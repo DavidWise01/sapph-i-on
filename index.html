@@ -60,6 +60,7 @@
   .seats { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:10px; margin:0 0 22px; }
   .seat { padding:12px 14px; }
   .seat b { letter-spacing:.08em; }
+  .seat a { display:block; font-size:14px; margin-top:4px; }
   .seat .addr { color:var(--dim); font:12px ui-monospace, Consolas, monospace; }
   .read { padding:14px 16px; margin:0 0 14px; }
   .read h2 { margin:0 0 8px; font-size:15px; letter-spacing:.12em; }
@@ -71,9 +72,9 @@
 <body>
 <header>
   <div>
-    <div class="src"><a href="https://0root.ai/">0root.ai</a> · world 7 · order 7^3 · sphere 1 · the census</div>
+    <div class="src"><a href="https://0root.ai/">0root.ai</a> · world 7 · order 7^3 · galaxy door · 24 spheres</div>
     <h1>SaPpH<span>{{i}}</span>on</h1>
-    <p class="sub">World 7 is the cube of 7. One keeper sits at the single center. Eight appeals sit on the eight corners. The page counts the cube on load and throws if the count is wrong.</p>
+    <p class="sub">World 7 is the cube of 7. This page is the galaxy door: it counts the cube and throws if the count is wrong. A galaxy holds 24 spheres, three on each corner seat. Each sphere is one idea in one HTML file.</p>
   </div>
   <div class="src">door number 7 · assigned<br>palindrome of five · unchanged</div>
 </header>
@@ -81,7 +82,7 @@
   <div class="stamps" id="stamps">
     <span class="stamp lit">LIT</span> 7×7×7 = 343, counted
     <span class="stamp amber">AMBER</span> the name, the number 7, the eight seats
-    <span class="stamp wall">WALL</span> eight steward spheres, still unmade
+    <span class="stamp lit">LIT</span> 24 spheres, three on each seat
   </div>
 
   <div class="layout">
@@ -113,8 +114,8 @@
   <section class="read">
     <h2>WHAT THE PAGE PROVES</h2>
     <p><span class="stamp lit">LIT</span> Every cell of a 7×7×7 grid is visited once. Cells with 3 faces exposed are corners (8). Cells with 2 are edges (12×5 = 60). Cells with 1 are faces (6×25 = 150). Cells with 0 are interior (5³ = 125). Those four counts sum to 343, and 7×7×7 is 343. The odd side leaves exactly one center, at (3,3,3). 343 = (3+4)³, and 3, 4, 3 are the digits of 343. Complex multiplication gives i² = −1 and i³ = −i. A failed check throws and the grid is not drawn.</p>
-    <p><span class="stamp amber">AMBER</span> The spelling SaPpH{{i}}on is the assigned name. Removing the braces leaves Sapphon, the name already used by the sphere <a href="https://github.com/DavidWise01/super-sapphon">super-sapphon</a> (six processors around one center, address 6[6×1×6]6). That sphere is a different count. Door number 7 is assigned by the request that opened this world. The eight corner labels are the eight appeals from the hallway build grammar, seated here and not yet filled. The sentence “the keeper chose the cube” is an assigned voice, the same kind of line the other keepers carry.</p>
-    <p><span class="stamp wall">WALL</span> No steward sphere has been written. This page does not extend the palindrome [ W1 | W2 ‖ W3 ‖ W4 | W5 ]. It does not record a world 6. i³ = −i is arithmetic inside the complex numbers. It does not locate this cube on a physical imaginary axis, and it is not a claim about mind, physics, or authority.</p>
+    <p><span class="stamp amber">AMBER</span> The spelling SaPpH{{i}}on is the assigned name. Deleting the token {{i}} and lowercasing leaves sapphon; that string step is proved on The Braces. The earlier sphere <a href="https://github.com/DavidWise01/super-sapphon">super-sapphon</a> uses that name for a different count, six around one. Door number 7 is assigned. The eight corner labels are the hallway's eight appeals. The sentence “the keeper chose the cube” is an assigned voice.</p>
+    <p><span class="stamp wall">WALL</span> This galaxy does not extend the palindrome [ W1 | W2 ‖ W3 ‖ W4 | W5 ] and does not record a world 6. i³ = −i is arithmetic. It does not locate the cube on a physical imaginary axis, and it is not a claim about mind, physics, or authority. The custom domain 0root.ai was still the older host when these spheres were published.</p>
     <p class="mono" id="card"></p>
     <p class="mono" id="fault"></p>
   </section>
@@ -198,10 +199,11 @@ function describe(x, y, z) {
   var k = kindAt(x, y, z);
   var ci = cornerIndex(x, y, z);
   if (k === "keeper") {
-    return {title:"SaPpH{{i}}on", body:"keeper · cell (3,3,3) · the one center of an odd cube. Sphere 1 is this census. The voice that says the keeper chose the cube is AMBER — assigned, not observed."};
+    return {title:"SaPpH{{i}}on", body:"keeper · cell (3,3,3) · the one center of an odd cube. This page is the galaxy door. The 24 spheres sit on the corners. The voice that says the keeper chose the cube is AMBER — assigned, not observed."};
   }
   if (ci >= 0) {
-    return {title:APPEALS[ci], body:"corner ("+x+","+y+","+z+") · seat "+(ci+1)+" of 8 · appeal assigned from the hallway grammar. Sphere unmade."};
+    var titles = SPHERES.filter(function(s){ return s.steward===APPEALS[ci]; }).map(function(s){ return s.title; }).join(", ");
+    return {title:APPEALS[ci], body:"corner ("+x+","+y+","+z+") · seat "+(ci+1)+" of 8 · "+titles+"."};
   }
   return {title:k, body:"cell ("+x+","+y+","+z+") · "+k+". Counted in the census. No separate sphere."};
 }
@@ -240,13 +242,21 @@ function draw() {
   show(sel.x, sel.y, z);
 }
 
+var SPHERES = [{"steward":"ETHOS","slug":"the-odd-center","title":"The Odd Center"},{"steward":"ETHOS","slug":"the-surface","title":"The Surface"},{"steward":"ETHOS","slug":"the-seal","title":"The Seal"},{"steward":"PATHOS","slug":"the-layers","title":"The Layers"},{"steward":"PATHOS","slug":"the-checker","title":"The Checker"},{"steward":"PATHOS","slug":"the-taxicab","title":"The Taxicab"},{"steward":"LOGOS","slug":"the-partition","title":"The Partition"},{"steward":"LOGOS","slug":"the-friedman","title":"The Friedman"},{"steward":"LOGOS","slug":"the-euler","title":"The Euler"},{"steward":"MYTHOS","slug":"the-braces","title":"The Braces"},{"steward":"MYTHOS","slug":"the-six-around","title":"The Six Around"},{"steward":"MYTHOS","slug":"the-imaginary","title":"The Imaginary"},{"steward":"EPISTEME","slug":"the-prime-power","title":"The Prime Power"},{"steward":"EPISTEME","slug":"the-mod-nine","title":"The Mod Nine"},{"steward":"EPISTEME","slug":"the-gap","title":"The Gap"},{"steward":"TECHNE","slug":"the-shells","title":"The Shells"},{"steward":"TECHNE","slug":"the-address","title":"The Address"},{"steward":"TECHNE","slug":"the-lines","title":"The Lines"},{"steward":"PHRONESIS","slug":"the-dual","title":"The Dual"},{"steward":"PHRONESIS","slug":"the-diagonal","title":"The Diagonal"},{"steward":"PHRONESIS","slug":"the-bonds","title":"The Bonds"},{"steward":"KAIROS","slug":"the-twenty-four","title":"The Twenty-Four"},{"steward":"KAIROS","slug":"the-sum","title":"The Sum"},{"steward":"KAIROS","slug":"the-outside","title":"The Outside"}];
+if (SPHERES.length !== 24) throw new Error("LIT FAIL sphere count");
+var perSeat = {};
+SPHERES.forEach(function (s) { perSeat[s.steward] = (perSeat[s.steward] || 0) + 1; });
+APPEALS.forEach(function (name) { if (perSeat[name] !== 3) throw new Error("LIT FAIL " + name); });
 var seats = document.getElementById("seats");
 APPEALS.forEach(function (name, i) {
   var x = (i & 1) ? 6 : 0, y = (i & 2) ? 6 : 0, z = (i & 4) ? 6 : 0;
   var el = document.createElement("article");
   el.className = "seat";
   el.id = "seat-" + name.toLowerCase();
-  el.innerHTML = "<b>" + name + "</b><div class='addr'>corner (" + x + "," + y + "," + z + ")</div><div>Sphere unmade. <span class='stamp wall'>WALL</span></div>";
+  var links = SPHERES.filter(function (s) { return s.steward === name; }).map(function (s) {
+    return "<a href=\"spheres/" + s.slug + ".html\">" + s.title + "</a>";
+  }).join("");
+  el.innerHTML = "<b>" + name + "</b><div class='addr'>corner (" + x + "," + y + "," + z + ") · 3 spheres</div>" + links;
   seats.appendChild(el);
 });
 

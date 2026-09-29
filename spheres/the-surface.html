@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Surface — SaPpH{{i}}on</title>
+<style>
+  :root { --ink:#1a1230; --dim:#5c5470; --accent:#1d4ed8; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; color:var(--ink);
+    font:16px/1.5 "Segoe UI", ui-sans-serif, sans-serif;
+    background:
+      radial-gradient(800px 420px at 0% 0%, color-mix(in srgb, var(--accent) 28%, white), transparent 60%),
+      radial-gradient(700px 420px at 100% 10%, #fde68a, transparent 55%),
+      linear-gradient(165deg, #f8f1e4, #f3e8ff 50%, #e7f0ff);
+    background-color:#f7f1e6; min-height:100vh;
+  }
+  a { color:var(--accent); }
+  header, main, footer { width:min(880px, calc(100% - 32px)); margin:0 auto; }
+  header { padding:22px 0 0; }
+  .src, .mono { font:13px/1.45 ui-monospace, Consolas, monospace; color:var(--dim); }
+  h1 { margin:8px 0 0; font-size:clamp(28px, 5vw, 44px); letter-spacing:.03em; }
+  .kicker { letter-spacing:.16em; font-size:12px; color:var(--accent); font-weight:700; }
+  .stage { background:#fffaf3; border:1px solid rgba(26,18,48,.14); border-radius:18px; padding:14px; margin:14px 0; }
+  .stamp { display:inline-block; padding:2px 8px; border-radius:999px; font:11px ui-monospace, Consolas, monospace; color:#fff; }
+  .lit { background:#047857; } .amber { background:#b45309; } .wall { background:#be185d; }
+  .bar { margin:4px 0; background:#bfdbfe; border-radius:8px; padding:6px 8px; font:13px ui-monospace, Consolas, monospace; }
+  .chip { display:inline-block; margin:3px; padding:6px 8px; border-radius:8px; background:#fff; border:1px solid rgba(26,18,48,.16); font:12px ui-monospace, Consolas, monospace; cursor:pointer; color:var(--ink); }
+  .eq { font-size:28px; margin:8px 0; }
+  .g7 { display:grid; grid-template-columns:repeat(7, 28px); gap:3px; margin:8px 0; }
+  .c, .dot { width:28px; height:28px; border-radius:6px; border:0; display:block; background:#e9d5ff; }
+  .dot.on { background:#fbbf24; }
+  .mini { display:inline-block; vertical-align:top; width:150px; margin:0 8px 8px 0; background:#fff; border-radius:12px; padding:8px; }
+  .nav { display:flex; justify-content:space-between; gap:12px; margin:8px 0 18px; }
+  footer { color:var(--dim); font-size:13px; padding-bottom:28px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="src"><a href="../">SaPpH{{i}}on</a> · galaxy 7^3 · sphere 2 of 24 · <a href="https://0root.ai/">0root.ai</a></div>
+  <div class="kicker">ETHOS</div>
+  <h1>The Surface</h1>
+  <p>The crust of the cube of 7 is 218 cells, and the interior is 125.</p>
+</header>
+<main>
+  <div class="nav">
+    <a href="the-odd-center.html">← The Odd Center</a>
+    <a href="the-seal.html">The Seal →</a>
+  </div>
+  <div class="stage" id="stage"></div>
+  <p class="mono" id="card"></p>
+  <p><span class="stamp lit">LIT</span> A cell is on the crust when at least one coordinate is 0 or 6. Counting them gives 218. The closed form n³ − (n−2)³ and the face-edge-corner form 6·5² + 12·5 + 8 give the same 218. The other 125 cells are interior.</p>
+  <p><span class="stamp amber">AMBER</span> Crust is a name for that counted set.</p>
+  <p><span class="stamp wall">WALL</span> The count does not say what the crust is made of.</p>
+</main>
+<footer>
+  David Lee Wise (ROOT0). Drafted by Grok (xAI) on 2026-09-29.
+  Birth seal f7383e4be46ad15bedb82bd7ad93776bce06437fbd0bd7400d1665db7896463c. One host, <a href="https://davidwise01.github.io/sapph-i-on/spheres/the-surface.html">this page</a>.
+</footer>
+<script>
+"use strict";
+
+function prove() {
+  var faults = [], surf = 0, inn = 0, x, y, z;
+  for (z = 0; z < 7; z++) for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+    var edge = x === 0 || x === 6 || y === 0 || y === 6 || z === 0 || z === 6;
+    if (edge) surf++; else inn++;
+  }
+  var closed = 343 - 125;
+  var parts = 6 * 25 + 12 * 5 + 8;
+  if (surf !== 218) faults.push("surf");
+  if (inn !== 125) faults.push("inn");
+  if (closed !== 218 || parts !== 218) faults.push("form");
+  if (surf + inn !== 343) faults.push("sum");
+  return { faults: faults, detail: "crust " + surf + " · interior " + inn };
+}
+
+var report = prove();
+function el(tag, cls, text) {
+  var n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text != null) n.textContent = text;
+  return n;
+}
+function finish(r) {
+  var card = document.getElementById("card");
+  if (!r || r.faults.length) {
+    var msg = (r && r.faults.join(", ")) || "no report";
+    card.innerHTML = "<span class='stamp wall'>WALL</span> LIT FAIL " + msg;
+    throw new Error("LIT FAIL " + msg);
+  }
+  card.innerHTML = "<span class='stamp lit'>LIT</span> " + r.detail;
+  draw(r);
+}
+if (report && typeof report.then === "function") report.then(finish);
+else finish(report);
+
+function draw() {
+  var stage = document.getElementById("stage");
+  var z = 0;
+  var read = el("p", "mono", "");
+  function paint() {
+    var g = el("div", "g7");
+    var x, y, crust;
+    for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+      crust = x === 0 || x === 6 || y === 0 || y === 6 || z === 0 || z === 6;
+      var c = el("button", "c");
+      c.type = "button";
+      c.style.background = crust ? "#fbcfe8" : "#e9d5ff";
+      c.addEventListener("click", function (ev) {
+        read.textContent = ev.currentTarget.dataset.t;
+      });
+      c.dataset.t = (x === 0 || x === 6 || y === 0 || y === 6 || z === 0 || z === 6) ? "crust ("+x+","+y+","+z+")" : "interior ("+x+","+y+","+z+")";
+      g.appendChild(c);
+    }
+    var old = stage.querySelector(".g7");
+    if (old) stage.removeChild(old);
+    stage.insertBefore(g, read);
+  }
+  var bar = el("label", "mono", "layer z ");
+  var range = document.createElement("input");
+  range.type = "range"; range.min = "0"; range.max = "6"; range.value = "0";
+  range.addEventListener("input", function () { z = Number(range.value); paint(); });
+  bar.appendChild(range);
+  stage.appendChild(bar);
+  stage.appendChild(read);
+  paint();
+}
+
+</script>
+</body>
+</html>

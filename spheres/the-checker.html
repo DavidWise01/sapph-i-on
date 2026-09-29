@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Checker — SaPpH{{i}}on</title>
+<style>
+  :root { --ink:#1a1230; --dim:#5c5470; --accent:#be185d; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; color:var(--ink);
+    font:16px/1.5 "Segoe UI", ui-sans-serif, sans-serif;
+    background:
+      radial-gradient(800px 420px at 0% 0%, color-mix(in srgb, var(--accent) 28%, white), transparent 60%),
+      radial-gradient(700px 420px at 100% 10%, #fde68a, transparent 55%),
+      linear-gradient(165deg, #f8f1e4, #f3e8ff 50%, #e7f0ff);
+    background-color:#f7f1e6; min-height:100vh;
+  }
+  a { color:var(--accent); }
+  header, main, footer { width:min(880px, calc(100% - 32px)); margin:0 auto; }
+  header { padding:22px 0 0; }
+  .src, .mono { font:13px/1.45 ui-monospace, Consolas, monospace; color:var(--dim); }
+  h1 { margin:8px 0 0; font-size:clamp(28px, 5vw, 44px); letter-spacing:.03em; }
+  .kicker { letter-spacing:.16em; font-size:12px; color:var(--accent); font-weight:700; }
+  .stage { background:#fffaf3; border:1px solid rgba(26,18,48,.14); border-radius:18px; padding:14px; margin:14px 0; }
+  .stamp { display:inline-block; padding:2px 8px; border-radius:999px; font:11px ui-monospace, Consolas, monospace; color:#fff; }
+  .lit { background:#047857; } .amber { background:#b45309; } .wall { background:#be185d; }
+  .bar { margin:4px 0; background:#bfdbfe; border-radius:8px; padding:6px 8px; font:13px ui-monospace, Consolas, monospace; }
+  .chip { display:inline-block; margin:3px; padding:6px 8px; border-radius:8px; background:#fff; border:1px solid rgba(26,18,48,.16); font:12px ui-monospace, Consolas, monospace; cursor:pointer; color:var(--ink); }
+  .eq { font-size:28px; margin:8px 0; }
+  .g7 { display:grid; grid-template-columns:repeat(7, 28px); gap:3px; margin:8px 0; }
+  .c, .dot { width:28px; height:28px; border-radius:6px; border:0; display:block; background:#e9d5ff; }
+  .dot.on { background:#fbbf24; }
+  .mini { display:inline-block; vertical-align:top; width:150px; margin:0 8px 8px 0; background:#fff; border-radius:12px; padding:8px; }
+  .nav { display:flex; justify-content:space-between; gap:12px; margin:8px 0 18px; }
+  footer { color:var(--dim); font-size:13px; padding-bottom:28px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="src"><a href="../">SaPpH{{i}}on</a> · galaxy 7^3 · sphere 5 of 24 · <a href="https://0root.ai/">0root.ai</a></div>
+  <div class="kicker">PATHOS</div>
+  <h1>The Checker</h1>
+  <p>Coloring the cube by x+y+z leaves the two colors one cell apart.</p>
+</header>
+<main>
+  <div class="nav">
+    <a href="the-layers.html">← The Layers</a>
+    <a href="the-taxicab.html">The Taxicab →</a>
+  </div>
+  <div class="stage" id="stage"></div>
+  <p class="mono" id="card"></p>
+  <p><span class="stamp lit">LIT</span> Cells with even x+y+z and cells with odd x+y+z are counted by visiting all 343. Their counts differ by 1, which is forced by the odd total.</p>
+  <p><span class="stamp amber">AMBER</span> The two colors are a drawing choice.</p>
+  <p><span class="stamp wall">WALL</span> The coloring is not a physical material.</p>
+</main>
+<footer>
+  David Lee Wise (ROOT0). Drafted by Grok (xAI) on 2026-09-29.
+  Birth seal edd53682fdb2daab30f20ddf2e472866c9a9cadc2e2f44cc21e0e6b33ed93685. One host, <a href="https://davidwise01.github.io/sapph-i-on/spheres/the-checker.html">this page</a>.
+</footer>
+<script>
+"use strict";
+
+function prove() {
+  var faults = [], even = 0, odd = 0, x, y, z;
+  for (z = 0; z < 7; z++) for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+    if ((x + y + z) % 2 === 0) even++; else odd++;
+  }
+  if (even + odd !== 343) faults.push("sum");
+  if (Math.abs(even - odd) !== 1) faults.push("gap");
+  return { faults: faults, detail: "even " + even + " · odd " + odd };
+}
+
+var report = prove();
+function el(tag, cls, text) {
+  var n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text != null) n.textContent = text;
+  return n;
+}
+function finish(r) {
+  var card = document.getElementById("card");
+  if (!r || r.faults.length) {
+    var msg = (r && r.faults.join(", ")) || "no report";
+    card.innerHTML = "<span class='stamp wall'>WALL</span> LIT FAIL " + msg;
+    throw new Error("LIT FAIL " + msg);
+  }
+  card.innerHTML = "<span class='stamp lit'>LIT</span> " + r.detail;
+  draw(r);
+}
+if (report && typeof report.then === "function") report.then(finish);
+else finish(report);
+
+function draw(report) {
+  var stage = document.getElementById("stage");
+  var z = 3;
+  var read = el("p", "mono", report.detail);
+  function paint() {
+    var g = el("div", "g7");
+    var x, y;
+    for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+      var c = el("button", "c");
+      c.type = "button";
+      c.style.background = ((x + y + z) % 2 === 0) ? "#fde68a" : "#bfdbfe";
+      c.dataset.t = "(" + x + "," + y + "," + z + ") " + (((x + y + z) % 2 === 0) ? "even" : "odd");
+      c.addEventListener("click", function (ev) { read.textContent = ev.currentTarget.dataset.t; });
+      g.appendChild(c);
+    }
+    var old = stage.querySelector(".g7");
+    if (old) stage.removeChild(old);
+    stage.insertBefore(g, read);
+  }
+  var range = document.createElement("input");
+  range.type = "range"; range.min = "0"; range.max = "6"; range.value = "3";
+  range.addEventListener("input", function () { z = Number(range.value); paint(); });
+  stage.appendChild(range);
+  stage.appendChild(read);
+  paint();
+}
+
+</script>
+</body>
+</html>

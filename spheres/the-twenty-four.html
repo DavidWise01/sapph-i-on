@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Twenty-Four — SaPpH{{i}}on</title>
+<style>
+  :root { --ink:#1a1230; --dim:#5c5470; --accent:#4338ca; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; color:var(--ink);
+    font:16px/1.5 "Segoe UI", ui-sans-serif, sans-serif;
+    background:
+      radial-gradient(800px 420px at 0% 0%, color-mix(in srgb, var(--accent) 28%, white), transparent 60%),
+      radial-gradient(700px 420px at 100% 10%, #fde68a, transparent 55%),
+      linear-gradient(165deg, #f8f1e4, #f3e8ff 50%, #e7f0ff);
+    background-color:#f7f1e6; min-height:100vh;
+  }
+  a { color:var(--accent); }
+  header, main, footer { width:min(880px, calc(100% - 32px)); margin:0 auto; }
+  header { padding:22px 0 0; }
+  .src, .mono { font:13px/1.45 ui-monospace, Consolas, monospace; color:var(--dim); }
+  h1 { margin:8px 0 0; font-size:clamp(28px, 5vw, 44px); letter-spacing:.03em; }
+  .kicker { letter-spacing:.16em; font-size:12px; color:var(--accent); font-weight:700; }
+  .stage { background:#fffaf3; border:1px solid rgba(26,18,48,.14); border-radius:18px; padding:14px; margin:14px 0; }
+  .stamp { display:inline-block; padding:2px 8px; border-radius:999px; font:11px ui-monospace, Consolas, monospace; color:#fff; }
+  .lit { background:#047857; } .amber { background:#b45309; } .wall { background:#be185d; }
+  .bar { margin:4px 0; background:#bfdbfe; border-radius:8px; padding:6px 8px; font:13px ui-monospace, Consolas, monospace; }
+  .chip { display:inline-block; margin:3px; padding:6px 8px; border-radius:8px; background:#fff; border:1px solid rgba(26,18,48,.16); font:12px ui-monospace, Consolas, monospace; cursor:pointer; color:var(--ink); }
+  .eq { font-size:28px; margin:8px 0; }
+  .g7 { display:grid; grid-template-columns:repeat(7, 28px); gap:3px; margin:8px 0; }
+  .c, .dot { width:28px; height:28px; border-radius:6px; border:0; display:block; background:#e9d5ff; }
+  .dot.on { background:#fbbf24; }
+  .mini { display:inline-block; vertical-align:top; width:150px; margin:0 8px 8px 0; background:#fff; border-radius:12px; padding:8px; }
+  .nav { display:flex; justify-content:space-between; gap:12px; margin:8px 0 18px; }
+  footer { color:var(--dim); font-size:13px; padding-bottom:28px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="src"><a href="../">SaPpH{{i}}on</a> · galaxy 7^3 · sphere 22 of 24 · <a href="https://0root.ai/">0root.ai</a></div>
+  <div class="kicker">KAIROS</div>
+  <h1>The Twenty-Four</h1>
+  <p>The cube has 24 rotations.</p>
+</header>
+<main>
+  <div class="nav">
+    <a href="the-bonds.html">← The Bonds</a>
+    <a href="the-sum.html">The Sum →</a>
+  </div>
+  <div class="stage" id="stage"></div>
+  <p class="mono" id="card"></p>
+  <p><span class="stamp lit">LIT</span> Two counts agree. Signed permutation matrices of size 3 with determinant 1 number 24, out of 48 signed permutations. Separately, 6 choices for which way is up and 4 unit fronts perpendicular to that up also number 24.</p>
+  <p><span class="stamp amber">AMBER</span> A galaxy of 24 spheres uses this count as its size. The match is assigned: the number is the same, the pages are not the rotations themselves.</p>
+  <p><span class="stamp wall">WALL</span> Twenty-four rotations do not say a physical cube is turning.</p>
+</main>
+<footer>
+  David Lee Wise (ROOT0). Drafted by Grok (xAI) on 2026-09-29.
+  Birth seal c300e5a5e3b2b0944200e2c7400a2a7297862e4fa5d82f8cd0d3d4c62084d65f. One host, <a href="https://davidwise01.github.io/sapph-i-on/spheres/the-twenty-four.html">this page</a>.
+</footer>
+<script>
+"use strict";
+
+function prove() {
+  var faults = [];
+  function det(m) {
+    return m[0][0] * (m[1][1] * m[2][2] - m[1][2] * m[2][1])
+      - m[0][1] * (m[1][0] * m[2][2] - m[1][2] * m[2][0])
+      + m[0][2] * (m[1][0] * m[2][1] - m[1][1] * m[2][0]);
+  }
+  var perms = [[0,1,2],[0,2,1],[1,0,2],[1,2,0],[2,0,1],[2,1,0]];
+  var all = 0, rot = 0, p, s, sg, m, r;
+  for (p = 0; p < perms.length; p++) for (s = 0; s < 8; s++) {
+    sg = [(s & 1) ? -1 : 1, (s & 2) ? -1 : 1, (s & 4) ? -1 : 1];
+    m = [[0,0,0],[0,0,0],[0,0,0]];
+    for (r = 0; r < 3; r++) m[r][perms[p][r]] = sg[r];
+    all++;
+    if (det(m) === 1) rot++;
+  }
+  if (all !== 48 || rot !== 24) faults.push("matrices");
+  function cross(a, b) { return [a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1]*b[0]]; }
+  var ups = [[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]];
+  var labels = ["+x","-x","+y","-y","+z","-z"];
+  var frames = [], ui, fi, up, front, dot, right, mag, turn;
+  for (ui = 0; ui < ups.length; ui++) {
+    turn = 0;
+    up = ups[ui];
+    for (fi = 0; fi < ups.length; fi++) {
+      front = ups[fi];
+      dot = up[0]*front[0] + up[1]*front[1] + up[2]*front[2];
+      if (dot !== 0) continue;
+      right = cross(front, up);
+      mag = Math.abs(right[0]) + Math.abs(right[1]) + Math.abs(right[2]);
+      if (mag !== 1) faults.push("frame");
+      else frames.push(labels[ui] + " · turn " + (turn++));
+    }
+    if (turn !== 4) faults.push("turns");
+  }
+  if (frames.length !== 24 || frames.length !== rot) faults.push("agree");
+  return { faults: faults, detail: "6 × 4 = 24", frames: frames };
+}
+
+var report = prove();
+function el(tag, cls, text) {
+  var n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text != null) n.textContent = text;
+  return n;
+}
+function finish(r) {
+  var card = document.getElementById("card");
+  if (!r || r.faults.length) {
+    var msg = (r && r.faults.join(", ")) || "no report";
+    card.innerHTML = "<span class='stamp wall'>WALL</span> LIT FAIL " + msg;
+    throw new Error("LIT FAIL " + msg);
+  }
+  card.innerHTML = "<span class='stamp lit'>LIT</span> " + r.detail;
+  draw(r);
+}
+if (report && typeof report.then === "function") report.then(finish);
+else finish(report);
+
+function draw(report) {
+  var stage = document.getElementById("stage");
+  var read = el("p", "mono", report.detail);
+  report.frames.forEach(function (name) {
+    var b = el("button", "chip", name);
+    b.type = "button";
+    b.addEventListener("click", function () { read.textContent = name + " · one of 24"; });
+    stage.appendChild(b);
+  });
+  stage.appendChild(read);
+}
+
+</script>
+</body>
+</html>

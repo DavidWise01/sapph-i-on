@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Diagonal — SaPpH{{i}}on</title>
+<style>
+  :root { --ink:#1a1230; --dim:#5c5470; --accent:#c2410c; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; color:var(--ink);
+    font:16px/1.5 "Segoe UI", ui-sans-serif, sans-serif;
+    background:
+      radial-gradient(800px 420px at 0% 0%, color-mix(in srgb, var(--accent) 28%, white), transparent 60%),
+      radial-gradient(700px 420px at 100% 10%, #fde68a, transparent 55%),
+      linear-gradient(165deg, #f8f1e4, #f3e8ff 50%, #e7f0ff);
+    background-color:#f7f1e6; min-height:100vh;
+  }
+  a { color:var(--accent); }
+  header, main, footer { width:min(880px, calc(100% - 32px)); margin:0 auto; }
+  header { padding:22px 0 0; }
+  .src, .mono { font:13px/1.45 ui-monospace, Consolas, monospace; color:var(--dim); }
+  h1 { margin:8px 0 0; font-size:clamp(28px, 5vw, 44px); letter-spacing:.03em; }
+  .kicker { letter-spacing:.16em; font-size:12px; color:var(--accent); font-weight:700; }
+  .stage { background:#fffaf3; border:1px solid rgba(26,18,48,.14); border-radius:18px; padding:14px; margin:14px 0; }
+  .stamp { display:inline-block; padding:2px 8px; border-radius:999px; font:11px ui-monospace, Consolas, monospace; color:#fff; }
+  .lit { background:#047857; } .amber { background:#b45309; } .wall { background:#be185d; }
+  .bar { margin:4px 0; background:#bfdbfe; border-radius:8px; padding:6px 8px; font:13px ui-monospace, Consolas, monospace; }
+  .chip { display:inline-block; margin:3px; padding:6px 8px; border-radius:8px; background:#fff; border:1px solid rgba(26,18,48,.16); font:12px ui-monospace, Consolas, monospace; cursor:pointer; color:var(--ink); }
+  .eq { font-size:28px; margin:8px 0; }
+  .g7 { display:grid; grid-template-columns:repeat(7, 28px); gap:3px; margin:8px 0; }
+  .c, .dot { width:28px; height:28px; border-radius:6px; border:0; display:block; background:#e9d5ff; }
+  .dot.on { background:#fbbf24; }
+  .mini { display:inline-block; vertical-align:top; width:150px; margin:0 8px 8px 0; background:#fff; border-radius:12px; padding:8px; }
+  .nav { display:flex; justify-content:space-between; gap:12px; margin:8px 0 18px; }
+  footer { color:var(--dim); font-size:13px; padding-bottom:28px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="src"><a href="../">SaPpH{{i}}on</a> · galaxy 7^3 · sphere 20 of 24 · <a href="https://0root.ai/">0root.ai</a></div>
+  <div class="kicker">PHRONESIS</div>
+  <h1>The Diagonal</h1>
+  <p>Four space diagonals each have squared length 108.</p>
+</header>
+<main>
+  <div class="nav">
+    <a href="the-dual.html">← The Dual</a>
+    <a href="the-bonds.html">The Bonds →</a>
+  </div>
+  <div class="stage" id="stage"></div>
+  <p class="mono" id="card"></p>
+  <p><span class="stamp lit">LIT</span> Among the 8 corners, four pairs differ in all three coordinates. Each pair spans 6 in x, y, and z, so the squared length is 3×36 = 108.</p>
+  <p><span class="stamp amber">AMBER</span> Space diagonal is the name of a corner-to-opposite-corner segment.</p>
+  <p><span class="stamp wall">WALL</span> 108 is a squared grid length, not a measured distance in meters.</p>
+</main>
+<footer>
+  David Lee Wise (ROOT0). Drafted by Grok (xAI) on 2026-09-29.
+  Birth seal b014eb774d3c482e9091966a81273314a8ef89312d0d58e02863e23358c678e7. One host, <a href="https://davidwise01.github.io/sapph-i-on/spheres/the-diagonal.html">this page</a>.
+</footer>
+<script>
+"use strict";
+
+function prove() {
+  var faults = [], corners = [], i, j, diags = 0, dx, dy, dz;
+  for (i = 0; i < 8; i++) corners.push([(i & 1) ? 6 : 0, (i & 2) ? 6 : 0, (i & 4) ? 6 : 0]);
+  for (i = 0; i < 8; i++) for (j = i + 1; j < 8; j++) {
+    dx = corners[i][0] - corners[j][0];
+    dy = corners[i][1] - corners[j][1];
+    dz = corners[i][2] - corners[j][2];
+    if (dx !== 0 && dy !== 0 && dz !== 0) {
+      diags++;
+      if (dx * dx + dy * dy + dz * dz !== 108) faults.push("len");
+    }
+  }
+  if (diags !== 4) faults.push("count");
+  if (3 * 36 !== 108) faults.push("form");
+  return { faults: faults, detail: "4 diagonals, length² = 108" };
+}
+
+var report = prove();
+function el(tag, cls, text) {
+  var n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text != null) n.textContent = text;
+  return n;
+}
+function finish(r) {
+  var card = document.getElementById("card");
+  if (!r || r.faults.length) {
+    var msg = (r && r.faults.join(", ")) || "no report";
+    card.innerHTML = "<span class='stamp wall'>WALL</span> LIT FAIL " + msg;
+    throw new Error("LIT FAIL " + msg);
+  }
+  card.innerHTML = "<span class='stamp lit'>LIT</span> " + r.detail;
+  draw(r);
+}
+if (report && typeof report.then === "function") report.then(finish);
+else finish(report);
+
+function draw(report) {
+  var stage = document.getElementById("stage");
+  ["(0,0,0) — (6,6,6)", "(6,0,0) — (0,6,6)", "(0,6,0) — (6,0,6)", "(0,0,6) — (6,6,0)"].forEach(function (t) {
+    stage.appendChild(el("div", "bar", t + " · 108"));
+  });
+  stage.appendChild(el("p", "mono", report.detail));
+}
+
+</script>
+</body>
+</html>

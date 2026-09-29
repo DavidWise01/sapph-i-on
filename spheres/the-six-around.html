@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Six Around — SaPpH{{i}}on</title>
+<style>
+  :root { --ink:#1a1230; --dim:#5c5470; --accent:#7c3aed; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; color:var(--ink);
+    font:16px/1.5 "Segoe UI", ui-sans-serif, sans-serif;
+    background:
+      radial-gradient(800px 420px at 0% 0%, color-mix(in srgb, var(--accent) 28%, white), transparent 60%),
+      radial-gradient(700px 420px at 100% 10%, #fde68a, transparent 55%),
+      linear-gradient(165deg, #f8f1e4, #f3e8ff 50%, #e7f0ff);
+    background-color:#f7f1e6; min-height:100vh;
+  }
+  a { color:var(--accent); }
+  header, main, footer { width:min(880px, calc(100% - 32px)); margin:0 auto; }
+  header { padding:22px 0 0; }
+  .src, .mono { font:13px/1.45 ui-monospace, Consolas, monospace; color:var(--dim); }
+  h1 { margin:8px 0 0; font-size:clamp(28px, 5vw, 44px); letter-spacing:.03em; }
+  .kicker { letter-spacing:.16em; font-size:12px; color:var(--accent); font-weight:700; }
+  .stage { background:#fffaf3; border:1px solid rgba(26,18,48,.14); border-radius:18px; padding:14px; margin:14px 0; }
+  .stamp { display:inline-block; padding:2px 8px; border-radius:999px; font:11px ui-monospace, Consolas, monospace; color:#fff; }
+  .lit { background:#047857; } .amber { background:#b45309; } .wall { background:#be185d; }
+  .bar { margin:4px 0; background:#bfdbfe; border-radius:8px; padding:6px 8px; font:13px ui-monospace, Consolas, monospace; }
+  .chip { display:inline-block; margin:3px; padding:6px 8px; border-radius:8px; background:#fff; border:1px solid rgba(26,18,48,.16); font:12px ui-monospace, Consolas, monospace; cursor:pointer; color:var(--ink); }
+  .eq { font-size:28px; margin:8px 0; }
+  .g7 { display:grid; grid-template-columns:repeat(7, 28px); gap:3px; margin:8px 0; }
+  .c, .dot { width:28px; height:28px; border-radius:6px; border:0; display:block; background:#e9d5ff; }
+  .dot.on { background:#fbbf24; }
+  .mini { display:inline-block; vertical-align:top; width:150px; margin:0 8px 8px 0; background:#fff; border-radius:12px; padding:8px; }
+  .nav { display:flex; justify-content:space-between; gap:12px; margin:8px 0 18px; }
+  footer { color:var(--dim); font-size:13px; padding-bottom:28px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="src"><a href="../">SaPpH{{i}}on</a> · galaxy 7^3 · sphere 11 of 24 · <a href="https://0root.ai/">0root.ai</a></div>
+  <div class="kicker">MYTHOS</div>
+  <h1>The Six Around</h1>
+  <p>Six around one sums to 25, a different count from 343.</p>
+</header>
+<main>
+  <div class="nav">
+    <a href="the-braces.html">← The Braces</a>
+    <a href="the-imaginary.html">The Imaginary →</a>
+  </div>
+  <div class="stage" id="stage"></div>
+  <p class="mono" id="card"></p>
+  <p><span class="stamp lit">LIT</span> 6 + 6 + 1 + 6 + 6 = 25, and 6 + 1 = 7. 7×7×7 = 343. 25 is not 343.</p>
+  <p><span class="stamp amber">AMBER</span> The stack 6[6×1×6]6 is the address written on super-sapphon. This page did not re-read that file on load.</p>
+  <p><span class="stamp wall">WALL</span> Unequal counts do not say the earlier sphere is false. They say it is a different count.</p>
+</main>
+<footer>
+  David Lee Wise (ROOT0). Drafted by Grok (xAI) on 2026-09-29.
+  Birth seal 922ad390d5e31c81597916ceb0c319df45c8ebdf3bfead03dfbac9b2adacb829. One host, <a href="https://davidwise01.github.io/sapph-i-on/spheres/the-six-around.html">this page</a>.
+</footer>
+<script>
+"use strict";
+
+function prove() {
+  var faults = [];
+  var stack = 6 + 6 + 1 + 6 + 6;
+  if (stack !== 25) faults.push("stack");
+  if ((6 + 1) !== 7) faults.push("ring");
+  if (7 * 7 * 7 !== 343) faults.push("cube");
+  if (stack === 343) faults.push("same");
+  return { faults: faults, detail: "25 ≠ 343" };
+}
+
+var report = prove();
+function el(tag, cls, text) {
+  var n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text != null) n.textContent = text;
+  return n;
+}
+function finish(r) {
+  var card = document.getElementById("card");
+  if (!r || r.faults.length) {
+    var msg = (r && r.faults.join(", ")) || "no report";
+    card.innerHTML = "<span class='stamp wall'>WALL</span> LIT FAIL " + msg;
+    throw new Error("LIT FAIL " + msg);
+  }
+  card.innerHTML = "<span class='stamp lit'>LIT</span> " + r.detail;
+  draw(r);
+}
+if (report && typeof report.then === "function") report.then(finish);
+else finish(report);
+
+function draw() {
+  var stage = document.getElementById("stage");
+  ["6", "6", "1", "6", "6"].forEach(function (n) {
+    stage.appendChild(el("span", "chip", n));
+  });
+  stage.appendChild(el("p", "eq", "25 ≠ 343"));
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Odd Center — SaPpH{{i}}on</title>
+<style>
+  :root { --ink:#1a1230; --dim:#5c5470; --accent:#1d4ed8; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; color:var(--ink);
+    font:16px/1.5 "Segoe UI", ui-sans-serif, sans-serif;
+    background:
+      radial-gradient(800px 420px at 0% 0%, color-mix(in srgb, var(--accent) 28%, white), transparent 60%),
+      radial-gradient(700px 420px at 100% 10%, #fde68a, transparent 55%),
+      linear-gradient(165deg, #f8f1e4, #f3e8ff 50%, #e7f0ff);
+    background-color:#f7f1e6; min-height:100vh;
+  }
+  a { color:var(--accent); }
+  header, main, footer { width:min(880px, calc(100% - 32px)); margin:0 auto; }
+  header { padding:22px 0 0; }
+  .src, .mono { font:13px/1.45 ui-monospace, Consolas, monospace; color:var(--dim); }
+  h1 { margin:8px 0 0; font-size:clamp(28px, 5vw, 44px); letter-spacing:.03em; }
+  .kicker { letter-spacing:.16em; font-size:12px; color:var(--accent); font-weight:700; }
+  .stage { background:#fffaf3; border:1px solid rgba(26,18,48,.14); border-radius:18px; padding:14px; margin:14px 0; }
+  .stamp { display:inline-block; padding:2px 8px; border-radius:999px; font:11px ui-monospace, Consolas, monospace; color:#fff; }
+  .lit { background:#047857; } .amber { background:#b45309; } .wall { background:#be185d; }
+  .bar { margin:4px 0; background:#bfdbfe; border-radius:8px; padding:6px 8px; font:13px ui-monospace, Consolas, monospace; }
+  .chip { display:inline-block; margin:3px; padding:6px 8px; border-radius:8px; background:#fff; border:1px solid rgba(26,18,48,.16); font:12px ui-monospace, Consolas, monospace; cursor:pointer; color:var(--ink); }
+  .eq { font-size:28px; margin:8px 0; }
+  .g7 { display:grid; grid-template-columns:repeat(7, 28px); gap:3px; margin:8px 0; }
+  .c, .dot { width:28px; height:28px; border-radius:6px; border:0; display:block; background:#e9d5ff; }
+  .dot.on { background:#fbbf24; }
+  .mini { display:inline-block; vertical-align:top; width:150px; margin:0 8px 8px 0; background:#fff; border-radius:12px; padding:8px; }
+  .nav { display:flex; justify-content:space-between; gap:12px; margin:8px 0 18px; }
+  footer { color:var(--dim); font-size:13px; padding-bottom:28px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="src"><a href="../">SaPpH{{i}}on</a> · galaxy 7^3 · sphere 1 of 24 · <a href="https://0root.ai/">0root.ai</a></div>
+  <div class="kicker">ETHOS</div>
+  <h1>The Odd Center</h1>
+  <p>An odd cube has one center cell. An even cube has none.</p>
+</header>
+<main>
+  <div class="nav">
+    <a href="the-outside.html">← The Outside</a>
+    <a href="the-surface.html">The Surface →</a>
+  </div>
+  <div class="stage" id="stage"></div>
+  <p class="mono" id="card"></p>
+  <p><span class="stamp lit">LIT</span> For every side n from 1 through 9, the number of cells with x = y = z = (n−1)/2 is 1 when n is odd and 0 when n is even. The cube of 7 therefore has one center, (3,3,3).</p>
+  <p><span class="stamp amber">AMBER</span> Calling that center the keeper is the galaxy's assigned name for the cell.</p>
+  <p><span class="stamp wall">WALL</span> A center cell is not a mind, and it is not evidence that an even cube is empty in any other sense.</p>
+</main>
+<footer>
+  David Lee Wise (ROOT0). Drafted by Grok (xAI) on 2026-09-29.
+  Birth seal ede4da63894d4ae50934f62c657ecc5cf695980a404b5ece29953f90b14a03f8. One host, <a href="https://davidwise01.github.io/sapph-i-on/spheres/the-odd-center.html">this page</a>.
+</footer>
+<script>
+"use strict";
+
+function prove() {
+  var faults = [];
+  function centers(n) {
+    var c = 0, x, y, z;
+    for (z = 0; z < n; z++) for (y = 0; y < n; y++) for (x = 0; x < n; x++) {
+      if (x === y && y === z && z * 2 === n - 1) c++;
+    }
+    return c;
+  }
+  var rows = [], n;
+  for (n = 1; n <= 9; n++) {
+    var c = centers(n);
+    rows.push(n + ":" + c);
+    if (c !== (n % 2)) faults.push("n" + n);
+  }
+  if (centers(7) !== 1) faults.push("seven");
+  return { faults: faults, detail: rows.join(" "), rows: rows };
+}
+
+var report = prove();
+function el(tag, cls, text) {
+  var n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text != null) n.textContent = text;
+  return n;
+}
+function finish(r) {
+  var card = document.getElementById("card");
+  if (!r || r.faults.length) {
+    var msg = (r && r.faults.join(", ")) || "no report";
+    card.innerHTML = "<span class='stamp wall'>WALL</span> LIT FAIL " + msg;
+    throw new Error("LIT FAIL " + msg);
+  }
+  card.innerHTML = "<span class='stamp lit'>LIT</span> " + r.detail;
+  draw(r);
+}
+if (report && typeof report.then === "function") report.then(finish);
+else finish(report);
+
+function draw(report) {
+  var stage = document.getElementById("stage");
+  report.rows.forEach(function (row) {
+    var parts = row.split(":");
+    var n = Number(parts[0]), c = Number(parts[1]);
+    var card = el("div", "mini");
+    card.appendChild(el("b", "", "n=" + n));
+    var g = el("div", "g7");
+    var i, x, y, on;
+    var side = Math.min(n, 7);
+    for (y = 0; y < side; y++) for (x = 0; x < side; x++) {
+      on = (n % 2 === 1) && x === (side - 1) / 2 && y === (side - 1) / 2 && c === 1;
+      var cell = el("i", on ? "dot on" : "dot");
+      g.appendChild(cell);
+    }
+    card.appendChild(g);
+    card.appendChild(el("span", "mono", c === 1 ? "one center" : "no center"));
+    stage.appendChild(card);
+  });
+}
+
+</script>
+</body>
+</html>
