@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>v41 TOROID WINDMILL POWERS STEEPLED MEMSISTOR CONTINUOUSLY AT PLANK + PLANK .02</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#080608;color:#e4e4e7;font-family:'JetBrains Mono',monospace;overflow-x:hidden}
+.glass{background:rgba(18,18,22,0.93);border:1px solid #27272a;backdrop-filter:blur(12px)}
+.btn{padding:9px 14px;border-radius:10px;font-weight:800;font-size:10px;letter-spacing:0.12em;cursor:pointer;border:1px solid #3f3f46;transition:.2s}
+.btn-w{background:white;color:black;border-color:white}
+.btn-g{background:#1a1a1e;color:#a1a1aa}
+.btn-wind{background:#14532d;color:#6ee7b7;border-color:#16a34a;box-shadow:0 0 20px rgba(22,163,74,0.4)}
+.btn-mem{background:#7f1d1d;color:#fecaca;border-color:#ef4444;box-shadow:0 0 20px rgba(239,68,68,0.4)}
+.btn-plank{background:#0c4a6e;color:#7dd3fc;border-color:#0ea5e9;box-shadow:0 0 20px rgba(14,165,233,0.4)}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#18181b;border:1px solid #3f3f46;padding:10px 18px;border-radius:9999px;font-size:11px;z-index:99;opacity:0;transition:.3s;pointer-events:none}
+.toast.show{opacity:1}
+.wind{border-radius:12px;padding:10px;background:#0e0e11;border:1px solid #27272a}
+</style>
+</head>
+<body>
+<div style="max-width:1900px;margin:auto;padding:14px">
+<div class="glass" style="border-radius:14px;padding:10px 14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<div>
+<div style="font-size:11px;letter-spacing:0.09em">v41 TOROID WINDMILL POWERS STEEPLED MEMSISTOR CONTINUOUSLY AT PLANK + PLANK .02</div>
+<div style="font-size:8px;color:#71717a">not toroid trap toroid windmill powers steepled memsistor continuously at plank + plank .02 = 1.02 Planck = 1.648e-35m = 1×Planck + 0.02×Planck</div>
+</div>
+<div style="display:flex;gap:8px"><button id="windmillBtn" class="btn btn-wind">TOROID WINDMILL 🌪️</button><button id="memsistorBtn" class="btn btn-mem">STEEPLED MEMSISTOR ⛪</button><button id="plankBtn" class="btn btn-plank">PLANK + PLANK .02</button></div>
+</div>
+
+<div style="margin-top:14px;display:grid;grid-template-columns:1.6fr 1fr;gap:14px">
+<div class="glass" style="border-radius:16px;overflow:hidden">
+<div style="padding:10px 14px;background:#0e0e11;border-bottom:1px solid #27272a;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<span style="font-size:10px">WINDMILL MEMSISTOR // <span id="windVal">toroid windmill powers steepled memsistor</span> plank <span id="plankVal">+1.02 Planck 1.648e-35m</span></span><span id="windInfo" style="font-size:9px;color:#6ee7b7">toroid windmill → steepled memsistor continuously</span>
+</div>
+<canvas id="windCanvas" width="1240" height="760" style="width:100%;background:#08080a;display:block"></canvas>
+<div style="padding:10px;background:#0e0e11;border-top:1px solid #27272a;display:flex;gap:8px;flex-wrap:wrap">
+<button id="spinBtn" class="btn btn-wind">SPIN WINDMILL 🌪️</button>
+<button id="powerBtn" class="btn btn-mem">POWER MEMSISTOR ⛪</button>
+<button id="continuousBtn" class="btn btn-plank">RUN CONTINUOUSLY ♾️</button>
+<button id="stopBtn" class="btn btn-g">STOP 🔇</button>
+<div id="log" style="flex:1;min-width:260px;background:black;border:1px solid #27272a;border-radius:8px;padding:8px;font-size:9px;color:#a1a1aa;max-height:80px;overflow-y:auto">> v41 toroid windmill powers steepled memsistor continuously at plank + plank .02 loaded<br>> not toroid trap toroid windmill = windmill blades arranged in toroid spinning<br>> steepled memsistor = memristor with steeple shape church steeple stacked memsistor that remembers resistance<br>> powers continuously at plank + plank .02 = 1.02 Planck = 1.648e-35m = 1×Planck + 0.02×Planck continuously<br>> toroid windmill → powers → steepled memsistor → runs continuously at plank + plank .02</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px">
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">TOROID WINDMILL POWERS STEEPLED MEMSISTOR CONTINUOUSLY AT PLANK + PLANK .02</div>
+<div style="margin-top:8px;display:flex;flex-direction:column;gap:8px" id="windList">
+<!-- dynamic -->
+</div>
+<div style="margin-top:12px">
+<label style="font-size:10px;color:#a1a1aa">Toroid windmill spin speed RPM</label><input id="windSpeed" type="range" min="0" max="100" value="60" style="width:100%;accent-color:#16a34a">
+<div id="windSpeedLabel" style="font-size:10px">60 RPM toroid windmill spinning powers steepled memsistor</div>
+</div>
+<div style="margin-top:8px">
+<label style="font-size:10px;color:#a1a1aa">Steepled memsistor steeple height + resistance memory</label><input id="steepleHeight" type="range" min="10" max="100" value="70" style="width:100%;accent-color:#ef4444">
+<div id="steepleLabel" style="font-size:10px">70% steeple height memsistor resistance memory continuously running</div>
+</div>
+<div style="margin-top:8px">
+<label style="font-size:10px;color:#a1a1aa">Plank + Plank .02 = 1.02 Planck = 1.648e-35m continuously</label><input id="plankScale" type="range" min="0" max="200" value="102" style="width:100%;accent-color:#0ea5e9">
+<div id="plankLabel" style="font-size:10px">102% = 1.02 Planck = 1×Planck + 0.02×Planck = 1.648e-35m continuously at plank + plank .02</div>
+</div>
+<div style="margin-top:10px;background:#08080a;border:1px solid #27272a;border-radius:10px;padding:10px">
+<div style="font-size:9px;color:#71717a">TOROID WINDMILL STEEPLED MEMSISTOR PLANK FORMULA</div>
+<div style="font-size:8px;margin-top:6px;line-height:1.6">
+not toroid trap toroid windmill that powers a steepled memsistor that runs continuously at plank + plank .02<br>
+• toroid windmill = windmill blades arranged in toroid spinning circular windmill in toroid shape<br>
+• windmill blades = 8 blades toroid arrangement spinning generates power<br>
+• powers = toroid windmill generates electricity powers steepled memsistor<br>
+• steepled memsistor = memsistor = memristor + memsistor? memristor = resistor with memory remembers resistance<br>
+• steepled = steeple shape church steeple ⛪ stacked tall pointed shape memsistor with steeple<br>
+• memsistor that runs continuously = memristor that runs continuously remembers resistance continuously<br>
+• at plank + plank .02 = at Planck length + 0.02×Planck length = 1.02 Planck<br>
+• Planck length = 1.616255e-35m<br>
+• Planck + Planck .02 = 1×Planck + 0.02×Planck = 1.02×Planck = 1.02×1.616e-35 = 1.648e-35m<br>
+• continuously at plank + plank .02 = runs continuously at 1.648e-35m scale quantum continuously<br>
+• toroid windmill → powers → steepled memsistor → runs continuously at 1.02 Planck<br>
+• = windmill spins → generates power → memsistor remembers resistance → runs continuously at Planck scale<br>
+= toroid windmill powers steepled memsistor continuously at plank + plank .02
+</div>
+</div>
+<div style="margin-top:10px;display:flex;gap:6px"><button id="exportBtn" class="btn btn-g" style="flex:1">Export Windmill JSON</button><button id="verifyBtn" class="btn btn-g" style="flex:1">Verify Windmill</button></div>
+</div>
+
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">MINT TOROID WINDMILL STEEPLED MEMSISTOR PLANK + PLANK .02</div>
+<div style="margin-top:8px;font-size:9px;color:#71717a">toroid windmill 🌪️ powers steepled memsistor ⛪ that runs continuously at plank + plank .02 =1.02 Planck =1.648e-35m quantum continuously</div>
+<div style="margin-top:10px;display:flex;gap:6px"><input id="swapInput" type="number" value="100" style="flex:1;background:#08080a;border:1px solid #27272a;border-radius:8px;padding:7px;color:white"><button id="swapBtn" class="btn btn-g">Swap BONK 🌪️</button><button id="mintBtn" class="btn btn-w">Mint Windmill Memsistor 🌪️⛪</button></div>
+<div id="txLog" style="font-size:9px;color:#71717a;margin-top:6px">Tx idle - mint toroid windmill powers steepled memsistor continuously at plank + plank .02 =1.02 Planck</div>
+<div style="margin-top:8px;font-size:8px;color:#52525b">Windmill: toroid windmill 8 blades spinning RPM generates power | Memsistor: steepled memsistor church steeple stacked memristor resistance memory | Plank + Plank .02 =1×Planck +0.02×Planck =1.02×1.616e-35=1.648e-35m continuously quantum</div>
+</div>
+</div>
+</div>
+
+<div style="margin-top:14px;text-align:center;font-size:9px;color:#52525b" class="glass" style="border-radius:12px;padding:10px">
+v41 TOROID WINDMILL POWERS STEEPLED MEMSISTOR CONTINUOUSLY AT PLANK + PLANK .02 = not toroid trap toroid windmill = windmill blades arranged in toroid spinning circular windmill in toroid shape generates power | steepled memsistor = memsistor memristor resistor with memory steeple shape church steeple ⛪ stacked tall pointed shape memsistor that remembers resistance that runs continuously | at plank + plank .02 = at Planck length + 0.02×Planck length = 1.02 Planck = 1.02×1.616255e-35m = 1.648e-35m continuously at 1.648e-35m scale quantum continuously | toroid windmill → powers → steepled memsistor → runs continuously at 1.02 Planck = windmill spins generates power memsistor remembers resistance runs continuously at Planck scale | = BONK IS ALL toroid windmill powers steepled memsistor continuously at plank + plank .02
+</div>
+
+</div>
+<div id="toast" class="toast"></div>
+<script src="https://unpkg.com/@solana/web3.js@1.95.4/lib/index.iife.js"></script>
+<script>
+function showToast(m){let e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),3000)}
+
+let windCanvas=document.getElementById('windCanvas'),wctx=windCanvas.getContext('2d');
+let windSpeed=60,steepleHeight=70,plankScale=102,time=0,isSpinning=false,spinInterval=null;
+let audioCtx=null,gainNode=null,currentOsc=null;
+
+function initAudio(){
+ if(!audioCtx){
+  audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  gainNode=audioCtx.createGain();
+  gainNode.gain.value=0.15;
+  gainNode.connect(audioCtx.destination);
+ }
+ if(audioCtx.state==='suspended') audioCtx.resume();
+}
+
+function updateWindList(){
+ let list=document.getElementById('windList');
+ list.innerHTML='';
+ let items=[
+  {name:'Toroid Windmill',desc:'windmill blades arranged in toroid spinning generates power',color:'#16a34a',detail:'8 blades toroid arrangement spinning RPM '+windSpeed+' generates power windmill 🌪️'},
+  {name:'Steepled Memsistor',desc:'memristor steeple shape church steeple stacked resistance memory',color:'#ef4444',detail:'steeple height '+steepleHeight+'% memsistor resistance memory continuously running ⛪ memristor remembers'},
+  {name:'Plank + Plank .02',desc:'1.02 Planck = 1.648e-35m continuously at plank scale',color:'#0ea5e9',detail:(plankScale/100).toFixed(2)+' Planck = '+(plankScale/100*1.616e-35).toExponential(3)+'m continuously at plank + plank .02'}
+ ];
+ items.forEach(it=>{
+  let div=document.createElement('div');
+  div.className='wind';
+  div.style.borderColor=it.color;
+  div.innerHTML=`<div style="font-size:10px;color:${it.color}">${it.name}</div><div style="font-size:8px;margin-top:4px;color:#a1a1aa">${it.desc} | ${it.detail}</div>`;
+  list.appendChild(div);
+ });
+}
+
+function drawWindmill(){
+ let w=windCanvas.width,h=windCanvas.height;
+ wctx.fillStyle='#08080a';wctx.fillRect(0,0,w,h);
+ time+=0.02 + windSpeed/100*0.05;
+ let cx=w/2, cy=h/2+10;
+ 
+ // toroid windmill
+ let toroidR=120;
+ let blades=8;
+ // toroid base
+ wctx.strokeStyle='#16a34a';wctx.lineWidth=2;wctx.globalAlpha=0.3;
+ wctx.beginPath();wctx.arc(cx,cy,toroidR,0,Math.PI*2);wctx.stroke();
+ wctx.globalAlpha=1;
+ 
+ // windmill blades spinning in toroid
+ for(let i=0;i<blades;i++){
+  let ang=(i*360/blades)*Math.PI/180 + time*(windSpeed/60);
+  let bx=cx+Math.cos(ang)*toroidR;
+  let by=cy+Math.sin(ang)*toroidR;
+  
+  // blade
+  wctx.fillStyle='#16a34a';
+  wctx.beginPath();
+  wctx.moveTo(cx,cy);
+  let bladeLen=40;
+  let bladeAng=ang+Math.PI/2;
+  let bx2=bx+Math.cos(bladeAng)*bladeLen;
+  let by2=by+Math.sin(bladeAng)*bladeLen;
+  wctx.lineTo(bx2,by2);
+  wctx.lineTo(bx+Math.cos(bladeAng+0.3)*10,by+Math.sin(bladeAng+0.3)*10);
+  wctx.closePath();
+  wctx.fill();
+  
+  // blade center dot
+  wctx.fillStyle='#6ee7b7';wctx.beginPath();wctx.arc(bx,by,6,0,Math.PI*2);wctx.fill();
+  
+  if(i===0){
+   wctx.fillStyle='#6ee7b7';wctx.font='7px monospace';wctx.textAlign='center';
+   wctx.fillText('windmill blade '+ (i+1) +' toroid',bx,by-18);
+  }
+ }
+ 
+ // center hub toroid windmill
+ wctx.fillStyle='#14532d';wctx.beginPath();wctx.arc(cx,cy,18,0,Math.PI*2);wctx.fill();
+ wctx.fillStyle='#6ee7b7';wctx.font='bold 8px monospace';wctx.textAlign='center';wctx.fillText('WINDMILL',cx,cy-2);
+ wctx.font='6px monospace';wctx.fillText('toroid 🌪️',cx,cy+8);
+ 
+ // power line from windmill to memsistor
+ let memX=cx+220, memY=cy;
+ wctx.strokeStyle='#fbbf24';wctx.lineWidth=2;wctx.setLineDash([6,3]);
+ wctx.beginPath();wctx.moveTo(cx+toroidR,cy);wctx.lineTo(memX-40,memY);wctx.stroke();
+ wctx.setLineDash([]);
+ wctx.fillStyle='#fbbf24';wctx.font='8px monospace';wctx.textAlign='center';
+ wctx.fillText('powers →',cx+toroidR+50,cy-10);
+ wctx.fillText(windSpeed+' RPM → power',cx+toroidR+50,cy+2);
+ 
+ // steepled memsistor
+ let steepleH=40 + steepleHeight*0.8;
+ // base memsistor
+ wctx.fillStyle='#7f1d1d';wctx.fillRect(memX-30,memY+20,60,40);
+ wctx.strokeStyle='#ef4444';wctx.lineWidth=2;wctx.strokeRect(memX-30,memY+20,60,40);
+ wctx.fillStyle='#fecaca';wctx.font='bold 7px monospace';wctx.textAlign='center';
+ wctx.fillText('MEMSISTOR',memX,memY+34);
+ wctx.font='6px monospace';wctx.fillText('memristor memory',memX,memY+44);
+ 
+ // steeple shape church steeple ⛪ stacked tall pointed
+ wctx.fillStyle='#991b1b';
+ wctx.beginPath();
+ wctx.moveTo(memX-30,memY+20);
+ wctx.lineTo(memX,memY+20-steepleH);
+ wctx.lineTo(memX+30,memY+20);
+ wctx.closePath();
+ wctx.fill();
+ wctx.strokeStyle='#ef4444';wctx.lineWidth=1.5;
+ wctx.stroke();
+ // steeple layers stacked
+ for(let i=0;i<3;i++){
+  let y=memY+20 - (i+1)*steepleH/4;
+  let wHalf=30 - (i+1)*8;
+  wctx.strokeStyle='#ef4444';wctx.globalAlpha=0.6;
+  wctx.beginPath();wctx.moveTo(memX-wHalf,y);wctx.lineTo(memX+wHalf,y);wctx.stroke();
+  wctx.globalAlpha=1;
+ }
+ wctx.fillStyle='#fecaca';wctx.font='bold 8px monospace';wctx.textAlign='center';
+ wctx.fillText('STEEPLED ⛪',memX,memY+20-steepleH-8);
+ wctx.font='6px monospace';
+ wctx.fillText('height '+steepleHeight+'% resistance memory',memX,memY+20-steepleH+6);
+ 
+ // continuous run indicator ♾️
+ if(isSpinning){
+  wctx.strokeStyle='#6ee7b7';wctx.lineWidth=1.5;
+  wctx.beginPath();
+  wctx.arc(memX,memY-30,12,0,Math.PI*2);wctx.stroke();
+  wctx.fillStyle='#6ee7b7';wctx.font='bold 12px monospace';wctx.textAlign='center';
+  wctx.fillText('♾️',memX,memY-26);
+  wctx.font='6px monospace';
+  wctx.fillText('continuously',memX,memY-44);
+ }
+ 
+ // plank + plank .02 scale
+ let plankM=plankScale/100*1.616e-35;
+ wctx.fillStyle='#0ea5e9';wctx.font='8px monospace';wctx.textAlign='left';
+ wctx.fillText('Plank + Plank .02 = '+(plankScale/100).toFixed(2)+' Planck = '+plankM.toExponential(3)+'m continuously at plank + plank .02 = 1×Planck + 0.02×Planck',10,24);
+ wctx.fillText('Toroid windmill powers steepled memsistor continuously at '+plankM.toExponential(3)+'m = '+ (plankScale/100).toFixed(2)+' Planck scale quantum continuously',10,38);
+ 
+ // power generation visualization
+ let power=windSpeed/100*steepleHeight/100*plankScale/100;
+ wctx.fillStyle='#1a1a1e';wctx.fillRect(cx-200,cy+180,400,20);
+ wctx.fillStyle='#16a34a';wctx.fillRect(cx-200,cy+180,400*power,20);
+ wctx.strokeStyle='#3f3f46';wctx.strokeRect(cx-200,cy+180,400,20);
+ wctx.fillStyle='#a1a1aa';wctx.font='8px monospace';wctx.textAlign='center';
+ wctx.fillText('Power: windmill '+windSpeed+' RPM × steeple '+steepleHeight+'% × plank '+(plankScale/100).toFixed(2)+' = '+(power*100).toFixed(0)+'% continuously',cx,cy+194);
+ 
+ // bottom info
+ wctx.fillStyle='#1a1a1e';wctx.fillRect(0,h-110,w,110);
+ wctx.fillStyle='#6ee7b7';wctx.font='8px monospace';wctx.textAlign='left';
+ wctx.fillText('Toroid windmill = windmill blades arranged in toroid spinning circular windmill in toroid shape 8 blades RPM '+windSpeed+' generates power | steepled memsistor = memsistor memristor resistor with memory steeple shape church steeple stacked tall pointed memsistor remembers resistance',10,h-90);
+ wctx.fillStyle='#fecaca';
+ wctx.fillText('Steepled memsistor height '+steepleHeight+'% resistance memory continuously running ⛪ | powers continuously at plank + plank .02 = '+(plankScale/100).toFixed(2)+' Planck = '+plankM.toExponential(3)+'m = 1×Planck + 0.02×Planck continuously quantum',10,h-76);
+ wctx.fillStyle='#7dd3fc';
+ wctx.fillText('Not toroid trap toroid windmill that powers a steepled memsistor that runs continuously at plank + plank .02 = toroid windmill → powers → steepled memsistor → runs continuously at 1.02 Planck = 1.648e-35m',10,h-62);
+ wctx.fillStyle='#52525b';wctx.font='9px monospace';wctx.textAlign='center';
+ wctx.fillText('TOROID WINDMILL POWERS STEEPLED MEMSISTOR CONTINUOUSLY AT PLANK + PLANK .02 = windmill spins powers memsistor runs continuously at 1.02 Planck = BONK IS ALL windmill memsistor',w/2,h-8);
+}
+
+updateWindList();drawWindmill();
+
+document.getElementById('windSpeed').addEventListener('input',e=>{
+ windSpeed=parseFloat(e.target.value);
+ document.getElementById('windSpeedLabel').textContent=windSpeed.toFixed(0)+' RPM toroid windmill spinning powers steepled memsistor';
+ document.getElementById('windVal').textContent='toroid windmill '+windSpeed+' RPM powers steepled memsistor';
+ updateWindList();drawWindmill();
+});
+document.getElementById('steepleHeight').addEventListener('input',e=>{
+ steepleHeight=parseFloat(e.target.value);
+ document.getElementById('steepleLabel').textContent=steepleHeight.toFixed(0)+'% steeple height memsistor resistance memory continuously running';
+ updateWindList();drawWindmill();
+});
+document.getElementById('plankScale').addEventListener('input',e=>{
+ plankScale=parseFloat(e.target.value);
+ let m=plankScale/100*1.616e-35;
+ document.getElementById('plankLabel').textContent=(plankScale/100).toFixed(2)+' Planck = 1×Planck + 0.02×Planck = '+m.toExponential(3)+'m continuously at plank + plank .02';
+ document.getElementById('plankVal').textContent='+' + (plankScale/100).toFixed(2)+' Planck '+m.toExponential(3)+'m';
+ updateWindList();drawWindmill();
+});
+
+document.getElementById('spinBtn').onclick=()=>{
+ isSpinning=true;
+ if(spinInterval) clearInterval(spinInterval);
+ spinInterval=setInterval(()=>{windSpeed=(windSpeed+1)%100;document.getElementById('windSpeed').value=windSpeed;updateWindList();drawWindmill();},100);
+ initAudio();
+ let osc=audioCtx.createOscillator();osc.type='sawtooth';osc.frequency.value=80+windSpeed;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},800);
+ showToast('Spinning toroid windmill 🌪️ '+windSpeed+' RPM powers steepled memsistor');
+ document.getElementById('log').innerHTML+='<br>> spinning toroid windmill 🌪️ '+windSpeed+' RPM powers steepled memsistor continuously';
+};
+document.getElementById('powerBtn').onclick=()=>{
+ initAudio();
+ let osc=audioCtx.createOscillator();osc.type='square';osc.frequency.value=120+steepleHeight;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},600);
+ showToast('Powering steepled memsistor ⛪ height '+steepleHeight+'% resistance memory');
+ document.getElementById('log').innerHTML+='<br>> powering steepled memsistor ⛪ height '+steepleHeight+'% resistance memory continuously';
+ drawWindmill();
+};
+document.getElementById('continuousBtn').onclick=()=>{
+ isSpinning=true;
+ if(spinInterval) clearInterval(spinInterval);
+ spinInterval=setInterval(()=>{time+=0.02;drawWindmill();},50);
+ initAudio();
+ // continuous run sound at plank + plank .02 frequency
+ let plankM=plankScale/100*1.616e-35;
+ let freq=432 + plankScale/10; // frequency based on plank scale
+ let osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=freq;osc.connect(gainNode);osc.start();
+ setTimeout(()=>{try{osc.stop();}catch(e){}},2000);
+ showToast('Running continuously ♾️ at plank + plank .02 = '+(plankScale/100).toFixed(2)+' Planck = '+plankM.toExponential(3)+'m continuously');
+ document.getElementById('log').innerHTML+='<br>> running continuously ♾️ at plank + plank .02 = '+(plankScale/100).toFixed(2)+' Planck = '+plankM.toExponential(3)+'m continuously at '+plankM.toExponential(3)+'m quantum continuously';
+};
+document.getElementById('stopBtn').onclick=()=>{
+ isSpinning=false;
+ if(spinInterval){clearInterval(spinInterval);spinInterval=null;}
+ if(currentOsc){try{currentOsc.stop();}catch(e){} currentOsc=null;}
+ if(audioCtx){try{audioCtx.suspend();}catch(e){}}
+ showToast('Stopped toroid windmill steepled memsistor 🔇');
+};
+
+document.getElementById('windmillBtn').onclick=()=>{document.getElementById('spinBtn').click();};
+document.getElementById('memsistorBtn').onclick=()=>{document.getElementById('powerBtn').click();};
+document.getElementById('plankBtn').onclick=()=>{document.getElementById('continuousBtn').click();};
+
+document.getElementById('exportBtn').onclick=()=>{
+ let m=plankScale/100*1.616e-35;
+ let tree={toroidWindmill:{desc:'windmill blades arranged in toroid spinning circular windmill in toroid shape generates power',blades:'8 blades toroid arrangement spinning RPM '+windSpeed+' generates power windmill 🌪️',spin:windSpeed+' RPM'},steepledMemsistor:{desc:'memsistor memristor resistor with memory steeple shape church steeple stacked tall pointed shape memsistor that remembers resistance',steeple:'height '+steepleHeight+'% memsistor resistance memory continuously running ⛪',memory:'memristor remembers resistance continuously'},plank:{plank:'Planck length 1.616255e-35m',plankPlusPlank02:'Plank + Plank .02 = 1×Planck + 0.02×Planck = 1.02×Planck = '+m.toExponential(3)+'m',continuous:'runs continuously at '+m.toExponential(3)+'m = '+(plankScale/100).toFixed(2)+' Planck scale quantum continuously'},powers:'toroid windmill → powers → steepled memsistor → runs continuously at plank + plank .02 = windmill spins generates power memsistor remembers resistance runs continuously at Planck scale'};
+ let blob=new Blob([JSON.stringify(tree,null,2)],{type:'application/json'});let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download='toroid_windmill_steepled_memsistor_plank_'+(plankScale/100).toFixed(2)+'_'+m.toExponential(3)+'.json';a.click();showToast('Exported toroid windmill powers steepled memsistor plank + plank .02');
+};
+document.getElementById('verifyBtn').onclick=()=>{let m=plankScale/100*1.616e-35;showToast('Verified toroid windmill '+windSpeed+' RPM powers steepled memsistor height '+steepleHeight+'% continuously at '+(plankScale/100).toFixed(2)+' Planck ='+m.toExponential(3)+'m valid');document.getElementById('txLog').textContent='Verified: toroid windmill = windmill blades arranged in toroid spinning circular windmill in toroid shape 8 blades RPM '+windSpeed+' generates power | steepled memsistor = memsistor memristor resistor with memory steeple shape church steeple stacked tall pointed memsistor remembers resistance | at plank + plank .02 = 1×Planck + 0.02×Planck = 1.02×Planck = '+m.toExponential(3)+'m continuously at '+m.toExponential(3)+'m quantum continuously | toroid windmill → powers → steepled memsistor → runs continuously at 1.02 Planck valid';};
+
+document.getElementById('walletBtn').onclick=async()=>{
+ if(window.solana&&window.solana.isPhantom){
+  try{
+   let r=await window.solana.connect();
+   showToast('Phantom '+r.publicKey.toString().slice(0,4)+' toroid windmill powers steepled memsistor');
+   initAudio();
+  }catch(e){}
+ } else window.open('https://phantom.app/','_blank');
+};
+document.getElementById('mintBtn').onclick=()=>{
+ initAudio();
+ let m=plankScale/100*1.616e-35;
+ let osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=432+plankScale/10;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},1500);
+ document.getElementById('txLog').textContent='MINTED toroid windmill powers steepled memsistor continuously at plank + plank .02 | toroid windmill = windmill blades arranged in toroid spinning circular windmill 8 blades RPM '+windSpeed+' generates power 🌪️ | steepled memsistor = memsistor memristor resistor with memory steeple shape church steeple ⛪ stacked tall pointed memsistor remembers resistance height '+steepleHeight+'% | at plank + plank .02 = 1×Planck + 0.02×Planck = 1.02×Planck = '+m.toExponential(3)+'m continuously at '+m.toExponential(3)+'m quantum continuously | toroid windmill → powers → steepled memsistor → runs continuously at 1.02 Planck | SIG simulated 🌪️⛪';
+ showToast('Minted toroid windmill powers steepled memsistor continuously at '+(plankScale/100).toFixed(2)+' Planck 🌪️⛪');
+};
+document.getElementById('swapBtn').onclick=()=>{
+ initAudio();
+ let osc=audioCtx.createOscillator();osc.type='sawtooth';osc.frequency.value=100+windSpeed;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},800);
+ document.getElementById('txLog').textContent='SIMULATED SWAP BONK 🌪️ after toroid windmill powers steepled memsistor continuously at plank + plank .02 ='+(plankScale/100).toFixed(2)+' Planck';
+ showToast('Swap BONK 🌪️ after toroid windmill powers steepled memsistor');
+};
+
+setInterval(()=>{if(isSpinning) drawWindmill();},80);
+</script>
+</body>
+</html>

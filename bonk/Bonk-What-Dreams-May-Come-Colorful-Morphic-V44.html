@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>v44 WHAT DREAMS MAY COME STYLE COLORFUL MORPHIC CATALYTIC WITH COLOR 15PX WINDMILL QUANTUM DOT</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Cormorant+Garamond:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#080608;color:#e4e4e7;font-family:'JetBrains Mono',monospace;overflow-x:hidden}
+.glass{background:rgba(18,18,22,0.85);border:1px solid #27272a;backdrop-filter:blur(12px)}
+.btn{padding:9px 14px;border-radius:10px;font-weight:800;font-size:10px;letter-spacing:0.12em;cursor:pointer;border:1px solid #3f3f46;transition:.2s}
+.btn-w{background:white;color:black;border-color:white}
+.btn-g{background:#1a1a1e;color:#a1a1aa}
+.btn-dreams{background:linear-gradient(90deg,#ff6b6b,#feca57,#48dbfb,#ff9ff3,#54a0ff);color:white;border-color:#ff9ff3;box-shadow:0 0 30px rgba(255,159,243,0.5)}
+.btn-morphic{background:linear-gradient(90deg,#a78bfa,#f87171,#34d399,#fbbf24);color:white;border-color:#a78bfa;box-shadow:0 0 20px rgba(167,139,250,0.4)}
+.btn-catalytic{background:linear-gradient(90deg,#ef4444,#ec4899,#8b5cf6,#06b6d4);color:white;border-color:#ec4899;box-shadow:0 0 24px rgba(236,72,153,0.45)}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#18181b;border:1px solid #3f3f46;padding:10px 18px;border-radius:9999px;font-size:11px;z-index:99;opacity:0;transition:.3s;pointer-events:none}
+.toast.show{opacity:1}
+.dreams{border-radius:12px;padding:10px;background:rgba(14,14,17,0.9);border:1px solid #27272a}
+</style>
+</head>
+<body>
+<div style="max-width:1900px;margin:auto;padding:14px">
+<div class="glass" style="border-radius:14px;padding:10px 14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<div>
+<div style="font-size:11px;letter-spacing:0.09em;font-family:'Cormorant Garamond',serif;font-style:italic">v44 WHAT DREAMS MAY COME STYLE COLORFUL MORPHIC CATALYTIC WITH COLOR 15PX WINDMILL QUANTUM DOT OWNS CAPACITOR SET</div>
+<div style="font-size:8px;color:#a1a1aa">what dreams may come style 1998 Robin Williams colorful painted afterlife morphic oil painting world catalytic with color color as catalyst 15px windmill quantum dot owns capacitor set</div>
+</div>
+<div style="display:flex;gap:8px"><button id="dreamsBtn" class="btn btn-dreams">WHAT DREAMS MAY COME STYLE 🎨</button><button id="morphicBtn" class="btn btn-morphic">COLORFUL MORPHIC</button><button id="catalyticBtn" class="btn btn-catalytic">CATALYTIC WITH COLOR</button></div>
+</div>
+
+<div style="margin-top:14px;display:grid;grid-template-columns:1.6fr 1fr;gap:14px">
+<div class="glass" style="border-radius:16px;overflow:hidden">
+<div style="padding:10px 14px;background:#0e0e11;border-bottom:1px solid #27272a;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<span style="font-size:10px">DREAMS MAY COME // <span id="dreamsVal">colorful morphic catalytic with color</span> 15px <span id="pxVal">15 px per windmill quantum dot owns capacitor set</span></span><span id="dreamsInfo" style="font-size:9px;color:#ff9ff3">what dreams may come style colorful morphic catalytic</span>
+</div>
+<canvas id="dreamsCanvas" width="1240" height="760" style="width:100%;background:#08080a;display:block"></canvas>
+<div style="padding:10px;background:#0e0e11;border-top:1px solid #27272a;display:flex;gap:8px;flex-wrap:wrap">
+<button id="colorfulBtn" class="btn btn-dreams">COLORFUL 🎨</button>
+<button id="morphicBtn2" class="btn btn-morphic">MORPHIC 🌀</button>
+<button id="catalystBtn" class="btn btn-catalytic">CATALYTIC WITH COLOR 🔥</button>
+<button id="quantumBtn" class="btn btn-g">15PX QUANTUM DOT OWNS CAPACITOR</button>
+<div id="log" style="flex:1;min-width:260px;background:black;border:1px solid #27272a;border-radius:8px;padding:8px;font-size:9px;color:#c4b5fd;max-height:80px;overflow-y:auto">> v44 what dreams may come style colorful morphic catalytic with color loaded<br>> what dreams may come style 1998 Robin Williams movie colorful painted afterlife oil painting world morphic world paints itself<br>> colorful = vibrant oil paint colors red garnet ruby spinel rubellite colorful dreams may come palette<br>> morphic = morphing shapes oil paint morphs colorful world morphic catalytic<br>> catalytic with color = color as catalyst color catalyzes transformation color catalyzes quantum dot windmill<br>> 15px per windmill quantum dot owns capacitor set = 15px windmills quantum dot owns capacitor bank 3s what dreams may come style</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px">
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px;font-family:'Cormorant Garamond',serif;font-style:italic">WHAT DREAMS MAY COME STYLE COLORFUL MORPHIC CATALYTIC WITH COLOR</div>
+<div style="margin-top:8px;display:flex;flex-direction:column;gap:8px" id="dreamsList">
+<!-- dynamic -->
+</div>
+<div style="margin-top:12px">
+<label style="font-size:10px;color:#a1a1aa">What Dreams May Come colorful palette morphic intensity</label><input id="colorfulIntensity" type="range" min="0" max="100" value="80" style="width:100%;accent-color:#ff9ff3">
+<div id="colorfulLabel" style="font-size:10px">80% colorful morphic catalytic with color what dreams may come style oil painting</div>
+</div>
+<div style="margin-top:8px">
+<label style="font-size:10px;color:#a1a1aa">Morphic morphing speed colorful world morphs</label><input id="morphicSpeed" type="range" min="0" max="100" value="60" style="width:100%;accent-color:#a78bfa">
+<div id="morphicLabel" style="font-size:10px">60% morphic morphing colorful world paints itself morphic catalytic</div>
+</div>
+<div style="margin-top:8px">
+<label style="font-size:10px;color:#a1a1aa">Catalytic with color catalyst power color catalyzes</label><input id="catalyticPower" type="range" min="0" max="100" value="70" style="width:100%;accent-color:#ec4899">
+<div id="catalyticLabel" style="font-size:10px">70% catalytic with color color as catalyst catalyzes quantum dot windmill capacitor set</div>
+</div>
+<div style="margin-top:10px;background:#08080a;border:1px solid #27272a;border-radius:10px;padding:10px">
+<div style="font-size:9px;color:#71717a">WHAT DREAMS MAY COME STYLE FORMULA</div>
+<div style="font-size:8px;margin-top:6px;line-height:1.6;font-family:'Cormorant Garamond',serif">
+what dreams may come style = 1998 film Robin Williams colorful painted afterlife<br>
+• what dreams may come = movie where afterlife is oil painting world that paints itself colorful<br>
+• style = oil painting world colorful morphic catalytic with color<br>
+colorful = vibrant oil paint colors red garnet #f87171 ruby #ef4444 spinel #dc2626 rubellite #ec4899 red beryl #b91c1c<br>
+• colorful palette = what dreams may come palette vibrant reds pinks blues greens yellows purples<br>
+• colorful world = world is colorful oil painting colorful morphic<br>
+morphic = morphing shapes oil paint morphs colorful world morphic<br>
+• morphic = shape morphs oil paint morphs world paints itself morphic<br>
+• morphic world = world morphs colorful morphic catalytic<br>
+catalytic with color = color as catalyst color catalyzes transformation<br>
+• catalytic = catalyst that causes reaction color catalyzes<br>
+• with color = color is catalyst color catalyzes quantum dot windmill<br>
+• catalytic with color = color catalyzes transformation color as catalyst<br>
+• color catalyzes = red color catalyzes garnet ruby spinel rubellite transformation<br>
+• quantum dot owns capacitor set = 15px windmills quantum dot owns capacitor bank 3s<br>
+• 15px per windmill quantum dot owns capacitor set what dreams may come style<br>
+• = colorful morphic catalytic with color 15px windmill quantum dot owns capacitor set<br>
+= what dreams may come style colorful morphic catalytic with color
+</div>
+</div>
+<div style="margin-top:10px;display:flex;gap:6px"><button id="exportBtn" class="btn btn-g" style="flex:1">Export Dreams JSON</button><button id="verifyBtn" class="btn btn-g" style="flex:1">Verify Dreams</button></div>
+</div>
+
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px;font-family:'Cormorant Garamond',serif;font-style:italic">MINT WHAT DREAMS MAY COME STYLE COLORFUL MORPHIC CATALYTIC WITH COLOR</div>
+<div style="margin-top:8px;font-size:9px;color:#c4b5fd">what dreams may come style 1998 Robin Williams colorful painted afterlife oil painting world morphic world paints itself catalytic with color color as catalyst 15px windmill quantum dot owns capacitor set colorful morphic catalytic</div>
+<div style="margin-top:10px;display:flex;gap:6px"><input id="swapInput" type="number" value="100" style="flex:1;background:#08080a;border:1px solid #27272a;border-radius:8px;padding:7px;color:white"><button id="swapBtn" class="btn btn-g">Swap BONK 🎨</button><button id="mintBtn" class="btn btn-w">Mint Dreams May Come 🎨</button></div>
+<div id="txLog" style="font-size:9px;color:#a1a1aa;margin-top:6px">Tx idle - mint what dreams may come style colorful morphic catalytic with color 15px windmill quantum dot owns capacitor set</div>
+<div style="margin-top:8px;font-size:8px;color:#52525b">What Dreams May Come: 1998 film colorful painted afterlife oil painting world morphic | Colorful: vibrant oil paint colors red garnet ruby spinel rubellite | Morphic: morphing shapes oil paint morphs world paints itself | Catalytic with color: color as catalyst color catalyzes transformation | 15px windmill quantum dot owns capacitor set</div>
+</div>
+</div>
+</div>
+
+<div style="margin-top:14px;text-align:center;font-size:9px;color:#52525b" class="glass" style="border-radius:12px;padding:10px">
+v44 WHAT DREAMS MAY COME STYLE COLORFUL MORPHIC CATALYTIC WITH COLOR = what dreams may come style 1998 film Robin Williams colorful painted afterlife oil painting world that paints itself colorful morphic catalytic with color | colorful = vibrant oil paint colors red garnet #f87171 ruby #ef4444 spinel #dc2626 rubellite #ec4899 red beryl #b91c1c what dreams may come palette vibrant reds pinks blues greens yellows purples | morphic = morphing shapes oil paint morphs colorful world morphic world morphs colorful morphic catalytic | catalytic with color = color as catalyst color catalyzes transformation color is catalyst color catalyzes quantum dot windmill 15px windmill quantum dot owns capacitor set = colorful morphic catalytic with color = BONK IS ALL what dreams may come style colorful morphic catalytic with color
+</div>
+
+</div>
+<div id="toast" class="toast"></div>
+<script src="https://unpkg.com/@solana/web3.js@1.95.4/lib/index.iife.js"></script>
+<script>
+function showToast(m){let e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),3000)}
+
+let dreamsCanvas=document.getElementById('dreamsCanvas'),dctx=dreamsCanvas.getContext('2d');
+let colorfulIntensity=80,morphicSpeed=60,catalyticPower=70,time=0,isMorphing=true;
+let audioCtx=null,gainNode=null,currentOsc=null;
+
+let palette=[
+ {name:'Garnet Rose',hex:'#f87171',rgb:'248,113,113',freq:432,desc:'garnet X3Y2(SiO4)3 rose pink red colorful'},
+ {name:'Ruby Vivid',hex:'#ef4444',rgb:'239,68,68',freq:396,desc:'ruby Al2O3:Cr vivid red colorful'},
+ {name:'Spinel Brilliant',hex:'#dc2626',rgb:'220,38,38',freq:528,desc:'spinel MgAl2O4:Cr brilliant red colorful'},
+ {name:'Rubellite Pink',hex:'#ec4899',rgb:'236,72,153',freq:639,desc:'rubellite tourmaline pink-red colorful'},
+ {name:'Red Beryl Intense',hex:'#b91c1c',rgb:'185,28,28',freq:741,desc:'red beryl bixbite intense red colorful'},
+ {name:'Dreams Blue',hex:'#48dbfb',rgb:'72,219,251',freq:852,desc:'what dreams may come blue colorful'},
+ {name:'Dreams Yellow',hex:'#feca57',rgb:'254,202,87',freq:963,desc:'what dreams may come yellow colorful'},
+ {name:'Dreams Purple',hex:'#a78bfa',rgb:'167,139,250',freq:174,desc:'what dreams may come purple colorful morphic'}
+];
+
+function initAudio(){
+ if(!audioCtx){
+  audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  gainNode=audioCtx.createGain();
+  gainNode.gain.value=0.15;
+  gainNode.connect(audioCtx.destination);
+ }
+ if(audioCtx.state==='suspended') audioCtx.resume();
+}
+
+function updateDreamsList(){
+ let list=document.getElementById('dreamsList');
+ list.innerHTML='';
+ let items=[
+  {name:'What Dreams May Come Style',desc:'1998 film Robin Williams colorful painted afterlife oil painting world',color:'#ff9ff3',detail:'what dreams may come style colorful painted afterlife oil painting world that paints itself'},
+  {name:'Colorful',desc:'vibrant oil paint colors red garnet ruby spinel rubellite',color:'#f87171',detail:'colorful palette vibrant reds pinks blues greens yellows purples what dreams may come palette'},
+  {name:'Morphic',desc:'morphing shapes oil paint morphs colorful world morphic',color:'#a78bfa',detail:'morphic = shape morphs oil paint morphs world paints itself morphic world morphs'},
+  {name:'Catalytic with Color',desc:'color as catalyst color catalyzes transformation',color:'#ec4899',detail:'catalytic with color = color as catalyst color catalyzes quantum dot windmill 15px windmill quantum dot owns capacitor set'},
+  {name:'15px Windmill Quantum Dot Owns Capacitor Set',desc:'15px windmills quantum dot owns capacitor bank 3s what dreams may come style',color:'#6ee7b7',detail:'15px per windmill quantum dot owns capacitor set = 15px windmills quantum dot owns capacitor bank 3s colorful morphic catalytic'}
+ ];
+ items.forEach(it=>{
+  let div=document.createElement('div');
+  div.className='dreams';
+  div.style.borderColor=it.color;
+  div.innerHTML=`<div style="font-size:10px;color:${it.color};font-family:'Cormorant Garamond',serif;font-style:italic">${it.name}</div><div style="font-size:8px;margin-top:4px;color:#a1a1aa">${it.desc} | ${it.detail}</div>`;
+  list.appendChild(div);
+ });
+}
+
+function drawDreamsMayCome(){
+ let w=dreamsCanvas.width,h=dreamsCanvas.height;
+ // what dreams may come style background oil painting morphic colorful
+ let gradient=dctx.createRadialGradient(w/2,h/2,0,w/2,h/2,Math.max(w,h)/1.2);
+ let morphT=time*0.01*morphicSpeed/60;
+ let c1=palette[Math.floor(morphT)%palette.length].hex;
+ let c2=palette[Math.floor(morphT*1.3)%palette.length].hex;
+ let c3=palette[Math.floor(morphT*0.7)%palette.length].hex;
+ gradient.addColorStop(0,c1+'22');
+ gradient.addColorStop(0.5,c2+'18');
+ gradient.addColorStop(1,c3+'15');
+ dctx.fillStyle='#08080a';dctx.fillRect(0,0,w,h);
+ dctx.fillStyle=gradient;dctx.fillRect(0,0,w,h);
+ 
+ // colorful oil paint strokes morphic
+ for(let i=0;i<8;i++){
+  let p=palette[(i+Math.floor(time*0.02))%palette.length];
+  let x=(Math.sin(time*0.01*morphicSpeed/60 + i)*w/3 + w/2);
+  let y=(Math.cos(time*0.008*morphicSpeed/60 + i*1.3)*h/3 + h/2);
+  let r=80 + colorfulIntensity + Math.sin(time*0.02+i)*20;
+  dctx.fillStyle=p.hex + Math.floor(colorfulIntensity*1.5).toString(16).padStart(2,'0');
+  dctx.globalAlpha=0.15 + catalyticPower/100*0.1;
+  dctx.beginPath();
+  // morphic shape - not circle but oil paint blob morphic
+  dctx.moveTo(x+r*Math.cos(0), y+r*Math.sin(0)*0.7);
+  for(let a=0;a<Math.PI*2;a+=0.3){
+   let mr=r + Math.sin(a*3 + time*0.02*morphicSpeed/60)*20 + Math.cos(a*2)*10;
+   let mx=x+mr*Math.cos(a);
+   let my=y+mr*Math.sin(a)*0.7;
+   dctx.lineTo(mx,my);
+  }
+  dctx.closePath();
+  dctx.fill();
+  dctx.globalAlpha=1;
+ }
+ 
+ time+=0.02 + morphicSpeed/100*0.03;
+ let cx=w/2, cy=h/2+10;
+ 
+ // toroid windmill 15px per windmill quantum dot owns capacitor set colorful morphic
+ let toroidR=110 + Math.sin(time*0.5)*5;
+ let windCount=12;
+ let pxSize=15;
+ 
+ // quantum dot owns capacitor set center - one quantum dot owns capacitor bank
+ let qdotR=24 + catalyticPower/10;
+ dctx.fillStyle='#e9d5ff';
+ dctx.shadowColor='#a78bfa';dctx.shadowBlur=20+catalyticPower/3;
+ dctx.beginPath();dctx.arc(cx,cy,qdotR,0,Math.PI*2);dctx.fill();
+ dctx.shadowBlur=0;
+ dctx.fillStyle='black';dctx.font='bold 10px monospace';dctx.textAlign='center';
+ dctx.fillText('QD',cx,cy+3);
+ dctx.fillStyle='#a78bfa';dctx.font='7px monospace';
+ dctx.fillText('owns capacitor set',cx,cy+qdotR+12);
+ 
+ // catalytic with color - color catalyzes - each color catalytic aura around quantum dot
+ palette.slice(0,5).forEach((p,i)=>{
+  let ang=(i*72)*Math.PI/180 + time*0.3*catalyticPower/70;
+  let dist=qdotR+20+i*8;
+  let x=cx+Math.cos(ang)*dist;
+  let y=cy+Math.sin(ang)*dist;
+  dctx.fillStyle=p.hex;dctx.globalAlpha=0.3 + catalyticPower/100*0.3;
+  dctx.beginPath();dctx.arc(x,y,8 + catalyticPower/15,0,Math.PI*2);dctx.fill();
+  dctx.globalAlpha=1;
+  dctx.fillStyle=p.hex;dctx.font='6px monospace';dctx.textAlign='center';
+  dctx.fillText(p.name.split(' ')[0],x,y+16);
+ });
+ 
+ // 15px windmills colorful morphic catalytic
+ for(let i=0;i<windCount;i++){
+  let p=palette[i%palette.length];
+  let ang=(i*360/windCount)*Math.PI/180 + time*0.8;
+  let wx=cx+Math.cos(ang)*toroidR;
+  let wy=cy+Math.sin(ang)*toroidR;
+  
+  // windmill size 15 px per windmill colorful
+  let size=pxSize + Math.sin(time+i)*2; // morphic size variation 15px morphic
+  // hub colorful morphic
+  dctx.fillStyle=p.hex;dctx.globalAlpha=0.8;
+  dctx.beginPath();dctx.arc(wx,wy,4,0,Math.PI*2);dctx.fill();
+  dctx.globalAlpha=1;
+  
+  // 3 blades per windmill 15px per windmill colorful morphic
+  for(let b=0;b<3;b++){
+   let bladeAng=ang + b*120*Math.PI/180 + time*2.5;
+   let bl=size + Math.sin(time*2+b)*2; // morphic blade length
+   let bx=wx+Math.cos(bladeAng)*bl;
+   let by=wy+Math.sin(bladeAng)*bl;
+   dctx.strokeStyle=p.hex;dctx.lineWidth=1.5;dctx.globalAlpha=0.7+colorfulIntensity/200;
+   dctx.beginPath();dctx.moveTo(wx,wy);dctx.lineTo(bx,by);dctx.stroke();
+   dctx.globalAlpha=1;
+   // tip dot catalytic with color
+   dctx.fillStyle=p.hex;dctx.beginPath();dctx.arc(bx,by,2.5,0,Math.PI*2);dctx.fill();
+   // catalytic spark
+   if(catalyticPower>50 && Math.random()<0.05){
+    dctx.fillStyle=p.hex;dctx.globalAlpha=0.5;
+    dctx.beginPath();dctx.arc(bx+Math.random()*6-3,by+Math.random()*6-3,1,0,Math.PI*2);dctx.fill();
+    dctx.globalAlpha=1;
+   }
+  }
+  
+  // wire to quantum dot owns capacitor set
+  if(i%3===0){
+   dctx.strokeStyle=p.hex;dctx.lineWidth=0.5;dctx.globalAlpha=0.3;
+   dctx.setLineDash([2,3]);
+   dctx.beginPath();dctx.moveTo(wx,wy);dctx.lineTo(cx,cy);dctx.stroke();
+   dctx.setLineDash([]);
+   dctx.globalAlpha=1;
+  }
+ }
+ 
+ // wire them in 3s like capacitor set groups colorful morphic
+ for(let g=0;g<Math.ceil(windCount/3);g++){
+  let startIdx=g*3;
+  if(startIdx+2>=windCount) continue;
+  let ang1=(startIdx*360/windCount)*Math.PI/180;
+  let ang2=((startIdx+2)*360/windCount)*Math.PI/180;
+  let midAng=(ang1+ang2)/2;
+  let gx=cx+Math.cos(midAng)*(toroidR+35);
+  let gy=cy+Math.sin(midAng)*(toroidR+35);
+  let p=palette[g%palette.length];
+  
+  dctx.strokeStyle=p.hex;dctx.lineWidth=1;dctx.globalAlpha=0.5;
+  dctx.setLineDash([3,3]);
+  dctx.beginPath();dctx.arc(cx,cy,toroidR+20,ang1-0.15,ang2+0.15);dctx.stroke();
+  dctx.setLineDash([]);
+  dctx.globalAlpha=1;
+  dctx.fillStyle=p.hex;dctx.font='7px monospace';dctx.textAlign='center';
+  dctx.fillText('3s C'+(g+1)+' '+pxSize+'px '+p.name.split(' ')[0],gx,gy);
+ }
+ 
+ // bottom info with what dreams may come style font
+ dctx.fillStyle='rgba(0,0,0,0.7)';dctx.fillRect(0,h-120,w,120);
+ dctx.fillStyle='#ff9ff3';dctx.font='italic 9px Cormorant Garamond';dctx.textAlign='left';
+ dctx.fillText('What Dreams May Come style 1998 Robin Williams colorful painted afterlife oil painting world that paints itself colorful morphic catalytic with color color as catalyst',10,h-100);
+ dctx.fillStyle='#f87171';dctx.font='8px monospace';dctx.textAlign='left';
+ dctx.fillText('Colorful palette vibrant reds '+palette.slice(0,5).map(p=>p.hex+' '+p.name).join(' | ')+' | colorful morphic catalytic with color '+colorfulIntensity+'% colorful '+morphicSpeed+'% morphic '+catalyticPower+'% catalytic',10,h-86);
+ dctx.fillStyle='#a78bfa';
+ dctx.fillText('Morphic morphing oil paint morphs world paints itself morphic world morphs colorful morphic catalytic | catalytic with color color as catalyst catalyzes quantum dot windmill 15px windmill quantum dot owns capacitor set',10,h-72);
+ dctx.fillStyle='#6ee7b7';
+ dctx.fillText('15px per windmill quantum dot owns capacitor set = 15px windmills quantum dot owns capacitor bank 3s what dreams may come style colorful morphic catalytic | wire them in 3s like capacitor set charge -1→+1 | retry at 15 px per windmill',10,h-58);
+ dctx.fillStyle='#52525b';dctx.font='9px monospace';dctx.textAlign='center';
+ dctx.fillText('WHAT DREAMS MAY COME STYLE COLORFUL MORPHIC CATALYTIC WITH COLOR = colorful oil paint world morphic catalytic with color 15px windmill quantum dot owns capacitor set = BONK IS ALL what dreams may come',w/2,h-8);
+}
+
+updateDreamsList();drawDreamsMayCome();
+
+document.getElementById('colorfulIntensity').addEventListener('input',e=>{
+ colorfulIntensity=parseFloat(e.target.value);
+ document.getElementById('colorfulLabel').textContent=colorfulIntensity.toFixed(0)+'% colorful morphic catalytic with color what dreams may come style oil painting';
+ document.getElementById('dreamsVal').textContent=colorfulIntensity.toFixed(0)+'% colorful '+morphicSpeed.toFixed(0)+'% morphic '+catalyticPower.toFixed(0)+'% catalytic with color';
+});
+document.getElementById('morphicSpeed').addEventListener('input',e=>{
+ morphicSpeed=parseFloat(e.target.value);
+ document.getElementById('morphicLabel').textContent=morphicSpeed.toFixed(0)+'% morphic morphing colorful world paints itself morphic catalytic';
+});
+document.getElementById('catalyticPower').addEventListener('input',e=>{
+ catalyticPower=parseFloat(e.target.value);
+ document.getElementById('catalyticLabel').textContent=catalyticPower.toFixed(0)+'% catalytic with color color as catalyst catalyzes quantum dot windmill capacitor set';
+});
+
+document.getElementById('colorfulBtn').onclick=()=>{
+ colorfulIntensity=90;
+ document.getElementById('colorfulIntensity').value=90;
+ updateDreamsList();drawDreamsMayCome();
+ initAudio();
+ palette.slice(0,3).forEach((p,i)=>{
+  setTimeout(()=>{
+   if(!audioCtx){audioCtx=new (window.AudioContext||window.webkitAudioContext)();gainNode=audioCtx.createGain();gainNode.gain.value=0.15;gainNode.connect(audioCtx.destination);}
+   let osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=p.freq;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},400);
+  },i*200);
+ });
+ showToast('Colorful 🎨 what dreams may come palette vibrant reds pinks blues greens');
+};
+document.getElementById('morphicBtn2').onclick=()=>{
+ morphicSpeed=80;
+ document.getElementById('morphicSpeed').value=80;
+ showToast('Morphic 🌀 oil paint morphs colorful world paints itself morphic');
+};
+document.getElementById('catalystBtn').onclick=()=>{
+ catalyticPower=90;
+ document.getElementById('catalyticPower').value=90;
+ showToast('Catalytic with color 🔥 color as catalyst catalyzes quantum dot windmill');
+};
+
+document.getElementById('dreamsBtn').onclick=()=>{
+ colorfulIntensity=85;morphicSpeed=70;catalyticPower=80;
+ document.getElementById('colorfulIntensity').value=85;document.getElementById('morphicSpeed').value=70;document.getElementById('catalyticPower').value=80;
+ updateDreamsList();drawDreamsMayCome();
+ showToast('What Dreams May Come style 🎨 colorful painted afterlife oil painting world morphic catalytic with color');
+};
+document.getElementById('morphicBtn').onclick=()=>{document.getElementById('morphicBtn2').click();};
+document.getElementById('catalyticBtn').onclick=()=>{document.getElementById('catalystBtn').click();};
+document.getElementById('quantumBtn').onclick=()=>{
+ showToast('15px windmill quantum dot owns capacitor set = 15px windmills quantum dot owns capacitor bank 3s what dreams may come style colorful morphic');
+};
+
+document.getElementById('exportBtn').onclick=()=>{
+ let tree={whatDreamsMayComeStyle:'1998 film Robin Williams colorful painted afterlife oil painting world that paints itself colorful morphic catalytic with color',colorful:{palette:palette.map(p=>({name:p.name,hex:p.hex,freq:p.freq+'Hz',desc:p.desc})),intensity:colorfulIntensity+'% colorful morphic catalytic with color what dreams may come style oil painting'},morphic:{desc:'morphing shapes oil paint morphs colorful world morphic world paints itself morphic',speed:morphicSpeed+'% morphic morphing colorful world paints itself'},catalyticWithColor:{desc:'color as catalyst color catalyzes transformation color is catalyst color catalyzes quantum dot windmill',power:catalyticPower+'% catalytic with color color as catalyst catalyzes quantum dot windmill capacitor set'},quantumDotOwnsCapacitorSet:'15px per windmill quantum dot owns capacitor set = 15px windmills quantum dot owns capacitor bank 3s what dreams may come style colorful morphic catalytic'};
+ let blob=new Blob([JSON.stringify(tree,null,2)],{type:'application/json'});let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download='what_dreams_may_come_style_colorful_morphic_catalytic_'+colorfulIntensity+'_'+morphicSpeed+'_'+catalyticPower+'.json';a.click();showToast('Exported what dreams may come style colorful morphic catalytic with color');
+};
+document.getElementById('verifyBtn').onclick=()=>{showToast('Verified what dreams may come style colorful morphic catalytic with color '+colorfulIntensity+'% colorful '+morphicSpeed+'% morphic '+catalyticPower+'% catalytic valid');document.getElementById('txLog').textContent='Verified: what dreams may come style 1998 film Robin Williams colorful painted afterlife oil painting world that paints itself colorful morphic catalytic with color | colorful palette vibrant reds '+palette.slice(0,5).map(p=>p.hex+' '+p.name).join(' | ')+' | morphic morphing oil paint morphs world paints itself | catalytic with color color as catalyst catalyzes quantum dot windmill 15px windmill quantum dot owns capacitor set = colorful morphic catalytic with color valid';};
+
+document.getElementById('walletBtn').onclick=async()=>{
+ if(window.solana&&window.solana.isPhantom){
+  try{
+   let r=await window.solana.connect();
+   showToast('Phantom '+r.publicKey.toString().slice(0,4)+' what dreams may come style colorful morphic catalytic');
+   initAudio();
+  }catch(e){}
+ } else window.open('https://phantom.app/','_blank');
+};
+document.getElementById('mintBtn').onclick=()=>{
+ initAudio();
+ palette.forEach((p,i)=>{
+  setTimeout(()=>{
+   let osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=p.freq;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},600);
+  },i*150);
+ });
+ document.getElementById('txLog').textContent='MINTED what dreams may come style colorful morphic catalytic with color | what dreams may come style 1998 film Robin Williams colorful painted afterlife oil painting world that paints itself | colorful palette vibrant reds '+palette.slice(0,5).map(p=>p.hex+' '+p.name).join(' | ')+' | morphic morphing oil paint morphs world paints itself | catalytic with color color as catalyst catalyzes quantum dot windmill 15px windmill quantum dot owns capacitor set = colorful morphic catalytic with color | 15px per windmill quantum dot owns capacitor set = 15px windmills quantum dot owns capacitor bank 3s what dreams may come style | SIG simulated 🎨';
+ showToast('Minted what dreams may come style colorful morphic catalytic with color 🎨');
+};
+document.getElementById('swapBtn').onclick=()=>{
+ initAudio();
+ let osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=432;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},500);
+ document.getElementById('txLog').textContent='SIMULATED SWAP BONK 🎨 after what dreams may come style colorful morphic catalytic with color 15px windmill quantum dot owns capacitor set';
+ showToast('Swap BONK 🎨 after what dreams may come style colorful morphic catalytic');
+};
+
+setInterval(()=>{drawDreamsMayCome();},80);
+</script>
+</body>
+</html>

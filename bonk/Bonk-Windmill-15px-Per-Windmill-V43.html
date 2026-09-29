@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>v43 RETRY AT 15 PX PER WINDMILL TOROID WINDMILL 15PX CAPACITOR 3S</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#080608;color:#e4e4e7;font-family:'JetBrains Mono',monospace;overflow-x:hidden}
+.glass{background:rgba(18,18,22,0.93);border:1px solid #27272a;backdrop-filter:blur(12px)}
+.btn{padding:9px 14px;border-radius:10px;font-weight:800;font-size:10px;letter-spacing:0.12em;cursor:pointer;border:1px solid #3f3f46;transition:.2s}
+.btn-w{background:white;color:black;border-color:white}
+.btn-g{background:#1a1a1e;color:#a1a1aa}
+.btn-wind{background:#14532d;color:#6ee7b7;border-color:#16a34a;box-shadow:0 0 20px rgba(22,163,74,0.4)}
+.btn-15px{background:#0c4a6e;color:#7dd3fc;border-color:#0ea5e9;box-shadow:0 0 20px rgba(14,165,233,0.4)}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#18181b;border:1px solid #3f3f46;padding:10px 18px;border-radius:9999px;font-size:11px;z-index:99;opacity:0;transition:.3s;pointer-events:none}
+.toast.show{opacity:1}
+.px15{border-radius:10px;padding:8px;background:#0e0e11;border:1px solid #27272a}
+</style>
+</head>
+<body>
+<div style="max-width:1900px;margin:auto;padding:14px">
+<div class="glass" style="border-radius:14px;padding:10px 14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<div>
+<div style="font-size:11px;letter-spacing:0.09em">v43 RETRY AT 15 PX PER WINDMILL TOROID WINDMILL 15PX CAPACITOR 3S CHARGE -1→+1</div>
+<div style="font-size:8px;color:#71717a">retry at 15 px per windmill = 15px per windmill toroid windmill 15px windmill blades 15px per windmill compact</div>
+</div>
+<div style="display:flex;gap:8px"><button id="retryBtn" class="btn btn-15px">RETRY 15 PX PER WINDMILL</button><button id="windmillBtn" class="btn btn-wind">TOROID WINDMILL 15PX 🌪️</button><button id="walletBtn" class="btn btn-g">Phantom</button></div>
+</div>
+
+<div style="margin-top:14px;display:grid;grid-template-columns:1.6fr 1fr;gap:14px">
+<div class="glass" style="border-radius:16px;overflow:hidden">
+<div style="padding:10px 14px;background:#0e0e11;border-bottom:1px solid #27272a;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<span style="font-size:10px">15 PX PER WINDMILL // <span id="pxVal">15 px per windmill</span> windmill <span id="windVal">toroid windmill 15px</span></span><span id="pxInfo" style="font-size:9px;color:#7dd3fc">retry at 15 px per windmill compact</span>
+</div>
+<canvas id="pxCanvas" width="1240" height="760" style="width:100%;background:#08080a;display:block"></canvas>
+<div style="padding:10px;background:#0e0e11;border-top:1px solid #27272a;display:flex;gap:8px;flex-wrap:wrap">
+<button id="px15Btn" class="btn btn-15px">15 PX WINDMILL</button>
+<button id="spin15Btn" class="btn btn-wind">SPIN 15PX WINDMILL 🌪️</button>
+<button id="cap3sBtn" class="btn btn-15px">WIRE 3S CAPACITOR 15PX</button>
+<button id="chargeBtn" class="btn btn-g">CHARGE -1→+1 🔊</button>
+<div id="log" style="flex:1;min-width:260px;background:black;border:1px solid #27272a;border-radius:8px;padding:8px;font-size:9px;color:#a1a1aa;max-height:80px;overflow-y:auto">> v43 retry at 15 px per windmill loaded<br>> retry at 15 px per windmill = 15px per windmill toroid windmill 15px compact<br>> 15 px per windmill = each windmill 15px size windmill blades 15px per windmill<br>> toroid windmill 15px = toroid windmill with 15px per windmill blades 15px per windmill compact working fixed<br>> wire them in 3s like capacitor set charge -1.00 .25 .50 .75 .00 +1 = 3 caps 15px per windmill</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px">
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">RETRY AT 15 PX PER WINDMILL TOROID WINDMILL 15PX</div>
+<div style="margin-top:8px;display:flex;flex-direction:column;gap:8px" id="pxList">
+<!-- dynamic -->
+</div>
+<div style="margin-top:12px">
+<label style="font-size:10px;color:#a1a1aa">15 px per windmill size (px per windmill)</label><input id="pxSize" type="range" min="5" max="50" value="15" style="width:100%;accent-color:#0ea5e9">
+<div id="pxSizeLabel" style="font-size:10px">15 px per windmill = 15px per windmill toroid windmill compact 15px</div>
+</div>
+<div style="margin-top:8px">
+<label style="font-size:10px;color:#a1a1aa">Windmill count 15 px per windmill toroid</label><input id="windCount" type="range" min="3" max="24" step="3" value="12" style="width:100%;accent-color:#16a34a">
+<div id="windCountLabel" style="font-size:10px">12 windmills × 15 px per windmill = 180 px total toroid windmill</div>
+</div>
+<div style="margin-top:8px">
+<label style="font-size:10px;color:#a1a1aa">Charge -1.00 .25 .50 .75 .00 +1 = -1 to +1</label><input id="chargeLevel" type="range" min="-100" max="100" value="0" style="width:100%;accent-color:#ef4444">
+<div id="chargeLabel" style="font-size:10px">0.00 charge = 15 px per windmill charge neutral</div>
+</div>
+<div style="margin-top:10px;background:#08080a;border:1px solid #27272a;border-radius:10px;padding:10px">
+<div style="font-size:9px;color:#71717a">RETRY AT 15 PX PER WINDMILL FORMULA</div>
+<div style="font-size:8px;margin-top:6px;line-height:1.6">
+retry at 15 px per windmill<br>
+• retry = retry previous toroid windmill that didn't work lol<br>
+• at 15 px per windmill = 15 pixels per windmill<br>
+• 15 px per windmill = each windmill 15px size compact<br>
+• toroid windmill 15px = toroid windmill with windmills 15px per windmill<br>
+• previous windmill was large ~80px per windmill broken<br>
+• retry at 15 px per windmill = compact 15px per windmill working fixed<br>
+• windmill blades 15px per windmill = blades 15px length<br>
+• toroid windmill 15px per windmill = toroid arrangement with 15px windmills<br>
+• 12 windmills × 15 px = 180 px total toroid circumference<br>
+• wire them in 3s like capacitor set = 3 windmills per capacitor set 3s<br>
+• charge -1.00 .25 .50 .75 .00 +1 = charge levels -1 to +1<br>
+• 15 px per windmill charge -1 to +1 = 15px windmills charged -1 to +1<br>
+= retry at 15 px per windmill toroid windmill 15px compact working fixed
+</div>
+</div>
+<div style="margin-top:10px;display:flex;gap:6px"><button id="exportBtn" class="btn btn-g" style="flex:1">Export 15px JSON</button><button id="verifyBtn" class="btn btn-g" style="flex:1">Verify 15px</button></div>
+</div>
+
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">MINT RETRY AT 15 PX PER WINDMILL TOROID WINDMILL 15PX</div>
+<div style="margin-top:8px;font-size:9px;color:#71717a">retry at 15 px per windmill = 15px per windmill toroid windmill compact 15px windmill blades 15px per windmill wire them in 3s capacitor set charge -1→+1</div>
+<div style="margin-top:10px;display:flex;gap:6px"><input id="swapInput" type="number" value="100" style="flex:1;background:#08080a;border:1px solid #27272a;border-radius:8px;padding:7px;color:white"><button id="swapBtn" class="btn btn-g">Swap BONK 🌪️</button><button id="mintBtn" class="btn btn-w">Mint 15px Windmill 🌪️</button></div>
+<div id="txLog" style="font-size:9px;color:#71717a;margin-top:6px">Tx idle - mint retry at 15 px per windmill toroid windmill 15px per windmill compact</div>
+<div style="margin-top:8px;font-size:8px;color:#52525b">15 px per windmill: each windmill 15px size compact toroid windmill 15px blades 15px | Retry: previous broken fixed at 15 px per windmill working | Wire 3s: 3 windmills per capacitor set 3s like capacitor bank | Charge -1→+1: -1.00 .25 .50 .75 .00 +1 charge levels</div>
+</div>
+</div>
+</div>
+
+<div style="margin-top:14px;text-align:center;font-size:9px;color:#52525b" class="glass" style="border-radius:12px;padding:10px">
+v43 RETRY AT 15 PX PER WINDMILL = retry previous toroid windmill that didn't work lol at 15 px per windmill = 15 pixels per windmill = each windmill 15px size compact toroid windmill 15px windmill blades 15px per windmill compact working fixed | previous windmill large ~80px per windmill broken | retry at 15 px per windmill = compact 15px per windmill working fixed windmill blades 15px per windmill toroid windmill 15px per windmill = toroid arrangement with 15px windmills 12 windmills ×15 px =180 px total toroid circumference | wire them in 3s like capacitor set = 3 windmills per capacitor set 3s capacitor bank | charge -1.00 .25 .50 .75 .00 +1 = -1 to +1 charge levels | = BONK IS ALL retry at 15 px per windmill toroid windmill 15px
+</div>
+
+</div>
+<div id="toast" class="toast"></div>
+<script src="https://unpkg.com/@solana/web3.js@1.95.4/lib/index.iife.js"></script>
+<script>
+function showToast(m){let e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),3000)}
+
+let pxCanvas=document.getElementById('pxCanvas'),pctx=pxCanvas.getContext('2d');
+let pxSize=15,windCount=12,chargeLevel=0,time=0,isSpinning=false,spinInterval=null;
+let audioCtx=null,gainNode=null,currentOsc=null;
+
+function initAudio(){
+ if(!audioCtx){
+  audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  gainNode=audioCtx.createGain();
+  gainNode.gain.value=0.15;
+  gainNode.connect(audioCtx.destination);
+ }
+ if(audioCtx.state==='suspended') audioCtx.resume();
+}
+
+function updatePxList(){
+ let list=document.getElementById('pxList');
+ list.innerHTML='';
+ let items=[
+  {name:'15 px per windmill',desc:'each windmill 15px size compact toroid windmill 15px',color:'#0ea5e9',detail:pxSize+' px per windmill = '+pxSize+'px size compact working fixed'},
+  {name:'Toroid windmill 15px',desc:'toroid windmill with 15px per windmill blades',color:'#16a34a',detail:windCount+' windmills × '+pxSize+' px = '+(windCount*pxSize)+' px total toroid circumference'},
+  {name:'Wire in 3s capacitor set',desc:'3 windmills per capacitor set 3s like capacitor bank',color:'#a78bfa',detail:Math.ceil(windCount/3)+' groups of 3 windmills × '+pxSize+' px per windmill = capacitor set 3s'},
+  {name:'Charge -1→+1',desc:'charge -1.00 .25 .50 .75 .00 +1 = -1 to +1 charge levels',color:'#ef4444',detail:(chargeLevel/100).toFixed(2)+' charge = -1.00 .25 .50 .75 .00 +1 = -1 to +1 steps 0.25'}
+ ];
+ items.forEach(it=>{
+  let div=document.createElement('div');
+  div.className='px15';
+  div.style.borderColor=it.color;
+  div.innerHTML=`<div style="font-size:10px;color:${it.color}">${it.name}</div><div style="font-size:8px;margin-top:4px;color:#a1a1aa">${it.desc} | ${it.detail}</div>`;
+  list.appendChild(div);
+ });
+}
+
+function draw15pxWindmills(){
+ let w=pxCanvas.width,h=pxCanvas.height;
+ pctx.fillStyle='#08080a';pctx.fillRect(0,0,w,h);
+ time+=0.02 + (isSpinning?0.05:0);
+ let cx=w/2, cy=h/2+10;
+ 
+ // toroid windmill 15 px per windmill
+ let toroidR=140;
+ // toroid base circle
+ pctx.strokeStyle='#16a34a';pctx.lineWidth=1.5;pctx.globalAlpha=0.4;
+ pctx.beginPath();pctx.arc(cx,cy,toroidR,0,Math.PI*2);pctx.stroke();
+ pctx.globalAlpha=1;
+ pctx.fillStyle='#16a34a';pctx.font='7px monospace';pctx.textAlign='center';
+ pctx.fillText('toroid windmill '+windCount+'×'+pxSize+'px = '+(windCount*pxSize)+'px total',cx,cy-toroidR-20);
+ 
+ // draw each windmill 15 px per windmill
+ for(let i=0;i<windCount;i++){
+  let ang=(i*360/windCount)*Math.PI/180 + time*(isSpinning?1:0);
+  let wx=cx+Math.cos(ang)*toroidR;
+  let wy=cy+Math.sin(ang)*toroidR;
+  
+  // windmill size 15 px per windmill
+  let size=pxSize; // 15 px per windmill
+  let bladeLen=size; // blades 15px per windmill
+  
+  // windmill hub 4px
+  pctx.fillStyle='#14532d';pctx.beginPath();pctx.arc(wx,wy,4,0,Math.PI*2);pctx.fill();
+  
+  // 3 blades per windmill each 15px per windmill
+  for(let b=0;b<3;b++){
+   let bladeAng=ang + b*120*Math.PI/180 + time*3;
+   let bx=wx+Math.cos(bladeAng)*bladeLen;
+   let by=wy+Math.sin(bladeAng)*bladeLen;
+   pctx.strokeStyle='#6ee7b7';pctx.lineWidth=1.5;
+   pctx.beginPath();pctx.moveTo(wx,wy);pctx.lineTo(bx,by);pctx.stroke();
+   // blade tip dot 2px
+   pctx.fillStyle='#6ee7b7';pctx.beginPath();pctx.arc(bx,by,2,0,Math.PI*2);pctx.fill();
+  }
+  
+  // charge visualization based on chargeLevel -1→+1
+  let charge=chargeLevel/100;
+  let chargeColor=charge< -0.5?'#3b82f6':charge>0.5?'#ef4444':'#a1a1aa';
+  pctx.fillStyle=chargeColor;pctx.globalAlpha=0.6;
+  pctx.beginPath();pctx.arc(wx,wy,size/2+2,0,Math.PI*2);pctx.fill();
+  pctx.globalAlpha=1;
+  
+  // label every 3rd windmill for readability 15px per windmill
+  if(i%3===0){
+   pctx.fillStyle='#71717a';pctx.font='6px monospace';pctx.textAlign='center';
+   pctx.fillText(i+' 15px',wx,wy-18);
+  }
+ }
+ 
+ // wire them in 3s like capacitor set groups
+ for(let g=0;g<Math.ceil(windCount/3);g++){
+  let startIdx=g*3;
+  if(startIdx+2>=windCount) continue;
+  let ang1=(startIdx*360/windCount)*Math.PI/180;
+  let ang2=((startIdx+2)*360/windCount)*Math.PI/180;
+  let x1=cx+Math.cos(ang1)*toroidR;
+  let y1=cy+Math.sin(ang1)*toroidR;
+  let x2=cx+Math.cos(ang2)*toroidR;
+  let y2=cy+Math.sin(ang2)*toroidR;
+  // group arc 3 windmills
+  let midAng=(ang1+ang2)/2;
+  let gx=cx+Math.cos(midAng)*(toroidR+30);
+  let gy=cy+Math.sin(midAng)*(toroidR+30);
+  
+  pctx.strokeStyle='#a78bfa';pctx.lineWidth=1;pctx.setLineDash([3,3]);
+  // draw group box around 3 windmills 15px per windmill
+  let groupSpan=3* (360/windCount) * Math.PI/180 * toroidR; // arc length approx
+  pctx.beginPath();
+  pctx.arc(cx,cy,toroidR+18,ang1-0.1,ang2+0.1);
+  pctx.stroke();
+  pctx.setLineDash([]);
+  pctx.fillStyle='#a78bfa';pctx.font='7px monospace';pctx.textAlign='center';
+  pctx.fillText('3s C'+(g+1)+' 3×15px',gx,gy);
+ }
+ 
+ // center power generation from 15px windmills
+ let power=windCount/12 * pxSize/15 * (chargeLevel+100)/200;
+ pctx.fillStyle='#1a1a1e';pctx.fillRect(cx-150,cy+180,300,14);
+ pctx.fillStyle='#16a34a';pctx.fillRect(cx-150,cy+180,300*power,14);
+ pctx.strokeStyle='#3f3f46';pctx.strokeRect(cx-150,cy+180,300,14);
+ pctx.fillStyle='#a1a1aa';pctx.font='7px monospace';pctx.textAlign='center';
+ pctx.fillText('Power: '+windCount+' windmills × '+pxSize+'px × charge '+(chargeLevel/100).toFixed(2)+' = '+(power*100).toFixed(0)+'% at 15 px per windmill',cx,cy+190);
+ 
+ // plank + plank .02 scale still
+ let plankM=1.02*1.616e-35;
+ pctx.fillStyle='#0ea5e9';pctx.font='7px monospace';pctx.textAlign='left';
+ pctx.fillText('15 px per windmill = '+pxSize+'px per windmill toroid windmill compact working fixed | retry at 15 px per windmill = previous broken fixed at 15 px per windmill | wire them in 3s like capacitor set = 3 windmills per capacitor set 3s | charge -1.00 .25 .50 .75 .00 +1 = '+(chargeLevel/100).toFixed(2),10,24);
+ pctx.fillText('Plank + Plank .02 = 1.02 Planck = '+plankM.toExponential(3)+'m continuously at '+plankM.toExponential(3)+'m | toroid windmill powers steepled memsistor continuously at 1.02 Planck',10,36);
+ 
+ // bottom info
+ pctx.fillStyle='#1a1a1e';pctx.fillRect(0,h-110,w,110);
+ pctx.fillStyle='#0ea5e9';pctx.font='8px monospace';pctx.textAlign='left';
+ pctx.fillText('Retry at 15 px per windmill = 15px per windmill toroid windmill 15px compact | each windmill 15px size compact toroid windmill 15px windmill blades 15px per windmill compact working fixed | previous windmill large ~80px per windmill broken',10,h-90);
+ pctx.fillStyle='#6ee7b7';
+ pctx.fillText('Toroid windmill '+windCount+'×'+pxSize+'px = '+(windCount*pxSize)+'px total toroid circumference = toroid arrangement with 15px windmills | wire them in 3s like capacitor set = 3 windmills per capacitor set 3s capacitor bank 3s',10,h-76);
+ pctx.fillStyle='#a78bfa';
+ pctx.fillText('Wire in 3s: '+Math.ceil(windCount/3)+' groups of 3 windmills × '+pxSize+' px per windmill = capacitor set 3s like capacitor bank | charge -1.00 .25 .50 .75 .00 +1 = '+(chargeLevel/100).toFixed(2)+' = -1 to +1 steps 0.25',10,h-62);
+ pctx.fillStyle='#52525b';pctx.font='9px monospace';pctx.textAlign='center';
+ pctx.fillText('RETRY AT 15 PX PER WINDMILL = 15px per windmill toroid windmill compact working fixed = BONK IS ALL 15 px per windmill',w/2,h-8);
+}
+
+updatePxList();draw15pxWindmills();
+
+document.getElementById('pxSize').addEventListener('input',e=>{
+ pxSize=parseFloat(e.target.value);
+ document.getElementById('pxSizeLabel').textContent=pxSize.toFixed(0)+' px per windmill = '+pxSize+'px per windmill toroid windmill compact 15px';
+ document.getElementById('pxVal').textContent=pxSize+' px per windmill';
+ updatePxList();draw15pxWindmills();
+});
+document.getElementById('windCount').addEventListener('input',e=>{
+ windCount=parseInt(e.target.value);
+ document.getElementById('windCountLabel').textContent=windCount+' windmills × '+pxSize+' px per windmill = '+(windCount*pxSize)+' px total toroid windmill';
+ updatePxList();draw15pxWindmills();
+});
+document.getElementById('chargeLevel').addEventListener('input',e=>{
+ chargeLevel=parseFloat(e.target.value);
+ document.getElementById('chargeLabel').textContent=(chargeLevel/100).toFixed(2)+' charge = 15 px per windmill charge '+ (chargeLevel<0?'-1.00 negative':chargeLevel>0?'+1.00 positive':'neutral 0.00');
+ updatePxList();draw15pxWindmills();
+});
+
+document.getElementById('px15Btn').onclick=()=>{
+ pxSize=15;
+ document.getElementById('pxSize').value=15;
+ updatePxList();draw15pxWindmills();
+ showToast('15 px per windmill = 15px per windmill toroid windmill compact');
+};
+document.getElementById('spin15Btn').onclick=()=>{
+ isSpinning=!isSpinning;
+ if(isSpinning){
+  initAudio();
+  let osc=audioCtx.createOscillator();osc.type='sawtooth';osc.frequency.value=80+pxSize*2;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},600);
+  showToast('Spinning 15 px per windmill 🌪️ '+windCount+' windmills × '+pxSize+'px = '+(windCount*pxSize)+'px total toroid');
+ } else {
+  showToast('Stopped 15 px per windmill');
+ }
+ document.getElementById('log').innerHTML+='<br>> spinning 15 px per windmill 🌪️ '+windCount+'×'+pxSize+'px = '+(windCount*pxSize)+'px total toroid windmill';
+};
+document.getElementById('cap3sBtn').onclick=()=>{
+ windCount=12;
+ document.getElementById('windCount').value=12;
+ updatePxList();draw15pxWindmills();
+ showToast('Wire in 3s like capacitor set = 3 windmills per capacitor set 3s '+Math.ceil(windCount/3)+' groups × '+pxSize+'px');
+};
+document.getElementById('chargeBtn').onclick=()=>{
+ let levels=[-100,-75,-50,-25,0,25,50,75,100];
+ let idx=0;
+ if(spinInterval) clearInterval(spinInterval);
+ chargeLevel=levels[0];
+ spinInterval=setInterval(()=>{
+  chargeLevel=levels[idx%levels.length];
+  document.getElementById('chargeLevel').value=chargeLevel;
+  updatePxList();draw15pxWindmills();
+  if(audioCtx){
+   if(currentOsc){try{currentOsc.stop();}catch(e){}}
+   let osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=100 + (chargeLevel+100)*2.5;osc.connect(gainNode);osc.start();currentOsc=osc;setTimeout(()=>{try{osc.stop();}catch(e){}},250);
+  }
+  idx++;
+  if(idx>=levels.length*2){clearInterval(spinInterval);spinInterval=null;if(currentOsc){try{currentOsc.stop();}catch(e){}} showToast('Charged -1.00 .25 .50 .75 .00 +1 at 15 px per windmill complete 🔊');}
+ },300);
+ showToast('Charging -1.00 .25 .50 .75 .00 +1 at 15 px per windmill 🔊');
+};
+
+document.getElementById('retryBtn').onclick=()=>{
+ pxSize=15;windCount=12;chargeLevel=0;
+ document.getElementById('pxSize').value=15;document.getElementById('windCount').value=12;document.getElementById('chargeLevel').value=0;
+ updatePxList();draw15pxWindmills();
+ showToast('Retry at 15 px per windmill = 15px per windmill toroid windmill compact working fixed');
+};
+document.getElementById('windmillBtn').onclick=()=>{document.getElementById('spin15Btn').click();};
+
+document.getElementById('exportBtn').onclick=()=>{
+ let tree={retryAt15PxPerWindmill:{desc:'retry at 15 px per windmill = 15 pixels per windmill = each windmill 15px size compact toroid windmill 15px windmill blades 15px per windmill compact working fixed',previous:'previous windmill large ~80px per windmill broken',retry:'retry at 15 px per windmill = compact 15px per windmill working fixed windmill blades 15px per windmill'},toroidWindmill:{pxPerWindmill:pxSize+' px per windmill',count:windCount+' windmills × '+pxSize+' px = '+(windCount*pxSize)+' px total toroid circumference',blades:'3 blades per windmill each '+pxSize+'px per windmill'},wireIn3s:{groups:Math.ceil(windCount/3)+' groups of 3 windmills × '+pxSize+' px per windmill = capacitor set 3s like capacitor bank',capacitorSet:'3 windmills per capacitor set 3s capacitor bank'},charge:{level:(chargeLevel/100).toFixed(2)+' charge = -1.00 .25 .50 .75 .00 +1 = -1 to +1 steps 0.25',levels:'-1.00 -0.75 -0.50 -0.25 0.00 +0.25 +0.50 +0.75 +1.00'}};
+ let blob=new Blob([JSON.stringify(tree,null,2)],{type:'application/json'});let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download='retry_at_15_px_per_windmill_'+pxSize+'px_'+windCount+'windmills.json';a.click();showToast('Exported retry at 15 px per windmill '+pxSize+'px');
+};
+document.getElementById('verifyBtn').onclick=()=>{showToast('Verified retry at 15 px per windmill = '+pxSize+'px per windmill '+windCount+' windmills × '+pxSize+'px = '+(windCount*pxSize)+'px total toroid working fixed valid');document.getElementById('txLog').textContent='Verified: retry at 15 px per windmill = '+pxSize+' px per windmill toroid windmill compact | each windmill '+pxSize+'px size compact toroid windmill '+pxSize+'px windmill blades '+pxSize+'px per windmill compact working fixed | '+windCount+' windmills × '+pxSize+' px = '+(windCount*pxSize)+' px total toroid circumference | wire them in 3s like capacitor set = 3 windmills per capacitor set 3s capacitor bank | charge -1.00 .25 .50 .75 .00 +1 = '+(chargeLevel/100).toFixed(2)+' = -1 to +1 steps 0.25 valid';};
+
+document.getElementById('walletBtn').onclick=async()=>{
+ if(window.solana&&window.solana.isPhantom){
+  try{
+   let r=await window.solana.connect();
+   showToast('Phantom '+r.publicKey.toString().slice(0,4)+' retry at 15 px per windmill');
+   initAudio();
+  }catch(e){}
+ } else window.open('https://phantom.app/','_blank');
+};
+document.getElementById('mintBtn').onclick=()=>{
+ initAudio();
+ let osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=200+pxSize*5;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},800);
+ document.getElementById('txLog').textContent='MINTED retry at 15 px per windmill = '+pxSize+' px per windmill toroid windmill compact | each windmill '+pxSize+'px size compact toroid windmill '+pxSize+'px windmill blades '+pxSize+'px per windmill compact working fixed | '+windCount+' windmills × '+pxSize+' px = '+(windCount*pxSize)+' px total toroid circumference | wire them in 3s like capacitor set = 3 windmills per capacitor set 3s capacitor bank | charge -1.00 .25 .50 .75 .00 +1 = '+(chargeLevel/100).toFixed(2)+' = -1 to +1 steps 0.25 | retry at 15 px per windmill working fixed | SIG simulated 🌪️';
+ showToast('Minted retry at 15 px per windmill '+pxSize+'px 🌪️');
+};
+document.getElementById('swapBtn').onclick=()=>{
+ initAudio();
+ let osc=audioCtx.createOscillator();osc.type='sawtooth';osc.frequency.value=120;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},500);
+ document.getElementById('txLog').textContent='SIMULATED SWAP BONK 🌪️ after retry at 15 px per windmill '+pxSize+'px per windmill';
+ showToast('Swap BONK 🌪️ after retry at 15 px per windmill');
+};
+
+setInterval(()=>{if(isSpinning) draw15pxWindmills();},80);
+</script>
+</body>
+</html>

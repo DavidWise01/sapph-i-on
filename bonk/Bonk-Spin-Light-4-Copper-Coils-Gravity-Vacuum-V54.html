@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>v54 SPIN AND LIGHT UP 4 COPPER COILS GRAVITY VACUUM</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#020208;color:#e4e4e7;font-family:'JetBrains Mono',monospace;overflow-x:hidden}
+.glass{background:rgba(10,10,18,0.94);border:1px solid #1a1a2e;backdrop-filter:blur(14px)}
+.btn{padding:9px 14px;border-radius:10px;font-weight:800;font-size:10px;letter-spacing:0.12em;cursor:pointer;border:1px solid #3f3f46;transition:.25s;text-transform:uppercase}
+.btn-w{background:white;color:black;border-color:white}
+.btn-g{background:#0a0a12;color:#a1a1aa;border-color:#1a1a2e}
+.btn-spin{background:#000;color:#00ffff;border:2px solid #00ffff;box-shadow:0 0 20px rgba(0,255,255,0.6);font-family:'Orbitron',monospace}
+.btn-copper{background:#000;color:#fb923c;border:2px solid #fb923c;box-shadow:0 0 20px rgba(251,146,60,0.6);font-family:'Orbitron',monospace}
+.btn-gravity{background:#1e1b4b;color:#c4b5fd;border:2px solid #a78bfa;box-shadow:0 0 20px rgba(167,139,250,0.4);font-family:'Orbitron',monospace}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#0a0a12;border:2px solid #fb923c;padding:10px 18px;border-radius:9999px;font-size:11px;z-index:99;opacity:0;transition:.3s;pointer-events:none;box-shadow:0 0 20px rgba(251,146,60,0.5);font-family:'Orbitron',monospace;color:#fb923c}
+.toast.show{opacity:1}
+.coil{border-radius:12px;padding:10px;background:rgba(10,10,18,0.9);border:1px solid #1a1a2e;box-shadow:0 0 12px rgba(251,146,60,0.15)}
+</style>
+</head>
+<body>
+<div style="max-width:1900px;margin:auto;padding:14px">
+<div class="glass" style="border-radius:14px;padding:12px 16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;border:2px solid #fb923c;box-shadow:0 0 30px rgba(251,146,60,0.3)">
+<div>
+<div style="font-size:12px;letter-spacing:0.12em;font-family:'Orbitron',monospace;color:#fb923c;text-shadow:0 0 10px rgba(251,146,60,0.8)">v54 SPIN AND LIGHT UP ADD 4 COPPER COILS THAT GET ITS SPIN FROM GRAVITY VACUUM LOL - +</div>
+<div style="font-size:8px;color:#fdba74">spin and light up add 4 copper coils that get its spin from gravity vacuum lol - + = spin light up 4 copper coils get spin from gravity vacuum</div>
+</div>
+<div style="display:flex;gap:8px"><button id="spinBtn" class="btn btn-spin">SPIN AND LIGHT UP</button><button id="copperBtn" class="btn btn-copper">4 COPPER COILS</button><button id="gravityBtn" class="btn btn-gravity">GRAVITY VACUUM SPIN</button></div>
+</div>
+
+<div style="margin-top:14px;display:grid;grid-template-columns:1.6fr 1fr;gap:14px">
+<div class="glass" style="border-radius:16px;overflow:hidden;border:2px solid #00ffff;box-shadow:0 0 30px rgba(0,255,255,0.2)">
+<div style="padding:10px 14px;background:#0a0a12;border-bottom:2px solid #fb923c;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<span style="font-size:10px;font-family:'Orbitron',monospace;color:#fb923c;text-shadow:0 0 8px rgba(251,146,60,0.6)">SPIN LIGHT 4 COILS // <span id="spinVal">spin and light up</span> coils <span id="coilVal">4 copper coils gravity vacuum</span></span><span id="spinInfo" style="font-size:9px;color:#00ffff;font-family:'Orbitron',monospace">SPIN LIGHT UP 4 COPPER COILS GRAVITY VACUUM</span>
+</div>
+<canvas id="spinCanvas" width="1240" height="760" style="width:100%;background:#020208;display:block"></canvas>
+<div style="padding:10px;background:#0a0a12;border-top:2px solid #00ffff;display:flex;gap:8px;flex-wrap:wrap">
+<button id="spinLightBtn" class="btn btn-spin">SPIN AND LIGHT UP</button>
+<button id="fourCoilsBtn" class="btn btn-copper">4 COPPER COILS</button>
+<button id="gravityVacuumBtn" class="btn btn-gravity">GRAVITY VACUUM SPIN</button>
+<button id="plusMinusBtn" class="btn btn-g">- + LOL</button>
+<div id="log" style="flex:1;min-width:260px;background:black;border:2px solid #fb923c;border-radius:8px;padding:8px;font-size:9px;color:#fdba74;max-height:80px;overflow-y:auto;font-family:'Orbitron',monospace">> v54 spin and light up add 4 copper coils that get its spin from gravity vacuum lol - + loaded<br>> spin and light up = spin and light up pulsar quasar blink<br>> add 4 copper coils = add 4 copper coils around spinning pulsar<br>> that get its spin from gravity vacuum = coils get spin from gravity vacuum energy<br>> lol - + = lol minus plus - + charge</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px">
+<div class="glass" style="border-radius:16px;padding:14px;border:2px solid #fb923c">
+<div style="font-size:11px;font-family:'Orbitron',monospace;color:#fb923c">SPIN LIGHT UP 4 COPPER COILS GRAVITY VACUUM - +</div>
+<div style="margin-top:8px;display:flex;flex-direction:column;gap:8px" id="coilList"></div>
+<div style="margin-top:12px">
+<label style="font-size:10px;color:#00ffff;font-family:'Orbitron',monospace">Spin speed and light up intensity</label><input id="spinSpeed" type="range" min="0" max="200" value="80" style="width:100%;accent-color:#00ffff">
+<div id="spinSpeedLabel" style="font-size:10px;color:#7dd3fc">80 = spin speed and light up intensity</div>
+</div>
+<div style="margin-top:8px">
+<label style="font-size:10px;color:#fb923c;font-family:'Orbitron',monospace">4 copper coils count</label><input id="coilCount" type="range" min="1" max="8" value="4" style="width:100%;accent-color:#fb923c">
+<div id="coilCountLabel" style="font-size:10px;color:#fdba74">4 = 4 copper coils gravity vacuum</div>
+</div>
+<div style="margin-top:8px">
+<label style="font-size:10px;color:#a78bfa;font-family:'Orbitron',monospace">Gravity vacuum spin power</label><input id="gravityPower" type="range" min="0" max="100" value="70" style="width:100%;accent-color:#a78bfa">
+<div id="gravityPowerLabel" style="font-size:10px;color:#c4b5fd">70% = gravity vacuum spin power - +</div>
+</div>
+<div style="margin-top:10px;display:flex;gap:6px"><button id="exportBtn" class="btn btn-g" style="flex:1">Export JSON</button><button id="verifyBtn" class="btn btn-g" style="flex:1">Verify Coils</button></div>
+</div>
+
+<div class="glass" style="border-radius:16px;padding:14px;border:2px solid #00ffff">
+<div style="font-size:11px;font-family:'Orbitron',monospace;color:#00ffff">MINT SPIN LIGHT UP 4 COPPER COILS GRAVITY VACUUM - +</div>
+<div style="margin-top:8px;font-size:9px;color:#fb923c;font-family:'Orbitron',monospace">have it spin and light up add 4 copper coils that get its spin from gravity vacuum lol - + = spin light up 4 copper coils gravity vacuum spin - +</div>
+<div style="margin-top:10px;display:flex;gap:6px"><input id="swapInput" type="number" value="100" style="flex:1;background:#020208;border:2px solid #fb923c;border-radius:8px;padding:7px;color:#fb923c;font-family:'Orbitron',monospace"><button id="swapBtn" class="btn btn-g">Swap BONK</button><button id="mintBtn" class="btn btn-w">Mint Spin Coils</button></div>
+<div id="txLog" style="font-size:9px;color:#00ffff;margin-top:6px;font-family:'Orbitron',monospace">Tx idle - mint spin and light up 4 copper coils gravity vacuum lol - +</div>
+</div>
+</div>
+</div>
+
+</div>
+<div id="toast" class="toast"></div>
+<script src="https://unpkg.com/@solana/web3.js@1.95.4/lib/index.iife.js"></script>
+<script>
+function showToast(m){let e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),3000)}
+
+let spinCanvas=document.getElementById('spinCanvas'),spctx=spinCanvas.getContext('2d');
+let spinSpeed=80,coilCount=4,gravityPower=70,time=0,spinAngle=0,lightPhase=0;
+let audioCtx=null,gainNode=null;
+let coils=[];
+
+class CopperCoil{
+ constructor(idx,total){
+  this.idx=idx;
+  this.total=total;
+  this.angle=(idx*360/total)*Math.PI/180;
+  this.radius=180;
+  this.coilTurns=8;
+  this.spin=0;
+  this.charge=(idx%2===0)?'+':'-';
+ }
+ update(){
+  this.spin+=spinSpeed/100*0.02 + gravityPower/100*0.01;
+  this.angle+=spinSpeed/100*0.005;
+ }
+}
+
+function initCoils(){
+ coils=[];
+ for(let i=0;i<coilCount;i++){ coils.push(new CopperCoil(i,coilCount)); }
+}
+function initAudio(){
+ if(!audioCtx){
+  audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  gainNode=audioCtx.createGain();gainNode.gain.value=0.12;gainNode.connect(audioCtx.destination);
+ }
+ if(audioCtx.state==='suspended') audioCtx.resume();
+}
+function updateCoilList(){
+ let list=document.getElementById('coilList');list.innerHTML='';
+ let items=[
+  {name:'Spin And Light Up Speed '+spinSpeed,desc:'spin and light up pulsar quasar blink',color:'#00ffff'},
+  {name:coilCount+' Copper Coils Copper Cu 29',desc:'4 coils copper around spinning pulsar',color:'#fb923c'},
+  {name:'Gravity Vacuum Spin Power '+gravityPower+'%',desc:'coils get spin from gravity vacuum energy',color:'#a78bfa'},
+  {name:'- + Lol Charge Polarity '+coils.map(c=>c.charge).join(' '),desc:'lol minus plus - + charge polarity',color:'#f87171'}
+ ];
+ items.forEach(it=>{
+  let div=document.createElement('div');div.className='coil';div.style.borderColor=it.color;
+  div.innerHTML=`<div style="font-size:10px;color:${it.color};font-family:'Orbitron',monospace">${it.name}</div><div style="font-size:7px;color:#fdba74">${it.desc}</div>`;
+  list.appendChild(div);
+ });
+ document.getElementById('spinVal').textContent='spin speed '+spinSpeed+' light up';
+ document.getElementById('coilVal').textContent=coilCount+' copper coils gravity vacuum '+gravityPower+'% - +';
+}
+function drawSpinCoils(){
+ let w=spinCanvas.width,h=spinCanvas.height;
+ spctx.fillStyle='#020208';spctx.fillRect(0,0,w,h);
+ time+=0.02;spinAngle+=spinSpeed/100*0.03;lightPhase+=spinSpeed/100*0.05;
+ let cx=w/2, cy=h/2+10;
+ spctx.strokeStyle='#1a0f0a';spctx.lineWidth=0.5;spctx.globalAlpha=0.2;
+ for(let x=0;x<w;x+=40){ spctx.beginPath();spctx.moveTo(x,0);spctx.lineTo(x,h);spctx.stroke(); }
+ for(let y=0;y<h;y+=40){ spctx.beginPath();spctx.moveTo(0,y);spctx.lineTo(w,y);spctx.stroke(); }
+ spctx.globalAlpha=1;
+ coils.forEach(c=>c.update());
+ let outerRadius=220;
+ spctx.strokeStyle='#ff00ff';spctx.lineWidth=1;spctx.globalAlpha=0.3;spctx.beginPath();spctx.arc(cx,cy,outerRadius,0,Math.PI*2);spctx.stroke();spctx.globalAlpha=1;
+ coils.forEach(coil=>{
+  let x=cx+Math.cos(coil.angle)*coil.radius;
+  let y=cy+Math.sin(coil.angle)*coil.radius;
+  spctx.strokeStyle='#fb923c';spctx.lineWidth=2;spctx.shadowColor='#fb923c';spctx.shadowBlur=12+gravityPower/10;
+  for(let t=0;t<coil.coilTurns;t++){
+   let turnRadius=12 + t*2;let turnAng=coil.spin*2 + t*0.5;
+   spctx.beginPath();spctx.ellipse(x,y,turnRadius,turnRadius*0.6,turnAng,0,Math.PI*2);spctx.stroke();
+  }
+  spctx.shadowBlur=0;
+  spctx.fillStyle='#fb923c';spctx.beginPath();spctx.arc(x,y,8,0,Math.PI*2);spctx.fill();
+  spctx.fillStyle='black';spctx.font='bold 7px Orbitron';spctx.textAlign='center';spctx.fillText('Cu',x,y+2);
+  spctx.fillStyle=coil.charge==='+'?'#00ffff':'#ff0040';spctx.font='bold 10px Orbitron';spctx.fillText(coil.charge,x,y-16);
+  spctx.fillStyle='#fb923c';spctx.font='6px Orbitron';spctx.fillText('COIL '+(coil.idx+1)+' GRAVITY VACUUM',x,y+20);
+  spctx.strokeStyle='#fb923c';spctx.lineWidth=0.8;spctx.globalAlpha=0.4;spctx.setLineDash([3,3]);spctx.beginPath();spctx.moveTo(x,y);spctx.lineTo(cx,cy);spctx.stroke();spctx.setLineDash([]);spctx.globalAlpha=1;
+  let spinX=x+Math.cos(coil.spin)*12;let spinY=y+Math.sin(coil.spin)*12;
+  spctx.fillStyle='#00ffff';spctx.beginPath();spctx.arc(spinX,spinY,3,0,Math.PI*2);spctx.fill();
+ });
+ let centerRadius=35 + Math.sin(lightPhase)*8;
+ let isLightOn=Math.sin(lightPhase*0.5)>0;
+ let lightIntensity=isLightOn?1:0.2;
+ spctx.fillStyle='black';spctx.shadowColor='#00ffff';spctx.shadowBlur=30*lightIntensity+spinSpeed/3;spctx.beginPath();spctx.arc(cx,cy,centerRadius,0,Math.PI*2);spctx.fill();spctx.shadowBlur=0;
+ spctx.strokeStyle='#00ffff';spctx.lineWidth=3*lightIntensity;spctx.shadowColor='#00ffff';spctx.shadowBlur=15*lightIntensity;spctx.globalAlpha=lightIntensity;spctx.beginPath();spctx.arc(cx,cy,centerRadius,0,Math.PI*2);spctx.stroke();spctx.shadowBlur=0;spctx.globalAlpha=1;
+ spctx.strokeStyle='#ff00ff';spctx.lineWidth=2;spctx.beginPath();spctx.arc(cx,cy,centerRadius*0.7,spinAngle,spinAngle+Math.PI*0.8);spctx.stroke();
+ let spinDotX=cx+Math.cos(spinAngle)*centerRadius*0.7;let spinDotY=cy+Math.sin(spinAngle)*centerRadius*0.7;
+ spctx.fillStyle='#ff00ff';spctx.beginPath();spctx.arc(spinDotX,spinDotY,4,0,Math.PI*2);spctx.fill();
+ if(isLightOn){
+  for(let b=0;b<2;b++){
+   let beamAng=spinAngle*2 + b*Math.PI;let beamColor=b===0?'#00ffff':'#ff00ff';
+   spctx.strokeStyle=beamColor;spctx.lineWidth=4;spctx.shadowColor=beamColor;spctx.shadowBlur=20;spctx.globalAlpha=0.7;
+   spctx.beginPath();spctx.moveTo(cx,cy);spctx.lineTo(cx+Math.cos(beamAng)*300,cy+Math.sin(beamAng)*300);spctx.stroke();spctx.shadowBlur=0;spctx.globalAlpha=1;
+  }
+  spctx.fillStyle='#ffff00';spctx.shadowColor='#ffff00';spctx.shadowBlur=20;spctx.beginPath();spctx.arc(cx,cy,centerRadius*0.4,0,Math.PI*2);spctx.fill();spctx.shadowBlur=0;
+ }
+ spctx.fillStyle='white';spctx.font='bold 9px Orbitron';spctx.textAlign='center';spctx.fillText('SPIN',cx,cy-4);spctx.font='7px Orbitron';spctx.fillText('LIGHT UP',cx,cy+6);
+ spctx.fillStyle='#00ffff';spctx.font='6px Orbitron';spctx.fillText('spin '+spinSpeed+' light up gravity vacuum '+gravityPower+'%',cx,cy+centerRadius+16);
+ spctx.fillStyle='rgba(167,139,250,0.08)';spctx.beginPath();spctx.arc(cx,cy,outerRadius,0,Math.PI*2);spctx.fill();
+ spctx.strokeStyle='#a78bfa';spctx.lineWidth=1;spctx.setLineDash([5,5]);spctx.globalAlpha=0.4;spctx.beginPath();spctx.arc(cx,cy,outerRadius,0,Math.PI*2);spctx.stroke();spctx.setLineDash([]);spctx.globalAlpha=1;
+ spctx.fillStyle='#a78bfa';spctx.font='7px Orbitron';spctx.textAlign='center';spctx.fillText('GRAVITY VACUUM ENERGY FIELD THAT GETS SPIN FROM GRAVITY VACUUM - + LOL',cx,cy-outerRadius-12);
+ spctx.fillStyle='rgba(2,2,8,0.9)';spctx.fillRect(0,h-80,w,80);
+ spctx.fillStyle='#00ffff';spctx.font='8px Orbitron';spctx.textAlign='left';spctx.fillText('Spin and light up speed '+spinSpeed+' light up',10,h-60);
+ spctx.fillStyle='#fb923c';spctx.fillText('Add '+coilCount+' copper coils around spinning pulsar that get spin from gravity vacuum',10,h-46);
+ spctx.fillStyle='#a78bfa';spctx.fillText('Gravity vacuum power '+gravityPower+'% coils get spin from gravity vacuum energy - + '+coils.map(c=>c.charge).join(' '),10,h-32);
+}
+initCoils();updateCoilList();drawSpinCoils();
+document.getElementById('spinSpeed').addEventListener('input',e=>{ spinSpeed=parseFloat(e.target.value);document.getElementById('spinSpeedLabel').textContent=spinSpeed.toFixed(0)+' = spin speed and light up intensity';updateCoilList(); });
+document.getElementById('coilCount').addEventListener('input',e=>{ coilCount=parseInt(e.target.value);document.getElementById('coilCountLabel').textContent=coilCount+' = '+coilCount+' copper coils gravity vacuum';initCoils();updateCoilList(); });
+document.getElementById('gravityPower').addEventListener('input',e=>{ gravityPower=parseFloat(e.target.value);document.getElementById('gravityPowerLabel').textContent=gravityPower.toFixed(0)+'% = gravity vacuum spin power - +';updateCoilList(); });
+document.getElementById('spinLightBtn').onclick=()=>{ spinSpeed=80;document.getElementById('spinSpeed').value=80;updateCoilList();drawSpinCoils();showToast('Spin and light up speed '+spinSpeed); };
+document.getElementById('fourCoilsBtn').onclick=()=>{ coilCount=4;document.getElementById('coilCount').value=4;initCoils();updateCoilList();drawSpinCoils();showToast(coilCount+' copper coils'); };
+document.getElementById('gravityVacuumBtn').onclick=()=>{ gravityPower=70;document.getElementById('gravityPower').value=70;updateCoilList();drawSpinCoils();showToast('Gravity vacuum spin power '+gravityPower+'%'); };
+document.getElementById('plusMinusBtn').onclick=()=>{ showToast('Lol - + = '+coils.map(c=>c.charge).join(' ')+' charge polarity'); };
+document.getElementById('spinBtn').onclick=()=>{document.getElementById('spinLightBtn').click();};
+document.getElementById('copperBtn').onclick=()=>{document.getElementById('fourCoilsBtn').click();};
+document.getElementById('gravityBtn').onclick=()=>{document.getElementById('gravityVacuumBtn').click();};
+document.getElementById('exportBtn').onclick=()=>{
+ let tree={spin:spinSpeed,coils:coilCount,gravity:gravityPower,charges:coils.map(c=>c.charge)};
+ let blob=new Blob([JSON.stringify(tree,null,2)],{type:'application/json'});let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download='spin_4_copper_coils_gravity_vacuum.json';a.click();showToast('Exported');
+};
+document.getElementById('verifyBtn').onclick=()=>{ showToast('Verified spin '+spinSpeed+' coils '+coilCount+' gravity '+gravityPower+'%');document.getElementById('txLog').textContent='Verified spin '+spinSpeed+' coils '+coilCount+' gravity vacuum '+gravityPower+'% - + '+coils.map(c=>c.charge).join(' '); };
+document.getElementById('mintBtn').onclick=()=>{
+ initAudio();
+ coils.forEach((c,i)=>{ setTimeout(()=>{ let osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=150+i*40+spinSpeed;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},400); },i*120); });
+ document.getElementById('txLog').textContent='MINTED spin light up '+coilCount+' copper coils gravity vacuum '+gravityPower+'% - + '+coils.map(c=>c.charge).join(' ')+' SIG simulated';
+ showToast('Minted spin light up 4 copper coils gravity vacuum');
+};
+document.getElementById('swapBtn').onclick=()=>{ showToast('Swap BONK after spin 4 copper coils'); };
+setInterval(()=>{drawSpinCoils();},60);
+</script>
+</body>
+</html>

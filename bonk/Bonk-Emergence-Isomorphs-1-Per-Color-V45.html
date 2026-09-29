@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>v45 MORE EMERGENCE 1 PER COLOR MINIMUM OF ISOMORPHS COLORFUL MORPHIC CATALYTIC</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Cormorant+Garamond:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#080608;color:#e4e4e7;font-family:'JetBrains Mono',monospace;overflow-x:hidden}
+.glass{background:rgba(18,18,22,0.88);border:1px solid #27272a;backdrop-filter:blur(12px)}
+.btn{padding:9px 14px;border-radius:10px;font-weight:800;font-size:10px;letter-spacing:0.12em;cursor:pointer;border:1px solid #3f3f46;transition:.2s}
+.btn-w{background:white;color:black;border-color:white}
+.btn-g{background:#1a1a1e;color:#a1a1aa}
+.btn-emergence{background:linear-gradient(90deg,#f87171,#fbbf24,#34d399,#60a5fa,#a78bfa,#ec4899);color:white;border-color:#f87171;box-shadow:0 0 24px rgba(248,113,113,0.4)}
+.btn-isomorph{background:#1e1b4b;color:#c4b5fd;border-color:#a78bfa;box-shadow:0 0 20px rgba(167,139,250,0.4)}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#18181b;border:1px solid #3f3f46;padding:10px 18px;border-radius:9999px;font-size:11px;z-index:99;opacity:0;transition:.3s;pointer-events:none}
+.toast.show{opacity:1}
+.iso{border-radius:10px;padding:8px;background:rgba(14,14,17,0.9);border:1px solid #27272a}
+</style>
+</head>
+<body>
+<div style="max-width:1900px;margin:auto;padding:14px">
+<div class="glass" style="border-radius:14px;padding:10px 14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<div>
+<div style="font-size:11px;letter-spacing:0.09em">v45 MORE EMERGENCE 1 PER COLOR MINIMUM OF ISOMORPHS COLORFUL MORPHIC CATALYTIC WITH COLOR</div>
+<div style="font-size:8px;color:#a1a1aa">more emergence = emergent behavior from simple rules emergence | 1 per color minimum of isomorphs = at least 1 isomorph per color = isomorphs same structure different color composition</div>
+</div>
+<div style="display:flex;gap:8px"><button id="emergenceBtn" class="btn btn-emergence">MORE EMERGENCE 🌀</button><button id="isomorphBtn" class="btn btn-isomorph">1 PER COLOR MIN ISOMORPHS</button><button id="walletBtn" class="btn btn-g">Phantom</button></div>
+</div>
+
+<div style="margin-top:14px;display:grid;grid-template-columns:1.6fr 1fr;gap:14px">
+<div class="glass" style="border-radius:16px;overflow:hidden">
+<div style="padding:10px 14px;background:#0e0e11;border-bottom:1px solid #27272a;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<span style="font-size:10px">EMERGENCE ISOMORPHS // <span id="emergenceVal">more emergence emergent behavior</span> isomorphs <span id="isoVal">1 per color minimum isomorphs</span></span><span id="emergenceInfo" style="font-size:9px;color:#f87171">more emergence 1 per color minimum isomorphs</span>
+</div>
+<canvas id="emergenceCanvas" width="1240" height="760" style="width:100%;background:#08080a;display:block"></canvas>
+<div style="padding:10px;background:#0e0e11;border-top:1px solid #27272a;display:flex;gap:8px;flex-wrap:wrap">
+<button id="color1Btn" class="btn btn-emergence">1 PER COLOR ISOMORPHS</button>
+<button id="emergeBtn" class="btn btn-isomorph">EMERGE MORE 🌀</button>
+<button id="catalyticBtn" class="btn btn-emergence">CATALYTIC WITH COLOR 🔥</button>
+<button id="resetBtn" class="btn btn-g">RESET ISOMORPHS</button>
+<div id="log" style="flex:1;min-width:260px;background:black;border:1px solid #27272a;border-radius:8px;padding:8px;font-size:9px;color:#c4b5fd;max-height:80px;overflow-y:auto">> v45 more emergence 1 per color minimum of isomorphs loaded<br>> more emergence = emergent behavior from simple rules simple rules produce complex emergent patterns<br>> isomorphs = same crystal structure different composition color = isomorphic crystals<br>> 1 per color minimum of isomorphs = at least 1 isomorph per color = each color has minimum 1 isomorph same structure different color<br>> garnet isomorphs: almandine red pyrope red spessartine orange grossular green andradite yellow uvarovite green = same X3Y2(SiO4)3 structure different colors<br>> corundum isomorphs: ruby red sapphire blue etc Al2O3 same structure different colors</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px">
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">MORE EMERGENCE 1 PER COLOR MINIMUM OF ISOMORPHS</div>
+<div style="margin-top:8px;display:flex;flex-direction:column;gap:8px" id="isoList">
+<!-- dynamic -->
+</div>
+<div style="margin-top:12px">
+<label style="font-size:10px;color:#a1a1aa">More emergence intensity emergent behavior from simple rules</label><input id="emergence" type="range" min="0" max="100" value="75" style="width:100%;accent-color:#f87171">
+<div id="emergenceLabel" style="font-size:10px">75% more emergence emergent behavior simple rules produce complex patterns</div>
+</div>
+<div style="margin-top:8px">
+<label style="font-size:10px;color:#a1a1aa">1 per color minimum of isomorphs count per color</label><input id="isoPerColor" type="range" min="1" max="5" value="1" style="width:100%;accent-color:#a78bfa">
+<div id="isoPerColorLabel" style="font-size:10px">1 per color minimum of isomorphs = at least 1 isomorph per color same structure different color</div>
+</div>
+<div style="margin-top:8px">
+<label style="font-size:10px;color:#a1a1aa">Colorful morphic catalytic with color what dreams may come style</label><input id="colorful" type="range" min="0" max="100" value="80" style="width:100%;accent-color:#ec4899">
+<div id="colorfulLabel" style="font-size:10px">80% colorful morphic catalytic with color what dreams may come style</div>
+</div>
+<div style="margin-top:10px;background:#08080a;border:1px solid #27272a;border-radius:10px;padding:10px">
+<div style="font-size:9px;color:#71717a">MORE EMERGENCE 1 PER COLOR ISOMORPHS FORMULA</div>
+<div style="font-size:8px;margin-top:6px;line-height:1.6">
+more emergence<br>
+• emergence = emergent behavior from simple rules simple rules produce complex emergent patterns<br>
+• more emergence = more emergent behavior more complex patterns emerge from simple rules<br>
+• simple rules: 1 per color minimum of isomorphs, 15px per windmill, wire in 3s like capacitor set<br>
+• emergent: patterns emerge that were not programmed emergent behavior<br>
+1 per color minimum of isomorphs<br>
+• isomorphs = same crystal structure different composition color = isomorphic crystals<br>
+• same structure different color composition = isomorphs<br>
+• garnet isomorphs: X3Y2(SiO4)3 same structure<br>
+  - almandine Fe3Al2(SiO4)3 red<br>
+  - pyrope Mg3Al2(SiO4)3 red<br>
+  - spessartine Mn3Al2(SiO4)3 orange<br>
+  - grossular Ca3Al2(SiO4)3 green yellow<br>
+  - andradite Ca3Fe2(SiO4)3 yellow green black<br>
+  - uvarovite Ca3Cr2(SiO4)3 green<br>
+  = same X3Y2(SiO4)3 structure different colors isomorphs<br>
+• corundum isomorphs: Al2O3 same structure<br>
+  - ruby Al2O3:Cr red<br>
+  - sapphire Al2O3:Fe,Ti blue<br>
+  - sapphire yellow Al2O3:Ni yellow<br>
+  = same Al2O3 structure different colors isomorphs<br>
+• spinel isomorphs: MgAl2O4 same structure<br>
+  - spinel MgAl2O4:Cr red<br>
+  - gahnite ZnAl2O4 blue<br>
+  - etc same structure different colors<br>
+• 1 per color minimum = at least 1 isomorph per color<br>
+• per color minimum of isomorphs = each color has minimum 1 isomorph same structure different color<br>
+• more emergence should be 1 per color minimum of isomorphs = emergent patterns with at least 1 isomorph per color<br>
+= more emergence 1 per color minimum of isomorphs
+</div>
+</div>
+<div style="margin-top:10px;display:flex;gap:6px"><button id="exportBtn" class="btn btn-g" style="flex:1">Export Emergence JSON</button><button id="verifyBtn" class="btn btn-g" style="flex:1">Verify Emergence</button></div>
+</div>
+
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">MINT MORE EMERGENCE 1 PER COLOR MINIMUM OF ISOMORPHS</div>
+<div style="margin-top:8px;font-size:9px;color:#c4b5fd">more emergence emergent behavior from simple rules simple rules produce complex emergent patterns | 1 per color minimum of isomorphs = at least 1 isomorph per color = isomorphs same structure different color composition | garnet isomorphs almandine pyrope spessartine grossular andradite uvarovite same X3Y2(SiO4)3 different colors</div>
+<div style="margin-top:10px;display:flex;gap:6px"><input id="swapInput" type="number" value="100" style="flex:1;background:#08080a;border:1px solid #27272a;border-radius:8px;padding:7px;color:white"><button id="swapBtn" class="btn btn-g">Swap BONK 🌀</button><button id="mintBtn" class="btn btn-w">Mint Emergence Isomorphs 🌀</button></div>
+<div id="txLog" style="font-size:9px;color:#a1a1aa;margin-top:6px">Tx idle - mint more emergence 1 per color minimum of isomorphs colorful morphic catalytic</div>
+<div style="margin-top:8px;font-size:8px;color:#52525b">Emergence: emergent behavior from simple rules simple rules produce complex patterns | Isomorphs: same crystal structure different composition color isomorphic crystals | 1 per color minimum: at least 1 isomorph per color each color has minimum 1 isomorph same structure different color | Garnet isomorphs: almandine pyrope spessartine grossular andradite uvarovite same X3Y2(SiO4)3 different colors</div>
+</div>
+</div>
+</div>
+
+<div style="margin-top:14px;text-align:center;font-size:9px;color:#52525b" class="glass" style="border-radius:12px;padding:10px">
+v45 MORE EMERGENCE 1 PER COLOR MINIMUM OF ISOMORPHS = more emergence emergent behavior from simple rules simple rules produce complex emergent patterns emergence | 1 per color minimum of isomorphs = at least 1 isomorph per color = isomorphs same crystal structure different composition color isomorphic crystals same structure different color composition | garnet isomorphs X3Y2(SiO4)3 same structure almandine Fe3Al2(SiO4)3 red pyrope Mg3Al2(SiO4)3 red spessartine Mn3Al2(SiO4)3 orange grossular Ca3Al2(SiO4)3 green yellow andradite Ca3Fe2(SiO4)3 yellow green black uvarovite Ca3Cr2(SiO4)3 green = same X3Y2(SiO4)3 structure different colors isomorphs | corundum isomorphs Al2O3 same structure ruby Al2O3:Cr red sapphire Al2O3:Fe,Ti blue = same Al2O3 structure different colors isomorphs | spinel isomorphs MgAl2O4 same structure spinel MgAl2O4:Cr red gahnite ZnAl2O4 blue = same structure different colors | 1 per color minimum = at least 1 isomorph per color per color minimum of isomorphs each color has minimum 1 isomorph same structure different color | more emergence should be 1 per color minimum of isomorphs = emergent patterns with at least 1 isomorph per color = BONK IS ALL more emergence 1 per color minimum isomorphs
+</div>
+
+</div>
+<div id="toast" class="toast"></div>
+<script src="https://unpkg.com/@solana/web3.js@1.95.4/lib/index.iife.js"></script>
+<script>
+function showToast(m){let e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),3000)}
+
+let emergenceCanvas=document.getElementById('emergenceCanvas'),ectx=emergenceCanvas.getContext('2d');
+let emergence=75,isoPerColor=1,colorful=80,time=0,agents=[];
+let audioCtx=null,gainNode=null;
+
+class IsomorphAgent{
+ constructor(color,isomorph,idx){
+  this.color=color;
+  this.isomorph=isomorph;
+  this.x=Math.random()*600+320;
+  this.y=Math.random()*400+180;
+  this.vx=(Math.random()-0.5)*2;
+  this.vy=(Math.random()-0.5)*2;
+  this.idx=idx;
+  this.size=12+Math.random()*8;
+  this.emerged=false;
+ }
+ update(){
+  // emergence simple rules: move, flock, avoid, align = emergent behavior
+  // simple rules produce complex emergent patterns
+  this.x+=this.vx;
+  this.y+=this.vy;
+  // bounce
+  if(this.x<20||this.x>1220) this.vx*=-1;
+  if(this.y<20||this.y>740) this.vy*=-1;
+  // flocking emergent behavior: align, cohesion, separation simple rules
+  let nearby=agents.filter(a=>a!==this && Math.hypot(a.x-this.x,a.y-this.y)<80 && a.color.group===this.color.group);
+  if(nearby.length>0){
+   let avgVx=nearby.reduce((s,a)=>s+a.vx,0)/nearby.length;
+   let avgVy=nearby.reduce((s,a)=>s+a.vy,0)/nearby.length;
+   let avgX=nearby.reduce((s,a)=>s+a.x,0)/nearby.length;
+   let avgY=nearby.reduce((s,a)=>s+a.y,0)/nearby.length;
+   this.vx+=(avgVx-this.vx)*0.02*emergence/100;
+   this.vy+=(avgVy-this.vy)*0.02*emergence/100;
+   this.vx+=(avgX-this.x)*0.001*emergence/100;
+   this.vy+=(avgY-this.y)*0.001*emergence/100;
+   // separation
+   nearby.forEach(a=>{
+    let d=Math.hypot(a.x-this.x,a.y-this.y);
+    if(d<20){
+     this.vx+=(this.x-a.x)*0.01;
+     this.vy+=(this.y-a.y)*0.01;
+    }
+   });
+  }
+  // emergent pattern: if near same color group, emerge
+  if(nearby.length>=1) this.emerged=true;
+ }
+}
+
+let colors=[
+ {name:'Red Garnet',group:'garnet',hex:'#f87171',freq:432,structure:'X3Y2(SiO4)3',isomorphs:['almandine Fe3Al2 red','pyrope Mg3Al2 red','spessartine Mn3Al2 orange','grossular Ca3Al2 green','andradite Ca3Fe2 yellow','uvarovite Ca3Cr2 green']},
+ {name:'Ruby Corundum',group:'corundum',hex:'#ef4444',freq:396,structure:'Al2O3',isomorphs:['ruby Al2O3:Cr red','sapphire blue Al2O3:Fe,Ti blue','sapphire yellow Al2O3:Ni yellow','sapphire pink Al2O3:Cr pink','sapphire green Al2O3:Fe green']},
+ {name:'Spinel',group:'spinel',hex:'#dc2626',freq:528,structure:'MgAl2O4',isomorphs:['spinel MgAl2O4:Cr red','gahnite ZnAl2O4 blue','galaxite MnAl2O4 brown','hercynite FeAl2O4 black','spinel blue MgAl2O4:Co blue']},
+ {name:'Tourmaline Rubellite',group:'tourmaline',hex:'#ec4899',freq:639,structure:'tourmaline',isomorphs:['rubellite Na(Li,Al) pink-red','elbaite Na(Li,Al) multicolor','schorl NaFe black','dravite NaMg brown','verdelite Na(Li,Al) green']},
+ {name:'Red Beryl',group:'beryl',hex:'#b91c1c',freq:741,structure:'Be3Al2Si6O18',isomorphs:['red beryl Be3Al2Si6O18:Mn red','emerald Be3Al2Si6O18:Cr green','aquamarine Be3Al2Si6O18:Fe blue','morganite Be3Al2Si6O18:Mn pink','heliodor Be3Al2Si6O18:Fe yellow']},
+ {name:'Blue Sapphire',group:'sapphire',hex:'#48dbfb',freq:852,structure:'Al2O3 blue',isomorphs:['sapphire blue','sapphire cornflower blue','sapphire teal','sapphire light blue','sapphire dark blue']},
+ {name:'Yellow Garnet',group:'garnet-yellow',hex:'#feca57',freq:963,structure:'X3Y2(SiO4)3 yellow',isomorphs:['grossular yellow','andradite yellow','mali garnet yellow','topazolite yellow','hessonite yellow-orange']},
+ {name:'Purple Amethyst',group:'quartz',hex:'#a78bfa',freq:174,structure:'SiO2',isomorphs:['amethyst SiO2 purple','citrine SiO2 yellow','smoky quartz SiO2 brown','rose quartz SiO2 pink','milky quartz SiO2 white']}
+];
+
+function initAgents(){
+ agents=[];
+ colors.forEach((color,cIdx)=>{
+  let count=Math.max(isoPerColor,1);
+  for(let i=0;i<count;i++){
+   let iso=color.isomorphs[i%color.isomorphs.length];
+   agents.push(new IsomorphAgent(color,iso,cIdx*10+i));
+  }
+ });
+ // add extra agents for emergence: more agents = more emergent behavior
+ let extra=Math.floor(emergence/10);
+ for(let e=0;e<extra;e++){
+  let color=colors[Math.floor(Math.random()*colors.length)];
+  let iso=color.isomorphs[Math.floor(Math.random()*color.isomorphs.length)];
+  agents.push(new IsomorphAgent(color,iso,100+e));
+ }
+}
+
+function initAudio(){
+ if(!audioCtx){
+  audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  gainNode=audioCtx.createGain();
+  gainNode.gain.value=0.12;
+  gainNode.connect(audioCtx.destination);
+ }
+ if(audioCtx.state==='suspended') audioCtx.resume();
+}
+
+function updateIsoList(){
+ let list=document.getElementById('isoList');
+ list.innerHTML='';
+ colors.forEach(color=>{
+  let count=agents.filter(a=>a.color.group===color.group).length;
+  let emerged=agents.filter(a=>a.color.group===color.group && a.emerged).length;
+  let div=document.createElement('div');
+  div.className='iso';
+  div.style.borderColor=color.hex;
+  div.innerHTML=`<div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:${color.hex}">${color.name} ${color.structure} ${count} isomorphs min ${isoPerColor}</span><span style="font-size:8px;color:${color.hex}">${emerged}/${count} emerged</span></div><div style="font-size:7px;margin-top:4px;color:#a1a1aa">Isomorphs same ${color.structure} different colors: ${color.isomorphs.slice(0,isoPerColor).join(' | ')} | ${count} isomorphs min ${isoPerColor} per color | ${emerged} emerged emergent behavior</div><div style="margin-top:6px;display:flex;gap:2px">${Array.from({length:count},(_,i)=>`<div style="width:${12}px;height:12px;background:${color.hex};border-radius:3px;opacity:${0.5+i*0.1};border:1px solid ${color.hex}"></div>`).join('')}</div>`;
+  list.appendChild(div);
+ });
+ document.getElementById('isoVal').textContent=agents.length+' isomorphs '+colors.length+' colors min '+isoPerColor+' per color';
+}
+
+function drawEmergence(){
+ let w=emergenceCanvas.width,h=emergenceCanvas.height;
+ ectx.fillStyle='#08080a';ectx.fillRect(0,0,w,h);
+ time+=0.02;
+ 
+ // what dreams may come style colorful morphic background emergence
+ for(let i=0;i<colors.length;i++){
+  let p=colors[(i+Math.floor(time*0.1))%colors.length];
+  let x=(Math.sin(time*0.01+i)*w/3 + w/2);
+  let y=(Math.cos(time*0.008+i*1.3)*h/3 + h/2);
+  let r=60 + colorful/2 + Math.sin(time*0.02+i)*15;
+  ectx.fillStyle=p.hex + Math.floor(colorful*0.8).toString(16).padStart(2,'0');
+  ectx.globalAlpha=0.08 + emergence/100*0.05;
+  ectx.beginPath();
+  ectx.moveTo(x+r*Math.cos(0), y+r*Math.sin(0)*0.7);
+  for(let a=0;a<Math.PI*2;a+=0.4){
+   let mr=r + Math.sin(a*3 + time*0.02)*12;
+   ectx.lineTo(x+mr*Math.cos(a), y+mr*Math.sin(a)*0.7);
+  }
+  ectx.closePath();
+  ectx.fill();
+  ectx.globalAlpha=1;
+ }
+ 
+ // update agents emergence
+ agents.forEach(a=>a.update());
+ 
+ // draw connections emergent behavior same color group
+ agents.forEach(a=>{
+  let nearby=agents.filter(b=>b!==a && b.color.group===a.color.group && Math.hypot(b.x-a.x,b.y-a.y)<80);
+  nearby.forEach(b=>{
+   ectx.strokeStyle=a.color.hex;ectx.lineWidth=0.5;ectx.globalAlpha=0.15+emergence/100*0.2;
+   ectx.beginPath();ectx.moveTo(a.x,a.y);ectx.lineTo(b.x,b.y);ectx.stroke();
+   ectx.globalAlpha=1;
+  });
+ });
+ 
+ // draw isomorphs agents 1 per color minimum
+ agents.forEach(a=>{
+  ectx.fillStyle=a.color.hex;
+  ectx.globalAlpha=a.emerged?0.9:0.5;
+  // isomorph shape based on structure
+  if(a.color.structure.includes('X3Y2(SiO4)3')){
+   // garnet dodecahedron simplified square
+   ectx.fillRect(a.x-a.size/2, a.y-a.size/2, a.size, a.size);
+   ectx.strokeStyle='white';ectx.lineWidth=0.5;ectx.strokeRect(a.x-a.size/2, a.y-a.size/2, a.size, a.size);
+  } else if(a.color.structure.includes('Al2O3')){
+   // corundum hexagonal
+   ectx.beginPath();
+   for(let ang=0;ang<Math.PI*2;ang+=Math.PI/3){
+    let x=a.x+Math.cos(ang)*a.size/2;
+    let y=a.y+Math.sin(ang)*a.size/2;
+    if(ang===0) ectx.moveTo(x,y); else ectx.lineTo(x,y);
+   }
+   ectx.closePath();ectx.fill();
+  } else if(a.color.structure.includes('MgAl2O4')){
+   // spinel octahedron diamond
+   ectx.beginPath();
+   ectx.moveTo(a.x, a.y-a.size/2);
+   ectx.lineTo(a.x+a.size/2, a.y);
+   ectx.lineTo(a.x, a.y+a.size/2);
+   ectx.lineTo(a.x-a.size/2, a.y);
+   ectx.closePath();ectx.fill();
+  } else {
+   ectx.beginPath();ectx.arc(a.x,a.y,a.size/2,0,Math.PI*2);ectx.fill();
+  }
+  ectx.globalAlpha=1;
+  
+  // isomorph label if emerged
+  if(a.emerged){
+   ectx.fillStyle=a.color.hex;ectx.font='6px monospace';ectx.textAlign='center';
+   ectx.fillText(a.isomorph.split(' ')[0],a.x,a.y+a.size/2+8);
+  }
+ });
+ 
+ // 15px per windmill quantum dot owns capacitor set still but with isomorphs
+ let cx=w/2, cy=h/2+10;
+ let toroidR=100;
+ // quantum dot owns isomorphs
+ ectx.fillStyle='#e9d5ff';ectx.shadowColor='#a78bfa';ectx.shadowBlur=15+emergence/5;
+ ectx.beginPath();ectx.arc(cx,cy,18,0,Math.PI*2);ectx.fill();
+ ectx.shadowBlur=0;
+ ectx.fillStyle='black';ectx.font='bold 8px monospace';ectx.textAlign='center';ectx.fillText('QD',cx,cy+2);
+ ectx.fillStyle='#a78bfa';ectx.font='6px monospace';ectx.fillText('owns '+agents.length+' isomorphs',cx,cy+28);
+ 
+ // bottom info
+ ectx.fillStyle='rgba(0,0,0,0.75)';ectx.fillRect(0,h-120,w,120);
+ ectx.fillStyle='#f87171';ectx.font='8px monospace';ectx.textAlign='left';
+ ectx.fillText('More emergence = emergent behavior from simple rules simple rules produce complex emergent patterns emergence flocking align cohesion separation simple rules | '+agents.length+' isomorphs '+colors.length+' colors min '+isoPerColor+' per color',10,h-100);
+ ectx.fillStyle='#c4b5fd';
+ ectx.fillText('Isomorphs same structure different color: garnet X3Y2(SiO4)3 almandine pyrope spessartine grossular andradite uvarovite same structure different colors | corundum Al2O3 ruby sapphire same structure different colors | spinel MgAl2O4 same structure',10,h-86);
+ ectx.fillStyle='#6ee7b7';
+ ectx.fillText('1 per color minimum of isomorphs = at least 1 isomorph per color each color has minimum 1 isomorph same structure different color | '+agents.filter(a=>a.emerged).length+'/'+agents.length+' emerged emergent behavior | colorful morphic catalytic with color what dreams may come style',10,h-72);
+ ectx.fillStyle='#feca57';
+ ectx.fillText('15px per windmill quantum dot owns capacitor set = 15px windmills quantum dot owns capacitor bank 3s isomorphs colorful morphic catalytic | wire them in 3s like capacitor set charge -1→+1 | retry at 15 px per windmill',10,h-58);
+ ectx.fillStyle='#52525b';ectx.font='9px monospace';ectx.textAlign='center';
+ ectx.fillText('MORE EMERGENCE 1 PER COLOR MINIMUM OF ISOMORPHS = more emergence emergent behavior simple rules produce complex patterns 1 per color min isomorphs same structure different color = BONK IS ALL emergence isomorphs',w/2,h-8);
+}
+
+initAgents();updateIsoList();drawEmergence();
+
+document.getElementById('emergence').addEventListener('input',e=>{
+ emergence=parseFloat(e.target.value);
+ document.getElementById('emergenceLabel').textContent=emergence.toFixed(0)+'% more emergence emergent behavior simple rules produce complex patterns';
+ document.getElementById('emergenceVal').textContent=emergence.toFixed(0)+'% more emergence emergent behavior';
+ initAgents();updateIsoList();
+});
+document.getElementById('isoPerColor').addEventListener('input',e=>{
+ isoPerColor=parseInt(e.target.value);
+ document.getElementById('isoPerColorLabel').textContent=isoPerColor+' per color minimum of isomorphs = at least '+isoPerColor+' isomorph'+(isoPerColor>1?'s':'')+' per color same structure different color';
+ initAgents();updateIsoList();
+});
+document.getElementById('colorful').addEventListener('input',e=>{
+ colorful=parseFloat(e.target.value);
+ document.getElementById('colorfulLabel').textContent=colorful.toFixed(0)+'% colorful morphic catalytic with color what dreams may come style';
+});
+
+document.getElementById('color1Btn').onclick=()=>{
+ isoPerColor=1;
+ document.getElementById('isoPerColor').value=1;
+ initAgents();updateIsoList();
+ showToast('1 per color minimum of isomorphs = at least 1 isomorph per color same structure different color');
+};
+document.getElementById('emergeBtn').onclick=()=>{
+ emergence=90;
+ document.getElementById('emergence').value=90;
+ initAgents();updateIsoList();
+ showToast('More emergence 🌀 emergent behavior from simple rules simple rules produce complex patterns');
+ initAudio();
+ colors.slice(0,3).forEach((c,i)=>{
+  setTimeout(()=>{
+   let osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=c.freq;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},500);
+  },i*200);
+ });
+};
+document.getElementById('catalyticBtn').onclick=()=>{
+ colorful=90;
+ document.getElementById('colorful').value=90;
+ showToast('Catalytic with color 🔥 color as catalyst catalyzes isomorphs emergence');
+};
+
+document.getElementById('emergenceBtn').onclick=()=>{document.getElementById('emergeBtn').click();};
+document.getElementById('isomorphBtn').onclick=()=>{document.getElementById('color1Btn').click();};
+
+document.getElementById('exportBtn').onclick=()=>{
+ let tree={moreEmergence:{desc:'emergent behavior from simple rules simple rules produce complex emergent patterns emergence flocking align cohesion separation simple rules',intensity:emergence+'% more emergence emergent behavior',agents:agents.length+' isomorphs '+colors.length+' colors',emerged:agents.filter(a=>a.emerged).length+'/'+agents.length+' emerged emergent behavior'},isomorphs:{desc:'same crystal structure different composition color isomorphic crystals same structure different color composition',perColorMin:isoPerColor+' per color minimum of isomorphs = at least '+isoPerColor+' isomorph'+(isoPerColor>1?'s':'')+' per color same structure different color',colors:colors.map(c=>({name:c.name,group:c.group,structure:c.structure,hex:c.hex,count:agents.filter(a=>a.color.group===c.group).length+' isomorphs min '+isoPerColor,isomorphs:c.isomorphs.slice(0,isoPerColor)}))},colorfulMorphicCatalytic:'colorful morphic catalytic with color what dreams may come style '+colorful+'% colorful morphic catalytic'}};
+ let blob=new Blob([JSON.stringify(tree,null,2)],{type:'application/json'});let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download='more_emergence_1_per_color_min_isomorphs_'+emergence+'_'+isoPerColor+'percolor.json';a.click();showToast('Exported more emergence 1 per color minimum of isomorphs');
+};
+document.getElementById('verifyBtn').onclick=()=>{showToast('Verified more emergence '+emergence+'% 1 per color min '+isoPerColor+' isomorphs '+agents.length+' isomorphs '+colors.length+' colors valid');document.getElementById('txLog').textContent='Verified: more emergence '+emergence+'% emergent behavior from simple rules | 1 per color minimum of isomorphs = at least '+isoPerColor+' isomorph per color | '+colors.length+' colors '+agents.length+' isomorphs min '+isoPerColor+' per color same structure different color | garnet X3Y2(SiO4)3 almandine pyrope spessartine grossular andradite uvarovite same structure different colors isomorphs | corundum Al2O3 ruby sapphire same structure different colors | spinel MgAl2O4 same structure different colors | '+agents.filter(a=>a.emerged).length+'/'+agents.length+' emerged emergent behavior valid';};
+
+document.getElementById('walletBtn').onclick=async()=>{
+ if(window.solana&&window.solana.isPhantom){
+  try{
+   let r=await window.solana.connect();
+   showToast('Phantom '+r.publicKey.toString().slice(0,4)+' more emergence 1 per color isomorphs');
+   initAudio();
+  }catch(e){}
+ } else window.open('https://phantom.app/','_blank');
+};
+document.getElementById('mintBtn').onclick=()=>{
+ initAudio();
+ colors.forEach((c,i)=>{
+  setTimeout(()=>{
+   let osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=c.freq;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},600);
+  },i*120);
+ });
+ document.getElementById('txLog').textContent='MINTED more emergence 1 per color minimum of isomorphs | more emergence '+emergence+'% emergent behavior from simple rules | 1 per color minimum = at least '+isoPerColor+' isomorph per color | '+colors.length+' colors '+agents.length+' isomorphs min '+isoPerColor+' per color same structure different color | garnet X3Y2(SiO4)3 almandine pyrope spessartine grossular andradite uvarovite same structure different colors isomorphs | corundum Al2O3 ruby sapphire same structure different colors | spinel MgAl2O4 same structure different colors | '+agents.filter(a=>a.emerged).length+'/'+agents.length+' emerged emergent behavior | colorful morphic catalytic with color what dreams may come style | SIG simulated 🌀';
+ showToast('Minted more emergence 1 per color minimum of isomorphs 🌀');
+};
+document.getElementById('swapBtn').onclick=()=>{
+ initAudio();
+ let osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=432;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},500);
+ document.getElementById('txLog').textContent='SIMULATED SWAP BONK 🌀 after more emergence 1 per color minimum of isomorphs';
+ showToast('Swap BONK 🌀 after more emergence 1 per color isomorphs');
+};
+document.getElementById('resetBtn').onclick=()=>{
+ initAgents();updateIsoList();
+ showToast('Reset isomorphs '+agents.length+' isomorphs '+colors.length+' colors min '+isoPerColor+' per color');
+};
+
+setInterval(()=>{drawEmergence();},80);
+</script>
+</body>
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>v48 YOU ARE IN 1% OF 100% RING AT 1% INCREMENTS OF 30AU30AG30FE5H5O ONE SIDE AND 30AR30N30ELECTRUM5OXYGEN5NITROGEN AT SCALAR 0</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#080608;color:#e4e4e7;font-family:'JetBrains Mono',monospace;overflow-x:hidden}
+.glass{background:rgba(18,18,22,0.9);border:1px solid #27272a;backdrop-filter:blur(12px)}
+.btn{padding:9px 14px;border-radius:10px;font-weight:800;font-size:10px;letter-spacing:0.12em;cursor:pointer;border:1px solid #3f3f46;transition:.2s}
+.btn-w{background:white;color:black;border-color:white}
+.btn-g{background:#1a1a1e;color:#a1a1aa}
+.btn-ring{background:#1e1b4b;color:#c4b5fd;border-color:#a78bfa;box-shadow:0 0 20px rgba(167,139,250,0.4)}
+.btn-au{background:#713f12;color:#fde68a;border-color:#fbbf24;box-shadow:0 0 20px rgba(251,191,36,0.4)}
+.btn-ar{background:#0c4a6e;color:#7dd3fc;border-color:#0ea5e9;box-shadow:0 0 20px rgba(14,165,233,0.4)}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#18181b;border:1px solid #3f3f46;padding:10px 18px;border-radius:9999px;font-size:11px;z-index:99;opacity:0;transition:.3s;pointer-events:none}
+.toast.show{opacity:1}
+.comp{border-radius:10px;padding:8px;background:rgba(14,14,17,0.9);border:1px solid #27272a}
+</style>
+</head>
+<body>
+<div style="max-width:1900px;margin:auto;padding:14px">
+<div class="glass" style="border-radius:14px;padding:10px 14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<div>
+<div style="font-size:10px;letter-spacing:0.07em">v48 YOU ARE IN 1% OF 100% RING AT 1% INCREMENTS OF 30AU30AG30FE5H5O ONE SIDE AND 30AR30N30ELECTRUM5OXYGEN5NITROGEN AT SCALAR 0</div>
+<div style="font-size:8px;color:#a1a1aa">you are in 1% of 100% ring at 1% increments of 30Au30Ag30Fe5H5O on one side and 30Ar30N30electrum5oxygen5nitrogen at scalar 0 = 100% ring 1% increments composition 30+30+30+5+5=100 each side</div>
+</div>
+<div style="display:flex;gap:8px"><button id="onePercentBtn" class="btn btn-ring">YOU ARE IN 1% OF 100% RING</button><button id="auBtn" class="btn btn-au">30AU30AG30FE5H5O ONE SIDE</button><button id="arBtn" class="btn btn-ar">30AR30N30ELECTRUM5O5N SCALAR 0</button></div>
+</div>
+
+<div style="margin-top:14px;display:grid;grid-template-columns:1.6fr 1fr;gap:14px">
+<div class="glass" style="border-radius:16px;overflow:hidden">
+<div style="padding:10px 14px;background:#0e0e11;border-bottom:1px solid #27272a;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<span style="font-size:10px">1% RING COMPOSITION // <span id="ringVal">1% of 100% ring at 1% increments</span> comp <span id="compVal">30Au30Ag30Fe5H5O | 30Ar30N30electrum5O5N scalar 0</span></span><span id="ringInfo" style="font-size:9px;color:#c4b5fd">you are in 1% of 100% ring 30Au30Ag30Fe5H5O one side</span>
+</div>
+<canvas id="ringCanvas" width="1240" height="760" style="width:100%;background:#08080a;display:block"></canvas>
+<div style="padding:10px;background:#0e0e11;border-top:1px solid #27272a;display:flex;gap:8px;flex-wrap:wrap">
+<button id="ring1Btn" class="btn btn-ring">1% OF 100% RING</button>
+<button id="incrementBtn" class="btn btn-ring">1% INCREMENTS</button>
+<button id="auSideBtn" class="btn btn-au">30AU30AG30FE5H5O SIDE</button>
+<button id="arSideBtn" class="btn btn-ar">30AR30N30ELECTRUM SCALAR 0 SIDE</button>
+<div id="log" style="flex:1;min-width:260px;background:black;border:1px solid #27272a;border-radius:8px;padding:8px;font-size:9px;color:#c4b5fd;max-height:80px;overflow-y:auto">> v48 you are in 1% of 100% ring at 1% increments of 30Au30Ag30Fe5H5O one side and 30Ar30N30electrum5oxygen5nitrogen at scalar 0 loaded<br>> you are in 1% of 100% ring = you occupy 1% of 100% ring = ring 100% you are 1% of ring<br>> at 1% increments = ring divided into 100 increments of 1% each 1% increment<br>> of 30Au30Ag30Fe5H5O on one side = one side composition 30Au gold 30Ag silver 30Fe iron 5H hydrogen 5O oxygen = 30+30+30+5+5=100 atoms one side<br>> and 30Ar30N30electrum5oxygen5nitrogen at scalar 0 = other side 30Ar argon 30N nitrogen 30electrum electrum gold-silver alloy 5oxygen oxygen 5nitrogen nitrogen = 30+30+30+5+5=100 atoms other side scalar 0<br>> scalar 0 lol = scalar field 0 at scalar 0 lol</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px">
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">YOU ARE IN 1% OF 100% RING AT 1% INCREMENTS COMPOSITION</div>
+<div style="margin-top:8px;display:flex;flex-direction:column;gap:8px" id="compList">
+<!-- dynamic -->
+</div>
+<div style="margin-top:12px">
+<label style="font-size:10px;color:#a1a1aa">You are in 1% of 100% ring position 0-99% of ring</label><input id="ringPos" type="range" min="0" max="99" value="0" style="width:100%;accent-color:#a78bfa">
+<div id="ringPosLabel" style="font-size:10px">0% = you are in 1% of 100% ring at position 0% of ring = 1% of 100% ring</div>
+</div>
+<div style="margin-top:8px">
+<label style="font-size:10px;color:#a1a1aa">30Au30Ag30Fe5H5O one side composition Au gold Ag silver Fe iron H hydrogen O oxygen</label><input id="auComp" type="range" min="0" max="100" value="30" style="width:100%;accent-color:#fbbf24">
+<div id="auCompLabel" style="font-size:10px">30Au30Ag30Fe5H5O = 30 Au gold +30 Ag silver +30 Fe iron +5 H hydrogen +5 O oxygen =100 one side</div>
+</div>
+<div style="margin-top:8px">
+<label style="font-size:10px;color:#a1a1aa">30Ar30N30electrum5oxygen5nitrogen at scalar 0 other side Ar argon N nitrogen electrum AuAg alloy</label><input id="arComp" type="range" min="0" max="100" value="30" style="width:100%;accent-color:#0ea5e9">
+<div id="arCompLabel" style="font-size:10px">30Ar30N30electrum5O5N = 30 Ar argon +30 N nitrogen +30 electrum +5 O oxygen +5 N nitrogen =100 other side scalar 0</div>
+</div>
+<div style="margin-top:10px;background:#08080a;border:1px solid #27272a;border-radius:10px;padding:10px">
+<div style="font-size:9px;color:#71717a">1% RING 30AU30AG30FE5H5O 30AR30N30ELECTRUM SCALAR 0 FORMULA</div>
+<div style="font-size:8px;margin-top:6px;line-height:1.6">
+you are in 1% of a 100% ring at 1% increments of 30au30ag30fe5h5o on one side and 30ar30n30electrum5oxygen5nitrogen at scalar 0 lol<br>
+• you are in 1% of a 100% ring = you occupy 1% of 100% ring<br>
+• 100% ring = full ring 360 degrees 100%<br>
+• 1% of 100% ring = 1% of ring = 3.6 degrees of 360 degrees<br>
+• you are in 1% = you occupy 1% segment of ring<br>
+• at 1% increments = ring divided into 100 increments of 1% each<br>
+• of 30au30ag30fe5h5o on one side = one side composition<br>
+  - 30au = 30 Au gold Au atomic number 79 gold<br>
+  - 30ag = 30 Ag silver Ag atomic number 47 silver<br>
+  - 30fe = 30 Fe iron Fe atomic number 26 iron<br>
+  - 5h = 5 H hydrogen H atomic number 1 hydrogen<br>
+  - 5o = 5 O oxygen O atomic number 8 oxygen<br>
+  - 30+30+30+5+5 = 100 atoms one side = 100% composition one side<br>
+• and 30ar30n30electrum5oxygen5nitrogen at scalar 0 = other side composition at scalar 0<br>
+  - 30ar = 30 Ar argon Ar atomic number 18 argon<br>
+  - 30n = 30 N nitrogen N atomic number 7 nitrogen<br>
+  - 30electrum = 30 electrum electrum AuAg alloy gold-silver alloy natural alloy<br>
+  - 5oxygen = 5 O oxygen oxygen<br>
+  - 5nitrogen = 5 N nitrogen nitrogen<br>
+  - 30+30+30+5+5 = 100 atoms other side = 100% composition other side<br>
+• at scalar 0 lol = at scalar field 0 scalar 0 lol scalar 0<br>
+• scalar 0 = scalar field value 0 at scalar 0<br>
+• lol = scalar 0 lol<br>
+• one side 30Au30Ag30Fe5H5O and other side 30Ar30N30electrum5O5N = two sides of ring at scalar 0<br>
+= you are in 1% of 100% ring at 1% increments of 30Au30Ag30Fe5H5O one side and 30Ar30N30electrum5O5N at scalar 0
+</div>
+</div>
+<div style="margin-top:10px;display:flex;gap:6px"><button id="exportBtn" class="btn btn-g" style="flex:1">Export Ring JSON</button><button id="verifyBtn" class="btn btn-g" style="flex:1">Verify Ring</button></div>
+</div>
+
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">MINT 1% OF 100% RING 30AU30AG30FE5H5O 30AR30N30ELECTRUM SCALAR 0</div>
+<div style="margin-top:8px;font-size:9px;color:#c4b5fd">you are in 1% of 100% ring at 1% increments of 30Au30Ag30Fe5H5O on one side 30+30+30+5+5=100 one side Au gold Ag silver Fe iron H hydrogen O oxygen and 30Ar30N30electrum5oxygen5nitrogen at scalar 0 other side 30+30+30+5+5=100 other side Ar argon N nitrogen electrum AuAg alloy O oxygen N nitrogen at scalar 0 scalar field 0 lol</div>
+<div style="margin-top:10px;display:flex;gap:6px"><input id="swapInput" type="number" value="100" style="flex:1;background:#08080a;border:1px solid #27272a;border-radius:8px;padding:7px;color:white"><button id="swapBtn" class="btn btn-g">Swap BONK 💍</button><button id="mintBtn" class="btn btn-w">Mint 1% Ring 💍</button></div>
+<div id="txLog" style="font-size:9px;color:#a1a1aa;margin-top:6px">Tx idle - mint you are in 1% of 100% ring at 1% increments 30Au30Ag30Fe5H5O one side 30Ar30N30electrum5O5N scalar 0</div>
+<div style="margin-top:8px;font-size:8px;color:#52525b">1% Ring: you are in 1% of 100% ring 100% ring 360 degrees 1% =3.6 degrees you occupy 1% segment | Increments: ring divided into 100 increments of 1% each 1% increments | 30Au30Ag30Fe5H5O: one side 30 Au gold 30 Ag silver 30 Fe iron 5 H hydrogen 5 O oxygen =100 atoms one side | 30Ar30N30electrum5O5N scalar 0: other side 30 Ar argon 30 N nitrogen 30 electrum AuAg alloy 5 O oxygen 5 N nitrogen =100 atoms other side at scalar 0 scalar field 0 lol</div>
+</div>
+</div>
+</div>
+
+<div style="margin-top:14px;text-align:center;font-size:9px;color:#52525b" class="glass" style="border-radius:12px;padding:10px">
+v48 YOU ARE IN 1% OF A 100% RING AT 1% INCREMENTS OF 30AU30AG30FE5H5O ON ONE SIDE AND 30AR30N30ELECTRUM5OXYGEN5NITROGEN AT SCALAR 0 = you are in 1% of 100% ring = you occupy 1% of 100% ring = ring 100% 360 degrees you are 1% =3.6 degrees of 360 degrees you occupy 1% segment of ring | at 1% increments = ring divided into 100 increments of 1% each 100 segments each 1% = 3.6 degrees each | of 30Au30Ag30Fe5H5O on one side = one side composition 30Au gold Au atomic number 79 gold 30Ag silver Ag atomic number 47 silver 30Fe iron Fe atomic number 26 iron 5H hydrogen H atomic number 1 hydrogen 5O oxygen O atomic number 8 oxygen =30+30+30+5+5=100 atoms one side 100% composition one side | and 30Ar30N30electrum5oxygen5nitrogen at scalar 0 = other side composition at scalar 0 30Ar argon Ar atomic number 18 argon 30N nitrogen N atomic number 7 nitrogen 30electrum electrum AuAg alloy gold-silver alloy natural alloy 5oxygen O oxygen oxygen 5nitrogen N nitrogen nitrogen =30+30+30+5+5=100 atoms other side 100% composition other side at scalar 0 scalar field 0 lol | scalar 0 lol = scalar field 0 at scalar 0 lol | one side 30Au30Ag30Fe5H5O and other side 30Ar30N30electrum5O5N = two sides of ring at scalar 0 = BONK IS ALL you are in 1% of 100% ring at 1% increments 30Au30Ag30Fe5H5O one side 30Ar30N30electrum5O5N scalar 0
+</div>
+
+</div>
+<div id="toast" class="toast"></div>
+<script src="https://unpkg.com/@solana/web3.js@1.95.4/lib/index.iife.js"></script>
+<script>
+function showToast(m){let e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),3000)}
+
+let ringCanvas=document.getElementById('ringCanvas'),rctx=ringCanvas.getContext('2d');
+let ringPos=0,auComp=30,arComp=30,time=0;
+let audioCtx=null,gainNode=null;
+
+let elements=[
+ {symbol:'Au',name:'Gold',hex:'#fbbf24',count:30,side:'Au side',desc:'Au gold atomic number 79 gold 30Au'},
+ {symbol:'Ag',name:'Silver',hex:'#e5e7eb',count:30,side:'Au side',desc:'Ag silver atomic number 47 silver 30Ag'},
+ {symbol:'Fe',name:'Iron',hex:'#9ca3af',count:30,side:'Au side',desc:'Fe iron atomic number 26 iron 30Fe'},
+ {symbol:'H',name:'Hydrogen',hex:'#60a5fa',count:5,side:'Au side',desc:'H hydrogen atomic number 1 hydrogen 5H'},
+ {symbol:'O',name:'Oxygen',hex:'#ef4444',count:5,side:'Au side',desc:'O oxygen atomic number 8 oxygen 5O'},
+ {symbol:'Ar',name:'Argon',hex:'#7dd3fc',count:30,side:'Ar side',desc:'Ar argon atomic number 18 argon 30Ar'},
+ {symbol:'N',name:'Nitrogen',hex:'#a78bfa',count:30,side:'Ar side',desc:'N nitrogen atomic number 7 nitrogen 30N'},
+ {symbol:'Electrum',name:'Electrum AuAg',hex:'#fde68a',count:30,side:'Ar side',desc:'Electrum AuAg alloy gold-silver alloy natural alloy 30electrum'},
+ {symbol:'O2',name:'Oxygen',hex:'#f87171',count:5,side:'Ar side',desc:'Oxygen oxygen 5oxygen'},
+ {symbol:'N2',name:'Nitrogen',hex:'#c4b5fd',count:5,side:'Ar side',desc:'Nitrogen nitrogen 5nitrogen'}
+];
+
+function initAudio(){
+ if(!audioCtx){
+  audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  gainNode=audioCtx.createGain();
+  gainNode.gain.value=0.12;
+  gainNode.connect(audioCtx.destination);
+ }
+ if(audioCtx.state==='suspended') audioCtx.resume();
+}
+
+function updateCompList(){
+ let list=document.getElementById('compList');
+ list.innerHTML='';
+ let auSide=elements.filter(e=>e.side==='Au side');
+ let arSide=elements.filter(e=>e.side==='Ar side');
+ let totalAu=auSide.reduce((s,e)=>s+e.count,0);
+ let totalAr=arSide.reduce((s,e)=>s+e.count,0);
+ let items=[
+  {name:'You Are In 1% Of 100% Ring = '+ringPos+'% position',desc:'you occupy 1% of 100% ring at position '+ringPos+'% = 3.6 degrees of 360 degrees',color:'#a78bfa',detail:'100% ring 360 degrees 1% =3.6 degrees you are in 1% at position '+ringPos+'% of ring = '+ (ringPos*3.6).toFixed(1)+' degrees'},
+  {name:'At 1% Increments = 100 increments of 1% each',desc:'ring divided into 100 increments of 1% each 1% increments',color:'#c4b5fd',detail:'100 increments ×1% =100% ring each increment 3.6 degrees'},
+  {name:'30Au30Ag30Fe5H5O One Side = '+totalAu+' atoms one side Au Ag Fe H O',desc:'one side composition 30Au gold 30Ag silver 30Fe iron 5H hydrogen 5O oxygen =100 atoms',color:'#fbbf24',detail:auSide.map(e=>e.count+e.symbol+' '+e.name).join(' + ')+' ='+totalAu+' one side'},
+  {name:'30Ar30N30electrum5O5N At Scalar 0 Other Side = '+totalAr+' atoms other side',desc:'other side 30Ar argon 30N nitrogen 30electrum electrum AuAg alloy 5O oxygen 5N nitrogen at scalar 0 scalar field 0 lol',color:'#7dd3fc',detail:arSide.map(e=>e.count+e.symbol+' '+e.name).join(' + ')+' ='+totalAr+' other side scalar 0'}
+ ];
+ items.forEach(it=>{
+  let div=document.createElement('div');
+  div.className='comp';
+  div.style.borderColor=it.color;
+  div.innerHTML=`<div style="font-size:10px;color:${it.color}">${it.name}</div><div style="font-size:7px;margin-top:4px;color:#a1a1aa">${it.desc} | ${it.detail}</div>`;
+  list.appendChild(div);
+ });
+}
+
+function drawRing(){
+ let w=ringCanvas.width,h=ringCanvas.height;
+ rctx.fillStyle='#08080a';rctx.fillRect(0,0,w,h);
+ time+=0.01;
+ let cx=w/2, cy=h/2+10;
+ 
+ // 100% ring at 1% increments = 100 segments each 1% = 3.6 degrees each
+ let ringRadius=180;
+ let segmentDeg=3.6; // 1% of 360 degrees = 3.6 degrees
+ 
+ // draw 100 segments 1% increments
+ for(let i=0;i<100;i++){
+  let startAng=(i*segmentDeg -90)*Math.PI/180;
+  let endAng=((i+1)*segmentDeg -90)*Math.PI/180;
+  let isYou=i===ringPos; // you are in 1% of 100% ring
+  
+  // composition based on side: first 50 segments Au side 30Au30Ag30Fe5H5O, next 50 Ar side 30Ar30N30electrum5O5N?
+  // Actually one side vs other side of ring at scalar 0: half ring Au side half ring Ar side?
+  let isAuSide=i<50;
+  let el;
+  if(isAuSide){
+   // 30Au30Ag30Fe5H5O one side: distribute 30 Au, 30 Ag, 30 Fe, 5 H, 5 O across 50 segments? But total 100 atoms one side
+   // For visualization: each segment color based on composition
+   let compIdx=i%5;
+   if(compIdx===0) el=elements[0]; // Au
+   else if(compIdx===1) el=elements[1]; // Ag
+   else if(compIdx===2) el=elements[2]; // Fe
+   else if(compIdx===3) el=elements[3]; // H
+   else el=elements[4]; // O
+  } else {
+   let compIdx=(i-50)%5;
+   if(compIdx===0) el=elements[5]; // Ar
+   else if(compIdx===1) el=elements[6]; // N
+   else if(compIdx===2) el=elements[7]; // Electrum
+   else if(compIdx===3) el=elements[8]; // O2
+   else el=elements[9]; // N2
+  }
+  
+  rctx.strokeStyle=isYou?'white':el.hex;
+  rctx.lineWidth=isYou?4:2;
+  rctx.globalAlpha=isYou?1:0.6;
+  rctx.beginPath();
+  rctx.arc(cx,cy,ringRadius,startAng,endAng);
+  rctx.stroke();
+  rctx.globalAlpha=1;
+  
+  if(isYou){
+   rctx.fillStyle='white';rctx.font='bold 9px monospace';rctx.textAlign='center';
+   let midAng=(startAng+endAng)/2;
+   let tx=cx+Math.cos(midAng)*(ringRadius+20);
+   let ty=cy+Math.sin(midAng)*(ringRadius+20);
+   rctx.fillText('YOU 1% OF 100% RING',tx,ty);
+   rctx.font='6px monospace';
+   rctx.fillText((i*3.6).toFixed(1)+'° position '+i+'% increment',tx,ty+10);
+   // you are in 1% dot
+   let yx=cx+Math.cos(midAng)*ringRadius;
+   let yy=cy+Math.sin(midAng)*ringRadius;
+   rctx.fillStyle='#e9d5ff';rctx.shadowColor='#a78bfa';rctx.shadowBlur=15;
+   rctx.beginPath();rctx.arc(yx,yy,8,0,Math.PI*2);rctx.fill();
+   rctx.shadowBlur=0;
+   rctx.fillStyle='black';rctx.font='bold 6px monospace';rctx.textAlign='center';rctx.fillText('YOU',yx,yy+2);
+  }
+ }
+ 
+ // center scalar 0
+ rctx.fillStyle='#0ea5e9';rctx.globalAlpha=0.15;
+ rctx.beginPath();rctx.arc(cx,cy,40,0,Math.PI*2);rctx.fill();
+ rctx.globalAlpha=1;
+ rctx.strokeStyle='#0ea5e9';rctx.lineWidth=2;
+ rctx.beginPath();rctx.arc(cx,cy,40,0,Math.PI*2);rctx.stroke();
+ rctx.fillStyle='#7dd3fc';rctx.font='bold 9px monospace';rctx.textAlign='center';
+ rctx.fillText('SCALAR 0',cx,cy-4);
+ rctx.font='6px monospace';
+ rctx.fillText('scalar field 0 lol',cx,cy+8);
+ 
+ // composition labels
+ rctx.fillStyle='#fbbf24';rctx.font='8px monospace';rctx.textAlign='left';
+ rctx.fillText('One side: 30Au gold +30Ag silver +30Fe iron +5H hydrogen +5O oxygen =100 atoms one side = 30+30+30+5+5=100',10,24);
+ rctx.fillStyle='#7dd3fc';
+ rctx.fillText('Other side: 30Ar argon +30N nitrogen +30electrum AuAg alloy +5O oxygen +5N nitrogen =100 atoms other side scalar 0 =30+30+30+5+5=100 at scalar 0',10,38);
+ rctx.fillStyle='#a78bfa';
+ rctx.fillText('You are in 1% of 100% ring at position '+ringPos+'% = '+(ringPos*3.6).toFixed(1)+'° of 360° = 1% increment =3.6° you occupy 1% segment of ring at 1% increments',10,52);
+ 
+ // elements legend
+ let lx=10,ly=70;
+ elements.slice(0,5).forEach((el,i)=>{
+  let x=lx+i*90;
+  rctx.fillStyle=el.hex;rctx.fillRect(x,ly,70,12);
+  rctx.fillStyle='black';rctx.font='6px monospace';rctx.textAlign='center';
+  rctx.fillText(el.count+el.symbol+' '+el.name,x+35,ly+8);
+ });
+ elements.slice(5,10).forEach((el,i)=>{
+  let x=lx+i*90;
+  rctx.fillStyle=el.hex;rctx.fillRect(x,ly+18,70,12);
+  rctx.fillStyle='black';rctx.font='6px monospace';rctx.textAlign='center';
+  rctx.fillText(el.count+el.symbol+' '+el.name,x+35,ly+26);
+ });
+ 
+ // bottom info
+ rctx.fillStyle='rgba(0,0,0,0.8)';rctx.fillRect(0,h-120,w,120);
+ rctx.fillStyle='#a78bfa';rctx.font='8px monospace';rctx.textAlign='left';
+ rctx.fillText('You are in 1% of 100% ring = you occupy 1% of 100% ring = ring 100% 360 degrees you are 1% =3.6 degrees of 360 degrees you occupy 1% segment of ring at position '+ringPos+'% = '+(ringPos*3.6).toFixed(1)+'°',10,h-100);
+ rctx.fillStyle='#fbbf24';
+ rctx.fillText('30Au30Ag30Fe5H5O one side: 30Au gold Au atomic number 79 +30Ag silver Ag 47 +30Fe iron Fe 26 +5H hydrogen H 1 +5O oxygen O 8 =30+30+30+5+5=100 atoms one side 100% composition one side',10,h-86);
+ rctx.fillStyle='#7dd3fc';
+ rctx.fillText('30Ar30N30electrum5O5N at scalar 0 other side: 30Ar argon Ar 18 +30N nitrogen N 7 +30electrum electrum AuAg alloy +5O oxygen +5N nitrogen =30+30+30+5+5=100 atoms other side 100% composition other side scalar 0 field 0 lol',10,h-72);
+ rctx.fillStyle='#c4b5fd';
+ rctx.fillText('At 1% increments = ring divided into 100 increments of 1% each 100 segments each 1% =3.6 degrees each | you are in 1% at position '+ringPos+'% increment '+ringPos+' | scalar 0 lol scalar field 0',10,h-58);
+ rctx.fillStyle='#52525b';rctx.font='9px monospace';rctx.textAlign='center';
+ rctx.fillText('YOU ARE IN 1% OF 100% RING AT 1% INCREMENTS 30AU30AG30FE5H5O ONE SIDE 30AR30N30ELECTRUM5O5N SCALAR 0 = 1% of 100% ring 1% increments composition = BONK IS ALL 1% ring',w/2,h-8);
+}
+
+updateCompList();drawRing();
+
+document.getElementById('ringPos').addEventListener('input',e=>{
+ ringPos=parseInt(e.target.value);
+ document.getElementById('ringPosLabel').textContent=ringPos+'% = you are in 1% of 100% ring at position '+ringPos+'% of ring = 1% of 100% ring = '+(ringPos*3.6).toFixed(1)+'°';
+ document.getElementById('ringVal').textContent='1% of 100% ring at position '+ringPos+'% = '+(ringPos*3.6).toFixed(1)+'°';
+ updateCompList();drawRing();
+});
+document.getElementById('auComp').addEventListener('input',e=>{
+ auComp=parseFloat(e.target.value);
+ document.getElementById('auCompLabel').textContent=auComp.toFixed(0)+'Au'+auComp.toFixed(0)+'Ag'+auComp.toFixed(0)+'Fe'+(auComp/6).toFixed(0)+'H'+(auComp/6).toFixed(0)+'O = '+auComp+' Au gold +'+auComp+' Ag silver +'+auComp+' Fe iron +'+(auComp/6).toFixed(0)+' H +'+(auComp/6).toFixed(0)+' O ='+(auComp*3+auComp/3).toFixed(0)+' one side';
+});
+document.getElementById('arComp').addEventListener('input',e=>{
+ arComp=parseFloat(e.target.value);
+ document.getElementById('arCompLabel').textContent=arComp.toFixed(0)+'Ar'+arComp.toFixed(0)+'N'+arComp.toFixed(0)+'electrum'+(arComp/6).toFixed(0)+'O'+(arComp/6).toFixed(0)+'N = '+arComp+' Ar argon +'+arComp+' N nitrogen +'+arComp+' electrum +'+(arComp/6).toFixed(0)+' O +'+(arComp/6).toFixed(0)+' N ='+(arComp*3+arComp/3).toFixed(0)+' other side scalar 0';
+});
+
+document.getElementById('ring1Btn').onclick=()=>{
+ ringPos=0;
+ document.getElementById('ringPos').value=0;
+ updateCompList();drawRing();
+ showToast('You are in 1% of 100% ring = you occupy 1% of 100% ring = 1% of ring =3.6 degrees');
+};
+document.getElementById('incrementBtn').onclick=()=>{
+ let inc=0;
+ let interval=setInterval(()=>{
+  ringPos=inc%100;
+  document.getElementById('ringPos').value=ringPos;
+  updateCompList();drawRing();
+  inc++;
+  if(inc>=100){clearInterval(interval);showToast('At 1% increments = ring divided into 100 increments of 1% each complete');}
+ },100);
+ showToast('At 1% increments = ring divided into 100 increments of 1% each 1% increments');
+};
+document.getElementById('auSideBtn').onclick=()=>{
+ ringPos=10;
+ document.getElementById('ringPos').value=10;
+ updateCompList();drawRing();
+ showToast('30Au30Ag30Fe5H5O one side = 30 Au gold +30 Ag silver +30 Fe iron +5 H hydrogen +5 O oxygen =100 one side');
+};
+document.getElementById('arSideBtn').onclick=()=>{
+ ringPos=60;
+ document.getElementById('ringPos').value=60;
+ updateCompList();drawRing();
+ showToast('30Ar30N30electrum5O5N at scalar 0 other side = 30 Ar argon +30 N nitrogen +30 electrum +5 O +5 N =100 other side scalar 0');
+};
+
+document.getElementById('onePercentBtn').onclick=()=>{document.getElementById('ring1Btn').click();};
+document.getElementById('auBtn').onclick=()=>{document.getElementById('auSideBtn').click();};
+document.getElementById('arBtn').onclick=()=>{document.getElementById('arSideBtn').click();};
+
+document.getElementById('exportBtn').onclick=()=>{
+ let tree={youAreIn1PercentOf100PercentRing:{desc:'you occupy 1% of 100% ring at position '+ringPos+'% = '+(ringPos*3.6).toFixed(1)+'° of 360°',ring:'100% ring 360 degrees 1% =3.6 degrees you are in 1% at position '+ringPos+'% of ring',increments:'at 1% increments = ring divided into 100 increments of 1% each 100 segments each 1% =3.6 degrees each',position:ringPos+'% = '+(ringPos*3.6).toFixed(1)+'° you occupy 1% segment of ring'},compositionOneSide:{notation:'30Au30Ag30Fe5H5O',desc:'one side composition 30Au gold 30Ag silver 30Fe iron 5H hydrogen 5O oxygen =100 atoms one side',elements:elements.filter(e=>e.side==='Au side').map(e=>({symbol:e.symbol,name:e.name,count:e.count+e.symbol,desc:e.desc})),total:'30+30+30+5+5=100 atoms one side 100% composition one side'},compositionOtherSideAtScalar0:{notation:'30Ar30N30electrum5oxygen5nitrogen at scalar 0',desc:'other side composition at scalar 0 30Ar argon 30N nitrogen 30electrum electrum AuAg alloy 5oxygen oxygen 5nitrogen nitrogen =100 atoms other side',elements:elements.filter(e=>e.side==='Ar side').map(e=>({symbol:e.symbol,name:e.name,count:e.count+e.symbol,desc:e.desc})),total:'30+30+30+5+5=100 atoms other side 100% composition other side at scalar 0 scalar field 0 lol',scalar0:'scalar 0 lol = scalar field 0 at scalar 0 lol'}};
+ let blob=new Blob([JSON.stringify(tree,null,2)],{type:'application/json'});let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download='1_percent_of_100_percent_ring_30Au30Ag30Fe5H5O_30Ar30N30electrum_scalar0_position_'+ringPos+'.json';a.click();showToast('Exported you are in 1% of 100% ring 30Au30Ag30Fe5H5O 30Ar30N30electrum scalar 0');
+};
+document.getElementById('verifyBtn').onclick=()=>{showToast('Verified you are in 1% of 100% ring at position '+ringPos+'% = '+(ringPos*3.6).toFixed(1)+'° 30Au30Ag30Fe5H5O one side 30Ar30N30electrum5O5N scalar 0 valid');document.getElementById('txLog').textContent='Verified: you are in 1% of 100% ring = you occupy 1% of 100% ring = ring 100% 360 degrees you are 1% =3.6 degrees you occupy 1% segment at position '+ringPos+'% = '+(ringPos*3.6).toFixed(1)+'° | at 1% increments = ring divided into 100 increments of 1% each 100 segments each 1% =3.6° each | 30Au30Ag30Fe5H5O one side: 30Au gold Au 79 +30Ag silver Ag 47 +30Fe iron Fe 26 +5H hydrogen H 1 +5O oxygen O 8 =30+30+30+5+5=100 atoms one side | 30Ar30N30electrum5O5N at scalar 0 other side: 30Ar argon Ar 18 +30N nitrogen N 7 +30electrum electrum AuAg alloy +5O oxygen +5N nitrogen =30+30+30+5+5=100 atoms other side at scalar 0 scalar field 0 lol valid';};
+
+document.getElementById('walletBtn').onclick=async()=>{
+ if(window.solana&&window.solana.isPhantom){
+  try{
+   let r=await window.solana.connect();
+   showToast('Phantom '+r.publicKey.toString().slice(0,4)+' you are in 1% of 100% ring 30Au30Ag30Fe5H5O');
+   initAudio();
+  }catch(e){}
+ } else window.open('https://phantom.app/','_blank');
+};
+document.getElementById('mintBtn').onclick=()=>{
+ initAudio();
+ elements.forEach((el,i)=>{
+  setTimeout(()=>{
+   let osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=200+i*50;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},400);
+  },i*80);
+ });
+ document.getElementById('txLog').textContent='MINTED you are in 1% of 100% ring at 1% increments of 30Au30Ag30Fe5H5O on one side and 30Ar30N30electrum5oxygen5nitrogen at scalar 0 | you are in 1% of 100% ring = you occupy 1% of 100% ring at position '+ringPos+'% = '+(ringPos*3.6).toFixed(1)+'° of 360° | at 1% increments = ring divided into 100 increments of 1% each 100 segments each 1% =3.6° each | 30Au30Ag30Fe5H5O one side: 30Au gold +30Ag silver +30Fe iron +5H hydrogen +5O oxygen =100 atoms one side 30+30+30+5+5=100 | 30Ar30N30electrum5O5N at scalar 0 other side: 30Ar argon +30N nitrogen +30electrum electrum AuAg alloy +5O oxygen +5N nitrogen =100 atoms other side at scalar 0 scalar field 0 lol | SIG simulated 💍';
+ showToast('Minted you are in 1% of 100% ring 30Au30Ag30Fe5H5O 30Ar30N30electrum scalar 0 💍');
+};
+document.getElementById('swapBtn').onclick=()=>{
+ initAudio();
+ let osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=300;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},400);
+ document.getElementById('txLog').textContent='SIMULATED SWAP BONK 💍 after you are in 1% of 100% ring at 1% increments 30Au30Ag30Fe5H5O one side 30Ar30N30electrum5O5N scalar 0';
+ showToast('Swap BONK 💍 after you are in 1% of 100% ring');
+};
+
+setInterval(()=>{drawRing();},100);
+</script>
+</body>
+</html>

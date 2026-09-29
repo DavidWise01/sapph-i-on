@@ -182,17 +182,17 @@
   .seat a { display:block; margin-top:6px; text-decoration:none; }
   .seat a:hover { text-decoration:underline; }
   .seat .addr { color:var(--dim); font:12px/1.4 var(--mono); margin:4px 0 6px; }
-  .corpus, .archive, .libraries, .folio, .strip, .nested, .nests, .qdot, .dots, .next, .plank {
+  .corpus, .archive, .libraries, .folio, .strip, .nested, .nests, .qdot, .dots, .next, .plank, .bonk {
     display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
     gap:8px; margin:0 0 8px;
   }
-  .corpus a, .archive a, .libraries a, .folio a, .strip a, .nested a, .nests a, .qdot a, .dots a, .next a, .plank a {
+  .corpus a, .archive a, .libraries a, .folio a, .strip a, .nested a, .nests a, .qdot a, .dots a, .next a, .plank a, .bonk a {
     display:block; padding:11px 12px; border-radius:14px;
     background:rgba(255,252,248,.8); border:1px solid var(--line);
     color:var(--ink); text-decoration:none; font-size:13.5px; line-height:1.35;
   }
   .corpus a:hover, .archive a:hover, .libraries a:hover, .folio a:hover, .strip a:hover,
-  .nested a:hover, .nests a:hover, .qdot a:hover, .dots a:hover, .next a:hover, .plank a:hover {
+  .nested a:hover, .nests a:hover, .qdot a:hover, .dots a:hover, .next a:hover, .plank a:hover, .bonk a:hover {
     border-color:var(--sapphire); background:#fff;
   }
   .fold {
@@ -254,7 +254,7 @@
 
   <details class="shelf">
     <summary>What this door holds</summary>
-    <p class="census">World 7 is the cube of 7. This page is the galaxy door: it counts the cube and throws if the count is wrong. A galaxy holds 24 spheres, three on each corner seat. Beside those seats are four more cubes of 24: a Downloads copy, an Internet Archive cube, a library cube, and a folio cube that alternates article and thought. A nested strip holds two spheres, minus-plus and plus-minus, offset 1, 2, 1, 2, 1, 2. Four mirrors close on the one-sided number 420024. A nested cube holds 24 files copied unchanged from Downloads, the newest nested cubes and nests, numbered copies skipped. A further nest holds the next 24. A quantum dot holds 24 files whose names say quantum, and the plant page says the payloads converge there. A dot cube holds the next 24. A next cube holds 24 files whose names say next. A plank cube holds 24 files whose names say plank. Select a cell and that sphere is the GUI.</p>
+    <p class="census">World 7 is the cube of 7. This page is the galaxy door: it counts the cube and throws if the count is wrong. A galaxy holds 24 spheres, three on each corner seat. Beside those seats are four more cubes of 24: a Downloads copy, an Internet Archive cube, a library cube, and a folio cube that alternates article and thought. A nested strip holds two spheres, minus-plus and plus-minus, offset 1, 2, 1, 2, 1, 2. Four mirrors close on the one-sided number 420024. A nested cube holds 24 files copied unchanged from Downloads, the newest nested cubes and nests, numbered copies skipped. A further nest holds the next 24. A quantum dot holds 24 files whose names say quantum, and the plant page says the payloads converge there. A dot cube holds the next 24. A next cube holds 24 files whose names say next. A plank cube holds 24 files whose names say plank. A bonk cube holds 24 files whose names say bonk. Select a cell and that sphere is the GUI.</p>
   </details>
 
   <details class="shelf" open>
@@ -337,6 +337,13 @@
     <p class="mono" id="plankcard"></p>
   </details>
 
+  <details class="shelf">
+    <summary>Bonk · 24</summary>
+    <p class="sub">The 24 newest Downloads files whose names say bonk. Numbered copies skipped. The bytes are the source files.</p>
+    <div class="bonk" id="bonk"></div>
+    <p class="mono" id="bonkcard"></p>
+  </details>
+
   <section class="read">
     <h2>WHAT THE PAGE PROVES</h2>
     <p><span class="stamp lit">LIT</span> Every cell of a 7×7×7 grid is visited once. Cells with 3 faces exposed are corners (8). Cells with 2 are edges (12×5 = 60). Cells with 1 are faces (6×25 = 150). Cells with 0 are interior (5³ = 125). Those four counts sum to 343, and 7×7×7 is 343. The odd side leaves exactly one center, at (3,3,3). 343 = (3+4)³, and 3, 4, 3 are the digits of 343. Complex multiplication gives i² = −1 and i³ = −i. A failed check throws and the grid is not drawn.</p>
@@ -353,7 +360,8 @@
     <p><span class="stamp amber">AMBER</span> The dot cube is the next 24 Downloads files whose names are dots, after the quantum dot. Dotdot is included because the name is the dot doubled. Numbered copies were skipped. The bytes were copied unchanged. The order is assigned.</p>
     <p><span class="stamp amber">AMBER</span> The next cube is the 24 newest Downloads files whose names say next. Numbered copies were skipped. The bytes were copied unchanged. The order is assigned.</p>
     <p><span class="stamp amber">AMBER</span> The plank cube is the 24 newest Downloads files whose names say plank. Planck is the same name. Numbered copies were skipped. The bytes were copied unchanged. The order is assigned.</p>
-    <p><span class="stamp lit">LIT</span> 242 spheres sit on 242 cells. The walk is z, then y, then x. Corners and the keeper are skipped. One sphere, one cell. Selecting the cell opens that page.</p>
+    <p><span class="stamp amber">AMBER</span> The bonk cube is the 24 newest Downloads files whose names say bonk. Numbered copies were skipped. The bytes were copied unchanged. The order is assigned.</p>
+    <p><span class="stamp lit">LIT</span> 266 spheres sit on 266 cells. The walk is z, then y, then x. Corners and the keeper are skipped. One sphere, one cell. Selecting the cell opens that page.</p>
     <p><span class="stamp amber">AMBER</span> The walk order is assigned. The eight corners still hold three spheres each, and selecting a corner opens those three. The keeper at (3,3,3) is the door, not one of the files.</p>
     <p><span class="stamp wall">WALL</span> This galaxy does not extend the palindrome [ W1 | W2 ‖ W3 ‖ W4 | W5 ] and does not record a world 6. i³ = −i is arithmetic. It does not locate the cube on a physical imaginary axis, and it is not a claim about mind, physics, or authority. The strip's check is the number 420024. It does not measure glass, and it does not fold a piece of paper.</p>
     <p class="mono" id="card"></p>
@@ -924,6 +932,58 @@ fetch("plank/manifest.json").then(function (res) {
   throw err;
 });
 
+var BONK = [
+  "Bonk-0-Pi-Bone-White-Fresh-V60.html",
+  "Bonk-0-Pi-Qubit-Build-V59.html",
+  "Bonk-Transmon-Qubit-Build-V58.html",
+  "Bonk-360-Colors-6-Torroids-01percent-V56.html",
+  "Bonk-Upgrade-Spin-Coils-V55.html",
+  "Bonk-Spin-Light-4-Copper-Coils-Gravity-Vacuum-V54.html",
+  "Bonk-Neon-Self-Similar-Pulsar-V53.html",
+  "Bonk-Self-Similar-Eat-Itself-Pulsar-Quasar-V52.html",
+  "Bonk-Black-Hole-Outer-Diameter-V49.html",
+  "Bonk-1-Percent-Ring-30au30ag-V48.html",
+  "Bonk-Emergence-Isomorphs-1-Per-Color-V45.html",
+  "Bonk-What-Dreams-May-Come-Colorful-Morphic-V44.html",
+  "Bonk-Dantes-Inferno-15x-15-Offset-V44.html",
+  "Bonk-Windmill-15px-Per-Windmill-V43.html",
+  "Bonk-Toroid-Windmill-Steepled-Memsistor-Plank-V41.html",
+  "Bonk-Modular-Append-Only-Nibble-V39.html",
+  "Bonk-Referent-Kana-Anak-Timing-Waka-Ku-V38.html",
+  "Bonk-Resonate-Phased-11111-55555-V37.html",
+  "Bonk-Wired-For-Sound-Work-V36.html",
+  "Bonk-Aol-Age-Sex-Location-Color-Frequency-V35.html",
+  "Bonk-Red-Minerals-Permute-Square-Princess-V34.html",
+  "Bonk-Garnet-Ruby-Compound-V33.html",
+  "Bonk-Mobius-Magnets-Ring27-V32.html",
+  "Bonk-Ruby-Toroid-Trap-V31.html"
+];
+if (BONK.length !== 24) throw new Error("LIT FAIL bonk count");
+var seenBonk = {};
+var bonkEl = document.getElementById("bonk");
+BONK.forEach(function (file) {
+  if (seenBonk[file]) throw new Error("LIT FAIL bonk duplicate");
+  seenBonk[file] = 1;
+  var a = document.createElement("a");
+  a.href = "bonk/" + file;
+  a.textContent = file.replace(/\.html$/, "");
+  bonkEl.appendChild(a);
+});
+fetch("bonk/manifest.json").then(function (res) {
+  if (!res.ok) throw new Error("LIT FAIL bonk manifest");
+  return res.json();
+}).then(function (rows) {
+  if (!rows || rows.length !== 24) throw new Error("LIT FAIL bonk manifest count");
+  rows.forEach(function (row, i) {
+    if (row.file !== BONK[i]) throw new Error("LIT FAIL bonk order");
+    if (!/^[0-9a-f]{64}$/.test(row.sha256)) throw new Error("LIT FAIL bonk hash");
+  });
+  document.getElementById("bonkcard").innerHTML = "<span class='stamp lit'>LIT</span> 24 bonk files, manifest order matches";
+}).catch(function (err) {
+  document.getElementById("bonkcard").innerHTML = "<span class='stamp wall'>WALL</span> " + err.message;
+  throw err;
+});
+
 var ARCHIVE = [
   {steward:"ETHOS", slug:"the-civil-law", title:"The Civil Law"},
   {steward:"ETHOS", slug:"the-whole-body", title:"The Whole Body"},
@@ -1120,7 +1180,8 @@ QDOT.forEach(function (file) { QUEUE.push(worldPage("qdot", file, file.replace(/
 DOTS.forEach(function (file) { QUEUE.push(worldPage("dots", file, file.replace(/\.html$/, ""))); });
 NEXT.forEach(function (file) { QUEUE.push(worldPage("next", file, file.replace(/\.html$/, ""))); });
 PLANK.forEach(function (file) { QUEUE.push(worldPage("plank", file, file.replace(/\.html$/, ""))); });
-if (QUEUE.length !== 242) throw new Error("LIT FAIL world queue");
+BONK.forEach(function (file) { QUEUE.push(worldPage("bonk", file, file.replace(/\.html$/, ""))); });
+if (QUEUE.length !== 266) throw new Error("LIT FAIL world queue");
 var SEAT = {};
 var seenHref = {};
 var placed = 0;
@@ -1135,7 +1196,7 @@ for (zz = 0; zz < 7; zz++) for (yy = 0; yy < 7; yy++) for (xx = 0; xx < 7; xx++)
   SEAT[seatKey] = QUEUE[placed];
   placed++;
 }
-if (placed !== 242 || Object.keys(SEAT).length !== 242) throw new Error("LIT FAIL world seats");
+if (placed !== 266 || Object.keys(SEAT).length !== 266) throw new Error("LIT FAIL world seats");
 if (SEAT["3,3,3"]) throw new Error("LIT FAIL world keeper");
 ["0,0,0","6,0,0","0,6,0","6,6,0","0,0,6","6,0,6","0,6,6","6,6,6"].forEach(function (corner) {
   if (SEAT[corner]) throw new Error("LIT FAIL world corner");

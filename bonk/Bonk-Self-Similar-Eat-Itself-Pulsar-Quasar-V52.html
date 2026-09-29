@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>v52 SELF SIMILAR HAVE IT EAT ITSELF AND BLINK LIKE A PULSAR OR QUASAR AT SCALE</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#080608;color:#e4e4e7;font-family:'JetBrains Mono',monospace;overflow-x:hidden}
+.glass{background:rgba(18,18,22,0.92);border:1px solid #27272a;backdrop-filter:blur(12px)}
+.btn{padding:9px 14px;border-radius:10px;font-weight:800;font-size:10px;letter-spacing:0.12em;cursor:pointer;border:1px solid #3f3f46;transition:.2s}
+.btn-w{background:white;color:black;border-color:white}
+.btn-g{background:#1a1a1e;color:#a1a1aa}
+.btn-self{background:#581c87;color:#e9d5ff;border-color:#a78bfa;box-shadow:0 0 24px rgba(167,139,250,0.5)}
+.btn-eat{background:#7f1d1d;color:#fecaca;border-color:#ef4444;box-shadow:0 0 20px rgba(239,68,68,0.4)}
+.btn-pulsar{background:#0c4a6e;color:#7dd3fc;border-color:#0ea5e9;box-shadow:0 0 20px rgba(14,165,233,0.4)}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#18181b;border:1px solid #3f3f46;padding:10px 18px;border-radius:9999px;font-size:11px;z-index:99;opacity:0;transition:.3s;pointer-events:none}
+.toast.show{opacity:1}
+.self{border-radius:10px;padding:8px;background:rgba(14,14,17,0.9);border:1px solid #27272a}
+</style>
+</head>
+<body>
+<div style="max-width:1900px;margin:auto;padding:14px">
+<div class="glass" style="border-radius:14px;padding:10px 14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<div>
+<div style="font-size:10px;letter-spacing:0.07em">v52 SELF SIMILAR HAVE IT EAT ITSELF AND BLINK LIKE A PULSAR OR QUASAR AT SCALE SELF EATING PULSAR QUASAR BLINK</div>
+<div style="font-size:8px;color:#a1a1aa">its self similar have it eat itself and what blink like a pulsar or quasar at scale lol = self similar fractal eats itself ouroboros blink pulsar quasar at scale</div>
+</div>
+<div style="display:flex;gap:8px"><button id="selfBtn" class="btn btn-self">SELF SIMILAR</button><button id="eatBtn" class="btn btn-eat">EAT ITSELF 🐍</button><button id="pulsarBtn" class="btn btn-pulsar">BLINK LIKE PULSAR OR QUASAR</button></div>
+</div>
+
+<div style="margin-top:14px;display:grid;grid-template-columns:1.6fr 1fr;gap:14px">
+<div class="glass" style="border-radius:16px;overflow:hidden">
+<div style="padding:10px 14px;background:#0e0e11;border-bottom:1px solid #27272a;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<span style="font-size:10px">SELF SIMILAR EAT BLINK // <span id="selfVal">self similar fractal</span> eat <span id="eatVal">eat itself ouroboros</span> blink <span id="blinkVal">pulsar or quasar at scale</span></span><span id="selfInfo" style="font-size:9px;color:#e9d5ff">self similar eat itself blink pulsar quasar at scale</span>
+</div>
+<canvas id="selfCanvas" width="1240" height="760" style="width:100%;background:#08080a;display:block"></canvas>
+<div style="padding:10px;background:#0e0e11;border-top:1px solid #27272a;display:flex;gap:8px;flex-wrap:wrap">
+<button id="similarBtn" class="btn btn-self">SELF SIMILAR 🌀</button>
+<button id="eatItselfBtn" class="btn btn-eat">EAT ITSELF 🐍</button>
+<button id="blinkBtn" class="btn btn-pulsar">BLINK PULSAR QUASAR 💫</button>
+<button id="scaleBtn" class="btn btn-g">AT SCALE LOL</button>
+<div id="log" style="flex:1;min-width:260px;background:black;border:1px solid #27272a;border-radius:8px;padding:8px;font-size:9px;color:#c4b5fd;max-height:80px;overflow-y:auto">> v52 self similar have it eat itself and blink like a pulsar or quasar at scale loaded<br>> its self similar = self similar fractal self similar structure same pattern at different scales<br>> have it eat itself = have it eat itself ouroboros self eating black hole eats itself quantum dot eats itself<br>> and what blink like a pulsar or quasar at scale lol = blink like a pulsar or quasar at scale pulsar blinking period quasar blinking at scale lol<br>> self similar eat itself blink pulsar quasar at scale = self similar fractal that eats itself and blinks like pulsar or quasar at scale</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px">
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">SELF SIMILAR EAT ITSELF BLINK LIKE PULSAR OR QUASAR AT SCALE</div>
+<div style="margin-top:8px;display:flex;flex-direction:column;gap:8px" id="selfList">
+<!-- dynamic -->
+</div>
+<div style="margin-top:12px">
+<label style="font-size:10px;color:#a1a1aa">Self similar fractal depth self similar levels</label><input id="selfSimilar" type="range" min="1" max="8" value="5" style="width:100%;accent-color:#a78bfa">
+<div id="selfSimilarLabel" style="font-size:10px">5 = self similar fractal depth 5 levels self similar same pattern at different scales</div>
+</div>
+<div style="margin-top:8px">
+<label style="font-size:10px;color:#a1a1aa">Eat itself ouroboros eating speed self eating</label><input id="eatSpeed" type="range" min="0" max="100" value="60" style="width:100%;accent-color:#ef4444">
+<div id="eatSpeedLabel" style="font-size:10px">60% = eat itself ouroboros eating speed self eating black hole eats itself</div>
+</div>
+<div style="margin-top:8px">
+<label style="font-size:10px;color:#a1a1aa">Blink like pulsar or quasar at scale blink period pulsar quasar</label><input id="blinkPeriod" type="range" min="10" max="200" value="80" style="width:100%;accent-color:#0ea5e9">
+<div id="blinkPeriodLabel" style="font-size:10px">80ms = blink like pulsar or quasar at scale blink period pulsar 1.4s quasar variable at scale lol</div>
+</div>
+<div style="margin-top:10px;background:#08080a;border:1px solid #27272a;border-radius:10px;padding:10px">
+<div style="font-size:9px;color:#71717a">SELF SIMILAR EAT ITSELF BLINK PULSAR QUASAR FORMULA</div>
+<div style="font-size:8px;margin-top:6px;line-height:1.6">
+its self similar have it eat itself and what blink like a pulsar or qausar at scale lol<br>
+• its self similar = it is self similar<br>
+• self similar = fractal self similar structure same pattern at different scales<br>
+• fractal = self similar pattern repeats at different scales<br>
+• have it eat itself = have it eat itself ouroboros self eating<br>
+• eat itself = self eating ouroboros snake eats itself tail<br>
+• black hole eats itself = black hole eats itself self eating<br>
+• quantum dot eats itself = quantum dot eats itself self eating<br>
+• and what blink like a pulsar or qausar at scale lol = and blink like a pulsar or quasar at scale<br>
+• blink like a pulsar = blink like a pulsar pulsar blinking period 1.4 seconds pulsar blink<br>
+• or quasar = or quasar quasar blinking variable quasar blink<br>
+• at scale = at scale lol at scale pulsar quasar at scale of black hole we live in<br>
+• lol = at scale lol<br>
+• self similar eat itself blink pulsar quasar at scale = self similar fractal that eats itself and blinks like pulsar or quasar at scale<br>
+• self similar fractal eats itself ouroboros and blinks like pulsar quasar at scale of black hole we live in<br>
+= self similar have it eat itself and blink like a pulsar or quasar at scale lol
+</div>
+</div>
+<div style="margin-top:10px;display:flex;gap:6px"><button id="exportBtn" class="btn btn-g" style="flex:1">Export Self JSON</button><button id="verifyBtn" class="btn btn-g" style="flex:1">Verify Self</button></div>
+</div>
+
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">MINT SELF SIMILAR EAT ITSELF BLINK LIKE PULSAR OR QUASAR AT SCALE</div>
+<div style="margin-top:8px;font-size:9px;color:#c4b5fd">its self similar have it eat itself and blink like a pulsar or quasar at scale lol = self similar fractal self similar structure same pattern at different scales have it eat itself ouroboros self eating black hole eats itself quantum dot eats itself and blink like a pulsar or quasar at scale pulsar blinking period quasar blinking at scale of black hole we live in lol</div>
+<div style="margin-top:10px;display:flex;gap:6px"><input id="swapInput" type="number" value="100" style="flex:1;background:#08080a;border:1px solid #27272a;border-radius:8px;padding:7px;color:white"><button id="swapBtn" class="btn btn-g">Swap BONK 💫</button><button id="mintBtn" class="btn btn-w">Mint Self Similar Pulsar 🌀</button></div>
+<div id="txLog" style="font-size:9px;color:#a1a1aa;margin-top:6px">Tx idle - mint self similar have it eat itself and blink like a pulsar or quasar at scale</div>
+<div style="margin-top:8px;font-size:8px;color:#52525b">Self similar: fractal self similar structure same pattern at different scales | Eat itself: ouroboros self eating black hole eats itself quantum dot eats itself | Blink pulsar quasar at scale: blink like pulsar or quasar at scale pulsar blinking period quasar blinking at scale lol pulsar 1.4s quasar variable at scale of black hole we live in</div>
+</div>
+</div>
+</div>
+
+<div style="margin-top:14px;text-align:center;font-size:9px;color:#52525b" class="glass" style="border-radius:12px;padding:10px">
+v52 SELF SIMILAR HAVE IT EAT ITSELF AND BLINK LIKE A PULSAR OR QUASAR AT SCALE = its self similar = it is self similar fractal self similar structure same pattern at different scales fractal pattern repeats at different scales | have it eat itself = have it eat itself ouroboros self eating ouroboros snake eats itself tail black hole eats itself self eating black hole eats itself quantum dot eats itself self eating | and what blink like a pulsar or quasar at scale lol = and blink like a pulsar or quasar at scale pulsar blinking period quasar blinking at scale lol | blink like a pulsar = blink like a pulsar pulsar blinking period 1.4 seconds pulsar blink | or quasar = or quasar quasar blinking variable quasar blink | at scale = at scale lol at scale pulsar quasar at scale of black hole we live in | self similar eat itself blink pulsar quasar at scale = self similar fractal that eats itself and blinks like pulsar or quasar at scale = BONK IS ALL self similar eat itself blink pulsar quasar at scale
+</div>
+
+</div>
+<div id="toast" class="toast"></div>
+<script src="https://unpkg.com/@solana/web3.js@1.95.4/lib/index.iife.js"></script>
+<script>
+function showToast(m){let e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),3000)}
+
+let selfCanvas=document.getElementById('selfCanvas'),sctx=selfCanvas.getContext('2d');
+let selfSimilar=5,eatSpeed=60,blinkPeriod=80,time=0,blinkPhase=0,isBlinking=true;
+let audioCtx=null,gainNode=null;
+
+function initAudio(){
+ if(!audioCtx){
+  audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  gainNode=audioCtx.createGain();
+  gainNode.gain.value=0.1;
+  gainNode.connect(audioCtx.destination);
+ }
+ if(audioCtx.state==='suspended') audioCtx.resume();
+}
+
+function updateSelfList(){
+ let list=document.getElementById('selfList');
+ list.innerHTML='';
+ let items=[
+  {name:'Self Similar Fractal Depth '+selfSimilar+' Levels Self Similar',desc:'self similar fractal self similar structure same pattern at different scales',color:'#a78bfa',detail:'self similar = fractal same pattern repeats at different scales depth '+selfSimilar+' levels'},
+  {name:'Eat Itself Ouroboros Eating Speed '+eatSpeed+'% Self Eating',desc:'have it eat itself ouroboros self eating black hole eats itself quantum dot eats itself',color:'#ef4444',detail:'eat itself = self eating ouroboros snake eats itself tail eating speed '+eatSpeed+'%'},
+  {name:'Blink Like Pulsar Or Quasar At Scale Period '+blinkPeriod+'ms Blink',desc:'blink like a pulsar or quasar at scale pulsar blinking period quasar blinking at scale lol',color:'#0ea5e9',detail:'blink like pulsar or quasar at scale = pulsar 1.4s quasar variable blink period '+blinkPeriod+'ms at scale lol'},
+  {name:'At Scale Lol Black Hole We Live In Scale Pulsar Quasar At Scale',desc:'at scale lol at scale pulsar quasar at scale of black hole we live in',color:'#27272a',detail:'at scale = at scale of black hole we live in outer most diameter 1% ring at scale lol'}
+ ];
+ items.forEach(it=>{
+  let div=document.createElement('div');
+  div.className='self';
+  div.style.borderColor=it.color;
+  div.innerHTML=`<div style="font-size:10px;color:${it.color}">${it.name}</div><div style="font-size:7px;margin-top:4px;color:#a1a1aa">${it.desc} | ${it.detail}</div>`;
+  list.appendChild(div);
+ });
+ document.getElementById('selfVal').textContent='self similar depth '+selfSimilar+' levels fractal';
+ document.getElementById('eatVal').textContent='eat itself speed '+eatSpeed+'% ouroboros';
+ document.getElementById('blinkVal').textContent='blink pulsar quasar period '+blinkPeriod+'ms at scale';
+}
+
+function drawSelfSimilarEatBlink(){
+ let w=selfCanvas.width,h=selfCanvas.height;
+ sctx.fillStyle='#08080a';sctx.fillRect(0,0,w,h);
+ time+=0.02;
+ blinkPhase+=1000/blinkPeriod*0.01; // blink phase based on blink period
+ 
+ let cx=w/2, cy=h/2+10;
+ let isBlinkOn=Math.sin(blinkPhase*0.2)>0; // blink like pulsar or quasar
+ 
+ // self similar fractal: recursive rings self similar same pattern at different scales
+ function drawSelfSimilarRing(x,y,radius,depth){
+  if(depth<=0) return;
+  let isEat=Math.sin(time*eatSpeed/100 + depth)*0.5+0.5;
+  let blinkAlpha=isBlinkOn?0.8+Math.sin(blinkPhase)*0.2:0.2;
+  
+  // self similar ring
+  sctx.strokeStyle=depth%2===0?'#a78bfa':'#ef4444';
+  sctx.lineWidth=depth;
+  sctx.globalAlpha=blinkAlpha * (depth/selfSimilar);
+  sctx.beginPath();sctx.arc(x,y,radius,0,Math.PI*2);sctx.stroke();
+  sctx.globalAlpha=1;
+  
+  // have it eat itself: ouroboros eating itself - gap that eats
+  let eatAng=time*eatSpeed/100 % (Math.PI*2);
+  let eatGap=0.3 + isEat*0.5; // gap that eats itself
+  sctx.strokeStyle='#08080a';sctx.lineWidth=depth+4;
+  sctx.beginPath();sctx.arc(x,y,radius,eatAng,eatAng+eatGap);sctx.stroke();
+  // eating head
+  let hx=x+Math.cos(eatAng+eatGap)*radius;
+  let hy=y+Math.sin(eatAng+eatGap)*radius;
+  sctx.fillStyle='#ef4444';sctx.beginPath();sctx.arc(hx,hy,depth+2,0,Math.PI*2);sctx.fill();
+  
+  // recursive self similar smaller rings same pattern at different scales
+  let smallerR=radius*0.5;
+  let count=3;
+  for(let i=0;i<count;i++){
+   let ang=(i*360/count)*Math.PI/180 + time*0.5;
+   let nx=x+Math.cos(ang)*(radius-smallerR);
+   let ny=y+Math.sin(ang)*(radius-smallerR);
+   drawSelfSimilarRing(nx,ny,smallerR,depth-1);
+  }
+ }
+ 
+ drawSelfSimilarRing(cx,cy,140,selfSimilar);
+ 
+ // center quantum dot itself a black hole that owns you and eats itself self similar
+ let qdRadius=30 + Math.sin(time*2)*5;
+ // blink like pulsar or quasar at scale
+ let blinkIntensity=isBlinkOn?1:0.1;
+ sctx.fillStyle='black';sctx.shadowColor='#e9d5ff';sctx.shadowBlur=20*blinkIntensity+qdBhSize();
+ function qdBhSize(){return 30;}
+ sctx.beginPath();sctx.arc(cx,cy,qdRadius,0,Math.PI*2);sctx.fill();
+ sctx.shadowBlur=0;
+ sctx.strokeStyle='#e9d5ff';sctx.lineWidth=2*sctx.globalAlpha; // pulsar blink
+ sctx.globalAlpha=blinkIntensity;
+ sctx.beginPath();sctx.arc(cx,cy,qdRadius,0,Math.PI*2);sctx.stroke();
+ sctx.globalAlpha=1;
+ // pulsar beam blink like pulsar or quasar at scale
+ if(isBlinkOn){
+  sctx.strokeStyle='#7dd3fc';sctx.lineWidth=3;sctx.globalAlpha=0.6;
+  let beamAng=blinkPhase*2;
+  sctx.beginPath();sctx.moveTo(cx,cy);sctx.lineTo(cx+Math.cos(beamAng)*300,cx+Math.sin(beamAng)*300);sctx.stroke();
+  sctx.beginPath();sctx.moveTo(cx,cy);sctx.lineTo(cx+Math.cos(beamAng+Math.PI)*300,cx+Math.sin(beamAng+Math.PI)*300);sctx.stroke();
+  sctx.globalAlpha=1;
+  sctx.fillStyle='#7dd3fc';sctx.font='bold 8px monospace';sctx.textAlign='center';
+  sctx.fillText('PULSAR BEAM BLINK',cx+Math.cos(beamAng)*160,cy+Math.sin(beamAng)*160);
+ }
+ sctx.fillStyle='white';sctx.font='bold 9px monospace';sctx.textAlign='center';
+ sctx.fillText('QD BH',cx,cy-2);
+ sctx.font='7px monospace';
+ sctx.fillText('self similar',cx,cy+8);
+ sctx.fillText('eats itself',cx,cy+18);
+ sctx.fillStyle='#e9d5ff';sctx.font='6px monospace';
+ sctx.fillText('blink pulsar quasar '+blinkPeriod+'ms',cx,cy+qdRadius+16);
+ sctx.fillText('self similar depth '+selfSimilar+' eats itself speed '+eatSpeed+'%',cx,cy+qdRadius+24);
+ 
+ // outer most diameter 1% ring that is self similar and eats itself and blinks like pulsar quasar
+ let outerRadius=200;
+ sctx.strokeStyle='#ef4444';sctx.lineWidth=2;sctx.globalAlpha=0.5*blinkIntensity;
+ sctx.beginPath();sctx.arc(cx,cy,outerRadius,0,Math.PI*2);sctx.stroke();
+ sctx.globalAlpha=1;
+ sctx.fillStyle='#ef4444';sctx.font='7px monospace';sctx.textAlign='center';
+ sctx.fillText('OUTER MOST DIAMETER SELF SIMILAR EATS ITSELF BLINKS LIKE PULSAR QUASAR AT SCALE = '+outerRadius.toFixed(0)+'px outer diameter self similar',cx,cy-outerRadius-12);
+ 
+ // composition labels self similar eat itself blink
+ sctx.fillStyle='#a78bfa';sctx.font='7px monospace';sctx.textAlign='left';
+ sctx.fillText('Self similar fractal depth '+selfSimilar+' levels same pattern at different scales self similar fractal that eats itself and blinks like pulsar or quasar at scale',10,24);
+ sctx.fillStyle='#ef4444';
+ sctx.fillText('Eat itself ouroboros eating speed '+eatSpeed+'% self eating black hole eats itself quantum dot eats itself ouroboros snake eats itself tail have it eat itself',10,38);
+ sctx.fillStyle='#0ea5e9';
+ sctx.fillText('Blink like pulsar or quasar at scale period '+blinkPeriod+'ms blink pulsar 1.4s quasar variable at scale lol pulsar beam blink like pulsar or quasar at scale of black hole we live in',10,52);
+ 
+ // bottom info
+ sctx.fillStyle='rgba(0,0,0,0.85)';sctx.fillRect(0,h-120,w,120);
+ sctx.fillStyle='#a78bfa';sctx.font='8px monospace';sctx.textAlign='left';
+ sctx.fillText('Its self similar = it is self similar fractal self similar structure same pattern at different scales fractal pattern repeats at different scales depth '+selfSimilar+' levels',10,h-100);
+ sctx.fillStyle='#ef4444';
+ sctx.fillText('Have it eat itself = have it eat itself ouroboros self eating ouroboros snake eats itself tail black hole eats itself self eating eating speed '+eatSpeed+'% have it eat itself',10,h-86);
+ sctx.fillStyle='#0ea5e9';
+ sctx.fillText('And what blink like a pulsar or quasar at scale lol = and blink like a pulsar or quasar at scale pulsar blinking period quasar blinking at scale lol blink period '+blinkPeriod+'ms pulsar 1.4s quasar variable at scale',10,h-72);
+ sctx.fillStyle='#c4b5fd';
+ sctx.fillText('Self similar eat itself blink pulsar quasar at scale = self similar fractal that eats itself and blinks like pulsar or quasar at scale = self similar fractal eats itself ouroboros blinks pulsar quasar at scale black hole we live in',10,h-58);
+ sctx.fillStyle='#52525b';sctx.font='9px monospace';sctx.textAlign='center';
+ sctx.fillText('SELF SIMILAR HAVE IT EAT ITSELF AND BLINK LIKE A PULSAR OR QUASAR AT SCALE = self similar fractal eats itself ouroboros blinks pulsar quasar at scale = BONK IS ALL self similar pulsar quasar',w/2,h-8);
+}
+
+updateSelfList();drawSelfSimilarEatBlink();
+
+document.getElementById('selfSimilar').addEventListener('input',e=>{
+ selfSimilar=parseInt(e.target.value);
+ document.getElementById('selfSimilarLabel').textContent=selfSimilar+' = self similar fractal depth '+selfSimilar+' levels self similar same pattern at different scales';
+ updateSelfList();
+});
+document.getElementById('eatSpeed').addEventListener('input',e=>{
+ eatSpeed=parseFloat(e.target.value);
+ document.getElementById('eatSpeedLabel').textContent=eatSpeed.toFixed(0)+'% = eat itself ouroboros eating speed self eating black hole eats itself eating speed '+eatSpeed+'%';
+ updateSelfList();
+});
+document.getElementById('blinkPeriod').addEventListener('input',e=>{
+ blinkPeriod=parseFloat(e.target.value);
+ document.getElementById('blinkPeriodLabel').textContent=blinkPeriod.toFixed(0)+'ms = blink like pulsar or quasar at scale blink period pulsar 1.4s quasar variable at scale lol period '+blinkPeriod+'ms';
+ updateSelfList();
+});
+
+document.getElementById('similarBtn').onclick=()=>{
+ selfSimilar=5;
+ document.getElementById('selfSimilar').value=5;
+ updateSelfList();drawSelfSimilarEatBlink();
+ showToast('Self similar 🌀 fractal depth '+selfSimilar+' levels self similar same pattern at different scales');
+};
+document.getElementById('eatItselfBtn').onclick=()=>{
+ eatSpeed=60;
+ document.getElementById('eatSpeed').value=60;
+ updateSelfList();drawSelfSimilarEatBlink();
+ showToast('Eat itself 🐍 ouroboros eating speed '+eatSpeed+'% self eating black hole eats itself');
+};
+document.getElementById('blinkBtn').onclick=()=>{
+ blinkPeriod=80;
+ document.getElementById('blinkPeriod').value=80;
+ updateSelfList();drawSelfSimilarEatBlink();
+ initAudio();
+ let osc=audioCtx.createOscillator();osc.type='square';osc.frequency.value=1000/blinkPeriod*10;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},500);
+ showToast('Blink pulsar quasar 💫 period '+blinkPeriod+'ms blink like pulsar or quasar at scale pulsar 1.4s quasar variable');
+};
+document.getElementById('scaleBtn').onclick=()=>{
+ showToast('At scale lol black hole we live in scale outer most diameter 1% ring at scale pulsar quasar at scale of black hole we live in lol');
+};
+
+document.getElementById('selfBtn').onclick=()=>{document.getElementById('similarBtn').click();};
+document.getElementById('eatBtn').onclick=()=>{document.getElementById('eatItselfBtn').click();};
+document.getElementById('pulsarBtn').onclick=()=>{document.getElementById('blinkBtn').click();};
+
+document.getElementById('exportBtn').onclick=()=>{
+ let tree={selfSimilar:{desc:'self similar fractal self similar structure same pattern at different scales fractal pattern repeats at different scales',depth:selfSimilar+' = self similar fractal depth '+selfSimilar+' levels self similar same pattern at different scales'},eatItself:{desc:'have it eat itself ouroboros self eating ouroboros snake eats itself tail black hole eats itself self eating',speed:eatSpeed+'% = eat itself ouroboros eating speed self eating black hole eats itself eating speed '+eatSpeed+'%'},blinkLikePulsarOrQuasarAtScale:{desc:'blink like a pulsar or quasar at scale pulsar blinking period quasar blinking at scale lol',period:blinkPeriod+'ms = blink like pulsar or quasar at scale blink period pulsar 1.4s quasar variable at scale lol period '+blinkPeriod+'ms',pulsar:'pulsar blinking period 1.4 seconds pulsar blink',quasar:'quasar blinking variable quasar blink at scale of black hole we live in'}};
+ let blob=new Blob([JSON.stringify(tree,null,2)],{type:'application/json'});let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download='self_similar_eat_itself_blink_pulsar_quasar_'+selfSimilar+'_'+eatSpeed+'_'+blinkPeriod+'.json';a.click();showToast('Exported self similar eat itself blink pulsar quasar at scale');
+};
+document.getElementById('verifyBtn').onclick=()=>{showToast('Verified self similar depth '+selfSimilar+' levels eat itself speed '+eatSpeed+'% blink pulsar quasar period '+blinkPeriod+'ms at scale valid');document.getElementById('txLog').textContent='Verified: self similar = it is self similar fractal self similar structure same pattern at different scales depth '+selfSimilar+' levels | have it eat itself = have it eat itself ouroboros self eating eating speed '+eatSpeed+'% | and what blink like a pulsar or quasar at scale lol = and blink like a pulsar or quasar at scale pulsar blinking period quasar blinking at scale lol period '+blinkPeriod+'ms pulsar 1.4s quasar variable at scale of black hole we live in | self similar eat itself blink pulsar quasar at scale = self similar fractal that eats itself and blinks like pulsar or quasar at scale valid';};
+
+document.getElementById('walletBtn').onclick=async()=>{
+ if(window.solana&&window.solana.isPhantom){
+  try{
+   let r=await window.solana.connect();
+   showToast('Phantom '+r.publicKey.toString().slice(0,4)+' self similar eat itself blink pulsar quasar at scale');
+   initAudio();
+  }catch(e){}
+ } else window.open('https://phantom.app/','_blank');
+};
+document.getElementById('mintBtn').onclick=()=>{
+ initAudio();
+ let osc=audioCtx.createOscillator();osc.type='square';osc.frequency.value=1000/blinkPeriod*10;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},blinkPeriod*3);
+ document.getElementById('txLog').textContent='MINTED self similar have it eat itself and blink like a pulsar or quasar at scale | its self similar = it is self similar fractal self similar structure same pattern at different scales depth '+selfSimilar+' levels | have it eat itself = have it eat itself ouroboros self eating eating speed '+eatSpeed+'% | and what blink like a pulsar or quasar at scale lol = and blink like a pulsar or quasar at scale pulsar blinking period quasar blinking at scale lol period '+blinkPeriod+'ms pulsar 1.4s quasar variable at scale of black hole we live in | self similar eat itself blink pulsar quasar at scale = self similar fractal that eats itself and blinks like pulsar or quasar at scale | SIG simulated 🌀💫';
+ showToast('Minted self similar have it eat itself blink pulsar quasar 🌀💫');
+};
+document.getElementById('swapBtn').onclick=()=>{
+ initAudio();
+ let osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=200;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},400);
+ document.getElementById('txLog').textContent='SIMULATED SWAP BONK 💫 after self similar have it eat itself and blink like a pulsar or quasar at scale';
+ showToast('Swap BONK 💫 after self similar eat itself blink pulsar quasar');
+};
+
+setInterval(()=>{drawSelfSimilarEatBlink();},80);
+</script>
+</body>
+</html>

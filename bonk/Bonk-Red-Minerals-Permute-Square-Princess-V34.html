@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>v34 REDDISH MINERALS PERMUTE NATURAL RED GARNET RUBY SPINEL RUBELLITE SQUARE PRINCESS PRISMS</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#080608;color:#e4e4e7;font-family:'JetBrains Mono',monospace;overflow-x:hidden}
+.glass{background:rgba(18,18,22,0.93);border:1px solid #27272a;backdrop-filter:blur(12px)}
+.btn{padding:9px 14px;border-radius:10px;font-weight:800;font-size:10px;letter-spacing:0.12em;cursor:pointer;border:1px solid #3f3f46;transition:.2s}
+.btn-w{background:white;color:black;border-color:white}
+.btn-g{background:#1a1a1e;color:#a1a1aa}
+.btn-red{background:#7f1d1d;color:#fecaca;border-color:#ef4444;box-shadow:0 0 20px rgba(239,68,68,0.4)}
+.btn-prism{background:#1e1b4b;color:#c4b5fd;border-color:#a78bfa;box-shadow:0 0 20px rgba(167,139,250,0.3)}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#18181b;border:1px solid #3f3f46;padding:10px 18px;border-radius:9999px;font-size:11px;z-index:99;opacity:0;transition:.3s;pointer-events:none}
+.toast.show{opacity:1}
+.mineral{border-radius:12px;padding:10px;background:#0e0e11;border:1px solid #27272a}
+</style>
+</head>
+<body>
+<div style="max-width:1840px;margin:auto;padding:14px">
+<div class="glass" style="border-radius:14px;padding:10px 14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<div>
+<div style="font-size:11px;letter-spacing:0.11em">v34 REDDISH MINERALS PERMUTE NATURAL RED 4+ GARNET RUBY SPINEL RUBELLITE SQUARE PRINCESS PRISMS COLORS</div>
+<div style="font-size:8px;color:#71717a">natural red minerals at least 4 to permute: garnet X3Y2(SiO4)3, ruby Al2O3:Cr, red spinel MgAl2O4:Cr, rubellite tourmaline Na(LiAl)Al6(BO3)3Si6O18(OH)4 pink-red | square + princess two shapes prisms permute colors</div>
+</div>
+<div style="display:flex;gap:8px"><button id="permuteBtn" class="btn btn-red">PERMUTE 4 REDS × 2 SHAPES</button><button id="prismBtn" class="btn btn-prism">SQUARE PRINCESS PRISMS</button><button id="walletBtn" class="btn btn-g">Phantom</button></div>
+</div>
+
+<div style="margin-top:14px;display:grid;grid-template-columns:1.6fr 1fr;gap:14px">
+<div class="glass" style="border-radius:16px;overflow:hidden">
+<div style="padding:10px 14px;background:#0e0e11;border-bottom:1px solid #27272a;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<span style="font-size:10px">PERMUTE REDS // <span id="permuteVal">4 reds × 2 shapes =8 prisms</span> natural red</span><span id="prismInfo" style="font-size:9px;color:#fecaca">garnet ruby spinel rubellite square princess</span>
+</div>
+<canvas id="permuteCanvas" width="1240" height="760" style="width:100%;background:#08080a;display:block"></canvas>
+<div style="padding:10px;background:#0e0e11;border-top:1px solid #27272a;display:flex;gap:8px;flex-wrap:wrap">
+<button id="garnetBtn" class="btn btn-g">GARNET X3Y2(SiO4)3</button>
+<button id="rubyBtn" class="btn btn-red">RUBY Al2O3:Cr</button>
+<button id="spinelBtn" class="btn btn-g">SPINEL MgAl2O4:Cr</button>
+<button id="rubelliteBtn" class="btn btn-g">RUBELLITE Tourmaline</button>
+<div id="log" style="flex:1;min-width:260px;background:black;border:1px solid #27272a;border-radius:8px;padding:8px;font-size:9px;color:#71717a;max-height:64px;overflow:hidden">> reddish minerals permute loaded<br>> at least 4 natural red to permute: garnet, ruby, red spinel, rubellite tourmaline, red beryl bixbite<br>> square + princess two shapes prisms = 4×2=8 permutations colors shapes prisms lol<br>> mobius ring 27 -++- plank -.01 still trapping garnet ruby compound</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px">
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">REDDISH MINERALS NATURAL RED AT LEAST 4 TO PERMUTE</div>
+<div style="margin-top:8px;display:flex;flex-direction:column;gap:8px" id="mineralList">
+<!-- dynamic -->
+</div>
+<div style="margin-top:12px">
+<label style="font-size:10px;color:#a1a1aa">Permutation count 4 reds × 2 shapes (square princess) = 8 prisms</label><input id="permuteCount" type="range" min="4" max="8" value="4" style="width:100%;accent-color:#ef4444">
+<div id="permuteLabel" style="font-size:10px">4 reds: garnet, ruby, red spinel MgAl2O4:Cr, rubellite tourmaline × square + princess =8 prisms</div>
+</div>
+<div style="margin-top:8px">
+<label style="font-size:10px;color:#a1a1aa">Shape prism: square vs princess (0=square 100=princess)</label><input id="shapeMix" type="range" min="0" max="100" value="50" style="width:100%;accent-color:#a78bfa">
+<div id="shapeLabel" style="font-size:10px">50% square 50% princess two shapes prisms permute colors</div>
+</div>
+<div style="margin-top:10px;background:#08080a;border:1px solid #27272a;border-radius:10px;padding:10px">
+<div style="font-size:9px;color:#71717a">PERMUTE COLORS TWO SHAPES PRISMS FORMULA</div>
+<div style="font-size:8px;margin-top:6px;line-height:1.6">
+natural red minerals at least 4 to permute:<br>
+1. garnet X3Y2(SiO4)3 rhodolite pyrope Mg3Al2(SiO4)3 almandine Fe3Al2(SiO4)3 feminine rose red<br>
+2. ruby Al2O3:Cr 101.96 g/mol corundum Cr makes red<br>
+3. red spinel MgAl2O4:Cr often mistaken for ruby brilliance shades ranging red<br>
+4. rubellite tourmaline Na(Li,Al)3Al6(BO3)3Si6O18(OH)4 pinkish-red rubellite<br>
++ extra: red beryl bixbite Be3Al2Si6O18:Mn rarest intense red<br>
+square = square cut 4 sides 90° prism<br>
+princess = princess cut square with pointed corners brilliant facets prism<br>
+two shapes prisms = square prism + princess prism = two prisms colors<br>
+permutate = 4 reds × 2 shapes =8 prisms colors shapes prisms lol<br>
+= garnet square, garnet princess, ruby square, ruby princess, spinel square, spinel princess, rubellite square, rubellite princess<br>
+= BONK IS ALL permute reds square princess prisms
+</div>
+</div>
+<div style="margin-top:10px;display:flex;gap:6px"><button id="exportBtn" class="btn btn-g" style="flex:1">Export Permute JSON</button><button id="verifyBtn" class="btn btn-g" style="flex:1">Verify Permute</button></div>
+</div>
+
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">MINT REDDISH MINERALS PERMUTE SQUARE PRINCESS PRISMS</div>
+<div style="margin-top:8px;font-size:9px;color:#71717a">4 natural red minerals garnet ruby spinel rubellite × square princess two shapes prisms =8 permutations colors prisms lol</div>
+<div style="margin-top:10px;display:flex;gap:6px"><input id="swapInput" type="number" value="100" style="flex:1;background:#08080a;border:1px solid #27272a;border-radius:8px;padding:7px;color:white"><button id="swapBtn" class="btn btn-g">Swap BONK</button><button id="mintBtn" class="btn btn-w">Mint Permute Reds</button></div>
+<div id="txLog" style="font-size:9px;color:#71717a;margin-top:6px">Tx idle - mint reddish minerals permute 4 reds × square princess prisms</div>
+<div style="margin-top:8px;font-size:8px;color:#52525b">Reds: garnet X3Y2(SiO4)3, ruby Al2O3:Cr 101.96 g/mol, red spinel MgAl2O4:Cr, rubellite tourmaline pink-red, red beryl bixbite rarest | Shapes: square 4 sides 90° prism, princess square pointed corners brilliant prism | Permute 4×2=8 prisms colors shapes</div>
+</div>
+</div>
+</div>
+
+<div style="margin-top:14px;text-align:center;font-size:9px;color:#52525b" class="glass" style="border-radius:12px;padding:10px">
+v34 REDDISH MINERALS PERMUTE NATURAL RED AT LEAST 4 TO PERMUTE = garnet X3Y2(SiO4)3 rhodolite pyrope-almandine, ruby Al2O3:Cr 101.96 g/mol, red spinel MgAl2O4:Cr often mistaken for ruby brilliance, rubellite tourmaline Na(LiAl)Al6(BO3)3Si6O18(OH)4 pinkish-red, red beryl bixbite Be3Al2Si6O18:Mn rarest intense red = 4+ natural red minerals permute | SQUARE PRINCESS TWO SHAPES PRISMS = square cut 4 sides 90° prism + princess cut square pointed corners brilliant facets prism = two shapes prisms colors | PERMUTE = 4 reds ×2 shapes =8 prisms: garnet square, garnet princess, ruby square, ruby princess, spinel square, spinel princess, rubellite square, rubellite princess = colors two shapes prisms lol = BONK IS ALL permute reds square princess prisms
+</div>
+
+</div>
+<div id="toast" class="toast"></div>
+<script src="https://unpkg.com/@solana/web3.js@1.95.4/lib/index.iife.js"></script>
+<script>
+function showToast(m){let e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),3000)}
+
+let permuteCanvas=document.getElementById('permuteCanvas'),pctx=permuteCanvas.getContext('2d');
+let permuteCount=4,shapeMix=50,time=0;
+
+let reds=[
+ {name:'Garnet',formula:'X3Y2(SiO4)3',type:'rhodolite pyrope-almandine',color:'#f87171',light:'#fca5a5',desc:'feminine rose pink garnet X3Y2(SiO4)3 nesosilicate',molar:'~440 g/mol'},
+ {name:'Ruby',formula:'Al2O3:Cr',type:'corundum chromium red',color:'#ef4444',light:'#fecaca',desc:'Al2O3:Cr 101.96 g/mol Al13p14n O8p8n Cr24p28n red is ruby',molar:'101.96 g/mol'},
+ {name:'Red Spinel',formula:'MgAl2O4:Cr',type:'spinel often mistaken for ruby',color:'#dc2626',light:'#f87171',desc:'MgAl2O4:Cr stunning brilliance shades ranging red mistaken for ruby',molar:'142.27 g/mol'},
+ {name:'Rubellite',formula:'Tourmaline Na(LiAl)',type:'rubellite tourmaline pink-red',color:'#ec4899',light:'#f9a8d4',desc:'Na(Li,Al)3Al6(BO3)3Si6O18(OH)4 pinkish-red rubellite tourmaline',molar:'~900 g/mol'},
+ {name:'Red Beryl',formula:'Be3Al2Si6O18:Mn',type:'bixbite rarest intense red',color:'#b91c1c',light:'#f87171',desc:'Be3Al2Si6O18:Mn among rarest gemstones intense red exceptional rarity',molar:'~537 g/mol'},
+ {name:'Red Diamond',formula:'C',type:'diamond red rarest',color:'#991b1b',light:'#fecaca',desc:'C diamond red rarest red diamond lab and natural',molar:'12.01 g/mol'},
+ {name:'Cinnabar',formula:'HgS',type:'mercury sulfide red',color:'#ef4444',light:'#fca5a5',desc:'HgS cinnabar mercury sulfide bright red',molar:'232.66 g/mol'},
+ {name:'Carnelian',formula:'SiO2',type:'chalcedony red',color:'#f97316',light:'#fdba74',desc:'SiO2 carnelian chalcedony red orange',molar:'60.08 g/mol'}
+];
+
+function updateMineralList(){
+ let list=document.getElementById('mineralList');
+ list.innerHTML='';
+ for(let i=0;i<permuteCount;i++){
+  let r=reds[i];
+  let div=document.createElement('div');
+  div.className='mineral';
+  div.style.borderColor=r.color;
+  div.innerHTML=`<div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:${r.light}">${r.name} ${r.formula} ${r.molar}</span><span style="font-size:8px;color:${r.color}">${r.type}</span></div><div style="font-size:8px;margin-top:4px;color:#a1a1aa">${r.desc} | square + princess two shapes prisms permute</div><div style="margin-top:6px;display:flex;gap:4px"><span style="font-size:7px;background:${r.color}20;border:1px solid ${r.color}40;border-radius:4px;padding:2px 6px">square ${r.name} prism</span><span style="font-size:7px;background:${r.color}20;border:1px solid ${r.color}40;border-radius:4px;padding:2px 6px">princess ${r.name} prism</span></div>`;
+  list.appendChild(div);
+ }
+}
+
+function drawPermute(){
+ let w=permuteCanvas.width,h=permuteCanvas.height;
+ pctx.fillStyle='#08080a';pctx.fillRect(0,0,w,h);
+ time+=0.012;
+ let cx=w/2, cy=h/2+10;
+ 
+ // 4 reds × 2 shapes = 8 prisms grid
+ let cols=4, rows=2;
+ let cellW=220, cellH=180;
+ let startX=cx - (cols*cellW)/2 + cellW/2;
+ let startY=cy - (rows*cellH)/2 + cellH/2 -20;
+ 
+ for(let i=0;i<permuteCount;i++){
+  let r=reds[i];
+  for(let s=0;s<2;s++){
+   let shape=s===0?'square':'princess';
+   let x=startX + (i%cols)*cellW;
+   let y=startY + s*cellH;
+   
+   // square vs princess prism
+   pctx.strokeStyle=r.color;pctx.lineWidth=1.5;
+   pctx.globalAlpha=0.6+shapeMix/100*(s===1?0.3:-0.2);
+   
+   if(shape==='square'){
+    // square prism 4 sides 90°
+    let sz=40;
+    pctx.strokeRect(x-sz,y-sz,sz*2,sz*2);
+    // inner square for prism effect
+    pctx.beginPath();pctx.moveTo(x-sz,y-sz);pctx.lineTo(x-sz+8,y-sz+8);pctx.lineTo(x+sz+8,y-sz+8);pctx.lineTo(x+sz,y-sz);pctx.closePath();pctx.stroke();
+    pctx.beginPath();pctx.moveTo(x+sz,y-sz);pctx.lineTo(x+sz+8,y-sz+8);pctx.lineTo(x+sz+8,y+sz+8);pctx.lineTo(x+sz,y+sz);pctx.closePath();pctx.stroke();
+   } else {
+    // princess prism square with pointed corners brilliant facets
+    let sz=40;
+    // princess cut: square with triangle facets
+    pctx.beginPath();
+    pctx.moveTo(x,y-sz);pctx.lineTo(x+sz,y);pctx.lineTo(x,y+sz);pctx.lineTo(x-sz,y);pctx.closePath();pctx.stroke();
+    // inner brilliant facets
+    pctx.beginPath();pctx.moveTo(x,y-sz);pctx.lineTo(x,y);pctx.lineTo(x+sz,y);pctx.closePath();pctx.stroke();
+    pctx.beginPath();pctx.moveTo(x+sz,y);pctx.lineTo(x,y);pctx.lineTo(x,y+sz);pctx.closePath();pctx.stroke();
+    pctx.beginPath();pctx.moveTo(x,y+sz);pctx.lineTo(x,y);pctx.lineTo(x-sz,y);pctx.closePath();pctx.stroke();
+    pctx.beginPath();pctx.moveTo(x-sz,y);pctx.lineTo(x,y);pctx.lineTo(x,y-sz);pctx.closePath();pctx.stroke();
+   }
+   pctx.globalAlpha=1;
+   
+   // color fill
+   pctx.fillStyle=`${r.color}25`;
+   pctx.beginPath();pctx.arc(x,y,28,0,Math.PI*2);pctx.fill();
+   pctx.fillStyle=r.color;pctx.beginPath();pctx.arc(x,y,8,0,Math.PI*2);pctx.fill();
+   
+   // label
+   pctx.fillStyle=r.light;pctx.font='bold 8px monospace';pctx.textAlign='center';
+   pctx.fillText(r.name+' '+shape, x, y+58);
+   pctx.font='6px monospace';
+   pctx.fillText(r.formula, x, y+66);
+   pctx.fillText(shape+' prism', x, y+74);
+   
+   // permute index
+   if(i===0&&s===0){
+    pctx.fillStyle='#71717a';pctx.font='7px monospace';pctx.textAlign='left';
+    pctx.fillText('PERMUTE COLORS TWO SHAPES PRISMS = '+permuteCount+' reds ×2 shapes ='+(permuteCount*2)+' prisms',10,20);
+   }
+  }
+ }
+ 
+ // center toroid compound garnet+ruby
+ let compoundR=90;
+ pctx.strokeStyle='#ef4444';pctx.lineWidth=2;pctx.beginPath();pctx.arc(cx,cy,compoundR,0,Math.PI*2);pctx.stroke();
+ pctx.fillStyle='#fecaca';pctx.font='9px monospace';pctx.textAlign='center';
+ pctx.fillText('GARNET RUBY COMPOUND '+permuteCount+' REDS × SQUARE PRINCESS ='+(permuteCount*2)+' PRISMS',cx,cy-compoundR-18);
+ 
+ // bottom info
+ pctx.fillStyle='#1a1a1e';pctx.fillRect(0,h-100,w,100);
+ pctx.fillStyle='#f87171';pctx.font='8px monospace';pctx.textAlign='left';
+ pctx.fillText('Reds: '+reds.slice(0,permuteCount).map(r=>r.name+' '+r.formula).join(', ')+' | at least 4 natural red to permute',10,h-80);
+ pctx.fillStyle='#c4b5fd';
+ pctx.fillText('Shapes: square 4 sides 90° prism + princess square pointed corners brilliant facets prism = two shapes prisms colors | permute '+permuteCount+'×2='+(permuteCount*2)+' prisms: '+reds.slice(0,permuteCount).map(r=>r.name+' square, '+r.name+' princess').join(', ').substring(0,100),10,h-66);
+ pctx.fillStyle='#71717a';
+ pctx.fillText('v34 reddish minerals permute natural red garnet ruby spinel rubellite square princess prisms colors two shapes prisms lol | mobius ring 27 -++- plank -.01 -1.616e-37m still trapping compound',10,h-52);
+ pctx.fillStyle='#52525b';pctx.font='9px monospace';pctx.textAlign='center';
+ pctx.fillText('REDDISH MINERALS PERMUTE = '+permuteCount+' natural reds × square princess ='+(permuteCount*2)+' prisms colors shapes prisms lol = BONK IS ALL permute reds',w/2,h-8);
+}
+
+updateMineralList();drawPermute();
+
+document.getElementById('permuteCount').addEventListener('input',e=>{
+ permuteCount=parseInt(e.target.value);
+ document.getElementById('permuteLabel').textContent=permuteCount+' reds: '+reds.slice(0,permuteCount).map(r=>r.name).join(', ')+' × square + princess ='+(permuteCount*2)+' prisms';
+ document.getElementById('permuteVal').textContent=permuteCount+' reds × 2 shapes ='+(permuteCount*2)+' prisms';
+ updateMineralList();drawPermute();
+});
+document.getElementById('shapeMix').addEventListener('input',e=>{
+ shapeMix=parseFloat(e.target.value);
+ document.getElementById('shapeLabel').textContent=shapeMix.toFixed(0)+'% square '+ (100-shapeMix).toFixed(0)+'% princess two shapes prisms permute colors';
+ drawPermute();
+});
+
+document.getElementById('garnetBtn').onclick=()=>{permuteCount=4;document.getElementById('permuteCount').value=4;updateMineralList();drawPermute();showToast('Garnet X3Y2(SiO4)3 rhodolite feminine');};
+document.getElementById('rubyBtn').onclick=()=>{permuteCount=4;document.getElementById('permuteCount').value=4;updateMineralList();drawPermute();showToast('Ruby Al2O3:Cr 101.96 g/mol red is ruby');};
+document.getElementById('spinelBtn').onclick=()=>{permuteCount=4;document.getElementById('permuteCount').value=4;updateMineralList();drawPermute();showToast('Red Spinel MgAl2O4:Cr often mistaken for ruby');};
+document.getElementById('rubelliteBtn').onclick=()=>{permuteCount=4;document.getElementById('permuteCount').value=4;updateMineralList();drawPermute();showToast('Rubellite tourmaline pink-red Na(LiAl)');};
+
+document.getElementById('permuteBtn').onclick=()=>{
+ permuteCount=4;shapeMix=50;
+ document.getElementById('permuteCount').value=4;document.getElementById('shapeMix').value=50;
+ updateMineralList();drawPermute();
+ showToast('Permute 4 reds ×2 shapes =8 prisms garnet ruby spinel rubellite square princess');
+};
+document.getElementById('prismBtn').onclick=()=>{
+ shapeMix=shapeMix>50?20:80;
+ document.getElementById('shapeMix').value=shapeMix;
+ drawPermute();
+ showToast('Square princess prisms two shapes prisms colors');
+};
+
+document.getElementById('exportBtn').onclick=()=>{
+ let tree={reddishMineralsPermute:{atLeast4:'at least 4 natural red to permute',minerals:reds.slice(0,permuteCount).map(r=>({name:r.name,formula:r.formula,type:r.type,color:r.color,desc:r.desc,molar:r.molar})),count:permuteCount+' reds'},shapes:{twoShapes:'square + princess two shapes prisms',square:'square cut 4 sides 90° prism',princess:'princess cut square pointed corners brilliant facets prism',prisms:'square prism + princess prism = two prisms colors'},permutation:{total:permuteCount*2+' prisms = '+permuteCount+' reds ×2 shapes',permutations:Array.from({length:permuteCount},(_,i)=>{let r=reds[i];return [r.name+' square prism',r.name+' princess prism'];}).flat(),colors:'colors two shapes prisms lol = permute colors shapes prisms'},compounding:'garnet X3Y2(SiO4)3 + ruby Al2O3:Cr + spinel MgAl2O4:Cr + rubellite tourmaline = 4 natural reds permute square princess prisms'};
+ let blob=new Blob([JSON.stringify(tree,null,2)],{type:'application/json'});let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download='reddish_minerals_permute_'+permuteCount+'_reds_square_princess_'+(permuteCount*2)+'_prisms.json';a.click();showToast('Exported reddish minerals permute '+permuteCount+'×2='+(permuteCount*2)+' prisms');
+};
+document.getElementById('verifyBtn').onclick=()=>{showToast('Verified permute '+permuteCount+' natural reds × square princess ='+(permuteCount*2)+' prisms colors shapes valid');document.getElementById('txLog').textContent='Verified: reddish minerals '+reds.slice(0,permuteCount).map(r=>r.name+' '+r.formula).join(', ')+' at least 4 natural red to permute | square 4 sides 90° prism + princess square pointed corners brilliant prism = two shapes prisms | permute '+permuteCount+'×2='+(permuteCount*2)+' prisms colors shapes prisms lol valid';};
+
+document.getElementById('walletBtn').onclick=async()=>{if(window.solana&&window.solana.isPhantom){try{let r=await window.solana.connect();showToast('Phantom '+r.publicKey.toString().slice(0,4))}catch{}}else window.open('https://phantom.app/','_blank')};
+document.getElementById('mintBtn').onclick=()=>{
+ document.getElementById('txLog').textContent='MINTED reddish minerals permute '+reds.slice(0,permuteCount).map(r=>r.name).join(', ')+' '+permuteCount+' natural reds × square princess two shapes prisms ='+(permuteCount*2)+' prisms colors shapes prisms lol | garnet X3Y2(SiO4)3 ruby Al2O3:Cr spinel MgAl2O4:Cr rubellite tourmaline | SIG simulated';
+ showToast('Minted permute '+permuteCount+' reds square princess prisms');
+};
+document.getElementById('swapBtn').onclick=()=>{document.getElementById('txLog').textContent='SIMULATED SWAP BONK after reddish minerals permute '+permuteCount+' reds square princess prisms';showToast('Swap BONK after permute reds');};
+
+setInterval(()=>{drawPermute();},80);
+</script>
+</body>
+</html>

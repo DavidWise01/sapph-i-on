@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>v59 0-PI QUBIT BUILD -UNUPTANIUM+n+UNUPTANIUM-n PROTECTED QUBIT</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#020208;color:#e4e4e7;font-family:'JetBrains Mono',monospace;overflow-x:hidden}
+.glass{background:rgba(10,10,20,0.96);border:1px solid #1e1e3a;backdrop-filter:blur(16px)}
+.btn{padding:10px 16px;border-radius:12px;font-weight:900;font-size:10px;letter-spacing:0.12em;cursor:pointer;border:2px solid #3f3f46;transition:.25s;text-transform:uppercase}
+.btn-w{background:white;color:black;border-color:white}
+.btn-g{background:#0a0a12;color:#a1a1aa;border-color:#1e1e3a}
+.btn-0pi{background:#000;color:#00ffff;border:2px solid #00ffff;box-shadow:0 0 20px rgba(0,255,255,0.6);font-family:'Orbitron',monospace}
+.btn-unup{background:#000;color:#ff00ff;border:2px solid #ff00ff;box-shadow:0 0 20px rgba(255,0,255,0.6);font-family:'Orbitron',monospace}
+.btn-protect{background:#000;color:#00ff88;border:2px solid #00ff88;box-shadow:0 0 20px rgba(0,255,136,0.6);font-family:'Orbitron',monospace}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#0a0a12;border:2px solid #00ffff;padding:12px 22px;border-radius:9999px;font-size:11px;z-index:99;opacity:0;transition:.3s;pointer-events:none;box-shadow:0 0 25px rgba(0,255,255,0.6);font-family:'Orbitron',monospace;color:#00ffff}
+.toast.show{opacity:1}
+.comp{border-radius:12px;padding:10px;background:rgba(10,10,20,0.92);border:1px solid #1e1e3a}
+</style>
+</head>
+<body>
+<div style="max-width:1900px;margin:auto;padding:14px">
+<div class="glass" style="border-radius:16px;padding:14px 18px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;border:2px solid #00ffff;box-shadow:0 0 40px rgba(0,255,255,0.25)">
+<div>
+<div style="font-size:13px;letter-spacing:0.14em;font-family:'Orbitron',monospace;color:#00ffff;text-shadow:0 0 12px rgba(0,255,255,0.9)">v59 0-PI QUBIT BUILD -UNUPTANIUM+n+UNUPTANIUM-n PROTECTED QUBIT WHAT IS THAT ONE</div>
+<div style="font-size:8px;color:#7dd3fc">lets build 0-pi what is that one but i was thinking of -Unuptanioum+n+unuptanium-n = 0-pi protected qubit doubly degenerate 0 and pi wells -Unuptanium +n + unuptanium -n = - + charge islands protected</div>
+</div>
+<div style="display:flex;gap:8px"><button id="zeroPiBtn" class="btn btn-0pi">0-PI WHAT IS THAT</button><button id="unupBtn" class="btn btn-unup">-UNUPTANIUM+n+UNUPTANIUM-n</button><button id="protectBtn" class="btn btn-protect">PROTECTED QUBIT</button></div>
+</div>
+
+<div style="margin-top:14px;display:grid;grid-template-columns:1.7fr 1fr;gap:14px">
+<div class="glass" style="border-radius:18px;overflow:hidden;border:2px solid #ff00ff;box-shadow:0 0 40px rgba(255,0,255,0.25)">
+<div style="padding:12px 16px;background:#0a0a12;border-bottom:2px solid #00ffff;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<span style="font-size:11px;font-family:'Orbitron',monospace;color:#00ffff;text-shadow:0 0 8px rgba(0,255,255,0.7)">0-PI BUILD // <span id="zeroPiVal">0-pi protected qubit</span> <span id="unupVal">-Unuptanium+n+Unuptanium-n</span></span><span id="protectInfo" style="font-size:9px;color:#00ff88;font-family:'Orbitron',monospace">PROTECTED 0-PI - +</span>
+</div>
+<canvas id="zeroPiCanvas" width="1280" height="800" style="width:100%;background:#020208;display:block"></canvas>
+<div style="padding:12px;background:#0a0a12;border-top:2px solid #00ff88;display:flex;gap:8px;flex-wrap:wrap">
+<button id="whatIsBtn" class="btn btn-0pi">WHAT IS 0-PI</button>
+<button id="unupBuildBtn" class="btn btn-unup">BUILD -UNUPTANIUM+n</button>
+<button id="protectBuildBtn" class="btn btn-protect">PROTECTED 0 AND PI WELLS</button>
+<button id="assembleBtn" class="btn btn-w">ASSEMBLE 0-PI DONT RUN</button>
+<div id="log" style="flex:1;min-width:280px;background:black;border:2px solid #ff00ff;border-radius:10px;padding:10px;font-size:9px;color:#e9d5ff;max-height:90px;overflow-y:auto;font-family:'Orbitron',monospace">> v59 0-pi qubit build -Unuptanium+n+unuptanium-n loaded<br>> 0-pi what is that one = 0-pi protected superconducting qubit doubly degenerate ground state protected from charge and flux noise<br>> -Unuptanioum+n+unuptanium-n = -Unuptanium +n + unuptanium -n = your idea - + charge islands -Unuptanium +n + unuptanium -n<br>> 0-pi = 2 JJs + 2 superinductors + 2 capacitors loop 0 and pi wells protected qubit<br>> protected = protected from both charge noise and flux noise simultaneously 0-pi symmetry</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px">
+<div class="glass" style="border-radius:18px;padding:16px;border:2px solid #ff00ff;box-shadow:0 0 25px rgba(255,0,255,0.2)">
+<div style="font-size:12px;font-family:'Orbitron',monospace;color:#ff00ff;text-shadow:0 0 10px rgba(255,0,255,0.7)">0-PI WHAT IS THAT ONE -UNUPTANIUM+n+UNUPTANIUM-n</div>
+<div style="margin-top:10px;display:flex;flex-direction:column;gap:10px" id="zeroPiList"></div>
+<div style="margin-top:14px">
+<label style="font-size:10px;color:#00ffff;font-family:'Orbitron',monospace">EJ/EC ratio 0-pi large EJ/EC and EL/EC small protected</label><input id="ejec" type="range" min="20" max="200" value="100" style="width:100%;accent-color:#00ffff">
+<div id="ejecLabel" style="font-size:10px;color:#7dd3fc">100 = EJ/EC =100 0-pi regime large EJ/EC and large EL/EC? Actually EL small superinductor</div>
+</div>
+<div style="margin-top:10px">
+<label style="font-size:10px;color:#ff00ff;font-family:'Orbitron',monospace">Superinductor EL = Phi0^2 / (4 pi^2 L) large L superinductor</label><input id="superind" type="range" min="10" max="100" value="60" style="width:100%;accent-color:#ff00ff">
+<div id="superindLabel" style="font-size:10px;color:#e9d5ff">60 = superinductor EL large L = Josephson junction array superinductor</div>
+</div>
+<div style="margin-top:10px">
+<label style="font-size:10px;color:#00ff88;font-family:'Orbitron',monospace">-Unuptanium+n+Unuptanium-n charge islands - + protected</label><input id="unupCharge" type="range" min="0" max="100" value="50" style="width:100%;accent-color:#00ff88">
+<div id="unupChargeLabel" style="font-size:10px;color:#6ee7b7">50 = -Unuptanium +n + Unuptanium -n = - + charge islands -Unuptanium +n + unuptanium -n</div>
+</div>
+<div style="margin-top:12px;display:flex;gap:8px"><button id="exportBtn" class="btn btn-g" style="flex:1">Export 0-Pi JSON</button><button id="verifyBtn" class="btn btn-g" style="flex:1">Verify 0-Pi</button></div>
+</div>
+
+<div class="glass" style="border-radius:18px;padding:16px;border:2px solid #00ff88;box-shadow:0 0 25px rgba(0,255,136,0.2)">
+<div style="font-size:11px;font-family:'Orbitron',monospace;color:#00ff88;text-shadow:0 0 8px rgba(0,255,136,0.7)">MINT 0-PI -UNUPTANIUM+n+UNUPTANIUM-n PROTECTED</div>
+<div style="margin-top:8px;font-size:9px;color:#e9d5ff;font-family:'Orbitron',monospace">0-pi protected qubit what is that one: 0-pi is protected superconducting qubit with 0 and pi wells doubly degenerate ground state protected from charge noise and flux noise simultaneously via 0-pi symmetry 2 JJs + 2 superinductors + 2 capacitors loop -Unuptanium+n+unuptanium-n = -Unuptanium +n + unuptanium -n = - + charge islands protected qubit your idea maps to 0-pi - + charge islands</div>
+<div style="margin-top:12px;display:flex;gap:8px"><input id="swapInput" type="number" value="100" style="flex:1;background:#020208;border:2px solid #ff00ff;border-radius:10px;padding:8px;color:#ff00ff;font-family:'Orbitron',monospace"><button id="swapBtn" class="btn btn-g">Swap BONK</button><button id="mintBtn" class="btn btn-w">Mint 0-Pi</button></div>
+<div id="txLog" style="font-size:9px;color:#00ffff;margin-top:8px;font-family:'Orbitron',monospace">Tx idle - mint 0-pi -Unuptanium+n+unuptanium-n protected qubit</div>
+</div>
+</div>
+</div>
+
+</div>
+<div id="toast" class="toast"></div>
+<script src="https://unpkg.com/@solana/web3.js@1.95.4/lib/index.iife.js"></script>
+<script>
+function showToast(m){let e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),3500)}
+
+let zeroPiCanvas=document.getElementById('zeroPiCanvas'),zctx=zeroPiCanvas.getContext('2d');
+let ejec=100,superind=60,unupCharge=50,time=0;
+let audioCtx=null,gainNode=null;
+
+function initAudio(){
+ if(!audioCtx){
+  audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  gainNode=audioCtx.createGain();gainNode.gain.value=0.12;gainNode.connect(audioCtx.destination);
+ }
+ if(audioCtx.state==='suspended') audioCtx.resume();
+}
+function updateZeroPiList(){
+ let list=document.getElementById('zeroPiList');list.innerHTML='';
+ let items=[
+  {name:'0-Pi What Is That One Protected Qubit EJ/EC='+ejec+' Doubly Degenerate',desc:'0-pi is protected superconducting qubit with 0 and pi wells doubly degenerate ground state protected from charge and flux noise',color:'#00ffff',detail:'0-pi = 0 and pi wells = two degenerate minima at 0 and pi protected from both charge and flux noise simultaneously via 0-pi symmetry'},
+  {name:'-Unuptanium+n+Unuptanium-n Your Idea - + Charge Islands '+unupCharge,desc:'-Unuptanium +n + unuptanium -n = - + charge islands -Unuptanium +n + unuptanium -n your idea maps to 0-pi - +',color:'#ff00ff',detail:'-Unuptanium+n+Unuptanium-n = - Unuptanium +n + unuptanium -n = - + charge islands protected qubit - + charge islands'},
+  {name:'2 JJs + 2 Superinductors + 2 Capacitors Loop Superinductor EL='+superind,desc:'0-pi circuit: 2 Josephson junctions + 2 superinductors large L + 2 large capacitors loop',color:'#00ff88',detail:'2 JJs Al-AlOx-Al + 2 superinductors EL=Phi0^2/(4 pi^2 L) large L Josephson junction array superinductor + 2 capacitors'},
+  {name:'Protected From Charge And Flux Noise Simultaneously 0-Pi Symmetry',desc:'protected qubit protected from both charge noise and flux noise simultaneously via 0-pi symmetry disjoint wavefunctions',color:'#ffff00',detail:'protected = wavefunctions disjoint in 0 well and pi well exponentially suppressed matrix elements protected from charge and flux noise simultaneously'}
+ ];
+ items.forEach(it=>{
+  let div=document.createElement('div');div.className='comp';div.style.borderColor=it.color;div.style.boxShadow='0 0 12px '+it.color+'30';
+  div.innerHTML=`<div style="font-size:10px;color:${it.color};font-family:'Orbitron',monospace;text-shadow:0 0 6px ${it.color}80">${it.name}</div><div style="font-size:7px;color:#e9d5ff;margin-top:4px">${it.desc} | ${it.detail}</div>`;
+  list.appendChild(div);
+ });
+ document.getElementById('zeroPiVal').textContent='0-pi protected qubit EJ/EC='+ejec+' doubly degenerate 0 and pi wells';
+ document.getElementById('unupVal').textContent='-Unuptanium+n+Unuptanium-n = - + charge islands '+unupCharge;
+}
+function drawZeroPi(){
+ let w=zeroPiCanvas.width,h=zeroPiCanvas.height;
+ zctx.fillStyle='#020208';zctx.fillRect(0,0,w,h);
+ time+=0.02;
+ let cx=w/2, cy=h/2+20;
+ 
+ // ground plane
+ zctx.fillStyle='#0a0a1a';zctx.fillRect(0,0,w,h);
+ zctx.strokeStyle='#1e1e3a';zctx.lineWidth=0.5;zctx.globalAlpha=0.25;
+ for(let x=0;x<w;x+=20){ zctx.beginPath();zctx.moveTo(x,0);zctx.lineTo(x,h);zctx.stroke(); }
+ for(let y=0;y<h;y+=20){ zctx.beginPath();zctx.moveTo(0,y);zctx.lineTo(w,y);zctx.stroke(); }
+ zctx.globalAlpha=1;
+ 
+ // 0-pi circuit layout: loop with 2 JJs + 2 superinductors + 2 capacitors
+ // Layout: top capacitor, left JJ, bottom superinductor, right superinductor, etc. Actually 0-pi is symmetric loop
+ // Simplified: diamond shape loop
+ let loopSize=140;
+ let topX=cx, topY=cy-loopSize;
+ let rightX=cx+loopSize, rightY=cy;
+ let bottomX=cx, bottomY=cy+loopSize;
+ let leftX=cx-loopSize, leftY=cy;
+ 
+ // capacitors at top and bottom? In 0-pi, capacitors shunt the JJs
+ // top capacitor (large C)
+ let capW=80, capH=20;
+ zctx.fillStyle='#00ffff';zctx.shadowColor='#00ffff';zctx.shadowBlur=15;
+ zctx.fillRect(topX-capW/2,topY-capH/2,capW,capH);
+ zctx.shadowBlur=0;
+ zctx.strokeStyle='white';zctx.lineWidth=1;zctx.strokeRect(topX-capW/2,topY-capH/2,capW,capH);
+ zctx.fillStyle='black';zctx.font='bold 7px Orbitron';zctx.textAlign='center';zctx.fillText('C',topX,topY+2);
+ zctx.fillStyle='#00ffff';zctx.font='6px Orbitron';zctx.textAlign='center';
+ zctx.fillText('C large shunt',topX,topY-capH/2-8);
+ 
+ // bottom capacitor
+ zctx.fillStyle='#00ffff';zctx.shadowColor='#00ffff';zctx.shadowBlur=15;
+ zctx.fillRect(bottomX-capW/2,bottomY-capH/2,capW,capH);
+ zctx.shadowBlur=0;
+ zctx.strokeStyle='white';zctx.lineWidth=1;zctx.strokeRect(bottomX-capW/2,bottomY-capH/2,capW,capH);
+ zctx.fillStyle='black';zctx.font='bold 7px Orbitron';zctx.textAlign='center';zctx.fillText('C',bottomX,bottomY+2);
+ zctx.fillStyle='#00ffff';zctx.font='6px Orbitron';
+ zctx.fillText('C large shunt',bottomX,bottomY+capH/2+12);
+ 
+ // Josephson junctions left and right
+ let jjSize=16;
+ // left JJ
+ zctx.fillStyle='#ff00ff';zctx.shadowColor='#ff00ff';zctx.shadowBlur=18;
+ zctx.fillRect(leftX-jjSize/2,leftY-jjSize/2,jjSize,jjSize);
+ zctx.shadowBlur=0;
+ zctx.strokeStyle='white';zctx.lineWidth=1.5;zctx.strokeRect(leftX-jjSize/2,leftY-jjSize/2,jjSize,jjSize);
+ zctx.strokeStyle='black';zctx.lineWidth=1;zctx.beginPath();zctx.moveTo(leftX-jjSize/2,leftY);zctx.lineTo(leftX+jjSize/2,leftY);zctx.stroke();
+ zctx.beginPath();zctx.moveTo(leftX,leftY-jjSize/2);zctx.lineTo(leftX,leftY+jjSize/2);zctx.stroke();
+ zctx.fillStyle='white';zctx.font='6px Orbitron';zctx.textAlign='center';zctx.fillText('JJ1',leftX,leftY+jjSize/2+12);
+ zctx.fillStyle='#ff00ff';zctx.font='6px Orbitron';zctx.fillText('EJ='+ejec,leftX,leftY+jjSize/2+20);
+ 
+ // right JJ
+ zctx.fillStyle='#ff00ff';zctx.shadowColor='#ff00ff';zctx.shadowBlur=18;
+ zctx.fillRect(rightX-jjSize/2,rightY-jjSize/2,jjSize,jjSize);
+ zctx.shadowBlur=0;
+ zctx.strokeStyle='white';zctx.lineWidth=1.5;zctx.strokeRect(rightX-jjSize/2,rightY-jjSize/2,jjSize,jjSize);
+ zctx.strokeStyle='black';zctx.lineWidth=1;zctx.beginPath();zctx.moveTo(rightX-jjSize/2,rightY);zctx.lineTo(rightX+jjSize/2,rightY);zctx.stroke();
+ zctx.beginPath();zctx.moveTo(rightX,rightY-jjSize/2);zctx.lineTo(rightX,rightY+jjSize/2);zctx.stroke();
+ zctx.fillStyle='white';zctx.font='6px Orbitron';zctx.textAlign='center';zctx.fillText('JJ2',rightX,rightY+jjSize/2+12);
+ zctx.fillStyle='#ff00ff';zctx.font='6px Orbitron';zctx.fillText('EJ='+ejec,rightX,rightY+jjSize/2+20);
+ 
+ // superinductors: top-left to top, top-right to top? Actually 0-pi has superinductors in series with JJs forming loop
+ // Draw superinductors as coils: left top wire is superinductor EL, right top wire is superinductor EL
+ // superinductor = Josephson junction array large L
+ // top-left superinductor
+ zctx.strokeStyle='#00ff88';zctx.lineWidth=2.5;zctx.shadowColor='#00ff88';zctx.shadowBlur=12;
+ // coil drawing
+ let coilTurns=8;
+ for(let t=0;t<coilTurns;t++){
+  let prog=t/coilTurns;
+  let x1=leftX + (topX-leftX)*prog;
+  let y1=leftY + (topY-leftY)*prog + Math.sin(prog*Math.PI*coilTurns)*8;
+  let x2=leftX + (topX-leftX)*(prog+1/coilTurns);
+  let y2=leftY + (topY-leftY)*(prog+1/coilTurns) + Math.sin((prog+1/coilTurns)*Math.PI*coilTurns)*8;
+  zctx.beginPath();zctx.moveTo(x1,y1);zctx.lineTo(x2,y2);zctx.stroke();
+ }
+ zctx.shadowBlur=0;
+ zctx.fillStyle='#00ff88';zctx.font='6px Orbitron';zctx.textAlign='center';
+ zctx.fillText('L superinductor EL='+superind, (leftX+topX)/2-10, (leftY+topY)/2-10);
+ 
+ // top-right superinductor
+ zctx.strokeStyle='#00ff88';zctx.lineWidth=2.5;zctx.shadowColor='#00ff88';zctx.shadowBlur=12;
+ for(let t=0;t<coilTurns;t++){
+  let prog=t/coilTurns;
+  let x1=rightX + (topX-rightX)*prog;
+  let y1=rightY + (topY-rightY)*prog + Math.sin(prog*Math.PI*coilTurns)*8;
+  let x2=rightX + (topX-rightX)*(prog+1/coilTurns);
+  let y2=rightY + (topY-rightY)*(prog+1/coilTurns) + Math.sin((prog+1/coilTurns)*Math.PI*coilTurns)*8;
+  zctx.beginPath();zctx.moveTo(x1,y1);zctx.lineTo(x2,y2);zctx.stroke();
+ }
+ zctx.shadowBlur=0;
+ zctx.fillStyle='#00ff88';zctx.font='6px Orbitron';
+ zctx.fillText('L superinductor EL='+superind, (rightX+topX)/2+10, (rightY+topY)/2-10);
+ 
+ // bottom-left superinductor
+ zctx.strokeStyle='#00ff88';zctx.lineWidth=2.5;zctx.shadowColor='#00ff88';zctx.shadowBlur=12;
+ for(let t=0;t<coilTurns;t++){
+  let prog=t/coilTurns;
+  let x1=leftX + (bottomX-leftX)*prog;
+  let y1=leftY + (bottomY-leftY)*prog + Math.sin(prog*Math.PI*coilTurns)*8;
+  let x2=leftX + (bottomX-leftX)*(prog+1/coilTurns);
+  let y2=leftY + (bottomY-leftY)*(prog+1/coilTurns) + Math.sin((prog+1/coilTurns)*Math.PI*coilTurns)*8;
+  zctx.beginPath();zctx.moveTo(x1,y1);zctx.lineTo(x2,y2);zctx.stroke();
+ }
+ zctx.shadowBlur=0;
+ 
+ // bottom-right superinductor
+ zctx.strokeStyle='#00ff88';zctx.lineWidth=2.5;zctx.shadowColor='#00ff88';zctx.shadowBlur=12;
+ for(let t=0;t<coilTurns;t++){
+  let prog=t/coilTurns;
+  let x1=rightX + (bottomX-rightX)*prog;
+  let y1=rightY + (bottomY-rightY)*prog + Math.sin(prog*Math.PI*coilTurns)*8;
+  let x2=rightX + (bottomX-rightX)*(prog+1/coilTurns);
+  let y2=rightY + (bottomY-rightY)*(prog+1/coilTurns) + Math.sin((prog+1/coilTurns)*Math.PI*coilTurns)*8;
+  zctx.beginPath();zctx.moveTo(x1,y1);zctx.lineTo(x2,y2);zctx.stroke();
+ }
+ zctx.shadowBlur=0;
+ zctx.fillStyle='#00ff88';zctx.font='6px Orbitron';
+ zctx.fillText('EL=Phi0^2/(4pi^2 L) large L',cx, bottomY+20);
+ 
+ // -Unuptanium+n+unuptanium-n islands: - + charge islands protected
+ // Left island -Unuptanium +n
+ let leftIslandX=leftX-60, leftIslandY=leftY;
+ zctx.fillStyle=unupCharge>50?'#ff0040':'#00ffff';
+ zctx.shadowColor=zctx.fillStyle;zctx.shadowBlur=15;
+ zctx.beginPath();zctx.arc(leftIslandX,leftIslandY,22,0,Math.PI*2);zctx.fill();zctx.shadowBlur=0;
+ zctx.fillStyle='white';zctx.font='bold 8px Orbitron';zctx.textAlign='center';
+ zctx.fillText('-Unup',leftIslandX,leftIslandY-4);zctx.font='6px Orbitron';zctx.fillText('+n',leftIslandX,leftIslandY+6);
+ zctx.fillStyle='#ff0040';zctx.font='6px Orbitron';zctx.fillText('-Unuptanium +n - +',leftIslandX,leftIslandY-30);
+ 
+ // Right island +unuptanium -n
+ let rightIslandX=rightX+60, rightIslandY=rightY;
+ zctx.fillStyle=unupCharge>50?'#00ffff':'#ff0040';
+ zctx.shadowColor=zctx.fillStyle;zctx.shadowBlur=15;
+ zctx.beginPath();zctx.arc(rightIslandX,rightIslandY,22,0,Math.PI*2);zctx.fill();zctx.shadowBlur=0;
+ zctx.fillStyle='white';zctx.font='bold 8px Orbitron';zctx.textAlign='center';
+ zctx.fillText('+Unup',rightIslandX,rightIslandY-4);zctx.font='6px Orbitron';zctx.fillText('-n',rightIslandX,rightIslandY+6);
+ zctx.fillStyle='#00ffff';zctx.font='6px Orbitron';zctx.fillText('+Unuptanium -n + -',rightIslandX,rightIslandY-30);
+ 
+ // coupling lines from islands to loop - + charge
+ zctx.strokeStyle='#ff0040';zctx.lineWidth=1.5;zctx.setLineDash([4,4]);
+ zctx.beginPath();zctx.moveTo(leftIslandX+22,leftIslandY);zctx.lineTo(leftX-jjSize/2,leftY);zctx.stroke();
+ zctx.strokeStyle='#00ffff';zctx.beginPath();zctx.moveTo(rightIslandX-22,rightIslandY);zctx.lineTo(rightX+jjSize/2,rightY);zctx.stroke();
+ zctx.setLineDash([]);
+ 
+ // 0 and pi wells potential energy
+ let wellX=cx+220, wellY=cy;
+ zctx.fillStyle='rgba(0,0,0,0.8)';zctx.fillRect(wellX-100,wellY-80,200,160);
+ zctx.strokeStyle='#00ff88';zctx.lineWidth=2;
+ // double well potential: 0 and pi minima
+ zctx.beginPath();
+ for(let x=-80;x<=80;x++){
+  let phi=x/80*Math.PI; // -pi to pi
+  let V = -ejec/50*Math.cos(phi) - ejec/50*Math.cos(2*phi) + superind/20*phi*phi; // simplified 0-pi potential
+  let px=wellX + x;
+  let py=wellY + V*20;
+  if(x==-80) zctx.moveTo(px,py); else zctx.lineTo(px,py);
+ }
+ zctx.stroke();
+ // mark 0 and pi wells
+ zctx.fillStyle='#00ffff';zctx.font='bold 8px Orbitron';zctx.textAlign='center';
+ zctx.fillText('0 well',wellX-40,wellY+50);zctx.fillText('pi well',wellX+40,wellY+50);
+ zctx.fillStyle='#00ff88';zctx.beginPath();zctx.arc(wellX-40,wellY+30,6,0,Math.PI*2);zctx.fill();
+ zctx.beginPath();zctx.arc(wellX+40,wellY+30,6,0,Math.PI*2);zctx.fill();
+ zctx.fillStyle='white';zctx.font='6px Orbitron';zctx.fillText('DOUBLY DEGENERATE GROUND STATE',wellX,wellY-60);
+ zctx.fillText('PROTECTED FROM CHARGE AND FLUX NOISE',wellX,wellY-50);
+ zctx.fillText('DISJOINT WAVEFUNCTIONS',wellX,wellY-40);
+ 
+ // info labels
+ zctx.fillStyle='rgba(0,0,0,0.85)';zctx.fillRect(10,10,520,95);
+ zctx.fillStyle='#00ffff';zctx.font='9px Orbitron';zctx.textAlign='left';
+ zctx.fillText('0-PI WHAT IS THAT ONE: protected superconducting qubit doubly degenerate ground state 0 and pi wells EJ/EC='+ejec,12,26);
+ zctx.fillStyle='#ff00ff';
+ zctx.fillText('-Unuptanium+n+Unuptanium-n = -Unuptanium +n + unuptanium -n = - + charge islands protected qubit your idea - +',12,40);
+ zctx.fillStyle='#00ff88';
+ zctx.fillText('2 JJs + 2 superinductors L large EL + 2 capacitors C loop superinductor EL=Phi0^2/(4pi^2 L) EL='+superind,12,54);
+ zctx.fillStyle='#ffff00';
+ zctx.fillText('Protected = wavefunctions disjoint in 0 well and pi well exponentially suppressed matrix elements protected from charge and flux',12,68);
+ zctx.fillStyle='#a1a1aa';
+ zctx.fillText('Hamiltonian H = -EJ cos(theta) -EJ cos(phi) + EL phi^2 + EC ... 0-pi symmetry protected from charge and flux noise simultaneously',12,82);
+ zctx.fillStyle='#ff0040';zctx.font='7px Orbitron';
+ zctx.fillText('-Unuptanium +n = - + left island | +Unuptanium -n = + - right island | - + charge islands protected qubit -Unuptanium+n+Unuptanium-n',12,96);
+ 
+ zctx.fillStyle='#00ff88';zctx.font='bold 8px Orbitron';zctx.textAlign='left';
+ zctx.fillText('BUILD DONT RUN: build visual dont simulate quantum state build only 0-pi protected qubit 0 and pi wells doubly degenerate',12,h-20);
+}
+
+updateZeroPiList();drawZeroPi();
+
+document.getElementById('ejec').addEventListener('input',e=>{
+ ejec=parseFloat(e.target.value);
+ document.getElementById('ejecLabel').textContent=ejec.toFixed(0)+' = EJ/EC ='+ejec.toFixed(0)+' 0-pi regime large EJ/EC and large EL/EC? Actually EL small superinductor EJ/EC='+ejec.toFixed(0);
+ updateZeroPiList();drawZeroPi();
+});
+document.getElementById('superind').addEventListener('input',e=>{
+ superind=parseFloat(e.target.value);
+ document.getElementById('superindLabel').textContent=superind.toFixed(0)+' = superinductor EL large L = Josephson junction array superinductor EL='+superind.toFixed(0);
+ updateZeroPiList();drawZeroPi();
+});
+document.getElementById('unupCharge').addEventListener('input',e=>{
+ unupCharge=parseFloat(e.target.value);
+ document.getElementById('unupChargeLabel').textContent=unupCharge.toFixed(0)+' = -Unuptanium +n + Unuptanium -n = - + charge islands -Unuptanium +n + unuptanium -n charge '+unupCharge.toFixed(0);
+ updateZeroPiList();drawZeroPi();
+});
+
+document.getElementById('whatIsBtn').onclick=()=>{
+ showToast('0-pi what is that one: protected superconducting qubit doubly degenerate ground state 0 and pi wells protected from charge and flux noise');
+};
+document.getElementById('unupBuildBtn').onclick=()=>{
+ unupCharge=50;document.getElementById('unupCharge').value=50;
+ updateZeroPiList();drawZeroPi();
+ showToast('-Unuptanium+n+Unuptanium-n = -Unuptanium +n + unuptanium -n = - + charge islands protected qubit');
+};
+document.getElementById('protectBuildBtn').onclick=()=>{
+ ejec=100;superind=60;
+ document.getElementById('ejec').value=100;document.getElementById('superind').value=60;
+ updateZeroPiList();drawZeroPi();
+ showToast('Protected 0 and pi wells doubly degenerate ground state protected from charge and flux noise simultaneously');
+};
+document.getElementById('assembleBtn').onclick=()=>{
+ updateZeroPiList();drawZeroPi();
+ initAudio();
+ let osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=220;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},800);
+ showToast('Assembled 0-pi dont run it just build it -Unuptanium+n+Unuptanium-n protected qubit');
+};
+
+document.getElementById('zeroPiBtn').onclick=()=>{document.getElementById('whatIsBtn').click();};
+document.getElementById('unupBtn').onclick=()=>{document.getElementById('unupBuildBtn').click();};
+document.getElementById('protectBtn').onclick=()=>{document.getElementById('protectBuildBtn').click();};
+
+document.getElementById('exportBtn').onclick=()=>{
+ let tree={zeroPi:{whatIs:'0-pi is protected superconducting qubit doubly degenerate ground state 0 and pi wells protected from charge noise and flux noise simultaneously via 0-pi symmetry',EJ_EC:ejec+' EJ/EC='+ejec+' 0-pi regime large EJ/EC',superinductor:'EL='+superind+' superinductor EL=Phi0^2/(4pi^2 L) large L Josephson junction array superinductor',circuit:'2 JJs Al-AlOx-Al + 2 superinductors L large EL + 2 large capacitors C loop diamond shape loop 0-pi',protection:'protected from charge and flux noise simultaneously wavefunctions disjoint in 0 well and pi well exponentially suppressed matrix elements',hamiltonian:'H = -EJ cos(theta) -EJ cos(phi) + EL phi^2 + EC ... 0-pi symmetry protected',unuptanium:{desc:'-Unuptanium+n+Unuptanium-n = -Unuptanium +n + unuptanium -n = - + charge islands protected qubit',left:'-Unuptanium +n = - + left island -Unuptanium +n - + charge',right:'+Unuptanium -n = + - right island +Unuptanium -n + - charge',mapping:'your idea -Unuptanium+n+Unuptanium-n maps to 0-pi - + charge islands protected qubit - + charge islands protected'}}};
+ let blob=new Blob([JSON.stringify(tree,null,2)],{type:'application/json'});let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download='0_pi_build_Unuptanium_'+ejec+'_'+superind+'.json';a.click();showToast('Exported 0-pi -Unuptanium+n+Unuptanium-n protected qubit');
+};
+document.getElementById('verifyBtn').onclick=()=>{ showToast('Verified 0-pi -Unuptanium+n+Unuptanium-n EJ/EC='+ejec+' EL='+superind+' protected qubit');document.getElementById('txLog').textContent='Verified: 0-pi what is that one protected superconducting qubit doubly degenerate ground state 0 and pi wells protected from charge noise and flux noise simultaneously via 0-pi symmetry EJ/EC='+ejec+' | -Unuptanium+n+Unuptanium-n = -Unuptanium +n + unuptanium -n = - + charge islands protected qubit your idea - + charge islands -Unuptanium +n + unuptanium -n | 2 JJs + 2 superinductors L large EL='+superind+' + 2 capacitors C loop EL=Phi0^2/(4pi^2 L) large L | Protected = wavefunctions disjoint in 0 well and pi well exponentially suppressed matrix elements protected from charge and flux noise simultaneously | Hamiltonian H = -EJ cos(theta) -EJ cos(phi) + EL phi^2 + EC ... 0-pi symmetry protected valid'; };
+
+document.getElementById('swapBtn').onclick=()=>{ showToast('Swap BONK after 0-pi -Unuptanium+n+Unuptanium-n'); };
+document.getElementById('mintBtn').onclick=()=>{
+ initAudio();
+ let osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=110+ejec;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},1000);
+ document.getElementById('txLog').textContent='MINTED 0-pi -Unuptanium+n+Unuptanium-n protected qubit | 0-pi what is that one protected superconducting qubit doubly degenerate ground state 0 and pi wells protected from charge and flux noise simultaneously via 0-pi symmetry EJ/EC='+ejec+' | -Unuptanium+n+Unuptanium-n = -Unuptanium +n + unuptanium -n = - + charge islands protected qubit your idea - + charge islands | 2 JJs + 2 superinductors L large EL='+superind+' + 2 capacitors C loop | Protected = wavefunctions disjoint in 0 well and pi well exponentially suppressed matrix elements protected from charge and flux noise simultaneously | Hamiltonian H = -EJ cos(theta) -EJ cos(phi) + EL phi^2 + EC ... 0-pi symmetry protected | DONT RUN IT JUST BUILD IT build visual dont simulate quantum state build only | SIG 0-pi protected -Unuptanium';
+ showToast('Minted 0-pi -Unuptanium+n+Unuptanium-n protected qubit');
+};
+
+setInterval(()=>{drawZeroPi();},80);
+</script>
+</body>
+</html>

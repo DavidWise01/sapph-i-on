@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>v56 ADD ALL 360 COLORS AND ONLY 6 TORROIDS MAKE IT .01% OF 10^-35</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#000000;color:#e4e4e7;font-family:'JetBrains Mono',monospace;overflow-x:hidden}
+.glass{background:rgba(8,8,14,0.96);border:1px solid #1a1a2e;backdrop-filter:blur(16px)}
+.btn{padding:10px 16px;border-radius:12px;font-weight:900;font-size:10px;letter-spacing:0.12em;cursor:pointer;border:2px solid #3f3f46;transition:.25s;text-transform:uppercase}
+.btn-w{background:white;color:black;border-color:white}
+.btn-g{background:#0a0a12;color:#a1a1aa;border-color:#1a1a2e}
+.btn-rainbow{background:#000;color:white;border:2px solid white;box-shadow:0 0 20px rgba(255,255,255,0.5);font-family:'Orbitron',monospace;background:linear-gradient(90deg,red,orange,yellow,green,blue,indigo,violet)}
+.btn-torro{background:#000;color:#00ffff;border:2px solid #00ffff;box-shadow:0 0 20px rgba(0,255,255,0.6);font-family:'Orbitron',monospace}
+.btn-planck{background:#000;color:#ff00ff;border:2px solid #ff00ff;box-shadow:0 0 20px rgba(255,0,255,0.6);font-family:'Orbitron',monospace}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#0a0a12;border:2px solid #ff00ff;padding:12px 22px;border-radius:9999px;font-size:11px;z-index:99;opacity:0;transition:.3s;pointer-events:none;box-shadow:0 0 25px rgba(255,0,255,0.6);font-family:'Orbitron',monospace;color:#ff00ff}
+.toast.show{opacity:1}
+.col{border-radius:12px;padding:10px;background:rgba(8,8,14,0.92);border:1px solid #1a1a2e}
+</style>
+</head>
+<body>
+<div style="max-width:1900px;margin:auto;padding:14px">
+<div class="glass" style="border-radius:16px;padding:14px 18px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;border:2px solid white;box-shadow:0 0 40px rgba(255,255,255,0.2);background:linear-gradient(90deg,rgba(255,0,0,0.1),rgba(255,255,0,0.1),rgba(0,255,0,0.1),rgba(0,255,255,0.1),rgba(0,0,255,0.1),rgba(255,0,255,0.1))">
+<div>
+<div style="font-size:13px;letter-spacing:0.14em;font-family:'Orbitron',monospace;color:white;text-shadow:0 0 12px rgba(255,255,255,0.9)">v56 ADD ALL 360 COLORS AND ONLY 6 TORROIDS MAKE IT .01% OF 10^-35 360 COLORS 6 TORROIDS .01% OF 10^-35</div>
+<div style="font-size:8px;color:#e4e4e7">add all 360 colors and only 6 torroids make it .01% of 10^-35 = 360 colors hue 0-360 all colors 6 torroids toroidal coils .01% of 10^-35 = 1e-39m Planck scale .01% of Planck</div>
+</div>
+<div style="display:flex;gap:8px"><button id="colorsBtn" class="btn btn-rainbow">360 COLORS</button><button id="torroBtn" class="btn btn-torro">6 TORROIDS</button><button id="planckBtn" class="btn btn-planck">.01% OF 10^-35</button></div>
+</div>
+
+<div style="margin-top:14px;display:grid;grid-template-columns:1.7fr 1fr;gap:14px">
+<div class="glass" style="border-radius:18px;overflow:hidden;border:2px solid #ff00ff;box-shadow:0 0 40px rgba(255,0,255,0.25)">
+<div style="padding:12px 16px;background:#0a0a12;border-bottom:2px solid white;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;background:linear-gradient(90deg,rgba(255,0,0,0.15),rgba(0,255,0,0.15),rgba(0,0,255,0.15))">
+<span style="font-size:11px;font-family:'Orbitron',monospace;color:white;text-shadow:0 0 8px rgba(255,255,255,0.7)">360 COLORS 6 TORROIDS // <span id="colorVal">360 colors hue 0-360</span> <span id="torroVal">6 torroids toroidal</span> <span id="planckVal">.01% of 10^-35 = 1e-39m</span></span><span id="colInfo" style="font-size:9px;color:#00ffff;font-family:'Orbitron',monospace">360 COLORS 6 TORROIDS .01% OF 10^-35</span>
+</div>
+<canvas id="colCanvas" width="1280" height="800" style="width:100%;background:#000000;display:block"></canvas>
+<div style="padding:12px;background:#0a0a12;border-top:2px solid #00ffff;display:flex;gap:8px;flex-wrap:wrap">
+<button id="rainbowBtn" class="btn btn-rainbow">360 COLORS HUE</button>
+<button id="sixTorroBtn" class="btn btn-torro">6 TORROIDS ONLY</button>
+<button id="point01Btn" class="btn btn-planck">.01% OF 10^-35 = 1e-39m</button>
+<button id="spinBtn" class="btn btn-g">SPIN 360</button>
+<div id="log" style="flex:1;min-width:280px;background:black;border:2px solid white;border-radius:10px;padding:10px;font-size:9px;color:white;max-height:90px;overflow-y:auto;font-family:'Orbitron',monospace">> v56 add all 360 colors and only 6 torroids make it .01% of 10^-35 loaded<br>> add all 360 colors = add all 360 colors hue 0-360 degrees all colors 360 colors<br>> and only 6 torroids = and only 6 torroids toroidal coils 6 toroids only<br>> make it .01% of 10^-35 = make it .01% of 10^-35 meters = .01% = 0.0001 = 1e-4 10^-35 * 1e-4 = 1e-39m Planck scale .01% of Planck<br>> .01% of 10^-35 = 1e-39m = 0.0001% of meter? No .01% of 10^-35m = 1e-39m extremely small Planck scale</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px">
+<div class="glass" style="border-radius:18px;padding:16px;border:2px solid white;box-shadow:0 0 25px rgba(255,255,255,0.2)">
+<div style="font-size:12px;font-family:'Orbitron',monospace;color:white;text-shadow:0 0 10px rgba(255,255,255,0.7)">360 COLORS 6 TORROIDS .01% OF 10^-35 UPGRADED</div>
+<div style="margin-top:10px;display:flex;flex-direction:column;gap:10px" id="colList"></div>
+<div style="margin-top:14px">
+<label style="font-size:10px;color:white;font-family:'Orbitron',monospace">360 colors hue 0-360 all colors rainbow</label><input id="hueShift" type="range" min="0" max="360" value="0" style="width:100%;accent-color:white">
+<div id="hueShiftLabel" style="font-size:10px;color:#e4e4e7">0 = 360 colors hue 0-360 all colors rainbow hue shift 0 degrees</div>
+</div>
+<div style="margin-top:10px">
+<label style="font-size:10px;color:#00ffff;font-family:'Orbitron',monospace">6 torroids toroidal coils count 6 torroids only</label><input id="torroCount" type="range" min="1" max="12" value="6" style="width:100%;accent-color:#00ffff">
+<div id="torroCountLabel" style="font-size:10px;color:#7dd3fc">6 = only 6 torroids toroidal coils 6 torroids only toroidal</div>
+</div>
+<div style="margin-top:10px">
+<label style="font-size:10px;color:#ff00ff;font-family:'Orbitron',monospace">.01% of 10^-35 scale .01% of 10^-35 = 1e-39m Planck</label><input id="planckScale" type="range" min="1" max="100" value="1" style="width:100%;accent-color:#ff00ff">
+<div id="planckScaleLabel" style="font-size:10px;color:#e9d5ff">1% = .01% of 10^-35 = 1e-39m = 0.01% of 10^-35m Planck scale extremely small</div>
+</div>
+<div style="margin-top:12px;display:flex;gap:8px"><button id="exportBtn" class="btn btn-g" style="flex:1">Export 360 JSON</button><button id="verifyBtn" class="btn btn-g" style="flex:1">Verify 360</button></div>
+</div>
+
+<div class="glass" style="border-radius:18px;padding:16px;border:2px solid #00ffff;box-shadow:0 0 25px rgba(0,255,255,0.2)">
+<div style="font-size:11px;font-family:'Orbitron',monospace;color:#00ffff;text-shadow:0 0 8px rgba(0,255,255,0.7)">MINT 360 COLORS 6 TORROIDS .01% OF 10^-35</div>
+<div style="margin-top:8px;font-size:9px;color:white;font-family:'Orbitron',monospace">add all 360 colors and only 6 torroids make it .01% of 10^-35 = 360 colors hue 0-360 all colors rainbow 6 torroids toroidal coils toroidal 6 only .01% of 10^-35 = 1e-39m Planck scale .01% of Planck length 1.616e-35m * .01% = 1.616e-39m extremely small</div>
+<div style="margin-top:12px;display:flex;gap:8px"><input id="swapInput" type="number" value="100" style="flex:1;background:#000;border:2px solid white;border-radius:10px;padding:8px;color:white;font-family:'Orbitron',monospace"><button id="swapBtn" class="btn btn-g">Swap BONK</button><button id="mintBtn" class="btn btn-w">Mint 360 6T</button></div>
+<div id="txLog" style="font-size:9px;color:#00ffff;margin-top:8px;font-family:'Orbitron',monospace">Tx idle - mint 360 colors 6 torroids .01% of 10^-35 = 1e-39m</div>
+</div>
+</div>
+</div>
+
+</div>
+<div id="toast" class="toast"></div>
+<script src="https://unpkg.com/@solana/web3.js@1.95.4/lib/index.iife.js"></script>
+<script>
+function showToast(m){let e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),3500)}
+
+let colCanvas=document.getElementById('colCanvas'),cctx=colCanvas.getContext('2d');
+let hueShift=0,torroCount=6,planckScale=1,time=0,spinAngle=0;
+let audioCtx=null,gainNode=null;
+let torroids=[];
+
+class Torroid{
+ constructor(idx,total){
+  this.idx=idx;this.total=total;
+  this.angle=(idx*360/total)*Math.PI/180;
+  this.radius=180;
+  this.hue=(idx*360/total + hueShift)%360;
+  this.toroidRadius=35;
+  this.tubeRadius=8;
+  this.spin=0;
+  this.scale=planckScale/100 * 0.0001; // .01% of 10^-35 = 1e-4 * 1e-35 = 1e-39
+ }
+ update(){
+  this.spin+=0.02;
+  this.angle+=0.005;
+  this.hue=(this.idx*360/this.total + hueShift + time*20)%360;
+  this.scale=planckScale/100 * 0.0001; // .01% of 10^-35
+ }
+}
+
+function initTorroids(){ torroids=[]; for(let i=0;i<torroCount;i++){ torroids.push(new Torroid(i,torroCount)); } }
+function initAudio(){
+ if(!audioCtx){
+  audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  gainNode=audioCtx.createGain();gainNode.gain.value=0.14;gainNode.connect(audioCtx.destination);
+ }
+ if(audioCtx.state==='suspended') audioCtx.resume();
+}
+function hslToHex(h,s,l){
+ let c=(1-Math.abs(2*l-1))*s;
+ let x=c*(1-Math.abs((h/60)%2-1));
+ let m=l-c/2;
+ let r=0,g=0,b=0;
+ if(0<=h&&h<60){r=c;g=x;b=0;}
+ else if(60<=h&&h<120){r=x;g=c;b=0;}
+ else if(120<=h&&h<180){r=0;g=c;b=x;}
+ else if(180<=h&&h<240){r=0;g=x;b=c;}
+ else if(240<=h&&h<300){r=x;g=0;b=c;}
+ else if(300<=h&&h<360){r=c;g=0;b=x;}
+ r=Math.round((r+m)*255);g=Math.round((g+m)*255);b=Math.round((b+m)*255);
+ return `rgb(${r},${g},${b})`;
+}
+function updateColList(){
+ let list=document.getElementById('colList');list.innerHTML='';
+ let items=[
+  {name:'360 Colors Hue 0-360 All Colors Rainbow Hue Shift '+hueShift,desc:'add all 360 colors hue 0-360 degrees all colors 360 colors rainbow',color:hslToHex(hueShift,1,0.5)},
+  {name:torroCount+' Torroids Toroidal Coils Only 6 Torroids',desc:'and only 6 torroids toroidal coils 6 toroids only toroidal coils',color:'#00ffff'},
+  {name:'.01% Of 10^-35 = '+(1e-35*planckScale/100*0.0001).toExponential(2)+'m Planck Scale Extremely Small',desc:'.01% of 10^-35 = 1e-39m = 0.01% of 10^-35m Planck scale extremely small .01% * 10^-35 = 1e-39m',color:'#ff00ff'},
+  {name:'All 360 Colors On 6 Torroids Each Torroid Different Hue 360/6=60 Degrees Apart',desc:'360 colors distributed across 6 torroids each torroid 60 degrees hue apart rainbow torroids',color:'white'}
+ ];
+ items.forEach(it=>{
+  let div=document.createElement('div');div.className='col';div.style.borderColor=it.color;div.style.boxShadow='0 0 15px '+it.color+'40';
+  div.innerHTML=`<div style="font-size:10px;color:${it.color};font-family:'Orbitron',monospace;text-shadow:0 0 6px ${it.color}90">${it.name}</div><div style="font-size:7px;color:#e4e4e7;margin-top:4px">${it.desc}</div>`;
+  list.appendChild(div);
+ });
+ document.getElementById('colorVal').textContent='360 colors hue shift '+hueShift+' rainbow';
+ document.getElementById('torroVal').textContent=torroCount+' torroids toroidal only 6';
+ document.getElementById('planckVal').textContent='.01% of 10^-35 = '+(1e-35*planckScale/100*0.0001).toExponential(2)+'m = 1e-39m';
+}
+function draw360(){
+ let w=colCanvas.width,h=colCanvas.height;
+ cctx.fillStyle='#000000';cctx.fillRect(0,0,w,h);
+ time+=0.02;spinAngle+=0.01;
+ let cx=w/2, cy=h/2+10;
+ // update torroids
+ torroids.forEach(t=>t.update());
+ // rainbow background hue 0-360 all colors
+ for(let i=0;i<360;i++){
+  let ang=(i*1)*Math.PI/180;
+  let col=hslToHex((i+hueShift)%360,1,0.5);
+  cctx.strokeStyle=col;cctx.lineWidth=1;cctx.globalAlpha=0.15;
+  cctx.beginPath();cctx.moveTo(cx,cy);cctx.lineTo(cx+Math.cos(ang)*400,cy+Math.sin(ang)*400);cctx.stroke();
+ }
+ cctx.globalAlpha=1;
+ // 6 torroids toroidal coils only 6 torroids
+ torroids.forEach(tor=>{
+  let x=cx+Math.cos(tor.angle)*tor.radius;
+  let y=cy+Math.sin(tor.angle)*tor.radius;
+  let hueColor=hslToHex(tor.hue,1,0.5);
+  // toroid: torus shape = donut
+  // draw toroid as ellipse with tube
+  cctx.strokeStyle=hueColor;cctx.lineWidth=3;cctx.shadowColor=hueColor;cctx.shadowBlur=18+planckScale/5;
+  // outer ring of toroid
+  cctx.beginPath();cctx.ellipse(x,y,tor.toroidRadius,tor.toroidRadius*0.7,tor.spin,0,Math.PI*2);cctx.stroke();
+  // inner tube rings of torroid to show 3D torus
+  for(let t=0;t<8;t++){
+   let tubeAng=(t*360/8)*Math.PI/180 + tor.spin*2;
+   let tx=x+Math.cos(tubeAng)*tor.toroidRadius;
+   let ty=y+Math.sin(tubeAng)*tor.toroidRadius*0.7;
+   cctx.fillStyle=hueColor;cctx.globalAlpha=0.6;
+   cctx.beginPath();cctx.arc(tx,ty,tor.tubeRadius,0,Math.PI*2);cctx.fill();
+   cctx.globalAlpha=1;
+  }
+  cctx.shadowBlur=0;
+  // toroid center core at Planck scale .01% of 10^-35
+  let planckSize=planckScale*0.3 + 2; // visual size scaled from .01% of 10^-35
+  cctx.fillStyle=hueColor;cctx.shadowColor=hueColor;cctx.shadowBlur=12;
+  cctx.beginPath();cctx.arc(x,y,planckSize,0,Math.PI*2);cctx.fill();cctx.shadowBlur=0;
+  cctx.fillStyle='black';cctx.font='bold 6px Orbitron';cctx.textAlign='center';cctx.fillText('T'+(tor.idx+1),x,y+2);
+  cctx.fillStyle=hueColor;cctx.font='6px Orbitron';cctx.fillText(hueColor,x,y+planckSize+10);
+  cctx.fillText((1e-35*planckScale/100*0.0001).toExponential(1)+'m .01% of 10^-35',x,y+planckSize+18);
+  // wire connecting torroids to center that is .01% of 10^-35
+  cctx.strokeStyle=hueColor;cctx.lineWidth=1;cctx.globalAlpha=0.4; cctx.setLineDash([2,2]);
+  cctx.beginPath();cctx.moveTo(x,y);cctx.lineTo(cx,cy);cctx.stroke();cctx.setLineDash([]);cctx.globalAlpha=1;
+ });
+ // center that is .01% of 10^-35 Planck scale extremely small
+ let centerScale=planckScale*0.5 + 5;
+ cctx.fillStyle='white';cctx.shadowColor='white';cctx.shadowBlur=25+planckScale;
+ cctx.beginPath();cctx.arc(cx,cy,centerScale,0,Math.PI*2);cctx.fill();cctx.shadowBlur=0;
+ cctx.strokeStyle='black';cctx.lineWidth=1;cctx.beginPath();cctx.arc(cx,cy,centerScale,0,Math.PI*2);cctx.stroke();
+ cctx.fillStyle='black';cctx.font='bold 8px Orbitron';cctx.textAlign='center';
+ cctx.fillText('.01%',cx,cy-2);cctx.font='6px Orbitron';cctx.fillText('10^-35',cx,cy+6);
+ cctx.fillStyle='white';cctx.font='6px Orbitron';
+ cctx.fillText('.01% of 10^-35 = '+(1e-35*planckScale/100*0.0001).toExponential(2)+'m = 1e-39m Planck',cx,cy+centerScale+14);
+ cctx.fillText('360 colors '+torroCount+' torroids only 6 torroids .01% of 10^-35',cx,cy+centerScale+22);
+ // 360 colors legend
+ for(let i=0;i<12;i++){
+  let hue=i*30;
+  let col=hslToHex((hue+hueShift)%360,1,0.5);
+  let lx=10+i*50;
+  cctx.fillStyle=col;cctx.fillRect(lx,20,40,12);
+  cctx.fillStyle='black';cctx.font='5px Orbitron';cctx.textAlign='center';cctx.fillText(hue+'°',lx+20,29);
+ }
+ // bottom info
+ cctx.fillStyle='rgba(0,0,0,0.92)';cctx.fillRect(0,h-100,w,100);
+ cctx.fillStyle='white';cctx.font='8px Orbitron';cctx.textAlign='left';
+ cctx.fillText('Add all 360 colors = add all 360 colors hue 0-360 degrees all colors 360 colors rainbow hue shift '+hueShift+'° all 360 colors',10,h-80);
+ cctx.fillStyle='#00ffff';
+ cctx.fillText('And only 6 torroids = and only 6 torroids toroidal coils 6 toroids only toroidal coils count '+torroCount+' torroids only 6 torroids',10,h-64);
+ cctx.fillStyle='#ff00ff';
+ cctx.fillText('Make it .01% of 10^-35 = make it .01% of 10^-35 meters = .01% = 0.0001 = 1e-4 10^-35 * 1e-4 = 1e-39m = '+(1e-35*planckScale/100*0.0001).toExponential(2)+'m Planck scale .01% of Planck extremely small',10,h-48);
+ cctx.fillStyle='#ffff00';
+ cctx.fillText('360 colors on 6 torroids each torroid different hue 360/6=60° apart hue '+(360/torroCount).toFixed(0)+'° apart rainbow torroids .01% of 10^-35 = 1e-39m',10,h-32);
+}
+initTorroids();updateColList();draw360();
+document.getElementById('hueShift').addEventListener('input',e=>{ hueShift=parseFloat(e.target.value);document.getElementById('hueShiftLabel').textContent=hueShift.toFixed(0)+' = 360 colors hue 0-360 all colors rainbow hue shift '+hueShift.toFixed(0)+' degrees all 360 colors';updateColList(); });
+document.getElementById('torroCount').addEventListener('input',e=>{ torroCount=parseInt(e.target.value);document.getElementById('torroCountLabel').textContent=torroCount+' = only '+torroCount+' torroids toroidal coils '+torroCount+' torroids only toroidal';initTorroids();updateColList(); });
+document.getElementById('planckScale').addEventListener('input',e=>{ planckScale=parseFloat(e.target.value);document.getElementById('planckScaleLabel').textContent=planckScale.toFixed(0)+'% = .01% of 10^-35 = '+(1e-35*planckScale/100*0.0001).toExponential(2)+'m = 1e-39m Planck scale extremely small';updateColList(); });
+document.getElementById('rainbowBtn').onclick=()=>{ hueShift=(hueShift+60)%360;document.getElementById('hueShift').value=hueShift;updateColList();draw360();showToast('360 colors hue 0-360 all colors rainbow hue shift '+hueShift+'°'); };
+document.getElementById('sixTorroBtn').onclick=()=>{ torroCount=6;document.getElementById('torroCount').value=6;initTorroids();updateColList();draw360();showToast('Only 6 torroids toroidal coils 6 toroids only'); };
+document.getElementById('point01Btn').onclick=()=>{ planckScale=1;document.getElementById('planckScale').value=1;updateColList();draw360();showToast('.01% of 10^-35 = '+(1e-35*planckScale/100*0.0001).toExponential(2)+'m = 1e-39m Planck scale'); };
+document.getElementById('spinBtn').onclick=()=>{ hueShift=(hueShift+30)%360;document.getElementById('hueShift').value=hueShift;updateColList();showToast('Spin 360 colors hue shift '+hueShift+'°'); };
+document.getElementById('colorsBtn').onclick=()=>{document.getElementById('rainbowBtn').click();};
+document.getElementById('torroBtn').onclick=()=>{document.getElementById('sixTorroBtn').click();};
+document.getElementById('planckBtn').onclick=()=>{document.getElementById('point01Btn').click();};
+document.getElementById('exportBtn').onclick=()=>{
+ let tree={colors360:{hueShift:hueShift+'° 360 colors hue 0-360 all colors',count:'360 colors hue 0-360 rainbow'},torroids:{count:torroCount+' only 6 torroids toroidal coils',type:'toroidal coils torus donut shape 6 torroids only',distribution:'360/6=60° hue apart each torroid different hue rainbow torroids'},planckScale:{scale:'.01% of 10^-35 = '+(1e-35*planckScale/100*0.0001).toExponential(2)+'m',formula:'.01% = 0.0001 = 1e-4 10^-35 * 1e-4 = 1e-39m Planck scale .01% of Planck extremely small'}};
+ let blob=new Blob([JSON.stringify(tree,null,2)],{type:'application/json'});let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download='360_colors_6_torroids_01_percent_10_minus_35.json';a.click();showToast('Exported 360 colors 6 torroids .01% of 10^-35');
+};
+document.getElementById('verifyBtn').onclick=()=>{ showToast('Verified 360 colors hue '+hueShift+'° '+torroCount+' torroids .01% of 10^-35 = '+(1e-35*planckScale/100*0.0001).toExponential(2)+'m');document.getElementById('txLog').textContent='Verified 360 colors hue 0-360 all colors rainbow hue shift '+hueShift+'° | only '+torroCount+' torroids toroidal coils '+torroCount+' torroids only toroidal | .01% of 10^-35 = '+(1e-35*planckScale/100*0.0001).toExponential(2)+'m = 1e-39m Planck scale extremely small valid'; };
+document.getElementById('mintBtn').onclick=()=>{
+ initAudio();
+ for(let i=0;i<torroCount;i++){ setTimeout(()=>{ let osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=200+i*60+hueShift;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},500); },i*100); }
+ document.getElementById('txLog').textContent='MINTED add all 360 colors and only 6 torroids make it .01% of 10^-35 | 360 colors hue 0-360 all colors rainbow hue shift '+hueShift+'° | only '+torroCount+' torroids toroidal coils '+torroCount+' torroids only toroidal | .01% of 10^-35 = '+(1e-35*planckScale/100*0.0001).toExponential(2)+'m = 1e-39m Planck scale extremely small | SIG 360 6T .01%';
+ showToast('Minted 360 colors 6 torroids .01% of 10^-35');
+};
+document.getElementById('swapBtn').onclick=()=>{ showToast('Swap BONK after 360 colors 6 torroids .01% of 10^-35'); };
+setInterval(()=>{draw360();},60);
+</script>
+</body>
+</html>

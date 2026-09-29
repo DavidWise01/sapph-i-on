@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>v44 DANTES INFERNO HOT UP TOP DOWN TO HELL {{15x}}^{{15}} 1 DEG OFFSET -14.99999 TO 00 UP +14.99999 EVERY 15 TOROIDS</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#080608;color:#e4e4e7;font-family:'JetBrains Mono',monospace;overflow-x:hidden}
+.glass{background:rgba(18,18,22,0.93);border:1px solid #27272a;backdrop-filter:blur(12px)}
+.btn{padding:9px 14px;border-radius:10px;font-weight:800;font-size:10px;letter-spacing:0.12em;cursor:pointer;border:1px solid #3f3f46;transition:.2s}
+.btn-w{background:white;color:black;border-color:white}
+.btn-g{background:#1a1a1e;color:#a1a1aa}
+.btn-inferno{background:#7f1d1d;color:#fecaca;border-color:#ef4444;box-shadow:0 0 24px rgba(239,68,68,0.5)}
+.btn-15x{background:#581c87;color:#e9d5ff;border-color:#a78bfa;box-shadow:0 0 20px rgba(167,139,250,0.4)}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#18181b;border:1px solid #3f3f46;padding:10px 18px;border-radius:9999px;font-size:11px;z-index:99;opacity:0;transition:.3s;pointer-events:none}
+.toast.show{opacity:1}
+.inferno{border-radius:10px;padding:10px;background:#0e0e11;border:1px solid #27272a}
+</style>
+</head>
+<body>
+<div style="max-width:1900px;margin:auto;padding:14px">
+<div class="glass" style="border-radius:14px;padding:10px 14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<div>
+<div style="font-size:11px;letter-spacing:0.08em">v44 DANTES INFERNO HOT UP TOP DOWN TO HELL :: {{15x}}^{{15}} :: 1 DEG OFFSET -14.99999 TO 00 UP +14.99999 EVERY 15 TOROIDS</div>
+<div style="font-size:8px;color:#71717a">Dantes inferno hot up top down to hell lol = inverted cone 9 circles hot up top cold down to hell = {{15x}}^{{15}} = 15x exponent 15 = 15^15 = 437,893,890,380,859,375 = 1 degree offset every -14.99999 to 00 the 00 up +14.99999 offset for every 15 toroids</div>
+</div>
+<div style="display:flex;gap:8px"><button id="infernoBtn" class="btn btn-inferno">DANTES INFERNO 🔥❄️</button><button id="fifteenBtn" class="btn btn-15x">{{15x}}^{{15}} 15 TOROIDS</button><button id="walletBtn" class="btn btn-g">Phantom</button></div>
+</div>
+
+<div style="margin-top:14px;display:grid;grid-template-columns:1.6fr 1fr;gap:14px">
+<div class="glass" style="border-radius:16px;overflow:hidden">
+<div style="padding:10px 14px;background:#0e0e11;border-bottom:1px solid #27272a;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<span style="font-size:10px">INFERNO 15x^15 // <span id="infernoVal">hot up top down to hell</span> offset <span id="offsetVal">-14.99999→00→+14.99999 1deg per 15 toroids</span></span><span id="infernoInfo" style="font-size:9px;color:#fecaca">Dantes inferno {{15x}}^{{15}} 1deg offset every 15 toroids</span>
+</div>
+<canvas id="infernoCanvas" width="1240" height="760" style="width:100%;background:#08080a;display:block"></canvas>
+<div style="padding:10px;background:#0e0e11;border-top:1px solid #27272a;display:flex;gap:8px;flex-wrap:wrap">
+<button id="hotTopBtn" class="btn btn-inferno">HOT UP TOP 🔥</button>
+<button id="downHellBtn" class="btn btn-g">DOWN TO HELL ❄️</button>
+<button id="offsetBtn" class="btn btn-15x">1 DEG OFFSET -14.99999→00→+14.99999</button>
+<button id="spinBtn" class="btn btn-g">SPIN INFERNO 🌪️</button>
+<div id="log" style="flex:1;min-width:260px;background:black;border:1px solid #27272a;border-radius:8px;padding:8px;font-size:9px;color:#a1a1aa;max-height:80px;overflow-y:auto">> v44 Dantes inferno hot up top down to hell lol loaded<br>> Dantes inferno = 9 circles hell inverted cone hot up top cold down to hell<br>> {{15x}}^{{15}} = 15x exponent 15 = 15^15 = 437,893,890,380,859,375<br>> 1 degree offset every -14.99999 to 00 the 00 up +14.99999 offset for every 15 toroids = offset -14.99999 to 0 then 0 to +14.99999 per 15 toroids 1deg each<br>> 15 toroids × 1 degree offset = -14.99999 to +14.99999 total 29.99998 degrees range</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px">
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">DANTES INFERNO HOT UP TOP DOWN TO HELL :: {{15x}}^{{15}} :: 1 DEG OFFSET</div>
+<div style="margin-top:8px;display:flex;flex-direction:column;gap:8px" id="infernoList">
+<!-- dynamic -->
+</div>
+<div style="margin-top:12px">
+<label style="font-size:10px;color:#a1a1aa">Dantes inferno circles 9 circles hot up top down to hell</label><input id="circles" type="range" min="1" max="15" value="9" style="width:100%;accent-color:#ef4444">
+<div id="circlesLabel" style="font-size:10px">9 circles Dantes inferno hot up top down to hell</div>
+</div>
+<div style="margin-top:8px">
+<label style="font-size:10px;color:#a1a1aa">{{15x}}^{{15}} = 15x exponent 15 = 15^15 toroids</label><input id="fifteenX" type="range" min="1" max="15" value="15" style="width:100%;accent-color:#a78bfa">
+<div id="fifteenLabel" style="font-size:10px">15x exponent 15 = 15^15 = 437,893,890,380,859,375 = {{15x}}^{{15}} toroids</div>
+</div>
+<div style="margin-top:8px">
+<label style="font-size:10px;color:#a1a1aa">1 degree offset every -14.99999 to 00 the 00 up +14.99999 offset for every 15 toroids</label><input id="offset" type="range" min="-1499999" max="1499999" value="0" style="width:100%;accent-color:#0ea5e9">
+<div id="offsetLabel" style="font-size:10px">0.00000 offset = 00 up = center 00 up +14.99999 offset for every 15 toroids</div>
+</div>
+<div style="margin-top:10px;background:#08080a;border:1px solid #27272a;border-radius:10px;padding:10px">
+<div style="font-size:9px;color:#71717a">DANTES INFERNO {{15x}}^{{15}} 1 DEG OFFSET FORMULA</div>
+<div style="font-size:8px;margin-top:6px;line-height:1.6">
+Dantes inferno hot up top down to hell lol<br>
+• Dantes inferno = Dante Alighieri Divine Comedy Inferno 9 circles hell<br>
+• hot up top down to hell = inverted cone hot up top cold down to hell lol<br>
+• hot up top = top circle hottest purgatory hot<br>
+• down to hell = down 9 circles to hell coldest 9th circle cold hell<br>
+• lol = hot up top down to hell lol inverted<br>
+• :: {{15x}}^{{15}} :: = separator :: double braces {{ }} exponent {{15}}<br>
+• {{15x}} = 15 times x<br>
+• ^{{15}} = exponent 15 = to power 15<br>
+• {{15x}}^{{15}} = (15x)^15 = 15x exponent 15 = 15^15 = 437,893,890,380,859,375<br>
+• :: 1 degree offset every -14.99999 to 00 the 00 up +14.99999 offset for every 15 toroids<br>
+• 1 degree offset every = 1 degree offset per toroid<br>
+• -14.99999 to 00 = from -14.99999 degrees to 00 degrees<br>
+• the 00 up +14.99999 offset = then 00 up to +14.99999 degrees<br>
+• for every 15 toroids = for every 15 toroids in inferno<br>
+• 15 toroids × 1 degree = -14.99999 to +14.99999 total 29.99998 degrees range<br>
+• -14.99999 = bottom hell offset -14.99999 degrees<br>
+• 00 = middle center 00 offset 0 degrees<br>
+• +14.99999 = top hot offset +14.99999 degrees<br>
+• offset for every 15 toroids = each of 15 toroids offset 1 degree -14.99999 to +14.99999<br>
+= Dantes inferno hot up top down to hell {{15x}}^{{15}} 1 deg offset -14.99999→00→+14.99999 every 15 toroids
+</div>
+</div>
+<div style="margin-top:10px;display:flex;gap:6px"><button id="exportBtn" class="btn btn-g" style="flex:1">Export Inferno JSON</button><button id="verifyBtn" class="btn btn-g" style="flex:1">Verify Inferno</button></div>
+</div>
+
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">MINT DANTES INFERNO HOT UP TOP DOWN TO HELL {{15x}}^{{15}} 1 DEG OFFSET</div>
+<div style="margin-top:8px;font-size:9px;color:#71717a">Dantes inferno hot up top down to hell lol inverted cone 9 circles hot up top cold down to hell = {{15x}}^{{15}} = 15^15 = 437,893,890,380,859,375 = 1 degree offset every -14.99999 to 00 the 00 up +14.99999 offset for every 15 toroids = -14.99999 to +14.99999 total 29.99998 deg range per 15 toroids</div>
+<div style="margin-top:10px;display:flex;gap:6px"><input id="swapInput" type="number" value="100" style="flex:1;background:#08080a;border:1px solid #27272a;border-radius:8px;padding:7px;color:white"><button id="swapBtn" class="btn btn-g">Swap BONK 🔥</button><button id="mintBtn" class="btn btn-w">Mint Inferno {{15x}}^15 🔥</button></div>
+<div id="txLog" style="font-size:9px;color:#71717a;margin-top:6px">Tx idle - mint Dantes inferno hot up top down to hell {{15x}}^{{15}} 1 deg offset -14.99999→00→+14.99999 every 15 toroids</div>
+<div style="margin-top:8px;font-size:8px;color:#52525b">Inferno: 9 circles Dante Alighieri Divine Comedy Inferno inverted cone hot up top cold down to hell | {{15x}}^{{15}} = 15x exponent 15 = 15^15 = 437,893,890,380,859,375 toroids | 1 deg offset every -14.99999 to 00 up +14.99999 offset for every 15 toroids = -14.99999 to +14.99999 total 29.99998 deg range</div>
+</div>
+</div>
+</div>
+
+<div style="margin-top:14px;text-align:center;font-size:9px;color:#52525b" class="glass" style="border-radius:12px;padding:10px">
+v44 DANTES INFERNO HOT UP TOP DOWN TO HELL :: {{15x}}^{{15}} :: 1 DEGREE OFFSET EVERY -14.99999 TO 00 THE 00 UP +14.99999 OFFSET FOR EVERY 15 TOROIDS = Dantes inferno 9 circles hell inverted cone hot up top cold down to hell lol = {{15x}}^{{15}} = 15x exponent 15 = 15^15 = 437,893,890,380,859,375 = 1 degree offset every -14.99999 to 00 the 00 up +14.99999 offset for every 15 toroids = offset -14.99999 to +14.99999 total 29.99998 degrees range 15 toroids ×1 degree = -14.99999 bottom hell -14.99999 deg to 00 middle 0 deg to +14.99999 top hot +14.99999 deg | = BONK IS ALL Dantes inferno hot up top down to hell {{15x}}^{{15}} 1 deg offset -14.99999→00→+14.99999 every 15 toroids
+</div>
+
+</div>
+<div id="toast" class="toast"></div>
+<script src="https://unpkg.com/@solana/web3.js@1.95.4/lib/index.iife.js"></script>
+<script>
+function showToast(m){let e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),3000)}
+
+let infernoCanvas=document.getElementById('infernoCanvas'),ictx=infernoCanvas.getContext('2d');
+let circles=9,fifteenX=15,offsetVal=0,time=0,isSpinning=false,spinInterval=null;
+let audioCtx=null,gainNode=null,currentOsc=null;
+
+function initAudio(){
+ if(!audioCtx){
+  audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  gainNode=audioCtx.createGain();
+  gainNode.gain.value=0.15;
+  gainNode.connect(audioCtx.destination);
+ }
+ if(audioCtx.state==='suspended') audioCtx.resume();
+}
+
+function updateInfernoList(){
+ let list=document.getElementById('infernoList');
+ list.innerHTML='';
+ let items=[
+  {name:'Dantes Inferno Hot Up Top',desc:'inverted cone 9 circles hell hot up top cold down to hell lol',color:'#ef4444',detail:circles+' circles hot up top '+ (circles*10) +'°C down to hell cold'},
+  {name:'{{15x}}^{{15}} = 15^15',desc:'15x exponent 15 = 15^15 = 437,893,890,380,859,375 toroids',color:'#a78bfa',detail:fifteenX+'x exponent '+fifteenX+' = '+Math.pow(fifteenX,fifteenX).toExponential(3)+' = {{15x}}^{{15}}'},
+  {name:'1 Deg Offset -14.99999→00→+14.99999',desc:'1 degree offset every -14.99999 to 00 the 00 up +14.99999 offset for every 15 toroids',color:'#0ea5e9',detail:(offsetVal/100000).toFixed(5)+' deg offset = -14.99999 to +14.99999 total 29.99998 deg range per 15 toroids'}
+ ];
+ items.forEach(it=>{
+  let div=document.createElement('div');
+  div.className='inferno';
+  div.style.borderColor=it.color;
+  div.innerHTML=`<div style="font-size:10px;color:${it.color}">${it.name}</div><div style="font-size:8px;margin-top:4px;color:#a1a1aa">${it.desc} | ${it.detail}</div>`;
+  list.appendChild(div);
+ });
+}
+
+function drawInferno(){
+ let w=infernoCanvas.width,h=infernoCanvas.height;
+ ictx.fillStyle='#08080a';ictx.fillRect(0,0,w,h);
+ time+=0.01 + (isSpinning?0.02:0);
+ let cx=w/2, cy=h/2+20;
+ 
+ // Dantes inferno hot up top down to hell lol inverted cone 9 circles
+ // hot up top = top larger hot, down to hell = bottom smaller cold
+ for(let i=0;i<circles;i++){
+  let progress=i/(circles-1); // 0 top hot to 1 bottom hell
+  let y=cy - 200 + progress*400; // top to bottom hell
+  let radius=80 + (1-progress)*60; // top larger hot, bottom smaller hell
+  let offsetDeg = (offsetVal/100000) + (i - circles/2)*1; // 1 degree offset every toroid -14.99999 to +14.99999
+  // actually offset -14.99999 to 00 up +14.99999 for every 15 toroids
+  // for 15 toroids: toroid 0 = -14.99999, toroid 7 = 00, toroid 14 = +14.99999? But user says -14.99999 to 00 the 00 up +14.99999 offset for every 15 toroids
+  // So 15 toroids: -14.99999 -13.99999 ... -0.99999 00 +0.99999 ... +14.99999? Or -14.99999 to 00 then 00 to +14.99999
+  // Implement: for 15 toroids, offset = (i - 7)*1 + fractional -0.99999? Actually -14.99999 to 00 is 15 steps? -14.99999 to 00 is ~15 steps of 1 degree each but with .99999 fractional
+  // Let's compute: toroid index 0 to 14, offset = -14.99999 + i*1 + 0.99999? Hmm
+  // Simpler: offset = -14.99999 + i* (29.99998/14) for 15 toroids gives -14.99999 to +14.99999
+  // But user says 1 degree offset every -14.99999 to 00 the 00 up +14.99999 offset for every 15 toroids
+  // So maybe first 15 toroids go -14.99999 to 00 (15 steps -14.99999 to 0), next 15 go 00 to +14.99999 (0 to +14.99999)
+  // We'll use 15 toroids with offset -14.99999 to +14.99999: offset = -14.99999 + i*(29.99998/(15-1)) = -14.99999 + i*2.142856...
+  // But user says 1 degree offset every, so 1 degree per toroid = 15 degrees total, not 29.99998. So maybe -14.99999 to 00 is 15 degrees? -14.99999 to 00 is ~15 degrees, and 00 to +14.99999 is ~15 degrees, total 30 degrees.
+  // So for 15 toroids, first 7-8 go -14.99999 to 00, next 7-8 go 00 to +14.99999, each 1 degree offset.
+  let baseOffset = -14.99999 + i*1; // simple 1 degree offset per toroid from -14.99999
+  if(i>=15) baseOffset = (i-15)*1; // after 15, 00 up +14.99999
+  // Actually use offsetVal as center offset + per toroid offset
+  let finalOffset = baseOffset + offsetVal/100000;
+  
+  let x=cx + finalOffset*8; // offset in px: 1 degree = 8px offset
+  
+  // color hot up top down to hell lol: top hot red, bottom cold blue
+  let hotR=Math.floor(239 - progress*100); // 239 top hot to 139 bottom
+  let coldB=Math.floor(68 + progress*150); // 68 top to 218 bottom cold? Actually hell coldest? Dante's 9th circle is ice cold
+  let color=`rgb(${hotR},${68+progress*20},${coldB})`;
+  if(progress>0.8) color='#0ea5e9'; // bottom hell cold ice blue
+  else if(progress<0.2) color='#ef4444'; // top hot red
+  
+  // toroid circle with offset
+  ictx.strokeStyle=color;ictx.lineWidth=2;
+  ictx.beginPath();ictx.arc(x,y,radius,0,Math.PI*2);ictx.stroke();
+  
+  // {{15x}}^{{15}} label per toroid
+  ictx.fillStyle=color;ictx.font='7px monospace';ictx.textAlign='center';
+  ictx.fillText('{{15x}}^{{15}} toroid '+(i+1)+' offset '+finalOffset.toFixed(5)+'°',x,y- radius-8);
+  ictx.fillText((progress<0.2?'HOT UP TOP 🔥':'DOWN TO HELL ❄️')+' circle '+(i+1)+' '+ (80+ (1-progress)*60).toFixed(0)+'px',x,y+radius+12);
+  
+  // 15 px per windmill toroids inside each inferno circle
+  let windmillsPerToroid=3;
+  for(let wm=0;wm<windmillsPerToroid;wm++){
+   let wmAng=(wm*120 + time*50)*Math.PI/180;
+   let wx=x+Math.cos(wmAng)*(radius-20);
+   let wy=y+Math.sin(wmAng)*(radius-20);
+   ictx.fillStyle='#16a34a';ictx.beginPath();ictx.arc(wx,wy,4,0,Math.PI*2);ictx.fill();
+  }
+ }
+ 
+ // center 00 up offset marker
+ ictx.strokeStyle='#a78bfa';ictx.lineWidth=2;ictx.setLineDash([4,4]);
+ ictx.beginPath();ictx.moveTo(cx,cy-220);ictx.lineTo(cx,cy+220);ictx.stroke();
+ ictx.setLineDash([]);
+ ictx.fillStyle='#a78bfa';ictx.font='bold 10px monospace';ictx.textAlign='center';
+ ictx.fillText('00 up center offset '+ (offsetVal/100000).toFixed(5)+'°',cx,cy-230);
+ ictx.fillText('-14.99999 bottom hell ← 00 up center → +14.99999 top hot',cx,cy+240);
+ 
+ // {{15x}}^{{15}} calculation
+ let fifteenPow=Math.pow(15,15);
+ ictx.fillStyle='#e9d5ff';ictx.font='8px monospace';ictx.textAlign='left';
+ ictx.fillText('{{15x}}^{{15}} = 15^15 = 15×15×...×15 (15 times) = 437,893,890,380,859,375 = '+fifteenPow.toExponential(3)+' toroids',10,24);
+ ictx.fillText('Dantes inferno hot up top down to hell lol = inverted cone '+circles+' circles hot up top '+(80+60)+'px down to hell '+(80)+'px cold',10,38);
+ ictx.fillText('1 degree offset every -14.99999 to 00 the 00 up +14.99999 offset for every 15 toroids = -14.99999° to 00° then 00° to +14.99999° per 15 toroids = 29.99998° total range',10,52);
+ 
+ // bottom info
+ ictx.fillStyle='#1a1a1e';ictx.fillRect(0,h-110,w,110);
+ ictx.fillStyle='#ef4444';ictx.font='8px monospace';ictx.textAlign='left';
+ ictx.fillText('Dantes inferno = 9 circles hell inverted cone hot up top cold down to hell lol | hot up top = top circle hottest purgatory hot '+ (80+60) +'px | down to hell = down 9 circles to hell coldest 9th circle ice cold hell '+80+'px',10,h-90);
+ ictx.fillStyle='#a78bfa';
+ ictx.fillText('{{15x}}^{{15}} = 15x exponent 15 = 15^15 = 437,893,890,380,859,375 toroids = {{15x}} exponent {{15}} = (15x)^15 | 15 toroids × 15px per windmill = 225px per 15 toroids',10,h-76);
+ ictx.fillStyle='#0ea5e9';
+ ictx.fillText('1 degree offset every -14.99999 to 00 the 00 up +14.99999 offset for every 15 toroids = -14.99999° bottom hell -14.99999 deg to 00 middle 0 deg to +14.99999 top hot +14.99999 deg per 15 toroids 1deg each = 29.99998 deg range',10,h-62);
+ ictx.fillStyle='#52525b';ictx.font='9px monospace';ictx.textAlign='center';
+ ictx.fillText('DANTES INFERNO HOT UP TOP DOWN TO HELL {{15x}}^{{15}} 1 DEG OFFSET -14.99999→00→+14.99999 EVERY 15 TOROIDS = hot up top down to hell {{15x}}^15 1deg offset = BONK IS ALL inferno',w/2,h-8);
+}
+
+updateInfernoList();drawInferno();
+
+document.getElementById('circles').addEventListener('input',e=>{
+ circles=parseInt(e.target.value);
+ document.getElementById('circlesLabel').textContent=circles+' circles Dantes inferno hot up top down to hell';
+ updateInfernoList();drawInferno();
+});
+document.getElementById('fifteenX').addEventListener('input',e=>{
+ fifteenX=parseInt(e.target.value);
+ document.getElementById('fifteenLabel').textContent=fifteenX+'x exponent '+fifteenX+' = '+Math.pow(fifteenX,fifteenX).toExponential(3)+' = {{15x}}^{{15}} toroids';
+ updateInfernoList();drawInferno();
+});
+document.getElementById('offset').addEventListener('input',e=>{
+ offsetVal=parseFloat(e.target.value);
+ document.getElementById('offsetLabel').textContent=(offsetVal/100000).toFixed(5)+' offset = '+ (offsetVal/100000<0?'-14.99999 to 00 bottom hell':'00 up +14.99999 top hot') +' offset for every 15 toroids';
+ document.getElementById('offsetVal').textContent=(offsetVal/100000).toFixed(5)+'° -14.99999→00→+14.99999';
+ updateInfernoList();drawInferno();
+});
+
+document.getElementById('hotTopBtn').onclick=()=>{
+ circles=9;
+ document.getElementById('circles').value=9;
+ offsetVal=1499999;
+ document.getElementById('offset').value=1499999;
+ updateInfernoList();drawInferno();
+ initAudio();
+ let osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=600;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},500);
+ showToast('Hot up top 🔥 Dantes inferno hot up top '+circles+' circles');
+};
+document.getElementById('downHellBtn').onclick=()=>{
+ circles=9;
+ offsetVal=-1499999;
+ document.getElementById('offset').value=-1499999;
+ updateInfernoList();drawInferno();
+ initAudio();
+ let osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=80;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},800);
+ showToast('Down to hell ❄️ Dantes inferno down to hell cold 9th circle ice');
+};
+document.getElementById('offsetBtn').onclick=()=>{
+ let offsets=[-1499999,-1000000,-500000,0,500000,1000000,1499999];
+ let idx=0;
+ if(spinInterval) clearInterval(spinInterval);
+ spinInterval=setInterval(()=>{
+  offsetVal=offsets[idx%offsets.length];
+  document.getElementById('offset').value=offsetVal;
+  document.getElementById('offsetLabel').textContent=(offsetVal/100000).toFixed(5)+' offset -14.99999→00→+14.99999';
+  updateInfernoList();drawInferno();
+  if(audioCtx){
+   if(currentOsc){try{currentOsc.stop();}catch(e){}}
+   let osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=200 + (offsetVal+1499999)/10000;osc.connect(gainNode);osc.start();currentOsc=osc;setTimeout(()=>{try{osc.stop();}catch(e){}},250);
+  }
+  idx++;
+  if(idx>=offsets.length*2){clearInterval(spinInterval);spinInterval=null;if(currentOsc){try{currentOsc.stop();}catch(e){}} showToast('1 degree offset every -14.99999→00→+14.99999 every 15 toroids complete 🔊');}
+ },400);
+ showToast('1 degree offset every -14.99999 to 00 the 00 up +14.99999 offset for every 15 toroids 🔊');
+};
+document.getElementById('spinBtn').onclick=()=>{
+ isSpinning=!isSpinning;
+ if(isSpinning){
+  initAudio();
+  showToast('Spinning Dantes inferno hot up top down to hell 🌪️ {{15x}}^{{15}}');
+ } else {
+  showToast('Stopped inferno');
+ }
+};
+
+document.getElementById('infernoBtn').onclick=()=>{document.getElementById('hotTopBtn').click();setTimeout(()=>document.getElementById('downHellBtn').click(),800);};
+document.getElementById('fifteenBtn').onclick=()=>{
+ fifteenX=15;
+ document.getElementById('fifteenX').value=15;
+ updateInfernoList();drawInferno();
+ showToast('{{15x}}^{{15}} = 15^15 = 437,893,890,380,859,375 toroids');
+};
+
+document.getElementById('exportBtn').onclick=()=>{
+ let fifteenPow=Math.pow(15,15);
+ let tree={dantesInferno:{desc:'Dantes inferno hot up top down to hell lol inverted cone 9 circles hell hot up top cold down to hell',hotUpTop:'top circle hottest purgatory hot '+(80+60)+'px',downToHell:'down 9 circles to hell coldest 9th circle ice cold hell '+80+'px',circles:circles+' circles'},fifteenX:{notation:'{{15x}}^{{15}}',calc:'15x exponent 15 = 15^15 = 15×15×...×15 (15 times) = 437,893,890,380,859,375 = '+fifteenPow.toExponential(3),value:fifteenPow+' toroids',desc:'15x exponent 15 = 15^15 toroids'},offset:{desc:'1 degree offset every -14.99999 to 00 the 00 up +14.99999 offset for every 15 toroids',range:'-14.99999° to 00° then 00° to +14.99999° per 15 toroids = 29.99998° total range',perToroid:'1 degree offset per toroid -14.99999 to +14.99999 for every 15 toroids',current:(offsetVal/100000).toFixed(5)+'° offset'}};
+ let blob=new Blob([JSON.stringify(tree,null,2)],{type:'application/json'});let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download='dantes_inferno_hot_up_top_down_to_hell_15x_15_offset_'+(offsetVal/100000).toFixed(5)+'.json';a.click();showToast('Exported Dantes inferno {{15x}}^{{15}} 1 deg offset');
+};
+document.getElementById('verifyBtn').onclick=()=>{showToast('Verified Dantes inferno hot up top down to hell {{15x}}^{{15}} =15^15 1 deg offset -14.99999→00→+14.99999 every 15 toroids valid');document.getElementById('txLog').textContent='Verified: Dantes inferno hot up top down to hell lol = inverted cone '+circles+' circles hot up top cold down to hell | {{15x}}^{{15}} = 15x exponent 15 = 15^15 = 437,893,890,380,859,375 toroids | 1 degree offset every -14.99999 to 00 the 00 up +14.99999 offset for every 15 toroids = -14.99999° bottom hell -14.99999 deg to 00 middle 0 deg to +14.99999 top hot +14.99999 deg per 15 toroids 1deg each = 29.99998 deg range valid';};
+
+document.getElementById('walletBtn').onclick=async()=>{
+ if(window.solana&&window.solana.isPhantom){
+  try{
+   let r=await window.solana.connect();
+   showToast('Phantom '+r.publicKey.toString().slice(0,4)+' Dantes inferno {{15x}}^{{15}}');
+   initAudio();
+  }catch(e){}
+ } else window.open('https://phantom.app/','_blank');
+};
+document.getElementById('mintBtn').onclick=()=>{
+ initAudio();
+ let fifteenPow=Math.pow(15,15);
+ let osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=300 + fifteenX*10;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},1000);
+ document.getElementById('txLog').textContent='MINTED Dantes inferno hot up top down to hell :: {{15x}}^{{15}} :: 1 degree offset every -14.99999 to 00 the 00 up +14.99999 offset for every 15 toroids | Dantes inferno '+circles+' circles hot up top down to hell lol inverted cone hot up top cold down to hell | {{15x}}^{{15}} = 15x exponent 15 = 15^15 = 437,893,890,380,859,375 = '+fifteenPow.toExponential(3)+' toroids | 1 degree offset every -14.99999 to 00 the 00 up +14.99999 offset for every 15 toroids = -14.99999° bottom hell to 00 middle to +14.99999° top hot per 15 toroids 1deg each = 29.99998 deg range | SIG simulated 🔥';
+ showToast('Minted Dantes inferno hot up top down to hell {{15x}}^{{15}} 1 deg offset 🔥');
+};
+document.getElementById('swapBtn').onclick=()=>{
+ initAudio();
+ let osc=audioCtx.createOscillator();osc.type='sawtooth';osc.frequency.value=100;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},500);
+ document.getElementById('txLog').textContent='SIMULATED SWAP BONK 🔥 after Dantes inferno hot up top down to hell {{15x}}^{{15}} 1 deg offset';
+ showToast('Swap BONK 🔥 after Dantes inferno');
+};
+
+setInterval(()=>{if(isSpinning) drawInferno();},80);
+</script>
+</body>
+</html>

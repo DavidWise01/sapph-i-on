@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>v60 HANDMAKE 0-PI FIRST BY ITSELF FRESH ON BONE WHITE</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f9f6f0;color:#1a1a1a;font-family:'JetBrains Mono',monospace;overflow-x:hidden}
+.glass{background:rgba(249,246,240,0.94);border:1px solid #e7e0d3;backdrop-filter:blur(8px);box-shadow:0 2px 20px rgba(0,0,0,0.06)}
+.btn{padding:10px 16px;border-radius:12px;font-weight:700;font-size:10px;letter-spacing:0.08em;cursor:pointer;border:1px solid #d6cfbf;transition:.2s;text-transform:uppercase;background:#fffdf8;color:#1a1a1a}
+.btn-w{background:#1a1a1a;color:#f9f6f0;border-color:#1a1a1a}
+.btn-bone{background:#f9f6f0;color:#1a1a1a;border:2px solid #1a1a1a;font-family:'Caveat',cursive;font-size:13px;letter-spacing:0.02em}
+.btn-hand{border:2px dashed #1a1a1a;background:#fffdf8;color:#1a1a1a;font-family:'Caveat',cursive;font-size:13px;transform:rotate(-0.5deg)}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#1a1a1a;border:1px solid #1a1a1a;padding:12px 22px;border-radius:9999px;font-size:11px;z-index:99;opacity:0;transition:.3s;pointer-events:none;box-shadow:0 4px 20px rgba(0,0,0,0.15);font-family:'Caveat',cursive;color:#f9f6f0;font-size:14px}
+.toast.show{opacity:1}
+.hand{border-radius:14px;padding:12px;background:#fffdf8;border:1px solid #e7e0d3;box-shadow:2px 3px 0 #e7e0d3;transform:rotate(-0.3deg)}
+.hand:nth-child(2){transform:rotate(0.4deg)}
+.hand:nth-child(3){transform:rotate(-0.2deg)}
+</style>
+</head>
+<body>
+<div style="max-width:1900px;margin:auto;padding:14px">
+<div class="glass" style="border-radius:16px;padding:14px 18px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;border:2px solid #1a1a1a;box-shadow:4px 4px 0 #1a1a1a">
+<div>
+<div style="font-size:18px;letter-spacing:0.02em;font-family:'Caveat',cursive;color:#1a1a1a;font-weight:700">v60 HANDMAKE 0-PI FIRST BY ITSELF FRESH ON BONE WHITE FRESH HANDMADE</div>
+<div style="font-size:9px;color:#8a7f6f;font-family:'JetBrains Mono',monospace">handmake 0-pi first by itself fresh on bone white = handmade 0-pi first by itself fresh on bone white background #f9f6f0 bone white fresh handmade</div>
+</div>
+<div style="display:flex;gap:8px"><button id="handmakeBtn" class="btn btn-hand">HANDMAKE 0-PI FRESH</button><button id="boneBtn" class="btn btn-bone">BONE WHITE #f9f6f0</button><button id="firstBtn" class="btn btn-bone">FIRST BY ITSELF</button></div>
+</div>
+
+<div style="margin-top:14px;display:grid;grid-template-columns:1.7fr 1fr;gap:14px">
+<div class="glass" style="border-radius:18px;overflow:hidden;border:2px solid #1a1a1a;box-shadow:6px 6px 0 #1a1a1a">
+<div style="padding:12px 16px;background:#fffdf8;border-bottom:2px solid #1a1a1a;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<span style="font-size:14px;font-family:'Caveat',cursive;color:#1a1a1a;font-weight:700">HANDMADE 0-PI // <span id="handVal">handmade 0-pi first by itself fresh</span> <span id="boneVal" style="font-family:'JetBrains Mono',monospace;font-size:10px">bone white #f9f6f0 fresh</span></span><span id="freshInfo" style="font-size:12px;color:#1a1a1a;font-family:'Caveat',cursive">FRESH ON BONE WHITE</span>
+</div>
+<canvas id="boneCanvas" width="1280" height="800" style="width:100%;background:#f9f6f0;display:block"></canvas>
+<div style="padding:12px;background:#fffdf8;border-top:2px solid #1a1a1a;display:flex;gap:8px;flex-wrap:wrap">
+<button id="draw0PiBtn" class="btn btn-hand">DRAW 0-PI HANDMADE ✏️</button>
+<button id="freshBtn" class="btn btn-bone">FRESH BY ITSELF</button>
+<button id="protectBtn" class="btn btn-bone">PROTECTED 0 AND PI</button>
+<button id="clearBtn" class="btn btn-g">CLEAR BONE WHITE</button>
+<div id="log" style="flex:1;min-width:280px;background:#fffdf8;border:2px solid #1a1a1a;border-radius:12px;padding:10px;font-size:9px;color:#1a1a1a;max-height:90px;overflow-y:auto;font-family:'JetBrains Mono',monospace;box-shadow:3px 3px 0 #e7e0d3">> v60 handmake 0-pi first by itself fresh on bone white loaded<br>> handmake 0-pi first by itself = handmade 0-pi first by itself fresh handmade<br>> fresh on bone white = fresh on bone white background #f9f6f0 bone white #f9f6f0 bone white fresh handmade<br>> bone white = #f9f6f0 bone white #f9f6f0 R249 G246 B240 bone white fresh<br>> first by itself = first by itself fresh handmade 0-pi first by itself<br>> handmade = handmade hand drawn sketchy lines wobbly hand drawn style fresh</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px">
+<div class="glass" style="border-radius:18px;padding:16px;border:2px solid #1a1a1a;box-shadow:5px 5px 0 #1a1a1a">
+<div style="font-size:16px;font-family:'Caveat',cursive;color:#1a1a1a;font-weight:700">HANDMAKE 0-PI FIRST BY ITSELF FRESH ON BONE WHITE</div>
+<div style="margin-top:10px;display:flex;flex-direction:column;gap:10px" id="handList"></div>
+<div style="margin-top:14px">
+<label style="font-size:10px;color:#1a1a1a;font-family:'Caveat',cursive;font-size:13px">EJ/EC ratio handmade 0-pi EJ/EC wobbly hand drawn</label><input id="ejec" type="range" min="20" max="200" value="100" style="width:100%;accent-color:#1a1a1a">
+<div id="ejecLabel" style="font-size:10px;color:#8a7f6f">100 = EJ/EC =100 handmade 0-pi wobbly hand drawn EJ/EC</div>
+</div>
+<div style="margin-top:10px">
+<label style="font-size:10px;color:#1a1a1a;font-family:'Caveat',cursive;font-size:13px">Superinductor EL handmade large L wobbly coil</label><input id="superind" type="range" min="10" max="100" value="60" style="width:100%;accent-color:#1a1a1a">
+<div id="superindLabel" style="font-size:10px;color:#8a7f6f">60 = superinductor EL handmade large L wobbly coil hand drawn</div>
+</div>
+<div style="margin-top:10px">
+<label style="font-size:10px;color:#1a1a1a;font-family:'Caveat',cursive;font-size:13px">Bone white freshness fresh on bone white #f9f6f0</label><input id="freshness" type="range" min="0" max="100" value="80" style="width:100%;accent-color:#1a1a1a">
+<div id="freshnessLabel" style="font-size:10px;color:#8a7f6f">80% = bone white freshness fresh on bone white #f9f6f0 bone white fresh</div>
+</div>
+<div style="margin-top:12px;display:flex;gap:8px"><button id="exportBtn" class="btn btn-g" style="flex:1">Export Bone JSON</button><button id="verifyBtn" class="btn btn-g" style="flex:1">Verify Bone</button></div>
+</div>
+
+<div class="glass" style="border-radius:18px;padding:16px;border:2px solid #1a1a1a;box-shadow:5px 5px 0 #1a1a1a;background:#fffdf8">
+<div style="font-size:14px;font-family:'Caveat',cursive;color:#1a1a1a;font-weight:700">MINT HANDMAKE 0-PI FIRST BY ITSELF FRESH ON BONE WHITE</div>
+<div style="margin-top:8px;font-size:9px;color:#5a5244;font-family:'JetBrains Mono',monospace">handmake 0-pi first by itself fresh on bone white = handmade 0-pi first by itself fresh on bone white background #f9f6f0 bone white fresh handmade 0-pi protected qubit doubly degenerate ground state 0 and pi wells protected from charge and flux noise first by itself fresh</div>
+<div style="margin-top:12px;display:flex;gap:8px"><input id="swapInput" type="number" value="100" style="flex:1;background:#f9f6f0;border:2px solid #1a1a1a;border-radius:10px;padding:8px;color:#1a1a1a;font-family:'JetBrains Mono',monospace"><button id="swapBtn" class="btn btn-g">Swap BONK</button><button id="mintBtn" class="btn btn-w">Mint Bone 0-Pi</button></div>
+<div id="txLog" style="font-size:9px;color:#1a1a1a;margin-top:8px;font-family:'JetBrains Mono',monospace">Tx idle - mint handmake 0-pi first by itself fresh on bone white #f9f6f0</div>
+</div>
+</div>
+</div>
+
+</div>
+<div id="toast" class="toast"></div>
+<script>
+function showToast(m){let e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),3500)}
+
+let boneCanvas=document.getElementById('boneCanvas'),bctx=boneCanvas.getContext('2d');
+let ejec=100,superind=60,freshness=80,time=0;
+let wobble=2.5;
+
+function updateHandList(){
+ let list=document.getElementById('handList');list.innerHTML='';
+ let items=[
+  {name:'Handmake 0-Pi First By Itself Fresh Handmade EJ/EC='+ejec,desc:'handmade 0-pi first by itself fresh handmade 0-pi protected qubit doubly degenerate',detail:'handmade = hand drawn sketchy lines wobbly hand drawn style fresh by itself first'},
+  {name:'Fresh On Bone White Background #f9f6f0 Bone White Fresh '+freshness+'%',desc:'fresh on bone white background #f9f6f0 bone white #f9f6f0 R249 G246 B240 bone white fresh',detail:'bone white = #f9f6f0 bone white fresh handmade first by itself fresh on bone white'},
+  {name:'2 JJs + 2 Superinductors + 2 Capacitors Loop Handmade Wobbly',desc:'0-pi circuit handmade 2 JJs + 2 superinductors large L + 2 large capacitors loop wobbly hand drawn',detail:'2 JJs hand drawn + 2 superinductors wobbly coils EL='+superind+' + 2 capacitors handmade'},
+  {name:'Protected 0 And Pi Wells Doubly Degenerate Handmade Protected',desc:'protected 0 and pi wells doubly degenerate ground state protected from charge and flux noise handmade',detail:'protected = wavefunctions disjoint in 0 well and pi well handmade protected'}
+ ];
+ items.forEach((it,i)=>{
+  let div=document.createElement('div');div.className='hand';
+  div.style.transform='rotate('+( (i%2===0?-0.4:0.3) + Math.sin(time+i)*0.1)+'deg)';
+  div.innerHTML=`<div style="font-size:13px;color:#1a1a1a;font-family:'Caveat',cursive;font-weight:700">${it.name}</div><div style="font-size:8px;color:#8a7f6f;margin-top:4px;font-family:'JetBrains Mono',monospace">${it.desc} | ${it.detail}</div>`;
+  list.appendChild(div);
+ });
+ document.getElementById('handVal').textContent='handmade 0-pi first by itself fresh EJ/EC='+ejec;
+ document.getElementById('boneVal').textContent='bone white #f9f6f0 freshness '+freshness+'% fresh';
+}
+function wobblyLine(x1,y1,x2,y2){
+ // hand drawn wobbly line
+ let segs=8;
+ bctx.beginPath();
+ bctx.moveTo(x1,y1);
+ for(let i=1;i<=segs;i++){
+  let t=i/segs;
+  let x=x1+(x2-x1)*t + (Math.random()-0.5)*wobble;
+  let y=y1+(y2-y1)*t + (Math.random()-0.5)*wobble;
+  bctx.lineTo(x,y);
+ }
+ bctx.stroke();
+}
+function wobblyArc(cx,cy,r,start,end){
+ let segs=20;
+ bctx.beginPath();
+ for(let i=0;i<=segs;i++){
+  let t=i/segs;
+  let ang=start+(end-start)*t;
+  let x=cx+Math.cos(ang)*r + (Math.random()-0.5)*wobble*0.5;
+  let y=cy+Math.sin(ang)*r + (Math.random()-0.5)*wobble*0.5;
+  if(i===0) bctx.moveTo(x,y); else bctx.lineTo(x,y);
+ }
+ bctx.stroke();
+}
+function drawBone(){
+ let w=boneCanvas.width,h=boneCanvas.height;
+ // bone white background #f9f6f0 with freshness
+ let baseFresh=freshness/100;
+ bctx.fillStyle='#f9f6f0';
+ bctx.fillRect(0,0,w,h);
+ // subtle paper texture handmade
+ bctx.fillStyle='rgba(0,0,0,0.015)';
+ for(let i=0;i<200;i++){
+  let x=Math.random()*w;
+  let y=Math.random()*h;
+  let r=Math.random()*1.5;
+  bctx.beginPath();bctx.arc(x,y,r,0,Math.PI*2);bctx.fill();
+ }
+ time+=0.02;
+ let cx=w/2, cy=h/2+20;
+ let loopSize=130;
+ let topX=cx, topY=cy-loopSize;
+ let rightX=cx+loopSize, rightY=cy;
+ let bottomX=cx, bottomY=cy+loopSize;
+ let leftX=cx-loopSize, leftY=cy;
+ 
+ // hand drawn diamond loop with wobbly lines
+ bctx.strokeStyle='#1a1a1a';bctx.lineWidth=2.2;bctx.lineCap='round';bctx.lineJoin='round';
+ wobblyLine(leftX,leftY,topX,topY);
+ wobblyLine(topX,topY,rightX,rightY);
+ wobblyLine(rightX,rightY,bottomX,bottomY);
+ wobblyLine(bottomX,bottomY,leftX,leftY);
+ 
+ // capacitors handmade at top and bottom
+ let capW=70, capH=16;
+ // top cap handmade
+ bctx.fillStyle='#fffdf8';bctx.strokeStyle='#1a1a1a';bctx.lineWidth=2;
+ bctx.beginPath();
+ bctx.rect(topX-capW/2 + (Math.random()-0.5)*1, topY-capH/2 + (Math.random()-0.5)*1, capW, capH);
+ bctx.fill();bctx.stroke();
+ bctx.fillStyle='#1a1a1a';bctx.font='bold 10px Caveat';bctx.textAlign='center';
+ bctx.fillText('C',topX,topY+4);
+ bctx.font='10px Caveat';bctx.fillText('C large shunt handmade',topX,topY-capH/2-10);
+ 
+ // bottom cap handmade
+ bctx.fillStyle='#fffdf8';
+ bctx.beginPath();
+ bctx.rect(bottomX-capW/2 + (Math.random()-0.5)*1, bottomY-capH/2 + (Math.random()-0.5)*1, capW, capH);
+ bctx.fill();bctx.stroke();
+ bctx.fillStyle='#1a1a1a';bctx.font='bold 10px Caveat';bctx.textAlign='center';
+ bctx.fillText('C',bottomX,bottomY+4);
+ bctx.font='10px Caveat';bctx.fillText('C large shunt handmade',bottomX,bottomY+capH/2+18);
+ 
+ // JJs handmade left and right
+ let jjSize=18;
+ // left JJ handmade
+ bctx.fillStyle='#fffdf8';bctx.strokeStyle='#1a1a1a';bctx.lineWidth=2.2;
+ bctx.beginPath();
+ bctx.rect(leftX-jjSize/2 + (Math.random()-0.5)*1, leftY-jjSize/2 + (Math.random()-0.5)*1, jjSize, jjSize);
+ bctx.fill();bctx.stroke();
+ // cross handmade wobbly
+ bctx.strokeStyle='#1a1a1a';bctx.lineWidth=1.5;
+ wobblyLine(leftX-jjSize/2,leftY,leftX+jjSize/2,leftY);
+ wobblyLine(leftX,leftY-jjSize/2,leftX,leftY+jjSize/2);
+ bctx.fillStyle='#1a1a1a';bctx.font='10px Caveat';bctx.textAlign='center';
+ bctx.fillText('JJ1 EJ='+ejec,leftX,leftY+jjSize/2+18);
+ 
+ // right JJ handmade
+ bctx.fillStyle='#fffdf8';bctx.strokeStyle='#1a1a1a';bctx.lineWidth=2.2;
+ bctx.beginPath();
+ bctx.rect(rightX-jjSize/2 + (Math.random()-0.5)*1, rightY-jjSize/2 + (Math.random()-0.5)*1, jjSize, jjSize);
+ bctx.fill();bctx.stroke();
+ bctx.strokeStyle='#1a1a1a';bctx.lineWidth=1.5;
+ wobblyLine(rightX-jjSize/2,rightY,rightX+jjSize/2,rightY);
+ wobblyLine(rightX,rightY-jjSize/2,rightX,rightY+jjSize/2);
+ bctx.fillStyle='#1a1a1a';bctx.font='10px Caveat';bctx.textAlign='center';
+ bctx.fillText('JJ2 EJ='+ejec,rightX,rightY+jjSize/2+18);
+ 
+ // superinductors handmade wobbly coils
+ bctx.strokeStyle='#1a1a1a';bctx.lineWidth=1.8;
+ let coilTurns=7;
+ // top-left superinductor handmade wobbly coil
+ bctx.beginPath();
+ for(let t=0;t<=coilTurns;t++){
+  let prog=t/coilTurns;
+  let x=leftX + (topX-leftX)*prog;
+  let y=leftY + (topY-leftY)*prog + Math.sin(prog*Math.PI*coilTurns)*10 + (Math.random()-0.5)*wobble;
+  if(t===0) bctx.moveTo(x,y); else bctx.lineTo(x,y);
+ }
+ bctx.stroke();
+ bctx.font='10px Caveat';bctx.fillText('L EL='+superind+' superinductor handmade', (leftX+topX)/2-30, (leftY+topY)/2-12);
+ 
+ // top-right
+ bctx.beginPath();
+ for(let t=0;t<=coilTurns;t++){
+  let prog=t/coilTurns;
+  let x=rightX + (topX-rightX)*prog;
+  let y=rightY + (topY-rightY)*prog + Math.sin(prog*Math.PI*coilTurns)*10 + (Math.random()-0.5)*wobble;
+  if(t===0) bctx.moveTo(x,y); else bctx.lineTo(x,y);
+ }
+ bctx.stroke();
+ bctx.fillText('L EL='+superind+' handmade', (rightX+topX)/2+10, (rightY+topY)/2-12);
+ 
+ // bottom-left
+ bctx.beginPath();
+ for(let t=0;t<=coilTurns;t++){
+  let prog=t/coilTurns;
+  let x=leftX + (bottomX-leftX)*prog;
+  let y=leftY + (bottomY-leftY)*prog + Math.sin(prog*Math.PI*coilTurns)*10 + (Math.random()-0.5)*wobble;
+  if(t===0) bctx.moveTo(x,y); else bctx.lineTo(x,y);
+ }
+ bctx.stroke();
+ 
+ // bottom-right
+ bctx.beginPath();
+ for(let t=0;t<=coilTurns;t++){
+  let prog=t/coilTurns;
+  let x=rightX + (bottomX-rightX)*prog;
+  let y=rightY + (bottomY-rightY)*prog + Math.sin(prog*Math.PI*coilTurns)*10 + (Math.random()-0.5)*wobble;
+  if(t===0) bctx.moveTo(x,y); else bctx.lineTo(x,y);
+ }
+ bctx.stroke();
+ bctx.font='10px Caveat';bctx.fillText('EL=Phi0^2/(4pi^2 L) large L handmade',cx-70, bottomY+28);
+ 
+ // 0 and pi wells handmade double well potential on bone white
+ let wellX=cx+230, wellY=cy;
+ bctx.fillStyle='#fffdf8';bctx.strokeStyle='#1a1a1a';bctx.lineWidth=1.5;
+ bctx.beginPath();
+ bctx.rect(wellX-90,wellY-70,180,140);
+ bctx.fill();bctx.stroke();
+ // double well handmade wobbly
+ bctx.strokeStyle='#1a1a1a';bctx.lineWidth=2;
+ bctx.beginPath();
+ for(let x=-70;x<=70;x++){
+  let phi=x/70*Math.PI;
+  let V = -ejec/60*Math.cos(phi) - ejec/60*Math.cos(2*phi) + superind/25*phi*phi;
+  let px=wellX + x + (Math.random()-0.5)*0.5;
+  let py=wellY + V*18 + (Math.random()-0.5)*0.5;
+  if(x==-70) bctx.moveTo(px,py); else bctx.lineTo(px,py);
+ }
+ bctx.stroke();
+ // 0 and pi wells dots handmade
+ bctx.fillStyle='#1a1a1a';
+ bctx.beginPath();bctx.arc(wellX-35 + (Math.random()-0.5)*1, wellY+25 + (Math.random()-0.5)*1, 5,0,Math.PI*2);bctx.fill();
+ bctx.beginPath();bctx.arc(wellX+35 + (Math.random()-0.5)*1, wellY+25 + (Math.random()-0.5)*1, 5,0,Math.PI*2);bctx.fill();
+ bctx.font='12px Caveat';bctx.textAlign='center';
+ bctx.fillText('0 well',wellX-35,wellY+45);bctx.fillText('pi well',wellX+35,wellY+45);
+ bctx.font='bold 11px Caveat';bctx.fillText('DOUBLY DEGENERATE',wellX,wellY-50);
+ bctx.font='10px Caveat';bctx.fillText('PROTECTED FROM',wellX,wellY-38);
+ bctx.fillText('CHARGE AND FLUX NOISE',wellX,wellY-28);
+ bctx.fillText('DISJOINT WAVEFUNCTIONS',wellX,wellY-18);
+ 
+ // info labels handmade on bone white
+ bctx.fillStyle='rgba(249,246,240,0.9)';bctx.fillRect(10,10,520,90);
+ bctx.strokeStyle='#1a1a1a';bctx.lineWidth=1;bctx.strokeRect(10,10,520,90);
+ bctx.fillStyle='#1a1a1a';bctx.font='12px Caveat';bctx.textAlign='left';
+ bctx.fillText('0-PI WHAT IS THAT ONE: protected qubit doubly degenerate 0 and pi wells EJ/EC='+ejec+' handmade fresh',14,28);
+ bctx.font='11px Caveat';
+ bctx.fillText('2 JJs + 2 superinductors L large EL + 2 capacitors C loop handmade wobbly EL='+superind,14,46);
+ bctx.fillText('Protected = wavefunctions disjoint in 0 well and pi well protected from charge and flux noise handmade',14,64);
+ bctx.fillText('Bone white #f9f6f0 fresh on bone white first by itself fresh handmade 0-pi by itself fresh',14,82);
+ 
+ bctx.font='bold 11px Caveat';bctx.textAlign='left';
+ bctx.fillText('HANDMAKE 0-PI FIRST BY ITSELF FRESH ON BONE WHITE FRESH HANDMADE',12,h-16);
+}
+
+updateHandList();drawBone();
+
+document.getElementById('ejec').addEventListener('input',e=>{
+ ejec=parseFloat(e.target.value);
+ document.getElementById('ejecLabel').textContent=ejec.toFixed(0)+' = EJ/EC ='+ejec.toFixed(0)+' handmade 0-pi wobbly hand drawn EJ/EC';
+ updateHandList();drawBone();
+});
+document.getElementById('superind').addEventListener('input',e=>{
+ superind=parseFloat(e.target.value);
+ document.getElementById('superindLabel').textContent=superind.toFixed(0)+' = superinductor EL handmade large L wobbly coil hand drawn EL='+superind.toFixed(0);
+ updateHandList();drawBone();
+});
+document.getElementById('freshness').addEventListener('input',e=>{
+ freshness=parseFloat(e.target.value);
+ document.getElementById('freshnessLabel').textContent=freshness.toFixed(0)+'% = bone white freshness fresh on bone white #f9f6f0 bone white fresh freshness '+freshness.toFixed(0)+'%';
+ updateHandList();drawBone();
+});
+
+document.getElementById('draw0PiBtn').onclick=()=>{
+ updateHandList();drawBone();
+ showToast('Handmade 0-pi first by itself fresh on bone white ✏️ EJ/EC='+ejec+' EL='+superind);
+};
+document.getElementById('freshBtn').onclick=()=>{
+ freshness=80;document.getElementById('freshness').value=80;
+ updateHandList();drawBone();
+ showToast('Fresh by itself fresh on bone white #f9f6f0 freshness '+freshness+'%');
+};
+document.getElementById('protectBtn').onclick=()=>{
+ ejec=100;superind=60;
+ document.getElementById('ejec').value=100;document.getElementById('superind').value=60;
+ updateHandList();drawBone();
+ showToast('Protected 0 and pi wells doubly degenerate ground state protected from charge and flux noise handmade');
+};
+document.getElementById('clearBtn').onclick=()=>{
+ bctx.fillStyle='#f9f6f0';bctx.fillRect(0,0,boneCanvas.width,boneCanvas.height);
+ setTimeout(()=>{updateHandList();drawBone();},200);
+ showToast('Clear bone white #f9f6f0 fresh handmade');
+};
+
+document.getElementById('handmakeBtn').onclick=()=>{document.getElementById('draw0PiBtn').click();};
+document.getElementById('boneBtn').onclick=()=>{document.getElementById('freshBtn').click();};
+document.getElementById('firstBtn').onclick=()=>{document.getElementById('protectBtn').click();};
+
+document.getElementById('exportBtn').onclick=()=>{
+ let tree={handmake0Pi:{desc:'handmake 0-pi first by itself fresh on bone white handmade 0-pi first by itself fresh on bone white background #f9f6f0 bone white fresh handmade',EJ_EC:ejec+' handmade 0-pi EJ/EC='+ejec,EL:superind+' superinductor EL handmade large L wobbly coil',boneWhite:'#f9f6f0 bone white #f9f6f0 R249 G246 B240 bone white fresh handmade first by itself fresh',freshness:freshness+'% bone white freshness fresh on bone white #f9f6f0',circuit:'2 JJs + 2 superinductors + 2 capacitors loop handmade wobbly hand drawn sketchy lines',protected:'protected 0 and pi wells doubly degenerate ground state protected from charge and flux noise handmade'}};
+ let blob=new Blob([JSON.stringify(tree,null,2)],{type:'application/json'});let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download='handmake_0_pi_bone_white_fresh_'+ejec+'_'+superind+'.json';a.click();showToast('Exported handmake 0-pi first by itself fresh on bone white');
+};
+document.getElementById('verifyBtn').onclick=()=>{ showToast('Verified handmake 0-pi first by itself fresh on bone white EJ/EC='+ejec+' EL='+superind);document.getElementById('txLog').textContent='Verified: handmake 0-pi first by itself fresh on bone white handmade 0-pi first by itself fresh on bone white background #f9f6f0 bone white fresh handmade EJ/EC='+ejec+' | superinductor EL='+superind+' handmade large L wobbly coil hand drawn | bone white #f9f6f0 bone white #f9f6f0 R249 G246 B240 bone white fresh handmade first by itself fresh | 2 JJs + 2 superinductors + 2 capacitors loop handmade wobbly hand drawn sketchy lines | protected 0 and pi wells doubly degenerate ground state protected from charge and flux noise handmade first by itself fresh valid'; };
+
+document.getElementById('mintBtn').onclick=()=>{
+ document.getElementById('txLog').textContent='MINTED handmake 0-pi first by itself fresh on bone white | EJ/EC='+ejec+' handmade 0-pi EJ/EC='+ejec+' | superinductor EL='+superind+' handmade large L wobbly coil hand drawn | bone white #f9f6f0 bone white #f9f6f0 R249 G246 B240 bone white fresh handmade first by itself fresh | 2 JJs + 2 superinductors + 2 capacitors loop handmade wobbly hand drawn sketchy lines | protected 0 and pi wells doubly degenerate ground state protected from charge and flux noise handmade first by itself fresh | SIG handmade 0-pi bone white fresh';
+ showToast('Minted handmake 0-pi first by itself fresh on bone white bone white');
+};
+document.getElementById('swapBtn').onclick=()=>{ showToast('Swap BONK after handmake 0-pi bone white fresh'); };
+
+setInterval(()=>{drawBone();},120);
+</script>
+</body>
+</html>

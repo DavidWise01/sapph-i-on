@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>v55 UPGRADE SPIN LIGHT UP 4 COPPER COILS GRAVITY VACUUM - + UPGRADED</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#020208;color:#e4e4e7;font-family:'JetBrains Mono',monospace;overflow-x:hidden}
+.glass{background:rgba(12,12,22,0.96);border:1px solid #1a1a2e;backdrop-filter:blur(16px)}
+.btn{padding:10px 16px;border-radius:12px;font-weight:900;font-size:10px;letter-spacing:0.12em;cursor:pointer;border:2px solid #3f3f46;transition:.25s;text-transform:uppercase}
+.btn-w{background:white;color:black;border-color:white}
+.btn-g{background:#0a0a12;color:#a1a1aa;border-color:#1a1a2e}
+.btn-upgrade{background:linear-gradient(135deg,#000,#1a1a2e);color:#00ff88;border:2px solid #00ff88;box-shadow:0 0 30px rgba(0,255,136,0.7),inset 0 0 15px rgba(0,255,136,0.15);font-family:'Orbitron',monospace}
+.btn-copper-up{background:linear-gradient(135deg,#000,#2a1a0a);color:#fb923c;border:2px solid #fb923c;box-shadow:0 0 25px rgba(251,146,60,0.7);font-family:'Orbitron',monospace}
+.btn-spin-up{background:linear-gradient(135deg,#000,#0a1a2e);color:#00ffff;border:2px solid #00ffff;box-shadow:0 0 25px rgba(0,255,255,0.7);font-family:'Orbitron',monospace}
+.btn-vacuum-up{background:linear-gradient(135deg,#1a0a2e,#0a0a2e);color:#c4b5fd;border:2px solid #a78bfa;box-shadow:0 0 25px rgba(167,139,250,0.6);font-family:'Orbitron',monospace}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#0a0a12;border:2px solid #00ff88;padding:12px 22px;border-radius:9999px;font-size:11px;z-index:99;opacity:0;transition:.3s;pointer-events:none;box-shadow:0 0 25px rgba(0,255,136,0.6);font-family:'Orbitron',monospace;color:#00ff88}
+.toast.show{opacity:1}
+.up{border-radius:14px;padding:12px;background:rgba(12,12,22,0.92);border:2px solid #1a1a2e}
+</style>
+</head>
+<body>
+<div style="max-width:1900px;margin:auto;padding:14px">
+<div class="glass" style="border-radius:16px;padding:14px 18px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;border:2px solid #00ff88;box-shadow:0 0 40px rgba(0,255,136,0.35)">
+<div>
+<div style="font-size:13px;letter-spacing:0.14em;font-family:'Orbitron',monospace;color:#00ff88;text-shadow:0 0 12px rgba(0,255,136,0.9)">v55 UPGRADE SPIN LIGHT UP 4 COPPER COILS GRAVITY VACUUM - + UPGRADED SUPERCHARGED</div>
+<div style="font-size:8px;color:#6ee7b7">upgrade = upgrade spin light up 4 copper coils gravity vacuum lol - + upgraded supercharged energy harvesting vacuum energy</div>
+</div>
+<div style="display:flex;gap:8px"><button id="upgradeBtn" class="btn btn-upgrade">UPGRADE SUPERCHARGED</button><button id="copperUpBtn" class="btn btn-copper-up">4 COPPER COILS UPGRADED</button><button id="vacuumUpBtn" class="btn btn-vacuum-up">GRAVITY VACUUM UPGRADED</button></div>
+</div>
+
+<div style="margin-top:14px;display:grid;grid-template-columns:1.7fr 1fr;gap:14px">
+<div class="glass" style="border-radius:18px;overflow:hidden;border:2px solid #00ff88;box-shadow:0 0 40px rgba(0,255,136,0.25)">
+<div style="padding:12px 16px;background:#0a0a12;border-bottom:2px solid #00ff88;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<span style="font-size:11px;font-family:'Orbitron',monospace;color:#00ff88;text-shadow:0 0 8px rgba(0,255,136,0.7)">UPGRADE SPIN COILS // <span id="upgradeVal">upgraded spin light up</span> <span id="coilVal">4 copper coils upgraded gravity vacuum supercharged</span></span><span id="upInfo" style="font-size:9px;color:#00ff88;font-family:'Orbitron',monospace">UPGRADE SUPERCHARGED</span>
+</div>
+<canvas id="upCanvas" width="1280" height="800" style="width:100%;background:#020208;display:block"></canvas>
+<div style="padding:12px;background:#0a0a12;border-top:2px solid #fb923c;display:flex;gap:8px;flex-wrap:wrap">
+<button id="spinUpBtn" class="btn btn-spin-up">SPIN LIGHT UP UPGRADED</button>
+<button id="coilUpBtn" class="btn btn-copper-up">4 COPPER COILS UPGRADED</button>
+<button id="gravityUpBtn" class="btn btn-vacuum-up">GRAVITY VACUUM SUPERCHARGED</button>
+<button id="overclockBtn" class="btn btn-upgrade">OVERCLOCK - +</button>
+<div id="log" style="flex:1;min-width:280px;background:black;border:2px solid #00ff88;border-radius:10px;padding:10px;font-size:9px;color:#6ee7b7;max-height:90px;overflow-y:auto;font-family:'Orbitron',monospace;box-shadow:0 0 15px rgba(0,255,136,0.2)">> v55 upgrade spin light up 4 copper coils gravity vacuum upgraded supercharged loaded<br>> upgrade = upgrade spin light up 4 copper coils gravity vacuum supercharged energy harvesting<br>> spin light up upgraded = spin speed 2x light up intensity 3x pulsar quasar blink upgraded neon<br>> 4 copper coils upgraded = 4 coils copper upgraded to 8 coils option superconducting copper coils energy harvesting<br>> gravity vacuum upgraded = gravity vacuum spin power upgraded vacuum energy harvesting zero point energy supercharged<br>> - + upgraded = - + charge polarity upgraded to - + - + - + - + 8 polarity supercharged</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px">
+<div class="glass" style="border-radius:18px;padding:16px;border:2px solid #00ff88;box-shadow:0 0 25px rgba(0,255,136,0.2)">
+<div style="font-size:12px;font-family:'Orbitron',monospace;color:#00ff88;text-shadow:0 0 10px rgba(0,255,136,0.7)">UPGRADE SUPERCHARGED SPIN COILS GRAVITY VACUUM - +</div>
+<div style="margin-top:10px;display:flex;flex-direction:column;gap:10px" id="upList"></div>
+<div style="margin-top:14px">
+<label style="font-size:10px;color:#00ffff;font-family:'Orbitron',monospace">Spin speed upgraded 2x spin light up supercharged</label><input id="spinSpeed" type="range" min="0" max="300" value="150" style="width:100%;accent-color:#00ffff">
+<div id="spinSpeedLabel" style="font-size:10px;color:#7dd3fc">150 = upgraded spin speed 2x spin light up supercharged pulsar quasar</div>
+</div>
+<div style="margin-top:10px">
+<label style="font-size:10px;color:#fb923c;font-family:'Orbitron',monospace">Copper coils upgraded 4 to 8 coils superconducting</label><input id="coilCount" type="range" min="4" max="12" value="8" style="width:100%;accent-color:#fb923c">
+<div id="coilCountLabel" style="font-size:10px;color:#fdba74">8 = upgraded 4 to 8 copper coils superconducting copper coils energy harvesting</div>
+</div>
+<div style="margin-top:10px">
+<label style="font-size:10px;color:#a78bfa;font-family:'Orbitron',monospace">Gravity vacuum power upgraded supercharged vacuum energy</label><input id="gravityPower" type="range" min="0" max="200" value="140" style="width:100%;accent-color:#a78bfa">
+<div id="gravityPowerLabel" style="font-size:10px;color:#c4b5fd">140% = upgraded gravity vacuum supercharged vacuum energy zero point energy - +</div>
+</div>
+<div style="margin-top:10px">
+<label style="font-size:10px;color:#00ff88;font-family:'Orbitron',monospace">Overclock - + charge polarity supercharged overclock</label><input id="overclock" type="range" min="0" max="100" value="75" style="width:100%;accent-color:#00ff88">
+<div id="overclockLabel" style="font-size:10px;color:#6ee7b7">75% = overclock - + charge polarity supercharged overclock - + - + - +</div>
+</div>
+<div style="margin-top:12px;display:flex;gap:8px"><button id="exportBtn" class="btn btn-g" style="flex:1">Export Upgrade JSON</button><button id="verifyBtn" class="btn btn-g" style="flex:1">Verify Upgrade</button></div>
+</div>
+
+<div class="glass" style="border-radius:18px;padding:16px;border:2px solid #fb923c;box-shadow:0 0 25px rgba(251,146,60,0.2)">
+<div style="font-size:11px;font-family:'Orbitron',monospace;color:#fb923c;text-shadow:0 0 8px rgba(251,146,60,0.7)">MINT UPGRADE SUPERCHARGED SPIN COILS GRAVITY VACUUM</div>
+<div style="margin-top:8px;font-size:9px;color:#00ff88;font-family:'Orbitron',monospace">upgrade = upgrade spin light up 4 copper coils gravity vacuum lol - + upgraded supercharged energy harvesting vacuum energy zero point energy supercharged spin light up 4 to 8 copper coils superconducting copper coils gravity vacuum supercharged overclock - + charge polarity</div>
+<div style="margin-top:12px;display:flex;gap:8px"><input id="swapInput" type="number" value="100" style="flex:1;background:#020208;border:2px solid #00ff88;border-radius:10px;padding:8px;color:#00ff88;font-family:'Orbitron',monospace"><button id="swapBtn" class="btn btn-g">Swap BONK</button><button id="mintBtn" class="btn btn-w">Mint Upgrade</button></div>
+<div id="txLog" style="font-size:9px;color:#00ffff;margin-top:8px;font-family:'Orbitron',monospace">Tx idle - mint upgrade supercharged spin light up 4 copper coils gravity vacuum - +</div>
+</div>
+</div>
+</div>
+
+</div>
+<div id="toast" class="toast"></div>
+<script src="https://unpkg.com/@solana/web3.js@1.95.4/lib/index.iife.js"></script>
+<script>
+function showToast(m){let e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),3500)}
+
+let upCanvas=document.getElementById('upCanvas'),upctx=upCanvas.getContext('2d');
+let spinSpeed=150,coilCount=8,gravityPower=140,overclock=75,time=0,spinAngle=0,lightPhase=0,energy=0;
+let audioCtx=null,gainNode=null;
+let coils=[];
+
+class UpgradedCoil{
+ constructor(idx,total){
+  this.idx=idx;this.total=total;
+  this.angle=(idx*360/total)*Math.PI/180;
+  this.radius=190 + Math.sin(idx)*20;
+  this.coilTurns=12;
+  this.spin=0;
+  this.charge=(idx%2===0)?'+':'-';
+  this.energy=0;
+  this.superconducting=true;
+ }
+ update(){
+  this.spin+=spinSpeed/100*0.04 + gravityPower/100*0.02 + overclock/100*0.01;
+  this.angle+=spinSpeed/100*0.008 + gravityPower/100*0.002;
+  this.energy+=gravityPower/100*0.5 + overclock/100*0.3;
+  if(this.energy>100) this.energy=0;
+ }
+}
+
+function initCoils(){ coils=[]; for(let i=0;i<coilCount;i++){ coils.push(new UpgradedCoil(i,coilCount)); } }
+function initAudio(){
+ if(!audioCtx){
+  audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  gainNode=audioCtx.createGain();gainNode.gain.value=0.14;gainNode.connect(audioCtx.destination);
+ }
+ if(audioCtx.state==='suspended') audioCtx.resume();
+}
+function updateUpList(){
+ let list=document.getElementById('upList');list.innerHTML='';
+ let items=[
+  {name:'UPGRADE Spin Light Up Supercharged Speed '+spinSpeed+' 2x',desc:'spin light up upgraded 2x speed 3x light up pulsar quasar supercharged',color:'#00ff88'},
+  {name:coilCount+' Copper Coils Upgraded Superconducting Energy Harvesting',desc:'4 to '+coilCount+' coils upgraded superconducting copper coils energy harvesting vacuum energy',color:'#fb923c'},
+  {name:'Gravity Vacuum Power Supercharged '+gravityPower+'% Zero Point Energy',desc:'gravity vacuum upgraded vacuum energy harvesting zero point energy supercharged - +',color:'#a78bfa'},
+  {name:'Overclock - + Charge Polarity '+overclock+'% Supercharged '+coils.map(c=>c.charge).join(''),desc:'overclock - + charge polarity supercharged overclock - + - + - + energy harvesting',color:'#00ffff'}
+ ];
+ items.forEach(it=>{
+  let div=document.createElement('div');div.className='up';div.style.borderColor=it.color;div.style.boxShadow='0 0 15px '+it.color+'30';
+  div.innerHTML=`<div style="font-size:10px;color:${it.color};font-family:'Orbitron',monospace;text-shadow:0 0 6px ${it.color}90">${it.name}</div><div style="font-size:7px;color:#6ee7b7;margin-top:4px">${it.desc}</div>`;
+  list.appendChild(div);
+ });
+ document.getElementById('upgradeVal').textContent='upgrade spin '+spinSpeed+' light up supercharged';
+ document.getElementById('coilVal').textContent=coilCount+' copper coils upgraded gravity vacuum '+gravityPower+'% overclock '+overclock+'% - +';
+}
+function drawUpgrade(){
+ let w=upCanvas.width,h=upCanvas.height;
+ upctx.fillStyle='#020208';upctx.fillRect(0,0,w,h);
+ time+=0.025;spinAngle+=spinSpeed/100*0.05;lightPhase+=spinSpeed/100*0.08;energy+=gravityPower/100*0.02;
+ let cx=w/2, cy=h/2+10;
+ // upgraded grid neon supercharged
+ upctx.strokeStyle='#0a1a0a';upctx.lineWidth=0.6;upctx.globalAlpha=0.25+overclock/400;
+ for(let x=0;x<w;x+=30){ upctx.beginPath();upctx.moveTo(x,0);upctx.lineTo(x,h);upctx.stroke(); }
+ for(let y=0;y<h;y+=30){ upctx.beginPath();upctx.moveTo(0,y);upctx.lineTo(w,y);upctx.stroke(); }
+ upctx.globalAlpha=1;
+ coils.forEach(c=>c.update());
+ // outer vacuum field upgraded supercharged
+ let outerRadius=240 + Math.sin(time*0.5)*10 + gravityPower/10;
+ upctx.fillStyle='rgba(0,255,136,0.06)';upctx.beginPath();upctx.arc(cx,cy,outerRadius,0,Math.PI*2);upctx.fill();
+ upctx.strokeStyle='#00ff88';upctx.lineWidth=2+overclock/50;upctx.shadowColor='#00ff88';upctx.shadowBlur=20+gravityPower/5;upctx.globalAlpha=0.6;
+ upctx.beginPath();upctx.arc(cx,cy,outerRadius,0,Math.PI*2);upctx.stroke();upctx.shadowBlur=0;upctx.globalAlpha=1;
+ upctx.fillStyle='#00ff88';upctx.font='bold 8px Orbitron';upctx.textAlign='center';
+ upctx.fillText('UPGRADED GRAVITY VACUUM ENERGY FIELD SUPERCHARGED ZERO POINT ENERGY - + LOL '+outerRadius.toFixed(0)+'px',cx,cy-outerRadius-16);
+ // upgraded coils
+ coils.forEach(coil=>{
+  let x=cx+Math.cos(coil.angle)*coil.radius;
+  let y=cy+Math.sin(coil.angle)*coil.radius;
+  // energy harvesting glow
+  upctx.fillStyle='#fb923c';upctx.globalAlpha=coil.energy/100*0.3;upctx.shadowColor='#fb923c';upctx.shadowBlur=15+coil.energy/5;
+  upctx.beginPath();upctx.arc(x,y,20+coil.energy/10,0,Math.PI*2);upctx.fill();upctx.shadowBlur=0;upctx.globalAlpha=1;
+  upctx.strokeStyle='#fb923c';upctx.lineWidth=2.5;upctx.shadowColor='#fb923c';upctx.shadowBlur=14+gravityPower/8+overclock/10;
+  for(let t=0;t<coil.coilTurns;t++){
+   let turnRadius=14 + t*2.5;let turnAng=coil.spin*2.5 + t*0.6;
+   upctx.beginPath();upctx.ellipse(x,y,turnRadius,turnRadius*0.65,turnAng,0,Math.PI*2);upctx.stroke();
+  }
+  upctx.shadowBlur=0;
+  // superconducting core upgraded
+  upctx.fillStyle=coil.superconducting?'#ffffff':'#fb923c';upctx.shadowColor='#fb923c';upctx.shadowBlur=10;
+  upctx.beginPath();upctx.arc(x,y,10,0,Math.PI*2);upctx.fill();upctx.shadowBlur=0;
+  upctx.fillStyle='black';upctx.font='bold 8px Orbitron';upctx.textAlign='center';upctx.fillText('Cu',x,y+2);
+  upctx.fillStyle=coil.charge==='+'?'#00ffff':'#ff0040';upctx.font='bold 12px Orbitron';upctx.shadowColor=coil.charge==='+'?'#00ffff':'#ff0040';upctx.shadowBlur=8;
+  upctx.fillText(coil.charge,x,y-20);upctx.shadowBlur=0;
+  upctx.fillStyle='#fb923c';upctx.font='6px Orbitron';upctx.fillText('COIL '+(coil.idx+1)+' SUPERCONDUCTING',x,y+24);
+  upctx.fillText('gravity vacuum '+gravityPower+'% energy '+coil.energy.toFixed(0)+'%',x,y+32);
+  // upgraded wire with energy flow
+  upctx.strokeStyle='#fb923c';upctx.lineWidth=1.2;upctx.globalAlpha=0.5+coil.energy/200;upctx.setLineDash([4,4]);
+  let dashOffset=(time*10)%8;upctx.lineDashOffset=-dashOffset;
+  upctx.beginPath();upctx.moveTo(x,y);upctx.lineTo(cx,cy);upctx.stroke();upctx.setLineDash([]);upctx.lineDashOffset=0;upctx.globalAlpha=1;
+  let spinX=x+Math.cos(coil.spin)*14;let spinY=y+Math.sin(coil.spin)*14;
+  upctx.fillStyle='#00ffff';upctx.shadowColor='#00ffff';upctx.shadowBlur=8;upctx.beginPath();upctx.arc(spinX,spinY,4,0,Math.PI*2);upctx.fill();upctx.shadowBlur=0;
+ });
+ // center upgraded spin light up supercharged pulsar quasar
+ let centerRadius=42 + Math.sin(lightPhase)*10 + overclock/20;
+ let isLightOn=Math.sin(lightPhase*0.6)>0;
+ let lightIntensity=isLightOn?1:0.15;
+ upctx.fillStyle='black';upctx.shadowColor='#00ff88';upctx.shadowBlur=40*lightIntensity+spinSpeed/2+overclock/3;upctx.beginPath();upctx.arc(cx,cy,centerRadius,0,Math.PI*2);upctx.fill();upctx.shadowBlur=0;
+ upctx.strokeStyle='#00ff88';upctx.lineWidth=4*lightIntensity;upctx.shadowColor='#00ff88';upctx.shadowBlur=20*lightIntensity;upctx.globalAlpha=lightIntensity;upctx.beginPath();upctx.arc(cx,cy,centerRadius,0,Math.PI*2);upctx.stroke();upctx.shadowBlur=0;upctx.globalAlpha=1;
+ upctx.strokeStyle='#ff00ff';upctx.lineWidth=3;upctx.beginPath();upctx.arc(cx,cy,centerRadius*0.75,spinAngle,spinAngle+Math.PI*0.9);upctx.stroke();
+ let spinDotX=cx+Math.cos(spinAngle)*centerRadius*0.75;let spinDotY=cy+Math.sin(spinAngle)*centerRadius*0.75;
+ upctx.fillStyle='#ff00ff';upctx.shadowColor='#ff00ff';upctx.shadowBlur=10;upctx.beginPath();upctx.arc(spinDotX,spinDotY,5,0,Math.PI*2);upctx.fill();upctx.shadowBlur=0;
+ if(isLightOn){
+  for(let b=0;b<3;b++){
+   let beamAng=spinAngle*2.5 + b*Math.PI*2/3;let beamColor=b===0?'#00ffff':b===1?'#ff00ff':'#00ff88';
+   upctx.strokeStyle=beamColor;upctx.lineWidth=5;upctx.shadowColor=beamColor;upctx.shadowBlur=25;upctx.globalAlpha=0.8;
+   upctx.beginPath();upctx.moveTo(cx,cy);upctx.lineTo(cx+Math.cos(beamAng)*380,cy+Math.sin(beamAng)*380);upctx.stroke();upctx.shadowBlur=0;upctx.globalAlpha=1;
+  }
+  upctx.fillStyle='#ffff00';upctx.shadowColor='#ffff00';upctx.shadowBlur=30;upctx.beginPath();upctx.arc(cx,cy,centerRadius*0.45,0,Math.PI*2);upctx.fill();upctx.shadowBlur=0;
+  upctx.fillStyle='black';upctx.font='bold 7px Orbitron';upctx.textAlign='center';upctx.fillText('PULSAR',cx,cy+2);
+ }
+ upctx.fillStyle='white';upctx.font='bold 10px Orbitron';upctx.textAlign='center';upctx.fillText('UPGRADE',cx,cy-6);upctx.font='7px Orbitron';upctx.fillText('SPIN LIGHT UP',cx,cy+6);
+ upctx.fillStyle='#00ff88';upctx.font='6px Orbitron';upctx.fillText('upgraded spin '+spinSpeed+' light up gravity vacuum '+gravityPower+'% overclock '+overclock+'% - + '+coils.map(c=>c.charge).join(''),cx,cy+centerRadius+18);
+ upctx.fillStyle='rgba(2,2,8,0.92)';upctx.fillRect(0,h-90,w,90);
+ upctx.fillStyle='#00ff88';upctx.font='8px Orbitron';upctx.textAlign='left';upctx.fillText('UPGRADE supercharged spin '+spinSpeed+' light up intensity 3x pulsar quasar blink upgraded neon supercharged energy harvesting',10,h-70);
+ upctx.fillStyle='#fb923c';upctx.fillText('Upgraded '+coilCount+' copper coils superconducting energy harvesting vacuum energy zero point energy '+coils.map(c=>c.charge).join(' ')+' - +',10,h-54);
+ upctx.fillStyle='#a78bfa';upctx.fillText('Gravity vacuum supercharged '+gravityPower+'% zero point energy overclock '+overclock+'% - + charge polarity supercharged vacuum energy harvesting',10,h-38);
+}
+initCoils();updateUpList();drawUpgrade();
+document.getElementById('spinSpeed').addEventListener('input',e=>{ spinSpeed=parseFloat(e.target.value);document.getElementById('spinSpeedLabel').textContent=spinSpeed.toFixed(0)+' = upgraded spin speed 2x spin light up supercharged';updateUpList(); });
+document.getElementById('coilCount').addEventListener('input',e=>{ coilCount=parseInt(e.target.value);document.getElementById('coilCountLabel').textContent=coilCount+' = upgraded '+coilCount+' copper coils superconducting energy harvesting';initCoils();updateUpList(); });
+document.getElementById('gravityPower').addEventListener('input',e=>{ gravityPower=parseFloat(e.target.value);document.getElementById('gravityPowerLabel').textContent=gravityPower.toFixed(0)+'% = upgraded gravity vacuum supercharged vacuum energy zero point energy - +';updateUpList(); });
+document.getElementById('overclock').addEventListener('input',e=>{ overclock=parseFloat(e.target.value);document.getElementById('overclockLabel').textContent=overclock.toFixed(0)+'% = overclock - + charge polarity supercharged overclock - + - + - +';updateUpList(); });
+document.getElementById('spinUpBtn').onclick=()=>{ spinSpeed=150;document.getElementById('spinSpeed').value=150;updateUpList();drawUpgrade();showToast('Spin light up upgraded supercharged speed '+spinSpeed+' 2x 3x light up'); };
+document.getElementById('coilUpBtn').onclick=()=>{ coilCount=8;document.getElementById('coilCount').value=8;initCoils();updateUpList();drawUpgrade();showToast('Upgraded '+coilCount+' copper coils superconducting energy harvesting'); };
+document.getElementById('gravityUpBtn').onclick=()=>{ gravityPower=140;document.getElementById('gravityPower').value=140;updateUpList();drawUpgrade();showToast('Gravity vacuum supercharged '+gravityPower+'% zero point energy'); };
+document.getElementById('overclockBtn').onclick=()=>{ overclock=75;document.getElementById('overclock').value=75;updateUpList();drawUpgrade();initAudio();let osc=audioCtx.createOscillator();osc.type='sawtooth';osc.frequency.value=100+overclock*3;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},600);showToast('Overclock - + supercharged '+overclock+'% '+coils.map(c=>c.charge).join(' ')); };
+document.getElementById('upgradeBtn').onclick=()=>{ spinSpeed=150;gravityPower=140;overclock=75;coilCount=8;document.getElementById('spinSpeed').value=150;document.getElementById('gravityPower').value=140;document.getElementById('overclock').value=75;document.getElementById('coilCount').value=8;initCoils();updateUpList();drawUpgrade();showToast('UPGRADE SUPERCHARGED spin '+spinSpeed+' coils '+coilCount+' gravity '+gravityPower+'% overclock '+overclock+'%'); };
+document.getElementById('copperUpBtn').onclick=()=>{document.getElementById('coilUpBtn').click();};
+document.getElementById('vacuumUpBtn').onclick=()=>{document.getElementById('gravityUpBtn').click();};
+document.getElementById('exportBtn').onclick=()=>{
+ let tree={upgrade:{spin:spinSpeed+' supercharged 2x',coils:coilCount+' upgraded superconducting',gravity:gravityPower+'% supercharged zero point',overclock:overclock+'% - + supercharged',charges:coils.map(c=>c.charge)}};
+ let blob=new Blob([JSON.stringify(tree,null,2)],{type:'application/json'});let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download='upgrade_supercharged_spin_coils.json';a.click();showToast('Exported upgrade supercharged');
+};
+document.getElementById('verifyBtn').onclick=()=>{ showToast('Verified upgrade spin '+spinSpeed+' coils '+coilCount+' gravity '+gravityPower+'% overclock '+overclock+'%');document.getElementById('txLog').textContent='Verified upgrade spin '+spinSpeed+' coils '+coilCount+' gravity vacuum '+gravityPower+'% overclock '+overclock+'% - + '+coils.map(c=>c.charge).join(' ')+' supercharged'; };
+document.getElementById('mintBtn').onclick=()=>{
+ initAudio();
+ coils.forEach((c,i)=>{ setTimeout(()=>{ let osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=120+i*35+spinSpeed+overclock;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},500); },i*90); });
+ document.getElementById('txLog').textContent='MINTED UPGRADE supercharged spin light up '+coilCount+' copper coils gravity vacuum '+gravityPower+'% overclock '+overclock+'% - + '+coils.map(c=>c.charge).join(' ')+' SIG supercharged upgraded';
+ showToast('Minted upgrade supercharged spin light up coils gravity vacuum overclock');
+};
+document.getElementById('swapBtn').onclick=()=>{ showToast('Swap BONK after upgrade supercharged'); };
+setInterval(()=>{drawUpgrade();},50);
+</script>
+</body>
+</html>

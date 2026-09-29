@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>v58 TRANSMON BUILD DONT RUN IT JUST BUILD IT SUPERCONDUCTING QUBIT</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#020208;color:#e4e4e7;font-family:'JetBrains Mono',monospace;overflow-x:hidden}
+.glass{background:rgba(10,10,20,0.96);border:1px solid #1e1e3a;backdrop-filter:blur(16px)}
+.btn{padding:10px 16px;border-radius:12px;font-weight:900;font-size:10px;letter-spacing:0.12em;cursor:pointer;border:2px solid #3f3f46;transition:.25s;text-transform:uppercase}
+.btn-w{background:white;color:black;border-color:white}
+.btn-g{background:#0a0a12;color:#a1a1aa;border-color:#1e1e3a}
+.btn-transmon{background:#000;color:#00ffff;border:2px solid #00ffff;box-shadow:0 0 20px rgba(0,255,255,0.6);font-family:'Orbitron',monospace}
+.btn-jj{background:#000;color:#ff00ff;border:2px solid #ff00ff;box-shadow:0 0 20px rgba(255,0,255,0.6);font-family:'Orbitron',monospace}
+.btn-build{background:#000;color:#00ff88;border:2px solid #00ff88;box-shadow:0 0 20px rgba(0,255,136,0.6);font-family:'Orbitron',monospace}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#0a0a12;border:2px solid #00ffff;padding:12px 22px;border-radius:9999px;font-size:11px;z-index:99;opacity:0;transition:.3s;pointer-events:none;box-shadow:0 0 25px rgba(0,255,255,0.6);font-family:'Orbitron',monospace;color:#00ffff}
+.toast.show{opacity:1}
+.comp{border-radius:12px;padding:10px;background:rgba(10,10,20,0.92);border:1px solid #1e1e3a}
+</style>
+</head>
+<body>
+<div style="max-width:1900px;margin:auto;padding:14px">
+<div class="glass" style="border-radius:16px;padding:14px 18px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;border:2px solid #00ffff;box-shadow:0 0 40px rgba(0,255,255,0.25)">
+<div>
+<div style="font-size:13px;letter-spacing:0.14em;font-family:'Orbitron',monospace;color:#00ffff;text-shadow:0 0 12px rgba(0,255,255,0.9)">v58 TRANSMON BUILD DONT RUN IT JUST BUILD IT SUPERCONDUCTING QUBIT TRANSMON</div>
+<div style="font-size:8px;color:#7dd3fc">pivot lets build a transmon dont run it just build it = transmon superconducting qubit Josephson junction shunted by large capacitor dont run just build</div>
+</div>
+<div style="display:flex;gap:8px"><button id="buildBtn" class="btn btn-build">BUILD TRANSMON</button><button id="jjBtn" class="btn btn-jj">JOSEPHSON JUNCTION</button><button id="walletBtn" class="btn btn-g">Phantom</button></div>
+</div>
+
+<div style="margin-top:14px;display:grid;grid-template-columns:1.7fr 1fr;gap:14px">
+<div class="glass" style="border-radius:18px;overflow:hidden;border:2px solid #00ffff;box-shadow:0 0 40px rgba(0,255,255,0.25)">
+<div style="padding:12px 16px;background:#0a0a12;border-bottom:2px solid #00ffff;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<span style="font-size:11px;font-family:'Orbitron',monospace;color:#00ffff;text-shadow:0 0 8px rgba(0,255,255,0.7)">TRANSMON BUILD // <span id="buildVal">dont run it just build it</span> <span id="jjVal">Josephson junction shunted capacitor</span></span><span id="buildInfo" style="font-size:9px;color:#00ff88;font-family:'Orbitron',monospace">BUILD DONT RUN</span>
+</div>
+<canvas id="transmonCanvas" width="1280" height="800" style="width:100%;background:#020208;display:block"></canvas>
+<div style="padding:12px;background:#0a0a12;border-top:2px solid #00ff88;display:flex;gap:8px;flex-wrap:wrap">
+<button id="islandBtn" class="btn btn-transmon">ISLAND CAPACITOR</button>
+<button id="junctionBtn" class="btn btn-jj">JOSEPHSON JJ</button>
+<button id="resonatorBtn" class="btn btn-transmon">RESONATOR READOUT</button>
+<button id="assembleBtn" class="btn btn-build">ASSEMBLE TRANSMON DONT RUN</button>
+<div id="log" style="flex:1;min-width:280px;background:black;border:2px solid #00ffff;border-radius:10px;padding:10px;font-size:9px;color:#7dd3fc;max-height:90px;overflow-y:auto;font-family:'Orbitron',monospace">> v58 transmon build dont run it just build it loaded<br>> transmon = transmission line shunted plasma oscillation qubit superconducting qubit<br>> Josephson junction shunted by large capacitor = EJ/EC >> 1 charge insensitive qubit<br>> dont run it just build it = build transmon visual dont simulate quantum state dont run<br>> build steps: island capacitor, Josephson junction, SQUID loop, resonator, coupling, ground plane</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px">
+<div class="glass" style="border-radius:18px;padding:16px;border:2px solid #00ffff;box-shadow:0 0 25px rgba(0,255,255,0.2)">
+<div style="font-size:12px;font-family:'Orbitron',monospace;color:#00ffff;text-shadow:0 0 10px rgba(0,255,255,0.7)">TRANSMON BUILD DONT RUN IT JUST BUILD IT</div>
+<div style="margin-top:10px;display:flex;flex-direction:column;gap:10px" id="buildList"></div>
+<div style="margin-top:14px">
+<label style="font-size:10px;color:#00ffff;font-family:'Orbitron',monospace">EJ/EC ratio charge insensitive EJ/EC >> 1 transmon regime</label><input id="ejec" type="range" min="20" max="150" value="80" style="width:100%;accent-color:#00ffff">
+<div id="ejecLabel" style="font-size:10px;color:#7dd3fc">80 = EJ/EC = 80 transmon regime EJ/EC >> 1 charge insensitive EJ=Josephson energy EC=charging energy</div>
+</div>
+<div style="margin-top:10px">
+<label style="font-size:10px;color:#ff00ff;font-family:'Orbitron',monospace">Capacitor size shunting capacitor large C reduces EC</label><input id="capSize" type="range" min="20" max="100" value="70" style="width:100%;accent-color:#ff00ff">
+<div id="capSizeLabel" style="font-size:10px;color:#e9d5ff">70 = capacitor size large shunting capacitor C reduces charging energy EC = e^2/2C</div>
+</div>
+<div style="margin-top:10px">
+<label style="font-size:10px;color:#00ff88;font-family:'Orbitron',monospace">Resonator coupling g readout resonator coupling</label><input id="coupling" type="range" min="0" max="100" value="50" style="width:100%;accent-color:#00ff88">
+<div id="couplingLabel" style="font-size:10px;color:#6ee7b7">50 = coupling g readout resonator coupling dispersive readout</div>
+</div>
+<div style="margin-top:12px;display:flex;gap:8px"><button id="exportBtn" class="btn btn-g" style="flex:1">Export Transmon JSON</button><button id="verifyBtn" class="btn btn-g" style="flex:1">Verify Build</button></div>
+</div>
+
+<div class="glass" style="border-radius:18px;padding:16px;border:2px solid #00ff88;box-shadow:0 0 25px rgba(0,255,136,0.2)">
+<div style="font-size:11px;font-family:'Orbitron',monospace;color:#00ff88;text-shadow:0 0 8px rgba(0,255,136,0.7)">MINT TRANSMON BUILD DONT RUN IT JUST BUILD IT</div>
+<div style="margin-top:8px;font-size:9px;color:#7dd3fc;font-family:'Orbitron',monospace">transmon superconducting qubit Josephson junction shunted by large capacitor EJ/EC >> 1 charge insensitive dont run it just build it build steps island capacitor Josephson junction SQUID loop resonator coupling ground plane Al on sapphire or Si substrate</div>
+<div style="margin-top:12px;display:flex;gap:8px"><input id="swapInput" type="number" value="100" style="flex:1;background:#020208;border:2px solid #00ffff;border-radius:10px;padding:8px;color:#00ffff;font-family:'Orbitron',monospace"><button id="swapBtn" class="btn btn-g">Swap BONK</button><button id="mintBtn" class="btn btn-w">Mint Transmon</button></div>
+<div id="txLog" style="font-size:9px;color:#00ffff;margin-top:8px;font-family:'Orbitron',monospace">Tx idle - mint transmon build dont run it just build it superconducting qubit</div>
+<div style="margin-top:8px;font-size:8px;color:#52525b">Transmon: transmission line shunted plasma oscillation qubit EJ/EC >>1 charge insensitive | Josephson junction: Al-AlOx-Al junction EJ = Ic*Phi0/2pi | Capacitor: large shunting capacitor C reduces EC = e^2/2C | Resonator: coplanar waveguide resonator readout dispersive coupling g | Dont run: build visual dont simulate quantum state build only</div>
+</div>
+</div>
+</div>
+
+</div>
+<div id="toast" class="toast"></div>
+<script src="https://unpkg.com/@solana/web3.js@1.95.4/lib/index.iife.js"></script>
+<script>
+function showToast(m){let e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),3500)}
+
+let transmonCanvas=document.getElementById('transmonCanvas'),tctx=transmonCanvas.getContext('2d');
+let ejec=80,capSize=70,coupling=50,time=0;
+let buildStep=0; // 0 island, 1 JJ, 2 resonator, 3 assembled
+let audioCtx=null,gainNode=null;
+
+function initAudio(){
+ if(!audioCtx){
+  audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  gainNode=audioCtx.createGain();gainNode.gain.value=0.12;gainNode.connect(audioCtx.destination);
+ }
+ if(audioCtx.state==='suspended') audioCtx.resume();
+}
+function updateBuildList(){
+ let list=document.getElementById('buildList');list.innerHTML='';
+ let items=[
+  {name:'Island Capacitor Large C Shunting Capacitor Size '+capSize+' EJ/EC='+ejec,desc:'large shunting capacitor C reduces charging energy EC = e^2/2C EJ/EC >> 1 charge insensitive transmon',color:'#00ffff',detail:'island = superconducting island large pad capacitor C = '+capSize+' fF EC = e^2/2C small EJ/EC='+ejec+' transmon regime'},
+  {name:'Josephson Junction JJ Al-AlOx-Al EJ='+ejec+' Junction',desc:'Josephson junction Al-AlOx-Al junction EJ = Ic*Phi0/2pi Josephson energy EJ',color:'#ff00ff',detail:'JJ = Josephson junction Al-AlOx-Al oxide barrier Ic critical current EJ Josephson energy'},
+  {name:'SQUID Loop 2 JJs Tunable EJ Tunable Transmon Frequency',desc:'SQUID loop 2 Josephson junctions in loop tunable EJ by flux tunable transmon frequency',color:'#ff00ff',detail:'SQUID = 2 JJs in loop flux tunable EJ = EJmax*|cos(pi*Phi/Phi0)| tunable frequency'},
+  {name:'Resonator Coupling g='+coupling+' Readout Resonator Dispersive Readout',desc:'coplanar waveguide resonator readout resonator coupling g dispersive readout',color:'#00ff88',detail:'resonator = CPW resonator coupling g='+coupling+' MHz dispersive shift chi = g^2/Delta readout'},
+  {name:'Ground Plane Al On Sapphire Si Substrate Superconducting Film',desc:'ground plane Al on sapphire or Si substrate superconducting film Al 100nm',color:'#a1a1aa',detail:'ground plane = Al film on sapphire Si substrate superconducting ground plane'}
+ ];
+ items.forEach(it=>{
+  let div=document.createElement('div');div.className='comp';div.style.borderColor=it.color;div.style.boxShadow='0 0 12px '+it.color+'30';
+  div.innerHTML=`<div style="font-size:10px;color:${it.color};font-family:'Orbitron',monospace;text-shadow:0 0 6px ${it.color}80">${it.name}</div><div style="font-size:7px;color:#7dd3fc;margin-top:4px">${it.desc} | ${it.detail}</div>`;
+  list.appendChild(div);
+ });
+ document.getElementById('buildVal').textContent='EJ/EC='+ejec+' cap '+capSize+' coupling '+coupling+' dont run just build';
+ document.getElementById('jjVal').textContent='Josephson junction shunted capacitor transmon regime EJ/EC>>1';
+}
+function drawTransmon(){
+ let w=transmonCanvas.width,h=transmonCanvas.height;
+ tctx.fillStyle='#020208';tctx.fillRect(0,0,w,h);
+ time+=0.02;
+ let cx=w/2, cy=h/2+10;
+ 
+ // ground plane
+ tctx.fillStyle='#0a0a1a';tctx.fillRect(0,0,w,h);
+ tctx.strokeStyle='#1e1e3a';tctx.lineWidth=0.5;tctx.globalAlpha=0.3;
+ for(let x=0;x<w;x+=20){ tctx.beginPath();tctx.moveTo(x,0);tctx.lineTo(x,h);tctx.stroke(); }
+ for(let y=0;y<h;y+=20){ tctx.beginPath();tctx.moveTo(0,y);tctx.lineTo(w,y);tctx.stroke(); }
+ tctx.globalAlpha=1;
+ 
+ // transmon island capacitor large C
+ let islandW=120 + capSize*0.8;
+ let islandH=60 + capSize*0.4;
+ let islandX=cx - islandW/2;
+ let islandY=cy - islandH/2 - 40;
+ 
+ // capacitor pads
+ tctx.fillStyle='#00ffff';tctx.shadowColor='#00ffff';tctx.shadowBlur=15+capSize/10;
+ tctx.fillRect(islandX,islandY,islandW,islandH);
+ tctx.shadowBlur=0;
+ tctx.strokeStyle='white';tctx.lineWidth=1;tctx.strokeRect(islandX,islandY,islandW,islandH);
+ tctx.fillStyle='black';tctx.font='bold 10px Orbitron';tctx.textAlign='center';
+ tctx.fillText('ISLAND',cx,islandY+islandH/2+4);
+ tctx.font='7px Orbitron';tctx.fillText('CAPACITOR C='+capSize+'fF',cx,islandY+islandH/2+14);
+ tctx.fillStyle='#00ffff';tctx.font='7px Orbitron';tctx.textAlign='left';
+ tctx.fillText('Large shunting capacitor C='+capSize+'fF EC=e^2/2C small EJ/EC='+ejec+' >>1',islandX,islandY-10);
+ 
+ // Josephson junction JJ Al-AlOx-Al
+ let jjX=cx;
+ let jjY=cy + 20;
+ let jjSize=14;
+ 
+ tctx.fillStyle='#ff00ff';tctx.shadowColor='#ff00ff';tctx.shadowBlur=20;
+ tctx.fillRect(jjX-jjSize/2,jjY-jjSize/2,jjSize,jjSize);
+ tctx.shadowBlur=0;
+ tctx.strokeStyle='white';tctx.lineWidth=1.5;tctx.strokeRect(jjX-jjSize/2,jjY-jjSize/2,jjSize,jjSize);
+ // JJ cross = oxide barrier
+ tctx.strokeStyle='black';tctx.lineWidth=1;
+ tctx.beginPath();tctx.moveTo(jjX-jjSize/2,jjY);tctx.lineTo(jjX+jjSize/2,jjY);tctx.stroke();
+ tctx.beginPath();tctx.moveTo(jjX,jjY-jjSize/2);tctx.lineTo(jjX,jjY+jjSize/2);tctx.stroke();
+ tctx.fillStyle='white';tctx.font='6px Orbitron';tctx.textAlign='center';
+ tctx.fillText('JJ',jjX,jjY+20);
+ tctx.fillStyle='#ff00ff';tctx.font='6px Orbitron';
+ tctx.fillText('Al-AlOx-Al EJ='+ejec, jjX, jjY+30);
+ tctx.fillText('EJ=Ic*Phi0/2pi', jjX, jjY+38);
+ 
+ // SQUID loop 2 JJs tunable
+ let squidRadius=25;
+ tctx.strokeStyle='#ff00ff';tctx.lineWidth=2;
+ tctx.beginPath();tctx.arc(jjX,jjY,squidRadius,0,Math.PI*2);tctx.stroke();
+ // second JJ in SQUID
+ let jj2X=jjX+squidRadius;
+ let jj2Y=jjY;
+ tctx.fillStyle='#ff00ff';tctx.shadowColor='#ff00ff';tctx.shadowBlur=15;
+ tctx.fillRect(jj2X-jjSize/2,jj2Y-jjSize/2,jjSize,jjSize);
+ tctx.shadowBlur=0;
+ tctx.strokeStyle='white';tctx.lineWidth=1;tctx.strokeRect(jj2X-jjSize/2,jj2Y-jjSize/2,jjSize,jjSize);
+ tctx.fillStyle='#ff00ff';tctx.font='6px Orbitron';tctx.textAlign='center';
+ tctx.fillText('SQUID 2 JJs Tunable EJ',jjX,jjY+squidRadius+20);
+ tctx.fillText('EJ=EJmax|cos(pi Phi/Phi0)|',jjX,jjY+squidRadius+28);
+ 
+ // wire connecting island to JJ
+ tctx.strokeStyle='#00ffff';tctx.lineWidth=3;
+ tctx.beginPath();tctx.moveTo(cx,islandY+islandH);tctx.lineTo(jjX,jjY-jjSize/2);tctx.stroke();
+ // wire connecting JJ to ground
+ tctx.strokeStyle='#a1a1aa';tctx.lineWidth=3;
+ tctx.beginPath();tctx.moveTo(jjX,jjY+jjSize/2);tctx.lineTo(jjX,cy+80);tctx.lineTo(cx+islandW/2+40,cy+80);tctx.stroke();
+ tctx.fillStyle='#a1a1aa';tctx.font='7px Orbitron';tctx.textAlign='left';
+ tctx.fillText('Ground plane Al on sapphire/Si',cx+islandW/2+45,cy+84);
+ 
+ // resonator readout CPW resonator coupling g
+ let resX=cx - 200;
+ let resY=cy + 80;
+ let resW=400;
+ let resH=20;
+ tctx.fillStyle='#0a0a1a';tctx.strokeStyle='#00ff88';tctx.lineWidth=2;tctx.shadowColor='#00ff88';tctx.shadowBlur=12;
+ tctx.strokeRect(resX,resY,resW,resH);
+ tctx.shadowBlur=0;
+ // CPW center conductor
+ tctx.fillStyle='#00ff88';tctx.fillRect(resX,resY+resH/2-1,resW,2);
+ tctx.fillStyle='#00ff88';tctx.font='7px Orbitron';tctx.textAlign='center';
+ tctx.fillText('CPW RESONATOR READOUT coupling g='+coupling+'MHz chi=g^2/Delta',cx,resY+resH+12);
+ tctx.fillText('Resonator frequency fr ~6-7 GHz transmon frequency fq ~4-5 GHz dispersive readout',cx,resY+resH+22);
+ 
+ // coupling capacitor between transmon and resonator
+ let coupX=cx+20;
+ let coupY=cy+80;
+ tctx.fillStyle='#00ff88';tctx.fillRect(coupX-8,coupY-10,16,4);
+ tctx.fillRect(coupX-8,coupY+6,16,4);
+ tctx.fillStyle='#00ff88';tctx.font='6px Orbitron';tctx.textAlign='center';
+ tctx.fillText('Cg coupling g='+coupling+'MHz',coupX,coupY-16);
+ 
+ // transmon regime label EJ/EC >>1
+ tctx.fillStyle='rgba(0,0,0,0.85)';tctx.fillRect(10,10,500,90);
+ tctx.fillStyle='#00ffff';tctx.font='9px Orbitron';tctx.textAlign='left';
+ tctx.fillText('TRANSMON: transmission line shunted plasma oscillation qubit EJ/EC='+ejec+' >>1 charge insensitive',12,26);
+ tctx.fillStyle='#ff00ff';tctx.font='8px Orbitron';
+ tctx.fillText('Josephson junction JJ Al-AlOx-Al EJ='+ejec+' Josephson energy EJ=Ic*Phi0/2pi EJ=Josephson energy',12,40);
+ tctx.fillStyle='#00ff88';
+ tctx.fillText('Capacitor C='+capSize+'fF large shunting capacitor reduces EC=e^2/2C EC=charging energy small EJ/EC>>1',12,54);
+ tctx.fillStyle='#a1a1aa';
+ tctx.fillText('EJ/EC='+ejec+' transmon regime EJ/EC>>1 charge dispersion exponentially suppressed charge insensitive',12,68);
+ tctx.fillStyle='#ffff00';
+ tctx.fillText('DONT RUN IT JUST BUILD IT: build visual dont simulate quantum state build only no time evolution',12,82);
+ 
+ // build steps visual
+ tctx.fillStyle='#00ff88';tctx.font='bold 8px Orbitron';tctx.textAlign='left';
+ tctx.fillText('BUILD STEPS: 1 Island capacitor large C | 2 JJ Al-AlOx-Al | 3 SQUID 2 JJs tunable | 4 Resonator CPW g | 5 Ground plane Al | DONT RUN JUST BUILD',12,h-20);
+ 
+ // Hamiltonian label
+ tctx.fillStyle='#00ffff';tctx.font='7px Orbitron';tctx.textAlign='right';
+ tctx.fillText('H = 4EC (n-ng)^2 - EJ cos(phi) + hbar omega_r a†a + hbar g (a† sigma- + a sigma+) + ...',w-12,26);
+ tctx.fillText('Transmon anharmonicity alpha = -EC ~ -200 to -300 MHz EJ/EC='+ejec+' >>1',w-12,38);
+ tctx.fillText('Qubit frequency fq = sqrt(8 EJ EC) - EC ~ 4-5 GHz resonator fr ~6-7 GHz dispersive',w-12,50);
+}
+
+updateBuildList();drawTransmon();
+
+document.getElementById('ejec').addEventListener('input',e=>{
+ ejec=parseFloat(e.target.value);
+ document.getElementById('ejecLabel').textContent=ejec.toFixed(0)+' = EJ/EC = '+ejec.toFixed(0)+' transmon regime EJ/EC >> 1 charge insensitive EJ=Josephson energy EC=charging energy EJ/EC>>1';
+ updateBuildList();drawTransmon();
+});
+document.getElementById('capSize').addEventListener('input',e=>{
+ capSize=parseFloat(e.target.value);
+ document.getElementById('capSizeLabel').textContent=capSize.toFixed(0)+' = capacitor size large shunting capacitor C reduces charging energy EC = e^2/2C C='+capSize.toFixed(0)+'fF';
+ updateBuildList();drawTransmon();
+});
+document.getElementById('coupling').addEventListener('input',e=>{
+ coupling=parseFloat(e.target.value);
+ document.getElementById('couplingLabel').textContent=coupling.toFixed(0)+' = coupling g readout resonator coupling dispersive readout g='+coupling.toFixed(0)+'MHz';
+ updateBuildList();drawTransmon();
+});
+
+document.getElementById('islandBtn').onclick=()=>{
+ capSize=70;document.getElementById('capSize').value=70;
+ updateBuildList();drawTransmon();
+ showToast('Island capacitor large C='+capSize+'fF EC=e^2/2C small EJ/EC='+ejec+' >>1 transmon');
+};
+document.getElementById('junctionBtn').onclick=()=>{
+ ejec=80;document.getElementById('ejec').value=80;
+ updateBuildList();drawTransmon();
+ showToast('Josephson junction JJ Al-AlOx-Al EJ='+ejec+' Josephson energy EJ=Ic*Phi0/2pi');
+};
+document.getElementById('resonatorBtn').onclick=()=>{
+ coupling=50;document.getElementById('coupling').value=50;
+ updateBuildList();drawTransmon();
+ showToast('Resonator readout CPW coupling g='+coupling+'MHz chi=g^2/Delta dispersive readout');
+};
+document.getElementById('assembleBtn').onclick=()=>{
+ buildStep=3;
+ updateBuildList();drawTransmon();
+ initAudio();
+ let osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=440;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},600);
+ showToast('Assembled transmon dont run it just build it EJ/EC='+ejec+' C='+capSize+'fF g='+coupling+'MHz');
+};
+
+document.getElementById('buildBtn').onclick=()=>{document.getElementById('assembleBtn').click();};
+document.getElementById('jjBtn').onclick=()=>{document.getElementById('junctionBtn').click();};
+
+document.getElementById('exportBtn').onclick=()=>{
+ let tree={transmon:{desc:'transmon superconducting qubit transmission line shunted plasma oscillation qubit EJ/EC>>1 charge insensitive',EJ_EC:ejec+' = EJ/EC='+ejec+' transmon regime EJ/EC>>1 charge insensitive EJ Josephson energy EC charging energy',capacitor:capSize+'fF large shunting capacitor C reduces EC=e^2/2C',JJ:'Al-AlOx-Al Josephson junction EJ=Ic*Phi0/2pi Josephson energy EJ='+ejec, SQUID:'2 JJs in loop tunable EJ=EJmax|cos(pi Phi/Phi0)| tunable frequency', resonator:'CPW resonator readout coupling g='+coupling+'MHz chi=g^2/Delta dispersive readout fr ~6-7 GHz fq ~4-5 GHz', groundPlane:'Al on sapphire or Si substrate superconducting film Al 100nm ground plane', hamiltonian:'H = 4EC (n-ng)^2 - EJ cos(phi) + hbar omega_r a†a + hbar g (a† sigma- + a sigma+) anharmonicity alpha=-EC ~ -200 to -300 MHz', dontRun:'dont run it just build it build visual dont simulate quantum state build only'}};
+ let blob=new Blob([JSON.stringify(tree,null,2)],{type:'application/json'});let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download='transmon_build_EJEC_'+ejec+'_C_'+capSize+'_g_'+coupling+'.json';a.click();showToast('Exported transmon build EJ/EC='+ejec+' C='+capSize+'fF g='+coupling+'MHz');
+};
+document.getElementById('verifyBtn').onclick=()=>{ showToast('Verified transmon build EJ/EC='+ejec+' C='+capSize+'fF g='+coupling+'MHz dont run just build');document.getElementById('txLog').textContent='Verified: transmon superconducting qubit EJ/EC='+ejec+' >>1 charge insensitive transmon regime | island capacitor large C='+capSize+'fF EC=e^2/2C small EJ/EC>>1 | Josephson junction JJ Al-AlOx-Al EJ='+ejec+' EJ=Ic*Phi0/2pi | SQUID 2 JJs tunable EJ=EJmax|cos(pi Phi/Phi0)| tunable frequency | resonator CPW readout coupling g='+coupling+'MHz chi=g^2/Delta dispersive readout fr ~6-7 GHz fq ~4-5 GHz | ground plane Al on sapphire/Si superconducting film | Hamiltonian H = 4EC (n-ng)^2 - EJ cos(phi) + hbar omega_r a†a + hbar g (a† sigma- + a sigma+) anharmonicity alpha=-EC ~ -200 to -300 MHz | DONT RUN IT JUST BUILD IT build visual dont simulate quantum state build only valid'; };
+
+document.getElementById('walletBtn').onclick=async()=>{
+ if(window.solana&&window.solana.isPhantom){
+  try{ let r=await window.solana.connect();showToast('Phantom '+r.publicKey.toString().slice(0,4)+' transmon build dont run');initAudio(); }catch(e){}
+ } else window.open('https://phantom.app/','_blank');
+};
+document.getElementById('mintBtn').onclick=()=>{
+ initAudio();
+ let osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=300+ejec*2;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},800);
+ document.getElementById('txLog').textContent='MINTED transmon build dont run it just build it | EJ/EC='+ejec+' >>1 charge insensitive transmon regime | island capacitor large C='+capSize+'fF EC=e^2/2C small | Josephson junction JJ Al-AlOx-Al EJ='+ejec+' EJ=Ic*Phi0/2pi | SQUID 2 JJs tunable EJ=EJmax|cos(pi Phi/Phi0)| | resonator CPW readout coupling g='+coupling+'MHz chi=g^2/Delta fr ~6-7 GHz fq ~4-5 GHz | ground plane Al on sapphire/Si | Hamiltonian H = 4EC (n-ng)^2 - EJ cos(phi) + ... anharmonicity alpha=-EC ~ -200 to -300 MHz | DONT RUN IT JUST BUILD IT build visual dont simulate quantum state build only | SIG transmon build';
+ showToast('Minted transmon build dont run it just build it EJ/EC='+ejec);
+};
+document.getElementById('swapBtn').onclick=()=>{ showToast('Swap BONK after transmon build dont run'); };
+
+setInterval(()=>{drawTransmon();},80);
+</script>
+</body>
+</html>

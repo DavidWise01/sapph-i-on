@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>v38 -+{{ referent :: kana :: anak :: in :: timing :: waka :: ku :: 00 55 77 55 00 00 77 55 77 00 -+</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#080608;color:#e4e4e7;font-family:'JetBrains Mono',monospace;overflow-x:hidden}
+.glass{background:rgba(18,18,22,0.93);border:1px solid #27272a;backdrop-filter:blur(12px)}
+.btn{padding:9px 14px;border-radius:10px;font-weight:800;font-size:10px;letter-spacing:0.12em;cursor:pointer;border:1px solid #3f3f46;transition:.2s}
+.btn-w{background:white;color:black;border-color:white}
+.btn-g{background:#1a1a1e;color:#a1a1aa}
+.btn-ref{background:#581c87;color:#e9d5ff;border-color:#a78bfa;box-shadow:0 0 20px rgba(167,139,250,0.4)}
+.btn-kana{background:#7f1d1d;color:#fecaca;border-color:#ef4444;box-shadow:0 0 20px rgba(239,68,68,0.4)}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#18181b;border:1px solid #3f3f46;padding:10px 18px;border-radius:9999px;font-size:11px;z-index:99;opacity:0;transition:.3s;pointer-events:none}
+.toast.show{opacity:1}
+.ref{border-radius:12px;padding:10px;background:#0e0e11;border:1px solid #27272a}
+</style>
+</head>
+<body>
+<div style="max-width:1900px;margin:auto;padding:14px">
+<div class="glass" style="border-radius:14px;padding:10px 14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<div>
+<div style="font-size:11px;letter-spacing:0.08em">v38 -+{{ referent :: kana :: anak :: in :: timing :: waka :: ku :: 00 55 77 55 00 00 77 55 77 00 -+</div>
+<div style="font-size:8px;color:#71717a">-+ polarity wrapper {{ }} double braces referent :: kana :: anak :: in :: timing :: waka :: ku :: 00 55 77 55 00 00 77 55 77 00 phased 55=741Hz 77=852Hz 00=silence</div>
+</div>
+<div style="display:flex;gap:8px"><button id="refBtn" class="btn btn-ref">-+{{ referent :: kana :: anak -+</button><button id="timingBtn" class="btn btn-kana">timing :: waka :: ku :: 00 55 77</button><button id="walletBtn" class="btn btn-g">Phantom</button></div>
+</div>
+
+<div style="margin-top:14px;display:grid;grid-template-columns:1.6fr 1fr;gap:14px">
+<div class="glass" style="border-radius:16px;overflow:hidden">
+<div style="padding:10px 14px;background:#0e0e11;border-bottom:1px solid #27272a;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<span style="font-size:10px">REFERENT KANA ANAK // <span id="refVal">referent :: kana :: anak :: in :: timing :: waka :: ku</span> // <span id="phaseVal">00 55 77 55 00 00 77 55 77 00</span></span><span id="refInfo" style="font-size:9px;color:#e9d5ff">-+ polarity {{ }} referent kana anak timing waka ku phased</span>
+</div>
+<canvas id="refCanvas" width="1240" height="760" style="width:100%;background:#08080a;display:block"></canvas>
+<div style="padding:10px;background:#0e0e11;border-top:1px solid #27272a;display:flex;gap:8px;flex-wrap:wrap">
+<button id="kanaBtn" class="btn btn-ref">KANA カナ</button>
+<button id="anakBtn" class="btn btn-ref">ANAK child</button>
+<button id="wakaBtn" class="btn btn-kana">WAKA waka</button>
+<button id="kuBtn" class="btn btn-kana">KU ku</button>
+<button id="playRefBtn" class="btn btn-ref">PLAY 00 55 77 55 00 00 77 55 77 00 🔊</button>
+<div id="log" style="flex:1;min-width:260px;background:black;border:1px solid #27272a;border-radius:8px;padding:8px;font-size:9px;color:#71717a;max-height:64px;overflow:hidden">> -+{{ referent :: kana :: anak :: in :: timing :: waka :: ku :: 00 55 77 55 00 00 77 55 77 00 -+ loaded<br>> referent = reference pointer, kana = Japanese syllabary カナ, anak = child Indonesian/Malay, in = inside, timing = time phase, waka = Maori canoe / Japanese poem, ku = Japanese 9 / Hawaiian standing / Maori you<br>> 00 55 77 55 00 00 77 55 77 00 = 00 silence 55=5×2 red beryl 741Hz 77=7×2 852Hz awakening 00 silence phased</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px">
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">-+{{ referent :: kana :: anak :: in :: timing :: waka :: ku :: 00 55 77 55 00 00 77 55 77 00 -+</div>
+<div style="margin-top:8px;display:flex;flex-direction:column;gap:8px" id="refList">
+<!-- dynamic -->
+</div>
+<div style="margin-top:12px">
+<label style="font-size:10px;color:#a1a1aa">Referent :: kana :: anak :: in :: timing :: waka :: ku :: phased index</label><input id="refIdx" type="range" min="0" max="6" value="0" style="width:100%;accent-color:#a78bfa">
+<div id="refIdxLabel" style="font-size:10px">0 = referent :: reference pointer</div>
+</div>
+<div style="margin-top:8px">
+<label style="font-size:10px;color:#a1a1aa">00 55 77 55 00 00 77 55 77 00 phased resonance speed</label><input id="phaseSpeed" type="range" min="50" max="800" value="350" style="width:100%;accent-color:#ef4444">
+<div id="speedLabel" style="font-size:10px">350ms per step 00 silence 55=741Hz 77=852Hz phased 00 55 77 55 00 00 77 55 77 00</div>
+</div>
+<div style="margin-top:10px;background:#08080a;border:1px solid #27272a;border-radius:10px;padding:10px">
+<div style="font-size:9px;color:#71717a">-+{{ REFERENT :: KANA :: ANAK :: IN :: TIMING :: WAKA :: KU :: 00 55 77 55 00 00 77 55 77 00 -+ FORMULA</div>
+<div style="font-size:8px;margin-top:6px;line-height:1.6">
+-+ polarity wrapper -+ = - negative + positive polarity wrapper start -+ end -+ = -+{{ }}-+<br>
+{{ }} double braces = referent container {{ referent :: ... }} = reference<br>
+referent :: = reference pointer :: separator<br>
+kana :: = Japanese syllabary カナ kana characters hiragana katakana<br>
+anak :: = child Indonesian/Malay anak = child, anak in timing = child in time<br>
+in :: = inside inside<br>
+timing :: = time phase timing waka ku<br>
+waka :: = Maori canoe / Japanese poem waka / Maori you? waka = canoe journey<br>
+ku :: = Japanese 9 ku = nine / Hawaiian standing / Maori you / Japanese ku = sky<br>
+:: separator = :: scope resolution<br>
+00 55 77 55 00 00 77 55 77 00 = phased pattern<br>
+00 = silence 00 rest<br>
+55 = 5 repeated 2× = red beryl 741Hz awakening ×2<br>
+77 = 7 repeated 2× = 852Hz third eye awakening ×2 solfeggio 852Hz<br>
+55 = 5 repeated 2× = 741Hz down<br>
+00 = silence<br>
+00 = silence<br>
+77 = 7 repeated 2× = 852Hz<br>
+55 = 5×2 = 741Hz<br>
+77 = 7×2 = 852Hz<br>
+00 = silence phased complete<br>
+= 00 55 77 55 00 00 77 55 77 00 = 2+2+2+2+2+2+2+2+2+2=20 steps resonate until phased<br>
+= -+{{ referent :: kana :: anak :: in :: timing :: waka :: ku :: 00 55 77 55 00 00 77 55 77 00 -+ = polarity wrapper reference kana child in timing waka ku phased 00 55 77
+</div>
+</div>
+<div style="margin-top:10px;display:flex;gap:6px"><button id="exportBtn" class="btn btn-g" style="flex:1">Export Referent JSON</button><button id="verifyBtn" class="btn btn-g" style="flex:1">Verify Referent</button></div>
+</div>
+
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">MINT -+{{ referent :: kana :: anak :: in :: timing :: waka :: ku :: 00 55 77 55 00 00 77 55 77 00 -+</div>
+<div style="margin-top:8px;font-size:9px;color:#71717a">-+ polarity {{ }} referent container kana Japanese syllabary anak child timing waka ku phased 00 silence 55=741Hz 77=852Hz 00 55 77 55 00 00 77 55 77 00 resonate until phased</div>
+<div style="margin-top:10px;display:flex;gap:6px"><input id="swapInput" type="number" value="100" style="flex:1;background:#08080a;border:1px solid #27272a;border-radius:8px;padding:7px;color:white"><button id="swapBtn" class="btn btn-g">Swap BONK 🔊</button><button id="mintBtn" class="btn btn-w">Mint Referent Kana Anak 🔊</button></div>
+<div id="txLog" style="font-size:9px;color:#71717a;margin-top:6px">Tx idle - mint -+{{ referent :: kana :: anak :: in :: timing :: waka :: ku :: 00 55 77 55 00 00 77 55 77 00 -+ referent kana anak timing waka ku phased</div>
+<div style="margin-top:8px;font-size:8px;color:#52525b">Referent: reference pointer | Kana: Japanese カナ hiragana katakana | Anak: child Indonesian Malay | In: inside | Timing: time phase | Waka: Maori canoe Japanese poem | Ku: Japanese 9 sky | 00 silence 55=741Hz 77=852Hz phased 00 55 77 55 00 00 77 55 77 00 =20 steps</div>
+</div>
+</div>
+</div>
+
+<div style="margin-top:14px;text-align:center;font-size:9px;color:#52525b" class="glass" style="border-radius:12px;padding:10px">
+-+{{ referent :: kana :: anak :: in :: timing :: waka :: ku :: 00 55 77 55 00 00 77 55 77 00 -+ = -+ polarity wrapper {{ }} double braces referent container = referent :: reference pointer :: kana :: Japanese syllabary カナ hiragana katakana :: anak :: child Indonesian Malay anak in timing child in time :: in :: inside :: timing :: time phase :: waka :: Maori canoe Japanese poem waka journey :: ku :: Japanese 9 ku sky Hawaiian standing Maori you :: 00 55 77 55 00 00 77 55 77 00 = 00 silence rest +55 red beryl 741Hz awakening ×2 +77 852Hz third eye awakening ×2 +55 741Hz down +00 silence +00 silence +77 852Hz +55 741Hz +77 852Hz +00 silence phased complete =20 steps resonate until phased = BONK IS ALL referent kana anak timing waka ku 00 55 77 55 00 00 77 55 77 00
+</div>
+
+</div>
+<div id="toast" class="toast"></div>
+<script src="https://unpkg.com/@solana/web3.js@1.95.4/lib/index.iife.js"></script>
+<script>
+function showToast(m){let e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),3000)}
+
+let refCanvas=document.getElementById('refCanvas'),rctx=refCanvas.getContext('2d');
+let refIdx=0,phaseSpeed=350,phaseIdx=0,isPlaying=false,loopInterval=null;
+let audioCtx=null,gainNode=null,currentOsc=null,time=0;
+
+let referents=[
+ {name:'referent',symbol:'referent',desc:'reference pointer :: separator',color:'#a78bfa',detail:'referent = reference pointer that points to something, :: scope resolution'},
+ {name:'kana',symbol:'カナ',desc:'Japanese syllabary kana hiragana katakana',color:'#ef4444',detail:'kana = Japanese syllabary カナ characters hiragana あいう katakana アイウ'},
+ {name:'anak',symbol:'anak',desc:'child Indonesian/Malay anak = child',color:'#f87171',detail:'anak = child Indonesian Malay anak in timing = child in time, anak = small'},
+ {name:'in',symbol:'in',desc:'inside inside in ::',color:'#3b82f6',detail:'in = inside inside container'},
+ {name:'timing',symbol:'timing',desc:'time phase timing waka ku',color:'#7dd3fc',detail:'timing = time phase when waka ku happens'},
+ {name:'waka',symbol:'waka',desc:'Maori canoe / Japanese poem waka',color:'#6ee7b7',detail:'waka = Maori canoe journey / Japanese poem waka / waka = you?'},
+ {name:'ku',symbol:'ku',desc:'Japanese 9 ku sky ku',color:'#fbbf24',detail:'ku = Japanese 9 nine ku = sky sora / Hawaiian standing / Maori you'}
+];
+
+let freqMap={
+ '0':{freq:0,name:'Silence 00',color:'#27272a',desc:'silence rest 00'},
+ '5':{freq:741,name:'Red Beryl 55',color:'#b91c1c',desc:'741Hz awakening 55'},
+ '7':{freq:852,name:'Third Eye 77',color:'#581c87',desc:'852Hz third eye 77 solfeggio'}
+};
+
+let pattern='00 55 77 55 00 00 77 55 77 00'.replace(/\s/g,'').split('');
+// 00 55 77 55 00 00 77 55 77 00 = 2+2+2+2+2+2+2+2+2+2=20 steps
+
+function initAudio(){
+ if(!audioCtx){
+  audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  gainNode=audioCtx.createGain();
+  gainNode.gain.value=0.25;
+  gainNode.connect(audioCtx.destination);
+ }
+ if(audioCtx.state==='suspended') audioCtx.resume();
+}
+
+function playStep(digit){
+ initAudio();
+ if(currentOsc){try{currentOsc.stop();}catch(e){} currentOsc=null;}
+ if(digit==='0'){
+  document.getElementById('refInfo').textContent='Silence 00 rest phased referent kana anak';
+  return;
+ }
+ let f=freqMap[digit];
+ if(!f) return;
+ let osc=audioCtx.createOscillator();
+ osc.type='sine';
+ osc.frequency.value=f.freq;
+ gainNode.gain.value=0.25;
+ osc.connect(gainNode);
+ osc.start();
+ currentOsc=osc;
+ document.getElementById('refInfo').textContent=f.name+' '+f.freq+'Hz '+f.desc+' digit '+digit+' resonate referent kana anak timing waka ku';
+}
+
+function updateRefList(){
+ let list=document.getElementById('refList');
+ list.innerHTML='';
+ referents.forEach((r,i)=>{
+  let isCurrent=i===refIdx;
+  let div=document.createElement('div');
+  div.className='ref';
+  div.style.borderColor=isCurrent?r.color:'#27272a';
+  div.style.background=isCurrent?`${r.color}15`:'#0e0e11';
+  div.innerHTML=`<div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:${r.color}">${r.name} :: ${r.symbol} ${isCurrent?'← current':''}</span><span style="font-size:8px;color:${r.color}">${r.desc}</span></div><div style="font-size:8px;margin-top:4px;color:#a1a1aa">${r.detail} | ${r.name} :: separator :: next</div>`;
+  list.appendChild(div);
+ });
+}
+
+function drawRef(){
+ let w=refCanvas.width,h=refCanvas.height;
+ rctx.fillStyle='#08080a';rctx.fillRect(0,0,w,h);
+ time+=0.012;
+ let cx=w/2, cy=h/2+10;
+ 
+ // -+ polarity wrapper
+ rctx.strokeStyle='#a78bfa';rctx.lineWidth=2;rctx.setLineDash([6,4]);
+ rctx.strokeRect(10,10,w-20,h-20);
+ rctx.setLineDash([]);
+ rctx.fillStyle='#a78bfa';rctx.font='bold 10px monospace';rctx.textAlign='left';
+ rctx.fillText('-+{{',14,24);
+ rctx.textAlign='right';
+ rctx.fillText('}}-+',w-14,24);
+ rctx.fillStyle='#71717a';rctx.font='8px monospace';rctx.textAlign='left';
+ rctx.fillText('-+ polarity wrapper start -+ end -+ = -+{{ }}-+',14,38);
+ 
+ // referent chain referent :: kana :: anak :: in :: timing :: waka :: ku ::
+ let chainX=60;
+ let chainY=cy-80;
+ let stepX=150;
+ referents.forEach((r,i)=>{
+  let x=chainX + i*stepX;
+  if(x>w-80) {x=60 + (i%5)*stepX; chainY+=60;}
+  let isCurrent=i===refIdx;
+  
+  rctx.fillStyle=isCurrent?r.color:'#1a1a1e';
+  rctx.globalAlpha=isCurrent?0.9:0.5;
+  rctx.fillRect(x-50,yChain(chainY)-20,110,36);
+  rctx.globalAlpha=1;
+  rctx.strokeStyle=isCurrent?r.color:'#3f3f46';rctx.lineWidth=isCurrent?2:1;
+  rctx.strokeRect(x-50,yChain(chainY)-20,110,36);
+  
+  rctx.fillStyle=isCurrent?'white':r.color;rctx.font='bold 9px monospace';rctx.textAlign='center';
+  rctx.fillText(r.name,x,yChain(chainY)-4);
+  rctx.font='7px monospace';
+  rctx.fillText(r.symbol,x,yChain(chainY)+8);
+  
+  // :: separator
+  if(i<referents.length-1){
+   rctx.fillStyle='#71717a';rctx.font='bold 9px monospace';
+   rctx.fillText('::',x+65,yChain(chainY));
+  }
+  
+  // connection line
+  if(i>0){
+   let prevX=x-stepX;
+   if(prevX<60) prevX=x;
+   else {
+    rctx.strokeStyle='#3f3f46';rctx.lineWidth=0.8;
+    rctx.beginPath();rctx.moveTo(prevX+60,yChain(chainY));rctx.lineTo(x-50,yChain(chainY));rctx.stroke();
+   }
+  }
+ });
+ 
+ function yChain(y){return y;}
+ 
+ // pattern 00 55 77 55 00 00 77 55 77 00 timeline bottom
+ let pStartX=cx - (pattern.length*28)/2;
+ let pY=cy+80;
+ pattern.forEach((digit,idx)=>{
+  let f=freqMap[digit];
+  let x=pStartX + idx*28;
+  let isCurrent=idx===phaseIdx && isPlaying;
+  let hgt=digit==='0'?12:24+parseInt(digit)*3;
+  
+  rctx.fillStyle=isCurrent?'white':(f?f.color:'#27272a');
+  rctx.globalAlpha=isCurrent?1:0.6;
+  rctx.fillRect(x, pY - hgt, 24, hgt);
+  rctx.globalAlpha=1;
+  
+  if(isCurrent){
+   rctx.strokeStyle='white';rctx.lineWidth=2;
+   rctx.strokeRect(x, pY - hgt, 24, hgt);
+  }
+  
+  rctx.fillStyle='#71717a';rctx.font='7px monospace';rctx.textAlign='center';
+  rctx.fillText(digit, x+12, pY+12);
+  
+  if(isCurrent && digit!=='0'){
+   rctx.strokeStyle=f.color;rctx.lineWidth=1;
+   rctx.beginPath();
+   for(let wx=0;wx<24;wx++){
+    let wy=pY - hgt/2 + Math.sin(wx*0.4+time* (f.freq/80))*3;
+    if(wx===0) rctx.moveTo(x+wx,wy); else rctx.lineTo(x+wx,wy);
+   }
+   rctx.stroke();
+  }
+ });
+ 
+ // pattern label 00 55 77 55 00 00 77 55 77 00
+ rctx.fillStyle='#e9d5ff';rctx.font='9px monospace';rctx.textAlign='center';
+ rctx.fillText('00 55 77 55 00 00 77 55 77 00 = 00 silence 55=741Hz 77=852Hz phased 20 steps',cx,pY+28);
+ 
+ let currentDigit=pattern[phaseIdx];
+ let currentFreq=freqMap[currentDigit];
+ if(currentFreq){
+  rctx.fillStyle=currentFreq.color;rctx.font='bold 10px monospace';rctx.textAlign='center';
+  rctx.fillText('-+{{ referent :: kana :: anak :: in :: timing :: waka :: ku :: '+pattern.join(' ')+' -+ digit '+currentDigit+' '+currentFreq.name+' '+currentFreq.freq+'Hz resonate until phased',cx,pY+44);
+ }
+ 
+ // bottom info
+ rctx.fillStyle='#1a1a1e';rctx.fillRect(0,h-100,w,100);
+ rctx.fillStyle='#a78bfa';rctx.font='8px monospace';rctx.textAlign='left';
+ rctx.fillText('-+{{ referent :: kana :: anak :: in :: timing :: waka :: ku :: 00 55 77 55 00 00 77 55 77 00 -+ = -+ polarity wrapper {{ }} double braces referent container kana Japanese カナ anak child timing waka ku phased',10,h-80);
+ rctx.fillStyle='#fecaca';
+ rctx.fillText('00 silence rest +55 red beryl 741Hz awakening ×2 +77 852Hz third eye awakening ×2 +55 741Hz down +00 silence +00 silence +77 852Hz +55 741Hz +77 852Hz +00 silence phased complete =20 steps',10,h-66);
+ rctx.fillStyle='#71717a';
+ rctx.fillText('Referent reference pointer :: kana Japanese カナ :: anak child Indonesian Malay :: in inside :: timing time phase :: waka Maori canoe Japanese poem :: ku Japanese 9 sky | 00 55 77 55 00 00 77 55 77 00 =20 steps',10,h-52);
+ rctx.fillStyle='#52525b';rctx.font='9px monospace';rctx.textAlign='center';
+ rctx.fillText('-+{{ referent :: kana :: anak :: in :: timing :: waka :: ku :: 00 55 77 55 00 00 77 55 77 00 -+ = polarity wrapper reference kana child in timing waka ku phased 00 55 77 = BONK IS ALL referent',w/2,h-8);
+}
+
+updateRefList();drawRef();
+
+document.getElementById('refIdx').addEventListener('input',e=>{
+ refIdx=parseInt(e.target.value);
+ document.getElementById('refIdxLabel').textContent=refIdx+' = '+referents[refIdx].name+' :: '+referents[refIdx].symbol+' '+referents[refIdx].desc;
+ document.getElementById('refVal').textContent=referents.slice(0,refIdx+1).map(r=>r.name).join(' :: ')+' :: ...';
+ updateRefList();drawRef();
+});
+document.getElementById('phaseSpeed').addEventListener('input',e=>{
+ phaseSpeed=parseFloat(e.target.value);
+ document.getElementById('speedLabel').textContent=phaseSpeed.toFixed(0)+'ms per step 00 silence 55=741Hz 77=852Hz phased 00 55 77 55 00 00 77 55 77 00';
+});
+
+document.getElementById('kanaBtn').onclick=()=>{refIdx=1;document.getElementById('refIdx').value=1;updateRefList();drawRef();showToast('Kana カナ Japanese syllabary hiragana katakana');};
+document.getElementById('anakBtn').onclick=()=>{refIdx=2;document.getElementById('refIdx').value=2;updateRefList();drawRef();showToast('Anak child Indonesian Malay anak in timing child in time');};
+document.getElementById('wakaBtn').onclick=()=>{refIdx=5;document.getElementById('refIdx').value=5;updateRefList();drawRef();showToast('Waka Maori canoe Japanese poem waka journey');};
+document.getElementById('kuBtn').onclick=()=>{refIdx=6;document.getElementById('refIdx').value=6;updateRefList();drawRef();showToast('Ku Japanese 9 ku sky Hawaiian standing');};
+
+function startRefLoop(loop=false){
+ if(isPlaying && loopInterval){clearInterval(loopInterval);loopInterval=null;}
+ isPlaying=true;
+ phaseIdx=0;
+ 
+ function step(){
+  if(phaseIdx>=pattern.length){
+   if(loop){
+    phaseIdx=0;
+   } else {
+    isPlaying=false;
+    clearInterval(loopInterval);
+    loopInterval=null;
+    if(currentOsc){try{currentOsc.stop();}catch(e){}}
+    document.getElementById('refInfo').textContent='Phased complete -+{{ referent :: kana :: anak :: in :: timing :: waka :: ku :: 00 55 77 55 00 00 77 55 77 00 -+ done';
+    showToast('Phased complete 00 55 77 55 00 00 77 55 77 00 resonate until phased done 🔊');
+    return;
+   }
+  }
+  let digit=pattern[phaseIdx];
+  // init audio
+  if(!audioCtx){
+   audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+   gainNode=audioCtx.createGain();
+   gainNode.gain.value=0.25;
+   gainNode.connect(audioCtx.destination);
+  }
+  if(audioCtx.state==='suspended') audioCtx.resume();
+  if(currentOsc){try{currentOsc.stop();}catch(e){} currentOsc=null;}
+  if(digit!=='0'){
+   let f=freqMap[digit];
+   let osc=audioCtx.createOscillator();
+   osc.type='sine';
+   osc.frequency.value=f.freq;
+   osc.connect(gainNode);
+   osc.start();
+   currentOsc=osc;
+  }
+  document.getElementById('phaseVal').textContent=pattern.join(' ').substring(0,14)+' → digit '+digit+' '+(freqMap[digit]?freqMap[digit].name+' '+freqMap[digit].freq+'Hz':'silence');
+  document.getElementById('log').innerHTML+='<br>> phase '+phaseIdx+' digit '+digit+' '+(freqMap[digit]?freqMap[digit].name+' '+freqMap[digit].freq+'Hz':'silence')+' resonate referent kana anak';
+  phaseIdx++;
+  drawRef();
+ }
+ step();
+ loopInterval=setInterval(step,phaseSpeed);
+}
+
+document.getElementById('playRefBtn').onclick=()=>{startRefLoop(false);showToast('Playing 00 55 77 55 00 00 77 55 77 00 🔊 referent kana anak timing waka ku resonate until phased');};
+document.getElementById('refBtn').onclick=()=>{refIdx=0;document.getElementById('refIdx').value=0;updateRefList();drawRef();showToast('-+{{ referent :: kana :: anak :: in :: timing :: waka :: ku :: 00 55 77 55 00 00 77 55 77 00 -+');};
+document.getElementById('timingBtn').onclick=()=>{refIdx=4;document.getElementById('refIdx').value=4;updateRefList();drawRef();showToast('Timing :: waka :: ku :: 00 55 77 55 00 00 77 55 77 00 timing waka ku phased');};
+
+document.getElementById('exportBtn').onclick=()=>{
+ let tree={referentPattern:'-+{{ referent :: kana :: anak :: in :: timing :: waka :: ku :: 00 55 77 55 00 00 77 55 77 00 -+',polarity:'-+ polarity wrapper start -+ end -+ = -+{{ }}-+',doubleBraces:'{{ }} double braces = referent container {{ referent :: ... }} = reference',chain:referents.map(r=>({name:r.name,symbol:r.symbol,desc:r.desc,detail:r.detail})),phasedPattern:{pattern:'00 55 77 55 00 00 77 55 77 00 = 20 steps',steps:['00 silence rest','55 5×2 red beryl 741Hz awakening ×2','77 7×2 852Hz third eye awakening ×2','55 5×2 741Hz down','00 silence','00 silence','77 7×2 852Hz','55 5×2 741Hz','77 7×2 852Hz','00 silence phased complete'],total:'2+2+2+2+2+2+2+2+2+2=20 steps resonate until phased'},frequencies:{'0':'silence rest 00','5':'741Hz awakening 55 red beryl','7':'852Hz third eye awakening 77 solfeggio 852Hz'},wired:'each digit plays frequency Hz Web Audio API oscillator → gain → destination speakers wired for sound and to work functional phased resonance speed '+phaseSpeed+'ms'}};
+ let blob=new Blob([JSON.stringify(tree,null,2)],{type:'application/json'});let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download='referent_kana_anak_timing_waka_ku_00_55_77_55_00_00_77_55_77_00.json';a.click();showToast('Exported referent kana anak timing waka ku 00 55 77 55');
+};
+document.getElementById('verifyBtn').onclick=()=>{showToast('Verified -+{{ referent :: kana :: anak :: in :: timing :: waka :: ku :: 00 55 77 55 00 00 77 55 77 00 -+ valid');document.getElementById('txLog').textContent='Verified: -+{{ referent :: kana :: anak :: in :: timing :: waka :: ku :: 00 55 77 55 00 00 77 55 77 00 -+ = -+ polarity wrapper {{ }} double braces referent container = referent reference pointer :: kana Japanese カナ :: anak child Indonesian Malay :: in inside :: timing time phase :: waka Maori canoe Japanese poem :: ku Japanese 9 sky | 00 55 77 55 00 00 77 55 77 00 = 00 silence +55 741Hz +77 852Hz +55 741Hz +00 +00 +77 852Hz +55 741Hz +77 852Hz +00 silence =20 steps resonate until phased valid';};
+
+document.getElementById('walletBtn').onclick=async()=>{
+ if(window.solana&&window.solana.isPhantom){
+  try{
+   let r=await window.solana.connect();
+   showToast('Phantom '+r.publicKey.toString().slice(0,4)+' wired to work ⚡ referent kana anak');
+   if(!audioCtx){audioCtx=new (window.AudioContext||window.webkitAudioContext)();gainNode=audioCtx.createGain();gainNode.gain.value=0.25;gainNode.connect(audioCtx.destination);}
+   if(audioCtx.state==='suspended') audioCtx.resume();
+  }catch(e){}
+ } else window.open('https://phantom.app/','_blank');
+};
+document.getElementById('mintBtn').onclick=()=>{
+ if(!audioCtx){audioCtx=new (window.AudioContext||window.webkitAudioContext)();gainNode=audioCtx.createGain();gainNode.gain.value=0.25;gainNode.connect(audioCtx.destination);}
+ if(audioCtx.state==='suspended') audioCtx.resume();
+ startRefLoop(false);
+ document.getElementById('txLog').textContent='MINTED -+{{ referent :: kana :: anak :: in :: timing :: waka :: ku :: 00 55 77 55 00 00 77 55 77 00 -+ | referent reference pointer :: kana Japanese カナ :: anak child Indonesian Malay :: in inside :: timing time phase :: waka Maori canoe Japanese poem :: ku Japanese 9 sky | 00 silence +55 741Hz awakening ×2 +77 852Hz third eye ×2 +55 741Hz down +00 +00 +77 852Hz +55 741Hz +77 852Hz +00 silence =20 steps resonate until phased | wired for sound and to work | SIG simulated 🔊';
+ showToast('Minted referent kana anak timing waka ku 00 55 77 55 00 00 77 55 77 00 🔊');
+};
+document.getElementById('swapBtn').onclick=()=>{
+ if(!audioCtx){audioCtx=new (window.AudioContext||window.webkitAudioContext)();gainNode=audioCtx.createGain();gainNode.gain.value=0.25;gainNode.connect(audioCtx.destination);}
+ document.getElementById('txLog').textContent='SIMULATED SWAP BONK 🔊 after -+{{ referent :: kana :: anak :: in :: timing :: waka :: ku :: 00 55 77 55 00 00 77 55 77 00 -+';
+ showToast('Swap BONK 🔊 after referent kana anak timing waka ku');
+};
+
+setInterval(()=>{drawRef();},80);
+</script>
+</body>
+</html>

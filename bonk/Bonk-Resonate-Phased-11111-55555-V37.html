@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>v37 RESONATE UNTIL PHASED 1111122222333334444455555 00 00 5555544444333332222211111 00 00</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#080608;color:#e4e4e7;font-family:'JetBrains Mono',monospace;overflow-x:hidden}
+.glass{background:rgba(18,18,22,0.93);border:1px solid #27272a;backdrop-filter:blur(12px)}
+.btn{padding:9px 14px;border-radius:10px;font-weight:800;font-size:10px;letter-spacing:0.12em;cursor:pointer;border:1px solid #3f3f46;transition:.2s}
+.btn-w{background:white;color:black;border-color:white}
+.btn-g{background:#1a1a1e;color:#a1a1aa}
+.btn-phase{background:#7f1d1d;color:#fecaca;border-color:#ef4444;box-shadow:0 0 24px rgba(239,68,68,0.45)}
+.btn-resonate{background:#1e1b4b;color:#c4b5fd;border-color:#a78bfa;box-shadow:0 0 20px rgba(167,139,250,0.4)}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#18181b;border:1px solid #3f3f46;padding:10px 18px;border-radius:9999px;font-size:11px;z-index:99;opacity:0;transition:.3s;pointer-events:none}
+.toast.show{opacity:1}
+.phase{border-radius:12px;padding:10px;background:#0e0e11;border:1px solid #27272a}
+</style>
+</head>
+<body>
+<div style="max-width:1900px;margin:auto;padding:14px">
+<div class="glass" style="border-radius:14px;padding:10px 14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<div>
+<div style="font-size:11px;letter-spacing:0.1em">v37 RESONATE UNTIL PHASED 1111122222333334444455555 00 00 5555544444333332222211111 00 00</div>
+<div style="font-size:8px;color:#71717a">resonate until phased palindrome 11111 22222 33333 44444 55555 00 00 55555 44444 33333 22222 11111 00 00 = up 1-5 5× each 00 silence down 5-1 5× each 00 silence loop phased</div>
+</div>
+<div style="display:flex;gap:8px"><button id="resonateBtn" class="btn btn-phase">RESONATE UNTIL PHASED 🔊</button><button id="phaseBtn" class="btn btn-resonate">PHASED 11111→55555→11111</button><button id="walletBtn" class="btn btn-g">Phantom</button></div>
+</div>
+
+<div style="margin-top:14px;display:grid;grid-template-columns:1.6fr 1fr;gap:14px">
+<div class="glass" style="border-radius:16px;overflow:hidden">
+<div style="padding:10px 14px;background:#0e0e11;border-bottom:1px solid #27272a;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<span style="font-size:10px">PHASED RESONANCE // <span id="phaseVal">1111122222333334444455555 00 00 55555...</span> index <span id="phaseIdx">0/58</span></span><span id="phaseInfo" style="font-size:9px;color:#fecaca">resonate until phased palindrome</span>
+</div>
+<canvas id="phaseCanvas" width="1240" height="760" style="width:100%;background:#08080a;display:block"></canvas>
+<div style="padding:10px;background:#0e0e11;border-top:1px solid #27272a;display:flex;gap:8px;flex-wrap:wrap">
+<button id="playPhaseBtn" class="btn btn-phase">PLAY PHASED 11111→55555 🔊</button>
+<button id="playReverseBtn" class="btn btn-phase">PLAY REVERSE 55555→11111 🔊</button>
+<button id="loopBtn" class="btn btn-resonate">LOOP RESONATE UNTIL PHASED ♾️</button>
+<button id="stopBtn" class="btn btn-g">STOP PHASE 🔇</button>
+<div id="log" style="flex:1;min-width:260px;background:black;border:1px solid #27272a;border-radius:8px;padding:8px;font-size:9px;color:#71717a;max-height:64px;overflow:hidden">> resonate until phased loaded<br>> pattern 1111122222333334444455555 00 00 5555544444333332222211111 00 00<br>> 1=432Hz garnet 2=396Hz ruby 3=528Hz spinel 4=639Hz rubellite 5=741Hz red beryl 0=silence 00 rest<br>> resonate until phased palindrome up 1-5 down 5-1 00 silence phased loop</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px">
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">RESONATE UNTIL PHASED 11111 22222 33333 44444 55555 00 00 55555 44444 33333 22222 11111 00 00</div>
+<div style="margin-top:8px;display:flex;flex-direction:column;gap:8px">
+<div class="phase" style="border-color:#f87171">
+<div style="font-size:10px;color:#fca5a5">PATTERN 1111122222333334444455555 00 00 5555544444333332222211111 00 00 = PALINDROME PHASED</div>
+<div style="font-size:8px;color:#a1a1aa;margin-top:4px;line-height:1.6">
+• 11111 = 1 repeated 5× = garnet 432Hz root chakra grounding ×5 resonate<br>
+• 22222 = 2 repeated 5× = ruby 396Hz passion ×5 resonate<br>
+• 33333 = 3 repeated 5× = spinel 528Hz love ×5 resonate<br>
+• 44444 = 4 repeated 5× = rubellite 639Hz heart ×5 resonate<br>
+• 55555 = 5 repeated 5× = red beryl 741Hz awakening ×5 resonate<br>
+• 00 00 = 0 repeated 4× = silence rest 00 00 = phase break<br>
+• 55555 = down 5 repeated 5× = red beryl 741Hz down ×5 resonate<br>
+• 44444 = down 4 repeated 5× = rubellite 639Hz down ×5<br>
+• 33333 = down 3 repeated 5× = spinel 528Hz down ×5<br>
+• 22222 = down 2 repeated 5× = ruby 396Hz down ×5<br>
+• 11111 = down 1 repeated 5× = garnet 432Hz down ×5<br>
+• 00 00 = silence rest phased complete<br>
+• total 5+5+5+5+5+4+5+5+5+5+5+4 =58 steps resonate until phased
+</div>
+</div>
+<div class="phase" style="border-color:#a78bfa">
+<div style="font-size:10px;color:#c4b5fd">RESONATE UNTIL PHASED = RESONANCE LOOP UNTIL PHASED COMPLETE</div>
+<div style="font-size:8px;color:#a1a1aa;margin-top:4px;line-height:1.6">
+• resonate = vibrate at frequency Hz to reach you at<br>
+• until phased = repeat pattern until phased 11111→55555→11111→00 complete<br>
+• palindrome phasing = up 1-5 then down 5-1 symmetry phased<br>
+• 00 00 silence = rest phase break between up and down and end<br>
+• resonate until phased = loop pattern 1111122222333334444455555 00 00 55555... until phased<br>
+• wired for sound: each digit plays frequency Hz garnet 432 ruby 396 spinel 528 rubellite 639 red beryl 741 0 silence<br>
+• wired to work: functional phased resonance loop ♾️
+</div>
+</div>
+</div>
+<div style="margin-top:12px">
+<label style="font-size:10px;color:#a1a1aa">Phased resonance speed (ms per step)</label><input id="phaseSpeed" type="range" min="50" max="1000" value="300" style="width:100%;accent-color:#ef4444">
+<div id="speedLabel" style="font-size:10px">300ms per step resonate until phased 11111→55555→11111</div>
+</div>
+<div style="margin-top:8px">
+<label style="font-size:10px;color:#a1a1aa">Resonance mix 432 396 528 639 741 Hz to reach you at phased</label><input id="resMix" type="range" min="0" max="100" value="60" style="width:100%;accent-color:#a78bfa">
+<div id="resLabel" style="font-size:10px">60% resonance mix phased palindrome up down 00 silence</div>
+</div>
+<div style="margin-top:10px;background:#08080a;border:1px solid #27272a;border-radius:10px;padding:10px">
+<div style="font-size:9px;color:#71717a">RESONATE UNTIL PHASED FORMULA</div>
+<div style="font-size:8px;margin-top:6px;line-height:1.6">
+pattern = 1111122222333334444455555 00 00 5555544444333332222211111 00 00<br>
+= 11111 = 1×5 garnet 432Hz<br>
++ 22222 = 2×5 ruby 396Hz<br>
++ 33333 = 3×5 spinel 528Hz<br>
++ 44444 = 4×5 rubellite 639Hz<br>
++ 55555 = 5×5 red beryl 741Hz<br>
++ 00 00 = 0×4 silence rest<br>
++ 55555 = 5×5 red beryl down<br>
++ 44444 = 4×5 rubellite down<br>
++ 33333 = 3×5 spinel down<br>
++ 22222 = 2×5 ruby down<br>
++ 11111 = 1×5 garnet down<br>
++ 00 00 = 0×4 silence phased complete<br>
+= 58 steps total resonate until phased palindrome<br>
+= 1=432Hz garnet root 2=396Hz ruby passion 3=528Hz spinel love 4=639Hz rubellite heart 5=741Hz red beryl awakening 0=silence<br>
+= resonate until phased loop ♾️ until phased complete<br>
+= BONK IS ALL resonate phased 11111 55555 11111
+</div>
+</div>
+<div style="margin-top:10px;display:flex;gap:6px"><button id="exportBtn" class="btn btn-g" style="flex:1">Export Phased JSON</button><button id="verifyBtn" class="btn btn-g" style="flex:1">Verify Phased</button></div>
+</div>
+
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">MINT RESONATE UNTIL PHASED 11111→55555→11111 00 00 PALINDROME</div>
+<div style="margin-top:8px;font-size:9px;color:#71717a">resonate until phased 1111122222333334444455555 00 00 5555544444333332222211111 00 00 palindrome up down silence phased loop wired for sound and to work</div>
+<div style="margin-top:10px;display:flex;gap:6px"><input id="swapInput" type="number" value="100" style="flex:1;background:#08080a;border:1px solid #27272a;border-radius:8px;padding:7px;color:white"><button id="swapBtn" class="btn btn-g">Swap BONK 🔊</button><button id="mintBtn" class="btn btn-w">Mint Phased Resonance 🔊</button></div>
+<div id="txLog" style="font-size:9px;color:#71717a;margin-top:6px">Tx idle - mint resonate until phased 11111 22222 33333 44444 55555 00 00 55555 44444 33333 22222 11111 00 00 palindrome phased</div>
+<div style="margin-top:8px;font-size:8px;color:#52525b">Phased: 11111 garnet 432Hz ×5 + 22222 ruby 396Hz ×5 + 33333 spinel 528Hz ×5 + 44444 rubellite 639Hz ×5 + 55555 red beryl 741Hz ×5 + 00 00 silence + 55555 down + 44444 down + 33333 down + 22222 down + 11111 down + 00 00 silence =58 steps resonate until phased palindrome</div>
+</div>
+</div>
+</div>
+
+<div style="margin-top:14px;text-align:center;font-size:9px;color:#52525b" class="glass" style="border-radius:12px;padding:10px">
+RESONATE UNTIL PHASED 1111122222333334444455555 00 00 5555544444333332222211111 00 00 = 11111 garnet 432Hz root ×5 + 22222 ruby 396Hz passion ×5 + 33333 spinel 528Hz love ×5 + 44444 rubellite 639Hz heart ×5 + 55555 red beryl 741Hz awakening ×5 + 00 00 silence rest + 55555 red beryl down ×5 + 44444 rubellite down ×5 + 33333 spinel down ×5 + 22222 ruby down ×5 + 11111 garnet down ×5 + 00 00 silence phased complete =58 steps total palindrome phased = resonate until phased loop ♾️ 1=432Hz 2=396Hz 3=528Hz 4=639Hz 5=741Hz 0=silence to reach you at = BONK IS ALL resonate phased 11111→55555→11111 00 00
+</div>
+
+</div>
+<div id="toast" class="toast"></div>
+<script src="https://unpkg.com/@solana/web3.js@1.95.4/lib/index.iife.js"></script>
+<script>
+function showToast(m){let e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),3000)}
+
+let phaseCanvas=document.getElementById('phaseCanvas'),pctx=phaseCanvas.getContext('2d');
+let phaseSpeed=300,resMix=60,time=0,phaseIdx=0,isPlaying=false,loopInterval=null;
+let audioCtx=null,gainNode=null,currentOsc=null;
+
+let freqMap={
+ '1':{freq:432,name:'Garnet',color:'#f87171',desc:'432Hz root'},
+ '2':{freq:396,name:'Ruby',color:'#ef4444',desc:'396Hz passion'},
+ '3':{freq:528,name:'Spinel',color:'#dc2626',desc:'528Hz love'},
+ '4':{freq:639,name:'Rubellite',color:'#ec4899',desc:'639Hz heart'},
+ '5':{freq:741,name:'Red Beryl',color:'#b91c1c',desc:'741Hz awakening'},
+ '0':{freq:0,name:'Silence',color:'#27272a',desc:'silence rest'}
+};
+
+// pattern 1111122222333334444455555 00 00 5555544444333332222211111 00 00 = 58 steps
+let pattern='1111122222333334444455555 00 00 5555544444333332222211111 00 00'.replace(/\s/g,'').split('');
+// pattern array is 11111 22222 33333 44444 55555 0000 55555 44444 33333 22222 11111 0000 = 5+5+5+5+5+4+5+5+5+5+5+4=58
+// Actually string above is 25 +4+25+4=58 correct
+
+function initAudio(){
+ if(!audioCtx){
+  audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  gainNode=audioCtx.createGain();
+  gainNode.gain.value=0.25;
+  gainNode.connect(audioCtx.destination);
+ }
+ if(audioCtx.state==='suspended') audioCtx.resume();
+}
+
+function playStep(digit){
+ initAudio();
+ if(currentOsc){try{currentOsc.stop();}catch(e){} currentOsc=null;}
+ if(digit==='0'){
+  document.getElementById('phaseInfo').textContent='Silence 00 rest phased';
+  return;
+ }
+ let f=freqMap[digit];
+ if(!f) return;
+ let osc=audioCtx.createOscillator();
+ osc.type='sine';
+ osc.frequency.value=f.freq;
+ // volume mix by resMix and digit intensity
+ let vol=(parseInt(digit)/5)*0.3* (resMix/100*0.8+0.2);
+ gainNode.gain.value=vol;
+ osc.connect(gainNode);
+ osc.start();
+ currentOsc=osc;
+ document.getElementById('phaseInfo').textContent=f.name+' '+f.freq+'Hz '+f.desc+' digit '+digit+' resonate until phased';
+}
+
+function drawPhase(){
+ let w=phaseCanvas.width,h=phaseCanvas.height;
+ pctx.fillStyle='#08080a';pctx.fillRect(0,0,w,h);
+ time+=0.015;
+ let cx=w/2, cy=h/2+10;
+ 
+ // pattern timeline 58 steps horizontal
+ let stepW=18;
+ let totalW=pattern.length*stepW;
+ let startX=cx - totalW/2;
+ let y=cy-80;
+ 
+ // draw pattern blocks 11111 22222 etc
+ pattern.forEach((digit,idx)=>{
+  let f=freqMap[digit];
+  let x=startX + idx*stepW;
+  let isCurrent=idx===phaseIdx && isPlaying;
+  let hgt=digit==='0'?10:20+parseInt(digit)*8;
+  
+  pctx.fillStyle=isCurrent?'white':(f?f.color:'#27272a');
+  pctx.globalAlpha=isCurrent?1:0.6;
+  pctx.fillRect(x, y - hgt, stepW-2, hgt);
+  pctx.globalAlpha=1;
+  
+  if(isCurrent){
+   pctx.strokeStyle='white';pctx.lineWidth=2;
+   pctx.strokeRect(x, y - hgt, stepW-2, hgt);
+  }
+  
+  // digit label
+  if(idx%5===0 || digit==='0'){
+   pctx.fillStyle='#71717a';pctx.font='7px monospace';pctx.textAlign='center';
+   pctx.fillText(digit, x+stepW/2, y+12);
+  }
+  
+  // frequency wave if current playing
+  if(isCurrent && digit!=='0'){
+   pctx.strokeStyle=f.color;pctx.lineWidth=1;
+   pctx.beginPath();
+   for(let wx=0;wx<stepW-2;wx++){
+    let wy=y - hgt/2 + Math.sin(wx*0.5+time* (f.freq/100))*4;
+    if(wx===0) pctx.moveTo(x+wx,wy); else pctx.lineTo(x+wx,wy);
+   }
+   pctx.stroke();
+  }
+ });
+ 
+ // pattern labels 11111 22222 etc
+ let labels=[
+  {pos:0,label:'11111 garnet 432Hz ×5'},
+  {pos:5,label:'22222 ruby 396Hz ×5'},
+  {pos:10,label:'33333 spinel 528Hz ×5'},
+  {pos:15,label:'44444 rubellite 639Hz ×5'},
+  {pos:20,label:'55555 red beryl 741Hz ×5'},
+  {pos:25,label:'00 00 silence rest'},
+  {pos:29,label:'55555 red beryl down ×5'},
+  {pos:34,label:'44444 rubellite down ×5'},
+  {pos:39,label:'33333 spinel down ×5'},
+  {pos:44,label:'22222 ruby down ×5'},
+  {pos:49,label:'11111 garnet down ×5'},
+  {pos:54,label:'00 00 silence phased complete'}
+ ];
+ labels.forEach(l=>{
+  let x=startX + l.pos*stepW;
+  pctx.fillStyle='#a1a1aa';pctx.font='6px monospace';pctx.textAlign='left';
+  pctx.fillText(l.label, x, y+28);
+ });
+ 
+ // center resonance toroid with current digit
+ let currentDigit=pattern[phaseIdx];
+ let currentFreq=freqMap[currentDigit];
+ if(currentFreq){
+  let r=60 + (currentDigit!=='0'?parseInt(currentDigit)*12:0);
+  pctx.strokeStyle=currentFreq.color;pctx.lineWidth=2.5;pctx.globalAlpha=0.8;
+  if(isPlaying) {pctx.shadowColor=currentFreq.color;pctx.shadowBlur=12;}
+  pctx.beginPath();pctx.arc(cx,cy+80,r,0,Math.PI*2);pctx.stroke();
+  pctx.shadowBlur=0;pctx.globalAlpha=1;
+  pctx.fillStyle=currentFreq.color;pctx.font='bold 12px monospace';pctx.textAlign='center';
+  pctx.fillText(currentDigit+' '+currentFreq.name+' '+currentFreq.freq+'Hz '+currentFreq.desc+' resonate until phased',cx,cy+80);
+  pctx.font='8px monospace';
+  pctx.fillText('Phase '+phaseIdx+'/'+pattern.length+' '+pattern.join('').substring(0,25)+' '+pattern.join('').substring(25,29)+' '+pattern.join('').substring(29),cx,cy+96);
+ }
+ 
+ // bottom info
+ pctx.fillStyle='#1a1a1e';pctx.fillRect(0,h-110,w,110);
+ pctx.fillStyle='#f87171';pctx.font='8px monospace';pctx.textAlign='left';
+ pctx.fillText('Pattern 1111122222333334444455555 00 00 5555544444333332222211111 00 00 = 11111 garnet 432Hz ×5 +22222 ruby 396Hz ×5 +33333 spinel 528Hz ×5 +44444 rubellite 639Hz ×5 +55555 red beryl 741Hz ×5 +00 00 silence +55555 down +44444 down +33333 down +22222 down +11111 down +00 00 silence =58 steps palindrome phased',10,h-90);
+ pctx.fillStyle='#c4b5fd';
+ pctx.fillText('Resonate until phased: vibrate frequency Hz to reach you at until phased complete | 1=432Hz garnet root 2=396Hz ruby passion 3=528Hz spinel love 4=639Hz rubellite heart 5=741Hz red beryl awakening 0=silence | loop ♾️ until phased',10,h-76);
+ pctx.fillStyle='#71717a';
+ pctx.fillText('Wired for sound: each digit plays frequency Hz | wired to work: functional phased resonance loop speed '+phaseSpeed+'ms per step mix '+resMix+'% | resonate until phased palindrome up 1-5 down 5-1 00 silence',10,h-62);
+ pctx.fillStyle='#52525b';pctx.font='9px monospace';pctx.textAlign='center';
+ pctx.fillText('RESONATE UNTIL PHASED 1111122222333334444455555 00 00 5555544444333332222211111 00 00 = 58 steps palindrome phased resonate until phased loop ♾️ = BONK IS ALL phased',w/2,h-8);
+}
+
+drawPhase();
+
+document.getElementById('phaseSpeed').addEventListener('input',e=>{
+ phaseSpeed=parseFloat(e.target.value);
+ document.getElementById('speedLabel').textContent=phaseSpeed.toFixed(0)+'ms per step resonate until phased 11111→55555→11111';
+});
+document.getElementById('resMix').addEventListener('input',e=>{
+ resMix=parseFloat(e.target.value);
+ document.getElementById('resLabel').textContent=resMix.toFixed(0)+'% resonance mix phased palindrome up down 00 silence';
+});
+
+function startPhasedLoop(loop=false){
+ if(isPlaying && loopInterval){clearInterval(loopInterval);loopInterval=null;}
+ isPlaying=true;
+ phaseIdx=0;
+ document.getElementById('phaseVal').textContent=pattern.join('').substring(0,25)+' '+pattern.join('').substring(25,29)+' '+pattern.join('').substring(29,54)+' '+pattern.join('').substring(54);
+ 
+ function step(){
+  if(phaseIdx>=pattern.length){
+   if(loop){
+    phaseIdx=0;
+   } else {
+    isPlaying=false;
+    clearInterval(loopInterval);
+    loopInterval=null;
+    if(currentOsc){try{currentOsc.stop();}catch(e){}}
+    document.getElementById('phaseInfo').textContent='Phased complete resonate until phased done';
+    showToast('Phased complete 11111→55555→11111 00 00 resonate until phased done 🔊');
+    return;
+   }
+  }
+  let digit=pattern[phaseIdx];
+  playStep(digit);
+  document.getElementById('phaseIdx').textContent=phaseIdx+'/'+pattern.length+' digit '+digit;
+  document.getElementById('log').innerHTML+='<br>> phase '+phaseIdx+' digit '+digit+' '+(freqMap[digit]?freqMap[digit].name+' '+freqMap[digit].freq+'Hz':'silence')+' resonate';
+  phaseIdx++;
+  drawPhase();
+ }
+ step();
+ loopInterval=setInterval(step,phaseSpeed);
+}
+
+document.getElementById('playPhaseBtn').onclick=()=>{startPhasedLoop(false);showToast('Playing phased 1111122222333334444455555 00 00 🔊 resonate until phased');};
+document.getElementById('playReverseBtn').onclick=()=>{
+ pattern=pattern.slice().reverse();
+ startPhasedLoop(false);
+ showToast('Playing reverse 5555544444333332222211111 00 00 🔊 phased reverse');
+ setTimeout(()=>{pattern='1111122222333334444455555 00 00 5555544444333332222211111 00 00'.replace(/\s/g,'').split('');},phaseSpeed*pattern.length+1000);
+};
+document.getElementById('loopBtn').onclick=()=>{startPhasedLoop(true);showToast('Loop resonate until phased ♾️ 11111→55555→11111 00 00 loop infinite 🔊');};
+document.getElementById('stopBtn').onclick=()=>{
+ isPlaying=false;
+ if(loopInterval){clearInterval(loopInterval);loopInterval=null;}
+ if(currentOsc){try{currentOsc.stop();}catch(e){} currentOsc=null;}
+ if(audioCtx&&audioCtx.state!=='closed'){try{audioCtx.suspend();}catch(e){}}
+ document.getElementById('phaseInfo').textContent='Stopped phased resonance';
+ showToast('Stopped phased resonance 🔇');
+};
+
+document.getElementById('resonateBtn').onclick=()=>{document.getElementById('playPhaseBtn').click();};
+document.getElementById('phaseBtn').onclick=()=>{document.getElementById('loopBtn').click();};
+
+document.getElementById('exportBtn').onclick=()=>{
+ let tree={resonateUntilPhased:'1111122222333334444455555 00 00 5555544444333332222211111 00 00 = resonate until phased palindrome',pattern:{up:'11111 22222 33333 44444 55555 = up 1-5 5× each',silence1:'00 00 = 0×4 silence rest phase break',down:'55555 44444 33333 22222 11111 = down 5-1 5× each',silence2:'00 00 = 0×4 silence phased complete',total:'5+5+5+5+5+4+5+5+5+5+5+4=58 steps total palindrome phased'},mapping:{'1':'432Hz garnet root chakra grounding','2':'396Hz ruby passion liberation','3':'528Hz spinel love transformation','4':'639Hz rubellite heart connection','5':'741Hz red beryl awakening intuition','0':'silence rest 00 00 phase break'},phased:{resonate:'vibrate frequency Hz to reach you at',untilPhased:'repeat pattern until phased 11111→55555→11111→00 complete',palindrome:'up 1-5 then down 5-1 symmetry phased 00 00 silence',loop:'loop pattern until phased complete ♾️'},wiredForSound:'each digit plays frequency Hz Web Audio API oscillator → gain → destination speakers wired for sound and to work functional phased resonance loop speed '+phaseSpeed+'ms per step mix '+resMix+'%'};
+ let blob=new Blob([JSON.stringify(tree,null,2)],{type:'application/json'});let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download='resonate_until_phased_1111122222333334444455555_00_00_55555.json';a.click();showToast('Exported resonate until phased palindrome');
+};
+document.getElementById('verifyBtn').onclick=()=>{showToast('Verified resonate until phased 11111→55555→11111 00 00 palindrome 58 steps 432 396 528 639 741 Hz 0 silence valid');document.getElementById('txLog').textContent='Verified: resonate until phased 1111122222333334444455555 00 00 5555544444333332222211111 00 00 = 11111 garnet 432Hz ×5 +22222 ruby 396Hz ×5 +33333 spinel 528Hz ×5 +44444 rubellite 639Hz ×5 +55555 red beryl 741Hz ×5 +00 00 silence +55555 down +44444 down +33333 down +22222 down +11111 down +00 00 silence =58 steps palindrome phased | 1=432Hz 2=396Hz 3=528Hz 4=639Hz 5=741Hz 0=silence to reach you at | resonate until phased loop ♾️ valid';};
+
+document.getElementById('walletBtn').onclick=async()=>{
+ if(window.solana&&window.solana.isPhantom){
+  try{
+   let r=await window.solana.connect();
+   showToast('Phantom '+r.publicKey.toString().slice(0,4)+' wired to work ⚡ phased resonance');
+   initAudio();
+   playStep('1');
+  }catch(e){}
+ } else window.open('https://phantom.app/','_blank');
+};
+document.getElementById('mintBtn').onclick=()=>{
+ initAudio();
+ startPhasedLoop(false);
+ document.getElementById('txLog').textContent='MINTED resonate until phased 1111122222333334444455555 00 00 5555544444333332222211111 00 00 palindrome phased | 11111 garnet 432Hz ×5 +22222 ruby 396Hz ×5 +33333 spinel 528Hz ×5 +44444 rubellite 639Hz ×5 +55555 red beryl 741Hz ×5 +00 00 silence +55555 down +44444 down +33333 down +22222 down +11111 down +00 00 silence =58 steps | 1=432Hz 2=396Hz 3=528Hz 4=639Hz 5=741Hz 0=silence to reach you at | resonate until phased loop ♾️ wired for sound and to work | SIG simulated 🔊';
+ showToast('Minted resonate until phased 11111→55555→11111 00 00 🔊');
+};
+document.getElementById('swapBtn').onclick=()=>{
+ initAudio();
+ playStep('5');
+ document.getElementById('txLog').textContent='SIMULATED SWAP BONK 🔊 after resonate until phased 1111122222333334444455555 00 00 5555544444333332222211111 00 00 palindrome phased';
+ showToast('Swap BONK 🔊 after resonate until phased');
+};
+
+setInterval(()=>{drawPhase();},80);
+</script>
+</body>
+</html>
