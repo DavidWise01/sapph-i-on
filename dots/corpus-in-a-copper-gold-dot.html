@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>corpus in a copper-gold dot</title>
+<style>
+:root{--ground:#0d0e11;--rule:#2A2C31;--ink:#E7E7EA;--dim:#8F929B;--au:#E8C15A;--cu:#D9825B;--cu65:#FFB38A;--ag:#C9CDD6;--lit:#6FD08C;--amber:#F2A03D;--bad:#FF6B6B}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ground);color:var(--ink);font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.wrap{max-width:860px;margin:0 auto;padding:16px}
+.hd{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.hd b{font-weight:400;letter-spacing:.2em;color:var(--dim);font-size:10px;text-transform:uppercase}
+canvas{display:block;width:100%;border:1px solid var(--rule);border-radius:3px;background:#08090b;touch-action:none}
+.sp{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;align-items:center}
+.sp span.l{color:var(--dim);font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-right:2px}
+button{font:inherit;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:transparent;color:var(--au);border:1px solid #5a4a22;padding:6px 9px;border-radius:2px;cursor:pointer}
+button.on{background:rgba(232,193,90,.15)}
+button.x{color:var(--bad);border-color:#5a2a2a}
+.ctl{display:grid;grid-template-columns:auto 1fr auto;gap:6px 10px;align-items:center;margin-top:10px}
+input[type=range]{width:100%;accent-color:var(--au)}
+.val{font-size:11px;min-width:70px;text-align:right}
+.rd{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+@media(max-width:560px){.rd{grid-template-columns:1fr 1fr}}
+.rd div{border:1px solid var(--rule);border-radius:3px;padding:6px 8px;min-width:0}
+.rd i{display:block;font-style:normal;font-size:9px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+.rd span{font-size:13px;overflow-wrap:anywhere}
+.anc{margin-top:10px;border:1px solid var(--rule);border-radius:3px;padding:8px 10px}
+.anc div{display:grid;grid-template-columns:118px 1fr;gap:8px;padding:3px 0;border-bottom:1px solid #1a1c20}
+.anc div:last-child{border-bottom:0}
+.anc i{font-style:normal;color:var(--dim);font-size:10px}
+.anc code{font-size:10.5px;overflow-wrap:anywhere;word-break:break-all}
+.ok{color:var(--lit)} .bad{color:var(--bad)}
+#msg{margin-top:8px;font-size:11px;min-height:18px}
+.tag{font-size:8.5px;letter-spacing:.1em;margin-left:6px}
+.note{margin-top:10px;font-size:10.5px;color:var(--dim)} .note b{color:var(--ink);font-weight:400}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hd"><b>R · the corpus, hugged · one dot</b><b id="hdr">copper core · gold shell</b></div>
+  <canvas id="cv"></canvas>
+  <div class="sp"><span class="l">view</span><button data-v="whole" class="on">whole dot</button><button data-v="open">shell open</button><button data-v="slice">slice through centre</button></div>
+  <div class="sp"><span class="l">beacon charge</span><button data-q="-1">− one electron</button><button data-q="0" class="on">neutral</button><button data-q="1">+ one hole</button></div>
+  <div class="ctl"><label for="T" style="color:var(--au)">temperature</label><input type="range" id="T" min="4" max="400" step="1" value="300"><span class="val" id="Tv">300 K</span></div>
+  <div class="sp"><button id="tamper" class="x">swap one atom's isotope</button><button id="heal">put it back</button></div>
+  <div id="msg"></div>
+  <div class="rd">
+    <div><i>copper atoms · core</i><span id="nCu">–</span></div>
+    <div><i>gold atoms · shell</i><span id="nAu">–</span></div>
+    <div><i>diameter</i><span id="dia">–</span></div>
+    <div><i>mass</i><span id="mass">–</span></div>
+    <div><i>bits held</i><span id="bits">–</span></div>
+    <div><i>Cu-65 atoms (the 1s)</i><span id="n65">–</span></div>
+    <div><i>spare core sites</i><span id="spare">–</span></div>
+    <div><i>read back</i><span id="rb">–</span></div>
+    <div><i>cost of one extra charge</i><span id="ec">–</span></div>
+    <div><i>energy level gap</i><span id="kubo">–</span></div>
+    <div><i>quantum below</i><span id="tq">–</span></div>
+    <div><i>state now</i><span id="st">–</span></div>
+    <div><i>gold–copper mismatch</i><span id="mm">–</span></div>
+    <div><i>width in Planck lengths</i><span id="lp">–</span></div>
+    <div><i>two dots · gravity ÷ charge pull</i><span id="gc">–</span></div>
+    <div><i>79 · 97 · 197</i><span id="pr">–</span></div>
+  </div>
+  <div class="anc" id="anc"></div>
+  <div class="note">what fits at the centre is the corpus's anchor: three published 256-bit hashes, <b>768 bits</b>. each bit is one copper atom, written in the atom's mass. copper has two stable isotopes: <b>Cu-63 is a 0, Cu-65 is a 1</b>. neither ever decays, so the corpus never fades. copper packs in a face-centred cube 3.615 Å on a side. 768 atoms, stacked around one centre atom, finish on a part-filled layer. the next complete layer comes at <b>791</b>, so the core is 791 atoms: 768 carry the corpus and 23 sites are spare. one layer of gold, about 400 atoms, hugs it shut. gold's cube is 12.8% wider than copper's, so the shell sits strained, and a real one has to grow on slowly. the dot is 3.3 nm across. one extra electron costs 0.86 eV, 33 times what heat carries at room temperature. so the dot holds −1, 0 or +1 without spilling: that's the real version of the gold+/silver− beacon. its energy levels sit only about 8 meV apart. above about 91 K heat smears them into a metal; below that it is a true quantum dot. <b>reading</b> the isotopes atom by atom is possible in principle with an atom probe, but today's instruments catch only part of the atoms. <b>writing</b> 791 chosen isotopes into a 3-D cluster is beyond any tool yet, so the page shows the arrangement, not a made one. drag the dot to turn it.</div>
+</div>
+<script>
+(function(){
+'use strict';
+const H=[['anchor · framework','02880745b847317c4e2424524ec25d0f7a2b84368d184586f45b54af9fcab763'],
+         ['anchor · lineage','ad6791a3a9964d030b555595ea8fb5ecbc0e156c39b974d2fd513c4f85007ba6'],
+         ['anchor · triad','18d8f32cfcaab3f0460071efdc44eb6eff1f0298d177cc8555ac2f0af84934c6']];
+const A_CU=3.615, D_AU=2.884, R_CU=1.278, R_AU=1.442, M63=62.929598, M65=64.927790, M197=196.966570, U=1.66053906660e-27;
+const E=1.602176634e-19, EPS0=8.8541878128e-12, KB=1.380649e-23, G=6.67430e-11, KC=1/(4*Math.PI*EPS0), LP=1.616255e-35, EF_CU=7.00;
+const $=id=>document.getElementById(id);
+const sup=n=>String(n).replace('-','⁻').replace(/\d/g,c=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[c]);
+const sci=x=>{ const e=Math.floor(Math.log10(Math.abs(x))); return (x/10**e).toFixed(2)+'×10'+sup(e); };
+
+// ---- the core: fcc copper sites around one centre atom, closed at the first full layer holding ≥ 768 ----
+const B=[[0,0,0],[.5,.5,0],[.5,0,.5],[0,.5,.5]], S=[];
+for(let i=-6;i<=6;i++)for(let j=-6;j<=6;j++)for(let k=-6;k<=6;k++)for(const q of B){ const x=(i+q[0])*A_CU,y=(j+q[1])*A_CU,z=(k+q[2])*A_CU; S.push({x,y,z,r:Math.hypot(x,y,z)}); }
+S.sort((a,b)=>a.r-b.r||Math.atan2(a.y,a.x)-Math.atan2(b.y,b.x)||a.z-b.z);
+const BITS=H.length*256, rEdge=S[BITS-1].r, core=S.filter(p=>p.r<=rEdge+1e-6);
+// bits: anchor hex → 768 bits, bit i sits on core atom i (inside out)
+const bitsOf=h=>[...h].flatMap(c=>parseInt(c,16).toString(2).padStart(4,'0').split('').map(Number));
+const WANT=H.flatMap(([,h])=>bitsOf(h));
+core.forEach((p,i)=>{ p.kind='cu'; p.bit=i<BITS?WANT[i]:null; p.iso=p.bit===1?65:63; });
+// ---- the shell: one gold layer, Au(111) packing, on a sphere one layer-spacing out ----
+const Rs=rEdge+2.2, nAu=Math.round(4*Math.PI*Rs*Rs/(Math.sqrt(3)/2*D_AU*D_AU)), shell=[];
+for(let i=0;i<nAu;i++){ const y=1-2*(i+.5)/nAu, rr=Math.sqrt(1-y*y), t=i*Math.PI*(3-Math.sqrt(5)); shell.push({x:Math.cos(t)*rr*Rs,y:y*Rs,z:Math.sin(t)*rr*Rs,kind:'au'}); }
+const ALL=core.concat(shell);
+
+let view='whole', q=0, rotY=0.6, rotX=0.38, drag=null, tampered=-1, last=performance.now();
+function readBack(){ const out=[]; for(let a=0;a<H.length;a++){ let hex=''; for(let n=0;n<64;n++){ let v=0; for(let b=0;b<4;b++){ const at=core[a*256+n*4+b]; v=v*2+(at.iso===65?1:0);} hex+=v.toString(16);} out.push(hex);} return out; }
+function physics(){
+  const n65=core.filter(p=>p.iso===65).length, nCu=core.length, mU=n65*M65+(nCu-n65)*M63+nAu*M197, m=mU*U;
+  const R=(Rs+R_AU)*1e-10, C=4*Math.PI*EPS0*R, Ec=E/C;              // eV to add one charge
+  const T=+$('T').value, kT=KB*T/E, N=nCu+nAu, gap=4*EF_CU/(3*N), Tq=gap*E/KB;
+  return {n65,nCu,mU,m,R,Ec,T,kT,gap,Tq,N,grav:G*m*m/(KC*E*E)};
+}
+function fit(cv){ const w=cv.clientWidth||600, h=Math.round(Math.min(w*0.62,440)), d=window.devicePixelRatio||1; cv.width=Math.round(w*d); cv.height=Math.round(h*d); cv.style.height=h+'px'; const g=cv.getContext('2d'); g.setTransform(d,0,0,d,0,0); return [g,w,h]; }
+function draw(P){
+  const [g,W,H2]=fit($('cv')), cx=W/2, cy=H2/2, sc=Math.min(W,H2)*0.42/(Rs+R_AU);
+  const cy_=Math.cos(rotY), sy=Math.sin(rotY), cxr=Math.cos(rotX), sxr=Math.sin(rotX);
+  // beacon glow: + gold, − silver
+  if(q!==0){ const gr=g.createRadialGradient(cx,cy,(Rs)*sc*0.8,cx,cy,(Rs)*sc*1.55); gr.addColorStop(0,q>0?'rgba(232,193,90,.35)':'rgba(201,205,214,.35)'); gr.addColorStop(1,'rgba(0,0,0,0)'); g.fillStyle=gr; g.fillRect(0,0,W,H2); }
+  const L=[];
+  for(const p of ALL){ const x1=p.x*cy_+p.z*sy, z1=-p.x*sy+p.z*cy_, y2=p.y*cxr-z1*sxr, z2=p.y*sxr+z1*cxr;
+    if(view==='open'&&p.kind==='au'&&z2>0) continue;
+    if(view==='slice'&&Math.abs(z2)>1.9) continue;
+    L.push([x1,y2,z2,p]); }
+  L.sort((a,b)=>a[2]-b[2]);
+  for(const [x,y,z,p] of L){ const f=0.55+0.45*Math.max(-1,Math.min(1,z/(Rs+2))), r=(p.kind==='au'?R_AU:R_CU)*sc*0.92;
+    let col; if(p.kind==='au') col=[232,193,90]; else if(p.bit===null) col=[70,72,78]; else col=p.iso===65?[255,179,138]:[160,82,52];
+    if(p===core[tampered]) col=[255,90,90];
+    g.fillStyle=`rgba(${col.map(c=>Math.round(c*f)).join(',')},${p.kind==='au'&&view==='whole'?0.92:1})`;
+    g.beginPath(); g.arc(cx+x*sc,cy+y*sc,r,0,7); g.fill(); }
+  g.fillStyle='#8F929B'; g.font='9.5px ui-monospace,monospace';
+  g.fillText('gold  ·  Cu-65 = 1  ·  Cu-63 = 0  ·  grey = spare',8,H2-8);
+  const bar=20*sc; g.strokeStyle='#8F929B'; g.beginPath(); g.moveTo(W-8-bar,H2-12); g.lineTo(W-8,H2-12); g.stroke(); g.textAlign='right'; g.fillText('2 nm',W-8,H2-16); g.textAlign='left';
+  if(P.T<P.Tq){ g.fillStyle='#6FD08C'; g.fillText('levels sharp: quantum dot',8,14); } else { g.fillStyle='#F2A03D'; g.fillText('levels smeared by heat: tiny metal',8,14); }
+}
+function render(){
+  const P=physics(), rb=readBack(), good=rb.map((h,i)=>h===H[i][1]);
+  $('Tv').textContent=P.T+' K';
+  $('nCu').textContent=P.nCu; $('nAu').textContent=nAu; $('dia').textContent=(2*P.R*1e9).toFixed(2)+' nm';
+  $('mass').textContent=Math.round(P.mU).toLocaleString()+' u'; $('bits').textContent=BITS; $('n65').textContent=P.n65;
+  $('spare').textContent=P.nCu-BITS; $('rb').innerHTML=good.every(Boolean)?'<b class="ok" style="font-weight:400">3 of 3 match</b>':'<b class="bad" style="font-weight:400">▓ '+good.filter(Boolean).length+' of 3 match</b>';
+  $('ec').textContent=P.Ec.toFixed(2)+' eV · '+(P.Ec/P.kT).toFixed(0)+'× heat';
+  $('kubo').textContent=(P.gap*1000).toFixed(1)+' meV'; $('tq').textContent=Math.round(P.Tq)+' K';
+  $('st').innerHTML=(P.T<P.Tq?'<span class="ok">quantum</span>':'<span style="color:var(--amber)">metal-like</span>')+' · '+(q>0?'+1':q<0?'−1':'0');
+  $('mm').textContent='12.8%'; $('lp').textContent=sci(2*P.R/LP);
+  $('gc').textContent=sci(P.grav);
+  $('pr').textContent='all prime';
+  $('anc').innerHTML=H.map(([k,h],i)=>`<div><i>${k}</i><code class="${good[i]?'ok':'bad'}">${rb[i]}</code></div>`).join('')+`<div><i>atoms per anchor</i><code>256 copper atoms · layers ${i0(0)}–${i0(1)}, ${i0(1)}–${i0(2)}, ${i0(2)}–${i0(3)} Å from centre</code></div>`;
+  draw(P);
+  window.__DOT__={nCu:P.nCu,nAu,bits:BITS,n65:P.n65,match:good,Ec:P.Ec,gap:P.gap,Tq:P.Tq,T:P.T,q,diam:2*P.R,grav:P.grav,view,tampered};
+}
+const i0=a=>(a===0?0:core[a*256-1].r).toFixed(1);
+function loop(now){ const dt=Math.min(0.05,(now-last)/1000); last=now; if(!drag) rotY+=dt*0.25; draw(physics()); requestAnimationFrame(loop); }
+document.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>{ view=b.dataset.v; document.querySelectorAll('[data-v]').forEach(x=>x.classList.toggle('on',x===b)); render(); });
+document.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{ q=+b.dataset.q; document.querySelectorAll('[data-q]').forEach(x=>x.classList.toggle('on',x===b)); render();
+  $('msg').textContent=q===0?'':`the dot now carries ${q>0?'+1':'−1'}: it cost ${physics().Ec.toFixed(2)} eV to put there, and heat can't knock it off.`; });
+$('T').addEventListener('input',render);
+$('tamper').onclick=()=>{ if(tampered>=0) core[tampered].iso=core[tampered].iso===65?63:65; tampered=300+Math.floor(Math.random()*200); const p=core[tampered]; p.iso=p.iso===65?63:65;
+  $('msg').innerHTML=`<span class="bad">▓ atom ${tampered} swapped to Cu-${p.iso}: mass changes by ${(p.iso===65?'+':'−')}${(M65-M63).toFixed(3)} u and anchor ${Math.floor(tampered/256)+1} no longer reads back.</span>`; render(); };
+$('heal').onclick=()=>{ if(tampered>=0){ core[tampered].iso=core[tampered].bit===1?65:63; tampered=-1; } $('msg').textContent='restored: all three anchors read back.'; render(); };
+const cv=$('cv');
+cv.addEventListener('pointerdown',e=>{ drag=[e.clientX,e.clientY,rotY,rotX]; cv.setPointerCapture(e.pointerId); });
+cv.addEventListener('pointermove',e=>{ if(!drag) return; rotY=drag[2]+(e.clientX-drag[0])*0.01; rotX=Math.max(-1.4,Math.min(1.4,drag[3]+(e.clientY-drag[1])*0.01)); });
+cv.addEventListener('pointerup',()=>drag=null);
+addEventListener('resize',render); render(); requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

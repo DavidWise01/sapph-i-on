@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>One Dot to a Universe, Real</title>
+<style>
+:root{--bg:#05070a;--ink:#F1F2F5;--soft:#A7AEBB;--faint:#5e6676;--glass:rgba(255,255,255,.045);--edge:rgba(255,255,255,.09);--gold:#F5B94E;--vio:#A88BFF;--teal:#4FD1B5;--grad:linear-gradient(100deg,#A88BFF 0%,#F5B94E 100%)}
+*{box-sizing:border-box}
+body{margin:0;color:var(--ink);font:16px/1.6 Inter,ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:radial-gradient(1100px 700px at 85% -10%,#1a2440 0%,transparent 60%),var(--bg);min-height:100vh;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 18px 60px}
+.top{display:flex;justify-content:space-between;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:20px}
+.top b{color:var(--soft)}
+h1{font-size:clamp(36px,7vw,72px);line-height:1;letter-spacing:-.035em;margin:0 0 12px;font-weight:800}
+.gt,h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{font-size:clamp(16px,2.2vw,20px);color:var(--soft);max-width:700px;margin:0 0 22px}
+h2{font-size:clamp(24px,4vw,34px);letter-spacing:-.025em;line-height:1.1;margin:0 0 10px;font-weight:750}
+h3{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:0 0 10px;font-weight:600}
+p{margin:0 0 12px;color:var(--soft)}
+b.w{color:var(--ink)}
+.card{background:var(--glass);border:1px solid var(--edge);border-radius:22px;padding:22px}
+section{margin:0 0 20px}
+.hero{padding:0;overflow:hidden;position:relative;background:#000}
+canvas{display:block;width:100%;touch-action:none}
+.hud{position:absolute;left:16px;top:14px;right:16px;display:flex;justify-content:space-between;gap:10px;pointer-events:none;text-shadow:0 1px 8px rgba(0,0,0,.9)}
+.hud .l{font-size:clamp(20px,3.6vw,32px);font-weight:800;letter-spacing:-.02em;line-height:1.05}
+.hud .l small{display:block;font-size:13px;font-weight:500;color:#cfd3dc;letter-spacing:0;margin-top:4px}
+.hud .r{text-align:right;font-size:13px;color:#cfd3dc}
+.hud .r b{display:block;font-size:clamp(17px,2.8vw,23px);color:var(--ink)}
+.cap{position:absolute;left:16px;right:16px;bottom:12px;pointer-events:none;font-size:clamp(13.5px,1.9vw,16px);color:#e9ebf0;text-shadow:0 1px 8px rgba(0,0,0,1);max-width:760px}
+.cap i{font-style:normal;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:1px 7px;border-radius:99px;margin-left:6px;vertical-align:2px;background:rgba(245,185,78,.18);color:var(--gold)}
+.bar{background:#0b0e13;border-top:1px solid var(--edge)}
+.ctrl{display:flex;align-items:center;gap:10px;padding:12px 16px;flex-wrap:wrap}
+.ctrl input[type=range]{flex:1;min-width:170px;accent-color:#C9A0F0}
+.btn{appearance:none;border:0;border-radius:999px;padding:9px 16px;font:inherit;font-size:14px;font-weight:600;cursor:pointer;color:#120f22;background:var(--grad)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--edge)}
+.btn.ghost.on{border-color:rgba(245,185,78,.6);color:var(--gold)}
+.beats{display:flex;gap:6px;padding:0 16px 12px;flex-wrap:wrap}
+.beat{font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--edge);color:var(--soft)}
+.beat.on{color:#120f22;border-color:transparent}
+.beat.wk.on{background:var(--gold)}.beat.mo.on{background:#C9CBD6}.beat.da.on{background:var(--vio)}
+.tl{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:8px}
+.gen{border:1px solid var(--edge);border-radius:14px;padding:9px 11px;background:rgba(0,0,0,.25);cursor:pointer}
+.gen b{font-size:19px}
+.gen .s{font-size:13px;color:var(--ink)}
+.gen .m{font-size:12px;color:var(--soft)}
+.gen.on{border-color:rgba(168,139,255,.6);background:rgba(168,139,255,.12)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}.hud .r{font-size:12px}}
+.big{font-size:clamp(44px,8vw,70px);font-weight:800;letter-spacing:-.04em;line-height:1}
+.kt{width:100%;border-collapse:collapse;font-size:14px}
+.kt td{padding:7px 8px;border-bottom:1px solid var(--edge);vertical-align:top}
+.kt tr.hit td{color:var(--ink);font-weight:700}
+.pill{display:inline-block;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:99px;margin-left:4px;vertical-align:1px;font-weight:600;white-space:nowrap}
+.pill.lit{background:rgba(79,209,181,.14);color:var(--teal)}.pill.amb{background:rgba(245,185,78,.14);color:var(--gold)}
+.kid{border-radius:22px;padding:20px 22px;background:linear-gradient(120deg,rgba(168,139,255,.12),rgba(245,185,78,.10));border:1px solid var(--edge)}
+.kid p{color:var(--ink);font-size:17px;margin:0}
+details summary{cursor:pointer;color:var(--soft);font-size:14px;list-style:none;display:inline-flex;gap:8px;padding:10px 16px;border:1px solid var(--edge);border-radius:999px}
+details summary::-webkit-details-marker{display:none}
+details[open] summary{border-color:rgba(168,139,255,.55);color:var(--ink)}
+.foot{color:var(--faint);font-size:12px;text-align:center;margin-top:28px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top"><span><b>R</b> · hive · real</span><span>(·) → everything we can see</span></div>
+<h1>One dot to <span>everything,</span><br>as real as it gets.</h1>
+<p class="lede">The same 13.2 steps, now through what's really there at each size: foam, a proton, an atom, a protein, a virus, a ladybug in the grass by the Eiffel Tower, Paris, the Earth, the Sun, the stars, the galaxy, the web of galaxies, and the edge of what we can see.</p>
+
+<section class="card hero">
+  <canvas id="cv"></canvas>
+  <div class="hud"><div class="l" id="hl">step 0</div><div class="r"><b id="hs">–</b><span id="hm">–</span></div></div>
+  <div class="cap" id="cap">–</div>
+</section>
+<section class="card bar" style="padding:0;margin-top:-20px;border-top-left-radius:0;border-top-right-radius:0">
+  <div class="ctrl"><button class="btn" id="pl">Build it</button><input type="range" id="z" min="0" max="13.2228" step="0.0005" value="0" aria-label="step"><button class="btn ghost on" id="hv">hive: on</button><button class="btn ghost" id="rs">Back to the dot</button></div>
+  <div class="beats" id="bt"></div>
+</section>
+
+<section class="card">
+  <h3>The 13.2 steps · tap one to go there</h3>
+  <div class="tl" id="tl"></div>
+</section>
+
+<section class="grid2">
+  <div class="card">
+    <h3>How real is it?</h3>
+    <table class="kt">
+      <tr><td>Every size, and the 46,656× per step</td><td><span class="pill lit">checked</span></td></tr>
+      <tr><td>Where things sit: Paris on the Earth, the Earth's orbit, the nearest stars, the Sun 26,000 light-years from the galaxy's middle, Andromeda 2.5 million light-years away</td><td><span class="pill lit">real distances</span></td></tr>
+      <tr><td>Directions of the stars and galaxies, the shape of the arms, the web's filaments, the city blocks</td><td><span class="pill amb">impression</span></td></tr>
+      <tr><td>Stars and planets drawn bigger than life so you can see them</td><td><span class="pill amb">enlarged</span></td></tr>
+      <tr><td>Colour below 0.4 micrometres: nothing that small has a colour, so these are labels</td><td><span class="pill amb">labels</span></td></tr>
+      <tr><td>The quantum foam at the bottom: predicted, never seen</td><td><span class="pill amb">theory</span></td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h3>Does it land?</h3>
+    <div class="big gt" id="ans">13.22</div>
+    <p>steps of 6⁶ = 46,656× take one Planck length to the width of the observable universe. Centre to edge is 13.16. You said 13.2. <span class="pill lit">checked</span> A random target would land this close about 1 time in 20. <span class="pill amb">luck check</span></p>
+    <p>The hive rides along: <b class="w">4 workers</b> (gold), the <b class="w">mother</b> (the dead ring in the middle), and the <b class="w">daughter</b> (violet) shrinking 6× every beat, six beats a step.</p>
+  </div>
+</section>
+
+<section class="kid"><p><b>In small words:</b> start at the smallest dot there could ever be. zoom out and out. you pass a proton, an atom, a tiny virus sitting on a ladybug, who's sitting in the grass by the Eiffel Tower, in Paris, on the Earth, going round the Sun, among the stars, in our galaxy, in a web of galaxies, all the way to the edge of everything we can see. and you're right in the middle of it.</p></section>
+
+<section><details><summary>▸ Show the math</summary><div class="card" style="margin-top:12px">
+<p>View width = 2.2 × one Planck length × 46,656<sup>step</sup>. Planck length 1.616 × 10⁻³⁵ m. Observable universe 8.8 × 10²⁶ m wide, so 13.22 steps. <span class="pill lit">checked</span></p>
+<p>Sizes used: proton 1.68 fm · hydrogen atom 0.106 nm (its proton is 63,000× smaller) · protein 6 nm · virus 120 nm · ladybug 7.8 mm · Eiffel Tower 330 m tall, 125 m base · Paris ~10 km · Earth 12,742 km · Moon 3,475 km at 384,400 km · Sun 1.39 million km · Neptune's orbit 30 AU · Alpha Centauri 4.37 ly · Sun to galactic centre 26,000 ly · Milky Way ~100,000 ly · Andromeda 2.5 million ly · Virgo Cluster 54 million ly · edge 46.5 billion ly away. <span class="pill lit">real</span></p>
+<p>Coastlines are hand-traced outlines, accurate to a few hundred km. <span class="pill amb">approximate</span></p>
+</div></details></section>
+<div class="foot">(·) × 46,656<sup>13.2</sup></div>
+</div>
+
+<script>
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id);
+const LP=1.616255e-35,K=6**6,DIAM=8.8e26,RAD=4.4e26,LY=9.4607e15,AU=1.496e11;
+const STEPS=Math.log(DIAM/LP)/Math.log(K);
+const size=z=>LP*K**z;
+function mulberry32(a){return()=>{a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296;};}
+const gauss=r=>{let u=0,v=0;while(!u)u=r();v=r();return Math.sqrt(-2*Math.log(u))*Math.cos(6.2832*v);};
+const fmt=m=>{if(m>=LY*1e9)return(m/LY/1e9).toFixed(m/LY/1e9<10?1:0)+' billion light-years';if(m>=LY*1e6)return(m/LY/1e6).toFixed(1)+' million light-years';if(m>=LY*1e3)return Math.round(m/LY).toLocaleString()+' light-years';if(m>=LY*0.5)return(m/LY).toFixed(1)+' light-years';if(m>=1e9)return(m/1e9).toFixed(1)+' million km';if(m>=1e3)return Math.round(m/1e3).toLocaleString()+' km';if(m>=1)return Math.round(m)+' m';if(m>=1e-3)return(m*1e3).toFixed(1)+' mm';if(m>=1e-6)return(m*1e6).toFixed(1)+' µm';if(m>=1e-9)return(m*1e9).toFixed(1)+' nm';
+  const e=Math.floor(Math.log10(m)),mm=m/10**e;return mm.toFixed(1)+' × 10'+String(e).replace('-','⁻').replace(/\d/g,c=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[c])+' m';};
+let G,W,H;
+const onS=(x,y,r)=>x+r>0&&x-r<W&&y+r>0&&y-r<H;
+function dot(x,y,r,col,a){G.globalAlpha=a;G.fillStyle=col;if(r<1.3){G.fillRect(x-r,y-r,2*r,2*r);}else{G.beginPath();G.arc(x,y,r,0,6.2832);G.fill();}G.globalAlpha=1;}
+function glow(x,y,r,rgb,a){if(!onS(x,y,r))return;const g=G.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,`rgba(${rgb},${a})`);g.addColorStop(1,`rgba(${rgb},0)`);G.fillStyle=g;G.beginPath();G.arc(x,y,r,0,6.2832);G.fill();}
+const fill=c=>{G.fillStyle=c;G.fillRect(0,0,W,H);};
+const fadeIn=(px,a,b)=>Math.max(0,Math.min(1,(px-a)/(b-a)));
+
+// ================= objects, smallest first. off = centre in parent's frame (metres, y up)
+const OBJ=[];
+// 0 proton
+OBJ.push({name:'a proton',S:1.68e-15,off:[0,0],cap:'Inside a proton: three quarks, tied together by gluons. 1.68 femtometres across.',
+draw(x,y,k,px,now){const R=px/2;
+  if(R>60*W){fill('#140605');glow(W/2,H/2,Math.max(W,H),'255,120,70',.12);return;}
+  glow(x,y,R*1.25,'255,140,90',.42);
+  const Q=[0,1,2].map(i=>{const a=now/900+i*2.094+0.3*Math.sin(now/700+i);const rr=R*(0.34+0.06*Math.sin(now/500+i*2));return[x+rr*Math.cos(a),y+rr*Math.sin(a)];});
+  G.strokeStyle='rgba(255,240,220,.45)';G.lineWidth=Math.max(1,R*0.012);
+  for(let a=0;a<3;a++){const b=(a+1)%3,[x1,y1]=Q[a],[x2,y2]=Q[b];G.beginPath();for(let s=0;s<=24;s++){const t=s/24,nx=-(y2-y1),ny=x2-x1,l=Math.hypot(nx,ny)||1,w=Math.sin(t*18+now/80)*R*0.03*Math.sin(t*3.1416);G.lineTo(x1+(x2-x1)*t+nx/l*w,y1+(y2-y1)*t+ny/l*w);}G.stroke();}
+  G.lineWidth=1;
+  ['255,70,70','70,230,110','80,140,255'].forEach((c,i)=>{glow(Q[i][0],Q[i][1],R*0.18,c,.9);dot(Q[i][0],Q[i][1],Math.max(1.5,R*0.035),`rgb(${c})`,1);});
+  for(let s=0;s<14;s++){const a=Math.random()*6.2832,rr=Math.random()*R*0.8;dot(x+rr*Math.cos(a),y+rr*Math.sin(a),Math.max(1,R*0.012),'rgba(255,255,255,.8)',Math.random()*0.6);}}});
+// 1 hydrogen atom
+OBJ.push({name:'a hydrogen atom',S:1.06e-10,off:[1.1e-9,0.5e-9],cap:'A hydrogen atom. The electron is a cloud of chances; the proton in the middle is 63,000× smaller than the cloud. Atoms are almost entirely empty.',
+draw(x,y,k,px,now){const a0=5.29e-11*k;if(a0<0.6)return;
+  if(a0>25*W){G.fillStyle='rgba(90,130,220,.07)';G.fillRect(0,0,W,H);return;}
+  const r4=a0*4.5;if(!onS(x,y,r4))return;
+  const g=G.createRadialGradient(x,y,0,x,y,r4);g.addColorStop(0,'rgba(140,180,255,.55)');g.addColorStop(.12,'rgba(120,165,255,.36)');g.addColorStop(.3,'rgba(100,150,255,.14)');g.addColorStop(.6,'rgba(90,130,240,.04)');g.addColorStop(1,'rgba(90,130,240,0)');G.fillStyle=g;G.beginPath();G.arc(x,y,r4,0,6.2832);G.fill();
+  if(a0>30&&1.68e-15*k<2){glow(x,y,6,'255,160,110',.9);dot(x,y,1.5,'#ffd2b0',1);G.fillStyle='rgba(255,220,200,.85)';G.font='11px Inter,sans-serif';G.fillText('proton · 63,000× smaller',x+9,y+4);}
+  if(a0>6)for(let s=0;s<70;s++){const r=-(a0/2)*Math.log(Math.random()*Math.random()*Math.random()+1e-12),t=Math.random()*6.2832;dot(x+r*Math.cos(t),y+r*Math.sin(t),1.2,'#cfe0ff',0.55);}}});
+// 2 protein
+const PROT=(()=>{const r=mulberry32(77),A=[];let px=0,py=0;const EL=[['C','#8d9199',1.7e-10],['C','#8d9199',1.7e-10],['C','#8d9199',1.7e-10],['O','#e0463c',1.52e-10],['N','#3f6ee8',1.55e-10],['H','#eeeeee',1.1e-10],['H','#eeeeee',1.1e-10],['S','#e8c93c',1.8e-10]];
+  for(let i=0;i<260;i++){const a=r()*6.2832;px+=Math.cos(a)*1.4e-10;py+=Math.sin(a)*1.4e-10;const d=Math.hypot(px,py);if(d>2.7e-9){px*=2.5e-9/d;py*=2.5e-9/d;}
+    if(Math.hypot(px-1.1e-9,py-0.5e-9)<2.6e-10)continue;const e=EL[Math.floor(r()*(i%37===0?8:7))];A.push([px,py,e[1],e[2],r()]);}
+  return A.sort((a,b)=>a[4]-b[4]);})();
+OBJ.push({name:'a protein',S:6e-9,off:[3.6e-8,3.0e-8],cap:'A protein: a few thousand atoms folded into a tiny machine. Colours here are labels; nothing this small has a colour.',
+draw(x,y,k,px,now){if(px<3)return;const a=fadeIn(px,3,40);
+  for(const [ax,ay,c,r] of PROT){const sx=x+ax*k,sy=y-ay*k,R=r*k;if(!onS(sx,sy,R))continue;if(R<1.2){dot(sx,sy,1,c,a);continue;}
+    const g=G.createRadialGradient(sx-R*.35,sy-R*.35,R*.1,sx,sy,R);g.addColorStop(0,'#ffffff');g.addColorStop(.25,c);g.addColorStop(1,'rgba(0,0,0,.85)');G.globalAlpha=a;G.fillStyle=g;G.beginPath();G.arc(sx,sy,R,0,6.2832);G.fill();G.globalAlpha=1;}}});
+// 3 virus
+const CAPS=(()=>{const L=[];const s=0.15;for(let i=-8;i<=8;i++)for(let j=-8;j<=8;j++){const u=(i+j*0.5)*s,v=j*s*0.866;if(Math.hypot(u,v)<0.9)L.push([u,v]);}return L;})();
+OBJ.push({name:'a virus',S:1.2e-7,off:[1.5e-5,-1.0e-5],cap:'A virus, 120 nanometres. Its shell is built from the same protein repeated again and again, like tiles.',
+draw(x,y,k,px,now){const R=px/2;if(R<1)return;
+  if(R>30*W){fill('#4b4f6b');return;}
+  if(!onS(x,y,R*1.3))return;
+  for(let i=0;i<40;i++){const a=i*0.157+0.2,c=Math.cos(a),s=Math.sin(a);G.strokeStyle='rgba(150,160,200,.8)';G.lineWidth=Math.max(1,R*0.02);G.beginPath();G.moveTo(x+c*R*.95,y+s*R*.95);G.lineTo(x+c*R*1.18,y+s*R*1.18);G.stroke();dot(x+c*R*1.2,y+s*R*1.2,Math.max(1,R*0.035),'#b9c0e8',1);}
+  G.lineWidth=1;
+  const g=G.createRadialGradient(x-R*.3,y-R*.3,R*.1,x,y,R);g.addColorStop(0,'#aeb4d8');g.addColorStop(.7,'#6a7098');g.addColorStop(1,'#3b3f5c');G.fillStyle=g;G.beginPath();G.arc(x,y,R,0,6.2832);G.fill();
+  if(R>12)for(const [u,v] of CAPS){if(Math.hypot(u-0.6,v+0.5)<0.1)continue;const sx=x+u*R,sy=y+v*R,r=R*0.068;if(!onS(sx,sy,r))continue;const gg=G.createRadialGradient(sx-r*.3,sy-r*.3,r*.1,sx,sy,r);gg.addColorStop(0,'rgba(220,225,255,.55)');gg.addColorStop(1,'rgba(40,44,70,.55)');G.fillStyle=gg;G.beginPath();G.arc(sx,sy,r,0,6.2832);G.fill();}
+  G.strokeStyle='rgba(230,235,255,.25)';G.beginPath();for(let i=0;i<=6;i++){const a=i*1.0472+0.26;G.lineTo(x+Math.cos(a)*R*.93,y+Math.sin(a)*R*.93);}G.stroke();}});
+// 4 wing-case surface
+const CELLS=(()=>{const L=[];const s=8e-6;for(let i=-6;i<=6;i++)for(let j=-6;j<=6;j++){const u=(i+j*0.5)*s,v=j*s*0.866;if(Math.hypot(u,v)<3.6e-5)L.push([u,v]);}return L;})();
+OBJ.push({name:'a ladybug’s wing case',S:6e-5,off:[0.9e-3,-1.5e-3],cap:'The surface of the ladybug’s wing case, textured in tiny cells. The virus is sitting on it.',
+draw(x,y,k,px,now){const cpx=8e-6*k;if(cpx<4||cpx>3*W)return;
+  G.strokeStyle='rgba(60,0,0,.35)';G.lineWidth=Math.max(1,cpx*0.04);
+  for(const [u,v] of CELLS){const sx=x+u*k,sy=y-v*k,r=cpx*0.56;if(!onS(sx,sy,r))continue;const fa=1-Math.hypot(u,v)/3.6e-5;G.globalAlpha=Math.max(0,fa);G.beginPath();for(let i=0;i<=6;i++){const a=i*1.0472+0.5236;G.lineTo(sx+Math.cos(a)*r,sy+Math.sin(a)*r);}G.stroke();
+    const gg=G.createRadialGradient(sx-r*.3,sy-r*.3,0,sx,sy,r);gg.addColorStop(0,'rgba(255,190,170,.35)');gg.addColorStop(1,'rgba(255,190,170,0)');G.fillStyle=gg;G.fill();}
+  G.globalAlpha=1;G.lineWidth=1;}});
+// 5 ladybug
+const SPOTS=[[0,2.35e-3,.62e-3],[1.8e-3,.95e-3,.72e-3],[-1.8e-3,.95e-3,.72e-3],[2.2e-3,-.8e-3,.8e-3],[-2.2e-3,-.8e-3,.8e-3],[1.3e-3,-2.45e-3,.62e-3],[-1.3e-3,-2.45e-3,.62e-3]];
+OBJ.push({name:'a ladybug',S:7.8e-3,off:[0.06,-0.04],cap:'A seven-spot ladybug, 7.8 mm long, walking through the grass.',
+draw(x,y,k,px,now){if(px<1.5)return;if(px<5){dot(x,y,2,'#c81e12',1);return;}
+  if(px>40*W){const g=G.createLinearGradient(0,0,W,H);g.addColorStop(0,'#d8321f');g.addColorStop(1,'#8e1409');G.fillStyle=g;G.fillRect(0,0,W,H);return;}
+  const m=v=>v*k,E=(cx,cy,rx,ry,c)=>{G.fillStyle=c;G.beginPath();G.ellipse(x+m(cx),y-m(cy),m(rx),m(ry),0,0,6.2832);G.fill();};
+  G.fillStyle='rgba(0,0,0,.35)';G.beginPath();G.ellipse(x+m(.4e-3),y-m(-.7e-3),m(3.4e-3),m(3.9e-3),0,0,6.2832);G.fill();
+  G.strokeStyle='#1a1410';G.lineWidth=Math.max(1,m(.18e-3));for(const s of[-1,1])for(const [yy,ang] of [[1.6e-3,.5],[-.2e-3,.05],[-1.9e-3,-.45]]){G.beginPath();G.moveTo(x+m(s*2.6e-3),y-m(yy));G.lineTo(x+m(s*4.3e-3),y-m(yy+ang*2e-3));G.stroke();}
+  G.beginPath();G.moveTo(x-m(.5e-3),y-m(4.2e-3));G.lineTo(x-m(1.3e-3),y-m(5.1e-3));G.moveTo(x+m(.5e-3),y-m(4.2e-3));G.lineTo(x+m(1.3e-3),y-m(5.1e-3));G.stroke();G.lineWidth=1;
+  E(0,3.95e-3,1.1e-3,.7e-3,'#15110e');E(0,3.1e-3,2.2e-3,.95e-3,'#15110e');E(1.35e-3,3.05e-3,.6e-3,.45e-3,'#f1ece2');E(-1.35e-3,3.05e-3,.6e-3,.45e-3,'#f1ece2');
+  const g=G.createRadialGradient(x-m(1e-3),y-m(1.2e-3),m(.3e-3),x,y-m(-.4e-3),m(3.6e-3));g.addColorStop(0,'#ff6a4d');g.addColorStop(.55,'#d42a17');g.addColorStop(1,'#7f1208');G.fillStyle=g;G.beginPath();G.ellipse(x,y-m(-.4e-3),m(3.2e-3),m(3.55e-3),0,0,6.2832);G.fill();
+  for(const [sx,sy,r] of SPOTS)E(sx,sy,r,r*.92,'#120d0b');
+  G.strokeStyle='#120d0b';G.lineWidth=Math.max(1,m(.12e-3));G.beginPath();G.moveTo(x,y-m(2.2e-3));G.lineTo(x,y-m(-3.9e-3));G.stroke();G.lineWidth=1;
+  glow(x-m(1.1e-3),y-m(1.3e-3),m(1.2e-3),'255,255,255',.35);}});
+// 6 grass patch
+const BLADES=(()=>{const r=mulberry32(9),L=[];for(let i=0;i<900;i++){const d=Math.sqrt(r())*0.32,a=r()*6.2832;L.push([Math.cos(a)*d,Math.sin(a)*d,r()*6.2832,0.012+r()*0.04,Math.floor(r()*4)]);}return L;})();
+const BC=['#4f8a2b','#3d7222','#6aa23a','#2f5c1b'];
+OBJ.push({name:'grass on the Champ de Mars',S:0.5,off:[110,-85],cap:'Grass on the Champ de Mars, the lawn beside the Eiffel Tower.',
+draw(x,y,k,px,now){if(px<25||px>400*W)return;const a=fadeIn(px,25,120);
+  for(const [u,v,t,l,c] of BLADES){const sx=x+u*k,sy=y-v*k,L=l*k;if(!onS(sx,sy,L))continue;const fa=Math.max(0,1-Math.hypot(u,v)/0.32)*a;G.strokeStyle=BC[c];G.globalAlpha=fa;G.lineWidth=Math.max(1,L*0.12);G.beginPath();G.moveTo(sx,sy);G.quadraticCurveTo(sx+Math.cos(t)*L*.5+L*.2,sy+Math.sin(t)*L*.5,sx+Math.cos(t)*L,sy+Math.sin(t)*L);G.stroke();}
+  G.globalAlpha=1;G.lineWidth=1;}});
+// 7 Eiffel Tower, seen from straight above; frame origin = centre of the tower
+OBJ.push({name:'the Eiffel Tower',S:330,off:[-3400,400],cap:'The Eiffel Tower seen from straight above: 330 m tall, its four legs on a 125 m square, shadow thrown across the lawn.',
+draw(x,y,k,px,now){if(px<1.2)return;const m=v=>v*k,rot=-0.70,cr=Math.cos(rot),sr=Math.sin(rot);
+  const P=(u,v)=>[x+m(u*cr-v*sr),y-m(u*sr+v*cr)];
+  if(px>60*W){fill('#4a7f2a');return;}
+  // Champ de Mars lawn, running south-east
+  G.fillStyle='#c9b690';let q=[P(-90,-120),P(90,-120),P(90,-820),P(-90,-820)];G.beginPath();q.forEach(p=>G.lineTo(p[0],p[1]));G.fill();
+  G.fillStyle='#4f8a2e';q=[P(-78,-110),P(78,-110),P(78,-800),P(-78,-800)];G.beginPath();q.forEach(p=>G.lineTo(p[0],p[1]));G.fill();
+  G.fillStyle='#5b9437';q=[P(-80,-80),P(80,-80),P(80,80),P(-80,80)];G.beginPath();q.forEach(p=>G.lineTo(p[0],p[1]));G.fill();
+  if(px<4){dot(x,y,1.5,'#5a4a3a',1);return;}
+  // shadow toward the north-east
+  G.fillStyle='rgba(0,0,0,.28)';const sd=[Math.cos(0.9),Math.sin(0.9)],tip=[x+m(sd[0]*393),y-m(sd[1]*393)];G.beginPath();G.moveTo(...P(-62,62));G.lineTo(tip[0],tip[1]);G.lineTo(...P(62,-62));G.closePath();G.fill();
+  const iron='#5d4b3b',lite='#8a735c';
+  const feet=[[-62,-62],[62,-62],[62,62],[-62,62]];
+  G.strokeStyle=iron;G.lineWidth=Math.max(1,m(5));
+  for(const [u,v] of feet){G.beginPath();G.moveTo(...P(u,v));G.lineTo(...P(u*.12,v*.12));G.stroke();}
+  for(const s of [36,22,11]){G.strokeStyle=lite;G.lineWidth=Math.max(1,m(s>30?4:3));G.beginPath();[[-s,-s],[s,-s],[s,s],[-s,s],[-s,-s]].forEach(([u,v])=>G.lineTo(...P(u,v)));G.stroke();}
+  G.strokeStyle='rgba(60,45,35,.6)';G.lineWidth=Math.max(1,m(1.2));for(const [u,v] of feet){for(let t=.25;t<1;t+=.25){G.beginPath();G.moveTo(...P(u*(1-t)+u*.12*t,v));G.lineTo(...P(u,v*(1-t)+v*.12*t));G.stroke();}}
+  G.fillStyle=iron;for(const [u,v] of feet){G.beginPath();[[-13,-13],[13,-13],[13,13],[-13,13]].forEach(([a,b])=>G.lineTo(...P(u+a,v+b)));G.fill();}
+  dot(...P(0,0),Math.max(1.5,m(4)),'#2b221a',1);G.lineWidth=1;}});
+// 8 Paris
+const BLOCKS=(()=>{const r=mulberry32(21),L=[];for(let i=0;i<2600;i++){const u=(r()*2-1)*5600,v=(r()*2-1)*4300;if((u/5600)**2+(v/4300)**2>1)continue;L.push([u,v,60+r()*170,50+r()*140,Math.atan2(v,u)+(r()-.5)*.6,Math.floor(r()*4)]);}return L;})();
+const BCOL=['#b2a792','#a39a88','#bdb3a0','#9a9282'];
+const SEINE=[[9000,-3800],[5000,-2200],[2500,-900],[800,-100],[0,0],[-1200,300],[-2600,500],[-3560,590],[-4300,220],[-4800,-1000],[-5200,-2600],[-6200,-3000],[-7400,-1600],[-8000,1500],[-9200,3200]];
+OBJ.push({name:'Paris',S:1.05e4,off:[0,0],cap:'Paris inside its ring road, about 10 km across. The Seine curls through it; the green blocks are its parks and woods.',
+draw(x,y,k,px,now){if(px<1.2)return;const m=v=>v*k;
+  if(px>250*W){fill('#aaa08c');return;}
+  G.fillStyle='#8e8a78';G.beginPath();G.ellipse(x,y,m(1.6e4),m(1.3e4),0,0,6.2832);G.fill();
+  G.fillStyle='#9d9480';G.beginPath();G.ellipse(x,y,m(5700),m(4400),0,0,6.2832);G.fill();
+  if(px>30)for(const [u,v,w,h,a,c] of BLOCKS){const sx=x+m(u),sy=y-m(v),R=m(Math.max(w,h));if(!onS(sx,sy,R))continue;G.save();G.translate(sx,sy);G.rotate(-a);G.fillStyle=BCOL[c];G.fillRect(-m(w)/2,-m(h)/2,Math.max(1,m(w)),Math.max(1,m(h)));G.restore();}
+  G.fillStyle='#48803a';for(const [u,v,rx,ry] of [[-7300,300,1300,1900],[7000,-1600,1500,1100],[-400,-1300,280,200],[3200,2900,260,200]]){G.beginPath();G.ellipse(x+m(u),y-m(v),m(rx),m(ry),0,0,6.2832);G.fill();}
+  G.strokeStyle='#3e5f7a';G.lineWidth=Math.max(1,m(140));G.lineJoin='round';G.beginPath();SEINE.forEach(([u,v])=>G.lineTo(x+m(u),y-m(v)));G.stroke();
+  G.strokeStyle='rgba(70,65,55,.5)';G.lineWidth=Math.max(1,m(60));G.beginPath();G.ellipse(x,y,m(5700),m(4400),0,0,6.2832);G.stroke();G.lineWidth=1;}});
+// 9 Earth, orthographic, centred on Paris
+const LAND=[
+[[37,-9],[43.5,-8],[48.5,-4.8],[49.5,0],[51,2.5],[53.5,6],[57,8.5],[55,12],[54,14],[54.5,19],[57,21],[59.5,24],[60.5,29],[65,40],[69,33],[69,45],[68,55],[70,65],[73,70],[72,80],[76,100],[73,113],[71,130],[70,150],[69,170],[66,190],[60,165],[51,157],[59,142],[54,140],[43,132],[39,125],[40,120],[35,120],[30,122],[22,114],[21,108],[16,108],[10,106],[8,105],[13,100],[7,100],[1,104],[6,100],[16,98],[16,95],[22,92],[20,86],[15,80],[8,77],[15,74],[21,72],[25,66],[25,57],[27,56],[30,48],[24,51],[22,59],[17,55],[12,44],[16,43],[28,34],[31,32],[36,36],[37,30],[40,26],[38,24],[40,20],[45,13],[40,18],[38,16],[44,9],[43,5],[41,2],[37,-2],[36,-6]],
+[[56,8],[58,6],[62,5],[68,14],[71,26],[70,31],[66,24],[63,21],[60,18],[56,16],[55.5,13]],
+[[50,-5.5],[51,1.4],[53,0.3],[55.5,-1.6],[58.6,-3],[58.5,-5],[56,-6],[54.5,-3.5],[53,-4.5],[51.6,-5]],
+[[51.5,-9.8],[54,-10],[55.3,-7.5],[54,-6],[52,-6.3]],
+[[63.4,-22],[64,-13.5],[66.3,-15],[66.5,-22.5],[65,-24]],
+[[35.8,-5.9],[37,10],[33,11],[30.5,19],[32.5,23],[31.5,32],[22,37],[15,39.5],[12,43],[11.8,51],[2,45.5],[-4,39.5],[-10,40],[-15,40.5],[-20,35],[-26,32.9],[-34,26],[-34.8,20],[-34,18.4],[-29,16.5],[-22,14],[-17,11.8],[-12,13.7],[-6,12],[-1,9],[4,9.5],[4.5,6],[6,1],[4.8,-2],[4.4,-7.5],[6.5,-11.5],[10,-14.5],[14.7,-17.4],[21,-17],[27,-13],[30,-9.7],[33.5,-7.6]],
+[[-12,49.3],[-16,50.5],[-25,47],[-25,44],[-17,44]],
+[[65,-168],[70,-162],[71,-156],[70,-141],[69,-133],[70,-125],[68,-110],[68,-98],[72,-95],[68,-82],[63,-78],[60,-65],[55,-60],[52,-56],[47,-53],[45,-61],[44,-66],[41.5,-70],[40.5,-74],[37,-76],[35,-75.5],[31,-81],[27,-80],[25,-80.4],[25,-81],[29.5,-83],[30,-86],[29,-89],[29.5,-94],[26,-97],[22,-97.8],[19,-96],[18.5,-94],[21,-90.5],[21.5,-87],[18,-88],[16,-86],[15.5,-83.5],[11,-83.7],[9,-79.5],[7.2,-77.8],[8,-80],[9,-85],[13,-87.5],[15.7,-96],[20,-105.5],[23,-106],[26,-109],[31.5,-113],[28,-114],[23,-110],[30,-116],[34,-118.5],[37.8,-122.5],[42,-124.3],[48.4,-124.7],[54,-130],[58,-136],[60,-146],[59,-152],[57,-157],[54.5,-164],[58.5,-157.5],[60.5,-165]],
+[[12,-72],[10.5,-62],[8.5,-60],[5,-52.5],[0,-50],[-2,-44],[-5,-35.3],[-10,-36],[-13,-38.5],[-23,-42],[-25,-48],[-30,-50.5],[-34.5,-54],[-36,-57],[-39,-62],[-41,-65],[-46,-67.5],[-50,-69],[-52.5,-68.5],[-55,-67.5],[-54,-72],[-50,-75.5],[-42,-74],[-37,-73.5],[-30,-71.5],[-18.5,-70.3],[-15,-75.5],[-6,-81],[-2.5,-80.5],[1,-79.5],[4,-77.5],[8,-77.3],[9,-76],[11,-74.5]],
+[[31,130.5],[34,132],[35.5,135.5],[36,140],[41,141.5],[45.5,141.9],[43.3,145.5],[41.5,140],[38,139],[35.5,133],[33.5,129.5]]];
+const ICE=[[60,-43],[65,-40],[70,-22],[76,-19],[81,-12],[83,-30],[82,-50],[78,-70],[76,-67],[70,-54],[65,-52],[61,-48]];
+const P0=48.86*Math.PI/180,L0=2.35*Math.PI/180;
+const ortho=(lat,lon)=>{const f=lat*Math.PI/180,l=lon*Math.PI/180-L0,cc=Math.sin(P0)*Math.sin(f)+Math.cos(P0)*Math.cos(f)*Math.cos(l);let X=Math.cos(f)*Math.sin(l),Y=Math.cos(P0)*Math.sin(f)-Math.sin(P0)*Math.cos(f)*Math.cos(l);if(cc<0){const n=Math.hypot(X,Y)||1;X/=n;Y/=n;}return[X,Y,cc];};
+const CLOUDS=(()=>{const r=mulberry32(5),L=[];for(let i=0;i<70;i++)L.push([(r()*2-1)*75,r()*360-180,4+r()*9,r()]);return L;})();
+OBJ.push({name:'the Earth',S:1.2742e7,minPx:0.0003,off:[AU*Math.cos(2.2),AU*Math.sin(2.2)],cap:'The Earth, 12,742 km across, with Paris facing you. The Moon circles 384,400 km out.',
+draw(x,y,k,px,now){const R=px/2;
+  const mr=1.7374e6*k,mx=x+3.844e8*k*Math.cos(1.0),my=y-3.844e8*k*Math.sin(1.0);
+  if(R<70*W&&mr>0.5&&onS(mx,my,mr+2)){if(mr<1.5)dot(mx,my,1,'#bbb',1);else{const g=G.createRadialGradient(mx+mr*.3,my+mr*.3,mr*.1,mx,my,mr);g.addColorStop(0,'#d9d6cf');g.addColorStop(1,'#5d5b57');G.fillStyle=g;G.beginPath();G.arc(mx,my,mr,0,6.2832);G.fill();for(const [a,b,c] of [[-.3,-.2,.18],[.25,.1,.12],[-.05,.35,.1],[.35,-.35,.08]])dot(mx+a*mr,my+b*mr,c*mr,'rgba(70,68,64,.45)',1);}}
+  if(R<2.5){if(!onS(x,y,40))return;glow(x,y,8,'110,160,255',.6);dot(x,y,Math.max(1.5,R),'#7fb0f0',1);G.fillStyle='rgba(230,236,250,.85)';G.font='600 11px Inter,sans-serif';G.fillText('Earth',x+8,y-6);
+    if(3.844e8*k>14){dot(mx,my,1.2,'#ccc',1);G.fillStyle='rgba(210,210,210,.75)';G.font='11px Inter,sans-serif';G.fillText('Moon',mx+6,my-4);}return;}
+  if(R>40*W){fill('#4e6b3c');return;}
+  if(!onS(x,y,R*1.1))return;
+  glow(x,y,R*1.1,'110,160,255',.35);
+  const g=G.createRadialGradient(x-R*.2,y-R*.2,R*.1,x,y,R);g.addColorStop(0,'#2d6fb8');g.addColorStop(1,'#0d2d5c');G.fillStyle=g;G.beginPath();G.arc(x,y,R,0,6.2832);G.fill();
+  G.save();G.beginPath();G.arc(x,y,R,0,6.2832);G.clip();
+  const poly=(pts,col)=>{G.fillStyle=col;G.beginPath();let any=false;for(const [la,lo] of pts){const [X,Y,c]=ortho(la,lo);if(c>0)any=true;G.lineTo(x+X*R,y-Y*R);}if(any)G.fill();};
+  LAND.forEach(p=>poly(p,'#5b7a3f'));poly(ICE,'#e9eef2');
+  for(const [la,lo] of [[23,10],[20,25],[25,45]]){const [X,Y,c]=ortho(la,lo);if(c>0)glow(x+X*R,y-Y*R,R*0.22,'214,190,130',.55);}
+  const drift=now/60000;for(const [la,lo,s,t] of CLOUDS){const [X,Y,c]=ortho(la,lo+drift*40*(t-.5));if(c<=0.05)continue;glow(x+X*R,y-Y*R,R*s/100*c,'255,255,255',.55);}
+  const sx=0.5885,sy=-0.8085,sh=G.createLinearGradient(x+sx*R,y-sy*R,x-sx*R,y+sy*R);sh.addColorStop(0,'rgba(0,0,0,0)');sh.addColorStop(.55,'rgba(0,0,0,.05)');sh.addColorStop(1,'rgba(0,0,10,.75)');G.fillStyle=sh;G.fillRect(x-R,y-R,2*R,2*R);
+  G.restore();}});
+// 10 Solar system (frame = the Sun)
+const PLAN=[['Mercury',.387,'#b4aca4',4.88e6,.4],['Venus',.723,'#e8cf9a',1.21e7,3.9],['Mars',1.524,'#c1502e',6.79e6,5.1],['Jupiter',5.203,'#d8b98a',1.398e8,1.3],['Saturn',9.537,'#e3d19c',1.165e8,2.6],['Uranus',19.19,'#9fe3e6',5.07e7,4.4],['Neptune',30.07,'#4b70dd',4.92e7,0.9]];
+const BELT=(()=>{const r=mulberry32(3),L=[];for(let i=0;i<1400;i++){const d=(2.2+r()*1.1)*AU,a=r()*6.2832;L.push([d*Math.cos(a),d*Math.sin(a)]);}for(let i=0;i<1200;i++){const d=(30+r()*20)*AU,a=r()*6.2832;L.push([d*Math.cos(a),d*Math.sin(a)]);}return L;})();
+OBJ.push({name:'the Sun and planets',S:9e12,off:[0,0],cap:'The Sun and its planets out to Neptune. The Earth sits one astronomical unit out, 150 million km. Planets drawn bigger than life.',
+draw(x,y,k,px,now){if(px<1)return;const sR=6.957e8*k;
+  glow(x,y,Math.max(8,sR*6),'255,210,140',.55);dot(x,y,Math.max(2,sR),'#fff4d6',1);
+  if(px>2000*W)return;
+  G.strokeStyle='rgba(255,255,255,.10)';for(const d of [...PLAN.map(p=>p[1]),1]){const r=d*AU*k;if(r<3||r>8*W)continue;G.beginPath();G.arc(x,y,r,0,6.2832);G.stroke();}
+  for(const [u,v] of BELT){const sx=x+u*k,sy=y-v*k;if(sx<0||sx>W||sy<0||sy>H)continue;G.fillStyle='rgba(200,190,170,.35)';G.fillRect(sx,sy,1,1);}
+  for(const [n,d,c,dia,a] of PLAN){const r=d*AU*k,sx=x+r*Math.cos(a),sy=y-r*Math.sin(a);if(!onS(sx,sy,12))continue;const pr=Math.max(2.2,dia/2*k);glow(sx,sy,pr*3,'255,255,255',.12);dot(sx,sy,pr,c,1);if(n==='Saturn'&&pr>2){G.strokeStyle='rgba(230,210,160,.6)';G.beginPath();G.ellipse(sx,sy,pr*2.2,pr*.8,.3,0,6.2832);G.stroke();}
+    if(r>40&&r<3*W){G.fillStyle='rgba(230,232,240,.7)';G.font='11px Inter,sans-serif';G.fillText(n,sx+6,sy-5);}}
+  const er=AU*k;if(er>40&&er<3*W){const ex=x+er*Math.cos(2.2),ey=y-er*Math.sin(2.2);G.fillStyle='rgba(230,232,240,.8)';G.font='11px Inter,sans-serif';G.fillText('Earth',ex+6,ey-5);}}});
+// 11 nearest stars (frame = the Sun). [name, ly, RA h, Dec, colour, bright]
+const STARS=[['Alpha Centauri',4.37,14.66,-60.8,'255,236,190',1],['Proxima',4.24,14.49,-62.7,'255,140,90',.3],['Barnard’s Star',5.96,17.96,4.7,'255,130,80',.3],['Wolf 359',7.86,10.94,7.0,'255,120,80',.25],['Lalande 21185',8.31,11.06,36,'255,150,100',.35],['Sirius',8.6,6.75,-16.7,'200,220,255',1],['Luyten 726-8',8.79,1.65,-17.9,'255,120,80',.25],['Ross 154',9.69,18.83,-23.8,'255,130,90',.3],['Epsilon Eridani',10.5,3.55,-9.5,'255,200,140',.6],['Ross 128',11,11.8,.8,'255,130,90',.3],['Procyon',11.46,7.65,5.2,'245,245,255',.9],['61 Cygni',11.4,21.1,38.7,'255,180,120',.5],['Tau Ceti',11.9,1.73,-15.9,'255,230,180',.6],['Epsilon Indi',11.9,22.05,-56.8,'255,190,130',.5],['Altair',16.7,19.85,8.9,'230,235,255',.9],['Vega',25,18.6,38.8,'205,220,255',1],['Fomalhaut',25.1,22.96,-29.6,'215,228,255',.8],['Pollux',33.8,7.75,28,'255,205,150',.8],['Arcturus',36.7,14.26,19.2,'255,190,120',1],['Capella',42.9,5.28,46,'255,235,170',1]]
+  .map(([n,d,ra,de,c,b])=>{const a=ra*15*Math.PI/180,r=d*LY*Math.cos(de*Math.PI/180);return[n,r*Math.cos(a),r*Math.sin(a),c,b];});
+const OORT=(()=>{const r=mulberry32(8),L=[];for(let i=0;i<1600;i++){const d=Math.exp(Math.log(3e14)+r()*Math.log(1.5e16/3e14)),a=r()*6.2832;L.push([d*Math.cos(a),d*Math.sin(a)]);}return L;})();
+OBJ.push({name:'the nearest stars',S:5e17,off:[0,0],cap:'The nearest stars. Alpha Centauri is 4.4 light-years away; the faint haze around the Sun is the Oort cloud of comets. Stars drawn far bigger than life.',
+draw(x,y,k,px,now){if(px<2)return;
+  for(const [u,v] of OORT){const sx=x+u*k,sy=y-v*k;if(sx<0||sx>W||sy<0||sy>H)continue;G.fillStyle='rgba(170,200,255,.28)';G.fillRect(sx,sy,1,1);}
+  if(px>3e4*W)return;
+  const sun=px>40;if(sun&&px<2e3*W){G.fillStyle='rgba(255,240,200,.9)';G.font='11px Inter,sans-serif';G.fillText('Sun',x+8,y-6);}
+  for(const [n,u,v,c,b] of STARS){const sx=x+u*k,sy=y-v*k;if(!onS(sx,sy,20))continue;glow(sx,sy,6+10*b,c,.55);dot(sx,sy,1.5+1.3*b,`rgb(${c})`,1);
+    if(px>200&&px<60*W&&b>=.6){G.fillStyle='rgba(230,232,240,.75)';G.font='11px Inter,sans-serif';G.fillText(n,sx+7,sy-6);}}}});
+// 12 our patch of the galaxy (frame = the Sun)
+const FIELD=(()=>{const r=mulberry32(11),L=[];for(let i=0;i<3200;i++){const d=Math.sqrt(r())*6e18,a=r()*6.2832,t=r();L.push([d*Math.cos(a),d*Math.sin(a),t<.7?'255,190,150':t<.9?'255,240,210':'200,215,255',.25+r()*.6]);}return L;})();
+const SPOTS2=[['Pleiades',444,3.79,24.1,'150,190,255',12],['Hyades',153,4.45,15.9,'255,220,170',9],['Orion Nebula',1344,5.59,-5.4,'255,120,170',0]].map(([n,d,ra,de,c,m])=>{const a=ra*15*Math.PI/180,r=d*LY*Math.cos(de*Math.PI/180);return[n,r*Math.cos(a),r*Math.sin(a),c,m];});
+OBJ.push({name:'our patch of the galaxy',S:1e19,off:[0,-2.46e20],cap:'Our patch of the Milky Way, about 1,000 light-years across: thousands of stars, the Pleiades, and the glowing Orion Nebula.',
+draw(x,y,k,px,now){if(px<3)return;const a=fadeIn(px,3,60)*(1-fadeIn(px,40*W,400*W));if(a<=0)return;
+  for(const [u,v,c,b] of FIELD){const sx=x+u*k,sy=y-v*k;if(sx<0||sx>W||sy<0||sy>H)continue;G.fillStyle=`rgba(${c},${b*a})`;G.fillRect(sx,sy,1.2,1.2);}
+  for(const [n,u,v,c,m] of SPOTS2){const sx=x+u*k,sy=y-v*k;if(!onS(sx,sy,60))continue;if(m===0){glow(sx,sy,Math.max(8,1.2e17*k),c,.5*a);}else{const r=mulberry32(n.length);for(let i=0;i<m;i++){dot(sx+(r()-.5)*30,sy+(r()-.5)*30,1.4,`rgb(${c})`,a);}glow(sx,sy,22,c,.25*a);}
+    if(px>300){G.fillStyle=`rgba(230,232,240,${.75*a})`;G.font='11px Inter,sans-serif';G.fillText(n,sx+10,sy-8);}}
+  if(px>60&&px<30*W){G.strokeStyle=`rgba(245,185,78,${.8*a})`;G.beginPath();G.arc(x,y,5,0,6.2832);G.stroke();G.fillStyle=`rgba(245,185,78,${.9*a})`;G.font='600 11px Inter,sans-serif';G.fillText('Sun',x+8,y+4);}}});
+// 13 Milky Way (frame = galactic centre)
+const MW=(()=>{const r=mulberry32(13),L=[];const b=Math.tan(12*Math.PI/180),r0=1.1e20;
+  for(let i=0;i<9000;i++){const arm=i%4,th=r()*6.6,rr=r0*Math.exp(b*th);if(rr>5.3e20)continue;const a=th+arm*Math.PI/2+.4,sp=gauss(r)*0.07*rr;L.push([rr*Math.cos(a)+sp*Math.cos(a+1.57),rr*Math.sin(a)+sp*Math.sin(a+1.57),arm%2?'190,210,255':'215,225,255',.35+r()*.5,1]);
+    if(i%5===0){const ai=a-0.09;L.push([rr*.96*Math.cos(ai),rr*.96*Math.sin(ai),'40,25,20',.6,2]);}if(i%40===0)L.push([rr*Math.cos(a),rr*Math.sin(a),'255,120,160',.8,3]);}
+  for(let i=0;i<4000;i++){const rr=-1e20*Math.log(r()+1e-9);if(rr>5.3e20)continue;const a=r()*6.2832;L.push([rr*Math.cos(a),rr*Math.sin(a),'255,230,190',.25,1]);}
+  for(let i=0;i<3000;i++){const u=gauss(r)*0.55e20,v=gauss(r)*0.3e20,c=Math.cos(.47),s=Math.sin(.47);L.push([u*c-v*s,u*s+v*c,'255,215,160',.45,1]);}
+  for(const [cx,cy,n,s] of [[3e20,-1.5e21,700,1.4e20],[6e20,-1.8e21,350,.8e20]])for(let i=0;i<n;i++)L.push([cx+gauss(r)*s,cy+gauss(r)*s*.7,'215,220,255',.4,1]);
+  return L;})();
+OBJ.push({name:'the Milky Way',S:1e21,off:[-9e21,-4e21],cap:'The Milky Way, about 100,000 light-years across, a barred spiral. You are 26,000 light-years from its centre. The two smudges below are the Magellanic Clouds.',
+draw(x,y,k,px,now){if(px<2)return;if(px<8){glow(x,y,6,'220,225,255',.6);return;}const a=fadeIn(px,8,80)*(1-fadeIn(px,6*W,40*W));if(a<=0)return;
+  if(px>40)glow(x,y,px*0.12,'255,220,170',.35*a);
+  for(const [u,v,c,al,t] of MW){const sx=x+u*k,sy=y-v*k;if(sx<-2||sx>W+2||sy<-2||sy>H+2)continue;const s=t===2?2.2:t===3?1.8:1.2;G.fillStyle=`rgba(${c},${al*a})`;G.fillRect(sx,sy,s,s);}
+  if(px>60){const sx=x,sy=y+2.46e20*k;G.strokeStyle=`rgba(245,185,78,${a})`;G.beginPath();G.arc(sx,sy,6,0,6.2832);G.stroke();G.fillStyle=`rgba(245,185,78,${a})`;G.font='600 11px Inter,sans-serif';G.fillText('you',sx+9,sy+4);}}});
+// 14 Local Group (frame: the group's middle)
+const M31=(()=>{const r=mulberry32(31),L=[];for(let i=0;i<3500;i++){const arm=i%2,th=r()*7,rr=0.9e20*Math.exp(0.18*th);if(rr>1.1e21)continue;const a=th+arm*Math.PI,sp=gauss(r)*.09*rr;L.push([rr*Math.cos(a)+sp,rr*Math.sin(a)+sp,.35+r()*.4]);}for(let i=0;i<1500;i++)L.push([gauss(r)*1.6e20,gauss(r)*1.6e20,.5]);return L;})();
+const DW=(()=>{const r=mulberry32(4),L=[];for(let i=0;i<50;i++){const c=r()<.5?[-9e21,-4e21]:[1.33e22,4.1e21],d=3e20+r()*1.2e22,a=r()*6.2832;L.push([c[0]+d*Math.cos(a),c[1]+d*Math.sin(a)]);}return L;})();
+OBJ.push({name:'the Local Group',S:6e22,off:[9e21,4.246e21],cap:'The Local Group: the Milky Way, Andromeda 2.5 million light-years away, Triangulum, and dozens of little galaxies.',
+draw(x,y,k,px,now){if(px<3)return;const a=fadeIn(px,3,40)*(1-fadeIn(px,20*W,200*W));if(a<=0)return;
+  const mx=x+1.3263e22*k,my=y-4.127e21*k,inc=.3,rot=.65,c=Math.cos(rot),s=Math.sin(rot);
+  if(1.1e21*k>4){for(const [u,v,al] of M31){const uu=u,vv=v*inc,sx=mx+(uu*c-vv*s)*k,sy=my-(uu*s+vv*c)*k;if(sx<0||sx>W||sy<0||sy>H)continue;G.fillStyle=`rgba(225,225,255,${al*a})`;G.fillRect(sx,sy,1.2,1.2);}glow(mx,my,Math.max(4,2e20*k),'255,225,180',.5*a);}else glow(mx,my,5,'230,230,255',.7*a);
+  const tx=mx+6.2e21*k,ty=my+4.2e21*k;glow(tx,ty,Math.max(3,3e20*k),'200,215,255',.45*a);
+  for(const [u,v] of DW){dot(x+u*k,y-v*k,1.2,'rgba(210,215,240,.7)',a);}
+  if(px>100){G.fillStyle=`rgba(230,232,240,${.8*a})`;G.font='11px Inter,sans-serif';G.fillText('Andromeda',mx+10,my-10);G.fillText('Triangulum',tx+8,ty+4);}}});
+// 15 cosmic web (frame = the Sun)
+const WEB=(()=>{const r=mulberry32(99),N=[];N.push([5.1e23*Math.cos(1.1),5.1e23*Math.sin(1.1),3]);for(let i=0;i<420;i++){const d=Math.sqrt(r())*5.5e25,a=r()*6.2832;N.push([d*Math.cos(a),d*Math.sin(a),.5+r()*2]);}
+  const E=[],GL=[];for(let i=0;i<N.length;i++){const ds=N.map((n,j)=>[Math.hypot(n[0]-N[i][0],n[1]-N[i][1]),j]).sort((a,b)=>a[0]-b[0]).slice(1,4);for(const [d,j] of ds){if(j<i&&ds.length)continue;E.push([i,j]);for(let s=0;s<22;s++){const t=r(),jx=gauss(r)*d*.035,jy=gauss(r)*d*.035;GL.push([N[i][0]+(N[j][0]-N[i][0])*t+jx,N[i][1]+(N[j][1]-N[i][1])*t+jy]);}}}
+  for(let i=0;i<2500;i++){const d=Math.sqrt(r())*2e24,a=r()*6.2832;GL.push([d*Math.cos(a)*.5+2.5e23,d*Math.sin(a)*.3+2.5e23]);}
+  const FAR=[];for(let i=0;i<5200;i++){const d=Math.sqrt(r())*4.35e26,a=r()*6.2832,o=r()*6.2832,l=(0.6+r())*1.3e25;FAR.push([d*Math.cos(a),d*Math.sin(a),Math.cos(o)*l,Math.sin(o)*l]);}
+  return{N,E,GL,FAR};})();
+OBJ.push({name:'the cosmic web',S:1e25,minPx:0.05,off:[0,0],cap:'The cosmic web: galaxies strung along filaments around huge empty voids. The bright knot nearby is the Virgo Cluster, 54 million light-years away.',
+draw(x,y,k,px,now){const a=Math.max(.6,fadeIn(px,3,40));
+  const near=fadeIn(px,0.04*W,0.25*W);
+  if(near<1){const fa=.5*(1-near);G.fillStyle=`rgba(190,200,255,${fa})`;for(const [u,v,du,dv] of WEB.FAR){const sx=x+u*k,sy=y-v*k;if(sx<-20||sx>W+20||sy<-20||sy>H+20)continue;for(let s=0;s<5;s++){const t=s/4,w=Math.sin(t*3.1416+u)*0.15;G.fillRect(sx+(du*t-dv*w)*k,sy-(dv*t+du*w)*k,1.1,1.1);}}
+    for(let i=0;i<WEB.FAR.length;i+=9){const [u,v]=WEB.FAR[i];const sx=x+u*k,sy=y-v*k;if(onS(sx,sy,4))glow(sx,sy,4,'255,225,200',.5*(1-near));}}
+  if(near>0){const na=a*near*(1-fadeIn(px,200*W,1500*W));
+    for(const [u,v] of WEB.GL){const sx=x+u*k,sy=y-v*k;if(sx<0||sx>W||sy<0||sy>H)continue;G.fillStyle=`rgba(200,210,255,${.55*na})`;G.fillRect(sx,sy,1.3,1.3);}
+    for(const [u,v,w] of WEB.N){const sx=x+u*k,sy=y-v*k;if(!onS(sx,sy,30))continue;glow(sx,sy,6+6*w,'255,220,190',.45*na);}
+    const vx=x+WEB.N[0][0]*k,vy=y-WEB.N[0][1]*k;if(px>80*W&&px<1500*W&&onS(vx,vy,10)){G.fillStyle=`rgba(230,232,240,${.8*na})`;G.font='11px Inter,sans-serif';G.fillText('Virgo Cluster',vx+10,vy-8);}}}});
+// 16 observable universe (frame = the Sun, i.e. you)
+const CMB=(()=>{const r=mulberry32(2025),L=[];for(let i=0;i<2600;i++){const a=r()*6.2832,d=1-r()*0.035,t=r();L.push([Math.cos(a)*d,Math.sin(a)*d,t<.33?'255,120,60':t<.66?'255,190,90':'90,140,255',2+r()*4]);}return L;})();
+OBJ.push({name:'everything we can see',S:DIAM,off:[0,0],cap:'Everything light has had time to reach us from: 93 billion light-years across. The glowing rim is the oldest light there is. You are in the middle.',
+draw(x,y,k,px,now){const R=px/2;if(R<40)return;
+  if(R<8*W){for(const [u,v,c,s] of CMB){const sx=x+u*R,sy=y-v*R;if(!onS(sx,sy,s))continue;G.fillStyle=`rgba(${c},.5)`;G.fillRect(sx,sy,s*.8,s*.8);}
+    G.strokeStyle='rgba(255,170,100,.35)';G.lineWidth=2;G.beginPath();G.arc(x,y,R,0,6.2832);G.stroke();G.lineWidth=1;
+    if(R<2*W){G.fillStyle='rgba(245,185,78,.95)';G.beginPath();G.arc(x,y,3,0,6.2832);G.fill();G.font='600 12px Inter,sans-serif';G.fillText('you',x+8,y-6);G.fillStyle='rgba(255,200,150,.8)';G.font='12px Inter,sans-serif';const lx=x+R*.72,ly=y-R*.72;if(lx+150>W){G.textAlign='center';G.fillText('the edge: the oldest light',x,y-R-10);G.textAlign='left';}else G.fillText('the edge: the oldest light',lx,ly);}}}});
+
+// ============ camera and drawing
+const relPos=(j,i)=>{let X=0,Y=0;if(j<i){for(let t=j;t<i;t++){X+=OBJ[t].off[0];Y+=OBJ[t].off[1];}}else if(j>i){for(let t=i;t<j;t++){X-=OBJ[t].off[0];Y-=OBJ[t].off[1];}}return[X,Y];};
+const sm=t=>t*t*(3-2*t);
+let Z=0,playing=false,HIVE=true;
+function camera(VW){let i=0;while(i<OBJ.length-2&&VW>2.2*OBJ[i+1].S)i++;const V0=2.2*OBJ[i].S,V1=2.2*OBJ[i+1].S;let t=(Math.log(VW)-Math.log(V0))/(Math.log(V1)-Math.log(V0));t=Math.max(0,Math.min(1,t));
+  // the camera slides in proportion to the view width, so the smaller thing never leaves the frame
+  const f=Math.max(0,Math.min(1,(VW-V0)/(V1-V0)));const p=relPos(i+1,i);return{i,t,f,cx:p[0]*f,cy:p[1]*f};}
+function foam(now){const a=1-fadeIn(Z,2.2,3.4);if(a<=0)return;for(let s=0;s<90;s++){const x=Math.random()*W,y=Math.random()*H,r=4+Math.random()*50;G.strokeStyle=`rgba(${Math.random()<.5?'170,200,255':'255,210,170'},${Math.random()*0.25*a})`;G.beginPath();G.arc(x,y,r,0,6.2832);G.stroke();}
+  for(let s=0;s<260;s++){G.fillStyle=`rgba(255,255,255,${Math.random()*0.5*a})`;G.fillRect(Math.random()*W,Math.random()*H,1.3,1.3);}}
+const TET=[[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]].map(v=>v.map(x=>x/Math.sqrt(3)));
+function hive(now,beat,bf){if(!HIVE)return;const cx=W/2,cy=H/2,R=Math.min(W,H)*0.36,rot=now/3000,c=Math.cos(rot),s=Math.sin(rot);
+  const P=TET.map(([x,y,z])=>{const X=x*c+z*s,Z2=-x*s+z*c;return[cx+X*R,cy+(y*.9+Z2*.25)*R];});
+  G.setLineDash([3,7]);G.strokeStyle='rgba(245,185,78,.2)';G.beginPath();for(let a=0;a<4;a++)for(let b=a+1;b<4;b++){G.moveTo(P[a][0],P[a][1]);G.lineTo(P[b][0],P[b][1]);}G.stroke();G.setLineDash([]);
+  P.forEach((p,i)=>{glow(p[0],p[1],i===beat?26:14,'245,185,78',i===beat?.8:.4);dot(p[0],p[1],3,'#F5B94E',.9);});
+  G.strokeStyle=beat===4?'rgba(230,232,240,.95)':'rgba(200,203,214,.55)';G.lineWidth=1.5;G.beginPath();G.arc(cx,cy,7,0,6.2832);G.stroke();
+  const dr=R*Math.pow(6,-bf);G.strokeStyle=`rgba(168,139,255,${beat===5?.8:.32})`;G.beginPath();G.arc(cx,cy,Math.max(9,dr),0,6.2832);G.stroke();G.lineWidth=1;}
+function draw(now){const VW=2.2*size(Z),k=W/VW,cam=camera(VW);
+  G.fillStyle='#000';G.fillRect(0,0,W,H);
+  const vis=[];for(let j=OBJ.length-1;j>=0;j--){const px=OBJ[j].S*k;if(px<(OBJ[j].minPx||0.8))continue;const [X,Y]=relPos(j,cam.i);const sx=W/2+(X-cam.cx)*k,sy=H/2-(Y-cam.cy)*k;OBJ[j].draw(sx,sy,k,px,now);if(px>0.02*W&&px<40*W)vis.push(j);}
+  foam(now);
+  const f6=Z*6,beat=Math.min(5,Math.floor((f6%6+6)%6)),bf=f6-Math.floor(f6);hive(now,Z>0.01?beat:-1,bf);
+  return{beat,cam};}
+const CAPF='The very bottom: space itself is expected to fizz at this size. Predicted, never seen.',CAPD='The grand desert: we are inside a proton, but at these sizes nothing is known to live.';
+function sceneCap(cam){if(Z<2.2)return[CAPF,'theory'];if(Z<3.6)return[CAPD,'unknown'];const o=OBJ[cam.t>.5?cam.i+1:cam.i];return[o.cap,Z<6.2?'labels':Z>10.6?'enlarged':''];}
+const NAMES=['quantum foam','the grand desert','the grand desert','the grand desert','inside a proton','inside an atom','a virus','a ladybug','the Eiffel Tower','the Earth','Jupiter’s orbit','the nearest stars','the Milky Way','the cosmic web'];
+const ROLE=['worker 1','worker 2','worker 3','worker 4','mother','daughter'],RC=['wk','wk','wk','wk','mo','da'];
+$('bt').innerHTML=ROLE.map((r,i)=>`<span class="beat ${RC[i]}">${r} · ×6</span>`).join('');
+const GENS=[...Array(14).keys()].map(g=>({z:g,m:size(g),n:NAMES[g]})).concat([{z:STEPS,m:size(STEPS),n:'everything we can see',lab:'13.2'}]);
+$('tl').innerHTML=GENS.map(Gn=>`<div class="gen" data-z="${Gn.z}"><b>${Gn.lab||Gn.z}</b><div class="s">${fmt(Gn.m)}</div><div class="m">${Gn.n}</div></div>`).join('');
+function hud(r){const [cap,tag]=sceneCap(r.cam);
+  $('hl').innerHTML=`step ${Z.toFixed(1)}<small>of 13.2${Z>0.01?' · beat: '+ROLE[r.beat]:''}</small>`;
+  $('hs').textContent=fmt(size(Z));$('hm').textContent=Z<2.2?'quantum foam':Z<3.6?'the grand desert':OBJ[r.cam.t>.5?r.cam.i+1:r.cam.i].name;
+  $('cap').innerHTML=cap+(tag?`<i>${tag}</i>`:'');
+  document.querySelectorAll('.beat').forEach((b,i)=>b.classList.toggle('on',Z>0.01&&i===r.beat));
+  document.querySelectorAll('.gen').forEach(el=>el.classList.toggle('on',Math.abs(+el.dataset.z-Z)<0.5));
+  window.__REAL__.now={Z,view:2.2*size(Z),focus:OBJ[r.cam.i].name,t:+r.cam.t.toFixed(3),beat:r.beat,cap};}
+function sizeC(){const cv=$('cv'),w=cv.clientWidth||600,h=Math.round(Math.max(420,Math.min(w*0.62,640))),d=devicePixelRatio||1;cv.width=Math.round(w*d);cv.height=Math.round(h*d);cv.style.height=h+'px';G=cv.getContext('2d');G.setTransform(d,0,0,d,0,0);W=w;H=h;}
+let last=0;
+function frame(now){const dt=Math.min(50,now-(last||now));last=now;
+  if(playing){const slow=(Z>6.5&&Z<9.8)||(Z>3.6&&Z<6.3)?0.28:0.5;Z=Math.min(STEPS,Z+dt/1000*slow);$('z').value=Z;if(Z>=STEPS){playing=false;$('pl').textContent='Build it again';}}
+  const r=draw(now);hud(r);requestAnimationFrame(frame);}
+$('pl').onclick=()=>{if(Z>=STEPS-1e-3)Z=0;playing=!playing;$('pl').textContent=playing?'Pause':'Build it';};
+$('rs').onclick=()=>{playing=false;Z=0;$('z').value=0;$('pl').textContent='Build it';};
+$('hv').onclick=()=>{HIVE=!HIVE;$('hv').textContent='hive: '+(HIVE?'on':'off');$('hv').classList.toggle('on',HIVE);};
+$('z').addEventListener('input',()=>{playing=false;Z=+$('z').value;$('pl').textContent='Build it';});
+let drag=null;$('cv').addEventListener('pointerdown',e=>{drag=e.clientX;playing=false;$('pl').textContent='Build it';$('cv').setPointerCapture(e.pointerId);});
+$('cv').addEventListener('pointermove',e=>{if(drag===null)return;Z=Math.max(0,Math.min(STEPS,Z-(e.clientX-drag)/220));drag=e.clientX;$('z').value=Z;});
+$('cv').addEventListener('pointerup',()=>drag=null);
+$('cv').addEventListener('wheel',e=>{e.preventDefault();playing=false;Z=Math.max(0,Math.min(STEPS,Z+e.deltaY/900));$('z').value=Z;},{passive:false});
+document.querySelectorAll('.gen').forEach(el=>el.onclick=()=>{playing=false;Z=+el.dataset.z;$('z').value=Z;$('pl').textContent='Build it';$('cv').scrollIntoView({behavior:'smooth',block:'center'});});
+$('ans').textContent=STEPS.toFixed(2);
+window.__REAL__={STEPS,set:z=>{playing=false;Z=z;},objs:OBJ.map(o=>[o.name,o.S])};
+sizeC();requestAnimationFrame(frame);addEventListener('resize',sizeC);
+})();
+</script>
+</body>
+</html>

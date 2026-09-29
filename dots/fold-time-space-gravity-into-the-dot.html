@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fold Into the Dot</title>
+<style>
+:root{--bg:#0b0b14;--panel:#10111b;--ink:#E4E4EE;--dim:#8B8CA0;--line:#20223a;--earth:#C9A45C;--wood:#4FB39A;--metal:#B8C2CC;--fire:#E8894A;--water:#6E8FE0;--vi:#B79BFF;--lit:#7FD08E;--amb:#E8B84A;--dead:#E06A6A}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.wrap{max-width:1180px;margin:0 auto;padding:18px 16px 40px}
+h1{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);font-weight:400;margin:0 0 14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+.win{border:1px solid var(--line);border-top:3px solid var(--c);border-radius:6px;padding:14px;margin:0 0 16px;background:var(--panel)}
+.win h2{margin:0 0 10px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--c);font-weight:500;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.w1{--c:var(--earth)}.w2{--c:var(--wood)}.w3{--c:var(--metal)}.w4{--c:var(--fire)}.w5{--c:var(--water)}
+table{width:100%;border-collapse:collapse}
+td,th{padding:6px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+th{color:var(--dim);font-weight:400;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase}
+.st{font-size:10px;padding:1px 5px;border-radius:3px;border:1px solid currentColor;white-space:nowrap}
+.LIT{color:var(--lit)}.AMBER{color:var(--amb)}.DEAD{color:var(--dead)}
+.ctl{display:flex;align-items:center;gap:10px;margin:10px 0;flex-wrap:wrap}
+.ctl input[type=range]{flex:1;min-width:140px;accent-color:var(--c)}
+input[type=number],select{background:#0a0a12;color:var(--ink);border:1px solid var(--line);border-radius:3px;padding:6px 8px;font:inherit}
+input[type=number]{width:130px}
+button{background:transparent;color:var(--c);border:1px solid var(--c);border-radius:3px;padding:7px 11px;font:inherit;font-size:11px;letter-spacing:.08em;cursor:pointer;text-transform:uppercase}
+button:hover{background:rgba(255,255,255,.05)}
+canvas{width:100%;display:block;background:#08080f;border:1px solid var(--line);border-radius:4px;touch-action:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-top:10px}
+.cell{border:1px solid var(--line);border-radius:4px;padding:7px 9px}
+.cell b{display:block;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);font-weight:400}
+.cell span{font-size:14px}
+p{margin:8px 0}.note{color:var(--dim)}
+.eli{border-left:3px solid var(--earth);padding:6px 12px;margin-top:14px}
+.mx{font-size:13px;border:1px solid var(--line);border-radius:4px;padding:10px 12px;background:#0a0a12;white-space:pre;overflow-x:auto}
+.odd{color:var(--earth)}.even{color:var(--vi)}
+.stage{display:flex;gap:4px;flex-wrap:wrap;margin:6px 0}
+.stage span{padding:3px 8px;border:1px solid var(--line);border-radius:3px;color:var(--dim);font-size:11px}
+.stage span.on{color:var(--bg);background:var(--fire);border-color:var(--fire)}
+.groups{font-size:12px;line-height:1.7}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:760px){.two{grid-template-columns:1fr}}
+@media(max-width:600px){.w1 table tr:first-child{display:none}.w1 table tr,.w5 table tr,.w2 table tr{display:block;border-bottom:1px solid var(--line);padding:6px 0}.w1 table td,.w5 table td,.w2 table td{display:block;border:0;padding:2px 0}.w1 table td:first-child,.w5 table td:first-child{color:var(--c);font-weight:600}.w2 table td:first-child{font-weight:600}.w2 table tr.hd{display:none}.w2 table td[data-l]::before{content:attr(data-l);color:var(--dim);font-size:10px;letter-spacing:.08em;margin-right:8px;text-transform:uppercase}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1><span>R · time . space . gravity → (.)</span><span>3 axes → 2 → 1 → a dot and one bit</span></h1>
+
+<section class="win w1">
+<h2><span>W1 · source · your words, the accepted words</span><span>stamps</span></h2>
+<table>
+<tr><th>your word</th><th>accepted term</th><th>what it is</th><th></th></tr>
+<tr><td>fold</td><td><b>natural units</b>: set the constants to 1 (mathematically, divide the lattice of units by them)</td><td>every quantity is kg<sup>a</sup> m<sup>b</sup> s<sup>c</sup>: a point on a 3‑D grid of whole numbers (a, b, c). a constant of nature says two of those points are "the same". fold along it and the grid loses one direction.</td><td><span class="st LIT">LIT</span></td></tr>
+<tr><td>time . space</td><td><b>c</b>, the speed of light</td><td>c = 1 says a second is 299,792,458 metres. time folds onto space. the dot between them is the fold.</td><td><span class="st LIT">LIT</span></td></tr>
+<tr><td>gravity</td><td><b>G</b> (with c: G/c²)</td><td>G = 1 says a kilogram is 7.43 × 10⁻²⁸ m. mass folds onto length. the Earth is 4.4 mm, the Sun 1.48 km (half the size each would be as a black hole).</td><td><span class="st LIT">LIT</span></td></tr>
+<tr><td>(.)</td><td><b>a point</b>; in your bracket notation, bra and ket closed on a dot: <b>a scalar</b></td><td>everything a pure number. but time, space and gravity alone stop at a <b>line</b>: every quantity becomes length to some power, and nothing fixes which length is 1. the dot needs one more constant that sets a length: <b>ħ</b>, the quantum of action. I read the (.) as that: the smallest dot there is.</td><td><span class="st LIT">LIT</span> the line · <span class="st AMBER">AMBER</span> ħ as your dot</td></tr>
+<tr><td>what's left in the dot</td><td><b>one bit</b>: the parity of a + b + c</td><td>fold with c, G and ħ and the grid doesn't go to a single point: it goes to <b>two</b>. the constants' grid has determinant −2. whether a quantity lands on the even dot or the odd dot is whether it needs a square root. (W2.)</td><td><span class="st LIT">LIT</span></td></tr>
+</table>
+</section>
+
+<section class="win w2">
+<h2><span>W2 · the fold, solved · which powers of G, c, ħ make each quantity</span><span id="det">–</span></h2>
+<div class="mx">            kg   m   s
+G   (grav)  −1   3  −2
+c   (t.s)    0   1  −1
+ħ   (.)      1   2  −1      determinant = −2  →  2 dots left, not 1</div>
+<table id="qt"><tr class="hd"><th>quantity</th><th>kg m s</th><th>= G · c · ħ to the powers</th><th>needs ħ?</th><th>√?</th><th>Planck value</th></tr></table>
+<p><b>the bit.</b> a quantity folds with whole-number powers exactly when kg + m + s exponents add to an even number. odd ones (length, time, mass, energy) need a square root: the Planck length is √(ħG/c³). even ones fold clean. <span class="st LIT">LIT</span> (all 15 rows solved exactly with fractions, in Python and again in this page)</p>
+<p><b>your three alone.</b> force = c⁴/G and power = c⁵/G fold with no ħ at all: 1.21 × 10⁴⁴ newtons and 3.63 × 10⁵² watts, built from time, space and gravity only. <span class="st LIT">LIT</span></p>
+</section>
+
+<section class="win w3">
+<h2><span>W3 · 1D · after time . space . gravity, everything is a length</span><span id="ln">–</span></h2>
+<div class="ctl"><label for="kg">mass, kg</label><input type="number" id="kg" value="80"><span id="kgv">–</span></div>
+<div class="ctl"><label for="sec">time, s</label><input type="number" id="sec" value="1"><span id="secv">–</span></div>
+<div class="grid">
+<div class="cell"><b>Earth as a length</b><span>4.435 mm</span></div>
+<div class="cell"><b>Sun as a length</b><span>1,476.7 m</span></div>
+<div class="cell"><b>1 kg</b><span>7.426 × 10⁻²⁸ m</span></div>
+<div class="cell"><b>1 s</b><span>299,792,458 m</span></div>
+</div>
+<p>one axis survives: the power of length, n = (kg power) + (m power) + (s power). that's the line. ħ = 1 then makes length² a pure number (one Planck area, 2.61 × 10⁻⁷⁰ m²), which folds the line in half, over and over, down to its parity: odd or even. <span class="st LIT">LIT</span></p>
+</section>
+
+<section class="win w4">
+<h2><span>W4 · 2D · watch the fold · 3 → 2 → 1 → (.)</span><span id="stg">–</span></h2>
+<div class="stage" id="sl"><span>3D · kg m s</span><span>fold time . space</span><span>fold gravity</span><span>fold (.) · ħ</span></div>
+<canvas id="fd"></canvas>
+<div class="ctl"><label for="f">fold</label><input type="range" id="f" min="0" max="3" step="0.01" value="0"><button id="pl">play the fold</button></div>
+<div class="groups" id="gr"></div>
+<p class="note"><span class="odd">●</span> odd (needs a √) · <span class="even">●</span> even (folds clean). stage 0 is the kg‑m‑s grid seen corner-on, the same view as last build's cube: the corner kg·m·s sits dead centre, on top of the plain number 1. the observer again.</p>
+</section>
+
+<section class="win w5">
+<h2><span>W5 · 3D · the unit grid, the three fold arrows, the two tetrahedra</span><span>drag to turn</span></h2>
+<canvas id="u3"></canvas>
+<div class="ctl"><button id="co">corner-on</button><button id="sp">spin</button></div>
+<p>every dot is a possible unit, kg<sup>a</sup>m<sup>b</sup>s<sup>c</sup> for a, b, c from −2 to 2. arrows: <span style="color:#E8894A">G</span>, <span style="color:#4FB39A">c</span>, <span style="color:#B8C2CC">ħ</span>. colour is the leftover bit. on the unit cube at the centre, the odd corners and the even corners are the two tetrahedra from three builds back: the bit that survives the fold is which tetrahedron you're on. kg·m·s, the observer's corner, is odd. <span class="st LIT">LIT</span></p>
+<table>
+<tr><td>the constants' values</td><td>c = 299,792,458 m/s (exact by definition), G = 6.674 30 × 10⁻¹¹, ħ = 1.054 571 817 × 10⁻³⁴. G is the least well known, to about 1 part in 45,000.</td><td><span class="st AMBER">AMBER</span> measured inputs</td></tr>
+<tr><td>real powers vs whole powers</td><td>physics allows square roots, so with real powers the fold does reach a single dot. the leftover bit is what you see if you insist on whole-number powers, the way your base-11 circles do.</td><td><span class="st LIT">LIT</span></td></tr>
+<tr><td>charge, temperature</td><td>left out. adding coulombs or kelvin adds axes to the grid and needs more constants to fold them.</td><td><span class="st AMBER">AMBER</span> scope</td></tr>
+<tr><td>the last build</td><td>corner-on hexagon, observer at the centre, two tetrahedra, a bit. same shapes, now carrying units instead of letters.</td><td><span class="st LIT">LIT</span></td></tr>
+</table>
+<div class="eli"><b>small words.</b> everything we measure is made of how heavy, how long and how many seconds. light's speed says a second is just a very long metre. gravity says a kilogram is just a very, very tiny metre. now everything is metres. the tiniest wiggle of nature says one very small square is exactly 1. then everything folds to a dot, and all that's left is one yes-or-no: does it need a square root or not.</div>
+</section>
+</div>
+
+<script>
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id);
+function fit(cv,r,mn,mx){const w=cv.clientWidth||600,h=Math.round(Math.max(mn,Math.min(w*r,mx))),d=devicePixelRatio||1;cv.width=Math.round(w*d);cv.height=Math.round(h*d);cv.style.height=h+'px';const g=cv.getContext('2d');g.setTransform(d,0,0,d,0,0);return[g,w,h];}
+// ---- exact rational solve
+const gcd=(a,b)=>{a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b];}return a||1;};
+const fr=(n,d)=>{if(d<0){n=-n;d=-d;}const g=gcd(n,d);return[n/g,d/g];};
+const fs=([n,d])=>d===1?String(n):n+'/'+d;
+const Gv=[-1,3,-2],Cv=[0,1,-1],Hv=[1,2,-1],A=[0,1,2].map(i=>[Gv[i],Cv[i],Hv[i]]);
+const det3=m=>m[0][0]*(m[1][1]*m[2][2]-m[1][2]*m[2][1])-m[0][1]*(m[1][0]*m[2][2]-m[1][2]*m[2][0])+m[0][2]*(m[1][0]*m[2][1]-m[1][1]*m[2][0]);
+const D=det3(A);
+const solve=v=>[0,1,2].map(j=>{const m=A.map(r=>r.slice());for(let i=0;i<3;i++)m[i][j]=v[i];return fr(det3(m),D);});
+const C=299792458,G=6.67430e-11,H=1.054571817e-34;
+const Q=[['length',[0,1,0]],['time',[0,0,1]],['mass',[1,0,0]],['velocity',[0,1,-1]],['acceleration',[0,1,-2]],['force',[1,1,-2]],['energy',[1,2,-2]],['power',[1,2,-3]],['action',[1,2,-1]],['area',[0,2,0]],['momentum',[1,1,-1]],['frequency',[0,0,-1]],['density',[1,-3,0]],['pressure',[1,-1,-2]],['kg·m·s (observer)',[1,1,1]]];
+const par=v=>((v[0]+v[1]+v[2])%2+2)%2;
+const ROWS=Q.map(([n,v])=>{const s=solve(v),val=G**(s[0][0]/s[0][1])*C**(s[1][0]/s[1][1])*H**(s[2][0]/s[2][1]);const integ=s.every(x=>x[1]===1);return{n,v,s,val,integ,noH:s[2][0]===0,p:par(v)};});
+const allAgree=ROWS.every(r=>r.integ===(r.p===0));
+$('det').textContent=`det ${D} · √ exactly when odd: ${allAgree?'15 of 15':'NO'}`;
+$('qt').insertAdjacentHTML('beforeend',ROWS.map(r=>`<tr><td class="${r.p?'odd':'even'}">${r.p?'●':'○'} ${r.n}</td><td data-l="kg m s">${r.v.join(' ')}</td><td data-l="=">G<sup>${fs(r.s[0])}</sup> c<sup>${fs(r.s[1])}</sup> ħ<sup>${fs(r.s[2])}</sup></td><td data-l="needs ħ">${r.noH?'no':'yes'}</td><td data-l="needs √">${r.integ?'no':'yes'}</td><td data-l="Planck">${r.val.toExponential(3)}</td></tr>`).join(''));
+// ---- W3
+function conv(){const m=+$('kg').value||0,s=+$('sec').value||0,L1=m*G/C**2,L2=s*C;
+  const f=x=>x===0?'0 m':(Math.abs(x)<1e-3||Math.abs(x)>1e6?x.toExponential(3):x.toPrecision(4))+' m';
+  $('kgv').textContent='= '+f(L1);$('secv').textContent='= '+f(L2);$('ln').textContent='kg → m · s → m';}
+$('kg').addEventListener('input',conv);$('sec').addEventListener('input',conv);
+// ---- W4 fold stages
+const n3=[1,1,1].map(x=>x/Math.sqrt(3)),e1=[1/Math.SQRT2,-1/Math.SQRT2,0],e2=[n3[1]*e1[2]-n3[2]*e1[1],n3[2]*e1[0]-n3[0]*e1[2],n3[0]*e1[1]-n3[1]*e1[0]];
+const dot=(a,b)=>a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
+const PTS=[['1 (a number)',[0,0,0]],...Q];
+const lay=(v,k)=>k===0?[dot(v,e1),-dot(v,e2)]:k===1?[v[0],-(v[1]+v[2])]:k===2?[v[0]+v[1]+v[2],0]:[par(v)?1:-1,0];
+const SC=[1.0,0.85,1.0,1.8];
+function groups(k){const m=new Map();for(const [n,v] of PTS){const key=lay(v,k).map(x=>x.toFixed(3)).join(',');if(!m.has(key))m.set(key,[]);m.get(key).push(n);}return[...m.values()];}
+let F=0;
+function fold(){const [g,W,H]=fit($('fd'),0.55,280,440),cx=W/2,cy=H/2,S=Math.min(W,H)/7.2;const k0=Math.min(2,Math.floor(F)),t=F-k0,k1=Math.min(3,k0+1);
+  const ease=t<0.5?2*t*t:1-2*(1-t)**2;
+  document.querySelectorAll('#sl span').forEach((s,i)=>s.classList.toggle('on',i===Math.round(F)));
+  if(F>2.6){g.fillStyle='rgba(228,228,238,.5)';g.font=`${Math.min(120,S*2.6)}px ui-monospace,monospace`;g.textAlign='center';g.fillText('(   )',cx,cy+S*0.9);g.textAlign='left';}
+  if(F<0.5){g.strokeStyle='rgba(110,143,224,.18)';g.beginPath();for(let a=-2;a<=2;a++)for(let b=-2;b<=2;b++)for(let c=-2;c<=2;c++){const [x,y]=lay([a,b,c],0);g.moveTo(cx+S*x+1.5,cy+S*y);g.arc(cx+S*x,cy+S*y,1.5,0,7);}g.stroke();}
+  const pos=PTS.map(([n,v])=>{const a=lay(v,k0),b=lay(v,k1),s0=SC[k0],s1=SC[k1],sc=s0+(s1-s0)*ease;return[cx+S*sc*(a[0]+(b[0]-a[0])*ease),cy+S*sc*(a[1]+(b[1]-a[1])*ease),n,v];});
+  const spot=new Map();g.font='10px ui-monospace,monospace';
+  for(const [x,y,n,v] of pos){const key=Math.round(x)+','+Math.round(y);if(!spot.has(key))spot.set(key,[x,y,[],v]);spot.get(key)[2].push(n.replace(' (observer)','').replace(' (a number)',''));
+    g.fillStyle=n.startsWith('1 ')?'#E4E4EE':par(v)?'#C9A45C':'#B79BFF';g.beginPath();g.arc(x,y,n.startsWith('1 ')?4:5.5,0,7);g.fill();}
+  const atStage=Math.abs(F-Math.round(F))<0.03;
+  if(atStage){let j=0;const small=W<520;for(const [x,y,names] of spot.values()){const k=Math.round(F);const up=(k===2&&j%2===1);
+    const list=small&&names.length>3&&k<3?[...names.slice(0,2),'+'+(names.length-2)]:names;
+    g.fillStyle='rgba(228,228,238,.8)';g.textAlign=k>=2?'center':'left';
+    list.forEach((t,i)=>{const yy=up?y-12-(list.length-1-i)*11:y+(k>=2?16:-6)+i*11;g.fillText(t,k>=2?x:x+8,yy);});g.textAlign='left';j++;}}
+  const k=Math.round(F),gs=groups(k);
+  $('stg').textContent=['3 axes','2 axes','1 axis (length)','(.) · 2 dots'][k]+' · '+gs.length+' distinct spots';
+  $('gr').innerHTML='<b>sharing a spot at this stage:</b> '+(gs.filter(x=>x.length>1).map(x=>x.join(' = ')).join(' · ')||'none');
+  window.__FOLD__={F,k,spots:gs.length,groups:gs};}
+$('f').addEventListener('input',()=>{F=+$('f').value;fold();});
+let anim=null;$('pl').onclick=()=>{cancelAnimationFrame(anim);const t0=performance.now();const st=now=>{F=Math.min(3,(now-t0)/2600);$('f').value=F;fold();if(F<3)anim=requestAnimationFrame(st);};anim=requestAnimationFrame(st);};
+// ---- W5 3D
+let ax=0.5,ay=0.7,spin=true,drag=null,tgt=null;
+const rot=([x,y,z])=>{let c=Math.cos(ay),s=Math.sin(ay);[x,z]=[x*c+z*s,-x*s+z*c];c=Math.cos(ax);s=Math.sin(ax);[y,z]=[y*c-z*s,y*s+z*c];return[x,y,z];};
+function u3(){const [g,W,H]=fit($('u3'),0.6,280,440),cx=W/2,cy=H/2,S=Math.min(W,H)*0.13;const P=[];
+  for(let a=-2;a<=2;a++)for(let b=-2;b<=2;b++)for(let c=-2;c<=2;c++){const r=rot([a,b,c]);P.push([r,[a,b,c]]);}
+  P.sort((p,q)=>p[0][2]-q[0][2]);
+  const cube=(v)=>v.every(x=>x===0||x===1);
+  for(const [r,v] of P){const f=1/(1+r[2]*0.06),x=cx+S*r[0]*f,y=cy-S*r[1]*f,isC=cube(v);
+    g.fillStyle=par(v)?'#C9A45C':'#B79BFF';g.globalAlpha=isC?1:0.28+0.1*(r[2]+3.5)/7;g.beginPath();g.arc(x,y,isC?5:2.2,0,7);g.fill();}
+  g.globalAlpha=1;
+  const cc=[];for(const x of[0,1])for(const y of[0,1])for(const z of[0,1])cc.push([x,y,z]);
+  for(const pp of[0,1]){const set=cc.filter(v=>par(v)===pp);g.strokeStyle=pp?'rgba(201,164,92,.8)':'rgba(183,155,255,.8)';g.beginPath();for(let i=0;i<4;i++)for(let j=i+1;j<4;j++){const a=rot(set[i]),b=rot(set[j]);g.moveTo(cx+S*a[0],cy-S*a[1]);g.lineTo(cx+S*b[0],cy-S*b[1]);}g.stroke();}
+  for(const [v,col,lab] of [[Gv,'#E8894A','G'],[Cv,'#4FB39A','c'],[Hv,'#B8C2CC','ħ']]){const r=rot(v),o=rot([0,0,0]);g.strokeStyle=col;g.lineWidth=2;g.beginPath();g.moveTo(cx+S*o[0],cy-S*o[1]);g.lineTo(cx+S*r[0],cy-S*r[1]);g.stroke();g.lineWidth=1;g.fillStyle=col;g.font='12px ui-monospace,monospace';g.fillText(lab,cx+S*r[0]+5,cy-S*r[1]-5);}
+  const ax3=[[[2.6,0,0],'kg'],[[0,2.6,0],'m'],[[0,0,2.6],'s']];g.fillStyle='#8B8CA0';g.font='10px ui-monospace,monospace';for(const [v,l] of ax3){const r=rot(v);g.fillText(l,cx+S*r[0],cy-S*r[1]);}}
+const TA=Math.atan(1/Math.SQRT2);
+function loop(){if(tgt){ax+=(tgt[0]-ax)*0.12;ay+=(tgt[1]-ay)*0.12;if(Math.abs(tgt[0]-ax)+Math.abs(tgt[1]-ay)<1e-4){ax=tgt[0];ay=tgt[1];tgt=null;}u3();}else if(spin){ay+=0.005;u3();}requestAnimationFrame(loop);}
+$('co').onclick=()=>{spin=false;let a=-Math.PI/4;while(a-ay>Math.PI)a-=2*Math.PI;while(ay-a>Math.PI)a+=2*Math.PI;tgt=[TA,a];};
+$('sp').onclick=()=>{spin=true;tgt=null;};
+const cv=$('u3');cv.addEventListener('pointerdown',e=>{drag=[e.clientX,e.clientY];spin=false;tgt=null;cv.setPointerCapture(e.pointerId);});
+cv.addEventListener('pointermove',e=>{if(!drag)return;ay+=(e.clientX-drag[0])*0.01;ax+=(e.clientY-drag[1])*0.01;drag=[e.clientX,e.clientY];u3();});
+cv.addEventListener('pointerup',()=>drag=null);
+window.__FOLDX__={D,ROWS:ROWS.map(r=>({n:r.n,s:r.s.map(fs),integ:r.integ,p:r.p,val:r.val})),allAgree,groups};
+conv();fold();u3();loop();
+addEventListener('resize',()=>{fold();u3();});
+})();
+</script>
+</body>
+</html>

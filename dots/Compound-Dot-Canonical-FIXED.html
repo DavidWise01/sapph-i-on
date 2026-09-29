@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Compound Dot Canonical - FIXED</title>
+<style>body{margin:0;background:#050510;color:#e5e7eb;font-family:monospace} canvas{display:block}
+#info{position:absolute;left:12px;top:10px;font-size:11px;line-height:1.4;background:#00000099;padding:8px 10px;border-radius:12px;border:1px solid #ffffff15}
+</style></head><body>
+<canvas id="c"></canvas>
+<div id="info">
+Compound [[+183[0::neutronium]-183]]<br/>
+Planck Bubble l_p=1.616255e-35m<br/>
+wall 1-1^10^-35.02 T≈10^-35.02<br/>
+367 = 183 matter + 183 antimatter + 1 neutronium<br/>
+each dot = this — isomorphic
+</div>
+<script>
+const canvas=document.getElementById('c'), ctx=canvas.getContext('2d');
+let w,h,t=0;
+function resize(){ w=canvas.width=innerWidth; h=canvas.height=innerHeight; }
+addEventListener('resize',resize); resize();
+function loop(){
+ t+=0.007;
+ ctx.fillStyle='rgba(5,5,16,0.18)'; ctx.fillRect(0,0,w,h);
+ let cx=w/2, cy=h/2;
+ let breath=(Math.sin(t*0.2)+1)/2;
+ // core
+ let coreR=28+breath*14;
+ let grad=ctx.createRadialGradient(cx,cy,0,cx,cy,coreR*3);
+ grad.addColorStop(0,'#fef3c7'); grad.addColorStop(0.25,'#fbbf24'); grad.addColorStop(0.6,'#a78bfa'); grad.addColorStop(1,'#1e1b4b');
+ ctx.fillStyle=grad; ctx.globalAlpha=0.9; ctx.beginPath(); ctx.arc(cx,cy,coreR,0,Math.PI*2); ctx.fill();
+ // +183 matter fib forward
+ for(let n=1;n<=183;n++){
+   let r=Math.sqrt(n)*11;
+   let ang=n*2.39996 + t*0.08;
+   let x=cx+Math.cos(ang)*r*(0.7+breath*0.3);
+   let y=cy+Math.sin(ang)*r*(0.7+breath*0.3);
+   ctx.globalAlpha=0.5; ctx.fillStyle='#f472b6';
+   ctx.beginPath(); ctx.arc(x,y,1.6,0,Math.PI*2); ctx.fill();
+ }
+ // -183 antimatter backward
+ for(let n=1;n<=183;n++){
+   let r=Math.sqrt(n)*11;
+   let ang=-n*2.39996 - t*0.08;
+   let x=cx+Math.cos(ang)*r*(0.7+breath*0.3);
+   let y=cy+Math.sin(ang)*r*(0.7+breath*0.3);
+   ctx.globalAlpha=0.4; ctx.strokeStyle='#38bdf8'; ctx.lineWidth=0.9;
+   ctx.beginPath(); ctx.arc(x,y,2,0,Math.PI*2); ctx.stroke();
+ }
+ requestAnimationFrame(loop);
+}
+loop();
+</script>
+</body></html>

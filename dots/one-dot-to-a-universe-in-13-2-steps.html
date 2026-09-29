@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>One Dot to a Universe</title>
+<style>
+:root{--bg:#06090c;--ink:#F1F2F5;--soft:#A7AEBB;--faint:#5e6676;--glass:rgba(255,255,255,.045);--edge:rgba(255,255,255,.09);--gold:#F5B94E;--vio:#A88BFF;--teal:#4FD1B5;--grad:linear-gradient(100deg,#A88BFF 0%,#F5B94E 100%)}
+*{box-sizing:border-box}
+body{margin:0;color:var(--ink);font:16px/1.6 Inter,ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:radial-gradient(1100px 700px at 85% -10%,#1b2a4a 0%,transparent 60%),radial-gradient(900px 600px at -10% 40%,#3a2410 0%,transparent 55%),var(--bg);min-height:100vh;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 60px}
+.top{display:flex;justify-content:space-between;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:26px}
+.top b{color:var(--soft)}
+h1{font-size:clamp(40px,8vw,82px);line-height:1;letter-spacing:-.035em;margin:0 0 14px;font-weight:800}
+.gt,h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{font-size:clamp(17px,2.4vw,21px);color:var(--soft);max-width:660px;margin:0 0 26px}
+h2{font-size:clamp(26px,4.4vw,38px);letter-spacing:-.025em;line-height:1.1;margin:0 0 10px;font-weight:750}
+h3{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:0 0 10px;font-weight:600}
+p{margin:0 0 12px;color:var(--soft)}
+b.w{color:var(--ink)}
+.card{background:var(--glass);border:1px solid var(--edge);border-radius:22px;padding:24px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+section{margin:0 0 22px}
+.hero{padding:0;overflow:hidden;position:relative}
+canvas{display:block;width:100%;touch-action:none}
+.hud{position:absolute;left:18px;top:16px;right:18px;display:flex;justify-content:space-between;gap:10px;pointer-events:none;flex-wrap:wrap}
+.hud .l{font-size:clamp(22px,4vw,34px);font-weight:800;letter-spacing:-.02em;line-height:1.05}
+.hud .l small{display:block;font-size:13px;font-weight:500;color:var(--soft);letter-spacing:0;margin-top:4px}
+.hud .r{text-align:right;font-size:13px;color:var(--soft)}
+.hud .r b{display:block;font-size:clamp(18px,3vw,24px);color:var(--ink);letter-spacing:-.01em}
+.ctrl{display:flex;align-items:center;gap:12px;padding:14px 18px 18px;flex-wrap:wrap}
+.ctrl input[type=range]{flex:1;min-width:180px;accent-color:#C9A0F0}
+.btn{appearance:none;border:0;border-radius:999px;padding:10px 18px;font:inherit;font-size:14px;font-weight:600;cursor:pointer;color:#120f22;background:var(--grad)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--edge)}
+.beats{display:flex;gap:6px;padding:0 18px 18px;flex-wrap:wrap}
+.beat{font-size:12px;padding:5px 11px;border-radius:999px;border:1px solid var(--edge);color:var(--soft);transition:all .2s}
+.beat.on{color:#120f22;border-color:transparent}
+.beat.wk.on{background:var(--gold)}.beat.mo.on{background:#C9CBD6}.beat.da.on{background:var(--vio)}
+.tl{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:8px}
+.gen{border:1px solid var(--edge);border-radius:14px;padding:10px 12px;background:rgba(0,0,0,.22);cursor:pointer;transition:all .2s}
+.gen b{font-size:20px;letter-spacing:-.02em}
+.gen .s{font-size:13px;color:var(--ink)}
+.gen .m{font-size:12px;color:var(--soft)}
+.gen.on{border-color:rgba(168,139,255,.6);background:rgba(168,139,255,.12)}
+.gen.dim .m{color:var(--faint)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+.big{font-size:clamp(46px,9vw,76px);font-weight:800;letter-spacing:-.04em;line-height:1}
+.roles{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:14px 0}
+.role{text-align:center;border-radius:14px;padding:10px 4px;border:1px solid var(--edge);font-size:12px;color:var(--soft)}
+.role i{display:block;width:14px;height:14px;border-radius:50%;margin:0 auto 6px}
+.kt{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px}
+.kt td{padding:7px 8px;border-bottom:1px solid var(--edge)}
+.kt tr.hit td{color:var(--ink);font-weight:700}
+.pill{display:inline-block;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:99px;margin-left:6px;vertical-align:2px;font-weight:600}
+.pill.lit{background:rgba(79,209,181,.14);color:var(--teal)}.pill.amb{background:rgba(245,185,78,.14);color:var(--gold)}
+.kid{border-radius:22px;padding:22px 24px;background:linear-gradient(120deg,rgba(168,139,255,.12),rgba(245,185,78,.10));border:1px solid var(--edge)}
+.kid p{color:var(--ink);font-size:17px;margin:0}
+details summary{cursor:pointer;color:var(--soft);font-size:14px;list-style:none;display:inline-flex;gap:8px;padding:10px 16px;border:1px solid var(--edge);border-radius:999px}
+details summary::-webkit-details-marker{display:none}
+details[open] summary{border-color:rgba(168,139,255,.55);color:var(--ink)}
+.math{margin-top:14px}
+.math p{font-size:14.5px}
+.foot{color:var(--faint);font-size:12px;text-align:center;margin-top:30px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top"><span><b>R</b> · hive</span><span>(·) → universe</span></div>
+
+<h1>One dot.<br><span>13.2 steps.</span><br>A universe.</h1>
+<p class="lede">Every step, a hive of six builds the next one: four workers, one mother who stays behind, one daughter who becomes the seed of the step above. Six roles, six beats, each beat six times bigger.</p>
+
+<section class="card hero">
+  <canvas id="cv"></canvas>
+  <div class="hud"><div class="l" id="hl">step 0<small>–</small></div><div class="r"><b id="hs">–</b><span id="hm">–</span></div></div>
+  <div class="beats" id="bt"></div>
+  <div class="ctrl"><button class="btn" id="pl">Build it</button><input type="range" id="z" min="0" max="13.2228" step="0.001" value="0" aria-label="step"><button class="btn ghost" id="rs">Back to the dot</button></div>
+</section>
+
+<section class="card">
+  <h3>The 13.2 steps</h3>
+  <div class="tl" id="tl"></div>
+  <p style="font-size:13.5px;margin-top:12px">Sizes are exact: one Planck length × 46,656 per step. The things named beside them are my picks for what's that size. <span class="pill lit">checked</span> sizes · <span class="pill amb">my pick</span> names</p>
+</section>
+
+<section class="grid2">
+  <div class="card">
+    <h3>The hive</h3>
+    <h2>Six roles. <span class="gt">Six times bigger, six times.</span></h2>
+    <div class="roles">
+      <div class="role"><i style="background:var(--gold)"></i>worker</div><div class="role"><i style="background:var(--gold)"></i>worker</div><div class="role"><i style="background:var(--gold)"></i>worker</div><div class="role"><i style="background:var(--gold)"></i>worker</div>
+      <div class="role"><i style="border:2px solid #C9CBD6"></i>mother</div><div class="role"><i style="background:var(--vio)"></i>daughter</div>
+    </div>
+    <p>The four workers are the live corners from last time, and the mother is the dead dot in the middle, holding them. The daughter buds off, and the whole hive you just watched shrinks into her: she's the dot the next step starts from.</p>
+    <p>Each role works one beat, and each beat makes things 6× bigger. One step is 6 × 6 × 6 × 6 × 6 × 6 = <b class="w">46,656×</b>. <span class="pill lit">checked</span></p>
+  </div>
+  <div class="card">
+    <h3>Does it land?</h3>
+    <div class="big gt" id="ans">13.22</div>
+    <p>steps of 46,656× take one Planck length to the full width of the observable universe (93 billion light-years). Centre to edge is <b class="w">13.16</b>. You said <b class="w">13.2</b>: both round to it. <span class="pill lit">checked</span></p>
+    <table class="kt" id="kt"></table>
+    <p style="font-size:13.5px;margin-top:10px">Only a six-role hive lands near 13. Luck check: a random target would land this close about 1 time in 20 (1 in 8 if you allow either the width or the centre-to-edge). Close, not proof. <span class="pill amb">coincidence odds</span></p>
+  </div>
+</section>
+
+<section class="kid"><p><b>In small words:</b> start with one tiny dot. four helpers build around it, a mother holds the middle, and a daughter pops out. then zoom way out: that whole family is now just the daughter of a bigger family. do that 13 times and a little bit more, and the family is as big as everything we can see.</p></section>
+
+<section>
+<details><summary>▸ Show the math</summary>
+<div class="card math">
+<p>One Planck length = 1.616 × 10⁻³⁵ m. One step = 6⁶ = 46,656× = 4.669 powers of ten. Observable universe = 8.8 × 10²⁶ m across, a ratio of 10<sup>61.74</sup>. 61.74 ÷ 4.669 = <b class="w">13.22 steps</b>. Centre to edge (4.4 × 10²⁶ m): <b class="w">13.16</b>. <span class="pill lit">checked</span></p>
+<p>Other hive sizes, k roles each ×k: 4 → 25.6 steps, 5 → 17.7, 6 → 13.2, 7 → 10.4, 8 → 8.6. <span class="pill lit">checked</span></p>
+<p>The picture squeezes each step to 5× on screen so you can watch the hand-off. The real step is 46,656×. <span class="pill amb">drawn smaller</span> Your 13.2 is also the number of billions you've used before; I haven't tied the two together. <span class="pill amb">open</span></p>
+</div></details>
+</section>
+<div class="foot">(·) × 46,656<sup>13.2</sup> = everything we can see</div>
+</div>
+
+<script>
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id);
+function fit(cv,r,mn,mx){const w=cv.clientWidth||600,h=Math.round(Math.max(mn,Math.min(w*r,mx))),d=devicePixelRatio||1;cv.width=Math.round(w*d);cv.height=Math.round(h*d);cv.style.height=h+'px';const g=cv.getContext('2d');g.setTransform(d,0,0,d,0,0);return[g,w,h];}
+// ---- the numbers
+const LP=1.616255e-35,K=6**6,DIAM=8.8e26,RAD=4.4e26,LY=9.4607e15;
+const STEPS=Math.log(DIAM/LP)/Math.log(K),STEPR=Math.log(RAD/LP)/Math.log(K);
+const kSteps=k=>Math.log(DIAM/LP)/(k*Math.log(k));
+const NAMES=['one Planck length · the dot','still far below anything','still far below anything','still far below anything','a twentieth of a proton','a gamma ray’s wavelength','a virus','a ladybug','the Eiffel Tower','the Earth','Jupiter’s orbit','the nearest stars','the Milky Way','the cosmic web','everything we can see'];
+const size=z=>LP*K**z;
+const fmt=m=>{if(m>=LY*1e9)return(m/LY/1e9).toFixed(m/LY/1e9<10?1:0)+' billion light-years';if(m>=LY*1e3)return Math.round(m/LY).toLocaleString()+' light-years';if(m>=LY*0.5)return(m/LY).toFixed(1)+' light-years';if(m>=1e9)return(m/1e9).toFixed(1)+' million km';if(m>=1e3)return Math.round(m/1e3).toLocaleString()+' km';if(m>=1)return Math.round(m)+' m';if(m>=1e-3)return(m*1e3).toFixed(1)+' mm';
+  const e=Math.floor(Math.log10(m)),mm=m/10**e;return mm.toFixed(1)+' × 10'+String(e).replace('-','⁻').replace(/\d/g,c=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[c])+' m';};
+$('ans').textContent=STEPS.toFixed(2);
+$('kt').innerHTML=[4,5,6,7,8].map(k=>`<tr class="${k===6?'hit':''}"><td>${k} roles</td><td>×${(k**k).toLocaleString()} a step</td><td>${kSteps(k).toFixed(1)} steps</td></tr>`).join('');
+const GENS=[...Array(14).keys()].map(g=>({g,m:size(g),name:NAMES[g]})).concat([{g:13.2,m:size(STEPS),name:NAMES[14]}]);
+$('tl').innerHTML=GENS.map((G,i)=>`<div class="gen${G.g<4?' dim':''}" data-z="${G.g===13.2?STEPS:G.g}"><b>${G.g}</b><div class="s">${fmt(G.m)}</div><div class="m">${G.name}</div></div>`).join('');
+// ---- beats
+const ROLE=['worker','worker','worker','worker','mother','daughter'],RC=['wk','wk','wk','wk','mo','da'];
+$('bt').innerHTML=ROLE.map((r,i)=>`<span class="beat ${RC[i]}">${i<4?'worker '+(i+1):r} · ×6</span>`).join('');
+// ---- hive geometry (world units: hive g has size KV^g)
+const KV=5,DAU=0.82,TOP=15;
+const ang=g=>g*1.9+0.4;
+const C=[];C[TOP]=[0,0];for(let g=TOP-1;g>=0;g--){const s=KV**(g+1),a=ang(g+1);C[g]=[C[g+1][0]+Math.cos(a)*DAU*s,C[g+1][1]+Math.sin(a)*DAU*s];}
+const TET=[[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]].map(v=>v.map(x=>x/Math.sqrt(3)));
+let Z=0,playing=false,G2,W,H;
+function size2(){[G2,W,H]=fit($('cv'),0.62,380,560);}
+const stars=Array.from({length:90},()=>[Math.random(),Math.random(),Math.random()*1.3+.2,Math.random()*6.3]);
+function hive(g,cx,cy,sc,now,active,built=6){const s=KV**g*sc,[hx,hy]=[cx+(C[g][0])*sc,cy+(C[g][1])*sc];if(s<1.2||s>W*40)return;
+  const rot=now/2600+g*0.7,cr=Math.cos(rot),sr=Math.sin(rot),P=TET.map(([x,y,z])=>{const X=x*cr+z*sr,Z2=-x*sr+z*cr,Y=y*0.9+Z2*0.25;return[hx+X*0.52*s,hy+Y*0.52*s];});
+  const al=Math.max(0,Math.min(1,(s-2)/18));
+  if(built>=4)g2line(P,hx,hy,al);
+  P.forEach((p,i)=>{if(i>=built)return;const on=active===i;const r=Math.min(7,Math.max(1.5,0.045*s)),gl=Math.min(on?46:34,r*(on?5:3.2));const grd=G2.createRadialGradient(p[0],p[1],0,p[0],p[1],gl);grd.addColorStop(0,`rgba(245,185,78,${(on?.85:.5)*al})`);grd.addColorStop(1,'rgba(245,185,78,0)');G2.fillStyle=grd;G2.beginPath();G2.arc(p[0],p[1],gl,0,7);G2.fill();G2.fillStyle=`rgba(245,185,78,${al})`;G2.beginPath();G2.arc(p[0],p[1],r,0,7);G2.fill();});
+  if(built>4){G2.strokeStyle=`rgba(201,203,214,${(active===4?1:.6)*al})`;G2.lineWidth=Math.max(1,0.012*s);G2.beginPath();G2.arc(hx,hy,Math.min(12,Math.max(2,0.06*s)),0,7);G2.stroke();G2.lineWidth=1;}
+  if(g>0){const a=ang(g),dx=hx+Math.cos(a)*DAU*s,dy=hy+Math.sin(a)*DAU*s;const dr=0.23*s,on=active===5;G2.strokeStyle=`rgba(168,139,255,${(on?.95:.55)*al})`;G2.lineWidth=Math.max(1,0.015*s);G2.beginPath();G2.arc(dx,dy,dr,0,7);G2.stroke();G2.lineWidth=1;
+    const grd=G2.createRadialGradient(dx,dy,dr*0.2,dx,dy,dr*1.3);grd.addColorStop(0,`rgba(168,139,255,${(on?.22:.1)*al})`);grd.addColorStop(1,'rgba(168,139,255,0)');G2.fillStyle=grd;G2.beginPath();G2.arc(dx,dy,dr*1.3,0,7);G2.fill();}}
+function g2line(P,hx,hy,al){G2.strokeStyle=`rgba(245,185,78,${.35*al})`;G2.beginPath();for(let a=0;a<4;a++)for(let b=a+1;b<4;b++){G2.moveTo(P[a][0],P[a][1]);G2.lineTo(P[b][0],P[b][1]);}G2.stroke();G2.setLineDash([2,5]);G2.strokeStyle=`rgba(201,203,214,${.3*al})`;G2.beginPath();P.forEach(p=>{G2.moveTo(hx,hy);G2.lineTo(p[0],p[1]);});G2.stroke();G2.setLineDash([]);}
+function draw(now){const g=G2;g.clearRect(0,0,W,H);
+  for(const s of stars){g.fillStyle=`rgba(255,255,255,${0.07+0.07*Math.sin(now/900+s[3])})`;g.fillRect(s[0]*W,s[1]*H,s[2],s[2]);}
+  const gi=Math.floor(Z),t=Z-gi,e=t<.5?2*t*t:1-2*(1-t)**2,g0=Math.min(gi,TOP),g1=Math.min(gi+1,TOP);
+  const cxw=C[g0][0]+(C[g1][0]-C[g0][0])*e,cyw=C[g0][1]+(C[g1][1]-C[g0][1])*e;
+  const sc=Math.min(W,H)*0.40/KV**Z,cx=W/2-cxw*sc,cy=H/2+18-cyw*sc;
+  const beat=Math.min(5,Math.floor(t*6));
+  for(let k=Math.max(0,gi-4);k<=Math.min(TOP,gi+1);k++)hive(k,cx,cy,sc,now,k===gi+1?beat:-1,k===gi+1?beat+1:6);
+  if(Z<0.05){g.fillStyle='rgba(242,241,247,.9)';g.beginPath();g.arc(W/2,H/2+18,3,0,7);g.fill();}
+  return beat;}
+function hud(beat){const m=size(Z),gi=Math.floor(Z);const name=Z>=STEPS-0.01?NAMES[14]:NAMES[Math.min(13,Math.round(Z))];
+  $('hl').innerHTML=`step ${Z.toFixed(1)}<small>of 13.2 · ${Z<0.02?'the dot':'beat: '+(beat<4?'worker '+(beat+1):ROLE[beat])}</small>`;
+  $('hs').textContent=fmt(m);$('hm').textContent=name;
+  document.querySelectorAll('.beat').forEach((b,i)=>b.classList.toggle('on',Z>0.02&&i===beat));
+  document.querySelectorAll('.gen').forEach(el=>el.classList.toggle('on',Math.abs(+el.dataset.z-Z)<0.5));
+  window.__HIVE__.now={Z,m,name,beat};}
+let last=0;
+function frame(now){const dt=Math.min(50,now-(last||now));last=now;
+  if(playing){Z=Math.min(STEPS,Z+dt/1000*0.55);$('z').value=Z;if(Z>=STEPS){playing=false;$('pl').textContent='Build it again';}}
+  const b=draw(now);hud(b);requestAnimationFrame(frame);}
+$('pl').onclick=()=>{if(Z>=STEPS-1e-3)Z=0;playing=!playing;$('pl').textContent=playing?'Pause':'Build it';};
+$('rs').onclick=()=>{playing=false;Z=0;$('z').value=0;$('pl').textContent='Build it';};
+$('z').addEventListener('input',()=>{playing=false;Z=+$('z').value;$('pl').textContent='Build it';});
+document.querySelectorAll('.gen').forEach(el=>el.onclick=()=>{playing=false;Z=+el.dataset.z;$('z').value=Z;$('pl').textContent='Build it';$('cv').scrollIntoView({behavior:'smooth',block:'center'});});
+window.__HIVE__={STEPS,STEPR,K,kSteps:[4,5,6,7,8].map(kSteps),gens:GENS.map(G=>({g:G.g,m:G.m,s:fmt(G.m),n:G.name})),set:z=>{playing=false;Z=z;}};
+size2();requestAnimationFrame(frame);
+addEventListener('resize',size2);
+})();
+</script>
+</body>
+</html>
