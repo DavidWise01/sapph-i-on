@@ -52,6 +52,14 @@
   .cell.interior { background:#e9d5ff; }
   .cell.keeper { background:#fbbf24; box-shadow:inset 0 0 0 2px var(--gold); }
   .cell.on { outline:2px solid var(--ink); outline-offset:1px; }
+  .cell.held { box-shadow:inset 0 0 0 2px var(--sapphire); }
+  .gui-nav { display:flex; flex-wrap:wrap; gap:8px; margin:8px 0; }
+  .gui-nav button {
+    font:12px ui-monospace, Consolas, monospace; padding:4px 8px; border-radius:8px;
+    border:1px solid var(--line); background:#fff; color:var(--ink); cursor:pointer;
+  }
+  .gui { width:100%; height:min(68vh, 560px); border:1px solid var(--line); border-radius:12px; background:var(--card); }
+  @media (max-width:800px) { .gui { height:52vh; } }
   .card { padding:14px 16px; }
   .card h2 { margin:0 0 6px; font-size:16px; letter-spacing:.08em; }
   .mono { font:13px/1.45 ui-monospace, Consolas, monospace; }
@@ -76,7 +84,7 @@
   <div>
     <div class="src"><a href="https://0root.ai/">0root.ai</a> · world 7 · order 7^3 · galaxy door · 24 spheres</div>
     <h1>SaPpH<span>{{i}}</span>on</h1>
-    <p class="sub">World 7 is the cube of 7. This page is the galaxy door: it counts the cube and throws if the count is wrong. A galaxy holds 24 spheres, three on each corner seat. Beside those seats are four more cubes of 24: a Downloads copy, an Internet Archive cube, a library cube, and a folio cube that alternates article and thought. A nested strip holds two spheres, minus-plus and plus-minus, offset 1, 2, 1, 2, 1, 2. Four mirrors close on the one-sided number 420024. A nested cube holds 24 files copied unchanged from Downloads, the newest nested cubes and nests, numbered copies skipped. A further nest holds the next 24. A quantum dot holds 24 files whose names say quantum, and the plant page says the payloads converge there. A dot cube holds the next 24.</p>
+    <p class="sub">World 7 is the cube of 7. This page is the galaxy door: it counts the cube and throws if the count is wrong. A galaxy holds 24 spheres, three on each corner seat. Beside those seats are four more cubes of 24: a Downloads copy, an Internet Archive cube, a library cube, and a folio cube that alternates article and thought. A nested strip holds two spheres, minus-plus and plus-minus, offset 1, 2, 1, 2, 1, 2. Four mirrors close on the one-sided number 420024. A nested cube holds 24 files copied unchanged from Downloads, the newest nested cubes and nests, numbered copies skipped. A further nest holds the next 24. A quantum dot holds 24 files whose names say quantum, and the plant page says the payloads converge there. A dot cube holds the next 24. Select a cell and that sphere is the GUI.</p>
   </div>
   <div class="src">door number 7 · assigned<br>palindrome of five · unchanged</div>
 </header>
@@ -107,6 +115,8 @@
     <div class="card" id="inspect">
       <h2 id="iname">center</h2>
       <p class="mono" id="ibody"></p>
+      <div class="gui-nav" id="guinav"></div>
+      <iframe class="gui" id="gui" title="The sphere on this cell" hidden></iframe>
     </div>
   </div>
 
@@ -170,6 +180,8 @@
     <p><span class="stamp amber">AMBER</span> The further nest is the next 24 Downloads files whose names are nests or cubes. Honest-Math-No-Fudge was left in Downloads, because nest sits inside Honest. Numbered copies were skipped. The bytes were copied unchanged. The order is assigned.</p>
     <p><span class="stamp amber">AMBER</span> The quantum dot is the 24 newest Downloads files whose names say quantum or qdot, leaving the eight sapphon quantum-dot files in the corpus. Numbered copies were skipped. The immutable plant page says all previous payloads converge to the dot at &gt;.&lt;0x::. That sentence is the page's claim. The bytes were copied unchanged. The order is assigned.</p>
     <p><span class="stamp amber">AMBER</span> The dot cube is the next 24 Downloads files whose names are dots, after the quantum dot. Dotdot is included because the name is the dot doubled. Numbered copies were skipped. The bytes were copied unchanged. The order is assigned.</p>
+    <p><span class="stamp lit">LIT</span> 194 spheres sit on 194 cells. The walk is z, then y, then x. Corners and the keeper are skipped. One sphere, one cell. Selecting the cell opens that page.</p>
+    <p><span class="stamp amber">AMBER</span> The walk order is assigned. The eight corners still hold three spheres each, and selecting a corner opens those three. The keeper at (3,3,3) is the door, not one of the files.</p>
     <p><span class="stamp wall">WALL</span> This galaxy does not extend the palindrome [ W1 | W2 ‖ W3 ‖ W4 | W5 ] and does not record a world 6. i³ = −i is arithmetic. It does not locate the cube on a physical imaginary axis, and it is not a claim about mind, physics, or authority. The strip's check is the number 420024. It does not measure glass, and it does not fold a piece of paper.</p>
     <p class="mono" id="card"></p>
     <p class="mono" id="fault"></p>
@@ -254,19 +266,48 @@ function describe(x, y, z) {
   var k = kindAt(x, y, z);
   var ci = cornerIndex(x, y, z);
   if (k === "keeper") {
-    return {title:"SaPpH{{i}}on", body:"keeper · cell (3,3,3) · the one center of an odd cube. This page is the galaxy door. The 24 spheres sit on the corners. The voice that says the keeper chose the cube is AMBER — assigned, not observed."};
+    return {title:"SaPpH{{i}}on", body:"keeper · cell (3,3,3) · the one center of an odd cube. This page is the galaxy door. The voice that says the keeper chose the cube is AMBER — assigned, not observed.", pages:[]};
   }
   if (ci >= 0) {
-    var titles = SPHERES.filter(function(s){ return s.steward===APPEALS[ci]; }).map(function(s){ return s.title; }).join(", ");
-    return {title:APPEALS[ci], body:"corner ("+x+","+y+","+z+") · seat "+(ci+1)+" of 8 · "+titles+"."};
+    var mine = SPHERES.filter(function (s) { return s.steward === APPEALS[ci]; });
+    return {
+      title: APPEALS[ci],
+      body: "corner (" + x + "," + y + "," + z + ") · three spheres · this seat's GUI.",
+      pages: mine.map(function (s) { return {title:s.title, href:"spheres/" + s.slug + ".html"}; })
+    };
   }
-  return {title:k, body:"cell ("+x+","+y+","+z+") · "+k+". Counted in the census. No separate sphere."};
+  var held = SEAT[x + "," + y + "," + z];
+  if (held) {
+    return {
+      title: held.title,
+      body: held.cube + " · cell (" + x + "," + y + "," + z + ") · this sphere is the GUI of the cell.",
+      pages: [{title:held.title, href:held.href}]
+    };
+  }
+  return {title:k, body:"cell (" + x + "," + y + "," + z + ") · " + k + ". Counted in the census. No sphere on this cell.", pages:[]};
 }
 
 function show(x, y, z) {
   var d = describe(x, y, z);
   document.getElementById("iname").textContent = d.title;
   document.getElementById("ibody").textContent = d.body;
+  var nav = document.getElementById("guinav");
+  var gui = document.getElementById("gui");
+  nav.innerHTML = "";
+  if (!d.pages.length) {
+    gui.hidden = true;
+    gui.removeAttribute("src");
+    return;
+  }
+  gui.hidden = false;
+  d.pages.forEach(function (p, i) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.textContent = p.title;
+    b.addEventListener("click", function () { gui.src = p.href; });
+    nav.appendChild(b);
+    if (i === 0) gui.src = p.href;
+  });
 }
 
 function draw() {
@@ -280,7 +321,7 @@ function draw() {
     tally[k]++;
     btn = document.createElement("button");
     btn.type = "button";
-    btn.className = "cell " + k + (x === sel.x && y === sel.y ? " on" : "");
+    btn.className = "cell " + k + (SEAT[x + "," + y + "," + z] || k === "corner" ? " held" : "") + (x === sel.x && y === sel.y ? " on" : "");
     btn.setAttribute("role", "gridcell");
     btn.setAttribute("aria-label", describe(x, y, z).title + " " + x + " " + y + " " + z);
     btn.dataset.x = String(x);
@@ -755,6 +796,40 @@ STRIP.forEach(function (s) {
   a.href = "strip/" + s.slug + ".html";
   a.textContent = s.sign + " · offset " + s.offset + " · " + s.title;
   stripEl.appendChild(a);
+});
+
+function worldPage(folder, file, title) {
+  return {href:folder + "/" + file, title:title, cube:folder};
+}
+var QUEUE = [];
+CORPUS.forEach(function (file) { QUEUE.push(worldPage("corpus", file, file.replace(/\.html$/, ""))); });
+ARCHIVE.forEach(function (s) { QUEUE.push(worldPage("archive", s.slug + ".html", s.title)); });
+LIBRARIES.forEach(function (s) { QUEUE.push(worldPage("libraries", s.slug + ".html", s.title)); });
+FOLIO.forEach(function (s) { QUEUE.push(worldPage("folio", s.slug + ".html", s.title)); });
+STRIP.forEach(function (s) { QUEUE.push(worldPage("strip", s.slug + ".html", s.title)); });
+NESTED.forEach(function (file) { QUEUE.push(worldPage("nested", file, file.replace(/\.html$/, ""))); });
+NESTS.forEach(function (file) { QUEUE.push(worldPage("nests", file, file.replace(/\.html$/, ""))); });
+QDOT.forEach(function (file) { QUEUE.push(worldPage("qdot", file, file.replace(/\.html$/, ""))); });
+DOTS.forEach(function (file) { QUEUE.push(worldPage("dots", file, file.replace(/\.html$/, ""))); });
+if (QUEUE.length !== 194) throw new Error("LIT FAIL world queue");
+var SEAT = {};
+var seenHref = {};
+var placed = 0;
+var zz, yy, xx, seatKey;
+for (zz = 0; zz < 7; zz++) for (yy = 0; yy < 7; yy++) for (xx = 0; xx < 7; xx++) {
+  if (placed >= QUEUE.length) break;
+  if (kindAt(xx, yy, zz) === "keeper" || cornerIndex(xx, yy, zz) >= 0) continue;
+  seatKey = xx + "," + yy + "," + zz;
+  if (SEAT[seatKey]) throw new Error("LIT FAIL world duplicate");
+  if (seenHref[QUEUE[placed].href]) throw new Error("LIT FAIL world href");
+  seenHref[QUEUE[placed].href] = 1;
+  SEAT[seatKey] = QUEUE[placed];
+  placed++;
+}
+if (placed !== 194 || Object.keys(SEAT).length !== 194) throw new Error("LIT FAIL world seats");
+if (SEAT["3,3,3"]) throw new Error("LIT FAIL world keeper");
+["0,0,0","6,0,0","0,6,0","6,6,0","0,0,6","6,0,6","0,6,6","6,6,6"].forEach(function (corner) {
+  if (SEAT[corner]) throw new Error("LIT FAIL world corner");
 });
 
 zInput.addEventListener("input", draw);
