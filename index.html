@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SaPpH{{i}}on — World 7 · 7^3</title>
+<style>
+  :root {
+    --ink:#1a1230; --dim:#5c5470; --paper:#f7f1e6; --card:#fffaf3;
+    --sapphire:#1d4ed8; --rose:#be185d; --gold:#b45309; --leaf:#047857;
+    --line:rgba(26,18,48,.14);
+  }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; color:var(--ink);
+    font:16px/1.5 "Segoe UI", ui-sans-serif, sans-serif;
+    background:
+      radial-gradient(920px 520px at 8% -10%, #c7d2fe, transparent 58%),
+      radial-gradient(820px 480px at 110% 0%, #fbcfe8, transparent 52%),
+      radial-gradient(760px 520px at 70% 110%, #fde68a, transparent 48%),
+      linear-gradient(165deg, #f8f1e4, #efe7f8 46%, #e7f0ff);
+    min-height:100vh;
+  }
+  a { color:var(--sapphire); }
+  header, main { width:min(1080px, calc(100% - 32px)); margin:0 auto; }
+  header { padding:22px 0 8px; display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+  .src { font:12px/1.4 ui-monospace, Consolas, monospace; color:var(--dim); }
+  h1 { margin:8px 0 0; font-size:clamp(28px, 5vw, 46px); letter-spacing:.04em; line-height:1.05; }
+  h1 span { color:var(--sapphire); }
+  .sub { max-width:68ch; margin:8px 0 0; }
+  .stamps { display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 6px; }
+  .stamp { display:inline-block; padding:3px 8px; border-radius:999px; font:11px/1.3 ui-monospace, Consolas, monospace; color:#fff; }
+  .lit { background:var(--leaf); }
+  .amber { background:var(--gold); }
+  .wall { background:var(--rose); }
+  .layout { display:grid; grid-template-columns:auto 1fr; gap:22px; align-items:start; margin:18px 0 28px; }
+  @media (max-width:800px) { .layout { grid-template-columns:1fr; } }
+  .board, .card, .seat, .read { background:var(--card); border:1px solid var(--line); border-radius:18px; }
+  .board { padding:14px; }
+  .toolbar { display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:10px; font:13px ui-monospace, Consolas, monospace; }
+  input[type=range] { width:180px; accent-color:var(--sapphire); }
+  .grid { display:grid; grid-template-columns:repeat(7, 42px); gap:4px; }
+  @media (max-width:420px) { .grid { grid-template-columns:repeat(7, 34px); } }
+  .cell {
+    width:100%; aspect-ratio:1; border-radius:8px; border:1px solid transparent;
+    font:10px ui-monospace, Consolas, monospace; cursor:pointer; color:var(--ink);
+  }
+  .cell.corner { background:#fbcfe8; }
+  .cell.edge { background:#fde68a; }
+  .cell.face { background:#bfdbfe; }
+  .cell.interior { background:#e9d5ff; }
+  .cell.keeper { background:#fbbf24; box-shadow:inset 0 0 0 2px var(--gold); }
+  .cell.on { outline:2px solid var(--ink); outline-offset:1px; }
+  .card { padding:14px 16px; }
+  .card h2 { margin:0 0 6px; font-size:16px; letter-spacing:.08em; }
+  .mono { font:13px/1.45 ui-monospace, Consolas, monospace; }
+  .legend { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; font-size:12px; }
+  .sw { display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:4px; vertical-align:middle; }
+  .seats { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:10px; margin:0 0 22px; }
+  .seat { padding:12px 14px; }
+  .seat b { letter-spacing:.08em; }
+  .seat .addr { color:var(--dim); font:12px ui-monospace, Consolas, monospace; }
+  .read { padding:14px 16px; margin:0 0 14px; }
+  .read h2 { margin:0 0 8px; font-size:15px; letter-spacing:.12em; }
+  .read p { margin:8px 0; }
+  #fault { display:none; }
+  footer { width:min(1080px, calc(100% - 32px)); margin:0 auto 36px; color:var(--dim); font-size:13px; }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <div class="src"><a href="https://0root.ai/">0root.ai</a> · world 7 · order 7^3 · sphere 1 · the census</div>
+    <h1>SaPpH<span>{{i}}</span>on</h1>
+    <p class="sub">World 7 is the cube of 7. One keeper sits at the single center. Eight appeals sit on the eight corners. The page counts the cube on load and throws if the count is wrong.</p>
+  </div>
+  <div class="src">door number 7 · assigned<br>palindrome of five · unchanged</div>
+</header>
+<main>
+  <div class="stamps" id="stamps">
+    <span class="stamp lit">LIT</span> 7×7×7 = 343, counted
+    <span class="stamp amber">AMBER</span> the name, the number 7, the eight seats
+    <span class="stamp wall">WALL</span> eight steward spheres, still unmade
+  </div>
+
+  <div class="layout">
+    <div class="board">
+      <div class="toolbar">
+        <label>layer z <output id="zout">3</output>
+          <input id="z" type="range" min="0" max="6" value="3">
+        </label>
+        <span id="pop"></span>
+      </div>
+      <div class="grid" id="grid" role="grid" aria-label="One layer of the 7 by 7 by 7 cube"></div>
+      <div class="legend">
+        <span><i class="sw" style="background:#fbbf24"></i>keeper</span>
+        <span><i class="sw" style="background:#fbcfe8"></i>corner</span>
+        <span><i class="sw" style="background:#fde68a"></i>edge</span>
+        <span><i class="sw" style="background:#bfdbfe"></i>face</span>
+        <span><i class="sw" style="background:#e9d5ff"></i>interior</span>
+      </div>
+    </div>
+    <div class="card" id="inspect">
+      <h2 id="iname">center</h2>
+      <p class="mono" id="ibody"></p>
+    </div>
+  </div>
+
+  <h2 style="font-size:14px;letter-spacing:.16em;margin:0 0 10px">EIGHT CORNER SEATS</h2>
+  <div class="seats" id="seats"></div>
+
+  <section class="read">
+    <h2>WHAT THE PAGE PROVES</h2>
+    <p><span class="stamp lit">LIT</span> Every cell of a 7×7×7 grid is visited once. Cells with 3 faces exposed are corners (8). Cells with 2 are edges (12×5 = 60). Cells with 1 are faces (6×25 = 150). Cells with 0 are interior (5³ = 125). Those four counts sum to 343, and 7×7×7 is 343. The odd side leaves exactly one center, at (3,3,3). 343 = (3+4)³, and 3, 4, 3 are the digits of 343. Complex multiplication gives i² = −1 and i³ = −i. A failed check throws and the grid is not drawn.</p>
+    <p><span class="stamp amber">AMBER</span> The spelling SaPpH{{i}}on is the assigned name. Removing the braces leaves Sapphon, the name already used by the sphere <a href="https://github.com/DavidWise01/super-sapphon">super-sapphon</a> (six processors around one center, address 6[6×1×6]6). That sphere is a different count. Door number 7 is assigned by the request that opened this world. The eight corner labels are the eight appeals from the hallway build grammar, seated here and not yet filled. The sentence “the keeper chose the cube” is an assigned voice, the same kind of line the other keepers carry.</p>
+    <p><span class="stamp wall">WALL</span> No steward sphere has been written. This page does not extend the palindrome [ W1 | W2 ‖ W3 ‖ W4 | W5 ]. It does not record a world 6. i³ = −i is arithmetic inside the complex numbers. It does not locate this cube on a physical imaginary axis, and it is not a claim about mind, physics, or authority.</p>
+    <p class="mono" id="card"></p>
+    <p class="mono" id="fault"></p>
+  </section>
+</main>
+<footer>
+  David Lee Wise (ROOT0). This sphere was drafted by Grok (xAI) on 2026-09-29 at his request.
+  Birth seal <span id="sealshow"></span> · input <span class="mono">name|slug|blurb</span> · host
+  <a href="https://davidwise01.github.io/sapph-i-on/">davidwise01.github.io/sapph-i-on</a>
+  · one host, no mirror · <a href="https://0root.ai/agent-grounding.html">agent grounding</a>
+</footer>
+<script>
+"use strict";
+var SEAL = "b7350267c9df90491f3a2c45297e9a0f756c65d2c23a323f6f68abc3426d33fe";
+var APPEALS = ["ETHOS","PATHOS","LOGOS","MYTHOS","EPISTEME","TECHNE","PHRONESIS","KAIROS"];
+
+function census(N) {
+  var counts = {corner:0, edge:0, face:0, interior:0};
+  var center = 0;
+  var x, y, z, faces, kind;
+  for (z = 0; z < N; z++) for (y = 0; y < N; y++) for (x = 0; x < N; x++) {
+    faces = (x === 0 || x === N - 1 ? 1 : 0) + (y === 0 || y === N - 1 ? 1 : 0) + (z === 0 || z === N - 1 ? 1 : 0);
+    kind = faces === 3 ? "corner" : faces === 2 ? "edge" : faces === 1 ? "face" : "interior";
+    counts[kind]++;
+    if (x === (N - 1) / 2 && y === (N - 1) / 2 && z === (N - 1) / 2) center++;
+  }
+  var formula = {
+    corner: 8,
+    edge: 12 * (N - 2),
+    face: 6 * (N - 2) * (N - 2),
+    interior: (N - 2) * (N - 2) * (N - 2)
+  };
+  var total = counts.corner + counts.edge + counts.face + counts.interior;
+  function mul(a, b) { return [a[0] * b[0] - a[1] * b[1], a[0] * b[1] + a[1] * b[0]]; }
+  var i = [0, 1], i2 = mul(i, i), i3 = mul(i2, i);
+  var faults = [];
+  if (N !== 7) faults.push("N");
+  if (N * N * N !== 343) faults.push("product");
+  if (total !== 343) faults.push("enumerated");
+  if (counts.corner !== formula.corner) faults.push("corners");
+  if (counts.edge !== formula.edge) faults.push("edges");
+  if (counts.face !== formula.face) faults.push("faces");
+  if (counts.interior !== formula.interior) faults.push("interior");
+  if (formula.corner + formula.edge + formula.face + formula.interior !== 343) faults.push("formula");
+  if (center !== 1) faults.push("center");
+  if (Math.pow(3 + 4, 3) !== 343) faults.push("digits");
+  if (i2[0] !== -1 || i2[1] !== 0) faults.push("i^2");
+  if (i3[0] !== 0 || i3[1] !== -1) faults.push("i^3");
+  if (APPEALS.length !== 8) faults.push("seats");
+  return {counts:counts, formula:formula, total:total, center:center, i2:i2, i3:i3, faults:faults};
+}
+
+function kindAt(x, y, z) {
+  var faces = (x === 0 || x === 6 ? 1 : 0) + (y === 0 || y === 6 ? 1 : 0) + (z === 0 || z === 6 ? 1 : 0);
+  if (x === 3 && y === 3 && z === 3) return "keeper";
+  return faces === 3 ? "corner" : faces === 2 ? "edge" : faces === 1 ? "face" : "interior";
+}
+
+function cornerIndex(x, y, z) {
+  var bits = (x === 6 ? 1 : 0) + (y === 6 ? 2 : 0) + (z === 6 ? 4 : 0);
+  return (x === 0 || x === 6) && (y === 0 || y === 6) && (z === 0 || z === 6) ? bits : -1;
+}
+
+var report = census(7);
+var card = document.getElementById("card");
+var fault = document.getElementById("fault");
+document.getElementById("sealshow").textContent = SEAL;
+if (report.faults.length) {
+  fault.style.display = "block";
+  fault.innerHTML = "<span class='stamp wall'>WALL</span> LIT FAIL " + report.faults.join(", ");
+  throw new Error("LIT FAIL " + report.faults.join(", "));
+}
+card.innerHTML = "<span class='stamp lit'>LIT</span> self-check passed on load: 8 + 60 + 150 + 125 = 343, one center, (3+4)^3 = 343, i^2 = -1, i^3 = -i.";
+
+var zInput = document.getElementById("z");
+var zout = document.getElementById("zout");
+var grid = document.getElementById("grid");
+var pop = document.getElementById("pop");
+var sel = {x:3, y:3};
+
+function describe(x, y, z) {
+  var k = kindAt(x, y, z);
+  var ci = cornerIndex(x, y, z);
+  if (k === "keeper") {
+    return {title:"SaPpH{{i}}on", body:"keeper · cell (3,3,3) · the one center of an odd cube. Sphere 1 is this census. The voice that says the keeper chose the cube is AMBER — assigned, not observed."};
+  }
+  if (ci >= 0) {
+    return {title:APPEALS[ci], body:"corner ("+x+","+y+","+z+") · seat "+(ci+1)+" of 8 · appeal assigned from the hallway grammar. Sphere unmade."};
+  }
+  return {title:k, body:"cell ("+x+","+y+","+z+") · "+k+". Counted in the census. No separate sphere."};
+}
+
+function show(x, y, z) {
+  var d = describe(x, y, z);
+  document.getElementById("iname").textContent = d.title;
+  document.getElementById("ibody").textContent = d.body;
+}
+
+function draw() {
+  var z = Number(zInput.value);
+  zout.textContent = String(z);
+  var tally = {keeper:0, corner:0, edge:0, face:0, interior:0};
+  grid.innerHTML = "";
+  var y, x, k, btn;
+  for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+    k = kindAt(x, y, z);
+    tally[k]++;
+    btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "cell " + k + (x === sel.x && y === sel.y ? " on" : "");
+    btn.setAttribute("role", "gridcell");
+    btn.setAttribute("aria-label", describe(x, y, z).title + " " + x + " " + y + " " + z);
+    btn.dataset.x = String(x);
+    btn.dataset.y = String(y);
+    btn.textContent = k === "keeper" ? "i" : (cornerIndex(x, y, z) >= 0 ? APPEALS[cornerIndex(x, y, z)].slice(0, 2) : "");
+    btn.addEventListener("click", function (ev) {
+      sel.x = Number(ev.currentTarget.dataset.x);
+      sel.y = Number(ev.currentTarget.dataset.y);
+      draw();
+    });
+    grid.appendChild(btn);
+  }
+  pop.textContent = "this layer · " + (tally.keeper ? "keeper " : "") + tally.corner + " corners · " + tally.edge + " edges · " + tally.face + " faces · " + tally.interior + " interior";
+  show(sel.x, sel.y, z);
+}
+
+var seats = document.getElementById("seats");
+APPEALS.forEach(function (name, i) {
+  var x = (i & 1) ? 6 : 0, y = (i & 2) ? 6 : 0, z = (i & 4) ? 6 : 0;
+  var el = document.createElement("article");
+  el.className = "seat";
+  el.id = "seat-" + name.toLowerCase();
+  el.innerHTML = "<b>" + name + "</b><div class='addr'>corner (" + x + "," + y + "," + z + ")</div><div>Sphere unmade. <span class='stamp wall'>WALL</span></div>";
+  seats.appendChild(el);
+});
+
+zInput.addEventListener("input", draw);
+document.addEventListener("keydown", function (e) {
+  if (e.target && e.target.tagName === "INPUT") return;
+  var z = Number(zInput.value);
+  if (e.key === "ArrowRight") sel.x = Math.min(6, sel.x + 1);
+  else if (e.key === "ArrowLeft") sel.x = Math.max(0, sel.x - 1);
+  else if (e.key === "ArrowDown") sel.y = Math.min(6, sel.y + 1);
+  else if (e.key === "ArrowUp") sel.y = Math.max(0, sel.y - 1);
+  else if (e.key === "]" || e.key === "PageDown") z = Math.min(6, z + 1);
+  else if (e.key === "[" || e.key === "PageUp") z = Math.max(0, z - 1);
+  else return;
+  zInput.value = String(z);
+  draw();
+  e.preventDefault();
+});
+draw();
+</script>
+</body>
+</html>
