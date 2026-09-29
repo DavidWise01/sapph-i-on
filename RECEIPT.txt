@@ -1,0 +1,26 @@
+SaPpH{{i}}on · receipt · 2026-09-29
+
+Sphere
+  repo: https://github.com/DavidWise01/sapph-i-on
+  commit: 223f30db965ffccc00da47b184495b8353b99608
+  message: SaPpH{{i}}on
+  host: https://davidwise01.github.io/sapph-i-on/
+  pages: legacy, branch master, path /
+
+Hallway door
+  repo: https://github.com/DavidWise01/0root
+  commit: 1708a90b5326db738163e428e8724421d2fb3ed8
+  message: light the SaPpH{{i}}on door
+  GitHub Pages: https://davidwise01.github.io/0root/  (built, door present)
+  https://0root.ai/ is a different host (railway-hikari). Its llms.txt last-modified 2026-09-22 and does not yet contain this door. DNS was not changed.
+
+Seal
+  input: SaPpH{{i}}on|sapph-i-on|The cube of 7. 343 cells, eight corner seats, the keeper at the one center.
+  sha256: b7350267c9df90491f3a2c45297e9a0f756c65d2c23a323f6f68abc3426d33fe
+
+Checks
+  node census(7): corners 8, edges 60, faces 150, interior 125, total 343, center 1, i^2 = [-1,0], i^3 = [0,-1], faults empty
+  seal line hashes to the digest above
+  node --check on the sphere script and both hallway scripts: pass
+  Edge on the live page: self-check text present, 49 cells, 8 seats, layer z=0 shows 4 corners, clicking one reads ETHOS, layer z=3 reads keeper SaPpH{{i}}on, no pageerror
+  Edge on https://davidwise01.github.io/0root/: holodoor href is the sphere host, world names include 7^3, no pageerror
