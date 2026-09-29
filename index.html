@@ -62,7 +62,7 @@
   .seat b { letter-spacing:.08em; }
   .seat a { display:block; font-size:14px; margin-top:4px; }
   .corpus { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:8px; margin:0 0 22px; }
-  .corpus a, .archive a, .libraries a, .folio a { display:block; padding:8px 10px; font-size:13px; }
+  .corpus a, .archive a, .libraries a, .folio a, .strip a { display:block; padding:8px 10px; font-size:13px; }
   .seat .addr { color:var(--dim); font:12px ui-monospace, Consolas, monospace; }
   .read { padding:14px 16px; margin:0 0 14px; }
   .read h2 { margin:0 0 8px; font-size:15px; letter-spacing:.12em; }
@@ -76,7 +76,7 @@
   <div>
     <div class="src"><a href="https://0root.ai/">0root.ai</a> · world 7 · order 7^3 · galaxy door · 24 spheres</div>
     <h1>SaPpH<span>{{i}}</span>on</h1>
-    <p class="sub">World 7 is the cube of 7. This page is the galaxy door: it counts the cube and throws if the count is wrong. A galaxy holds 24 spheres, three on each corner seat. Beside those seats are four more cubes of 24: a Downloads copy, an Internet Archive cube, a library cube, and a folio cube that alternates article and thought.</p>
+    <p class="sub">World 7 is the cube of 7. This page is the galaxy door: it counts the cube and throws if the count is wrong. A galaxy holds 24 spheres, three on each corner seat. Beside those seats are four more cubes of 24: a Downloads copy, an Internet Archive cube, a library cube, and a folio cube that alternates article and thought. A nested strip holds two spheres, minus-plus and plus-minus, offset 1, 2, 1, 2, 1, 2. Four mirrors close on the one-sided number 420024.</p>
   </div>
   <div class="src">door number 7 · assigned<br>palindrome of five · unchanged</div>
 </header>
@@ -130,6 +130,12 @@
   <p class="sub" style="margin:0 0 10px">Article, thought, article, thought. Twelve spheres cite one Internet Archive article and throw if the identifier does not match. Twelve spheres are original thoughts and throw if their arithmetic fails. These are not the corner seats.</p>
   <div class="folio" id="folio"></div>
 
+  <h2 style="font-size:14px;letter-spacing:.16em;margin:18px 0 10px">STRIP · 2</h2>
+  <p class="sub" style="margin:0 0 10px">Two spheres on one nested loop. Minus-plus stands on offset 1. Plus-minus stands on offset 2. The fold is the Fibonacci palindrome. Four mirrors carry 24 to 42, and 240042 to 420024.</p>
+  <p class="mono" id="foldline">l./1/1/2/3/5/8\8\5\3\2\1\1\.r</p>
+  <div class="strip" id="strip"></div>
+  <p class="mono" id="stripcard"></p>
+
   <section class="read">
     <h2>WHAT THE PAGE PROVES</h2>
     <p><span class="stamp lit">LIT</span> Every cell of a 7×7×7 grid is visited once. Cells with 3 faces exposed are corners (8). Cells with 2 are edges (12×5 = 60). Cells with 1 are faces (6×25 = 150). Cells with 0 are interior (5³ = 125). Those four counts sum to 343, and 7×7×7 is 343. The odd side leaves exactly one center, at (3,3,3). 343 = (3+4)³, and 3, 4, 3 are the digits of 343. Complex multiplication gives i² = −1 and i³ = −i. A failed check throws and the grid is not drawn.</p>
@@ -138,7 +144,9 @@
     <p><span class="stamp amber">AMBER</span> The archive cube assigns three corpora to each of the eight appeals. The Internet Archive did not make that seating. Each sphere cites one item found there on 2026-09-29 and proves the identifier live. The page does not carry the files.</p>
     <p><span class="stamp amber">AMBER</span> The library cube assigns three libraries to each of the eight appeals. The Internet Archive did not make that seating. Each sphere cites one collection found there on 2026-09-29 and proves the identifier live. The page does not carry the holdings. McGill is three different identifiers: the university libraries, the Islamic Studies Library, and the Osler Library.</p>
     <p><span class="stamp amber">AMBER</span> The folio cube alternates article, thought, article, thought, three spheres to an appeal. The articles were found on the Internet Archive on 2026-09-29. The thoughts were written for this cube. The seating is assigned. The page does not carry the articles, and a thought does not read its neighbor.</p>
-    <p><span class="stamp wall">WALL</span> This galaxy does not extend the palindrome [ W1 | W2 ‖ W3 ‖ W4 | W5 ] and does not record a world 6. i³ = −i is arithmetic. It does not locate the cube on a physical imaginary axis, and it is not a claim about mind, physics, or authority.</p>
+    <p><span class="stamp lit">LIT</span> The strip recomputes its fold, its four mirrors, and its offset. 24 reversed is 42. 24 joined to 42 is 240042. 42 joined to 24 is 420024. 420024 reversed is 420024. Pair-reversal swaps those two writings and swaps them back. Offset 1 reads 402. Offset 2 reads 204. A failed check throws.</p>
+    <p><span class="stamp amber">AMBER</span> Möbius is the assigned name of that one-sided number. The four mirrors are the four reversals. The fold was given as the nest. The two spheres are minus-plus and plus-minus. They are not seated on the eight appeals. Neither sphere reads the other page.</p>
+    <p><span class="stamp wall">WALL</span> This galaxy does not extend the palindrome [ W1 | W2 ‖ W3 ‖ W4 | W5 ] and does not record a world 6. i³ = −i is arithmetic. It does not locate the cube on a physical imaginary axis, and it is not a claim about mind, physics, or authority. The strip's check is the number 420024. It does not measure glass, and it does not fold a piece of paper.</p>
     <p class="mono" id="card"></p>
     <p class="mono" id="fault"></p>
   </section>
@@ -457,6 +465,63 @@ FOLIO.forEach(function (s, i) {
 if (folioArticles !== 12 || folioThoughts !== 12) throw new Error("LIT FAIL folio split");
 ["ETHOS","PATHOS","LOGOS","MYTHOS","EPISTEME","TECHNE","PHRONESIS","KAIROS"].forEach(function (name) {
   if (perFolio[name] !== 3) throw new Error("LIT FAIL folio " + name);
+});
+
+var STRIP = [
+  {sign:"-+", slug:"the-minus-plus", title:"The Minus Plus", offset:1, reading:"402"},
+  {sign:"+-", slug:"the-plus-minus", title:"The Plus Minus", offset:2, reading:"204"}
+];
+var FOLD = "l./1/1/2/3/5/8\\8\\5\\3\\2\\1\\1\\.r";
+function stripProof() {
+  var faults = [];
+  function rev(s) { return String(s).split("").reverse().join(""); }
+  function pairRev(s) {
+    var out = "";
+    for (var i = 0; i < s.length; i += 2) out += rev(s.slice(i, i + 2));
+    return out;
+  }
+  var shown = document.getElementById("foldline").textContent;
+  if (shown !== FOLD) faults.push("fold shown");
+  if (FOLD.slice(0, 2) !== "l." || FOLD.slice(-2) !== ".r") faults.push("fold ends");
+  var body = FOLD.slice(2, -2);
+  var turn = body.indexOf("\\");
+  var left = body.slice(0, turn).split("/").filter(function (x) { return x !== ""; }).map(Number);
+  var right = body.slice(turn).split("\\").filter(function (x) { return x !== ""; }).map(Number);
+  var expectL = [1, 1, 2, 3, 5, 8], expectR = [8, 5, 3, 2, 1, 1];
+  if (left.length !== 6 || right.length !== 6) faults.push("fold length");
+  var sumL = 0, sumR = 0, four = 0;
+  for (var i = 0; i < 6; i++) {
+    if (left[i] !== expectL[i] || right[i] !== expectR[i] || right[i] !== left[5 - i]) faults.push("fold digits");
+    sumL += left[i]; sumR += right[i]; if (i < 4) four += left[i];
+  }
+  if (sumL !== 20 || sumR !== 20 || four !== 7) faults.push("fold sums");
+  if (rev("24") !== "42" || rev("240") !== "042" || rev("420") !== "024") faults.push("mirrors");
+  if (("240" + "042") !== "240042" || ("420" + "024") !== "420024") faults.push("joins");
+  if (24 * 10000 + 42 !== 240042 || 42 * 10000 + 24 !== 420024) faults.push("products");
+  if (rev("420024") !== "420024" || pairRev("240042") !== "420024" || pairRev("420024") !== "240042") faults.push("mobius");
+  var digits = "420024".split("");
+  var beats = [1, 2, 1, 2, 1, 2];
+  var read = {1:"", 2:""};
+  for (var b = 0; b < 6; b++) read[beats[b]] += digits[b];
+  if (read[1] !== "402" || read[2] !== "204") faults.push("offset");
+  if (STRIP.length !== 2) faults.push("strip count");
+  if (STRIP[0].sign !== "-+" || STRIP[0].offset !== 1 || STRIP[0].reading !== "402") faults.push("minus plus");
+  if (STRIP[1].sign !== "+-" || STRIP[1].offset !== 2 || STRIP[1].reading !== "204") faults.push("plus minus");
+  return faults;
+}
+var stripFaults = stripProof();
+var stripCard = document.getElementById("stripcard");
+if (stripFaults.length) {
+  stripCard.innerHTML = "<span class='stamp wall'>WALL</span> LIT FAIL " + stripFaults.join(", ");
+  throw new Error("LIT FAIL strip " + stripFaults.join(", "));
+}
+stripCard.innerHTML = "<span class='stamp lit'>LIT</span> 420024 · offset 1 reads 402 · offset 2 reads 204 · four mirrors";
+var stripEl = document.getElementById("strip");
+STRIP.forEach(function (s) {
+  var a = document.createElement("a");
+  a.href = "strip/" + s.slug + ".html";
+  a.textContent = s.sign + " · offset " + s.offset + " · " + s.title;
+  stripEl.appendChild(a);
 });
 
 zInput.addEventListener("input", draw);

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Plus Minus — SaPpH{{i}}on</title>
+<style>
+  :root { --ink:#1a1230; --dim:#5c5470; --accent:#1d4ed8; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; color:var(--ink);
+    font:16px/1.5 "Segoe UI", ui-sans-serif, sans-serif;
+    background:
+      radial-gradient(800px 420px at 0% 0%, color-mix(in srgb, var(--accent) 28%, white), transparent 60%),
+      radial-gradient(700px 420px at 100% 10%, #fde68a, transparent 55%),
+      linear-gradient(165deg, #f8f1e4, #f3e8ff 50%, #e7f0ff);
+    background-color:#f7f1e6; min-height:100vh;
+  }
+  a { color:var(--accent); }
+  header, main, footer { width:min(880px, calc(100% - 32px)); margin:0 auto; }
+  header { padding:22px 0 0; }
+  .src, .mono { font:13px/1.45 ui-monospace, Consolas, monospace; color:var(--dim); }
+  h1 { margin:8px 0 0; font-size:clamp(28px, 5vw, 44px); letter-spacing:.03em; }
+  .kicker { letter-spacing:.16em; font-size:12px; color:var(--accent); font-weight:700; }
+  .stage { background:#fffaf3; border:1px solid rgba(26,18,48,.14); border-radius:18px; padding:14px; margin:14px 0; }
+  .stamp { display:inline-block; padding:2px 8px; border-radius:999px; font:11px ui-monospace, Consolas, monospace; color:#fff; }
+  .lit { background:#047857; } .amber { background:#b45309; } .wall { background:#be185d; }
+  .nav { display:flex; justify-content:space-between; gap:12px; margin:8px 0 18px; flex-wrap:wrap; }
+  @media (max-width: 640px) { .nav { flex-direction:column; align-items:flex-start; } }
+  .beats { display:flex; gap:6px; flex-wrap:wrap; margin:8px 0; }
+  .beat { min-width:46px; text-align:center; padding:6px 4px; border-radius:10px; border:1px solid rgba(26,18,48,.14); }
+  .beat.on1 { background:#dbeafe; }
+  .beat.on2 { background:#fde68a; }
+  .beat b { display:block; font-size:18px; color:var(--ink); }
+  .beat i { font-style:normal; font-size:11px; color:var(--dim); }
+  .mirrors { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:8px 0; }
+  .mirrors div { padding:8px 10px; background:#fff; border-radius:12px; border:1px solid rgba(26,18,48,.14); }
+  footer { color:var(--dim); font-size:13px; padding-bottom:28px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="src"><a href="../">SaPpH{{i}}on</a> · nested strip · +- · sphere 2 of 2 · <a href="https://0root.ai/">0root.ai</a></div>
+  <div class="kicker">+-</div>
+  <h1>The Plus Minus</h1>
+  <p>Offset 2 through 420024 reads 204, and the mirror joined back to 24 is 420024.</p>
+</header>
+<main>
+  <div class="nav">
+    <a href="../">← galaxy door</a>
+    <a href="the-minus-plus.html">The Minus Plus →</a>
+  </div>
+  <div class="stage" id="stage"></div>
+  <p class="mono" id="card"></p>
+  <p><span class="stamp lit">LIT</span> On load this page runs the fold, the four mirrors, and the offset, and throws if a count is wrong.</p>
+  <p><span class="stamp amber">AMBER</span> This pass was written for the nested strip on 2026-09-29. +- stands on offset 2. Möbius is the assigned name of the one-sided number 420024. The four mirrors are the four reversals. This page does not read the other sphere.</p>
+  <p><span class="stamp wall">WALL</span> A passing check is the number. It is not a glass mirror, not a paper model on a desk, and not a claim about mind, physics, or authority.</p>
+</main>
+<footer>
+  David Lee Wise (ROOT0). Drafted by Grok (xAI) on 2026-09-29.
+  Birth seal 783e462eb0a7d1a159d7283090ee2374330d564889561bfe877a21d5464f8927. One host, <a href="https://davidwise01.github.io/sapph-i-on/strip/the-plus-minus.html">this page</a>.
+</footer>
+<script>
+"use strict";
+var SPHERE_OFFSET = 2;
+var SPHERE_READING = "204";
+var FOLD = "l./1/1/2/3/5/8\\8\\5\\3\\2\\1\\1\\.r";
+function prove() {
+  var faults = [], lines = [];
+  function rev(s) { return String(s).split("").reverse().join(""); }
+  function pairRev(s) {
+    if (s.length % 2 !== 0) faults.push("pair width");
+    var out = "";
+    for (var i = 0; i < s.length; i += 2) out += rev(s.slice(i, i + 2));
+    return out;
+  }
+  function same(name, got, expect) {
+    var ok = got.length === expect.length;
+    for (var i = 0; ok && i < got.length; i++) if (got[i] !== expect[i]) ok = false;
+    if (!ok) faults.push(name);
+  }
+  if (FOLD.slice(0, 2) !== "l." || FOLD.slice(-2) !== ".r") faults.push("fold ends");
+  var body = FOLD.slice(2, -2);
+  var turn = body.indexOf("\\");
+  var leftPart = body.slice(0, turn);
+  var rightPart = body.slice(turn);
+  if (leftPart.charAt(0) !== "/" || leftPart.indexOf("\\") !== -1) faults.push("fold slash");
+  if (rightPart.charAt(0) !== "\\") faults.push("fold hand");
+  var left = leftPart.split("/").filter(function (x) { return x !== ""; }).map(Number);
+  var right = rightPart.split("\\").filter(function (x) { return x !== ""; }).map(Number);
+  same("fold left", left, [1, 1, 2, 3, 5, 8]);
+  same("fold right", right, [8, 5, 3, 2, 1, 1]);
+  for (var i = 0; i < left.length; i++) if (right[i] !== left[left.length - 1 - i]) faults.push("fold nest");
+  var sumL = 0, sumR = 0, four = 0;
+  for (var k = 0; k < left.length; k++) {
+    sumL += left[k];
+    sumR += right[k];
+    if (k < 4) four += left[k];
+  }
+  if (sumL !== 20 || sumR !== 20) faults.push("fold sum");
+  if (four !== 7) faults.push("fold seven");
+  var pair = "24";
+  var mirror = rev(pair);
+  if (mirror !== "42" || rev(mirror) !== pair) faults.push("mirror 1");
+  var wide = pair + "0";
+  var wideM = mirror + "0";
+  if (wide !== "240" || Number(pair) * 10 !== 240) faults.push("wide 24");
+  if (wideM !== "420" || Number(mirror) * 10 !== 420) faults.push("wide 42");
+  var backWide = rev(wide);
+  var backWideM = rev(wideM);
+  if (backWide !== "042" || rev(backWide) !== wide) faults.push("mirror 2");
+  if (backWideM !== "024" || rev(backWideM) !== wideM) faults.push("mirror 3");
+  var join = wide + backWide;
+  var mobius = wideM + backWideM;
+  if (join !== "240042") faults.push("join");
+  if (mobius !== "420024") faults.push("mobius");
+  if (Number(pair) * 10000 + Number(mirror) !== 240042) faults.push("join product");
+  if (Number(mirror) * 10000 + Number(pair) !== 420024) faults.push("mobius product");
+  if (rev(join) !== join || rev(mobius) !== mobius) faults.push("one side");
+  var twisted = pairRev(join);
+  if (twisted !== mobius || pairRev(mobius) !== join) faults.push("mirror 4");
+  var mirrorCount = 0;
+  if (mirror === "42") mirrorCount++;
+  if (backWide === "042") mirrorCount++;
+  if (backWideM === "024") mirrorCount++;
+  if (twisted === "420024") mirrorCount++;
+  if (mirrorCount !== 4) faults.push("four mirrors");
+  var digits = mobius.split("").map(Number);
+  var beats = [1, 2, 1, 2, 1, 2];
+  if (digits.length !== beats.length) faults.push("offset length");
+  var read = { 1: "", 2: "" };
+  for (var b = 0; b < beats.length; b++) {
+    if (beats[b] !== (b % 2) + 1) faults.push("offset rhythm");
+    read[beats[b]] += String(digits[b]);
+  }
+  if (read[1] !== "402" || read[2] !== "204" || rev(read[1]) !== read[2]) faults.push("offset read");
+  if (SPHERE_OFFSET !== 1 && SPHERE_OFFSET !== 2) faults.push("sphere");
+  if (read[SPHERE_OFFSET] !== SPHERE_READING) faults.push("this offset");
+  lines.push(FOLD);
+  lines.push("left " + left.join(" ") + " = " + sumL);
+  lines.push("right " + right.join(" ") + " = " + sumR);
+  lines.push("1+1+2+3 = " + four);
+  lines.push("mirror 1: 24 -> " + mirror);
+  lines.push("mirror 2: 240 -> " + backWide);
+  lines.push("mirror 3: 420 -> " + backWideM);
+  lines.push("mirror 4: 240042 -> " + twisted);
+  lines.push("reverse " + mobius + " = " + rev(mobius));
+  lines.push("offset " + beats.join(","));
+  lines.push("offset 1 reads " + read[1]);
+  lines.push("offset 2 reads " + read[2]);
+  lines.push("four mirrors " + mirrorCount);
+  return { faults: faults, detail: mobius + " · offset " + SPHERE_OFFSET + " reads " + read[SPHERE_OFFSET], lines: lines, digits: digits, beats: beats };
+}
+var report = prove();
+function el(tag, cls, text) {
+  var n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text != null) n.textContent = text;
+  return n;
+}
+function finish(r) {
+  var card = document.getElementById("card");
+  if (!r || r.faults.length) {
+    var msg = (r && r.faults.join(", ")) || "no report";
+    card.innerHTML = "<span class='stamp wall'>WALL</span> LIT FAIL " + msg;
+    throw new Error("LIT FAIL " + msg);
+  }
+  card.innerHTML = "<span class='stamp lit'>LIT</span> " + r.detail;
+  draw(r);
+}
+if (report && typeof report.then === "function") report.then(finish);
+else finish(report);
+function draw(r) {
+  var stage = document.getElementById("stage");
+  (r.lines || []).forEach(function (line) { stage.appendChild(el("p", "mono", line)); });
+  var beats = el("div", "beats");
+  r.digits.forEach(function (d, i) {
+    var cell = el("div", "beat on" + r.beats[i]);
+    cell.appendChild(el("b", "", String(d)));
+    cell.appendChild(el("i", "", String(r.beats[i])));
+    beats.appendChild(cell);
+  });
+  stage.appendChild(beats);
+}
+</script>
+</body>
+</html>
