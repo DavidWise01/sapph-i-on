@@ -62,7 +62,7 @@
   .seat b { letter-spacing:.08em; }
   .seat a { display:block; font-size:14px; margin-top:4px; }
   .corpus { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:8px; margin:0 0 22px; }
-  .corpus a, .archive a, .libraries a { display:block; padding:8px 10px; font-size:13px; }
+  .corpus a, .archive a, .libraries a, .folio a { display:block; padding:8px 10px; font-size:13px; }
   .seat .addr { color:var(--dim); font:12px ui-monospace, Consolas, monospace; }
   .read { padding:14px 16px; margin:0 0 14px; }
   .read h2 { margin:0 0 8px; font-size:15px; letter-spacing:.12em; }
@@ -76,7 +76,7 @@
   <div>
     <div class="src"><a href="https://0root.ai/">0root.ai</a> · world 7 · order 7^3 · galaxy door · 24 spheres</div>
     <h1>SaPpH<span>{{i}}</span>on</h1>
-    <p class="sub">World 7 is the cube of 7. This page is the galaxy door: it counts the cube and throws if the count is wrong. A galaxy holds 24 spheres, three on each corner seat. Beside those seats are three more cubes of 24: a Downloads copy, an Internet Archive cube, and a library cube, one shelf to a sphere.</p>
+    <p class="sub">World 7 is the cube of 7. This page is the galaxy door: it counts the cube and throws if the count is wrong. A galaxy holds 24 spheres, three on each corner seat. Beside those seats are four more cubes of 24: a Downloads copy, an Internet Archive cube, a library cube, and a folio cube that alternates article and thought.</p>
   </div>
   <div class="src">door number 7 · assigned<br>palindrome of five · unchanged</div>
 </header>
@@ -126,6 +126,10 @@
   <p class="sub" style="margin:0 0 10px">One Internet Archive library to a sphere. Each sphere asks archive.org for its identifier and throws if the answer does not match. These are not the corner seats, and they are not the archive cube.</p>
   <div class="libraries" id="libraries"></div>
 
+  <h2 style="font-size:14px;letter-spacing:.16em;margin:18px 0 10px">FOLIO CUBE · 24</h2>
+  <p class="sub" style="margin:0 0 10px">Article, thought, article, thought. Twelve spheres cite one Internet Archive article and throw if the identifier does not match. Twelve spheres are original thoughts and throw if their arithmetic fails. These are not the corner seats.</p>
+  <div class="folio" id="folio"></div>
+
   <section class="read">
     <h2>WHAT THE PAGE PROVES</h2>
     <p><span class="stamp lit">LIT</span> Every cell of a 7×7×7 grid is visited once. Cells with 3 faces exposed are corners (8). Cells with 2 are edges (12×5 = 60). Cells with 1 are faces (6×25 = 150). Cells with 0 are interior (5³ = 125). Those four counts sum to 343, and 7×7×7 is 343. The odd side leaves exactly one center, at (3,3,3). 343 = (3+4)³, and 3, 4, 3 are the digits of 343. Complex multiplication gives i² = −1 and i³ = −i. A failed check throws and the grid is not drawn.</p>
@@ -133,6 +137,7 @@
     <p><span class="stamp amber">AMBER</span> The corpus batch is the 24 newest Sapphon HTML files in Downloads, skipping numbered copies. Each seal records sha256(title|slug|blurb) and the file hash computed when the copy was made. This page checks that the manifest lists those 24 names in that order. It does not re-prove what those files claim, and it does not restyle them.</p>
     <p><span class="stamp amber">AMBER</span> The archive cube assigns three corpora to each of the eight appeals. The Internet Archive did not make that seating. Each sphere cites one item found there on 2026-09-29 and proves the identifier live. The page does not carry the files.</p>
     <p><span class="stamp amber">AMBER</span> The library cube assigns three libraries to each of the eight appeals. The Internet Archive did not make that seating. Each sphere cites one collection found there on 2026-09-29 and proves the identifier live. The page does not carry the holdings. McGill is three different identifiers: the university libraries, the Islamic Studies Library, and the Osler Library.</p>
+    <p><span class="stamp amber">AMBER</span> The folio cube alternates article, thought, article, thought, three spheres to an appeal. The articles were found on the Internet Archive on 2026-09-29. The thoughts were written for this cube. The seating is assigned. The page does not carry the articles, and a thought does not read its neighbor.</p>
     <p><span class="stamp wall">WALL</span> This galaxy does not extend the palindrome [ W1 | W2 ‖ W3 ‖ W4 | W5 ] and does not record a world 6. i³ = −i is arithmetic. It does not locate the cube on a physical imaginary axis, and it is not a claim about mind, physics, or authority.</p>
     <p class="mono" id="card"></p>
     <p class="mono" id="fault"></p>
@@ -408,6 +413,50 @@ LIBRARIES.forEach(function (s) {
 });
 ["ETHOS","PATHOS","LOGOS","MYTHOS","EPISTEME","TECHNE","PHRONESIS","KAIROS"].forEach(function (name) {
   if (perLibrary[name] !== 3) throw new Error("LIT FAIL library " + name);
+});
+
+var FOLIO = [
+  {steward:"ETHOS", slug:"the-moving-bodies", title:"The Moving Bodies", kind:"article"},
+  {steward:"ETHOS", slug:"the-sub-cubes", title:"The Sub-cubes", kind:"thought"},
+  {steward:"ETHOS", slug:"the-field-paper", title:"The Field Paper", kind:"article"},
+  {steward:"PATHOS", slug:"the-one-two-seven", title:"The One-Two-Seven", kind:"thought"},
+  {steward:"PATHOS", slug:"the-plant-hybrids", title:"The Plant Hybrids", kind:"article"},
+  {steward:"PATHOS", slug:"the-base-seven", title:"The Base Seven", kind:"thought"},
+  {steward:"LOGOS", slug:"the-communication-paper", title:"The Communication Paper", kind:"article"},
+  {steward:"LOGOS", slug:"the-flat-residue", title:"The Flat Residue", kind:"thought"},
+  {steward:"LOGOS", slug:"the-inertia-paper", title:"The Inertia Paper", kind:"article"},
+  {steward:"MYTHOS", slug:"the-street-diameter", title:"The Street Diameter", kind:"thought"},
+  {steward:"MYTHOS", slug:"the-geometry-note", title:"The Geometry Note", kind:"article"},
+  {steward:"MYTHOS", slug:"the-divisors", title:"The Divisors", kind:"thought"},
+  {steward:"EPISTEME", slug:"the-machinery-paper", title:"The Machinery Paper", kind:"article"},
+  {steward:"EPISTEME", slug:"the-axis-cross", title:"The Axis Cross", kind:"thought"},
+  {steward:"EPISTEME", slug:"the-undecidable-paper", title:"The Undecidable Paper", kind:"article"},
+  {steward:"TECHNE", slug:"the-edge-midpoints", title:"The Edge Midpoints", kind:"thought"},
+  {steward:"TECHNE", slug:"the-memex-paper", title:"The Memex Paper", kind:"article"},
+  {steward:"TECHNE", slug:"the-corner-mass", title:"The Corner Mass", kind:"thought"},
+  {steward:"PHRONESIS", slug:"the-secrecy-paper", title:"The Secrecy Paper", kind:"article"},
+  {steward:"PHRONESIS", slug:"the-opposite-bit", title:"The Opposite Bit", kind:"thought"},
+  {steward:"PHRONESIS", slug:"the-electron-paper", title:"The Electron Paper", kind:"article"},
+  {steward:"KAIROS", slug:"the-squares", title:"The Squares", kind:"thought"},
+  {steward:"KAIROS", slug:"the-colour-lecture", title:"The Colour Lecture", kind:"article"},
+  {steward:"KAIROS", slug:"the-face-centers", title:"The Face Centers", kind:"thought"}
+];
+if (FOLIO.length !== 24) throw new Error("LIT FAIL folio count");
+var perFolio = {}, folioArticles = 0, folioThoughts = 0;
+var folioEl = document.getElementById("folio");
+FOLIO.forEach(function (s, i) {
+  var expect = (i % 2 === 0) ? "article" : "thought";
+  if (s.kind !== expect) throw new Error("LIT FAIL folio rhythm");
+  if (s.kind === "article") folioArticles++; else folioThoughts++;
+  perFolio[s.steward] = (perFolio[s.steward] || 0) + 1;
+  var a = document.createElement("a");
+  a.href = "folio/" + s.slug + ".html";
+  a.textContent = s.steward + " · " + s.kind + " · " + s.title;
+  folioEl.appendChild(a);
+});
+if (folioArticles !== 12 || folioThoughts !== 12) throw new Error("LIT FAIL folio split");
+["ETHOS","PATHOS","LOGOS","MYTHOS","EPISTEME","TECHNE","PHRONESIS","KAIROS"].forEach(function (name) {
+  if (perFolio[name] !== 3) throw new Error("LIT FAIL folio " + name);
 });
 
 zInput.addEventListener("input", draw);

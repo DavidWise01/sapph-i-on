@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Sub-cubes — SaPpH{{i}}on</title>
+<style>
+  :root { --ink:#1a1230; --dim:#5c5470; --accent:#1d4ed8; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; color:var(--ink);
+    font:16px/1.5 "Segoe UI", ui-sans-serif, sans-serif;
+    background:
+      radial-gradient(800px 420px at 0% 0%, color-mix(in srgb, var(--accent) 28%, white), transparent 60%),
+      radial-gradient(700px 420px at 100% 10%, #fde68a, transparent 55%),
+      linear-gradient(165deg, #f8f1e4, #f3e8ff 50%, #e7f0ff);
+    background-color:#f7f1e6; min-height:100vh;
+  }
+  a { color:var(--accent); }
+  header, main, footer { width:min(880px, calc(100% - 32px)); margin:0 auto; }
+  header { padding:22px 0 0; }
+  .src, .mono { font:13px/1.45 ui-monospace, Consolas, monospace; color:var(--dim); }
+  h1 { margin:8px 0 0; font-size:clamp(28px, 5vw, 44px); letter-spacing:.03em; }
+  .kicker { letter-spacing:.16em; font-size:12px; color:var(--accent); font-weight:700; }
+  .stage { background:#fffaf3; border:1px solid rgba(26,18,48,.14); border-radius:18px; padding:14px; margin:14px 0; }
+  .stamp { display:inline-block; padding:2px 8px; border-radius:999px; font:11px ui-monospace, Consolas, monospace; color:#fff; }
+  .lit { background:#047857; } .amber { background:#b45309; } .wall { background:#be185d; }
+  .nav { display:flex; justify-content:space-between; gap:12px; margin:8px 0 18px; }
+  footer { color:var(--dim); font-size:13px; padding-bottom:28px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="src"><a href="../">SaPpH{{i}}on</a> · folio cube · thought · sphere 2 of 24 · <a href="https://0root.ai/">0root.ai</a></div>
+  <div class="kicker">ETHOS</div>
+  <h1>The Sub-cubes</h1>
+  <p>The cube of side 7 holds 784 axis-aligned sub-cubes, and that is the sum of the first seven cubes.</p>
+</header>
+<main>
+  <div class="nav">
+    <a href="the-moving-bodies.html">← The Moving Bodies</a>
+    <a href="the-field-paper.html">The Field Paper →</a>
+  </div>
+  <div class="stage" id="stage"></div>
+  <p class="mono" id="card"></p>
+  <p><span class="stamp lit">LIT</span> On load this page runs the count in the script and throws if the count is wrong.</p>
+  <p><span class="stamp amber">AMBER</span> This thought was written for this cube on 2026-09-29. The seat ETHOS is assigned. The check is arithmetic in the page.</p>
+  <p><span class="stamp wall">WALL</span> A passing check does not read the neighboring article, and it is not a claim about mind, physics, or authority.</p>
+</main>
+<footer>
+  David Lee Wise (ROOT0). Drafted by Grok (xAI) on 2026-09-29.
+  Birth seal d8c5f76e6de94ab1180d7166aee59f046bea24a057bb6b1a2934d9a74132ec7b. One host, <a href="https://davidwise01.github.io/sapph-i-on/folio/the-sub-cubes.html">this page</a>.
+</footer>
+<script>
+"use strict";
+function prove() {
+  var faults = [], lines = [], total = 0, sumCubes = 0;
+  for (var k = 1; k <= 7; k++) {
+    var count = (8 - k) * (8 - k) * (8 - k);
+    total += count;
+    lines.push("side " + k + ": " + count);
+  }
+  for (var i = 1; i <= 7; i++) sumCubes += i * i * i;
+  var tri = 7 * 8 / 2;
+  if (total !== 784) faults.push("count");
+  if (sumCubes !== 784) faults.push("sum");
+  if (tri * tri !== 784) faults.push("triangle");
+  lines.push("sum " + total);
+  lines.push("1^3 + ... + 7^3 = " + sumCubes);
+  lines.push("28^2 = " + (tri * tri));
+  return { faults: faults, detail: "784 = 1^3+...+7^3 = 28^2", lines: lines };
+}
+var report = prove();
+function el(tag, cls, text) {
+  var n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text != null) n.textContent = text;
+  return n;
+}
+function finish(r) {
+  var card = document.getElementById("card");
+  if (!r || r.faults.length) {
+    var msg = (r && r.faults.join(", ")) || "no report";
+    card.innerHTML = "<span class='stamp wall'>WALL</span> LIT FAIL " + msg;
+    throw new Error("LIT FAIL " + msg);
+  }
+  card.innerHTML = "<span class='stamp lit'>LIT</span> " + r.detail;
+  draw(r);
+}
+if (report && typeof report.then === "function") report.then(finish);
+else finish(report);
+function draw(r) {
+  var stage = document.getElementById("stage");
+  (r.lines || []).forEach(function (line) { stage.appendChild(el("p", "mono", line)); });
+}
+</script>
+</body>
+</html>
