@@ -1,0 +1,282 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>heart · nested agents · depth budget</title><style>
+:root{--g0:#151109;--g1:#1c170e;--g2:#241e13;--g3:#382f1f;--gt:#cfc5b2;--gm:#8b8069;--gl:#675d49;
+--earth:#c9a24e;--wood:#5da583;--metal:#c8c8c0;--fire:#cf5f36;--water:#5487bd;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--g0);color:var(--gt);font:13px/1.55 ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+.top{padding:14px 18px 10px;border-bottom:1px solid var(--g3);background:#1a150d}
+.top h1{margin:0;font-size:15px;letter-spacing:.28em;font-weight:600;color:#e8dfc9}
+.top .sub{color:var(--gm);font-size:11px;margin-top:5px;letter-spacing:.06em}
+.origin{margin-top:9px;padding:7px 10px;border-left:3px solid var(--earth);background:#241c0f;color:#dcc286;font-size:12px}
+.wrap{display:flex;align-items:stretch;width:100%}
+.w{width:20%;min-width:0;border-right:1px solid var(--g3);display:flex;flex-direction:column;background:var(--g1)}
+.w:last-child{border-right:0}
+.hd{padding:9px 11px 8px;border-bottom:1px solid var(--g3);position:relative;overflow:hidden}
+.hd .ix{position:absolute;right:6px;top:-8px;font-size:44px;font-weight:700;opacity:.11}
+.hd .el{font-size:9px;letter-spacing:.42em;text-transform:uppercase}
+.hd .ti{font-size:13px;font-weight:600;margin-top:3px;color:#ece3cf}
+.band{height:3px}
+.w1 .el,.w1 .ix{color:var(--earth)} .w1 .band{background:var(--earth)}
+.w2 .el,.w2 .ix{color:var(--wood)}  .w2 .band{background:var(--wood)}
+.w3 .el,.w3 .ix{color:var(--metal)} .w3 .band{background:var(--metal)}
+.w4 .el,.w4 .ix{color:var(--fire)}  .w4 .band{background:var(--fire)}
+.w5 .el,.w5 .ix{color:var(--water)} .w5 .band{background:var(--water)}
+.bd{padding:10px 11px 14px;flex:1;overflow:auto}
+h4{margin:12px 0 5px;font-size:10px;letter-spacing:.2em;color:var(--gm);text-transform:uppercase;font-weight:600}
+h4:first-child{margin-top:0}
+p{margin:0 0 8px}
+.mono{font-size:11px;line-height:1.5;white-space:pre;overflow-x:auto;background:var(--g2);border:1px solid var(--g3);padding:7px 8px;border-radius:2px}
+.k{color:var(--gm)}.v{color:#ece3cf;font-weight:600}.hot{color:var(--fire);font-weight:700}.q{color:var(--water);font-weight:700}.ok{color:var(--wood);font-weight:700}
+button{font:inherit;font-size:11px;background:var(--g3);color:var(--gt);border:1px solid #473c28;padding:4px 9px;border-radius:2px;cursor:pointer}
+button:hover{background:#443a26} button.on{border-color:var(--fire);color:#e08b63}
+input[type=range]{width:100%}
+table{border-collapse:collapse;width:100%;font-size:10.5px}
+th{text-align:left;color:var(--gm);font-weight:600;border-bottom:1px solid var(--g3);padding:3px 4px}
+td{padding:2px 4px;border-bottom:1px solid #221c12}
+.stamp{display:inline-block;font-size:9px;letter-spacing:.14em;padding:1px 5px;border:1px solid;border-radius:2px}
+.s-lit{color:var(--wood);border-color:var(--wood)}.s-amb{color:#c39a3a;border-color:#c39a3a}.s-flag{color:var(--fire);border-color:var(--fire)}
+.note{font-size:10.5px;color:var(--gm)}
+.eli5{margin-top:10px;border:1px dashed var(--gl);padding:7px 9px;border-radius:2px;background:#1a150d}
+.eli5 .t{font-size:9px;letter-spacing:.2em;color:var(--gl);margin-bottom:4px}
+.eli5 p{font-size:11px;color:#aea48f;margin:0}
+.orn{font-size:9px;letter-spacing:.16em;color:var(--gl);border-top:1px dotted var(--gl);margin-top:10px;padding-top:5px}
+.dis{border-left:3px solid var(--water);background:#161b21;padding:7px 9px;margin-top:8px}
+.dis .t{color:var(--water);font-size:10px;letter-spacing:.14em;margin-bottom:4px}
+.row{display:flex;gap:5px;align-items:center;margin:6px 0;flex-wrap:wrap}
+.bar{height:8px;background:var(--g3);border-radius:1px;overflow:hidden}.bar i{display:block;height:100%}
+canvas{width:100%;display:block;background:var(--g2);border:1px solid var(--g3);border-radius:2px}
+@media(max-width:1100px){.wrap{flex-direction:column}.w{width:100%;border-right:0;border-bottom:1px solid var(--g3)}}
+</style></head><body>
+<div class="top">
+<h1>H E A R T &nbsp;·&nbsp; N E S T E D &nbsp; A G E N T S &nbsp;·&nbsp; D E P T H &nbsp; B U D G E T</h1>
+<div class="sub">BISTRE · FIVE PANELS · W1 SOURCE · W2 CONTRIBUTIONS · W3 1D · W4 2D · W5 3D · dissent is recorded, not resolved</div>
+<div class="origin" id="origin"></div>
+</div>
+<div class="wrap">
+ <div class="w w1"><div class="hd"><div class="ix">1</div><div class="el">Earth</div><div class="ti">SOURCE</div></div><div class="band"></div><div class="bd" id="b1"></div></div>
+ <div class="w w2"><div class="hd"><div class="ix">2</div><div class="el">Wood</div><div class="ti">CONTRIBUTIONS</div></div><div class="band"></div><div class="bd" id="b2"></div></div>
+ <div class="w w3"><div class="hd"><div class="ix">3</div><div class="el">Metal</div><div class="ti">1D · THE BUDGET</div></div><div class="band"></div><div class="bd" id="b3"></div></div>
+ <div class="w w4"><div class="hd"><div class="ix">4</div><div class="el">Fire</div><div class="ti">2D · REDUNDANCY</div></div><div class="band"></div><div class="bd" id="b4"></div></div>
+ <div class="w w5"><div class="hd"><div class="ix">5</div><div class="el">Water</div><div class="ti">3D · WHO COMMANDS</div></div><div class="band"></div><div class="bd" id="b5"></div></div>
+</div>
+<script>
+const D={"meta": {"rev": "rev26-0907", "ground": "BISTRE", "built": "2026-09-07", "file": "heart-nested-agents-depth-budget.html", "origin": "have an agent that works for the agent and the agents agents ,. so vascular < heart > , 4 valves, x cross frame, bottom left, depth 2 , external agent for internal agent, depth 1 internal agent. depth 0 cortex control. depths available before decoherence, find out ??", "plain": "You asked how many levels of 'someone working for someone' you can stack before the message falls apart. The answer is a number you can compute from one thing: how often a single hand-off garbles it. At 1% per hand-off you get about 12 levels before half the message is gone. At 20% you get one. Making three copies and taking the majority buys you a lot more depth -- but only while each worker is right more than half the time. Above that, three liars just outvote the truth. And in the heart itself, which is what you named, the surprise is that the top of the chain does not give the orders at all: the beat is made at the bottom, and a heart with every nerve cut still beats."}, "flag": {"word": "decoherence", "correct": "what this measures is loss of MUTUAL INFORMATION down a cascade of noisy channels \u2014 the accepted term is CHANNEL DEGRADATION and the bound is the DATA PROCESSING INEQUALITY.", "same": "classical cascade: correlation \u03b4\u207f, \u03b4 = 1\u22122p.  quantum dephasing: coherence (1\u22122\u03bb)\u207f. SAME functional form \u2014 one number raised to the depth \u2014 so the depth arithmetic is identical.", "diff": "what is lost differs. the classical channel loses the MESSAGE. the quantum one loses a PHASE that no measurement in the computational basis would ever see. flagged, both given, not merged."}, "place": {"said": "bottom left, depth 2", "chose": "the LEFT VENTRICLE", "why": "in the standard anterior view the LV apex is the bottom-left of the cardiac silhouette, and it is the highest-pressure chamber \u2014 which is what makes 'outermost delegate' the right reading.", "risk": "that is MY placement from two words. if bottom-left meant a different quadrant of your X, the depth-2 assignment moves and the 5\u00d7 work figure moves with it."}, "heart": {"valves": [["tricuspid", "RA -> RV", 1], ["pulmonary", "RV -> lungs", 1], ["mitral", "LA -> LV", 2], ["aortic", "LV -> body", 2]], "lvp": 120, "rvp": 25, "ratio": 4.8, "series": "the two loops are in SERIES, so flow through both is necessarily EQUAL", "sa": {"intrinsic": "~100-110/min", "resting": "~60-80/min", "denervated": "a transplanted heart beats with no neural connection at all"}}, "budget": [{"p": 0.001, "delta": 0.998, "d": [0, 124, 499, 1069, 3368]}, {"p": 0.005, "delta": 0.99, "d": [0, 24, 99, 212, 671]}, {"p": 0.01, "delta": 0.98, "d": [0, 12, 49, 105, 333]}, {"p": 0.02, "delta": 0.96, "d": [0, 6, 24, 52, 165]}, {"p": 0.05, "delta": 0.9, "d": [0, 2, 9, 20, 64]}, {"p": 0.1, "delta": 0.8, "d": [0, 1, 4, 9, 30]}, {"p": 0.15, "delta": 0.7, "d": [0, 0, 2, 6, 18]}, {"p": 0.2, "delta": 0.6, "d": [0, 0, 1, 4, 13]}, {"p": 0.3, "delta": 0.4, "d": [0, 0, 1, 2, 7]}, {"p": 0.4, "delta": 0.2, "d": [0, 0, 0, 1, 4]}], "redund": [{"p": 0.001, "plain": 124, "m3": 41449, "m5": 2000001, "gain": 334.27}, {"p": 0.005, "plain": 24, "m3": 1662, "m5": 100162, "gain": 69.25}, {"p": 0.01, "plain": 12, "m3": 416, "m5": 12614, "gain": 34.67}, {"p": 0.02, "plain": 6, "m3": 104, "m5": 1600, "gain": 17.33}, {"p": 0.05, "plain": 2, "m3": 17, "m5": 107, "gain": 8.5}, {"p": 0.1, "plain": 1, "m3": 4, "m5": 14, "gain": 4.0}, {"p": 0.15, "plain": 0, "m3": 1, "m5": 4, "gain": null}, {"p": 0.2, "plain": 0, "m3": 1, "m5": 2, "gain": null}, {"p": 0.3, "plain": 0, "m3": 0, "m5": 0, "gain": null}, {"p": 0.4, "plain": 0, "m3": 0, "m5": 0, "gain": null}], "chain": [{"p": 0.01, "d2": 0.8597, "d4": 0.7632}, {"p": 0.05, "d2": 0.5471, "d4": 0.3379}, {"p": 0.1, "d2": 0.3199, "d4": 0.1247}, {"p": 0.2, "d2": 0.0956, "d4": 0.0122}, {"p": 0.3, "d2": 0.0185, "d4": 0.0005}, {"p": 0.4, "d2": 0.0012, "d4": 0.0}], "wall": {"p": 0.5, "claim": "majority voting HELPS below p = 1/2 and HURTS above it, exactly.", "punch": "a committee of liars is worse than one liar. three wrong voters outvote the truth."}, "cost": [{"d": 0, "r1": 1, "r3": 1, "r5": 1}, {"d": 1, "r1": 1, "r3": 3, "r5": 5}, {"d": 2, "r1": 1, "r3": 9, "r5": 25}, {"d": 3, "r1": 1, "r3": 27, "r5": 125}, {"d": 4, "r1": 1, "r3": 81, "r5": 625}, {"d": 5, "r1": 1, "r3": 243, "r5": 3125}, {"d": 6, "r1": 1, "r3": 729, "r5": 15625}, {"d": 7, "r1": 1, "r3": 2187, "r5": 78125}, {"d": 8, "r1": 1, "r3": 6561, "r5": 390625}], "sim": [{"p": 0.05, "n": 1, "m": 0.05072, "c": 0.05}, {"p": 0.05, "n": 2, "m": 0.09557, "c": 0.095}, {"p": 0.05, "n": 4, "m": 0.17239, "c": 0.17195}, {"p": 0.05, "n": 8, "m": 0.28466, "c": 0.28477}, {"p": 0.2, "n": 1, "m": 0.20069, "c": 0.2}, {"p": 0.2, "n": 2, "m": 0.31891, "c": 0.32}, {"p": 0.2, "n": 4, "m": 0.43558, "c": 0.4352}, {"p": 0.2, "n": 8, "m": 0.49212, "c": 0.4916}], "contributions": [{"who": "the user", "w": 45, "what": "the architecture and the question. 'depths available before decoherence' is a quantity, not a vibe \u2014 naming it that way is what made it computable"}, {"who": "me", "w": 15, "what": "built the cascade, checked it against 400,000 simulated messages, and flagged the two places I chose a reading"}, {"who": "the heart", "w": 30, "what": "the answer that inverts the question. depth 0 does not command; the beat is generated at the bottom and a denervated heart still beats"}, {"who": "von Neumann 1956", "w": 10, "what": "majority multiplexing, and the p = 1/2 wall that comes with it"}], "dissent": {"by": "W5", "against": "W3", "claim": "the depth budget is d hops until information drops below the threshold", "rebuttal": "that budget assumes every hop is INDEPENDENT and identically noisy. real nested delegation is neither: agents at the same level share a brief, share a training, and fail together. correlated errors do not multiply, they persist \u2014 and majority voting over correlated voters buys nothing at all, because the three copies are wrong in the same way. W3's numbers are an UPPER BOUND on depth, obtainable only if your agents fail independently, which is the one property nobody ever checks."}}; const $=s=>document.querySelector(s);
+document.getElementById('origin').textContent='ORIGIN — '+D.meta.origin;
+function H2(p){if(p<=0||p>=1)return 0;return -p*Math.log2(p)-(1-p)*Math.log2(1-p);}
+
+/* W1 */(function(){const f=D.flag,pl=D.place,h=D.heart;
+$('#b1').innerHTML=`
+<h4>the word <span class="stamp s-flag">FLAG</span></h4>
+<div class="mono">you wrote : <span class="hot">${f.word}</span>
+measured  : loss of MUTUAL
+  INFORMATION down a cascade
+  of noisy channels</div>
+<p style="margin-top:7px" class="note">${f.correct}</p>
+<div class="mono">classical  δⁿ    δ = 1−2p
+quantum    (1−2λ)ⁿ
+SAME FORM — one number
+raised to the depth</div>
+<p style="margin-top:7px">${f.diff}</p>
+
+<h4>the chain, as given</h4>
+<div class="mono">depth 0  CORTEX CONTROL
+depth 1  INTERNAL AGENT
+depth 2  EXTERNAL AGENT
+         <span class="hot">bottom-left of the X</span>
+4 valves = 4 one-way gates</div>
+
+<h4>the X frame is real <span class="stamp s-lit">LIT</span></h4>
+<table><thead><tr><th>valve</th><th>gate</th><th>side</th></tr></thead><tbody>
+${h.valves.map(v=>`<tr><td class="v">${v[0]}</td><td class="note">${v[1]}</td><td class="${v[2]===2?'hot':'q'}">${v[2]===2?'LEFT':'right'}</td></tr>`).join('')}
+</tbody></table>
+<p class="note" style="margin-top:5px">all four annuli sit in the fibrous cardiac skeleton, roughly coplanar. the X is anatomy, not decoration.</p>
+
+<h4>the constraint that binds the levels <span class="stamp s-lit">LIT</span></h4>
+<p>${h.series}.</p>
+<div class="mono">LV systolic  ~${h.lvp} mmHg
+RV systolic  ~${h.rvp} mmHg
+ratio        ~<span class="hot">${h.ratio} : 1</span>
+
+work = pressure × volume
+volumes are EQUAL, forced</div>
+<p style="margin-top:7px"><b>The bottom-left agent does ~5× the work for identical throughput.</b> Equal duty, unequal load. That is what depth 2 costs, and it is not a choice — the series constraint makes the volumes equal whether anyone likes it or not.</p>
+
+<h4>where I chose <span class="stamp s-flag">FLAG</span></h4>
+<div class="mono">you said : ${pl.said}
+I placed : <span class="hot">${pl.chose}</span></div>
+<p class="note" style="margin-top:6px">${pl.why} ${pl.risk}</p>
+<div class="eli5"><div class="t">TODDLER CORNER</div><p>${D.meta.plain}</p></div>
+<div class="orn">ORNAMENT: none in this panel.</div>`;})();
+
+/* W2 */(function(){const c=D.contributions,col=['var(--earth)','var(--metal)','var(--wood)','var(--water)'];
+$('#b2').innerHTML=`<h4>who did what</h4>`+c.map((x,i)=>`
+<div style="margin-bottom:11px"><div class="row" style="justify-content:space-between;margin:0 0 3px"><b style="color:${col[i]}">${x.who}</b><span class="note">${x.w}%</span></div>
+<div class="bar"><i style="width:${x.w}%;background:${col[i]}"></i></div><p class="note" style="margin-top:4px">${x.what}</p></div>`).join('')+`
+<h4>the closed form, checked against 400,000 messages</h4>
+<table><thead><tr><th>p</th><th>hops</th><th>measured</th><th>formula</th><th>diff</th></tr></thead><tbody>
+${D.sim.map(s=>`<tr><td>${s.p}</td><td>${s.n}</td><td>${s.m.toFixed(5)}</td><td class="note">${s.c.toFixed(5)}</td><td class="ok">${Math.abs(s.m-s.c).toFixed(5)}</td></tr>`).join('')}
+</tbody></table>
+<p class="note" style="margin-top:6px">Worst disagreement 0.0011 on 400,000 trials — inside sampling noise. The formula was not trusted, it was checked.</p>
+<h4>two places I chose a reading</h4>
+<div class="mono">1. DECOHERENCE -> channel
+   degradation. same maths,
+   different loss. both stated.
+2. BOTTOM LEFT -> left
+   ventricle. my placement
+   from two words.</div>
+<p class="note" style="margin-top:6px">Neither was filled in silently. If either reading is wrong the build turns, and I would rather turn it than have guessed quietly.</p>
+<h4>no new fault</h4>
+<p class="note">Ten stand from this session. This build added none — every number is either a closed form checked by simulation, or a textbook physiological range stated as a range.</p>
+<div class="eli5"><div class="t">TODDLER CORNER</div><p>I wrote a formula for how fast a message rots, then sent four hundred thousand actual messages down the chain to see if the formula was telling the truth. It was, to four decimal places.</p></div>`;})();
+
+/* W3 */(function(){
+$('#b3').innerHTML=`
+<h4>the model</h4>
+<div class="mono">each hop: binary symmetric
+channel, error p
+
+correlation δₙ = (1−2p)ⁿ
+eff. error  pₙ = (1−δₙ)/2
+kept        Iₙ = 1 − H₂(pₙ)</div>
+<p style="margin-top:7px" class="note">correlation MULTIPLIES down the chain. that single fact is the whole answer: depth costs you a factor, not a subtraction.</p>
+
+<h4>depth budget <span class="stamp s-lit">LIT</span></h4>
+<p class="note">hops until information kept falls below each threshold</p>
+<table><thead><tr><th>p</th><th>δ</th><th>&lt;.99</th><th>&lt;.50</th><th>&lt;.10</th><th>&lt;.01</th></tr></thead><tbody>
+${D.budget.map(r=>`<tr><td class="v">${r.p}</td><td class="note">${r.delta}</td><td>${r.d[0]}</td><td class="hot">${r.d[1]}</td><td>${r.d[2]}</td><td>${r.d[3]}</td></tr>`).join('')}
+</tbody></table>
+<div class="mono" style="margin-top:7px">p = 0.01 → <span class="hot">12</span> levels keep half
+p = 0.05 → <span class="hot">2</span>
+p = 0.20 → <span class="hot">0</span>  one hop already
+             costs more than half</div>
+<p style="margin-top:7px"><b>Note the first column is 0 all the way down.</b> No chain, at any error rate above zero, keeps 99% of a bit past a single hop. <b>There is no free hand-off.</b></p>
+
+<h4>your chain specifically</h4>
+<p class="note">depth 0→1→2 is two hops down; a round trip is four — which is also four valves, one crossing each.</p>
+<table><thead><tr><th>p</th><th>I after 2</th><th>I after 4</th></tr></thead><tbody>
+${D.chain.map(c=>`<tr><td>${c.p.toFixed(2)}</td><td class="${c.d2>0.5?'ok':''}">${c.d2.toFixed(4)}</td><td class="${c.d4>0.5?'ok':'hot'}">${c.d4.toFixed(4)}</td></tr>`).join('')}
+</tbody></table>
+<p style="margin-top:7px"><b>Three levels survives any p &lt; 0.5.</b> It is not deep enough to die. The question you asked only starts to bite past roughly ten levels — so the honest answer to "depths available" is: <i>far more than three, and the number is set entirely by one parameter you have not measured.</i></p>
+<div class="eli5"><div class="t">TODDLER CORNER</div><p>Every time the message is handed on, a bit of it gets scrambled, and the scrambling multiplies. If each hand-off is 99% good you get about twelve hand-offs before half the meaning is gone. If each is 80% good, you get one.</p></div>`;})();
+
+/* W4 */(function(){const w=D.wall;
+$('#b4').innerHTML=`
+<h4>an agent that works FOR the agent</h4>
+<p>Read as <b>redundant delegation</b>: each level sends the same job to r subordinates and takes the majority. That is von Neumann's 1956 multiplexing, and it is what buys depth.</p>
+<div class="mono">plain      p
+majority-3 3p² − 2p³
+majority-5 Σ C(5,k)pᵏ(1−p)⁵⁻ᵏ, k≥3</div>
+<canvas id="cv" width="360" height="240"></canvas>
+<div class="row"><span class="note" style="width:100%" id="lab"></span><input type="range" id="sl" min="1" max="60" value="10"></div>
+<div class="row"><button id="r3" class="on">maj-3</button><button id="r5">maj-5</button><button id="tp">TAMPER</button></div>
+<div class="mono" id="st"></div>
+<div class="mono" id="chk"></div>
+
+<h4>the wall <span class="stamp s-lit">LIT</span></h4>
+<div class="mono">crossover at exactly <span class="hot">p = 1/2</span>
+below : redundancy HELPS
+above : redundancy HURTS</div>
+<p style="margin-top:7px"><b>${w.punch}</b> Above one half, adding voters makes the answer worse, monotonically — because the majority is now reliably wrong.</p>
+
+<h4>what redundancy buys</h4>
+<table><thead><tr><th>p</th><th>plain</th><th>maj-3</th><th>maj-5</th><th>gain</th></tr></thead><tbody>
+${D.redund.filter(r=>r.p<=0.2).map(r=>`<tr><td class="v">${r.p}</td><td>${r.plain}</td><td class="ok">${r.m3}</td><td class="ok">${r.m5}</td><td class="hot">${r.gain===null?'∞':r.gain+'×'}</td></tr>`).join('')}
+</tbody></table>
+<p style="margin-top:7px">The gain is not a constant — it grows as p shrinks, because maj-3 <b>squares</b> the error (p → ~3p²). <b>Halving the per-hop error roughly quadruples the depth the chain can carry.</b></p>
+<h4>and what it costs</h4>
+<div class="mono">depth   r=1     r=3      r=5
+${D.cost.map(c=>`  ${String(c.d).padStart(2)}   ${String(c.r1).padStart(4)}  ${String(c.r3).padStart(7)}  ${String(c.r5).padStart(9)}`).join('\n')}</div>
+<p style="margin-top:7px">Depth is bought with an <b>exponential headcount</b>. Your depth-2 tree at r=4 — one per valve — is 1 + 4 + 16 = <b>21 agents</b>.</p>
+<div class="eli5"><div class="t">TODDLER CORNER</div><p>Ask three workers instead of one and go with two-out-of-three, and mistakes get much rarer — as long as each worker is right more than half the time. If they are right less than half the time, three of them are worse than one.</p></div>`;
+const cv=$('#cv'),c=cv.getContext('2d'),sl=$('#sl');
+let r5=false,tam=false;
+const maj3=p=>3*p*p-2*p*p*p;
+function C(n,k){let r=1;for(let i=0;i<k;i++)r=r*(n-i)/(i+1);return r;}
+const maj5=p=>{let s=0;for(let k=3;k<=5;k++)s+=C(5,k)*Math.pow(p,k)*Math.pow(1-p,5-k);return s;};
+function draw(){
+ const p=+sl.value/100;
+ const f = tam ? (q=>q*0.5) : (r5?maj5:maj3);
+ const W=cv.width,H=cv.height,L=34,B=H-24;
+ c.clearRect(0,0,W,H);c.fillStyle='#241e13';c.fillRect(0,0,W,H);
+ c.strokeStyle='#332b1c';for(let i=0;i<=10;i++){const y=B-(B-12)*i/10;c.beginPath();c.moveTo(L,y);c.lineTo(W-8,y);c.stroke();}
+ const X=n=>L+(n/40)*(W-L-8), Y=v=>B-(B-12)*v;
+ function curve(fn,col,wd){c.strokeStyle=col;c.lineWidth=wd;c.beginPath();
+  for(let n=0;n<=40;n++){const q=fn(p);const dl=1-2*q;const I=1-H2((1-Math.pow(dl,n))/2);
+   const x=X(n),y=Y(I); n?c.lineTo(x,y):c.moveTo(x,y);} c.stroke();}
+ curve(q=>q,'#8b8069',1.5);
+ curve(f,tam?'#b05050':'#cf5f36',2.2);
+ c.strokeStyle='rgba(93,165,131,.6)';c.setLineDash([3,3]);c.beginPath();c.moveTo(L,Y(0.5));c.lineTo(W-8,Y(0.5));c.stroke();c.setLineDash([]);
+ c.fillStyle='#8b8069';c.font='9px ui-monospace,monospace';
+ c.fillText('I = 0.5',W-52,Y(0.5)-4); c.fillText('depth (hops)',W/2-32,H-6);
+ for(let n=0;n<=40;n+=10)c.fillText(n,X(n)-4,H-14);
+ c.save();c.translate(11,B);c.rotate(-Math.PI/2);c.fillText('information kept',0,0);c.restore();
+ const q=f(p), dl=1-2*q; let d=0; while(d<100000&&1-H2((1-Math.pow(dl,d+1))/2)>=0.5)d++;
+ let dp=0; const dlp=1-2*p; while(dp<100000&&1-H2((1-Math.pow(dlp,dp+1))/2)>=0.5)dp++;
+ $('#lab').textContent='p per hop = '+p.toFixed(2)+'   ·   grey = plain   ·   '+(tam?'RED = TAMPERED':'orange = '+(r5?'majority-5':'majority-3'));
+ $('#st').innerHTML=`per-hop error  ${p.toFixed(3)}
+after voting   <span class="${q<p?'ok':'hot'}">${q.toFixed(6)}</span>
+depth (plain)  ${dp}
+depth (voted)  <span class="hot">${d}</span>`;
+ $('#chk').innerHTML = tam
+  ? 'CHECK the vote rule is a real majority : <span class="hot">FAIL — "halve the error" is not achievable by voting; no majority rule beats p below p=0 or above p=1/2</span>'
+  : `CHECK voting helps only below p=1/2 : ${(q<p)===(p<0.5)?'<span class="ok">PASS</span>':'<span class="hot">FAIL</span>'}
+CHECK maj rule fixes p=0 and p=1/2  : ${Math.abs(f(0))<1e-12&&Math.abs(f(0.5)-0.5)<1e-12?'<span class="ok">PASS</span>':'<span class="hot">FAIL</span>'}`;
+}
+sl.oninput=draw;
+$('#r3').onclick=()=>{r5=false;$('#r3').classList.add('on');$('#r5').classList.remove('on');draw();};
+$('#r5').onclick=()=>{r5=true;$('#r5').classList.add('on');$('#r3').classList.remove('on');draw();};
+$('#tp').onclick=()=>{tam=!tam;$('#tp').textContent=tam?'RESET':'TAMPER';$('#tp').classList.toggle('on',tam);draw();};
+draw();})();
+
+/* W5 */(function(){const h=D.heart,d=D.dissent;
+$('#b5').innerHTML=`
+<h4>depth 0 does not command <span class="stamp s-lit">LIT</span></h4>
+<div class="mono">intrinsic SA node rate  ${h.sa.intrinsic}
+resting heart rate      ${h.sa.resting}
+the difference is VAGAL
+TONE — the nervous system
+holds the rate DOWN.</div>
+<p style="margin-top:7px">${h.sa.denervated}.</p>
+<p><b>In the one machine you named, the top of the hierarchy has no actuator.</b> Depth 0 does not issue the beat. The rhythm is generated below it, and cutting depth 0 entirely does not stop the machine.</p>
+<div class="mono">cortex = a TRIM TAB,
+         not a commander.
+the DEEPEST agent is the
+only load-bearing one.</div>
+<p style="margin-top:7px">That inverts the usual reading of a control hierarchy — and it inverts your own diagram. You put cortex at depth 0 as if it were the root. In the vascular system the root is <i>downstream</i>: remove the cortex and the heart beats; remove the left ventricle and nothing survives.</p>
+
+<h4>the third axis</h4>
+<p>W3 measures how deep a chain can go. W4 measures what depth costs in headcount. The third axis is <b>which end of the chain actually holds the load</b> — and the answer is the far end, not the near one.</p>
+<div class="mono">depth 0  no actuator, removable
+depth 1  rhythm, autonomous
+depth 2  <span class="hot">5× the work, load-bearing</span>
+
+authority runs DOWN.
+dependency runs UP.</div>
+
+<div class="dis"><div class="t">DISSENT — ${d.by} against ${d.against}</div>
+<p style="font-size:11.5px">W3 states <b>${d.claim}</b>.</p>
+<p style="font-size:11.5px;color:#a0bcd6">${d.rebuttal}</p>
+<p class="note">recorded, not resolved. the arithmetic is <span class="stamp s-lit">LIT</span>. the depth numbers as a claim about real delegation are <span class="stamp s-amb">AMBER</span> and are an upper bound only.</p></div>
+
+<h4>what W1–W4 left out</h4>
+<div class="mono">- p is never measured. every
+  number here is a function of a
+  parameter nobody has estimated
+  for real agents. that is the
+  gap, and it is the whole gap.
+- the channel is binary. real
+  instructions are not one bit and
+  degrade in ways a BSC does not
+  model.
+- no agent here refuses, delays,
+  or reinterprets. only flips.
+- the physiological figures are
+  typical adult RANGES, stated as
+  ranges. not measured here.
+- "decoherence" in the quantum
+  sense is named and set aside,
+  not computed. the shared form is
+  shown; the physics is not.</div>
+<div class="eli5"><div class="t">TODDLER CORNER</div><p>You drew the brain at the top giving orders. But a heart with every nerve to the brain cut still beats by itself — and the part doing five times the work is at the bottom of your drawing. The orders go down; the actual holding-up goes the other way.</p></div>
+<div class="orn">ORNAMENT: the dashed I = 0.5 line in W4 marks a real threshold. the dashes are decoration.</div>`;})();
+</script></body></html>

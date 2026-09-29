@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Nested HTML — push to failure</title>
+<style>
+  :root{--bg:#0f1115;--panel:#171a21;--line:#2a2f3a;--txt:#e6e8ee;--mut:#9aa1af;--accent:#7f77dd;--good:#5dcaa5;--bad:#e2726f;--amber:#efab27}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.6;padding:24px}
+  .wrap{max-width:760px;margin:0 auto}
+  h1{font-size:20px;font-weight:600;margin:0 0 4px}
+  h2{font-size:16px;font-weight:600;margin:22px 0 8px}
+  .sub{color:var(--mut);font-size:14px;margin:0 0 8px}
+  .cards{display:flex;gap:12px;margin:14px 0}
+  .card{flex:1;background:var(--panel);border-radius:10px;padding:12px 14px}
+  .card .lab{font-size:12px;color:var(--mut)}
+  .card .val{font-size:24px;font-weight:600;margin-top:2px}
+  .row{display:flex;align-items:center;gap:14px;margin:12px 0;flex-wrap:wrap}
+  .row label{font-size:14px;color:var(--mut);min-width:150px}
+  .row output{font-size:14px;font-weight:600;min-width:56px;text-align:right}
+  input[type=range]{flex:1;accent-color:var(--accent);min-width:180px}
+  button{background:#20242e;color:var(--txt);border:1px solid var(--line);border-radius:8px;padding:9px 16px;font-size:14px;cursor:pointer}
+  button:hover{background:#272c38}
+  button.warn{border-color:#5a3a3a}
+  .seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .seg button{border:0;border-radius:0;background:transparent}
+  .seg button.on{background:#2a2f3a;color:#fff}
+  .verdict{background:var(--panel);border-radius:10px;padding:14px 16px;margin-top:14px;font-size:14px}
+  code{background:#20242e;padding:2px 6px;border-radius:5px;font-size:12px}
+  .stamp{font-size:12px;font-weight:600;padding:2px 8px;border-radius:6px;margin-left:8px}
+  .amberst{background:#3a2c0a;color:#efab27}
+  .warnbox{background:#241417;border:1px solid #5a3a3a;border-radius:10px;padding:10px 14px;font-size:13px;color:#e7b7b7;margin:10px 0}
+  #host{position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;left:-9999px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Nested documents — push to failure <span class="stamp amberst">MEASURED LIVE</span></h1>
+  <p class="sub">Your browser cleared 300 because each level was a <i>distinct</i> document, dodging the same-document recursion guard. So there are two different ceilings to hit.</p>
+
+  <div class="row" style="gap:10px">
+    <span style="font-size:14px;color:var(--mut);min-width:150px">failure mode</span>
+    <span class="seg" id="mode">
+      <button data-m="distinct" class="on">distinct docs &mdash; memory</button>
+      <button data-m="identical">identical docs &mdash; guard</button>
+    </span>
+  </div>
+  <p class="sub" id="modedesc"><b>Distinct:</b> every level differs, so nothing trips the guard &mdash; it climbs until the tab runs out of memory. This is the crash-to-failure path.</p>
+
+  <div class="warnbox" id="warnbox">Heads up: on the distinct path, a high cap can consume gigabytes and crash this tab. That crash <i>is</i> the ceiling. Hit <b>Stop</b> any time.</div>
+
+  <div class="cards">
+    <div class="card"><div class="lab">deepest level alive</div><div class="val" id="depthNow">0</div></div>
+    <div class="card"><div class="lab">status</div><div class="val" id="status" style="font-size:18px">idle</div></div>
+    <div class="card"><div class="lab">target cap</div><div class="val" id="capOut">1500</div></div>
+  </div>
+
+  <div class="row">
+    <label>target depth cap</label>
+    <input type="range" id="cap" min="100" max="6000" value="1500" step="50" />
+    <output id="capLabel">1500</output>
+  </div>
+  <div class="row">
+    <button id="run">Run probe</button>
+    <button id="stop" class="warn">Stop</button>
+    <button id="reset">Reset</button>
+  </div>
+
+  <div class="verdict" id="verdict">Pick a mode and press <b>Run probe</b>. The counter climbs live; the watchdog widens its patience as frames get deeper (deep frames are timer-throttled, so a fixed timeout would lie).</div>
+
+  <p class="sub" style="margin-top:16px">The number you get is <b>your machine + your browser</b> on this run &mdash; RAM, build, and current load all move it. It is not a universal constant.</p>
+</div>
+
+<div id="host"></div>
+
+<script>
+var IDENT_SRCDOC = '<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><div class="slot"></div><scr'+'ipt>window.top.__onload()<\/scr'+'ipt></body></html>';
+
+window.__mode = 'distinct';
+window.__target = 1500;
+window.__deepest = 0;
+window.__lastTick = 0;
+window.__running = false;
+window.__count = 0;
+
+function srcdocFor(depth){
+  if(window.__mode === 'identical') return IDENT_SRCDOC;   // byte-identical every level -> trips guard
+  return '<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><div class="slot"></div>'
+       + '<scr'+'ipt>window.top.__onload('+depth+')<\/scr'+'ipt></body></html>';
+}
+
+window.__spawn = function(depth, hostDoc){
+  if(!window.__running) return;
+  var slot = hostDoc.querySelector('.slot') || hostDoc.body;
+  var f = hostDoc.createElement('iframe');
+  f.style.cssText = 'width:1px;height:1px;border:0;opacity:0';
+  f.srcdoc = srcdocFor(depth);
+  slot.appendChild(f);
+};
+
+window.__onload = function(depth){
+  if(!window.__running) return;
+  window.__count++;
+  var d = (typeof depth === 'number') ? depth : window.__count;  // identical mode has no arg
+  window.__deepest = Math.max(window.__deepest, d);
+  window.__lastTick = performance.now();
+  var dn = document.getElementById('depthNow'); if(dn) dn.textContent = window.__deepest;
+  if(d < window.__target){
+    try{
+      var w = document.getElementById('host').lastChild ? window : window;
+    }catch(e){}
+    // schedule next spawn from THIS frame's document, via its own window to keep it live
+    var thisWin = arguments.callee.caller ? null : null;
+    // find the frame that just loaded: it's the deepest .slot; spawn into current innermost doc
+    scheduleNext(d);
+  }
+};
+
+function innermostDoc(){
+  var doc = document.getElementById('host');
+  // walk down through iframes following .slot chain
+  var node = doc.querySelector('iframe');
+  var cur = null;
+  while(node){
+    try{
+      cur = node.contentWindow.document;
+      var nxt = cur.querySelector('.slot iframe') || cur.querySelector('iframe');
+      if(!nxt) break;
+      node = nxt;
+    }catch(e){ break; }
+  }
+  return cur;
+}
+
+function scheduleNext(depth){
+  setTimeout(function(){
+    if(!window.__running) return;
+    var doc = innermostDoc();
+    if(doc){ try{ window.__spawn(depth+1, doc); }catch(e){ /* refused */ } }
+  }, 0);
+}
+
+var capS=document.getElementById('cap'), capLabel=document.getElementById('capLabel'), capOut=document.getElementById('capOut');
+var statusEl=document.getElementById('status'), verdict=document.getElementById('verdict');
+var watchdog=null;
+
+capS.oninput=function(){ capLabel.textContent=capS.value; capOut.textContent=capS.value; };
+
+document.querySelectorAll('#mode button').forEach(function(b){
+  b.onclick=function(){
+    document.querySelectorAll('#mode button').forEach(function(x){x.classList.remove('on');});
+    b.classList.add('on');
+    window.__mode=b.dataset.m;
+    var dd=document.getElementById('modedesc'), wb=document.getElementById('warnbox');
+    if(window.__mode==='identical'){
+      dd.innerHTML='<b>Identical:</b> every level is byte-for-byte the same document, so the browser\'s same-document recursion guard should refuse at a small, repeatable depth. This is the clean-ceiling path.';
+      wb.style.display='none';
+    }else{
+      dd.innerHTML='<b>Distinct:</b> every level differs, so nothing trips the guard &mdash; it climbs until the tab runs out of memory. This is the crash-to-failure path.';
+      wb.style.display='block';
+    }
+  };
+});
+
+function patience(){ return Math.min(4000, 800 + window.__deepest*6); }
+
+function runProbe(){
+  clearInterval(watchdog);
+  var host=document.getElementById('host'); host.innerHTML='';
+  window.__target=+capS.value; window.__deepest=0; window.__count=0; window.__running=true;
+  window.__lastTick=performance.now();
+  document.getElementById('depthNow').textContent='0';
+  statusEl.textContent='nesting…'; statusEl.style.color='var(--accent)';
+  verdict.innerHTML='Climbing… deepest level alive updates live above.';
+  var root=document.createElement('iframe');
+  root.style.cssText='width:1px;height:1px;border:0;opacity:0';
+  root.srcdoc=srcdocFor(1);
+  host.appendChild(root);
+
+  watchdog=setInterval(function(){
+    if(!window.__running){ clearInterval(watchdog); return; }
+    var idle=performance.now()-window.__lastTick;
+    if(idle>patience()){
+      clearInterval(watchdog); window.__running=false;
+      var d=window.__deepest, cap=+capS.value;
+      if(d>=cap){
+        statusEl.textContent='hit cap'; statusEl.style.color='var(--good)';
+        verdict.innerHTML='Reached the cap of <b>'+cap+'</b> with no refusal. '+
+          (window.__mode==='identical'
+            ? 'Interesting &mdash; identical docs did NOT trip the guard here; your build may key the guard on URL rather than srcdoc content. Raise the cap or try distinct mode.'
+            : 'Push the cap higher to find the memory wall (watch for the tab getting heavy).');
+      }else{
+        statusEl.textContent=(window.__mode==='identical')?'guard refused':'decohered';
+        statusEl.style.color='var(--bad)';
+        verdict.innerHTML='<b>'+(window.__mode==='identical'?'Recursion guard refused':'Decoherence')+
+          ' at depth '+d+'.</b> The browser rendered '+d+' nested documents, then declined the '+(d+1)+'th. '+
+          (window.__mode==='identical'
+            ? 'That is the same-document guard &mdash; a clean, low, repeatable ceiling.'
+            : 'On the distinct path this is the resource wall (or a crash boundary). Re-run to confirm it is stable.');
+      }
+    }
+  },200);
+}
+
+document.getElementById('run').onclick=runProbe;
+document.getElementById('stop').onclick=function(){
+  window.__running=false; clearInterval(watchdog);
+  statusEl.textContent='stopped'; statusEl.style.color='var(--amber)';
+  verdict.innerHTML='Stopped at depth <b>'+window.__deepest+'</b>. Nested frames left in place; press Reset to free them.';
+};
+document.getElementById('reset').onclick=function(){
+  window.__running=false; clearInterval(watchdog);
+  document.getElementById('host').innerHTML='';
+  window.__deepest=0; window.__count=0;
+  document.getElementById('depthNow').textContent='0';
+  statusEl.textContent='idle'; statusEl.style.color='var(--txt)';
+  verdict.innerHTML='Cleared. Pick a mode and press <b>Run probe</b>.';
+};
+</script>
+</body>
+</html>

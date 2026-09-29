@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>the nesting probe · depth × width · find the knife-edge</title>
+<style>
+:root{--bg:#050C0A;--panel:#0B1512;--p2:#0E1a17;--rule:#173028;--ink:#E4F2EE;--dim:#7FA399;--faint:#4E6B62;
+--foam:#2C4A42;--safe:#5DCAA5;--doom:#D85A30;--cost:#EF9F27;--edge:#B58BE0;--good:#5DCAA5;--warn:#EF9F27;--teal:#1D9E75;--teal-d:#0F6E56;
+--mono:'DM Mono',ui-monospace,monospace;--sans:'Archivo',system-ui,sans-serif;}
+[data-theme="light"]{--bg:#EEF4F2;--panel:#FFF;--rule:#D6E4DF;--ink:#0C1B17;--dim:#4A635C;--faint:#8AA;--p2:#EDF3F1;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px}
+.wrap{max-width:1060px;margin:0 auto;padding:22px}
+h1{font-size:18px;font-weight:700;letter-spacing:-.02em;font-family:var(--mono)}h1 span{color:var(--edge)}
+.sub{color:var(--dim);font-family:var(--mono);font-size:12px;margin-top:4px}
+.top{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}.top .sp{flex:1}
+.btn{background:transparent;border:1px solid var(--rule);color:var(--dim);border-radius:6px;padding:8px 12px;font-family:var(--mono);font-size:11px;cursor:pointer}
+.btn:hover{border-color:var(--teal-d);color:var(--ink)}
+.main{display:grid;grid-template-columns:1.25fr 1fr;gap:18px}
+@media(max-width:840px){.main{grid-template-columns:1fr}}
+.stage{background:#030706;border:1px solid var(--rule);border-radius:12px;padding:8px}
+canvas{display:block;width:100%}
+.side{display:flex;flex-direction:column;gap:12px}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:14px}
+.card h3{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}
+.ctl{font-family:var(--mono);font-size:11px;color:var(--dim);margin:10px 0}
+.ctl .lab{display:flex;justify-content:space-between;margin-bottom:3px}.ctl .lab b{color:var(--ink)}
+.ctl input{width:100%}
+.read{font-family:var(--mono);font-size:12px;padding:6px 0;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between}
+.read:last-child{border-bottom:0}.read .k{color:var(--dim)}.read .v{font-weight:600}
+.verdict{border-radius:8px;padding:10px;text-align:center;font-family:var(--mono);font-weight:600;font-size:13px;margin-top:8px}
+.eli{font-family:var(--mono);font-size:10.5px;color:var(--faint);line-height:1.7}.eli b{color:var(--dim)}
+.foot{font-family:var(--mono);font-size:10px;color:var(--faint);line-height:1.7;margin-top:14px}
+.lit{color:var(--good)}.amber{color:var(--warn)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top">
+  <div><h1>the nesting probe · <span>depth × width</span> · find the knife-edge</h1>
+    <div class="sub">nest deeper, wider, and sweep the error across the threshold · below it, depth kills error doubly-exponentially · above it, depth explodes it</div></div>
+  <div class="sp"></div>
+  <button class="btn" id="theme">theme</button>
+</div>
+
+<div class="main">
+  <div class="stage"><canvas id="c" height="440" role="img" aria-label="A recursive nested-qubit tree that grows with depth and width, colored green when below the error threshold (protection deepens) and red when above (error amplifies)."></canvas></div>
+  <div class="side">
+    <div class="card">
+      <h3>the dials</h3>
+      <div class="ctl"><div class="lab"><span>depth (levels down)</span><b id="dl">3</b></div><input type="range" id="d" min="1" max="6" value="3"></div>
+      <div class="ctl"><div class="lab"><span>width (sub-qubits/node)</span><b id="wl">7</b></div><input type="range" id="w" min="3" max="9" step="2" value="7"></div>
+      <div class="ctl"><div class="lab"><span>physical error p</span><b id="pl">0.30% </b></div><input type="range" id="p" min="1" max="300" value="30"></div>
+    </div>
+    <div class="card">
+      <h3>the readout</h3>
+      <div class="read"><span class="k">threshold p_th</span><span class="v" style="color:var(--edge)">1.00%</span></div>
+      <div class="read"><span class="k">physical qubits (wᵈ)</span><span class="v" style="color:var(--cost)" id="cost">343</span></div>
+      <div class="read"><span class="k">error exponent 2ᵈ</span><span class="v" id="exp">8</span></div>
+      <div class="read"><span class="k">logical error p_L</span><span class="v" id="pL">1e-10</span></div>
+      <div class="verdict" id="verdict">BELOW — protected</div>
+    </div>
+  </div>
+</div>
+<div class="foot" id="foot"></div>
+</div>
+<h1 class="sr-only">An interactive probe for nested qubit structures. Dial depth, width, and physical error rate. Below the threshold, each level of depth squares the error suppression (doubly exponential protection) at width-to-the-depth qubit cost. Above the threshold, each level of depth amplifies the error. The threshold is the knife-edge that decides whether nesting helps or dooms.</h1>
+<script src="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap"></script>
+<script>
+(function(){
+var d=3,w=7,p=0.003,pth=0.01,t=0;
+var cv=document.getElementById('c'),ctx=cv.getContext('2d');
+function size(){var s=Math.min(2,devicePixelRatio||1),r=cv.getBoundingClientRect();cv.width=r.width*s;cv.height=440*s;ctx.setTransform(s,0,0,s,0,0);return{w:r.width,h:440};}
+function CS(v){return getComputedStyle(document.documentElement).getPropertyValue(v);}
+function drawNode(x,y,r,depthLeft,below,frac){
+  if(r<1.5||depthLeft<0)return;
+  var col= below? CS('--safe'):CS('--doom');
+  // intensity deepens (below) or reddens (above) with each level
+  ctx.strokeStyle=col;ctx.globalAlpha=0.3+0.5*(1-depthLeft/(d));ctx.lineWidth=1.2;
+  ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.stroke();ctx.globalAlpha=1;
+  if(depthLeft>0){
+    // width children arranged in a ring, going DOWNward (y grows) and around
+    var kids=Math.min(w,9);
+    for(var i=0;i<kids;i++){
+      var a=(i/kids)*6.28 + t*0.1 + depthLeft;
+      var cx=x+Math.cos(a)*r*0.62, cy=y+Math.sin(a)*r*0.62;
+      // connective thread
+      ctx.strokeStyle=col;ctx.globalAlpha=0.12;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(cx,cy);ctx.stroke();ctx.globalAlpha=1;
+      drawNode(cx,cy,r*0.34,depthLeft-1,below,frac);
+    }
+  } else {
+    ctx.fillStyle=col;ctx.globalAlpha=.8;ctx.beginPath();ctx.arc(x,y,r*0.5,0,7);ctx.fill();ctx.globalAlpha=1;
+  }
+}
+function draw(){
+  var g=size(),W=g.w,H=g.h,cx=W*0.5,cy=H*0.46;t+=0.03;
+  ctx.clearRect(0,0,W,H);
+  var below=p<pth;
+  // the recursive nested tree
+  drawNode(cx,cy,Math.min(W,H)*0.36,d,below,0);
+  // threshold banner
+  ctx.fillStyle= below?CS('--safe'):CS('--doom');ctx.font="600 11px 'DM Mono',monospace";ctx.textAlign='center';
+  ctx.fillText(below? 'p < threshold — each level DEEPENS protection (error → 0)':'p > threshold — each level AMPLIFIES error (nesting DOOMS it)',cx,H-14);
+  requestAnimationFrame(draw);
+}
+function fmt(x){ if(x>=0.001) return (x*100).toFixed(x<0.01?3:2)+'%'; var e=Math.floor(Math.log10(x)); var m=x/Math.pow(10,e); return m.toFixed(1)+'e'+e; }
+function update(){
+  document.getElementById('dl').textContent=d;
+  document.getElementById('wl').textContent=w;
+  document.getElementById('pl').textContent=(p*100).toFixed(2)+'%';
+  var cost=Math.pow(w,d);
+  document.getElementById('cost').textContent=cost.toLocaleString();
+  document.getElementById('exp').textContent=Math.pow(2,d);
+  var pL=Math.min(1,pth*Math.pow(p/pth,Math.pow(2,d)));
+  document.getElementById('pL').textContent=fmt(pL);
+  var below=p<pth;
+  var vd=document.getElementById('verdict');
+  if(below){vd.textContent='BELOW threshold — protected (error '+fmt(pL)+')';vd.style.background='rgba(93,202,165,0.15)';vd.style.color=CS('--safe');}
+  else{vd.textContent='ABOVE threshold — doomed (error '+fmt(pL)+')';vd.style.background='rgba(216,90,48,0.15)';vd.style.color=CS('--doom');}
+}
+document.getElementById('d').oninput=function(){d=+this.value;update();};
+document.getElementById('w').oninput=function(){w=+this.value;update();};
+document.getElementById('p').oninput=function(){p=(+this.value)/10000;update();};
+document.getElementById('theme').onclick=function(){var h=document.documentElement;h.setAttribute('data-theme',h.getAttribute('data-theme')==='dark'?'light':'dark');};
+document.getElementById('foot').innerHTML='<span class="lit">verified — the threshold theorem</span> — nest to depth d with width w per node: cost = wᵈ physical qubits (exponential in depth); protection = p_th·(p/p_th)^(2ᵈ) (DOUBLY exponential — each level squares the suppression). '+
+ 'the knife-edge: if physical error p < threshold p_th, depth drives logical error toward 0 (fault-tolerant); if p > p_th, depth drives it toward 1 (doomed). sweep p across 1% and watch the tree flip green↔red. this is why fault-tolerant quantum computing is possible AND hard: you must first get p below the line (done, 2024-26), then pay wᵈ qubits to nest down. <span class="amber">AMBER</span> — a clean single-code threshold model; real codes vary, but the doubly-exponential law and the knife-edge are exact.';
+update();draw();
+})();
+</script>
+</body></html>

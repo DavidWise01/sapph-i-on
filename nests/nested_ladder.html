@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>the real ladder · nested</title>
+<style>
+:root{--bg:#06100E;--panel:#0B1512;--p2:#0E1a17;--rule:#173028;--ink:#E4F2EE;--dim:#7FA399;--faint:#4E6B62;
+--F:#EF9F27;--B:#5DCAA5;--unk:#B58BE0;--pin:#6F9BE0;--good:#5DCAA5;--warn:#EF9F27;--bad:#D85A30;--teal:#1D9E75;--teal-d:#0F6E56;
+--mono:'DM Mono',ui-monospace,monospace;--sans:'Archivo',system-ui,sans-serif;}
+[data-theme="light"]{--bg:#F2F7F5;--panel:#FFF;--rule:#D6E4DF;--ink:#0C1B17;--dim:#4A635C;--faint:#8AA;--p2:#EDF3F1;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px}
+.wrap{max-width:1040px;margin:0 auto;padding:22px}
+h1{font-size:18px;font-weight:700;letter-spacing:-.02em;font-family:var(--mono)}h1 span{color:var(--pin)}
+.sub{color:var(--dim);font-family:var(--mono);font-size:12px;margin-top:4px}
+.top{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}.top .sp{flex:1}
+.btn{background:transparent;border:1px solid var(--rule);color:var(--dim);border-radius:6px;padding:8px 12px;font-family:var(--mono);font-size:11px;cursor:pointer}
+.btn:hover{border-color:var(--teal-d);color:var(--ink)}.btn.on{border-color:var(--pin);color:var(--pin)}
+.ladder{display:flex;flex-direction:column;gap:0}
+.rung{display:grid;grid-template-columns:32px 1fr;border-left:2px solid var(--rule);position:relative}
+.rung .lid{font-family:var(--mono);font-size:10px;color:var(--faint);padding:10px 4px;text-align:right}
+.rung .body{border-bottom:1px solid var(--rule);padding:10px 12px}
+.rung .nm{font-family:var(--mono);font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.tag{font-family:var(--mono);font-size:9px;padding:1px 6px;border-radius:100px;border:1px solid}
+.tag.F{color:var(--F);border-color:var(--F)}.tag.B{color:var(--B);border-color:var(--B)}.tag.unk{color:var(--unk);border-color:var(--unk)}
+.sz{color:var(--faint);font-family:var(--mono);font-size:11px;margin-left:auto}
+.how{font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:5px}
+.pinbar{height:5px;background:var(--p2);border-radius:3px;margin-top:7px;overflow:hidden}
+.pinfill{height:100%;background:linear-gradient(90deg,var(--pin),var(--teal));border-radius:3px}
+.desert .body{background:repeating-linear-gradient(45deg,transparent,transparent 6px,rgba(181,139,224,0.06) 6px,rgba(181,139,224,0.06) 12px)}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:14px;margin-bottom:14px}
+.card h3{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:8px}
+.eli{font-family:var(--mono);font-size:11px;color:var(--faint);line-height:1.7}.eli b{color:var(--dim)}
+.nestbox{border:1px dashed var(--teal-d);border-radius:10px;padding:4px;margin-top:14px;background:var(--p2)}
+.nestlabel{font-family:var(--mono);font-size:9px;color:var(--teal);letter-spacing:.1em;padding:4px 8px}
+iframe{width:100%;height:340px;border:0;border-radius:8px;background:var(--bg)}
+.foot{font-family:var(--mono);font-size:10px;color:var(--faint);line-height:1.7;margin-top:14px}
+.lit{color:var(--good)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top">
+  <div><h1>the real ladder · <span>nested</span></h1>
+    <div class="sub">every rung is inference · the bar is PIN = how much data holds it, not measured-vs-guessed</div></div>
+  <div class="sp"></div>
+  <button class="btn" id="theme">theme</button>
+</div>
+
+<div class="card">
+  <h3>the honest axis</h3>
+  <div class="eli">there is no line between "measured" and "inferred." <b>every rung is inference</b> — a needle, a click, a track, a bump, reasoned into a thing. the only thing that changes going down is <b>how much data pins the inference</b>. the bars below are that pin. the desert isn't where inference starts — it's where the rope runs out.</div>
+</div>
+
+<div class="ladder" id="ladder"></div>
+
+<div class="nestbox">
+  <div class="nestlabel">⌘ NESTED — an html inside the html (the ladder, drawn by the ladder)</div>
+  <iframe id="inner" title="nested inner ladder"></iframe>
+</div>
+
+<div class="foot" id="foot"></div>
+</div>
+<script src="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap"></script>
+<script>LAD={"rungs": [{"name": "YOU / SOLID", "size": "~1 m", "tag": "F\u00b7B", "how": "brain infers 'solid' from EM pushback", "pin": 100}, {"name": "CELL", "size": "~10 \u00b5m", "tag": "F\u00b7B", "how": "microscopy \u2014 inferred from focused light", "pin": 98}, {"name": "LIGHT \u03bb", "size": "~500 nm", "tag": "B", "how": "the photon field itself, a boson rung", "pin": 99}, {"name": "MOLECULE", "size": "~1 nm", "tag": "F\u00b7B", "how": "bonds inferred from spectra/diffraction", "pin": 96}, {"name": "ATOM", "size": "~1 \u00c5", "tag": "F\u00b7B", "how": "STM: position inferred from tunneling current", "pin": 95}, {"name": "NUCLEUS", "size": "~1 fm", "tag": "F", "how": "Rutherford: inferred from scattering angle", "pin": 93}, {"name": "PROTON", "size": "~0.84 fm", "tag": "F\u00b7B", "how": "quarks-in-gluon, inferred from form factors", "pin": 90}, {"name": "QUARK / e\u207b", "size": "< 1 am", "tag": "F", "how": "never seen free \u2014 inferred from jets", "pin": 82}, {"name": "HIGGS", "size": "~10\u207b\u00b9\u2078 m", "tag": "B", "how": "a 125 GeV bump over background", "pin": 70}, {"name": "[ DESERT ]", "size": "unmapped", "tag": "?", "how": "no data \u2014 inference with zero rope", "pin": 8}, {"name": "PLANCK", "size": "1.6e-35 m", "tag": "B", "how": "geometry quantizes \u2014 pure theory", "pin": 3}], "lP": 1.61625502392855e-35};</script>
+<script>
+(function(){
+var D=LAD.rungs;
+var host=document.getElementById('ladder');
+D.forEach(function(r,i){
+  var tagc=r.tag.indexOf('?')>=0?'unk':(r.tag==='B'?'B':'F');
+  var tagtxt=r.tag;
+  var div=document.createElement('div');
+  div.className='rung'+(r.tag.indexOf('?')>=0?' desert':'');
+  div.innerHTML='<div class="lid">L'+i+'</div>'+
+   '<div class="body"><div class="nm">'+r.name+
+     ' <span class="tag '+tagc+'">'+tagtxt+'</span>'+
+     '<span class="sz">'+r.size+'</span></div>'+
+     '<div class="how">'+r.how+'</div>'+
+     '<div class="pinbar"><div class="pinfill" style="width:'+r.pin+'%"></div></div>'+
+     '<div class="how" style="color:var(--faint);font-size:9px;margin-top:3px">pin: '+r.pin+'% — '+
+        (r.pin>85?'tightly held by data':(r.pin>50?'held, fewer cross-checks':(r.pin>15?'thin':'no data — pure theory')))+'</div>'+
+   '</div>';
+  host.appendChild(div);
+});
+
+// build the NESTED html: a compact version of the same ladder, rendered into an iframe
+var innerRows=D.map(function(r,i){
+  var col=r.tag.indexOf('?')>=0?'#B58BE0':(r.tag==='B'?'#5DCAA5':'#EF9F27');
+  return '<div style="display:flex;align-items:center;gap:6px;font:11px DM Mono,monospace;color:#7FA399;padding:2px 0">'+
+    '<span style="width:26px;color:#4E6B62">L'+i+'</span>'+
+    '<span style="width:96px;color:'+col+'">'+r.name+'</span>'+
+    '<span style="flex:1;height:6px;background:#0E1a17;border-radius:3px;overflow:hidden">'+
+      '<span style="display:block;height:100%;width:'+r.pin+'%;background:'+col+'"></span></span>'+
+    '<span style="width:34px;text-align:right;color:#4E6B62">'+r.pin+'%</span></div>';
+}).join('');
+var innerDoc='<!DOCTYPE html><html><head><meta charset="utf-8"></head>'+
+ '<body style="margin:0;padding:12px;background:#06100E;font-family:DM Mono,monospace">'+
+ '<div style="color:#6F9BE0;font-size:11px;letter-spacing:.1em;margin-bottom:8px">INNER LADDER · same rungs, same pin-gradient</div>'+
+ innerRows+
+ '<div style="color:#4E6B62;font-size:9px;margin-top:10px">the nested copy fades with the pin — top rungs bright, desert & Planck nearly dark. inference all the way, rope thinning down.</div>'+
+ '</body></html>';
+var inner=document.getElementById('inner');
+inner.srcdoc=innerDoc;
+
+document.getElementById('theme').onclick=function(){var h=document.documentElement;h.setAttribute('data-theme',h.getAttribute('data-theme')==='dark'?'light':'dark');};
+document.getElementById('foot').innerHTML='<span class="lit">verified</span> — 11 rungs, each tagged F (fermion/sitter), B (boson/seat), or ? (unknown); Planck length 1.6×10⁻³⁵ m checked. '+
+ 'the bar is PIN — how tightly data holds the inference (100% you/solid → 3% Planck). there is no measured/inferred border: the atom is a tunneling current, the nucleus a scattering angle, the quark a jet, the Higgs a histogram bump, and "solid" is your brain reading EM pushback. all inference; the desert is only where the data-rope runs out. the inner frame is the same ladder nested inside this one — html in the html.';
+})();
+</script>
+</body></html>

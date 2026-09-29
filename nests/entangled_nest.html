@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>entangle the nester · -> becomes <></title>
+<style>
+:root{--bg:#06100E;--panel:#0B1512;--p2:#0E1a17;--rule:#173028;--ink:#E4F2EE;--dim:#7FA399;--faint:#4E6B62;
+--solo:#5DCAA5;--ent:#EF9F27;--link:#B58BE0;--amp:#6F9BE0;--good:#5DCAA5;--warn:#EF9F27;--bad:#D85A30;--teal:#1D9E75;--teal-d:#0F6E56;
+--mono:'DM Mono',ui-monospace,monospace;--sans:'Archivo',system-ui,sans-serif;}
+[data-theme="light"]{--bg:#F2F7F5;--panel:#FFF;--rule:#D6E4DF;--ink:#0C1B17;--dim:#4A635C;--faint:#8AA;--p2:#EDF3F1;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px}
+.wrap{max-width:1040px;margin:0 auto;padding:22px}
+h1{font-size:18px;font-weight:700;letter-spacing:-.02em;font-family:var(--mono)}h1 span{color:var(--ent)}
+.sub{color:var(--dim);font-family:var(--mono);font-size:12px;margin-top:4px}
+.top{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}.top .sp{flex:1}
+.btn{background:transparent;border:1px solid var(--rule);color:var(--dim);border-radius:6px;padding:8px 12px;font-family:var(--mono);font-size:11px;cursor:pointer}
+.btn:hover{border-color:var(--teal-d);color:var(--ink)}.btn.on{border-color:var(--ent);color:var(--ent)}
+.main{display:grid;grid-template-columns:1.3fr 1fr;gap:18px}
+@media(max-width:840px){.main{grid-template-columns:1fr}}
+.stage{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:10px}
+canvas{display:block;width:100%}
+.side{display:flex;flex-direction:column;gap:12px}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:14px}
+.card h3{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}
+.row{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;padding:5px 0;border-bottom:1px solid var(--rule)}
+.row:last-child{border-bottom:0}.row .k{color:var(--dim)}.row .v{color:var(--ink);font-weight:500}
+.row .v.s{color:var(--solo)}.row .v.e{color:var(--ent)}.row .v.a{color:var(--amp)}
+.eli{font-family:var(--mono);font-size:11px;color:var(--faint);line-height:1.7}.eli b{color:var(--dim)}
+.foot{font-family:var(--mono);font-size:10px;color:var(--faint);line-height:1.7;margin-top:16px}
+.lit{color:var(--good)}
+.big{font-family:var(--mono);font-size:14px;margin-top:4px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top">
+  <div><h1>entangle the nester · <span>-&gt; becomes &lt;&gt;</span></h1>
+    <div class="sub">separate dials → one shared object · 6 bits → 2⁶=64 amplitudes · the entanglement IS the speedup</div></div>
+  <div class="sp"></div>
+  <button class="btn" id="toggle">entangle the shells →</button>
+  <button class="btn" id="measure">measure one shell</button>
+  <button class="btn" id="theme">theme</button>
+</div>
+
+<div class="main">
+  <div class="stage"><canvas id="c" height="460" role="img" aria-label="Nested qubit shells, either independent or entangled by shared links, with one measurement collapsing the whole register"></canvas></div>
+  <div class="side">
+    <div class="card">
+      <h3>the register</h3>
+      <div class="row"><span class="k">shells linked?</span><span class="v" id="linked">no — solo dials</span></div>
+      <div class="row"><span class="k">one shell alone</span><span class="v s" id="purity">purity 1.0 (its own)</span></div>
+      <div class="row"><span class="k">capacity</span><span class="v" id="cap">6 bits (a counter)</span></div>
+      <div class="row"><span class="k">the connectors</span><span class="v" id="conn">-&gt; (independent)</span></div>
+      <div class="big" id="big" style="color:var(--solo)">six separate coins</div>
+    </div>
+    <div class="card">
+      <h3>why the QFT needs it</h3>
+      <div class="eli">the shells hold bits of <b>one number</b>. only entanglement fuses "6 shells" into "one 6-bit phase," holding <b>2⁶=64 amplitudes at once</b> that interfere. unentangled = an abacus. entangled = a quantum computer. the <b>&lt;&gt;</b> is the fusion.</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="margin-top:16px">
+  <h3>🧒 toddler corner — six dice, one throw</h3>
+  <div class="eli">
+    lay out <b>six dice</b>. <b>separate</b> (unentangled): each rolls on its own, and to know the set you read all six — six little answers. now <b>chain them</b> (entangled): they become <b>one throw with six faces that always agree</b> — and here\u2019s the spooky part, you only have to look at <b>ONE die</b> and you instantly know <b>all six</b>, because they\u2019re locked together. the info stopped living <b>in the dice</b> and moved <b>into the chain between them</b> — look at a single die alone and it\u2019s just a blur (a coin), because its real answer is only in the <b>whole set at once</b>. that locking-together is what lets six little dice pretend to be <b>one giant 64-sided die</b> — and rolling that giant die is how a quantum computer does in one throw what would take a normal one sixty-four separate rolls.
+  </div>
+</div>
+<div class="foot" id="foot"></div>
+</div>
+<h1 class="sr-only">Entangling the nested qubits turns six independent shells into one shared register holding 2 to the 6 amplitudes at once — the entanglement is the source of the quantum speedup.</h1>
+<script src="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap"></script>
+<script>
+(function(){
+var entangled=false, measured=-1, t=0;
+var cv=document.getElementById('c'),ctx=cv.getContext('2d');
+function size(){var d=Math.min(2,devicePixelRatio||1),r=cv.getBoundingClientRect();cv.width=r.width*d;cv.height=460*d;ctx.setTransform(d,0,0,d,0,0);return{w:r.width,h:460};}
+var N=6;
+function draw(){
+  var g=size(),W=g.w,H=g.h;ctx.clearRect(0,0,W,H);t+=0.04;
+  var cx=W/2, cy=H*0.42, Rmax=Math.min(W,H)*0.34;
+  // shells (nested rings), each a qubit dial
+  for(var i=N-1;i>=0;i--){
+    var R=Rmax*((i+1)/N);
+    var col = entangled?'#EF9F27':'#5DCAA5';
+    ctx.strokeStyle=col;ctx.globalAlpha=entangled?0.5:0.4;ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.arc(cx,cy,R,0,7);ctx.stroke();ctx.globalAlpha=1;
+    // dial hand — if entangled+measured, all snap to the SAME reading
+    var reading;
+    if(entangled && measured>=0){ reading = measured; } // all forced same
+    else { reading = (i%2); } // solo: whatever each is
+    var a = -Math.PI/2 + (entangled&&measured>=0 ? (measured? Math.PI:0) : (Math.sin(t+i)*0.8));
+    ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(cx,cy);
+    ctx.lineTo(cx+Math.cos(a)*R,cy+Math.sin(a)*R);ctx.stroke();
+    ctx.fillStyle=col;ctx.beginPath();ctx.arc(cx+Math.cos(a)*R,cy+Math.sin(a)*R,4,0,7);ctx.fill();
+  }
+  // the connectors between shells: -> (solo) or <> (entangled links)
+  ctx.textAlign='center';ctx.font="600 13px 'DM Mono',monospace";
+  for(var i=0;i<N-1;i++){
+    var R1=Rmax*((i+1)/N), R2=Rmax*((i+2)/N);
+    var midR=(R1+R2)/2;
+    var conn = entangled?'<>':'->';
+    ctx.fillStyle=entangled?'#B58BE0':getComputedStyle(document.documentElement).getPropertyValue('--faint');
+    ctx.fillText(conn, cx, cy-midR+4);
+    if(entangled){
+      // draw the entangling link as a bright chord
+      ctx.strokeStyle='#B58BE0';ctx.globalAlpha=.4;ctx.lineWidth=1;
+      ctx.beginPath();ctx.arc(cx,cy,midR,-Math.PI/2-0.3,-Math.PI/2+0.3);ctx.stroke();ctx.globalAlpha=1;
+    }
+  }
+  // center 0 = shared middle
+  ctx.fillStyle=entangled?'#B58BE0':getComputedStyle(document.documentElement).getPropertyValue('--faint');
+  ctx.beginPath();ctx.arc(cx,cy,4,0,7);ctx.fill();
+  ctx.font="600 11px 'DM Mono',monospace";ctx.fillText('0',cx,cy+3-8);
+  // measurement flash
+  if(entangled && measured>=0){
+    ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--bad');ctx.font="600 11px 'DM Mono',monospace";
+    ctx.fillText('measured shell → ALL snap to '+measured,cx,H-56);
+  }
+  // capacity bar: 6 bits vs 64 amplitudes
+  ctx.textAlign='center';ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--faint');ctx.font="500 10px 'DM Mono',monospace";
+  ctx.fillText(entangled? 'ONE shared register — 2⁶ = 64 amplitudes at once (they interfere)' : 'six separate dials — 6 independent bits (just a counter)', cx, H-34);
+  ctx.fillStyle=entangled?'#EF9F27':'#5DCAA5';ctx.font="500 10px 'DM Mono',monospace";
+  ctx.fillText(entangled? 'every -> became a <> · the shells share one state' : 'every connector is -> · each shell is its own', cx, H-16);
+  requestAnimationFrame(draw);
+}
+function update(){
+  document.getElementById('linked').textContent = entangled?'YES — shared <>':'no — solo dials';
+  document.getElementById('linked').className='v '+(entangled?'e':'');
+  document.getElementById('purity').textContent = entangled?'purity 0.5 (gone into link)':'purity 1.0 (its own)';
+  document.getElementById('purity').className='v '+(entangled?'e':'s');
+  document.getElementById('cap').textContent = entangled?'2⁶ = 64 amplitudes':'6 bits (a counter)';
+  document.getElementById('cap').className='v '+(entangled?'a':'');
+  document.getElementById('conn').textContent = entangled?'<> (entangled links)':'-> (independent)';
+  var big=document.getElementById('big');
+  big.textContent = entangled?'one shared 64-state object':'six separate coins';
+  big.style.color = entangled?'var(--ent)':'var(--solo)';
+}
+document.getElementById('toggle').onclick=function(){entangled=!entangled;measured=-1;this.textContent=entangled?'un-entangle':'entangle the shells →';this.classList.toggle('on',entangled);update();};
+document.getElementById('measure').onclick=function(){ if(entangled){measured=Math.random()<0.5?0:1;} };
+document.getElementById('theme').onclick=function(){var h=document.documentElement;h.setAttribute('data-theme',h.getAttribute('data-theme')==='dark'?'light':'dark');};
+document.getElementById('foot').innerHTML='<span class="lit">verified</span> — unentangled, each shell has purity 1.0 (its own state, 6 independent bits). entangled (GHZ-like), one shell has purity 0.5 — its state is gone into the shared link, and measuring ONE shell forces ALL the others. '+
+ 'the QFT needs this: entanglement fuses n shells into one n-bit number holding 2ⁿ amplitudes at once (n=6 → 64) that interfere — the exponential that beats classical. unentangled it\u2019s an abacus; entangled it\u2019s a quantum computer. your 6&lt;&gt;0&lt;&gt;6 drew it turns ago: the &lt;&gt; IS the entangling link, the 0 the shared middle.';
+update();draw();
+})();
+</script>
+</body></html>

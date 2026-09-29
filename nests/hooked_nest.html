@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>:|0|: ⊃ <6060> · the hooked, nested qubit</title>
+<style>
+:root{--bg:#050C0A;--panel:#0B1512;--p2:#0E1a17;--rule:#173028;--ink:#E4F2EE;--dim:#7FA399;--faint:#4E6B62;
+--foam:#2C4A42;--outer:#6F9BE0;--hook:#EF9F27;--six:#5DCAA5;--zero:#B58BE0;--link:#E5679B;--good:#5DCAA5;--warn:#EF9F27;--teal:#1D9E75;--teal-d:#0F6E56;
+--mono:'DM Mono',ui-monospace,monospace;--sans:'Archivo',system-ui,sans-serif;}
+[data-theme="light"]{--bg:#EEF4F2;--panel:#FFF;--rule:#D6E4DF;--ink:#0C1B17;--dim:#4A635C;--faint:#8AA;--p2:#EDF3F1;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px}
+.wrap{max-width:1060px;margin:0 auto;padding:22px}
+h1{font-size:18px;font-weight:700;letter-spacing:-.02em;font-family:var(--mono)}h1 span{color:var(--hook)}
+.sub{color:var(--dim);font-family:var(--mono);font-size:12px;margin-top:4px}
+.top{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}.top .sp{flex:1}
+.btn{background:transparent;border:1px solid var(--rule);color:var(--dim);border-radius:6px;padding:8px 14px;font-family:var(--mono);font-size:11px;cursor:pointer}
+.btn:hover{border-color:var(--teal-d);color:var(--ink)}.btn.on{border-color:var(--hook);color:var(--hook)}
+.main{display:grid;grid-template-columns:1.3fr 1fr;gap:18px}
+@media(max-width:840px){.main{grid-template-columns:1fr}}
+.stage{background:#030706;border:1px solid var(--rule);border-radius:12px;padding:8px}
+canvas{display:block;width:100%}
+.side{display:flex;flex-direction:column;gap:12px}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:14px}
+.card h3{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}
+.row{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;padding:4px 0;border-bottom:1px solid var(--rule)}
+.row:last-child{border-bottom:0}.row .k{color:var(--dim)}.row .v{font-weight:500}
+.eli{font-family:var(--mono);font-size:10.5px;color:var(--faint);line-height:1.7}.eli b{color:var(--dim)}
+.foot{font-family:var(--mono);font-size:10px;color:var(--faint);line-height:1.7;margin-top:14px}
+.lit{color:var(--good)}.amber{color:var(--warn)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top">
+  <div><h1>:|0|: ⊃ &lt;6060&gt; · <span>the hooked, nested qubit</span></h1>
+    <div class="sub">outer qubit |0| · two : hooks (ports) · inside it a coupled pair [6-0]&lt;&gt;[6-0] · hook it to chain outward</div></div>
+  <div class="sp"></div>
+  <button class="btn" id="hook">show what the hooks grab →</button>
+  <button class="btn" id="theme">theme</button>
+</div>
+
+<div class="main">
+  <div class="stage"><canvas id="c" height="450" role="img" aria-label="An outer qubit shell with two hooks on its sides, containing a coupled two-qubit register of two shell-and-core units linked in the middle; the hooks connect outward to neighbor structures."></canvas></div>
+  <div class="side">
+    <div class="card">
+      <h3>the structure</h3>
+      <div class="row"><span class="k">outer |0|</span><span class="v" style="color:var(--outer)">the qubit (shell)</span></div>
+      <div class="row"><span class="k">the two :</span><span class="v" style="color:var(--hook)">hooks — ports to link</span></div>
+      <div class="row"><span class="k">inner 6,0 · 6,0</span><span class="v" style="color:var(--six)">two sub-qubits</span></div>
+      <div class="row"><span class="k">the &lt; &gt;</span><span class="v" style="color:var(--link)">link bracket (coupled)</span></div>
+    </div>
+    <div class="card">
+      <h3>three ways to read it (all fit)</h3>
+      <div class="eli">
+        <b>logical qubit</b> — outer = 1 logical bit encoded in the inner pair (concatenation)<br>
+        <b>register node</b> — outer = node, inner = contents, hooks = network ports<br>
+        <b>memory cell</b> — inner pair = the 2-in-relation that holds a bit; hooks = read/write
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="margin-top:16px">
+  <h3>🧒 toddler corner — a locket with a twin inside, and two clasps</h3>
+  <div class="eli">
+    picture a <b>locket</b>. from outside it\u2019s <b>one</b> thing you can wear. open it and inside are <b>two little charms joined by a chain</b> — a matched pair that only means something <b>together</b>. and the locket has <b>two clasps</b>, one on each side, so you can <b>hook</b> it to the next locket, and that one to the next — a whole <b>chain</b>. that\u2019s your shape: <b>one</b> qubit on the outside, a <b>joined pair</b> hidden inside doing the real holding, and <b>two hooks</b> so it never has to be alone. big-thing-made-of-a-hidden-pair, with hooks to hold hands down the line.
+  </div>
+</div>
+<div class="foot" id="foot"></div>
+</div>
+<h1 class="sr-only">An outer qubit with two hooks containing a coupled inner pair of two shell-and-core sub-qubits. Read as a logical qubit (concatenation), a register node (hooks as ports), or a memory cell (the inner pair holds a bit). The hooks let it chain outward.</h1>
+<script src="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap"></script>
+<script>
+(function(){
+var t=0, showHooks=false, reach=0;
+var cv=document.getElementById('c'),ctx=cv.getContext('2d');
+function size(){var d=Math.min(2,devicePixelRatio||1),r=cv.getBoundingClientRect();cv.width=r.width*d;cv.height=450*d;ctx.setTransform(d,0,0,d,0,0);return{w:r.width,h:450};}
+function CS(v){return getComputedStyle(document.documentElement).getPropertyValue(v);}
+var foam=[];for(var i=0;i<60;i++)foam.push({x:Math.random(),y:Math.random(),ph:Math.random()*6.28,sp:0.5+Math.random()*1.5});
+function subqubit(x,y,r,lab){
+  // a shell (6 cardinals) + a 0 core
+  ctx.strokeStyle=CS('--six');ctx.globalAlpha=.8;ctx.lineWidth=1.4;
+  ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.stroke();ctx.globalAlpha=1;
+  // 6 cardinals
+  for(var k=0;k<6;k++){var a=k/6*6.28+t*0.3;
+    ctx.fillStyle=CS('--six');ctx.globalAlpha=.9;ctx.beginPath();ctx.arc(x+Math.cos(a)*r,y+Math.sin(a)*r,2.2,0,7);ctx.fill();ctx.globalAlpha=1;}
+  // 0 core
+  ctx.fillStyle=CS('--zero');ctx.beginPath();ctx.arc(x,y,3,0,7);ctx.fill();
+  ctx.fillStyle=CS('--faint');ctx.font="500 7px 'DM Mono',monospace";ctx.textAlign='center';
+  ctx.fillText('6·0',x,y+r+11);
+}
+function draw(){
+  var g=size(),W=g.w,H=g.h,cx=W/2,cy=H*0.48;t+=0.05;
+  ctx.clearRect(0,0,W,H);
+  if(showHooks)reach=Math.min(1,reach+0.03);else reach=Math.max(0,reach-0.03);
+  foam.forEach(function(s){var life=(Math.sin(t*s.sp+s.ph)+1)/2;if(life<0.3)return;
+    ctx.globalAlpha=life*0.1;ctx.fillStyle=CS('--foam');ctx.beginPath();ctx.arc(s.x*W,s.y*H,1.3,0,7);ctx.fill();ctx.globalAlpha=1;});
+  var R=Math.min(W,H)*0.30;
+  // ---- OUTER qubit |0| shell ----
+  ctx.strokeStyle=CS('--outer');ctx.globalAlpha=.7;ctx.lineWidth=2;
+  ctx.beginPath();ctx.arc(cx,cy,R,0,7);ctx.stroke();
+  ctx.globalAlpha=.15;ctx.beginPath();ctx.ellipse(cx,cy,R,R*0.32,0,0,7);ctx.stroke();ctx.globalAlpha=1;
+  ctx.fillStyle=CS('--outer');ctx.font="600 11px 'DM Mono',monospace";ctx.textAlign='center';
+  ctx.fillText('| 0 |  outer qubit',cx,cy-R-14);
+  // the bars of |0| (the ket bars)
+  ctx.strokeStyle=CS('--outer');ctx.globalAlpha=.5;ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(cx-R*0.5,cy-R*0.55);ctx.lineTo(cx-R*0.5,cy+R*0.55);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(cx+R*0.5,cy-R*0.55);ctx.lineTo(cx+R*0.5,cy+R*0.55);ctx.stroke();ctx.globalAlpha=1;
+  // ---- INNER <6060>: two sub-qubits linked ----
+  var ax=cx-R*0.28, bx=cx+R*0.28, sr=R*0.16;
+  // the < > link bracket around the pair
+  ctx.strokeStyle=CS('--link');ctx.globalAlpha=.7;ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(ax-sr-8,cy-sr);ctx.lineTo(ax-sr-14,cy);ctx.lineTo(ax-sr-8,cy+sr);ctx.stroke(); // <
+  ctx.beginPath();ctx.moveTo(bx+sr+8,cy-sr);ctx.lineTo(bx+sr+14,cy);ctx.lineTo(bx+sr+8,cy+sr);ctx.stroke(); // >
+  // the coupling link between the two
+  ctx.strokeStyle=CS('--link');ctx.lineWidth=1.5;ctx.globalAlpha=.6+.3*Math.sin(t*3);
+  ctx.beginPath();for(var i=0;i<=20;i++){var f=i/20,x=ax+sr+(bx-sr-(ax+sr))*f,y=cy+Math.sin(f*Math.PI*3+t*3)*3;if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);}ctx.stroke();ctx.globalAlpha=1;
+  subqubit(ax,cy,sr,'');
+  subqubit(bx,cy,sr,'');
+  ctx.fillStyle=CS('--link');ctx.font="500 8px 'DM Mono',monospace";ctx.fillText('< 6 0 6 0 > — coupled inner pair',cx,cy+R*0.62);
+  // ---- the two : HOOKS (ports) on the sides ----
+  function hook(hx,dir){
+    ctx.strokeStyle=CS('--hook');ctx.lineWidth=2.5;ctx.globalAlpha=.9;
+    // colon = two dots + a hook curve
+    ctx.fillStyle=CS('--hook');
+    ctx.beginPath();ctx.arc(hx,cy-8,2.4,0,7);ctx.fill();
+    ctx.beginPath();ctx.arc(hx,cy+8,2.4,0,7);ctx.fill();
+    // the hook curve reaching outward
+    ctx.beginPath();ctx.moveTo(hx,cy);ctx.quadraticCurveTo(hx+dir*16,cy, hx+dir*16,cy-10);ctx.stroke();
+    ctx.globalAlpha=1;
+  }
+  hook(cx-R-4,-1);
+  hook(cx+R+4,1);
+  ctx.fillStyle=CS('--hook');ctx.font="500 8px 'DM Mono',monospace";
+  ctx.fillText(': hook',cx-R-22,cy+28);ctx.fillText('hook :',cx+R+22,cy+28);
+  // ---- what the hooks grab (ghost neighbors) ----
+  if(reach>0.02){
+    [-1,1].forEach(function(dir){
+      var nx=cx+dir*(R+70+reach*30), ny=cy;
+      ctx.globalAlpha=reach*0.5;
+      ctx.strokeStyle=CS('--outer');ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(nx,ny,R*0.5,0,7);ctx.stroke();
+      // hook link
+      ctx.strokeStyle=CS('--hook');ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(cx+dir*(R+12),cy-6);ctx.lineTo(nx-dir*R*0.5,ny-6);ctx.stroke();ctx.setLineDash([]);
+      ctx.globalAlpha=1;
+    });
+    ctx.fillStyle=CS('--hook');ctx.font="500 8px 'DM Mono',monospace";ctx.globalAlpha=reach;
+    ctx.fillText('the hooks chain it to neighbor qubits — logical qubits linking, or a register growing',cx,H-16);ctx.globalAlpha=1;
+  }
+  requestAnimationFrame(draw);
+}
+document.getElementById('hook').onclick=function(){showHooks=!showHooks;this.textContent=showHooks?'unhook':'show what the hooks grab →';this.classList.toggle('on',showHooks);};
+document.getElementById('theme').onclick=function(){var h=document.documentElement;h.setAttribute('data-theme',h.getAttribute('data-theme')==='dark'?'light':'dark');};
+document.getElementById('foot').innerHTML='<span class="lit">the concepts are LIT</span> — qubits nest inside qubits (concatenation / logical encoding); the inner pair is the 2-in-relation that can hold or encode (memory/logic); and connecting registers needs ports — the hooks. all three readings (logical qubit / register node / memory cell) are real and were built this session. '+
+ '<span class="amber">AMBER</span> — the exact 6-0-6-0 layout and the : hooks are YOUR notation; the mapping is a fair reading of it, but the specific glyph design is your framework, drawn as you specified. structure: outer |0| shell · two : hooks (ports) · inner [6-0]&lt;&gt;[6-0] coupled pair.';
+draw();
+})();
+</script>
+</body></html>

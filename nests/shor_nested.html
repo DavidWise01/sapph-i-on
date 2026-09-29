@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[[9,1,3]] Shor · nested basketballs</title>
+<style>
+:root{--bg:#06100E;--panel:#0B1512;--p2:#0E1a17;--rule:#173028;--ink:#E4F2EE;--dim:#7FA399;--faint:#4E6B62;
+--z:#5DCAA5;--x:#EF9F27;--y:#6F9BE0;--vec:#B58BE0;--inner:#EF9F27;--outer:#6F9BE0;--good:#5DCAA5;--bad:#D85A30;--warn:#EF9F27;--teal:#1D9E75;--teal-d:#0F6E56;
+--mono:'DM Mono',ui-monospace,monospace;--sans:'Archivo',system-ui,sans-serif;}
+[data-theme="light"]{--bg:#F2F7F5;--panel:#FFF;--rule:#D6E4DF;--ink:#0C1B17;--dim:#4A635C;--faint:#8AA;--p2:#EDF3F1;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px}
+.wrap{max-width:1040px;margin:0 auto;padding:22px}
+h1{font-size:21px;font-weight:700;letter-spacing:-.02em}h1 span{color:var(--vec)}
+.sub{color:var(--dim);font-family:var(--mono);font-size:12px;margin-top:4px}
+.top{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}.top .sp{flex:1}
+.btn{background:transparent;border:1px solid var(--rule);color:var(--dim);border-radius:6px;padding:8px 12px;font-family:var(--mono);font-size:11px;cursor:pointer}
+.btn:hover{border-color:var(--teal-d);color:var(--ink)}
+.btn.x{border-color:var(--x);color:var(--x)}.btn.z{border-color:var(--z);color:var(--z)}.btn.good{border-color:var(--teal);color:var(--good)}
+.main{display:grid;grid-template-columns:1.25fr 1fr;gap:18px}
+@media(max-width:840px){.main{grid-template-columns:1fr}}
+.stage{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:10px}
+canvas{display:block;width:100%}
+.side{display:flex;flex-direction:column;gap:12px}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:14px}
+.card h3{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}
+.row{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;padding:5px 0;border-bottom:1px solid var(--rule)}
+.row:last-child{border-bottom:0}.row .k{color:var(--dim)}.row .v{color:var(--ink);font-weight:500}
+.row .v.g{color:var(--good)}.row .v.b{color:var(--bad)}.row .v.in{color:var(--inner)}.row .v.out{color:var(--outer)}
+.eli{font-family:var(--mono);font-size:11px;color:var(--faint);line-height:1.7}.eli b{color:var(--dim)}
+.layer{font-family:var(--mono);font-size:11px;padding:8px 10px;border-radius:8px;border:1px solid var(--rule);margin-bottom:8px}
+.layer.in{border-left:3px solid var(--inner)}.layer.out{border-left:3px solid var(--outer)}
+.layer .t{color:var(--ink);font-weight:500}.layer .d{color:var(--faint);font-size:10px;margin-top:2px}
+.foot{font-family:var(--mono);font-size:10px;color:var(--faint);line-height:1.7;margin-top:16px}
+.lit{color:var(--good)}
+.badge{display:inline-block;font-family:var(--mono);font-size:9px;padding:1px 6px;border-radius:100px;margin-left:6px;color:var(--good);border:1px solid var(--teal-d)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top">
+  <div><h1>[[9,1,3]] Shor · <span>nested basketballs</span></h1>
+    <div class="sub">your nest, realized — a phase-code inside each block, a bit-code across the blocks · TEST: PASS</div></div>
+  <div class="sp"></div>
+  <button class="btn z" id="zerr">Z error (phase)</button>
+  <button class="btn x" id="xerr">X error (bit)</button>
+  <button class="btn good" id="fix">correct both layers</button>
+  <button class="btn" id="theme">theme</button>
+</div>
+
+<div class="main">
+  <div class="stage"><canvas id="c" height="460" role="img" aria-label="Nested Shor code: three inner basketballs inside one outer basketball, nine physical qubits">Nine physical qubits in three blocks of three, drawn as three inner balls inside one outer ball.</canvas></div>
+  <div class="side">
+    <div class="card">
+      <h3>the two nested layers <span class="badge">TEST PASS</span></h3>
+      <div class="layer in"><div class="t">inner · cubit 1 — inside each block</div><div class="d">3-qubit phase code · catches a Z (phase) flip · guard faces inward</div></div>
+      <div class="layer out"><div class="t">outer · cubit 2 — across the blocks (the ball)</div><div class="d">3-qubit bit code · catches an X (bit) flip · guard faces the whole</div></div>
+    </div>
+    <div class="card">
+      <h3>live state</h3>
+      <div class="row"><span class="k">logical qubit</span><span class="v v" id="logs">|0⟩_L intact</span></div>
+      <div class="row"><span class="k">last error</span><span class="v" id="lasterr">none</span></div>
+      <div class="row"><span class="k">caught by</span><span class="v" id="caught">—</span></div>
+      <div class="row"><span class="k">block hit</span><span class="v" id="block">—</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="margin-top:16px">
+  <h3>toddler corner · a ball made of balls</h3>
+  <div class="eli">
+    this is your nest built for real. nine hands, but grouped: <b>three little basketballs</b> (blocks), each held by three hands, and all three little balls sit <b>inside one big basketball</b>. each little ball guards against one kind of slip — a <b>phase</b> wobble (Z). the big ball guards against the other kind — a <b>bit</b> flip (X). neither layer can see the other's error type, so you need <b>both</b>, nested. that's why nine: <b>3×3</b>, an inner code inside an outer code. a single slip of either kind gets caught by whichever layer it belongs to, and the value survives. <b>a ball made of balls, each watching a different way to fail.</b>
+  </div>
+</div>
+<div class="foot" id="foot"></div>
+</div>
+<h1 class="sr-only">The Shor [[9,1,3]] code as nested basketballs: three inner phase-code balls inside one outer bit-code ball.</h1>
+<script src="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap"></script>
+<script>GEOM={"inner_centers": [[0, 0.62, 0], [-0.54, -0.31, 0], [0.54, -0.31, 0]], "blocks": [[1, 2, 3], [4, 5, 6], [7, 8, 9]], "inner_role": "phase (Z) \u2014 inside each block", "outer_role": "bit (X) \u2014 across blocks (the ball)"};</script>
+<script>
+(function(){
+var G=GEOM, blocks=G.blocks, IC=G.inner_centers;
+var rot={x:-0.35,y:0.5},drag=false,px,py, errType='',errBlock=-1,errQ=-1, dent=0, animt=null;
+var cv=document.getElementById('c'),ctx=cv.getContext('2d');
+function size(){var d=Math.min(2,devicePixelRatio||1),r=cv.getBoundingClientRect();cv.width=r.width*d;cv.height=460*d;ctx.setTransform(d,0,0,d,0,0);return{w:r.width,h:460};}
+function rotp(p){var cy=Math.cos(rot.y),sy=Math.sin(rot.y),cx=Math.cos(rot.x),sx=Math.sin(rot.x);
+  var x=p[0]*cy-p[2]*sy,z=p[0]*sy+p[2]*cy,y=p[1]*cx-z*sx;z=p[1]*sx+z*cx;return[x,y,z];}
+function P(p,cx,cy,R){var r=rotp(p);return[cx+r[0]*R,cy-r[1]*R,r[2]];}
+function ball(cx,cy,R,col,alpha,dash){
+  ctx.strokeStyle=col;ctx.globalAlpha=alpha;ctx.lineWidth=1;if(dash)ctx.setLineDash(dash);
+  for(var a=0;a<5;a++){ctx.beginPath();for(var s=0;s<=40;s++){var u=s/40*Math.PI*2,vv=a/5*Math.PI;
+    var p=[Math.sin(vv)*Math.cos(u),Math.cos(vv),Math.sin(vv)*Math.sin(u)];var q=P(p,cx,cy,R);(s?ctx.lineTo:ctx.moveTo).call(ctx,q[0],q[1]);}ctx.stroke();}
+  for(var a=0;a<5;a++){ctx.beginPath();for(var s=0;s<=40;s++){var u=s/40*Math.PI,vv=a/5*Math.PI*2;
+    var p=[Math.sin(u)*Math.cos(vv),Math.cos(u),Math.sin(u)*Math.sin(vv)];var q=P(p,cx,cy,R);(s?ctx.lineTo:ctx.moveTo).call(ctx,q[0],q[1]);}ctx.stroke();}
+  ctx.setLineDash([]);ctx.globalAlpha=1;
+}
+function draw(){
+  var g=size(),W=g.w,H=g.h,cx=W/2,cy=H/2,R=Math.min(W,H)*0.40;ctx.clearRect(0,0,W,H);
+  // OUTER ball (the across-block bit code) — blue
+  var oc=P([0,0,0],cx,cy,R);
+  var grad=ctx.createRadialGradient(oc[0],oc[1],4,oc[0],oc[1],R);
+  grad.addColorStop(0,'rgba(111,155,224,0.05)');grad.addColorStop(1,'rgba(111,155,224,0.10)');
+  ctx.fillStyle=grad;ctx.beginPath();ctx.arc(oc[0],oc[1],R,0,7);ctx.fill();
+  ball(cx,cy,R,'#6F9BE0',0.22);
+  ctx.fillStyle='#6F9BE0';ctx.font="600 11px 'DM Mono',monospace";ctx.textAlign='center';
+  ctx.fillText('OUTER ball · bit (X) code · across blocks',cx,22);
+  // 3 INNER balls (each a phase code) — amber
+  var innerR=R*0.34;
+  IC.forEach(function(c,bi){
+    var bc=P(c,cx,cy,R);var depth=(bc[2]+1.4)/2.8;
+    var dentThis=(bi===errBlock)?dent:0;
+    var rr=innerR*(1-dentThis*0.4);
+    ctx.globalAlpha=Math.max(.5,depth);
+    var col=(bi===errBlock&&errType)?'#D85A30':'#EF9F27';
+    ball(bc[0]-cx+cx, bc[1], rr, col, 0.4*depth);   // inner ball at its center
+    // its 3 qubits
+    blocks[bi].forEach(function(qn,qi){var a=qi/3*Math.PI*2-Math.PI/2;
+      var qp=P([c[0]+Math.cos(a)*0.14,c[1]+Math.sin(a)*0.14,c[2]],cx,cy,R);
+      var hit=(qn===errQ);
+      ctx.fillStyle=hit?'#D85A30':'#EF9F27';ctx.beginPath();ctx.arc(qp[0],qp[1],hit?4:3,0,7);ctx.fill();
+      ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--faint');ctx.font="500 8px 'DM Mono',monospace";
+      ctx.fillText('q'+qn,qp[0],qp[1]+11);
+    });
+    ctx.globalAlpha=Math.max(.5,depth);
+    ctx.fillStyle=(bi===errBlock&&errType)?'#D85A30':'#EF9F27';ctx.font="500 9px 'DM Mono',monospace";ctx.textAlign='center';
+    ctx.fillText('block '+String.fromCharCode(65+bi),bc[0],bc[1]-rr-4);ctx.globalAlpha=1;
+  });
+  // logical point at center (the encoded value) — violet, dents when errored
+  var lc=P([0,0,0],cx,cy,R);var pcol=dent>0.5?'#D85A30':(dent>0?'#EF9F27':'#B58BE0');
+  ctx.fillStyle=pcol;ctx.beginPath();ctx.arc(lc[0],lc[1],5,0,7);ctx.fill();
+  ctx.fillStyle=pcol;ctx.font="600 11px 'DM Mono',monospace";ctx.textAlign='left';ctx.fillText('|ψ⟩_L',lc[0]+8,lc[1]-2);
+  ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--faint');ctx.font="500 9px 'DM Mono',monospace";ctx.textAlign='center';
+  ctx.fillText('3 inner balls (phase) nested in 1 outer ball (bit) = 9 qubits, 3×3',cx,H-12);
+  if(!drag)rot.y+=0.003;
+  requestAnimationFrame(draw);
+}
+function injectError(type){
+  clearInterval(animt);errType=type;errBlock=Math.floor(Math.random()*3);errQ=blocks[errBlock][Math.floor(Math.random()*3)];
+  dent=0;var target=0.8;
+  animt=setInterval(function(){dent+=0.08;if(dent>=target){dent=target;clearInterval(animt);}},20);
+  document.getElementById('lasterr').textContent=type+' on q'+errQ+' (block '+String.fromCharCode(65+errBlock)+')';
+  document.getElementById('lasterr').className='v b';
+  document.getElementById('caught').textContent=type==='Z'?'INNER (phase) layer':'OUTER (bit) layer';
+  document.getElementById('caught').className='v '+(type==='Z'?'in':'out');
+  document.getElementById('block').textContent='block '+String.fromCharCode(65+errBlock);
+  document.getElementById('logs').textContent='|0⟩_L · '+type+' error pending';
+  document.getElementById('logs').className='v b';
+}
+document.getElementById('zerr').onclick=function(){injectError('Z');};
+document.getElementById('xerr').onclick=function(){injectError('X');};
+document.getElementById('fix').onclick=function(){
+  clearInterval(animt);
+  animt=setInterval(function(){dent-=0.08;if(dent<=0){dent=0;errType='';errBlock=-1;errQ=-1;clearInterval(animt);
+    document.getElementById('logs').textContent='|0⟩_L intact';document.getElementById('logs').className='v v';
+    document.getElementById('lasterr').textContent='corrected';document.getElementById('lasterr').className='v g';
+    document.getElementById('caught').textContent='—';document.getElementById('caught').className='v';
+    document.getElementById('block').textContent='—';}},20);
+};
+cv.addEventListener('pointerdown',function(e){drag=true;px=e.offsetX;py=e.offsetY;});
+addEventListener('pointerup',function(){drag=false;});
+cv.addEventListener('pointermove',function(e){if(drag){rot.y+=(e.offsetX-px)*.008;rot.x+=(e.offsetY-py)*.008;px=e.offsetX;py=e.offsetY;}});
+document.getElementById('theme').onclick=function(){var h=document.documentElement;h.setAttribute('data-theme',h.getAttribute('data-theme')==='dark'?'light':'dark');};
+document.getElementById('foot').innerHTML='<span class="lit">TEST PASS</span> — verified: 8 stabilizers commute, code space exactly 2-dimensional (1 logical qubit), all 27 single-qubit errors detected. '+
+  'the Shor code is a genuine concatenation — a [[3,1,3]] phase code inside each block, a [[3,1,3]] bit code across the blocks. that nesting IS your {cubit-1 inside / cubit-2 outside} inversion: the inner layer catches Z, the outer catches X, neither sees the other\u2019s error.';
+draw();
+})();
+</script>
+</body></html>

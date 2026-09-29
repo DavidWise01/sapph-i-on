@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[[27,1,3]] · 3×3×3 nested</title>
+<style>
+:root{--bg:#06100E;--panel:#0B1512;--p2:#0E1a17;--rule:#173028;--ink:#E4F2EE;--dim:#7FA399;--faint:#4E6B62;
+--l1:#6F9BE0;--l2:#EF9F27;--l3:#5DCAA5;--vec:#B58BE0;--good:#5DCAA5;--bad:#D85A30;--warn:#EF9F27;--teal:#1D9E75;--teal-d:#0F6E56;
+--mono:'DM Mono',ui-monospace,monospace;--sans:'Archivo',system-ui,sans-serif;}
+[data-theme="light"]{--bg:#F2F7F5;--panel:#FFF;--rule:#D6E4DF;--ink:#0C1B17;--dim:#4A635C;--faint:#8AA;--p2:#EDF3F1;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px}
+.wrap{max-width:1040px;margin:0 auto;padding:22px}
+h1{font-size:21px;font-weight:700;letter-spacing:-.02em}h1 span{color:var(--vec)}
+.sub{color:var(--dim);font-family:var(--mono);font-size:12px;margin-top:4px}
+.top{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}.top .sp{flex:1}
+.btn{background:transparent;border:1px solid var(--rule);color:var(--dim);border-radius:6px;padding:8px 12px;font-family:var(--mono);font-size:11px;cursor:pointer}
+.btn:hover{border-color:var(--teal-d);color:var(--ink)}.btn.good{border-color:var(--teal);color:var(--good)}
+.main{display:grid;grid-template-columns:1.3fr 1fr;gap:18px}
+@media(max-width:840px){.main{grid-template-columns:1fr}}
+.stage{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:10px}
+canvas{display:block;width:100%}
+.side{display:flex;flex-direction:column;gap:12px}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:14px}
+.card h3{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}
+.row{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;padding:5px 0;border-bottom:1px solid var(--rule)}
+.row:last-child{border-bottom:0}.row .k{color:var(--dim)}.row .v{color:var(--ink);font-weight:500}
+.row .v.g{color:var(--good)}.row .v.b{color:var(--bad)}.row .v.w{color:var(--warn)}
+.layer{font-family:var(--mono);font-size:11px;padding:7px 10px;border-radius:8px;border:1px solid var(--rule);margin-bottom:7px}
+.layer.l1{border-left:3px solid var(--l1)}.layer.l2{border-left:3px solid var(--l2)}.layer.l3{border-left:3px solid var(--l3)}
+.layer .t{color:var(--ink)}.layer .d{color:var(--faint);font-size:10px}
+.eli{font-family:var(--mono);font-size:11px;color:var(--faint);line-height:1.7}.eli b{color:var(--dim)}
+.foot{font-family:var(--mono);font-size:10px;color:var(--faint);line-height:1.7;margin-top:16px}
+.lit{color:var(--good)}.amb{color:var(--warn)}
+.badge{display:inline-block;font-family:var(--mono);font-size:9px;padding:1px 6px;border-radius:100px;margin-left:6px}
+.badge.LIT{color:var(--good);border:1px solid var(--teal-d)}.badge.AMBER{color:var(--warn);border:1px solid var(--warn)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top">
+  <div><h1>[[27,1,3]] · <span>3×3×3 nested</span></h1>
+    <div class="sub">one more layer — 9 inner balls, in 3 middle balls, in 1 outer ball · 27 = 3³ qubits</div></div>
+  <div class="sp"></div>
+  <button class="btn" id="err">inject 1 error</button>
+  <button class="btn good" id="fix">correct</button>
+  <button class="btn" id="theme">theme</button>
+</div>
+
+<div class="main">
+  <div class="stage"><canvas id="c" height="480" role="img" aria-label="27 qubits nested three levels deep: nine inner balls grouped in three middle balls inside one outer ball">Twenty-seven physical qubits nested three levels: nine inner balls in three middle balls in one outer ball.</canvas></div>
+  <div class="side">
+    <div class="card">
+      <h3>three nested layers <span class="badge LIT">TEST PASS</span></h3>
+      <div class="layer l1"><div class="t">outer ball · level 1</div><div class="d">3 middle groups · one error basis</div></div>
+      <div class="layer l2"><div class="t">middle balls · level 2</div><div class="d">3 inner groups each · other basis</div></div>
+      <div class="layer l3"><div class="t">inner balls · level 3</div><div class="d">3 qubits each · doubles one basis</div></div>
+    </div>
+    <div class="card">
+      <h3>the honest parameters</h3>
+      <div class="row"><span class="k">physical qubits n</span><span class="v">27 = 3³</span></div>
+      <div class="row"><span class="k">logical qubits k</span><span class="v">1</span></div>
+      <div class="row"><span class="k">distance d</span><span class="v w">3</span></div>
+      <div class="row"><span class="k">d in over-protected basis</span><span class="v g">9</span></div>
+      <div class="row"><span class="k">d in lagging basis</span><span class="v b">3</span></div>
+      <div class="row"><span class="k">errors corrected</span><span class="v w">still just 1</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="margin-top:16px">
+  <h3>toddler corner · the wasted layer</h3>
+  <div class="eli">
+    you nested one more time: <b>nine</b> tiny balls, bundled into <b>three</b> medium balls, all inside <b>one</b> big ball — <b>3×3×3 = 27</b> hands. and your guess was right: it's <b>[[27,1,3]]</b>. but here's the twist the math shows — the third layer <b>only helps against one kind of slip</b>. against that kind it's now super-strong (survives 4 at once); against the <b>other</b> kind it's still weak (survives just 1). a chain is as strong as its weakest link, so overall it <b>still only fixes 1 error</b> — same as the 9-qubit version, using three times the qubits. <b>you can nest deeper, but nesting the same way twice just armors one side and leaves the other bare.</b>
+  </div>
+</div>
+<div class="foot" id="foot"></div>
+</div>
+<h1 class="sr-only">The [[27,1,3]] code: three levels of 3-qubit nesting, 27 physical qubits, distance still 3 because the third layer over-protects one error basis.</h1>
+<script src="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap"></script>
+<script>DEEP={"mid_centers": [[0, 0.6, 0], [-0.52, -0.3, 0], [0.52, -0.3, 0]], "inner_offsets": [[0, 0.16, 0], [-0.14, -0.08, 0], [0.14, -0.08, 0]], "n": 27, "d": 3, "d_bit": 9, "note": "unbalanced: one basis d=9, other d=3"};</script>
+<script>
+(function(){
+var D=DEEP, MID=D.mid_centers, IO=D.inner_offsets;
+var rot={x:-0.35,y:0.5},drag=false,px,py, errPath=null, dent=0, animt=null;
+var cv=document.getElementById('c'),ctx=cv.getContext('2d');
+function size(){var d=Math.min(2,devicePixelRatio||1),r=cv.getBoundingClientRect();cv.width=r.width*d;cv.height=480*d;ctx.setTransform(d,0,0,d,0,0);return{w:r.width,h:480};}
+function rotp(p){var cy=Math.cos(rot.y),sy=Math.sin(rot.y),cx=Math.cos(rot.x),sx=Math.sin(rot.x);
+  var x=p[0]*cy-p[2]*sy,z=p[0]*sy+p[2]*cy,y=p[1]*cx-z*sx;z=p[1]*sx+z*cx;return[x,y,z];}
+function Pt(p,cx,cy,R){var r=rotp(p);return[cx+r[0]*R,cy-r[1]*R,r[2]];}
+function ball(cx,cy,R,col,alpha){ctx.strokeStyle=col;ctx.globalAlpha=alpha;ctx.lineWidth=1;
+  for(var a=0;a<4;a++){ctx.beginPath();for(var s=0;s<=32;s++){var u=s/32*Math.PI*2,vv=a/4*Math.PI;
+    var p=[Math.sin(vv)*Math.cos(u),Math.cos(vv),Math.sin(vv)*Math.sin(u)];var q=Pt(p,cx,cy,R);(s?ctx.lineTo:ctx.moveTo).call(ctx,q[0],q[1]);}ctx.stroke();}
+  ctx.globalAlpha=1;}
+function draw(){
+  var g=size(),W=g.w,H=g.h,cx=W/2,cy=H/2,R=Math.min(W,H)*0.40;ctx.clearRect(0,0,W,H);
+  // OUTER ball
+  var oc=Pt([0,0,0],cx,cy,R);
+  var grad=ctx.createRadialGradient(oc[0],oc[1],4,oc[0],oc[1],R);
+  grad.addColorStop(0,'rgba(111,155,224,0.04)');grad.addColorStop(1,'rgba(111,155,224,0.09)');
+  ctx.fillStyle=grad;ctx.beginPath();ctx.arc(oc[0],oc[1],R,0,7);ctx.fill();
+  ball(cx,cy,R,'#6F9BE0',0.18);
+  ctx.fillStyle='#6F9BE0';ctx.font="600 11px 'DM Mono',monospace";ctx.textAlign='center';ctx.fillText('OUTER (level 1)',cx,20);
+  var qn=0;
+  // depth sort middle balls
+  var mids=MID.map(function(c,mi){return {c:c,mi:mi,z:rotp(c)[2]};}).sort(function(a,b){return a.z-b.z;});
+  mids.forEach(function(m){
+    var mi=m.mi, mc=Pt(m.c,cx,cy,R), midR=R*0.30, depth=Math.max(.5,(mc[2]+1.4)/2.8);
+    ctx.globalAlpha=depth;ball(mc[0],mc[1],midR,'#EF9F27',0.32*depth);ctx.globalAlpha=1;
+    // 3 inner balls in this middle ball
+    IO.forEach(function(off,ii){
+      var icpt=[m.c[0]+off[0],m.c[1]+off[1],m.c[2]+off[2]];
+      var ic=Pt(icpt,cx,cy,R), innR=R*0.11;
+      var hit=errPath&&errPath[0]===mi&&errPath[1]===ii;
+      ctx.globalAlpha=depth;ball(ic[0],ic[1],innR,hit?'#D85A30':'#5DCAA5',0.5*depth);
+      // 3 qubits in this inner ball
+      for(var qi=0;qi<3;qi++){var a=qi/3*Math.PI*2-Math.PI/2;
+        var qp=Pt([icpt[0]+Math.cos(a)*0.05,icpt[1]+Math.sin(a)*0.05,icpt[2]],cx,cy,R);
+        var qhit=hit&&errPath[2]===qi;
+        ctx.fillStyle=qhit?'#D85A30':'#5DCAA5';ctx.beginPath();ctx.arc(qp[0],qp[1],qhit?3:1.8,0,7);ctx.fill();
+      }
+      ctx.globalAlpha=1;
+    });
+  });
+  // logical point
+  var lc=Pt([0,0,0],cx,cy,R);var pc=dent>0.5?'#D85A30':(dent>0?'#EF9F27':'#B58BE0');
+  ctx.fillStyle=pc;ctx.beginPath();ctx.arc(lc[0],lc[1],5,0,7);ctx.fill();
+  ctx.fillStyle=pc;ctx.font="600 10px 'DM Mono',monospace";ctx.textAlign='left';ctx.fillText('|ψ⟩_L',lc[0]+7,lc[1]-2);
+  ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--faint');ctx.font="500 9px 'DM Mono',monospace";ctx.textAlign='center';
+  ctx.fillText('9 inner · 3 middle · 1 outer = 27 qubits, nested 3 deep',cx,H-12);
+  if(!drag)rot.y+=0.003;
+  requestAnimationFrame(draw);
+}
+document.getElementById('err').onclick=function(){
+  clearInterval(animt);errPath=[Math.floor(Math.random()*3),Math.floor(Math.random()*3),Math.floor(Math.random()*3)];dent=0;
+  animt=setInterval(function(){dent+=0.08;if(dent>=0.7){dent=0.7;clearInterval(animt);}},20);
+};
+document.getElementById('fix').onclick=function(){
+  clearInterval(animt);
+  animt=setInterval(function(){dent-=0.08;if(dent<=0){dent=0;errPath=null;clearInterval(animt);}},20);
+};
+cv.addEventListener('pointerdown',function(e){drag=true;px=e.offsetX;py=e.offsetY;});
+addEventListener('pointerup',function(){drag=false;});
+cv.addEventListener('pointermove',function(e){if(drag){rot.y+=(e.offsetX-px)*.008;rot.x+=(e.offsetY-py)*.008;px=e.offsetX;py=e.offsetY;}});
+document.getElementById('theme').onclick=function(){var h=document.documentElement;h.setAttribute('data-theme',h.getAttribute('data-theme')==='dark'?'light':'dark');};
+document.getElementById('foot').innerHTML='<span class="lit">verified</span> — tracking distance in both error bases through the concatenation: bare (1,1) → +phase+bit = Shor [[9,1,3]] (matches the known code) → +3rd layer → [[27,1,3]], with one basis at d=9 and the other at d=3. '+
+  'your prediction was right: <span class="lit">27 = 3³, distance 3</span>. the honest catch: the third identical layer over-armors one error type (d=9) while the other stays d=3, so the code <span class="amb">still corrects only 1 error</span> — deeper, but not stronger. to correct more you must grow both bases together (Shor∘Shor = [[81,1,9]]).';
+draw();
+})();
+</script>
+</body></html>

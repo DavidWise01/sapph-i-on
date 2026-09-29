@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Nested HTML &amp; decoherence probe</title>
+<style>
+  :root{--bg:#0f1115;--panel:#171a21;--line:#2a2f3a;--txt:#e6e8ee;--mut:#9aa1af;--accent:#7f77dd;--good:#5dcaa5;--bad:#e2726f}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.6;padding:24px}
+  .wrap{max-width:760px;margin:0 auto}
+  h1{font-size:20px;font-weight:600;margin:0 0 4px}
+  h2{font-size:16px;font-weight:600;margin:26px 0 8px}
+  .sub{color:var(--mut);font-size:14px;margin:0 0 8px}
+  #demo iframe{width:100%;border:0;display:block}
+  .cards{display:flex;gap:12px;margin:14px 0}
+  .card{flex:1;background:var(--panel);border-radius:10px;padding:12px 14px}
+  .card .lab{font-size:12px;color:var(--mut)}
+  .card .val{font-size:24px;font-weight:600;margin-top:2px}
+  .row{display:flex;align-items:center;gap:14px;margin:12px 0}
+  .row label{font-size:14px;color:var(--mut);min-width:150px}
+  .row output{font-size:14px;font-weight:600;min-width:56px;text-align:right}
+  input[type=range]{flex:1;accent-color:var(--accent)}
+  button{background:#20242e;color:var(--txt);border:1px solid var(--line);border-radius:8px;padding:9px 16px;font-size:14px;cursor:pointer}
+  button:hover{background:#272c38}
+  .verdict{background:var(--panel);border-radius:10px;padding:14px 16px;margin-top:14px;font-size:14px}
+  code{background:#20242e;padding:2px 6px;border-radius:5px;font-size:12px}
+  .stamp{font-size:12px;font-weight:600;padding:2px 8px;border-radius:6px;margin-left:8px}
+  .lit{background:#0f3b2e;color:#5dcaa5}
+  .amber{background:#3a2c0a;color:#efab27}
+  #probeHost{position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;left:-9999px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>HTML in HTML in HTML &mdash; and where it decoheres</h1>
+  <p class="sub">Part 1 nests three real documents you can see. Part 2 keeps nesting until your browser refuses, and reports the depth it broke.</p>
+
+  <h2>Part 1 &mdash; a 3-deep nest <span class="stamp lit">LIT</span></h2>
+  <p class="sub">Each colored frame is a separate full <code>&lt;!DOCTYPE html&gt;</code> document, built at runtime inside the one around it.</p>
+  <div id="demo"></div>
+
+  <h2>Part 2 &mdash; decoherence probe <span class="stamp amber">MEASURED LIVE</span></h2>
+  <p class="sub">Same trick, run to the limit: every level phones <code>window.top</code> and spawns the next. When new levels stop reporting for a moment, that's decoherence &mdash; your browser's nesting ceiling.</p>
+
+  <div class="cards">
+    <div class="card"><div class="lab">deepest level alive</div><div class="val" id="depthNow">0</div></div>
+    <div class="card"><div class="lab">status</div><div class="val" id="status" style="font-size:18px">idle</div></div>
+    <div class="card"><div class="lab">target cap</div><div class="val" id="capOut">80</div></div>
+  </div>
+
+  <div class="row">
+    <label>target depth cap</label>
+    <input type="range" id="cap" min="10" max="300" value="80" step="1" />
+    <output id="capLabel">80</output>
+  </div>
+  <div class="row">
+    <button id="run">Run probe</button>
+    <button id="reset">Reset</button>
+  </div>
+
+  <div class="verdict" id="verdict">Press <b>Run probe</b>. It nests iframes one inside the next until your browser stops allowing it. High cap = deeper attempt (and briefly heavier on the tab).</div>
+
+  <p class="sub" style="margin-top:16px">Note: the ceiling is <b>browser-dependent</b> &mdash; Chromium, Firefox, and Safari each cap nested browsing contexts differently to stop runaway recursion. This measures <i>yours</i>, not a universal constant.</p>
+</div>
+
+<div id="probeHost"></div>
+
+<script>
+// ---------- shared O(1) bootstrap: each level's srcdoc is tiny and fixed-size ----------
+function bootstrap(depth, visible){
+  const style = visible
+    ? `body{margin:0;font-family:system-ui,sans-serif}
+       .box{border:2px solid ${['#7f77dd','#5dcaa5','#efab27'][(depth-1)%3]};
+            border-radius:10px;padding:12px;margin:0}
+       .lbl{font-size:13px;color:#e6e8ee;background:#171a21;display:inline-block;
+            padding:2px 8px;border-radius:6px;margin-bottom:8px}`
+    : `body{margin:0}`;
+  const label = visible ? `<div class="lbl">level ${depth} &mdash; a document</div>` : '';
+  const openBox = visible ? '<div class="box">' : '';
+  const closeBox = visible ? '</div>' : '';
+  return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>${style}</style></head>`
+       + `<body style="background:${visible?'#12151b':'transparent'}">`
+       + openBox + label
+       + `<div class="slot"></div>`
+       + closeBox
+       + `<script>window.top.__onload(${depth}, document, ${visible});<\/script>`
+       + `</body></html>`;
+}
+
+// top-level engine, reachable from every same-origin srcdoc child
+window.__target = 3;
+window.__visibleMax = 3;      // only first N levels render visibly
+window.__deepest = 0;
+window.__lastTick = 0;
+
+window.__spawn = function(depth, hostDoc, visible){
+  const slot = hostDoc.querySelector('.slot') || hostDoc.body;
+  const f = hostDoc.createElement('iframe');
+  const vis = visible && depth <= window.__visibleMax;
+  if(vis){ f.style.width='100%'; f.style.border='0'; f.style.display='block'; f.setAttribute('scrolling','no'); }
+  else { f.style.width='1px'; f.style.height='1px'; f.style.border='0'; f.style.opacity='0'; }
+  f.srcdoc = bootstrap(depth, vis);
+  slot.appendChild(f);
+};
+
+window.__onload = function(depth, doc, visible){
+  window.__deepest = Math.max(window.__deepest, depth);
+  window.__lastTick = performance.now();
+  const dn = document.getElementById('depthNow'); if(dn) dn.textContent = depth;
+  // fit visible frames to content
+  if(visible){
+    try{
+      const fr = doc.defaultView.frameElement;
+      if(fr){ fr.style.height = (doc.body.scrollHeight+4)+'px'; }
+    }catch(e){}
+  }
+  if(depth < window.__target){
+    // yield so onload can fire and UI stays alive; this is where the browser may refuse
+    (doc.defaultView || window).setTimeout(function(){
+      try{ window.__spawn(depth+1, doc, visible); }catch(e){ /* refused */ }
+    }, visible?0:0);
+  }
+};
+
+// ---------- Part 1: build the visible 3-nest ----------
+function buildDemo(){
+  window.__target = 3; window.__visibleMax = 3; window.__deepest = 0;
+  const host = document.getElementById('demo');
+  host.innerHTML = '';
+  const root = document.createElement('iframe');
+  root.style.width='100%'; root.style.border='0'; root.style.display='block'; root.setAttribute('scrolling','no');
+  root.srcdoc = bootstrap(1, true);
+  host.appendChild(root);
+  // resize the outermost after the chain settles
+  setTimeout(()=>{ try{ root.style.height=(root.contentWindow.document.body.scrollHeight+40)+'px'; }catch(e){ root.style.height='260px'; } }, 400);
+}
+
+// ---------- Part 2: decoherence probe ----------
+const capS=document.getElementById('cap');
+const capLabel=document.getElementById('capLabel'), capOut=document.getElementById('capOut');
+const statusEl=document.getElementById('status'), verdict=document.getElementById('verdict');
+capS.oninput=()=>{ capLabel.textContent=capS.value; capOut.textContent=capS.value; };
+
+let watchdog=null;
+function runProbe(){
+  clearInterval(watchdog);
+  const host=document.getElementById('probeHost'); host.innerHTML='';
+  window.__target=+capS.value; window.__visibleMax=0; window.__deepest=0; window.__lastTick=performance.now();
+  document.getElementById('depthNow').textContent='0';
+  statusEl.textContent='nesting…'; statusEl.style.color='var(--accent)';
+  verdict.innerHTML='Nesting in progress…';
+  const root=document.createElement('iframe');
+  root.style.cssText='width:1px;height:1px;border:0;opacity:0';
+  root.srcdoc=bootstrap(1,false);
+  host.appendChild(root);
+
+  watchdog=setInterval(()=>{
+    const idle=performance.now()-window.__lastTick;
+    if(idle>700){                       // no new level reported recently
+      clearInterval(watchdog);
+      const d=window.__deepest, cap=+capS.value;
+      if(d>=cap){
+        statusEl.textContent='hit cap'; statusEl.style.color='var(--good)';
+        verdict.innerHTML=`Reached the target cap of <b>${cap}</b> with no refusal &mdash; your browser allows at least this deep. Raise the cap to find the true ceiling.`;
+      }else{
+        statusEl.textContent='decohered'; statusEl.style.color='var(--bad)';
+        verdict.innerHTML=`<b>Decoherence at depth ${d}.</b> Your browser rendered ${d} nested documents, then quietly refused to create the ${d+1}th &mdash; its nested-browsing-context ceiling. (Try again; it's usually stable within a level or two.)`;
+      }
+    }
+  },200);
+}
+document.getElementById('run').onclick=runProbe;
+document.getElementById('reset').onclick=()=>{
+  clearInterval(watchdog);
+  document.getElementById('probeHost').innerHTML='';
+  window.__deepest=0; document.getElementById('depthNow').textContent='0';
+  statusEl.textContent='idle'; statusEl.style.color='var(--txt)';
+  verdict.innerHTML='Press <b>Run probe</b> to measure again.';
+};
+
+buildDemo();
+</script>
+</body>
+</html>

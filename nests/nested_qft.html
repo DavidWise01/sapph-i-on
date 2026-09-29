@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>nested qubits · the QFT phase-ruler</title>
+<style>
+:root{--bg:#06100E;--panel:#0B1512;--p2:#0E1a17;--rule:#173028;--ink:#E4F2EE;--dim:#7FA399;--faint:#4E6B62;
+--q:#5DCAA5;--ang:#EF9F27;--pair:#6F9BE0;--home:#B58BE0;--good:#5DCAA5;--warn:#EF9F27;--teal:#1D9E75;--teal-d:#0F6E56;
+--mono:'DM Mono',ui-monospace,monospace;--sans:'Archivo',system-ui,sans-serif;}
+[data-theme="light"]{--bg:#F2F7F5;--panel:#FFF;--rule:#D6E4DF;--ink:#0C1B17;--dim:#4A635C;--faint:#8AA;--p2:#EDF3F1;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px}
+.wrap{max-width:1040px;margin:0 auto;padding:22px}
+h1{font-size:18px;font-weight:700;letter-spacing:-.02em;font-family:var(--mono)}h1 span{color:var(--ang)}
+.sub{color:var(--dim);font-family:var(--mono);font-size:12px;margin-top:4px}
+.top{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}.top .sp{flex:1}
+.btn{background:transparent;border:1px solid var(--rule);color:var(--dim);border-radius:6px;padding:8px 12px;font-family:var(--mono);font-size:11px;cursor:pointer}
+.btn:hover{border-color:var(--teal-d);color:var(--ink)}.btn.on{border-color:var(--ang);color:var(--ang)}
+.main{display:grid;grid-template-columns:1.3fr 1fr;gap:18px}
+@media(max-width:840px){.main{grid-template-columns:1fr}}
+.stage{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:10px}
+canvas{display:block;width:100%}
+.side{display:flex;flex-direction:column;gap:12px}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:14px}
+.card h3{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}
+.lvl{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11.5px;padding:5px 0;border-bottom:1px solid var(--rule)}
+.lvl:last-child{border-bottom:0}.lvl .k{color:var(--dim)}.lvl .v{color:var(--ang);font-weight:500}
+.lvl.pair .v{color:var(--pair)}.lvl.home .v{color:var(--home)}
+.eli{font-family:var(--mono);font-size:11px;color:var(--faint);line-height:1.7}.eli b{color:var(--dim)}
+.foot{font-family:var(--mono);font-size:10px;color:var(--faint);line-height:1.7;margin-top:16px}
+.lit{color:var(--good)}.amber{color:var(--warn)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top">
+  <div><h1>nested qubits · the <span>QFT phase-ruler</span></h1>
+    <div class="sub">each shell rotates at HALF the angle of the one outside — 360→180→90→45→22.5→0 · this is the Quantum Fourier Transform</div></div>
+  <div class="sp"></div>
+  <button class="btn" id="run">run the readout →</button>
+  <button class="btn" id="theme">theme</button>
+</div>
+
+<div class="main">
+  <div class="stage"><canvas id="c" height="470" role="img" aria-label="Nested qubit shells each rotating at half the phase angle of the shell outside it, reading out a phase bit by bit"></canvas></div>
+  <div class="side">
+    <div class="card">
+      <h3>the nest · {layer, angle, count}</h3>
+      <div class="lvl"><span class="k">l0 · 360° · 1</span><span class="v">I — whole turn (home)</span></div>
+      <div class="lvl"><span class="k">l1 · 180° · 2</span><span class="v">Z — coarsest bit</span></div>
+      <div class="lvl"><span class="k">l2 · 90° · 3</span><span class="v">S</span></div>
+      <div class="lvl"><span class="k">l3 · 45° · 4</span><span class="v">T</span></div>
+      <div class="lvl pair"><span class="k">l4 · 22.5° · 5 ×2</span><span class="v">√T — finest, paired</span></div>
+      <div class="lvl home"><span class="k">l5 · 0° · 6</span><span class="v">I — fully read (home)</span></div>
+    </div>
+    <div class="card">
+      <h3>what the nesting DOES</h3>
+      <div class="eli">a phase written in binary, read one <b>bit per shell</b>. each shell halves the angle to catch the next finer bit — a <b>ruler for phase</b>. six shells = six bits. this is the engine of <b>Shor\u2019s factoring</b>: turn "find the period" into "read this phase," then nest it out.</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="margin-top:16px">
+  <h3>🧒 toddler corner — a ruler made of spins</h3>
+  <div class="eli">
+    picture <b>rulers inside rulers</b>. the biggest has one mark: a <b>whole turn</b>. inside it, a ruler with the turn cut in <b>half</b>. inside that, cut in <b>half again</b> — quarter, eighth, sixteenth. each nested ruler measures the leftover the bigger one couldn\u2019t, <b>twice as finely</b>. line them all up and you can read a spin\u2019s exact angle <b>bit by bit</b>, from coarse to fine. that\u2019s what these nested qubits do — they\u2019re a <b>ruler built of spins</b>, and reading the ruler is how a quantum computer <b>factors giant numbers</b>. the finest ruler (the 22.5 one) is the shakiest, so you keep <b>two</b> of it. you start at a whole turn and finish at zero-left-to-measure: <b>you\u2019ve read the whole number.</b>
+  </div>
+</div>
+<div class="foot" id="foot"></div>
+</div>
+<h1 class="sr-only">Nested qubits as the Quantum Fourier Transform: each shell rotates at half the phase angle of the shell outside it, reading a phase bit by bit.</h1>
+<script src="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap"></script>
+<script>
+(function(){
+var levels=[{a:360,g:'I',c:1,pair:false},{a:180,g:'Z',c:2,pair:false},{a:90,g:'S',c:3,pair:false},
+            {a:45,g:'T',c:4,pair:false},{a:22.5,g:'√T',c:5,pair:true},{a:0,g:'I',c:6,pair:false}];
+var running=false, t=0, active=-1;
+var cv=document.getElementById('c'),ctx=cv.getContext('2d');
+function size(){var d=Math.min(2,devicePixelRatio||1),r=cv.getBoundingClientRect();cv.width=r.width*d;cv.height=470*d;ctx.setTransform(d,0,0,d,0,0);return{w:r.width,h:470};}
+function draw(){
+  var g=size(),W=g.w,H=g.h,cx=W/2,cy=H/2;ctx.clearRect(0,0,W,H);
+  var n=levels.length, Rmax=Math.min(W,H)*0.44;
+  if(running){t+=0.012; active=Math.min(n-1,Math.floor(t*n));}
+  for(var i=0;i<n;i++){
+    var R=Rmax*(1-i/n)*0.95+8;
+    var lvl=levels[i];
+    var on = !running || i<=active;
+    var col = lvl.pair?'#6F9BE0':(lvl.a===0||lvl.a===360?'#B58BE0':'#EF9F27');
+    // shell ring
+    ctx.strokeStyle=lvl.pair?'#6F9BE0':getComputedStyle(document.documentElement).getPropertyValue('--q');
+    ctx.globalAlpha=on?0.5:0.15;ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(cx,cy,R,0,7);ctx.stroke();ctx.globalAlpha=1;
+    // the rotation hand at this shell's angle (half the previous)
+    var baseAng = -Math.PI/2 + (lvl.a*Math.PI/180) * (running? (0.5-0.5*Math.cos(Math.min(1,(t*n-i))*Math.PI)) : 1);
+    if(on && lvl.a!==0){
+      ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(cx,cy);
+      ctx.lineTo(cx+Math.cos(baseAng)*R,cy+Math.sin(baseAng)*R);ctx.stroke();
+      ctx.fillStyle=col;ctx.beginPath();ctx.arc(cx+Math.cos(baseAng)*R,cy+Math.sin(baseAng)*R,4,0,7);ctx.fill();
+      if(lvl.pair){ // the x2 — a second hand
+        var a2=-Math.PI/2 + (lvl.a*Math.PI/180)*0.5;
+        ctx.strokeStyle='#6F9BE0';ctx.globalAlpha=.6;ctx.beginPath();ctx.moveTo(cx,cy);
+        ctx.lineTo(cx+Math.cos(a2)*R,cy+Math.sin(a2)*R);ctx.stroke();ctx.globalAlpha=1;
+      }
+    }
+    // angle label on the shell
+    ctx.fillStyle=on?col:getComputedStyle(document.documentElement).getPropertyValue('--faint');
+    ctx.font="600 10px 'DM Mono',monospace";ctx.textAlign='center';
+    ctx.fillText(lvl.a+'°'+(lvl.pair?' ×2':''),cx,cy-R-6);
+  }
+  // center = the 0 (fully read)
+  ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--home');
+  ctx.beginPath();ctx.arc(cx,cy,4,0,7);ctx.fill();
+  ctx.font="600 11px 'DM Mono',monospace";ctx.textAlign='center';
+  ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--faint');ctx.font="500 9px 'DM Mono',monospace";
+  ctx.fillText('each shell = half the angle of the one outside · a ruler for phase',cx,H-24);
+  ctx.fillText('360 (home) → 180 → 90 → 45 → 22.5×2 → 0 (fully read) · the QFT',cx,H-10);
+  if(running && t>=1.05){running=false;t=0;active=-1;document.getElementById('run').textContent='run the readout →';}
+  requestAnimationFrame(draw);
+}
+document.getElementById('run').onclick=function(){running=!running;t=0;active=-1;this.textContent=running?'reading...':'run the readout →';};
+document.getElementById('theme').onclick=function(){var h=document.documentElement;h.setAttribute('data-theme',h.getAttribute('data-theme')==='dark'?'light':'dark');};
+document.getElementById('foot').innerHTML='<span class="lit">verified</span> — the halving angles 360,180,90,45,22.5,0 are exactly the QFT controlled-phase rotations 360/2^k (matching the I,Z,S,T,√T gate tower). each nested shell reads one finer bit of a phase, halving the angle — a phase-ruler, the engine of Shor\u2019s factoring. 360° and 0° are both identity, so the nest starts and ends at home: begin knowing nothing finer than a whole turn, end with the phase fully read (0 left to split). '+
+ '<span class="amber">AMBER</span> — the ×2 on the finest rung (22.5) is your phase-lock reading: the deepest bit is the most fragile, so pairing it is where you\u2019d spend redundancy — sound logic, but the doubling is your notation, not a standard QFT feature.';
+draw();
+})();
+</script>
+</body></html>
