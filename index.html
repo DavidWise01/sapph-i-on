@@ -70,7 +70,7 @@
   .seat b { letter-spacing:.08em; }
   .seat a { display:block; font-size:14px; margin-top:4px; }
   .corpus { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:8px; margin:0 0 22px; }
-  .corpus a, .archive a, .libraries a, .folio a, .strip a, .nested a, .nests a, .qdot a, .dots a { display:block; padding:8px 10px; font-size:13px; }
+  .corpus a, .archive a, .libraries a, .folio a, .strip a, .nested a, .nests a, .qdot a, .dots a, .next a { display:block; padding:8px 10px; font-size:13px; }
   .seat .addr { color:var(--dim); font:12px ui-monospace, Consolas, monospace; }
   .read { padding:14px 16px; margin:0 0 14px; }
   .read h2 { margin:0 0 8px; font-size:15px; letter-spacing:.12em; }
@@ -84,7 +84,7 @@
   <div>
     <div class="src"><a href="https://0root.ai/">0root.ai</a> · world 7 · order 7^3 · galaxy door · 24 spheres</div>
     <h1>SaPpH<span>{{i}}</span>on</h1>
-    <p class="sub">World 7 is the cube of 7. This page is the galaxy door: it counts the cube and throws if the count is wrong. A galaxy holds 24 spheres, three on each corner seat. Beside those seats are four more cubes of 24: a Downloads copy, an Internet Archive cube, a library cube, and a folio cube that alternates article and thought. A nested strip holds two spheres, minus-plus and plus-minus, offset 1, 2, 1, 2, 1, 2. Four mirrors close on the one-sided number 420024. A nested cube holds 24 files copied unchanged from Downloads, the newest nested cubes and nests, numbered copies skipped. A further nest holds the next 24. A quantum dot holds 24 files whose names say quantum, and the plant page says the payloads converge there. A dot cube holds the next 24. Select a cell and that sphere is the GUI.</p>
+    <p class="sub">World 7 is the cube of 7. This page is the galaxy door: it counts the cube and throws if the count is wrong. A galaxy holds 24 spheres, three on each corner seat. Beside those seats are four more cubes of 24: a Downloads copy, an Internet Archive cube, a library cube, and a folio cube that alternates article and thought. A nested strip holds two spheres, minus-plus and plus-minus, offset 1, 2, 1, 2, 1, 2. Four mirrors close on the one-sided number 420024. A nested cube holds 24 files copied unchanged from Downloads, the newest nested cubes and nests, numbered copies skipped. A further nest holds the next 24. A quantum dot holds 24 files whose names say quantum, and the plant page says the payloads converge there. A dot cube holds the next 24. A next cube holds 24 files whose names say next. Select a cell and that sphere is the GUI.</p>
   </div>
   <div class="src">door number 7 · assigned<br>palindrome of five · unchanged</div>
 </header>
@@ -166,6 +166,11 @@
   <div class="dots" id="dots"></div>
   <p class="mono" id="dotscard"></p>
 
+  <h2 style="font-size:14px;letter-spacing:.16em;margin:18px 0 10px">NEXT · 24</h2>
+  <p class="sub" style="margin:0 0 10px">The 24 newest Downloads files whose names say next. Numbered copies skipped. The bytes are the source files.</p>
+  <div class="next" id="next"></div>
+  <p class="mono" id="nextcard"></p>
+
   <section class="read">
     <h2>WHAT THE PAGE PROVES</h2>
     <p><span class="stamp lit">LIT</span> Every cell of a 7×7×7 grid is visited once. Cells with 3 faces exposed are corners (8). Cells with 2 are edges (12×5 = 60). Cells with 1 are faces (6×25 = 150). Cells with 0 are interior (5³ = 125). Those four counts sum to 343, and 7×7×7 is 343. The odd side leaves exactly one center, at (3,3,3). 343 = (3+4)³, and 3, 4, 3 are the digits of 343. Complex multiplication gives i² = −1 and i³ = −i. A failed check throws and the grid is not drawn.</p>
@@ -180,7 +185,8 @@
     <p><span class="stamp amber">AMBER</span> The further nest is the next 24 Downloads files whose names are nests or cubes. Honest-Math-No-Fudge was left in Downloads, because nest sits inside Honest. Numbered copies were skipped. The bytes were copied unchanged. The order is assigned.</p>
     <p><span class="stamp amber">AMBER</span> The quantum dot is the 24 newest Downloads files whose names say quantum or qdot, leaving the eight sapphon quantum-dot files in the corpus. Numbered copies were skipped. The immutable plant page says all previous payloads converge to the dot at &gt;.&lt;0x::. That sentence is the page's claim. The bytes were copied unchanged. The order is assigned.</p>
     <p><span class="stamp amber">AMBER</span> The dot cube is the next 24 Downloads files whose names are dots, after the quantum dot. Dotdot is included because the name is the dot doubled. Numbered copies were skipped. The bytes were copied unchanged. The order is assigned.</p>
-    <p><span class="stamp lit">LIT</span> 194 spheres sit on 194 cells. The walk is z, then y, then x. Corners and the keeper are skipped. One sphere, one cell. Selecting the cell opens that page.</p>
+    <p><span class="stamp amber">AMBER</span> The next cube is the 24 newest Downloads files whose names say next. Numbered copies were skipped. The bytes were copied unchanged. The order is assigned.</p>
+    <p><span class="stamp lit">LIT</span> 218 spheres sit on 218 cells. The walk is z, then y, then x. Corners and the keeper are skipped. One sphere, one cell. Selecting the cell opens that page.</p>
     <p><span class="stamp amber">AMBER</span> The walk order is assigned. The eight corners still hold three spheres each, and selecting a corner opens those three. The keeper at (3,3,3) is the door, not one of the files.</p>
     <p><span class="stamp wall">WALL</span> This galaxy does not extend the palindrome [ W1 | W2 ‖ W3 ‖ W4 | W5 ] and does not record a world 6. i³ = −i is arithmetic. It does not locate the cube on a physical imaginary axis, and it is not a claim about mind, physics, or authority. The strip's check is the number 420024. It does not measure glass, and it does not fold a piece of paper.</p>
     <p class="mono" id="card"></p>
@@ -617,6 +623,58 @@ fetch("dots/manifest.json").then(function (res) {
   throw err;
 });
 
+var NEXT = [
+  "Next-Evo-After-You-Are-Garden-Loop.html",
+  "Next-Evo-512-Full.html",
+  "Next-Evo-After-Infinite-Gardens-You.html",
+  "Next-Evo-After-27-Cube-Infinite-Gardens.html",
+  "Next-Evo-21-Colony.html",
+  "Next-Evo-After-Width-Tripled-27.html",
+  "Next-Evo-After-Minus1-0-Plus1.html",
+  "Next-Evo-After-Planck-Photon-Pinned.html",
+  "X3-Triple-Next-Evolution.html",
+  "Next-Evolution-Propagation-Garden.html",
+  "Next-Evolution-After-Cubit.html",
+  "Next-Evo-Planck-Time.html",
+  "Next-Evo-Gen-Triple.html",
+  "Next-Evo-Gen-Double.html",
+  "Next-Evo-Bh-Cycle.html",
+  "Phi-Tower-Next-Evo.html",
+  "Next-Evolution-Gravity-Garden.html",
+  "Next-Evolution-Garden.html",
+  "Next-Evo.html",
+  "Next-Gen1-Gen2.html",
+  "Garden-Network-Next.html",
+  "Next-Gen-10-Qd.html",
+  "Next-Bifrostal-328.html",
+  "Perm-Explorer-Next-Perm.html"
+];
+if (NEXT.length !== 24) throw new Error("LIT FAIL next count");
+var seenNext = {};
+var nextEl = document.getElementById("next");
+NEXT.forEach(function (file) {
+  if (seenNext[file]) throw new Error("LIT FAIL next duplicate");
+  seenNext[file] = 1;
+  var a = document.createElement("a");
+  a.href = "next/" + file;
+  a.textContent = file.replace(/\.html$/, "");
+  nextEl.appendChild(a);
+});
+fetch("next/manifest.json").then(function (res) {
+  if (!res.ok) throw new Error("LIT FAIL next manifest");
+  return res.json();
+}).then(function (rows) {
+  if (!rows || rows.length !== 24) throw new Error("LIT FAIL next manifest count");
+  rows.forEach(function (row, i) {
+    if (row.file !== NEXT[i]) throw new Error("LIT FAIL next order");
+    if (!/^[0-9a-f]{64}$/.test(row.sha256)) throw new Error("LIT FAIL next hash");
+  });
+  document.getElementById("nextcard").innerHTML = "<span class='stamp lit'>LIT</span> 24 next files, manifest order matches";
+}).catch(function (err) {
+  document.getElementById("nextcard").innerHTML = "<span class='stamp wall'>WALL</span> " + err.message;
+  throw err;
+});
+
 var ARCHIVE = [
   {steward:"ETHOS", slug:"the-civil-law", title:"The Civil Law"},
   {steward:"ETHOS", slug:"the-whole-body", title:"The Whole Body"},
@@ -811,7 +869,8 @@ NESTED.forEach(function (file) { QUEUE.push(worldPage("nested", file, file.repla
 NESTS.forEach(function (file) { QUEUE.push(worldPage("nests", file, file.replace(/\.html$/, ""))); });
 QDOT.forEach(function (file) { QUEUE.push(worldPage("qdot", file, file.replace(/\.html$/, ""))); });
 DOTS.forEach(function (file) { QUEUE.push(worldPage("dots", file, file.replace(/\.html$/, ""))); });
-if (QUEUE.length !== 194) throw new Error("LIT FAIL world queue");
+NEXT.forEach(function (file) { QUEUE.push(worldPage("next", file, file.replace(/\.html$/, ""))); });
+if (QUEUE.length !== 218) throw new Error("LIT FAIL world queue");
 var SEAT = {};
 var seenHref = {};
 var placed = 0;
@@ -826,7 +885,7 @@ for (zz = 0; zz < 7; zz++) for (yy = 0; yy < 7; yy++) for (xx = 0; xx < 7; xx++)
   SEAT[seatKey] = QUEUE[placed];
   placed++;
 }
-if (placed !== 194 || Object.keys(SEAT).length !== 194) throw new Error("LIT FAIL world seats");
+if (placed !== 218 || Object.keys(SEAT).length !== 218) throw new Error("LIT FAIL world seats");
 if (SEAT["3,3,3"]) throw new Error("LIT FAIL world keeper");
 ["0,0,0","6,0,0","0,6,0","6,6,0","0,0,6","6,0,6","0,6,6","6,6,6"].forEach(function (corner) {
   if (SEAT[corner]) throw new Error("LIT FAIL world corner");
