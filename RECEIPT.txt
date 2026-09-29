@@ -24,3 +24,26 @@ Checks
   node --check on the sphere script and both hallway scripts: pass
   Edge on the live page: self-check text present, 49 cells, 8 seats, layer z=0 shows 4 corners, clicking one reads ETHOS, layer z=3 reads keeper SaPpH{{i}}on, no pageerror
   Edge on https://davidwise01.github.io/0root/: holodoor href is the sphere host, world names include 7^3, no pageerror
+
+24 spheres · 2026-09-29
+
+A galaxy holds 24 single-idea spheres, three on each of the eight corners. The galaxy door counts the cube and is not one of the 24. The birth seal above was not rewritten.
+
+Sphere
+  commit: 8fabe7661444edf9d4ee74f5265c6159bb9ea854
+  message: 24 spheres
+  host: https://davidwise01.github.io/sapph-i-on/
+  files: spheres/*.html (24), seals/*.txt (24), index.html
+
+Hallway door
+  commit: e0be72caac8d70e0d00e1fdd44a2c271eb89d244
+  message: 24 spheres on the SaPpH{{i}}on door
+  GitHub Pages: https://davidwise01.github.io/0root/
+  https://0root.ai/ was not changed. DNS was not changed.
+
+Checks
+  node prove() on all 24: no faults
+  The Seal: eaac81925a883075bc71005bc746e6774c9a652744b819a80324ff2fc094c65c
+  Edge, local: all 24 cards start with LIT, no pageerror, body background rgb(247, 241, 230)
+  Index: 24 seat links, layer z=0 shows 4 corners, a corner click names the seat, width 390 still shows 24 links
+  The Twenty-Four: 24 chips, one clicked. The Surface: slider set to 3, a cell clicked. The Braces: button clicked.
