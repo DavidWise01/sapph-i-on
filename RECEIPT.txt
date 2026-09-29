@@ -103,3 +103,11 @@ Nested cube · 2026-09-29
   commit: 7dbb75d5c523a341290dece4d993ec5b099d15d9
   message: 24 nested files, like for like
   check: node door with the corpus and nested manifests stubbed. LIT: census 343, strip 420024, offset 1 reads 402, offset 2 reads 204, 24 nested files, manifest order matches, 49 cells. A swapped file throws LIT FAIL nested order. A short hash throws LIT FAIL nested hash. The 24 file bytes match the Downloads sources and the seals.
+
+Further nest · 2026-09-29
+
+The next 24 Downloads HTML files whose names are nests or cubes, after the nested cube, newest of what remained. Numbered copies skipped. Honest-Math-No-Fudge was left in Downloads, because nest sits inside Honest. Four older files remain in Downloads: big-g-nest, hypercube_gallery, the_cube, nested-shells. Copied unchanged into nests/. The galaxy birth seal was not rewritten.
+
+  commit: 71d89d1568fda4909b0a2c9a14de787862657844
+  message: 24 further nest files, like for like
+  check: node door with the corpus, nested, and nests manifests stubbed. LIT: census 343, strip 420024, 24 nested files, 24 further files, manifest order matches, 49 cells. A swapped file throws LIT FAIL nests order. A short hash throws LIT FAIL nests hash. The 24 file bytes match the Downloads sources and the seals.
