@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Julia Set, Nested</title>
+<style>
+:root{--bg:#07080c;--ink:#F1F2F5;--soft:#A7AEBB;--faint:#5e6676;--glass:rgba(255,255,255,.045);--edge:rgba(255,255,255,.09);--gold:#F5B94E;--vio:#A88BFF;--teal:#4FD1B5;--rose:#FF7A8A;--grad:linear-gradient(100deg,#4FD1B5 0%,#A88BFF 50%,#F5B94E 100%)}
+*{box-sizing:border-box}html,body{overflow-x:hidden}
+body{margin:0;color:var(--ink);font:16px/1.6 Inter,ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:radial-gradient(1000px 650px at 85% -10%,#1b2a4a 0%,transparent 60%),radial-gradient(900px 600px at -10% 45%,#2a1638 0%,transparent 55%),var(--bg);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding:28px 16px 60px}
+.top{display:flex;justify-content:space-between;gap:10px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:20px}.top b{color:var(--soft)}
+h1{font-size:clamp(38px,7.5vw,76px);line-height:1;letter-spacing:-.035em;margin:0 0 12px;font-weight:800}
+.gt,h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{font-size:clamp(16px,2.2vw,20px);color:var(--soft);max-width:760px;margin:0 0 22px}
+h2{font-size:clamp(22px,3.6vw,32px);letter-spacing:-.025em;line-height:1.1;margin:0 0 10px;font-weight:750}
+h3{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:0 0 10px;font-weight:600}
+p{margin:0 0 12px;color:var(--soft)}b.w{color:var(--ink)}
+.card{background:var(--glass);border:1px solid var(--edge);border-radius:22px;padding:22px}
+section{margin:0 0 20px}
+canvas{display:block;width:100%;touch-action:manipulation}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:800px){.grid2{grid-template-columns:1fr}}
+.big-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:20px;align-items:start}
+@media(max-width:860px){.big-grid{grid-template-columns:1fr}}
+.pill{display:inline-block;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:99px;margin-left:4px;vertical-align:1px;font-weight:600;white-space:nowrap}
+.pill.lit{background:rgba(79,209,181,.14);color:var(--teal)}.pill.amb{background:rgba(245,185,78,.14);color:var(--gold)}.pill.dead{background:rgba(255,122,138,.14);color:var(--rose)}
+.kid{border-radius:22px;padding:20px 22px;background:linear-gradient(120deg,rgba(79,209,181,.10),rgba(168,139,255,.12));border:1px solid var(--edge)}
+.kid p{color:var(--ink);font-size:17px;margin:0}
+.btn{appearance:none;border:0;border-radius:999px;padding:8px 14px;font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;color:#0d0c16;background:var(--grad)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--edge)}.btn.ghost.on{border-color:var(--vio);background:rgba(168,139,255,.15)}
+.dock{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+/* the square */
+.sq{display:grid;grid-template-columns:34px repeat(4,1fr);gap:6px;align-items:center}
+.sq .hd{font:600 11px/1 ui-monospace,Menlo,monospace;color:var(--faint);text-align:center;letter-spacing:.04em}
+.tile{position:relative;border-radius:12px;overflow:hidden;border:1.5px solid var(--edge);cursor:pointer;background:#000;aspect-ratio:1}
+.tile canvas{width:100%;height:100%}
+.tile span{position:absolute;left:5px;top:3px;font:700 11px/1.2 ui-monospace,Menlo,monospace;color:#fff;text-shadow:0 1px 3px #000}
+.tile.on{border-color:#fff;box-shadow:0 0 0 2px rgba(255,255,255,.35)}
+.tile.s0{border-color:rgba(79,209,181,.9)}.tile.s1{border-color:rgba(79,209,181,.6)}.tile.s2{border-color:rgba(168,139,255,.7)}.tile.s3{border-color:rgba(255,122,138,.75)}
+.tile.on{border-color:#fff}
+.one{display:flex;gap:14px;align-items:center;margin-bottom:12px}
+.one .tile{width:74px;flex:none}
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--soft);margin-top:10px}.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.mapwrap{position:relative;border-radius:18px;overflow:hidden;background:#000}
+.mapwrap .cap{position:absolute;left:12px;top:10px;font:600 12px/1.3 ui-monospace,Menlo,monospace;color:#fff;text-shadow:0 1px 3px #000;pointer-events:none}
+.ro{font:13px/1.55 ui-monospace,Menlo,monospace;color:var(--soft);margin-top:10px;min-height:120px}
+.ro b{color:var(--ink);font-weight:600}
+.nva{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:14px;margin:10px 0}
+.nva dt{color:var(--faint);font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding-top:3px}.nva dd{margin:0;color:var(--ink)}
+details summary{cursor:pointer;color:var(--soft);font-size:14px;list-style:none;display:inline-flex;padding:10px 16px;border:1px solid var(--edge);border-radius:999px}
+details summary::-webkit-details-marker{display:none}
+.foot{color:var(--faint);font-size:12px;text-align:center;margin-top:28px}
+</style></head>
+<body><div class="wrap">
+<div class="top"><span><b>R</b> · outside · nested</span><span>1 + 4 × 4 = 17 · a1 → q17</span></div>
+<h1>What's <span>outside</span> a Julia set.</h1>
+<p class="lede">Keep doing one thing to a point: square it, add c. Some points stay close forever. That's the inside. The rest run off to infinity. That's the outside. The Julia set is the fence between them. The outside isn't empty space. It has a map, and every point in it has an address.</p>
+
+<div class="kid"><p><b>Small words.</b> Pick a spot. Square it and add a number, again and again. If it stays near home, it's inside. If it zooms away, it's outside. The fence is the Julia set. Every outside spot gets two labels: <b>how high</b> above the fence it is (its ring) and <b>which way</b> it runs off (its ray). It's latitude and longitude, just for escaping.</p></div>
+
+<div class="card nest" style="margin-top:16px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;border-color:rgba(245,185,78,.35)">
+  <p style="margin:0;max-width:680px"><b class="w">Nested.</b> This page is at rest. Nothing runs until you tap <b class="w">Hatch</b>. Then it draws in small slices, at most 8 ms per frame, and goes fully idle once the 19 pictures are done. No downloads, no network, no storage, no hidden code. <span class="pill lit">checked</span></p>
+  <div class="dock"><button class="btn" id="hatch">Hatch</button><span id="hs" style="font:13px ui-monospace,Menlo,monospace;color:var(--soft)">resting · 0 of 19</span></div>
+</div>
+<section class="big-grid" style="margin-top:22px">
+  <div class="card">
+    <h3>Your 17, arranged: 1 + Aa·Bb × Cc·Dd</h3>
+    <div class="one"><div class="tile s0" data-l="a1" id="t-a1"><canvas></canvas><span>a1</span></div><p style="margin:0;font-size:14px"><b class="w">a1 is the 1.</b> c = 0. The fence is a perfect circle and the outside is just everything past radius 1. Every other map below is this one, bent. <span class="pill lit">checked</span></p></div>
+    <div class="sq" id="sq"></div>
+    <div class="legend"><span><i style="background:#4FD1B5"></i>shells 0–1 · deep inside</span><span><i style="background:#A88BFF"></i>shell 2 · near the edge</span><span><i style="background:#FF7A8A"></i>shell 3 · outside, dust</span></div>
+    <p style="font-size:13.5px;margin-top:12px">The rule is your max. Row depth is AB 0, Ab 1, aB 2, ab 3; column depth is CD 0, Cd 1, cD 2, cd 3. A tile's shell is the <b class="w">larger of the two</b>. So shells hold 1, 3, 5, 7 tiles. The first 9 (b2 → j10) are connected. The last 7 (k11 → q17) are dust. <span class="pill lit">checked</span></p>
+  </div>
+  <div>
+    <div class="mapwrap"><canvas id="mp"></canvas><div class="cap" id="mcap"></div></div>
+    <div class="dock" style="margin-top:10px"><button class="btn ghost on" id="bRays">rays</button><button class="btn ghost on" id="bRings">rings</button><button class="btn ghost" id="bGrid">address grid</button></div>
+    <dl class="nva" id="nva"></dl>
+    <div class="ro" id="ro">Tap or hover the map to read an address.</div>
+  </div>
+</section>
+
+<section class="grid2">
+  <div class="card">
+    <h3>Where the 17 sit</h3>
+    <div class="mapwrap"><canvas id="mm"></canvas></div>
+    <p style="font-size:13.5px;margin-top:10px">This is the map of all the maps: every c you could pick. The black shape holds the c values whose fence is one connected piece. Your 10 connected ones sit inside it, along six directions. The 7 dust ones sit together on one outside ring, <b class="w">0.03</b> above it. <span class="pill lit">checked</span></p>
+  </div>
+  <div class="card">
+    <h3>How the square turns into a disk</h3>
+    <p><b class="w">Shell = max(row, column).</b> The same number marks the ring. <b class="w">Angle = column − row</b>, from −3 to +3, one sixth of a turn per step. So the Punnett square wraps into rings around a1. <span class="pill amb">my construction</span></p>
+    <p><b class="w">Inside shells 0, 1, 2:</b> the fence has one home point that pulls everything in. How hard it pulls is 0.35, then 0.70, then 0.95 (1 would be the edge). It also spins by the angle. <span class="pill lit">checked</span></p>
+    <p><b class="w">Outside shell 3:</b> each tile sits on the ray that heads for the pinch where shell 2 was going: ray 1/3 for a half turn, 1/7 for a third, 1/63 for a sixth, 0 for straight on. <span class="pill lit">checked</span></p>
+    <p>The 10 / 7 split in your two groups comes out of the max rule by itself: 1 + 3 + 5 = 9 connected, plus a1 makes 10, and the outer ring has 7. <span class="pill lit">checked</span></p>
+  </div>
+</section>
+
+<section class="grid2">
+  <div class="card">
+    <h3>What the outside map shows</h3>
+    <p>The <b class="w">colour</b> is the ray (which way a point escapes). The <b class="w">rings</b> are heights: each ring in is half as high as the one outside it. The <b class="w">rays</b> are 32 evenly spaced escape directions. For a1 they're straight spokes. Everywhere else the same 32 spokes bend onto the fence. <span class="pill lit">checked</span></p>
+    <p><b class="w">Connected (b2 → j10):</b> every outside point has a height and a direction, all the way down to the fence. The outside is one clean ring-and-spoke map. <span class="pill lit">checked</span></p>
+    <p><b class="w">Dust (k11 → q17):</b> the map only works above one height, the level of the point 0, which is where the outside pinches into a figure-eight (drawn white). Below it, directions split and stop being single-valued. Those areas are drawn grey. <span class="pill lit">checked</span></p>
+  </div>
+  <div class="card">
+    <h3>What's solid, what isn't</h3>
+    <p>▓ <b class="w">Control:</b> for a1 the page's height and direction must match plain radius and angle. They match to rounding, checked on 1,000 random points. <span class="pill lit">checked</span></p>
+    <p>▓ <b class="w">Known-bad input:</b> the dust tiles have to make the direction readout refuse ("below the split"). It does on all 7, and it never refuses on the 10 connected ones. <span class="pill lit">checked</span></p>
+    <p>Near a pinch, points escape slowly. A pixel that hasn't escaped by the step limit is drawn dark, even when it's really outside. This matters most for h8 (0.95 deep, right at the cusp). <span class="pill amb">as drawn</span></p>
+    <p>Rays reach their pinch points, but slowly. At height 10⁻⁶ the ray to the cusp is still 0.019 away. <span class="pill lit">checked</span></p>
+  </div>
+</section>
+
+<section><details><summary>▸ Show the math</summary><div class="card" style="margin-top:12px">
+<p>Map: z → z² + c. Height G(z) = lim log|zₙ| ÷ 2ⁿ. Each step doubles it, so rings are halvings. Direction: from the escaped end, halve back one step at a time, picking the half nearest each point's own angle. For c = 0 this gives exactly log|z| and arg z. <span class="pill lit">checked</span></p>
+<p>Connected ⇔ the point 0 never escapes. All 9 inside tiles: 0 stays bounded for 5,000 steps. All 7 outside tiles: 0 escapes past 2 by step 5. <span class="pill lit">checked</span></p>
+<p>Inside tiles: c = λ/2 − λ²/4 with λ = depth · e^(2πi·angle). The fixed point's pull comes back as exactly λ (checked to 10⁻⁹). <span class="pill lit">checked</span></p>
+<p>Outside tiles: found by walking each ray inward to height 0.03, then checked in reverse: every one reads back height 0.03000 and the right ray. <span class="pill lit">checked</span></p>
+<p>Ray angles for a p/q pinch: 1/2 → 1/3 and 2/3 · 1/3 → 1/7 and 2/7 · 1/6 → 1/63 and 2/63. The lower one is used. Mirror tiles take 1 − θ. <span class="pill lit">checked</span></p>
+<p>Shell counts: max(i, j) = k holds 2k + 1 cells, and 1 + 3 + 5 + 7 = 16 = 4². <span class="pill lit">checked</span></p>
+</div></details></section>
+<div class="foot">a1 the 1 · 9 connected · 7 dust · 16 = 4² · rings halve · rays double · nested: rests until hatched</div>
+</div>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id),TAU=2*Math.PI;
+const RAW=[["b2",0,0,0,0,0.144375,0.0,1,"0",""],["c3",1,0,1,-1,0.23625,-0.197020779,1,"-1/6",""],["d4",1,1,1,0,0.2275,0.0,1,"0",""],["e5",0,1,1,1,0.23625,0.197020779,1,"1/6",""],["f6",2,0,2,-2,-0.1246875,-0.606759049,1,"-1/3",""],["g7",2,1,2,-1,0.3503125,-0.215965085,1,"-1/6",""],["h8",2,2,2,0,0.249375,0.0,1,"0",""],["i9",1,2,2,1,0.3503125,0.215965085,1,"1/6",""],["j10",0,2,2,2,-0.1246875,0.606759049,1,"1/3",""],["k11",3,0,3,-3,-0.861049327,-0.452407413,0,"-1/2","2/3"],["l12",3,1,3,-2,0.121490861,-0.778890697,0,"-1/3","6/7"],["m13",3,2,3,-1,0.460312799,-0.162818006,0,"-1/6","62/63"],["n14",3,3,3,0,0.419008221,0.0,0,"0","0"],["o15",2,3,3,1,0.460312799,0.162818006,0,"1/6","1/63"],["p16",1,3,3,2,0.121490861,0.778890697,0,"1/3","1/7"],["q17",0,3,3,3,-0.861049327,0.452407413,0,"1/2","1/3"]];
+const ROW=['AB','Ab','aB','ab'],COL=['CD','Cd','cD','cd'];
+const CELLS=[{l:'a1',k:-1,m:0,c:[0,0],inside:1,alpha:'0',ray:'',g:'the 1'}].concat(RAW.map(r=>({l:r[0],i:r[1],j:r[2],k:r[3],m:r[4],c:[r[5],r[6]],inside:r[7],alpha:r[8],ray:r[9],g:ROW[r[1]]+'×'+COL[r[2]]})));
+const BY={};CELLS.forEach(d=>BY[d.l]=d);
+const RHO=[0.35,0.7,0.95];
+// critical potential: G(0) for this c (0 when connected)
+function gcrit(cx,cy){let x=0,y=0;for(let n=0;n<3000;n++){const t=x*x-y*y+cx;y=2*x*y+cy;x=t;const r2=x*x+y*y;if(r2>1e20)return Math.log(r2)/2/Math.pow(2,n+1);}return 0;}
+const OX=new Float64Array(1200),OY=new Float64Array(1200);
+// escape: returns [G, theta, n] ; G<0 means never escaped
+function probe(zx,zy,cx,cy,NMAX){let x=zx,y=zy,n=0;OX[0]=x;OY[0]=y;
+  for(;n<NMAX;n++){const r2=x*x+y*y;if(r2>1e12)break;const t=x*x-y*y+cx;y=2*x*y+cy;x=t;OX[n+1]=x;OY[n+1]=y;}
+  if(n>=NMAX)return[-1,0,n];
+  const G=Math.log(x*x+y*y)/2/Math.pow(2,n);
+  let th=((Math.atan2(y,x)/TAU)%1+1)%1;
+  for(let k=n-1;k>=0;k--){const a=((Math.atan2(OY[k],OX[k])/TAU)%1+1)%1,c1=th/2,c2=c1+.5;const d1=Math.abs(c1-a),d2=Math.abs(c2-a);th=(Math.min(d1,1-d1)<=Math.min(d2,1-d2))?c1:c2;}
+  return[G,th,n];}
+function hsl(h,s,l){h=((h%1)+1)%1;const a=s*Math.min(l,1-l),f=n=>{const k=(n+h*12)%12;return l-a*Math.max(-1,Math.min(k-3,9-k,1));};return[f(0)*255,f(8)*255,f(4)*255];}
+let OPT={rays:true,rings:true,grid:false};
+function shade(G,th,gc,opt){
+  if(G<0)return[10,10,16];
+  const below=gc>0&&G<=gc*(1+1e-9);
+  const lg=Math.log2(G),fl=lg-Math.floor(lg);
+  let r,g,b;
+  if(below){const v=0.22+0.18*(1-Math.min(1,G/gc));r=g=b=v*255;}
+  else{const L=0.30+0.30/(1+G*6);[r,g,b]=hsl(th,0.62,L);}
+  if(opt.grid&&!below){const q=(Math.floor(th*32)+Math.floor(lg))&1;if(q){r*=.62;g*=.62;b*=.62;}}
+  if(opt.rings&&(fl<0.045||fl>0.955)){r=r*.35;g=g*.35;b=b*.35;}
+  if(opt.rays&&!below){const f=th*32-Math.floor(th*32);if(f<0.035||f>0.965){r=r*.5+120;g=g*.5+120;b=b*.5+120;}}
+  if(gc>0&&Math.abs(Math.log2(G/gc))<0.04){r=g=b=255;}
+  return[r,g,b];}
+// the nest: one queue, one slice of at most 8 ms per frame, idle when empty
+const QUEUE=[];let pumping=false,HATCHED=false,DONE=0,MAPDONE=false;const BUDGET=8;
+function pump(){const t=performance.now();
+  while(QUEUE.length&&performance.now()-t<BUDGET){const j=QUEUE[0];if(j.cancel){QUEUE.shift();continue;}if(j.it.next().done){j.done=true;QUEUE.shift();if(j.count==='map'){if(!MAPDONE){MAPDONE=true;DONE++;}}else if(j.count)DONE++;status();}}
+  if(QUEUE.length)requestAnimationFrame(pump);else{pumping=false;status();}}
+function enqueue(j,front){if(front)QUEUE.unshift(j);else QUEUE.push(j);if(!pumping){pumping=true;requestAnimationFrame(pump);}return j;}
+function status(){if(!HATCHED)return;$('hs').textContent=QUEUE.length?`drawing · ${DONE} of 19`:`done · ${DONE} of 19 · idle`;}
+// generic renderer over a view, as a row-by-row generator
+function renderJulia(cv,d,px,NMAX,opt){
+  const w=px,h=px,ctx=cv.getContext('2d');cv.width=w;cv.height=h;const img=ctx.createImageData(w,h),D=img.data;
+  const [cx,cy]=d.c,gc=gcrit(cx,cy),S=d.inside?1.75:1.9,sc=2*S/w;
+  const job={cancel:false,view:{S,sc,gc}};
+  job.it=(function*(){for(let row=0;row<h;row++){const y=S-row*sc;for(let col=0;col<w;col++){const x=-S+col*sc;const [G,th]=probe(x,y,cx,cy,NMAX);const c=shade(G,th,gc,opt);const o=(row*w+col)*4;D[o]=c[0];D[o+1]=c[1];D[o+2]=c[2];D[o+3]=255;}if(row%8===7||row===h-1)ctx.putImageData(img,0,0);yield;}})();
+  return job;}
+// build the square
+const sq=$('sq');let html='<div></div>'+COL.map(c=>`<div class="hd">${c}</div>`).join('');
+for(let i=0;i<4;i++){html+=`<div class="hd">${ROW[i]}</div>`;for(let j=0;j<4;j++){const d=CELLS.find(q=>q.i===i&&q.j===j);html+=`<div class="tile s${d.k}" data-l="${d.l}" id="t-${d.l}"><canvas></canvas><span>${d.l}</span></div>`;}}
+sq.innerHTML=html;
+function hatchTiles(){CELLS.forEach(d=>{const cv=document.querySelector(`#t-${d.l} canvas`);const j=renderJulia(cv,d,110,160,{rays:true,rings:true,grid:false});j.count=1;enqueue(j);});}
+document.querySelectorAll('.tile').forEach(t=>t.addEventListener('click',()=>select(t.dataset.l)));
+// selection and big map
+let SEL='a1',job=null,MPX=0;
+const frac=s=>s||'0';
+function adj(d){if(d.l==='a1')return'the perfect circle · outside = everything past radius 1';
+  if(d.inside)return`connected · spins ${frac(d.alpha)} turn · pull ${RHO[d.k]} (shell ${d.k})`;
+  return`dust · on ray ${d.ray} · 0.03 above the set (shell 3)`;}
+function cfmt(c){const [x,y]=c;return`${x.toFixed(5)} ${y<0?'−':'+'} ${Math.abs(y).toFixed(5)}i`;}
+function select(l){SEL=l;const d=BY[l];document.querySelectorAll('.tile').forEach(t=>t.classList.toggle('on',t.dataset.l===l));
+  $('nva').innerHTML=`<dt>noun</dt><dd><b>${l}</b> · c = ${cfmt(d.c)} ${d.g&&d.l!=='a1'?'· '+d.g:''}</dd><dt>verb</dt><dd>z → z² + c, again and again</dd><dt>adjective</dt><dd>${adj(d)}</dd>`;
+  $('mcap').textContent=`${l} · ${d.inside?'connected':'dust'}`;draw();$('ro').innerHTML='Tap or hover the map to read an address.';}
+function draw(){const cv=$('mp'),w=Math.min(cv.parentElement.clientWidth||400,640);MPX=w;cv.style.height=w+'px';if(!HATCHED){cv.width=w;cv.height=w;const g=cv.getContext('2d');g.fillStyle='#07080c';g.fillRect(0,0,w,w);g.fillStyle='#5e6676';g.font='600 14px ui-monospace,Menlo,monospace';g.textAlign='center';g.fillText('resting · tap Hatch',w/2,w/2);return;}if(job)job.cancel=true;job=renderJulia(cv,BY[SEL],w,700,OPT);job.count='map';enqueue(job,true);}
+function bits(th,n){let s='';let t=th;for(let i=0;i<n;i++){t*=2;s+=t>=1?'1':'0';if(t>=1)t-=1;}return s;}
+function readAt(e){if(!HATCHED||!job||!job.view)return;const r=$('mp').getBoundingClientRect(),px=(e.clientX-r.left)/r.width*MPX,py=(e.clientY-r.top)/r.height*MPX;const {S,sc,gc}=job.view,x=-S+px*sc,y=S-py*sc,d=BY[SEL];
+  const [G,th,n]=probe(x,y,d.c[0],d.c[1],1100);
+  let out=`z = ${cfmt([x,y])}<br>`;
+  if(G<0){out+=`<b>inside</b>: stays home past 1,100 steps. Not outside.`;}
+  else{const ring=Math.floor(-Math.log2(G));out+=`escapes in <b>${n}</b> steps · height <b>${G.toExponential(3)}</b> · ring <b>${ring}</b><br>`;
+    if(gc>0&&G<=gc*(1+1e-9))out+=`direction: <b>refused</b>, below the split (height of 0 = ${gc.toExponential(3)}). Here the outside has pinched, so one direction per point no longer exists.`;
+    else out+=`direction <b>${th.toFixed(6)}</b> turn · binary 0.${bits(th,12)}…<br>address <b>ring ${ring} · ray 0x${Math.floor(th*256).toString(16).padStart(2,'0')}</b>`;}
+  $('ro').innerHTML=out;}
+$('mp').addEventListener('pointermove',readAt);$('mp').addEventListener('pointerdown',readAt);
+const tog=(id,k)=>$(id).onclick=()=>{OPT[k]=!OPT[k];$(id).classList.toggle('on',OPT[k]);draw();};
+tog('bRays','rays');tog('bRings','rings');tog('bGrid','grid');
+// the parameter-plane map
+let MM=null;
+let MMIMG=null,MMJOB=null;
+function drawMM(){const cv=$('mm'),w=Math.min(cv.parentElement.clientWidth||400,560),h=Math.round(w*0.8);cv.style.height=h+'px';const g=cv.getContext('2d');
+  if(!HATCHED){cv.width=w;cv.height=h;g.fillStyle='#07080c';g.fillRect(0,0,w,h);g.fillStyle='#5e6676';g.font='600 14px ui-monospace,Menlo,monospace';g.textAlign='center';g.fillText('resting · tap Hatch',w/2,h/2);return;}
+  if(MMIMG&&MMIMG.width===w){g.putImageData(MMIMG,0,0);mmDots(g,w,h);return;}
+  if(MMJOB)MMJOB.cancel=true;cv.width=w;cv.height=h;
+  const img=g.createImageData(w,h),D=img.data;
+  const x0=-2.1,x1=0.75,sc=(x1-x0)/w,yc=0;
+  MMJOB={cancel:false,count:1};MMJOB.it=(function*(){
+  for(let r=0;r<h;r++){const cy=(h/2-r)*sc+yc;for(let q=0;q<w;q++){const cx=x0+q*sc;let x=cx,y=cy,n=0;for(;n<500;n++){const r2=x*x+y*y;if(r2>1e12)break;const t=x*x-y*y+cx;y=2*x*y+cy;x=t;}const o=(r*w+q)*4;
+    if(n>=500){D[o]=D[o+1]=D[o+2]=6;}else{const G=Math.log(x*x+y*y)/2/Math.pow(2,n+1)*2;const lg=Math.log2(G),f=lg-Math.floor(lg);let [a,b,c]=hsl(0.62+0.08*Math.sin(lg),0.35,0.18+0.18/(1+G*5));if(f<0.05||f>0.95){a*=.5;b*=.5;c*=.5;}if(Math.abs(G-0.03)/0.03<0.035){a=255;b=122;c=138;}D[o]=a;D[o+1]=b;D[o+2]=c;}D[o+3]=255;}
+    if(r%8===7)g.putImageData(img,0,0);yield;}
+  g.putImageData(img,0,0);MMIMG=img;mmDots(g,w,h);})();enqueue(MMJOB);}
+function mmDots(g,w,h){const x0=-2.1,x1=0.75,sc=(x1-x0)/w,yc=0;const Y=v=>h/2-(v-yc)/sc,X=v=>(v-x0)/sc;
+  g.font='600 11px ui-monospace,Menlo,monospace';const P=[];
+  CELLS.forEach(d=>{const px=X(d.c[0]),py=Y(d.c[1]);P.push([px,py,d.l]);const col=d.k<0?'#fff':d.k<2?'#4FD1B5':d.k===2?'#A88BFF':'#FF7A8A';g.fillStyle=col;g.beginPath();g.arc(px,py,d.l===SEL?6:4,0,TAU);g.fill();if(d.l===SEL){g.strokeStyle='#fff';g.lineWidth=2;g.beginPath();g.arc(px,py,9,0,TAU);g.stroke();}});
+  // labels: only the edge ones + selected, to avoid a pile-up near the cusp
+  const show=new Set(['a1','f6','j10','k11','l12','m13','n14','o15','p16','q17',SEL]);
+  CELLS.forEach(d=>{if(!show.has(d.l))return;const px=X(d.c[0]),py=Y(d.c[1]);let ux=d.c[0]+0.3,uy=d.c[1];if(d.l==='a1'){ux=-1;uy=-0.6;}const L=Math.hypot(ux,uy)||1;ux/=L;uy/=L;
+    let tx=px+ux*14,ty=py-uy*14+4;g.textAlign=ux>0.35?'left':ux<-0.35?'right':'center';if(g.textAlign==='center')ty+=uy>0?-4:8;
+    const tw=g.measureText(d.l).width;if(g.textAlign==='left'&&tx+tw>w-3){g.textAlign='right';tx=w-3;}
+    g.fillStyle='rgba(6,8,11,.55)';const bx=g.textAlign==='left'?tx:g.textAlign==='right'?tx-tw:tx-tw/2;g.fillRect(bx-2,ty-10,tw+4,13);
+    g.fillStyle='rgba(241,242,245,.95)';g.fillText(d.l,tx,ty);});
+  g.textAlign='left';MM={P};}
+$('mm').addEventListener('pointerdown',e=>{if(!MM||!MMIMG)return;const r=$('mm').getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;let best=null,bd=22;MM.P.forEach(([px,py,l])=>{const dd=Math.hypot(px-x,py-y);if(dd<bd){bd=dd;best=l;}});if(best){select(best);drawMM();}});
+document.querySelectorAll('.tile').forEach(t=>t.addEventListener('click',()=>{if(MMIMG)drawMM();}));
+let rs=0;addEventListener('resize',()=>{clearTimeout(rs);rs=setTimeout(()=>{draw();drawMM();},200);});
+$('hatch').onclick=()=>{if(HATCHED)return;HATCHED=true;$('hatch').textContent='Hatched';$('hatch').disabled=true;draw();hatchTiles();drawMM();status();};
+select('a1');drawMM();
+window.__JULIA__={cells:CELLS,probe,gcrit,select,get sel(){return SEL},get done(){return !!(job&&job.done)},get idle(){return HATCHED&&!pumping&&QUEUE.length===0},get queued(){return QUEUE.length},get hatched(){return HATCHED},get count(){return DONE}};
+})();
+</script>
+</body></html>

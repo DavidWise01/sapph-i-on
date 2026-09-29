@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>the hanger · 11011 · the nested zero</title>
+<style>
+:root{--ground:#0e0d0b;--rule:#2C2A26;--ink:#E9E6DF;--dim:#948F85;--au:#E8C15A;--cu:#D9825B;--neg:#7FB8FF;--pos:#FF8A6B;--n:#B8B2A6;--lit:#6FD08C;--amber:#F2A03D}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ground);color:var(--ink);font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.wrap{max-width:860px;margin:0 auto;padding:16px}
+.hd{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin:14px 0 8px}
+.hd:first-child{margin-top:0}
+.hd b{font-weight:400;letter-spacing:.2em;color:var(--dim);font-size:10px;text-transform:uppercase}
+canvas{display:block;width:100%;border:1px solid var(--rule);border-radius:3px;background:#090807}
+.sp{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;align-items:center}
+.sp span.l{color:var(--dim);font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-right:2px}
+button{font:inherit;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:transparent;color:var(--au);border:1px solid #5a4a22;padding:6px 9px;border-radius:2px;cursor:pointer}
+button.on{background:rgba(232,193,90,.15)}
+.rd{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+@media(max-width:560px){.rd{grid-template-columns:1fr 1fr}}
+.rd div{border:1px solid var(--rule);border-radius:3px;padding:6px 8px;min-width:0}
+.rd i{display:block;font-style:normal;font-size:9px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+.rd span{font-size:13px;overflow-wrap:anywhere}
+.s{font-size:8.5px;letter-spacing:.1em;margin-left:4px}
+.lit{color:var(--lit)} .amb{color:var(--amber)}
+#msg,#zmsg{margin-top:8px;font-size:11px;min-height:18px}
+.note{margin-top:10px;font-size:10.5px;color:var(--dim)} .note b{color:var(--ink);font-weight:400}
+.small{margin-top:8px;font-size:11px;border-left:2px solid var(--au);padding-left:9px;color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hd"><b>R · the hanger · [1]~[1]~[0]~[1]~[1]</b><b>11011 in binary = 27</b></div>
+  <canvas id="cv"></canvas>
+  <div class="sp"><span class="l">chain charges</span><button data-c="t" class="on">− + 0 − +  (yours)</button><button data-c="m">− + 0 + −  (mirror)</button></div>
+  <div class="sp"><span class="l">put in the 0</span><button data-p="n" class="on">neutron</button><button data-p="p">proton</button></div>
+  <div id="msg"></div>
+  <div class="rd">
+    <div><i>11011 in binary</i><span>27 = 3×3×3<s class="s lit">LIT</s></span></div>
+    <div><i>dots · chain + lattice</i><span>5 + 27 = 32 = 2⁵<s class="s lit">LIT</s></span></div>
+    <div><i>bits held · 768 each</i><span>24,576</span></div>
+    <div><i>chain binding</i><span id="bind">–</span></div>
+    <div><i>pull at the 0 · voltage</i><span id="pot">–</span></div>
+    <div><i>pull at the 0 · push</i><span id="fld">–</span></div>
+    <div><i>what holds the lattice up</i><span>charge, not weight</span></div>
+    <div><i>height where heat beats weight</i><span>1.98 m<s class="s lit">LIT</s></span></div>
+  </div>
+
+  <div class="hd"><b>open the 0 · the same chain inside, 5× smaller each time</b><b id="lvl">level 0</b></div>
+  <canvas id="zv"></canvas>
+  <div class="sp"><button id="in">open the 0</button><button id="out">close</button><button id="nuc">jump to level 9</button><button id="pl">jump to Planck</button></div>
+  <div id="zmsg"></div>
+  <div class="rd">
+    <div><i>one site across</i><span id="zs">–</span></div>
+    <div><i>what lives at that size</i><span id="zw">–</span></div>
+    <div><i>levels · dot to nucleon</i><span>9<s class="s lit">LIT</s></span></div>
+    <div><i>levels · dot to Planck</i><span>37.65<s class="s lit">LIT</s></span></div>
+    <div><i>level 9 site vs a proton</i><span>1.71 vs 1.68 fm</span></div>
+    <div><i>corpora one core can hold</i><span>2⁷⁶⁸ ≈ 1.6×10²³¹</span></div>
+    <div><i>atoms in the seen universe</i><span>~10⁸⁰</span></div>
+    <div><i>self-similar below level 2?</i><span class="amb">no · yours</span></div>
+  </div>
+  <div class="note"><b>the hanger.</b> your chain 11011 reads the same both ways, and in binary it's <b>27</b>: so 27 dots hang, a 3×3×3 cube. the four 1s hold its four top corners and the 0 sits over the middle column. that makes 32 dots, 2⁵, so five bits address every one. at 3.34 nm a dot weighs 2.1×10⁻²² kg. heat at room temperature lifts it about 2 metres against gravity, so nothing this small hangs by its weight. what holds the chain is charge. −+0−+ binds at 0.90 eV, 35 times heat. <b>the 0 is protected</b>: in your chain the four charges' voltages cancel exactly at the middle, so putting a charge there costs nothing. a neutron sits still. a proton gets pushed, because the push (1.5 units) doesn't cancel, and it drifts out. flip to the mirror chain −+0+− and it's the other way round: the push cancels but the voltage doesn't. so the translation form keeps the neutron and lets the proton go. <b>the nest.</b> five sites fit across one, so each chain inside a 0 is 5× smaller. nine openings take the 3.34 nm dot to 1.71 fm, within 1.5% of a proton's width. that is where your [−][+][n/p][−][+] lands. 28.65 more reach the Planck length. the arithmetic is LIT. the self-similarity is yours: below level 2 a site is smaller than an atom, so the chains there can't be made of dots. the physics changes at every step: atom, electrons, nucleus, nucleon. <b>the dead shell.</b> the shell's gold was forged in neutron-rich matter, the kind a neutron-star collision throws out, so "the shell a dead star left" has a literal reading. <b>the universe inside</b> is counted, not built: one 768-bit core can hold 10²³¹ different corpora, more than 10⁸⁰ squared.</div>
+  <div class="small">small words: five beads on a string. the middle bead is a gold box with a secret inside. open the box and there are five tinier beads. open the middle one again. nine boxes down, the beads are as small as the middle of an atom.</div>
+</div>
+<script>
+(function(){
+'use strict';
+const K=8.9875517923e9, E=1.602176634e-19, KB=1.380649e-23, D=3.3352135721604647e-9, LP=1.616255e-35;
+const U1=K*E*E/D/E;                        // eV per unit (ke²/d)
+const $=id=>document.getElementById(id);
+const sup=n=>String(n).replace('-','⁻').replace(/\d/g,c=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[c]);
+const len=m=>m>=1e-9?(m*1e9).toFixed(2)+' nm':m>=1e-12?(m*1e12).toFixed(m>=1e-11?1:2)+' pm':m>=1e-15?(m*1e15).toFixed(2)+' fm':(m/10**Math.floor(Math.log10(m))).toFixed(2)+'×10'+sup(Math.floor(Math.log10(m)))+' m';
+let chain='t', probe='n', px=0, pv=0, last=performance.now(), lv=0, lvT=0;
+const Q=()=>chain==='t'?[-1,1,0,-1,1]:[-1,1,0,1,-1], X=[-2,-1,0,1,2];
+function pot(x){ return Q().reduce((s,q,i)=>i===2?s:s+q/Math.abs(x-X[i]),0); }
+function fld(x){ return Q().reduce((s,q,i)=>i===2?s:s+q*Math.sign(x-X[i])/(x-X[i])**2,0); }
+function bind(){ const q=Q(); let u=0; for(let i=0;i<5;i++)for(let j=i+1;j<5;j++) u+=q[i]*q[j]/Math.abs(X[i]-X[j]); return u; }
+function fit(cv,r,mx){ const w=cv.clientWidth||600, h=Math.round(Math.min(w*r,mx)), d=window.devicePixelRatio||1; cv.width=Math.round(w*d); cv.height=Math.round(h*d); cv.style.height=h+'px'; const g=cv.getContext('2d'); g.setTransform(d,0,0,d,0,0); return [g,w,h]; }
+function dot(g,x,y,r,q,zero){ // q: -1 / +1 / 0-shell
+  if(zero){ g.fillStyle='#E8C15A'; g.beginPath(); g.arc(x,y,r,0,7); g.fill(); g.fillStyle='#8a4a2c'; g.beginPath(); g.arc(x,y,r*0.74,0,7); g.fill(); return; }
+  g.fillStyle='#E8C15A'; g.beginPath(); g.arc(x,y,r,0,7); g.fill(); g.fillStyle='#D9825B'; g.beginPath(); g.arc(x,y,r*0.74,0,7); g.fill();
+  g.strokeStyle=q<0?'#7FB8FF':'#FF8A6B'; g.lineWidth=2; g.beginPath(); g.arc(x,y,r+3,0,7); g.stroke(); g.lineWidth=1;
+  g.fillStyle=q<0?'#7FB8FF':'#FF8A6B'; g.font='bold 12px ui-monospace,monospace'; g.textAlign='center'; g.fillText(q<0?'−':'+',x,y-r-7); g.textAlign='left'; }
+function drawHanger(){
+  const [g,W,H]=fit($('cv'),0.62,420), gap=Math.min(W/6.2,90), r=gap*0.3, y0=H*0.16, cx=W/2, q=Q();
+  g.strokeStyle='#4a453c'; g.beginPath(); g.moveTo(cx-2.5*gap,y0); g.lineTo(cx+2.5*gap,y0); g.stroke();
+  // cube 3x3x3 hanging, isometric
+  const s=Math.min(gap*0.62,H*0.1), ox=cx, oy=y0+H*0.3, iso=(i,j,k)=>[ox+(i-j)*s*0.95, oy+(i+j)*s*0.5+k*s*1.05];
+  const P=[]; for(let i=0;i<3;i++)for(let j=0;j<3;j++)for(let k=0;k<3;k++) P.push([i,j,k]);
+  const corners=[[0,0,0],[2,0,0],[0,2,0],[2,2,0]], hooks=[0,1,3,4];
+  g.strokeStyle='rgba(232,193,90,.35)'; corners.forEach((c,n)=>{ const [x,y]=iso(...c); g.beginPath(); g.moveTo(cx+X[hooks[n]]*gap,y0+r); g.lineTo(x,y); g.stroke(); });
+  { const [x,y]=iso(1,1,0); g.setLineDash([3,4]); g.beginPath(); g.moveTo(cx,y0+r); g.lineTo(x,y); g.stroke(); g.setLineDash([]); }
+  P.sort((a,b)=>(a[0]+a[1])-(b[0]+b[1])).forEach(p=>{ const [x,y]=iso(...p); g.fillStyle='#E8C15A'; g.beginPath(); g.arc(x,y,s*0.34,0,7); g.fill(); g.fillStyle='#b8663f'; g.beginPath(); g.arc(x,y,s*0.24,0,7); g.fill(); });
+  for(let i=0;i<5;i++) dot(g,cx+X[i]*gap,y0,r,q[i],i===2);
+  // probe in the 0
+  const pxl=cx+px*gap; g.fillStyle=probe==='n'?'#B8B2A6':'#FF8A6B'; g.beginPath(); g.arc(pxl,y0,r*0.36,0,7); g.fill();
+  g.fillStyle='#0e0d0b'; g.font='bold 10px ui-monospace,monospace'; g.textAlign='center'; g.fillText(probe==='n'?'n':'p',pxl,y0+3.5); g.textAlign='left';
+  g.fillStyle='#948F85'; g.font='9.5px ui-monospace,monospace'; g.fillText('27 hang: 3 × 3 × 3',8,H-8);
+  g.fillText('ornament: threads and tilt are for the eye',8,14);
+}
+function drawNest(){
+  const [g,W,H]=fit($('zv'),0.34,240), cx=W/2, cy=H/2, gap=Math.min(W/5.6,110), r=gap*0.42, f=lvT-Math.floor(lvT);
+  // current chain grows as we zoom: scale = 5^frac
+  const z=5**f, L=Math.floor(lvT);
+  const drawChain=(lev,sc,depth)=>{ const gp=gap*sc, rr=r*sc; if(rr<0.6||depth>3) return;
+    const nuc=lev>=9, labs=nuc?['−','+','n/p','−','+']:['1','1','0','1','1'];
+    for(let i=0;i<5;i++){ const x=cx+X[i]*gp; if(x<-rr||x>W+rr) continue;
+      g.fillStyle=i===2?'rgba(232,193,90,.18)':(lev>=37?'#556':'rgba(217,130,91,.85)'); g.strokeStyle=i===2?'#E8C15A':'#8a4a2c';
+      g.beginPath(); g.arc(x,cy,rr,0,7); g.fill(); g.stroke();
+      if(rr>9){ g.fillStyle=nuc?(labs[i]==='−'?'#7FB8FF':labs[i]==='+'?'#FF8A6B':'#E9E6DF'):'#E9E6DF'; g.font=Math.min(14,rr*0.5)+'px ui-monospace,monospace'; g.textAlign='center'; g.fillText(labs[i],x,cy+4); g.textAlign='left'; } }
+    drawChain(lev+1,sc/5,depth+1); };
+  drawChain(L,z,0);
+  g.fillStyle='#948F85'; g.font='9.5px ui-monospace,monospace'; g.fillText('each 0 holds a chain 5× smaller',8,H-8);
+}
+const WHAT=[[0,'the dot · 1,196 atoms'],[1,'2.6 copper spacings'],[2,'one copper atom\'s radius'],[3,'half a hydrogen atom'],[4,'inside the atom · inner electrons'],[5,'where gold\'s innermost electrons orbit'],[6,'empty · between nucleus and electrons'],[7,'empty'],[8,'smaller than a gold nucleus (14 fm)'],[9,'one nucleon · [−][+][n/p][−][+]'],[10,'nothing measured lives here'],[37,'nothing measured lives here'],[37.65,'the Planck length']];
+function whatAt(l){ let w=WHAT[0][1]; for(const [a,b] of WHAT) if(l>=a-1e-9) w=b; return w; }
+function readouts(){
+  const b=bind(), p0=pot(0), f0=fld(0);
+  $('bind').textContent=(b*U1).toFixed(2)+' eV · '+(-b*U1/(KB*300/E)).toFixed(0)+'× heat';
+  $('pot').innerHTML=Math.abs(p0)<1e-12?'<span class="lit">0 · cancels</span>':(p0*U1).toFixed(2)+' V';
+  $('fld').innerHTML=Math.abs(f0)<1e-12?'<span class="lit">0 · cancels</span>':f0.toFixed(2)+' units';
+  const lvl=Math.min(lv,Math.log(D/LP)/Math.log(5)), size=D/5**lvl;
+  $('lvl').textContent='level '+(lv>=37.6?'37.65':lv); $('zs').textContent=len(size); $('zw').textContent=whatAt(lv);
+  window.__HANG__={chain,probe,px,bindEV:b*U1,pot0:p0,fld0:f0,lv,size};
+}
+function step(now){ const dt=Math.min(0.05,(now-last)/1000); last=now;
+  if(probe==='p'){ const f=fld(px); if(Math.abs(f)>1e-9&&Math.abs(px)<0.62){ pv+=f*dt*0.6; px+=pv*dt; } else if(Math.abs(px)>=0.62){ pv=0; px=Math.sign(px)*0.62; } }
+  else { px*=0.9; pv=0; }
+  lvT+=(lv-lvT)*Math.min(1,dt*6); if(Math.abs(lv-lvT)<1e-3) lvT=lv;
+  drawHanger(); drawNest(); window.__HANG__&&(window.__HANG__.px=px); requestAnimationFrame(step); }
+function setMsg(){ const f0=fld(0), p0=pot(0);
+  $('msg').textContent= probe==='n' ? 'a neutron in the 0: no charge, so neither voltage nor push touches it. it stays.'
+   : Math.abs(f0)>1e-9 ? `a proton in the 0: costs ${(p0*U1).toFixed(2)} eV to place, but the push is ${f0.toFixed(1)} units, so it drifts toward the − on its right.`
+   : `a proton in the 0: the pushes cancel, so it stays, but placing it costs ${(p0*U1).toFixed(2)} eV.`; }
+document.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{ chain=b.dataset.c; px=0; pv=0; document.querySelectorAll('[data-c]').forEach(x=>x.classList.toggle('on',x===b)); readouts(); setMsg(); });
+document.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>{ probe=b.dataset.p; px=0; pv=0; document.querySelectorAll('[data-p]').forEach(x=>x.classList.toggle('on',x===b)); readouts(); setMsg(); });
+const setL=v=>{ lv=v; readouts(); $('zmsg').textContent=lv===9?'level 9: a site is 1.71 fm, a nucleon. your [−][+][n/p][−][+] lives here.':lv>=37.6?'the Planck length: 37.65 openings from the dot. nothing smaller has a meaning we can measure.':''; };
+$('in').onclick=()=>setL(lv>=37?37.65:lv+1); $('out').onclick=()=>setL(lv>=37.6?37:Math.max(0,lv-1));
+$('nuc').onclick=()=>setL(9); $('pl').onclick=()=>setL(37.65);
+addEventListener('resize',()=>{}); readouts(); setMsg(); requestAnimationFrame(step);
+})();
+</script>
+</body>
+</html>

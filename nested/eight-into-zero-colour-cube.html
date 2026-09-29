@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>eight into zero · the colour cube</title>
+<style>
+:root{--ground:#121113;--rule:#2c2a2e;--ink:#E8E6EA;--dim:#928E97;--au:#E8C15A;--lit:#6FD08C;--amber:#F2A03D;--bad:#FF6B6B}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ground);color:var(--ink);font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.wrap{max-width:860px;margin:0 auto;padding:16px}
+.hd{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin:14px 0 8px}
+.hd:first-child{margin-top:0}
+.hd b{font-weight:400;letter-spacing:.2em;color:var(--dim);font-size:10px;text-transform:uppercase}
+canvas{display:block;width:100%;border:1px solid var(--rule);border-radius:3px;background:#0c0b0d}
+.sp{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;align-items:center}
+.sp span.l{color:var(--dim);font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-right:2px}
+button{font:inherit;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:transparent;color:var(--au);border:1px solid #5a4a22;padding:6px 9px;border-radius:2px;cursor:pointer}
+button.on{background:rgba(232,193,90,.15)}
+.rd{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+@media(max-width:560px){.rd{grid-template-columns:1fr 1fr}}
+.rd div{border:1px solid var(--rule);border-radius:3px;padding:6px 8px;min-width:0}
+.rd i{display:block;font-style:normal;font-size:9px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+.rd span{font-size:13px;overflow-wrap:anywhere}
+.s{font-size:8.5px;letter-spacing:.1em;margin-left:4px}
+.lit{color:var(--lit)} .amb{color:var(--amber)} .bad{color:var(--bad)}
+.tw{overflow-x:auto;margin-top:10px} table{border-collapse:collapse;width:100%;font-size:11px}
+th,td{padding:4px 7px;border-bottom:1px solid #1e1d20;text-align:right;white-space:nowrap} th{color:var(--dim);font-weight:400;font-size:9px;letter-spacing:.1em;text-transform:uppercase} td:first-child,th:first-child{text-align:left}
+#msg{margin-top:8px;font-size:11px;min-height:18px}
+.note{margin-top:10px;font-size:10.5px;color:var(--dim)} .note b{color:var(--ink);font-weight:400}
+.small{margin-top:8px;font-size:11px;border-left:2px solid var(--au);padding-left:9px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hd"><b>R · eight into the 0 · the paint cube</b><b id="pairhd">complement pairs</b></div>
+  <canvas id="cube"></canvas>
+  <div class="sp"><span class="l">pairs</span><button data-m="true" class="on">complements · [bk,wt] [rd,gr] [yl,pu] [bl,or]</button><button data-m="yours">yours · [bk,wt] [rd,bl] [gr,yl] [or,pu]</button></div>
+  <div class="rd">
+    <div><i>all 8 corners, summed from the 0</i><span class="lit">0, 0, 0</span></div>
+    <div><i>pairs that close on the 0</i><span id="pc">–</span></div>
+    <div><i>bits per colour</i><span>3 · paint R, Y, B on or off<s class="s lit">LIT</s></span></div>
+    <div><i>8 = 3 × 3 − 1</i><span>the 9th is the 0</span></div>
+  </div>
+
+  <div class="hd"><b>the corpus in 8 colours · 768 bits = 256 cells</b><b id="gridhd">as written</b></div>
+  <canvas id="grid"></canvas>
+  <div class="sp"><button id="flip">complement every cell</button><button id="flipY">apply your pairs to every cell (control)</button><button id="back">as written</button></div>
+  <div id="msg"></div>
+  <div class="rd">
+    <div><i>cells</i><span>256 = 16 × 16</span></div>
+    <div><i>anchors read back</i><span id="rb">–</span></div>
+    <div><i>cells that close on the 0</i><span id="cz">–</span></div>
+    <div><i>anchor edges</i><span>cell 85⅓ and 170⅔</span></div>
+  </div>
+
+  <div class="hd"><b>{{8 colours}}^{{n}}^{{n}}</b><b>towers read right to left</b></div>
+  <div class="tw"><table id="tw"></table></div>
+
+  <div class="note"><b>the cube.</b> paint has three primaries, red, yellow, blue, each on or off. that's 3 bits, 2³ = <b>8</b> mixes, and they are exactly your eight: white (no paint), red, yellow, blue, orange (r+y), green (y+b), purple (r+b), black (all three). they sit on the corners of a cube. its centre is the neutral grey, <b>the 0</b>. measured from the 0, all eight corners add to exactly zero: <b>8 into 0</b>, LIT. a colour's complement is the opposite corner, all three bits flipped. those four pairs are the cube's four long diagonals, and each crosses the 0: black–white, red–green, yellow–purple, blue–orange. your black–white is one of them. your other three pairs are edges or face diagonals, so each pair on its own misses the 0; only all eight together close it. <b>the corpus.</b> 3 bits per colour means the three 256-bit anchors, 768 bits, are exactly <b>256 colour cells</b>, a 16 × 16 square. complementing every cell writes the corpus's exact opposite (every bit flipped), and cell plus complement lands on the 0 in all 256 cells. your pairing isn't a bit-flip: only its black and white cells close. <b>the tower.</b> 8^(n^n): n = 2 gives 4,096. n = 3 gives 2⁸¹. n = 4 gives 8^256 = <b>2⁷⁶⁸</b>, every possible 768-bit corpus, all 10²³¹ of them. that last one isn't magic: 256 cells times 3 bits is 768. <b>8 = 3×3−1:</b> eight corners plus the centre make 9 points, 3 × 3. take the 0 away and 8 remain around it.</div>
+  <div class="small">small words: eight paint pots sit on the corners of a box. the grey in the middle is the 0. each pot has a partner straight across through the middle; mix partners and you get grey. write the secret with the pots, then swap every pot for its partner: you get the secret's exact opposite, and together they make grey everywhere.</div>
+</div>
+<script>
+(function(){
+'use strict';
+// RYB cube: bit2 = red, bit1 = yellow, bit0 = blue
+const COL=[['wt','#EFEDE6'],['bl','#2F5FD0'],['yl','#F2CD2E'],['gr','#3FA34D'],['rd','#D8342C'],['pu','#7B3FA8'],['or','#EE8A22'],['bk','#141414']];
+const NAME=COL.map(c=>c[0]), IDX=Object.fromEntries(NAME.map((n,i)=>[n,i]));
+const TRUE=[['bk','wt'],['rd','gr'],['yl','pu'],['bl','or']], YOURS=[['bk','wt'],['rd','bl'],['gr','yl'],['or','pu']];
+const H=['02880745b847317c4e2424524ec25d0f7a2b84368d184586f45b54af9fcab763','ad6791a3a9964d030b555595ea8fb5ecbc0e156c39b974d2fd513c4f85007ba6','18d8f32cfcaab3f0460071efdc44eb6eff1f0298d177cc8555ac2f0af84934c6'];
+const BITS=H.join('').split('').flatMap(c=>parseInt(c,16).toString(2).padStart(4,'0').split('').map(Number));
+const WRITTEN=[]; for(let i=0;i<768;i+=3) WRITTEN.push(BITS[i]*4+BITS[i+1]*2+BITS[i+2]);
+const $=id=>document.getElementById(id);
+const vec=i=>[(i>>2&1)*2-1,(i>>1&1)*2-1,(i&1)*2-1];
+const add=(a,b)=>a.map((x,k)=>x+b[k]);
+const partner=(map,i)=>{ for(const [a,b] of map){ if(NAME[i]===a) return IDX[b]; if(NAME[i]===b) return IDX[a]; } return i; };
+let mode='true', cells=WRITTEN.slice(), state='written', ang=0.5, last=performance.now();
+function fit(cv,r,mx){ const w=cv.clientWidth||600, h=Math.round(Math.min(w*r,mx)), d=window.devicePixelRatio||1; cv.width=Math.round(w*d); cv.height=Math.round(h*d); cv.style.height=h+'px'; const g=cv.getContext('2d'); g.setTransform(d,0,0,d,0,0); return [g,w,h]; }
+function drawCube(){
+  const [g,W,Hh]=fit($('cube'),0.56,380), cx=W/2, cy=Hh/2, s=Math.min(W,Hh)*0.26, c=Math.cos(ang), sn=Math.sin(ang), t=0.45, ct=Math.cos(t), st=Math.sin(t);
+  const P=v=>{ const x=v[0]*c+v[2]*sn, z=-v[0]*sn+v[2]*c, y=v[1]*ct-z*st, z2=v[1]*st+z*ct; return [cx+x*s,cy-y*s,z2]; };
+  // edges
+  g.strokeStyle='#2c2a2e'; for(let i=0;i<8;i++)for(let b=0;b<3;b++){ const j=i^(1<<b); if(j>i){ const a=P(vec(i)), e=P(vec(j)); g.beginPath(); g.moveTo(a[0],a[1]); g.lineTo(e[0],e[1]); g.stroke(); } }
+  const pairs=mode==='true'?TRUE:YOURS;
+  for(const [a,b] of pairs){ const i=IDX[a], j=IDX[b], A=P(vec(i)), B=P(vec(j)), sum=add(vec(i),vec(j)), ok=sum.every(x=>x===0);
+    g.strokeStyle=ok?'rgba(111,208,140,.75)':'rgba(255,107,107,.75)'; g.lineWidth=2; g.beginPath(); g.moveTo(A[0],A[1]); g.lineTo(B[0],B[1]); g.stroke(); g.lineWidth=1;
+    if(!ok){ const Z=P([0,0,0]), S=P(sum.map(x=>x/2)); g.strokeStyle='#FF6B6B'; g.setLineDash([3,3]); g.beginPath(); g.moveTo(Z[0],Z[1]); g.lineTo(S[0],S[1]); g.stroke(); g.setLineDash([]); } }
+  const Z=P([0,0,0]); g.fillStyle='#E8C15A'; g.beginPath(); g.arc(Z[0],Z[1],9,0,7); g.fill(); g.fillStyle='#8a4a2c'; g.beginPath(); g.arc(Z[0],Z[1],6.5,0,7); g.fill();
+  const pts=[...Array(8).keys()].map(i=>[...P(vec(i)),i]).sort((a,b)=>a[2]-b[2]);
+  for(const [x,y,z,i] of pts){ g.fillStyle=COL[i][1]; g.strokeStyle='#5d5a60'; g.beginPath(); g.arc(x,y,11,0,7); g.fill(); g.stroke(); g.fillStyle='#928E97'; g.font='10px ui-monospace,monospace'; g.fillText(NAME[i],x+14,y+4); }
+  g.fillStyle='#928E97'; g.font='9.5px ui-monospace,monospace'; g.fillText('green = crosses the 0 · red = misses (dashed: by how much)',8,Hh-8);
+}
+function drawGrid(){
+  const [g,W,Hh]=fit($('grid'),0.62,440), n=16, sz=Math.min((W-20)/n,(Hh-30)/n), ox=(W-sz*n)/2, oy=8;
+  for(let k=0;k<256;k++){ const x=ox+(k%n)*sz, y=oy+Math.floor(k/n)*sz; g.fillStyle=COL[cells[k]][1]; g.fillRect(x+0.5,y+0.5,sz-1,sz-1); }
+  for(const b of [256/3,512/3]){ const k=Math.floor(b), x=ox+(k%n)*sz+(b-k)*sz, y=oy+Math.floor(k/n)*sz; g.strokeStyle='#E8C15A'; g.lineWidth=2; g.beginPath(); g.moveTo(x,y-2); g.lineTo(x,y+sz+2); g.stroke(); g.lineWidth=1; }
+  g.fillStyle='#928E97'; g.font='9.5px ui-monospace,monospace'; g.fillText('gold ticks: where one anchor ends inside a cell',ox,Hh-6);
+}
+function readBack(){ const b=cells.flatMap(v=>[v>>2&1,v>>1&1,v&1]); const out=[]; for(let a=0;a<3;a++){ let h=''; for(let i=0;i<64;i++){ const o=a*256+i*4; h+=(b[o]*8+b[o+1]*4+b[o+2]*2+b[o+3]).toString(16);} out.push(h);} return out; }
+function render(){
+  const pairs=mode==='true'?TRUE:YOURS, closed=pairs.filter(([a,b])=>add(vec(IDX[a]),vec(IDX[b])).every(x=>x===0)).length;
+  $('pc').innerHTML=(closed===4?'<span class="lit">':'<span class="amb">')+closed+' of 4</span>';
+  $('pairhd').textContent=mode==='true'?'complement pairs':'your pairs';
+  const rb=readBack(), m=rb.filter((h,i)=>h===H[i]).length, notH=H.map(h=>[...h].map(c=>(15-parseInt(c,16)).toString(16)).join('')), isNot=rb.every((h,i)=>h===notH[i]);
+  $('rb').innerHTML=m===3?'<span class="lit">3 of 3</span>':isNot?'<span class="amb">0 of 3 · exact opposite</span>':'<span class="bad">▓ '+m+' of 3 · scrambled</span>';
+  const z=state==='written'?null:cells.reduce((s,v,k)=>s+(add(vec(v),vec(WRITTEN[k])).every(x=>x===0)?1:0),0);
+  $('cz').innerHTML=z===null?'–':(z===256?'<span class="lit">256 of 256</span>':'<span class="bad">▓ '+z+' of 256</span>');
+  $('gridhd').textContent=state==='written'?'as written':state==='true'?'every cell complemented':'your pairs applied';
+  window.__CUBE__={mode,closed,state,read:m,isNot,zeroCells:z,counts:NAME.map((n,i)=>cells.filter(v=>v===i).length)};
+  drawGrid();
+}
+function tower(){
+  const rows=[['n','8^(n^n)','as a power of 2','reading','(8^n)^n'],
+    ['1','8','2³','one cube','8'],['2','4,096','2¹²','16 × 16 × 16','4,096'],['3','2.42×10²⁴','2⁸¹','3 × 27: your 81 and your 27','134,217,728'],['4','1.55×10²³¹','2⁷⁶⁸','every possible corpus core','2⁴⁸']];
+  $('tw').innerHTML=rows.map((r,i)=>'<tr>'+r.map(c=>i?`<td>${c}</td>`:`<th>${c}</th>`).join('')+'</tr>').join('');
+}
+document.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{ mode=b.dataset.m; document.querySelectorAll('[data-m]').forEach(x=>x.classList.toggle('on',x===b)); render(); });
+$('flip').onclick=()=>{ cells=WRITTEN.map(v=>7-v); state='true'; $('msg').innerHTML='every cell swapped for the corner straight across the 0: every bit of the corpus flipped. cell + complement = the 0, in all 256.'; render(); };
+$('flipY').onclick=()=>{ cells=WRITTEN.map(v=>partner(YOURS,v)); state='yours'; const z=cells.reduce((s,v,k)=>s+(add(vec(v),vec(WRITTEN[k])).every(x=>x===0)?1:0),0);
+  $('msg').innerHTML=`<span class="bad">▓ control: your pairs swap colours but don't flip bits. only the ${z} black and white cells close on the 0.</span>`; render(); };
+$('back').onclick=()=>{ cells=WRITTEN.slice(); state='written'; $('msg').textContent=''; render(); };
+function loop(now){ const dt=Math.min(0.05,(now-last)/1000); last=now; ang+=dt*0.3; drawCube(); requestAnimationFrame(loop); }
+addEventListener('resize',render); tower(); render(); requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

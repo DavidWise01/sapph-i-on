@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>tut cipher · read through the cube cell</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Egyptian+Hieroglyphs&display=swap" rel="stylesheet">
+<style>
+:root{--ground:#0f0e0b;--rule:#2e2a22;--ink:#EFE9DC;--dim:#978F7F;--au:#D4AF37;--lapis:#3A5BC7;--lit:#6FD08C;--amber:#F2A03D;--bad:#FF6B6B}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ground);color:var(--ink);font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.wrap{max-width:900px;margin:0 auto;padding:16px}
+.hd{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin:18px 0 8px}
+.hd:first-child{margin-top:0}
+.hd b{font-weight:400;letter-spacing:.2em;color:var(--dim);font-size:10px;text-transform:uppercase}
+.g{font-family:'Noto Sans Egyptian Hieroglyphs',serif;font-size:20px}
+canvas{display:block;width:100%;border:1px solid var(--rule);border-radius:3px;background:#0a0908;touch-action:none}
+input[type=text]{width:100%;background:#0a0908;border:1px solid var(--rule);color:var(--ink);font:inherit;font-size:16px;padding:9px 10px;border-radius:2px;letter-spacing:.12em;text-transform:uppercase}
+.sp{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;align-items:center}
+button{font:inherit;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:transparent;color:var(--au);border:1px solid #5a4a22;padding:6px 9px;border-radius:2px;cursor:pointer}
+button.on{background:rgba(212,175,55,.15)}
+.rd{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+@media(max-width:560px){.rd{grid-template-columns:1fr 1fr}}
+.rd div{border:1px solid var(--rule);border-radius:3px;padding:6px 8px;min-width:0}
+.rd i{display:block;font-style:normal;font-size:9px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+.rd span{font-size:13px;overflow-wrap:anywhere}
+.tw{overflow-x:auto;margin-top:8px;border:1px solid var(--rule);border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:11px}
+th,td{padding:5px 7px;border-bottom:1px solid #1d1b17;text-align:left;vertical-align:top}
+th{color:var(--dim);font-weight:400;font-size:9px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+td.n{white-space:nowrap}
+.s{font-size:9px;letter-spacing:.1em;white-space:nowrap}
+.lit{color:var(--lit)} .amb{color:var(--amber)} .bad{color:var(--bad)}
+#msg{margin-top:8px;font-size:11px;min-height:18px}
+.note{margin-top:10px;font-size:10.5px;color:var(--dim)} .note b{color:var(--ink);font-weight:400}
+.small{margin-top:8px;font-size:11px;border-left:2px solid var(--au);padding-left:9px}
+@media(max-width:560px){
+ #au tr,#rt tr{display:grid;grid-template-columns:1fr auto;border-bottom:1px solid #1d1b17}
+ #rt tr{grid-template-columns:auto 1fr auto}
+ #au th,#rt th{display:none} #au td,#rt td{border:0}
+ #au td:nth-child(2){display:none}
+ #au td:nth-child(4),#rt td:nth-child(4){grid-column:1/-1;color:var(--dim);padding-top:0}
+}
+.verdict{border:1px solid #4a3d1c;background:rgba(212,175,55,.05);border-radius:3px;padding:9px 11px;font-size:11.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hd"><b>R · the uploaded cipher, read through the cube cell</b><b>27 = 26 letters + the 0</b></div>
+  <div class="verdict">what it is: an English-letter substitution into hieroglyphs, Greek and a dot tally. the tally is the real engine: <b>value = 3 × lines + dots</b>. that's base 3 with only its last digit finished. finish it and every letter is <b>3 trits</b>, one cell of a 3 × 3 × 3 cube: 26 cells on the outside for A–Z, and the centre for the 0 (space). the cube's 8 corners are the 8-colour cell from last turn, and flipping a cell through the 0 is <b>Atbash</b> (A↔Z, B↔Y … M↔N). the glyph and Greek layers can't round-trip; the cube does.</div>
+
+  <div class="hd"><b>the cell · type a word</b><b id="wv">–</b></div>
+  <input type="text" id="w" value="PTOLEMY" maxlength="24" aria-label="word">
+  <div class="sp"><button data-w="PTOLEMY">ptolemy</button><button data-w="TUT">tut</button><button data-w="ANKH">ankh</button><button data-w="ROSETTA">rosetta</button><button id="cmp">flip through the 0 (atbash)</button></div>
+  <canvas id="cv"></canvas>
+  <div id="msg"></div>
+  <div class="tw"><table id="lt"></table></div>
+  <div class="rd">
+    <div><i>cells in the cube</i><span>27 = 3³</span></div>
+    <div><i>outside · letters</i><span>26 · 8 corners, 12 edges, 6 faces</span></div>
+    <div><i>centre</i><span>the 0 · space</span></div>
+    <div><i>longest mark · yours → cell</i><span>10 → 6 (Z)</span></div>
+  </div>
+
+  <div class="hd"><b>round trip · word → layer → word</b><b>the known-bad input must make noise</b></div>
+  <div class="tw"><table id="rt"></table></div>
+
+  <div class="hd"><b>the page's claims, stamped</b><b id="tally">–</b></div>
+  <div class="tw"><table id="au"></table></div>
+
+  <div class="hd"><b>the cartouche, aligned</b><b>7 signs, 10 Greek letters: vowels mostly unwritten</b></div>
+  <div class="tw"><table id="pt"></table></div>
+
+  <div class="note"><b>how the cell solves it.</b> your tally already counts in threes: a dot is 1, a line is 3. take one more step and let three lines close into a triangle, <b>△ = 9</b>, your own A-triangle. then every letter 1–26 is at most △△||.., three digits of base 3. shift them to −1, 0, +1 and the letters sit on a 3 × 3 × 3 cube with the <b>0 at the centre</b>: A = +1, M = +13, N = −13, Z = −1. a letter and its opposite cell always add to 0 (27 wraps to 0). that's Atbash, the old mirror alphabet, so the cube's own complement is a working cipher. the 8 corners, where all three digits are ±1, are E G K M N P T V. give each digit a paint (+1 = on) and they wear last turn's 8 colours: M black / N white, K orange / P blue, G purple / T yellow, E red / V green. complements again. <b>what doesn't survive.</b> the glyph layer sends 26 letters to 20 signs (c=k, e=i, o=u=w, f=v, j=y), so it can't be read back. English also has no letters for 7 Egyptian sounds (ꜥ ḥ ḫ ẖ š ṯ ḏ). the Greek layer sends 26 to 22. "Demotic" here is a made-up tally, not the Demotic script. the dot values follow English alphabet order, which the Egyptian signs never had. <b>images.</b> the three embedded charts carry the most errors: wrong Gardiner codes, a shifted category row, and an off-by-one Greek alignment. the code's own letter map is mostly sound. a few ▓ marks are my own arithmetic catching the page's arithmetic.</div>
+  <div class="small">small words: 27 boxes in a big cube. the middle box is empty: that's the 0. each letter lives in one outside box. walk straight through the middle to the box on the other side and you find the letter's mirror: A and Z, B and Y. the picture-writing version loses letters when you read it back; the cube never does.</div>
+</div>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const A='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+// balanced: n (1..26) → v in −13..13, space → 0
+const bal=n=>n<=13?n:n-27, unbal=v=>v<0?v+27:v;
+const trits=v=>{ let t=[],x=v; for(let i=0;i<3;i++){ let r=((x%3)+3)%3; if(r===2) r=-1; t.unshift(r); x=(x-r)/3; } return t; };   // [9s,3s,1s]
+const val=t=>t[0]*9+t[1]*3+t[2];
+const letterOf=v=>v===0?' ':A[unbal(v)-1];
+const his=n=>{ if(n<=0) return '·'; const l=Math.floor(n/3), d=n%3; return '|'.repeat(l)+'.'.repeat(d); };
+const cell=n=>{ const a=Math.floor(n/9), b=Math.floor(n%9/3), c=n%3; return ('△'.repeat(a)+'|'.repeat(b)+'.'.repeat(c))||'·'; };
+const kind=t=>['centre','face','edge','corner'][t.filter(x=>x!==0).length];
+// RYB paint on corners: +1 = on, (R,Y,B) = (9s,3s,1s)
+const PAINT={'111':['black','#141414'],'000':['white','#EFEDE6'],'110':['orange','#EE8A22'],'001':['blue','#2F5FD0'],'101':['purple','#7B3FA8'],'010':['yellow','#F2CD2E'],'100':['red','#D8342C'],'011':['green','#3FA34D']};
+const paint=t=>t.every(x=>x!==0)?PAINT[t.map(x=>x>0?1:0).join('')]:null;
+// the uploaded page's own letter → Gardiner map and Greek map (copied as data)
+const GL={a:'G1',b:'D58',c:'V31',d:'D46',e:'M17',f:'I9',g:'W11',h:'O4',i:'M17',j:'M17A',k:'V31',l:'E23',m:'G17',n:'N35',o:'G43',p:'Q3',q:'N29',r:'D21',s:'S29',t:'X1',u:'G43',v:'I9',w:'G43',x:'V31+S29',y:'M17A',z:'O34'};
+const GR={a:'Α',b:'Β',c:'Κ',d:'Δ',e:'Ε',f:'Φ',g:'Γ',h:'Η',i:'Ι',j:'Ι',k:'Κ',l:'Λ',m:'Μ',n:'Ν',o:'Ο',p:'Π',q:'Θ',r:'Ρ',s:'Σ',t:'Τ',u:'Υ',v:'Φ',w:'Ω',x:'Ξ',y:'Υ',z:'Ζ'};
+const inv=m=>{ const r={}; for(const [k,v] of Object.entries(m)) if(!(v in r)) r[v]=k; return r; };
+const GLi=inv(GL), GRi=inv(GR);
+let word='PTOLEMY', flipped=false, rot=0.6, tilt=0.42, drag=null, last=performance.now();
+const clean=s=>s.toUpperCase().replace(/[^A-Z ]/g,'');
+function enc(w){ return [...w].map(ch=>{ if(ch===' ') return {ch,n:0,v:0,t:[0,0,0]}; const n=A.indexOf(ch)+1, v=bal(n); return {ch,n,v,t:trits(v)}; }); }
+function shown(){ const e=enc(word); return flipped?e.map(x=>{ const t=x.t.map(y=>-y), v=val(t); return {ch:letterOf(v),n:unbal(v),v,t}; }):e; }
+function fit(cv){ const w=cv.clientWidth||600, h=Math.round(Math.min(w*0.62,420)), d=window.devicePixelRatio||1; cv.width=Math.round(w*d); cv.height=Math.round(h*d); cv.style.height=h+'px'; const g=cv.getContext('2d'); g.setTransform(d,0,0,d,0,0); return [g,w,h]; }
+function draw(){
+  const [g,W,H]=fit($('cv')), cx=W/2, cy=H/2, s=Math.min(W,H)*0.25, c=Math.cos(rot), sn=Math.sin(rot), ct=Math.cos(tilt), st=Math.sin(tilt);
+  const P=(a,b,d)=>{ const x=a*c+d*sn, z=-a*sn+d*c, y=b*ct-z*st, z2=b*st+z*ct; return [cx+x*s,cy-y*s,z2]; };
+  const cur=shown(), on=new Set(cur.map(x=>x.v));
+  // path
+  const pts=cur.map(x=>P(x.t[2],x.t[1],x.t[0]));
+  const cells=[]; for(let v=-13;v<=13;v++){ const t=trits(v), p=P(t[2],t[1],t[0]); cells.push([p,v,t]); }
+  cells.sort((a,b)=>a[0][2]-b[0][2]);
+  for(const [p,v,t] of cells){ const lit=on.has(v), pt=paint(t), f=0.55+0.3*p[2];
+    const r=(v===0?9:7)*(lit?1.35:1);
+    g.fillStyle=v===0?'#D4AF37':pt?pt[1]:`rgba(151,143,127,${0.35*f+0.15})`; g.globalAlpha=lit||v===0?1:0.55;
+    g.beginPath(); g.arc(p[0],p[1],r,0,7); g.fill(); g.globalAlpha=1;
+    if(lit){ g.strokeStyle='#D4AF37'; g.lineWidth=2; g.beginPath(); g.arc(p[0],p[1],r+3,0,7); g.stroke(); g.lineWidth=1; }
+    g.fillStyle=lit?'#EFE9DC':'rgba(239,233,220,.55)'; g.font=(lit?'bold 11px':'10px')+' ui-monospace,monospace'; g.fillText(v===0?'0':letterOf(v),p[0]+r+3,p[1]+4); }
+  g.strokeStyle='rgba(212,175,55,.55)'; g.lineWidth=1.5; g.beginPath(); pts.forEach((p,i)=>i?g.lineTo(p[0],p[1]):g.moveTo(p[0],p[1])); g.stroke(); g.lineWidth=1;
+  g.fillStyle='#978F7F'; g.font='9.5px ui-monospace,monospace'; g.fillText('drag to turn · corners wear the 8 paints · gold line = the word\'s path',8,H-8);
+}
+function render(){
+  const e=enc(word), cur=shown();
+  $('wv').textContent=(flipped?'atbash of ':'')+word+' → '+cur.map(x=>x.ch).join('');
+  let h='<tr><th>letter</th><th>#</th><th>your tally</th><th>cell (△=9)</th><th>trits</th><th>where</th><th>paint</th><th>opposite</th></tr>';
+  cur.forEach(x=>{ if(x.ch===' '){ h+='<tr><td>space</td><td>0</td><td>·</td><td>·</td><td>0 0 0</td><td>centre</td><td>–</td><td>itself</td></tr>'; return; }
+    const pt=paint(x.t), opp=letterOf(-x.v);
+    h+=`<tr><td class="n"><b>${x.ch}</b></td><td>${x.n}</td><td class="n">${his(x.n)}</td><td class="n">${cell(x.n)}</td><td class="n">${x.t.map(y=>y>0?'+':y<0?'−':'0').join(' ')}</td><td>${kind(x.t)}</td><td>${pt?`<span style="color:${pt[1]==='#141414'?'#bbb':pt[1]}">■ ${pt[0]}</span>`:'–'}</td><td>${opp}</td></tr>`; });
+  $('lt').innerHTML=h;
+  const sumTot=e.reduce((s,x)=>s+x.n,0), sumBal=e.reduce((s,x)=>s+x.v,0);
+  $('msg').innerHTML=`letter sum ${sumTot} · balanced sum ${sumBal>=0?'+':'−'}${Math.abs(sumBal)} · word + its atbash = <span class="lit">0 in every cell</span>`;
+  // round trip
+  const lw=word.toLowerCase().replace(/ /g,'');
+  const viaGl=[...lw].map(ch=>GLi[GL[ch]]||'?').join('').toUpperCase(), viaGr=[...lw].map(ch=>GRi[GR[ch]]||'?').join('').toUpperCase();
+  const viaCell=enc(word.replace(/ /g,'')).map(x=>letterOf(val(x.t))).join('');
+  const W0=word.replace(/ /g,''), row=(n,out,note)=>`<tr><td>${n}</td><td class="n">${out}</td><td>${out===W0?'<span class="lit">back intact</span>':'<span class="bad">▓ '+[...out].filter((c,i)=>c!==W0[i]).length+' letters lost</span>'}</td><td>${note}</td></tr>`;
+  $('rt').innerHTML='<tr><th>layer</th><th>reads back as</th><th>result</th><th>why</th></tr>'+
+    row('hieroglyph (page)',viaGl,'26 letters share 20 signs: c=k, e=i, o=u=w, f=v, j=y')+
+    row('Greek (page)',viaGr,'26 letters share 22: c=k, i=j, u=y, f=v')+
+    row('the cube cell',viaCell,'27 cells, one per letter + the 0: nothing shared');
+  draw();
+  window.__TUT__={word,flipped,shown:cur.map(x=>x.ch).join(''),viaGl,viaGr,viaCell,sumTot,sumBal};
+}
+// ---- audit ----
+const AU=[
+ ['dot tally: value = 3·lines + dots','code','LIT','it is base 3 with only the last digit finished; P = 16 = |||||. checks'],
+ ['". =1 prime"','header','DEAD','1 is not prime. it is the unit: the one mark every count is built from'],
+ ['"isomorphic" across 4 scripts','title','DEAD','an isomorphism must read back one-to-one. glyphs: 26 → 20. Greek: 26 → 22'],
+ ['A = 3| + 3| + 1. = 19 → collapses to 1','panel 02','LIT','19 → 1 + 9 = 10 → 1, by digit sum'],
+ ['Q3: 13 → "13%9?" → . =1','Q nest','▓ DEAD','13 mod 9 = 4, digit sum 4. it does not reduce to 1'],
+ ['Ptolemy: "sum reduces to . =1"','section 03','▓ DEAD','the page\'s own sign totals 13+7+16+13+10+10+7 = 76 → 13 → 4. letter values 106 → 7'],
+ ['27 Gardiner categories (A–Z + Aa)','header, tree image','DEAD','there is no J category: 25 letters + Aa = 26. the code pads the list with an invented "AaA"'],
+ ['"24 uniliterals"','badge, chart','AMBER','the searchable list holds 19; the 7 sounds English lacks (ꜥ ḥ ḫ ẖ š ṯ ḏ) are missing'],
+ ['letter → sign map (a→G1 … z→O34)','code','LIT','24 of 26 letters draw the glyph their Gardiner code claims (checked against Unicode names). o/u/w → G43 and j/y → M17A are forced by English'],
+ ['h and y draw the wrong glyph','code','▓ DEAD','h is labelled O4 (shelter) but draws U+13250, Unicode O1 (house). y is labelled M17A but draws U+131C9, Unicode M16 (papyrus clump)'],
+ ['Q7 brazier','Q nest','▓ DEAD','the glyph drawn is U+132AF, which Unicode names R1 (offering table)'],
+ ['"Demotic" column','code','DEAD','"latin~|||" is an invented tally. Demotic is a real cursive script with its own signs'],
+ ['Greek q → Θ','code','AMBER','Greek has no q; theta is th. koppa or kappa is closer'],
+ ['Ptolemy: y → E, s → Y','cartouche image','DEAD','off by one. the double reed is the ι of -αι-, the folded cloth is the final Σ; ε is unwritten'],
+ ['Ptolemy: "lion (doubled)" row','code','DEAD','one lion (E23) in the cartouche. 8 rows for 7 signs'],
+ ['"Rosetta Stone, line 42"','cartouche image','DEAD','the hieroglyphic section has 14 surviving lines'],
+ ['P in Ptolemy = "P1 ship"','tree image','DEAD','it is Q3, the stool, as the page\'s own Q nest says'],
+ ['"T1 bread loaf", "G43 lion"','tree image','DEAD','loaf is X1 (T1 is a mace); lion is E23 (G43 is the quail chick)'],
+ ['D / E / F / G category boxes','tree image','DEAD','labels shifted one box: "E — Mammals D1–D58", "F — E1–E34", "Birds F1–F52"'],
+ ['vulture = "A1"','alphabet chart','DEAD','G1. A1 is the seated man. (the code has it right)'],
+ ['reed "Y1", two reeds "Y5"','alphabet chart','DEAD','reed leaf is M17. Y1 is a papyrus roll, Y5 a game board'],
+ ['ripple N35 = ayin','alphabet chart','DEAD','N35 is n. ayin (ꜥ) is D36, the forearm'],
+ ['basket "F35", cobra "G17 I9", hand "D21"','alphabet chart','DEAD','basket V31; cobra I10; hand D46. F35 is heart-and-windpipe, G17 owl, I9 viper, D21 mouth'],
+ ['folded cloth "N29" and "S34", bolt "Z4"','alphabet chart','DEAD','cloth S29; N29 is the hill (q); S34 is the ankh; bolt O34; Z4 is two strokes (y)'],
+ ['horned viper "I10 š", rope "Z9 ṯ"','alphabet chart','DEAD','horned viper I9 = f; š is N37 (pool); ṯ is V13; Z9 is crossed sticks'],
+ ['Gardiner 1927 · Rosetta 196 BC','footer','LIT','the grammar and the decree date'],
+ ['decompositions (stool = 4 legs + seat = 13 …)','code','AMBER','yours: a counting rule laid over the pictures, not a property of the signs'],
+];
+function audit(){ let h='<tr><th>claim</th><th>where</th><th>stamp</th><th>why</th></tr>', n={LIT:0,AMBER:0,DEAD:0};
+  AU.forEach(([c,w,s,y])=>{ const k=s.includes('DEAD')?'DEAD':s; n[k]++; h+=`<tr><td>${c}</td><td class="n">${w}</td><td class="s ${k==='LIT'?'lit':k==='AMBER'?'amb':'bad'}">${s}</td><td>${y}</td></tr>`; });
+  $('au').innerHTML=h; $('tally').textContent=`${n.LIT} LIT · ${n.AMBER} AMBER · ${n.DEAD} DEAD`; window.__AUDIT__=n; }
+function ptol(){
+  const R=[['𓊪','Q3','stool','p','Π'],['𓏏','X1','bread loaf','t','τ'],['𓅱','G43','quail chick','w','ο'],['𓃭','E23','lion','rw / l','λ'],['','','(not written)','','ε'],['𓅓','G17','owl','m','μ'],['𓇌','M17 ×2','two reeds','y','αι (ι)'],['𓋴','S29','folded cloth','s','ς (+ ο before it, unwritten)']];
+  $('pt').innerHTML='<tr><th>sign</th><th>Gardiner</th><th>picture</th><th>sound</th><th>Greek Πτολεμαῖος</th></tr>'+R.map(r=>`<tr><td class="g">${r[0]}</td><td class="n">${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td></tr>`).join('');
+}
+$('w').addEventListener('input',e=>{ word=clean(e.target.value)||'A'; flipped=false; $('cmp').classList.remove('on'); render(); });
+document.querySelectorAll('[data-w]').forEach(b=>b.onclick=()=>{ word=b.dataset.w; $('w').value=word; flipped=false; $('cmp').classList.remove('on'); render(); });
+$('cmp').onclick=()=>{ flipped=!flipped; $('cmp').classList.toggle('on',flipped); render(); };
+const cv=$('cv');
+cv.addEventListener('pointerdown',e=>{ drag=[e.clientX,e.clientY,rot,tilt]; cv.setPointerCapture(e.pointerId); });
+cv.addEventListener('pointermove',e=>{ if(!drag) return; rot=drag[2]+(e.clientX-drag[0])*0.01; tilt=Math.max(-1.3,Math.min(1.3,drag[3]+(e.clientY-drag[1])*0.01)); });
+cv.addEventListener('pointerup',()=>drag=null);
+function loop(now){ const dt=Math.min(0.05,(now-last)/1000); last=now; if(!drag) rot+=dt*0.2; draw(); requestAnimationFrame(loop); }
+addEventListener('resize',render); audit(); ptol(); render(); requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

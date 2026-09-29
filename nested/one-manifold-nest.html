@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>one manifold · the nest</title>
+<style>
+:root{--ground:#0b0b0e;--rule:#25262c;--ink:#E7E7EA;--dim:#8F929B;--bh:#FF5A6E;--ns:#C9A0FF;--dis:#7FB8FF;--forge:#F2A03D;--dead:#9AA0AA;--lit:#6FD08C;--amber:#F2A03D}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ground);color:var(--ink);font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.wrap{max-width:900px;margin:0 auto;padding:14px}
+.nest{font-size:11px;word-break:break-word;border:1px solid var(--rule);border-radius:3px;padding:8px 10px;margin-bottom:10px}
+.nest .d{color:#FF7A9C} .nest .t{color:var(--ink)}
+canvas{display:block;width:100%;border:1px solid var(--rule);border-radius:3px;background:#07070a}
+.bar{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:8px}
+button{font:inherit;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:transparent;color:var(--ink);border:1px solid #3a3d44;padding:6px 9px;border-radius:2px;cursor:pointer}
+button.on{background:rgba(255,255,255,.08)}
+.rd{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+@media(max-width:600px){.rd{grid-template-columns:1fr}}
+.rd div{border:1px solid var(--rule);border-radius:3px;padding:7px 9px}
+.rd i{display:block;font-style:normal;font-size:9px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;margin-bottom:2px}
+.st{font-size:8.5px;letter-spacing:.1em;margin-left:6px} .lit{color:var(--lit)} .amb{color:var(--amber)}
+#perm{font-size:15px;letter-spacing:.18em;margin-top:10px;color:#FF7A9C;word-break:break-all}
+input[type=range]{flex:1;min-width:150px;accent-color:#FF7A9C}
+.note{margin-top:10px;font-size:10.5px;color:var(--dim)} .note b{color:var(--ink);font-weight:400}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="nest" id="nest"></div>
+  <canvas id="cv"></canvas>
+  <div class="bar"><span style="color:var(--dim)">the last layer:</span><button id="c1" class="on">choice 1 · forge</button><button id="c2">choice 2 · dead shell</button><button id="sp">spin the nest</button></div>
+  <div class="rd" id="layers"></div>
+  <div class="bar" style="margin-top:14px"><button id="sh">permute a–z</button><span style="color:var(--dim)">letters</span><input type="range" id="n" min="1" max="60" step="1" value="26"><span id="nv" style="min-width:26px;text-align:right">26</span></div>
+  <div id="perm"></div>
+  <div class="rd">
+    <div><i>arrangements of the letters</i><span id="fac">–</span></div>
+    <div><i>that many atoms is about</i><span id="kg">–</span></div>
+    <div><i>vs the atoms in one earth</i><span id="vs">–</span></div>
+  </div>
+  <div class="note"><b>the nest</b> is yours, kept exactly as typed, with the <b>^</b> and <b>^^</b> joins treated as tokens (R = your root name, withheld). each layer gets a stamp: LIT where there's measured physics under it, AMBER where it's your structure. <b>black-hole layer 0</b>: black holes are real and do sit pinned at the centres of galaxies by the gravity of everything around them, but not as a layer of their own. <b>neutron-star layer −1</b>: a neutron star's radius is only 2.9 times the size at which light can't escape (1.4 suns in 12 km: 4.13 km), so it's about <b>a third of the way to a black hole</b>, your "1/3 strength", measured in how tightly it's packed. <b>choice 1, the forge</b>: two neutron stars spiral in and collide, tearing pieces off each other; the thrown-off matter is where much of the universe's <b>gold</b> is made, the gold in the core of the stack. <b>choice 2, the dead shell</b>: a neutron star that has cooled and stopped shining: still a third of a black hole, just quiet. <b>a–z permuted</b>: 26 letters have 403,291,461,126,605,635,584,000,000 orderings, about the number of atoms in 12 kg of water. to match the ~1.3 × 10⁵⁰ atoms in the earth you need <b>42</b> letters: 41 give 3.4 × 10⁴⁹, 42 give 1.4 × 10⁵¹.</div>
+</div>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const EARTH=1.33e50, NA=6.02214076e23;
+let choice=1, ang=0, spin=false, perm=null;
+// the nest, token by token; joins are tokens too
+const TOK=[['{{R.reality}}','t'],['^','d'],['{{R.abstract}}','t'],['^','d'],['{{blackholelayer0}}','t'],['^^','d'],['{{neutronstarlayer}}','t'],['^^','d'],['{{disentangledneutronstarlayer}}','t'],['^','d'],['{{choice 1:: forge … or 2:: dead neutron shell or black hole at 1/3 strength}}','t'],['::','d'],['one manifold','t'],['·','d'],['a – z, permuted','t'],['=','d'],['1 planet','t']];
+$('nest').innerHTML=TOK.map(([s,k])=>`<span class="${k}">${s}</span>`).join(' ');
+const LAYERS=[
+ {k:'R.reality',col:'#E7E7EA',st:'amb',txt:'the outer frame: yours'},
+ {k:'R.abstract',col:'#B8BCC6',st:'amb',txt:'the layer of ideas: yours'},
+ {k:'black-hole layer · 000',col:'#FF5A6E',st:'lit',txt:'real: held at galaxy centres by everything around them. a layer: yours'},
+ {k:'neutron-star layer · −1 · 00',col:'#C9A0FF',st:'lit',txt:'real: r = 2.9 × the light-trap size, a third of a black hole'},
+ {k:'disentangled neutron-star layer',col:'#7FB8FF',st:'amb',txt:'yours: no measured meaning for "disentangled" here'},
+ {k:'choice',col:'#F2A03D',st:'lit',txt:'1 · forge: they collide and make gold · 2 · dead shell: cooled, quiet, still a third of a black hole'}];
+function layers(){ $('layers').innerHTML=LAYERS.map(l=>`<div><i style="color:${l.col}">${l.k}<span class="st ${l.st}">${l.st==='lit'?'LIT':'AMBER'}</span></i>${l.txt}</div>`).join(''); }
+function fit(cv){ const w=cv.clientWidth||700, h=Math.round(Math.min(w*0.62,480)), d=window.devicePixelRatio||1; cv.width=Math.round(w*d); cv.height=Math.round(h*d); cv.style.height=h+'px'; const g=cv.getContext('2d'); g.setTransform(d,0,0,d,0,0); return [g,w,h]; }
+function draw(){
+  const [g,W,H]=fit($('cv')), cx=W/2, cy=H/2, R=Math.min(W,H)*0.46;
+  const rings=[[1,'#E7E7EA','R.reality'],[0.85,'#B8BCC6','R.abstract'],[0.7,'#FF5A6E','black holes · 000'],[0.53,'#C9A0FF','neutron stars · −1'],[0.37,'#7FB8FF','disentangled'],[0.22,choice===1?'#F2A03D':'#9AA0AA',choice===1?'forge':'dead shell']];
+  rings.forEach(([f,col,lab],i)=>{ g.strokeStyle=col; g.globalAlpha=0.9; g.lineWidth=i===0?1:1.5; g.setLineDash(i<2?[3,5]:[]); g.beginPath(); g.arc(cx,cy,R*f,0,7); g.stroke(); g.setLineDash([]);
+    g.fillStyle=col; g.font='10px ui-monospace,monospace'; g.fillText(lab,cx+R*f*Math.cos(-2.3)-10,cy+R*f*Math.sin(-2.3)-4); });
+  g.globalAlpha=1;
+  // black holes on their ring: dark discs with a red rim, pinned
+  const nb=10; for(let k=0;k<nb;k++){ const a=ang*0.3+k/nb*2*Math.PI, x=cx+R*0.7*Math.cos(a), y=cy+R*0.7*Math.sin(a); g.fillStyle='#000'; g.beginPath(); g.arc(x,y,7,0,7); g.fill(); g.strokeStyle='#FF5A6E'; g.beginPath(); g.arc(x,y,7,0,7); g.stroke(); }
+  // neutron stars: radius drawn 2.9x their light-trap ring
+  const nn=14; for(let k=0;k<nn;k++){ const a=-ang*0.45+k/nn*2*Math.PI, x=cx+R*0.53*Math.cos(a), y=cy+R*0.53*Math.sin(a); g.fillStyle='#C9A0FF'; g.beginPath(); g.arc(x,y,5,0,7); g.fill(); g.strokeStyle='rgba(255,90,110,.8)'; g.beginPath(); g.arc(x,y,5/2.9,0,7); g.stroke(); }
+  // disentangled: the same stars pulled apart into loose pairs
+  const nd=18; for(let k=0;k<nd;k++){ const a=ang*0.6+k/nd*2*Math.PI, x=cx+R*0.37*Math.cos(a), y=cy+R*0.37*Math.sin(a), s=3.5+2*Math.sin(ang*2+k); g.fillStyle='#7FB8FF'; g.beginPath(); g.arc(x-s,y,2.2,0,7); g.arc(x+s,y,2.2,0,7); g.fill(); }
+  // the choice, at the centre
+  if(choice===1){ const d=R*0.12*(1-((ang*0.5)%1)); g.fillStyle='#F2A03D'; for(const s of [-1,1]){ g.beginPath(); g.arc(cx+s*d,cy,6,0,7); g.fill(); }
+    if(d<R*0.03){ for(let k=0;k<16;k++){ const a=k/16*2*Math.PI, r=R*0.2*((ang*3)%1); g.fillStyle=`rgba(232,193,90,${1-((ang*3)%1)})`; g.beginPath(); g.arc(cx+r*Math.cos(a),cy+r*Math.sin(a),2,0,7); g.fill(); } }
+    g.fillStyle='#E8C15A'; g.font='10px ui-monospace,monospace'; g.fillText('gold thrown off',cx-38,cy+R*0.18); }
+  else { g.strokeStyle='#9AA0AA'; g.setLineDash([2,3]); g.beginPath(); g.arc(cx,cy,R*0.09,0,7); g.stroke(); g.setLineDash([]); g.fillStyle='#9AA0AA'; g.beginPath(); g.arc(cx,cy,R*0.05,0,7); g.fill(); g.font='10px ui-monospace,monospace'; g.fillText('cold, still ⅓ of a black hole',cx-80,cy+R*0.16); }
+  g.fillStyle='rgba(0,0,0,.55)'; g.fillRect(0,0,W,20); g.fillStyle='#8F929B'; g.font='10px ui-monospace,monospace'; g.fillText('one manifold · outside in · the red ring inside each neutron star is its light-trap size (1/2.9 of it)',8,13);
+}
+function fact(n){ let f=1n; for(let k=2n;k<=BigInt(n);k++) f*=k; return f; }
+function sciB(b){ const s=b.toString(); const e=s.length-1; return e<6?Number(b).toLocaleString():(s[0]+'.'+s.slice(1,3)+'×10'+String(e).replace(/\d/g,c=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[c])); }
+function letters(n){ const al='abcdefghijklmnopqrstuvwxyz'; const out=[]; for(let i=0;i<n;i++) out.push(i<26?al[i]:al[i%26]+Math.floor(i/26)); return out; }
+function permute(){ const n=+$('n').value, L=letters(n); for(let i=L.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [L[i],L[j]]=[L[j],L[i]]; } perm=L; show(); }
+function show(){ const n=+$('n').value, f=fact(n), atoms=Number(f), kg=atoms/NA*0.018015; $('nv').textContent=n;
+  $('fac').textContent=n===26?f.toLocaleString():sciB(f);
+  $('kg').textContent=kg<1e-3?(kg*1e6).toPrecision(2)+' mg of water':kg<1e3?kg.toPrecision(3)+' kg of water':kg<5.97e24?(kg/1e3).toPrecision(3)+' tonnes of water':(atoms/EARTH).toPrecision(3)+' earths';
+  const r=atoms/EARTH; $('vs').innerHTML=r>=1?`<span style="color:#6FD08C">${r.toPrecision(3)}× — enough for a planet</span>`:`${r.toExponential(1)} of it`;
+  $('perm').textContent=perm&&perm.length===n?perm.join(' '):letters(n).join(' ');
+  window.__NEST__={n,fact:f.toString(),ratio:r,choice}; }
+function loop(){ if(spin){ ang+=0.02; draw(); } requestAnimationFrame(loop); }
+$('c1').onclick=()=>{ choice=1; $('c1').classList.add('on'); $('c2').classList.remove('on'); draw(); show(); };
+$('c2').onclick=()=>{ choice=2; $('c2').classList.add('on'); $('c1').classList.remove('on'); draw(); show(); };
+$('sp').onclick=()=>{ spin=!spin; $('sp').classList.toggle('on',spin); };
+$('sh').onclick=permute; $('n').oninput=()=>{ perm=null; show(); };
+addEventListener('resize',draw); layers(); draw(); show(); spin=true; $('sp').classList.add('on'); loop();
+})();
+</script>
+</body>
+</html>

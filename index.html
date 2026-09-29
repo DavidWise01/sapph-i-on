@@ -62,7 +62,7 @@
   .seat b { letter-spacing:.08em; }
   .seat a { display:block; font-size:14px; margin-top:4px; }
   .corpus { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:8px; margin:0 0 22px; }
-  .corpus a, .archive a, .libraries a, .folio a, .strip a { display:block; padding:8px 10px; font-size:13px; }
+  .corpus a, .archive a, .libraries a, .folio a, .strip a, .nested a { display:block; padding:8px 10px; font-size:13px; }
   .seat .addr { color:var(--dim); font:12px ui-monospace, Consolas, monospace; }
   .read { padding:14px 16px; margin:0 0 14px; }
   .read h2 { margin:0 0 8px; font-size:15px; letter-spacing:.12em; }
@@ -76,7 +76,7 @@
   <div>
     <div class="src"><a href="https://0root.ai/">0root.ai</a> · world 7 · order 7^3 · galaxy door · 24 spheres</div>
     <h1>SaPpH<span>{{i}}</span>on</h1>
-    <p class="sub">World 7 is the cube of 7. This page is the galaxy door: it counts the cube and throws if the count is wrong. A galaxy holds 24 spheres, three on each corner seat. Beside those seats are four more cubes of 24: a Downloads copy, an Internet Archive cube, a library cube, and a folio cube that alternates article and thought. A nested strip holds two spheres, minus-plus and plus-minus, offset 1, 2, 1, 2, 1, 2. Four mirrors close on the one-sided number 420024.</p>
+    <p class="sub">World 7 is the cube of 7. This page is the galaxy door: it counts the cube and throws if the count is wrong. A galaxy holds 24 spheres, three on each corner seat. Beside those seats are four more cubes of 24: a Downloads copy, an Internet Archive cube, a library cube, and a folio cube that alternates article and thought. A nested strip holds two spheres, minus-plus and plus-minus, offset 1, 2, 1, 2, 1, 2. Four mirrors close on the one-sided number 420024. A nested cube holds 24 files copied unchanged from Downloads, the newest nested cubes and nests, numbered copies skipped.</p>
   </div>
   <div class="src">door number 7 · assigned<br>palindrome of five · unchanged</div>
 </header>
@@ -136,6 +136,11 @@
   <div class="strip" id="strip"></div>
   <p class="mono" id="stripcard"></p>
 
+  <h2 style="font-size:14px;letter-spacing:.16em;margin:18px 0 10px">NESTED CUBE · 24</h2>
+  <p class="sub" style="margin:0 0 10px">Like for like from the drive. Twenty-four nested cubes and nests, newest first, numbered copies skipped. The bytes are the source files.</p>
+  <div class="nested" id="nested"></div>
+  <p class="mono" id="nestedcard"></p>
+
   <section class="read">
     <h2>WHAT THE PAGE PROVES</h2>
     <p><span class="stamp lit">LIT</span> Every cell of a 7×7×7 grid is visited once. Cells with 3 faces exposed are corners (8). Cells with 2 are edges (12×5 = 60). Cells with 1 are faces (6×25 = 150). Cells with 0 are interior (5³ = 125). Those four counts sum to 343, and 7×7×7 is 343. The odd side leaves exactly one center, at (3,3,3). 343 = (3+4)³, and 3, 4, 3 are the digits of 343. Complex multiplication gives i² = −1 and i³ = −i. A failed check throws and the grid is not drawn.</p>
@@ -146,6 +151,7 @@
     <p><span class="stamp amber">AMBER</span> The folio cube alternates article, thought, article, thought, three spheres to an appeal. The articles were found on the Internet Archive on 2026-09-29. The thoughts were written for this cube. The seating is assigned. The page does not carry the articles, and a thought does not read its neighbor.</p>
     <p><span class="stamp lit">LIT</span> The strip recomputes its fold, its four mirrors, and its offset. 24 reversed is 42. 24 joined to 42 is 240042. 42 joined to 24 is 420024. 420024 reversed is 420024. Pair-reversal swaps those two writings and swaps them back. Offset 1 reads 402. Offset 2 reads 204. A failed check throws.</p>
     <p><span class="stamp amber">AMBER</span> Möbius is the assigned name of that one-sided number. The four mirrors are the four reversals. The fold was given as the nest. The two spheres are minus-plus and plus-minus. They are not seated on the eight appeals. Neither sphere reads the other page.</p>
+    <p><span class="stamp amber">AMBER</span> The nested cube is 24 Downloads files, newest first among the nested cubes and nests. Numbered copies were skipped. Toolchain files, ROMs, photos, and books were left where they were. The bytes were copied unchanged. The order is assigned.</p>
     <p><span class="stamp wall">WALL</span> This galaxy does not extend the palindrome [ W1 | W2 ‖ W3 ‖ W4 | W5 ] and does not record a world 6. i³ = −i is arithmetic. It does not locate the cube on a physical imaginary axis, and it is not a claim about mind, physics, or authority. The strip's check is the number 420024. It does not measure glass, and it does not fold a piece of paper.</p>
     <p class="mono" id="card"></p>
     <p class="mono" id="fault"></p>
@@ -340,6 +346,58 @@ fetch("corpus/manifest.json").then(function (res) {
   document.getElementById("corpuscard").innerHTML = "<span class='stamp lit'>LIT</span> 24 corpus files, manifest order matches";
 }).catch(function (err) {
   document.getElementById("corpuscard").innerHTML = "<span class='stamp wall'>WALL</span> " + err.message;
+  throw err;
+});
+
+var NESTED = [
+  "Generative-Nested-Each-Brace.html",
+  "Nested-Containment-Staroreafwg.html",
+  "Bone-Nest-Exponential-Tower.html",
+  "Wrapped-Nested-Exponential-Tower.html",
+  "Nested-Hive-Swarm-Delegators-3-Levels.html",
+  "Photon-Out-Shell-Black-Hole-Infinite-Nesting-Void.html",
+  "Nested-Relative-Scale-Me-You-Moon-Sun.html",
+  "Imergent-Cubes.html",
+  "75px-Cube-Strip-15.html",
+  "81-Nested-Og.html",
+  "outside-the-julia-set-nested.html",
+  "V116-Cube-Lattice.html",
+  "tut-cipher-read-through-the-cube-cell.html",
+  "eight-into-zero-colour-cube.html",
+  "Add-More-Pin-Nested.html",
+  "hanger-11011-nested-zero.html",
+  "one-manifold-nest.html",
+  "Aeon-Nested-Html-Rust-Go-Wasm.html",
+  "Bonk-Nest-0-Ice9-0-V26.html",
+  "Prims-10-Generations-Nested.html",
+  "G6-Corrected-81-Nested-3x3-Power-3.html",
+  "One-Boxy-Nested-Boxy.html",
+  "17-Layers-Nested-Cu.html",
+  "Mini-1px-Cube-1g.html"
+];
+if (NESTED.length !== 24) throw new Error("LIT FAIL nested count");
+var seenNested = {};
+var nestedEl = document.getElementById("nested");
+NESTED.forEach(function (file) {
+  if (seenNested[file]) throw new Error("LIT FAIL nested duplicate");
+  seenNested[file] = 1;
+  var a = document.createElement("a");
+  a.href = "nested/" + file;
+  a.textContent = file.replace(/\.html$/, "");
+  nestedEl.appendChild(a);
+});
+fetch("nested/manifest.json").then(function (res) {
+  if (!res.ok) throw new Error("LIT FAIL nested manifest");
+  return res.json();
+}).then(function (rows) {
+  if (!rows || rows.length !== 24) throw new Error("LIT FAIL nested manifest count");
+  rows.forEach(function (row, i) {
+    if (row.file !== NESTED[i]) throw new Error("LIT FAIL nested order");
+    if (!/^[0-9a-f]{64}$/.test(row.sha256)) throw new Error("LIT FAIL nested hash");
+  });
+  document.getElementById("nestedcard").innerHTML = "<span class='stamp lit'>LIT</span> 24 nested files, manifest order matches";
+}).catch(function (err) {
+  document.getElementById("nestedcard").innerHTML = "<span class='stamp wall'>WALL</span> " + err.message;
   throw err;
 });
 
