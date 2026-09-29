@@ -47,3 +47,12 @@ Checks
   Edge, local: all 24 cards start with LIT, no pageerror, body background rgb(247, 241, 230)
   Index: 24 seat links, layer z=0 shows 4 corners, a corner click names the seat, width 390 still shows 24 links
   The Twenty-Four: 24 chips, one clicked. The Surface: slider set to 3, a cell clicked. The Braces: button clicked.
+
+Hallway index · 2026-09-29
+
+The hallway index names World 7 · 7^3 in the opening paragraph, the L3 rung, and the census line. The five-world counts and the palindrome are unchanged. The galaxy birth seal was not rewritten.
+
+  commit: 670a1fdda2c998a5224f47207b3c11ee7341c33a
+  message: name World 7 · 7^3 in the hallway index
+  GitHub Pages: https://davidwise01.github.io/0root/
+  https://0root.ai/ last-modified 2026-09-22, server railway-hikari, and its index does not contain 7^3. DNS was not changed.
