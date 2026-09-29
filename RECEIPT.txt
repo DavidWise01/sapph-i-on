@@ -95,3 +95,11 @@ Two spheres, minus-plus then plus-minus, nested on one loop. The fold is l./1/1/
   commit: 86b0fb8b7ba71ca0bbcbc550ffad4231a8750996
   message: 2 spheres, nested strip, 420024
   check: Edge loaded both spheres and the door. LIT: offset 1 reads 402, offset 2 reads 204, four mirrors, census 343. A wrong reading throws.
+
+Nested cube · 2026-09-29
+
+24 Downloads HTML files whose names are nested cubes or nests, newest first, numbered copies skipped. Copied unchanged into nested/. Toolchain files, ROMs, photos, and books were left where they were. They are not the 24 corner spheres. The galaxy birth seal was not rewritten.
+
+  commit: 7dbb75d5c523a341290dece4d993ec5b099d15d9
+  message: 24 nested files, like for like
+  check: node door with the corpus and nested manifests stubbed. LIT: census 343, strip 420024, offset 1 reads 402, offset 2 reads 204, 24 nested files, manifest order matches, 49 cells. A swapped file throws LIT FAIL nested order. A short hash throws LIT FAIL nested hash. The 24 file bytes match the Downloads sources and the seals.
