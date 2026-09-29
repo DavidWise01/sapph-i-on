@@ -62,7 +62,7 @@
   .seat b { letter-spacing:.08em; }
   .seat a { display:block; font-size:14px; margin-top:4px; }
   .corpus { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:8px; margin:0 0 22px; }
-  .corpus a, .archive a { display:block; padding:8px 10px; font-size:13px; }
+  .corpus a, .archive a, .libraries a { display:block; padding:8px 10px; font-size:13px; }
   .seat .addr { color:var(--dim); font:12px ui-monospace, Consolas, monospace; }
   .read { padding:14px 16px; margin:0 0 14px; }
   .read h2 { margin:0 0 8px; font-size:15px; letter-spacing:.12em; }
@@ -76,7 +76,7 @@
   <div>
     <div class="src"><a href="https://0root.ai/">0root.ai</a> · world 7 · order 7^3 · galaxy door · 24 spheres</div>
     <h1>SaPpH<span>{{i}}</span>on</h1>
-    <p class="sub">World 7 is the cube of 7. This page is the galaxy door: it counts the cube and throws if the count is wrong. A galaxy holds 24 spheres, three on each corner seat. Beside those seats are two more cubes of 24: a Downloads copy, and an Internet Archive cube, one corpus to a sphere.</p>
+    <p class="sub">World 7 is the cube of 7. This page is the galaxy door: it counts the cube and throws if the count is wrong. A galaxy holds 24 spheres, three on each corner seat. Beside those seats are three more cubes of 24: a Downloads copy, an Internet Archive cube, and a library cube, one shelf to a sphere.</p>
   </div>
   <div class="src">door number 7 · assigned<br>palindrome of five · unchanged</div>
 </header>
@@ -122,12 +122,17 @@
   <p class="sub" style="margin:0 0 10px">One Internet Archive corpus to a sphere. Each sphere asks archive.org for its identifier and throws if the answer does not match. These are not the corner seats.</p>
   <div class="archive" id="archive"></div>
 
+  <h2 style="font-size:14px;letter-spacing:.16em;margin:18px 0 10px">LIBRARY CUBE · 24</h2>
+  <p class="sub" style="margin:0 0 10px">One Internet Archive library to a sphere. Each sphere asks archive.org for its identifier and throws if the answer does not match. These are not the corner seats, and they are not the archive cube.</p>
+  <div class="libraries" id="libraries"></div>
+
   <section class="read">
     <h2>WHAT THE PAGE PROVES</h2>
     <p><span class="stamp lit">LIT</span> Every cell of a 7×7×7 grid is visited once. Cells with 3 faces exposed are corners (8). Cells with 2 are edges (12×5 = 60). Cells with 1 are faces (6×25 = 150). Cells with 0 are interior (5³ = 125). Those four counts sum to 343, and 7×7×7 is 343. The odd side leaves exactly one center, at (3,3,3). 343 = (3+4)³, and 3, 4, 3 are the digits of 343. Complex multiplication gives i² = −1 and i³ = −i. A failed check throws and the grid is not drawn.</p>
     <p><span class="stamp amber">AMBER</span> The spelling SaPpH{{i}}on is the assigned name. Deleting the token {{i}} and lowercasing leaves sapphon; that string step is proved on The Braces. The earlier sphere <a href="https://github.com/DavidWise01/super-sapphon">super-sapphon</a> uses that name for a different count, six around one. Door number 7 is assigned. The eight corner labels are the hallway's eight appeals. The sentence “the keeper chose the cube” is an assigned voice.</p>
     <p><span class="stamp amber">AMBER</span> The corpus batch is the 24 newest Sapphon HTML files in Downloads, skipping numbered copies. Each seal records sha256(title|slug|blurb) and the file hash computed when the copy was made. This page checks that the manifest lists those 24 names in that order. It does not re-prove what those files claim, and it does not restyle them.</p>
     <p><span class="stamp amber">AMBER</span> The archive cube assigns three corpora to each of the eight appeals. The Internet Archive did not make that seating. Each sphere cites one item found there on 2026-09-29 and proves the identifier live. The page does not carry the files.</p>
+    <p><span class="stamp amber">AMBER</span> The library cube assigns three libraries to each of the eight appeals. The Internet Archive did not make that seating. Each sphere cites one collection found there on 2026-09-29 and proves the identifier live. The page does not carry the holdings. McGill is three different identifiers: the university libraries, the Islamic Studies Library, and the Osler Library.</p>
     <p><span class="stamp wall">WALL</span> This galaxy does not extend the palindrome [ W1 | W2 ‖ W3 ‖ W4 | W5 ] and does not record a world 6. i³ = −i is arithmetic. It does not locate the cube on a physical imaginary axis, and it is not a claim about mind, physics, or authority.</p>
     <p class="mono" id="card"></p>
     <p class="mono" id="fault"></p>
@@ -363,6 +368,46 @@ ARCHIVE.forEach(function (s) {
 });
 ["ETHOS","PATHOS","LOGOS","MYTHOS","EPISTEME","TECHNE","PHRONESIS","KAIROS"].forEach(function (name) {
   if (perArchive[name] !== 3) throw new Error("LIT FAIL archive " + name);
+});
+
+var LIBRARIES = [
+  {steward:"ETHOS", slug:"the-smithsonian-shelf", title:"The Smithsonian Shelf"},
+  {steward:"ETHOS", slug:"the-scottish-shelf", title:"The Scottish Shelf"},
+  {steward:"ETHOS", slug:"the-mcgill-shelf", title:"The McGill Shelf"},
+  {steward:"PATHOS", slug:"the-church-shelf", title:"The Church Shelf"},
+  {steward:"PATHOS", slug:"the-congregational-shelf", title:"The Congregational Shelf"},
+  {steward:"PATHOS", slug:"the-mouride-shelf", title:"The Mouride Shelf"},
+  {steward:"LOGOS", slug:"the-islamic-shelf", title:"The Islamic Shelf"},
+  {steward:"LOGOS", slug:"the-tripitaka-shelf", title:"The Tripitaka Shelf"},
+  {steward:"LOGOS", slug:"the-universal-shelf", title:"The Universal Shelf"},
+  {steward:"MYTHOS", slug:"the-portugal-brazil-shelf", title:"The Portugal Brazil Shelf"},
+  {steward:"MYTHOS", slug:"the-bohemian-shelf", title:"The Bohemian Shelf"},
+  {steward:"MYTHOS", slug:"the-community-shelf", title:"The Community Shelf"},
+  {steward:"EPISTEME", slug:"the-cornell-shelf", title:"The Cornell Shelf"},
+  {steward:"EPISTEME", slug:"the-canadian-shelf", title:"The Canadian Shelf"},
+  {steward:"EPISTEME", slug:"the-botanical-shelf", title:"The Botanical Shelf"},
+  {steward:"TECHNE", slug:"the-building-shelf", title:"The Building Shelf"},
+  {steward:"TECHNE", slug:"the-nasa-shelf", title:"The NASA Shelf"},
+  {steward:"TECHNE", slug:"the-million-shelf", title:"The Million Shelf"},
+  {steward:"PHRONESIS", slug:"the-osler-shelf", title:"The Osler Shelf"},
+  {steward:"PHRONESIS", slug:"the-ocean-shelf", title:"The Ocean Shelf"},
+  {steward:"PHRONESIS", slug:"the-padua-shelf", title:"The Padua Shelf"},
+  {steward:"KAIROS", slug:"the-newspaper-shelf", title:"The Newspaper Shelf"},
+  {steward:"KAIROS", slug:"the-weekly-shelf", title:"The Weekly Shelf"},
+  {steward:"KAIROS", slug:"the-microfilm-shelf", title:"The Microfilm Shelf"}
+];
+if (LIBRARIES.length !== 24) throw new Error("LIT FAIL library count");
+var perLibrary = {};
+var libraryEl = document.getElementById("libraries");
+LIBRARIES.forEach(function (s) {
+  perLibrary[s.steward] = (perLibrary[s.steward] || 0) + 1;
+  var a = document.createElement("a");
+  a.href = "libraries/" + s.slug + ".html";
+  a.textContent = s.steward + " · " + s.title;
+  libraryEl.appendChild(a);
+});
+["ETHOS","PATHOS","LOGOS","MYTHOS","EPISTEME","TECHNE","PHRONESIS","KAIROS"].forEach(function (name) {
+  if (perLibrary[name] !== 3) throw new Error("LIT FAIL library " + name);
 });
 
 zInput.addEventListener("input", draw);
