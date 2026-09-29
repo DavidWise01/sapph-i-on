@@ -62,7 +62,7 @@
   .seat b { letter-spacing:.08em; }
   .seat a { display:block; font-size:14px; margin-top:4px; }
   .corpus { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:8px; margin:0 0 22px; }
-  .corpus a { display:block; padding:8px 10px; font-size:13px; }
+  .corpus a, .archive a { display:block; padding:8px 10px; font-size:13px; }
   .seat .addr { color:var(--dim); font:12px ui-monospace, Consolas, monospace; }
   .read { padding:14px 16px; margin:0 0 14px; }
   .read h2 { margin:0 0 8px; font-size:15px; letter-spacing:.12em; }
@@ -76,7 +76,7 @@
   <div>
     <div class="src"><a href="https://0root.ai/">0root.ai</a> · world 7 · order 7^3 · galaxy door · 24 spheres</div>
     <h1>SaPpH<span>{{i}}</span>on</h1>
-    <p class="sub">World 7 is the cube of 7. This page is the galaxy door: it counts the cube and throws if the count is wrong. A galaxy holds 24 spheres, three on each corner seat. Beside those seats, 24 Downloads files are copied like for like. That batch is not another corner sphere.</p>
+    <p class="sub">World 7 is the cube of 7. This page is the galaxy door: it counts the cube and throws if the count is wrong. A galaxy holds 24 spheres, three on each corner seat. Beside those seats are two more cubes of 24: a Downloads copy, and an Internet Archive cube, one corpus to a sphere.</p>
   </div>
   <div class="src">door number 7 · assigned<br>palindrome of five · unchanged</div>
 </header>
@@ -118,12 +118,17 @@
   <div class="corpus" id="corpus"></div>
   <p class="mono" id="corpuscard"></p>
 
+  <h2 style="font-size:14px;letter-spacing:.16em;margin:0 0 10px">ARCHIVE CUBE · 24</h2>
+  <p class="sub" style="margin:0 0 10px">One Internet Archive corpus to a sphere. Each sphere asks archive.org for its identifier and throws if the answer does not match. These are not the corner seats.</p>
+  <div class="archive" id="archive"></div>
+
   <section class="read">
     <h2>WHAT THE PAGE PROVES</h2>
     <p><span class="stamp lit">LIT</span> Every cell of a 7×7×7 grid is visited once. Cells with 3 faces exposed are corners (8). Cells with 2 are edges (12×5 = 60). Cells with 1 are faces (6×25 = 150). Cells with 0 are interior (5³ = 125). Those four counts sum to 343, and 7×7×7 is 343. The odd side leaves exactly one center, at (3,3,3). 343 = (3+4)³, and 3, 4, 3 are the digits of 343. Complex multiplication gives i² = −1 and i³ = −i. A failed check throws and the grid is not drawn.</p>
     <p><span class="stamp amber">AMBER</span> The spelling SaPpH{{i}}on is the assigned name. Deleting the token {{i}} and lowercasing leaves sapphon; that string step is proved on The Braces. The earlier sphere <a href="https://github.com/DavidWise01/super-sapphon">super-sapphon</a> uses that name for a different count, six around one. Door number 7 is assigned. The eight corner labels are the hallway's eight appeals. The sentence “the keeper chose the cube” is an assigned voice.</p>
     <p><span class="stamp amber">AMBER</span> The corpus batch is the 24 newest Sapphon HTML files in Downloads, skipping numbered copies. Each seal records sha256(title|slug|blurb) and the file hash computed when the copy was made. This page checks that the manifest lists those 24 names in that order. It does not re-prove what those files claim, and it does not restyle them.</p>
-    <p><span class="stamp wall">WALL</span> This galaxy does not extend the palindrome [ W1 | W2 ‖ W3 ‖ W4 | W5 ] and does not record a world 6. i³ = −i is arithmetic. It does not locate the cube on a physical imaginary axis, and it is not a claim about mind, physics, or authority. The custom domain 0root.ai was still the older host when these spheres were published.</p>
+    <p><span class="stamp amber">AMBER</span> The archive cube assigns three corpora to each of the eight appeals. The Internet Archive did not make that seating. Each sphere cites one item found there on 2026-09-29 and proves the identifier live. The page does not carry the files.</p>
+    <p><span class="stamp wall">WALL</span> This galaxy does not extend the palindrome [ W1 | W2 ‖ W3 ‖ W4 | W5 ] and does not record a world 6. i³ = −i is arithmetic. It does not locate the cube on a physical imaginary axis, and it is not a claim about mind, physics, or authority.</p>
     <p class="mono" id="card"></p>
     <p class="mono" id="fault"></p>
   </section>
@@ -318,6 +323,46 @@ fetch("corpus/manifest.json").then(function (res) {
 }).catch(function (err) {
   document.getElementById("corpuscard").innerHTML = "<span class='stamp wall'>WALL</span> " + err.message;
   throw err;
+});
+
+var ARCHIVE = [
+  {steward:"ETHOS", slug:"the-civil-law", title:"The Civil Law"},
+  {steward:"ETHOS", slug:"the-whole-body", title:"The Whole Body"},
+  {steward:"ETHOS", slug:"the-latin-stones", title:"The Latin Stones"},
+  {steward:"PATHOS", slug:"the-northern-tongue", title:"The Northern Tongue"},
+  {steward:"PATHOS", slug:"the-hermetic-body", title:"The Hermetic Body"},
+  {steward:"PATHOS", slug:"the-occult-stack", title:"The Occult Stack"},
+  {steward:"LOGOS", slug:"the-latin-glosses", title:"The Latin Glosses"},
+  {steward:"LOGOS", slug:"the-corpus-glossary", title:"The Corpus Glossary"},
+  {steward:"LOGOS", slug:"the-pdf-corpus", title:"The PDF Corpus"},
+  {steward:"MYTHOS", slug:"the-latin-fathers", title:"The Latin Fathers"},
+  {steward:"MYTHOS", slug:"the-oriental-fathers", title:"The Oriental Fathers"},
+  {steward:"MYTHOS", slug:"the-byzantine-fonts", title:"The Byzantine Fonts"},
+  {steward:"EPISTEME", slug:"the-gutenberg-shelf", title:"The Gutenberg Shelf"},
+  {steward:"EPISTEME", slug:"the-american-libraries", title:"The American Libraries"},
+  {steward:"EPISTEME", slug:"the-heritage-library", title:"The Heritage Library"},
+  {steward:"TECHNE", slug:"the-manual-library", title:"The Manual Library"},
+  {steward:"TECHNE", slug:"the-book-scan", title:"The Book Scan"},
+  {steward:"TECHNE", slug:"the-california-library", title:"The California Library"},
+  {steward:"PHRONESIS", slug:"the-wellcome-library", title:"The Wellcome Library"},
+  {steward:"PHRONESIS", slug:"the-european-libraries", title:"The European Libraries"},
+  {steward:"PHRONESIS", slug:"the-boston-library", title:"The Boston Library"},
+  {steward:"KAIROS", slug:"the-journals", title:"The Journals"},
+  {steward:"KAIROS", slug:"the-periodicals", title:"The Periodicals"},
+  {steward:"KAIROS", slug:"the-folk-library", title:"The Folk Library"}
+];
+if (ARCHIVE.length !== 24) throw new Error("LIT FAIL archive count");
+var perArchive = {};
+var archiveEl = document.getElementById("archive");
+ARCHIVE.forEach(function (s) {
+  perArchive[s.steward] = (perArchive[s.steward] || 0) + 1;
+  var a = document.createElement("a");
+  a.href = "archive/" + s.slug + ".html";
+  a.textContent = s.steward + " · " + s.title;
+  archiveEl.appendChild(a);
+});
+["ETHOS","PATHOS","LOGOS","MYTHOS","EPISTEME","TECHNE","PHRONESIS","KAIROS"].forEach(function (name) {
+  if (perArchive[name] !== 3) throw new Error("LIT FAIL archive " + name);
 });
 
 zInput.addEventListener("input", draw);
