@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>16 stars · true colour · planck</title>
+<style>
+:root{--ground:#08090b;--rule:#25282d;--ink:#E7E9EC;--dim:#8D939C;--au:#D4AF37;--lit:#6FD08C;--amber:#F2A03D;--bad:#FF6B6B}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ground);color:var(--ink);font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.wrap{max-width:920px;margin:0 auto;padding:16px}
+.hd{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin:16px 0 8px}
+.hd:first-child{margin-top:0}
+.hd b{font-weight:400;letter-spacing:.2em;color:var(--dim);font-size:10px;text-transform:uppercase}
+.verdict{border:1px solid #4a3d1c;background:rgba(212,175,55,.05);border-radius:3px;padding:9px 11px;font-size:11.5px}
+.stars{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media(max-width:560px){ .stars{grid-template-columns:repeat(2,1fr)} }
+.st{border:1px solid var(--rule);border-radius:3px;padding:8px;min-width:0;cursor:pointer}
+.st.on{border-color:var(--au)}
+.orb{width:58px;height:58px;border-radius:50%;margin:4px auto 8px}
+.st .n{font-size:11.5px}
+.st .m{font-size:10px;color:var(--dim)}
+canvas{display:block;width:100%;border:1px solid var(--rule);border-radius:3px;background:#060708}
+.ctl{display:grid;grid-template-columns:auto 1fr auto;gap:6px 10px;align-items:center;margin-top:8px}
+input[type=range]{width:100%;accent-color:var(--au)}
+.val{font-size:11px;min-width:90px;text-align:right}
+.rd{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+.rd div{border:1px solid var(--rule);border-radius:3px;padding:6px 8px;min-width:0}
+.rd i{display:block;font-style:normal;font-size:9px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+.rd span{font-size:13px;overflow-wrap:anywhere}
+.tw{overflow-x:auto;margin-top:8px;border:1px solid var(--rule);border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:11px}
+th,td{padding:6px 8px;border-bottom:1px solid #1b1d21;text-align:left;vertical-align:top}
+th{color:var(--dim);font-weight:400;font-size:9px;letter-spacing:.1em;text-transform:uppercase}
+.s{font-size:9px;letter-spacing:.1em;white-space:nowrap}
+.lit{color:var(--lit)} .amb{color:var(--amber)} .bad{color:var(--bad)}
+.note{margin-top:10px;font-size:10.5px;color:var(--dim)} .note b{color:var(--ink);font-weight:400}
+.small{margin-top:8px;font-size:11px;border-left:2px solid var(--au);padding-left:9px}
+@media(max-width:560px){ .rd{grid-template-columns:1fr 1fr} .ctl{grid-template-columns:1fr} .val{text-align:left}
+ #tl tr,#st tr{display:grid;grid-template-columns:1fr auto;border-bottom:1px solid #22252a} #tl th,#st th{display:none} #tl td,#st td{border:0} #tl td:nth-child(2),#st td:nth-child(2),#st td:nth-child(4){grid-column:1/-1;color:var(--dim)} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hd"><b>R · 16 stars on the vector · true colour</b><b>colour = planck's law of the surface</b></div>
+  <div class="verdict">yes, a star's colour <b>is Planck</b>: Planck's law of heat glow, applied to the star's <b>surface temperature</b>, not its nucleus. red is cool (~3,000 K), yellow-white is the Sun (5,772 K), white is ~9,000 K, blue-white is 20,000 K and up. the page computes each colour from Planck's formula and the eye's colour response. two of your five come out differently: <b>there are no green stars</b> (the Sun's glow peaks in green, at 502 nm, and still looks white), and <b>black</b> is a black hole, which gives no light of its own. the 1969–1976 part doesn't hold: rockets don't puncture the 4th dimension, and the ozone hole is mostly CFCs. but the chemistry of how chlorine destroys ozone was first worked out in 1973–74 for rocket exhaust, so your instinct points at a real thread.</div>
+
+  <div class="hd"><b>the 16 · coloured by the math</b><b>tap one</b></div>
+  <div class="stars" id="stars"></div>
+
+  <div class="hd"><b>any temperature · the glow and where it peaks</b><b id="th">–</b></div>
+  <canvas id="sp"></canvas>
+  <div class="ctl"><label for="T" style="color:var(--au)">surface temperature</label><input type="range" id="T" min="2.4" max="4.7" step="0.001" value="3.7613"><span class="val" id="Tv">–</span></div>
+  <div class="rd">
+    <div><i>colour to the eye</i><span id="cc">–</span></div>
+    <div><i>glow peaks at (Wien)</i><span id="pk">–</span></div>
+    <div><i>light per m² vs the Sun</i><span id="sb">–</span></div>
+    <div><i>greenest any star gets</i><span id="gr">–</span></div>
+    <div><i>Sun's surface</i><span>5,772 K · peak 502 nm</span></div>
+    <div><i>Sun's core</i><span>15.7 million K · X-rays</span></div>
+    <div><i>what you see</i><span>the surface only</span></div>
+    <div><i>the nucleus sets</i><span>how much, not what colour</span></div>
+  </div>
+
+  <div class="hd"><b>1957 → 1987 · what really happened</b><b>your 1969–1976 window</b></div>
+  <div class="tw"><table id="tl"></table></div>
+
+  <div class="hd"><b>your line, stamped</b><b>piece by piece</b></div>
+  <div class="tw"><table id="st"></table></div>
+
+  <div class="note"><b>how the colours are computed.</b> for each temperature the page adds up Planck's glow across the visible band (380–780 nm), weighted by how the eye's three colour receptors respond. then it converts that to screen colour. brightness is set equal so you compare hue only; real brightness goes as temperature to the fourth power (the next number on each card). <b>why no green star.</b> a heat glow is always a broad hump. when its peak sits in the green, the hump spills evenly into red and blue too, and the eye adds them up to white. across 1,000 to 50,000 K the page's check never finds green beating both red and blue. <b>black.</b> a black hole makes no light; what you'd see is the bent glow around it. a black dwarf, a white dwarf cooled to nothing, would be black too, but the universe isn't old enough for any to exist. <b>dwarfs, planets, exos.</b> brown dwarfs glow a dull red to infrared. planets like Earth (288 K) glow only in infrared, so you see them by reflected sunlight. a hot Jupiter close to its star can reach ~1,500 K and glow orange-red on its own. <b>the toroids.</b> CERN's magnets can't be seen in the sky. its 7 km Super Proton Synchrotron did switch on in 1976, your year. and the sky does hold real rings: a dying Sun-like star puffs off a glowing shell shaped like a thick ring around a very hot white dwarf, as in the Ring Nebula. <b>stamps.</b> the colours, peaks and temperatures are LIT; the example stars' temperatures are standard values.</div>
+  <div class="small">small words: hot things glow. a bit hot is red, hotter is yellow-white like our Sun, hotter still is white and then blue. the math for that glow is Planck's. no star looks green, because green glow always comes mixed with red and blue, which makes white. black is a black hole, which doesn't glow at all.</div>
+</div>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+// CIE 1931 colour-matching functions (multi-lobe Gaussian fit) + Planck's law
+const gs=(x,m,a,b)=>{ const s=x<m?a:b; return Math.exp(-0.5*((x-m)/s)**2); };
+const cmf=l=>[1.056*gs(l,599.8,37.9,31.0)+0.362*gs(l,442.0,16.0,26.7)-0.065*gs(l,501.1,20.4,26.2), 0.821*gs(l,568.8,46.9,40.5)+0.286*gs(l,530.9,16.3,31.1), 1.217*gs(l,437.0,11.8,36.0)+0.681*gs(l,459.0,26.0,13.8)];
+const H=6.62607015e-34, C=299792458, K=1.380649e-23, WIEN=2.897771955e-3;
+const planck=(lnm,T)=>{ const l=lnm*1e-9; return 2*H*C*C/l**5/Math.expm1(H*C/(l*K*T)); };
+function colour(T){ if(T<=0) return {rgb:[0,0,0],lin:[0,0,0]}; T=Math.max(T,1000);   // below ~1,000 K the eye-response fit's far-red tail is unreliable: hold the hue at 1,000 K (deep red); such bodies are dark anyway
+  let X=0,Y=0,Z=0; for(let l=380;l<=780;l+=5){ const p=planck(l,T), c=cmf(l); X+=p*c[0]; Y+=p*c[1]; Z+=p*c[2]; }
+  let r=3.2406*X-1.5372*Y-0.4986*Z, g=-0.9689*X+1.8758*Y+0.0415*Z, b=0.0557*X-0.2040*Y+1.0570*Z; const m=Math.max(r,g,b); const lin=[r,g,b].map(v=>Math.max(0,v/m));
+  const f=v=>v<=0.0031308?12.92*v:1.055*Math.pow(v,1/2.4)-0.055; return {lin,rgb:lin.map(v=>Math.round(255*f(v)))}; }
+const hex=a=>'#'+a.map(v=>v.toString(16).padStart(2,'0')).join('');
+const STARS=[
+ ['Earth',288,'planet · seen by reflected sunlight'],
+ ['Y brown dwarf',400,'failed star · infrared only'],
+ ['T brown dwarf',1000,'failed star · dull red'],
+ ['hot Jupiter',1500,'exoplanet glowing on its own'],
+ ['L dwarf',2000,'the smallest stars'],
+ ['Proxima Centauri',3042,'red dwarf · nearest star'],
+ ['Betelgeuse',3600,'red supergiant'],
+ ['K dwarf',4500,'orange dwarf'],
+ ['the Sun',5772,'yellow dwarf · G'],
+ ['Procyon',6530,'F · yellow-white'],
+ ['Sirius A',9940,'A · white'],
+ ['Rigel',12100,'B · blue-white supergiant'],
+ ['Spica',22400,'B · hot blue'],
+ ['Sirius B',25000,'white dwarf · Earth-sized'],
+ ['ζ Puppis',40000,'O · among the hottest'],
+ ['black hole',0,'no light of its own'],
+];
+let sel=8;
+function cards(){ $('stars').innerHTML=STARS.map((s,i)=>{ const c=colour(s[1]), T=s[1], vis=T>=900;
+  const bg=T===0?'radial-gradient(circle,#000 55%,#6a4b2a 62%,#000 70%)':vis?`radial-gradient(circle at 40% 38%,#fff 0%,${hex(c.rgb)} 35%,${hex(c.rgb.map(v=>Math.round(v*0.55)))} 100%)`:`radial-gradient(circle,${hex(c.rgb.map(v=>Math.round(v*0.18)))} 0%,#0b0c0e 100%)`;
+  const sb=T?((T/5772)**4):0;
+  return `<div class="st ${i===sel?'on':''}" data-i="${i}"><div class="orb" style="background:${bg}"></div><div class="n">${s[0]}</div><div class="m">${T?T.toLocaleString()+' K':'—'} · ${s[2]}</div><div class="m">${T?'peak '+(WIEN/T*1e9>=1000?(WIEN/T*1e6).toFixed(1)+' µm':(WIEN/T*1e9).toFixed(0)+' nm')+' · '+(sb<0.01?sb.toExponential(1):sb.toFixed(2))+'× Sun per m²':'bent light around it'}</div></div>`; }).join('');
+  document.querySelectorAll('.st').forEach(d=>d.onclick=()=>{ sel=+d.dataset.i; const T=STARS[sel][1]; if(T>0){ $('T').value=Math.log10(Math.max(251,T)).toFixed(4); } cards(); spec(); }); }
+function fit(cv,r,mn,mx){ const w=cv.clientWidth||600, h=Math.round(Math.max(mn,Math.min(w*r,mx))), d=window.devicePixelRatio||1; cv.width=Math.round(w*d); cv.height=Math.round(h*d); cv.style.height=h+'px'; const g=cv.getContext('2d'); g.setTransform(d,0,0,d,0,0); return [g,w,h]; }
+function spec(){
+  const T=10**(+$('T').value), [g,W,Hh]=fit($('sp'),0.4,200,300), L=30, R=W-10, Tp=14, B=Hh-28, l0=100, l1=3000;
+  const X=l=>L+(R-L)*(Math.log10(l)-Math.log10(l0))/(Math.log10(l1)-Math.log10(l0));
+  // visible band
+  for(let l=380;l<=780;l+=2){ const c=cmf(l); let r=3.2406*c[0]-1.5372*c[1]-0.4986*c[2], gg=-0.9689*c[0]+1.8758*c[1]+0.0415*c[2], b=0.0557*c[0]-0.2040*c[1]+1.0570*c[2]; const m=Math.max(r,gg,b,1e-9); g.fillStyle=`rgba(${Math.round(255*Math.max(0,r/m))},${Math.round(255*Math.max(0,gg/m))},${Math.round(255*Math.max(0,b/m))},0.22)`; g.fillRect(X(l),Tp,X(l+2)-X(l)+0.5,B-Tp); }
+  let mx=0; const pts=[]; for(let i=0;i<=400;i++){ const l=10**(Math.log10(l0)+(Math.log10(l1)-Math.log10(l0))*i/400), v=planck(l,T)*l; pts.push([l,v]); mx=Math.max(mx,v); }
+  const c=colour(T); g.strokeStyle=hex(c.rgb); g.lineWidth=2; g.beginPath(); pts.forEach(([l,v],i)=>{ const x=X(l), y=B-(B-Tp)*v/mx; i?g.lineTo(x,y):g.moveTo(x,y); }); g.stroke(); g.lineWidth=1;
+  const lp=WIEN/T*1e9; if(lp>=l0&&lp<=l1){ g.strokeStyle='#E7E9EC'; g.setLineDash([3,3]); g.beginPath(); g.moveTo(X(lp),Tp); g.lineTo(X(lp),B); g.stroke(); g.setLineDash([]); }
+  g.fillStyle='#8D939C'; g.font='9.5px ui-monospace,monospace'; [100,200,380,500,780,1000,2000,3000].forEach(l=>g.fillText(l+'',X(l)-8,Hh-12)); g.fillText('wavelength, nm (log) · shaded = what eyes see · dashed = the peak',L,11);
+  $('th').textContent=Math.round(T).toLocaleString()+' K'; $('Tv').textContent=Math.round(T).toLocaleString()+' K';
+  $('cc').innerHTML=`<span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:${hex(c.rgb)};vertical-align:-2px"></span> ${hex(c.rgb)}`;
+  $('pk').textContent=T<1000?(lp/1000).toFixed(1)+' µm · infrared: almost no visible glow':lp>=1000?(lp/1000).toFixed(2)+' µm · infrared':lp>=380&&lp<=780?lp.toFixed(0)+' nm · visible':lp.toFixed(0)+' nm · ultraviolet';
+  $('sb').textContent=((T/5772)**4).toPrecision(3)+'×';
+  window.__STAR__={T,rgb:c.rgb,peak:lp};
+}
+// green check over 1,000–50,000 K (linear light)
+let worst=-9, atT=0; for(let T=1000;T<=50000;T+=50){ const l=colour(T).lin; const ex=l[1]-Math.max(l[0],l[2]); if(ex>worst){ worst=ex; atT=T; } }
+$('gr').innerHTML=worst<0?`<span class="lit">never green</span> · closest at ${atT.toLocaleString()} K`:`green at ${atT} K`;
+window.__GREEN__={worst,atT};
+const TL=[
+ ['1957','Sputnik: space exploration begins','LIT'],
+ ['1961','first person in orbit','LIT'],
+ ['1969','people walk on the Moon','LIT'],
+ ['1972','Pioneer 10 launched: first probe past the asteroid belt, now leaving the solar system','LIT'],
+ ['1973–74','chlorine found to destroy ozone: the chemistry was first worked out with rocket exhaust in mind, then CFCs were shown to be the far bigger source','LIT'],
+ ['1976','Viking 1 lands on Mars; CERN\'s 7 km Super Proton Synchrotron switches on','LIT'],
+ ['1977','Voyagers 1 and 2 launched: two real vectors leaving Earth','LIT'],
+ ['1985','the Antarctic ozone hole is found','LIT'],
+ ['1987','Montreal Protocol bans CFCs; the ozone layer is now slowly healing','LIT'],
+];
+$('tl').innerHTML='<tr><th>year</th><th>what</th><th>stamp</th></tr>'+TL.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td class="s lit">${r[2]}</td></tr>`).join('');
+const ST=[
+ ['colour = the energy of the star, or Planck','colour = Planck\'s law at the surface temperature','LIT','the core sets how much light, the surface sets its colour'],
+ ['Planck in the nucleus','the core is 15.7 million K and glows in X-rays, but that light is absorbed and re-sent many times on its long way out','DEAD','you only ever see the surface'],
+ ['red, white, yellow stars','cool, hot and Sun-like surfaces','LIT','blue is the hottest'],
+ ['green stars','no temperature makes a green star','DEAD','the Sun peaks in green and looks white'],
+ ['black','a black hole, no light of its own','LIT','black dwarfs: none exist yet'],
+ ['dwarfs, planets, exos','brown dwarfs glow dull red; planets glow infrared; hot Jupiters can glow orange','LIT',''],
+ ['space exploration started 1969–1976','it started in 1957; 1969 was the Moon','DEAD','your window caught the Moon, Pioneer, Viking'],
+ ['a rocket punctured the 4th dimension','rockets move through spacetime; nothing punctures it','DEAD',''],
+ ['ozone holes because rockets flew through','the hole is mostly CFCs; rockets add a small, growing share','DEAD as the main cause','but chlorine-ozone chemistry was first studied for rockets (1974)'],
+ ['CERN\'s toroids in the sky, 16 stars','can\'t be seen; CERN\'s SPS did start in 1976','DEAD','real sky rings: shells around white dwarfs'],
+ ['16 colours by 1976','16 is your count; the page shows 16 real objects','AMBER','yours'],
+];
+$('st').innerHTML='<tr><th>you wrote</th><th>what\'s real</th><th>stamp</th><th>note</th></tr>'+ST.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td class="s ${r[2].startsWith('LIT')?'lit':r[2].startsWith('DEAD')?'bad':'amb'}">${r[2]}</td><td>${r[3]}</td></tr>`).join('');
+$('T').addEventListener('input',spec);
+addEventListener('resize',spec); cards(); spec();
+})();
+</script>
+</body>
+</html>

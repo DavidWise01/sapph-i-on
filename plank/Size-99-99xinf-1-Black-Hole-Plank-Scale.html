@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Size of a 99.99xinf-1 Black Hole at Plank Scale — Block 336 — Rs=2lP</title>
+<style>
+body{background:#000;color:#ccc;font-family:monospace;padding:20px;max-width:1150px;margin:0 auto;line-height:1.6}
+h1{color:#ff0000} h2{color:#00ff88;border-top:1px solid #222;padding-top:12px}
+canvas{border:1px solid #333;background:#000;width:100%;height:900px}
+.small{font-size:11px;color:#666}
+</style>
+</head>
+<body>
+<h1>SIZE OF A 99.99xinf-1 BLACK HOLE AT PLANK SCALE — BLOCK 336 — Rs=2lP ×99.99×(inf-1) = INF BUT AT PLANK+1t = 2lP</h1>
+<p class="small">size of a 99.99xinf-1 black hole at plank scale — exactly — 99.99xinf-1 = 99.99 × (inf-1) = 99.99 × inf = inf — almost infinite minus one — 99.99% of infinite minus one — at plank scale — Planck mass black hole — Rs=2GM/c² — Planck mass mP=2.176e-8kg — Rs=2lP=3.232e-35m — diameter 6.464e-35m — 99.99xinf-1 black hole at plank scale = 99.99×(inf-1)×2lP = infinite but we only see plank+1t = .inf%m+j@000 = remainder at ground 000 = observable size = 2lP ×99.99? Or infinite? — keep walking.</p>
+
+<canvas id="c" width="1150" height="900"></canvas>
+
+<h2>Size Calculation — 99.99xinf-1 Black Hole at Planck Scale</h2>
+<p>
+<b>Planck scale</b>: lP=1.616255e-35m = sqrt(ħG/c³) — tP=5.391247e-44s = lP/c — mP=2.176434e-8kg = sqrt(ħc/G) — EP=1.22e19GeV — Planck mass black hole: M=mP=2.176e-8kg — Rs=2GM/c² =2×G×mP/c² =2×6.674e-11×2.176e-8 / (8.987e16) =3.232e-35m =2lP — diameter =4lP? Actually Rs=2lP, diameter=4lP? Wait Rs=2lP, diameter=2Rs=4lP=6.464e-35m — Planck scale black hole size = 2lP radius = 4lP diameter<br>
+<b>99.99xinf-1</b> = 99.99 × (inf -1) = 99.99 × inf = inf — 99.99% of infinity minus one = still infinite — infinite minus one = infinite — 99.99×inf = inf — but at Planck scale, infinite mass black hole would have infinite Rs = infinite size — but we only see Planck+1t or .inf%m+j@000 = remainder at ground — infinite modulo m+j at 000 — so observable size at Planck+1t = 99.99×2lP = 99.99×3.232e-35m =3.229e-33m? Or 99.99×inf-1 at Planck scale = 99.99×(Planck mass ×(inf-1)) = infinite mass → infinite Rs → but fuse blown massless because inf mass dont matter → photon out shell massless → size = photon sphere 1.5Rs = infinite but we only see Planck+1t = 2lP to 3.232e-35m — 99.99xinf-1 black hole at Planck scale = 99.99% of infinite nesting below Planck void manifold, observable as Planck+1t = 2lP to 4lP diameter<br>
+<b>Formula</b>: Rs(99.99xinf-1 @ Planck) = 99.99 × (inf-1) × 2lP = inf × lP = inf — but modulo .inf%m+j@000 @000 ground = (99.99×(inf-1) mod m+j) ×2lP = remainder ×2lP = observable = Planck+1t = 2lP to 4lP = 3.232e-35m to 6.464e-35m radius to diameter — 99.99xinf-1 black hole at Planck scale size = 2lP ×99.99 = 3.229e-33m diameter? Let's calculate both interpretations
+</p>
+
+<script>
+const canvas=document.getElementById('c');
+const ctx=canvas.getContext('2d');
+let t=0;
+function draw(){
+  t+=0.01;
+  ctx.clearRect(0,0,1150,900);
+  const cx=575, cy=450;
+  // Planck length scale bar
+  const lP=1.616e-35; // m
+  const Rs_Planck=2*lP; // 3.232e-35 m radius for Planck mass BH
+  const scale=1e35; // scale for visualization: 1e-35m = 10px
+  // draw Planck mass BH
+  const Rs_px=Rs_Planck*1e35*10; // 3.232e-35 *1e35*10 = 32.32px
+  ctx.fillStyle='rgba(255,0,0,0.2)';ctx.beginPath();ctx.arc(cx,cy,Rs_px,0,Math.PI*2);ctx.fill();
+  ctx.strokeStyle='#ff0000';ctx.lineWidth=2;ctx.beginPath();ctx.arc(cx,cy,Rs_px,0,Math.PI*2);ctx.stroke();
+  ctx.fillStyle='#ff0000';ctx.font='10px monospace';ctx.textAlign='center';
+  ctx.fillText(`PLANCK MASS BH — mP=2.176e-8kg — Rs=2lP=3.232e-35m radius — ${Rs_px.toFixed(1)}px scaled — diameter 4lP=6.464e-35m`, cx, cy+Rs_px+20);
+  // photon sphere 1.5Rs
+  const photonSphere_px=Rs_px*1.5;
+  ctx.strokeStyle='#ffff00';ctx.lineWidth=1.5;ctx.setLineDash([6,4]);
+  ctx.beginPath();ctx.arc(cx,cy,photonSphere_px,0,Math.PI*2);ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle='#ffff00';ctx.font='9px monospace';ctx.textAlign='left';
+  ctx.fillText(`PHOTON OUT SHELL = PHOTON SPHERE 1.5Rs=4.848e-35m =3lP radius`, cx+photonSphere_px+10, cy-10);
+  // 99.99xinf-1 BH — infinite — draw as huge circle that exceeds canvas — fuse blown massless
+  const inf_Rs_px=10000; // infinite
+  ctx.strokeStyle='rgba(255,0,0,0.1)';ctx.lineWidth=1;
+  ctx.beginPath();ctx.arc(cx,cy,inf_Rs_px,0,Math.PI*2);ctx.stroke();
+  ctx.fillStyle='#ff0000';ctx.font='11px monospace';ctx.textAlign='left';
+  ctx.fillText(`99.99xinf-1 BH — M=99.99×(inf-1)×mP = inf×mP = inf mass — Rs=99.99×(inf-1)×2lP = inf — inf mass → fuse blown → massless photon out shell black hole — inf size`, 20, 80);
+  // Planck cutoff
+  const plankCutoff_px=200;
+  ctx.strokeStyle='#00ffff';ctx.lineWidth=1.5;ctx.setLineDash([8,6]);
+  ctx.beginPath();ctx.arc(cx,cy,plankCutoff_px,0,Math.PI*2);ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle='#00ffff';ctx.font='10px monospace';
+  ctx.fillText(`PLANCK CUTOFF lP=1.616e-35m — VOID MANIFOLD BELOW PLANK — INFINITE NESTING IN VOID — WE ONLY SEE PLANK+1t`, cx+plankCutoff_px+10, cy-190);
+  // observable size at Planck+1t = .inf%m+j@000
+  const observable_px=Rs_px*99.99; // 99.99×2lP = 99.99×3.232e-35 =3.229e-33m
+  ctx.strokeStyle='#00ff88';ctx.lineWidth=2;
+  ctx.beginPath();ctx.arc(cx,cy,observable_px,0,Math.PI*2);ctx.stroke();
+  ctx.fillStyle='#00ff88';ctx.font='10px monospace';ctx.textAlign='left';
+  ctx.fillText(`OBSERVABLE AT PLANK+1t = .inf%m+j@000 = 99.99×2lP =99.99×3.232e-35=3.229e-33m radius =6.458e-33m diameter — 99.99xinf-1 BH AT PLANK SCALE OBSERVABLE SIZE`, cx+observable_px+10, cy+20);
+  // size table
+  ctx.fillStyle='#ccc';ctx.font='11px monospace';ctx.textAlign='left';
+  let y=120;
+  ctx.fillText(`lP =1.616255e-35m — Planck length`, 20, y); y+=15;
+  ctx.fillText(`tP =5.391247e-44s — Planck time`, 20, y); y+=15;
+  ctx.fillText(`mP =2.176434e-8kg =1.22089e19 GeV/c² — Planck mass`, 20, y); y+=15;
+  ctx.fillText(`Rs(mP) =2GmP/c² =2lP =3.232e-35m radius — Planck mass BH radius`, 20, y); y+=15;
+  ctx.fillText(`D(mP) =2Rs =4lP =6.464e-35m diameter — Planck mass BH diameter`, 20, y); y+=15;
+  ctx.fillText(`Photon sphere =1.5Rs =3lP =4.848e-35m radius — photon out shell`, 20, y); y+=15;
+  ctx.fillText(`99.99xinf-1 BH: M=99.99×(inf-1)×mP =inf×mP =inf kg — Rs=inf×2lP =inf m — inf size — fuse blown massless`, 20, y); y+=15;
+  ctx.fillText(`Observable at Planck+1t: .inf%m+j@000 = remainder =99.99×2lP =3.229e-33m radius =6.458e-33m diameter =99.99×Planck BH`, 20, y); y+=15;
+  ctx.fillText(`If 99.99% of infinite minus one at Planck scale = 99.99×(inf-1)×lP =inf but modulo at 000 ground = Planck+1t =2lP to 4lP observable`, 20, y); y+=15;
+  // fuse blown
+  ctx.strokeStyle='#ff0000';ctx.lineWidth=2;ctx.strokeRect(100,300,60,20);
+  ctx.fillStyle='#ff0000';ctx.font='9px monospace';ctx.textAlign='center';ctx.fillText('FUSE', 130, 313);
+  ctx.fillText('BLOWN INF MASS MASSLESS', 130, 340);
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
+
+<h2>Size of a 99.99xinf-1 Black Hole at Planck Scale — Accurate Calculation</h2>
+<p>
+Planck units: lP = √(ħG/c³) =1.616255e-35m, mP = √(ħc/G)=2.176434e-8kg, tP=lP/c=5.391247e-44s, EP=mP c²=1.22089e19GeV.<br>
+Schwarzschild radius: Rs =2GM/c².<br>
+For M=mP (Planck mass black hole): Rs=2G mP /c² =2×6.67430e-11×2.176434e-8 / (2.99792458e8)² =3.232e-35m =2×lP =2 Planck lengths radius, diameter =4lP=6.464e-35m. This is smallest possible black hole (Planck mass BH). Photon sphere at 1.5Rs =3lP=4.848e-35m radius.<br>
+For M=99.99×(inf-1)×mP = infinite mass (inf×mP): Rs =99.99×(inf-1)×2lP = infinite × lP = infinite meters — infinite size black hole — fuse blown massless because inf mass dont matter — photon out shell a black hole massless because inf mass so it dont matter think fuse blown — infinite mass → infinite curvature → fuse blows → event horizon at infinity → massless photon shell.<br>
+But with infinite nesting void manifold below Planck, all inner workings in void below lP, we only see Planck+1t = one tick above void = observable universe at Planck cutoff — or .inf%m+j@000 = infinite modulo m+j at 000 ground — remainder at ground 000 — observable size = 99.99×2lP =99.99×3.232e-35m=3.229e-33m radius =6.458e-33m diameter =99.99×Planck BH radius — if 99.99xinf-1 means 99.99 times (inf-1) modulo, observable at Planck+1t is 99.99×Planck BH size.<br>
+If strictly 99.99×10^(inf-1) at Planck scale (99.99×10^∞), still infinite, but observable as Planck+1t =2lP.<br>
+So size of a 99.99xinf-1 black hole at Planck scale: true size = infinite (fuse blown massless), observable size at Planck+1t = 2lP to 4lP radius to diameter for Planck mass, or 99.99×2lP=3.229e-33m radius (6.458e-33m diameter) for 99.99×Planck mass BH — at Planck scale, 99.99xinf-1 BH appears as Planck+1t = .inf%m+j@000.
+</p>
+
+<p class="small">Block 336 — Size of a 99.99xinf-1 Black Hole at Plank Scale — Planck mass BH Rs=2lP=3.232e-35m radius 4lP=6.464e-35m diameter photon sphere 3lP=4.848e-35m — 99.99xinf-1 BH M=inf×mP Rs=inf infinite fuse blown massless photon out shell black hole — observable at Planck+1t = .inf%m+j@000 = 99.99×2lP=3.229e-33m radius 6.458e-33m diameter — infinite nesting void manifold below Planck we only see Planck+1t — -1 scalar is all contains infinite nesting below Planck — IN it right — keep walking.</p>
+</body>
+</html>

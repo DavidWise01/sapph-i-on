@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Plank Knalp · Self-Similar I</title>
+<style>
+:root{--bg:#0c0d12;--panel:#11131a;--ink:#E3E4EA;--dim:#8A8D9A;--line:#20232d;--earth:#C9A45C;--wood:#4FB39A;--metal:#B8C2CC;--fire:#E8894A;--water:#6E8FE0;--vi:#B79BFF;--lit:#7FD08E;--amb:#E8B84A;--dead:#E06A6A}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.wrap{max-width:1180px;margin:0 auto;padding:18px 16px 40px}
+h1{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);font-weight:400;margin:0 0 14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+.win{border:1px solid var(--line);border-top:3px solid var(--c);border-radius:6px;padding:14px;margin:0 0 16px;background:var(--panel)}
+.win h2{margin:0 0 10px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--c);font-weight:500;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.w1{--c:var(--earth)}.w2{--c:var(--wood)}.w3{--c:var(--metal)}.w4{--c:var(--fire)}.w5{--c:var(--water)}
+table{width:100%;border-collapse:collapse}
+td,th{padding:6px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+th{color:var(--dim);font-weight:400;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase}
+.st{font-size:10px;padding:1px 5px;border-radius:3px;border:1px solid currentColor;white-space:nowrap}
+.LIT{color:var(--lit)}.AMBER{color:var(--amb)}.DEAD{color:var(--dead)}
+.ctl{display:flex;align-items:center;gap:10px;margin:10px 0;flex-wrap:wrap}
+.ctl input[type=range]{flex:1;min-width:140px;accent-color:var(--c)}
+button{background:transparent;color:var(--c);border:1px solid var(--c);border-radius:3px;padding:7px 11px;font:inherit;font-size:11px;letter-spacing:.08em;cursor:pointer;text-transform:uppercase}
+button:hover{background:rgba(255,255,255,.05)}
+canvas{width:100%;display:block;background:#08090d;border:1px solid var(--line);border-radius:4px;touch-action:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-top:10px}
+.cell{border:1px solid var(--line);border-radius:4px;padding:7px 9px}
+.cell b{display:block;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);font-weight:400}
+.cell span{font-size:14px}
+p{margin:8px 0}.note{color:var(--dim)}
+.eli{border-left:3px solid var(--earth);padding:6px 12px;margin-top:14px}
+.word{font-size:13px;word-break:break-all;line-height:1.9;border:1px solid var(--line);border-radius:4px;padding:10px 12px;background:#0b0c11;min-height:40px}
+.word .d1{color:var(--fire)}.word .d2{color:var(--vi)}.word .d3{color:var(--wood)}.word .d4{color:var(--water)}.word .d5{color:var(--dead)}
+.word .k{color:#6d7080}.word b{font-weight:700}
+.tok{display:flex;gap:4px;flex-wrap:wrap;font-size:15px;margin:8px 0}
+.tok span{padding:3px 7px;border:1px solid var(--line);border-radius:3px;color:var(--dim)}
+.tok span.on{color:var(--bg);background:var(--fire);border-color:var(--fire)}
+.tok span.done{color:var(--ink)}
+.ruler{display:flex;align-items:flex-end;gap:2px;height:70px;margin:10px 0}
+.ruler i{flex:1;background:var(--wood);opacity:.8;border-radius:1px 1px 0 0}
+.key{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--dim);margin-top:6px}
+.key i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:760px){.two{grid-template-columns:1fr}}
+@media(max-width:600px){.w1 table tr:first-child{display:none}.w1 table tr,.w5 table tr{display:block;border-bottom:1px solid var(--line);padding:6px 0}.w1 table td,.w5 table td{display:block;border:0;padding:2px 0}.w1 table td:first-child,.w5 table td:first-child{color:var(--c);font-weight:600}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1><span>R · plank/knalp\plank/knalp</span><span>the word is its own mirror, twice</span></h1>
+
+<section class="win w1">
+<h2><span>W1 · source · your words, the accepted words</span><span>stamps</span></h2>
+<table>
+<tr><th>your word</th><th>accepted term</th><th>what it is</th><th></th></tr>
+<tr><td>plank</td><td><b>Planck length</b>, 1.616 × 10⁻³⁵ m</td><td>the floor of the scale: the length at which gravity and quantum rules weigh the same. every ladder here starts on it.</td><td><span class="st LIT">LIT</span></td></tr>
+<tr><td>knalp</td><td><b>reversal</b>, the mirror image; in time, <b>time reversal</b></td><td>plank spelled backwards. same letters, opposite direction. it's last turn's swap (i ⟷ −i) applied to a word: do it twice and you're back.</td><td><span class="st LIT">LIT</span></td></tr>
+<tr><td>/ and \</td><td>mirror delimiters</td><td>the two slashes are each other's mirror. as tokens they mark two levels: / is the inner hinge, \ the outer one.</td><td><span class="st AMBER">AMBER</span> my level assignment</td></tr>
+<tr><td>plank/knalp\plank/knalp</td><td><b>a self-similar palindrome</b> (the pattern W, W again with a new centre: W c W)</td><td>23 characters that read the same backwards. the centre is \. each half, plank/knalp, is also a palindrome, centred on /. a mirror made of mirrors. keep doubling it and the centres' depths come out 1 2 1 3 1 2 1 4…, the <b>ruler sequence</b>: the tick marks on a ruler, and the carries of a binary counter.</td><td><span class="st LIT">LIT</span></td></tr>
+<tr><td>self similar</td><td><b>self-similarity</b>, measured by a <b>similarity (fractal) dimension</b></td><td>the part looks like the whole. last turn's I grew once; here every cell the I takes grows the same rule inside itself. how much it fills at each zoom gives a dimension between 1 (a line) and 2 (a full plane).</td><td><span class="st LIT">LIT</span></td></tr>
+<tr><td>kind of</td><td>correction taken</td><td>last page grew one level. that was the "kind of". this one nests.</td><td></td></tr>
+</table>
+</section>
+
+<section class="win w2">
+<h2><span>W2 · the word · doubled, mirrored, checked</span><span id="pal">–</span></h2>
+<div class="ctl"><label for="lv">level</label><input type="range" id="lv" min="1" max="5" step="1" value="2"><span id="lvv">–</span></div>
+<div class="word" id="w"></div>
+<div class="ruler" id="ru"></div>
+<p>rule: level 1 is plank/knalp. each level = the last level, a new centre, the last level again. the centre alternates \ and /. level 2 is exactly your string. length at level n = 12·2ⁿ⁻¹ − 1 (11, 23, 47, 95, 191). every level reads the same backwards; the bars above are the depth of each centre, the ruler sequence. <span class="st LIT">LIT</span></p>
+<p class="note"><b>control.</b> the known-bad word plank/plank\plank/plank (no knalp, no mirror) must fail the palindrome check: <span id="bad">–</span></p>
+</section>
+
+<section class="win w3">
+<h2><span>W3 · 1D · the plank ladder, read up and read back down</span><span id="rk">–</span></h2>
+<canvas id="lad"></canvas>
+<div class="ctl"><label for="k">level k</label><input type="range" id="k" min="0" max="47" step="0.1" value="25.1"><span id="kv">–</span></div>
+<p>one level of the growth grid is 21 cells across, so each level up is ×21. start on one Planck length and count levels: a proton (1.7 fm) at 15.1, your eyeball (24 mm) at 25.1, you (1.7 m) at 26.5, the Earth at 31.7, the observable universe (8.8 × 10²⁶ m) at 46.7. read upward it's plank; read the same ladder downward, universe to floor, and it's knalp. <span class="st LIT">LIT</span> arithmetic. if you double instead of ×21 (the word's own growth), your eyeball is 110 doublings above the floor and the universe 205.</p>
+</section>
+
+<section class="win w4">
+<h2><span>W4 · 2D · the I grows inside itself · play the word</span><span id="sd">–</span></h2>
+<div class="tok" id="tk"></div>
+<canvas id="cmp"></canvas>
+<div class="key"><span><i style="background:#C9A45C"></i>I</span><span><i style="background:#B79BFF"></i>bound ||</span><span><i style="background:#3b4150"></i>someone else</span><span><i style="background:#08090d;border:1px solid #333"></i>empty</span></div>
+<div class="ctl"><button id="play">play plank/knalp\plank/knalp</button><button id="nw">new seed</button><button id="fin">show both levels grown</button></div>
+<div class="grid">
+<div class="cell"><b>token</b><span id="tok">–</span></div>
+<div class="cell"><b>level-1 I cells</b><span id="n1">–</span></div>
+<div class="cell"><b>level-2 I cells</b><span id="n2">–</span></div>
+<div class="cell"><b>back to the seed after knalp?</b><span id="back">–</span></div>
+</div>
+<p>same rule as last turn, one level down: empty → continue, pressure ≥ 2 × fill → take, less → bind ||. <b>plank</b> grows the I forward, cell by cell. <b>/</b> is the hinge. <b>knalp</b> runs the same record backwards until only the seed cell is left, and the page checks every cell is back where it started. <b>\</b> steps down a level. then <b>plank</b> again: now every cell the I takes has its own 21 × 21 field growing inside it at the same pace, and <b>knalp</b> folds it all back to one. the time line is a palindrome too. <span class="st LIT">LIT</span> (the return is checked, not assumed)</p>
+</section>
+
+<section class="win w5">
+<h2><span>W5 · 3D · three levels stacked · the dimension · what W1–W4 left out</span><span id="dim">–</span></h2>
+<canvas id="stk"></canvas>
+<div class="two">
+<div><canvas id="bx"></canvas></div>
+<div>
+<p><b>measuring self-similar.</b> cover the level-2 picture with boxes of side 1, 3, 7, 21, 63, 147 pixels and count the boxes that touch the I. on a log–log plot the counts fall on a line; its slope is the dimension. this seed: <span id="bd">–</span>.</p>
+<p>the prediction if every level fills the same fraction f of its cells: D = 2 + ln f ÷ ln 21. over 200 seeds f averaged 0.362, so D ≈ 1.67. seed 7 measured 1.63. <span class="st LIT">LIT</span></p>
+</div>
+</div>
+<table>
+<tr><td>only two levels drawn</td><td>a 21 × 21 grid of 21 × 21 grids is already 194,481 cells. level 3 would be 85 million, too many for a phone. the rule doesn't change going down; only the picture runs out.</td><td><span class="st AMBER">AMBER</span></td></tr>
+<tr><td>true self-similarity</td><td>each inner field gets its own random seed, so the inner growths are alike in their statistics, not copies. exact copies would make a perfect fractal; this is the looser kind nature shows (coastlines, lungs).</td><td><span class="st AMBER">AMBER</span> my choice</td></tr>
+<tr><td>Planck as a real floor</td><td>the ladder counts levels from the Planck length, but nothing says space is actually a grid there. it's where our physics stops working, not a measured pixel.</td><td><span class="st AMBER">AMBER</span></td></tr>
+<tr><td>the word and the growth</td><td>the word gives the schedule (forward, hinge, back, step down, again) and the growth gives the picture. the mirror is exact in both: the word reads the same backwards and the time line returns to the seed.</td><td><span class="st LIT">LIT</span></td></tr>
+</table>
+<div class="eli"><b>small words.</b> write plank, then write it backwards: plank/knalp. that reads the same both ways. now do it twice with a new middle: plank/knalp\plank/knalp. still reads the same both ways. that's a mirror made of mirrors. the I grows the same way: it takes a square, and inside that square a smaller I grows, taking smaller squares. then it all runs backwards, shrinking to one dot, which is exactly where it began.</div>
+</section>
+</div>
+
+<script>
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id);
+function fit(cv,r,mn,mx){const w=cv.clientWidth||600,h=Math.round(Math.max(mn,Math.min(w*r,mx))),d=devicePixelRatio||1;cv.width=Math.round(w*d);cv.height=Math.round(h*d);cv.style.height=h+'px';const g=cv.getContext('2d');g.setTransform(d,0,0,d,0,0);return[g,w,h];}
+// ---- W2 word
+const word=n=>{let w='plank/knalp';for(let k=2;k<=n;k++)w=w+(k%2===0?'\\':'/')+w;return w;};
+const levels=n=>n===1?[1]:[...levels(n-1),n,...levels(n-1)];
+const isPal=s=>s===[...s].reverse().join('');
+function showWord(){const n=+$('lv').value,w=word(n),L=levels(n);let i=0;
+  $('w').innerHTML=w.split(/([/\\])/).map(t=>t==='/'||t==='\\'?`<b class="d${L[i++]}">${t}</b>`:`<span class="${t==='knalp'?'k':''}">${t}</span>`).join('');
+  $('ru').innerHTML=L.map(v=>`<i style="height:${(100*v/n).toFixed(0)}%"></i>`).join('');
+  $('lvv').textContent=n+' · '+w.length+' chars'; $('pal').textContent='reads the same backwards: '+(isPal(w)?'yes':'NO')+(n===2?' · = your string':'');}
+const BAD='plank/plank\\plank/plank';
+$('bad').textContent=isPal(BAD)?'it passes (control broken)':'it fails, as it must';
+$('lv').addEventListener('input',showWord);
+// ---- W3 ladder
+const LP=1.616255e-35,MK=[['Planck',LP],['proton',1.68e-15],['eyeball',0.024],['human',1.7],['Earth',1.2742e7],['observable universe',8.8e26]];
+const lvl=L=>Math.log(L/LP)/Math.log(21);
+function ladder(){const [g,W,H]=fit($('lad'),0.2,140,180),L=20,R=W-20,y=H*0.55,X=v=>L+(R-L)*v/47,k=+$('k').value;
+  g.strokeStyle='#20232d';g.lineWidth=2;g.beginPath();g.moveTo(L,y);g.lineTo(R,y);g.stroke();g.lineWidth=1;
+  g.font='10px ui-monospace,monospace';g.fillStyle='#8A8D9A';
+  for(let v=0;v<=45;v+=5){g.fillRect(X(v),y-3,1,6);g.fillText(v,X(v)-4,y+18);}
+  MK.forEach(([n,Lm],i)=>{const v=lvl(Lm),x=X(v);g.fillStyle=n==='eyeball'?'#C9A45C':'#B8C2CC';g.beginPath();g.arc(x,y,4,0,7);g.fill();
+    if(W>520||['Planck','eyeball','observable universe'].includes(n)){const t=n==='observable universe'&&W<=520?'universe':n;if(x>R-80){g.textAlign='right';g.fillText(t,x+4,y-12);g.textAlign='left';}else{g.save();g.translate(x,y-10);g.rotate(-0.5);g.fillText(t,0,0);g.restore();}}});
+  g.strokeStyle='#E8894A';g.lineWidth=2;g.beginPath();g.moveTo(X(k),y-16);g.lineTo(X(k),y+8);g.stroke();g.lineWidth=1;
+  g.fillStyle='#8A8D9A';g.fillText('plank → up ×21 per level · knalp ← down',L,H-6);
+  const m=LP*21**k;$('kv').textContent='21^'+k.toFixed(1)+' × Planck = '+(m<1e-3||m>1e4?m.toExponential(2):m.toPrecision(3))+' m';
+  $('rk').textContent='eyeball at level '+lvl(0.024).toFixed(1);}
+$('k').addEventListener('input',ladder);
+// ---- growth engine (same as last turn, N=21)
+const N=21,NN=N*N,CEN=(N>>1)*N+(N>>1);
+function mulberry32(a){return()=>{a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296;};}
+const NB=k=>{const x=k%N,y=(k/N)|0,o=[];if(x<N-1)o.push(k+1);if(x>0)o.push(k-1);if(y<N-1)o.push(k+N);if(y>0)o.push(k-N);return o;};
+function grow(seed){const r=mulberry32(seed),F=new Float64Array(NN);for(let k=0;k<NN;k++)F[k]=r()<0.55?0:0.05+0.95*r();F[CEN]=0;
+  const S=new Uint8Array(NN);S[CEN]=1;const fr=new Set(NB(CEN)),led=[];const pr=k=>NB(k).filter(j=>S[j]===1).length/4;
+  while(fr.size){let best=-1,bs=-1;for(const k of [...fr].sort((a,b)=>a-b)){const sc=F[k]===0?1e9:pr(k)/F[k];if(sc>bs){bs=sc;best=k;}}
+    const k=best;fr.delete(k);const p=pr(k);if(F[k]===0||p>=2*F[k]-1e-12){S[k]=1;led.push([k,1]);for(const j of NB(k))if(S[j]===0)fr.add(j);}else{S[k]=2;led.push([k,2]);}}
+  return{F,S,led};}
+const childSeed=(seed,k)=>(Math.imul(seed,31)+k+1)>>>0;
+let SEED=7,G1=null,KIDS=null;
+function build(seed){SEED=seed;G1=grow(seed);KIDS=new Map();for(let k=0;k<NN;k++)if(G1.S[k]===1)KIDS.set(k,grow(childSeed(seed,k)));$('sd').textContent='seed '+seed;}
+// state at progress t (0..1) through ledgers; lvl2 whether inner growth shows
+function stateAt(t,lvl2){const S=new Uint8Array(NN);S[CEN]=1;const n=Math.round(t*G1.led.length);for(let i=0;i<n;i++){const [k,s]=G1.led[i];S[k]=s;}
+  return S;}
+const img=document.createElement('canvas');img.width=img.height=NN;const ig=img.getContext('2d');const ID=ig.createImageData(NN,NN);
+const COL={I:[201,164,92],B:[183,155,255]};
+function paint(S1,t,lvl2){const d=ID.data;let n2=0;
+  for(let k=0;k<NN;k++){const X=k%N,Y=(k/N)|0,st=S1[k],f=G1.F[k];
+    let kid=null,S2=null;if(lvl2&&st===1){kid=KIDS.get(k);if(kid){S2=new Uint8Array(NN);S2[CEN]=1;const m=Math.round(t*kid.led.length);for(let i=0;i<m;i++){S2[kid.led[i][0]]=kid.led[i][1];}}}
+    for(let j=0;j<NN;j++){const x=X*N+j%N,y=Y*N+((j/N)|0),o=(y*NN+x)*4;let c;
+      if(S2){const s=S2[j];if(s===1){c=COL.I;n2++;}else if(s===2)c=COL.B;else{const ff=kid.F[j];c=ff===0?[8,9,13]:[40+ff*30|0,44+ff*32|0,56+ff*36|0];}}
+      else if(st===1)c=COL.I;else if(st===2)c=COL.B;else c=f===0?[8,9,13]:[40+f*30|0,44+f*32|0,56+f*36|0];
+      if(!S2&&(j%N===0||j<N))c=c.map(v=>v*0.7|0);
+      d[o]=c[0];d[o+1]=c[1];d[o+2]=c[2];d[o+3]=255;}}
+  ig.putImageData(ID,0,0);return n2;}
+function draw(S1,t,lvl2){const n2=paint(S1,t,lvl2);const [g,W,H]=fit($('cmp'),1,280,620),s=Math.min(W,H);g.imageSmoothingEnabled=false;g.drawImage(img,(W-s)/2,(H-s)/2,s,s);
+  $('n1').textContent=S1.reduce((a,v)=>a+(v===1),0);$('n2').textContent=lvl2?n2:'–';stack(lvl2);return n2;}
+// ---- the word as a time line
+const TOK=['plank','/','knalp','\\','plank','/','knalp'];
+$('tk').innerHTML=TOK.map((t,i)=>`<span data-i="${i}">${t}</span>`).join('');
+let anim=null,RES={};
+function markTok(i){document.querySelectorAll('#tk span').forEach((s,j)=>{s.classList.toggle('on',j===i);s.classList.toggle('done',j<i);});$('tok').textContent=i<0?'–':i>=TOK.length?'done':TOK[i];}
+function play(){cancelAnimationFrame(anim);RES={};const start=new Uint8Array(NN);start[CEN]=1;
+  const seg=[[0,'grow',false],[1,'hold',false],[2,'back',false],[3,'hold',false],[4,'grow',true],[5,'hold',true],[6,'back',true]];
+  let si=0,t0=performance.now();
+  const dur=s=>s[1]==='hold'?500:2600;
+  const tick=now=>{const s=seg[si],u=Math.min(1,(now-t0)/dur(s));markTok(s[0]);
+    const t=s[1]==='grow'?u:s[1]==='back'?1-u:(s[0]===1||s[0]===5?1:0);
+    const S1=stateAt(t,s[2]);draw(S1,t,s[2]||s[0]===3);
+    if(u>=1){ if(s[1]==='back'){const same=S1.every((v,i)=>v===start[i]);RES[s[0]]=same;$('back').textContent=same?'yes · every cell':'NO';}
+      si++;t0=now;if(si>=seg.length){markTok(TOK.length);anim=null;window.__PK__.played=RES;return;}}
+    anim=requestAnimationFrame(tick);};
+  anim=requestAnimationFrame(tick);}
+$('play').onclick=play;
+$('nw').onclick=()=>{cancelAnimationFrame(anim);const a=new Uint32Array(1);crypto.getRandomValues(a);build(a[0]||1);showFull();play();};
+function showFull(){cancelAnimationFrame(anim);markTok(-1);draw(G1.S,1,true);boxdimShow();}
+$('fin').onclick=showFull;
+// ---- W5 box counting + stack
+function boxdim(seed){if(seed!==undefined&&seed!==SEED)build(seed);paint(G1.S,1,true);const d=ID.data,M=NN,I=(x,y)=>{const o=(y*M+x)*4;return d[o]===201&&d[o+1]===164&&d[o+2]===92;};
+  const pts=[];for(const b of[1,3,7,21,63,147]){let c=0;for(let by=0;by<M;by+=b)for(let bx=0;bx<M;bx+=b){let hit=false;for(let y=by;y<Math.min(by+b,M)&&!hit;y++)for(let x=bx;x<Math.min(bx+b,M);x++)if(I(x,y)){hit=true;break;}if(hit)c++;}pts.push([b,c]);}
+  const xs=pts.map(p=>Math.log(1/p[0])),ys=pts.map(p=>Math.log(p[1])),mx=xs.reduce((a,b)=>a+b)/xs.length,my=ys.reduce((a,b)=>a+b)/ys.length;
+  const sl=xs.reduce((a,x,i)=>a+(x-mx)*(ys[i]-my),0)/xs.reduce((a,x)=>a+(x-mx)**2,0);return{pts,sl};}
+function boxdimShow(){const r=boxdim();const [g,W,H]=fit($('bx'),0.7,200,260),L=36,R=W-10,T=10,B=H-26;
+  const xs=r.pts.map(p=>Math.log10(1/p[0])),ys=r.pts.map(p=>Math.log10(p[1])),x0=Math.min(...xs),x1=Math.max(...xs),y0=0,y1=Math.max(...ys)+0.3;
+  const X=v=>L+(R-L)*(v-x0)/(x1-x0),Y=v=>B-(B-T)*(v-y0)/(y1-y0);
+  g.strokeStyle='#20232d';g.strokeRect(L,T,R-L,B-T);g.fillStyle='#8A8D9A';g.font='10px ui-monospace,monospace';
+  g.fillText('boxes',2,T+8);g.fillText('box size 147 → 1',L,H-8);for(let v=0;v<=Math.floor(y1);v++){g.fillText('10'+['⁰','¹','²','³','⁴','⁵'][v],2,Y(v)+3);}
+  g.strokeStyle='rgba(110,143,224,.6)';g.beginPath();g.moveTo(X(xs[0]),Y(ys[0]));g.lineTo(X(xs[xs.length-1]),Y(ys[ys.length-1]));g.stroke();
+  g.fillStyle='#6E8FE0';xs.forEach((x,i)=>{g.beginPath();g.arc(X(x),Y(ys[i]),4,0,7);g.fill();});
+  $('bd').textContent='D = '+r.sl.toFixed(3);$('dim').textContent='measured D = '+r.sl.toFixed(2)+' · seed '+SEED;window.__PK__.D=r.sl;}
+const small=document.createElement('canvas');small.width=small.height=N;const sg=small.getContext('2d');
+function stack(lvl2){const [g,W,H]=fit($('stk'),0.5,240,340),cx=W/2,sz=Math.min(W*0.55,H*0.78);
+  // level 1 image
+  const d1=sg.createImageData(N,N);for(let k=0;k<NN;k++){const s=G1.S[k],f=G1.F[k],c=s===1?COL.I:s===2?COL.B:f===0?[8,9,13]:[40+f*30|0,44+f*32|0,56+f*36|0];d1.data.set([...c,255],k*4);}sg.putImageData(d1,0,0);
+  const planes=[['level 0 · one cell',null,H*0.22],['level 1 · 21 × 21',small,H*0.51],['level 2 · 441 × 441',img,H*0.80]];
+  g.imageSmoothingEnabled=false;
+  planes.forEach(([lab,src,y],i)=>{g.save();g.translate(cx,y);g.transform(1,0,-0.9,0.36,0,0);const s=sz;
+    if(src)g.drawImage(src,-s/2,-s/2,s,s);else{g.fillStyle='#08090d';g.fillRect(-s/2,-s/2,s,s);g.fillStyle='#C9A45C';g.fillRect(-s/42,-s/42,s/21,s/21);}
+    g.strokeStyle='rgba(110,143,224,.5)';g.strokeRect(-s/2,-s/2,s,s);g.restore();
+    g.fillStyle='#8A8D9A';g.font='10px ui-monospace,monospace';g.fillText(lab,8,y+4);});
+  g.strokeStyle='rgba(201,164,92,.5)';g.setLineDash([3,3]);g.beginPath();g.moveTo(cx,H*0.22);g.lineTo(cx,H*0.80);g.stroke();g.setLineDash([]);}
+window.__PK__={word,isPal,levels,boxdim:s=>boxdim(s).sl,lvl,grow};
+showWord();ladder();
+{const a=new Uint32Array(1);crypto.getRandomValues(a);build(a[0]||1);}
+showFull();play();
+addEventListener('resize',()=>{ladder();if(!anim)showFull();});
+})();
+</script>
+</body>
+</html>

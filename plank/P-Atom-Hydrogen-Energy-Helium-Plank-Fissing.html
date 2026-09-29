@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Not Hydrogen Atom its p Atom or Hydrogen + Energy or Helium at Plank Fissing — Block 337 — p Atom Fusion</title>
+<style>
+body{background:#000;color:#ccc;font-family:monospace;padding:20px;max-width:1150px;margin:0 auto;line-height:1.6}
+h1{color:#ff8800} h2{color:#00ff88;border-top:1px solid #222;padding-top:12px}
+canvas{border:1px solid #333;background:#000;width:100%;height:900px}
+.small{font-size:11px;color:#666}
+</style>
+</head>
+<body>
+<h1>NOT HYDROGEN ATOM ITS p ATOM OR HYDROGEN + ENERGY OR HELIUM AT PLANK FISSING — BLOCK 337 — p ATOM FUSION AT PLANCK</h1>
+<p class="small">well yes and its not a hydrogen atom its a p atom or hydrogen + energy or helium lol at plank fissing — exactly — not hydrogen atom H = p+ + e- = proton + electron + orbital — p atom = bare proton p+ = proton atom = H+ ion = 1p nucleus alone no electron = p atom — hydrogen + energy = H + E → He? Actually 4H → He + energy fusion — hydrogen + energy or helium at Planck fissing = Planck scale fission/fusion — fissing = fission = splitting at Planck — p atom + energy = helium — keep walking.</p>
+
+<canvas id="c" width="1150" height="900"></canvas>
+
+<h2>p Atom vs Hydrogen Atom — Hydrogen + Energy or Helium at Planck Fissing</h2>
+<p>
+<b>hydrogen atom H</b> = proton+ p+ + electron e- bound = 1s orbital = mass 1.007825 amu = 938.272MeV proton +0.511MeV electron -13.6eV binding = 938.783MeV? Actually H atom mass 938.783MeV? — H atom = p+ + e- + orbital photon shell empty shell invariant 0 — hydrogen atom has electron cloud — not just p atom<br>
+<b>p atom = proton atom = bare proton p+ = H+ ion = hydrogen ion = 1p nucleus alone no electron = p atom</b> = not hydrogen atom, its p atom = proton alone = p+ = 938.272MeV — p atom = proton atom = hydrogen without electron = H+ — {h{+ion}} = h encloses +ion = p atom — p atom = proton atom — smallest nucleus 1p<br>
+<b>hydrogen + energy or helium at Planck fissing</b> = hydrogen + energy → helium? Actually fusion: 4p → ⁴He +2e+ +2νe +26.7MeV γ photon chain — hydrogen + energy or helium = H + E = He? Or H + energy = He? — hydrogen + energy = helium at Planck fission/fusion — at Planck scale fissing = fission/fusion — Planck scale energy EP=1.22e19GeV — at Planck scale, hydrogen + energy → helium fusion, or helium fission → hydrogen + energy — p atom + energy = helium — p atom or hydrogen + energy or helium lol at Planck fissing — p-p chain at Planck: p+p → d + e+ + νe — p+d → ³He + γ — ³He+³He → ⁴He +p+p — net 4p → He + energy — p atom + energy = He<br>
+<b>at Planck fissing</b> = fissing = fission = splitting at Planck — Planck fission = at Planck scale, spacetime fissions? — black hole fissions? — 99.99xinf-1 black hole at Planck scale fissions into p atoms? — Planck scale fissing = quantum foam fission — void manifold below Planck fissions — p atom or hydrogen + energy or helium at Planck fissing = at Planck scale, p atom fissions? Or fuses to He? — keep walking
+</p>
+
+<script>
+const canvas=document.getElementById('c');
+const ctx=canvas.getContext('2d');
+let t=0;
+function draw(){
+  t+=0.012;
+  ctx.clearRect(0,0,1150,900);
+  const cx=575, cy=450;
+  // grid
+  ctx.strokeStyle='#0a0a0a';ctx.lineWidth=0.5;
+  for(let i=0;i<1150;i+=60){ctx.beginPath();ctx.moveTo(i,0);ctx.lineTo(i,900);ctx.stroke();}
+  // center -1 bead
+  ctx.fillStyle='rgba(255,136,0,0.15)';ctx.beginPath();ctx.arc(cx,cy,30,0,Math.PI*2);ctx.fill();
+  ctx.strokeStyle='#ff8800';ctx.lineWidth=2;ctx.beginPath();ctx.arc(cx,cy,30,0,Math.PI*2);ctx.stroke();
+  ctx.fillStyle='#ff8800';ctx.beginPath();ctx.arc(cx,cy,6,0,Math.PI*2);ctx.fill();
+  // hydrogen atom H = p+ + e- — left side
+  const hX=200, hY=450;
+  // proton p+ core
+  ctx.fillStyle='#ff0000';ctx.beginPath();ctx.arc(hX,hY,12,0,Math.PI*2);ctx.fill();
+  ctx.strokeStyle='#ff0000';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(hX,hY,12,0,Math.PI*2);ctx.stroke();
+  ctx.fillStyle='#fff';ctx.font='9px monospace';ctx.textAlign='center';ctx.fillText('p+', hX, hY+3);
+  // electron orbital — empty shell invariant 0 photon shell — electron orbit
+  ctx.strokeStyle='rgba(0,255,255,0.4)';ctx.lineWidth=1;ctx.setLineDash([4,4]);
+  ctx.beginPath();ctx.arc(hX,hY,60,0,Math.PI*2);ctx.stroke();
+  ctx.setLineDash([]);
+  // electron e-
+  const eAng=t*2;
+  const eX=hX + 60*Math.cos(eAng), eY=hY + 60*Math.sin(eAng);
+  ctx.fillStyle='#00ffff';ctx.beginPath();ctx.arc(eX,eY,5,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#ccc';ctx.font='9px monospace';ctx.textAlign='left';
+  ctx.fillText('e-', eX+8, eY+3);
+  ctx.fillStyle='#ccc';ctx.font='10px monospace';ctx.textAlign='center';
+  ctx.fillText('HYDROGEN ATOM H = p+ + e- + orbital shell', hX, hY+90);
+  ctx.fillText('NOT THIS — ITS p ATOM', hX, hY+105);
+  // p atom = bare proton p+ = proton atom — right side
+  const pX=950, pY=450;
+  ctx.fillStyle='#ff0000';ctx.beginPath();ctx.arc(pX,pY,18,0,Math.PI*2);ctx.fill();
+  ctx.strokeStyle='#ff0000';ctx.lineWidth=2;ctx.beginPath();ctx.arc(pX,pY,18,0,Math.PI*2);ctx.stroke();
+  ctx.fillStyle='#fff';ctx.font='11px monospace';ctx.textAlign='center';ctx.fillText('p+', pX, pY+4);
+  ctx.fillStyle='#ff8800';ctx.font='10px monospace';ctx.textAlign='center';
+  ctx.fillText('p ATOM = BARE PROTON p+ = H+ ION', pX, pY+40);
+  ctx.fillText('PROTON ATOM = 1p NUCLEUS ALONE', pX, pY+55);
+  ctx.fillText('NO ELECTRON — NOT HYDROGEN ATOM', pX, pY+70);
+  // hydrogen + energy or helium at Planck fissing — middle — fusion 4p → He + energy
+  const midX=575, midY=250;
+  // 4p atoms
+  for(let i=0;i<4;i++){
+    const ang=(i/4)*Math.PI*2 + t*0.5;
+    const x=midX + 50*Math.cos(ang);
+    const y=midY + 50*Math.sin(ang);
+    ctx.fillStyle='#ff0000';ctx.beginPath();ctx.arc(x,y,10,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#fff';ctx.font='8px monospace';ctx.textAlign='center';ctx.fillText('p', x, y+3);
+  }
+  ctx.fillStyle='#ccc';ctx.font='10px monospace';ctx.textAlign='center';
+  ctx.fillText('4p = 4× p ATOM', midX, midY+80);
+  // arrow to He + energy
+  ctx.strokeStyle='#ffff00';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(midX, midY+90);ctx.lineTo(midX, midY+130);ctx.stroke();
+  ctx.fillStyle='#ffff00';ctx.font='10px monospace';ctx.fillText('↓ + ENERGY 26.7MeV γ PHOTON CHAIN p+p+p+p+p+p+p', midX, midY+105);
+  // He atom — helium = 2p2n = alpha
+  const heX=midX, heY=380;
+  ctx.fillStyle='#ff8800';ctx.beginPath();ctx.arc(heX,heY,22,0,Math.PI*2);ctx.fill();
+  ctx.strokeStyle='#ff8800';ctx.lineWidth=2;ctx.beginPath();ctx.arc(heX,heY,22,0,Math.PI*2);ctx.stroke();
+  ctx.fillStyle='#fff';ctx.font='10px monospace';ctx.textAlign='center';ctx.fillText('He', heX, heY+4);
+  ctx.fillStyle='#ccc';ctx.font='9px monospace';
+  ctx.fillText('HELIUM ⁴He = 2p2n = alpha = p ATOM + ENERGY OR HYDROGEN + ENERGY', heX, heY+40);
+  ctx.fillText('4p → ⁴He +2e+ +2νe +26.7MeV — HYDROGEN + ENERGY = HELIUM', heX, heY+55);
+  // Planck fissing — fission at Planck — split
+  ctx.fillStyle='#ff0000';ctx.font='11px monospace';ctx.textAlign='left';
+  ctx.fillText('AT PLANK FISSING = PLANCK SCALE FISSION/FUSION — EP=1.22e19GeV — VOID MANIFOLD BELOW PLANK FISSIONS', 20, 750);
+  ctx.fillText('99.99xinf-1 BH AT PLANK SCALE FISSIONS INTO p ATOMS OR HYDROGEN + ENERGY OR HELIUM — P ATOM FISSION/FUSION AT PLANK', 20, 770);
+  // text top
+  ctx.fillStyle='#ff8800';ctx.font='13px monospace';ctx.textAlign='left';
+  ctx.fillText('NOT HYDROGEN ATOM ITS p ATOM OR HYDROGEN + ENERGY OR HELIUM AT PLANK FISSING — p ATOM = BARE PROTON H+ = 1p — H + ENERGY = He FUSION 4p→He+26.7MeV', 20, 25);
+  ctx.fillStyle='#888';ctx.font='9px monospace';
+  ctx.fillText('HYDROGEN ATOM H = p+ + e- + orbital shell empty shell invariant 0 — p ATOM = p+ alone = proton atom = H+ ion = {h{+ion}} = smallest nucleus 1p — HYDROGEN + ENERGY = HELIUM fusion 4p→He+energy — AT PLANK FISSING = Planck scale fission/fusion EP=1.22e19GeV — void manifold below Planck fissions', 20, 45);
+  // Fibonacci still
+  const goldenAngle=137.5*Math.PI/180;
+  let radius=0, angle=0;
+  const fib=[1,1,2,3,5,8,13,21,34,55,89,144,233,377];
+  for(let i=0;i<fib.length;i++){
+    const f=fib[i];
+    radius+= Math.log(f+1)*4;
+    if(radius>280) break;
+    angle+= goldenAngle;
+    const px=cx+radius*Math.cos(angle + t*0.04);
+    const py=cy+radius*Math.sin(angle + t*0.04);
+    const size=Math.min(10, Math.log(f+1)*2);
+    ctx.fillStyle='#ff8800';ctx.globalAlpha=0.5;
+    ctx.beginPath();ctx.arc(px,py,size,0,Math.PI*2);ctx.fill();
+    ctx.globalAlpha=1;
+  }
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
+
+<h2>p Atom vs Hydrogen Atom — At Planck Fissing Fusion</h2>
+<p>
+Hydrogen atom: 1 proton p+ (938.272MeV) + 1 electron e- (0.511MeV) bound by Coulomb -13.6eV = H atom mass 1.007825 amu =938.783MeV? Actually H atom = p+ + e- + binding -13.6eV. Has electron orbital shell empty shell invariant 0 photon shell ds²=0 — electron cloud — hydrogen atom is p+ plus electron shell.<br>
+p atom: bare proton p+ = proton atom = H+ ion = hydrogen ion = 1p nucleus alone no electron = p atom = {h{+ion}} = h encloses +ion = proton atom = smallest nucleus 1p =938.272MeV — not hydrogen atom, its p atom — p atom = proton atom = bare proton.<br>
+Hydrogen + energy or helium: fusion 4p → ⁴He +2e+ +2νe +26.7MeV γ photon chain p+p+p+p+p+p+p photon chain laser — hydrogen + energy = helium — or hydrogen + energy or helium = at Planck fission/fusion, hydrogen plus energy becomes helium, helium fissions into hydrogen plus energy — Planck scale energy EP=1.22e19GeV can fission/fuse p atoms — 99.99xinf-1 black hole at Planck scale fissions into p atoms or hydrogen + energy or helium — p atom or hydrogen + energy or helium lol at Planck fissing — exactly — at Planck scale, matter is p atoms fissing/fusing — Planck fissing = void manifold below Planck fissions into p atoms — keep walking.
+</p>
+
+<p class="small">Block 337 — Not Hydrogen Atom its p Atom or Hydrogen + Energy or Helium at Plank Fissing — Hydrogen atom H = p+ + e- + orbital shell empty shell — p atom = bare proton p+ = H+ ion = proton atom = 1p smallest nucleus = {h{+ion}} — Hydrogen + energy = helium fusion 4p → ⁴He +2e+ +2νe +26.7MeV photon chain — At Planck fissing = Planck scale fission/fusion EP=1.22e19GeV void manifold below Planck fissions into p atoms or hydrogen+energy or helium — 99.99xinf-1 BH at Planck scale fissions into p atoms — keep walking.</p>
+</body>
+</html>
