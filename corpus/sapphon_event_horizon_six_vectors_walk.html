@@ -1,0 +1,1383 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sapphon Event Horizon · 4×4 SVG QDots</title>
+<style>
+  :root {
+    --bg:#04070a;
+    --panel:#080d14;
+    --panel2:#0b111a;
+    --line:#1a2535;
+    --gold:#ffd700;
+    --silver:#c0c0c0;
+    --cyan:#00e5ff;
+    --magenta:#ff2d95;
+    --ink:#e8e8e8;
+    --muted:#7d8ba0;
+    --blue:#a8c8ff;
+  }
+  * { box-sizing:border-box; }
+  html,body {
+    margin:0; min-height:100%;
+    background:
+      radial-gradient(circle at 50% 18%, rgba(255,215,0,.07), transparent 20%),
+      radial-gradient(circle at 18% 82%, rgba(0,229,255,.05), transparent 18%),
+      radial-gradient(circle at 82% 76%, rgba(255,45,149,.05), transparent 20%),
+      linear-gradient(180deg, #04070a, #05080d 60%, #020406);
+    color:var(--ink);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  .app {
+    width:min(1540px, calc(100% - 24px));
+    margin:0 auto;
+    padding:16px 0 36px;
+  }
+  .hero {
+    border:1px solid var(--line);
+    background:rgba(8,13,20,.92);
+    border-radius:18px;
+    padding:14px 16px;
+    box-shadow:0 22px 70px rgba(0,0,0,.35);
+  }
+  .hero .title {
+    font-weight:900;
+    font-size:13px;
+    letter-spacing:.08em;
+    color:var(--gold);
+  }
+  .hero .sub {
+    margin-top:6px;
+    font-size:10px;
+    line-height:1.6;
+    color:var(--muted);
+  }
+  .layout {
+    margin-top:14px;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 360px;
+    gap:14px;
+  }
+  @media(max-width:1100px) {
+    .layout { grid-template-columns:1fr; }
+  }
+  .card {
+    border:1px solid var(--line);
+    background:rgba(8,13,20,.94);
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 20px 64px rgba(0,0,0,.32);
+  }
+  .head {
+    padding:14px 16px;
+    border-bottom:1px solid rgba(255,255,255,.05);
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    align-items:flex-end;
+    flex-wrap:wrap;
+  }
+  .head h2 {
+    margin:0;
+    font-size:11px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+  .head .note {
+    font-size:9px;
+    color:var(--muted);
+  }
+  .body { padding:16px; }
+
+  .stage {
+    position:relative;
+    min-height:820px;
+    overflow:hidden;
+    background:
+      radial-gradient(circle at center, rgba(255,215,0,.06), transparent 18%),
+      radial-gradient(circle at center, rgba(0,229,255,.035), transparent 36%),
+      linear-gradient(180deg, #05080d, #04070a);
+  }
+  .stage::before {
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
+    background-size:36px 36px;
+    mask-image:radial-gradient(circle at center, black 32%, transparent 85%);
+    pointer-events:none;
+  }
+  .hud {
+    position:absolute;
+    z-index:10;
+    border:1px solid var(--line);
+    background:rgba(8,13,20,.86);
+    border-radius:10px;
+    padding:8px 10px;
+    font-size:10px;
+    line-height:1.45;
+    color:var(--muted);
+    backdrop-filter:blur(8px);
+  }
+  .hud.tl { left:12px; top:12px; }
+  .hud.tr { right:12px; top:12px; text-align:right; }
+  .hud.bl { left:12px; bottom:12px; max-width:430px; }
+  .hud.br { right:12px; bottom:12px; }
+  .hud b { color:var(--gold); }
+  .hud .cyan { color:var(--cyan); }
+  .hud .mag { color:var(--magenta); }
+
+  .eh-core {
+    position:absolute;
+    left:50%; top:50%;
+    transform:translate(-50%,-50%);
+    width:min(760px, 88%);
+    aspect-ratio:1;
+    border-radius:50%;
+    z-index:2;
+  }
+  .eh-core .ring {
+    position:absolute;
+    left:50%; top:50%;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+    border:1px solid rgba(255,215,0,.16);
+    box-shadow:inset 0 0 30px rgba(255,215,0,.03);
+  }
+  .eh-core .ring.r1 { width:100%; height:100%; }
+  .eh-core .ring.r2 { width:84%; height:84%; border-style:dashed; border-color:rgba(168,200,255,.14); }
+  .eh-core .ring.r3 { width:66%; height:66%; border-color:rgba(0,229,255,.14); }
+  .eh-core .ring.r4 { width:46%; height:46%; border-color:rgba(255,45,149,.16); }
+  .pressure {
+    position:absolute;
+    left:50%; top:50%;
+    transform:translate(-50%,-50%);
+    width:38%; height:38%;
+    border-radius:50%;
+    background:
+      radial-gradient(circle at center, rgba(255,255,255,.07), rgba(255,215,0,.05) 20%, rgba(0,229,255,.05) 36%, rgba(255,45,149,.06) 54%, rgba(4,7,10,.96) 72%);
+    border:1px solid rgba(255,215,0,.22);
+    box-shadow:0 0 50px rgba(255,215,0,.08), inset 0 0 36px rgba(255,255,255,.03);
+    z-index:3;
+  }
+  .anchor {
+    position:absolute;
+    left:50%; top:50%;
+    transform:translate(-50%,-50%);
+    width:188px;
+    min-height:70px;
+    border-radius:18px;
+    border:1px solid rgba(255,215,0,.5);
+    background:rgba(5,8,13,.96);
+    z-index:8;
+    display:grid;
+    place-items:center;
+    padding:10px 12px;
+    text-align:center;
+    box-shadow:0 0 28px rgba(255,215,0,.12), 0 0 46px rgba(0,229,255,.05);
+  }
+  .anchor .main {
+    color:var(--gold);
+    font-size:14px;
+    font-weight:900;
+    letter-spacing:.05em;
+  }
+  .anchor .sub {
+    margin-top:4px;
+    color:var(--cyan);
+    font-size:8px;
+    font-weight:800;
+  }
+  .anchor .tiny {
+    margin-top:4px;
+    color:var(--muted);
+    font-size:7px;
+    line-height:1.35;
+  }
+
+  .qgrid {
+    position:absolute;
+    left:50%; top:50%;
+    transform:translate(-50%,-50%);
+    width:min(520px, 74%);
+    aspect-ratio:1;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    grid-template-rows:repeat(4,1fr);
+    gap:12px;
+    z-index:6;
+  }
+  .qcell {
+    display:grid;
+    place-items:center;
+  }
+  .qsvg {
+    width:100%;
+    height:100%;
+    overflow:visible;
+  }
+  .qlabel {
+    fill:#c7d3e3;
+    font-size:8px;
+    font-weight:800;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    letter-spacing:.08em;
+  }
+
+  .readout {
+    position:absolute;
+    left:50%;
+    bottom:68px;
+    transform:translateX(-50%);
+    z-index:10;
+    min-width:min(760px, 90%);
+    border:1px solid var(--line);
+    background:rgba(8,13,20,.9);
+    border-radius:10px;
+    padding:9px 12px;
+    font-size:10px;
+    color:var(--blue);
+    text-align:center;
+    line-height:1.5;
+    backdrop-filter:blur(8px);
+  }
+
+  .stack {
+    display:grid;
+    gap:12px;
+  }
+  .def {
+    border:1px solid rgba(255,255,255,.06);
+    border-radius:12px;
+    background:#0a1119;
+    padding:10px 12px;
+    font-size:10px;
+    line-height:1.6;
+    color:var(--muted);
+  }
+  .def b { color:var(--gold); }
+  .seed {
+    color:var(--gold);
+    font-weight:900;
+  }
+  .pillrow {
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-top:8px;
+  }
+  .pill {
+    border:1px solid #223042;
+    background:#121a26;
+    border-radius:999px;
+    padding:4px 8px;
+    color:var(--blue);
+    font-size:9px;
+  }
+</style>
+
+<style id="six-vector-walk-css">
+.six-panel{
+  margin-top:14px;
+  border:1px solid rgba(255,215,0,.18);
+  border-radius:18px;
+  background:
+    radial-gradient(circle at 50% 42%,rgba(255,215,0,.055),transparent 24%),
+    radial-gradient(circle at 16% 70%,rgba(0,229,255,.04),transparent 20%),
+    radial-gradient(circle at 84% 70%,rgba(255,45,149,.04),transparent 20%),
+    rgba(8,13,20,.95);
+  overflow:hidden;
+  box-shadow:0 22px 70px rgba(0,0,0,.34);
+}
+.six-head{
+  padding:14px 16px;
+  border-bottom:1px solid rgba(255,255,255,.05);
+  display:flex;justify-content:space-between;gap:12px;align-items:flex-end;flex-wrap:wrap;
+}
+.six-head h2{
+  margin:0;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#FFD700;
+}
+.six-head .note{font-size:9px;color:#7d8ba0}
+.six-body{padding:16px}
+.vector-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 360px;
+  gap:16px;
+}
+@media(max-width:1020px){.vector-layout{grid-template-columns:1fr}}
+.vector-field{
+  position:relative;
+  min-height:560px;
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:16px;
+  background:
+    radial-gradient(circle at center,rgba(255,215,0,.06),transparent 16%),
+    radial-gradient(circle at center,rgba(0,229,255,.025),transparent 45%),
+    #05080d;
+  overflow:hidden;
+}
+.vector-field::before,.vector-field::after{
+  content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  background:rgba(255,255,255,.05);pointer-events:none
+}
+.vector-field::before{width:1px;height:88%}
+.vector-field::after{height:1px;width:88%}
+.vector-orbit{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:390px;height:390px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.06);
+}
+.vector-node{
+  position:absolute;
+  transform:translate(-50%,-50%);
+  width:116px;min-height:64px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.08);
+  background:#0a1119;
+  display:grid;place-items:center;
+  padding:9px;
+  text-align:center;
+  color:#dce6f4;
+  transition:.22s ease;
+  z-index:3;
+}
+.vector-node b{display:block;font-size:11px;letter-spacing:.08em}
+.vector-node span{display:block;margin-top:4px;color:#7d8ba0;font-size:8px;line-height:1.35}
+.vector-node.active{
+  transform:translate(-50%,-50%) scale(1.08);
+  border-color:var(--vc);
+  box-shadow:0 0 0 2px color-mix(in srgb,var(--vc) 16%,transparent),
+             0 0 28px color-mix(in srgb,var(--vc) 22%,transparent);
+  color:var(--vc);
+}
+.vector-node.air{left:50%;top:10%;--vc:#A8C8FF}
+.vector-node.water{left:14%;top:38%;--vc:#00E5FF}
+.vector-node.fire{left:86%;top:38%;--vc:#FF6D00}
+.vector-node.earth{left:50%;top:90%;--vc:#C0C0C0}
+.vector-node.life{left:50%;top:50%;--vc:#FFD700;width:132px;min-height:74px}
+.vector-node.expansion{left:86%;top:76%;--vc:#69F0AE}
+.vector-arrow{
+  position:absolute;
+  left:50%;top:50%;
+  width:330px;height:330px;
+  transform:translate(-50%,-50%);
+  pointer-events:none;z-index:1;
+}
+.vector-arrow path{
+  fill:none;stroke:rgba(255,255,255,.08);stroke-width:1.1;stroke-dasharray:5 6;
+}
+.vector-arrow path.active{
+  stroke:#FFD700;stroke-width:2;stroke-dasharray:none;
+  filter:drop-shadow(0 0 5px rgba(255,215,0,.45));
+}
+.walk-panel{
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:16px;
+  background:#070b11;
+  padding:14px;
+}
+.walk-panel h3{
+  margin:0 0 10px;color:#FFD700;font-size:10px;letter-spacing:.12em
+}
+.walk-readout{
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:12px;background:#05080d;padding:12px;
+  min-height:154px;
+}
+.walk-step{
+  color:#A8C8FF;font-size:9px;font-weight:900;letter-spacing:.08em
+}
+.walk-name{
+  margin-top:7px;color:#fff;font-size:22px;font-weight:900;letter-spacing:.04em
+}
+.walk-role{
+  margin-top:7px;color:#8A96A8;font-size:10px;line-height:1.55
+}
+.walk-math{
+  margin-top:10px;color:#FFD700;font-size:9px;line-height:1.55
+}
+.walk-actions{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px
+}
+.walk-actions button{
+  border:1px solid #223042;background:#121A26;color:#A8C8FF;
+  border-radius:10px;padding:9px;cursor:pointer;font:900 9px/1 ui-monospace,Consolas,monospace;
+}
+.walk-actions button:hover{border-color:rgba(255,215,0,.38);color:#FFD700}
+.walk-track{
+  margin-top:12px;
+  display:grid;grid-template-columns:repeat(6,1fr);gap:5px
+}
+.track-cell{
+  border:1px solid rgba(255,255,255,.06);border-radius:8px;background:#080d14;
+  min-height:42px;display:grid;place-items:center;text-align:center;
+  color:#5A6577;font-size:7px;font-weight:800;padding:5px
+}
+.track-cell.done{color:#00E5FF;border-color:rgba(0,229,255,.2)}
+.track-cell.active{color:#FFD700;border-color:rgba(255,215,0,.35);box-shadow:0 0 12px rgba(255,215,0,.08)}
+.lock-strip{
+  margin-top:12px;
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:10px;background:#05080d;padding:10px;
+  color:#8A96A8;font-size:9px;line-height:1.6
+}
+.lock-strip b{color:#FFD700}
+.walk-summary{
+  margin-top:12px;color:#8A96A8;font-size:9px;line-height:1.6
+}
+.walk-summary b{color:#FFD700}
+</style>
+
+</head>
+<body>
+<div class="app">
+  <section class="hero">
+    <div class="title">SAPPHON EVENT HORIZON · REALISTIC SVG QDOT CENTER</div>
+    <div class="sub">
+      Rebuilt so the center is <b>0.[eh]0</b> and the 4×4 matrix is made of <b>16 individual SVG qdots</b>,
+      each color responsible for its own SVG. The seed path remains <span class="seed">(au(ag(qkag(eeee))))</span>,
+      while the inside wt pushes through the pressure valve of <b>360/plank@plank-+1</b>.
+    </div>
+  </section>
+
+  <div class="layout">
+    <section class="card">
+      <div class="head">
+        <h2>Event Horizon Field</h2>
+        <div class="note">0.[eh]0 · 4 qdots × 4 qdots · 16 bleeding colors</div>
+      </div>
+      <div class="body" style="padding:0">
+        <div class="stage">
+          <div class="hud tl">
+            <div><b>seed</b> <span class="seed">(au(ag(qkag(eeee))))</span></div>
+            <div>26 → 53 → 106 → 336 → 362 → +4 = 366</div>
+            <div>coherence lock before next shell</div>
+          </div>
+
+          <div class="hud tr">
+            <div><b>pressure valve</b></div>
+            <div>wt → 360/plank@plank-+1</div>
+            <div>event horizon anchor at center</div>
+          </div>
+
+          <div class="eh-core">
+            <div class="ring r1"></div>
+            <div class="ring r2"></div>
+            <div class="ring r3"></div>
+            <div class="ring r4"></div>
+
+            <div class="pressure"></div>
+
+            <div class="qgrid">
+              
+      <div class="qcell">
+        <svg class="qsvg" viewBox="0 0 100 100" role="img" aria-label="Qdot 01">
+          <defs>
+            <radialGradient id="rg1" cx="35%" cy="30%" r="65%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+              <stop offset="14%" stop-color="#ff1744" stop-opacity="0.95"/>
+              <stop offset="42%" stop-color="#ff1744" stop-opacity="0.45"/>
+              <stop offset="74%" stop-color="#05080d" stop-opacity="0.96"/>
+              <stop offset="100%" stop-color="#020406" stop-opacity="1"/>
+            </radialGradient>
+
+            <radialGradient id="halo1" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#ff1744" stop-opacity="0.28"/>
+              <stop offset="70%" stop-color="#ff1744" stop-opacity="0.08"/>
+              <stop offset="100%" stop-color="#ff1744" stop-opacity="0"/>
+            </radialGradient>
+
+            <filter id="blur1" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="4.2"/>
+            </filter>
+
+            <filter id="glow1" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="2.2" result="b"/>
+              <feMerge>
+                <feMergeNode in="b"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+
+          <circle cx="50" cy="50" r="42" fill="url(#halo1)" filter="url(#blur1)"/>
+          <ellipse cx="50" cy="50" rx="35" ry="15" fill="none" stroke="#ff1744" stroke-opacity="0.22" stroke-width="1.6" transform="rotate(0.0 50 50)"/>
+          <ellipse cx="50" cy="50" rx="18" ry="34" fill="none" stroke="#ff1744" stroke-opacity="0.14" stroke-width="1.2" transform="rotate(45.0 50 50)"/>
+          <circle cx="50" cy="50" r="26" fill="url(#rg1)" filter="url(#glow1)"/>
+          <circle cx="40" cy="38" r="6" fill="#ffffff" fill-opacity="0.72"/>
+          <circle cx="62" cy="61" r="2.8" fill="#ff1744" fill-opacity="0.94"/>
+          <text x="50" y="92" text-anchor="middle" class="qlabel">Q01</text>
+        </svg>
+      </div>
+    
+      <div class="qcell">
+        <svg class="qsvg" viewBox="0 0 100 100" role="img" aria-label="Qdot 02">
+          <defs>
+            <radialGradient id="rg2" cx="35%" cy="30%" r="65%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+              <stop offset="14%" stop-color="#ff6d00" stop-opacity="0.95"/>
+              <stop offset="42%" stop-color="#ff6d00" stop-opacity="0.45"/>
+              <stop offset="74%" stop-color="#05080d" stop-opacity="0.96"/>
+              <stop offset="100%" stop-color="#020406" stop-opacity="1"/>
+            </radialGradient>
+
+            <radialGradient id="halo2" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#ff6d00" stop-opacity="0.28"/>
+              <stop offset="70%" stop-color="#ff6d00" stop-opacity="0.08"/>
+              <stop offset="100%" stop-color="#ff6d00" stop-opacity="0"/>
+            </radialGradient>
+
+            <filter id="blur2" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="4.2"/>
+            </filter>
+
+            <filter id="glow2" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="2.2" result="b"/>
+              <feMerge>
+                <feMergeNode in="b"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+
+          <circle cx="50" cy="50" r="42" fill="url(#halo2)" filter="url(#blur2)"/>
+          <ellipse cx="50" cy="50" rx="35" ry="15" fill="none" stroke="#ff6d00" stroke-opacity="0.22" stroke-width="1.6" transform="rotate(22.5 50 50)"/>
+          <ellipse cx="50" cy="50" rx="18" ry="34" fill="none" stroke="#ff6d00" stroke-opacity="0.14" stroke-width="1.2" transform="rotate(56.25 50 50)"/>
+          <circle cx="50" cy="50" r="26" fill="url(#rg2)" filter="url(#glow2)"/>
+          <circle cx="40" cy="38" r="6" fill="#ffffff" fill-opacity="0.72"/>
+          <circle cx="62" cy="61" r="2.8" fill="#ff6d00" fill-opacity="0.94"/>
+          <text x="50" y="92" text-anchor="middle" class="qlabel">Q02</text>
+        </svg>
+      </div>
+    
+      <div class="qcell">
+        <svg class="qsvg" viewBox="0 0 100 100" role="img" aria-label="Qdot 03">
+          <defs>
+            <radialGradient id="rg3" cx="35%" cy="30%" r="65%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+              <stop offset="14%" stop-color="#ffd600" stop-opacity="0.95"/>
+              <stop offset="42%" stop-color="#ffd600" stop-opacity="0.45"/>
+              <stop offset="74%" stop-color="#05080d" stop-opacity="0.96"/>
+              <stop offset="100%" stop-color="#020406" stop-opacity="1"/>
+            </radialGradient>
+
+            <radialGradient id="halo3" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#ffd600" stop-opacity="0.28"/>
+              <stop offset="70%" stop-color="#ffd600" stop-opacity="0.08"/>
+              <stop offset="100%" stop-color="#ffd600" stop-opacity="0"/>
+            </radialGradient>
+
+            <filter id="blur3" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="4.2"/>
+            </filter>
+
+            <filter id="glow3" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="2.2" result="b"/>
+              <feMerge>
+                <feMergeNode in="b"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+
+          <circle cx="50" cy="50" r="42" fill="url(#halo3)" filter="url(#blur3)"/>
+          <ellipse cx="50" cy="50" rx="35" ry="15" fill="none" stroke="#ffd600" stroke-opacity="0.22" stroke-width="1.6" transform="rotate(45.0 50 50)"/>
+          <ellipse cx="50" cy="50" rx="18" ry="34" fill="none" stroke="#ffd600" stroke-opacity="0.14" stroke-width="1.2" transform="rotate(67.5 50 50)"/>
+          <circle cx="50" cy="50" r="26" fill="url(#rg3)" filter="url(#glow3)"/>
+          <circle cx="40" cy="38" r="6" fill="#ffffff" fill-opacity="0.72"/>
+          <circle cx="62" cy="61" r="2.8" fill="#ffd600" fill-opacity="0.94"/>
+          <text x="50" y="92" text-anchor="middle" class="qlabel">Q03</text>
+        </svg>
+      </div>
+    
+      <div class="qcell">
+        <svg class="qsvg" viewBox="0 0 100 100" role="img" aria-label="Qdot 04">
+          <defs>
+            <radialGradient id="rg4" cx="35%" cy="30%" r="65%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+              <stop offset="14%" stop-color="#76ff03" stop-opacity="0.95"/>
+              <stop offset="42%" stop-color="#76ff03" stop-opacity="0.45"/>
+              <stop offset="74%" stop-color="#05080d" stop-opacity="0.96"/>
+              <stop offset="100%" stop-color="#020406" stop-opacity="1"/>
+            </radialGradient>
+
+            <radialGradient id="halo4" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#76ff03" stop-opacity="0.28"/>
+              <stop offset="70%" stop-color="#76ff03" stop-opacity="0.08"/>
+              <stop offset="100%" stop-color="#76ff03" stop-opacity="0"/>
+            </radialGradient>
+
+            <filter id="blur4" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="4.2"/>
+            </filter>
+
+            <filter id="glow4" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="2.2" result="b"/>
+              <feMerge>
+                <feMergeNode in="b"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+
+          <circle cx="50" cy="50" r="42" fill="url(#halo4)" filter="url(#blur4)"/>
+          <ellipse cx="50" cy="50" rx="35" ry="15" fill="none" stroke="#76ff03" stroke-opacity="0.22" stroke-width="1.6" transform="rotate(67.5 50 50)"/>
+          <ellipse cx="50" cy="50" rx="18" ry="34" fill="none" stroke="#76ff03" stroke-opacity="0.14" stroke-width="1.2" transform="rotate(78.75 50 50)"/>
+          <circle cx="50" cy="50" r="26" fill="url(#rg4)" filter="url(#glow4)"/>
+          <circle cx="40" cy="38" r="6" fill="#ffffff" fill-opacity="0.72"/>
+          <circle cx="62" cy="61" r="2.8" fill="#76ff03" fill-opacity="0.94"/>
+          <text x="50" y="92" text-anchor="middle" class="qlabel">Q04</text>
+        </svg>
+      </div>
+    
+      <div class="qcell">
+        <svg class="qsvg" viewBox="0 0 100 100" role="img" aria-label="Qdot 05">
+          <defs>
+            <radialGradient id="rg5" cx="35%" cy="30%" r="65%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+              <stop offset="14%" stop-color="#00e676" stop-opacity="0.95"/>
+              <stop offset="42%" stop-color="#00e676" stop-opacity="0.45"/>
+              <stop offset="74%" stop-color="#05080d" stop-opacity="0.96"/>
+              <stop offset="100%" stop-color="#020406" stop-opacity="1"/>
+            </radialGradient>
+
+            <radialGradient id="halo5" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#00e676" stop-opacity="0.28"/>
+              <stop offset="70%" stop-color="#00e676" stop-opacity="0.08"/>
+              <stop offset="100%" stop-color="#00e676" stop-opacity="0"/>
+            </radialGradient>
+
+            <filter id="blur5" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="4.2"/>
+            </filter>
+
+            <filter id="glow5" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="2.2" result="b"/>
+              <feMerge>
+                <feMergeNode in="b"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+
+          <circle cx="50" cy="50" r="42" fill="url(#halo5)" filter="url(#blur5)"/>
+          <ellipse cx="50" cy="50" rx="35" ry="15" fill="none" stroke="#00e676" stroke-opacity="0.22" stroke-width="1.6" transform="rotate(90.0 50 50)"/>
+          <ellipse cx="50" cy="50" rx="18" ry="34" fill="none" stroke="#00e676" stroke-opacity="0.14" stroke-width="1.2" transform="rotate(90.0 50 50)"/>
+          <circle cx="50" cy="50" r="26" fill="url(#rg5)" filter="url(#glow5)"/>
+          <circle cx="40" cy="38" r="6" fill="#ffffff" fill-opacity="0.72"/>
+          <circle cx="62" cy="61" r="2.8" fill="#00e676" fill-opacity="0.94"/>
+          <text x="50" y="92" text-anchor="middle" class="qlabel">Q05</text>
+        </svg>
+      </div>
+    
+      <div class="qcell">
+        <svg class="qsvg" viewBox="0 0 100 100" role="img" aria-label="Qdot 06">
+          <defs>
+            <radialGradient id="rg6" cx="35%" cy="30%" r="65%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+              <stop offset="14%" stop-color="#1de9b6" stop-opacity="0.95"/>
+              <stop offset="42%" stop-color="#1de9b6" stop-opacity="0.45"/>
+              <stop offset="74%" stop-color="#05080d" stop-opacity="0.96"/>
+              <stop offset="100%" stop-color="#020406" stop-opacity="1"/>
+            </radialGradient>
+
+            <radialGradient id="halo6" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#1de9b6" stop-opacity="0.28"/>
+              <stop offset="70%" stop-color="#1de9b6" stop-opacity="0.08"/>
+              <stop offset="100%" stop-color="#1de9b6" stop-opacity="0"/>
+            </radialGradient>
+
+            <filter id="blur6" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="4.2"/>
+            </filter>
+
+            <filter id="glow6" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="2.2" result="b"/>
+              <feMerge>
+                <feMergeNode in="b"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+
+          <circle cx="50" cy="50" r="42" fill="url(#halo6)" filter="url(#blur6)"/>
+          <ellipse cx="50" cy="50" rx="35" ry="15" fill="none" stroke="#1de9b6" stroke-opacity="0.22" stroke-width="1.6" transform="rotate(112.5 50 50)"/>
+          <ellipse cx="50" cy="50" rx="18" ry="34" fill="none" stroke="#1de9b6" stroke-opacity="0.14" stroke-width="1.2" transform="rotate(101.25 50 50)"/>
+          <circle cx="50" cy="50" r="26" fill="url(#rg6)" filter="url(#glow6)"/>
+          <circle cx="40" cy="38" r="6" fill="#ffffff" fill-opacity="0.72"/>
+          <circle cx="62" cy="61" r="2.8" fill="#1de9b6" fill-opacity="0.94"/>
+          <text x="50" y="92" text-anchor="middle" class="qlabel">Q06</text>
+        </svg>
+      </div>
+    
+      <div class="qcell">
+        <svg class="qsvg" viewBox="0 0 100 100" role="img" aria-label="Qdot 07">
+          <defs>
+            <radialGradient id="rg7" cx="35%" cy="30%" r="65%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+              <stop offset="14%" stop-color="#00e5ff" stop-opacity="0.95"/>
+              <stop offset="42%" stop-color="#00e5ff" stop-opacity="0.45"/>
+              <stop offset="74%" stop-color="#05080d" stop-opacity="0.96"/>
+              <stop offset="100%" stop-color="#020406" stop-opacity="1"/>
+            </radialGradient>
+
+            <radialGradient id="halo7" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.28"/>
+              <stop offset="70%" stop-color="#00e5ff" stop-opacity="0.08"/>
+              <stop offset="100%" stop-color="#00e5ff" stop-opacity="0"/>
+            </radialGradient>
+
+            <filter id="blur7" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="4.2"/>
+            </filter>
+
+            <filter id="glow7" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="2.2" result="b"/>
+              <feMerge>
+                <feMergeNode in="b"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+
+          <circle cx="50" cy="50" r="42" fill="url(#halo7)" filter="url(#blur7)"/>
+          <ellipse cx="50" cy="50" rx="35" ry="15" fill="none" stroke="#00e5ff" stroke-opacity="0.22" stroke-width="1.6" transform="rotate(135.0 50 50)"/>
+          <ellipse cx="50" cy="50" rx="18" ry="34" fill="none" stroke="#00e5ff" stroke-opacity="0.14" stroke-width="1.2" transform="rotate(112.5 50 50)"/>
+          <circle cx="50" cy="50" r="26" fill="url(#rg7)" filter="url(#glow7)"/>
+          <circle cx="40" cy="38" r="6" fill="#ffffff" fill-opacity="0.72"/>
+          <circle cx="62" cy="61" r="2.8" fill="#00e5ff" fill-opacity="0.94"/>
+          <text x="50" y="92" text-anchor="middle" class="qlabel">Q07</text>
+        </svg>
+      </div>
+    
+      <div class="qcell">
+        <svg class="qsvg" viewBox="0 0 100 100" role="img" aria-label="Qdot 08">
+          <defs>
+            <radialGradient id="rg8" cx="35%" cy="30%" r="65%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+              <stop offset="14%" stop-color="#40c4ff" stop-opacity="0.95"/>
+              <stop offset="42%" stop-color="#40c4ff" stop-opacity="0.45"/>
+              <stop offset="74%" stop-color="#05080d" stop-opacity="0.96"/>
+              <stop offset="100%" stop-color="#020406" stop-opacity="1"/>
+            </radialGradient>
+
+            <radialGradient id="halo8" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#40c4ff" stop-opacity="0.28"/>
+              <stop offset="70%" stop-color="#40c4ff" stop-opacity="0.08"/>
+              <stop offset="100%" stop-color="#40c4ff" stop-opacity="0"/>
+            </radialGradient>
+
+            <filter id="blur8" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="4.2"/>
+            </filter>
+
+            <filter id="glow8" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="2.2" result="b"/>
+              <feMerge>
+                <feMergeNode in="b"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+
+          <circle cx="50" cy="50" r="42" fill="url(#halo8)" filter="url(#blur8)"/>
+          <ellipse cx="50" cy="50" rx="35" ry="15" fill="none" stroke="#40c4ff" stroke-opacity="0.22" stroke-width="1.6" transform="rotate(157.5 50 50)"/>
+          <ellipse cx="50" cy="50" rx="18" ry="34" fill="none" stroke="#40c4ff" stroke-opacity="0.14" stroke-width="1.2" transform="rotate(123.75 50 50)"/>
+          <circle cx="50" cy="50" r="26" fill="url(#rg8)" filter="url(#glow8)"/>
+          <circle cx="40" cy="38" r="6" fill="#ffffff" fill-opacity="0.72"/>
+          <circle cx="62" cy="61" r="2.8" fill="#40c4ff" fill-opacity="0.94"/>
+          <text x="50" y="92" text-anchor="middle" class="qlabel">Q08</text>
+        </svg>
+      </div>
+    
+      <div class="qcell">
+        <svg class="qsvg" viewBox="0 0 100 100" role="img" aria-label="Qdot 09">
+          <defs>
+            <radialGradient id="rg9" cx="35%" cy="30%" r="65%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+              <stop offset="14%" stop-color="#448aff" stop-opacity="0.95"/>
+              <stop offset="42%" stop-color="#448aff" stop-opacity="0.45"/>
+              <stop offset="74%" stop-color="#05080d" stop-opacity="0.96"/>
+              <stop offset="100%" stop-color="#020406" stop-opacity="1"/>
+            </radialGradient>
+
+            <radialGradient id="halo9" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#448aff" stop-opacity="0.28"/>
+              <stop offset="70%" stop-color="#448aff" stop-opacity="0.08"/>
+              <stop offset="100%" stop-color="#448aff" stop-opacity="0"/>
+            </radialGradient>
+
+            <filter id="blur9" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="4.2"/>
+            </filter>
+
+            <filter id="glow9" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="2.2" result="b"/>
+              <feMerge>
+                <feMergeNode in="b"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+
+          <circle cx="50" cy="50" r="42" fill="url(#halo9)" filter="url(#blur9)"/>
+          <ellipse cx="50" cy="50" rx="35" ry="15" fill="none" stroke="#448aff" stroke-opacity="0.22" stroke-width="1.6" transform="rotate(180.0 50 50)"/>
+          <ellipse cx="50" cy="50" rx="18" ry="34" fill="none" stroke="#448aff" stroke-opacity="0.14" stroke-width="1.2" transform="rotate(135.0 50 50)"/>
+          <circle cx="50" cy="50" r="26" fill="url(#rg9)" filter="url(#glow9)"/>
+          <circle cx="40" cy="38" r="6" fill="#ffffff" fill-opacity="0.72"/>
+          <circle cx="62" cy="61" r="2.8" fill="#448aff" fill-opacity="0.94"/>
+          <text x="50" y="92" text-anchor="middle" class="qlabel">Q09</text>
+        </svg>
+      </div>
+    
+      <div class="qcell">
+        <svg class="qsvg" viewBox="0 0 100 100" role="img" aria-label="Qdot 10">
+          <defs>
+            <radialGradient id="rg10" cx="35%" cy="30%" r="65%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+              <stop offset="14%" stop-color="#7c4dff" stop-opacity="0.95"/>
+              <stop offset="42%" stop-color="#7c4dff" stop-opacity="0.45"/>
+              <stop offset="74%" stop-color="#05080d" stop-opacity="0.96"/>
+              <stop offset="100%" stop-color="#020406" stop-opacity="1"/>
+            </radialGradient>
+
+            <radialGradient id="halo10" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#7c4dff" stop-opacity="0.28"/>
+              <stop offset="70%" stop-color="#7c4dff" stop-opacity="0.08"/>
+              <stop offset="100%" stop-color="#7c4dff" stop-opacity="0"/>
+            </radialGradient>
+
+            <filter id="blur10" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="4.2"/>
+            </filter>
+
+            <filter id="glow10" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="2.2" result="b"/>
+              <feMerge>
+                <feMergeNode in="b"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+
+          <circle cx="50" cy="50" r="42" fill="url(#halo10)" filter="url(#blur10)"/>
+          <ellipse cx="50" cy="50" rx="35" ry="15" fill="none" stroke="#7c4dff" stroke-opacity="0.22" stroke-width="1.6" transform="rotate(202.5 50 50)"/>
+          <ellipse cx="50" cy="50" rx="18" ry="34" fill="none" stroke="#7c4dff" stroke-opacity="0.14" stroke-width="1.2" transform="rotate(146.25 50 50)"/>
+          <circle cx="50" cy="50" r="26" fill="url(#rg10)" filter="url(#glow10)"/>
+          <circle cx="40" cy="38" r="6" fill="#ffffff" fill-opacity="0.72"/>
+          <circle cx="62" cy="61" r="2.8" fill="#7c4dff" fill-opacity="0.94"/>
+          <text x="50" y="92" text-anchor="middle" class="qlabel">Q10</text>
+        </svg>
+      </div>
+    
+      <div class="qcell">
+        <svg class="qsvg" viewBox="0 0 100 100" role="img" aria-label="Qdot 11">
+          <defs>
+            <radialGradient id="rg11" cx="35%" cy="30%" r="65%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+              <stop offset="14%" stop-color="#e040fb" stop-opacity="0.95"/>
+              <stop offset="42%" stop-color="#e040fb" stop-opacity="0.45"/>
+              <stop offset="74%" stop-color="#05080d" stop-opacity="0.96"/>
+              <stop offset="100%" stop-color="#020406" stop-opacity="1"/>
+            </radialGradient>
+
+            <radialGradient id="halo11" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#e040fb" stop-opacity="0.28"/>
+              <stop offset="70%" stop-color="#e040fb" stop-opacity="0.08"/>
+              <stop offset="100%" stop-color="#e040fb" stop-opacity="0"/>
+            </radialGradient>
+
+            <filter id="blur11" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="4.2"/>
+            </filter>
+
+            <filter id="glow11" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="2.2" result="b"/>
+              <feMerge>
+                <feMergeNode in="b"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+
+          <circle cx="50" cy="50" r="42" fill="url(#halo11)" filter="url(#blur11)"/>
+          <ellipse cx="50" cy="50" rx="35" ry="15" fill="none" stroke="#e040fb" stroke-opacity="0.22" stroke-width="1.6" transform="rotate(225.0 50 50)"/>
+          <ellipse cx="50" cy="50" rx="18" ry="34" fill="none" stroke="#e040fb" stroke-opacity="0.14" stroke-width="1.2" transform="rotate(157.5 50 50)"/>
+          <circle cx="50" cy="50" r="26" fill="url(#rg11)" filter="url(#glow11)"/>
+          <circle cx="40" cy="38" r="6" fill="#ffffff" fill-opacity="0.72"/>
+          <circle cx="62" cy="61" r="2.8" fill="#e040fb" fill-opacity="0.94"/>
+          <text x="50" y="92" text-anchor="middle" class="qlabel">Q11</text>
+        </svg>
+      </div>
+    
+      <div class="qcell">
+        <svg class="qsvg" viewBox="0 0 100 100" role="img" aria-label="Qdot 12">
+          <defs>
+            <radialGradient id="rg12" cx="35%" cy="30%" r="65%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+              <stop offset="14%" stop-color="#f50057" stop-opacity="0.95"/>
+              <stop offset="42%" stop-color="#f50057" stop-opacity="0.45"/>
+              <stop offset="74%" stop-color="#05080d" stop-opacity="0.96"/>
+              <stop offset="100%" stop-color="#020406" stop-opacity="1"/>
+            </radialGradient>
+
+            <radialGradient id="halo12" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#f50057" stop-opacity="0.28"/>
+              <stop offset="70%" stop-color="#f50057" stop-opacity="0.08"/>
+              <stop offset="100%" stop-color="#f50057" stop-opacity="0"/>
+            </radialGradient>
+
+            <filter id="blur12" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="4.2"/>
+            </filter>
+
+            <filter id="glow12" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="2.2" result="b"/>
+              <feMerge>
+                <feMergeNode in="b"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+
+          <circle cx="50" cy="50" r="42" fill="url(#halo12)" filter="url(#blur12)"/>
+          <ellipse cx="50" cy="50" rx="35" ry="15" fill="none" stroke="#f50057" stroke-opacity="0.22" stroke-width="1.6" transform="rotate(247.5 50 50)"/>
+          <ellipse cx="50" cy="50" rx="18" ry="34" fill="none" stroke="#f50057" stroke-opacity="0.14" stroke-width="1.2" transform="rotate(168.75 50 50)"/>
+          <circle cx="50" cy="50" r="26" fill="url(#rg12)" filter="url(#glow12)"/>
+          <circle cx="40" cy="38" r="6" fill="#ffffff" fill-opacity="0.72"/>
+          <circle cx="62" cy="61" r="2.8" fill="#f50057" fill-opacity="0.94"/>
+          <text x="50" y="92" text-anchor="middle" class="qlabel">Q12</text>
+        </svg>
+      </div>
+    
+      <div class="qcell">
+        <svg class="qsvg" viewBox="0 0 100 100" role="img" aria-label="Qdot 13">
+          <defs>
+            <radialGradient id="rg13" cx="35%" cy="30%" r="65%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+              <stop offset="14%" stop-color="#ff5252" stop-opacity="0.95"/>
+              <stop offset="42%" stop-color="#ff5252" stop-opacity="0.45"/>
+              <stop offset="74%" stop-color="#05080d" stop-opacity="0.96"/>
+              <stop offset="100%" stop-color="#020406" stop-opacity="1"/>
+            </radialGradient>
+
+            <radialGradient id="halo13" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#ff5252" stop-opacity="0.28"/>
+              <stop offset="70%" stop-color="#ff5252" stop-opacity="0.08"/>
+              <stop offset="100%" stop-color="#ff5252" stop-opacity="0"/>
+            </radialGradient>
+
+            <filter id="blur13" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="4.2"/>
+            </filter>
+
+            <filter id="glow13" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="2.2" result="b"/>
+              <feMerge>
+                <feMergeNode in="b"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+
+          <circle cx="50" cy="50" r="42" fill="url(#halo13)" filter="url(#blur13)"/>
+          <ellipse cx="50" cy="50" rx="35" ry="15" fill="none" stroke="#ff5252" stroke-opacity="0.22" stroke-width="1.6" transform="rotate(270.0 50 50)"/>
+          <ellipse cx="50" cy="50" rx="18" ry="34" fill="none" stroke="#ff5252" stroke-opacity="0.14" stroke-width="1.2" transform="rotate(180.0 50 50)"/>
+          <circle cx="50" cy="50" r="26" fill="url(#rg13)" filter="url(#glow13)"/>
+          <circle cx="40" cy="38" r="6" fill="#ffffff" fill-opacity="0.72"/>
+          <circle cx="62" cy="61" r="2.8" fill="#ff5252" fill-opacity="0.94"/>
+          <text x="50" y="92" text-anchor="middle" class="qlabel">Q13</text>
+        </svg>
+      </div>
+    
+      <div class="qcell">
+        <svg class="qsvg" viewBox="0 0 100 100" role="img" aria-label="Qdot 14">
+          <defs>
+            <radialGradient id="rg14" cx="35%" cy="30%" r="65%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+              <stop offset="14%" stop-color="#ffab40" stop-opacity="0.95"/>
+              <stop offset="42%" stop-color="#ffab40" stop-opacity="0.45"/>
+              <stop offset="74%" stop-color="#05080d" stop-opacity="0.96"/>
+              <stop offset="100%" stop-color="#020406" stop-opacity="1"/>
+            </radialGradient>
+
+            <radialGradient id="halo14" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#ffab40" stop-opacity="0.28"/>
+              <stop offset="70%" stop-color="#ffab40" stop-opacity="0.08"/>
+              <stop offset="100%" stop-color="#ffab40" stop-opacity="0"/>
+            </radialGradient>
+
+            <filter id="blur14" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="4.2"/>
+            </filter>
+
+            <filter id="glow14" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="2.2" result="b"/>
+              <feMerge>
+                <feMergeNode in="b"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+
+          <circle cx="50" cy="50" r="42" fill="url(#halo14)" filter="url(#blur14)"/>
+          <ellipse cx="50" cy="50" rx="35" ry="15" fill="none" stroke="#ffab40" stroke-opacity="0.22" stroke-width="1.6" transform="rotate(292.5 50 50)"/>
+          <ellipse cx="50" cy="50" rx="18" ry="34" fill="none" stroke="#ffab40" stroke-opacity="0.14" stroke-width="1.2" transform="rotate(191.25 50 50)"/>
+          <circle cx="50" cy="50" r="26" fill="url(#rg14)" filter="url(#glow14)"/>
+          <circle cx="40" cy="38" r="6" fill="#ffffff" fill-opacity="0.72"/>
+          <circle cx="62" cy="61" r="2.8" fill="#ffab40" fill-opacity="0.94"/>
+          <text x="50" y="92" text-anchor="middle" class="qlabel">Q14</text>
+        </svg>
+      </div>
+    
+      <div class="qcell">
+        <svg class="qsvg" viewBox="0 0 100 100" role="img" aria-label="Qdot 15">
+          <defs>
+            <radialGradient id="rg15" cx="35%" cy="30%" r="65%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+              <stop offset="14%" stop-color="#eeff41" stop-opacity="0.95"/>
+              <stop offset="42%" stop-color="#eeff41" stop-opacity="0.45"/>
+              <stop offset="74%" stop-color="#05080d" stop-opacity="0.96"/>
+              <stop offset="100%" stop-color="#020406" stop-opacity="1"/>
+            </radialGradient>
+
+            <radialGradient id="halo15" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#eeff41" stop-opacity="0.28"/>
+              <stop offset="70%" stop-color="#eeff41" stop-opacity="0.08"/>
+              <stop offset="100%" stop-color="#eeff41" stop-opacity="0"/>
+            </radialGradient>
+
+            <filter id="blur15" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="4.2"/>
+            </filter>
+
+            <filter id="glow15" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="2.2" result="b"/>
+              <feMerge>
+                <feMergeNode in="b"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+
+          <circle cx="50" cy="50" r="42" fill="url(#halo15)" filter="url(#blur15)"/>
+          <ellipse cx="50" cy="50" rx="35" ry="15" fill="none" stroke="#eeff41" stroke-opacity="0.22" stroke-width="1.6" transform="rotate(315.0 50 50)"/>
+          <ellipse cx="50" cy="50" rx="18" ry="34" fill="none" stroke="#eeff41" stroke-opacity="0.14" stroke-width="1.2" transform="rotate(202.5 50 50)"/>
+          <circle cx="50" cy="50" r="26" fill="url(#rg15)" filter="url(#glow15)"/>
+          <circle cx="40" cy="38" r="6" fill="#ffffff" fill-opacity="0.72"/>
+          <circle cx="62" cy="61" r="2.8" fill="#eeff41" fill-opacity="0.94"/>
+          <text x="50" y="92" text-anchor="middle" class="qlabel">Q15</text>
+        </svg>
+      </div>
+    
+      <div class="qcell">
+        <svg class="qsvg" viewBox="0 0 100 100" role="img" aria-label="Qdot 16">
+          <defs>
+            <radialGradient id="rg16" cx="35%" cy="30%" r="65%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+              <stop offset="14%" stop-color="#69f0ae" stop-opacity="0.95"/>
+              <stop offset="42%" stop-color="#69f0ae" stop-opacity="0.45"/>
+              <stop offset="74%" stop-color="#05080d" stop-opacity="0.96"/>
+              <stop offset="100%" stop-color="#020406" stop-opacity="1"/>
+            </radialGradient>
+
+            <radialGradient id="halo16" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#69f0ae" stop-opacity="0.28"/>
+              <stop offset="70%" stop-color="#69f0ae" stop-opacity="0.08"/>
+              <stop offset="100%" stop-color="#69f0ae" stop-opacity="0"/>
+            </radialGradient>
+
+            <filter id="blur16" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="4.2"/>
+            </filter>
+
+            <filter id="glow16" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="2.2" result="b"/>
+              <feMerge>
+                <feMergeNode in="b"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+
+          <circle cx="50" cy="50" r="42" fill="url(#halo16)" filter="url(#blur16)"/>
+          <ellipse cx="50" cy="50" rx="35" ry="15" fill="none" stroke="#69f0ae" stroke-opacity="0.22" stroke-width="1.6" transform="rotate(337.5 50 50)"/>
+          <ellipse cx="50" cy="50" rx="18" ry="34" fill="none" stroke="#69f0ae" stroke-opacity="0.14" stroke-width="1.2" transform="rotate(213.75 50 50)"/>
+          <circle cx="50" cy="50" r="26" fill="url(#rg16)" filter="url(#glow16)"/>
+          <circle cx="40" cy="38" r="6" fill="#ffffff" fill-opacity="0.72"/>
+          <circle cx="62" cy="61" r="2.8" fill="#69f0ae" fill-opacity="0.94"/>
+          <text x="50" y="92" text-anchor="middle" class="qlabel">Q16</text>
+        </svg>
+      </div>
+    
+            </div>
+
+            <div class="anchor">
+              <div>
+                <div class="main">0.[eh]0</div>
+                <div class="sub">event horizon center</div>
+                <div class="tiny">4×4 qdot matrix · 16 color state SVGs</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="readout">
+            16 separate SVG qdots · each color owns its own SVG · all 16 remain pinned to 0.[eh]0 while color bleeds across the event-horizon field
+          </div>
+
+          <div class="hud bl">
+            <div><b>EM</b> <span class="cyan">E cyan</span> ⟂ <span class="mag">B magenta</span></div>
+            <div>DRAGON . + = . =0::DRAGON</div>
+            <div>field law preserved · event-horizon center made more realistic</div>
+          </div>
+
+          <div class="hud br">
+            <div><b>matrix</b> 4 × 4</div>
+            <div><b>colors</b> 16</div>
+            <div><b>anchor</b> 0.[eh]0</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="card">
+      <div class="head">
+        <h2>Field Register</h2>
+        <div class="note">seed → center → lock</div>
+      </div>
+      <div class="body">
+        <div class="stack">
+          <div class="def">
+            <b>elemental seed</b><br>
+            (au(ag(qkag(eeee))))
+          </div>
+
+          <div class="def">
+            <b>center</b><br>
+            0.[eh]0 = event horizon center of page
+          </div>
+
+          <div class="def">
+            <b>qdot matrix</b><br>
+            4 qdots × 4 qdots = 16 qdots<br>
+            each qdot is rendered by its <b>own SVG</b><br>
+            each SVG owns one color state
+          </div>
+
+          <div class="def">
+            <b>pressure / valve</b><br>
+            wt pushing through the pressure valve of<br>
+            360/plank@plank-+1
+          </div>
+
+          <div class="def">
+            <b>generation register</b><br>
+            26 := 13 × .5 × 13<br>
+            26.5 × 2 = 53<br>
+            53 × 2 = 106<br>
+            106 × 3 = 336<br>
+            336 + 26 = 362<br>
+            362 + 4 sentinels = 366<br>
+            366 → mod 0 → report → lock
+          </div>
+
+          <div class="def">
+            <b>sentinels</b><br>
+            -n+ · -s+ · -e+ · -w+
+            <div class="pillrow">
+              <span class="pill">-n+</span>
+              <span class="pill">-s+</span>
+              <span class="pill">-e+</span>
+              <span class="pill">-w+</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+<section class="six-panel" id="six-vectors-under-pressure">
+  <div class="six-head">
+    <h2>Six Vectors Under Pressure</h2>
+    <div class="note">Art of War / fight-flight / evolution layer</div>
+  </div>
+
+  <div class="six-body">
+    <div class="vector-layout">
+      <div class="vector-field">
+        <div class="vector-orbit"></div>
+
+        <svg class="vector-arrow" viewBox="0 0 330 330" aria-hidden="true">
+          <path id="p0" d="M165 165 L165 38"/>
+          <path id="p1" d="M165 165 L46 122"/>
+          <path id="p2" d="M165 165 L284 122"/>
+          <path id="p3" d="M165 165 L165 292"/>
+          <path id="p4" d="M165 165 L165 165"/>
+          <path id="p5" d="M165 165 L284 248"/>
+        </svg>
+
+        <div class="vector-node air" data-v="0">
+          <div><b>AIR</b><span>sense · scan · signal · breath</span></div>
+        </div>
+
+        <div class="vector-node water" data-v="1">
+          <div><b>WATER</b><span>flow · evade · adapt · route around</span></div>
+        </div>
+
+        <div class="vector-node fire" data-v="2">
+          <div><b>FIRE</b><span>push · engage · act · fight</span></div>
+        </div>
+
+        <div class="vector-node earth" data-v="3">
+          <div><b>EARTH</b><span>hold · anchor · stabilize · freeze</span></div>
+        </div>
+
+        <div class="vector-node life" data-v="4">
+          <div><b>LIFE FORCE</b><span>choose · animate · continue · decide</span></div>
+        </div>
+
+        <div class="vector-node expansion" data-v="5">
+          <div><b>EXPANSION</b><span>grow · reproduce · propagate · evolve</span></div>
+        </div>
+      </div>
+
+      <div class="walk-panel">
+        <h3>WALK THE PRESSURE RESPONSE</h3>
+
+        <div class="walk-readout">
+          <div class="walk-step" id="walkStep">STEP 1 / 6</div>
+          <div class="walk-name" id="walkName">AIR</div>
+          <div class="walk-role" id="walkRole">Sense the pressure field first. Scan, breathe, signal, and locate the gradient before committing force.</div>
+          <div class="walk-math" id="walkMath">pressure → observation → vector candidate</div>
+        </div>
+
+        <div class="walk-actions">
+          <button id="walkPrev">← PREV</button>
+          <button id="walkNext">NEXT →</button>
+          <button id="walkAuto">▶ AUTO WALK</button>
+          <button id="walkReset">↺ RESET</button>
+        </div>
+
+        <div class="walk-track">
+          <div class="track-cell" data-t="0">AIR</div>
+          <div class="track-cell" data-t="1">WATER</div>
+          <div class="track-cell" data-t="2">FIRE</div>
+          <div class="track-cell" data-t="3">EARTH</div>
+          <div class="track-cell" data-t="4">LIFE</div>
+          <div class="track-cell" data-t="5">EXPAND</div>
+        </div>
+
+        <div class="lock-strip" id="walkLock">
+          <b>closure gate:</b> after EXPANSION → 366 → mod 0 → REPORT → LOCK
+        </div>
+
+        <div class="walk-summary">
+          <b>under pressure:</b> sense / evade / engage / anchor / choose / expand.<br>
+          The first five are the primitive response set; the sixth is the resultant growth/evolution vector.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<script id="six-vector-walk-js">
+(() => {
+  const steps = [
+    {
+      name:"AIR",
+      role:"Sense the pressure field first. Scan, breathe, signal, and locate the gradient before committing force.",
+      math:"pressure → observation → vector candidate"
+    },
+    {
+      name:"WATER",
+      role:"Flow around the obstruction. Evade, reroute, absorb local change, and preserve continuity instead of colliding head-on.",
+      math:"pressure + path obstruction → reroute / adapt"
+    },
+    {
+      name:"FIRE",
+      role:"Engage when routing around is insufficient. Push into the gradient, act, and spend energy to change the field.",
+      math:"pressure + commitment → work / fight"
+    },
+    {
+      name:"EARTH",
+      role:"Anchor the state. Hold position, freeze drift, stabilize the local geometry, and create a reliable reference floor.",
+      math:"pressure + instability → anchor / hold"
+    },
+    {
+      name:"LIFE FORCE",
+      role:"Choose among the available responses and preserve continuation. This is the decision-bearing center of the primitive set.",
+      math:"AIR ∪ WATER ∪ FIRE ∪ EARTH → choice / continuation"
+    },
+    {
+      name:"EXPANSION",
+      role:"When the generation remains coherent, propagate the successful state outward: grow, reproduce, distribute, or evolve.",
+      math:"coherent survival state → expansion → 366 → mod 0 → REPORT → LOCK"
+    }
+  ];
+
+  let idx = 0;
+  let timer = null;
+  const name = document.getElementById("walkName");
+  const role = document.getElementById("walkRole");
+  const math = document.getElementById("walkMath");
+  const step = document.getElementById("walkStep");
+  const nodes = [...document.querySelectorAll(".vector-node")];
+  const tracks = [...document.querySelectorAll(".track-cell")];
+  const paths = [...document.querySelectorAll(".vector-arrow path")];
+  const lock = document.getElementById("walkLock");
+
+  function render(){
+    const s = steps[idx];
+    step.textContent = "STEP " + (idx+1) + " / " + steps.length;
+    name.textContent = s.name;
+    role.textContent = s.role;
+    math.textContent = s.math;
+
+    nodes.forEach((n,i)=>n.classList.toggle("active",i===idx));
+    tracks.forEach((t,i)=>{
+      t.classList.toggle("active",i===idx);
+      t.classList.toggle("done",i<idx);
+    });
+    paths.forEach((p,i)=>p.classList.toggle("active",i===idx));
+
+    lock.innerHTML = idx===5
+      ? "<b>closure reached:</b> EXPANSION → 366 → mod 0 → REPORT → LOCK → next plank{{n}}^{{n}} shell may open"
+      : "<b>closure gate:</b> after EXPANSION → 366 → mod 0 → REPORT → LOCK";
+  }
+
+  document.getElementById("walkNext").onclick = () => { idx=(idx+1)%steps.length; render(); };
+  document.getElementById("walkPrev").onclick = () => { idx=(idx-1+steps.length)%steps.length; render(); };
+  document.getElementById("walkReset").onclick = () => { idx=0; render(); };
+
+  document.getElementById("walkAuto").onclick = function(){
+    if(timer){
+      clearInterval(timer); timer=null; this.textContent="▶ AUTO WALK"; return;
+    }
+    this.textContent="■ STOP";
+    timer=setInterval(()=>{
+      idx++;
+      if(idx>=steps.length){
+        idx=steps.length-1;
+        render();
+        clearInterval(timer); timer=null;
+        document.getElementById("walkAuto").textContent="▶ AUTO WALK";
+        return;
+      }
+      render();
+    }, 1300);
+  };
+
+  nodes.forEach((n,i)=>n.addEventListener("click",()=>{idx=i;render()}));
+  tracks.forEach((t,i)=>t.addEventListener("click",()=>{idx=i;render()}));
+  render();
+})();
+</script>
+
+</body>
+</html>

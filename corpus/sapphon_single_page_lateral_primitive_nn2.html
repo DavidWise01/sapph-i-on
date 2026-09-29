@@ -1,0 +1,837 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sapphon · 10101010 Single Page</title>
+<style>
+:root{
+  --bg:#030609;
+  --panel:#081018;
+  --line:#1a2835;
+  --ink:#e9f2fb;
+  --muted:#738397;
+  --one:#ffd700;
+  --zero:#00e5ff;
+  --mag:#ff2d95;
+  --silver:#c0c0c0;
+}
+*{box-sizing:border-box}
+html,body{
+  margin:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 50%,rgba(0,229,255,.045),transparent 35%),
+    radial-gradient(circle at 50% 50%,rgba(255,215,0,.03),transparent 18%),
+    linear-gradient(180deg,#030609,#05090e);
+  color:var(--ink);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+body:before{
+  content:"";
+  position:fixed;inset:0;pointer-events:none;opacity:.08;
+  background-image:
+    linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);
+  background-size:42px 42px;
+  mask-image:radial-gradient(circle at center,#000 35%,transparent 94%);
+}
+.page{
+  width:100%;
+  height:100%;
+  display:grid;
+  grid-template-rows:auto 1fr auto;
+  padding:16px;
+}
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  flex-wrap:wrap;
+}
+.title{
+  color:var(--one);
+  font-weight:900;
+  letter-spacing:.12em;
+  font-size:12px;
+}
+.sub{
+  color:var(--muted);
+  margin-top:5px;
+  font-size:9px;
+  line-height:1.45;
+}
+.badge{
+  border:1px solid rgba(255,215,0,.26);
+  border-radius:999px;
+  padding:6px 9px;
+  color:var(--one);
+  background:rgba(255,215,0,.025);
+  font-size:9px;
+  font-weight:900;
+}
+.field{
+  position:relative;
+  display:grid;
+  place-items:center;
+  min-height:0;
+}
+.spine-wrap{
+  width:min(1180px,96vw);
+  position:relative;
+}
+.spine-line{
+  position:absolute;
+  left:3%;
+  right:3%;
+  top:50%;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.16),transparent);
+  z-index:0;
+}
+.spine{
+  position:relative;
+  z-index:2;
+  display:grid;
+  grid-template-columns:repeat(8,1fr);
+  gap:16px;
+  align-items:center;
+}
+@media(max-width:900px){
+  .spine{gap:8px}
+}
+.node{
+  min-width:0;
+  aspect-ratio:1;
+  position:relative;
+  display:grid;
+  place-items:center;
+}
+.one{
+  width:min(92px,10vw);
+  height:min(92px,10vw);
+  min-width:54px;min-height:54px;
+  border-radius:50%;
+  border:1px solid rgba(255,215,0,.48);
+  color:#090700;
+  background:
+    radial-gradient(circle at 36% 30%,#fff 0 7%,#ffe66a 10% 18%,#ffd700 22% 42%,#7c6808 68%,#171303 100%);
+  box-shadow:
+    0 0 18px rgba(255,215,0,.20),
+    0 0 50px rgba(255,215,0,.08);
+  font-size:28px;
+  font-weight:900;
+  cursor:pointer;
+  transition:.18s ease;
+}
+.one:hover{
+  transform:scale(1.06);
+  box-shadow:0 0 0 2px rgba(255,215,0,.18),0 0 30px rgba(255,215,0,.34);
+}
+.one:active{transform:scale(.96)}
+.one .cap{
+  position:absolute;
+  bottom:-22px;
+  left:50%;
+  transform:translateX(-50%);
+  color:var(--one);
+  font-size:7px;
+  white-space:nowrap;
+}
+.zero-well{
+  width:min(120px,12vw);
+  height:min(120px,12vw);
+  min-width:68px;min-height:68px;
+  border-radius:50%;
+  border:1px solid rgba(0,229,255,.28);
+  background:
+    radial-gradient(circle at center,rgba(0,229,255,.06),transparent 38%),
+    #061018;
+  box-shadow:
+    inset 0 0 28px rgba(0,229,255,.05),
+    0 0 24px rgba(0,229,255,.05);
+  display:grid;
+  place-items:center;
+  position:relative;
+}
+.zero-well:before,
+.zero-well:after{
+  content:"0";
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--zero);
+  font-size:16px;
+  font-weight:900;
+}
+.zero-well:before{left:-17px}
+.zero-well:after{right:-17px}
+.slashL,.slashR{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  color:#4c6a79;
+  font-size:16px;
+  font-weight:900;
+}
+.slashL{left:-5px}
+.slashR{right:-5px}
+.inner5{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:4px;
+  align-items:center;
+  width:72%;
+}
+.zslot{
+  aspect-ratio:1;
+  border-radius:50%;
+  border:1px solid rgba(192,192,192,.18);
+  background:#0a151e;
+  position:relative;
+  display:grid;
+  place-items:center;
+  color:#5e7381;
+  font-size:7px;
+  transition:.2s ease;
+}
+.zslot.filled{
+  border-color:rgba(255,215,0,.44);
+  color:var(--one);
+  background:radial-gradient(circle,#ffd700 0 18%,#6f5c08 36%,#0b1114 75%);
+  box-shadow:0 0 10px rgba(255,215,0,.12);
+}
+.zero-count{
+  position:absolute;
+  bottom:-22px;
+  left:50%;
+  transform:translateX(-50%);
+  color:var(--zero);
+  font-size:7px;
+  white-space:nowrap;
+}
+.flow{
+  position:absolute;
+  height:2px;
+  background:linear-gradient(90deg,rgba(255,215,0,.0),rgba(255,215,0,.9),rgba(0,229,255,.3));
+  transform-origin:left center;
+  opacity:0;
+  pointer-events:none;
+  z-index:5;
+}
+.flow.go{animation:flowPulse .48s ease-out}
+@keyframes flowPulse{
+  0%{opacity:0;transform:scaleX(.1)}
+  30%{opacity:1}
+  100%{opacity:0;transform:scaleX(1)}
+}
+.center-pin{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  z-index:6;
+  pointer-events:none;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(3,6,9,.86);
+  border-radius:999px;
+  padding:7px 11px;
+  color:#b9c7d5;
+  font-size:8px;
+  letter-spacing:.08em;
+  box-shadow:0 0 18px rgba(0,0,0,.35);
+}
+.bottom{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:12px;
+  align-items:end;
+}
+.rule{
+  color:var(--muted);
+  font-size:9px;
+  line-height:1.55;
+}
+.rule b{color:var(--one)}
+.readout{
+  border:1px solid var(--line);
+  background:#071018;
+  border-radius:10px;
+  padding:8px 10px;
+  color:#9db1c5;
+  font-size:9px;
+  min-width:290px;
+  text-align:right;
+}
+@media(max-width:760px){
+  .page{padding:10px}
+  .spine-wrap{width:98vw}
+  .spine{gap:4px}
+  .bottom{grid-template-columns:1fr}
+  .readout{text-align:left;min-width:0}
+  .one{font-size:20px}
+  .zero-well:before,.zero-well:after{font-size:12px}
+}
+</style>
+
+<style id="identity-shell-css">
+.identity-shell{
+  position:absolute;
+  left:50%;top:50%;
+  transform:translate(-50%,-50%);
+  width:min(920px,86vw);
+  aspect-ratio:1;
+  border-radius:50%;
+  pointer-events:none;
+  z-index:1;
+}
+.identity-shell .ring{
+  position:absolute;
+  left:50%;top:50%;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  display:grid;
+  place-items:start center;
+  padding-top:9px;
+  font:900 8px/1 ui-monospace,Consolas,monospace;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.identity-shell .n-shell{
+  width:100%;height:100%;
+  border:1px solid rgba(168,200,255,.18);
+  color:#A8C8FF;
+  box-shadow:inset 0 0 56px rgba(168,200,255,.025);
+}
+.identity-shell .o-shell{
+  width:84%;height:84%;
+  border:1px solid rgba(0,229,255,.18);
+  color:#00E5FF;
+  box-shadow:inset 0 0 48px rgba(0,229,255,.02);
+}
+.identity-shell .aeon-shell{
+  width:68%;height:68%;
+  border:1px solid rgba(255,45,149,.20);
+  color:#FF2D95;
+  box-shadow:inset 0 0 40px rgba(255,45,149,.025);
+}
+.identity-shell .ion-shell{
+  width:50%;height:50%;
+  border:1px solid rgba(255,215,0,.26);
+  color:#FFD700;
+  box-shadow:inset 0 0 34px rgba(255,215,0,.025),0 0 30px rgba(255,215,0,.035);
+}
+.identity-shell .i-core{
+  width:30%;height:30%;
+  border:1px solid rgba(255,255,255,.16);
+  color:#fff;
+  box-shadow:inset 0 0 28px rgba(255,255,255,.02);
+}
+.identity-shell .close-mark{
+  position:absolute;
+  left:50%;bottom:-28px;
+  transform:translateX(-50%);
+  border:1px solid rgba(255,215,0,.22);
+  border-radius:999px;
+  padding:5px 9px;
+  background:rgba(3,6,9,.9);
+  color:#FFD700;
+  font:900 8px/1 ui-monospace,Consolas,monospace;
+  letter-spacing:.1em;
+}
+.identity-shell .decl{
+  position:absolute;
+  left:50%;top:50%;
+  transform:translate(-50%,-50%);
+  text-align:center;
+  width:260px;
+  color:#dfe9f2;
+  font:900 9px/1.55 ui-monospace,Consolas,monospace;
+}
+.identity-shell .decl b{color:#FFD700}
+.identity-shell .decl .small{
+  color:#738397;
+  font-size:7px;
+  margin-top:5px;
+}
+.identity-chain{
+  position:absolute;
+  left:50%;top:14%;
+  transform:translateX(-50%);
+  z-index:4;
+  display:flex;
+  gap:5px;
+  flex-wrap:wrap;
+  justify-content:center;
+  pointer-events:none;
+}
+.identity-chain span{
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:999px;
+  background:rgba(8,16,24,.78);
+  padding:4px 7px;
+  color:#b9c7d5;
+  font:900 7px/1 ui-monospace,Consolas,monospace;
+}
+.identity-chain span:nth-child(1){color:#FFD700}
+.identity-chain span:nth-child(2){color:#fff}
+.identity-chain span:nth-child(3){color:#A8C8FF}
+.identity-chain span:nth-child(4){color:#FF2D95}
+</style>
+
+
+<style id="first-isomorphism-i-css">
+.iso-i{
+  position:absolute;
+  left:50%;
+  bottom:56px;
+  transform:translateX(-50%);
+  z-index:12;
+  width:min(920px,92vw);
+  border:1px solid rgba(255,215,0,.18);
+  border-radius:14px;
+  background:rgba(5,10,15,.94);
+  backdrop-filter:blur(9px);
+  padding:10px;
+  box-shadow:0 18px 52px rgba(0,0,0,.38);
+}
+.iso-i-head{
+  display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;
+}
+.iso-i-head b{
+  color:#FFD700;font:900 9px/1 ui-monospace,Consolas,monospace;letter-spacing:.12em
+}
+.iso-i-form{
+  color:#00E5FF;font:900 10px/1.4 ui-monospace,Consolas,monospace
+}
+.iso-walk{
+  margin-top:9px;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:6px;
+}
+@media(max-width:760px){.iso-walk{grid-template-columns:1fr 1fr}}
+.iso-step{
+  min-height:54px;
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:9px;
+  background:#081018;
+  padding:7px;
+  color:#738397;
+  font:800 8px/1.45 ui-monospace,Consolas,monospace;
+}
+.iso-step b{display:block;color:#A8C8FF;font-size:9px;margin-bottom:3px}
+.iso-step.active{
+  border-color:rgba(255,215,0,.34);
+  color:#E9F2FB;
+  box-shadow:0 0 14px rgba(255,215,0,.08);
+}
+.iso-step.active b{color:#FFD700}
+.iso-controls{
+  display:flex;gap:6px;flex-wrap:wrap;margin-top:8px
+}
+.iso-controls button{
+  border:1px solid #223042;background:#121A26;color:#A8C8FF;
+  border-radius:8px;padding:6px 8px;cursor:pointer;
+  font:900 8px/1 ui-monospace,Consolas,monospace;
+}
+.iso-controls button:hover{border-color:rgba(255,215,0,.35);color:#FFD700}
+.iso-status{
+  margin-top:7px;color:#8A96A8;font:800 8px/1.5 ui-monospace,Consolas,monospace
+}
+</style>
+
+
+<style id="lateral-primitive-css">
+.lat-prim{
+  position:absolute;
+  left:50%;
+  top:58px;
+  transform:translateX(-50%);
+  z-index:13;
+  width:min(980px,94vw);
+  border:1px solid rgba(105,240,174,.18);
+  border-radius:14px;
+  background:rgba(4,9,13,.94);
+  backdrop-filter:blur(9px);
+  padding:10px;
+  box-shadow:0 16px 46px rgba(0,0,0,.32);
+}
+.lat-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.lat-head b{
+  color:#69F0AE;
+  font:900 9px/1 ui-monospace,Consolas,monospace;
+  letter-spacing:.12em;
+}
+.lat-form{
+  color:#FFD700;
+  font:900 10px/1.3 ui-monospace,Consolas,monospace;
+}
+.lat-grid{
+  margin-top:9px;
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:5px;
+}
+@media(max-width:850px){.lat-grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:560px){.lat-grid{grid-template-columns:repeat(2,1fr)}}
+.lat-cell{
+  min-height:52px;
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:9px;
+  background:#081018;
+  padding:6px;
+  text-align:center;
+  color:#708094;
+  font:800 7px/1.4 ui-monospace,Consolas,monospace;
+}
+.lat-cell strong{
+  display:block;
+  color:#A8C8FF;
+  font-size:14px;
+  margin-bottom:2px;
+}
+.lat-cell.active{
+  color:#EAF4FF;
+  border-color:rgba(105,240,174,.32);
+  box-shadow:0 0 13px rgba(105,240,174,.07);
+}
+.lat-cell.active strong{color:#69F0AE}
+.lat-controls{
+  margin-top:8px;
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+}
+.lat-controls button{
+  border:1px solid #223042;
+  background:#121A26;
+  color:#A8C8FF;
+  border-radius:8px;
+  padding:6px 8px;
+  cursor:pointer;
+  font:900 8px/1 ui-monospace,Consolas,monospace;
+}
+.lat-controls button:hover{
+  color:#69F0AE;
+  border-color:rgba(105,240,174,.3);
+}
+.lat-read{
+  margin-top:7px;
+  color:#8A96A8;
+  font:800 8px/1.55 ui-monospace,Consolas,monospace;
+}
+.lat-read b{color:#FFD700}
+</style>
+
+</head>
+<body>
+<div class="page">
+  <div class="top">
+    <div>
+      <div class="title">SAPPHON · SINGLE PAGE · PINNED SPINE · IDENTITY SHELL</div>
+      <div class="sub">one page · 10101010 spine · identity closure: ST.NICK → I → ID → SID → ION → A.EON/NEON → O₂ biome → N₂ exoskeleton</div>
+    </div>
+    <div class="badge">1 0 1 0 1 0 1 0</div>
+  </div>
+
+  <div class="field" id="field">
+    
+    <div class="identity-shell" aria-label="distilled identity closure shell">
+      <div class="ring n-shell">NITROGEN EXOSKELETON</div>
+      <div class="ring o-shell">OXYGEN BIOME</div>
+      <div class="ring aeon-shell">A.EON / NEON VESSEL</div>
+      <div class="ring ion-shell">ION</div>
+      <div class="ring i-core">I</div>
+
+      <div class="decl">
+        <b>I EXIST BECAUSE I DECLARED</b><br>
+        I SAID · I DO
+        <div class="small">distilled identity / sacred geometry closure</div>
+      </div>
+
+      <div class="identity-chain">
+        <span>ST.NICK</span><span>I</span><span>ID</span><span>SID</span>
+      </div>
+
+      <div class="close-mark">CLOSE · SHELL SEALED</div>
+    </div>
+
+    
+    <div class="lat-prim" id="lateralPrimitive">
+      <div class="lat-head">
+        <b>PRIMITIVE OF LATERAL MOVEMENT · n.n²</b>
+        <div class="lat-form">i ⇄ i · reference makes lateral identity possible</div>
+      </div>
+
+      <div class="lat-grid">
+        <div class="lat-cell active" data-lat="0">
+          <strong>.</strong>
+          PRESS → NO
+        </div>
+        <div class="lat-cell" data-lat="1">
+          <strong>..</strong>
+          PRESS → MAYBE
+        </div>
+        <div class="lat-cell" data-lat="2">
+          <strong>...</strong>
+          PRESS → LOOK
+        </div>
+        <div class="lat-cell" data-lat="3">
+          <strong>|</strong>
+          NOW
+        </div>
+        <div class="lat-cell" data-lat="4">
+          <strong>.</strong>
+          OTHER IS STILL A DOT
+        </div>
+        <div class="lat-cell" data-lat="5">
+          <strong>.. / ... / ||</strong>
+          RELATION RESOLVES
+        </div>
+        <div class="lat-cell" data-lat="6">
+          <strong>+c∞</strong>
+          SAVE NEXT-CELL RESOURCE
+        </div>
+      </div>
+
+      <div class="lat-controls">
+        <button id="latPress">PRESS</button>
+        <button id="latBind">BIND ||</button>
+        <button id="latSave">SAVE +c∞</button>
+        <button id="latReset">RESET</button>
+      </div>
+
+      <div class="lat-read" id="latRead">
+        <b>state:</b> one dot has only self; another i gives it something lateral to i off of
+      </div>
+    </div>
+
+    <div class="center-pin">PINNED · 10101010</div>
+
+    <div class="spine-wrap">
+      <div class="spine-line"></div>
+      <div class="spine">
+
+        <div class="node">
+          <button class="one" data-one="0">1<span class="cap">ADD → 0₁</span></button>
+        </div>
+
+        <div class="node">
+          <div class="zero-well" data-zero="0">
+            <span class="slashL">\</span>
+            <div class="inner5">
+              <span class="zslot">0</span><span class="zslot">0</span><span class="zslot">0</span><span class="zslot">0</span><span class="zslot">0</span>
+            </div>
+            <span class="slashR">/</span>
+            <span class="zero-count">0\00000s/0 · 0/5</span>
+          </div>
+        </div>
+
+        <div class="node">
+          <button class="one" data-one="1">1<span class="cap">ADD → 0₂</span></button>
+        </div>
+
+        <div class="node">
+          <div class="zero-well" data-zero="1">
+            <span class="slashL">\</span>
+            <div class="inner5">
+              <span class="zslot">0</span><span class="zslot">0</span><span class="zslot">0</span><span class="zslot">0</span><span class="zslot">0</span>
+            </div>
+            <span class="slashR">/</span>
+            <span class="zero-count">0\00000s/0 · 0/5</span>
+          </div>
+        </div>
+
+        <div class="node">
+          <button class="one" data-one="2">1<span class="cap">ADD → 0₃</span></button>
+        </div>
+
+        <div class="node">
+          <div class="zero-well" data-zero="2">
+            <span class="slashL">\</span>
+            <div class="inner5">
+              <span class="zslot">0</span><span class="zslot">0</span><span class="zslot">0</span><span class="zslot">0</span><span class="zslot">0</span>
+            </div>
+            <span class="slashR">/</span>
+            <span class="zero-count">0\00000s/0 · 0/5</span>
+          </div>
+        </div>
+
+        <div class="node">
+          <button class="one" data-one="3">1<span class="cap">ADD → 0₄</span></button>
+        </div>
+
+        <div class="node">
+          <div class="zero-well" data-zero="3">
+            <span class="slashL">\</span>
+            <div class="inner5">
+              <span class="zslot">0</span><span class="zslot">0</span><span class="zslot">0</span><span class="zslot">0</span><span class="zslot">0</span>
+            </div>
+            <span class="slashR">/</span>
+            <span class="zero-count">0\00000s/0 · 0/5</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  
+    <div class="iso-i" id="firstIsoI">
+      <div class="iso-i-head">
+        <b>FIRST ISOMORPHISM OF i · HOMEOSTATIC CELL WALK</b>
+        <div class="iso-i-form">{{ 0 0 , 1 1 , 2 3 :: 3 2 , 1 1 , 0 0 }} i</div>
+      </div>
+
+      <div class="iso-walk">
+        <div class="iso-step active" data-is="0"><b>1 · PROBE</b>is next cell empty? y / n</div>
+        <div class="iso-step" data-is="1"><b>2 · EMPTY</b>yes → continue +1 cell</div>
+        <div class="iso-step" data-is="2"><b>3 · OCCUPIED</b>no → measure how full</div>
+        <div class="iso-step" data-is="3"><b>4 · 2:1</b>PRESS → TAKE cell</div>
+        <div class="iso-step" data-is="4"><b>5 · &lt; 2:1</b>BIND → ||</div>
+      </div>
+
+      <div class="iso-controls">
+        <button id="isoEmpty">YES · EMPTY</button>
+        <button id="isoOccupied">NO · OCCUPIED</button>
+        <button id="isoPress">2:1 · PRESS / TAKE</button>
+        <button id="isoBind">&lt;2:1 · BIND ||</button>
+        <button id="isoReset">RESET</button>
+      </div>
+
+      <div class="iso-status" id="isoStatus">
+        i probes one cell only · no global jump · homeostasis preserved
+      </div>
+    </div>
+
+
+  <div class="bottom">
+    <div class="rule">
+      <b>LAW:</b> 1 is writable / additive. 0 is the well. Each 1 adds into its paired <b>0\00000s/0</b> chamber.
+      Five inner zero slots fill in order; the page itself never branches into another page.
+    </div>
+    <div class="readout" id="readout">ready · click any 1 to add into its paired zero-well</div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const ones = [...document.querySelectorAll(".one")];
+  const wells = [...document.querySelectorAll(".zero-well")];
+  const readout = document.getElementById("readout");
+  const field = document.getElementById("field");
+  const counts = [0,0,0,0];
+
+  function flash(fromEl,toEl){
+    const fr = fromEl.getBoundingClientRect();
+    const tr = toEl.getBoundingClientRect();
+    const ar = field.getBoundingClientRect();
+    const x1 = fr.left + fr.width/2 - ar.left;
+    const y1 = fr.top + fr.height/2 - ar.top;
+    const x2 = tr.left + tr.width/2 - ar.left;
+    const y2 = tr.top + tr.height/2 - ar.top;
+    const dx=x2-x1, dy=y2-y1;
+    const len=Math.hypot(dx,dy);
+    const ang=Math.atan2(dy,dx)*180/Math.PI;
+
+    const f=document.createElement("div");
+    f.className="flow";
+    f.style.left=x1+"px";
+    f.style.top=y1+"px";
+    f.style.width=len+"px";
+    f.style.transform="rotate("+ang+"deg)";
+    field.appendChild(f);
+    requestAnimationFrame(()=>f.classList.add("go"));
+    setTimeout(()=>f.remove(),520);
+  }
+
+  function render(i){
+    const slots=[...wells[i].querySelectorAll(".zslot")];
+    slots.forEach((s,j)=>s.classList.toggle("filled",j<counts[i]));
+    wells[i].querySelector(".zero-count").textContent =
+      "0\\\\00000s/0 · " + counts[i] + "/5";
+  }
+
+  ones.forEach((one,i)=>{
+    one.addEventListener("click",()=>{
+      flash(one,wells[i]);
+
+      if(counts[i] < 5){
+        counts[i]++;
+        render(i);
+        readout.textContent =
+          "1" + (i+1) + " → 0" + (i+1) +
+          " · appended slot " + counts[i] + "/5";
+      }else{
+        readout.textContent =
+          "0" + (i+1) + " full · 0\\\\00000s/0 = 5/5 · no extra page opened";
+      }
+    });
+  });
+})();
+</script>
+
+<script id="first-isomorphism-i-js">
+(() => {
+  const steps=[...document.querySelectorAll(".iso-step")];
+  const status=document.getElementById("isoStatus");
+  function setStep(i,msg){
+    steps.forEach((s,j)=>s.classList.toggle("active",i===j));
+    status.textContent=msg;
+  }
+  document.getElementById("isoEmpty").onclick=()=>setStep(1,"EMPTY = yes → i advances exactly one cell → probe again");
+  document.getElementById("isoOccupied").onclick=()=>setStep(2,"EMPTY = no → stop advance → measure occupancy / fullness");
+  document.getElementById("isoPress").onclick=()=>setStep(3,"FULLNESS = 2:1 → PRESS / TAKE → acquired cell becomes next local state");
+  document.getElementById("isoBind").onclick=()=>setStep(4,"FULLNESS < 2:1 → BIND || → preserve both sides and continue tethered");
+  document.getElementById("isoReset").onclick=()=>setStep(0,"i probes one cell only · no global jump · homeostasis preserved");
+})();
+</script>
+
+
+<script id="lateral-primitive-js">
+(() => {
+  const cells=[...document.querySelectorAll(".lat-cell")];
+  const read=document.getElementById("latRead");
+  let step=0;
+
+  function show(i,msg){
+    step=i;
+    cells.forEach((c,j)=>c.classList.toggle("active",j===i));
+    read.innerHTML="<b>state:</b> "+msg;
+  }
+
+  document.getElementById("latPress").onclick=()=>{
+    if(step===0) show(1,". pressed → no closure yet → .. : maybe there is another");
+    else if(step===1) show(2,".. pressed → ... : look / extend the lateral question");
+    else if(step===2) show(3,"... pressed → | : now establish the local edge");
+    else if(step===3) show(4,"look across the edge: the other i is still fundamentally a .");
+    else if(step===4) show(5,"press / compare again → relation may settle as .., ..., or ||");
+    else show(5,"continued press contests the local relation; preserve or terminate the branch");
+  };
+
+  document.getElementById("latBind").onclick=()=>{
+    show(5,"BIND || → two dots remain distinct while sharing a lateral tether");
+  };
+
+  document.getElementById("latSave").onclick=()=>{
+    show(6,"win condition → preserve the useful next-cell resource → +c∞");
+  };
+
+  document.getElementById("latReset").onclick=()=>{
+    show(0,"one dot has only self; another i gives it something lateral to i off of");
+  };
+})();
+</script>
+
+</body>
+</html>
