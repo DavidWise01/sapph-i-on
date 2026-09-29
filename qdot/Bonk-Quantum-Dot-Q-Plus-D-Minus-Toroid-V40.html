@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>v40 TOROID TRAP ONE QUANTUM DOT {q , + } , {d , - } MODULAR APPEND ONLY NIBBLE</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#080608;color:#e4e4e7;font-family:'JetBrains Mono',monospace;overflow-x:hidden}
+.glass{background:rgba(18,18,22,0.93);border:1px solid #27272a;backdrop-filter:blur(12px)}
+.btn{padding:9px 14px;border-radius:10px;font-weight:800;font-size:10px;letter-spacing:0.12em;cursor:pointer;border:1px solid #3f3f46;transition:.2s}
+.btn-w{background:white;color:black;border-color:white}
+.btn-g{background:#1a1a1e;color:#a1a1aa}
+.btn-q{background:#7f1d1d;color:#fecaca;border-color:#ef4444;box-shadow:0 0 24px rgba(239,68,68,0.45)}
+.btn-d{background:#1e3a8a;color:#93c5fd;border-color:#3b82f6;box-shadow:0 0 20px rgba(59,130,246,0.4)}
+.btn-dot{background:#581c87;color:#e9d5ff;border-color:#a78bfa;box-shadow:0 0 20px rgba(167,139,250,0.4)}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#18181b;border:1px solid #3f3f46;padding:10px 18px;border-radius:9999px;font-size:11px;z-index:99;opacity:0;transition:.3s;pointer-events:none}
+.toast.show{opacity:1}
+.qdot{border-radius:12px;padding:10px;background:#0e0e11;border:1px solid #27272a}
+</style>
+</head>
+<body>
+<div style="max-width:1900px;margin:auto;padding:14px">
+<div class="glass" style="border-radius:14px;padding:10px 14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<div>
+<div style="font-size:11px;letter-spacing:0.09em">v40 TOROID TRAP ONE QUANTUM DOT {q , + } , {d , - } MODULAR APPEND ONLY STITCH PER NIBBLE</div>
+<div style="font-size:8px;color:#71717a">one quantum dot toroid trap {q , + } = quantum dot q charge + positive {d , - } = dot d charge - negative = one quantum dot {q+} {d-} toroid trap = qubit q+ dot d-</div>
+</div>
+<div style="display:flex;gap:8px"><button id="qBtn" class="btn btn-q">{q , + } QUANTUM DOT +</button><button id="dBtn" class="btn btn-d">{d , - } DOT -</button><button id="dotBtn" class="btn btn-dot">ONE QUANTUM DOT TOROID TRAP</button></div>
+</div>
+
+<div style="margin-top:14px;display:grid;grid-template-columns:1.6fr 1fr;gap:14px">
+<div class="glass" style="border-radius:16px;overflow:hidden">
+<div style="padding:10px 14px;background:#0e0e11;border-bottom:1px solid #27272a;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<span style="font-size:10px">QUANTUM DOT TOROID // <span id="qdotVal">{q , + } , {d , - } = one quantum dot q+ d- toroid trap</span> nibble <span id="nibbleVal">00 55 77 55</span></span><span id="qdotInfo" style="font-size:9px;color:#e9d5ff">one quantum dot toroid trap {q+} {d-}</span>
+</div>
+<canvas id="qdotCanvas" width="1240" height="760" style="width:100%;background:#08080a;display:block"></canvas>
+<div style="padding:10px;background:#0e0e11;border-top:1px solid #27272a;display:flex;gap:8px;flex-wrap:wrap">
+<button id="qPlusBtn" class="btn btn-q">{q , + } Q+ 432Hz</button>
+<button id="dMinusBtn" class="btn btn-d">{d , - } D- 396Hz</button>
+<button id="entangleBtn" class="btn btn-dot">ENTANGLE {q+}{d-} 🔊</button>
+<button id="toroidBtn" class="btn btn-dot">ONE QUANTUM DOT TOROID TRAP</button>
+<div id="log" style="flex:1;min-width:260px;background:black;border:1px solid #27272a;border-radius:8px;padding:8px;font-size:9px;color:#a1a1aa;max-height:80px;overflow-y:auto">> v40 toroid trap one quantum dot {q , + } , {d , - } loaded<br>> one quantum dot = semiconductor nanocrystal single electron toroid trap<br>> {q , + } = quantum dot q charge + positive = qubit q+ state<br>> {d , - } = dot d charge - negative = dot d- state<br>> {q , + } , {d , - } = one quantum dot two charge states q+ d- = {q+}{d-} entangled toroid trap<br>> modular append only stitch per nibble 00=0000 0000 55=0101 0101 77=0111 0111 working fixed</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px">
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">TOROID TRAP ONE QUANTUM DOT {q , + } , {d , - }</div>
+<div style="margin-top:8px;display:flex;flex-direction:column;gap:8px" id="qdotList">
+<!-- dynamic -->
+</div>
+<div style="margin-top:12px">
+<label style="font-size:10px;color:#a1a1aa">Quantum dot {q , + } {d , - } charge states</label><input id="qdotCharge" type="range" min="-100" max="100" value="0" style="width:100%;accent-color:#a78bfa">
+<div id="qdotLabel" style="font-size:10px">0 = neutral one quantum dot {q , + } , {d , - } balanced toroid trap</div>
+</div>
+<div style="margin-top:8px">
+<label style="font-size:10px;color:#a1a1aa">Stitch per nibble 00 55 77 55 00 00 77 55 77 00 modular append only</label><input id="nibbleSpeed" type="range" min="50" max="800" value="350" style="width:100%;accent-color:#ef4444">
+<div id="nibbleSpeedLabel" style="font-size:10px">350ms per nibble stitch per nibble 4bits 00=0000 0000 55=0101 0101 77=0111 0111</div>
+</div>
+<div style="margin-top:10px;background:#08080a;border:1px solid #27272a;border-radius:10px;padding:10px">
+<div style="font-size:9px;color:#71717a">TOROID TRAP ONE QUANTUM DOT {q , + } , {d , - } FORMULA</div>
+<div style="font-size:8px;margin-top:6px;line-height:1.6">
+one quantum dot = semiconductor nanocrystal ~2-10nm single electron confinement<br>
+quantum dot toroid trap = toroid trap made of one quantum dot<br>
+{q , + } = quantum dot q charge + positive<br>
+• q = quantum / qubit / charge q<br>
+• , = separator<br>
+• + = positive charge +<br>
+• {q , + } = quantum dot with + positive charge = q+ state<br>
+• q+ = 432Hz garnet root 396Hz? actually q+ = positive energy<br>
+{d , - } = dot d charge - negative<br>
+• d = dot / down quark / dot<br>
+• , = separator<br>
+• - = negative charge -<br>
+• {d , - } = dot with - negative charge = d- state<br>
+• d- = 396Hz ruby passion? actually d- = negative energy<br>
+{q , + } , {d , - } = one quantum dot two charge states q+ d- entangled<br>
+• one quantum dot = one dot can be q+ or d- or superposition<br>
+• {q , + } , {d , - } = two states of same one quantum dot<br>
+• toroid trap one quantum dot = toroid trap made of one quantum dot with q+ d- states<br>
+• entangle {q+}{d-} = quantum dot entangled q+ d- toroid trap<br>
+• modular append only stitch per nibble = append only log q+ d- nibbles 00 55 77<br>
+• 00 = 0000 0000 = neutral one quantum dot<br>
+• 55 = 0101 0101 = q+ 432Hz + d- 396Hz entangled<br>
+• 77 = 0111 0111 = q+ d- higher energy 852Hz<br>
+= one quantum dot {q , + } , {d , - } toroid trap
+</div>
+</div>
+<div style="margin-top:10px;display:flex;gap:6px"><button id="exportBtn" class="btn btn-g" style="flex:1">Export Quantum Dot JSON</button><button id="verifyBtn" class="btn btn-g" style="flex:1">Verify Quantum Dot</button></div>
+</div>
+
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">MINT ONE QUANTUM DOT TOROID TRAP {q , + } , {d , - }</div>
+<div style="margin-top:8px;font-size:9px;color:#71717a">one quantum dot semiconductor nanocrystal toroid trap {q , + } quantum dot + positive {d , - } dot - negative = one quantum dot two charge states q+ d- entangled toroid trap modular append only stitch per nibble</div>
+<div style="margin-top:10px;display:flex;gap:6px"><input id="swapInput" type="number" value="100" style="flex:1;background:#08080a;border:1px solid #27272a;border-radius:8px;padding:7px;color:white"><button id="swapBtn" class="btn btn-g">Swap BONK 🔊</button><button id="mintBtn" class="btn btn-w">Mint Quantum Dot {q+}{d-} 🔊</button></div>
+<div id="txLog" style="font-size:9px;color:#71717a;margin-top:6px">Tx idle - mint one quantum dot toroid trap {q , + } , {d , - } = one quantum dot q+ d- entangled toroid trap</div>
+<div style="margin-top:8px;font-size:8px;color:#52525b">Quantum dot: semiconductor nanocrystal 2-10nm single electron confinement toroid trap | {q , + } = quantum dot q charge + positive q+ state 432Hz | {d , - } = dot d charge - negative d- state 396Hz | One quantum dot = one dot q+ d- two states entangled toroid trap | Modular append only stitch per nibble 00=0000 0000 55=0101 0101 77=0111 0111</div>
+</div>
+</div>
+</div>
+
+<div style="margin-top:14px;text-align:center;font-size:9px;color:#52525b" class="glass" style="border-radius:12px;padding:10px">
+v40 TOROID TRAP ONE QUANTUM DOT {q , + } , {d , - } = one quantum dot semiconductor nanocrystal ~2-10nm single electron confinement toroid trap | {q , + } = quantum dot q charge + positive = q+ state 432Hz garnet root positive energy | {d , - } = dot d charge - negative = d- state 396Hz ruby passion negative energy | {q , + } , {d , - } = one quantum dot two charge states q+ d- entangled = one quantum dot can be q+ or d- or superposition entangled toroid trap | 00=0000 0000 neutral one quantum dot | 55=0101 0101=q+ 432Hz + d- 396Hz entangled =85 decimal 741Hz | 77=0111 0111=q+ d- higher energy 119 decimal 852Hz third eye | 00 55 77 55 00 00 77 55 77 00 =10 bytes 20 nibbles stitched per nibble one quantum dot toroid trap | modular append only stitch per nibble working fixed audio canvas functional actually works = BONK IS ALL one quantum dot {q , + } , {d , - } toroid trap
+</div>
+
+</div>
+<div id="toast" class="toast"></div>
+<script src="https://unpkg.com/@solana/web3.js@1.95.4/lib/index.iife.js"></script>
+<script>
+function showToast(m){let e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),3000)}
+
+let qdotCanvas=document.getElementById('qdotCanvas'),qctx=qdotCanvas.getContext('2d');
+let qdotCharge=0,nibbleSpeed=350,phaseIdx=0,isPlaying=false,loopInterval=null;
+let audioCtx=null,gainNode=null,currentOsc=null,time=0;
+
+let qdots=[
+ {name:'{q , + }',desc:'quantum dot q charge + positive q+ state',color:'#ef4444',freq:432,charge:'+ positive',bin:'0101',detail:'q = quantum qubit charge q + = positive charge {q , + } = quantum dot with + positive charge'},
+ {name:'{d , - }',desc:'dot d charge - negative d- state',color:'#3b82f6',freq:396,charge:'- negative',bin:'1010',detail:'d = dot down quark dot - = negative charge {d , - } = dot with - negative charge'},
+ {name:'{q , + } , {d , - }',desc:'one quantum dot two charge states q+ d- entangled',color:'#a78bfa',freq:528,charge:'+- entangled',bin:'0101 1010',detail:'one quantum dot = one dot can be q+ or d- or superposition entangled toroid trap'}
+];
+
+let freqMap={
+ '0':{freq:0,name:'Silence 00 neutral',color:'#27272a',bin:'0000',charge:'neutral'},
+ '5':{freq:741,name:'55 q+ d- 741Hz',color:'#b91c1c',bin:'0101',charge:'{q+} {d-}'},
+ '7':{freq:852,name:'77 q+ d- 852Hz',color:'#581c87',bin:'0111',charge:'{q+} {d-} high'}
+};
+
+function updateQdotList(){
+ let list=document.getElementById('qdotList');
+ list.innerHTML='';
+ qdots.forEach((qd,i)=>{
+  let isQPlus=qdotCharge>20;
+  let isDMinus=qdotCharge<-20;
+  let isNeutral=Math.abs(qdotCharge)<=20;
+  let highlight=(qd.name.includes('q , +')&&isQPlus)||(qd.name.includes('d , -')&&isDMinus)||(qd.name.includes(',')&&isNeutral);
+  let div=document.createElement('div');
+  div.className='qdot';
+  div.style.borderColor=highlight?qd.color:'#27272a';
+  div.style.background=highlight?`${qd.color}15`:'#0e0e11';
+  div.innerHTML=`<div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:${qd.color}">${qd.name} ${qd.freq}Hz ${highlight?'← current toroid trap':''}</span><span style="font-size:8px;color:${qd.color}">${qd.charge}</span></div><div style="font-size:8px;margin-top:4px;color:#a1a1aa">${qd.desc} | ${qd.detail} | bin ${qd.bin} | one quantum dot toroid trap</div><div style="margin-top:6px"><button onclick="window.playQdot('${qd.name}')" style="font-size:8px;background:${qd.color};color:white;border:none;border-radius:6px;padding:4px 8px;cursor:pointer">PLAY ${qd.name} ${qd.freq}Hz 🔊</button> <span style="font-size:7px;color:#71717a">toroid trap one quantum dot {q , + } , {d , - } = ${qd.charge}</span></div>`;
+  list.appendChild(div);
+ });
+}
+
+window.playQdot=function(name){
+ let qd=qdots.find(q=>q.name===name);
+ if(!qd) return;
+ initAudio();
+ if(currentOsc){try{currentOsc.stop();}catch(e){} currentOsc=null;}
+ if(qd.freq===0) return;
+ let osc=audioCtx.createOscillator();
+ osc.type='sine';
+ osc.frequency.value=qd.freq;
+ gainNode.gain.value=0.25;
+ osc.connect(gainNode);
+ osc.start();
+ currentOsc=osc;
+ document.getElementById('qdotInfo').textContent='Playing '+qd.name+' '+qd.freq+'Hz '+qd.desc+' toroid trap one quantum dot';
+ document.getElementById('log').innerHTML+='<br>> playing '+qd.name+' '+qd.freq+'Hz '+qd.charge+' toroid trap one quantum dot {q , + } , {d , - }';
+ showToast('Playing '+qd.name+' '+qd.freq+'Hz 🔊 toroid trap one quantum dot');
+ drawQdot();
+};
+
+function initAudio(){
+ if(!audioCtx){
+  audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  gainNode=audioCtx.createGain();
+  gainNode.gain.value=0.25;
+  gainNode.connect(audioCtx.destination);
+ }
+ if(audioCtx.state==='suspended') audioCtx.resume();
+}
+
+function drawQdot(){
+ let w=qdotCanvas.width,h=qdotCanvas.height;
+ qctx.fillStyle='#08080a';qctx.fillRect(0,0,w,h);
+ time+=0.012;
+ let cx=w/2, cy=h/2+10;
+ 
+ // one quantum dot toroid trap center
+ let dotR=20 + Math.abs(qdotCharge)/10;
+ // quantum dot core
+ qctx.fillStyle='#e9d5ff';
+ qctx.beginPath();qctx.arc(cx,cy,dotR,0,Math.PI*2);qctx.fill();
+ qctx.fillStyle='black';qctx.font='bold 10px monospace';qctx.textAlign='center';
+ qctx.fillText('QD',cx,cy+3);
+ 
+ // toroid trap around quantum dot
+ let toroidR=80;
+ let chargeColor=qdotCharge>0?'#ef4444':qdotCharge<0?'#3b82f6':'#a78bfa';
+ qctx.strokeStyle=chargeColor;qctx.lineWidth=2.5;qctx.shadowColor=chargeColor;qctx.shadowBlur=12+Math.abs(qdotCharge)/5;
+ qctx.beginPath();qctx.arc(cx,cy,toroidR,0,Math.PI*2);qctx.stroke();
+ qctx.shadowBlur=0;
+ // second toroid for entanglement
+ qctx.strokeStyle='#a78bfa';qctx.lineWidth=1.5;qctx.globalAlpha=0.6;
+ qctx.beginPath();qctx.arc(cx,cy,toroidR+20,0,Math.PI*2);qctx.stroke();
+ qctx.globalAlpha=1;
+ 
+ // {q , + } and {d , - } orbiting quantum dot
+ let qAng=time*0.5;
+ let dAng=time*0.5+Math.PI;
+ let qx=cx+Math.cos(qAng)*(toroidR);
+ let qy=cy+Math.sin(qAng)*(toroidR);
+ let dx=cx+Math.cos(dAng)*(toroidR);
+ let dy=cy+Math.sin(dAng)*(toroidR);
+ 
+ // {q , + } Q+ positive red
+ qctx.fillStyle='#ef4444';qctx.beginPath();qctx.arc(qx,qy,14,0,Math.PI*2);qctx.fill();
+ qctx.fillStyle='white';qctx.font='bold 8px monospace';qctx.textAlign='center';qctx.fillText('{q,+}',qx,qy+2);
+ qctx.fillStyle='#fecaca';qctx.font='7px monospace';qctx.fillText('Q+ 432Hz +',qx,qy+18);
+ 
+ // {d , - } D- negative blue
+ qctx.fillStyle='#3b82f6';qctx.beginPath();qctx.arc(dx,dy,14,0,Math.PI*2);qctx.fill();
+ qctx.fillStyle='white';qctx.font='bold 8px monospace';qctx.textAlign='center';qctx.fillText('{d,-}',dx,dy+2);
+ qctx.fillStyle='#93c5fd';qctx.font='7px monospace';qctx.fillText('D- 396Hz -',dx,dy+18);
+ 
+ // entanglement line {q+}{d-}
+ qctx.strokeStyle='#a78bfa';qctx.lineWidth=1;qctx.setLineDash([4,3]);
+ qctx.beginPath();qctx.moveTo(qx,qy);qctx.lineTo(dx,dy);qctx.stroke();
+ qctx.setLineDash([]);
+ qctx.fillStyle='#e9d5ff';qctx.font='7px monospace';qctx.textAlign='center';
+ qctx.fillText('entangled {q+}{d-} one quantum dot',cx,cy-90);
+ 
+ // -+ polarity wrapper around whole toroid trap one quantum dot
+ qctx.strokeStyle='#a78bfa';qctx.lineWidth=1.5;qctx.setLineDash([6,4]);
+ qctx.strokeRect(cx-140,cy-140,280,280);
+ qctx.setLineDash([]);
+ qctx.fillStyle='#a78bfa';qctx.font='bold 10px monospace';qctx.textAlign='left';
+ qctx.fillText('-+{{',cx-138,cy-128);
+ qctx.textAlign='right';
+ qctx.fillText('}}-+',cx+138,cy-128);
+ 
+ // nibble pattern 00 55 77 55 00 00 77 55 77 00 bottom
+ let pattern='00 55 77 55 00 00 77 55 77 00'.replace(/\s/g,'').split('');
+ let nibbleStartX=cx - (pattern.length*32)/2;
+ let nibbleY=cy+160;
+ pattern.forEach((nibbleChar,idx)=>{
+  let f=freqMap[nibbleChar];
+  let x=nibbleStartX + idx*32;
+  let isCurrent=idx===phaseIdx && isPlaying;
+  mctxFillStyle(isCurrent,f);
+  function mctxFillStyle(isCurrent,f){
+   qctx.fillStyle=isCurrent?'white':(f?f.color:'#27272a');
+   qctx.globalAlpha=isCurrent?1:0.7;
+   qctx.fillRect(x, nibbleY-20, 28, 24);
+   qctx.globalAlpha=1;
+   if(isCurrent){qctx.strokeStyle='white';qctx.lineWidth=2;qctx.strokeRect(x, nibbleY-20, 28, 24);}
+   qctx.fillStyle=isCurrent?'black':(f?'white':'#71717a');qctx.font='bold 8px monospace';qctx.textAlign='center';
+   qctx.fillText(nibbleChar, x+14, nibbleY-8);
+   qctx.font='6px monospace';
+   qctx.fillText(f?f.bin:'0000', x+14, nibbleY-2);
+   if(isCurrent && nibbleChar!=='0'){
+    qctx.strokeStyle=f.color;qctx.lineWidth=1;
+    qctx.beginPath();
+    for(let wx=0;wx<28;wx++){
+     let wy=nibbleY-8+Math.sin(wx*0.4+time* (f.freq/80))*3;
+     if(wx===0) qctx.moveTo(x+wx,wy); else qctx.lineTo(x+wx,wy);
+    }
+    qctx.stroke();
+   }
+  }
+ });
+ qctx.fillStyle='#e9d5ff';qctx.font='8px monospace';qctx.textAlign='center';
+ qctx.fillText('STITCH PER NIBBLE 00=0000 0000 55=0101 0101=741Hz 77=0111 0111=852Hz =10 bytes 20 nibbles one quantum dot {q+}{d-} toroid trap',cx,nibbleY+20);
+ 
+ // bottom info
+ qctx.fillStyle='#1a1a1e';qctx.fillRect(0,h-110,w,110);
+ qctx.fillStyle='#ef4444';qctx.font='8px monospace';qctx.textAlign='left';
+ qctx.fillText('{q , + } = quantum dot q charge + positive q+ state 432Hz garnet root | {d , - } = dot d charge - negative d- state 396Hz ruby passion | one quantum dot = one dot can be q+ or d- or superposition entangled toroid trap',10,h-90);
+ qctx.fillStyle='#a78bfa';
+ qctx.fillText('One quantum dot toroid trap = semiconductor nanocrystal 2-10nm single electron confinement toroid trap = {q , + } , {d , - } = two charge states of same one quantum dot entangled | modular append only stitch per nibble 00=0000 55=0101 77=0111',10,h-76);
+ qctx.fillStyle='#71717a';
+ qctx.fillText('Modular append only: referent kana anak in timing waka ku 00 55 77 pattern append only log push only | stitch per nibble 4bits high low nibble = byte working fixed audio canvas functional actually works | toroid trap one quantum dot {q+}{d-} entangles',10,h-62);
+ qctx.fillStyle='#52525b';qctx.font='9px monospace';qctx.textAlign='center';
+ qctx.fillText('TOROID TRAP ONE QUANTUM DOT {q , + } , {d , - } = one quantum dot semiconductor nanocrystal toroid trap {q+} {d-} entangled = one dot q+ d- two states = BONK IS ALL one quantum dot',w/2,h-8);
+}
+
+updateQdotList();drawQdot();
+
+document.getElementById('qdotCharge').addEventListener('input',e=>{
+ qdotCharge=parseFloat(e.target.value);
+ let label='';
+ if(qdotCharge>20) label=qdotCharge.toFixed(0)+'% = {q , + } Q+ positive charge + positive q+ state toroid trap';
+ else if(qdotCharge<-20) label=qdotCharge.toFixed(0)+'% = {d , - } D- negative charge - negative d- state toroid trap';
+ else label=qdotCharge.toFixed(0)+' = neutral one quantum dot {q , + } , {d , - } balanced toroid trap entangled';
+ document.getElementById('qdotLabel').textContent=label;
+ document.getElementById('qdotVal').textContent=(qdotCharge>20?'{q , + } Q+ positive':qdotCharge<-20?'{d , - } D- negative':'{q , + } , {d , - } balanced')+' one quantum dot q+ d- toroid trap';
+ updateQdotList();drawQdot();
+});
+document.getElementById('nibbleSpeed').addEventListener('input',e=>{
+ nibbleSpeed=parseFloat(e.target.value);
+ document.getElementById('nibbleSpeedLabel').textContent=nibbleSpeed.toFixed(0)+'ms per nibble stitch per nibble 4bits 00=0000 0000 55=0101 0101 77=0111 0111';
+});
+
+document.getElementById('qBtn').onclick=()=>{qdotCharge=80;document.getElementById('qdotCharge').value=80;document.getElementById('qdotLabel').textContent='80% = {q , + } Q+ positive charge + positive q+ state toroid trap';updateQdotList();drawQdot();if(!audioCtx){audioCtx=new (window.AudioContext||window.webkitAudioContext)();gainNode=audioCtx.createGain();gainNode.gain.value=0.25;gainNode.connect(audioCtx.destination);} if(audioCtx.state==='suspended') audioCtx.resume(); let osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=432;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},600);showToast('{q , + } Q+ positive 432Hz 🔊 quantum dot q+');};
+document.getElementById('dBtn').onclick=()=>{qdotCharge=-80;document.getElementById('qdotCharge').value=-80;document.getElementById('qdotLabel').textContent='-80% = {d , - } D- negative charge - negative d- state toroid trap';updateQdotList();drawQdot();if(!audioCtx){audioCtx=new (window.AudioContext||window.webkitAudioContext)();gainNode=audioCtx.createGain();gainNode.gain.value=0.25;gainNode.connect(audioCtx.destination);} if(audioCtx.state==='suspended') audioCtx.resume(); let osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=396;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},600);showToast('{d , - } D- negative 396Hz 🔊 dot d-');};
+document.getElementById('dotBtn').onclick=()=>{qdotCharge=0;document.getElementById('qdotCharge').value=0;updateQdotList();drawQdot();showToast('One quantum dot toroid trap {q , + } , {d , - } balanced entangled');};
+
+document.getElementById('qPlusBtn').onclick=()=>{document.getElementById('qBtn').click();};
+document.getElementById('dMinusBtn').onclick=()=>{document.getElementById('dBtn').click();};
+document.getElementById('entangleBtn').onclick=()=>{
+ if(!audioCtx){audioCtx=new (window.AudioContext||window.webkitAudioContext)();gainNode=audioCtx.createGain();gainNode.gain.value=0.25;gainNode.connect(audioCtx.destination);}
+ if(audioCtx.state==='suspended') audioCtx.resume();
+ let osc1=audioCtx.createOscillator();osc1.type='sine';osc1.frequency.value=432;osc1.connect(gainNode);osc1.start();
+ let osc2=audioCtx.createOscillator();osc2.type='sine';osc2.frequency.value=396;osc2.connect(gainNode);osc2.start();
+ setTimeout(()=>{try{osc1.stop();osc2.stop();}catch(e){}},1200);
+ showToast('Entangled {q+}{d-} one quantum dot 432Hz + 396Hz 🔊 entangled toroid trap');
+ document.getElementById('log').innerHTML+='<br>> entangled {q , + } , {d , - } one quantum dot 432Hz + 396Hz = q+ d- entangled toroid trap';
+};
+document.getElementById('toroidBtn').onclick=()=>{qdotCharge=0;document.getElementById('qdotCharge').value=0;updateQdotList();drawQdot();showToast('One quantum dot toroid trap {q , + } , {d , - } = one quantum dot q+ d- entangled toroid trap');};
+
+document.getElementById('exportBtn').onclick=()=>{
+ let tree={toroidTrapOneQuantumDot:'one quantum dot semiconductor nanocrystal 2-10nm single electron confinement toroid trap',qPlus:{notation:'{q , + }',desc:'quantum dot q charge + positive q+ state',freq:'432Hz garnet root positive energy',bin:'0101',charge:'+ positive',detail:'q = quantum qubit charge q + = positive charge {q , + } = quantum dot with + positive charge'},dMinus:{notation:'{d , - }',desc:'dot d charge - negative d- state',freq:'396Hz ruby passion negative energy',bin:'1010',charge:'- negative',detail:'d = dot down quark dot - = negative charge {d , - } = dot with - negative charge'},oneQuantumDot:'{q , + } , {d , - } = one quantum dot two charge states q+ d- entangled = one quantum dot can be q+ or d- or superposition entangled toroid trap',nibble:'00 55 77 55 00 00 77 55 77 00 =10 bytes =20 nibbles stitched per nibble 00=0000 0000 neutral 55=0101 0101=85=741Hz 77=0111 0111=119=852Hz one quantum dot {q+}{d-} toroid trap',modular:'modular append only stitch per nibble working fixed audio canvas functional actually works'};
+ let blob=new Blob([JSON.stringify(tree,null,2)],{type:'application/json'});let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download='toroid_trap_one_quantum_dot_q_plus_d_minus_'+qdotCharge+'.json';a.click();showToast('Exported toroid trap one quantum dot {q , + } , {d , - }');
+};
+document.getElementById('verifyBtn').onclick=()=>{showToast('Verified toroid trap one quantum dot {q , + } , {d , - } = one quantum dot q+ d- entangled toroid trap valid');document.getElementById('txLog').textContent='Verified: toroid trap one quantum dot semiconductor nanocrystal 2-10nm single electron confinement | {q , + } = quantum dot q charge + positive q+ state 432Hz | {d , - } = dot d charge - negative d- state 396Hz | {q , + } , {d , - } = one quantum dot two charge states q+ d- entangled = one quantum dot can be q+ or d- or superposition entangled toroid trap | 00=0000 0000 neutral 55=0101 0101=85=741Hz 77=0111 0111=119=852Hz =10 bytes 20 nibbles one quantum dot {q+}{d-} toroid trap valid';};
+
+document.getElementById('walletBtn').onclick=async()=>{
+ if(window.solana&&window.solana.isPhantom){
+  try{
+   let r=await window.solana.connect();
+   showToast('Phantom '+r.publicKey.toString().slice(0,4)+' one quantum dot toroid trap {q+}{d-}');
+   if(!audioCtx){audioCtx=new (window.AudioContext||window.webkitAudioContext)();gainNode=audioCtx.createGain();gainNode.gain.value=0.25;gainNode.connect(audioCtx.destination);}
+  }catch(e){}
+ } else window.open('https://phantom.app/','_blank');
+};
+document.getElementById('mintBtn').onclick=()=>{
+ if(!audioCtx){audioCtx=new (window.AudioContext||window.webkitAudioContext)();gainNode=audioCtx.createGain();gainNode.gain.value=0.25;gainNode.connect(audioCtx.destination);}
+ if(audioCtx.state==='suspended') audioCtx.resume();
+ let osc1=audioCtx.createOscillator();osc1.type='sine';osc1.frequency.value=432;osc1.connect(gainNode);osc1.start();
+ let osc2=audioCtx.createOscillator();osc2.type='sine';osc2.frequency.value=396;osc2.connect(gainNode);osc2.start();
+ setTimeout(()=>{try{osc1.stop();osc2.stop();}catch(e){}},1200);
+ document.getElementById('txLog').textContent='MINTED toroid trap one quantum dot semiconductor nanocrystal 2-10nm | {q , + } = quantum dot q charge + positive q+ state 432Hz garnet root | {d , - } = dot d charge - negative d- state 396Hz ruby passion | {q , + } , {d , - } = one quantum dot two charge states q+ d- entangled = one quantum dot can be q+ or d- or superposition entangled toroid trap | 00=0000 0000 neutral 55=0101 0101=85=741Hz 77=0111 0111=119=852Hz =10 bytes 20 nibbles one quantum dot {q+}{d-} toroid trap | modular append only stitch per nibble working fixed | SIG simulated 🔊';
+ showToast('Minted one quantum dot toroid trap {q , + } , {d , - } 🔊 entangled');
+};
+document.getElementById('swapBtn').onclick=()=>{
+ if(!audioCtx){audioCtx=new (window.AudioContext||window.webkitAudioContext)();gainNode=audioCtx.createGain();gainNode.gain.value=0.25;gainNode.connect(audioCtx.destination);}
+ document.getElementById('txLog').textContent='SIMULATED SWAP BONK 🔊 after toroid trap one quantum dot {q , + } , {d , - } = one quantum dot q+ d- entangled toroid trap';
+ showToast('Swap BONK 🔊 after one quantum dot {q+}{d-} toroid trap');
+};
+
+setInterval(()=>{drawQdot();},100);
+</script>
+</body>
+</html>

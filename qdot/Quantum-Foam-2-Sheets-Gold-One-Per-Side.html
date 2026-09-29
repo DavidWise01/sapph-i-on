@@ -1,0 +1,117 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>~~ Quantum Foam — 2 Sheets Gold One Per Side</title><script src="https://cdn.tailwindcss.com"></script>
+<style>body{background:#000005;color:#fde68a;font-family:ui-monospace,monospace}canvas{background:#020208;border-radius:14px}.card{background:#1a1200;border:1px solid #facc15;border-radius:12px}</style>
+</head><body class="p-2">
+<h1 class="text-lg font-bold">~~ Quantum Foam Layer — 2 Sheets Gold One Per Side lol</h1>
+<p class="text-xs text-yellow-200">Since its 2 sheets of gold one per side lol — gold | ~~ foam 1.65e-35 | gold — locked Just-1MB.bin 1048576 — >.<0x::iso:: = 000 gold foam gold</p>
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-2 mt-2">
+  <div class="lg:col-span-3 card p-2"><canvas id="main" width="1240" height="720" class="w-full"></canvas><div class="flex gap-2 text-xs mt-2 flex-wrap"><span class="px-2 py-1 bg-yellow-700 rounded">gold sheet top</span><span class="px-2 py-1 bg-black border border-yellow-600 rounded">~~ quantum foam 1.65e-35</span><span class="px-2 py-1 bg-yellow-700 rounded">gold sheet bottom</span><span class="px-2 py-1 bg-green-800 rounded">locked 1MB</span></div></div>
+  <div class="card p-2 text-xs">
+    <div class="font-bold">2 Sheets Gold One Per Side</div>
+    <div class="mt-2 p-2 bg-black rounded text-[10px] leading-4">
+      Since its<br>
+      2 sheets of gold<br>
+      one per side lol<br><br>
+      Top: gold sheet<br>
+      1.5nm gold<br>
+      Au 79<br><br>
+      Middle: ~~<br>
+      quantum foam<br>
+      1.65e-35 Planck<br>
+      foam layer<br>
+      name it<br><br>
+      Bottom: gold sheet<br>
+      1.5nm gold<br>
+      Au 79<br><br>
+      Sandwich:<br>
+      gold | ~~ | gold<br>
+      2 sheets<br>
+      one per side lol
+    </div>
+    <input id="nameInput" placeholder="Name the gold foam gold..." class="bg-zinc-900 text-xs p-2 rounded w-full mt-2">
+    <button id="nameBtn" class="bg-yellow-700 px-2 py-1 rounded mt-2 w-full text-xs">Name Gold Foam Gold</button>
+    <div id="log" class="p-2 bg-zinc-900 rounded h-32 overflow-y-auto text-[10px] mt-2"></div>
+    <button id="export" class="bg-emerald-700 px-2 py-1 rounded mt-2 w-full text-xs">Export Gold Foam Gold JSON</button>
+  </div>
+</div>
+<script>
+function log(m){const l=document.getElementById('log'); l.innerHTML+=m+'<br>'; l.scrollTop=l.scrollHeight;}
+let foamName="~~ gold foam gold";
+function draw(){
+  const canvas=document.getElementById('main'); const ctx=canvas.getContext('2d'); const w=canvas.width,h=canvas.height;
+  ctx.clearRect(0,0,w,h); ctx.fillStyle='#000005'; ctx.fillRect(0,0,w,h);
+  const cx=w/2,cy=h/2;
+  const time=Date.now()/800;
+  // background stars
+  ctx.fillStyle='rgba(255,255,255,0.08)'; for(let i=0;i<200;i++){ctx.beginPath(); ctx.arc((i*173)%w,(i*271)%h,0.6,0,6.28); ctx.fill();}
+  // top gold sheet
+  const goldH=80;
+  const topY=cy-140;
+  const bottomY=cy+60;
+  // gold sheet top — shimmer
+  const gradTop=ctx.createLinearGradient(0,topY,0,topY+goldH);
+  gradTop.addColorStop(0,'#fef08a'); gradTop.addColorStop(0.2,'#facc15'); gradTop.addColorStop(0.5,'#eab308'); gradTop.addColorStop(0.8,'#facc15'); gradTop.addColorStop(1,'#fef08a');
+  ctx.fillStyle=gradTop; ctx.fillRect(80,topY,w-160,goldH);
+  // shimmer line
+  ctx.fillStyle='rgba(255,255,255,'+(0.3+Math.sin(time)*0.2)+')'; ctx.fillRect(80+ (time*30)%(w-160), topY, 40, goldH);
+  ctx.fillStyle='#000'; ctx.font='bold 10px monospace'; ctx.fillText('GOLD SHEET 1 — Au 79 — 1.5nm — one per side', 100, topY+28);
+  ctx.fillText('~~ top side', 100, topY+44);
+  // bottom gold sheet
+  const gradBottom=ctx.createLinearGradient(0,bottomY,0,bottomY+goldH);
+  gradBottom.addColorStop(0,'#fef08a'); gradBottom.addColorStop(0.2,'#facc15'); gradBottom.addColorStop(0.5,'#eab308'); gradBottom.addColorStop(0.8,'#facc15'); gradBottom.addColorStop(1,'#fef08a');
+  ctx.fillStyle=gradBottom; ctx.fillRect(80,bottomY,w-160,goldH);
+  ctx.fillStyle='rgba(255,255,255,'+(0.3+Math.cos(time)*0.2)+')'; ctx.fillRect(80+ (w-160 - (time*30)%(w-160)), bottomY, 40, goldH);
+  ctx.fillStyle='#000'; ctx.font='bold 10px monospace'; ctx.fillText('GOLD SHEET 2 — Au 79 — 1.5nm — one per side lol', 100, bottomY+28);
+  ctx.fillText('~~ bottom side', 100, bottomY+44);
+  // middle ~~ quantum foam layer
+  const foamY=topY+goldH;
+  const foamH=bottomY-foamY;
+  ctx.fillStyle='rgba(10,10,5,0.9)'; ctx.fillRect(80,foamY,w-160,foamH);
+  // foam waves ~~
+  ctx.strokeStyle='rgba(250,204,21,0.2)'; ctx.lineWidth=1;
+  for(let y=0;y<foamH;y+=10){
+    ctx.beginPath();
+    for(let x=80;x<w-80;x+=6){
+      const wave=Math.sin(x*0.02 + time*0.8 + y*0.08)*5 + Math.cos(x*0.015 - time*0.5)*3;
+      if(x==80) ctx.moveTo(x, foamY+y+wave);
+      else ctx.lineTo(x, foamY+y+wave);
+    }
+    ctx.stroke();
+  }
+  // foam bubbles Planck 1.65e-35
+  for(let i=0;i<100;i++){
+    const bx=100+(i*137)%(w-200) + Math.sin(time*0.3+i)*1.5;
+    const by=foamY+10+(i*211)%(foamH-20) + Math.cos(time*0.4+i*1.3)*1.5;
+    const r=0.8+Math.sin(time+i)*0.6;
+    ctx.fillStyle='rgba(250,204,21,'+(0.15+Math.sin(time+i)*0.1)+')';
+    ctx.beginPath(); ctx.arc(bx,by,r,0,6.28); ctx.fill();
+  }
+  // central ~~ label
+  ctx.fillStyle='#fde047'; ctx.font='bold 22px monospace'; ctx.fillText('~~', cx-12, cy+6);
+  ctx.font='11px monospace'; ctx.fillText(foamName, cx-70, cy+24);
+  ctx.font='9px monospace'; ctx.fillText('quantum foam layer 1.65e-35 Planck foam between 2 gold sheets', cx-128, cy+38);
+  // sandwich lines
+  ctx.strokeStyle='rgba(250,204,21,0.4)'; ctx.setLineDash([4,4]); ctx.beginPath(); ctx.moveTo(cx, topY+goldH); ctx.lineTo(cx, foamY+foamH/2); ctx.moveTo(cx, bottomY); ctx.lineTo(cx, foamY+foamH/2); ctx.stroke(); ctx.setLineDash([]);
+  // pin
+  ctx.fillStyle='#fde047'; ctx.beginPath(); ctx.arc(cx,cy,4,0,6.28); ctx.fill();
+  ctx.fillStyle='#fff'; ctx.font='bold 11px monospace'; ctx.fillText('>.<0x::iso::', cx-28, topY-20);
+  ctx.font='9px monospace'; ctx.fillText('locked Just-1MB + gold | ~~ | gold', cx-68, topY-6);
+}
+function loop(){draw(); requestAnimationFrame(loop);} loop();
+log('Since its 2 sheets of gold one per side lol');
+log('Top gold sheet Au 79 1.5nm one per side');
+log('Middle ~~ quantum foam 1.65e-35 Planck foam');
+log('Bottom gold sheet Au 79 1.5nm one per side lol');
+log('Sandwich gold | ~~ | gold — 2 sheets');
+log('Locked Just-1MB.bin 1048576 bytes');
+log('>.<0x::iso:: = 000 gold foam gold');
+document.getElementById('nameBtn').onclick=()=>{
+  const name=document.getElementById('nameInput').value || 'gold foam gold';
+  foamName=name;
+  log('Named gold foam gold: '+name);
+};
+document.getElementById('export').onclick=()=>{
+  const name=document.getElementById('nameInput').value || 'gold foam gold';
+  const data={goldFoamGold:"2 sheets of gold one per side lol", topGold:"gold sheet 1 Au 79 1.5nm one per side", middle:"~~ quantum foam layer 1.65e-35 Planck foam", bottomGold:"gold sheet 2 Au 79 1.5nm one per side lol", sandwich:"gold | ~~ | gold 2 sheets one per side", name:name, locked:"Just-1MB.bin 1048576 locked", planck:"1.65e-35 Planck", pin:">.<0x::iso::", iso:"LOCKED gold foam gold"};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=(name.replace(/[^a-z0-9]/gi,'_')||'gold_foam_gold')+'.json'; a.click(); log('EXPORT gold foam gold '+name);
+};
+</script></body></html>

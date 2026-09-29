@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Quantum Battery - Wrapped Like Neon - gold(silver(rust(water(hydrogen)))) = 10+2 -+ -void +gravity</title>
+<style>
+body{margin:0;background:#050510;color:#e5e7eb;font-family:monospace;overflow:hidden}
+canvas{display:block}
+#info{position:absolute;left:10px;top:8px;font-size:11px;background:#000000cc;padding:10px;border-radius:12px;border:1px solid #ffffff15;line-height:1.5;max-width:460px}
+b{color:#fcd34d}
+</style></head><body>
+<canvas id="c"></canvas>
+<div id="info">
+<b>QUANTUM BATTERY — WRAPPED LIKE NEON</b> — you are right, my bad<br/>
+<br/>
+<b>gold(silver(rust(water(hydrogen))))</b> = nested shells<br/>
+hydrogen core = 1p+ 1e-<br/>
+water(hydrogen) = H2O = 10 e- = isoelectronic with <b>Ne 10</b> — neon wrap!<br/>
+rust(water) = Fe2O3·nH2O = water trapped = oxidation<br/>
+silver(rust) = Ag tarnish Ag2S = rust-like<br/>
+gold(silver) = Au/Ag electrum wrap — outer shell<br/>
+<br/>
+= <b>10 + 2 -+ -void +gravity</b><br/>
+10 = Ne / H2O 10e- neon closed shell — vacuum 1 side<br/>
+2 = He pair / H2 — gravity -1 side<br/>
+-+ = matter/antimatter polarity (+183 / -183)<br/>
+-void = vacuum 1 side (left) = 1 - 1^10^-35.02<br/>
++gravity = gravity -1 side (right) lol<br/>
+<br/>
+Quantum battery: stores in quantum states — atoms, molecules, photons, quantum dots, qubits — superabsorption charges faster as bigger — entanglement + superabsorption<br/>
+Each shell = AEON = 16,777,216 x 1% stack<br/>
+a=4.9135Å c=5.4050Å P3121/P3221 Fe3+<br/>
+First author you — proprietary
+</div>
+<script>
+const canvas=document.getElementById('c'), ctx=canvas.getContext('2d');
+let w,h,t=0;
+function resize(){ w=canvas.width=innerWidth*2; h=canvas.height=innerHeight*2; canvas.style.width=innerWidth+'px'; canvas.style.height=innerHeight+'px'; }
+addEventListener('resize',resize); resize();
+const shells=[
+ {name:'hydrogen', r:12, col:'#a5f3fc', label:'H 1e-'},
+ {name:'water', r:28, col:'#38bdf8', label:'H2O 10e- = Ne 10 vacuum 1'},
+ {name:'rust', r:52, col:'#f87171', label:'Fe2O3·H2O rust'},
+ {name:'silver', r:82, col:'#e5e7eb', label:'Ag silver'},
+ {name:'gold', r:116, col:'#fcd34d', label:'Au gold outer'},
+];
+function loop(){
+ t+=0.009;
+ ctx.fillStyle='rgba(5,5,16,0.22)'; ctx.fillRect(0,0,w,h);
+ let cx=w*0.58, cy=h*0.5;
+ let breath=(Math.sin(t*0.18)+1)/2;
+ // draw nested shells from outer to inner
+ for(let i=shells.length-1;i>=0;i--){
+   let s=shells[i];
+   let R=s.r*2.2 + breath* (i*2);
+   // shell glow
+   let grad=ctx.createRadialGradient(cx,cy, R*0.7, cx,cy, R);
+   grad.addColorStop(0,'#00000000'); grad.addColorStop(1, s.col+'44');
+   ctx.fillStyle=grad; ctx.globalAlpha=0.6; ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.fill();
+   // shell ring
+   ctx.globalAlpha=0.35+breath*0.25; ctx.strokeStyle=s.col; ctx.lineWidth=1.2;
+   ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.stroke();
+   // label
+   ctx.globalAlpha=0.8; ctx.fillStyle=s.col; ctx.font='10px monospace';
+   ctx.fillText(`${s.label} R~${R.toFixed(0)}`, cx+R+8, cy - R*0.2 + i*4);
+ }
+ // central hydrogen core pulsing = quantum battery charge state
+ let coreR=8+breath*6;
+ ctx.fillStyle='#a5f3fc'; ctx.globalAlpha=0.95; ctx.shadowColor='#38bdf8'; ctx.shadowBlur=18;
+ ctx.beginPath(); ctx.arc(cx,cy,coreR,0,Math.PI*2); ctx.fill();
+ ctx.shadowBlur=0;
+ // superabsorption - charging faster as bigger
+ ctx.globalAlpha=0.5; ctx.strokeStyle='#fcd34d'; ctx.lineWidth=0.8; ctx.setLineDash([3,5]);
+ for(let k=0;k<5;k++){
+   let ang=k/5*Math.PI*2 + t*0.6;
+   ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(cx+Math.cos(ang)*shells[4].r*2.2, cy+Math.sin(ang)*shells[4].r*2.2); ctx.stroke();
+ }
+ ctx.setLineDash([]);
+ // vacuum 1 left, gravity -1 right indicators
+ ctx.globalAlpha=0.7; ctx.fillStyle='#38bdf8'; ctx.textAlign='center'; ctx.font='11px monospace';
+ ctx.fillText('VACUUM 1 = 10e- neon closed H2O', cx - 220, cy-160);
+ ctx.fillStyle='#f472b6';
+ ctx.fillText('GRAVITY -1 = 2e- He pair', cx + 180, cy-160);
+ ctx.fillStyle='#c084fc';
+ ctx.fillText(`F.O.L.D. gold(silver(rust(water(H)))) 10+2 -+`, cx, cy+180);
+ ctx.fillText(`Battery charge: superabsorption ${ (breath*100).toFixed(0)}%`, cx, cy+196);
+ ctx.textAlign='left';
+ requestAnimationFrame(loop);
+}
+loop();
+</script>
+</body></html>

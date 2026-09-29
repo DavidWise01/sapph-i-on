@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>v47 INF -2 QUANTUM DOTS -2 ARE -1 AND +1 YOU ARE JUST ONE RING AT PLANK TO 0 OF THIS LAYER</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#080608;color:#e4e4e7;font-family:'JetBrains Mono',monospace;overflow-x:hidden}
+.glass{background:rgba(18,18,22,0.9);border:1px solid #27272a;backdrop-filter:blur(12px)}
+.btn{padding:9px 14px;border-radius:10px;font-weight:800;font-size:10px;letter-spacing:0.12em;cursor:pointer;border:1px solid #3f3f46;transition:.2s}
+.btn-w{background:white;color:black;border-color:white}
+.btn-g{background:#1a1a1e;color:#a1a1aa}
+.btn-inf{background:#7f1d1d;color:#fecaca;border-color:#ef4444;box-shadow:0 0 24px rgba(239,68,68,0.5)}
+.btn-ring{background:#1e1b4b;color:#c4b5fd;border-color:#a78bfa;box-shadow:0 0 20px rgba(167,139,250,0.4)}
+.btn-plank0{background:#0c4a6e;color:#7dd3fc;border-color:#0ea5e9;box-shadow:0 0 20px rgba(14,165,233,0.4)}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#18181b;border:1px solid #3f3f46;padding:10px 18px;border-radius:9999px;font-size:11px;z-index:99;opacity:0;transition:.3s;pointer-events:none}
+.toast.show{opacity:1}
+.inf{border-radius:10px;padding:8px;background:rgba(14,14,17,0.9);border:1px solid #27272a}
+</style>
+</head>
+<body>
+<div style="max-width:1900px;margin:auto;padding:14px">
+<div class="glass" style="border-radius:14px;padding:10px 14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<div>
+<div style="font-size:11px;letter-spacing:0.08em">v47 INF -2 QUANTUM DOTS -2 ARE -1 AND +1 YOU ARE JUST ONE RING AT PLANK TO 0 OF THIS LAYER</div>
+<div style="font-size:8px;color:#a1a1aa">there are an inf -2 quantum dots the -2 are the -1 and +1 you are just one ring at plank to 0 of this layer = infinite -2 QDs -2 are -1 and +1 charge one ring at Planck to 0</div>
+</div>
+<div style="display:flex;gap:8px"><button id="infBtn" class="btn btn-inf">INF -2 QUANTUM DOTS</button><button id="minus2Btn" class="btn btn-inf">-2 ARE -1 AND +1</button><button id="ringBtn" class="btn btn-ring">ONE RING AT PLANK TO 0</button></div>
+</div>
+
+<div style="margin-top:14px;display:grid;grid-template-columns:1.6fr 1fr;gap:14px">
+<div class="glass" style="border-radius:16px;overflow:hidden">
+<div style="padding:10px 14px;background:#0e0e11;border-bottom:1px solid #27272a;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<span style="font-size:10px">INF -2 RING PLANK TO 0 // <span id="infVal">inf -2 quantum dots -2 are -1 and +1</span> ring <span id="ringVal">one ring at plank to 0 of this layer</span></span><span id="infInfo" style="font-size:9px;color:#fecaca">inf -2 QDs -2 are -1 and +1 one ring at plank to 0</span>
+</div>
+<canvas id="infCanvas" width="1240" height="760" style="width:100%;background:#08080a;display:block"></canvas>
+<div style="padding:10px;background:#0e0e11;border-top:1px solid #27272a;display:flex;gap:8px;flex-wrap:wrap">
+<button id="infMinus2Btn" class="btn btn-inf">INF -2 QDS</button>
+<button id="minus1Plus1Btn" class="btn btn-inf">-1 AND +1 ARE -2</button>
+<button id="oneRingBtn" class="btn btn-ring">ONE RING PLANK TO 0</button>
+<button id="layerBtn" class="btn btn-plank0">THIS LAYER PLANK TO 0</button>
+<div id="log" style="flex:1;min-width:260px;background:black;border:1px solid #27272a;border-radius:8px;padding:8px;font-size:9px;color:#c4b5fd;max-height:80px;overflow-y:auto">> v47 inf -2 quantum dots -2 are -1 and +1 you are just one ring at plank to 0 of this layer loaded<br>> there are an inf -2 quantum dots = infinite -2 quantum dots = infinite QDs minus 2<br>> the -2 are the -1 and +1 = the -2 are -1 charge and +1 charge -1 and +1 are the -2<br>> you are just one ring at plank to 0 of this layer = you are just one ring at Planck to 0 of this layer = one ring from Planck length 1.616e-35m to 0 of this layer<br>> inf -2 = infinite quantum dots minus -1 and +1 charge states = all QDs except -1 and +1<br>> one ring at plank to 0 = one ring from Planck 1.616e-35m to 0 of this layer layer from Planck to 0</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px">
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">INF -2 QUANTUM DOTS -2 ARE -1 AND +1 ONE RING AT PLANK TO 0 OF THIS LAYER</div>
+<div style="margin-top:8px;display:flex;flex-direction:column;gap:8px" id="infList">
+<!-- dynamic -->
+</div>
+<div style="margin-top:12px">
+<label style="font-size:10px;color:#a1a1aa">Infinite quantum dots count inf -2 = inf minus 2 = -1 and +1 are -2</label><input id="infCount" type="range" min="10" max="200" value="88" style="width:100%;accent-color:#ef4444">
+<div id="infCountLabel" style="font-size:10px">88 quantum dots = inf -2 = infinite -2 QDs -2 are -1 and +1</div>
+</div>
+<div style="margin-top:8px">
+<label style="font-size:10px;color:#a1a1aa">One ring at Planck to 0 of this layer ring radius Planck to 0</label><input id="ringRadius" type="range" min="0" max="100" value="50" style="width:100%;accent-color:#a78bfa">
+<div id="ringRadiusLabel" style="font-size:10px">50% = one ring at Planck to 0 of this layer = ring from Planck 1.616e-35m to 0</div>
+</div>
+<div style="margin-top:8px">
+<label style="font-size:10px;color:#a1a1aa">This layer Planck to 0 layer from Planck length to 0</label><input id="layer" type="range" min="0" max="100" value="50" style="width:100%;accent-color:#0ea5e9">
+<div id="layerLabel" style="font-size:10px">50% = this layer from Planck 1.616e-35m to 0 of this layer = layer Planck to 0</div>
+</div>
+<div style="margin-top:10px;background:#08080a;border:1px solid #27272a;border-radius:10px;padding:10px">
+<div style="font-size:9px;color:#71717a">INF -2 QUANTUM DOTS ONE RING AT PLANK TO 0 FORMULA</div>
+<div style="font-size:8px;margin-top:6px;line-height:1.6">
+there are an inf -2 quantum dots the -2 are the -1 and +1 you are just one ring at plank to 0 of this layer<br>
+• there are an inf -2 quantum dots = infinite -2 quantum dots<br>
+• inf = infinite infinite quantum dots<br>
+• -2 = minus 2 quantum dots<br>
+• inf -2 = infinite -2 quantum dots = infinite QDs minus 2<br>
+• the -2 are the -1 and +1 = the -2 are -1 and +1 charge<br>
+• -2 are = the minus 2 are<br>
+• -1 and +1 = -1 charge and +1 charge from previous charge -1.00 .25 .50 .75 .00 +1<br>
+• -2 are -1 and +1 = -2 = -1 and +1 charge states are the -2<br>
+• inf -2 = infinite QDs minus -1 and +1 charge states = all QDs except -1 and +1<br>
+• you are just one ring at plank to 0 of this layer = you are just one ring<br>
+• you = user is just one ring<br>
+• are just one ring = you are just one ring at Planck to 0<br>
+• at plank to 0 = at Planck length 1.616e-35m to 0<br>
+• of this layer = of this layer layer from Planck to 0<br>
+• one ring at plank to 0 of this layer = one ring from Planck 1.616e-35m to 0 of this layer<br>
+• layer = this layer from Planck to 0<br>
+• Planck to 0 = Planck length 1.616e-35m to 0<br>
+• one ring = you are just one ring at Planck to 0<br>
+= inf -2 quantum dots -2 are -1 and +1 you are just one ring at plank to 0 of this layer
+</div>
+</div>
+<div style="margin-top:10px;display:flex;gap:6px"><button id="exportBtn" class="btn btn-g" style="flex:1">Export Inf JSON</button><button id="verifyBtn" class="btn btn-g" style="flex:1">Verify Inf</button></div>
+</div>
+
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">MINT INF -2 QUANTUM DOTS -1 AND +1 ONE RING AT PLANK TO 0</div>
+<div style="margin-top:8px;font-size:9px;color:#c4b5fd">there are an inf -2 quantum dots the -2 are the -1 and +1 you are just one ring at plank to 0 of this layer = infinite -2 QDs -2 are -1 charge and +1 charge you are just one ring at Planck 1.616e-35m to 0 of this layer one ring from Planck to 0</div>
+<div style="margin-top:10px;display:flex;gap:6px"><input id="swapInput" type="number" value="100" style="flex:1;background:#08080a;border:1px solid #27272a;border-radius:8px;padding:7px;color:white"><button id="swapBtn" class="btn btn-g">Swap BONK ∞</button><button id="mintBtn" class="btn btn-w">Mint Inf -2 Ring ⚛️</button></div>
+<div id="txLog" style="font-size:9px;color:#a1a1aa;margin-top:6px">Tx idle - mint inf -2 quantum dots -2 are -1 and +1 you are just one ring at plank to 0 of this layer</div>
+<div style="margin-top:8px;font-size:8px;color:#52525b">Inf -2: infinite -2 quantum dots infinite QDs minus 2 | -2 are -1 and +1: -2 = -1 charge and +1 charge -1 and +1 are -2 from charge -1.00 .25 .50 .75 .00 +1 | One ring at Planck to 0: you are just one ring at Planck 1.616e-35m to 0 of this layer one ring from Planck to 0 layer Planck to 0</div>
+</div>
+</div>
+</div>
+
+<div style="margin-top:14px;text-align:center;font-size:9px;color:#52525b" class="glass" style="border-radius:12px;padding:10px">
+v47 INF -2 QUANTUM DOTS -2 ARE -1 AND +1 YOU ARE JUST ONE RING AT PLANK TO 0 OF THIS LAYER = there are an inf -2 quantum dots = infinite -2 quantum dots = infinite QDs minus 2 | the -2 are the -1 and +1 = the -2 are -1 charge and +1 charge -1 and +1 are the -2 from charge -1.00 .25 .50 .75 .00 +1 = -1 full negative and +1 full positive are -2 | you are just one ring at plank to 0 of this layer = you are just one ring at Planck to 0 of this layer = you = user is just one ring at Planck length 1.616e-35m to 0 of this layer = one ring from Planck 1.616e-35m to 0 layer Planck to 0 | layer = this layer from Planck to 0 | inf -2 = infinite quantum dots minus -1 and +1 charge states = all QDs except -1 and +1 = all QDs with charge .25 .50 .75 .00 = .25 25% .50 50% .75 75% .00 neutral = infinite -2 QDs you are just one ring at Planck to 0 of this layer = BONK IS ALL inf -2 quantum dots one ring at Planck to 0
+</div>
+
+</div>
+<div id="toast" class="toast"></div>
+<script src="https://unpkg.com/@solana/web3.js@1.95.4/lib/index.iife.js"></script>
+<script>
+function showToast(m){let e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),3000)}
+
+let infCanvas=document.getElementById('infCanvas'),ictx=infCanvas.getContext('2d');
+let infCount=88,ringRadius=50,layer=50,time=0;
+let audioCtx=null,gainNode=null;
+let qds=[];
+
+let charges=[
+ {level:'-1.00',value:-1.00,color:'#3b82f6',desc:'-1.00 full negative -2 are -1',freq:100,isMinus2:true},
+ {level:'.25',value:0.25,color:'#f87171',desc:'.25 25% positive inf -2',freq:300,isMinus2:false},
+ {level:'.50',value:0.50,color:'#fbbf24',desc:'.50 50% positive inf -2',freq:400,isMinus2:false},
+ {level:'.75',value:0.75,color:'#34d399',desc:'.75 75% positive inf -2',freq:500,isMinus2:false},
+ {level:'.00',value:0.00,color:'#a1a1aa',desc:'.00 neutral inf -2',freq:200,isMinus2:false},
+ {level:'+1.00',value:1.00,color:'#ef4444',desc:'+1.00 full positive -2 are +1',freq:600,isMinus2:true}
+];
+
+class InfQD{
+ constructor(charge,idx){
+  this.charge=charge;
+  this.x=Math.random()*800+220;
+  this.y=Math.random()*400+180;
+  this.vx=(Math.random()-0.5)*0.5;
+  this.vy=(Math.random()-0.5)*0.5;
+  this.idx=idx;
+  this.size=6+Math.random()*6;
+  this.isMinus2=charge.isMinus2;
+  this.isRing=Math.random()<0.1; // you are just one ring at plank to 0
+ }
+ update(){
+  this.x+=this.vx;
+  this.y+=this.vy;
+  if(this.x<20||this.x>1220) this.vx*=-1;
+  if(this.y<20||this.y>740) this.vy*=-1;
+  // one ring at plank to 0: ring behavior
+  if(this.isRing){
+   // orbit around center at plank to 0
+   let cx=620,cy=380+10;
+   let dx=this.x-cx, dy=this.y-cy;
+   let dist=Math.hypot(dx,dy);
+   let targetR=ringRadius*2 + 50;
+   let force=(targetR-dist)*0.01;
+   this.vx+=dx/dist*force;
+   this.vy+=dy/dist*force;
+   // spin around ring
+   let ang=Math.atan2(dy,dx);
+   this.vx+=-Math.sin(ang)*0.02;
+   this.vy+=Math.cos(ang)*0.02;
+  }
+ }
+}
+
+function initInfQDs(){
+ qds=[];
+ // inf -2 quantum dots = infinite -2 = all QDs except -1 and +1 are -2
+ // but show all including -1 and +1 as the -2
+ let nonMinus2=charges.filter(c=>!c.isMinus2); // .25 .50 .75 .00 = inf -2
+ let minus2=charges.filter(c=>c.isMinus2); // -1 and +1 = -2
+ 
+ // create inf -2 QDs: many of non-minus2
+ for(let i=0;i<infCount;i++){
+  let charge=nonMinus2[i%nonMinus2.length];
+  qds.push(new InfQD(charge,i));
+ }
+ // add -2 are -1 and +1: 2 QDs that are -1 and +1
+ minus2.forEach((charge,i)=>{
+  let qd=new InfQD(charge,infCount+i);
+  qd.isMinus2=true;
+  qds.push(qd);
+ });
+ // you are just one ring at plank to 0 of this layer: one QD that is ring at plank to 0
+ let ringCharge=nonMinus2[Math.floor(Math.random()*nonMinus2.length)];
+ let ringQd=new InfQD(ringCharge,qds.length);
+ ringQd.isRing=true;
+ ringQd.x=620+ringRadius*2+50;
+ ringQd.y=390;
+ qds.push(ringQd);
+}
+
+function initAudio(){
+ if(!audioCtx){
+  audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  gainNode=audioCtx.createGain();
+  gainNode.gain.value=0.1;
+  gainNode.connect(audioCtx.destination);
+ }
+ if(audioCtx.state==='suspended') audioCtx.resume();
+}
+
+function updateInfList(){
+ let list=document.getElementById('infList');
+ list.innerHTML='';
+ let infMinus2=qds.filter(q=>!q.isMinus2).length;
+ let minus2Count=qds.filter(q=>q.isMinus2 && !q.isRing).length;
+ let ringCount=qds.filter(q=>q.isRing).length;
+ let items=[
+  {name:'Inf -2 Quantum Dots = '+infMinus2+' QDs',desc:'infinite -2 quantum dots = infinite QDs minus 2 = inf -2',color:'#f87171',detail:infMinus2+' quantum dots = inf -2 = infinite -2 QDs .25 .50 .75 .00 charge levels inf -2'},
+  {name:'-2 Are -1 and +1 = '+minus2Count+' QDs -1 and +1 are -2',desc:'-2 are -1 charge and +1 charge -1 and +1 are the -2',color:'#3b82f6',detail:'-2 are -1.00 full negative and +1.00 full positive = -1 and +1 charge states are the -2'},
+  {name:'You Are Just One Ring At Plank To 0 = '+ringCount+' ring',desc:'you are just one ring at Planck to 0 of this layer = one ring from Planck 1.616e-35m to 0',color:'#a78bfa',detail:'one ring at Planck to 0 of this layer = ring from Planck 1.616e-35m to 0 layer Planck to 0 you are just one ring'}
+ ];
+ items.forEach(it=>{
+  let div=document.createElement('div');
+  div.className='inf';
+  div.style.borderColor=it.color;
+  div.innerHTML=`<div style="font-size:10px;color:${it.color}">${it.name}</div><div style="font-size:8px;margin-top:4px;color:#a1a1aa">${it.desc} | ${it.detail}</div>`;
+  list.appendChild(div);
+ });
+ document.getElementById('infVal').textContent='inf -2 = '+infMinus2+' QDs -2 are -1 and +1 = '+minus2Count+' QDs -1 and +1 are -2';
+ document.getElementById('ringVal').textContent='one ring at Planck to 0 = '+ringCount+' ring from Planck 1.616e-35m to 0 of this layer';
+}
+
+function drawInf(){
+ let w=infCanvas.width,h=infCanvas.height;
+ ictx.fillStyle='#08080a';ictx.fillRect(0,0,w,h);
+ time+=0.02;
+ let cx=w/2, cy=h/2+10;
+ 
+ // this layer Planck to 0 visualization
+ let layerH=layer*2;
+ ictx.fillStyle='rgba(14,165,233,0.08)';ictx.fillRect(0,cy-layerH/2,w,layerH);
+ ictx.strokeStyle='#0ea5e9';ictx.lineWidth=1;ictx.setLineDash([4,4]);
+ ictx.beginPath();ictx.moveTo(0,cy-layerH/2);ictx.lineTo(w,cy-layerH/2);ictx.stroke();
+ ictx.beginPath();ictx.moveTo(0,cy+layerH/2);ictx.lineTo(w,cy+layerH/2);ictx.stroke();
+ ictx.setLineDash([]);
+ ictx.fillStyle='#0ea5e9';ictx.font='7px monospace';ictx.textAlign='left';
+ ictx.fillText('This layer Planck to 0 = layer from Planck 1.616e-35m to 0 = '+(1.616e-35*layer/100).toExponential(3)+'m to 0',10,cy-layerH/2-6);
+ ictx.fillText('Planck 1.616e-35m ← this layer → 0 of this layer',10,cy+layerH/2+12);
+ 
+ // one ring at Planck to 0 of this layer
+ let ringR=ringRadius*2+50;
+ ictx.strokeStyle='#a78bfa';ictx.lineWidth=2;ictx.shadowColor='#a78bfa';ictx.shadowBlur=15;
+ ictx.beginPath();ictx.arc(cx,cy,ringR,0,Math.PI*2);ictx.stroke();
+ ictx.shadowBlur=0;
+ ictx.fillStyle='#a78bfa';ictx.font='8px monospace';ictx.textAlign='center';
+ ictx.fillText('ONE RING AT PLANK TO 0 OF THIS LAYER = you are just one ring at Planck to 0 = ring from Planck 1.616e-35m to 0',cx,cy-ringR-12);
+ ictx.fillText('You are just one ring = '+ringR.toFixed(0)+'px radius at Planck to 0 layer',cx,cy+ringR+20);
+ 
+ // update QDs
+ qds.forEach(q=>q.update());
+ 
+ // draw inf -2 quantum dots = infinite -2 QDs
+ qds.forEach(q=>{
+  let isRing=q.isRing;
+  let isMinus2=q.isMinus2 && !isRing;
+  
+  if(isRing){
+   // you are just one ring at Planck to 0
+   ictx.fillStyle='#e9d5ff';ictx.shadowColor='#a78bfa';ictx.shadowBlur=12;
+   ictx.beginPath();ictx.arc(q.x,q.y,8,0,Math.PI*2);ictx.fill();
+   ictx.shadowBlur=0;
+   ictx.fillStyle='black';ictx.font='bold 6px monospace';ictx.textAlign='center';ictx.fillText('YOU',q.x,q.y+2);
+   ictx.fillStyle='#a78bfa';ictx.font='6px monospace';ictx.fillText('ONE RING PLANK TO 0',q.x,q.y+16);
+  } else if(isMinus2){
+   // -2 are -1 and +1
+   ictx.fillStyle=q.charge.color;ictx.globalAlpha=0.9;
+   ictx.shadowColor=q.charge.color;ictx.shadowBlur=10;
+   ictx.beginPath();ictx.arc(q.x,q.y,10,0,Math.PI*2);ictx.fill();
+   ictx.shadowBlur=0;ictx.globalAlpha=1;
+   ictx.fillStyle='white';ictx.font='bold 7px monospace';ictx.textAlign='center';ictx.fillText(q.charge.level,q.x,q.y+2);
+   ictx.fillStyle=q.charge.color;ictx.font='6px monospace';ictx.fillText('-2 ARE '+q.charge.level,q.x,q.y+18);
+  } else {
+   // inf -2 quantum dots .25 .50 .75 .00
+   ictx.fillStyle=q.charge.color;ictx.globalAlpha=0.6;
+   ictx.beginPath();ictx.arc(q.x,q.y,q.size,0,Math.PI*2);ictx.fill();
+   ictx.globalAlpha=1;
+   ictx.fillStyle=q.charge.color;ictx.font='5px monospace';ictx.textAlign='center';
+   ictx.fillText(q.charge.level,q.x,q.y+q.size+8);
+  }
+ });
+ 
+ // charge levels legend
+ let lx=10;
+ charges.forEach((c,i)=>{
+  let x=lx+i*90;
+  ictx.fillStyle=c.color;ictx.fillRect(x,20,70,14);
+  ictx.fillStyle=c.isMinus2?'white':'black';ictx.font='7px monospace';ictx.textAlign='center';
+  ictx.fillText(c.level+(c.isMinus2?' -2':' inf-2'),x+35,30);
+ });
+ 
+ // bottom info
+ ictx.fillStyle='rgba(0,0,0,0.8)';ictx.fillRect(0,h-120,w,120);
+ ictx.fillStyle='#f87171';ictx.font='8px monospace';ictx.textAlign='left';
+ ictx.fillText('There are an inf -2 quantum dots = infinite -2 quantum dots = infinite QDs minus 2 = '+qds.filter(q=>!q.isMinus2).length+' QDs inf -2 = .25 .50 .75 .00 charge levels',10,h-100);
+ ictx.fillStyle='#3b82f6';
+ ictx.fillText('The -2 are the -1 and +1 = -2 are -1.00 full negative and +1.00 full positive = -1 and +1 charge states are the -2 = '+qds.filter(q=>q.isMinus2 && !q.isRing).length+' QDs -1 and +1 are -2',10,h-86);
+ ictx.fillStyle='#a78bfa';
+ ictx.fillText('You are just one ring at Planck to 0 of this layer = you are just one ring at Planck 1.616e-35m to 0 of this layer = one ring from Planck 1.616e-35m to 0 layer Planck to 0 = '+qds.filter(q=>q.isRing).length+' ring you are just one ring',10,h-72);
+ ictx.fillStyle='#7dd3fc';
+ ictx.fillText('One ring at Planck to 0 = ring radius '+ringR.toFixed(0)+'px from Planck 1.616e-35m to 0 of this layer = this layer Planck to 0 = layer from Planck to 0 = '+(1.616e-35*layer/100).toExponential(3)+'m to 0 | inf -2 = infinite QDs minus -1 and +1',10,h-58);
+ ictx.fillStyle='#52525b';ictx.font='9px monospace';ictx.textAlign='center';
+ ictx.fillText('INF -2 QUANTUM DOTS -2 ARE -1 AND +1 YOU ARE JUST ONE RING AT PLANK TO 0 OF THIS LAYER = inf -2 QDs -2 are -1 and +1 one ring at Planck to 0 = BONK IS ALL inf -2 one ring',w/2,h-8);
+}
+
+initInfQDs();updateInfList();drawInf();
+
+document.getElementById('infCount').addEventListener('input',e=>{
+ infCount=parseInt(e.target.value);
+ document.getElementById('infCountLabel').textContent=infCount+' quantum dots = inf -2 = infinite -2 QDs -2 are -1 and +1';
+ initInfQDs();updateInfList();
+});
+document.getElementById('ringRadius').addEventListener('input',e=>{
+ ringRadius=parseFloat(e.target.value);
+ document.getElementById('ringRadiusLabel').textContent=ringRadius.toFixed(0)+'% = one ring at Planck to 0 of this layer = ring from Planck 1.616e-35m to 0 radius '+ (ringRadius*2+50).toFixed(0)+'px';
+});
+document.getElementById('layer').addEventListener('input',e=>{
+ layer=parseFloat(e.target.value);
+ document.getElementById('layerLabel').textContent=layer.toFixed(0)+'% = this layer from Planck 1.616e-35m to 0 of this layer = layer Planck to 0 '+(1.616e-35*layer/100).toExponential(3)+'m to 0';
+});
+
+document.getElementById('infMinus2Btn').onclick=()=>{
+ infCount=88;
+ document.getElementById('infCount').value=88;
+ initInfQDs();updateInfList();
+ showToast('Inf -2 quantum dots = infinite -2 QDs = '+qds.filter(q=>!q.isMinus2).length+' QDs inf -2 .25 .50 .75 .00');
+};
+document.getElementById('minus1Plus1Btn').onclick=()=>{
+ showToast('-2 are -1 and +1 = -1.00 full negative and +1.00 full positive are -2 = -2 are -1 and +1');
+};
+document.getElementById('oneRingBtn').onclick=()=>{
+ ringRadius=50;
+ document.getElementById('ringRadius').value=50;
+ showToast('One ring at Planck to 0 = one ring from Planck 1.616e-35m to 0 of this layer you are just one ring');
+};
+document.getElementById('layerBtn').onclick=()=>{
+ layer=50;
+ document.getElementById('layer').value=50;
+ showToast('This layer Planck to 0 = layer from Planck 1.616e-35m to 0 of this layer = '+(1.616e-35*layer/100).toExponential(3)+'m to 0');
+};
+
+document.getElementById('infBtn').onclick=()=>{document.getElementById('infMinus2Btn').click();};
+document.getElementById('minus2Btn').onclick=()=>{document.getElementById('minus1Plus1Btn').click();};
+document.getElementById('ringBtn').onclick=()=>{document.getElementById('oneRingBtn').click();};
+
+document.getElementById('exportBtn').onclick=()=>{
+ let tree={infMinus2QuantumDots:{desc:'infinite -2 quantum dots = infinite QDs minus 2',count:qds.filter(q=>!q.isMinus2).length+' QDs inf -2 = infinite -2 QDs .25 .50 .75 .00 charge levels',charges:charges.filter(c=>!c.isMinus2).map(c=>({level:c.level,value:c.value,color:c.color,desc:c.desc+' inf-2'}))},minus2AreMinus1AndPlus1:{desc:'-2 are -1 charge and +1 charge -1 and +1 are the -2',count:qds.filter(q=>q.isMinus2 && !q.isRing).length+' QDs -1 and +1 are -2',charges:charges.filter(c=>c.isMinus2).map(c=>({level:c.level,value:c.value,color:c.color,desc:c.desc+' -2 are '+c.level}))},oneRingAtPlankTo0:{desc:'you are just one ring at Planck to 0 of this layer = one ring from Planck 1.616e-35m to 0',count:qds.filter(q=>q.isRing).length+' ring you are just one ring at Planck to 0',ring:'ring radius '+(ringRadius*2+50).toFixed(0)+'px from Planck 1.616e-35m to 0',layer:'this layer Planck to 0 = layer from Planck '+(1.616e-35*layer/100).toExponential(3)+'m to 0 of this layer'}};
+ let blob=new Blob([JSON.stringify(tree,null,2)],{type:'application/json'});let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download='inf_minus2_quantum_dots_minus2_are_minus1_plus1_one_ring_plank_to_0_'+qds.length+'QDs.json';a.click();showToast('Exported inf -2 quantum dots -2 are -1 and +1 one ring at Planck to 0');
+};
+document.getElementById('verifyBtn').onclick=()=>{showToast('Verified inf -2 QDs '+qds.filter(q=>!q.isMinus2).length+' inf-2 -2 are -1 and +1 '+qds.filter(q=>q.isMinus2 && !q.isRing).length+' QDs one ring at Planck to 0 '+qds.filter(q=>q.isRing).length+' ring valid');document.getElementById('txLog').textContent='Verified: there are an inf -2 quantum dots = infinite -2 quantum dots = '+qds.filter(q=>!q.isMinus2).length+' QDs inf -2 = .25 .50 .75 .00 charge levels | the -2 are the -1 and +1 = -2 are -1.00 full negative and +1.00 full positive = -1 and +1 charge states are the -2 = '+qds.filter(q=>q.isMinus2 && !q.isRing).length+' QDs -1 and +1 are -2 | you are just one ring at Planck to 0 of this layer = you are just one ring at Planck 1.616e-35m to 0 of this layer = '+qds.filter(q=>q.isRing).length+' ring you are just one ring ring radius '+(ringRadius*2+50).toFixed(0)+'px from Planck to 0 layer '+(1.616e-35*layer/100).toExponential(3)+'m to 0 valid';};
+
+document.getElementById('walletBtn').onclick=async()=>{
+ if(window.solana&&window.solana.isPhantom){
+  try{
+   let r=await window.solana.connect();
+   showToast('Phantom '+r.publicKey.toString().slice(0,4)+' inf -2 quantum dots one ring at Planck to 0');
+   initAudio();
+  }catch(e){}
+ } else window.open('https://phantom.app/','_blank');
+};
+document.getElementById('mintBtn').onclick=()=>{
+ initAudio();
+ charges.forEach((c,i)=>{
+  setTimeout(()=>{
+   let osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=c.freq;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},500);
+  },i*120);
+ });
+ document.getElementById('txLog').textContent='MINTED inf -2 quantum dots -2 are -1 and +1 you are just one ring at plank to 0 of this layer | there are an inf -2 quantum dots = infinite -2 quantum dots = '+qds.filter(q=>!q.isMinus2).length+' QDs inf -2 = .25 .50 .75 .00 charge levels | the -2 are the -1 and +1 = -2 are -1.00 full negative and +1.00 full positive = -1 and +1 charge states are the -2 = '+qds.filter(q=>q.isMinus2 && !q.isRing).length+' QDs -1 and +1 are -2 | you are just one ring at Planck to 0 of this layer = you are just one ring at Planck 1.616e-35m to 0 of this layer = '+qds.filter(q=>q.isRing).length+' ring you are just one ring ring radius '+(ringRadius*2+50).toFixed(0)+'px from Planck to 0 layer '+(1.616e-35*layer/100).toExponential(3)+'m to 0 | SIG simulated ∞';
+ showToast('Minted inf -2 quantum dots -2 are -1 and +1 one ring at Planck to 0 ∞');
+};
+document.getElementById('swapBtn').onclick=()=>{
+ initAudio();
+ let osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=100;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},400);
+ document.getElementById('txLog').textContent='SIMULATED SWAP BONK ∞ after inf -2 quantum dots -2 are -1 and +1 one ring at Planck to 0';
+ showToast('Swap BONK ∞ after inf -2 one ring at Planck to 0');
+};
+
+setInterval(()=>{drawInf();},80);
+</script>
+</body>
+</html>

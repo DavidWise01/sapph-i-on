@@ -62,7 +62,7 @@
   .seat b { letter-spacing:.08em; }
   .seat a { display:block; font-size:14px; margin-top:4px; }
   .corpus { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:8px; margin:0 0 22px; }
-  .corpus a, .archive a, .libraries a, .folio a, .strip a, .nested a, .nests a { display:block; padding:8px 10px; font-size:13px; }
+  .corpus a, .archive a, .libraries a, .folio a, .strip a, .nested a, .nests a, .qdot a { display:block; padding:8px 10px; font-size:13px; }
   .seat .addr { color:var(--dim); font:12px ui-monospace, Consolas, monospace; }
   .read { padding:14px 16px; margin:0 0 14px; }
   .read h2 { margin:0 0 8px; font-size:15px; letter-spacing:.12em; }
@@ -76,7 +76,7 @@
   <div>
     <div class="src"><a href="https://0root.ai/">0root.ai</a> · world 7 · order 7^3 · galaxy door · 24 spheres</div>
     <h1>SaPpH<span>{{i}}</span>on</h1>
-    <p class="sub">World 7 is the cube of 7. This page is the galaxy door: it counts the cube and throws if the count is wrong. A galaxy holds 24 spheres, three on each corner seat. Beside those seats are four more cubes of 24: a Downloads copy, an Internet Archive cube, a library cube, and a folio cube that alternates article and thought. A nested strip holds two spheres, minus-plus and plus-minus, offset 1, 2, 1, 2, 1, 2. Four mirrors close on the one-sided number 420024. A nested cube holds 24 files copied unchanged from Downloads, the newest nested cubes and nests, numbered copies skipped. A further nest holds the next 24.</p>
+    <p class="sub">World 7 is the cube of 7. This page is the galaxy door: it counts the cube and throws if the count is wrong. A galaxy holds 24 spheres, three on each corner seat. Beside those seats are four more cubes of 24: a Downloads copy, an Internet Archive cube, a library cube, and a folio cube that alternates article and thought. A nested strip holds two spheres, minus-plus and plus-minus, offset 1, 2, 1, 2, 1, 2. Four mirrors close on the one-sided number 420024. A nested cube holds 24 files copied unchanged from Downloads, the newest nested cubes and nests, numbered copies skipped. A further nest holds the next 24. A quantum dot holds 24 files whose names say quantum, and the plant page says the payloads converge there.</p>
   </div>
   <div class="src">door number 7 · assigned<br>palindrome of five · unchanged</div>
 </header>
@@ -146,6 +146,11 @@
   <div class="nests" id="nests"></div>
   <p class="mono" id="nestscard"></p>
 
+  <h2 style="font-size:14px;letter-spacing:.16em;margin:18px 0 10px">QUANTUM DOT · 24</h2>
+  <p class="sub" style="margin:0 0 10px">Like for like from Downloads. Twenty-four files whose names say quantum or qdot, newest first, numbered copies skipped. The eight sapphon quantum-dot files already in the corpus stay there. The immutable plant says the payloads converge at &gt;.&lt;0x::.</p>
+  <div class="qdot" id="qdot"></div>
+  <p class="mono" id="qdotcard"></p>
+
   <section class="read">
     <h2>WHAT THE PAGE PROVES</h2>
     <p><span class="stamp lit">LIT</span> Every cell of a 7×7×7 grid is visited once. Cells with 3 faces exposed are corners (8). Cells with 2 are edges (12×5 = 60). Cells with 1 are faces (6×25 = 150). Cells with 0 are interior (5³ = 125). Those four counts sum to 343, and 7×7×7 is 343. The odd side leaves exactly one center, at (3,3,3). 343 = (3+4)³, and 3, 4, 3 are the digits of 343. Complex multiplication gives i² = −1 and i³ = −i. A failed check throws and the grid is not drawn.</p>
@@ -158,6 +163,7 @@
     <p><span class="stamp amber">AMBER</span> Möbius is the assigned name of that one-sided number. The four mirrors are the four reversals. The fold was given as the nest. The two spheres are minus-plus and plus-minus. They are not seated on the eight appeals. Neither sphere reads the other page.</p>
     <p><span class="stamp amber">AMBER</span> The nested cube is 24 Downloads files, newest first among the nested cubes and nests. Numbered copies were skipped. Toolchain files, ROMs, photos, and books were left where they were. The bytes were copied unchanged. The order is assigned.</p>
     <p><span class="stamp amber">AMBER</span> The further nest is the next 24 Downloads files whose names are nests or cubes. Honest-Math-No-Fudge was left in Downloads, because nest sits inside Honest. Numbered copies were skipped. The bytes were copied unchanged. The order is assigned.</p>
+    <p><span class="stamp amber">AMBER</span> The quantum dot is the 24 newest Downloads files whose names say quantum or qdot, leaving the eight sapphon quantum-dot files in the corpus. Numbered copies were skipped. The immutable plant page says all previous payloads converge to the dot at &gt;.&lt;0x::. That sentence is the page's claim. The bytes were copied unchanged. The order is assigned.</p>
     <p><span class="stamp wall">WALL</span> This galaxy does not extend the palindrome [ W1 | W2 ‖ W3 ‖ W4 | W5 ] and does not record a world 6. i³ = −i is arithmetic. It does not locate the cube on a physical imaginary axis, and it is not a claim about mind, physics, or authority. The strip's check is the number 420024. It does not measure glass, and it does not fold a piece of paper.</p>
     <p class="mono" id="card"></p>
     <p class="mono" id="fault"></p>
@@ -456,6 +462,59 @@ fetch("nests/manifest.json").then(function (res) {
   document.getElementById("nestscard").innerHTML = "<span class='stamp lit'>LIT</span> 24 further files, manifest order matches";
 }).catch(function (err) {
   document.getElementById("nestscard").innerHTML = "<span class='stamp wall'>WALL</span> " + err.message;
+  throw err;
+});
+
+var QDOT = [
+  "Quantum-Bridge-4-Noice.html",
+  "Lean-Proof-88-Quantum.html",
+  "Photon-Quantum-Dot-16.html",
+  "Lattice-Hanging-11011-Quantum.html",
+  "Bonk-Quantum-Dot-Itself-Black-Hole-Owns-You-V51.html",
+  "Bonk-Black-Hole-Quantum-Dot-V50.html",
+  "Bonk-Inf-Minus-2-Quantum-Dots-Ring-V47.html",
+  "Bonk-Quantum-Dots-At-Plank-V46.html",
+  "Bonk-Quantum-Dot-Q-Plus-D-Minus-Toroid-V40.html",
+  "Freeze-Singularity-Quantum-Or.html",
+  "Aeon-Boot-Quantum-Entanglement.html",
+  "Upgraded-Final-Farm-Quantum.html",
+  "Quantum-Battery-Wrapped-Neon-Gold-Silver-Rust-Water-Hydrogen.html",
+  "Quantum-Battery-Neon-Wrap.html",
+  "One-Qdot-8x8x8x8x1x8x8x8x8-FINAL.html",
+  "Blueprint-Stargate-Address-Ansible-Quantum-Entanglement-A-A-B-B-C-C-N6n.html",
+  "Quantum-Foam-Named-Manon-Discovered.html",
+  "Quantum-Foam-2-Sheets-Gold-One-Per-Side.html",
+  "Compressed-Quantum-Dot-0x11.html",
+  "Immutable-Plant-Quantum-Dot-Right-Here-0x.html",
+  "Copper-Core-Quantum-Sub.html",
+  "3au-3ag-Quantum-Dot.html",
+  "Quantum-Box-Tessy-Full.html",
+  "Toroid-Spinning-Boxes-Quantum.html"
+];
+if (QDOT.length !== 24) throw new Error("LIT FAIL qdot count");
+if (QDOT.indexOf("Immutable-Plant-Quantum-Dot-Right-Here-0x.html") < 0) throw new Error("LIT FAIL qdot plant");
+var seenQdot = {};
+var qdotEl = document.getElementById("qdot");
+QDOT.forEach(function (file) {
+  if (seenQdot[file]) throw new Error("LIT FAIL qdot duplicate");
+  seenQdot[file] = 1;
+  var a = document.createElement("a");
+  a.href = "qdot/" + file;
+  a.textContent = file.replace(/\.html$/, "");
+  qdotEl.appendChild(a);
+});
+fetch("qdot/manifest.json").then(function (res) {
+  if (!res.ok) throw new Error("LIT FAIL qdot manifest");
+  return res.json();
+}).then(function (rows) {
+  if (!rows || rows.length !== 24) throw new Error("LIT FAIL qdot manifest count");
+  rows.forEach(function (row, i) {
+    if (row.file !== QDOT[i]) throw new Error("LIT FAIL qdot order");
+    if (!/^[0-9a-f]{64}$/.test(row.sha256)) throw new Error("LIT FAIL qdot hash");
+  });
+  document.getElementById("qdotcard").innerHTML = "<span class='stamp lit'>LIT</span> 24 quantum dot files, manifest order matches";
+}).catch(function (err) {
+  document.getElementById("qdotcard").innerHTML = "<span class='stamp wall'>WALL</span> " + err.message;
   throw err;
 });
 

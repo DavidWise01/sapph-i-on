@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>v46 MAKE THEM ALL QUANTUM DOTS AT PLANK = ALL ISOMORPHS QUANTUM DOTS AT PLANK 1.616e-35m</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#080608;color:#e4e4e7;font-family:'JetBrains Mono',monospace;overflow-x:hidden}
+.glass{background:rgba(18,18,22,0.9);border:1px solid #27272a;backdrop-filter:blur(12px)}
+.btn{padding:9px 14px;border-radius:10px;font-weight:800;font-size:10px;letter-spacing:0.12em;cursor:pointer;border:1px solid #3f3f46;transition:.2s}
+.btn-w{background:white;color:black;border-color:white}
+.btn-g{background:#1a1a1e;color:#a1a1aa}
+.btn-quantum{background:#581c87;color:#e9d5ff;border-color:#a78bfa;box-shadow:0 0 24px rgba(167,139,250,0.5)}
+.btn-plank{background:#0c4a6e;color:#7dd3fc;border-color:#0ea5e9;box-shadow:0 0 20px rgba(14,165,233,0.4)}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#18181b;border:1px solid #3f3f46;padding:10px 18px;border-radius:9999px;font-size:11px;z-index:99;opacity:0;transition:.3s;pointer-events:none}
+.toast.show{opacity:1}
+.qd{border-radius:10px;padding:8px;background:rgba(14,14,17,0.9);border:1px solid #27272a}
+</style>
+</head>
+<body>
+<div style="max-width:1900px;margin:auto;padding:14px">
+<div class="glass" style="border-radius:14px;padding:10px 14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<div>
+<div style="font-size:11px;letter-spacing:0.09em">v46 MAKE THEM ALL QUANTUM DOTS AT PLANK = ALL ISOMORPHS QUANTUM DOTS AT PLANK 1.616e-35m</div>
+<div style="font-size:8px;color:#a1a1aa">make them all quantum dots at plank = all isomorphs quantum dots at plank scale 1.616e-35m = all colors isomorphs quantum dots at Planck length</div>
+</div>
+<div style="display:flex;gap:8px"><button id="allQdBtn" class="btn btn-quantum">ALL QUANTUM DOTS</button><button id="plankBtn" class="btn btn-plank">AT PLANK 1.616e-35m</button><button id="walletBtn" class="btn btn-g">Phantom</button></div>
+</div>
+
+<div style="margin-top:14px;display:grid;grid-template-columns:1.6fr 1fr;gap:14px">
+<div class="glass" style="border-radius:16px;overflow:hidden">
+<div style="padding:10px 14px;background:#0e0e11;border-bottom:1px solid #27272a;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<span style="font-size:10px">QUANTUM DOTS AT PLANK // <span id="qdVal">all quantum dots at plank</span> plank <span id="plankVal">1.616e-35m Planck length</span></span><span id="qdInfo" style="font-size:9px;color:#e9d5ff">make them all quantum dots at plank</span>
+</div>
+<canvas id="qdCanvas" width="1240" height="760" style="width:100%;background:#08080a;display:block"></canvas>
+<div style="padding:10px;background:#0e0e11;border-top:1px solid #27272a;display:flex;gap:8px;flex-wrap:wrap">
+<button id="quantumDotsBtn" class="btn btn-quantum">ALL QUANTUM DOTS AT PLANK</button>
+<button id="emergenceBtn" class="btn btn-plank">MORE EMERGENCE AT PLANK 🌀</button>
+<button id="isomorphQdBtn" class="btn btn-quantum">ISOMORPHS QUANTUM DOTS</button>
+<button id="spinBtn" class="btn btn-g">SPIN PLANK QDS 🌪️</button>
+<div id="log" style="flex:1;min-width:260px;background:black;border:1px solid #27272a;border-radius:8px;padding:8px;font-size:9px;color:#c4b5fd;max-height:80px;overflow-y:auto">> v46 make them all quantum dots at plank loaded<br>> make them all quantum dots at plank = all isomorphs quantum dots at plank scale 1.616e-35m<br>> all quantum dots = all isomorphs are quantum dots semiconductor nanocrystals 2-10nm but at Planck scale 1.616e-35m quantum<br>> at plank = at Planck length 1.616255e-35m Planck scale quantum<br>> all quantum dots at plank = all colors isomorphs quantum dots at Planck length 1.616e-35m = all isomorphs quantum dots at Planck scale</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px">
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">MAKE THEM ALL QUANTUM DOTS AT PLANK 1.616e-35m</div>
+<div style="margin-top:8px;display:flex;flex-direction:column;gap:8px" id="qdList">
+<!-- dynamic -->
+</div>
+<div style="margin-top:12px">
+<label style="font-size:10px;color:#a1a1aa">Quantum dot size at Planck scale 1.616e-35m to 2-10nm</label><input id="qdSize" type="range" min="0" max="100" value="2" style="width:100%;accent-color:#a78bfa">
+<div id="qdSizeLabel" style="font-size:10px">2% = Planck scale 1.616e-35m quantum dot at Planck length</div>
+</div>
+<div style="margin-top:8px">
+<label style="font-size:10px;color:#a1a1aa">All quantum dots count isomorphs quantum dots at Planck</label><input id="qdCount" type="range" min="1" max="5" value="2" style="width:100%;accent-color:#f87171">
+<div id="qdCountLabel" style="font-size:10px">2 per color quantum dots at Planck = all isomorphs quantum dots at Planck scale</div>
+</div>
+<div style="margin-top:8px">
+<label style="font-size:10px;color:#a1a1aa">Plank scale 1.616e-35m to 1.02 Planck 1.648e-35m</label><input id="plankScale" type="range" min="0" max="200" value="100" style="width:100%;accent-color:#0ea5e9">
+<div id="plankLabel" style="font-size:10px">100% = 1.00 Planck = 1.616e-35m all quantum dots at Planck length</div>
+</div>
+<div style="margin-top:10px;background:#08080a;border:1px solid #27272a;border-radius:10px;padding:10px">
+<div style="font-size:9px;color:#71717a">MAKE THEM ALL QUANTUM DOTS AT PLANK FORMULA</div>
+<div style="font-size:8px;margin-top:6px;line-height:1.6">
+make them all quantum dots at plank<br>
+• make them all = make all of them<br>
+• them = isomorphs from previous more emergence 1 per color minimum of isomorphs<br>
+• quantum dots = semiconductor nanocrystals 2-10nm single electron confinement quantum dots<br>
+• at plank = at Planck length 1.616255e-35m Planck scale quantum<br>
+• make them all quantum dots at plank = make all isomorphs quantum dots at Planck scale<br>
+• all quantum dots at plank = all colors isomorphs quantum dots at Planck length<br>
+• all isomorphs quantum dots at Planck scale =<br>
+  - garnet isomorphs almandine pyrope spessartine grossular andradite uvarovite quantum dots at Planck<br>
+  - corundum isomorphs ruby sapphire quantum dots at Planck<br>
+  - spinel isomorphs spinel gahnite quantum dots at Planck<br>
+  - tourmaline rubellite elbaite quantum dots at Planck<br>
+  - beryl red beryl emerald aquamarine quantum dots at Planck<br>
+  - etc all quantum dots at Planck 1.616e-35m<br>
+• quantum dot at Planck = semiconductor nanocrystal at Planck length 1.616e-35m quantum dot<br>
+• Planck length = 1.616255e-35m smallest length quantum scale<br>
+• quantum dots at Planck = quantum dots at Planck scale run continuously at Planck scale<br>
+= make them all quantum dots at plank = all isomorphs quantum dots at Planck 1.616e-35m
+</div>
+</div>
+<div style="margin-top:10px;display:flex;gap:6px"><button id="exportBtn" class="btn btn-g" style="flex:1">Export QD Plank JSON</button><button id="verifyBtn" class="btn btn-g" style="flex:1">Verify QD Plank</button></div>
+</div>
+
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">MINT ALL QUANTUM DOTS AT PLANK 1.616e-35m</div>
+<div style="margin-top:8px;font-size:9px;color:#c4b5fd">make them all quantum dots at plank = all isomorphs quantum dots at Planck scale 1.616e-35m = all colors garnet corundum spinel tourmaline beryl quartz isomorphs quantum dots at Planck length semiconductor nanocrystals at Planck scale</div>
+<div style="margin-top:10px;display:flex;gap:6px"><input id="swapInput" type="number" value="100" style="flex:1;background:#08080a;border:1px solid #27272a;border-radius:8px;padding:7px;color:white"><button id="swapBtn" class="btn btn-g">Swap BONK ⚛️</button><button id="mintBtn" class="btn btn-w">Mint QD At Plank ⚛️</button></div>
+<div id="txLog" style="font-size:9px;color:#a1a1aa;margin-top:6px">Tx idle - mint make them all quantum dots at plank = all isomorphs quantum dots at Planck 1.616e-35m</div>
+<div style="margin-top:8px;font-size:8px;color:#52525b">Quantum dots at Planck: all isomorphs quantum dots at Planck scale 1.616e-35m semiconductor nanocrystals at Planck length | All: all colors isomorphs quantum dots | At Planck: Planck length 1.616255e-35m smallest length quantum scale</div>
+</div>
+</div>
+</div>
+
+<div style="margin-top:14px;text-align:center;font-size:9px;color:#52525b" class="glass" style="border-radius:12px;padding:10px">
+v46 MAKE THEM ALL QUANTUM DOTS AT PLANK = make all of them quantum dots at Planck = make all isomorphs quantum dots at Planck scale = all isomorphs from previous more emergence 1 per color minimum of isomorphs are quantum dots semiconductor nanocrystals 2-10nm but at Planck scale 1.616e-35m quantum | at Planck = at Planck length 1.616255e-35m Planck scale quantum smallest length | make them all quantum dots at Planck = make all isomorphs quantum dots at Planck scale = all colors garnet corundum spinel tourmaline beryl quartz isomorphs quantum dots at Planck length semiconductor nanocrystals at Planck scale | garnet isomorphs almandine pyrope spessartine grossular andradite uvarovite quantum dots at Planck | corundum isomorphs ruby sapphire quantum dots at Planck | spinel isomorphs spinel gahnite quantum dots at Planck | all quantum dots at Planck 1.616e-35m = BONK IS ALL quantum dots at Planck
+</div>
+
+</div>
+<div id="toast" class="toast"></div>
+<script src="https://unpkg.com/@solana/web3.js@1.95.4/lib/index.iife.js"></script>
+<script>
+function showToast(m){let e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),3000)}
+
+let qdCanvas=document.getElementById('qdCanvas'),qctx=qdCanvas.getContext('2d');
+let qdSize=2,qdCount=2,plankScale=100,time=0,isSpinning=false;
+let audioCtx=null,gainNode=null;
+let qdots=[];
+
+let colors=[
+ {name:'Garnet QD at Plank',group:'garnet',hex:'#f87171',freq:432,structure:'X3Y2(SiO4)3 QD',isomorphs:['almandine QD at Plank','pyrope QD at Plank','spessartine QD at Plank','grossular QD at Plank','andradite QD at Plank','uvarovite QD at Plank']},
+ {name:'Ruby QD at Plank',group:'corundum',hex:'#ef4444',freq:396,structure:'Al2O3 QD',isomorphs:['ruby QD at Plank','sapphire blue QD at Plank','sapphire yellow QD at Plank','sapphire pink QD at Plank','sapphire green QD at Plank']},
+ {name:'Spinel QD at Plank',group:'spinel',hex:'#dc2626',freq:528,structure:'MgAl2O4 QD',isomorphs:['spinel QD at Plank','gahnite QD at Plank','galaxite QD at Plank','hercynite QD at Plank','spinel blue QD at Plank']},
+ {name:'Tourmaline QD at Plank',group:'tourmaline',hex:'#ec4899',freq:639,structure:'tourmaline QD',isomorphs:['rubellite QD at Plank','elbaite QD at Plank','schorl QD at Plank','dravite QD at Plank','verdelite QD at Plank']},
+ {name:'Red Beryl QD at Plank',group:'beryl',hex:'#b91c1c',freq:741,structure:'Be3Al2Si6O18 QD',isomorphs:['red beryl QD at Plank','emerald QD at Plank','aquamarine QD at Plank','morganite QD at Plank','heliodor QD at Plank']},
+ {name:'Blue Sapphire QD at Plank',group:'sapphire',hex:'#48dbfb',freq:852,structure:'Al2O3 blue QD',isomorphs:['sapphire blue QD at Plank','sapphire cornflower QD at Plank','sapphire teal QD at Plank','sapphire light blue QD at Plank','sapphire dark blue QD at Plank']},
+ {name:'Yellow Garnet QD at Plank',group:'garnet-yellow',hex:'#feca57',freq:963,structure:'X3Y2(SiO4)3 yellow QD',isomorphs:['grossular yellow QD at Plank','andradite yellow QD at Plank','mali garnet yellow QD at Plank','topazolite yellow QD at Plank','hessonite yellow-orange QD at Plank']},
+ {name:'Purple Amethyst QD at Plank',group:'quartz',hex:'#a78bfa',freq:174,structure:'SiO2 QD',isomorphs:['amethyst QD at Plank','citrine QD at Plank','smoky quartz QD at Plank','rose quartz QD at Plank','milky quartz QD at Plank']}
+];
+
+class PlanckQD{
+ constructor(color,isomorph,idx){
+  this.color=color;
+  this.isomorph=isomorph;
+  this.x=Math.random()*600+320;
+  this.y=Math.random()*400+180;
+  this.vx=(Math.random()-0.5)*0.8;
+  this.vy=(Math.random()-0.5)*0.8;
+  this.idx=idx;
+  this.baseSize=qdSize;
+  this.plankM=1.616e-35*plankScale/100;
+  this.phase=Math.random()*Math.PI*2;
+ }
+ update(){
+  this.x+=this.vx;
+  this.y+=this.vy;
+  if(this.x<20||this.x>1220) this.vx*=-1;
+  if(this.y<20||this.y>740) this.vy*=-1;
+  // quantum dot at Planck scale quantum fluctuations
+  this.vx+=(Math.random()-0.5)*0.02;
+  this.vy+=(Math.random()-0.5)*0.02;
+  this.phase+=0.02;
+ }
+}
+
+function initQDs(){
+ qdots=[];
+ colors.forEach((color,cIdx)=>{
+  let count=Math.max(qdCount,1);
+  for(let i=0;i<count;i++){
+   let iso=color.isomorphs[i%color.isomorphs.length];
+   qdots.push(new PlanckQD(color,iso,cIdx*10+i));
+  }
+ });
+}
+
+function initAudio(){
+ if(!audioCtx){
+  audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  gainNode=audioCtx.createGain();
+  gainNode.gain.value=0.1;
+  gainNode.connect(audioCtx.destination);
+ }
+ if(audioCtx.state==='suspended') audioCtx.resume();
+}
+
+function updateQdList(){
+ let list=document.getElementById('qdList');
+ list.innerHTML='';
+ colors.forEach(color=>{
+  let count=qdots.filter(q=>q.color.group===color.group).length;
+  let div=document.createElement('div');
+  div.className='qd';
+  div.style.borderColor=color.hex;
+  div.innerHTML=`<div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:${color.hex}">${color.name} ${color.structure} ${count} QDs at Plank min ${qdCount}</span><span style="font-size:8px;color:${color.hex}">${(1.616e-35*plankScale/100).toExponential(3)}m</span></div><div style="font-size:7px;margin-top:4px;color:#a1a1aa">Isomorphs quantum dots at Planck ${color.structure} at Planck 1.616e-35m: ${color.isomorphs.slice(0,qdCount).join(' | ')} | ${count} QDs at Plank min ${qdCount} per color at Planck scale</div><div style="margin-top:6px;display:flex;gap:2px">${Array.from({length:count},(_,i)=>`<div style="width:14px;height:14px;background:${color.hex};border-radius:50%;opacity:${0.6+i*0.1};border:1px solid ${color.hex};box-shadow:0 0 6px ${color.hex}"></div>`).join('')}</div>`;
+  list.appendChild(div);
+ });
+ document.getElementById('qdVal').textContent=qdots.length+' quantum dots at Planck '+colors.length+' colors min '+qdCount+' per color';
+ document.getElementById('plankVal').textContent=(1.616e-35*plankScale/100).toExponential(3)+'m Planck length';
+}
+
+function drawQDsAtPlank(){
+ let w=qdCanvas.width,h=qdCanvas.height;
+ qctx.fillStyle='#08080a';qctx.fillRect(0,0,w,h);
+ time+=0.02;
+ 
+ // Planck scale background quantum foam
+ for(let i=0;i<30;i++){
+  let x=Math.random()*w;
+  let y=Math.random()*h;
+  let r=Math.random()*1.5;
+  qctx.fillStyle='#1a1a1e';qctx.globalAlpha=0.3;
+  qctx.beginPath();qctx.arc(x,y,r,0,Math.PI*2);qctx.fill();
+  qctx.globalAlpha=1;
+ }
+ 
+ // update quantum dots at Planck
+ qdots.forEach(q=>{
+  q.baseSize=qdSize;
+  q.plankM=1.616e-35*plankScale/100;
+  q.update();
+ });
+ 
+ // draw connections quantum entanglement at Planck scale
+ qdots.forEach(q=>{
+  let nearby=qdots.filter(b=>b!==q && b.color.group===q.color.group && Math.hypot(b.x-q.x,b.y-q.y)<100);
+  nearby.forEach(b=>{
+   qctx.strokeStyle=q.color.hex;ectxAlpha();
+   function ectxAlpha(){
+    qctx.lineWidth=0.4;qctx.globalAlpha=0.12;
+    qctx.beginPath();qctx.moveTo(q.x,q.y);qctx.lineTo(b.x,b.y);qctx.stroke();
+    qctx.globalAlpha=1;
+   }
+  });
+ });
+ 
+ // draw quantum dots at Planck scale all isomorphs quantum dots at Planck 1.616e-35m
+ qdots.forEach(q=>{
+  let size=4 + qdSize/10 + Math.sin(q.phase)*1; // quantum dot size at Planck scale tiny but visible
+  let glowSize=size+6+Math.sin(q.phase*1.5)*2;
+  
+  // quantum dot glow at Planck scale
+  qctx.fillStyle=q.color.hex;qctx.globalAlpha=0.15;
+  qctx.shadowColor=q.color.hex;qctx.shadowBlur=12+qdSize/5;
+  qctx.beginPath();qctx.arc(q.x,q.y,glowSize,0,Math.PI*2);qctx.fill();
+  qctx.shadowBlur=0;qctx.globalAlpha=1;
+  
+  // quantum dot core at Planck scale semiconductor nanocrystal at Planck length
+  qctx.fillStyle=q.color.hex;
+  qctx.beginPath();qctx.arc(q.x,q.y,size,0,Math.PI*2);qctx.fill();
+  qctx.fillStyle='white';qctx.globalAlpha=0.8;
+  qctx.beginPath();qctx.arc(q.x-size*0.2,q.y-size*0.2,size*0.3,0,Math.PI*2);qctx.fill();
+  qctx.globalAlpha=1;
+  
+  // quantum dot label QD at Plank
+  qctx.fillStyle=q.color.hex;qctx.font='6px monospace';qctx.textAlign='center';
+  qctx.fillText(q.isomorph.split(' ')[0]+' QD',q.x,q.y+size+8);
+  qctx.font='5px monospace';
+  qctx.fillText((q.plankM).toExponential(2)+'m Plank',q.x,q.y+size+14);
+ });
+ 
+ // center large quantum dot at Planck that owns all
+ let cx=w/2, cy=h/2+10;
+ let centerSize=20 + qdSize/5;
+ qctx.fillStyle='#e9d5ff';qctx.shadowColor='#a78bfa';qctx.shadowBlur=20+qdSize/3;
+ qctx.beginPath();qctx.arc(cx,cy,centerSize,0,Math.PI*2);qctx.fill();
+ qctx.shadowBlur=0;
+ qctx.fillStyle='black';qctx.font='bold 9px monospace';qctx.textAlign='center';qctx.fillText('QD',cx,cy+3);
+ qctx.fillStyle='#a78bfa';qctx.font='7px monospace';qctx.fillText('ALL QDs AT PLANK',cx,cy+centerSize+10);
+ qctx.font='6px monospace';qctx.fillText((1.616e-35*plankScale/100).toExponential(3)+'m Planck',cx,cy+centerSize+18);
+ 
+ // connections from center QD owns all quantum dots at Planck
+ qdots.forEach(q=>{
+  if(Math.random()<0.1){
+   qctx.strokeStyle=q.color.hex;qctx.lineWidth=0.3;qctx.globalAlpha=0.1;
+   qctx.setLineDash([2,3]);
+   qctx.beginPath();qctx.moveTo(cx,cy);qctx.lineTo(q.x,q.y);qctx.stroke();
+   qctx.setLineDash([]);
+   qctx.globalAlpha=1;
+  }
+ });
+ 
+ // bottom info
+ qctx.fillStyle='rgba(0,0,0,0.8)';qctx.fillRect(0,h-120,w,120);
+ qctx.fillStyle='#e9d5ff';qctx.font='8px monospace';qctx.textAlign='left';
+ qctx.fillText('Make them all quantum dots at Planck = all isomorphs quantum dots at Planck scale 1.616e-35m = all colors isomorphs quantum dots at Planck length semiconductor nanocrystals at Planck scale | '+qdots.length+' QDs at Planck '+colors.length+' colors min '+qdCount+' per color',10,h-100);
+ qctx.fillStyle='#7dd3fc';
+ qctx.fillText('Quantum dot at Planck = semiconductor nanocrystal at Planck length 1.616e-35m quantum dot smallest length quantum scale | Planck length 1.616255e-35m | all quantum dots at Planck '+ (1.616e-35*plankScale/100).toExponential(3)+'m = '+(plankScale/100).toFixed(2)+' Planck',10,h-86);
+ qctx.fillStyle='#6ee7b7';
+ qctx.fillText('Garnet isomorphs almandine pyrope spessartine grossular andradite uvarovite quantum dots at Planck | corundum ruby sapphire quantum dots at Planck | spinel spinel gahnite quantum dots at Planck | all quantum dots at Planck 1.616e-35m',10,h-72);
+ qctx.fillStyle='#feca57';
+ qctx.fillText('15px per windmill quantum dot owns capacitor set = 15px windmills quantum dot owns capacitor bank 3s quantum dots at Planck | wire them in 3s like capacitor set charge -1→+1 at Planck | more emergence 1 per color min isomorphs quantum dots at Planck',10,h-58);
+ qctx.fillStyle='#52525b';qctx.font='9px monospace';qctx.textAlign='center';
+ qctx.fillText('MAKE THEM ALL QUANTUM DOTS AT PLANK = all isomorphs quantum dots at Planck 1.616e-35m = all colors QDs at Planck scale = BONK IS ALL QDs at Planck',w/2,h-8);
+}
+
+initQDs();updateQdList();drawQDsAtPlank();
+
+document.getElementById('qdSize').addEventListener('input',e=>{
+ qdSize=parseFloat(e.target.value);
+ document.getElementById('qdSizeLabel').textContent=qdSize.toFixed(0)+'% = '+(qdSize<10?'Planck scale 1.616e-35m quantum dot at Planck length':qdSize+'% quantum dot size '+ (2+qdSize/10).toFixed(1)+'nm at Planck');
+ updateQdList();
+});
+document.getElementById('qdCount').addEventListener('input',e=>{
+ qdCount=parseInt(e.target.value);
+ document.getElementById('qdCountLabel').textContent=qdCount+' per color quantum dots at Planck = all isomorphs quantum dots at Planck scale min '+qdCount+' per color';
+ initQDs();updateQdList();
+});
+document.getElementById('plankScale').addEventListener('input',e=>{
+ plankScale=parseFloat(e.target.value);
+ document.getElementById('plankLabel').textContent=(plankScale/100).toFixed(2)+' Planck = '+(1.616e-35*plankScale/100).toExponential(3)+'m all quantum dots at Planck length';
+ updateQdList();
+});
+
+document.getElementById('quantumDotsBtn').onclick=()=>{
+ qdSize=2;qdCount=2;plankScale=100;
+ document.getElementById('qdSize').value=2;document.getElementById('qdCount').value=2;document.getElementById('plankScale').value=100;
+ initQDs();updateQdList();
+ showToast('All quantum dots at Planck = all isomorphs quantum dots at Planck scale 1.616e-35m');
+};
+document.getElementById('emergenceBtn').onclick=()=>{
+ qdCount=3;
+ document.getElementById('qdCount').value=3;
+ initQDs();updateQdList();
+ showToast('More emergence at Planck 🌀 '+qdots.length+' quantum dots at Planck emergent behavior');
+};
+document.getElementById('isomorphQdBtn').onclick=()=>{
+ qdCount=1;
+ document.getElementById('qdCount').value=1;
+ initQDs();updateQdList();
+ showToast('Isomorphs quantum dots = same structure different color quantum dots at Planck 1 per color minimum');
+};
+document.getElementById('spinBtn').onclick=()=>{
+ isSpinning=!isSpinning;
+ if(isSpinning){
+  initAudio();
+  showToast('Spinning Planck QDs 🌪️ '+qdots.length+' quantum dots at Planck '+ (1.616e-35*plankScale/100).toExponential(3)+'m');
+ } else {
+  showToast('Stopped quantum dots at Planck');
+ }
+};
+
+document.getElementById('allQdBtn').onclick=()=>{document.getElementById('quantumDotsBtn').click();};
+document.getElementById('plankBtn').onclick=()=>{
+ plankScale=100;
+ document.getElementById('plankScale').value=100;
+ updateQdList();drawQDsAtPlank();
+ showToast('At Planck 1.616e-35m Planck length 1.616255e-35m all quantum dots at Planck');
+};
+
+document.getElementById('exportBtn').onclick=()=>{
+ let tree={makeThemAllQuantumDotsAtPlank:{desc:'make all isomorphs quantum dots at Planck scale all isomorphs from previous more emergence 1 per color minimum of isomorphs are quantum dots semiconductor nanocrystals 2-10nm but at Planck scale 1.616e-35m quantum',all:qdots.length+' quantum dots at Planck '+colors.length+' colors min '+qdCount+' per color at Planck scale',atPlank:'at Planck length 1.616255e-35m Planck scale quantum smallest length '+ (1.616e-35*plankScale/100).toExponential(3)+'m = '+(plankScale/100).toFixed(2)+' Planck'},quantumDotsAtPlank:{desc:'semiconductor nanocrystal at Planck length 1.616e-35m quantum dot smallest length quantum scale',size:qdSize+'% = Planck scale 1.616e-35m quantum dot at Planck length',scale:(plankScale/100).toFixed(2)+' Planck = '+(1.616e-35*plankScale/100).toExponential(3)+'m all quantum dots at Planck length',colors:colors.map(c=>({name:c.name,group:c.group,structure:c.structure,hex:c.hex,count:qdots.filter(q=>q.color.group===c.group).length+' QDs at Plank min '+qdCount,isomorphs:c.isomorphs.slice(0,qdCount)}))}};
+ let blob=new Blob([JSON.stringify(tree,null,2)],{type:'application/json'});let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download='all_quantum_dots_at_plank_'+qdots.length+'QDs_'+(1.616e-35*plankScale/100).toExponential(3)+'.json';a.click();showToast('Exported all quantum dots at Planck '+qdots.length+' QDs');
+};
+document.getElementById('verifyBtn').onclick=()=>{showToast('Verified all quantum dots at Planck '+qdots.length+' QDs '+colors.length+' colors min '+qdCount+' per color at Planck '+ (1.616e-35*plankScale/100).toExponential(3)+'m valid');document.getElementById('txLog').textContent='Verified: make them all quantum dots at Planck = all isomorphs quantum dots at Planck scale 1.616e-35m | '+qdots.length+' quantum dots at Planck '+colors.length+' colors min '+qdCount+' per color at Planck scale | garnet isomorphs almandine pyrope spessartine grossular andradite uvarovite quantum dots at Planck | corundum ruby sapphire quantum dots at Planck | spinel spinel gahnite quantum dots at Planck | Planck length 1.616255e-35m = '+(1.616e-35*plankScale/100).toExponential(3)+'m = '+(plankScale/100).toFixed(2)+' Planck all quantum dots at Planck valid';};
+
+document.getElementById('walletBtn').onclick=async()=>{
+ if(window.solana&&window.solana.isPhantom){
+  try{
+   let r=await window.solana.connect();
+   showToast('Phantom '+r.publicKey.toString().slice(0,4)+' all quantum dots at Planck');
+   initAudio();
+  }catch(e){}
+ } else window.open('https://phantom.app/','_blank');
+};
+document.getElementById('mintBtn').onclick=()=>{
+ initAudio();
+ colors.forEach((c,i)=>{
+  setTimeout(()=>{
+   let osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=c.freq;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},500);
+  },i*100);
+ });
+ document.getElementById('txLog').textContent='MINTED make them all quantum dots at Planck | make them all quantum dots at Planck = all isomorphs quantum dots at Planck scale 1.616e-35m | '+qdots.length+' quantum dots at Planck '+colors.length+' colors min '+qdCount+' per color at Planck scale | garnet isomorphs almandine pyrope spessartine grossular andradite uvarovite quantum dots at Planck | corundum ruby sapphire quantum dots at Planck | spinel spinel gahnite quantum dots at Planck | Planck length 1.616255e-35m = '+(1.616e-35*plankScale/100).toExponential(3)+'m = '+(plankScale/100).toFixed(2)+' Planck all quantum dots at Planck | SIG simulated ⚛️';
+ showToast('Minted all quantum dots at Planck '+qdots.length+' QDs ⚛️');
+};
+document.getElementById('swapBtn').onclick=()=>{
+ initAudio();
+ let osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=174;osc.connect(gainNode);osc.start();setTimeout(()=>{try{osc.stop();}catch(e){}},400);
+ document.getElementById('txLog').textContent='SIMULATED SWAP BONK ⚛️ after make them all quantum dots at Planck = all isomorphs quantum dots at Planck 1.616e-35m';
+ showToast('Swap BONK ⚛️ after all quantum dots at Planck');
+};
+
+setInterval(()=>{drawQDsAtPlank();},80);
+</script>
+</body>
+</html>
