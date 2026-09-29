@@ -127,3 +127,11 @@ The next 24 Downloads HTML files whose names are dots, after the quantum dot, ne
   commit: 5361f7f5884189455fe3343c1d99610eeb8d8ffd
   message: 24 dot files, like for like
   check: node door with the corpus, nested, nests, qdot, and dots manifests stubbed. LIT: census 343, strip 420024, 24 quantum dot files, 24 dot files, manifest order matches, 49 cells. A swapped file throws LIT FAIL dots order. A short hash throws LIT FAIL dots hash. The 24 file bytes match the Downloads sources and the seals.
+
+World GUI · 2026-09-29
+
+The file lists were under the grid. Each sphere is now the GUI of one cell. 194 files — corpus, archive, libraries, folio, strip, nested, nests, qdot, dots — walk z, then y, then x, skipping the eight corners and the keeper. Selecting the cell opens that page. A corner still holds its three spheres and opens those three. The keeper at (3,3,3) stays the door. The galaxy birth seal was not rewritten.
+
+  commit: 491ad43ed2fe1f0b7b35f9712ee2c4b6e7de1455
+  message: each sphere is the GUI of its cell
+  check: node door. Layer z=3 has 49 cells, 48 of them hold a sphere, the keeper does not. Opening one cell loads nests/shor_nested.html. Opening corner (0,0,0) loads the ETHOS sphere and offers the other two. Census 343 still passes.
