@@ -71,3 +71,11 @@ Archive cube · 2026-09-29
   commit: 2b2b59a479b812cea00f18c883b7e8b8ad5bc071
   message: 24 archive corpora
   check: Edge loaded the door (24 archive links, census 343, ivory) and three spheres returned LIT: gutenberg, corpusjuriscivil01krueuoft, web_pdf_grobid_corpus_201906.
+
+Library cube · 2026-09-29
+
+24 spheres, one Internet Archive library each, three on each appeal. Each page fetches archive.org/metadata/<identifier> and throws unless the identifier, a title, and a mediatype come back. The holdings are not in the sphere. The galaxy birth seal was not rewritten.
+
+  commit: 835ba66b315e252adf7a34d6ba416da6897b1552
+  message: 24 library shelves
+  check: Edge loaded the door (24 library links, 24 archive links, 24 corpus files, census 343, ivory) and three spheres returned LIT: smithsonian, newspapers, knowledge-for-international-tripitaka.
