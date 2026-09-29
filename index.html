@@ -6,87 +6,183 @@
 <title>SaPpH{{i}}on — World 7 · 7^3</title>
 <style>
   :root {
-    --ink:#1a1230; --dim:#5c5470; --paper:#f7f1e6; --card:#fffaf3;
-    --sapphire:#1d4ed8; --rose:#be185d; --gold:#b45309; --leaf:#047857;
-    --line:rgba(26,18,48,.14);
+    --ink:#1c1730; --dim:#6d667c; --paper:#f3efe7; --card:#fffcf8;
+    --sapphire:#1e4fd7; --rose:#be185d; --gold:#b45309; --leaf:#0f766e;
+    --line:rgba(28,23,48,.12);
+    --serif:"Palatino Linotype", Palatino, Georgia, serif;
+    --sans:"Segoe UI Variable", "Segoe UI", ui-sans-serif, sans-serif;
+    --mono:ui-monospace, "Cascadia Mono", Consolas, monospace;
   }
   * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
   body {
     margin:0; color:var(--ink);
-    font:16px/1.5 "Segoe UI", ui-sans-serif, sans-serif;
-    background:
-      radial-gradient(920px 520px at 8% -10%, #c7d2fe, transparent 58%),
-      radial-gradient(820px 480px at 110% 0%, #fbcfe8, transparent 52%),
-      radial-gradient(760px 520px at 70% 110%, #fde68a, transparent 48%),
-      linear-gradient(165deg, #f8f1e4, #efe7f8 46%, #e7f0ff);
-    background-color:#f7f1e6;
+    font:16px/1.55 var(--sans);
+    background-color:var(--paper);
+    background-image:
+      radial-gradient(980px 460px at -8% -12%, #d9e2ff 0%, transparent 62%),
+      radial-gradient(760px 420px at 108% -8%, #f8d5e6 0%, transparent 58%),
+      radial-gradient(860px 480px at 78% 112%, #efe4bf 0%, transparent 52%);
     min-height:100vh;
   }
-  a { color:var(--sapphire); }
-  header, main { width:min(1080px, calc(100% - 32px)); margin:0 auto; }
-  header { padding:22px 0 8px; display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; }
-  .src { font:12px/1.4 ui-monospace, Consolas, monospace; color:var(--dim); }
-  h1 { margin:8px 0 0; font-size:clamp(28px, 5vw, 46px); letter-spacing:.04em; line-height:1.05; }
-  h1 span { color:var(--sapphire); }
-  .sub { max-width:68ch; margin:8px 0 0; }
-  .stamps { display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 6px; }
-  .stamp { display:inline-block; padding:3px 8px; border-radius:999px; font:11px/1.3 ui-monospace, Consolas, monospace; color:#fff; }
+  a { color:var(--sapphire); text-underline-offset:3px; }
+  header, main, footer { width:min(1180px, calc(100% - 40px)); margin:0 auto; }
+  header {
+    padding:36px 0 8px;
+    display:flex; justify-content:space-between; align-items:flex-end; gap:24px;
+  }
+  .eyebrow, .door-note {
+    margin:0; font:12px/1.4 var(--mono); letter-spacing:.04em; color:var(--dim);
+  }
+  h1 {
+    margin:10px 0 0;
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(44px, 7vw, 76px);
+    letter-spacing:-.035em;
+    line-height:.92;
+  }
+  h1 span { color:var(--sapphire); font-style:italic; }
+  .lede { margin:14px 0 0; max-width:36ch; font-size:18px; color:var(--ink); }
+  .stamps { display:flex; flex-wrap:wrap; gap:8px; margin:22px 0 0; }
+  .stamp {
+    display:inline-block; padding:4px 9px; border-radius:999px;
+    font:11px/1.3 var(--mono); letter-spacing:.04em; color:#fff;
+  }
   .lit { background:var(--leaf); }
   .amber { background:var(--gold); }
   .wall { background:var(--rose); }
-  .layout { display:grid; grid-template-columns:auto 1fr; gap:22px; align-items:start; margin:18px 0 28px; }
-  @media (max-width:800px) { .layout { grid-template-columns:1fr; } }
-  .board, .card, .seat, .read { background:var(--card); border:1px solid var(--line); border-radius:18px; }
-  .board { padding:14px; }
-  .toolbar { display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:10px; font:13px ui-monospace, Consolas, monospace; }
-  input[type=range] { width:180px; accent-color:var(--sapphire); }
-  .grid { display:grid; grid-template-columns:repeat(7, 42px); gap:4px; }
-  @media (max-width:420px) { .grid { grid-template-columns:repeat(7, 34px); } }
+  .layout {
+    display:grid; grid-template-columns:minmax(300px, 440px) minmax(0, 1fr);
+    gap:18px; align-items:start; margin:18px 0 28px;
+  }
+  @media (max-width:860px) {
+    header { flex-direction:column; align-items:flex-start; padding-top:24px; }
+    .layout { grid-template-columns:1fr; }
+    header, main, footer { width:min(1180px, calc(100% - 28px)); }
+  }
+  .board, .card, .seat, .read {
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:24px;
+    box-shadow:0 18px 50px rgba(28,23,48,.06);
+  }
+  .board, .card { padding:18px; }
+  .toolbar {
+    display:flex; gap:14px; align-items:center; justify-content:space-between;
+    flex-wrap:wrap; margin-bottom:14px;
+  }
+  .layer { display:flex; align-items:center; gap:10px; font:12px var(--mono); color:var(--dim); }
+  .layer output {
+    min-width:1.2em; font-family:var(--serif); font-size:28px; color:var(--ink); line-height:1;
+  }
+  input[type=range] { width:148px; accent-color:var(--sapphire); }
+  #pop { font:12px/1.4 var(--mono); color:var(--dim); }
+  .grid { display:grid; grid-template-columns:repeat(7, 1fr); gap:7px; }
+  button { font:inherit; color:inherit; }
   .cell {
-    width:100%; aspect-ratio:1; border-radius:8px; border:1px solid transparent;
-    font:10px ui-monospace, Consolas, monospace; cursor:pointer; color:var(--ink);
+    width:100%; aspect-ratio:1; padding:0; border:0; border-radius:14px;
+    font:11px/1 var(--mono); letter-spacing:.06em; cursor:pointer; color:var(--ink);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.75);
+    transition:transform .14s ease, box-shadow .14s ease;
   }
-  .cell.corner { background:#fbcfe8; }
-  .cell.edge { background:#fde68a; }
-  .cell.face { background:#bfdbfe; }
-  .cell.interior { background:#e9d5ff; }
-  .cell.keeper { background:#fbbf24; box-shadow:inset 0 0 0 2px var(--gold); }
-  .cell.on { outline:2px solid var(--ink); outline-offset:1px; }
-  .cell.held { box-shadow:inset 0 0 0 2px var(--sapphire); }
-  .gui-nav { display:flex; flex-wrap:wrap; gap:8px; margin:8px 0; }
+  .cell:hover { transform:translateY(-1px); }
+  .cell.corner { background:#f7c6dc; font-weight:650; }
+  .cell.edge { background:#f6e3a4; }
+  .cell.face { background:#c9ddfb; }
+  .cell.interior { background:#e4d4fb; }
+  .cell.keeper {
+    background:linear-gradient(160deg, #ffe08a, #f5b942);
+    font-family:var(--serif); font-style:italic; font-size:18px; letter-spacing:0;
+  }
+  .cell.held { box-shadow:inset 0 0 0 2px var(--sapphire), inset 0 1px 0 rgba(255,255,255,.75); }
+  .cell.on { outline:2px solid var(--ink); outline-offset:3px; }
+  .cell.keeper.on { outline-color:var(--gold); }
+  @media (prefers-reduced-motion:reduce) {
+    html { scroll-behavior:auto; }
+    .cell, .cell:hover { transition:none; transform:none; }
+  }
+  .card h2 {
+    margin:0; font-family:var(--serif); font-weight:500; font-size:clamp(26px, 3vw, 34px);
+    letter-spacing:-.03em; line-height:1.05;
+  }
+  .card .mono { margin:8px 0 0; color:var(--dim); }
+  .gui-nav { display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 0; }
   .gui-nav button {
-    font:12px ui-monospace, Consolas, monospace; padding:4px 8px; border-radius:8px;
-    border:1px solid var(--line); background:#fff; color:var(--ink); cursor:pointer;
+    font:12px/1 var(--sans); padding:8px 12px; border-radius:999px;
+    border:1px solid var(--line); background:#fff; cursor:pointer;
   }
-  .gui { width:100%; height:min(68vh, 560px); border:1px solid var(--line); border-radius:12px; background:var(--card); }
-  @media (max-width:800px) { .gui { height:52vh; } }
-  .card { padding:14px 16px; }
-  .card h2 { margin:0 0 6px; font-size:16px; letter-spacing:.08em; }
-  .mono { font:13px/1.45 ui-monospace, Consolas, monospace; }
-  .legend { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; font-size:12px; }
-  .sw { display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:4px; vertical-align:middle; }
-  .seats { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:10px; margin:0 0 22px; }
-  .seat { padding:12px 14px; }
-  .seat b { letter-spacing:.08em; }
-  .seat a { display:block; font-size:14px; margin-top:4px; }
-  .corpus { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:8px; margin:0 0 22px; }
-  .corpus a, .archive a, .libraries a, .folio a, .strip a, .nested a, .nests a, .qdot a, .dots a, .next a { display:block; padding:8px 10px; font-size:13px; }
-  .seat .addr { color:var(--dim); font:12px ui-monospace, Consolas, monospace; }
-  .read { padding:14px 16px; margin:0 0 14px; }
-  .read h2 { margin:0 0 8px; font-size:15px; letter-spacing:.12em; }
-  .read p { margin:8px 0; }
+  .gui-nav button:hover { border-color:var(--sapphire); color:var(--sapphire); }
+  .gui-wait {
+    margin:14px 0 0; min-height:320px; border-radius:18px;
+    display:grid; place-items:center; text-align:center; padding:32px 22px;
+    color:var(--dim);
+    border:1px dashed rgba(30,79,215,.35);
+    background:
+      radial-gradient(360px 160px at 50% 0%, rgba(217,226,255,.95), transparent 72%),
+      #fff;
+  }
+  .gui-wait[hidden] { display:none; }
+  .gui {
+    width:100%; height:min(74vh, 720px); margin-top:14px;
+    border:0; border-radius:18px; background:#fff;
+    box-shadow:0 16px 40px rgba(28,23,48,.08);
+  }
+  .gui[hidden] { display:none; }
+  @media (max-width:860px) {
+    .gui { height:62vh; }
+    .gui-wait { min-height:220px; }
+    .cell { border-radius:10px; }
+  }
+  .mono { font:13px/1.5 var(--mono); }
+  .legend { display:flex; flex-wrap:wrap; gap:10px 14px; margin-top:14px; font-size:12px; color:var(--dim); }
+  .sw { display:inline-block; width:11px; height:11px; border-radius:4px; margin-right:5px; vertical-align:-1px; }
+  .sw.held { background:#fff; box-shadow:inset 0 0 0 2px var(--sapphire); }
+  .census { max-width:78ch; margin:0 0 28px; color:var(--dim); }
+  main > h2 {
+    margin:32px 0 8px; font:650 12px/1.2 var(--sans);
+    letter-spacing:.18em; color:var(--dim);
+  }
+  .sub { max-width:68ch; margin:0 0 12px; color:var(--dim); }
+  .seats { display:grid; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr)); gap:12px; margin:0 0 8px; }
+  .seat { padding:16px 16px 14px; }
+  .seat b { letter-spacing:.12em; font-size:13px; }
+  .seat a { display:block; margin-top:6px; text-decoration:none; }
+  .seat a:hover { text-decoration:underline; }
+  .seat .addr { color:var(--dim); font:12px/1.4 var(--mono); margin:4px 0 6px; }
+  .corpus, .archive, .libraries, .folio, .strip, .nested, .nests, .qdot, .dots, .next {
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
+    gap:8px; margin:0 0 8px;
+  }
+  .corpus a, .archive a, .libraries a, .folio a, .strip a, .nested a, .nests a, .qdot a, .dots a, .next a {
+    display:block; padding:11px 12px; border-radius:14px;
+    background:rgba(255,252,248,.8); border:1px solid var(--line);
+    color:var(--ink); text-decoration:none; font-size:13.5px; line-height:1.35;
+  }
+  .corpus a:hover, .archive a:hover, .libraries a:hover, .folio a:hover, .strip a:hover,
+  .nested a:hover, .nests a:hover, .qdot a:hover, .dots a:hover, .next a:hover {
+    border-color:var(--sapphire); background:#fff;
+  }
+  .fold {
+    display:block; width:fit-content; max-width:100%;
+    padding:12px 14px; border-radius:14px; background:#fff; border:1px solid var(--line);
+    font-size:15px; letter-spacing:.03em;
+  }
+  .read { padding:22px 22px 18px; margin:28px 0 18px; }
+  .read h2 { margin:0 0 12px; font:650 12px/1.2 var(--sans); letter-spacing:.18em; color:var(--dim); }
+  .read p { margin:12px 0; }
   #fault { display:none; }
-  footer { width:min(1080px, calc(100% - 32px)); margin:0 auto 36px; color:var(--dim); font-size:13px; }
+  footer { margin-bottom:48px; color:var(--dim); font-size:13px; }
 </style>
 </head>
 <body>
 <header>
   <div>
-    <div class="src"><a href="https://0root.ai/">0root.ai</a> · world 7 · order 7^3 · galaxy door · 24 spheres</div>
+    <p class="eyebrow"><a href="https://0root.ai/">0root.ai</a> · world 7 · order 7^3 · galaxy door · 24 spheres</p>
     <h1>SaPpH<span>{{i}}</span>on</h1>
-    <p class="sub">World 7 is the cube of 7. This page is the galaxy door: it counts the cube and throws if the count is wrong. A galaxy holds 24 spheres, three on each corner seat. Beside those seats are four more cubes of 24: a Downloads copy, an Internet Archive cube, a library cube, and a folio cube that alternates article and thought. A nested strip holds two spheres, minus-plus and plus-minus, offset 1, 2, 1, 2, 1, 2. Four mirrors close on the one-sided number 420024. A nested cube holds 24 files copied unchanged from Downloads, the newest nested cubes and nests, numbered copies skipped. A further nest holds the next 24. A quantum dot holds 24 files whose names say quantum, and the plant page says the payloads converge there. A dot cube holds the next 24. A next cube holds 24 files whose names say next. Select a cell and that sphere is the GUI.</p>
+    <p class="lede">Select a cell. That sphere is the GUI.</p>
   </div>
-  <div class="src">door number 7 · assigned<br>palindrome of five · unchanged</div>
+  <p class="door-note">door number 7 · assigned<br>palindrome of five · unchanged</p>
 </header>
 <main>
   <div class="stamps" id="stamps">
@@ -98,76 +194,81 @@
   <div class="layout">
     <div class="board">
       <div class="toolbar">
-        <label>layer z <output id="zout">3</output>
-          <input id="z" type="range" min="0" max="6" value="3">
+        <label class="layer">layer
+          <output id="zout">3</output>
+          <input id="z" type="range" min="0" max="6" value="3" aria-label="layer z">
         </label>
         <span id="pop"></span>
       </div>
       <div class="grid" id="grid" role="grid" aria-label="One layer of the 7 by 7 by 7 cube"></div>
       <div class="legend">
-        <span><i class="sw" style="background:#fbbf24"></i>keeper</span>
-        <span><i class="sw" style="background:#fbcfe8"></i>corner</span>
-        <span><i class="sw" style="background:#fde68a"></i>edge</span>
-        <span><i class="sw" style="background:#bfdbfe"></i>face</span>
-        <span><i class="sw" style="background:#e9d5ff"></i>interior</span>
+        <span><i class="sw" style="background:#f5b942"></i>keeper</span>
+        <span><i class="sw" style="background:#f7c6dc"></i>corner</span>
+        <span><i class="sw" style="background:#f6e3a4"></i>edge</span>
+        <span><i class="sw" style="background:#c9ddfb"></i>face</span>
+        <span><i class="sw" style="background:#e4d4fb"></i>interior</span>
+        <span><i class="sw held"></i>sphere</span>
       </div>
     </div>
     <div class="card" id="inspect">
       <h2 id="iname">center</h2>
       <p class="mono" id="ibody"></p>
       <div class="gui-nav" id="guinav"></div>
+      <p class="gui-wait" id="guiwait">Choose a held cell. Its sphere fills this frame. The keeper at the center is this door.</p>
       <iframe class="gui" id="gui" title="The sphere on this cell" hidden></iframe>
     </div>
   </div>
 
-  <h2 style="font-size:14px;letter-spacing:.16em;margin:0 0 10px">EIGHT CORNER SEATS</h2>
+  <p class="census">World 7 is the cube of 7. This page is the galaxy door: it counts the cube and throws if the count is wrong. A galaxy holds 24 spheres, three on each corner seat. Beside those seats are four more cubes of 24: a Downloads copy, an Internet Archive cube, a library cube, and a folio cube that alternates article and thought. A nested strip holds two spheres, minus-plus and plus-minus, offset 1, 2, 1, 2, 1, 2. Four mirrors close on the one-sided number 420024. A nested cube holds 24 files copied unchanged from Downloads, the newest nested cubes and nests, numbered copies skipped. A further nest holds the next 24. A quantum dot holds 24 files whose names say quantum, and the plant page says the payloads converge there. A dot cube holds the next 24. A next cube holds 24 files whose names say next. Select a cell and that sphere is the GUI.</p>
+
+  <h2>EIGHT CORNER SEATS</h2>
   <div class="seats" id="seats"></div>
 
-  <h2 style="font-size:14px;letter-spacing:.16em;margin:0 0 10px">CORPUS BATCH · 24</h2>
-  <p class="sub" style="margin:0 0 10px">Like for like from Downloads. The bytes are the source files. They are not the 24 corner spheres.</p>
+  <h2>CORPUS BATCH · 24</h2>
+  <p class="sub">Like for like from Downloads. The bytes are the source files. They are not the 24 corner spheres.</p>
   <div class="corpus" id="corpus"></div>
   <p class="mono" id="corpuscard"></p>
 
-  <h2 style="font-size:14px;letter-spacing:.16em;margin:0 0 10px">ARCHIVE CUBE · 24</h2>
-  <p class="sub" style="margin:0 0 10px">One Internet Archive corpus to a sphere. Each sphere asks archive.org for its identifier and throws if the answer does not match. These are not the corner seats.</p>
+  <h2>ARCHIVE CUBE · 24</h2>
+  <p class="sub">One Internet Archive corpus to a sphere. Each sphere asks archive.org for its identifier and throws if the answer does not match. These are not the corner seats.</p>
   <div class="archive" id="archive"></div>
 
-  <h2 style="font-size:14px;letter-spacing:.16em;margin:18px 0 10px">LIBRARY CUBE · 24</h2>
-  <p class="sub" style="margin:0 0 10px">One Internet Archive library to a sphere. Each sphere asks archive.org for its identifier and throws if the answer does not match. These are not the corner seats, and they are not the archive cube.</p>
+  <h2>LIBRARY CUBE · 24</h2>
+  <p class="sub">One Internet Archive library to a sphere. Each sphere asks archive.org for its identifier and throws if the answer does not match. These are not the corner seats, and they are not the archive cube.</p>
   <div class="libraries" id="libraries"></div>
 
-  <h2 style="font-size:14px;letter-spacing:.16em;margin:18px 0 10px">FOLIO CUBE · 24</h2>
-  <p class="sub" style="margin:0 0 10px">Article, thought, article, thought. Twelve spheres cite one Internet Archive article and throw if the identifier does not match. Twelve spheres are original thoughts and throw if their arithmetic fails. These are not the corner seats.</p>
+  <h2>FOLIO CUBE · 24</h2>
+  <p class="sub">Article, thought, article, thought. Twelve spheres cite one Internet Archive article and throw if the identifier does not match. Twelve spheres are original thoughts and throw if their arithmetic fails. These are not the corner seats.</p>
   <div class="folio" id="folio"></div>
 
-  <h2 style="font-size:14px;letter-spacing:.16em;margin:18px 0 10px">STRIP · 2</h2>
-  <p class="sub" style="margin:0 0 10px">Two spheres on one nested loop. Minus-plus stands on offset 1. Plus-minus stands on offset 2. The fold is the Fibonacci palindrome. Four mirrors carry 24 to 42, and 240042 to 420024.</p>
-  <p class="mono" id="foldline">l./1/1/2/3/5/8\8\5\3\2\1\1\.r</p>
+  <h2>STRIP · 2</h2>
+  <p class="sub">Two spheres on one nested loop. Minus-plus stands on offset 1. Plus-minus stands on offset 2. The fold is the Fibonacci palindrome. Four mirrors carry 24 to 42, and 240042 to 420024.</p>
+  <p class="mono fold" id="foldline">l./1/1/2/3/5/8\8\5\3\2\1\1\.r</p>
   <div class="strip" id="strip"></div>
   <p class="mono" id="stripcard"></p>
 
-  <h2 style="font-size:14px;letter-spacing:.16em;margin:18px 0 10px">NESTED CUBE · 24</h2>
-  <p class="sub" style="margin:0 0 10px">Like for like from the drive. Twenty-four nested cubes and nests, newest first, numbered copies skipped. The bytes are the source files.</p>
+  <h2>NESTED CUBE · 24</h2>
+  <p class="sub">Like for like from the drive. Twenty-four nested cubes and nests, newest first, numbered copies skipped. The bytes are the source files.</p>
   <div class="nested" id="nested"></div>
   <p class="mono" id="nestedcard"></p>
 
-  <h2 style="font-size:14px;letter-spacing:.16em;margin:18px 0 10px">FURTHER NEST · 24</h2>
-  <p class="sub" style="margin:0 0 10px">The next 24 Downloads files whose names are nests or cubes. Newest of what remained. Numbered copies skipped. The bytes are the source files.</p>
+  <h2>FURTHER NEST · 24</h2>
+  <p class="sub">The next 24 Downloads files whose names are nests or cubes. Newest of what remained. Numbered copies skipped. The bytes are the source files.</p>
   <div class="nests" id="nests"></div>
   <p class="mono" id="nestscard"></p>
 
-  <h2 style="font-size:14px;letter-spacing:.16em;margin:18px 0 10px">QUANTUM DOT · 24</h2>
-  <p class="sub" style="margin:0 0 10px">Like for like from Downloads. Twenty-four files whose names say quantum or qdot, newest first, numbered copies skipped. The eight sapphon quantum-dot files already in the corpus stay there. The immutable plant says the payloads converge at &gt;.&lt;0x::.</p>
+  <h2>QUANTUM DOT · 24</h2>
+  <p class="sub">Like for like from Downloads. Twenty-four files whose names say quantum or qdot, newest first, numbered copies skipped. The eight sapphon quantum-dot files already in the corpus stay there. The immutable plant says the payloads converge at &gt;.&lt;0x::.</p>
   <div class="qdot" id="qdot"></div>
   <p class="mono" id="qdotcard"></p>
 
-  <h2 style="font-size:14px;letter-spacing:.16em;margin:18px 0 10px">DOTS · 24</h2>
-  <p class="sub" style="margin:0 0 10px">The next 24 Downloads files whose names are dots. Newest of what remained after the quantum dot. Numbered copies skipped. The bytes are the source files.</p>
+  <h2>DOTS · 24</h2>
+  <p class="sub">The next 24 Downloads files whose names are dots. Newest of what remained after the quantum dot. Numbered copies skipped. The bytes are the source files.</p>
   <div class="dots" id="dots"></div>
   <p class="mono" id="dotscard"></p>
 
-  <h2 style="font-size:14px;letter-spacing:.16em;margin:18px 0 10px">NEXT · 24</h2>
-  <p class="sub" style="margin:0 0 10px">The 24 newest Downloads files whose names say next. Numbered copies skipped. The bytes are the source files.</p>
+  <h2>NEXT · 24</h2>
+  <p class="sub">The 24 newest Downloads files whose names say next. Numbered copies skipped. The bytes are the source files.</p>
   <div class="next" id="next"></div>
   <p class="mono" id="nextcard"></p>
 
@@ -300,12 +401,15 @@ function show(x, y, z) {
   var nav = document.getElementById("guinav");
   var gui = document.getElementById("gui");
   nav.innerHTML = "";
+  var wait = document.getElementById("guiwait");
   if (!d.pages.length) {
     gui.hidden = true;
     gui.removeAttribute("src");
+    if (wait) wait.hidden = false;
     return;
   }
   gui.hidden = false;
+  if (wait) wait.hidden = true;
   d.pages.forEach(function (p, i) {
     var b = document.createElement("button");
     b.type = "button";
@@ -340,7 +444,7 @@ function draw() {
     });
     grid.appendChild(btn);
   }
-  pop.textContent = "this layer · " + (tally.keeper ? "keeper " : "") + tally.corner + " corners · " + tally.edge + " edges · " + tally.face + " faces · " + tally.interior + " interior";
+  pop.textContent = "this layer · " + (tally.keeper ? "keeper · " : "") + tally.corner + " corners · " + tally.edge + " edges · " + tally.face + " faces · " + tally.interior + " interior";
   show(sel.x, sel.y, z);
 }
 
