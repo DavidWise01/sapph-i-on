@@ -135,3 +135,11 @@ The file lists were under the grid. Each sphere is now the GUI of one cell. 194 
   commit: 491ad43ed2fe1f0b7b35f9712ee2c4b6e7de1455
   message: each sphere is the GUI of its cell
   check: node door. Layer z=3 has 49 cells, 48 of them hold a sphere, the keeper does not. Opening one cell loads nests/shor_nested.html. Opening corner (0,0,0) loads the ETHOS sphere and offers the other two. Census 343 still passes.
+
+Next · 2026-09-29
+
+The 24 newest Downloads HTML files whose names say next. Numbered copies skipped. Seventeen older files remain in Downloads: Next-Aeon-Cycle, Next-Assembly-Full-Manifold, 88-Mph-Next, Next-Cycle-19-24-Third, Next-Cycle-14-18-After-WATER, V133-Lithium-Li-Next, V129-Next-Osmium-Os, V121-Next-Gen-All, V120-Next-Gen-Gen0, V119-Next-Gem-Emerald, V106-Next-Atomic-Stack, Integrated-One-Earth-Scalar-NEXT-EVO-FULL-ISOMORPH-ALL-ON, Integrated-One-Earth-Scalar-NEXT-EVO, Next-Set-After-Discoverer, Next-Body-System-128, Maybe-No-Balefire-Next, the_next_frontier. Copied unchanged into next/. The galaxy birth seal was not rewritten.
+
+  commit: ef54976d31b4cffc5f69ebc609173a983c743a1a
+  message: 24 next files, like for like
+  check: node door with the corpus, nested, nests, qdot, dots, and next manifests stubbed. LIT: census 343, strip 420024, 24 dot files, 24 next files, manifest order matches, 49 cells. Layer z=4 holds 27 spheres. Opening cell (3,0,4) loads next/Next-Evo-After-You-Are-Garden-Loop.html. Opening corner (0,0,0) loads the ETHOS sphere and offers the other two. A swapped file throws LIT FAIL next order. A short hash throws LIT FAIL next hash. The 24 file bytes match the Downloads sources and the seals.
