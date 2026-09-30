@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Midplanes — SaPpH{{i}}on</title>
+<style>
+  :root { --ink:#1a1230; --dim:#5c5470; --accent:#b45309; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; color:var(--ink);
+    font:16px/1.5 "Segoe UI", ui-sans-serif, sans-serif;
+    background:
+      radial-gradient(800px 420px at 0% 0%, color-mix(in srgb, var(--accent) 28%, white), transparent 60%),
+      radial-gradient(700px 420px at 100% 10%, #fde68a, transparent 55%),
+      linear-gradient(165deg, #f8f1e4, #f3e8ff 50%, #e7f0ff);
+    background-color:#f7f1e6; min-height:100vh;
+  }
+  a { color:var(--accent); }
+  header, main, footer { width:min(880px, calc(100% - 32px)); margin:0 auto; }
+  header { padding:22px 0 0; }
+  .src, .mono { font:13px/1.45 ui-monospace, Consolas, monospace; color:var(--dim); }
+  h1 { margin:8px 0 0; font-size:clamp(28px, 5vw, 44px); letter-spacing:.03em; }
+  .kicker { letter-spacing:.16em; font-size:12px; color:var(--accent); font-weight:700; }
+  .stage { background:#fffaf3; border:1px solid rgba(26,18,48,.14); border-radius:18px; padding:14px; margin:14px 0; display:flex; flex-wrap:wrap; gap:8px; align-items:flex-end; }
+  .stamp { display:inline-block; padding:2px 8px; border-radius:999px; font:11px ui-monospace, Consolas, monospace; color:#fff; }
+  .lit { background:#047857; } .amber { background:#b45309; } .wall { background:#be185d; }
+  .nav { display:flex; justify-content:space-between; gap:12px; margin:8px 0 18px; flex-wrap:wrap; }
+  .layer { display:grid; grid-template-columns:repeat(7, 12px); gap:2px; }
+  .cell { width:12px; height:12px; border-radius:3px; background:#efe6d6; display:block; }
+  .cell.on { background:var(--accent); }
+  .strip, .bars { display:flex; gap:4px; flex-wrap:wrap; align-items:flex-end; }
+  .dot { width:8px; height:8px; border-radius:99px; background:var(--accent); display:block; }
+  .bar { min-width:36px; background:var(--accent); border-radius:8px 8px 4px 4px; color:#fff; font:11px ui-monospace, Consolas, monospace; display:flex; align-items:flex-end; justify-content:center; padding:4px; }
+  .bar span { color:#fff; }
+  footer { color:var(--dim); font-size:13px; padding-bottom:28px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="src"><a href="../">SaPpH{{i}}on</a> · generative cube · sphere 19 of 24 · <a href="https://0root.ai/">0root.ai</a></div>
+  <div class="kicker">GENERATIVE</div>
+  <h1>The Midplanes</h1>
+  <p>The three midplanes together hold 127 cells, and 216 plus 127 is 343.</p>
+</header>
+<main>
+  <div class="nav">
+    <a href="the-octants.html">← The Octants</a>
+    <a href="the-layer-rim.html">The Layer Rim →</a>
+  </div>
+  <div class="stage" id="stage"></div>
+  <p class="mono" id="card"></p>
+  <p><span class="stamp lit">LIT</span> On load this page generates the figure and throws if the count is wrong.</p>
+  <p><span class="stamp amber">AMBER</span> This count was written for the generative cube on 2026-09-30. The page does not copy a Downloads file and it does not read its neighbors.</p>
+  <p><span class="stamp wall">WALL</span> A passing check is the count. It is not a claim about mind, physics, or authority.</p>
+</main>
+<footer>
+  David Lee Wise (ROOT0). Drafted by Grok (xAI) on 2026-09-30.
+  Birth seal d898250463859805fc950c9a7b5c595fcf929a26dc6b19d3c9c83d7b3f74126c. One host, <a href="https://davidwise01.github.io/sapph-i-on/generative/the-midplanes.html">this page</a>.
+</footer>
+<script>
+"use strict";
+function prove() {
+    var faults = [], hot = [], x, y, z, n = 0, ix = 0, iy = 0, iz = 0, ixy = 0, ixz = 0, iyz = 0, all = 0;
+    for (z = 0; z < 7; z++) for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+      var a = x === 3, b = y === 3, c = z === 3;
+      if (a) ix++; if (b) iy++; if (c) iz++;
+      if (a && b) ixy++; if (a && c) ixz++; if (b && c) iyz++;
+      if (a && b && c) all++;
+      if (a || b || c) { n++; hot.push(x + "," + y + "," + z); }
+    }
+    var union = ix + iy + iz - ixy - ixz - iyz + all;
+    if (ix !== 49 || iy !== 49 || iz !== 49) faults.push("plane");
+    if (ixy !== 7 || ixz !== 7 || iyz !== 7 || all !== 1) faults.push("meet");
+    if (union !== 127 || n !== 127 || n + 216 !== 343) faults.push("union");
+    return { faults: faults, hot: hot, detail: "The three midplanes together hold 127 cells, and 216 plus 127 is 343.", lines: ["union " + union] };
+  }
+var report = prove();
+function el(tag, cls, text) {
+  var n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text != null) n.textContent = text;
+  return n;
+}
+function finish(r) {
+  var card = document.getElementById("card");
+  if (!r || r.faults.length) {
+    var msg = (r && r.faults.join(", ")) || "no report";
+    card.innerHTML = "<span class='stamp wall'>WALL</span> LIT FAIL " + msg;
+    throw new Error("LIT FAIL " + msg);
+  }
+  card.innerHTML = "<span class='stamp lit'>LIT</span> " + r.detail;
+  draw(r);
+}
+finish(report);
+function draw(r) {
+  var stage = document.getElementById("stage");
+  if (r.hot) {
+    var set = {};
+    r.hot.forEach(function (k) { set[k] = 1; });
+    var z, y, x, layer, c;
+    for (z = 0; z < 7; z++) {
+      layer = el("div", "layer");
+      for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+        c = el("i", set[x + "," + y + "," + z] ? "cell on" : "cell");
+        layer.appendChild(c);
+      }
+      stage.appendChild(layer);
+    }
+  }
+  if (r.strips) {
+    r.strips.forEach(function (n) {
+      var strip = el("div", "strip");
+      for (var i = 0; i < n; i++) strip.appendChild(el("i", "dot"));
+      stage.appendChild(strip);
+    });
+  }
+  if (r.bars) {
+    var row = el("div", "bars");
+    var max = 1;
+    r.bars.forEach(function (b) { if (b.n > max) max = b.n; });
+    r.bars.forEach(function (b) {
+      var bar = el("div", "bar");
+      bar.style.height = Math.max(18, Math.round(b.n / max * 96)) + "px";
+      bar.appendChild(el("span", "", b.label));
+      row.appendChild(bar);
+    });
+    stage.appendChild(row);
+  }
+  (r.lines || []).forEach(function (line) { stage.appendChild(el("p", "mono", line)); });
+}
+</script>
+</body>
+</html>
