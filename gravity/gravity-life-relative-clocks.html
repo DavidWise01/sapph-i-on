@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>the life of gravity · relative clocks</title>
+<style>
+:root{--ground:#0b0c0e;--rule:#25282d;--ink:#E7E9EC;--dim:#8D939C;--far:#E7E9EC;--seat:#C9A0FF;--au:#D4AF37;--zero:#6FC3FF;--lit:#6FD08C;--amber:#F2A03D;--bad:#FF6B6B}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ground);color:var(--ink);font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.wrap{max-width:900px;margin:0 auto;padding:16px}
+.hd{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin:18px 0 8px}
+.hd:first-child{margin-top:0}
+.hd b{font-weight:400;letter-spacing:.2em;color:var(--dim);font-size:10px;text-transform:uppercase}
+.verdict{border:1px solid #3d3552;background:rgba(201,160,255,.05);border-radius:3px;padding:9px 11px;font-size:11.5px}
+canvas{display:block;width:100%;border:1px solid var(--rule);border-radius:3px;background:#07080a}
+.sp{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;align-items:center}
+.sp span.l{color:var(--dim);font-size:10px;letter-spacing:.1em;text-transform:uppercase}
+button{font:inherit;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:transparent;color:var(--seat);border:1px solid #4a3d66;padding:6px 9px;border-radius:2px;cursor:pointer}
+button.on{background:rgba(201,160,255,.15)}
+.ctl{display:grid;grid-template-columns:auto 1fr auto;gap:6px 10px;align-items:center;margin-top:8px}
+input[type=range]{width:100%;accent-color:var(--seat)}
+.val{font-size:11px;min-width:96px;text-align:right}
+.rd{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+.rd div{border:1px solid var(--rule);border-radius:3px;padding:6px 8px;min-width:0}
+.rd i{display:block;font-style:normal;font-size:9px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+.rd span{font-size:13px;overflow-wrap:anywhere}
+.tw{overflow-x:auto;margin-top:8px;border:1px solid var(--rule);border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:11px}
+th,td{padding:6px 8px;border-bottom:1px solid #1b1d21;text-align:left}
+th{color:var(--dim);font-weight:400;font-size:9px;letter-spacing:.1em;text-transform:uppercase}
+tr.on td{background:rgba(201,160,255,.08)}
+.lit{color:var(--lit)} .amb{color:var(--amber)} .bad{color:var(--bad)}
+#msg{margin-top:8px;font-size:11px;min-height:18px}
+.note{margin-top:10px;font-size:10.5px;color:var(--dim)} .note b{color:var(--ink);font-weight:400}
+.small{margin-top:8px;font-size:11px;border-left:2px solid var(--seat);padding-left:9px}
+@media(max-width:560px){ .rd{grid-template-columns:1fr 1fr} .ctl{grid-template-columns:1fr} .val{text-align:left} #tb td:nth-child(3),#tb th:nth-child(3){display:none} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hd"><b>R · the life of gravity</b><b>every clock relative to every other</b></div>
+  <div class="verdict">yes: the 13.8 billion ticks and the 26.5 laps are the count of a clock <b>far from all gravity</b>. sit anywhere else and your clock runs slower, and so your "today" lands somewhere else on the lap. on a neutron star, 13.8 billion far-away years are <b>11.2 billion</b> of yours: 21.5 laps, and your today is at 163°, mid-collapse (iron turning to element 0). hover at 1.01 × the edge of a black hole and it's <b>1.4 billion</b>: 2.6 laps, today at 229°, two dead stars spiralling toward the merge. on Earth's surface the difference is <b>9.6 years</b> in 13.8 billion. and every one of those clocks feels normal to whoever holds it; slowness only shows when you compare.</div>
+
+  <div class="hd"><b>pick a seat</b><b id="seatn">–</b></div>
+  <div class="sp"><button data-s="0">far away</button><button data-s="1" class="on">Earth</button><button data-s="2">Sun</button><button data-s="3">white dwarf</button><button data-s="4">neutron star</button><button data-s="5">black hole · 1.5 rs</button><button data-s="6">black hole · 1.01 rs</button></div>
+  <div class="ctl"><label for="r" style="color:var(--seat)">or hover at r / rs</label><input type="range" id="r" min="0" max="3" step="0.001" value="3"><span class="val" id="rv">–</span></div>
+  <canvas id="cv"></canvas>
+  <div class="sp"><button id="run">run 13.8 billion far-away ticks</button></div>
+  <div id="msg"></div>
+  <div class="rd">
+    <div><i>your clock rate</i><span id="f">–</span></div>
+    <div><i>your years, when far-away says 13.8 billion</i><span id="y">–</span></div>
+    <div><i>you fall behind by</i><span id="lag">–</span></div>
+    <div><i>your laps</i><span id="lp">–</span></div>
+    <div><i>your today on the lap</i><span id="td">–</span></div>
+    <div><i>far-away today</i><span>26.5 laps · 180° · element 0</span></div>
+    <div><i>how it feels to you</i><span>normal · 1 s per s</span></div>
+    <div><i>a galaxy seen 13.2 Gyr back</i><span>ticks 9.4× slow, to us</span></div>
+  </div>
+
+  <div class="hd"><b>the seats</b><b>√(1 − rs/r)</b></div>
+  <div class="tw"><table id="tb"></table></div>
+
+  <div class="note"><b>the rule.</b> a clock at distance r from a mass runs at √(1 − r<sub>s</sub>/r) of a clock far away. r<sub>s</sub> = 2GM/c² is the size at which light can't leave (8.9 mm for Earth, 3 km for the Sun, 4.1 km for 1.4 Suns). measured, not assumed: clocks a few floors apart disagree, and GPS satellites are corrected for it every day. <b>the seats.</b> Earth's surface runs 7 × 10⁻¹⁰ slow: 9.6 years lost over 13.8 billion. the Sun's surface: 29,000 years. a white dwarf: 3.6 million years. a neutron star: 2.6 billion years; it is 19% slow. hovering at 1.5 × the black-hole size costs 42%; at 1.01 ×, 90%. at the edge itself the clock stops, and the lap never turns. <b>your today moves.</b> the lap from the last pages is 521 million far-away years. a slow clock does fewer laps, so its "now" sits at a different station: the neutron-star seat is still mid-collapse (163°) when far-away reaches element 0 (180°). the black-hole seat at 1.01 rs is at 229° of its third lap, two dead stars spiralling toward the merge. <b>relative to everyone else.</b> nobody's clock is wrong. each runs one second per second for its owner, so none of them is the true one. far-away is just the seat with no gravity to subtract. <b>seen across the universe.</b> there's a second kind of slowing: light from a galaxy seen as it was 13.2 billion years ago has been stretched by the expanding universe (redshift ~8.4), so we watch its clocks run 9.4× slow. <b>stamps.</b> the formula and the Earth, Sun, white dwarf and neutron star numbers are LIT. the black-hole seats need a rocket to hover, and "sat there for 13.8 billion years" is a thought experiment: AMBER. the lap stations carry over from the last page: AMBER.</div>
+  <div class="small">small words: heavy things slow time down near them. on Earth it's tiny, a few years over the whole life of the universe. on a squashed star it's a fifth. right next to a black hole, time almost stops. but whoever is there feels normal; only when two people compare watches do they see the difference.</div>
+</div>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const G=6.67430e-11, C=299792458, MS=1.98847e30, T=13.8e9, LAPS=26.5;
+const fac=(M,R)=>Math.sqrt(1-2*G*M/(R*C*C));
+const SEATS=[['far away',1,'no mass'],['Earth surface',fac(5.9722e24,6.371e6),'r = 6,371 km · rs = 8.9 mm'],['Sun surface',fac(MS,6.957e8),'r = 696,000 km · rs = 3.0 km'],['white dwarf (Sirius B)',fac(1.02*MS,5.8e6),'r = 5,800 km · rs = 3.0 km'],['neutron star',fac(1.4*MS,12e3),'r = 12 km · rs = 4.1 km'],['black hole · 1.5 rs',Math.sqrt(1-1/1.5),'hovering, on a rocket'],['black hole · 1.01 rs',Math.sqrt(1-1/1.01),'hovering, on a rocket']];
+const STN=['cloud · birth','star is born','life','old age','death','element 0','two dead stars spiral','merge · decompress','kilonova','mixed into the next cloud'];
+let f=SEATS[1][1], name=SEATS[1][0], prog=1, anim=null;
+const yrs=x=>x>=1e9?(x/1e9).toFixed(3)+' billion':x>=1e6?(x/1e6).toFixed(2)+' million':x>=1e3?Math.round(x).toLocaleString():x.toFixed(1);
+function today(laps){ const d=((laps%1)*360+360)%360; return {d,st:STN[Math.floor((d+18)/36)%10]}; }
+function fit(cv){ const w=cv.clientWidth||600, h=Math.round(Math.max(250,Math.min(w*0.42,320))), d=window.devicePixelRatio||1; cv.width=Math.round(w*d); cv.height=Math.round(h*d); cv.style.height=h+'px'; const g=cv.getContext('2d'); g.setTransform(d,0,0,d,0,0); return [g,w,h]; }
+function dial(g,x,y,r,laps,col,label,sub){ g.strokeStyle='#25282d'; g.lineWidth=2; g.beginPath(); g.arc(x,y,r,0,7); g.stroke();
+  for(let i=0;i<10;i++){ const a=i/10*2*Math.PI-Math.PI/2; g.strokeStyle=i===5?'#6FC3FF':i===0?'#D4AF37':'#3a3e46'; g.beginPath(); g.moveTo(x+Math.cos(a)*r*0.86,y+Math.sin(a)*r*0.86); g.lineTo(x+Math.cos(a)*r,y+Math.sin(a)*r); g.stroke(); }
+  const a=(laps%1)*2*Math.PI-Math.PI/2; g.strokeStyle=col; g.lineWidth=3; g.beginPath(); g.moveTo(x,y); g.lineTo(x+Math.cos(a)*r*0.8,y+Math.sin(a)*r*0.8); g.stroke(); g.lineWidth=1;
+  g.fillStyle=col; g.font='bold 12px ui-monospace,monospace'; g.textAlign='center'; g.fillText(laps.toFixed(2)+' laps',x,y+r+18);
+  g.font='10px ui-monospace,monospace'; g.fillText(label,x,y-r-10); g.fillStyle='#8D939C'; g.fillText(sub,x,y+r+32); g.textAlign='left'; }
+function draw(){
+  const [g,W,H]=fit($('cv')), r=Math.min(W*0.18,H*0.3), far=LAPS*prog, me=LAPS*prog*f;
+  dial(g,W*0.27,H*0.47,r,far,'#E7E9EC','far away',yrs(T*prog)+' yr');
+  dial(g,W*0.73,H*0.47,r,me,'#C9A0FF',name.length>22?name.slice(0,22)+'…':name,yrs(T*prog*f)+' yr');
+  g.fillStyle='#8D939C'; g.font='9.5px ui-monospace,monospace'; g.fillText(W<520?'one lap per dial · gold = birth · blue = element 0':'dial = one lap (521 Myr far-away) · gold tick = birth · blue tick = element 0',8,H-8);
+}
+function render(){
+  const lapsMe=LAPS*f, t=today(lapsMe), lag=T*(1-f);
+  $('seatn').textContent=name; $('f').innerHTML=f===1?'1':(1-f<1e-3?'1 − '+(1-f).toExponential(2):f.toFixed(4));
+  $('y').textContent=yrs(T*f); $('lag').innerHTML=f===1?'0':(lag<1e3?lag.toFixed(1)+' years':yrs(lag)+' years');
+  $('lp').textContent=lapsMe.toFixed(3); $('td').innerHTML=`${t.d.toFixed(1)}° · ${t.st}`;
+  document.querySelectorAll('#tb tr[data-i]').forEach(tr=>tr.classList.toggle('on',SEATS[+tr.dataset.i][0]===name));
+  window.__REL__={name,f,years:T*f,lag,laps:lapsMe,deg:t.d,stage:t.st};
+  draw();
+}
+$('tb').innerHTML='<tr><th>seat</th><th>clock rate</th><th>where</th><th>behind, over 13.8 Gyr</th><th>laps · today</th></tr>'+SEATS.map((s,i)=>{ const lp=LAPS*s[1], t=today(lp), lag=T*(1-s[1]); return `<tr data-i="${i}"><td>${s[0]}</td><td>${s[1]===1?'1':(1-s[1]<1e-3?'1 − '+(1-s[1]).toExponential(2):s[1].toFixed(4))}</td><td>${s[2]}</td><td>${s[1]===1?'0':(lag<1e3?lag.toFixed(1)+' yr':yrs(lag)+' yr')}</td><td>${lp.toFixed(2)} · ${t.d.toFixed(0)}° ${t.st}</td></tr>`; }).join('');
+document.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{ const s=SEATS[+b.dataset.s]; f=s[1]; name=s[0]; document.querySelectorAll('[data-s]').forEach(q=>q.classList.toggle('on',q===b)); $('rv').textContent='–'; render(); });
+$('r').addEventListener('input',()=>{ const rr=Math.max(1.0001,1+(10**(+$('r').value)-1)/100); f=Math.sqrt(1-1/rr); name='hovering at '+rr.toFixed(4)+' rs'; $('rv').textContent=rr.toFixed(4)+' rs'; document.querySelectorAll('[data-s]').forEach(q=>q.classList.remove('on')); render(); });
+$('run').onclick=()=>{ cancelAnimationFrame(anim); const t0=performance.now(); const step=now=>{ prog=Math.min(1,(now-t0)/6000); draw(); if(prog<1) anim=requestAnimationFrame(step); else { const t=today(LAPS*f); $('msg').innerHTML=`far-away reaches 13.8 billion: 26.5 laps, element 0. your clock: ${(LAPS*f).toFixed(2)} laps, today at ${t.d.toFixed(0)}°, ${t.st}.`; } }; prog=0; anim=requestAnimationFrame(step); };
+addEventListener('resize',draw); render();
+})();
+</script>
+</body>
+</html>

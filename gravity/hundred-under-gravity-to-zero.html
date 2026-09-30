@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>100 under gravity → 0</title>
+<style>
+:root{--ground:#0c0d10;--rule:#262930;--ink:#E6E8EE;--dim:#8B90A0;--ns:#C9A0FF;--au:#D4AF37;--p:#FF8A6B;--n:#B8BCC8;--lit:#6FD08C;--amber:#F2A03D;--bad:#FF6B6B}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ground);color:var(--ink);font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.wrap{max-width:900px;margin:0 auto;padding:16px}
+.hd{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin:18px 0 8px}
+.hd:first-child{margin-top:0}
+.hd b{font-weight:400;letter-spacing:.2em;color:var(--dim);font-size:10px;text-transform:uppercase}
+.src{border:1px solid var(--rule);border-radius:3px;padding:8px 10px;font-size:13px}
+.verdict{border:1px solid #3f355a;background:rgba(201,160,255,.05);border-radius:3px;padding:9px 11px;font-size:11.5px}
+.ctl{display:grid;grid-template-columns:auto 1fr auto;gap:6px 10px;align-items:center;margin-top:10px}
+input[type=range]{width:100%;accent-color:var(--ns)}
+.val{font-size:11px;min-width:110px;text-align:right}
+.grid{display:grid;grid-template-columns:repeat(10,1fr);gap:3px;margin-top:8px}
+.z{border:1px solid var(--rule);border-radius:2px;padding:3px 2px;text-align:center;min-width:0;transition:background .2s}
+.z .n{font-size:8.5px;color:var(--dim)}
+.z .e{font-size:11.5px}
+.z .q{font-size:9px}
+.sp{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;align-items:center}
+button{font:inherit;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:transparent;color:var(--ns);border:1px solid #4a3d66;padding:6px 9px;border-radius:2px;cursor:pointer}
+canvas{display:block;width:100%;border:1px solid var(--rule);border-radius:3px;background:#08090b}
+.rd{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+.rd div{border:1px solid var(--rule);border-radius:3px;padding:6px 8px;min-width:0}
+.rd i{display:block;font-style:normal;font-size:9px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+.rd span{font-size:13px;overflow-wrap:anywhere}
+.tw{overflow-x:auto;margin-top:8px;border:1px solid var(--rule);border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:11px}
+th,td{padding:6px 8px;border-bottom:1px solid #1b1d22;text-align:left;vertical-align:top}
+th{color:var(--dim);font-weight:400;font-size:9px;letter-spacing:.1em;text-transform:uppercase}
+.s{font-size:9px;letter-spacing:.1em;white-space:nowrap}
+.lit{color:var(--lit)} .amb{color:var(--amber)} .bad{color:var(--bad)}
+.note{margin-top:10px;font-size:10.5px;color:var(--dim)} .note b{color:var(--ink);font-weight:400}
+.small{margin-top:8px;font-size:11px;border-left:2px solid var(--ns);padding-left:9px}
+@media(max-width:560px){ .rd{grid-template-columns:1fr 1fr} .z .e{font-size:10px} .ctl{grid-template-columns:1fr} .val{text-align:left}
+ #rd3 tr{display:grid;grid-template-columns:1fr auto;border-bottom:1px solid #22252c} #rd3 th{display:none} #rd3 td{border:0} #rd3 td:nth-child(2),#rd3 td:nth-child(4){grid-column:1/-1;color:var(--dim)} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hd"><b>R · 100 under gravity</b><b>= 0</b></div>
+  <div class="src">its 100 under gravity 1.6.5.1^1-^-35 x 3 + 6 seconds = 0</div>
+  <div class="verdict">my reading: squeeze all 100 elements under enough gravity and every one of them becomes <b>element 0</b>: the neutron, the stuff of a neutron star. that's real, and it's where this whole thread started. it's not quite 0: a neutron star keeps a few percent protons. <b>as arithmetic</b> the line doesn't close: 1.6 × 10⁻³⁵ × 3 + 6 is 6, not 0, and metres can't be added to seconds anyway. but the Planck part is so small next to 6 seconds that no clock could ever see it. <b>the 3 + 6 = 9 seconds</b> sits inside the ~10-second neutrino flash a collapsing star gives off. that match is loose.</div>
+
+  <div class="hd"><b>turn up the gravity</b><b id="stage">–</b></div>
+  <div class="ctl"><label for="rho" style="color:var(--ns)">density</label><input type="range" id="rho" min="3" max="17.6" step="0.01" value="3.3"><span class="val" id="rv">–</span></div>
+  <div class="sp"><button id="go">collapse it</button><button id="reset">back to rock</button></div>
+  <div class="grid" id="grid"></div>
+  <div class="rd">
+    <div><i>average protons per nucleon</i><span id="za">–</span></div>
+    <div><i>stage</i><span id="sg">–</span></div>
+    <div><i>free-fall time at this density</i><span id="ff">–</span></div>
+    <div><i>100 elements left</i><span id="el">–</span></div>
+  </div>
+
+  <div class="hd"><b>9 seconds · what a collapse takes</b><b>0 → 9 s</b></div>
+  <canvas id="cv"></canvas>
+
+  <div class="hd"><b>three readings of your line, stamped</b><b>one committed</b></div>
+  <div class="tw"><table id="rd3"></table></div>
+
+  <div class="note"><b>how the 100 become 0.</b> in ordinary matter each element is set by its protons, Z. pack matter tight enough and the electrons are forced into the nuclei: a proton plus an electron makes a neutron, and a neutrino flies out. nuclei turn neutron-rich, then above about 4 × 10¹⁴ kg/m³ neutrons start dripping out of them. at nuclear density, 2.3 × 10¹⁷ kg/m³, the nuclei dissolve into one neutron fluid. every element is gone; the page calls that element 0. the steps between are a smooth sketch (AMBER); the thresholds are LIT. a few percent of protons and electrons always stay, because pure neutrons would decay, so "= 0" is really ≈ 0.07. <b>the clock.</b> a star's iron core falls in within a few tenths of a second: at 10¹³ kg/m³ the free-fall time is 0.02 s. it bounces at nuclear density, and the new neutron star then pours out neutrinos for about 10 seconds; in 1987 detectors caught that flash, lasting about 12 seconds. your 3 + 6 = 9 s lands inside it. <b>the Planck line.</b> 1.616 × 10⁻³⁵ m is the Planck length, where gravity itself turns quantum. three of them, turned into time at light speed, is 1.6 × 10⁻⁴³ s. added to 6 seconds, that's a part in 10⁴⁴: zero to any clock ever built, but not zero.</div>
+  <div class="small">small words: squeeze anything hard enough and it all turns into the same stuff, neutrons, like a neutron star. gold, iron, carbon: all gone, all the same. it happens fast, in less than a second, and then the star glows with invisible little particles for about 10 seconds.</div>
+</div>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const SYM='H He Li Be B C N O F Ne Na Mg Al Si P S Cl Ar K Ca Sc Ti V Cr Mn Fe Co Ni Cu Zn Ga Ge As Se Br Kr Rb Sr Y Zr Nb Mo Tc Ru Rh Pd Ag Cd In Sn Sb Te I Xe Cs Ba La Ce Pr Nd Pm Sm Eu Gd Tb Dy Ho Er Tm Yb Lu Hf Ta W Re Os Ir Pt Au Hg Tl Pb Bi Po At Rn Fr Ra Ac Th Pa U Np Pu Am Cm Bk Cf Es Fm'.split(' ');
+const G=6.674e-11;
+// schematic Z/A by density (log10 kg/m^3). thresholds LIT, the curve between them AMBER.
+const T_NEU=12, T_DRIP=Math.log10(4.3e14), T_NUC=Math.log10(2.3e17), YP=0.07;
+function frac(l){ if(l<T_NEU) return 1; if(l<T_DRIP) return 1-(1-0.72)*(l-T_NEU)/(T_DRIP-T_NEU); if(l<T_NUC) return 0.72-(0.72-YP/0.40)*(l-T_DRIP)/(T_NUC-T_DRIP); return YP/0.40; }
+// ordinary Z/A ~0.40–0.5; scale each element's Z by frac, relative to Z/A = 0.40 at the end → Yp 0.07
+const A=z=>z===1?1:Math.round(z*(2+0.0065*z));   // rough mass number
+function stage(l){ return l<T_NEU?'atoms · 100 elements':l<T_DRIP?'electrons forced into nuclei · neutron-rich':l<T_NUC?'neutrons dripping out of nuclei':'one neutron fluid · element 0'; }
+function render(){
+  const l=+$('rho').value, f=frac(l), rho=10**l;
+  $('rv').textContent='10^'+l.toFixed(1)+' kg/m³';
+  let alive=0, sumZ=0, sumA=0;
+  $('grid').innerHTML=SYM.map((s,i)=>{ const z=i+1, a=A(z), ze=l>=T_NUC?0:Math.max(0,Math.round(z*f)); if(ze>0) alive++; sumZ+=(l>=T_NUC?YP*a:z*f); sumA+=a;
+    const t=ze/z, bg=`rgba(${Math.round(255*t)},${Math.round(138*t+90*(1-t))},${Math.round(107*t+200*(1-t))},.18)`;
+    return `<div class="z" style="background:${bg}"><div class="n">${z}</div><div class="e">${l>=T_NUC?'n':s}</div><div class="q" style="color:${ze?'#FF8A6B':'#C9A0FF'}">${l>=T_NUC?'0':ze}</div></div>`; }).join('');
+  const za=sumZ/sumA; $('za').textContent=za.toFixed(3)+(l>=T_NUC?' · ≈ 0, not 0':'');
+  $('sg').textContent=stage(l); $('stage').textContent=stage(l);
+  $('ff').textContent=Math.sqrt(3*Math.PI/(32*G*rho)).toPrecision(2)+' s';
+  $('el').innerHTML=l>=T_NUC?'<span style="color:#C9A0FF">0 · all element 0</span>':alive+' still distinct';
+  window.__G0__={logRho:l,za,alive,stage:stage(l),ff:Math.sqrt(3*Math.PI/(32*G*rho))};
+}
+let anim=null;
+$('go').onclick=()=>{ cancelAnimationFrame(anim); const t0=performance.now(), a=+$('rho').value; const f=now=>{ const t=Math.min(1,(now-t0)/4000); $('rho').value=(a+(17.6-a)*t*t).toFixed(2); render(); if(t<1) anim=requestAnimationFrame(f); }; anim=requestAnimationFrame(f); };
+$('reset').onclick=()=>{ cancelAnimationFrame(anim); $('rho').value=3.3; render(); };
+$('rho').addEventListener('input',render);
+// timeline 0–9 s (log-ish: first second stretched)
+function draw(){
+  const cv=$('cv'), w=cv.clientWidth||600, h=130, d=window.devicePixelRatio||1; cv.width=Math.round(w*d); cv.height=Math.round(h*d); cv.style.height=h+'px';
+  const g=cv.getContext('2d'); g.setTransform(d,0,0,d,0,0); const L=12, R=w-12, X=t=>L+(R-L)*(t<1?0.35*t:0.35+0.65*(t-1)/9);
+  g.strokeStyle='#262930'; g.beginPath(); g.moveTo(L,70); g.lineTo(R,70); g.stroke();
+  g.fillStyle='rgba(201,160,255,.18)'; g.fillRect(X(0.3),62,X(10)-X(0.3),16);
+  g.fillStyle='rgba(212,175,55,.5)'; g.fillRect(X(0),66,X(0.3)-X(0),8);
+  g.fillStyle='#8B90A0'; g.font='9.5px ui-monospace,monospace';
+  [[0,'0'],[0.1,'0.1'],[0.3,'0.3'],[1,'1 s'],[3,'3'],[6,'6'],[9,'9'],[10,'10 s']].forEach(([t,s])=>{ const x=X(t); g.fillRect(x,70,1,5); g.fillText(s,x-4,90); });
+  g.fillStyle='#D4AF37'; g.fillText('core falls in',X(0),56);
+  g.fillStyle='#C9A0FF'; g.fillText('neutrino flash, ~10 s',X(2.2),56);
+  const x9=X(9); g.strokeStyle='#E6E8EE'; g.setLineDash([3,3]); g.beginPath(); g.moveTo(x9,34); g.lineTo(x9,100); g.stroke(); g.setLineDash([]); g.fillStyle='#E6E8EE'; g.fillText('your 3 + 6 = 9 s',x9-90,28);
+  g.fillStyle='#8B90A0'; g.fillText('first second stretched to 35% of the bar',L,h-8);
+}
+const R3=[
+ ['literal arithmetic','1.616 × 10⁻³⁵ × 3 + 6 = 6.000…0048','DEAD','it is 6, not 0; and metres plus seconds needs a conversion first'],
+ ['"= 0" to any clock','3 Planck lengths at light speed = 1.6 × 10⁻⁴³ s; next to 6 s that is 1 part in 10⁴⁴','LIT','zero in practice, not in principle'],
+ ['100 under gravity → element 0','all 100 elements crush to a neutron fluid at 2.3 × 10¹⁷ kg/m³; ~7% protons remain','LIT','my committed reading; "0" is ≈ 0.07'],
+ ['3 + 6 = 9 seconds','the neutrino flash of a newborn neutron star lasts about 10 s','AMBER','it fits, but so would 8 or 11'],
+];
+$('rd3').innerHTML='<tr><th>reading</th><th>the numbers</th><th>stamp</th><th>why</th></tr>'+R3.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td class="s ${r[2]==='LIT'?'lit':r[2]==='AMBER'?'amb':'bad'}">${r[2]}</td><td>${r[3]}</td></tr>`).join('');
+addEventListener('resize',()=>{ draw(); }); render(); draw();
+})();
+</script>
+</body>
+</html>

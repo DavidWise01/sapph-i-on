@@ -1,0 +1,124 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Gravity Takes Gold Rips Hole White Sun Can't See Silver Relief</title><script src="https://cdn.tailwindcss.com"></script>
+<style>body{background:#000005;color:#e5e7eb;font-family:ui-monospace,monospace}canvas{background:#020208;border-radius:14px}.card{background:#0f0f0a;border:1px solid #444;border-radius:12px}</style>
+</head><body class="p-2">
+<h1 class="text-sm font-bold">Yeah gravity takes so gold, rips hole in gold white sun we cant see it from here sad, its all speculative to your gold dumb ass right, then that needs relief so punches up to us silver lol , about right</h1>
+<p class="text-xs text-zinc-400">Gravity → takes gold → rips hole in gold → white sun behind we can't see from here sad speculative → relief → punches up to us silver lol — about right — gold | ~~ | gold + silver relief — >.<0x::iso:: = 000 gravity gold hole white sun silver</p>
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-2 mt-2">
+  <div class="lg:col-span-3 card p-2"><canvas id="main" width="1240" height="760" class="w-full"></canvas><div class="flex gap-2 text-xs mt-2 flex-wrap"><span class="px-2 py-1 bg-yellow-700 rounded">gravity takes gold</span><span class="px-2 py-1 bg-black border border-yellow-600 rounded">rips hole in gold</span><span class="px-2 py-1 bg-white text-black rounded">white sun can't see sad</span><span class="px-2 py-1 bg-zinc-600 rounded">speculative to gold dumb ass</span><span class="px-2 py-1 bg-slate-300 text-black rounded">relief punches up silver lol</span></div></div>
+  <div class="card p-2 text-xs">
+    <div class="font-bold">Gravity Gold Hole White Sun Silver</div>
+    <div class="mt-2 p-2 bg-black rounded text-[10px] leading-4">
+      Yeah gravity<br>
+      takes so gold<br>
+      rips hole in gold<br><br>
+      White sun<br>
+      we cant see it<br>
+      from here sad<br>
+      behind gold<br>
+      speculative<br>
+      to your gold<br>
+      dumb ass right<br><br>
+      Then that needs<br>
+      relief<br>
+      so punches up<br>
+      to us silver lol<br>
+      about right<br><br>
+      Flow:<br>
+      gravity ↓<br>
+      gold sheet → hole<br>
+      white sun hidden<br>
+      speculative<br>
+      relief ↑<br>
+      silver punch up<br>
+      to us<br><br>
+      gold | ~~ hole | gold<br>
+      + silver relief<br>
+    </div>
+    <div id="log" class="p-2 bg-zinc-900 rounded h-36 overflow-y-auto text-[10px] mt-2"></div>
+    <button id="export" class="bg-emerald-700 px-2 py-1 rounded mt-2 w-full text-xs">Export Gravity Gold Silver JSON</button>
+  </div>
+</div>
+<script>
+function log(m){const l=document.getElementById('log'); l.innerHTML+=m+'<br>'; l.scrollTop=l.scrollHeight;}
+function draw(){
+  const canvas=document.getElementById('main'); const ctx=canvas.getContext('2d'); const w=canvas.width,h=canvas.height;
+  ctx.clearRect(0,0,w,h); ctx.fillStyle='#000005'; ctx.fillRect(0,0,w,h);
+  const cx=w/2,cy=h/2;
+  const time=Date.now()/900;
+  // stars
+  ctx.fillStyle='rgba(255,255,255,0.08)'; for(let i=0;i<200;i++){ctx.beginPath(); ctx.arc((i*173)%w,(i*271)%h,0.5,0,6.28); ctx.fill();}
+  const goldH=70;
+  const topY=80;
+  const foamY=topY+goldH;
+  const foamH=280;
+  const bottomY=foamY+foamH;
+  // gravity arrow takes gold
+  ctx.fillStyle='#facc15'; ctx.font='bold 10px monospace'; ctx.fillText('gravity takes ↓', 20, topY-12);
+  ctx.strokeStyle='#facc15'; ctx.beginPath(); ctx.moveTo(60, topY-20); ctx.lineTo(60, topY); ctx.stroke();
+  // top gold sheet with hole ripped
+  const gradTop=ctx.createLinearGradient(0,topY,0,topY+goldH);
+  gradTop.addColorStop(0,'#fef08a'); gradTop.addColorStop(0.5,'#eab308'); gradTop.addColorStop(1,'#fef08a');
+  ctx.fillStyle=gradTop; ctx.fillRect(80,topY,w-160,goldH);
+  // hole ripped in gold
+  const holeX=cx+Math.sin(time*0.5)*10;
+  const holeY=topY+goldH/2;
+  const holeR=34+Math.sin(time)*3;
+  // hole black with white sun behind peeking
+  ctx.fillStyle='#000'; ctx.beginPath(); ctx.arc(holeX,holeY,holeR,0,6.28); ctx.fill();
+  ctx.strokeStyle='#444'; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(holeX,holeY,holeR,0,6.28); ctx.stroke();
+  // white sun behind we cant see from here sad — speculative
+  // white sun hidden behind gold, only visible through hole, but we cant see from here
+  const sunGrad=ctx.createRadialGradient(holeX,holeY,2,holeX,holeY,holeR*3);
+  sunGrad.addColorStop(0,'#fff'); sunGrad.addColorStop(0.4,'#fefefe'); sunGrad.addColorStop(1,'rgba(255,255,255,0)');
+  ctx.fillStyle=sunGrad; ctx.globalAlpha=0.6+Math.sin(time)*0.2; ctx.beginPath(); ctx.arc(holeX,holeY,holeR*0.8,0,6.28); ctx.fill(); ctx.globalAlpha=1;
+  ctx.fillStyle='#000'; ctx.font='8px monospace'; ctx.fillText('white sun behind — cant see from here sad', holeX+holeR+8, holeY-4);
+  ctx.fillText('speculative to gold dumb ass', holeX+holeR+8, holeY+8);
+  // foam ~~ layer between gold sheets
+  ctx.fillStyle='rgba(20,20,10,0.9)'; ctx.fillRect(80,foamY,w-160,foamH);
+  // foam waves ~~
+  ctx.strokeStyle='rgba(250,204,21,0.12)'; ctx.lineWidth=1;
+  for(let y=0;y<foamH;y+=12){
+    ctx.beginPath();
+    for(let x=80;x<w-80;x+=6){
+      const wave=Math.sin(x*0.02+time*0.6+y*0.08)*4;
+      if(x==80) ctx.moveTo(x, foamY+y+wave);
+      else ctx.lineTo(x, foamY+y+wave);
+    }
+    ctx.stroke();
+  }
+  // bottom gold sheet
+  const gradBottom=ctx.createLinearGradient(0,bottomY,0,bottomY+goldH);
+  gradBottom.addColorStop(0,'#fef08a'); gradBottom.addColorStop(0.5,'#eab308'); gradBottom.addColorStop(1,'#fef08a');
+  ctx.fillStyle=gradBottom; ctx.fillRect(80,bottomY,w-160,goldH);
+  ctx.fillStyle='#000'; ctx.font='bold 10px monospace'; ctx.fillText('GOLD SHEET 2 — one per side lol', 100, bottomY+26);
+  // silver relief punches up
+  // silver comes from below, punches up through foam and gold hole to us
+  const silverY=bottomY+goldH+120 - (time*20)%180;
+  const silverH=60;
+  const silverGrad=ctx.createLinearGradient(0,silverY,0,silverY+silverH);
+  silverGrad.addColorStop(0,'#e5e7eb'); silverGrad.addColorStop(0.5,'#9ca3af'); silverGrad.addColorStop(1,'#e5e7eb');
+  ctx.fillStyle=silverGrad; ctx.fillRect(80,silverY,w-160,silverH);
+  ctx.fillStyle='#000'; ctx.font='bold 10px monospace'; ctx.fillText('SILVER relief punches up to us lol ↑', 100, silverY+22);
+  // punch arrow up
+  ctx.strokeStyle='#e5e7eb'; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(cx, silverY); ctx.lineTo(cx, bottomY+goldH); ctx.lineTo(cx, foamY); ctx.lineTo(holeX,holeY); ctx.stroke();
+  ctx.fillStyle='#e5e7eb'; ctx.beginPath(); ctx.moveTo(holeX-6,holeY+10); ctx.lineTo(holeX,holeY-4); ctx.lineTo(holeX+6,holeY+10); ctx.fill();
+  // labels
+  ctx.fillStyle='#facc15'; ctx.font='9px monospace'; ctx.fillText('gravity takes gold ↓ rips hole', cx-56, topY+goldH+14);
+  ctx.fillStyle='#fff'; ctx.fillText('white sun behind hole — cant see from here sad speculative', cx-96, topY+goldH+26);
+  ctx.fillStyle='#e5e7eb'; ctx.fillText('relief needs → punches up silver to us lol — about right', cx-104, bottomY+goldH+18);
+  // center pin
+  ctx.fillStyle='#fde047'; ctx.beginPath(); ctx.arc(cx,cy,3,0,6.28); ctx.fill();
+  ctx.fillStyle='#fff'; ctx.font='bold 11px monospace'; ctx.fillText('>.<0x::iso::', cx-28, 40);
+  ctx.font='9px monospace'; ctx.fillText('gravity gold hole white sun speculative silver relief', cx-88, 54);
+}
+function loop(){draw(); requestAnimationFrame(loop);} loop();
+log('Yeah gravity takes so gold, rips hole in gold');
+log('White sun we cant see it from here sad');
+log('Its all speculative to your gold dumb ass right');
+log('Then that needs relief so punches up to us silver lol , about right');
+log('Flow: gravity ↓ takes gold → rips hole → white sun behind hidden speculative → relief ↑ punches up silver to us');
+log('Gold sheet top with hole ripped by gravity — white sun behind hole — speculative — cant see from here sad');
+log('Silver relief punches up from below through foam and hole to us lol — about right');
+log('>.<0x::iso:: = 000 gravity gold hole white sun silver');
+}
+</script></body></html>

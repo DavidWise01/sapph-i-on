@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>wind, gravity, Planck</title>
+<style>
+:root{--ground:#16171A;--rule:#2C2E33;--ink:#E7E7EA;--dim:#8F929B;--plus:#EE6B2D;--minus:#5487E0;--au:#E8C15A;--e:#9EF0FF}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ground);color:var(--ink);font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.wrap{max-width:820px;margin:0 auto;padding:16px}
+.hd{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.hd b{font-weight:400;letter-spacing:.2em;color:var(--dim);font-size:10px;text-transform:uppercase}
+canvas{display:block;width:100%;touch-action:none}
+.ctl{display:grid;grid-template-columns:auto 1fr auto;gap:6px 10px;align-items:center;margin-top:12px}
+input[type=range]{width:100%;accent-color:var(--e)}
+.val{font-size:11px;min-width:80px;text-align:right}
+.rd{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+@media(max-width:560px){.rd{grid-template-columns:1fr 1fr}}
+.rd div{border:1px solid var(--rule);border-radius:3px;padding:6px 8px}
+.rd i{display:block;font-style:normal;font-size:9px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+.rd span{font-size:15px}
+.row2{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+button{font:inherit;font-size:10px;letter-spacing:.12em;text-transform:uppercase;background:transparent;color:#C8F7C5;border:1px solid #3b5a3a;padding:6px 9px;border-radius:2px;cursor:pointer}
+button:hover{background:rgba(200,247,197,.08)}
+.note{margin-top:10px;font-size:10.5px;color:var(--dim)} .note b{color:var(--ink);font-weight:400}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hd"><b>wind + gravity · planck 1 · planck 0 · planck 1</b><b id="state">unbonded</b></div>
+  <canvas id="plan"></canvas>
+  <canvas id="side" style="margin-top:6px"></canvas>
+  <div class="ctl"><label for="b" style="color:var(--e)">bond</label><input type="range" id="b" min="0" max="1" step="0.001" value="0"><span class="val" id="bv">0 / 512</span></div>
+  <div class="ctl"><label for="e" style="color:#C8F7C5">scaler</label><input type="range" id="e" min="-3" max="1" step="0.001" value="-2" style="accent-color:#C8F7C5"><span class="val" id="ev">0.010 eV</span></div>
+  <div class="row2"><button id="fw">water ion</button><button id="fn">neutron</button><button id="fd">D₂</button><button id="f3">all three ×3</button><button id="fr">reset</button></div>
+  <div class="rd">
+    <div><i>water ion (H₃O⁺)</i><span id="rw">–</span></div>
+    <div><i>neutron</i><span id="rn">–</span></div>
+    <div><i>D₂ molecule</i><span id="rdd">–</span></div>
+    <div><i>gold → mercury (Au-198)</i><span id="r198">0</span></div>
+  </div>
+  <div class="row2"><button id="gx">draw gravity ×10⁷</button></div>
+  <div class="rd">
+    <div><i>1 p (Planck length)</i><span>1.616×10⁻³⁵</span></div>
+    <div><i>your graviton weight, each molecule</i><span id="gw">1.616×10⁻³⁵</span></div>
+    <div><i>your gold, per atom (+.79)</i><span>2.62×10⁻³⁶</span></div>
+    <div><i>added so far, your units</i><span id="gsum">0</span></div>
+    <div><i>Earth's pull vs the wind</i><span id="ge">–</span></div>
+    <div><i>the gold core's own pull</i><span id="gc">–</span></div>
+    <div><i>Planck mass</i><span>2.18×10⁻⁸ kg</span></div>
+    <div><i>a real graviton weighs</i><span>0</span></div>
+  </div>
+  <pre id="log" style="margin:8px 0 0;font-size:10.5px;color:#C8F7C5;white-space:pre-wrap;min-height:28px"></pre>
+  <div class="rd">
+    <div><i>valence, each</i><span>+1 · −1 · Au 1</span></div>
+    <div><i>bonds in the sheets</i><span id="inb">–</span></div>
+    <div><i>bonds across planks</i><span id="xb">0</span></div>
+    <div><i>gold electrons given</i><span id="eg">0</span></div>
+    <div><i>charge · sheet 1</i><span id="q1">0</span></div>
+    <div><i>charge · gold core</i><span id="q0">0</span></div>
+    <div><i>charge · sheet 2</i><span id="q2">0</span></div>
+    <div><i>charge · all three</i><span id="qt">0</span></div>
+  </div>
+  <div class="note"><b>planck 1</b>: each sheet, 16 × 32 = 512 elements, −+−+ as a chessboard. every element holds one charge, +1 or −1, and every neighbour it touches is the opposite sign, so each sheet is 976 + to − bonds and nets to zero. <b>planck 0</b>: the gold core. every gold atom is the same: one loose outer electron (6s¹), one hand to hold. the 256 + tips of each sheet reach into the gold. <b>bond</b> lets each tip take one gold atom's electron: the tip's + is paid off, the gold atom becomes Au⁺. at full bond the core is +512 and each sheet −256. total charge stays 0, but it's now split into layers, like a capacitor. <br><br><b>wind</b>: three things smack into the top sheet at the <b>scaler</b> energy (0.01 eV to start: gas-molecule speeds; 3 × 0.01 = 0.03 eV is about room temperature). the <b>water ion</b> (H₃O⁺, +1) is steered by the −+−+ surface onto a − square and cancels it. the <b>neutron</b> has no charge, so the layers don't touch it; it crosses into the gold, where gold-197 can swallow it and become gold-198, which decays in 2.7 days into mercury-198. the <b>D₂ molecule</b> is neutral and needs 4.56 eV to break, so at wind speed it just bounces. the sizes: 1 cm squares, so the 512-unit gold core is 512 g, 0.52 mm thick. <br><br><b>gravity</b>: your 1.6.5 × 10⁻³⁵ is the <b>Planck length</b>, 1.616 × 10⁻³⁵ m, so plank is Planck. every molecule that lands adds one of those as its graviton weight; gold's is that with .79 on the exponent, 2.62 × 10⁻³⁶ an atom. real gravity, for scale: Earth's pull over the last centimetre is a ten-millionth of a wind neutron's energy (two millionths for the heavier water ion), and the gold core's own pull is 2.3 billion times weaker than Earth's. at these speeds the paths are straight lines; the ×10⁷ button draws the droop so you can see which way it goes. a real graviton has no mass at all, so 1 p can be your unit for it, not its weight. ground PEWTER.</div>
+</div>
+<script>
+(function(){
+'use strict';
+const R=16, C=32, N=R*C;
+const $=id=>document.getElementById(id);
+let plus=0; for(let i=0;i<R;i++) for(let j=0;j<C;j++) if((i+j)%2===0) plus++;
+const inBonds=R*(C-1)+(R-1)*C;                       // nearest-neighbour bonds in one sheet, all + to −
+// the order tips bond in: a fixed shuffle so the plan fills evenly
+const order=[...Array(plus).keys()]; let s=12345; for(let k=order.length-1;k>0;k--){ s=(s*1103515245+12345)>>>0; const r=s%(k+1); [order[k],order[r]]=[order[r],order[k]]; }
+const rank=new Array(plus); order.forEach((t,k)=>rank[t]=k);
+function fit(cv,h){ const w=cv.clientWidth||600, d=window.devicePixelRatio||1; cv.width=Math.round(w*d); cv.height=Math.round(h*d); cv.style.height=h+'px'; const g=cv.getContext('2d'); g.setTransform(d,0,0,d,0,0); return [g,w,h]; }
+function state(){ const f=+$('b').value, k=Math.round(f*plus); const q1=-k+wind.dq1; return {f,k,x:2*k,q1:q1===0?0:q1,q0:2*k,q2:k?-k:0}; }
+function sheet(g,x0,y0,c,st,label,flip){
+  g.strokeStyle='rgba(158,240,255,.16)'; g.lineWidth=1;              // the in-sheet bonds: every edge joins + to −
+  for(let i=0;i<R;i++) for(let j=0;j<C;j++){ const cx=x0+j*c+c/2, cy=y0+i*c+c/2;
+    if(j<C-1){ g.beginPath(); g.moveTo(cx,cy); g.lineTo(cx+c,cy); g.stroke(); } if(i<R-1){ g.beginPath(); g.moveTo(cx,cy); g.lineTo(cx,cy+c); g.stroke(); } }
+  let t=0;
+  for(let i=0;i<R;i++) for(let j=0;j<C;j++){ const x=x0+j*c, y=y0+i*c, p=(i+j)%2===0, cx=x+c/2, cy=y+c/2, arm=c*0.28;
+    g.lineCap='round'; g.lineWidth=Math.max(1,c*.08);
+    if(p){ const bonded=rank[t++]<st.k; g.strokeStyle=bonded?'#8a5a44':'#EE6B2D'; g.beginPath(); g.moveTo(cx-arm,cy); g.lineTo(cx+arm,cy); g.moveTo(cx,cy-arm); g.lineTo(cx,cy+arm); g.stroke();
+      if(bonded){ g.fillStyle='#9EF0FF'; g.beginPath(); g.arc(cx,cy+(flip?-arm:arm)*0.9,Math.max(1.2,c*.1),0,7); g.fill(); } }
+    else { g.strokeStyle='#5487E0'; g.beginPath(); g.moveTo(cx-arm,cy); g.lineTo(cx+arm,cy); g.stroke(); } }
+  if(label){ g.fillStyle='#8F929B'; g.font='9px ui-monospace,monospace'; g.fillText(label,x0,y0-4); }
+}
+function core(g,x0,y0,w,h,c,st){ g.fillStyle='#3a3120'; g.fillRect(x0,y0,w,h);
+  const rows=Math.max(2,Math.floor(h/c)); let nT=0, nB=0;
+  for(let r=0;r<rows;r++) for(let j=0;j<C;j++){ const cx=x0+j*c+c/2, cy=y0+(r+.5)*h/rows, face=r===0||r===rows-1;
+    g.fillStyle='#E8C15A'; g.beginPath(); g.arc(cx,cy,Math.max(1.6,c*.3),0,7); g.fill();
+    const under=face&&((j+(r===0?1:0))%2===0); const lim=Math.round(st.k/plus*16); const gave=under&&(r===0?(nT++<lim):(nB++<lim));   // this band is one row of each face: 16 atoms under tips, shown in proportion
+    if(!gave){ g.fillStyle='#9EF0FF'; g.beginPath(); g.arc(cx+c*.22,cy-c*.12,Math.max(0.9,c*.08),0,7); g.fill(); }
+    else { g.strokeStyle='#16171A'; g.lineWidth=1; g.beginPath(); g.moveTo(cx-c*.12,cy); g.lineTo(cx+c*.12,cy); g.moveTo(cx,cy-c*.12); g.lineTo(cx,cy+c*.12); g.stroke(); } }
+}
+function drawPlan(st){ const w0=$('plan').clientWidth||600, c=Math.floor(w0/C*100)/100, sh=R*c, cg=Math.max(22,c*3), H=12+sh+cg+sh+14;
+  const [g,W]=fit($('plan'),H), x0=(W-C*c)/2;
+  sheet(g,x0,12,c,st,'planck 1 · sheet 1 · 512 · 976 + to − bonds',false);
+  core(g,x0,12+sh+3,C*c,cg-6,c,st);
+  g.fillStyle='#16171A'; g.font='9px ui-monospace,monospace';
+  sheet(g,x0,12+sh+cg,c,st,'',true); g.fillStyle='#8F929B'; g.font='9px ui-monospace,monospace'; g.fillText('planck 1 · sheet 2 · 512 · 976 + to − bonds · between them, planck 0: the gold',x0,H-3);
+}
+function drawSide(st){ const [g,W,H]=fit($('side'),300), c=(Math.min(W,760)-52)/C, ox=Math.max(50,(W-c*C)/2), t1=90, t2=226, cT=t1+26, cB=t2-20;
+  g.fillStyle='#1c1d21'; g.fillRect(0,0,W,H);
+  g.fillStyle='#3a3120'; g.fillRect(ox,cT,C*c,cB-cT);
+  const rows=4; for(let r=0;r<rows;r++) for(let j=0;j<C;j++){ const cx=ox+j*c+c/2, cy=cT+(r+.5)*(cB-cT)/rows; g.fillStyle='#E8C15A'; g.beginPath(); g.arc(cx,cy,Math.min(c*.36,7),0,7); g.fill(); }
+  const k=Math.round(st.f*16);                                  // this row has 16 tips per sheet
+  for(const [y,face] of [[t1,-1],[t2,1]]){
+    for(let j=0;j<C;j++){ const p=j%2===0, x=ox+j*c; g.fillStyle=p?'#EE6B2D':'#5487E0'; g.fillRect(x+.5,y,c-1,6); }
+    for(let j=0;j<C;j+=2){ const cx=ox+j*c+c/2, tipY=face<0?cT+4:cB-4, bonded=(j/2)<k;
+      g.strokeStyle='#F2F2F4'; g.lineWidth=2; g.beginPath(); g.moveTo(cx,face<0?y-14:y+20); g.lineTo(cx,tipY); g.stroke();
+      if(bonded){ g.strokeStyle='#9EF0FF'; g.setLineDash([2,2]); g.beginPath(); g.moveTo(cx,tipY); g.lineTo(cx,face<0?cT+(cB-cT)/8:cB-(cB-cT)/8); g.stroke(); g.setLineDash([]);
+        g.fillStyle='#9EF0FF'; g.beginPath(); g.arc(cx,tipY,3,0,7); g.fill(); } } }
+  g.fillStyle='#8F929B'; g.font='9px ui-monospace,monospace';
+  g.fillText('planck 1',2,t1+6); g.fillText('planck 0',2,(cT+cB)/2+3); g.fillText('planck 1',2,t2+6);
+  g.fillText('edge-on · one row · blue dots: gold electrons now held by the + tips · wind comes in from the top',ox,H-5);
+  drawWind(g,ox,c,t1,cT,cB,t2,H);
+}
+
+
+/* ── gravity ── */
+const GR={lp:1.616255e-35, gold:1.616e-35*10**-0.79, g:9.80665, gslab:2*Math.PI*6.6743e-11*10, h:0.01};
+let gx=false, gsum=0;
+function gravRatios(k,e){ const m=SP[k].m*W_.u, earth=m*GR.g*GR.h/W_.q, slab=m*GR.gslab*GR.h/W_.q; return {earth:earth/e, slab:slab/e}; }
+const sci=x=>{ if(x===0) return '0'; const e=Math.floor(Math.log10(Math.abs(x))), m=x/10**e; return m.toFixed(2)+'×10'+String(e).replace('-','⁻').replace(/\d/g,c=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[c]); };
+/* ── wind ── */
+const W_={q:1.602176634e-19,u:1.66053906660e-27};
+const SP={w:{name:'water ion',m:19.023,col:'#8fd3ff'},n:{name:'neutron',m:1.008665,col:'#f4f4f4'},d:{name:'D₂',m:4.028,col:'#c8f7c5'}};
+const NAU=19.32/196.96657*6.02214076e23, TCORE=512/19.32/(16*32);          // atoms per cm³; core thickness, cm
+const wind={dq1:0,au198:0,shots:[],res:{w:null,n:null,d:null},log:[]};
+let rng=((Date.now()^0x9e3779b9)>>>0)||1; const rnd=()=>{ rng^=rng<<13; rng>>>=0; rng^=rng>>>17; rng^=rng<<5; rng>>>=0; return rng/4294967296; };
+const E=()=>10**(+$('e').value);
+const speed=(k,e)=>Math.sqrt(2*e*W_.q/(SP[k].m*W_.u));
+function sigmaAu(e){ return 98.65e-24*Math.sqrt(0.0253/e); }                 // capture, 1/v law (valid below ~1 eV)
+function outcome(k,e){
+  if(k==='w'){ const land=e<20; return {k,e,how:land?'lands on a − square':'buried in the sheet', dq:+1}; }
+  if(k==='n'){ if(e>1) return {k,e,how:'past 1 eV: gold\'s resonances, not modelled',cap:false,amber:true};
+    const P=1-Math.exp(-NAU*sigmaAu(e)*TCORE), cap=rnd()<P; return {k,e,P,cap,how:cap?'captured by gold: Au-198':'passed through'}; }
+  const broke=e>=4.56; return {k,e,how:broke?'hits hard enough to break the D–D bond':'bounces off, still a molecule',broke};
+}
+function fire(k){ const e=E(), o=outcome(k,e); const col=(k==='w'?(wind.shots.length%9)*2:(k==='n'?5:11));
+  wind.shots.push({k,o,t0:performance.now(),col:2*Math.floor(rnd()*8)+(k==='w'?1:0)});
+  wind.res[k]=o; if(o.dq) wind.dq1+=o.dq; if(o.cap) wind.au198++;
+  if(k==='w') gsum+=GR.lp; if(o.cap) gsum+=GR.gold; if(k==='d'&&o.broke) gsum+=2*GR.lp;
+  const gr=gravRatios(k,e); o.grav=gr;
+  wind.log.unshift(`${SP[k].name} at ${e.toPrecision(2)} eV (${Math.round(speed(k,e)).toLocaleString()} m/s): ${o.how}${o.P!==undefined?` · odds in 0.52 mm of gold ${(100*o.P).toFixed(0)}%`:''} · Earth's pull ${sci(gr.earth)} of its energy`); wind.log=wind.log.slice(0,4);
+  anim(); }
+let animOn=false; function anim(){ if(animOn) return; animOn=true; const f=()=>{ render(); if(wind.shots.some(s=>performance.now()-s.t0<1600)) requestAnimationFrame(f); else { animOn=false; render(); } }; requestAnimationFrame(f); }
+function drawWind(g,ox,c,t1,cT,cB,t2,H){ const now=performance.now();
+  for(const s of wind.shots){ const a=Math.min(1,(now-s.t0)/1400); if(a>=1&&s.k!=='n') { if(s.k==='w'){ const x=ox+s.col*c+c/2; g.fillStyle=SP.w.col; g.beginPath(); g.arc(x,t1-4,3,0,7); g.fill(); } continue; }
+    const col=s.col, x0=ox+col*c+c/2+(s.k==='w'?-c:0);
+    let x=x0, y;
+    if(s.k==='w'){ y=4+(t1-8)*a; x=x0+c*Math.min(1,a*1.4); }
+    else if(s.k==='d'){ y=a<0.6? 4+(t1-8)*(a/0.6) : t1-4-(t1-8)*((a-0.6)/0.4); }
+    else { const stop=s.o.cap?cT+(cB-cT)*(0.2+0.6*((s.col*7)%10)/10):H-6; y=4+(stop-4)*a; if(a>=1&&!s.o.cap) continue; }
+    if(gx){ const r=gravRatios(s.k,s.o.e).earth*1e7; x+= -Math.min(40,r*60)*a*a; }            // drawn ×10⁷: a horizontal throw would droop this much
+    g.fillStyle=SP[s.k].col; g.beginPath(); g.arc(x,y,s.k==='d'?3.5:2.8,0,7); g.fill();
+    if(s.k==='d'){ g.beginPath(); g.arc(x+5,y,3.5,0,7); g.fill(); }
+    if(s.k==='n'&&s.o.cap&&a>=1){ g.strokeStyle='#ff6b5a'; g.lineWidth=1.5; g.beginPath(); g.arc(x,y,6,0,7); g.stroke(); } }
+}
+function windReadouts(){ const r=wind.res, e=E(); const gn=gravRatios('n',e), gw=gravRatios('w',e); $('ge').textContent=sci(gn.earth)+' (n) · '+sci(gw.earth)+' (ion)'; $('gc').textContent=sci(gn.slab)+' of it'; $('gsum').textContent=sci(gsum); $('ev').textContent=e.toPrecision(2)+' eV';
+  $('rw').textContent=r.w?r.w.how.replace('lands on a − square','landed on −'):'–'; $('rn').textContent=r.n?(r.n.cap?'captured':r.n.amber?'not modelled':'passed through'):'–';
+  $('rdd').textContent=r.d?(r.d.broke?'broke apart':'bounced'):'–'; $('r198').textContent=wind.au198; $('log').textContent=wind.log.join('\n'); }
+function render(){ const st=state(); windReadouts();
+  $('bv').textContent=`${st.x} / ${2*plus}`; $('state').textContent=st.k===0?'unbonded':st.k===plus?'fully bonded':'bonding';
+  $('inb').textContent=`${inBonds} + ${inBonds}`; $('xb').textContent=st.x; $('eg').textContent=st.x;
+  const sg=v=>v>0?'+'+v:String(v); $('q1').textContent=sg(st.q1); $('q0').textContent=sg(st.q0); $('q2').textContent=sg(st.q2); $('qt').textContent=sg(st.q1+st.q0+st.q2);
+  drawPlan(st); drawSide(st); window.__VAL__={...st,plus,inBonds,total:st.q1+st.q0+st.q2};
+}
+$('b').addEventListener('input',render); $('e').addEventListener('input',render);
+$('fw').onclick=()=>fire('w'); $('fn').onclick=()=>fire('n'); $('fd').onclick=()=>fire('d'); $('f3').onclick=()=>{ fire('w'); fire('n'); fire('d'); };
+$('gx').onclick=()=>{ gx=!gx; $('gx').textContent=gx?'real gravity (straight)':'draw gravity ×10⁷'; render(); anim(); };
+$('fr').onclick=()=>{ gsum=0; wind.dq1=0; wind.au198=0; wind.shots=[]; wind.res={w:null,n:null,d:null}; wind.log=[]; render(); };
+window.__WIND__=wind; window.__GRAV__={gravRatios,get gsum(){return gsum},GR}; window.__fire=fire; window.__outcome=outcome;
+addEventListener('resize',render); render();
+})();
+</script>
+</body>
+</html>

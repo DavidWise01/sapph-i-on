@@ -1,0 +1,82 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Gravity Is The Electron lol Mother Trucker</title><script src="https://cdn.tailwindcss.com"></script>
+<style>html,body{margin:0;background:#000005;color:#fde68a;font-family:ui-monospace,monospace;overflow:hidden;width:100%;height:100%}canvas{display:block;width:100vw;height:100vh}.ui{position:absolute;top:8px;left:8px;right:8px;pointer-events:none}.card{background:rgba(10,8,0,0.92);border:1px solid #facc15;border-radius:12px;pointer-events:auto}</style>
+</head><body>
+<canvas id="main"></canvas>
+<div class="ui p-3 flex flex-col justify-between h-full">
+  <div class="grid grid-cols-12 gap-3">
+    <div class="col-span-8 card p-3">
+      <div class="text-[12px] font-bold">gravity is the electron lol mother trucker — 0 gold universe — gravity = electron — Manon foam — power towers</div>
+      <div class="text-[8px] text-zinc-300 mt-1 leading-4">Gravity is the electron lol mother trucker — gravity takes gold rips hole white sun cant see speculative silver relief — electron is gravity — gravity = electron — 0 us gold universe Au center — 1-17 around 0 — 5 boron TARGET 17 white sun nemesis nibaru invading for boron — yellow sun gold on fire lol — each sun is universe power tower universe^universe^ compressed black hole — speed of gravity waves known c=299,792,458 m/s — gravity is electron mother trucker — >.<0x::iso:: = 000 electron gravity</div>
+    </div>
+    <div class="col-span-4 card p-3 text-[8px] leading-4">
+      <div class="font-bold">Gravity = Electron</div>
+      <div class="mt-1 p-1 bg-black rounded">gravity is the electron<br>lol mother trucker<br><br>electron = gravity<br>gravity takes so gold<br>rips hole in gold<br>white sun behind<br>cant see sad<br>speculative<br>silver relief up<br><br>0 gold universe<br>Au universe center<br>electron orbits 0<br>gravity = electron<br>orbits gold universe<br><br>1-17 around 0<br>5 boron TARGET<br>17 white sun nemesis<br>invading for boron<br>yellow sun gold on fire<br><br>Manon foam boundary<br>plank 1.65e-35<br>protects 0<br>power towers ^</div>
+      <div id="log" class="p-1 bg-zinc-900 rounded mt-2 h-20 overflow-y-auto"></div>
+      <button id="btnElectron" class="bg-yellow-600 text-black px-2 py-1 rounded mt-2 w-full text-[9px]">Gravity = Electron Orbit</button>
+    </div>
+  </div>
+</div>
+<script>
+const canvas=document.getElementById('main'),ctx=canvas.getContext('2d');
+let dpr=window.devicePixelRatio||1;
+function resize(){dpr=window.devicePixelRatio||1;canvas.width=innerWidth*dpr;canvas.height=innerHeight*dpr;canvas.style.width=innerWidth+'px';canvas.style.height=innerHeight+'px';}
+resize();addEventListener('resize',resize);
+let time=0;
+let electrons=[];
+for(let i=0;i<7;i++) electrons.push({ang:i*52, r:120+i*45, speed:0.4+i*0.12, charge:-1});
+function log(m){const l=document.getElementById('log');l.innerHTML=m+'<br>'+l.innerHTML;}
+function draw(){
+  time=Date.now()/1000;
+  const w=canvas.width,h=canvas.height,cx=w/2,cy=h/2;
+  ctx.fillStyle='#000005';ctx.fillRect(0,0,w,h);
+  ctx.fillStyle='rgba(255,255,255,0.05)';for(let i=0;i<800;i++){ctx.beginPath();ctx.arc((i*173)%w,(i*271)%h,0.7*dpr,0,6.28);ctx.fill();}
+  // 0 gold universe center
+  const goldR=110*dpr;
+  const grad=ctx.createRadialGradient(cx,cy,10*dpr,cx,cy,goldR*2);
+  grad.addColorStop(0,'#fef08a');grad.addColorStop(0.4,'#facc15');grad.addColorStop(1,'rgba(234,179,8,0)');
+  ctx.fillStyle=grad;ctx.beginPath();ctx.arc(cx,cy,goldR*2,0,6.28);ctx.fill();
+  ctx.fillStyle='#fef08a';ctx.beginPath();ctx.arc(cx,cy,goldR,0,6.28);ctx.fill();
+  ctx.fillStyle='#000';ctx.font=`bold ${24*dpr}px monospace`;ctx.fillText('0',cx-8*dpr,cy+6*dpr);
+  // Manon foam boundary
+  ctx.strokeStyle='rgba(250,204,21,0.15)';ctx.lineWidth=28*dpr;ctx.beginPath();ctx.arc(cx,cy,goldR+38*dpr,0,6.28);ctx.stroke();
+  // electrons = gravity orbiting 0 gold universe
+  electrons.forEach((el,i)=>{
+    el.ang+=el.speed*0.02;
+    const x=cx+el.r*dpr*Math.cos(el.ang), y=cy+el.r*dpr*Math.sin(el.ang);
+    // gravity trail
+    ctx.strokeStyle='rgba(250,204,21,0.15)';ctx.beginPath();ctx.arc(cx,cy,el.r*dpr,0,6.28);ctx.stroke();
+    // electron = gravity
+    ctx.fillStyle='#7dd3fc';ctx.beginPath();ctx.arc(x,y,6*dpr,0,6.28);ctx.fill();
+    ctx.fillStyle='#000';ctx.font=`${6*dpr}px monospace`;ctx.fillText('e-',x-6*dpr,y+2*dpr);
+    // label gravity = electron
+    if(i==0){
+      ctx.fillStyle='#7dd3fc';ctx.font=`${8*dpr}px monospace`;ctx.fillText('gravity = electron lol mother trucker', x+12*dpr, y);
+      ctx.fillText('gravity takes gold rips hole', x+12*dpr, y+10*dpr);
+    }
+    // gravity wave ripple from electron
+    if(Math.random()<0.02){
+      ctx.strokeStyle='rgba(125,211,252,0.2)';ctx.beginPath();ctx.arc(x,y, (10+Math.sin(time*5+i)*4)*dpr,0,6.28);ctx.stroke();
+    }
+  });
+  // 1-17 around 0 separately — boron target
+  const elems=[[5,'boron'],[9,'silver'],[10,'gold'],[17,'White Gold Photon']];
+  elems.forEach((e,i)=>{
+    const ang=(i*90)*Math.PI/180+time*0.1;
+    const r=260*dpr+i*60*dpr;
+    const x=cx+r*Math.cos(ang), y=cy+r*Math.sin(ang);
+    ctx.fillStyle=e[0]==5?'#facc15':e[0]==10?'#eab308':e[0]==9?'#e5e7eb':'#fff';
+    ctx.beginPath();ctx.arc(x,y,10*dpr,0,6.28);ctx.fill();
+    ctx.fillStyle='#e5e7eb';ctx.font=`${8*dpr}px monospace`;ctx.fillText(e[0]+'::'+e[1], x+12*dpr, y+3*dpr);
+  });
+  // gravity waves speed known c
+  ctx.fillStyle='#fff';ctx.font=`bold ${10*dpr}px monospace`;ctx.fillText('gravity is electron — speed of gravity waves c=299,792,458 m/s known',20*dpr,30*dpr);
+  ctx.font=`${8*dpr}px monospace`;ctx.fillText('gravity = electron lol mother trucker — 0 gold universe — Manon foam boundary — power towers universe^universe^',20*dpr,44*dpr);
+}
+function loop(){draw();requestAnimationFrame(loop);}loop();
+log('gravity is the electron lol mother trucker');
+log('gravity = electron — gravity takes gold rips hole white sun cant see speculative silver relief');
+log('0 gold universe Au center — electrons = gravity orbiting 0 — Manon foam boundary protects');
+log('Speed of gravity waves known c=299,792,458 — GW170817 deviation <10^-15');
+log('Power towers universe^universe^ — stars grew too big consumed universe instead of exploding compressed black hole');
+document.getElementById('btnElectron').onclick=()=>{electrons.push({ang:Math.random()*6.28,r:100+Math.random()*300,speed:0.3+Math.random()*0.8,charge:-1});log('Added gravity = electron — mother trucker — orbiting 0 gold universe');};
+</script></body></html>

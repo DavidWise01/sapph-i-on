@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Vacuum 1 and Gravity -1 - Final</title>
+<style>
+body{margin:0;background:#050510;color:#e5e7eb;font-family:monospace;overflow:hidden}
+canvas{display:block}
+#info{position:absolute;left:12px;top:10px;font-size:11px;background:#000000aa;padding:12px;border-radius:12px;border:1px solid #ffffff15;line-height:1.6;max-width:440px}
+#info b{color:#fcd34d}
+.left{color:#38bdf8} .right{color:#f472b6}
+</style></head><body>
+<canvas id="c"></canvas>
+<div id="info">
+<b>FINAL FARM — VACUUM 1 / GRAVITY -1 lol</b><br/>
+<br/>
+<span class="left">Left side: VACUUM 1</span> — Planck bubble<br/>
+<span class="right">Right side: GRAVITY -1</span> — collapse<br/>
+<br/>
+One qdot = 8x8x8x8x1x8x8x8x8 = 16,777,216 AEONs<br/>
+10^-35.1 m foam farm ↔ 10^35 m cosmic farm<br/>
+Ratio 10^70.1 isomorphic<br/>
+<br/>
+<span style="color:#a78bfa">+183 matter vs -183 antimatter</span><br/>
+<span style="color:#e9d5ff">+1 vacuum = 1 - 1^10^-35.02 wall = near perfect reflector</span><br/>
+<span style="color:#f472b6">-1 gravity = -1 x G, inverted potential, holds stack</span><br/>
+<br/>
+a=4.9135Å c=5.4050Å P3121/P3221 Fe3+<br/>
+l_P=1.616255(18)e-35 m<br/>
+First author you — proprietary — lol
+</div>
+<script>
+const canvas=document.getElementById('c'), ctx=canvas.getContext('2d');
+let w,h,t=0;
+function resize(){ w=canvas.width=innerWidth*2; h=canvas.height=innerHeight*2; canvas.style.width=innerWidth+'px'; canvas.style.height=innerHeight+'px'; }
+addEventListener('resize',resize); resize();
+function loop(){
+ t+=0.008;
+ ctx.fillStyle='rgba(5,5,16,0.22)'; ctx.fillRect(0,0,w,h);
+ let cx=w/2, cy=h/2;
+ let breath=(Math.sin(t*0.15)+1)/2;
+ // left side vacuum 1 - blue/cyan
+ let leftX=cx-w*0.22, leftY=cy;
+ let gradL=ctx.createRadialGradient(leftX,leftY,0,leftX,leftY,140);
+ gradL.addColorStop(0,'#e0f2fe'); gradL.addColorStop(0.3,'#38bdf8'); gradL.addColorStop(1,'#00000000');
+ ctx.globalAlpha=0.7+breath*0.2; ctx.fillStyle=gradL; ctx.beginPath(); ctx.arc(leftX,leftY,140,0,Math.PI*2); ctx.fill();
+ ctx.fillStyle='#38bdf8'; ctx.globalAlpha=0.9; ctx.beginPath(); ctx.arc(leftX,leftY,18+breath*6,0,Math.PI*2); ctx.fill();
+ ctx.fillStyle='#e5e7eb'; ctx.font='11px monospace'; ctx.textAlign='center';
+ ctx.fillText('VACUUM 1', leftX, leftY+40);
+ ctx.fillText('1 - 1^10^-35.02', leftX, leftY+54);
+ ctx.fillText('+183 matter', leftX, leftY+68);
+ // right side gravity -1 - magenta/red
+ let rightX=cx+w*0.22, rightY=cy;
+ let gradR=ctx.createRadialGradient(rightX,rightY,0,rightX,rightY,140);
+ gradR.addColorStop(0,'#fce7f3'); gradR.addColorStop(0.3,'#f472b6'); gradR.addColorStop(1,'#00000000');
+ ctx.globalAlpha=0.7+breath*0.2; ctx.fillStyle=gradR; ctx.beginPath(); ctx.arc(rightX,rightY,140,0,Math.PI*2); ctx.fill();
+ ctx.fillStyle='#f472b6'; ctx.globalAlpha=0.9; ctx.beginPath(); ctx.arc(rightX,rightY,18+breath*6,0,Math.PI*2); ctx.fill();
+ ctx.fillStyle='#e5e7eb'; ctx.textAlign='center';
+ ctx.fillText('GRAVITY -1 lol', rightX, rightY+40);
+ ctx.fillText('-1 x G inverted', rightX, rightY+54);
+ ctx.fillText('-183 antimatter', rightX, rightY+68);
+ // central qdot / 0::neutronium connecting
+ let coreR=22+breath*10;
+ let gradC=ctx.createRadialGradient(cx,cy,0,cx,cy,coreR*4);
+ gradC.addColorStop(0,'#fef3c7'); gradC.addColorStop(0.3,'#fbbf24'); gradC.addColorStop(0.7,'#9333ea'); gradC.addColorStop(1,'#00000000');
+ ctx.globalAlpha=0.85; ctx.fillStyle=gradC; ctx.beginPath(); ctx.arc(cx,cy,coreR*4,0,Math.PI*2); ctx.fill();
+ ctx.fillStyle='#fcd34d'; ctx.globalAlpha=0.95; ctx.beginPath(); ctx.arc(cx,cy,coreR,0,Math.PI*2); ctx.fill();
+ ctx.fillStyle='#e5e7eb'; ctx.textAlign='center';
+ ctx.fillText('0::neutronium', cx, cy- coreR -10);
+ ctx.fillText('1% stack 100% F.O.L.D.', cx, cy+ coreR +18);
+ // connections
+ ctx.globalAlpha=0.15+breath*0.15; ctx.strokeStyle='#a78bfa'; ctx.lineWidth=1; ctx.setLineDash([4,6]);
+ ctx.beginPath(); ctx.moveTo(leftX,leftY); ctx.lineTo(cx,cy); ctx.stroke();
+ ctx.beginPath(); ctx.moveTo(rightX,rightY); ctx.lineTo(cx,cy); ctx.stroke();
+ ctx.setLineDash([]);
+ // AEONs orbiting between vacuum and gravity
+ let nodes=16;
+ for(let i=0;i<nodes;i++){
+   let ang=i/nodes*Math.PI*2 + t*0.3;
+   let x=cx+Math.cos(ang)*(w*0.22)*(0.8+breath*0.2);
+   let y=cy+Math.sin(ang)*(h*0.12)*(0.8+breath*0.2);
+   let isLeft=Math.cos(ang)<0;
+   ctx.globalAlpha=0.6; ctx.fillStyle=isLeft?'#38bdf8':'#f472b6';
+   ctx.beginPath(); ctx.arc(x,y,2,0,Math.PI*2); ctx.fill();
+ }
+ ctx.textAlign='left';
+ requestAnimationFrame(loop);
+}
+loop();
+</script>
+</body></html>
