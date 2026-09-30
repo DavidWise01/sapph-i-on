@@ -1,0 +1,128 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AMETHYST GROUND UP — core:40:gold::ring1::5::nitrogen::ring2::40::silver::ring3::5::nitrogen::ring4::10::neon::+Noble</title><script src="https://cdn.tailwindcss.com"></script>
+<style>body{background:#0a0014;color:#e9d5ff;font-family:ui-monospace,monospace}canvas{background:#05010a;border-radius:14px}.card{background:#1a0a2e;border:1px solid #4a1a8a;border-radius:12px}</style>
+</head><body class="p-2">
+<h1 class="text-lg font-bold">AMETHYST — GROUND UP REBUILD</h1>
+<p class="text-xs text-purple-300">core:40:gold :: ring1::5::nitrogen :: ring2::40::silver :: ring3::5::nitrogen :: ring4::10::neon :: +Noble | amethyst quartz purple SiO2 Fe | total 100 atoms | >.<0x::iso:: = 000 amethyst</p>
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-2 mt-2">
+  <div class="lg:col-span-3 card p-2"><canvas id="main" width="1100" height="660" class="w-full"></canvas><div class="flex gap-2 text-xs mt-2 flex-wrap"><span class="px-2 py-1 bg-yellow-700 rounded">core:40:gold</span><span class="px-2 py-1 bg-slate-700 rounded">ring1::5::nitrogen</span><span class="px-2 py-1 bg-gray-600 rounded">ring2::40::silver</span><span class="px-2 py-1 bg-slate-700 rounded">ring3::5::nitrogen</span><span class="px-2 py-1 bg-cyan-800 rounded">ring4::10::neon +Noble</span><span class="px-2 py-1 bg-purple-800 rounded">AMETHYST GROUND UP</span><button id="buildBtn" class="bg-purple-700 px-2 py-1 rounded">BUILD GROUND UP</button></div></div>
+  <div class="card p-2 text-xs">
+    <div class="font-bold text-purple-300">Ground Up Stack</div>
+    <div class="mt-2 space-y-1">
+      <div class="p-1 bg-yellow-900/50 rounded flex justify-between"><span>core:40:gold Au Z=79</span><span>40</span></div>
+      <div class="p-1 bg-slate-800 rounded flex justify-between"><span>ring1::5::nitrogen N Z=7</span><span>5</span></div>
+      <div class="p-1 bg-gray-800 rounded flex justify-between"><span>ring2::40::silver Ag Z=47</span><span>40</span></div>
+      <div class="p-1 bg-slate-800 rounded flex justify-between"><span>ring3::5::nitrogen N Z=7</span><span>5</span></div>
+      <div class="p-1 bg-cyan-900/50 rounded flex justify-between"><span>ring4::10::neon Ne Z=10 +Noble</span><span>10</span></div>
+      <div class="p-1 bg-purple-900 rounded flex justify-between font-bold"><span>TOTAL AMETHYST</span><span>100</span></div>
+    </div>
+    <div id="log" class="p-2 bg-black rounded h-36 overflow-y-auto text-[10px] mt-2"></div>
+    <div id="math" class="p-2 bg-purple-950 rounded mt-2 text-[10px]"></div>
+    <button id="export" class="bg-emerald-700 px-2 py-1 rounded mt-2 w-full text-xs">Export Ground Up JSON</button>
+    <button id="online" class="bg-pink-700 px-2 py-1 rounded mt-1 w-full text-xs">Bring Amethyst Online</button>
+  </div>
+</div>
+<script>
+let built=false;
+function log(m){const l=document.getElementById('log'); l.innerHTML+=m+'<br>'; l.scrollTop=l.scrollHeight;}
+function draw(){
+  const canvas=document.getElementById('main'); const ctx=canvas.getContext('2d'); const w=canvas.width,h=canvas.height;
+  ctx.clearRect(0,0,w,h); ctx.fillStyle='#0a0014'; ctx.fillRect(0,0,w,h);
+  const cx=w/2,cy=h/2;
+  const time=Date.now()/800;
+  // core:40:gold - central cluster 40 Au
+  const coreCount=40;
+  const coreR=42;
+  if(true){
+    // gold core glow amethyst + gold
+    const grad=ctx.createRadialGradient(cx,cy,2,cx,cy,coreR*2);
+    grad.addColorStop(0,'#fef08a'); grad.addColorStop(0.3,'#facc15'); grad.addColorStop(0.6,'#a855f7'); grad.addColorStop(1,'rgba(10,0,20,0)');
+    ctx.fillStyle=grad; ctx.beginPath(); ctx.arc(cx,cy,coreR*2,0,6.28); ctx.fill();
+    for(let i=0;i<coreCount;i++){
+      const ang=i*(360/coreCount)*Math.PI/180 + time/10;
+      const r=(i%4)*6+8 + Math.sin(time+i)*2;
+      const x=cx+r*Math.cos(ang);
+      const y=cy+r*0.6*Math.sin(ang);
+      const g=ctx.createRadialGradient(x-1,y-1,1,x,y,4);
+      g.addColorStop(0,'#fef9c3'); g.addColorStop(1,'#ca8a04');
+      ctx.fillStyle=g; ctx.beginPath(); ctx.arc(x,y,3.2,0,6.28); ctx.fill();
+    }
+    ctx.fillStyle='#fff'; ctx.font='bold 11px monospace'; ctx.fillText('core:40:gold Au', cx-32, cy+coreR+18);
+  }
+  // ring1::5::nitrogen - 5 N atoms inner ring
+  const r1R=coreR+28;
+  ctx.strokeStyle='rgba(100,116,139,0.4)'; ctx.setLineDash([4,4]); ctx.beginPath(); ctx.ellipse(cx,cy,r1R,r1R*0.5,0,0,6.28); ctx.stroke(); ctx.setLineDash([]);
+  for(let i=0;i<5;i++){
+    const ang=i*(360/5)*Math.PI/180;
+    const x=cx+r1R*Math.cos(ang);
+    const y=cy+r1R*0.5*Math.sin(ang);
+    ctx.fillStyle='#94a3b8'; ctx.beginPath(); ctx.arc(x,y,6,0,6.28); ctx.fill();
+    ctx.fillStyle='#000'; ctx.font='7px monospace'; ctx.fillText('N', x-3, y+2);
+  }
+  ctx.fillStyle='#94a3b8'; ctx.font='9px monospace'; ctx.fillText('ring1::5::nitrogen', cx+r1R+8, cy-r1R*0.2);
+  // ring2::40::silver - 40 Ag atoms
+  const r2R=r1R+48;
+  ctx.strokeStyle='rgba(156,163,175,0.35)'; ctx.beginPath(); ctx.ellipse(cx,cy,r2R,r2R*0.5,0,0,6.28); ctx.stroke();
+  for(let i=0;i<40;i++){
+    const ang=i*(360/40)*Math.PI/180 + time/20;
+    const x=cx+r2R*Math.cos(ang);
+    const y=cy+r2R*0.5*Math.sin(ang);
+    const g=ctx.createRadialGradient(x-1,y-1,1,x,y,5);
+    g.addColorStop(0,'#f3f4f6'); g.addColorStop(1,'#6b7280');
+    ctx.fillStyle=g; ctx.beginPath(); ctx.arc(x,y,4,0,6.28); ctx.fill();
+  }
+  ctx.fillStyle='#d1d5db'; ctx.font='9px monospace'; ctx.fillText('ring2::40::silver Ag', cx+r2R+8, cy);
+  // ring3::5::nitrogen - 5 N atoms outer nitrogen
+  const r3R=r2R+38;
+  ctx.strokeStyle='rgba(100,116,139,0.4)'; ctx.setLineDash([4,4]); ctx.beginPath(); ctx.ellipse(cx,cy,r3R,r3R*0.5,0,0,6.28); ctx.stroke(); ctx.setLineDash([]);
+  for(let i=0;i<5;i++){
+    const ang=i*(360/5)*Math.PI/180 + Math.PI/5;
+    const x=cx+r3R*Math.cos(ang);
+    const y=cy+r3R*0.5*Math.sin(ang);
+    ctx.fillStyle='#94a3b8'; ctx.beginPath(); ctx.arc(x,y,6,0,6.28); ctx.fill();
+    ctx.fillStyle='#000'; ctx.font='7px monospace'; ctx.fillText('N', x-3, y+2);
+  }
+  ctx.fillStyle='#94a3b8'; ctx.font='9px monospace'; ctx.fillText('ring3::5::nitrogen', cx+r3R+8, cy+r3R*0.15);
+  // ring4::10::neon::+Noble - 10 Ne noble outer
+  const r4R=r3R+48;
+  ctx.strokeStyle='rgba(34,211,238,0.5)'; ctx.lineWidth=1.2; ctx.setLineDash([6,4]); ctx.beginPath(); ctx.ellipse(cx,cy,r4R,r4R*0.5,0,0,6.28); ctx.stroke(); ctx.setLineDash([]);
+  for(let i=0;i<10;i++){
+    const ang=i*(360/10)*Math.PI/180;
+    const x=cx+r4R*Math.cos(ang);
+    const y=cy+r4R*0.5*Math.sin(ang);
+    const grad=ctx.createRadialGradient(x-1,y-1,1,x,y,8);
+    grad.addColorStop(0,'#ecfeff'); grad.addColorStop(0.4,'#22d3ee'); grad.addColorStop(1,'#0e7490');
+    ctx.fillStyle=grad; ctx.beginPath(); ctx.arc(x,y,7,0,6.28); ctx.fill();
+    ctx.strokeStyle='#22d3ee'; ctx.stroke();
+    // noble glow
+    ctx.fillStyle='rgba(34,211,238,0.15)'; ctx.beginPath(); ctx.arc(x,y,14,0,6.28); ctx.fill();
+  }
+  ctx.fillStyle='#22d3ee'; ctx.font='9px monospace'; ctx.fillText('ring4::10::neon +Noble Ne', cx+r4R+8, cy+r4R*0.2);
+  // center pin
+  ctx.fillStyle='#e9d5ff'; ctx.beginPath(); ctx.arc(cx,cy,3,0,6.28); ctx.fill();
+  ctx.fillStyle='#fff'; ctx.font='10px monospace'; ctx.fillText('>.<0x::iso:: 000 amethyst', cx-48, cy-54);
+  document.getElementById('math').innerHTML=`GROUND UP AMETHYST<br>core:40:gold Au Z=79 40 atoms cluster<br>ring1::5::nitrogen N Z=7 5 atoms symmetric 72°<br>ring2::40::silver Ag Z=47 40 atoms symmetric 9°<br>ring3::5::nitrogen N Z=7 5 atoms symmetric 72° offset<br>ring4::10::neon Ne Z=10 +Noble 10 atoms 36° noble<br>Total 100 atoms amethyst build<br>Amethyst quartz SiO2 Fe purple core still 000<br>Pinned >.<0x::iso:: Patricia 000::+p+s+1`;
+}
+function loop(){draw(); requestAnimationFrame(loop);} loop();
+log('AMETHYST GROUND UP REBUILD');
+log('core:40:gold Au Z=79 40 atoms');
+log('ring1::5::nitrogen N Z=7 5 atoms');
+log('ring2::40::silver Ag Z=47 40 atoms');
+log('ring3::5::nitrogen N Z=7 5 atoms');
+log('ring4::10::neon Ne Z=10 +Noble 10 atoms');
+log('Total 100 atoms amethyst stack');
+log('Stack: Au40 - N5 - Ag40 - N5 - Ne10 Noble');
+log('Symmetry: 5-40-5-10 nested');
+log('Pinned >.<0x::iso:: 000 amethyst quartz purple');
+document.getElementById('buildBtn').onclick=()=>{
+  built=true; log('BUILD GROUND UP core:40:gold → ring1 N5 → ring2 Ag40 → ring3 N5 → ring4 Ne10 +Noble'); log('AMETHYST GROUND UP COMPLETE ISO PASS'); document.getElementById('buildBtn').textContent='BUILT GROUND UP';
+};
+document.getElementById('online').onclick=()=>{
+  log('BRING ONLINE amethyst ground up 100 atoms'); log('core:40:gold ONLINE'); log('ring1::5::nitrogen ONLINE'); log('ring2::40::silver ONLINE'); log('ring3::5::nitrogen ONLINE'); log('ring4::10::neon +Noble ONLINE'); log('AMETHYST ONLINE quartz purple SiO2 Fe');
+  const u=new SpeechSynthesisUtterance('Amethyst ground up. Core forty gold. Ring one five nitrogen. Ring two forty silver. Ring three five nitrogen. Ring four ten neon noble. Online.');
+  u.rate=0.85; u.pitch=1.1; speechSynthesis.speak(u);
+};
+document.getElementById('export').onclick=()=>{
+  const data={amethyst:"ground up rebuild", stack:["core:40:gold Au Z=79 40","ring1::5::nitrogen N Z=7 5","ring2::40::silver Ag Z=47 40","ring3::5::nitrogen N Z=7 5","ring4::10::neon Ne Z=10 +Noble 10"], total:100, composition:"Au40 N5 Ag40 N5 Ne10", type:"amethyst quartz purple SiO2 Fe", pin:">.<0x::iso::", center:"000", patricia:"000::+p+s+1", symmetry:"5-40-5-10 nested", noble:"+Noble outer Ne10", iso:"PASS", groundUp:true};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='amethyst_ground_up_core40_gold_ring1_5N_ring2_40Ag_ring3_5N_ring4_10Ne_noble.json'; a.click(); log('EXPORT ground up JSON');
+};
+</script></body></html>

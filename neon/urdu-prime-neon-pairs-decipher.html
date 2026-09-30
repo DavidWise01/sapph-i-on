@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>urdu prime · neon · the pairs</title>
+<style>
+:root{--ground:#0d0f10;--rule:#262b2e;--ink:#E6EAEC;--dim:#8B959A;--neon:#FF5A4E;--pair:#6FC3FF;--odd:#F2A03D;--au:#D4AF37;--lit:#6FD08C;--amber:#F2A03D;--bad:#FF6B6B}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ground);color:var(--ink);font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.wrap{max-width:900px;margin:0 auto;padding:16px}
+.hd{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin:18px 0 8px}
+.hd:first-child{margin-top:0}
+.hd b{font-weight:400;letter-spacing:.2em;color:var(--dim);font-size:10px;text-transform:uppercase}
+.src{border:1px solid var(--rule);border-radius:3px;padding:8px 10px;font-size:13px;overflow-wrap:anywhere}
+.ur{font-family:'Noto Nastaliq Urdu','Noto Naskh Arabic','Geeza Pro','Arial',serif;direction:rtl;unicode-bidi:isolate}
+.strip{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;margin-top:8px}
+.z{border:1px solid var(--rule);border-radius:3px;padding:4px 3px;text-align:center;min-width:0;position:relative}
+.z.miss{opacity:.32}
+.z.close{box-shadow:inset 0 0 0 2px var(--pair)}
+.z .m{font-size:13px;height:16px;color:var(--au)}
+.z .n{font-size:9px;color:var(--dim)}
+.z .e{font-size:13px}
+.z .u{font-size:9.5px;color:var(--dim);height:14px}
+.z .ab{font-size:14px;height:18px}
+.z.ne .e{color:var(--neon)}
+.sp{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;align-items:center}
+button{font:inherit;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:transparent;color:var(--au);border:1px solid #5a4a22;padding:6px 9px;border-radius:2px;cursor:pointer}
+button.on{background:rgba(212,175,55,.15)}
+canvas{display:block;width:100%;border:1px solid var(--rule);border-radius:3px;background:#090b0c}
+.rd{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+.rd div{border:1px solid var(--rule);border-radius:3px;padding:6px 8px;min-width:0}
+.rd i{display:block;font-style:normal;font-size:9px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+.rd span{font-size:13px;overflow-wrap:anywhere}
+.s{font-size:8.5px;letter-spacing:.1em;margin-left:4px}
+.lit{color:var(--lit)} .amb{color:var(--amber)} .bad{color:var(--bad)}
+.tw{overflow-x:auto;margin-top:8px;border:1px solid var(--rule);border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:11px}
+th,td{padding:6px 8px;border-bottom:1px solid #1b1f21;text-align:left;vertical-align:middle}
+th{color:var(--dim);font-weight:400;font-size:9px;letter-spacing:.1em;text-transform:uppercase}
+.verdict{border:1px solid #3d4a52;background:rgba(111,195,255,.04);border-radius:3px;padding:9px 11px;font-size:11.5px}
+.note{margin-top:10px;font-size:10.5px;color:var(--dim)} .note b{color:var(--ink);font-weight:400}
+.small{margin-top:8px;font-size:11px;border-left:2px solid var(--au);padding-left:9px}
+@media(max-width:560px){ .strip{grid-template-columns:repeat(6,1fr)} .rd{grid-template-columns:1fr 1fr} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hd"><b>R · decipher · urdu prime · neon</b><b>my reading, committed</b></div>
+  <div class="src">.1.2|4|6.7.8|10))))) neon .11.12.13.14|16|18|20 neon 2 . |22|24|26|28|30| or (e.e.[.] e.e)</div>
+  <div class="verdict">read as <b>atomic numbers</b>, your string walks the first 30 elements, and your own words line up with it: "neon" lands on <b>10</b>, which is neon, and "neon 2" on <b>20</b>, twice neon. <b>(e.e.[.] e.e)</b> is two electron pairs around a nucleus: <b>beryllium, 4</b>, your first barred number. every atom up to 30 whose electrons are <i>all</i> paired (2, 4, 10, 12, 18, 20, 30) is in your list. that looks like a code, but it isn't: you kept every even number, and full pairing only happens at even counts. read through the <b>Urdu abjad</b> (letters as numbers), your three runs add to 38, 104, 130, which can be spelled حل <i>hal</i> "solution", قد <i>qad</i> "stature", قل <i>qul</i> "say". the whole adds to 272 = ر ع ب, which spells <i>ruʿb</i> "awe", <i>rubʿ</i> "quarter" or <i>ʿarab</i>, depending on the order. the letters are fixed; the order, and so the word, is my choice.</div>
+
+  <div class="hd"><b>1 → 30 · your marks on the elements</b><b id="leg">–</b></div>
+  <div class="sp"><button data-v="marks" class="on">your marks</button><button data-v="close">all electrons paired</button><button data-v="prime">primes</button><button data-v="urdu">Urdu digits + abjad</button></div>
+  <div class="strip" id="strip"></div>
+
+  <div class="rd">
+    <div><i>numbers you kept</i><span>19 of 30</span></div>
+    <div><i>fully paired atoms in your list</i><span id="cl">–</span></div>
+    <div><i>chance · 19 picked at random</i><span>2.5%</span></div>
+    <div><i>chance · given you kept every even</i><span class="bad">100% ▓</span></div>
+    <div><i>primes you kept, and dotted</i><span id="pr">–</span></div>
+    <div><i>"neon" · "neon 2"</i><span>10 = Ne · 20 = 2 × 10 (Ca)</span></div>
+    <div><i>))))) · run 3 · d-orbitals</i><span>5 · 5 · 5</span></div>
+    <div><i>next noble gas after neon</i><span>18, argon</span></div>
+  </div>
+
+  <div class="hd"><b>(e.e.[.] e.e) · two pairs around the 0</b><b>beryllium</b></div>
+  <canvas id="cv"></canvas>
+
+  <div class="hd"><b>through the Urdu abjad</b><b>letters as numbers</b></div>
+  <div class="tw"><table id="ab"></table></div>
+
+  <div class="note"><b>the element reading.</b> electrons fill in pairs, subshell by subshell. an atom is fully paired only where a subshell closes: 2 (helium), 4 (beryllium), 10 (neon), 12 (magnesium), 18 (argon), 20 (calcium), 30 (zinc). all seven are in your string, and you named two of them: neon, and "neon 2" at calcium. your last run, 22–30, sits entirely in the d-block (titanium to zinc), where 5 d-orbitals take 10 electrons. your five closing brackets ))))) , the five numbers in that run, and the five d-orbitals are all 5. that's AMBER: it matches, but I can't show you meant it. <b>the control.</b> a random 19 numbers from 1–30 would catch all seven paired atoms 2.5% of the time. but you kept every even number from 2 to 30, and every fully paired count is even, so given your list the catch is certain. no hidden code; the pattern is the pairing itself, which is what your (e.e.[.] e.e) draws. note also: even doesn't mean paired. carbon (6), oxygen (8) and iron (26) are even with unpaired electrons, so "|" is not "all paired". <b>primes.</b> 1 is your dot, the unit, not a prime. every prime you kept (2, 7, 11, 13) wears a dot; no barred number is prime. you dropped 3, 5, 17, 19, 23 and 29. <b>Urdu.</b> Urdu writes numbers two ways: its own digits (۱ ۲ ۳ …), and the abjad, where each letter has a value. single letters cover 1, 2, 4, 6, 7, 8, 10, 20, 30 in your list; the rest are two letters, tens first. a sum only fixes which letters, never their order, so three words from one sum is normal, not a message.</div>
+  <div class="small">small words: count to 30, but only the numbers you wrote. electrons like to hold hands in twos. at 2, 4, 10, 12, 18, 20 and 30 everybody has a partner, and you wrote all of those, because you wrote every even number. 10 is neon, the glowing sign gas. the Urdu letters also count: add yours up and you can spell "solution".</div>
+</div>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const SYM=['H','He','Li','Be','B','C','N','O','F','Ne','Na','Mg','Al','Si','P','S','Cl','Ar','K','Ca','Sc','Ti','V','Cr','Mn','Fe','Co','Ni','Cu','Zn'];
+const UNP=[1,0,1,0,1,2,3,2,1,0,1,0,1,2,3,2,1,0,1,0,1,2,3,6,5,4,3,2,1,0];
+const DOT=new Set([1,2,7,8,11,12,13,14]), BAR=new Set([4,6,10,16,18,20,22,24,26,28,30]);
+const HIS=new Set([...DOT,...BAR]);
+const PRIME=n=>{ if(n<2) return false; for(let d=2;d*d<=n;d++) if(n%d===0) return false; return true; };
+const UD='۰۱۲۳۴۵۶۷۸۹', ud=n=>String(n).split('').map(c=>UD[+c]).join('');
+const ONES=['','ا','ب','ج','د','ه','و','ز','ح','ط'], TENS=['','ی','ک','ل','م','ن','س','ع','ف','ص'], HUND=['','ق','ر','ش','ت','ث','خ','ذ','ض','ظ'];
+const abjad=n=>HUND[Math.floor(n/100)%10]+TENS[Math.floor(n/10)%10]+ONES[n%10];
+let view='marks';
+function strip(){
+  $('strip').innerHTML=Array.from({length:30},(_,i)=>{ const z=i+1, kept=HIS.has(z), mark=DOT.has(z)?'.':BAR.has(z)?'|':'', close=UNP[i]===0;
+    let cls='z'+(kept?'':' miss')+(z===10||z===20?' ne':'')+((view==='close'&&close)?' close':'');
+    let top=view==='urdu'?`<span class="ur">${ud(z)}</span>`:view==='prime'?(PRIME(z)?'<span style="color:#6FD08C">p</span>':''):mark;
+    let low=view==='urdu'?`<span class="ur">${abjad(z)}</span>`:view==='close'?(close?'<span style="color:#6FC3FF">all paired</span>':UNP[i]+' single'):(UNP[i]?UNP[i]+' single':'<span style="color:#6FC3FF">paired</span>');
+    return `<div class="${cls}"><div class="m">${top}</div><div class="n">${z}</div><div class="e">${SYM[i]}</div><div class="u ${view==='urdu'?'ab':''}">${low}</div></div>`; }).join('');
+  $('leg').textContent={marks:'. dot · | bar · faded = left out',close:'blue ring = every electron paired',prime:'p = prime',urdu:'Urdu digit · abjad letters'}[view];
+}
+function draw(){
+  const cv=$('cv'), w=cv.clientWidth||600, h=Math.round(Math.max(210,Math.min(w*0.4,240))), d=window.devicePixelRatio||1; cv.width=Math.round(w*d); cv.height=Math.round(h*d); cv.style.height=h+'px';
+  const g=cv.getContext('2d'); g.setTransform(d,0,0,d,0,0); const cx=w/2, cy=h/2, t=performance.now()/1000, r1=h*0.17, r2=h*0.32;
+  g.strokeStyle='#262b2e'; [r1,r2].forEach(r=>{ g.beginPath(); g.arc(cx,cy,r,0,7); g.stroke(); });
+  g.fillStyle='#D4AF37'; g.beginPath(); g.arc(cx,cy,9,0,7); g.fill(); g.fillStyle='#0d0f10'; g.font='bold 10px ui-monospace,monospace'; g.textAlign='center'; g.fillText('[.]',cx,cy+3.5);
+  const pair=(r,a,lab)=>{ for(const s of [-0.18,0.18]){ const x=cx+Math.cos(a+s)*r, y=cy+Math.sin(a+s)*r; g.fillStyle='#6FC3FF'; g.beginPath(); g.arc(x,y,4.5,0,7); g.fill(); g.fillStyle='#0d0f10'; g.font='bold 8px ui-monospace,monospace'; g.fillText('e',x,y+3); } g.fillStyle='#8B959A'; g.font='9.5px ui-monospace,monospace'; g.fillText(lab,cx+Math.cos(a)*(r+18),cy+Math.sin(a)*(r+18)+3); };
+  pair(r1,t*0.9,'1s² · e.e'); pair(r2,-t*0.5+2,'2s² · e.e');
+  g.textAlign='left'; g.fillStyle='#8B959A'; g.fillText('Be · 4 · (e.e.[.] e.e) · both pairs full',8,h-8); g.fillText('orbits drawn for the eye',8,14);
+  requestAnimationFrame(draw);
+}
+function abj(){
+  const runs=[['run 1 · .1.2|4|6.7.8|10',[1,2,4,6,7,8,10],'حل','hal · solution','لح'],['run 2 · .11.12.13.14|16|18|20',[11,12,13,14,16,18,20],'قد','qad · stature','دق'],['run 3 · |22|24|26|28|30|',[22,24,26,28,30],'قل','qul · say!','لق'],['all 19',[...HIS].sort((a,b)=>a-b),'رعب · ربع · عرب','ruʿb awe · rubʿ quarter · ʿarab','']];
+  $('ab').innerHTML='<tr><th>run</th><th>sum</th><th>letters</th><th>as a word (order mine)</th><th>stamp</th></tr>'+runs.map(r=>{ const s=r[1].reduce((a,b)=>a+b,0); return `<tr><td>${r[0]}</td><td>${s} · <span class="ur">${ud(s)}</span></td><td class="ur" style="font-size:16px">${abjad(s)}</td><td><span class="ur" style="font-size:16px">${r[2]}</span> · ${r[3]}</td><td class="s amb">AMBER</td></tr>`; }).join('');
+  window.__ABJ__=runs.map(r=>({sum:r[1].reduce((a,b)=>a+b,0),letters:abjad(r[1].reduce((a,b)=>a+b,0))}));
+}
+const closes=UNP.map((u,i)=>u===0?i+1:0).filter(Boolean), inHis=closes.filter(z=>HIS.has(z));
+$('cl').innerHTML=`<span class="lit">${inHis.length} of ${closes.length}</span> · ${closes.join(' ')}`;
+const pk=[...HIS].filter(PRIME), pd=pk.filter(z=>DOT.has(z));
+$('pr').innerHTML=`<span class="lit">${pd.length} of ${pk.length}</span> · ${pk.join(' ')}`;
+document.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>{ view=b.dataset.v; document.querySelectorAll('[data-v]').forEach(x=>x.classList.toggle('on',x===b)); strip(); });
+window.__URDU__={closes,inHis:inHis.length,kept:HIS.size,primesKept:pk,primesDotted:pd.length,evensKept:[...HIS].filter(z=>z%2===0).length};
+strip(); abj(); draw();
+})();
+</script>
+</body>
+</html>

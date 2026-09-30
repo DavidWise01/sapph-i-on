@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>I Declared · Ion in Neon</title>
+<style>
+:root{--bg:#0e0c10;--ink:#E4E1DA;--dim:#8E8A93;--line:#25222a;--earth:#C9A45C;--wood:#4FB39A;--metal:#B8C2CC;--fire:#E8894A;--water:#6E8FE0;--vi:#B79BFF;--lit:#7FD08E;--amb:#E8B84A;--dead:#E06A6A}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.wrap{max-width:1180px;margin:0 auto;padding:18px 16px 40px}
+h1{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);font-weight:400;margin:0 0 14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+.win{border:1px solid var(--line);border-top:3px solid var(--c);border-radius:6px;padding:14px;margin:0 0 16px;background:#121016}
+.win h2{margin:0 0 10px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--c);font-weight:500;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.w1{--c:var(--earth)}.w2{--c:var(--wood)}.w3{--c:var(--metal)}.w4{--c:var(--fire)}.w5{--c:var(--water)}
+table{width:100%;border-collapse:collapse}
+td,th{padding:6px 6px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+th{color:var(--dim);font-weight:400;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase}
+.st{font-size:10px;padding:1px 5px;border-radius:3px;border:1px solid currentColor;white-space:nowrap}
+.LIT{color:var(--lit)}.AMBER{color:var(--amb)}.DEAD{color:var(--dead)}
+.ctl{display:flex;align-items:center;gap:10px;margin:10px 0;flex-wrap:wrap}
+.ctl input{flex:1;min-width:160px;accent-color:var(--c)}
+button{background:transparent;color:var(--c);border:1px solid var(--c);border-radius:3px;padding:7px 11px;font:inherit;font-size:11px;letter-spacing:.08em;cursor:pointer;text-transform:uppercase}
+button:hover{background:rgba(255,255,255,.05)}
+canvas{width:100%;display:block;background:#0b0a0d;border:1px solid var(--line);border-radius:4px;touch-action:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-top:10px}
+.cell{border:1px solid var(--line);border-radius:4px;padding:7px 9px}
+.cell b{display:block;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);font-weight:400}
+.cell span{font-size:14px}
+.bar{display:grid;grid-template-columns:62px 1fr 64px;gap:8px;align-items:center;margin:3px 0}
+.bar i{display:block;height:12px;background:var(--c);border-radius:2px;opacity:.75}
+.bar.on i{opacity:1;box-shadow:0 0 0 1px var(--ink)}
+.bar .r{text-align:right;color:var(--dim)}
+p{margin:8px 0}
+.note{color:var(--dim)}
+.eli{border-left:3px solid var(--earth);padding:6px 12px;margin-top:14px}
+.orn{color:var(--vi);font-size:10.5px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:760px){.two{grid-template-columns:1fr}}
+.hit{color:var(--lit)}
+@media(max-width:600px){table tr:first-child:has(th){display:none}table tr{display:block;border-bottom:1px solid var(--line);padding:6px 0}table td{display:block;border:0;padding:2px 0}table td:first-child{color:var(--c);font-weight:600}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1><span>R · I declared · ion ⊂ neon ⊂ oxygen ⊂ nitrogen</span><span>10 electrons · one vessel · four wearers</span></h1>
+
+<section class="win w1">
+<h2><span>W1 · source · your words, the accepted words</span><span>stamps</span></h2>
+<table>
+<tr><th>your word</th><th>accepted term</th><th>what it is</th><th></th></tr>
+<tr><td>nick · i · id · sid</td><td>handle → self → identifier → <b>security identifier (SID)</b></td><td>the name, distilled four times. a nickname is what others call you; "I" is what you call yourself; an id is a unique key; a SID is the key an operating system writes on everything you own (S‑1‑5‑…). each step strips a layer and keeps what can't be shared.</td><td><span class="st AMBER">AMBER</span></td></tr>
+<tr><td>i exist because i declared · said i do</td><td><b>performative utterance</b>; in code, a <b>declaration</b></td><td>a sentence that doesn't describe a fact but makes one: "I do" makes a marriage. <code>let i;</code> makes a variable exist in scope. in a nerve cell the declaration is the <b>action potential</b>: all or none, one bit. (W4 runs it.)</td><td><span class="st LIT">LIT</span></td></tr>
+<tr><td>sacred geometry</td><td><b>the octet as a cube = two tetrahedra</b></td><td>neon's outer 8 = 4 orbitals (1 s + 3 p) × 2 spins. 4 points spread evenly = a tetrahedron, 109.47° apart; two of them, one per spin, interlock into the 8 corners of a cube. (W5.)</td><td><span class="st LIT">LIT</span> count · <span class="st AMBER">AMBER</span> picture</td></tr>
+<tr><td>A.eon</td><td><b>argon</b> (Ar, the argon shell 2·8·8)</td><td>read as argon, and the pun holds: the air's argon was made over aeons by potassium‑40 swallowing an electron and becoming argon‑40. potassium's ion K⁺ wears the argon shell. (W3.)</td><td><span class="st LIT">LIT</span></td></tr>
+<tr><td>neon · a vessel for ion</td><td><b>isoelectronic series</b> (same electron count)</td><td>the neon shell (2·8 = 10 electrons) is worn by N³⁻, O²⁻, F⁻, Ne, Na⁺, Mg²⁺, Al³⁺. one vessel, many wearers. the ion is the atom that gained or gave electrons to get into it.</td><td><span class="st LIT">LIT</span></td></tr>
+<tr><td>ion which is I</td><td><b>Na⁺</b> (and K⁺)</td><td>sodium gives up 1 electron and becomes neon‑shaped; potassium gives 1 and becomes argon‑shaped. these two are the ions a nerve cell uses to declare. the I is written into both.</td><td><span class="st AMBER">AMBER</span></td></tr>
+<tr><td>wrapped in oxygen biome, wrapped in nitrogen exoskeleton</td><td><b>O²⁻ and N³⁻ in the same series</b></td><td>inside the neon shell the wrapping order is exact: the same 10 electrons hold looser around O than around Ne, and looser still around N. your nesting I ⊂ Ne ⊂ O ⊂ N is the size order. (W2.)</td><td><span class="st LIT">LIT</span> order</td></tr>
+<tr><td>close</td><td><b>closed shell</b></td><td>a shell with every seat filled: 2, 10, 18. neon is closed. read also as "am I close": yes, see the hit in W2.</td><td><span class="st LIT">LIT</span></td></tr>
+</table>
+</section>
+
+<section class="win w2">
+<h2><span>W2 · the nesting · one 10-electron shell on four nuclei</span><span id="sel">–</span></h2>
+<canvas id="nest"></canvas>
+<div class="ctl"><label for="z">nucleus Z</label><input type="range" id="z" min="7" max="13" step="1" value="11"><span id="zv">–</span></div>
+<div class="grid">
+<div class="cell"><b>electrons</b><span>10 · always</span></div>
+<div class="cell"><b>protons</b><span id="zp">–</span></div>
+<div class="cell"><b>pull on the outer 8 (Z<sub>eff</sub>)</b><span id="ze">–</span></div>
+<div class="cell"><b>shell size, rough</b><span id="zr">–</span></div>
+</div>
+<p><span class="hit">the hit.</span> give every nucleus the same 10 electrons. the inner two screen 0.85 each, the other seven in the shell 0.35 each: 4.15 of the charge is hidden, and the outer 8 feel Z − 4.15. more pull, smaller shell. so N³⁻ (7 protons, pull 2.85) is the loosest, widest wrap; O²⁻ (3.85) sits inside it; Ne (5.85) inside that; Na⁺ (6.85) is the tightest, the core. that is your order: I ⊂ neon ⊂ oxygen ⊂ nitrogen. <span class="st LIT">LIT</span> order · <span class="st AMBER">AMBER</span> sizes (a screening rule of thumb; measured ionic radii run N³⁻ ≈ 146 pm, O²⁻ ≈ 140, Na⁺ ≈ 102: same order, gentler spread).</p>
+<p class="note"><b>control.</b> four shells can be nested 4! = 24 ways. one of them matches the size order. a guess lands there 1 time in 24 (4.2%). yours landed. a known-bad input, putting nitrogen inside neon, fails: <span id="ctl">–</span></p>
+</section>
+
+<section class="win w3">
+<h2><span>W3 · 1D · the two vessels, and the argon made over aeons</span><span>Z<sub>eff</sub> → size</span></h2>
+<div class="two">
+<div><div class="note">neon vessel · 10 electrons · 2·8</div><div id="neL"></div></div>
+<div><div class="note">argon vessel · 18 electrons · 2·8·8</div><div id="arL"></div></div>
+</div>
+<p class="note">same law, one shell further out: 11.25 of the charge is hidden, outer 8 feel Z − 11.25. K⁺ is the core of the argon vessel the way Na⁺ is the core of the neon one.</p>
+<div class="ctl"><label for="ag">time since Earth formed</label><input type="range" id="ag" min="0" max="4.543" step="0.001" value="4.543"><span id="agv">–</span></div>
+<div class="grid">
+<div class="cell"><b>potassium-40 left</b><span id="k40">–</span></div>
+<div class="cell"><b>became argon-40 (10.72%)</b><span id="ar40">–</span></div>
+<div class="cell"><b>became calcium-40 (89.28%)</b><span id="ca40">–</span></div>
+<div class="cell"><b>half-life</b><span>1.248 billion years</span></div>
+</div>
+<p>A.eon, in numbers: a K‑40 nucleus captures one of its own electrons and turns into Ar‑40. over Earth's 4.54 billion years, 92% of the original K‑40 has decayed, and 9.9% of it became argon. that's why argon, not neon, is the third gas in the air: 0.934% argon against 0.0018% neon, 514 to 1. <span class="st LIT">LIT</span></p>
+</section>
+
+<section class="win w4">
+<h2><span>W4 · 2D · the declaration · said I do</span><span id="fired">–</span></h2>
+<canvas id="hh"></canvas>
+<div class="ctl"><button id="b5">whisper · 5</button><button id="b10">say I do · 10</button><button id="b40">shout · 40</button><span class="note">µA/cm² for 1 ms</span></div>
+<div class="grid">
+<div class="cell"><b>stimulus</b><span id="hs">–</span></div>
+<div class="cell"><b>peak voltage</b><span id="hp">–</span></div>
+<div class="cell"><b>threshold (1 ms)</b><span>6.85 µA/cm²</span></div>
+<div class="cell"><b>declared?</b><span id="hd">–</span></div>
+</div>
+<p>the membrane model runs live here (sodium, potassium and leak channels, squid-axon constants, rest −65 mV). below 6.85 the cell stays silent. above it, the cell declares: sodium, the neon‑shelled ion, rushes in and the voltage flips positive. shouting at 40 peaks at +41.7 mV; saying it at 10 peaks at +39.5. the answer barely depends on how loud you say it. it is 1 bit: I do or I don't. <span class="st LIT">LIT</span> (run in this page and checked in a separate run: 7 → +36.1, 40 → +41.7).</p>
+<p class="note"><b>the batteries, for a human nerve at 37 °C</b> (from the salt on each side of the skin of the cell): potassium inside 140 mM / outside 5 → −89.1 mV. sodium outside 145 / inside 12 → +66.6 mV. with the membrane letting potassium through most at rest, it sits at −67.3 mV; when sodium's door opens 500×, it swings to +51.1. argon-shaped K⁺ holds the silence, neon-shaped Na⁺ speaks. <span class="st LIT">LIT</span> arithmetic · <span class="st AMBER">AMBER</span> the salt levels are typical textbook values</p>
+</section>
+
+<section class="win w5">
+<h2><span>W5 · 3D · the octet as two tetrahedra, the 0 in the middle</span><span>drag to turn</span></h2>
+<canvas id="oct"></canvas>
+<p><span style="color:var(--earth)">●</span> 4 spin‑up, one tetrahedron · <span style="color:var(--vi)">●</span> 4 spin‑down, the other · together the 8 corners of a cube · centre = the nucleus, the 0. each tetrahedron's points sit 109.47° apart. 8 into 0, the same cube as before, now carrying neon. <span class="orn">ORNAMENT: electrons are clouds, not corner points. the count (4 × 2 = 8) is LIT; the picture is a way to hold it.</span></p>
+<p><b>what W1–W4 left out.</b></p>
+<table>
+<tr><td>air as layers: oxygen inside, nitrogen outside</td><td>the lower 100 km of air is stirred, not layered: 78.084% N₂, 20.946% O₂, 0.934% Ar everywhere. higher up, where gases do separate, nitrogen sits below and oxygen above. as literal air, the wrap is reversed.</td><td><span class="st DEAD">DEAD</span></td></tr>
+<tr><td>nitrogen exoskeleton</td><td>the shell insects wear is chitin, (C₈H₁₃O₅N)ₙ. nitrogen is 14.007 / 203.19 = 6.9% of it by mass. every exoskeleton carries nitrogen.</td><td><span class="st LIT">LIT</span></td></tr>
+<tr><td>oxygen biome</td><td>about 65% of a human body by mass is oxygen, mostly in water.</td><td><span class="st AMBER">AMBER</span></td></tr>
+<tr><td>the I in two vessels</td><td>a nerve uses both: K⁺ (argon vessel) inside the cell, Na⁺ (neon vessel) outside. the declaration is the moment they trade places.</td><td><span class="st LIT">LIT</span></td></tr>
+</table>
+<div class="eli"><b>small words.</b> neon has 10 tiny electrons, and every seat is full, so it's calm. other atoms want that calm too. nitrogen grabs 3 extra, oxygen grabs 2, sodium throws 1 away, and then they all have exactly neon's 10. the fewer protons in the middle, the weaker the hug, so nitrogen's 10 float widest, oxygen's a bit closer, neon's closer still, sodium's tightest. that's your nesting: you, sodium, in the middle, wrapped in neon, wrapped in oxygen, wrapped in nitrogen. and when you decide something, a nerve opens a door, sodium runs in, and the cell says yes all at once. it can't say half a yes.</div>
+</section>
+</div>
+
+<script>
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id);
+const S2=2*0.85+7*0.35, S3=2*1.0+8*0.85+7*0.35, A0=52.918;
+const NE=[['N³⁻',7,'nitrogen exoskeleton'],['O²⁻',8,'oxygen biome'],['F⁻',9,''],['Ne',10,'the vessel'],['Na⁺',11,'I · the ion'],['Mg²⁺',12,''],['Al³⁺',13,'']];
+const AR=[['P³⁻',15],['S²⁻',16],['Cl⁻',17],['Ar',18],['K⁺',19],['Ca²⁺',20]];
+const rNe=Z=>A0*4/(Z-S2), rAr=Z=>A0*9/(Z-S3);
+const HIS=['Na⁺','Ne','O²⁻','N³⁻'];
+const zOf=n=>NE.find(e=>e[0]===n)[1];
+const nestOK=ord=>ord.every((n,i)=>i===0||rNe(zOf(n))>rNe(zOf(ord[i-1])));
+function fit(cv,r,mn,mx){const w=cv.clientWidth||600,h=Math.round(Math.max(mn,Math.min(w*r,mx))),d=devicePixelRatio||1;cv.width=Math.round(w*d);cv.height=Math.round(h*d);cv.style.height=h+'px';const g=cv.getContext('2d');g.setTransform(d,0,0,d,0,0);return[g,w,h];}
+const ST={};
+// W2
+function nest(){
+  const Z=+$('z').value, e=NE.find(x=>x[1]===Z), [g,W,H]=fit($('nest'),0.5,260,380), cx=W/2, cy=H/2, k=(Math.min(W,H)/2-22)/rNe(7);
+  const col={'N³⁻':'#4FB39A','O²⁻':'#7FD08E','Ne':'#E8894A','Na⁺':'#C9A45C'};
+  HIS.slice().reverse().forEach(n=>{const r=rNe(zOf(n))*k; g.strokeStyle=col[n]; g.globalAlpha=n===e[0]?1:.45; g.lineWidth=n===e[0]?2.5:1.2; g.beginPath(); g.arc(cx,cy,r,0,7); g.stroke();
+    g.globalAlpha=1; g.fillStyle=col[n]; g.font='10px ui-monospace,monospace'; const lab=n+' · '+NE.find(x=>x[0]===n)[2]; const ang=-Math.PI/2-0.35*HIS.indexOf(n); g.fillText(W<420?n:lab,cx+r*Math.cos(ang)+4,cy+r*Math.sin(ang)-4);});
+  const r=rNe(Z)*k; g.fillStyle='#E4E1DA';
+  for(let i=0;i<8;i++){const a=i*Math.PI/4+0.3; g.beginPath(); g.arc(cx+r*Math.cos(a),cy+r*Math.sin(a),3.2,0,7); g.fill();}
+  for(let i=0;i<2;i++){const a=i*Math.PI; g.beginPath(); g.arc(cx+7*Math.cos(a),cy+7*Math.sin(a),2.4,0,7); g.fill();}
+  g.fillStyle='#E06A6A'; g.beginPath(); g.arc(cx,cy,3.2+Z*0.15,0,7); g.fill();
+  g.fillStyle='#8E8A93'; g.fillText('10 electrons on '+e[0]+(W<420?'':' · rings drawn to the screening-rule size'),10,H-8);
+  $('sel').textContent=e[0]+(e[2]?' · '+e[2]:''); $('zv').textContent=Z+' · '+e[0]; $('zp').textContent=Z+' ('+(Z<10?'gained '+(10-Z):Z>10?'gave '+(Z-10):'neutral')+')';
+  $('ze').textContent=(Z-S2).toFixed(2); $('zr').textContent='~'+rNe(Z).toFixed(1)+' pm';
+  ST.sel=e[0]; ST.r=rNe(Z);
+}
+// W3
+function ladders(){
+  const mk=(el,arr,rf)=>{const mx=rf(arr[0][1]); $(el).innerHTML=arr.map(([n,Z])=>`<div class="bar${HIS.includes(n)||n==='K⁺'||n==='Ar'?' on':''}"><span>${n}</span><i style="width:${(100*rf(Z)/mx).toFixed(1)}%"></i><span class="r">${rf(Z).toFixed(1)} pm</span></div>`).join('');};
+  mk('neL',NE,rNe); mk('arL',AR,rAr);
+}
+function aeon(){const t=+$('ag').value, left=2**(-t/1.248), gone=1-left;
+  $('agv').textContent=t.toFixed(3)+' billion years'; $('k40').textContent=(100*left).toFixed(1)+'%'; $('ar40').textContent=(100*gone*0.1072).toFixed(1)+'%'; $('ca40').textContent=(100*gone*0.8928).toFixed(1)+'%';
+  ST.k40=left; ST.ar40=gone*0.1072;}
+// W4 membrane
+function hh(I0){let V=-65,m=0.0529,h=0.5961,n=0.3177,pk=-99;const dt=0.01,ex=Math.exp,tr=[];
+  for(let s=0;s<3000;s++){const t=s*dt,I=t>=1&&t<2?I0:0;
+    const am=Math.abs(V+40)<1e-6?1:0.1*(V+40)/(1-ex(-(V+40)/10)),bm=4*ex(-(V+65)/18),ah=0.07*ex(-(V+65)/20),bh=1/(1+ex(-(V+35)/10)),an=Math.abs(V+55)<1e-6?0.1:0.01*(V+55)/(1-ex(-(V+55)/10)),bn=0.125*ex(-(V+65)/80);
+    m+=dt*(am*(1-m)-bm*m);h+=dt*(ah*(1-h)-bh*h);n+=dt*(an*(1-n)-bn*n);
+    V+=dt*(I-120*m**3*h*(V-50)-36*n**4*(V+77)-0.3*(V+54.387)); if(t>1)pk=Math.max(pk,V); if(s%10===0)tr.push(V);}
+  return{pk,tr};}
+const RUNS={};
+function say(I0){const res=hh(I0); RUNS[I0]=res; const [g,W,H]=fit($('hh'),0.36,200,280), L=40, R=W-10, T=12, B=H-24, X=i=>L+(R-L)*i/300, Y=v=>T+(B-T)*(60-v)/140;
+  g.strokeStyle='#25222a'; g.fillStyle='#8E8A93'; g.font='10px ui-monospace,monospace';
+  for(const v of[40,0,-40,-80]){g.beginPath();g.moveTo(L,Y(v));g.lineTo(R,Y(v));g.stroke();g.fillText((v>0?'+':'')+v,4,Y(v)+3);}
+  g.fillText('mV',4,T+2); g.fillText('0 ms',L,H-8); g.fillText('30 ms',R-36,H-8);
+  g.fillStyle='rgba(232,137,74,.18)'; g.fillRect(X(10),T,X(20)-X(10),B-T);
+  for(const k of Object.keys(RUNS)){const r=RUNS[k]; g.strokeStyle=+k===I0?'#E8894A':'rgba(232,137,74,.3)'; g.lineWidth=+k===I0?2:1; g.beginPath(); r.tr.forEach((v,i)=>i?g.lineTo(X(i),Y(v)):g.moveTo(X(i),Y(v))); g.stroke();}
+  g.lineWidth=1; const fired=res.pk>0;
+  $('hs').textContent=I0+' µA/cm²'; $('hp').textContent=(res.pk>0?'+':'')+res.pk.toFixed(1)+' mV'; $('hd').textContent=fired?'1 · I do':'0 · silent'; $('fired').textContent=fired?'declared':'not declared';
+  ST.I=I0; ST.fired=fired; ST.peak=res.pk; window.__DEC__={...ST};}
+// W5 octet
+let ax=0.5, ay=0.6, drag=null;
+const CUBE=[];for(const x of[-1,1])for(const y of[-1,1])for(const z of[-1,1])CUBE.push([x,y,z]);
+function oct(){const [g,W,H]=fit($('oct'),0.55,260,360), cx=W/2, cy=H/2, s=Math.min(W,H)*0.26;
+  const rot=([x,y,z])=>{let c=Math.cos(ay),sn=Math.sin(ay);[x,z]=[x*c+z*sn,-x*sn+z*c];c=Math.cos(ax);sn=Math.sin(ax);[y,z]=[y*c-z*sn,y*sn+z*c];return[cx+s*x/(1+z*0.12),cy+s*y/(1+z*0.12),z];};
+  const P=CUBE.map(rot);
+  g.strokeStyle='rgba(110,143,224,.25)'; g.beginPath(); for(let i=0;i<8;i++)for(let j=i+1;j<8;j++){let d=0;for(let k=0;k<3;k++)if(CUBE[i][k]!==CUBE[j][k])d++; if(d===1){g.moveTo(P[i][0],P[i][1]);g.lineTo(P[j][0],P[j][1]);}} g.stroke();
+  const up=CUBE.map((v,i)=>v[0]*v[1]*v[2]>0?i:-1).filter(i=>i>=0), dn=CUBE.map((v,i)=>v[0]*v[1]*v[2]<0?i:-1).filter(i=>i>=0);
+  for(const [set,c] of [[up,'#C9A45C'],[dn,'#B79BFF']]){g.strokeStyle=c; g.globalAlpha=.8; g.beginPath(); for(let a=0;a<4;a++)for(let b=a+1;b<4;b++){g.moveTo(P[set[a]][0],P[set[a]][1]);g.lineTo(P[set[b]][0],P[set[b]][1]);} g.stroke(); g.globalAlpha=1;}
+  CUBE.map((v,i)=>[P[i][2],i]).sort((a,b)=>b[0]-a[0]).forEach(([,i])=>{g.fillStyle=up.includes(i)?'#C9A45C':'#B79BFF'; g.beginPath(); g.arc(P[i][0],P[i][1],5+(1-P[i][2])*1.5,0,7); g.fill();});
+  g.fillStyle='#E06A6A'; g.beginPath(); g.arc(cx,cy,5,0,7); g.fill(); g.fillStyle='#8E8A93'; g.font='10px ui-monospace,monospace'; g.fillText('0',cx+8,cy+4);
+  g.fillText(W<420?'4 up + 4 down = 8 · 109.47°':'4 up + 4 down = 8 · tetrahedral angle 109.47°',10,H-8);}
+const cv=$('oct');
+cv.addEventListener('pointerdown',e=>{drag=[e.clientX,e.clientY];cv.setPointerCapture(e.pointerId);});
+cv.addEventListener('pointermove',e=>{if(!drag)return;ay+=(e.clientX-drag[0])*0.01;ax+=(e.clientY-drag[1])*0.01;drag=[e.clientX,e.clientY];oct();});
+cv.addEventListener('pointerup',()=>drag=null);
+let spin=true; cv.addEventListener('pointerdown',()=>spin=false);
+(function loop(){if(spin){ay+=0.004;oct();}requestAnimationFrame(loop);})();
+// control
+const bad=['Na⁺','N³⁻','Ne','O²⁻'];
+$('ctl').textContent=(nestOK(HIS)?'your order passes':'your order FAILS')+' · bad order '+(nestOK(bad)?'passes (control broken)':'fails, as it must');
+ST.hisOK=nestOK(HIS); ST.badOK=nestOK(bad);
+$('z').addEventListener('input',nest); $('ag').addEventListener('input',aeon);
+$('b5').onclick=()=>say(5); $('b10').onclick=()=>say(10); $('b40').onclick=()=>say(40);
+addEventListener('resize',()=>{nest();say(ST.I||10);oct();});
+ladders(); aeon(); nest(); say(5); say(10);
+})();
+</script>
+</body>
+</html>

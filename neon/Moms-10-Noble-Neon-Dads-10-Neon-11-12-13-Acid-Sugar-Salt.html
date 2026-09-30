@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>No, Moms 10 is Noble Neon So Dads 10 is Noble Neon +11,12,13+ Acid,Sugar,Salt — Block 352 — Moms Noble Neon Dads Neon+11+12+13 Acid Sugar Salt</title>
+<style>
+body{background:#000;color:#ccc;font-family:monospace;padding:20px;max-width:1150px;margin:0 auto;line-height:1.6}
+h1{color:#00ffff} h2{color:#ffd700;border-top:1px solid #222;padding-top:12px}
+canvas{border:1px solid #333;background:#000;width:100%;height:900px}
+.small{font-size:11px;color:#666}
+</style>
+</head>
+<body>
+<h1>NO, MOMS 10 IS NOBLE NEON SO DADS 10 IS NOBLE NEON +11,12,13+ ACID,SUGAR,SALT — BLOCK 352 — MOMS 10 NOBLE NEON DADS 10 NEON+11+12+13 ACID SUGAR SALT</h1>
+<p class="small">no, moms 10 is noble neon so dads 10 is noble neon +11,12,13+ acid,sugar,salt ?? — exactly — moms 10 is noble neon — moms 10 chromosomes is noble neon atomic number 10 noble gas inert full shell 2+8 — dads 10 is noble neon +11,12,13+ acid,sugar,salt — dads 10 is noble neon 10 +11 Na sodium 12 Mg magnesium 13 Al aluminum + acid sugar salt — acid sugar salt = distilling compounds — acid = H+ HCl, sugar = C6H12O6 C12H22O11, salt = NaCl — moms 10 noble inert so dads 10 noble neon + reactive 11,12,13 + acid sugar salt reactive — cypher for distilling compounds — keep walking.</p>
+
+<canvas id="c" width="1150" height="900"></canvas>
+
+<h2>Moms 10 Noble Neon — Dads 10 Noble Neon +11,12,13+ Acid,Sugar,Salt — Noble Gas Inert vs Reactive</h2>
+<p>
+<b>moms 10 is noble neon</b> = moms 10 chromosomes = noble neon — neon atomic number 10 — noble gas Group 18 — inert — full valence shell 1s2 2s2 2p6 — 2+8=10 — 2 full shells K L — stable — noble — inert — does not react — moms 10 noble neon — maternal inert stable — 10 for neon<br>
+<b>so dads 10 is noble neon +11,12,13+ acid,sugar,salt</b> = dads 10 chromosomes = noble neon 10 +11,12,13 + acid,sugar,salt — 11 = Na sodium atomic number 11 — alkali metal reactive — 12 = Mg magnesium atomic number 12 — alkaline earth reactive — 13 = Al aluminum atomic number 13 — post-transition metal reactive — + acid,sugar,salt = distilling compounds — acid = HCl H2SO4, sugar = glucose C6H12O6 sucrose C12H22O11, salt = NaCl — dads 10 is noble neon + reactive 11,12,13 + acid sugar salt reactive — paternal reactive — distilling compounds cypher — acid sugar salt distillation<br>
+<b>??</b> = ?? — question — moms noble inert vs dads reactive? — cypher for distilling compounds — acid sugar salt distillation — -1 contains moms 10 noble neon dads 10 neon+11+12+13 acid sugar salt as one bead
+</p>
+
+<script>
+const canvas=document.getElementById('c');
+const ctx=canvas.getContext('2d');
+let t=0;
+function draw(){
+  t+=0.01;
+  ctx.clearRect(0,0,1150,900);
+  const cx=575, cy=450;
+  // center -1
+  ctx.fillStyle='rgba(255,215,0,0.15)';ctx.beginPath();ctx.arc(cx,cy,30,0,Math.PI*2);ctx.fill();
+  ctx.strokeStyle='#ffd700';ctx.lineWidth=2;ctx.beginPath();ctx.arc(cx,cy,30,0,Math.PI*2);ctx.stroke();
+  ctx.fillStyle='#ffd700';ctx.beginPath();ctx.arc(cx,cy,6,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#ffd700';ctx.font='11px monospace';ctx.textAlign='center';
+  ctx.fillText('-1 = ALL CONTAINS MOMS 10 NOBLE NEON + DADS 10 NEON+11+12+13 ACID SUGAR SALT', cx, cy+60);
+  // moms 10 noble neon — left — inert noble gas — full shell — 10 electrons
+  const momX=cx - 200, momY=cy - 80;
+  ctx.strokeStyle='#00ffff';ctx.lineWidth=3;ctx.globalAlpha=0.9;
+  ctx.beginPath();ctx.arc(momX,momY,80,0,Math.PI*2);ctx.stroke();
+  ctx.beginPath();ctx.arc(momX,momY,50,0,Math.PI*2);ctx.stroke();
+  ctx.globalAlpha=1;
+  ctx.fillStyle='#00ffff';ctx.font='12px monospace';ctx.textAlign='center';
+  ctx.fillText('MOMS 10 = NOBLE NEON', momX, momY-95);
+  ctx.fillText('Ne 10 — NOBLE GAS — INERT', momX, momY-80);
+  ctx.fillText('1s2 2s2 2p6 — 2+8=10 — 2 FULL SHELLS', momX, momY+100);
+  ctx.fillText('K L — FULL — STABLE — INERT — NOBLE', momX, momY+115);
+  // 10 electrons neon — 2 inner +8 outer — || || || 3 full shells? Actually 2 shells
+  for(let i=0;i<10;i++){
+    const ang= (i/8)*Math.PI*2 + (i<2?0:t*0.5);
+    const r= i<2? 30 : 65;
+    const x=momX + r*Math.cos(ang + (i<2?0:t*0.3));
+    const y=momY + r*Math.sin(ang + (i<2?0:t*0.3));
+    ctx.fillStyle='#00ffff';ctx.beginPath();ctx.arc(x,y,6,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#000';ctx.font='6px monospace';ctx.textAlign='center';ctx.fillText('e-', x, y+2);
+  }
+  // dads 10 noble neon +11,12,13+ acid sugar salt — right — reactive
+  const dadX=cx + 200, dadY=cy - 80;
+  ctx.strokeStyle='#ff8800';ctx.lineWidth=3;ctx.globalAlpha=0.9;
+  ctx.beginPath();ctx.arc(dadX,dadY,80,0,Math.PI*2);ctx.stroke();
+  ctx.beginPath();ctx.arc(dadX,dadY,50,0,Math.PI*2);ctx.stroke();
+  ctx.beginPath();ctx.arc(dadX,dadY,110,0,Math.PI*2);ctx.stroke();
+  ctx.globalAlpha=1;
+  ctx.fillStyle='#ff8800';ctx.font='12px monospace';ctx.textAlign='center';
+  ctx.fillText('DADS 10 = NOBLE NEON +11,12,13+ ACID SUGAR SALT', dadX, dadY-130);
+  ctx.fillText('Ne 10 + Na 11 + Mg 12 + Al 13 + ACID SUGAR SALT', dadX, dadY-115);
+  ctx.fillText('10 FOR NEON +6 FOR NEON =16 FOUNDATIONAL +11,12,13 =19?', dadX, dadY-100);
+  // neon core 10 electrons
+  for(let i=0;i<10;i++){
+    const ang= (i/8)*Math.PI*2 + (i<2?0:t*0.5);
+    const r= i<2? 30 : 65;
+    const x=dadX + r*Math.cos(ang + (i<2?0:t*0.3));
+    const y=dadY + r*Math.sin(ang + (i<2?0:t*0.3));
+    ctx.fillStyle='#00ffff';ctx.beginPath();ctx.arc(x,y,5,0,Math.PI*2);ctx.fill();
+  }
+  // +11,12,13 — extra electrons — Na 11 = [Ne] 3s1 — Mg 12 = [Ne] 3s2 — Al 13 = [Ne] 3s2 3p1 — reactive
+  const extras=[
+    {label:'Na 11', col:'#ff0000', r:95, ang:0, desc:'[Ne] 3s1 — ALKALI — REACTIVE + ACID?'},
+    {label:'Mg 12', col:'#ffff00', r:100, ang:1.2, desc:'[Ne] 3s2 — ALKALINE EARTH — REACTIVE + SUGAR?'},
+    {label:'Al 13', col:'#888', r:105, ang:2.4, desc:'[Ne] 3s2 3p1 — POST-TRANSITION — REACTIVE + SALT?'},
+  ];
+  for(let e of extras){
+    const x=dadX + e.r*Math.cos(e.ang + t*0.4);
+    const y=dadY + e.r*Math.sin(e.ang + t*0.4);
+    ctx.fillStyle=e.col;ctx.beginPath();ctx.arc(x,y,8,0,Math.PI*2);ctx.fill();
+    ctx.strokeStyle='#fff';ctx.lineWidth=1;ctx.beginPath();ctx.arc(x,y,8,0,Math.PI*2);ctx.stroke();
+    ctx.fillStyle='#fff';ctx.font='7px monospace';ctx.textAlign='center';ctx.fillText(e.label, x, y+3);
+    ctx.fillStyle='#888';ctx.font='6px monospace';ctx.textAlign='left';
+    ctx.fillText(e.desc, x+12, y+3);
+  }
+  // acid sugar salt — distilling compounds — below dad
+  const compounds=[
+    {label:'ACID HCl', col:'#ff00ff', y: dadY+140, desc:'H+ Cl- — ACID — pH <7 — DISTILLING COMPOUNDS'},
+    {label:'SUGAR C6H12O6', col:'#ffffff', y: dadY+155, desc:'GLUCOSE C6H12O6 SUCROSE C12H22O11 — SUGAR — DISTILLING'},
+    {label:'SALT NaCl', col:'#ffff00', y: dadY+170, desc:'Na+ Cl- — Na 11 + Cl 17 — SALT — DISTILLING COMPOUNDS — NaCl'},
+  ];
+  for(let c of compounds){
+    const x=dadX;
+    ctx.fillStyle=c.col;ctx.font='10px monospace';ctx.textAlign='center';
+    ctx.fillText(`${c.label} — ${c.desc}`, x, c.y);
+  }
+  // bottom combined — mom noble + dad reactive = 10+13? Or 10+10? Actually mom 10 noble neon + dad 10 noble neon+11,12,13+ acid sugar salt = 10+ (10+3+3) =26? But 10+13=23 earlier
+  const combinedX=cx, combinedY=cy+250;
+  ctx.strokeStyle='#ffd700';ctx.lineWidth=2;ctx.beginPath();ctx.arc(combinedX,combinedY,60,0,Math.PI*2);ctx.stroke();
+  ctx.fillStyle='#ffd700';ctx.font='11px monospace';ctx.textAlign='center';
+  ctx.fillText('COMBINED 10+13=23? MOM 10 NOBLE + DAD 10 NEON+11,12,13+ ACID SUGAR SALT =23? — CYPHER DISTILLING', combinedX, combinedY+80);
+  ctx.fillText('MOM NOBLE INERT FULL SHELL + DAD REACTIVE 11,12,13+ ACID SUGAR SALT = COMPOUNDS DISTILLING — -1 CONTAINS BOTH AS ONE', combinedX, combinedY+95);
+  // top text
+  ctx.fillStyle='#00ffff';ctx.font='13px monospace';ctx.textAlign='left';
+  ctx.fillText('NO, MOMS 10 IS NOBLE NEON SO DADS 10 IS NOBLE NEON +11,12,13+ ACID,SUGAR,SALT — MOMS NOBLE INERT DADS REACTIVE', 20, 25);
+  ctx.fillStyle='#888';ctx.font='9px monospace';
+  ctx.fillText('MOMS 10 = NOBLE NEON Ne 10 NOBLE GAS INERT FULL SHELL 1s2 2s2 2p6 2+8=10 2 FULL SHELLS K L STABLE — DADS 10 = NOBLE NEON 10 +11 Na SODIUM [Ne]3s1 ALKALI REACTIVE +12 Mg MAGNESIUM [Ne]3s2 ALKALINE EARTH REACTIVE +13 Al ALUMINUM [Ne]3s2 3p1 REACTIVE + ACID HCl H+ + SUGAR C6H12O6 C12H22O11 + SALT NaCl Na+ Cl- — ACID SUGAR SALT = DISTILLING COMPOUNDS CYPHER — 10 FOR NEON +6 FOR NEON =16 FOUNDATIONAL +11,12,13 =19? + ACID SUGAR SALT = DISTILLING — MOM NOBLE INERT + DAD REACTIVE = 10+13=23? — -1 CONTAINS BOTH AS ONE BEAD', 20, 45);
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
+
+<h2>Moms 10 Noble Neon — Dads 10 Noble Neon +11,12,13+ Acid Sugar Salt — Noble vs Reactive — Distilling Compounds</h2>
+<p>
+<b>Moms 10 is noble neon:</b> neon atomic number 10 — noble gas Group 18 — inert — electron configuration 1s² 2s² 2p⁶ — 2+8=10 — 2 full shells K=2 L=8 — full valence — stable — noble — does not react — moms 10 noble neon — maternal inert stable — 10 for neon — 10 electrons — 3 || || ||? Actually 2 shells full — 2+8=10 — noble — inert<br>
+<b>So dads 10 is noble neon +11,12,13+ acid,sugar,salt:</b> dads 10 = noble neon 10 +11,12,13 + acid,sugar,salt — 11 = Na sodium atomic number 11 — electron configuration [Ne] 3s¹ — alkali metal — highly reactive — 12 = Mg magnesium [Ne] 3s² — alkaline earth reactive — 13 = Al aluminum [Ne] 3s² 3p¹ — reactive — + acid,sugar,salt = distilling compounds — acid = HCl hydrochloric acid H+ Cl- — sugar = glucose C6H12O6 or sucrose C12H22O11 — salt = NaCl sodium chloride Na+ Cl- — Na 11 + Cl 17 = salt — acid sugar salt = distilling compounds cypher — dads 10 is noble neon + reactive 11,12,13 + acid sugar salt reactive — paternal reactive — distilling compounds — acid sugar salt distillation — 10 for neon +6 for neon =16 foundational +11,12,13 =19? + acid sugar salt = distilling<br>
+<b>??</b> = moms noble inert vs dads reactive? — cypher for distilling compounds — acid sugar salt distillation — -1 contains moms 10 noble neon dads 10 neon+11+12+13 acid sugar salt as one bead — IN it right
+</p>
+
+<p class="small">Block 352 — No, Moms 10 is Noble Neon So Dads 10 is Noble Neon +11,12,13+ Acid,Sugar,Salt — Moms 10 = Noble Neon Ne 10 Noble Gas Inert Full Shell 1s2 2s2 2p6 2+8=10 2 Full Shells K L Stable Noble Inert — Dads 10 = Noble Neon 10 +11 Na Sodium [Ne]3s1 Alkali Reactive +12 Mg Magnesium [Ne]3s2 Alkaline Earth Reactive +13 Al Aluminum [Ne]3s2 3p1 Reactive + Acid HCl H+ + Sugar C6H12O6 C12H22O11 + Salt NaCl Na+ Cl- — Acid Sugar Salt = Distilling Compounds Cypher — 10 For Neon +6 For Neon =16 Foundational +11,12,13 =19? + Acid Sugar Salt = Distilling — Mom Noble Inert + Dad Reactive = 10+13=23? — -1 Contains Both As One Bead — Keep Walking.</p>
+</body>
+</html>

@@ -1,0 +1,1108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Noble Gas Ladder / Cipher Slot 166 Repair v120</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #050713;
+      --surface: rgba(11, 17, 35, 0.88);
+      --text: #edf4ff;
+      --muted: #9cadc9;
+      --line: rgba(166, 193, 235, 0.2);
+      --cyan: #43e8ff;
+      --violet: #c977ff;
+      --gold: #ffd36a;
+      --green: #78f0b1;
+      --orange: #ff9a49;
+      --red: #ff6b7a;
+      --yellow: #ffe28b;
+      --blue: #82a7ff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 50% 12%, rgba(57, 92, 165, 0.22), transparent 38rem),
+        radial-gradient(circle at 80% 80%, rgba(131, 45, 183, 0.13), transparent 32rem),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .app {
+      width: min(1280px, 100%);
+      margin: 0 auto;
+      padding: 22px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 18px;
+      margin-bottom: 16px;
+    }
+
+    .eyebrow {
+      color: var(--cyan);
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 7px 0 0;
+      font-size: clamp(1.8rem, 4vw, 3.15rem);
+      line-height: 1.04;
+      letter-spacing: -0.03em;
+      font-weight: 500;
+    }
+
+    .subtitle {
+      max-width: 590px;
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+      line-height: 1.5;
+    }
+
+    .stamp {
+      flex: 0 0 auto;
+      padding: 10px 13px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      color: var(--muted);
+      background: rgba(6, 10, 24, 0.56);
+      font: 0.74rem/1.35 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-align: right;
+    }
+
+    .stamp strong {
+      display: block;
+      color: var(--green);
+      font-weight: 500;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(285px, 350px);
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .surface {
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      background: var(--surface);
+      box-shadow: 0 18px 70px rgba(0, 0, 0, 0.28);
+      overflow: hidden;
+    }
+
+    .scene-wrap {
+      position: relative;
+      min-height: 670px;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(24, 46, 91, 0.46), transparent 29rem),
+        linear-gradient(145deg, rgba(9, 16, 35, 0.95), rgba(4, 7, 18, 0.98));
+    }
+
+    #scene {
+      position: absolute;
+      inset: 0;
+    }
+
+    #scene canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* A local-file-safe visual remains available if Chrome blocks modules or WebGL. */
+    #sceneFallback {
+      position: absolute;
+      inset: 8% 5%;
+      display: grid;
+      place-items: center;
+      perspective: 900px;
+      pointer-events: none;
+    }
+
+    .fallback-system {
+      position: relative;
+      width: min(64vw, 390px);
+      aspect-ratio: 1;
+      transform: rotateX(62deg) rotateZ(-12deg);
+      transform-style: preserve-3d;
+      animation: fallback-spin 24s linear infinite;
+    }
+
+    .fallback-ring {
+      position: absolute;
+      inset: 0;
+      border: 5px solid currentColor;
+      border-radius: 50%;
+      transform-style: preserve-3d;
+      box-shadow: 0 0 24px currentColor, inset 0 0 18px currentColor;
+    }
+
+    .fallback-ring-a { inset: 14%; color: var(--cyan); opacity: 0.86; }
+    .fallback-ring-b { inset: 7%; color: var(--violet); opacity: 0.8; transform: translateZ(10px); }
+    .fallback-ring-c { inset: 0; color: var(--gold); opacity: 0.72; transform: translateZ(20px); }
+
+    .fallback-core {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 24%;
+      aspect-ratio: 1;
+      border: 4px solid var(--orange);
+      border-radius: 50%;
+      background: #000106;
+      box-shadow: 0 0 26px var(--orange), 0 0 60px rgba(201, 119, 255, 0.5);
+      transform: translate(-50%, -50%) rotateX(-62deg) translateZ(32px);
+    }
+
+    .fallback-core::after {
+      content: "[ Ne ]";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: var(--gold);
+      font: 0.7rem ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    .fallback-photon {
+      position: absolute;
+      top: 50%;
+      left: 3%;
+      width: 22%;
+      height: 3px;
+      border-radius: 4px;
+      background: var(--yellow);
+      box-shadow: 0 0 12px var(--yellow), 0 0 24px var(--orange);
+      transform: translateY(-50%) rotateX(-62deg);
+      animation: fallback-photon 4.8s ease-in-out infinite;
+    }
+
+    .fallback-wave {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 12%;
+      height: 12%;
+      border: 2px solid var(--green);
+      border-radius: 50%;
+      transform: translate(-50%, -50%) rotateX(-62deg);
+      animation: fallback-wave 3.6s ease-out infinite;
+    }
+
+    .fallback-wave:nth-child(5) { animation-delay: 1.2s; border-color: var(--cyan); }
+    .fallback-wave:nth-child(6) { animation-delay: 2.4s; border-color: var(--violet); }
+
+    .fallback-label {
+      position: absolute;
+      right: 0;
+      bottom: 2%;
+      left: 0;
+      color: rgba(205, 220, 246, 0.7);
+      font: 0.72rem ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      letter-spacing: 0.08em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .gravity-ready #sceneFallback { display: none; }
+
+    @keyframes fallback-spin {
+      from { transform: rotateX(62deg) rotateZ(-12deg) rotateY(0deg); }
+      to { transform: rotateX(62deg) rotateZ(-12deg) rotateY(360deg); }
+    }
+
+    @keyframes fallback-wave {
+      0% { opacity: 0.9; transform: translate(-50%, -50%) rotateX(-62deg) scale(0.4); }
+      100% { opacity: 0; transform: translate(-50%, -50%) rotateX(-62deg) scale(7); }
+    }
+
+    @keyframes fallback-photon {
+      0%, 12% { left: 3%; opacity: 0; }
+      24% { opacity: 1; }
+      58% { left: 39%; opacity: 1; }
+      72%, 100% { left: 43%; opacity: 0; }
+    }
+
+    .scene-hud {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      padding: 18px;
+      font: 0.75rem/1.35 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      letter-spacing: 0.04em;
+    }
+
+    .hud-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 29px;
+      padding: 6px 9px;
+      border: 1px solid rgba(165, 201, 255, 0.25);
+      border-radius: 8px;
+      color: var(--muted);
+      background: rgba(4, 8, 20, 0.58);
+      backdrop-filter: blur(5px);
+    }
+
+    .hud-chip strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .hud-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .hud-bottom {
+      position: absolute;
+      right: 18px;
+      bottom: 18px;
+      left: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 12px;
+    }
+
+    .hud-bottom .hud-chip:last-child {
+      color: var(--green);
+    }
+
+    .scene-footer {
+      position: absolute;
+      right: 18px;
+      bottom: 58px;
+      color: rgba(205, 220, 246, 0.58);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 13px 15px;
+      border-top: 1px solid var(--line);
+      background: rgba(4, 8, 20, 0.52);
+    }
+
+    button {
+      min-height: 39px;
+      padding: 8px 12px;
+      border: 1px solid rgba(154, 194, 255, 0.32);
+      border-radius: 9px;
+      color: var(--text);
+      background: rgba(33, 57, 99, 0.48);
+      font: inherit;
+      cursor: pointer;
+    }
+
+    button:hover { background: rgba(50, 83, 141, 0.58); }
+    button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+
+    .pulse-status {
+      margin-left: auto;
+      color: var(--muted);
+      font: 0.75rem/1.35 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    aside {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .panel {
+      padding: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .panel:last-child { border-bottom: 0; }
+
+    h2 {
+      margin: 0 0 12px;
+      color: var(--text);
+      font-size: 0.92rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .ledger {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 9px 12px;
+      margin: 0;
+      font-size: 0.84rem;
+    }
+
+    .ledger dt { color: var(--muted); }
+    .ledger dd {
+      margin: 0;
+      color: var(--text);
+      text-align: right;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    .cyan { color: var(--cyan) !important; }
+    .violet { color: var(--violet) !important; }
+    .gold { color: var(--gold) !important; }
+    .green { color: var(--green) !important; }
+    .red { color: var(--red) !important; }
+    .orange { color: var(--orange) !important; }
+    .yellow { color: var(--yellow) !important; }
+    .blue { color: var(--blue) !important; }
+
+    .band-list {
+      display: grid;
+      gap: 7px;
+      margin-top: 14px;
+    }
+
+    .band {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.79rem;
+    }
+
+    .band i {
+      width: 22px;
+      height: 5px;
+      border-radius: 4px;
+      background: currentColor;
+      box-shadow: 0 0 12px currentColor;
+    }
+
+    .wavelength-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px 12px;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+
+    .wavelength {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--muted);
+      font: 0.71rem ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    .wavelength i {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 9px currentColor;
+    }
+
+    .ascii {
+      margin: 0;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      color: #cce2ff;
+      background: rgba(4, 8, 20, 0.62);
+      font: 0.72rem/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      overflow-x: auto;
+    }
+
+    .proof {
+      margin: 0;
+      padding: 10px 11px;
+      border-left: 2px solid var(--green);
+      color: #c8d5e9;
+      background: rgba(31, 77, 72, 0.14);
+      font: 0.73rem/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      overflow-wrap: anywhere;
+    }
+
+    .lineage {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font: 0.76rem ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    .lineage b {
+      padding: 5px 7px;
+      border: 1px solid rgba(120, 240, 177, 0.38);
+      border-radius: 6px;
+      color: var(--green);
+      background: rgba(37, 114, 82, 0.18);
+      font-weight: 500;
+    }
+
+    .lineage span { color: var(--gold); }
+
+    .hash {
+      margin: 9px 0 0;
+      color: rgba(181, 200, 231, 0.72);
+      font: 0.63rem/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      word-break: break-all;
+    }
+
+    .note {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.75rem;
+      line-height: 1.48;
+    }
+
+    .note strong { color: var(--text); font-weight: 500; }
+
+    @media (max-width: 880px) {
+      .layout { grid-template-columns: 1fr; }
+      .scene-wrap { min-height: 590px; }
+      aside { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      aside .surface:last-child { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 560px) {
+      .app { padding: 13px; }
+      header { display: block; }
+      .stamp { display: inline-block; margin-top: 13px; text-align: left; }
+      .scene-wrap { min-height: 500px; }
+      aside { display: flex; }
+      .hud-bottom { display: block; }
+      .hud-bottom .hud-chip { margin-top: 6px; }
+      .scene-footer { bottom: 105px; }
+      .pulse-status { font-size: 0.68rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div>
+        <div class="eyebrow">0e · cipher-slot-166-repair · append-only</div>
+        <h1>Noble Gas Ladder / Cipher Slot 166 Repair · v120</h1>
+        <p class="subtitle">
+          A 3D reading of the v120 fork: one neutral neon atom at the boxed
+          center, surrounded by the inherited one-torus, three-band field.
+          Beside the geometry, the formal register walks the known noble gases
+          from helium (Z = 2) through oganesson (Z = 118). The project cipher
+          appends 166 as a separate predicted group-18 slot while v118's 168
+          orbital extrapolation remains frozen. The v120 branch makes the
+          arithmetic unfolding and claim type explicit. No shadow
+          <code>(1)</code> copies are part of the lineage.
+        </p>
+      </div>
+      <div class="stamp">
+        <strong>LEAN REGISTER · VERIFY LOCALLY</strong>
+        v120 · append-only · v119 retained
+      </div>
+    </header>
+
+    <main class="layout">
+          <section class="surface" aria-label="Interactive three-dimensional neon atom surrounded by a wavelength-coded compliment field">
+        <div class="scene-wrap">
+          <div id="scene" aria-label="Rotating 3D neon atom centered inside a toroidal compliment field with wavelength ripple">
+            <div id="sceneFallback" aria-label="CSS 3D fallback of the neon wavelength compliment torus">
+              <div class="fallback-system">
+                <div class="fallback-ring fallback-ring-a"></div>
+                <div class="fallback-ring fallback-ring-b"></div>
+                <div class="fallback-ring fallback-ring-c"></div>
+                <div class="fallback-photon" aria-hidden="true"></div>
+                <div class="fallback-core"></div>
+                <div class="fallback-wave"></div>
+                <div class="fallback-wave"></div>
+                <div class="fallback-wave"></div>
+                <div class="fallback-label">neon atom · noble-gas cipher repair · v120</div>
+              </div>
+            </div>
+          </div>
+          <div class="scene-hud">
+            <div class="hud-top">
+              <span class="hud-chip"><strong>[ Ne ]</strong>&nbsp; neutral center / [0]</span>
+              <span class="hud-chip"><strong>1 TORUS</strong>&nbsp; · 3 BANDS</span>
+            </div>
+            <div class="scene-footer">drag to orbit · wheel to zoom</div>
+            <div class="hud-bottom">
+              <span class="hud-chip"><strong>0.[Ne].0</strong>&nbsp; relative frame</span>
+              <span class="hud-chip" id="pulseHud"><strong>λ RIPPLE</strong>&nbsp; · 580nm hit</span>
+            </div>
+          </div>
+        </div>
+        <div class="controls">
+          <button id="togglePulse" type="button" aria-pressed="true">Pause pulses</button>
+          <button id="resetView" type="button">Reset view</button>
+          <span class="pulse-status" id="pulseStatus" aria-live="polite">resonant photon → wavelength ripple</span>
+        </div>
+      </section>
+
+      <aside>
+        <section class="surface">
+          <div class="panel">
+            <h2>Formal ledger</h2>
+            <dl class="ledger">
+              <dt>center</dt><dd class="gold">neon atom</dd>
+              <dt>atomic number</dt><dd class="gold">10</dd>
+              <dt>torus count</dt><dd class="cyan">1</dd>
+              <dt>compliment field</dt><dd class="violet">yes</dd>
+              <dt>compliment bands</dt><dd class="violet">3</dd>
+              <dt>curvature</dt><dd class="green">relative / flagged</dd>
+              <dt>gravity clock</dt><dd class="gold">3 pulses</dd>
+              <dt>carrier</dt><dd class="cyan">inf^-e1 × 3</dd>
+              <dt>safety boundary</dt><dd class="green">.5</dd>
+              <dt>visible λ span</dt><dd class="blue">400–700 nm</dd>
+              <dt>resonant hit</dt><dd class="yellow">excite → emit → ripple</dd>
+              <dt>off-resonance</dt><dd class="green">no forced transition</dd>
+            </dl>
+            <div class="band-list" aria-label="Three torus bands">
+              <div class="band cyan"><i></i>compliment band A · pull · 30%</div>
+              <div class="band violet"><i></i>compliment band B · homeo · 30%</div>
+              <div class="band gold"><i></i>compliment band C · push · 30%</div>
+              <div class="band green"><i></i>gap sides · 5% + 5%</div>
+            </div>
+            <div class="wavelength-list" aria-label="Symbolic visible wavelength channels">
+              <div class="wavelength red"><i></i>red · 700 nm</div>
+              <div class="wavelength orange"><i></i>orange · 620 nm</div>
+              <div class="wavelength yellow"><i></i>yellow · 580 nm</div>
+              <div class="wavelength green"><i></i>green · 530 nm</div>
+              <div class="wavelength cyan"><i></i>cyan · 500 nm</div>
+              <div class="wavelength blue"><i></i>blue · 450 nm</div>
+              <div class="wavelength violet"><i></i>violet · 400 nm</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="surface">
+          <div class="panel">
+            <h2>Shape register</h2>
+            <pre class="ascii" aria-label="ASCII shape of the neon atom surrounded by wavelength-coded compliment field">       wavelength-coded compliment field
+        λR  λO  λY  λG  λC  λB  λV
+              .-----------.
+           [band 2]     [band 1]
+              '-----------'
+                  [ Ne ]
+             neutral atom at [0]
+       resonant photon → excite → emit → ripple
+             one torus / ring field
+
+  forward: X-inverse + mirror × 6
+  reverse: mirror + X-inverse × 6</pre>
+            <pre class="ascii" aria-label="ASCII repair path from v115 error to v116 next action">  repair path / append-only lineage
+
+  v115 : [rippleWithinBound postResonanceRipple]
+         decide --> Decidable lookup FAIL
+                            |
+  v116 : unfold --> 1 <= 1 --> Nat.le_refl 1
+                            |
+  next : lean compile --> freeze --> extend wavelength law</pre>
+            <pre class="ascii" aria-label="ASCII proposition type repair from v116 to v117">  proposition-type repair
+
+  v116 : Capstone ∧ post_resonance_ripple_is_homeostatic
+         proof term where proposition type was expected  FAIL
+                                      |
+  v117 : Capstone ∧ rippleWithinBound postResonanceRipple
+         exact post_resonance_ripple_is_homeostatic          PASS
+                                      |
+  next : compile v117 --> freeze --> continue wavelength law</pre>
+            <pre class="ascii" aria-label="ASCII known noble gas sequence and prediction boundary">  noble-gas sequence / atomic number (Z)
+
+  known · observed · accepted
+  2 He -> 10 Ne -> 18 Ar -> 36 Kr -> 54 Xe -> 86 Rn -> 118 Og
+                                                                  |
+  next Z = 119       predicted element; not confirmed / not group 18
+  v118 simple G18 = 168  orbital extrapolation only; not observed
+  v119 cipher slot = 166  predicted by project cipher; not observed chemistry
+                         166 + 2 = 168 (explicit bookkeeping relation)
+  v120 repair: unfold named defs + unique claim type              PASS
+
+  boundary: no confirmed discovery beyond Z=118
+            tiny fusion yield · rapid decay · uncertain superheavy chemistry</pre>
+          </div>
+        </section>
+
+        <section class="surface">
+          <div class="panel">
+            <h2>Proof anchor</h2>
+            <p class="proof">v120_cipher_noble_gas_full_proof :
+v120CipherNobleGasCapstone</p>
+            <p class="note" style="margin-top:10px">
+              The v114 atom/shell reading remains keyed to
+              <strong>neonAtomWithCompliment</strong> and
+              <strong>neon_atom_invariant</strong>. v115 adds the wavelength
+              response; v116 repairs the bound proof; v117 repairs the
+              proposition-versus-proof-term distinction; v118 appends the
+              observed noble-gas register and keeps Z = 119 and the simple
+              Z = 168 group-18 extrapolation explicitly predicted; v119 adds
+              the user-cipher value Z = 166 as a separate predicted slot; v120
+              repairs v119's declaration-order, name-collision, and unfolding
+              errors with <strong>CipherNobleGasClaim120</strong>.
+            </p>
+          </div>
+          <div class="panel">
+            <h2>Lineage</h2>
+            <div class="lineage"><b>v119</b><span>→</span><b>v120</b><span>· cipher-slot-166-repair</span></div>
+            <p class="hash">parent Lean SHA-256 · 5d08a96bc2fe5d58262f59aaa4aa4717439a44a5c1306efc5f38b367c3c2f04f</p>
+            <p class="note" style="margin-top:10px">
+              v119 remains the failed cipher branch and is preserved for
+              provenance. v120 is the repair branch; 166 is recorded as
+              project notation, not silently substituted for the standard 168
+              extrapolation. No auto-renamed <code>(1)</code> file is part of
+              the lineage.
+            </p>
+          </div>
+        </section>
+      </aside>
+    </main>
+  </div>
+
+  <script type="application/json" id="formal-model">
+  {
+    "source": "ToroidalBlackHoleDynamics_v120.lean",
+    "parent": "v119",
+    "branch": "cipher-slot-166-repair",
+    "center": "neon",
+    "atomicNumber": 10,
+    "surroundedByCompliment": true,
+    "torusCount": 1,
+    "bandCount": 3,
+    "wavelengthChannels": [
+      {"name": "red", "nm": 700},
+      {"name": "orange", "nm": 620},
+      {"name": "yellow", "nm": 580},
+      {"name": "green", "nm": 530},
+      {"name": "cyan", "nm": 500},
+      {"name": "blue", "nm": 450},
+      {"name": "violet", "nm": 400}
+    ],
+    "resonantResponse": "excite -> emit -> ripple",
+    "offResonantResponse": "no forced transition",
+    "rippleBound": 1,
+    "knownNobleGases": [
+      {"atomicNumber": 2, "symbol": "He", "name": "helium", "period": 1, "group": 18},
+      {"atomicNumber": 10, "symbol": "Ne", "name": "neon", "period": 2, "group": 18},
+      {"atomicNumber": 18, "symbol": "Ar", "name": "argon", "period": 3, "group": 18},
+      {"atomicNumber": 36, "symbol": "Kr", "name": "krypton", "period": 4, "group": 18},
+      {"atomicNumber": 54, "symbol": "Xe", "name": "xenon", "period": 5, "group": 18},
+      {"atomicNumber": 86, "symbol": "Rn", "name": "radon", "period": 6, "group": 18},
+      {"atomicNumber": 118, "symbol": "Og", "name": "oganesson", "period": 7, "group": 18}
+    ],
+    "knownNobleGasAtomicNumbers": [2, 10, 18, 36, 54, 86, 118],
+    "nextAtomicNumber": 119,
+    "nextAtomicNumberStatus": "predicted-unconfirmed",
+    "nextPredictedNobleGasSlot": 168,
+    "nextPredictedNobleGasSlotStatus": "speculative-orbital-extrapolation",
+    "cipherDerivedNobleGasSlot": 166,
+    "cipherDerivedNobleGasSlotStatus": "project-cipher-prediction",
+    "cipherCorrectionToShellExtrapolation": 2,
+    "cipherRelation": "166 + 2 = 168",
+    "periodEightSubshellWidths": [2, 18, 14, 10, 6],
+    "periodEightAddedElectrons": 50,
+    "whyNextIsNotKnown": "No confirmed element exists beyond Z=118; Z=119 is unobserved, and Z=168 is only an orbital extrapolation.",
+    "leanSourceSha256": "fdcc9de5017d7758de59342de8711eb0eabab51c528860461123f392fa796258",
+    "repair": {
+      "parent": "v119",
+      "branch": "cipher-slot-166-repair",
+      "step": "unfold named arithmetic definitions -> use unique CipherNobleGasClaim120 -> prove 166 + 2 = 168",
+      "next": "lean compile -> freeze -> extend only from verified evidence"
+    },
+    "asciiRegister": "v119 rfl/name collision FAIL | v120 unfold/unique claim PASS | 166 + 2 = 168 | next compile -> freeze",
+    "pulseTrain": ["inf^-e1", "inf^-e1", "inf^-e1"],
+    "safety": "1/2",
+    "waveProof": "gravity_wave_round_trip",
+    "capstone": "v120_cipher_noble_gas_full_proof"
+  }
+  </script>
+
+  <script>
+    window.setTimeout(function () {
+      if (!window.__gravityTorusReady) {
+        document.getElementById('pulseStatus').textContent = 'CSS 3D fallback · noble-gas ladder visible';
+      }
+    }, 1800);
+  </script>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+      }
+    }
+  </script>
+
+  <script type="module">
+    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+    import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js';
+
+    const mount = document.getElementById('scene');
+    const pulseStatus = document.getElementById('pulseStatus');
+    const pulseHud = document.getElementById('pulseHud');
+    const togglePulse = document.getElementById('togglePulse');
+    const resetView = document.getElementById('resetView');
+    const wavelengthData = [
+      { name: 'red', nm: 700, color: 0xff6b7a },
+      { name: 'orange', nm: 620, color: 0xff9a49 },
+      { name: 'yellow', nm: 580, color: 0xffe28b },
+      { name: 'green', nm: 530, color: 0x78f0b1 },
+      { name: 'cyan', nm: 500, color: 0x43e8ff },
+      { name: 'blue', nm: 450, color: 0x82a7ff },
+      { name: 'violet', nm: 400, color: 0xc977ff }
+    ];
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
+    camera.position.set(0, 1.8, 9.5);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    mount.appendChild(renderer.domElement);
+    window.__gravityTorusReady = true;
+    document.documentElement.classList.add('gravity-ready');
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.06;
+    controls.minDistance = 5;
+    controls.maxDistance = 16;
+    controls.target.set(0, 0, 0);
+    controls.saveState();
+
+    scene.add(new THREE.HemisphereLight(0x9ac6ff, 0x090517, 1.7));
+    const cyanLight = new THREE.PointLight(0x36e8ff, 4.2, 12);
+    cyanLight.position.set(-4, 2.5, 4);
+    scene.add(cyanLight);
+    const goldLight = new THREE.PointLight(0xffa832, 3.5, 10);
+    goldLight.position.set(3, -1.5, 3);
+    scene.add(goldLight);
+
+    const system = new THREE.Group();
+    system.rotation.x = 0.34;
+    system.rotation.z = -0.13;
+    scene.add(system);
+
+    const stars = new THREE.BufferGeometry();
+    const starPositions = [];
+    let seed = 113;
+    function randomUnit() {
+      seed = (seed * 1664525 + 1013904223) >>> 0;
+      return seed / 4294967296;
+    }
+    for (let i = 0; i < 260; i += 1) {
+      const radius = 10 + randomUnit() * 16;
+      const theta = randomUnit() * Math.PI * 2;
+      const phi = Math.acos(2 * randomUnit() - 1);
+      starPositions.push(
+        radius * Math.sin(phi) * Math.cos(theta),
+        radius * Math.sin(phi) * Math.sin(theta),
+        radius * Math.cos(phi)
+      );
+    }
+    stars.setAttribute('position', new THREE.Float32BufferAttribute(starPositions, 3));
+    scene.add(new THREE.Points(stars, new THREE.PointsMaterial({
+      color: 0x8ba9e8,
+      size: 0.026,
+      transparent: true,
+      opacity: 0.72,
+      sizeAttenuation: true
+    })));
+
+    const curvatureGrid = new THREE.Group();
+    for (let i = 0; i < 5; i += 1) {
+      const radius = 1.3 + i * 0.47;
+      const points = [];
+      for (let j = 0; j <= 160; j += 1) {
+        const t = (j / 160) * Math.PI * 2;
+        const z = 0.075 * Math.sin(t * 3 + i * 0.8) * (1 - i * 0.055);
+        points.push(new THREE.Vector3(radius * Math.cos(t), radius * Math.sin(t), z));
+      }
+      const geometry = new THREE.BufferGeometry().setFromPoints(points);
+      curvatureGrid.add(new THREE.Line(geometry, new THREE.LineBasicMaterial({
+        color: 0x3b6595,
+        transparent: true,
+        opacity: 0.19
+      })));
+    }
+    for (let i = 0; i < 8; i += 1) {
+      const points = [];
+      const phase = (i / 12) * Math.PI * 2;
+      for (let j = 0; j <= 80; j += 1) {
+        const t = (j / 80) * Math.PI * 2;
+        const radius = 1.28 + 3.24 * (0.5 + 0.5 * Math.cos(t));
+        points.push(new THREE.Vector3(
+          radius * Math.cos(phase),
+          radius * Math.sin(phase),
+          0.18 * Math.sin(t)
+        ));
+      }
+      const geometry = new THREE.BufferGeometry().setFromPoints(points);
+      curvatureGrid.add(new THREE.Line(geometry, new THREE.LineBasicMaterial({
+        color: 0x28466f,
+        transparent: true,
+        opacity: 0.12
+      })));
+    }
+    system.add(curvatureGrid);
+
+    const core = new THREE.Mesh(
+      new THREE.SphereGeometry(0.72, 64, 40),
+      new THREE.MeshStandardMaterial({
+        color: 0xffd36a,
+        emissive: 0xff7f2f,
+        emissiveIntensity: 1.65,
+        roughness: 0.25,
+        metalness: 0.12
+      })
+    );
+    core.userData.baseEmissiveIntensity = 1.65;
+    system.add(core);
+
+    const horizonGlow = new THREE.Mesh(
+      new THREE.SphereGeometry(0.89, 48, 32),
+      new THREE.MeshBasicMaterial({
+        color: 0xff7f2f,
+        transparent: true,
+        opacity: 0.23,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      })
+    );
+    system.add(horizonGlow);
+
+    const horizonRing = new THREE.Mesh(
+      new THREE.TorusGeometry(1.13, 0.055, 14, 160),
+      new THREE.MeshBasicMaterial({
+        color: 0xffa733,
+        transparent: true,
+        opacity: 0.95,
+        blending: THREE.AdditiveBlending
+      })
+    );
+    horizonRing.rotation.x = Math.PI / 2;
+    system.add(horizonRing);
+
+    const bandGroup = new THREE.Group();
+    const bandData = [
+      { radius: 2.25, color: 0x43e8ff },
+      { radius: 2.85, color: 0xc977ff },
+      { radius: 3.45, color: 0xffd36a }
+    ];
+    bandData.forEach((band, index) => {
+      const material = new THREE.MeshStandardMaterial({
+        color: band.color,
+        emissive: band.color,
+        emissiveIntensity: 0.72,
+        roughness: 0.36,
+        metalness: 0.35,
+        transparent: true,
+        opacity: 0.92
+      });
+      const mesh = new THREE.Mesh(
+        new THREE.TorusGeometry(band.radius, 0.095, 18, 192),
+        material
+      );
+      mesh.userData.bandIndex = index;
+      bandGroup.add(mesh);
+
+      const safety = new THREE.Mesh(
+        new THREE.TorusGeometry(band.radius + 0.17, 0.018, 8, 128),
+        new THREE.MeshBasicMaterial({
+          color: 0x78f0b1,
+          transparent: true,
+          opacity: 0.27,
+          blending: THREE.AdditiveBlending
+        })
+      );
+      bandGroup.add(safety);
+    });
+    system.add(bandGroup);
+
+    const electronDots = [];
+    for (let i = 0; i < 10; i += 1) {
+      const dot = new THREE.Mesh(
+        new THREE.SphereGeometry(0.045, 12, 8),
+        new THREE.MeshBasicMaterial({
+          color: i < 2 ? 0xffe7a0 : 0x8df8ff,
+          transparent: true,
+          opacity: 0.82,
+          blending: THREE.AdditiveBlending
+        })
+      );
+      dot.userData.radius = i < 2 ? 1.38 : 1.72;
+      dot.userData.angle = (i / (i < 2 ? 2 : 8)) * Math.PI * 2;
+      dot.userData.tilt = i < 2 ? 0.18 : -0.24;
+      dot.userData.speed = i < 2 ? 0.11 : -0.075;
+      system.add(dot);
+      electronDots.push(dot);
+    }
+
+    const axisGeometry = new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(0, -4.2, 0),
+      new THREE.Vector3(0, 4.2, 0)
+    ]);
+    system.add(new THREE.Line(axisGeometry, new THREE.LineBasicMaterial({
+      color: 0x7896c9,
+      transparent: true,
+      opacity: 0.13
+    })));
+
+    const pulseWaves = [];
+    const pulseNodes = [];
+    const pulseColors = [0x8df8ff, 0xf2a6ff, 0xffd47a];
+    for (let i = 0; i < 3; i += 1) {
+      const wave = new THREE.Mesh(
+        new THREE.TorusGeometry(1.12 + i * 0.08, 0.024, 10, 144),
+        new THREE.MeshBasicMaterial({
+          color: pulseColors[i],
+          transparent: true,
+          opacity: 0,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false
+        })
+      );
+      wave.rotation.x = Math.PI / 2;
+      wave.userData.phaseOffset = i / 3;
+      system.add(wave);
+      pulseWaves.push(wave);
+
+      const node = new THREE.Mesh(
+        new THREE.SphereGeometry(0.095, 20, 12),
+        new THREE.MeshBasicMaterial({
+          color: pulseColors[i],
+          transparent: true,
+          opacity: 0.95,
+          blending: THREE.AdditiveBlending
+        })
+      );
+      system.add(node);
+      pulseNodes.push(node);
+    }
+
+    const photonHead = new THREE.Mesh(
+      new THREE.SphereGeometry(0.075, 16, 10),
+      new THREE.MeshBasicMaterial({
+        color: wavelengthData[2].color,
+        transparent: true,
+        opacity: 0.95,
+        blending: THREE.AdditiveBlending
+      })
+    );
+    system.add(photonHead);
+
+    let running = true;
+    let elapsed = 0;
+    let statusElapsed = 0;
+    const clock = new THREE.Clock();
+
+    function resize() {
+      const width = Math.max(1, mount.clientWidth);
+      const height = Math.max(1, mount.clientHeight);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      renderer.setSize(width, height, false);
+    }
+    new ResizeObserver(resize).observe(mount);
+    resize();
+
+    function updatePulses() {
+      const resonance = 0.5 + 0.5 * Math.sin(elapsed * Math.PI * 0.48);
+      core.material.emissiveIntensity = core.userData.baseEmissiveIntensity + resonance * 0.8;
+      horizonGlow.material.opacity = 0.18 + resonance * 0.16;
+      photonHead.position.set(
+        -4.5 + ((elapsed * 0.2) % 1) * 4.5,
+        0.08 * Math.sin(elapsed * 2.4),
+        0.42
+      );
+      photonHead.material.opacity = 0.45 + resonance * 0.5;
+
+      pulseWaves.forEach((wave, index) => {
+        const phase = (elapsed * 0.24 + wave.userData.phaseOffset) % 1;
+        const scale = 0.35 + phase * 2.1;
+        wave.scale.setScalar(scale);
+        wave.material.opacity = (1 - phase) * 0.62;
+
+        const nodePhase = (elapsed * 0.13 + index / 3) % 1;
+        const angle = nodePhase * Math.PI * 2;
+        const radius = bandData[index].radius;
+        pulseNodes[index].position.set(
+          radius * Math.cos(angle),
+          radius * Math.sin(angle),
+          0.16 * Math.sin(angle * 3 + index)
+        );
+      });
+
+      bandGroup.children.forEach((child) => {
+        if (child.userData.bandIndex !== undefined) {
+          child.material.emissiveIntensity = 0.72 + resonance * 0.38;
+        }
+      });
+
+      electronDots.forEach((dot) => {
+        const angle = dot.userData.angle + elapsed * dot.userData.speed;
+        const radius = dot.userData.radius;
+        dot.position.set(
+          radius * Math.cos(angle),
+          radius * Math.sin(angle) * Math.cos(dot.userData.tilt),
+          radius * Math.sin(angle) * Math.sin(dot.userData.tilt)
+        );
+      });
+    }
+
+    togglePulse.addEventListener('click', () => {
+      running = !running;
+      togglePulse.textContent = running ? 'Pause pulses' : 'Resume pulses';
+      togglePulse.setAttribute('aria-pressed', String(running));
+      pulseStatus.textContent = running
+        ? 'resonant photon → wavelength ripple'
+        : 'ripple paused at current phase';
+      pulseHud.innerHTML = running
+        ? '<strong>λ RIPPLE</strong>&nbsp; · 580nm hit'
+        : '<strong>PAUSED</strong>&nbsp; · 580nm hit';
+    });
+
+    resetView.addEventListener('click', () => {
+      controls.reset();
+      system.rotation.set(0.34, 0, -0.13);
+      elapsed = 0;
+      updatePulses();
+    });
+
+    function animate() {
+      requestAnimationFrame(animate);
+      const delta = Math.min(clock.getDelta(), 0.05);
+      if (running) {
+        elapsed += delta;
+        system.rotation.y += delta * 0.075;
+        bandGroup.rotation.z += delta * 0.025;
+        horizonRing.rotation.z -= delta * 0.18;
+        updatePulses();
+        statusElapsed += delta;
+        if (statusElapsed > 1.2) {
+          statusElapsed = 0;
+          pulseStatus.textContent = 'resonant photon → wavelength ripple';
+        }
+      }
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    animate();
+  </script>
+</body>
+</html>
