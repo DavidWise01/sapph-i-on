@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>the nail sheet · gold then silver</title>
+<style>
+:root{
+  --ground:#131416; --rule:#2E3136; --ink:#E6E6E8; --ink-dim:#9295A0;
+  --earth:#C9A227; --earth-2:#8C6A32; --earth-bg:#1D1710;
+  --wood:#4FB089;  --wood-2:#2E7F68;  --wood-bg:#10191A;
+  --metal:#C6CBD1; --metal-2:#8A8F98; --metal-bg:#17181C;
+  --fire:#EE6B2D;  --fire-2:#F2A03D;  --fire-bg:#1F1310;
+  --water:#5487E0; --water-2:#2A3A8B; --water-bg:#0F1324;
+  --lit:#6FD08C; --amber:#F2A03D; --dead:#9A8A82; --cu:#D98A56; --au:#E8C15A; --ag:#C9D1DA; --am:#A77BD8;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ground);color:var(--ink);font-size:12px;line-height:1.45;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"DejaVu Sans Mono",monospace}
+.fail{display:none;position:sticky;top:0;z-index:9;background:#5a1410;color:#fff;padding:6px 14px;font-size:11px}
+.mast{padding:13px 16px 10px;border-bottom:1px solid var(--rule);display:flex;gap:18px;flex-wrap:wrap;justify-content:space-between;align-items:flex-end}
+.mast pre{margin:0;font-size:10px;line-height:1.3;color:var(--cu);white-space:pre;overflow-x:auto;max-width:100%}
+.sub{font-size:10px;color:var(--ink-dim);letter-spacing:.2em;text-transform:uppercase}
+.chi{font-size:10px;color:var(--ink-dim);letter-spacing:.12em} .chi b{color:var(--earth)}
+.pent{display:flex;width:100%}
+.win{flex:1 1 20%;width:20%;min-width:0;border-right:1px solid var(--rule);display:flex;flex-direction:column;min-height:calc(100vh - 100px)}
+.win:last-child{border-right:none}
+.win-hd{padding:9px 11px;border-bottom:1px solid var(--rule)}
+.win-hd .n{font-size:9px;letter-spacing:.28em;opacity:.75}
+.win-hd h2{margin:2px 0 0;font-size:13px;letter-spacing:.07em}
+.win-hd .el{font-size:9px;letter-spacing:.2em;opacity:.7;margin-top:2px}
+.win-bd{padding:11px;flex:1;overflow:auto}
+#w1{background:var(--earth-bg)} #w1 .win-hd{border-bottom-color:var(--earth-2)} #w1 h2,#w1 .n{color:var(--earth)}
+#w2{background:var(--wood-bg)}  #w2 .win-hd{border-bottom-color:var(--wood-2)}  #w2 h2,#w2 .n{color:var(--wood)}
+#w3{background:var(--metal-bg)} #w3 .win-hd{border-bottom-color:var(--metal-2)} #w3 h2,#w3 .n{color:var(--metal)}
+#w4{background:var(--fire-bg)}  #w4 .win-hd{border-bottom-color:var(--fire)}    #w4 h2,#w4 .n{color:var(--fire)}
+#w5{background:var(--water-bg)} #w5 .win-hd{border-bottom-color:var(--water-2)} #w5 h2,#w5 .n{color:var(--water)}
+button{font:inherit;font-size:10px;letter-spacing:.15em;text-transform:uppercase;background:transparent;color:inherit;border:1px solid currentColor;padding:6px 10px;cursor:pointer;border-radius:2px}
+button:hover{background:rgba(255,255,255,.06)} button[disabled]{opacity:.4;cursor:progress}
+button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+#w1 button{color:var(--earth)} #w2 button{color:var(--wood)} #w3 button{color:var(--metal)} #w4 button{color:var(--fire)} #w5 button{color:var(--water)}
+button.kb{border-style:dashed}
+input[type=range]{width:100%;accent-color:var(--fire)} #w5 input[type=range]{accent-color:var(--water)}
+.row{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:9px}
+.k{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);margin:12px 0 5px}
+pre.blk{margin:0 0 9px;font-size:10px;line-height:1.35;white-space:pre-wrap;word-break:break-word}
+.small{font-size:10px;color:var(--ink-dim)}
+.plain{border-left:2px solid currentColor;padding:5px 8px;margin:0 0 10px;font-size:10.5px;background:rgba(255,255,255,.03);color:var(--ink)}
+.plain b{font-size:9px;letter-spacing:.18em;opacity:.65;display:block;margin-bottom:2px}
+.stamp{display:inline-block;font-size:9px;padding:0 4px;border:1px solid;border-radius:2px;min-width:44px;text-align:center}
+.s-lit{color:var(--lit)} .s-amber{color:var(--amber)} .s-dead{color:var(--dead);text-decoration:line-through}
+canvas{display:block;width:100%;background:rgba(0,0,0,.32);border:1px solid var(--rule);border-radius:2px;touch-action:none}
+.rd{display:flex;justify-content:space-between;gap:8px;border-bottom:1px dotted var(--rule);padding:3px 0;font-size:10.5px}
+.rd b{font-weight:400;text-align:right}
+.board{border:1px solid var(--earth-2);border-radius:2px;padding:8px;background:rgba(0,0,0,.28)}
+.board .line{display:flex;justify-content:space-between;gap:6px;padding:2px 0;font-size:10px}
+.wait{color:var(--ink-dim)} .ok{color:var(--lit)} .bad{color:var(--fire)} .dis{color:var(--water)}
+.bar{height:9px;background:rgba(255,255,255,.07);border-radius:1px;overflow:hidden;margin:2px 0 7px}
+.bar i{display:block;height:100%;width:0;background:var(--wood);transition:width .5s}
+.cl{margin:0 0 7px;font-size:10px;line-height:1.4} .cl .q{color:var(--ink)} .cl .a{color:var(--ink-dim)}
+.wd{margin:0 0 7px;font-size:10px} .wd .his{color:var(--earth)} .wd .acc{color:var(--ink)} .wd .den{color:var(--ink-dim)}
+.bench{border-top:1px solid var(--rule);padding:12px 16px;background:#130f0c}
+.bench h3{margin:0 0 6px;font-size:11px;letter-spacing:.2em;color:var(--am);font-weight:400}
+.bench ol{margin:0;padding-left:20px;columns:2 360px;column-gap:28px} .bench li{margin:0 0 7px;font-size:10.5px;break-inside:avoid} .bench li b{color:var(--am);font-weight:400}
+.foot{padding:10px 16px;border-top:1px solid var(--rule);color:var(--ink-dim);font-size:10px}
+code,.mono{font-family:inherit;color:var(--wood)}
+@media (max-width:1180px){.pent{flex-wrap:wrap}.win{flex:1 1 100%;width:100%;min-height:auto;border-right:none;border-bottom:1px solid var(--rule)}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="fail" id="fail"></div>
+<div class="mast"><div><pre id="strip">…</pre>
+  <div class="sub">the nail sheet · gold then silver · ground TARNISH #131416 · title withheld · the ladder frozen beside it</div></div>
+  <div class="chi">CHI → <b>W1 EARTH</b> · W2 WOOD · W3 METAL · W4 FIRE · W5 WATER<br>feedback rises to W1 · function and flow over beauty</div></div>
+<div class="pent">
+<section class="win" id="w1"><div class="win-hd"><div class="n">W1</div><h2>SOURCE</h2><div class="el">EARTH · command position</div></div><div class="win-bd">
+  <div class="row"><button id="b1">Run audit</button><span class="small" id="b1s">idle</span></div>
+  <div class="plain"><b>Start here — plain English</b><span id="plaintext"></span></div>
+  <div class="small" id="flag" style="margin:-4px 0 10px"></div>
+  <div class="k">Your words · the accepted word · what it means</div><div id="words"></div>
+  <div class="k">The sheet, claim by claim</div><div id="claims"></div>
+  <div class="k">▓ Control catches, this build</div><pre class="blk" id="catches"></pre>
+  <div class="k">Toddler corner</div><pre class="blk" id="toddler"></pre>
+  <div class="k">Feedback board</div><div class="board" id="board"></div></div></section>
+<section class="win" id="w2"><div class="win-hd"><div class="n">W2</div><h2>CONTRIBUTIONS</h2><div class="el">WOOD · growth</div></div><div class="win-bd">
+  <div class="row"><button id="b2">Run tally</button><button id="b2x" class="kb">pull one nail</button><span class="small" id="b2s">idle</span></div>
+  <div class="plain"><b>Plain English</b>Who did what (a judgement). Then the sheet's integers, written in your I-13 and run in your VM first: how many nails a 10 × 10 chessboard holds, how far the nails go in, and the gap between your two exponents. The page recounts; they must agree. The tamper pulls one nail from the page's board; the agreement must break.</div>
+  <div id="contrib"></div>
+  <div class="k">I-13 · as run in your VM</div><pre class="blk" id="i13src" style="color:var(--wood);max-height:200px;overflow:auto"></pre>
+  <div class="k">VM result · page recompute</div><div id="i13cmp"></div>
+  <div class="k">Reports to W1</div><pre class="blk" id="rep2">— not run —</pre></div></section>
+<section class="win" id="w3"><div class="win-hd"><div class="n">W3</div><h2>1D · THE NAILS SINK</h2><div class="el">METAL · focus</div></div><div class="win-bd">
+  <div class="row"><button id="b3">Add gold, then silver</button><button id="b3t" class="kb">real atoms</button><span class="small" id="b3s">idle</span></div>
+  <div class="plain"><b>Plain English</b>One axis: how many atoms have gone on (log scale). The line is the nail height, from 1.00 down. Gold goes first until the nails reach 0.93; then silver. On your scale gold needs a universe of atoms and silver a thumbnail of the count. The dashed button switches to real atoms and the whole thing lands near 10²²; it has to move, or the scale isn't doing anything.</div>
+  <canvas id="c3" height="250"></canvas>
+  <div class="rd"><span>gold atoms to reach 0.93</span><b id="m3a">–</b></div>
+  <div class="rd"><span>silver atoms for the next 7 units</span><b id="m3b">–</b></div>
+  <div class="rd"><span>nail height now</span><b id="m3c">–</b></div>
+  <div class="k">Reports to W1</div><pre class="blk" id="rep3">— not run —</pre></div></section>
+<section class="win" id="w4"><div class="win-hd"><div class="n">W4</div><h2>2D · HOW FAR THE SHEET REACHES</h2><div class="el">FIRE · visibility</div></div><div class="win-bd">
+  <div class="row"><button id="b4">Map the field</button><button id="b4s">stripes</button><button id="b4t" class="kb">all +</button></div>
+  <div class="plain"><b>Plain English</b>A side cut through one row of the sheet: the sheet runs across the middle, above and below it is the space the field reaches into. Orange pushes up, blue down; brightness is strength on a log scale. The white lines mark where the field drops to 1%. Chessboard: about one cell on each side, the + tips top and bottom. The dashed button makes every square +: then it reaches much farther, which it must.</div>
+  <canvas id="c4" height="250"></canvas>
+  <pre class="blk small" id="probe" style="min-height:26px">tap or hover the map…</pre>
+  <div class="rd"><span>pattern</span><b id="m4p">chessboard</b></div>
+  <div class="rd"><span>field down to 1% at</span><b id="m4a">–</b></div>
+  <div class="rd"><span>left at one cell out</span><b id="m4b">–</b></div>
+  <div class="k">Reports to W1</div><pre class="blk" id="rep4">— not run —</pre></div></section>
+<section class="win" id="w5"><div class="win-hd"><div class="n">W5</div><h2>3D · BOTH FACES</h2><div class="el">WATER · wisdom / flow</div></div><div class="win-bd">
+  <div class="row"><button id="b5">Press it</button><button id="b5r">rotate</button><span class="small" id="b5s">idle</span></div>
+  <div class="plain"><b>Plain English</b>Three axes: the sheet, its 50 nails, the gold and then silver layers on top. W3 only watched the top. A nail is one rigid piece: every bit it sinks on top, it comes out underneath. Press it and watch the bottom tips grow as the top tips shrink.</div>
+  <canvas id="c5" height="260"></canvas>
+  <div class="rd"><span>top tips</span><b id="m5a">1.00</b></div>
+  <div class="rd"><span>bottom tips</span><b id="m5b">1.00</b></div>
+  <div class="rd"><span>top + bottom</span><b id="m5c">2.00</b></div>
+  <div class="k">Dissent filed against W1</div><pre class="blk" id="dissent"></pre>
+  <div class="k">What W1–W4 left out</div><pre class="blk" id="left"></pre>
+  <div class="k">Reports to W1</div><pre class="blk" id="rep5">— not run —</pre></div></section>
+</div>
+<div class="foot" id="foot"></div>
+<script>const DATA = {"sheet": {"weights": {"Au": {"Z": 79, "his": 9.772372209557991e-80, "his_log": -79.01, "real_kg": 3.270706842992035e-25, "real_log_kg": -24.485358380416894, "real_log_g": -21.485358380416894}, "Ag": {"Z": 47, "his": 9.772372209558151e-48, "his_log": -47.01, "real_kg": 1.7911936014382211e-25, "real_log_kg": -24.74685747082755, "real_log_g": -21.74685747082755}, "ratio_his_Ag_over_Au": 1.0000000000000164e+32, "ratio_real_Ag_over_Au": 0.5476472479568487, "point01": 0.9772372209558107}, "bed": {"W": 100.0, "stiff": 100.0, "added_for_0.93": 6.999999999999995, "nails": 50, "load_per_nail": 2.0}, "count": {"his_Au_atoms_for_7": 7.163050945965359e+79, "his_Ag_atoms_for_7": 7.163050945965241e+47, "real_Au_atoms_7g": 2.140210154443973e+22, "real_Ag_atoms_7g": 3.9080085993833185e+22, "universe_atoms": 1e+80}, "stack": {"Au": {"thick_um": 36.23188405797099, "layers": 153880.30023625764}, "Ag": {"thick_um": 66.73021925643465, "layers": 282917.11784289003}, "mismatch_pct": 0.1740964150850946}, "field": {"checker": {"profile": [[0.02, 0.951159643681649], [0.030417499999999997, 0.9258032361097304], [0.046261215312499986, 0.8874476618857573], [0.0703575258383984, 0.8298366090229352], [0.10700500210947413, 0.7446822772675641], [0.16274123258324644, 0.6232525399117312], [0.24750907210504483, 0.46291900487704113], [0.37643036003776, 0.28122041295401384], [0.5725035238224281, 0.12389403837341093], [0.8707062967934351, 0.033693562747431446], [1.3242354391357154, 0.004532692054085737], [2.0139965734955307, 0.00023629950425847903], [3.0630370387150148, 3.0077047363871448e-05], [4.658496456255697, 2.2228947536563292e-05], [7.0849907979078806, 1.05422813289576e-05]], "z_1pct": 1.14538423795402, "at_one_cell": 0.01903129595293145, "at_surface": 0.9999975558908242}, "stripes": {"profile": [[0.02, 0.9600702472914002], [0.030417499999999997, 0.9393242220137472], [0.046261215312499986, 0.9079032228948375], [0.0703575258383984, 0.8605715190812244], [0.10700500210947413, 0.7901454708172287], [0.16274123258324644, 0.6881926379459155], [0.24750907210504483, 0.5489796220835088], [0.37643036003776, 0.3794718834887845], [0.5725035238224281, 0.21009577250480768], [0.8707062967934351, 0.0842734837859692], [1.3242354391357154, 0.022388604665351614], [2.0139965734955307, 0.0054936898120551934], [3.0630370387150148, 0.003492033128280936], [4.658496456255697, 0.002645267000727762], [7.0849907979078806, 0.0013674144153324583]], "z_1pct": 1.652530959385059, "at_one_cell": 0.057010780182595734, "at_surface": 0.9999980021977882}, "uniform": {"profile": [[0.02, 0.9963533124323272], [0.030417499999999997, 0.9944538951587998], [0.046261215312499986, 0.9915652476010539], [0.0703575258383984, 0.9871724283928239], [0.10700500210947413, 0.9804930913221457], [0.16274123258324644, 0.9703402503095387], [0.24750907210504483, 0.9549186997005195], [0.37643036003776, 0.9315333073361325], [0.5725035238224281, 0.896207086210374], [0.8707062967934351, 0.8433072892332372], [1.3242354391357154, 0.7656281223341216], [2.0139965734955307, 0.656281728406148], [3.0630370387150148, 0.5148262479124549], [4.658496456255697, 0.35695569028932084], [7.0849907979078806, 0.21439127150069506]], "z_1pct": 39.57120687135544, "at_one_cell": 0.8207767549535991, "at_surface": 0.9999998176643422}, "theory": {"checker_z_1pct": 1.1452696835263096, "stripes_z_1pct": 1.5427635583882524, "checker_at_one_cell": 0.019067804630695667, "stripes_at_one_cell": 0.05502166961638792}}}, "i13": {"globals": {"nails": 50, "minus": 50, "added": 7, "gap": 32}, "error": "OK", "cortex": {"fp": 3415517402, "depth": 11, "addr": 2155480973, "mask": 63, "idem": true, "pass": true}}, "i13src": "// the 10 x 10 sheet: + where row + column is even (a chessboard), - elsewhere. nails at the +.\ndef m2(I n){ if n < 2 { -> n } -> m2(n-2) }\ndef row(I i,I j){ if j > 9 { -> 0 } I c <- 0 if m2(i+j) < 1 { c <- 1 } -> c + row(i,j+1) }\ndef grid(I i){ if i > 9 { -> 0 } -> row(i,0) + grid(i+1) }\nI nails <- grid(0)\nI minus <- 100 - grid(0)\nI added <- 100 - 93\nI gap <- 79 - 47\n", "claims": {"plain": "Built as: a 10 × 10 sheet, each cell 1 of 100, so each cell is your 1%. The + cells, a chessboard of 50, carry nails that poke out top and bottom. Gold goes on atom by atom at your weight, 10^−79.01 each, until the nails sink from 1.00 to 0.93; then silver stacks on at 10^−47.01 each. Your exponents are the atomic numbers: gold is element 79, silver 47. On that scale the nails need 7.2 × 10⁷⁹ gold atoms, about as many atoms as the observable universe holds, but only 7.2 × 10⁴⁷ silver: your silver weighs 10³² times more per atom. Real atoms go the other way: a silver atom weighs about half a gold one, and 7 g of gold is 2.1 × 10²² atoms. Silver does stack on gold: their crystals differ by only 0.17%. And the −+−+ sheet: with + and − alternating like a chessboard, its field reaches out only a little over one cell on each side (down to 1% at 1.15 cells). Those are the + tips, top and bottom. A sheet of all + reaches 35 times farther.", "toddler": "a sheet of 100 squares. every other square has a nail through it, poking up and poking down.\nsprinkle gold on top. the nails sink a little.\nsprinkle silver after. silver sits on gold like a glove: same size.\nthe + and − squares are like kids shouting and shushing in turns:\none step away, you can barely hear them.\nif they all shout (all +), you hear them across the park.", "flag": "one line: “10x1^10-47.01” read literally is 10 × 1¹⁰ − 47.01 = −37.01, a negative weight. read as 1 × 10^−47.01, matching gold's form", "words": [["weight 100 on a 10 × 10 grid", "a normalised grid: each cell carries 1 unit = 1%", "the 1% from last time, laid out as squares"], ["1x10^-79.01 · 10^-47.01", "10^−(Z + 0.01): the exponents are gold's and silver's atomic numbers, 79 and 47", "a code for the element, not its mass (a gold atom is 10^−24.49 kg)"], ["dust nails pushed in to .93", "a pin-screen (a bed of spring-loaded pins); 0.93 = 7% compression", "the pins sink as load is added; how far is set by how stiff the bed is"], ["silver can stack", "epitaxial growth: silver grows on gold layer by layer", "their cubic cells differ by 0.17%, so each silver layer lands on a gold layer's sites"], ["the sheet -+-+-+", "a sheet of alternating charge: a chessboard (or stripes) of ±", "nearby it's strong; a cell or so away the + and − cancel and the field dies exponentially"], ["the tips of the + top and bottom", "the + sign's vertical stroke: a pin through the sheet, out both faces; also the field, which reaches out the same short way on both sides", "a nail pushed in on top comes out the same amount underneath"]], "claims": [["LIT", "gold 79, silver 47", "your exponents are the atomic numbers. the .01 on each: 10^−0.01 = 0.977"], ["LIT", "on your scale, 7 units of gold", "7 / 10^−79.01 = 7.2 × 10⁷⁹ gold atoms: under 10⁸⁰, about the usual count of atoms in the observable universe (Lean: count)"], ["LIT", "on your scale, silver", "7.2 × 10⁴⁷ atoms: your silver is 10³² times heavier per atom than your gold (Lean: his_ratio)"], ["DEAD", "as real weight", "a silver atom is 0.55 of a gold atom (107.87 vs 196.97 u). real 7 g of gold: 2.1 × 10²² atoms; of silver: 3.9 × 10²²"], ["AMBER", "the nails reach 0.93 after 7 units", "if the bed is as stiff as the sheet (another 100 units pushes them flush). 50 nails, 2 units each"], ["LIT", "silver can stack on gold", "cubic cells 4.0853 vs 4.0782 Å: 0.17% apart. 7 g of gold over a 10 × 10 cm sheet is 36 µm, 154,000 atom layers; 7 g of silver 67 µm"], ["LIT", "the −+−+ sheet reaches out one cell", "chessboard: the field falls to 1% at 1.15 cells, 1.9% at one cell; the 10 × 10 sum matches the endless-sheet formula to 0.01%. stripes: 1.65 cells"], ["LIT", "and only because it alternates", "the control: a sheet of all + keeps 82% of its field at one cell and falls to 1% only at 39.6 cells"], ["LIT", "50 nails", "a 10 × 10 chessboard has 50 + and 50 − (Lean: chess; your VM: 50)"], ["AMBER", "10x1^10-47.01", "read as 10^−47.01. as typed, it's −37.01"]], "catches": ["▓1 THE RULER: the first field sum used 8 × 8 sample points per square. near the sheet it read 5-24% ABOVE the surface value, which can't happen for a chessboard. replaced by the exact closed form for a charged square; the 10 × 10 result now matches the endless-sheet theory to 0.01%", "▓2 THE THEORY: my first 'theory' line dropped the (4/π)² amplitude of the leading wave and said 1.04 cells. with it: 1.145. the exact sum says 1.1454. the draft number was wrong by 10%", "▓3 THE CONTROL: a sheet of all + is the known-bad for 'it only reaches a cell'. it must reach far, and it does: 39.6 cells", "▓4 THE BANNER'S KNOWN-BAD WAS SILENT: the tampered copy changed the first \"nails\": 50 in the file, which was the bed's count, not your VM's. the self-check never read it, so the banner stayed down. retargeted at the VM's value: the banner fires", "▓5 THE TAMPER: the first tamper shifted the chessboard one square. a shifted 10 × 10 board still has 50 and 50, so it could never be caught. replaced by pulling one nail (49): caught, 2 of 4. the shift-blindness is a real property of counting, noted in W2", "▓6 LOOKING: the first side-cut drew solid columns under the sheet. the square's closed form assumes the observer is above it; below, atan2 jumped a branch. the field under a sheet is the mirror of the field above with the sign flipped; now computed that way"], "contributions": [{"who": "your sheet", "weight": 40, "what": "100 cells, the gold then silver order, the 0.93, the Z-coded weights, the −+−+ with tips both ways"}, {"who": "me", "weight": 40, "what": "reading the exponents as atomic numbers, both scales counted, the bed's stiffness, the stacking check, the exact field sum, I-13 port, Lean"}, {"who": "physics nobody owns", "weight": 20, "what": "atomic masses, crystal cells, Coulomb's law, Fourier's decay of alternating patterns"}], "left": ["what the nails are made of, and so how stiff the bed really is", "whether gold and silver alloy at the boundary (they do, fully: electrum)", "charge on the gold itself: a metal layer on a ± sheet screens it", "the − side of the sheet, underneath the gold: it carries the other tips"]}};</script>
+<script>/* rev38 · ui.js — the nail sheet. numbers from DATA (verify/sheet.py, your VM) or recomputed here. */
+(function(){
+'use strict';
+const D=DATA, S=D.sheet, EL=id=>document.getElementById(id);
+function fit(cv,h){ const w=cv.clientWidth||300, dpr=window.devicePixelRatio||1; cv.width=Math.round(w*dpr); cv.height=Math.round(h*dpr); cv.style.height=h+'px'; const g=cv.getContext('2d'); g.setTransform(dpr,0,0,dpr,0,0); g.font='9px ui-monospace,monospace'; return [g,w,h]; }
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const sup=n=>String(n).replace('-','⁻').replace(/\d/g,c=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[c]);
+const e10=x=>{ const e=Math.floor(Math.log10(x)); return (x/10**e).toFixed(1)+'×10'+sup(e); };
+const Q={checker:(i,j)=>(i+j)%2===0?1:-1, stripes:(i,j)=>i%2===0?1:-1, uniform:()=>1};
+/* the field of one uniformly charged square, closed form (same as sheet.py) */
+const Fq=(x,y,z)=>Math.atan2(x*y, z*Math.sqrt(x*x+y*y+z*z));
+const Ez_rect=(x1,x2,y1,y2,z)=>Fq(x2,y2,z)-Fq(x1,y2,z)-Fq(x2,y1,z)+Fq(x1,y1,z);
+function Ez(p,x,y,z){ if(z<0) return -Ez(p,x,y,-z); let e=0; for(let i=0;i<10;i++) for(let j=0;j<10;j++) e+=Q[p](i,j)*Ez_rect(i-x,i+1-x,j-y,j+1-y,z); return e/(2*Math.PI); }
+function reach(p){ const f=z=>Math.abs(Ez(p,4.5,4.5,z)); if(f(40)>=0.01) return null; let lo=0,hi=40; for(let k=0;k<70;k++){ const m=(lo+hi)/2; if(f(m)<0.01) hi=m; else lo=m; } return hi; }
+
+/* bus */
+const REPORTS={W2:null,W3:null,W4:null,W5:null};
+function report(w,p){ REPORTS[w]=p; drawBoard(); }
+function drawBoard(){ EL('board').innerHTML=[['W2','WOOD'],['W3','METAL'],['W4','FIRE'],['W5','WATER']].map(([w,e])=>{ const r=REPORTS[w];
+    if(!r) return `<div class="line"><span>${w} · ${e}</span><span class="wait">awaiting run</span></div>`;
+    const cls=r.kind==='dissent'?'dis':(r.agree===false?'bad':'ok'), mk=r.kind==='dissent'?'⚑':(r.agree===false?'✕':'✓');
+    return `<div class="line"><span>${w} · ${e}</span><span class="${cls}">${mk} ${r.text}</span></div>`; }).join('')+
+    `<div class="line" style="border-top:1px solid var(--earth-2);margin-top:5px;padding-top:5px"><span>reports filed</span><span>${Object.values(REPORTS).filter(Boolean).length} / 4</span></div>`; }
+
+const I13=D.i13.globals;
+function pageInts(pulled=0){ let n=0; for(let i=0;i<10;i++) for(let j=0;j<10;j++) if((i+j)%2===0) n++; n-=pulled; return {nails:n,minus:100-n,added:100-93,gap:79-47}; }
+function selfcheck(){ const bad=[], P=pageInts();
+  for(const k of Object.keys(I13)) if(P[k]!==I13[k]) bad.push(`I-13 ${k}: VM ${I13[k]} ≠ page ${P[k]}`);
+  const c=Ez('checker',4.5,4.5,1.0); if(Math.abs(c-S.field.checker.at_one_cell)>1e-9) bad.push('field sum disagrees with sheet.py');
+  if(Math.abs(Ez('uniform',4.5,4.5,1.0)-S.field.uniform.at_one_cell)>1e-9) bad.push('uniform control disagrees');
+  if(!(S.field.uniform.z_1pct>10*S.field.checker.z_1pct)) bad.push('known-bad: an all-+ sheet should reach far');
+  if(Math.abs(S.weights.ratio_his_Ag_over_Au/1e32-1)>1e-9) bad.push('exponent gap');
+  if(bad.length) throw new Error(bad.join(' · ')); return true; }
+
+/* masthead */
+function strip(){ const W=S.weights, rows=[[W.Au.his_log,'your gold, per atom'],[W.Ag.his_log,'your silver, per atom'],[W.Au.real_log_g,'real gold atom, grams'],[W.Ag.real_log_g,'real silver atom, grams']];
+  const bar=l=>'█'.repeat(Math.round(-l/2)); const F=S.field;
+  EL('strip').textContent='weight per atom (bar = how many powers of ten below 1, each █ = two)\n'+rows.map(([l,t])=>l.toFixed(2).padStart(7)+' '+bar(l).padEnd(41)+t).join('\n')+
+    '\nhow far the −+−+ sheet reaches before its field is 1% (each █ = one cell)\n'+[['chessboard',F.checker.z_1pct],['stripes',F.stripes.z_1pct],['all +',F.uniform.z_1pct]].map(([n,z])=>z.toFixed(2).padStart(7)+' '+'█'.repeat(Math.max(1,Math.round(z))).padEnd(41)+n).join('\n'); }
+
+/* W1 */
+function w1(){ EL('plaintext').textContent=D.claims.plain; EL('flag').textContent='⚑ '+D.claims.flag;
+  EL('words').innerHTML=D.claims.words.map(([h,a,m])=>`<div class="wd"><span class="his">“${h}”</span> → <span class="acc">${a}</span><br><span class="den">${m}</span></div>`).join('');
+  EL('claims').innerHTML=D.claims.claims.map(([st,c,a])=>`<div class="cl"><span class="stamp s-${st.toLowerCase()}">${st}</span> <span class="q">${c}</span><br><span class="a">${a}</span></div>`).join('');
+  EL('catches').textContent=D.claims.catches.join('\n'); EL('toddler').textContent=D.claims.toddler; drawBoard();
+  EL('b1').onclick=()=>{ const b=EL('b1'); b.disabled=true; setTimeout(()=>{ const R=Object.values(REPORTS), n=R.filter(Boolean).length, bad=R.filter(r=>r&&r.agree===false).length, dis=R.filter(r=>r&&r.kind==='dissent').length;
+    let sc='ok'; try{ selfcheck(); }catch(e){ sc='FAIL'; } const st=D.claims.claims.reduce((m,c)=>(m[c[0]]=(m[c[0]]||0)+1,m),{});
+    EL('b1s').innerHTML=(n<4?`<span class="bad">incomplete — ${4-n} unrun</span>`:`<span class="${bad?'bad':'ok'}">${n}/4 in · ${bad} mismatch · ${dis} dissent</span>`)+` · self-check <span class="${sc==='ok'?'ok':'bad'}">${sc}</span> · LIT ${st.LIT||0} AMBER ${st.AMBER||0} DEAD ${st.DEAD||0}`;
+    b.disabled=false; },300); }; }
+
+/* W2 */
+let tampered=false;
+function w2(){ EL('contrib').innerHTML=D.claims.contributions.map((c,i)=>`<div style="margin-bottom:9px"><div style="display:flex;justify-content:space-between"><b style="font-weight:400">${c.who}</b><span class="small" id="cw${i}">0%</span></div><div class="bar"><i id="cb${i}"></i></div><div class="small">${c.what}</div></div>`).join('');
+  EL('i13src').textContent=D.i13src;
+  const cmp=()=>{ const P=pageInts(tampered?1:0); let ag=0,n=0,h=''; for(const k of Object.keys(I13)){ n++; const same=P[k]===I13[k]; ag+=same; h+=`<div class="rd"><span>${k}</span><b><span class="${same?'ok':'bad'}">${I13[k]} · ${P[k]} ${same?'✓':'✕'}</span></b></div>`; }
+    EL('i13cmp').innerHTML=h+`<div class="small" style="margin-top:4px">VM Cortex mask 0x${D.i13.cortex.mask.toString(16)} · ${D.i13.cortex.pass?'pass':'FAIL'}${tampered?' · one nail pulled from the page\'s board':' · note: shifting the chessboard one square leaves 50 and 50, so a count can\'t see a shifted board'}</div>`; return [ag,n]; };
+  cmp();
+  EL('b2x').onclick=()=>{ tampered=!tampered; EL('b2x').textContent=tampered?'untamper':'pull one nail'; const [a,n]=cmp(); EL('b2s').innerHTML=tampered?`<span class="${a<n?'ok':'bad'}">tamper ${a<n?'caught':'NOT caught'}: ${n-a} of ${n} disagree</span>`:'restored'; };
+  EL('b2').onclick=()=>{ const b=EL('b2'); b.disabled=true; D.claims.contributions.forEach((c,i)=>setTimeout(()=>{ EL('cb'+i).style.width=c.weight+'%'; EL('cw'+i).textContent=c.weight+'%'; },90*i+60));
+    setTimeout(()=>{ const sm=D.claims.contributions.reduce((a,c)=>a+c.weight,0), [a,n]=cmp(); EL('b2s').innerHTML=`<span class="${sm===100&&a===n?'ok':'bad'}">sum ${sm}% · I-13 ${a}/${n}</span>`;
+      EL('rep2').textContent=`→ W1: I-13 VM vs page: ${a} of ${n} agree${tampered?' (TAMPERED)':''}\n   50 nails · 7 units in · exponents 32 apart`; report('W2',{agree:sm===100&&a===n,text:`I-13 ${a}/${n}`}); b.disabled=false; },420); }; }
+
+/* W3 · the nails sink */
+let real=false, prog=null;
+function scale(){ const W=S.weights; return real?{Au:W.Au.real_kg*1e3,Ag:W.Ag.real_kg*1e3,unit:'grams'}:{Au:W.Au.his,Ag:W.Ag.his,unit:'your units'}; }
+function draw3(t){ const [g,W,H]=fit(EL('c3'),250), Lf=34, R=W-8, T=16, B=H-24, s=scale(), nAu=7/s.Au, nAg=7/s.Ag;
+  const lo=Math.floor(Math.min(Math.log10(nAu),Math.log10(nAg)))-3, hi=Math.ceil(Math.max(Math.log10(nAu),Math.log10(nAg)))+1;
+  const X=l=>Lf+(R-Lf)*(l-lo)/(hi-lo), Y=h=>B-(B-T)*(h-0.84)/(1.01-0.84);
+  g.strokeStyle='#2E3136'; g.fillStyle=css('--ink-dim'); for(const h of [0.86,0.93,1.0]){ g.beginPath(); g.moveTo(Lf,Y(h)); g.lineTo(R,Y(h)); g.stroke(); g.fillText(h.toFixed(2),2,Y(h)+3); }
+  for(let l=lo;l<=hi;l+=Math.max(1,Math.round((hi-lo)/6))) g.fillText('10'+sup(l),X(l)-8,H-6);
+  g.fillText('atoms added (log) · '+s.unit,Lf,T-4);
+  // gold: height falls linearly in atoms → on a log axis it hugs 1.00 then drops near n_Au; silver after
+  const path=(el,n0,h0,col,frac)=>{ g.strokeStyle=col; g.lineWidth=2; g.beginPath(); let st=false;
+    for(let k=0;k<=200*frac;k++){ const l=lo+(Math.log10(n0)+0.3-lo)*k/200, n=10**l, h=h0-0.07*Math.min(1,n/n0); const x=X(l), y=Y(h); st?g.lineTo(x,y):g.moveTo(x,y); st=true; } g.stroke(); g.lineWidth=1; };
+  const fa=t===undefined?1:Math.min(1,t*2), fs=t===undefined?1:Math.max(0,t*2-1);
+  path('Au',nAu,1.0,css('--au'),fa); if(fs>0) path('Ag',nAg,0.93,css('--ag'),fs);
+  g.fillStyle=css('--au'); g.fillText('gold '+e10(nAu),X(Math.log10(nAu))-30,Y(0.93)-6); g.fillStyle=css('--ag'); g.fillText('silver '+e10(nAg),X(Math.log10(nAg))-34,Y(0.86)+12);
+  if(!real){ g.strokeStyle='#e0584f'; g.setLineDash([3,3]); g.beginPath(); g.moveTo(X(80),T); g.lineTo(X(80),B); g.stroke(); g.setLineDash([]); g.fillStyle='#e0584f'; g.fillText('~ every atom there is',X(80)-110,T+10); }
+  EL('m3a').textContent=e10(nAu); EL('m3b').textContent=e10(nAg); EL('m3c').textContent=(t===undefined||t>=1)?'0.86':(1-0.07*Math.min(1,t*2)-0.07*Math.max(0,t*2-1)).toFixed(3); }
+function w3(){ draw3(0);
+  EL('b3').onclick=()=>{ const b=EL('b3'); b.disabled=true; const t0=performance.now(); const f=t=>{ const k=Math.min(1,(t-t0)/2200); draw3(k); EL('b3s').textContent=k<0.5?'gold…':k<1?'silver…':'done';
+      if(k<1) requestAnimationFrame(f); else { b.disabled=false; const s=scale(); EL('rep3').textContent=`→ W1: ${real?'real':'your'} scale: gold ${e10(7/s.Au)}, silver ${e10(7/s.Ag)} atoms for 7 units each\n   ${real?'silver needs MORE atoms (lighter)':'silver needs 10³² fewer (heavier on your scale)'}`;
+        report('W3',{agree:true,text:`${real?'real':'yours'}: Au ${e10(7/s.Au)}`}); } }; requestAnimationFrame(f); };
+  EL('b3t').onclick=()=>{ const before=7/scale().Au; real=!real; EL('b3t').textContent=real?'your scale':'real atoms'; draw3(); const after=7/scale().Au;
+    EL('b3s').innerHTML=`<span class="${before!==after?'ok':'bad'}">${real?'real atoms':'your scale'}: gold count moved ${Math.abs(Math.log10(after/before)).toFixed(1)} powers of ten ${before!==after?'· the control fires':'· NOTHING moved: broken'}</span>`; }; }
+
+/* W4 · the field */
+let pat='checker', map4=null;
+function draw4(){ const [g,W,H]=fit(EL('c4'),250), nx=100, nz=60, x0=-1, x1=11, z0=-3, z1=3, mid=H/2;
+  const X=x=>W*(x-x0)/(x1-x0), Z=z=>H*(z1-z)/(z1-z0);
+  if(!map4||map4.p!==pat){ const v=new Float64Array(nx*nz); for(let j=0;j<nz;j++) for(let i=0;i<nx;i++){ const x=x0+(x1-x0)*(i+.5)/nx, z=z1-(z1-z0)*(j+.5)/nz; v[j*nx+i]=Math.abs(z)<0.03?0:Ez(pat,x,4.5,z); } map4={p:pat,v}; }
+  for(let j=0;j<nz;j++) for(let i=0;i<nx;i++){ const e=map4.v[j*nx+i], a=Math.abs(e), m=a<1e-3?0:Math.min(1,(Math.log10(a)+3)/3);
+    g.fillStyle=e>0?`rgba(238,107,45,${m})`:`rgba(84,135,224,${m})`; g.fillRect(W*i/nx,H*j/nz,W/nx+1,H/nz+1); }
+  for(let i=0;i<10;i++){ const q=Q[pat](i,4); g.fillStyle=q>0?'#EE6B2D':'#5487E0'; g.fillRect(X(i)+1,mid-2,X(i+1)-X(i)-2,4); if(q>0){ g.fillStyle='#fff'; g.fillRect((X(i)+X(i+1))/2-1,mid-9,2,18); } }
+  const r=pat==='checker'?S.field.checker.z_1pct:pat==='stripes'?S.field.stripes.z_1pct:S.field.uniform.z_1pct;
+  g.strokeStyle='#fff'; g.setLineDash([4,3]); for(const s of [1,-1]){ const zz=Math.min(2.95,r)*s; g.beginPath(); g.moveTo(0,Z(zz)); g.lineTo(W,Z(zz)); g.stroke(); } g.setLineDash([]);
+  g.fillStyle='rgba(0,0,0,.65)'; g.fillRect(0,0,W,13); g.fillStyle=css('--ink'); g.fillText(`side cut through row 5 · ±3 cells above and below · 1% line at ${r.toFixed(2)} cells${r>3?' (off this view)':''}`,4,10);
+  EL('m4p').textContent={checker:'chessboard',stripes:'stripes',uniform:'all + (the control)'}[pat]; EL('m4a').textContent=r.toFixed(3)+' cells';
+  EL('m4b').textContent=(100*S.field[pat].at_one_cell).toFixed(1)+'%'; return r; }
+function w4(){ draw4();
+  const cv=EL('c4'); const pr=e=>{ const b=cv.getBoundingClientRect(), x=-1+12*(e.clientX-b.left)/b.width, z=3-6*(e.clientY-b.top)/b.height; EL('probe').textContent=`x ${x.toFixed(2)} · height ${z.toFixed(2)} cells · field ${(100*Math.abs(Ez(pat,x,4.5,z))).toFixed(2)}% of the surface value`; };
+  cv.addEventListener('pointermove',pr); cv.addEventListener('pointerdown',pr);
+  EL('b4s').onclick=()=>{ pat=pat==='stripes'?'checker':'stripes'; EL('b4s').textContent=pat==='stripes'?'chessboard':'stripes'; draw4(); };
+  EL('b4t').onclick=()=>{ pat='uniform'; const r=draw4(); EL('probe').innerHTML=`<span class="${r>10?'ok':'bad'}">all +: 1% only at ${r.toFixed(1)} cells, ${(r/S.field.checker.z_1pct).toFixed(0)}× farther · ${r>10?'the control fires':'SILENT: broken'}</span>`; };
+  EL('b4').onclick=()=>{ pat='checker'; map4=null; const r=draw4(), live=reach('checker'); EL('rep4').textContent=`→ W1: chessboard reaches ${r.toFixed(3)} cells (live bisection ${live.toFixed(3)})\n   endless-sheet formula ${S.field.theory.checker_z_1pct.toFixed(3)}`;
+    report('W4',{agree:Math.abs(live-r)<1e-6&&Math.abs(r-S.field.theory.checker_z_1pct)<1e-3,text:`1% at ${r.toFixed(2)} cells`}); }; }
+
+/* W5 · both faces */
+let ang=0.6, spin=null, press=0;
+function draw5(){ const [g,W,H]=fit(EL('c5'),260), ca=Math.cos(ang), sa=Math.sin(ang), sc=Math.min(W,H)/15;
+  const P=(x,y,z)=>{ const X=(x-4.5)*ca-(y-4.5)*sa, Y=(x-4.5)*sa+(y-4.5)*ca; return [W/2+X*sc, H/2-z*sc*1.6+Y*sc*0.42, Y]; };
+  const top=1-0.14*press, bot=1+0.14*press, au=Math.min(1,press*2)*0.35, ag=Math.max(0,press*2-1)*0.35;
+  const quad=(pts,fill)=>{ g.fillStyle=fill; g.beginPath(); pts.forEach(([x,y,z],k)=>{ const [a,b]=P(x,y,z); k?g.lineTo(a,b):g.moveTo(a,b); }); g.closePath(); g.fill(); };
+  quad([[0,0,0],[10,0,0],[10,10,0],[0,10,0]],'rgba(120,125,135,.35)');
+  const cells=[]; for(let i=0;i<10;i++) for(let j=0;j<10;j++) cells.push({i,j,d:(i-4.5)*sa+(j-4.5)*ca}); cells.sort((a,b)=>b.d-a.d);
+  for(const c of cells){ const plus=(c.i+c.j)%2===0, cx=c.i+0.5, cy=c.j+0.5;
+    if(au>0) quad([[c.i,c.j,0.02],[c.i+1,c.j,0.02],[c.i+1,c.j+1,0.02],[c.i,c.j+1,0.02]],`rgba(232,193,90,${0.25+au})`);
+    if(ag>0) quad([[c.i,c.j,0.05],[c.i+1,c.j,0.05],[c.i+1,c.j+1,0.05],[c.i,c.j+1,0.05]],`rgba(201,209,218,${0.2+ag})`);
+    if(plus){ const [a1,b1]=P(cx,cy,-0.5*bot), [a2,b2]=P(cx,cy,0.5*top); g.strokeStyle='#e6e6e8'; g.lineWidth=2; g.beginPath(); g.moveTo(a1,b1); g.lineTo(a2,b2); g.stroke(); g.lineWidth=1; }
+    else { const [a,b]=P(cx,cy,0.06); g.fillStyle='#5487E0'; g.fillRect(a-3,b-1,6,2); } }
+  g.fillStyle=css('--ink-dim'); g.fillText('50 nails through the + squares · gold, then silver, on top · heights ×2 for view',4,11);
+  EL('m5a').textContent=top.toFixed(3); EL('m5b').textContent=bot.toFixed(3); EL('m5c').textContent=(top+bot).toFixed(3); }
+function w5(){ EL('dissent').textContent=`⚑ W1 and W3 say the nails are pushed "in" to 0.93. a nail is rigid: 0.07 in on top is 0.07 out underneath, so the bottom tips reach 1.07 and the sum stays 2.00. nothing is absorbed; the load passes straight through to whatever is under the sheet. if the bottom tips can't move (a hard floor), the nails don't sink at all and the sheet takes the weight instead.\n   W1 has not accepted this. Recorded.`;
+  EL('left').textContent=D.claims.left.map(x=>'· '+x).join('\n'); draw5();
+  EL('b5').onclick=()=>{ const b=EL('b5'); b.disabled=true; const t0=performance.now(); const f=t=>{ press=Math.min(1,(t-t0)/2000)*0.5; draw5(); if(press<0.5) requestAnimationFrame(f); else { b.disabled=false; EL('b5s').textContent='pressed to 0.93';
+      EL('rep5').textContent='→ W1 (dissent): top 0.930 · bottom 1.070 · sum 2.000\n   the nails pass the load through; they don\'t absorb it'; report('W5',{kind:'dissent',text:'0.93 top = 1.07 bottom'}); } }; requestAnimationFrame(f); };
+  EL('b5r').onclick=()=>{ if(spin){ cancelAnimationFrame(spin); spin=null; return; } const t0=performance.now(), a0=ang; const f=t=>{ ang=a0+(t-t0)/1700; draw5(); spin=requestAnimationFrame(f); }; spin=requestAnimationFrame(f); }; }
+
+function rest(){ const st=D.claims.claims.reduce((m,c)=>(m[c[0]]=(m[c[0]]||0)+1,m),{});
+  EL('foot').innerHTML=`Every figure computed before this file was written (verify/sheet.py) and pulled back out of it by verify/crosscheck.js. The sheet: <span class="stamp s-lit">LIT</span> ${st.LIT} · <span class="stamp s-amber">AMBER</span> ${st.AMBER} · <span class="stamp s-dead">DEAD</span> ${st.DEAD}. `+
+   `LIT: your exponents are atomic numbers, both atom counts, the stacking fit, the sheet's reach (exact sum, checked against the endless-sheet formula), 50 nails. AMBER: the bed's stiffness (set equal to the sheet's weight), reading 10x1^10-47.01 as 10^−47.01, the grams in "7 units". `+
+   `Ornament: none; the 3D heights are doubled for view and say so.`; }
+
+function init(){ try{ selfcheck(); }catch(e){ EL('fail').style.display='block'; EL('fail').textContent='SELF-CHECK FAILED: '+e.message; }
+  strip(); w1(); w2(); w3(); w4(); w5(); rest();
+  let t; addEventListener('resize',()=>{ clearTimeout(t); t=setTimeout(()=>{ draw3(); map4=null; draw4(); draw5(); },120); }); }
+window.__REV38__={selfcheck,pageInts,Ez,reach};
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
+})();
+</script>
+</body>
+</html>

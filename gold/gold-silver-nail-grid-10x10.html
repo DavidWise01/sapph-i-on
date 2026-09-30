@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>the grid · 10 × 10 · weight 100</title>
+<style>
+:root{--ground:#16171A;--rule:#2C2E33;--ink:#E7E7EA;--dim:#8F929B;--plus:#EE6B2D;--minus:#5487E0;--au:#E8C15A;--ag:#C9D1DA;--nail:#F2F2F4}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ground);color:var(--ink);font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.wrap{max-width:760px;margin:0 auto;padding:16px}
+.hd{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.hd b{font-weight:400;letter-spacing:.2em;color:var(--dim);font-size:10px;text-transform:uppercase}
+canvas{display:block;width:100%;touch-action:none}
+.ctl{display:grid;grid-template-columns:auto 1fr auto;gap:6px 10px;align-items:center;margin-top:12px}
+.ctl label{font-size:11px}
+input[type=range]{width:100%}
+#au{accent-color:var(--au)} #ag{accent-color:var(--ag)}
+.val{font-size:11px;min-width:92px;text-align:right}
+.rd{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+@media(max-width:560px){.rd{grid-template-columns:1fr 1fr}}
+.rd div{border:1px solid var(--rule);border-radius:3px;padding:6px 8px}
+.rd i{display:block;font-style:normal;font-size:9px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+.rd span{font-size:15px}
+.note{margin-top:10px;font-size:10.5px;color:var(--dim)}
+.note b{color:var(--ink);font-weight:400}
+.lock{opacity:.35}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hd"><b>the grid · 10 × 10 · weight 100</b><b id="state">bare</b></div>
+  <canvas id="plan"></canvas>
+  <canvas id="side" style="margin-top:6px"></canvas>
+  <div class="ctl">
+    <label for="au" style="color:var(--au)">gold</label><input type="range" id="au" min="0" max="80" step="0.005" value="0"><span class="val" id="auv">0 atoms</span>
+    <label for="ag" style="color:var(--ag)" id="agl" class="lock">silver</label><input type="range" id="ag" min="0" max="49" step="0.005" value="0" disabled><span class="val" id="agv">locked</span>
+  </div>
+  <div class="rd">
+    <div><i>total weight</i><span id="w">100</span></div>
+    <div><i>top tips</i><span id="top">1.000</span></div>
+    <div><i>bottom tips</i><span id="bot">1.000</span></div>
+    <div><i>per square</i><span id="cell">1.000</span></div>
+  </div>
+  <div class="note">each square weighs 1 (so each is 1%). the sheet runs <b>−+−+</b> as a chessboard: the 50 <b>+</b> squares carry a nail, the vertical stroke of the +, poking out top and bottom. gold adds <b>10<sup>−79.01</sup></b> per atom until the tips sink to <b>0.93</b>; then silver unlocks at <b>10<sup>−47.01</sup></b> per atom. the sliders run in powers of ten of atoms. the bed is as stiff as the sheet (another 100 pushes the tips flush), so 0.93 means 7 units of metal. ground PEWTER.</div>
+</div>
+<script>
+(function(){
+'use strict';
+const WAu=10**-79.01, WAg=10**-47.01, W0=100, STIFF=100, STOP=0.93;
+const $=id=>document.getElementById(id);
+const sup=n=>String(n).replace('-','⁻').replace(/\d/g,c=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[c]);
+const big=l=>l<=0?'0 atoms':(()=>{ const e=Math.floor(l), m=10**(l-e); return m.toFixed(2)+'×10'+sup(e)+' atoms'; })();
+const lAuStop=Math.log10(W0*(1-STOP)/WAu);                 // the atom count that brings the tips to 0.93
+function state(){
+  let lAu=+$('au').value; if(lAu>lAuStop) lAu=lAuStop;       // gold stops at 0.93
+  const au=lAu>0?10**lAu*WAu:0;
+  const unlocked=lAu>=lAuStop-1e-9;
+  const lAg=unlocked?+$('ag').value:0, agRaw=lAg>0?10**lAg*WAg:0;
+  const ag=Math.min(agRaw, STIFF*STOP);                        // silver can press them flush, no further
+  const add=au+ag, top=Math.max(0,1-add/STIFF);
+  return {lAu,au,unlocked,lAg,ag,add,top,bot:2-top};
+}
+function fit(cv,h){ const w=cv.clientWidth||600, d=window.devicePixelRatio||1; cv.width=Math.round(w*d); cv.height=Math.round(h*d); cv.style.height=h+'px'; const g=cv.getContext('2d'); g.setTransform(d,0,0,d,0,0); return [g,w,h]; }
+function drawPlan(s){
+  const w0=$('plan').clientWidth||600, [g,W,H]=fit($('plan'),Math.min(w0,560)), n=10, c=Math.min(W,H)/n, ox=(W-c*n)/2;
+  const auA=Math.min(1,s.au/7), agA=Math.min(1,s.ag/7);
+  for(let i=0;i<n;i++) for(let j=0;j<n;j++){
+    const x=ox+j*c, y=i*c, plus=(i+j)%2===0;
+    g.fillStyle=plus?'#2a1c16':'#16202e'; g.fillRect(x,y,c,c);
+    if(auA>0){ g.fillStyle=`rgba(232,193,90,${0.12+0.5*auA})`; g.fillRect(x,y,c,c); }
+    if(agA>0){ g.fillStyle=`rgba(201,209,218,${0.10+0.45*agA})`; g.fillRect(x,y,c,c); }
+    g.strokeStyle='#2C2E33'; g.strokeRect(x+0.5,y+0.5,c-1,c-1);
+    const cx=x+c/2, cy=y+c/2, arm=c*0.26;
+    g.lineCap='round';
+    if(plus){ g.strokeStyle='#EE6B2D'; g.lineWidth=Math.max(2,c*0.06); g.beginPath(); g.moveTo(cx-arm,cy); g.lineTo(cx+arm,cy); g.stroke();
+      const t=arm*(0.4+0.6*s.top); g.strokeStyle='#F2F2F4'; g.lineWidth=Math.max(2.5,c*0.075); g.beginPath(); g.moveTo(cx,cy-t); g.lineTo(cx,cy+arm*(0.4+0.6*s.bot)); g.stroke(); }
+    else { g.strokeStyle='#5487E0'; g.lineWidth=Math.max(2,c*0.06); g.beginPath(); g.moveTo(cx-arm,cy); g.lineTo(cx+arm,cy); g.stroke(); }
+    g.fillStyle='rgba(231,231,234,.55)'; g.font=Math.max(8,c*0.14)+'px ui-monospace,monospace'; g.fillText((1+s.add/100).toFixed(3),x+3,y+c-4);
+  }
+}
+function drawSide(s){
+  const [g,W,H]=fit($('side'),170), n=10, c=Math.min(W,560)/n, ox=(W-c*n)/2, mid=62, L=38;
+  const up=h=>L*(1-Math.pow(Math.max(0,1-h),0.4)), down=b=>L*(1+Math.pow(Math.max(0,b-1),0.4));   // stretched near 1.00 so 0.07 shows
+  g.fillStyle='#1c1d21'; g.fillRect(0,0,W,H);
+  const au=Math.min(1,s.au/7)*5, ag=Math.min(1,s.ag/93)*8;
+  if(au>0){ g.fillStyle='#E8C15A'; g.fillRect(ox,mid-3-au,c*n,au); }
+  if(ag>0){ g.fillStyle='#C9D1DA'; g.fillRect(ox,mid-3-au-ag,c*n,ag); }
+  g.strokeStyle='rgba(242,242,244,.3)'; g.setLineDash([3,4]); g.lineWidth=1;
+  for(const [y,t,dx] of [[mid-3-up(1),'1.00 top',0],[mid-3-up(STOP),'0.93',0],[mid+3+down(1),'1.00 below',0],[mid+3+down(2-STOP),'1.07',0]]){ const room=ox+c*n+4<=W-58; g.beginPath(); g.moveTo(room?ox:ox+62,y); g.lineTo(ox+c*n,y); g.stroke(); g.fillStyle='#8F929B'; g.font='9px ui-monospace,monospace'; g.fillText(t,room?ox+c*n+4:ox+2,y+3); }
+  g.setLineDash([]);
+  for(let j=0;j<n;j++){ const plus=j%2===0, x=ox+j*c;          // row 1 of the chessboard, seen edge-on
+    g.fillStyle=plus?'#EE6B2D':'#5487E0'; g.fillRect(x+1,mid-3,c-2,6);
+    if(plus){ g.strokeStyle='#F2F2F4'; g.lineWidth=3; g.lineCap='round'; g.beginPath(); g.moveTo(x+c/2,mid-3-up(s.top)); g.lineTo(x+c/2,mid+3+down(s.bot)); g.stroke(); }
+  }
+  g.fillStyle='#8F929B'; g.font='9px ui-monospace,monospace'; g.fillText('edge-on · one row · tips top and bottom · lengths on a stretched scale so 0.07 shows',ox,H-4);
+}
+function render(){
+  const s=state();
+  $('auv').textContent=big(s.lAu)+(s.unlocked?' · stop':'');
+  $('ag').disabled=!s.unlocked; $('agl').className=s.unlocked?'':'lock';
+  $('agv').textContent=s.unlocked?big(s.lAg):'locked';
+  $('w').textContent=(W0+s.add).toFixed(3); $('top').textContent=s.top.toFixed(3); $('bot').textContent=s.bot.toFixed(3); $('cell').textContent=(1+s.add/100).toFixed(3);
+  $('state').textContent=s.lAu<=0?'bare':!s.unlocked?'gold going on':s.lAg<=0?'gold done · silver ready':s.top<1e-6?'pressed flush':'silver stacking';
+  drawPlan(s); drawSide(s);
+  window.__GRID__=s;
+}
+$('au').addEventListener('input',render); $('ag').addEventListener('input',render);
+addEventListener('resize',render); render();
+})();
+</script>
+</body>
+</html>
