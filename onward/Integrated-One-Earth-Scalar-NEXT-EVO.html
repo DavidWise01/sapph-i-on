@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Integrated One Earth Scalar — NEXT EVO — One File</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>body{background:#0a0f1a;color:#e2e8f0;font-family:ui-monospace,monospace}canvas{background:#050a14;border-radius:12px}.card{background:#111827;border:1px solid #1f2937;border-radius:12px}.badge{font-size:10px;padding:2px 6px;border-radius:4px}select,input{background:#1e293b;border:1px solid #334155;border-radius:6px;padding:6px 8px;color:#e2e8f0}</style>
+</head><body class="p-3">
+<h1 class="text-xl font-bold">Integrated One Earth Scalar — NEXT EVO — One File Baked</h1>
+<p class="text-xs text-slate-400">Invariant: [[ quad a::90 b::90 c::90 d::90 x::center 000 ]] | elliptical sides just 2 | left -+30-+ right -+30-+ | -2x+2x[1]-2x+2x | M>=2 stable M=1 blowout</p>
+
+<div class="grid grid-cols-2 md:grid-cols-6 gap-2 my-3 card p-3">
+  <div><label class="text-xs">Earth Scalar</label><select id="scalarSel"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></div>
+  <div><label class="text-xs">Polarity Pattern</label><select id="polaritySel"><option value="--+++--">--+++-- Original</option><option value="++---++" selected>++---++ Inversion</option><option value="+-+-+-">+-+-+- Alternating</option></select></div>
+  <div><label class="text-xs">Manifold M</label><select id="manifoldSel"><option value="4">M=4 Full (4 sides)</option><option value="2" selected>M=2 Operating (2 sides)</option><option value="1">M=1 BLOWOUT</option></select></div>
+  <div><label class="text-xs">Coil Set</label><select id="coilSetSel"><option value="iso6" selected>ISO 003/007/012/018/021/024</option><option value="gen24">Generative 24 Library</option><option value="custom">Custom 6</option></select></div>
+  <div><label class="text-xs">NE-2 Layout</label><select id="ne2Sel"><option value="2x2" selected>2x2 offset -2x+2x[1]-2x+2x</option><option value="x4">x4 separate</option><option value="ring">Ring 6</option></select></div>
+  <div><label class="text-xs">Boxiness n</label><select id="boxSel"><option>2</option><option>3</option><option selected>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select></div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-3">
+  <div class="lg:col-span-2 card p-2">
+    <canvas id="hexCanvas" width="900" height="520" class="w-full"></canvas>
+    <div class="flex gap-3 text-xs mt-2 flex-wrap">
+      <span>Field Center: <b id="fieldCenter">0.02 mT</b></span>
+      <span>Volume: <b id="volVal">63.2</b></span>
+      <span>Sum Quads: <b id="sumQ">360°</b></span>
+      <span id="isoBadge" class="badge bg-green-700">ISO PASS</span>
+      <span id="blowBadge" class="badge bg-green-700">M=2 STABLE</span>
+      <button id="invertBtn" class="bg-violet-700 px-2 py-1 rounded text-xs">INVERT ++---++</button>
+      <button id="trapBtn" class="bg-slate-700 px-2 py-1 rounded text-xs">Trap Mode: ON</button>
+    </div>
+  </div>
+  <div class="card p-2">
+    <h3 class="font-bold text-sm">Isomorphic Library — One File</h3>
+    <canvas id="isoMap" width="380" height="220" class="w-full rounded mb-2"></canvas>
+    <div class="grid grid-cols-2 gap-1 text-xs max-h-64 overflow-y-auto" id="libList"></div>
+    <div class="mt-2 flex gap-2">
+      <input id="seedIn" value="EARTH-3" class="w-24 text-xs"><button id="genMore" class="bg-violet-700 px-2 py-1 rounded text-xs">Gen 12</button><button id="exportJson" class="bg-emerald-700 px-2 py-1 rounded text-xs">Export JSON</button>
+    </div>
+    <div class="mt-2 text-xs p-2 bg-slate-800 rounded" id="mathBox"></div>
+  </div>
+</div>
+
+<div class="card p-2 mt-3">
+  <h3 class="font-bold text-sm">Generative Preview Grid (24 variants, all M>=2)</h3>
+  <div id="grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2 mt-2"></div>
+</div>
+
+<script>
+let library=[], selected=2, trapMode=true;
+function hash(s){let h=0;for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))>>>0;return h;}
+function rndGen(h){return ()=>{h=(h*1664525+1013904223)>>>0;return h/4294967296;};}
+function makeVariant(seed, idx){
+  const h=hash(seed+idx); const r=rndGen(h);
+  const n=2+Math.floor(r()*6); const e=1+r()*1; const delta=15+r()*30; const S=1+r()*9;
+  const base=[90,90,90,90]; const d=(r()-0.5)*10; base[0]+=d; base[2]-=d; const d2=(r()-0.5)*10; base[1]+=d2; base[3]-=d2;
+  const sum=base.reduce((a,b)=>a+b,0); const f=360/sum; const quads=base.map(v=>Math.round(v*f*10)/10);
+  const M=r()>0.35?2:4;
+  return {id:`ISO-${String(library.length+idx+1).padStart(3,'0')}`, seed, S:Math.round(S*10)/10, n, e:Math.round(e*100)/100, delta:Math.round(delta), quads, left:`-${Math.round(delta)}+${Math.round(delta)}-+`, right:`-${Math.round(delta)}+${Math.round(delta)}-+`, center:"000", M, iso:"PASS", polarity:"+", vol:(S*2*Math.PI*Math.PI).toFixed(1)};
+}
+const fixedCoils=[
+  {id:"ISO-003", S:3.2, n:4, e:1.3, delta:28, quads:[90.8,87.2,89.2,92.8], polarity:"+", M:2},
+  {id:"ISO-007", S:2.9, n:5, e:1.6, delta:32, quads:[88.7,88.3,91.3,91.7], polarity:"+", M:2},
+  {id:"ISO-012", S:3.1, n:3, e:1.4, delta:30, quads:[91.4,91.1,88.6,88.9], polarity:"-", M:2, save:true},
+  {id:"ISO-018", S:3.0, n:6, e:1.5, delta:29, quads:[90.2,89.8,90.1,89.9], polarity:"-", M:2},
+  {id:"ISO-021", S:3.3, n:4, e:1.2, delta:31, quads:[92,88,91,89], polarity:"+", M:2},
+  {id:"ISO-024", S:2.8, n:5, e:1.7, delta:27, quads:[89,91,90,90], polarity:"+", M:2},
+];
+
+function drawHex(){
+  const selPol=document.getElementById('polaritySel').value;
+  const S=parseFloat(document.getElementById('scalarSel').value);
+  const M=parseInt(document.getElementById('manifoldSel').value);
+  const n=parseInt(document.getElementById('boxSel').value);
+  const canvas=document.getElementById('hexCanvas'); const ctx=canvas.getContext('2d'); const w=canvas.width,h=canvas.height;
+  ctx.clearRect(0,0,w,h); ctx.fillStyle='#050a14'; ctx.fillRect(0,0,w,h);
+  ctx.strokeStyle='#111827'; ctx.lineWidth=0.5; for(let x=0;x<w;x+=40){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();} for(let y=0;y<h;y+=40){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
+  const cx=w/2, cy=h/2, R=130*(0.6+S/10);
+  // draw 6 coils
+  for(let i=0;i<6;i++){
+    const ang=i*60*Math.PI/180; const coilX=cx+R*Math.cos(ang); const coilY=cy+R*0.45*Math.sin(ang);
+    const v = (document.getElementById('coilSetSel').value==='iso6')? fixedCoils[i] : library[i]||fixedCoils[i];
+    const pol = selPol[i]||"+"; const col = pol==="+"?"#a78bfa":"#fb923c";
+    ctx.strokeStyle=col; ctx.lineWidth=2; ctx.shadowColor=col; ctx.shadowBlur=pol==="+"?12:6;
+    ctx.beginPath();
+    for(let a=0;a<=360;a+=4){
+      const rad=a*Math.PI/180; const bx=Math.sign(Math.cos(rad))*Math.pow(Math.abs(Math.cos(rad)),2/(v.n||n)); const by=Math.sign(Math.sin(rad))*Math.pow(Math.abs(Math.sin(rad)),2/(v.n||n));
+      const r=18*(v.e||1.5); const ox=coilX+(r*bx)*Math.cos(rad)*0.7; const oy=coilY+(r*by)*Math.sin(rad)*0.7;
+      if(a===0) ctx.moveTo(ox,oy); else ctx.lineTo(ox,oy);
+    } ctx.closePath(); ctx.stroke(); ctx.shadowBlur=0;
+    ctx.fillStyle='#e2e8f0'; ctx.font='10px monospace'; ctx.fillText(v.id||`C${i}`, coilX-14, coilY-22); ctx.fillText(pol, coilX-4, coilY+28);
+    if(v.save){ ctx.fillStyle='#fde047'; ctx.fillRect(coilX-3,coilY-3,6,6); ctx.fillText('[1]', coilX+6, coilY-4); }
+  }
+  // central plasma tube
+  ctx.fillStyle='rgba(168,85,247,0.15)'; ctx.beginPath(); ctx.arc(cx,cy,36,0,6.28); ctx.fill();
+  ctx.strokeStyle='#c084fc'; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(cx,cy,28,0,6.28); ctx.stroke();
+  ctx.fillStyle='#e9d5ff'; ctx.font='11px monospace'; ctx.fillText('PLASMA 000', cx-32, cy+4);
+  // field lines inward
+  if(trapMode){
+    ctx.strokeStyle='rgba(96,165,250,0.6)'; ctx.lineWidth=1;
+    for(let i=0;i<6;i++){const ang=i*60*Math.PI/180; const sx=cx+R*0.85*Math.cos(ang); const sy=cy+R*0.38*Math.sin(ang); ctx.beginPath(); ctx.moveTo(sx,sy); ctx.lineTo(cx+(sx-cx)*0.25, cy+(sy-cy)*0.25); ctx.stroke(); ctx.beginPath(); ctx.arc(cx+(sx-cx)*0.25, cy+(sy-cy)*0.25,2,0,6.28); ctx.fillStyle='#60a5fa'; ctx.fill();}
+  }
+  // NE-2 2x2 offset -2x+2x[1]-2x+2x
+  const neSel=document.getElementById('ne2Sel').value;
+  let nePos=[];
+  if(neSel==='2x2'){ nePos=[{x:cx-28,y:cy-28,l:'-2x'},{x:cx+28,y:cy-28,l:'+2x[1]'},{x:cx-28,y:cy+28,l:'-2x'},{x:cx+28,y:cy+28,l:'+2x'}]; }
+  else if(neSel==='x4'){ nePos=[{x:cx-40,y:cy,l:'-2x'},{x:cx+40,y:cy,l:'+2x'},{x:cx,y:cy-40,l:'-2x'},{x:cx,y:cy+40,l:'+2x'}]; }
+  else { nePos=[{x:cx-32,y:cy-18,l:'-2x'},{x:cx+32,y:cy-18,l:'+2x'},{x:cx-32,y:cy+18,l:'-2x'},{x:cx+32,y:cy+18,l:'+2x'},{x:cx-48,y:cy,l:'-2x'},{x:cx+48,y:cy,l:'+2x'}]; }
+  nePos.forEach((p,i)=>{const flick = M===1? Math.random(): Math.sin(Date.now()/120+i)*0.25+0.75; ctx.globalAlpha=flick; ctx.fillStyle='#f97316'; ctx.beginPath(); ctx.arc(p.x,p.y,5,0,6.28); ctx.fill(); ctx.globalAlpha=1; ctx.fillStyle='#fff'; ctx.font='9px monospace'; ctx.fillText(p.l,p.x-14,p.y-8);});
+  // blowout
+  if(M===1){ ctx.fillStyle='#ef4444'; ctx.font='bold 26px monospace'; ctx.fillText('BLOWOUT M=1 BOOM DEATH', cx-170, 30); document.getElementById('blowBadge').textContent='M=1 BLOWOUT'; document.getElementById('blowBadge').className='badge bg-red-700'; } else { document.getElementById('blowBadge').textContent='M='+M+' STABLE'; document.getElementById('blowBadge').className='badge bg-green-700'; }
+  document.getElementById('fieldCenter').textContent=(M===1?'∞':(0.02* (3/S)).toFixed(3)+' mT');
+  document.getElementById('volVal').textContent=(S*2*Math.PI*Math.PI).toFixed(1);
+  document.getElementById('sumQ').textContent='360°'; document.getElementById('isoBadge').textContent='ISO PASS'; 
+  document.getElementById('mathBox').innerHTML=`S=${S} R=S·R0 B=μ0NI/(2πR)∝1/S n=${n}<br>Boxy: ((√(x²+y²)-R)/r)^n+(z/r)^n=1<br>Ellip: (x/a)²+(y/b)²=1 e=${fixedCoils[0].e}<br>Pattern: ${selPol} offset -2x+2x[1]-2x+2x | quads 90,90,90,90 | center 000`;
+}
+
+function renderLib(){
+  const grid=document.getElementById('grid'); grid.innerHTML='';
+  const list=document.getElementById('libList'); list.innerHTML='';
+  const all = library.length? library : Array.from({length:24},(_,i)=>{const v=makeVariant('EARTH-3',i); v.id=`ISO-${String(i+1).padStart(3,'0')}`; return v;});
+  if(library.length===0){ library.push(...all); }
+  all.slice(0,24).forEach((v,i)=>{
+    const div=document.createElement('div'); div.className='card p-1 cursor-pointer'; div.innerHTML=`<canvas width="160" height="100" class="w-full rounded"></canvas><div class="text-[10px]"><b>${v.id}</b> S=${v.S} n=${v.n} e=${v.e} δ=${v.delta}° M=${v.M}</div>`;
+    const c=div.querySelector('canvas'); const ctx=c.getContext('2d'); ctx.fillStyle='#050a14'; ctx.fillRect(0,0,c.width,c.height); ctx.strokeStyle='#8b5cf6'; ctx.strokeRect(10,10,c.width-20,c.height-20); ctx.fillStyle='#fde047'; ctx.fillRect(c.width/2-2,c.height/2-2,4,4);
+    div.onclick=()=>{selected=i; drawHex();};
+    grid.appendChild(div);
+    const li=document.createElement('div'); li.className='p-1 border border-slate-700 rounded cursor-pointer hover:bg-slate-800'; li.textContent=`${v.id} S${v.S} n${v.n} δ${v.delta}`; li.onclick=()=>{selected=i; drawHex();}; list.appendChild(li);
+  });
+}
+
+renderLib(); drawHex(); setInterval(drawHex,100);
+document.getElementById('scalarSel').onchange=drawHex;
+document.getElementById('polaritySel').onchange=drawHex;
+document.getElementById('manifoldSel').onchange=drawHex;
+document.getElementById('boxSel').onchange=drawHex;
+document.getElementById('coilSetSel').onchange=drawHex;
+document.getElementById('ne2Sel').onchange=drawHex;
+document.getElementById('invertBtn').onclick=()=>{const sel=document.getElementById('polaritySel'); sel.value = sel.value==='++---++'?'--+++--':'++---++'; drawHex();};
+document.getElementById('trapBtn').onclick=function(){trapMode=!trapMode; this.textContent='Trap Mode: '+(trapMode?'ON':'OFF'); drawHex();};
+document.getElementById('genMore').onclick=()=>{
+  const seed=document.getElementById('seedIn')?.value||'EARTH-3';
+  for(let i=0;i<12;i++){ const v=makeVariant(seed, library.length+i); library.push(v); }
+  renderLib(); drawHex();
+};
+document.getElementById('exportJson').onclick=()=>{
+  const blob=new Blob([JSON.stringify({type:'integrated_one_earth_scalar_next_evo', earthScalar:parseInt(document.getElementById('scalarSel').value), polarity:document.getElementById('polaritySel').value, manifold:parseInt(document.getElementById('manifoldSel').value), pattern:'-2x+2x[1]-2x+2x', coils:fixedCoils, library:library.slice(0,24)},null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='integrated_next_evo.json'; a.click();
+};
+</script>
+</body></html>

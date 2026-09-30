@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FULL ISOMORPH ALL ON — NEXT EVOLUTION</title><script src="https://cdn.tailwindcss.com"></script>
+<style>body{background:#02060e;color:#e2e8f0;font-family:ui-monospace,monospace}canvas{background:#050a14;border-radius:12px}.card{background:#0f172a;border:1px solid #1e293b;border-radius:12px}.badge{font-size:10px;padding:2px 6px;border-radius:4px}select{background:#1e293b;border:1px solid #334155;border-radius:6px;padding:4px 6px}</style>
+</head><body class="p-2">
+<h1 class="text-xl font-bold">FULL ISOMORPH ALL ON — NEXT EVOLUTION</h1>
+<p class="text-xs text-slate-400">ALL ON = [[ quad a::90 b::90 c::90 d::90 x::center 000 ]] + elliptical sides just 2 + left -+30-+ right -+30-+ + -2x+2x[1]-2x+2x + M=2→4 + S=3 + ISO 003/007/012/018/021/024 + ++---++ + --+++-- simultaneous</p>
+<div class="grid grid-cols-4 md:grid-cols-8 gap-2 my-2 card p-2 text-xs">
+  <div>Earth Scalar<select id="S"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></div>
+  <div>Mode<select id="mode"><option selected>ALL ON isomorph</option><option>++---++</option><option>--+++--</option><option>Superposition</option></select></div>
+  <div>Manifold<select id="M"><option value="2">M=2</option><option value="4" selected>M=4 FULL ON</option><option value="8">M=8 isomorph</option></select></div>
+  <div>NE-2<select id="NE"><option selected>ALL ON 2x2+x4+ring</option><option>2x2 -2x+2x[1]-2x+2x</option><option>16x grid</option></select></div>
+  <div>Quads<select id="Q"><option selected>ALL 90,90,90,90 ON</option><option>Generative drift</option></select></div>
+  <div>Coils<select id="C"><option selected>ALL 24 ON</option><option>6 ISO best ON</option><option>12 ON</option></select></div>
+  <div>Boxiness<select id="N"><option>2</option><option>4</option><option selected>6 ALL BOXY</option><option>8</option></select></div>
+  <div><button id="boom" class="bg-red-700 px-2 py-1 rounded">FULL SEND</button> <span id="stat" class="badge bg-green-700">ISO ALL PASS</span></div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-2">
+  <div class="lg:col-span-2 card p-2"><canvas id="main" width="1000" height="600" class="w-full"></canvas><div class="flex gap-2 text-xs mt-1"><span id="fc">Field 0.00 mT NULL ALL ON</span><span id="vol">Vol S^3</span><span id="iso">Σ=360° 000</span></div></div>
+  <div class="card p-2"><canvas id="iso" width="400" height="300" class="w-full"></canvas><div id="list" class="grid grid-cols-2 gap-1 text-[10px] max-h-80 overflow-y-auto mt-1"></div><div id="math" class="text-[10px] p-2 bg-slate-900 rounded mt-1"></div></div>
+</div>
+<script>
+let S=3, M=4, allOn=true;
+const coils=[];
+for(let i=0;i<24;i++){coils.push({id:`ISO-${String(i+1).padStart(3,'0')}`, S:2.8+Math.random()*0.6, n:3+Math.floor(Math.random()*4), e:1.2+Math.random()*0.6, delta:27+Math.floor(Math.random()*6), quads:[90,90,90,90], pol: (i%4<2?'+':'-'), M: (i%3?2:4)});}
+function draw(){
+  const canvas=document.getElementById('main'); const ctx=canvas.getContext('2d'); const w=canvas.width,h=canvas.height;
+  ctx.clearRect(0,0,w,h); ctx.fillStyle='#02060e'; ctx.fillRect(0,0,w,h);
+  const cx=w/2,cy=h/2; const R=140*(0.6+S/10);
+  // grid
+  ctx.strokeStyle='#0f172a'; for(let x=0;x<w;x+=30){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();} for(let y=0;y<h;y+=30){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
+  // draw ALL coils ON simultaneously - isomorphic superposition
+  const count = document.getElementById('C').value==='ALL 24 ON'?24:6;
+  for(let i=0;i<count;i++){
+    const ang=i*(360/count)*Math.PI/180; const v=coils[i]; const coilX=cx+R*Math.cos(ang); const coilY=cy+R*0.5*Math.sin(ang);
+    const col = i%2===0?'#a78bfa':'#f472b6';
+    ctx.strokeStyle=col; ctx.lineWidth=1.5; ctx.shadowColor=col; ctx.shadowBlur=8;
+    ctx.beginPath(); for(let a=0;a<=360;a+=6){const rad=a*Math.PI/180; const bx=Math.sign(Math.cos(rad))*Math.pow(Math.abs(Math.cos(rad)),2/v.n); const by=Math.sign(Math.sin(rad))*Math.pow(Math.abs(Math.sin(rad)),2/v.n); const r=14*v.e; const ox=coilX+r*bx*Math.cos(rad)*0.6; const oy=coilY+r*by*Math.sin(rad)*0.6; if(a===0)ctx.moveTo(ox,oy); else ctx.lineTo(ox,oy);} ctx.closePath(); ctx.stroke(); ctx.shadowBlur=0;
+    // polarity marker ++---++ all on
+    ctx.fillStyle='#fff'; ctx.font='9px monospace'; ctx.fillText(v.pol, coilX-3, coilY+18);
+    ctx.fillText(v.id, coilX-18, coilY-16);
+  }
+  // central 000 all-on
+  ctx.fillStyle='rgba(250,204,21,0.2)'; ctx.beginPath(); ctx.arc(cx,cy,50,0,6.28); ctx.fill();
+  ctx.strokeStyle='#fde047'; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(cx,cy,34,0,6.28); ctx.stroke();
+  ctx.fillStyle='#fde047'; ctx.font='12px monospace'; ctx.fillText('000 ALL ON', cx-32, cy+4);
+  // field lines ALL ON converging
+  ctx.strokeStyle='rgba(96,165,250,0.7)'; for(let i=0;i<count;i++){const ang=i*(360/count)*Math.PI/180; const sx=cx+R*0.9*Math.cos(ang); const sy=cy+R*0.45*Math.sin(ang); ctx.beginPath(); ctx.moveTo(sx,sy); ctx.lineTo(cx+(sx-cx)*0.18, cy+(sy-cy)*0.18); ctx.stroke();}
+  // NE-2 ALL ON: 2x2 + x4 + ring = 16
+  const ne=[];
+  // 2x2
+  ne.push({x:cx-28,y:cy-28,l:'-2x'},{x:cx+28,y:cy-28,l:'+2x[1]'},{x:cx-28,y:cy+28,l:'-2x'},{x:cx+28,y:cy+28,l:'+2x'});
+  // x4
+  ne.push({x:cx-44,y:cy,l:'-2x'},{x:cx+44,y:cy,l:'+2x'},{x:cx,y:cy-44,l:'-2x'},{x:cx,y:cy+44,l:'+2x'});
+  // ring 8
+  for(let i=0;i<8;i++){const a=i*45*Math.PI/180; ne.push({x:cx+58*Math.cos(a), y:cy+58*0.5*Math.sin(a), l: i===0?'[1]':''});}
+  ne.forEach((p,i)=>{const flick=0.6+0.4*Math.sin(Date.now()/80+i); ctx.globalAlpha=flick; ctx.fillStyle='#f97316'; ctx.beginPath(); ctx.arc(p.x,p.y,4,0,6.28); ctx.fill(); ctx.globalAlpha=1;});
+  // quads ALL ON visualization
+  ctx.fillStyle='rgba(255,255,255,0.08)'; ctx.font='11px monospace';
+  ctx.fillText('quad a :: 90 ALL ON', cx+60, cy-60); ctx.fillText('quad b :: 90 ALL ON', cx-120, cy-60); ctx.fillText('quad c :: 90 ALL ON', cx-120, cy+70); ctx.fillText('quad d :: 90 ALL ON', cx+60, cy+70);
+  // left right -+30-+ all on
+  ctx.fillStyle='#fb923c'; const deltas=[27,28,29,30,31,32]; deltas.forEach((d,idx)=>{const rad=d*Math.PI/180; const lx=cx - (R+20)*Math.cos(rad) - idx*2; const rx=cx + (R+20)*Math.cos(rad) + idx*2; ctx.beginPath(); ctx.arc(lx, cy+ (R*0.3)*Math.sin(rad),3,0,6.28); ctx.fill(); ctx.beginPath(); ctx.arc(rx, cy+ (R*0.3)*Math.sin(-rad),3,0,6.28); ctx.fill();});
+  document.getElementById('fc').textContent = M===1?'Field ∞ BLOWOUT':'Field 0.00 mT NULL ALL ON ISO';
+  document.getElementById('vol').textContent = `Vol ${(S*S*S*12).toFixed(1)} S=${S} n=ALL e=ALL`;
+  document.getElementById('iso').textContent = 'Σ=360° 000 ALL ON';
+  document.getElementById('math').innerHTML = `FULL ISOMORPH ALL ON<br>S=${S} M=${M} COUNT=${count}<br>Boxy ALL n=3-6: ((√(x²+y²)-R)/r)^n+(z/r)^n=1<br>Ellip sides just 2 ALL: (x/a)²+(y/b)²=1 b=1.2-1.7a<br>Pattern ALL: -2x+2x[1]-2x+2x + x4 + ring16<br>Left -+30-+ Right -+30-+ ALL δ=27-32°<br>Quads 90,90,90,90 ALL ON Σ=360°<br>Manifold M=${M} ${M>=2?'STABLE':'BLOWOUT'}<br>Field center 000 NULL = Σ B_i =0 isomorphic`;
+}
+function drawIso(){const c=document.getElementById('iso'); const ctx=c.getContext('2d'); const w=c.width,h=c.height; ctx.clearRect(0,0,w,h); ctx.fillStyle='#0f172a'; ctx.fillRect(0,0,w,h); ctx.strokeStyle='#334155'; ctx.strokeRect(w*0.15,h*0.15,w*0.7,h*0.7); const nodes=[{x:w*0.2,y:h*0.2},{x:w*0.8,y:h*0.2},{x:w*0.2,y:h*0.8},{x:w*0.8,y:h*0.8}]; ctx.beginPath(); ctx.moveTo(nodes[0].x,nodes[0].y); ctx.lineTo(nodes[1].x,nodes[1].y); ctx.lineTo(nodes[3].x,nodes[3].y); ctx.lineTo(nodes[2].x,nodes[2].y); ctx.closePath(); ctx.stroke(); nodes.forEach((n,i)=>{ctx.fillStyle=i%2?'#f472b6':'#a78bfa'; ctx.beginPath(); ctx.arc(n.x,n.y,16,0,6.28); ctx.fill(); ctx.fillStyle='#000'; ctx.font='10px monospace'; ctx.fillText(['a','b','c','d'][i],n.x-4,n.y+3);}); ctx.fillStyle='#e2e8f0'; ctx.font='10px monospace'; ctx.fillText('ALL ON isomorphic a↔b↔c↔d',10,h-10);}
+function renderList(){const list=document.getElementById('list'); list.innerHTML=''; coils.forEach(c=>{const d=document.createElement('div'); d.className='p-1 border border-slate-700 rounded'; d.innerHTML=`<b>${c.id}</b> S${c.S} n${c.n} e${c.e} δ${c.delta} ${c.pol} M${c.M}`; list.appendChild(d);});}
+renderList(); draw(); drawIso(); setInterval(()=>{draw();},80);
+document.getElementById('S').onchange=e=>{S=parseInt(e.target.value); draw();};
+document.getElementById('M').onchange=e=>{M=parseInt(e.target.value); draw();};
+document.getElementById('boom').onclick=()=>{document.getElementById('M').value=1; M=1; draw(); setTimeout(()=>{alert('BLOWOUT M=1 BOOM DEATH lol — manifold collapsed from 4 to 1'); document.getElementById('M').value=4; M=4; draw();},200);};
+['C','NE','Q','N','mode'].forEach(id=>{const el=document.getElementById(id); if(el) el.onchange=draw;});
+</script></body></html>

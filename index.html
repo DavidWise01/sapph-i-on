@@ -182,17 +182,17 @@
   .seat a { display:block; margin-top:6px; text-decoration:none; }
   .seat a:hover { text-decoration:underline; }
   .seat .addr { color:var(--dim); font:12px/1.4 var(--mono); margin:4px 0 6px; }
-  .corpus, .archive, .libraries, .folio, .strip, .nested, .nests, .qdot, .dots, .next, .plank, .bonk, .gold, .generative, .toroid {
+  .corpus, .archive, .libraries, .folio, .strip, .nested, .nests, .qdot, .dots, .next, .plank, .bonk, .gold, .generative, .toroid, .onward {
     display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
     gap:8px; margin:0 0 8px;
   }
-  .corpus a, .archive a, .libraries a, .folio a, .strip a, .nested a, .nests a, .qdot a, .dots a, .next a, .plank a, .bonk a, .gold a, .generative a, .toroid a {
+  .corpus a, .archive a, .libraries a, .folio a, .strip a, .nested a, .nests a, .qdot a, .dots a, .next a, .plank a, .bonk a, .gold a, .generative a, .toroid a, .onward a {
     display:block; padding:11px 12px; border-radius:14px;
     background:rgba(255,252,248,.8); border:1px solid var(--line);
     color:var(--ink); text-decoration:none; font-size:13.5px; line-height:1.35;
   }
   .corpus a:hover, .archive a:hover, .libraries a:hover, .folio a:hover, .strip a:hover,
-  .nested a:hover, .nests a:hover, .qdot a:hover, .dots a:hover, .next a:hover, .plank a:hover, .bonk a:hover, .gold a:hover, .generative a:hover, .toroid a:hover {
+  .nested a:hover, .nests a:hover, .qdot a:hover, .dots a:hover, .next a:hover, .plank a:hover, .bonk a:hover, .gold a:hover, .generative a:hover, .toroid a:hover, .onward a:hover {
     border-color:var(--sapphire); background:#fff;
   }
   .fold {
@@ -254,7 +254,7 @@
 
   <details class="shelf">
     <summary>What this door holds</summary>
-    <p class="census">World 7 is the cube of 7. This page is the galaxy door: it counts the cube and throws if the count is wrong. A galaxy holds 24 spheres, three on each corner seat. Beside those seats are four more cubes of 24: a Downloads copy, an Internet Archive cube, a library cube, and a folio cube that alternates article and thought. A nested strip holds two spheres, minus-plus and plus-minus, offset 1, 2, 1, 2, 1, 2. Four mirrors close on the one-sided number 420024. A nested cube holds 24 files copied unchanged from Downloads, the newest nested cubes and nests, numbered copies skipped. A further nest holds the next 24. A quantum dot holds 24 files whose names say quantum, and the plant page says the payloads converge there. A dot cube holds the next 24. A next cube holds 24 files whose names say next. A plank cube holds 24 files whose names say plank. A bonk cube holds 24 files whose names say bonk. A gold cube holds 24 files whose names say gold. A generative cube holds 24 counts. Each page generates its figure and throws if the count fails. Twenty toroid files fill the cells that remained. The bytes are the Downloads files whose names say toroid. Select a cell and that sphere is the GUI.</p>
+    <p class="census">World 7 is the cube of 7. This page is the galaxy door: it counts the cube and throws if the count is wrong. A galaxy holds 24 spheres, three on each corner seat. Beside those seats are four more cubes of 24: a Downloads copy, an Internet Archive cube, a library cube, and a folio cube that alternates article and thought. A nested strip holds two spheres, minus-plus and plus-minus, offset 1, 2, 1, 2, 1, 2. Four mirrors close on the one-sided number 420024. A nested cube holds 24 files copied unchanged from Downloads, the newest nested cubes and nests, numbered copies skipped. A further nest holds the next 24. A quantum dot holds 24 files whose names say quantum, and the plant page says the payloads converge there. A dot cube holds the next 24. A next cube holds 24 files whose names say next. A plank cube holds 24 files whose names say plank. A bonk cube holds 24 files whose names say bonk. A gold cube holds 24 files whose names say gold. A generative cube holds 24 counts. Each page generates its figure and throws if the count fails. Twenty toroid files fill the cells that remained. The bytes are the Downloads files whose names say toroid. Select a cell and that sphere is the GUI. A further next holds 24 files whose names say next. The cells are full, so those 24 are published beside the cube and are not seated.</p>
   </details>
 
   <details class="shelf" open>
@@ -365,6 +365,13 @@
     <p class="mono" id="toroidcard"></p>
   </details>
 
+  <details class="shelf">
+    <summary>Further next · 24</summary>
+    <p class="sub">The 24 newest Downloads files whose names say next, after the next cube. Numbered copies skipped. The bytes are the source files. The cells are full, so these 24 are not seated.</p>
+    <div class="onward" id="onward"></div>
+    <p class="mono" id="onwardcard"></p>
+  </details>
+
   <section class="read">
     <h2>WHAT THE PAGE PROVES</h2>
     <p><span class="stamp lit">LIT</span> Every cell of a 7×7×7 grid is visited once. Cells with 3 faces exposed are corners (8). Cells with 2 are edges (12×5 = 60). Cells with 1 are faces (6×25 = 150). Cells with 0 are interior (5³ = 125). Those four counts sum to 343, and 7×7×7 is 343. The odd side leaves exactly one center, at (3,3,3). 343 = (3+4)³, and 3, 4, 3 are the digits of 343. Complex multiplication gives i² = −1 and i³ = −i. A failed check throws and the grid is not drawn.</p>
@@ -385,6 +392,8 @@
     <p><span class="stamp amber">AMBER</span> The gold cube is the 24 newest Downloads files whose names say gold. Golden is a different word and was left in Downloads. Numbered copies were skipped. The bytes were copied unchanged. The order is assigned.</p>
     <p><span class="stamp amber">AMBER</span> The generative cube is 24 original counts. Each page generates its figure from the cube of 7 and throws if the count fails. No Downloads file was copied. The order is assigned.</p>
     <p><span class="stamp amber">AMBER</span> The toroid set is the 20 newest Downloads files whose names say toroid. Toroidal is a different word and was left in Downloads. Numbered copies were skipped. A Windows duplicate with the same bytes was left in Downloads. The bytes were copied unchanged. The order is assigned. These 20 fill the cells that remained.</p>
+    <p><span class="stamp amber">AMBER</span> The further next is the 24 newest Downloads files whose names say next, after the next cube. Numbered copies were skipped. The bytes were copied unchanged. The order is assigned.</p>
+    <p><span class="stamp wall">WALL</span> The walk has no cell left. These 24 are published beside the cube. They are not seated.</p>
     <p><span class="stamp lit">LIT</span> 334 spheres sit on 334 cells. The walk is z, then y, then x. Corners and the keeper are skipped. One sphere, one cell. Selecting the cell opens that page.</p>
     <p><span class="stamp amber">AMBER</span> The walk order is assigned. The eight corners still hold three spheres each, and selecting a corner opens those three. The keeper at (3,3,3) is the door, not one of the files.</p>
     <p><span class="stamp wall">WALL</span> This galaxy does not extend the palindrome [ W1 | W2 ‖ W3 ‖ W4 | W5 ] and does not record a world 6. i³ = −i is arithmetic. It does not locate the cube on a physical imaginary axis, and it is not a claim about mind, physics, or authority. The strip's check is the number 420024. It does not measure glass, and it does not fold a piece of paper.</p>
@@ -1157,6 +1166,58 @@ fetch("toroid/manifest.json").then(function (res) {
   document.getElementById("toroidcard").innerHTML = "<span class='stamp lit'>LIT</span> 20 toroid files, manifest order matches";
 }).catch(function (err) {
   document.getElementById("toroidcard").innerHTML = "<span class='stamp wall'>WALL</span> " + err.message;
+  throw err;
+});
+
+var ONWARD = [
+  "Next-Evo-Coherent-Wave-X4-24-Nodes.html",
+  "Next-Evolution-Element-119.html",
+  "Next-Evo-Beyond-Ne.html",
+  "Next-Evo-Carry-State-At-0root.html",
+  "Evolve-Next-Perp-Loop-At-0root.html",
+  "Evolve-Next-After-0root-Garden.html",
+  "Next-Evo-Photon-Collapse.html",
+  "Next-Evo-After-Heka-Fin-Again.html",
+  "Next-Evo-Tower-C3.html",
+  "Next-Evo-After-Coherent-Heka.html",
+  "Next-Evo-After-Polarity-Wave.html",
+  "Next-Aeon-Cycle.html",
+  "Next-Assembly-Full-Manifold.html",
+  "88-Mph-Next.html",
+  "Next-Cycle-19-24-Third.html",
+  "Next-Cycle-14-18-After-WATER.html",
+  "V133-Lithium-Li-Next.html",
+  "V129-Next-Osmium-Os.html",
+  "V121-Next-Gen-All.html",
+  "V120-Next-Gen-Gen0.html",
+  "V119-Next-Gem-Emerald.html",
+  "V106-Next-Atomic-Stack.html",
+  "Integrated-One-Earth-Scalar-NEXT-EVO-FULL-ISOMORPH-ALL-ON.html",
+  "Integrated-One-Earth-Scalar-NEXT-EVO.html"
+];
+if (ONWARD.length !== 24) throw new Error("LIT FAIL onward count");
+var seenOnward = {};
+var onwardEl = document.getElementById("onward");
+ONWARD.forEach(function (file) {
+  if (seenOnward[file]) throw new Error("LIT FAIL onward duplicate");
+  seenOnward[file] = 1;
+  var a = document.createElement("a");
+  a.href = "onward/" + file;
+  a.textContent = file.replace(/\.html$/, "");
+  onwardEl.appendChild(a);
+});
+fetch("onward/manifest.json").then(function (res) {
+  if (!res.ok) throw new Error("LIT FAIL onward manifest");
+  return res.json();
+}).then(function (rows) {
+  if (!rows || rows.length !== 24) throw new Error("LIT FAIL onward manifest count");
+  rows.forEach(function (row, i) {
+    if (row.file !== ONWARD[i]) throw new Error("LIT FAIL onward order");
+    if (!/^[0-9a-f]{64}$/.test(row.sha256)) throw new Error("LIT FAIL onward hash");
+  });
+  document.getElementById("onwardcard").innerHTML = "<span class='stamp lit'>LIT</span> 24 further next files, manifest order matches";
+}).catch(function (err) {
+  document.getElementById("onwardcard").innerHTML = "<span class='stamp wall'>WALL</span> " + err.message;
   throw err;
 });
 
