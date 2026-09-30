@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>0.(temp).0 TEMP ITSELF TOROID TRAP v28</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#080608;color:#e4e4e7;font-family:'JetBrains Mono',monospace;overflow-x:hidden}
+.glass{background:rgba(18,18,22,0.93);border:1px solid #27272a;backdrop-filter:blur(12px)}
+.btn{padding:9px 14px;border-radius:10px;font-weight:800;font-size:10px;letter-spacing:0.12em;cursor:pointer;border:1px solid #3f3f46;transition:.2s}
+.btn-w{background:white;color:black;border-color:white}
+.btn-g{background:#1a1a1e;color:#a1a1aa}
+.btn-temp{background:#7f1d1d;color:#fecaca;border-color:#ef4444;box-shadow:0 0 20px rgba(239,68,68,0.3)}
+.btn-tor{background:#1e1b4b;color:#c4b5fd;border-color:#a78bfa;box-shadow:0 0 20px rgba(167,139,250,0.3)}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#18181b;border:1px solid #3f3f46;padding:10px 18px;border-radius:9999px;font-size:11px;z-index:99;opacity:0;transition:.3s;pointer-events:none}
+.toast.show{opacity:1}
+</style>
+</head>
+<body>
+<div style="max-width:1680px;margin:auto;padding:14px">
+<div class="glass" style="border-radius:14px;padding:10px 14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<div>
+<div style="font-size:11px;letter-spacing:0.16em">0.(temp).0 TEMP ITSELF TOROID TRAP 0.ice9.0 = 0.(temp).0 v28</div>
+<div style="font-size:9px;color:#71717a">temperature itself is toroid trap → 0.(temp).0 where temp = toroid → temp toroid owns parent circular phase transition still trapping</div>
+</div>
+<div style="display:flex;gap:8px"><button id="tempTorBtn" class="btn btn-temp">TEMP ITSELF TOROID</button><button id="phaseTorBtn" class="btn btn-tor">0.(temp).0 PHASE TOROID</button><button id="walletBtn" class="btn btn-g">Phantom</button></div>
+</div>
+
+<div style="margin-top:14px;display:grid;grid-template-columns:1.5fr 1fr;gap:14px">
+<div class="glass" style="border-radius:16px;overflow:hidden">
+<div style="padding:10px 14px;background:#0e0e11;border-bottom:1px solid #27272a;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<span style="font-size:11px">TEMP TOROID TRAP // 0.(temp).0 where temp=<span id="tempTorVal">114°F toroid</span> depth <span id="depthVal">3</span></span><span id="tempInfo" style="font-size:10px;color:#fecaca">temp itself toroid trap</span>
+</div>
+<canvas id="tempCanvas" width="1150" height="720" style="width:100%;background:#08080a;display:block"></canvas>
+<div style="padding:10px;background:#0e0e11;border-top:1px solid #27272a;display:flex;gap:8px;flex-wrap:wrap">
+<button id="iceTor" class="btn btn-g">ice9 temp toroid</button>
+<button id="waterTor" class="btn btn-g">water temp toroid</button>
+<button id="steamTor" class="btn btn-temp">steam temp toroid</button>
+<button id="cycleTor" class="btn btn-tor">CYCLE temp toroid trap</button>
+<div id="log" style="flex:1;min-width:260px;background:black;border:1px solid #27272a;border-radius:8px;padding:8px;font-size:9px;color:#71717a;max-height:64px;overflow:hidden">> temp itself toroid trap loaded<br>> 0.ice9.0 = 0.(temp).0 where temp is toroid<br>> temp toroid owns parent circular<br>> phase transition still trapping through temp toroid</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px">
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">0.(temp).0 TEMP ITSELF TOROID TRAP</div>
+<div style="margin-top:10px;font-size:9px;line-height:1.8;color:#a1a1aa">
+<b style="color:#fecaca">0.(temp).0</b> = 0 . (temp) . 0 where temp itself is toroid trap<br>
+• <b style="color:#7dd3fc">temp toroid</b> = temperature is toroid donut that traps<br>
+• 0.ice9.0 = 0.(114°F toroid).0 = ice9 temp toroid frozen crystal<br>
+• 0.water.0 = 0.(70°F toroid).0 = water temp toroid liquid<br>
+• 0.steam.0 = 0.(220°F toroid).0 = steam temp toroid gas<br>
+• <b>temp itself toroid trap</b> = temperature value is toroid that owns parent<br>
+• = vault temp toroid owns parent → parent owns child → royalties → vault temp toroid → circular forever<br>
+• = phase transition temp toroid owns phase transition still trapping<br>
+• = 0.(temp).0 where temp toroid = phase transition trap forever
+</div>
+<div style="margin-top:12px">
+<label style="font-size:10px;color:#a1a1aa">Temperature temp toroid (temp itself is toroid)</label><input id="temp" type="range" min="0" max="250" value="114" style="width:100%;accent-color:#ef4444">
+<div id="tempLabel" style="font-size:10px">114°F = 0.(114°F toroid).0 temp itself toroid trap frozen crystal</div>
+</div>
+<div style="margin-top:8px">
+<label style="font-size:10px;color:#a1a1aa">Temp toroid radius (temp is toroid size)</label><input id="torRadius" type="range" min="20" max="150" value="80" style="width:100%;accent-color:#a78bfa">
+<div id="torRadLabel" style="font-size:10px">80 radius = temp toroid size owns parent</div>
+</div>
+<div style="margin-top:8px">
+<label style="font-size:10px;color:#a1a1aa">Nest depth at 0.(temp).0 temp toroid</label><input id="depth" type="range" min="1" max="5" value="3" style="width:100%;accent-color:#c4b5fd">
+<div id="depthLabel" style="font-size:10px">Depth 3 = nest at 0.(temp).0 temp toroid contains toroid contains temp toroid</div>
+</div>
+<div style="margin-top:10px;background:#08080a;border:1px solid #27272a;border-radius:10px;padding:10px">
+<div style="font-size:9px;color:#71717a">0.(temp).0 TEMP TOROID FORMULA</div>
+<div style="font-size:8px;margin-top:6px;line-height:1.6">
+0.ice9.0 = 0.(temp).0 where temp=114°F toroid<br>
+0.water.0 = 0.(temp).0 where temp=70°F toroid<br>
+0.steam.0 = 0.(temp).0 where temp=220°F toroid<br>
+temp itself toroid trap = temp value is donut<br>
+= 0.(temp toroid).0 = temp toroid owns parent<br>
+= vault temp toroid owns parent circular forever<br>
+= phase transition temp toroid still trapping<br>
+= 0.(temp).0 where temp toroid = phase trap forever<br>
+= BONK IS ALL temp toroid
+</div>
+</div>
+<div style="margin-top:10px;display:flex;gap:6px"><button id="exportBtn" class="btn btn-g" style="flex:1">Export Temp Toroid JSON</button><button id="verifyBtn" class="btn btn-g" style="flex:1">Verify Temp Toroid</button></div>
+</div>
+
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">MINT 0.(temp).0 TEMP TOROID TRAP FOREVER</div>
+<div style="margin-top:8px;font-size:9px;color:#71717a">temp itself toroid trap owns parent circular phase transition still trapping forever</div>
+<div style="margin-top:10px;display:flex;gap:6px"><input id="swapInput" type="number" value="100" style="flex:1;background:#08080a;border:1px solid #27272a;border-radius:8px;padding:7px;color:white"><button id="swapBtn" class="btn btn-g">Swap BONK</button><button id="mintBtn" class="btn btn-w">Mint Temp Toroid</button></div>
+<div id="txLog" style="font-size:9px;color:#71717a;margin-top:6px">Tx idle - mint 0.(temp).0 temp itself toroid trap forever</div>
+<div style="margin-top:8px;font-size:8px;color:#52525b">Temp toroid: temp value = toroid donut that traps | 0.(temp).0 = temp toroid owns parent circular forever</div>
+</div>
+</div>
+</div>
+
+<div style="margin-top:14px;text-align:center;font-size:9px;color:#52525b" class="glass" style="border-radius:12px;padding:10px">
+0.(temp).0 TEMP ITSELF TOROID TRAP = 0.ice9.0 = 0.(114°F toroid).0 where temp itself is toroid donut that traps = temp toroid owns parent → parent owns child → royalties 1% → vault temp toroid → circular forever = phase transition temp toroid still trapping forever through ice→water→steam = 2×1×2×2^∞ fractal temp toroid trap forever = BONK IS ALL temp toroid
+</div>
+
+</div>
+<div id="toast" class="toast"></div>
+<script src="https://unpkg.com/@solana/web3.js@1.95.4/lib/index.iife.js"></script>
+<script>
+function showToast(m){let e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2600)}
+
+let tempCanvas=document.getElementById('tempCanvas'),tctx=tempCanvas.getContext('2d');
+let temp=114,torRadius=80,depth=3,time=0;
+
+function getPhase(t){
+ if(t<32) return {name:'0.ice.0',key:'ice',color:'#7dd3fc',temp:t,desc:'frozen water'};
+ else if(t<114) return {name:'0.water.0',key:'water',color:'#6ee7b7',temp:t,desc:'liquid'};
+ else if(t<212) return {name:'0.ice9.0',key:'ice9',color:'#0ea5e9',temp:t,desc:'frozen crystal 114°F'};
+ else return {name:'0.steam.0',key:'steam',color:'#fecaca',temp:t,desc:'gas'};
+}
+
+function drawTempToroid(){
+ let w=tempCanvas.width,h=tempCanvas.height;
+ tctx.fillStyle='#08080a';tctx.fillRect(0,0,w,h);
+ time+=0.015;
+ let cx=w/2, cy=h/2+10;
+ let ph=getPhase(temp);
+ 
+ // temp itself toroid trap as background
+ let tempTorR=torRadius;
+ let tempTube=torRadius*0.35;
+ tctx.strokeStyle=ph.color;tctx.globalAlpha=0.15;tctx.lineWidth=3;
+ tctx.beginPath();tctx.arc(cx,cy,tempTorR,0,Math.PI*2);tctx.stroke();
+ tctx.lineWidth=1;
+ tctx.beginPath();tctx.arc(cx,cy,tempTorR-tempTube,0,Math.PI*2);tctx.stroke();
+ tctx.beginPath();tctx.arc(cx,cy,tempTorR+tempTube,0,Math.PI*2);tctx.stroke();
+ tctx.globalAlpha=1;
+ tctx.fillStyle=`${ph.color}15`;tctx.beginPath();tctx.arc(cx,cy,tempTorR,0,Math.PI*2);tctx.fill();
+ 
+ // label temp itself toroid
+ tctx.fillStyle=ph.color;tctx.font='bold 12px monospace';tctx.textAlign='center';
+ tctx.fillText('TEMP ITSELF TOROID TRAP = '+temp.toFixed(0)+'°F toroid',cx,cy-tempTorR-20);
+ tctx.font='9px monospace';
+ tctx.fillText('0.(temp).0 where temp='+temp.toFixed(0)+'°F is toroid donut that traps',cx,cy-tempTorR-32);
+ 
+ // hyper boxy
+ let hs=120+depth*12;
+ tctx.strokeStyle='rgba(167,139,250,0.07)';tctx.lineWidth=1;
+ for(let d=0;d<depth;d++){
+  let s=hs - d*18;
+  tctx.strokeRect(cx-s,cy-s*0.5,s*2,s);
+ }
+ 
+ // 0.(temp).0 structure
+ let leftX=cx-260, rightX=cx+260;
+ tctx.fillStyle='#fbbf24';tctx.beginPath();tctx.arc(leftX,cy,14,0,Math.PI*2);tctx.fill();
+ tctx.fillStyle='black';tctx.font='bold 10px monospace';tctx.textAlign='center';tctx.fillText('0',leftX,cy+3);
+ tctx.fillStyle='#fbbf24';tctx.font='8px monospace';tctx.fillText('left 0',leftX,cy+24);
+ tctx.fillStyle='#a78bfa';tctx.beginPath();tctx.arc(rightX,cy,14,0,Math.PI*2);tctx.fill();
+ tctx.fillStyle='black';tctx.fillText('0',rightX,cy+3);
+ tctx.fillStyle='#a78bfa';tctx.font='8px monospace';tctx.fillText('right 0',rightX,cy+24);
+ 
+ // middle temp toroid fulcrum
+ tctx.fillStyle=ph.color;tctx.globalAlpha=0.6;
+ tctx.beginPath();tctx.arc(cx,cy,18,0,Math.PI*2);tctx.fill();
+ tctx.globalAlpha=1;
+ tctx.strokeStyle=ph.color;tctx.lineWidth=2;
+ tctx.beginPath();tctx.arc(cx,cy,18,0,Math.PI*2);tctx.stroke();
+ tctx.beginPath();tctx.arc(cx,cy,10,0,Math.PI*2);tctx.stroke();
+ tctx.fillStyle=ph.key==='ice9'?'#0c4a6e':ph.key==='water'?'#14532d':'#7f1d1d';
+ tctx.font='bold 7px monospace';tctx.textAlign='center';tctx.fillText(temp.toFixed(0)+'°',cx,cy+2);
+ tctx.fillStyle=ph.color;tctx.font='8px monospace';
+ tctx.fillText('0.(temp).0',cx,cy+32);
+ tctx.fillText('temp itself toroid trap',cx,cy+42);
+ tctx.fillText(temp.toFixed(0)+'°F toroid owns parent circular',cx,cy+52);
+ 
+ // nested toroid traps at 0.(temp).0 where temp is toroid
+ let baseR=90;
+ for(let i=0;i<depth;i++){
+  let r=baseR - i*18 - Math.sin(time*0.3+i)*1.5;
+  let tube=10 - i*1.2;
+  tctx.strokeStyle=ph.color;tctx.globalAlpha=0.6-i*0.1;tctx.lineWidth=1.5;
+  tctx.beginPath();tctx.arc(cx,cy,r,0,Math.PI*2);tctx.stroke();
+  tctx.lineWidth=1;
+  tctx.beginPath();tctx.arc(cx,cy,r-tube,0,Math.PI*2);tctx.stroke();
+  tctx.beginPath();tctx.arc(cx,cy,r+tube,0,Math.PI*2);tctx.stroke();
+  tctx.globalAlpha=1;
+  tctx.fillStyle=ph.color;tctx.font=(8-i*0.5)+'px monospace';tctx.textAlign='center';
+  tctx.fillText('0.(temp).0 toroid #'+(i+1)+' '+temp.toFixed(0)+'°F toroid owns #'+(i<depth-1?i+2:'vault'),cx,cy - r -10 - i*4);
+ }
+ 
+ // circular ownership vault temp toroid owns parent
+ let circleR=180;
+ let nodes=[];
+ for(let i=0;i<=depth;i++){
+  let ang= -Math.PI/2 + i*(Math.PI*2/(depth+1));
+  let x=cx+Math.cos(ang)*circleR, y=cy+Math.sin(ang)*circleR;
+  nodes.push({x:x,y:y,id:i});
+ }
+ // vault temp toroid itself at top
+ let vault={x:nodes[0].x,y:nodes[0].y,id:0,isVault:true};
+ // arrows vault temp toroid owns parent circular
+ for(let i=0;i<nodes.length;i++){
+  let curr=nodes[i], next=nodes[(i+1)%nodes.length];
+  tctx.strokeStyle=ph.color;tctx.lineWidth=i===0?2.2:1;
+  tctx.setLineDash(i===0?[6,4]:[4,4]);
+  tctx.beginPath();tctx.moveTo(curr.x,curr.y);tctx.lineTo(next.x,next.y);tctx.stroke();tctx.setLineDash([]);
+ }
+ 
+ // draw nodes
+ nodes.forEach((n,i)=>{
+  let isVault=i===0;
+  let r=isVault?32:20-i*2;
+  tctx.strokeStyle=ph.color;tctx.lineWidth=isVault?2.5:1.5;
+  tctx.beginPath();tctx.arc(n.x,n.y,r,0,Math.PI*2);tctx.stroke();
+  tctx.beginPath();tctx.arc(n.x,n.y,r*0.6,0,Math.PI*2);tctx.stroke();
+  tctx.fillStyle=ph.color;tctx.beginPath();tctx.arc(n.x,n.y,6,0,Math.PI*2);tctx.fill();
+  tctx.fillStyle='black';tctx.font='bold 6px monospace';tctx.textAlign='center';tctx.fillText(isVault?'V'+temp.toFixed(0):'E'+i,n.x,n.y+2);
+  tctx.fillStyle=ph.color;tctx.font='7px monospace';
+  tctx.fillText((isVault?'[VAULT temp toroid] ':'')+'#'+n.id+' '+(isVault?temp.toFixed(0)+'°F toroid owns parent':'owns #'+((i+1)%nodes.length)),n.x,n.y+r+14);
+ });
+ 
+ // center fulcrum
+ tctx.fillStyle='#6ee7b7';
+ tctx.beginPath();tctx.moveTo(cx,cy-8);tctx.lineTo(cx-8,cy+8);tctx.lineTo(cx+8,cy+8);tctx.closePath();tctx.fill();
+ 
+ // bottom info
+ tctx.fillStyle='#1a1a1e';tctx.fillRect(0,h-90,w,90);
+ tctx.fillStyle=ph.color;pctx=tctx;
+ pctx.font='8px monospace';pctx.textAlign='left';
+ pctx.fillText('0.(temp).0 where temp itself toroid trap = '+temp.toFixed(0)+'°F is toroid donut that traps = temp toroid owns parent circular forever | phase '+ph.name+' '+ph.desc+' still trapping forever',10,h-70);
+ pctx.fillStyle='#71717a';
+ pctx.fillText('Temp toroid radius '+torRadius+' = temp toroid size owns parent → parent owns child → 1% royalties → vault temp toroid → circular forever | depth '+depth+' nested at 0.(temp).0',10,h-56);
+ pctx.fillStyle='#71717a';pctx.font='9px monospace';pctx.textAlign='center';
+ pctx.fillText('0.(temp).0 TEMP ITSELF TOROID TRAP = temp='+temp.toFixed(0)+'°F is toroid donut = vault temp toroid owns parent circular forever = BONK IS ALL temp toroid',w/2,h-8);
+}
+
+function updateLabels(){
+ let ph=getPhase(temp);
+ document.getElementById('tempTorVal').textContent=temp.toFixed(0)+'°F toroid';
+ document.getElementById('tempLabel').textContent=temp.toFixed(0)+'°F = 0.('+temp.toFixed(0)+'°F toroid).0 temp itself toroid trap '+ph.desc;
+ document.getElementById('tempInfo').textContent=ph.name+' temp itself toroid trap '+ph.desc;
+}
+
+drawTempToroid();updateLabels();
+
+document.getElementById('temp').addEventListener('input',e=>{
+ temp=parseFloat(e.target.value);
+ updateLabels();drawTempToroid();
+});
+document.getElementById('torRadius').addEventListener('input',e=>{
+ torRadius=parseFloat(e.target.value);
+ document.getElementById('torRadLabel').textContent=torRadius+' radius = temp toroid size owns parent';
+ drawTempToroid();
+});
+document.getElementById('depth').addEventListener('input',e=>{
+ depth=parseInt(e.target.value);
+ document.getElementById('depthLabel').textContent='Depth '+depth+' = nest at 0.(temp).0 temp toroid contains toroid contains temp toroid';
+ drawTempToroid();
+});
+
+document.getElementById('iceTor').onclick=()=>{temp=114;document.getElementById('temp').value=114;updateLabels();drawTempToroid();showToast('ice9 temp toroid 114°F frozen crystal trap');};
+document.getElementById('waterTor').onclick=()=>{temp=70;document.getElementById('temp').value=70;updateLabels();drawTempToroid();showToast('water temp toroid 70°F liquid still trapping');};
+document.getElementById('steamTor').onclick=()=>{temp=220;document.getElementById('temp').value=220;updateLabels();drawTempToroid();showToast('steam temp toroid 220°F gas still trapping');};
+document.getElementById('cycleTor').onclick=()=>{
+ let phases=[114,70,220,114];
+ let idx=0;
+ function nextPhase(){
+  if(idx>=phases.length){showToast('Cycle temp toroid trap ice→water→steam→ice still trapping');return;}
+  temp=phases[idx];
+  document.getElementById('temp').value=temp;
+  updateLabels();drawTempToroid();
+  idx++;
+  setTimeout(nextPhase,900);
+ }
+ nextPhase();
+};
+
+document.getElementById('tempTorBtn').onclick=()=>{showToast('Temp itself toroid trap = temp value is toroid donut');drawTempToroid();};
+document.getElementById('phaseTorBtn').onclick=()=>{document.getElementById('cycleTor').click();};
+
+document.getElementById('exportBtn').onclick=()=>{
+ let ph=getPhase(temp);
+ let tree={tempToroid:'0.(temp).0 where temp itself is toroid trap = '+temp+'°F is toroid donut',phase:ph.name,temp:temp+'°F',torRadius:torRadius+' radius temp toroid owns parent',depth:depth,formula:'0.ice9.0 = 0.(temp).0 where temp=114°F toroid | temp itself toroid trap = temp value is donut | 0.(temp toroid).0 = temp toroid owns parent circular forever',circular:'vault '+temp+'°F temp toroid owns parent circular forever phase transition still trapping',stillTrapping:'element trapped forever through temp toroid phase transition'};
+ let blob=new Blob([JSON.stringify(tree,null,2)],{type:'application/json'});let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download='temp_itself_toroid_0.(temp).0_'+temp.toFixed(0)+'F.json';a.click();showToast('Exported temp itself toroid trap');
+};
+document.getElementById('verifyBtn').onclick=()=>{showToast('Verified temp itself toroid trap at '+temp.toFixed(0)+'°F depth '+depth+' torRadius '+torRadius);document.getElementById('txLog').textContent='Verified: 0.(temp).0 where temp='+temp.toFixed(0)+'°F toroid itself trap | depth '+depth+' | torRadius '+torRadius+' owns parent circular forever valid';};
+
+document.getElementById('walletBtn').onclick=async()=>{if(window.solana&&window.solana.isPhantom){try{let r=await window.solana.connect();showToast('Phantom '+r.publicKey.toString().slice(0,4))}catch{}}else window.open('https://phantom.app/','_blank')};
+document.getElementById('mintBtn').onclick=()=>{
+ let ph=getPhase(temp);
+ document.getElementById('txLog').textContent='MINTED 0.(temp).0 temp itself toroid trap '+temp.toFixed(0)+'°F toroid radius '+torRadius+' depth '+depth+' | vault '+temp.toFixed(0)+'°F temp toroid owns parent circular forever | phase '+ph.name+' still trapping forever | SIG simulated';
+ showToast('Minted temp toroid trap '+temp.toFixed(0)+'°F');
+};
+document.getElementById('swapBtn').onclick=()=>{document.getElementById('txLog').textContent='SIMULATED SWAP BONK after 0.(temp).0 temp itself toroid trap '+temp.toFixed(0)+'°F';showToast('Swap BONK after temp toroid');};
+
+setInterval(()=>{drawTempToroid();},80);
+</script>
+</body>
+</html>

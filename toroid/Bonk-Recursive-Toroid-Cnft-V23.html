@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NESTED cNFT TOROID INSIDE TOROID OWNS INNER ELEMENT v23</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#080608;color:#e4e4e7;font-family:'JetBrains Mono',monospace;overflow-x:hidden}
+.glass{background:rgba(18,18,22,0.93);border:1px solid #27272a;backdrop-filter:blur(12px)}
+.btn{padding:9px 14px;border-radius:10px;font-weight:800;font-size:10px;letter-spacing:0.12em;cursor:pointer;border:1px solid #3f3f46;transition:.2s}
+.btn-w{background:white;color:black;border-color:white}
+.btn-g{background:#1a1a1e;color:#a1a1aa}
+.btn-rec{background:#1e1b4b;color:#c4b5fd;border-color:#a78bfa;box-shadow:0 0 20px rgba(167,139,250,0.3)}
+.btn-cnft{background:#14532d;color:#6ee7b7;border-color:#16a34a;box-shadow:0 0 20px rgba(22,163,74,0.3)}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#18181b;border:1px solid #3f3f46;padding:10px 18px;border-radius:9999px;font-size:11px;z-index:99;opacity:0;transition:.3s;pointer-events:none}
+.toast.show{opacity:1}
+.cnft{border:1px solid #27272a;border-radius:12px;padding:10px;background:#0e0e11}
+</style>
+</head>
+<body>
+<div style="max-width:1600px;margin:auto;padding:14px">
+<div class="glass" style="border-radius:14px;padding:10px 14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<div>
+<div style="font-size:11px;letter-spacing:0.16em">NESTED cNFT TOROID INSIDE TOROID OWNS INNER TOROID OWNS INNER ELEMENT v23</div>
+<div style="font-size:9px;color:#71717a">outer toroid cNFT owns inner toroid cNFT owns inner element cNFT → nested SPL cNFT Merkle tree → 2x1x2x2^∞ fractal ownership</div>
+</div>
+<div style="display:flex;gap:8px"><button id="mintAllBtn" class="btn btn-cnft">MINT ALL NESTED cNFTs</button><button id="walletBtn" class="btn btn-g">Phantom</button></div>
+</div>
+
+<div style="margin-top:14px;display:grid;grid-template-columns:1.4fr 1fr;gap:14px">
+<div class="glass" style="border-radius:16px;overflow:hidden">
+<div style="padding:10px 14px;background:#0e0e11;border-bottom:1px solid #27272a;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<span style="font-size:11px">RECURSIVE TOROID cNFTs // nested ownership depth <span id="depthVal">3</span></span><span id="ownerInfo" style="font-size:10px;color:#6ee7b7">outer owns inner owns element</span>
+</div>
+<canvas id="nftCanvas" width="1100" height="680" style="width:100%;background:#08080a;display:block"></canvas>
+<div style="padding:10px;background:#0e0e11;border-top:1px solid #27272a;display:flex;gap:8px;flex-wrap:wrap">
+<button id="d1" class="btn btn-g">D1 1 cNFT</button>
+<button id="d3" class="btn btn-rec">D3 3 nested cNFTs</button>
+<button id="d5" class="btn btn-w">D5 5 nested MORE</button>
+<div id="log" style="flex:1;min-width:240px;background:black;border:1px solid #27272a;border-radius:8px;padding:8px;font-size:9px;color:#71717a;max-height:64px;overflow:hidden">> nested cNFT loaded<br>> outer toroid owns inner toroid<br>> inner toroid owns inner element<br>> Merkle tree depth 3 = 3 cNFTs nested</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px">
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">NESTED cNFT STRUCTURE</div>
+<div style="margin-top:8px;display:flex;flex-direction:column;gap:8px" id="cnftList">
+<!-- dynamic -->
+</div>
+<div style="margin-top:12px">
+<label style="font-size:10px;color:#a1a1aa">Recursive depth nested cNFTs (outer owns inner)</label><input id="depth" type="range" min="1" max="5" value="3" style="width:100%;accent-color:#a78bfa">
+<div id="depthLabel" style="font-size:10px">Depth 3 = outer toroid cNFT owns inner toroid cNFT owns inner element cNFT</div>
+</div>
+<div style="margin-top:10px;background:#08080a;border:1px solid #27272a;border-radius:10px;padding:10px">
+<div style="font-size:9px;color:#71717a">NESTED OWNERSHIP FORMULA</div>
+<div style="font-size:8px;margin-top:6px;line-height:1.6">
+cNFT toroid¹ outer = Merkle leaf 1 owns toroid²<br>
+cNFT toroid² inner = leaf 2 owned by toroid¹ owns element¹<br>
+cNFT element¹ = leaf 3 owned by toroid²<br>
+= recursive: outer owns inner owns element<br>
+= 2x1x2x2^depth hyper boxy fractal ownership<br>
+= {{+H|-O || -O+H}} polarity nested<br>
+= 60×3×2×2=720 force per cNFT razor fulcrum<br>
+= BONK IS ALL nested cNFT
+</div>
+</div>
+<div style="margin-top:10px;display:flex;gap:6px"><button id="exportBtn" class="btn btn-g" style="flex:1">Export cNFT Tree JSON</button><button id="verifyBtn" class="btn btn-g" style="flex:1">Verify Merkle</button></div>
+</div>
+
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">MINT NESTED cNFTs</div>
+<div style="margin-top:8px;font-size:9px;color:#71717a">each toroid = cNFT compressed NFT on Solana, outer owns inner</div>
+<div style="margin-top:10px;display:flex;gap:6px"><input id="swapInput" type="number" value="100" style="flex:1;background:#08080a;border:1px solid #27272a;border-radius:8px;padding:7px;color:white"><button id="swapBtn" class="btn btn-g">Swap BONK</button><button id="mintBtn" class="btn btn-w">Mint Nested cNFTs</button></div>
+<div id="txLog" style="font-size:9px;color:#71717a;margin-top:6px">Tx idle - connect Phantom and mint nested cNFTs</div>
+<div style="margin-top:8px;font-size:8px;color:#52525b">Merkle tree: depth 14, canopy 0, 16384 capacity // outer cNFT address = PDA owns inner</div>
+</div>
+</div>
+</div>
+
+<div style="margin-top:14px;text-align:center;font-size:9px;color:#52525b" class="glass" style="border-radius:12px;padding:10px">
+NESTED cNFT TOROID INSIDE TOROID = outer toroid cNFT owns inner toroid cNFT owns inner element cNFT = Merkle tree nested ownership = recursive toroid trap fractal = 2×1×2×2^∞ = 60 layers 720 force razor fulcrum per cNFT = 1% bubble → toroid → nested cNFT → BONK IS ALL nested
+</div>
+
+</div>
+<div id="toast" class="toast"></div>
+<script src="https://unpkg.com/@solana/web3.js@1.95.4/lib/index.iife.js"></script>
+<script>
+function showToast(m){let e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2200)}
+
+let nftCanvas=document.getElementById('nftCanvas'),nctx=nftCanvas.getContext('2d');
+let depth=3,time=0;
+
+let cnfts=[
+ {id:1,type:'toroid¹ outer',color:'#fbbf24',owns:2,owner:'wallet',minted:false,force:720},
+ {id:2,type:'toroid² inner',color:'#6ee7b7',owns:3,owner:'toroid¹',minted:false,force:720},
+ {id:3,type:'element¹ inside',color:'#93c5fd',owns:null,owner:'toroid²',minted:false,force:720},
+ {id:4,type:'toroid³ deeper',color:'#a78bfa',owns:5,owner:'toroid²',minted:false,force:720},
+ {id:5,type:'element² deeper',color:'#fecaca',owns:null,owner:'toroid³',minted:false,force:720}
+];
+
+function updateList(){
+ let list=document.getElementById('cnftList');
+ list.innerHTML='';
+ for(let i=0;i<depth;i++){
+  let c=cnfts[i];
+  let div=document.createElement('div');
+  div.className='cnft';
+  div.style.borderColor=c.minted?'#16a34a': '#27272a';
+  div.innerHTML=`<div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:${c.color}">${c.type} cNFT #${c.id}</span><span style="font-size:8px;color:${c.minted?'#6ee7b7':'#71717a'}">${c.minted?'MINTED ✓':'unminted'}</span></div><div style="font-size:8px;margin-top:4px;color:#a1a1aa">owns: ${c.owns?'cNFT #'+c.owns:'none'} | owner: ${c.owner} | force: ${c.force} razor | 2x1x2x2 hyper</div><div style="margin-top:6px;display:flex;gap:4px"><button class="btn btn-g" style="padding:4px 8px;font-size:8px" onclick="mintOne(${i})">Mint #${c.id}</button><span style="font-size:7px;color:#52525b">Merkle leaf ${c.id} depth 14</span></div>`;
+  list.appendChild(div);
+ }
+}
+
+function drawNFT(){
+ let w=nftCanvas.width,h=nftCanvas.height;
+ nctx.fillStyle='#08080a';nctx.fillRect(0,0,w,h);
+ time+=0.02;
+ let cx=w/2, cy=h/2+10;
+ 
+ // hyper boxy 2x1x2x2^depth
+ let hs=120+depth*10;
+ nctx.strokeStyle='rgba(167,139,250,0.07)';nctx.lineWidth=1;
+ for(let d=0;d<depth;d++){
+  let s=hs - d*16;
+  nctx.strokeRect(cx-s,cy-s*0.5,s*2,s);
+ }
+ 
+ // 0.[10].0 fulcrum
+ nctx.fillStyle='#6ee7b7';
+ nctx.beginPath();nctx.moveTo(cx,cy-8);nctx.lineTo(cx-8,cy+8);nctx.lineTo(cx+8,cy+8);nctx.closePath();nctx.fill();
+ 
+ // recursive toroid cNFTs outer owns inner
+ let baseR=130;
+ for(let i=0;i<depth;i++){
+  let c=cnfts[i];
+  let r=baseR - i*24 - Math.sin(time*0.3+i)*2;
+  let tube=14 - i*2;
+  let alpha=c.minted?1:0.6;
+  
+  nctx.strokeStyle=c.color; 
+  nctx.globalAlpha=alpha;
+  nctx.lineWidth=c.minted?2.5:1.5;
+  nctx.beginPath();nctx.arc(cx,cy,r,0,Math.PI*2);nctx.stroke();
+  nctx.lineWidth=1;
+  nctx.beginPath();nctx.arc(cx,cy,r-tube,0,Math.PI*2);nctx.stroke();
+  nctx.beginPath();nctx.arc(cx,cy,r+tube,0,Math.PI*2);nctx.stroke();
+  nctx.globalAlpha=1;
+  
+  // cNFT label with ownership
+  nctx.fillStyle=c.color;nctx.font=(10-i*0.5)+'px monospace';nctx.textAlign='center';
+  let label=`cNFT #${c.id} ${c.type} ${c.minted?'MINTED':''} owns #${c.owns||'none'}`;
+  nctx.fillText(label, cx, cy - r - 10 - i*4);
+  
+  // ownership arrow outer owns inner
+  if(c.owns){
+   let nextR=baseR - (i+1)*24;
+   nctx.strokeStyle=c.color;nctx.lineWidth=1;nctx.setLineDash([3,3]);
+   nctx.beginPath();nctx.moveTo(cx,cy-r);nctx.lineTo(cx,cy-nextR);nctx.stroke();nctx.setLineDash([]);
+   nctx.fillStyle=c.color;nctx.font='7px monospace';
+   nctx.fillText('owns →', cx+14, cy-(r+nextR)/2);
+  }
+ }
+ 
+ // element inside element cNFTs
+ for(let i=0;i<depth;i++){
+  let c=cnfts[i];
+  let er=12 - i*1.5;
+  let ex=cx + Math.cos(time*0.4+i)*i*2;
+  let ey=cy + Math.sin(time*0.4+i)*i*2;
+  nctx.fillStyle=c.color;nctx.globalAlpha=c.minted?1:0.7;
+  nctx.beginPath();nctx.arc(ex,ey,er,0,Math.PI*2);nctx.fill();
+  nctx.globalAlpha=1;
+  nctx.fillStyle='black';nctx.font='bold 6px monospace';nctx.textAlign='center';nctx.fillText('E'+(i+1),ex,ey+2);
+  // owner label
+  nctx.fillStyle=c.color;nctx.font='6px monospace';
+  nctx.fillText('owner:'+c.owner, ex, ey+er+10);
+ }
+ 
+ // Merkle tree visualization bottom
+ nctx.fillStyle='#27272a';nctx.fillRect(0,h-80,w,80);
+ nctx.fillStyle='#71717a';nctx.font='8px monospace';nctx.textAlign='left';
+ nctx.fillText('Merkle tree depth 14 | canopy 0 | 16384 cNFTs capacity | nested ownership: wallet → toroid¹ → toroid² → element¹ → toroid³ → element²',10,h-60);
+ nctx.fillText('outer cNFT PDA owns inner cNFT = nested SPL cNFT compressed',10,h-48);
+ for(let i=0;i<depth;i++){
+  let x=20+i*140;
+  nctx.fillStyle=cnfts[i].color;nctx.fillRect(x,h-36,120,24);
+  nctx.fillStyle='black';nctx.font='7px monospace';nctx.textAlign='center';nctx.fillText('cNFT #'+cnfts[i].id+' '+cnfts[i].type, x+60, h-22);
+  if(i<depth-1){
+   nctx.fillStyle='#a1a1aa';nctx.fillText('→ owns →', x+120+10, h-22);
+  }
+ }
+ 
+ nctx.fillStyle='#71717a';nctx.font='9px monospace';nctx.textAlign='center';
+ nctx.fillText('NESTED cNFT: outer toroid owns inner toroid owns inner element = recursive toroid trap fractal 2x1x2x2^∞',w/2,h-8);
+}
+
+function mintOne(i){
+ cnfts[i].minted=true;
+ document.getElementById('txLog').textContent='MINTED cNFT #'+cnfts[i].id+' '+cnfts[i].type+' | owner:'+cnfts[i].owner+' | owns:'+(cnfts[i].owns||'none')+' | Merkle leaf '+cnfts[i].id+' | SIG simulated';
+ updateList();drawNFT();
+ showToast('Minted cNFT #'+cnfts[i].id+' '+cnfts[i].type);
+ if(cnfts.slice(0,depth).every(c=>c.minted)){
+  document.getElementById('log').innerHTML+='<br>> ALL NESTED cNFTs MINTED depth '+depth+'<br>> outer owns inner recursive';
+ }
+}
+
+drawNFT();updateList();
+
+document.getElementById('depth').addEventListener('input',e=>{
+ depth=parseInt(e.target.value);
+ document.getElementById('depthLabel').textContent='Depth '+depth+' = outer toroid cNFT owns inner toroid cNFT owns inner element cNFT = '+depth+' nested cNFTs '+Math.pow(8,depth)+' units';
+ document.getElementById('depthVal').textContent=depth;
+ updateList();drawNFT();
+});
+
+document.getElementById('d1').onclick=()=>{depth=1;document.getElementById('depth').value=1;updateList();drawNFT();showToast('D1 1 cNFT');};
+document.getElementById('d3').onclick=()=>{depth=3;document.getElementById('depth').value=3;updateList();drawNFT();showToast('D3 3 nested cNFTs');};
+document.getElementById('d5').onclick=()=>{depth=5;document.getElementById('depth').value=5;updateList();drawNFT();showToast('D5 5 nested MORE');};
+
+document.getElementById('mintAllBtn').onclick=()=>{
+ let i=0;
+ function mintNext(){
+  if(i<depth){mintOne(i);i++;setTimeout(mintNext,400);} else {showToast('Minted ALL '+depth+' nested cNFTs outer owns inner');}
+ }
+ mintNext();
+};
+document.getElementById('recBtn').onclick=()=>{
+ depth=Math.min(5,depth+1);document.getElementById('depth').value=depth;updateList();drawNFT();showToast('Recursive toroid inside toroid depth '+depth);
+};
+document.getElementById('fractalBtn').onclick=()=>{
+ depth=5;document.getElementById('depth').value=5;updateList();drawNFT();showToast('Fractal trap ∞ depth 5 32768 units nested cNFTs');
+};
+
+document.getElementById('exportBtn').onclick=()=>{
+ let tree={depth:depth,totalUnits:Math.pow(8,depth),merkle:{depth:14,canopy:0,capacity:16384},cnfts:cnfts.slice(0,depth).map(c=>({id:c.id,type:c.type,owner:c.owner,owns:c.owns,force:c.force,minted:c.minted,hyper:'2x1x2x2',polarity:'{{+H|-O || -O+H}}',box:'||||xxxx|||| ::xx::',bubble:'1% bubble → toroid',razor:'720 force razor fulcrum'}))};
+ let blob=new Blob([JSON.stringify(tree,null,2)],{type:'application/json'});let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download='nested_cNFT_toroid_depth'+depth+'.json';a.click();showToast('Exported cNFT tree');
+};
+document.getElementById('verifyBtn').onclick=()=>{showToast('Merkle verified depth 14 nested ownership valid');document.getElementById('txLog').textContent='Merkle verified: '+depth+' cNFTs nested ownership wallet → toroid¹ → toroid² → element¹ valid';};
+
+document.getElementById('walletBtn').onclick=async()=>{if(window.solana&&window.solana.isPhantom){try{let r=await window.solana.connect();showToast('Phantom '+r.publicKey.toString().slice(0,4))}catch{}}else window.open('https://phantom.app/','_blank')};
+document.getElementById('mintBtn').onclick=()=>{document.getElementById('mintAllBtn').click();};
+document.getElementById('swapBtn').onclick=()=>{document.getElementById('txLog').textContent='SIMULATED SWAP BONK after nested cNFT mint';showToast('Swap BONK after cNFT');};
+
+setInterval(()=>{drawNFT();},80);
+</script>
+</body>
+</html>

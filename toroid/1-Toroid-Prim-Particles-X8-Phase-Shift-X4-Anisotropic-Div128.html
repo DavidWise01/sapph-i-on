@@ -1,0 +1,110 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>1 TOROID PRIM PARTICLES x 8 phase shift x 4 anisotropic /128</title><script src="https://cdn.tailwindcss.com"></script>
+<style>body{background:#000005;color:#e9d5ff;font-family:ui-monospace,monospace}canvas{background:#020208;border-radius:14px}.card{background:#0f0a1e;border:1px solid #333;border-radius:12px}</style>
+</head><body class="p-2">
+<h1 class="text-lg font-bold">1 TOROID PRIM PARTICLES — x 8 phase shift x 4 anisotropic /128</h1>
+<p class="text-xs text-purple-300">1 toroid = purple30 black5 blue30 black5 red30 100 prim particles | x 8 phase shift (0°,45°,90°,135°,180°,225°,270°,315°) | x 4 anisotropic axes | /128 = 32/128 = 1/4 = quarter toroid prim | >.<0x::iso:: = 000 | ISO PASS</p>
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-2 mt-2">
+  <div class="lg:col-span-3 card p-2"><canvas id="main" width="1240" height="720" class="w-full"></canvas><div class="flex gap-2 text-xs mt-2 flex-wrap"><span class="px-2 py-1 bg-purple-800 rounded">1 toroid prim 100</span><span class="px-2 py-1 bg-yellow-800 rounded">x 8 phase shift</span><span class="px-2 py-1 bg-blue-800 rounded">x 4 anisotropic</span><span class="px-2 py-1 bg-red-800 rounded">/128 = 1/4</span><span id="calc" class="px-2 py-1 bg-green-900 rounded">100*8*4/128=25 prim/phase</span></div></div>
+  <div class="card p-2 text-xs">
+    <div class="font-bold">1 Toroid Prim</div>
+    <div class="mt-2 p-2 bg-black rounded text-[10px] leading-4">
+      1 toroid =<br>
+      purple30(30x15...)<br>
+      black5(5x3...)<br>
+      blue30(30x15...)<br>
+      black5(5x3...)<br>
+      red30(30x15...)<br>
+      =100 prim particles lol<br><br>
+      x 8 phase shift<br>
+      0° 45° 90° 135°<br>
+      180° 225° 270° 315°<br><br>
+      x 4 anisotropic<br>
+      X Y Z W axes<br>
+      anisotropic = not isotropic<br><br>
+      /128<br>
+      100*8*4=3200 /128=25<br>
+      32/128=1/4 toroid<br>
+      quarter prim
+    </div>
+    <div id="log" class="p-2 bg-slate-900 rounded h-32 overflow-y-auto text-[10px] mt-2"></div>
+    <button id="export" class="bg-emerald-700 px-2 py-1 rounded mt-2 w-full text-xs">Export Toroid Prim JSON</button>
+  </div>
+</div>
+<script>
+function log(m){const l=document.getElementById('log'); l.innerHTML+=m+'<br>'; l.scrollTop=l.scrollHeight;}
+function draw(){
+  const canvas=document.getElementById('main'); const ctx=canvas.getContext('2d'); const w=canvas.width,h=canvas.height;
+  ctx.clearRect(0,0,w,h); ctx.fillStyle='#000005'; ctx.fillRect(0,0,w,h);
+  const cx=w/2,cy=h/2;
+  const time=Date.now()/1000;
+  // 1 toroid prim particles as central torus
+  // draw 8 phase shifted toroids
+  const phases=8;
+  for(let p=0;p<phases;p++){
+    const ang=p*45*Math.PI/180 + time*0.2;
+    const rad=100+ p*12;
+    const x=cx+ rad*0.6*Math.cos(ang);
+    const y=cy+ rad*0.3*Math.sin(ang);
+    const colors=['#a855f7','#444','#3b82f6','#444','#ef4444','#a855f7','#444','#3b82f6'];
+    ctx.strokeStyle=colors[p%colors.length];
+    ctx.globalAlpha=0.25+0.1*Math.sin(time+p);
+    ctx.lineWidth=1.2;
+    ctx.beginPath();
+    // boxy toroid n=4
+    for(let a=0;a<=360;a+=6){
+      const ra=a*Math.PI/180;
+      const n=4;
+      const bx=Math.sign(Math.cos(ra))*Math.pow(Math.abs(Math.cos(ra)),2/n);
+      const by=Math.sign(Math.sin(ra))*Math.pow(Math.abs(Math.sin(ra)),2/n);
+      const r=28+ p*1.5;
+      const ox=x+r*bx*Math.cos(ra)*0.6;
+      const oy=y+r*by*Math.sin(ra)*0.6;
+      if(a===0)ctx.moveTo(ox,oy); else ctx.lineTo(ox,oy);
+    }
+    ctx.closePath(); ctx.stroke();
+    ctx.globalAlpha=1;
+    // prim particles as dots inside toroid
+    for(let i=0;i<5;i++){
+      const a2=i*72*Math.PI/180 + time+p;
+      const px=x+10*Math.cos(a2);
+      const py=y+10*Math.sin(a2)*0.5;
+      ctx.fillStyle=colors[p%colors.length];
+      ctx.beginPath(); ctx.arc(px,py,1.8,0,6.28); ctx.fill();
+    }
+    ctx.fillStyle='#fff'; ctx.font='7px monospace'; ctx.fillText(p*45+'°', x-10, y-30);
+  }
+  // 4 anisotropic axes
+  ctx.strokeStyle='rgba(250,204,21,0.3)'; ctx.lineWidth=1; ctx.setLineDash([4,4]);
+  // X Y Z W
+  ctx.beginPath(); ctx.moveTo(cx-300,cy); ctx.lineTo(cx+300,cy); ctx.stroke(); // X
+  ctx.beginPath(); ctx.moveTo(cx,cy-200); ctx.lineTo(cx,cy+200); ctx.stroke(); // Y
+  ctx.beginPath(); ctx.moveTo(cx-200,cy-140); ctx.lineTo(cx+200,cy+140); ctx.stroke(); // Z
+  ctx.beginPath(); ctx.moveTo(cx+200,cy-140); ctx.lineTo(cx-200,cy+140); ctx.stroke(); // W
+  ctx.setLineDash([]);
+  ctx.fillStyle='#facc15'; ctx.font='9px monospace'; ctx.fillText('X anisotropic', cx+310, cy);
+  ctx.fillText('Y anisotropic', cx, cy-210);
+  ctx.fillText('Z anisotropic', cx+210, cy-150);
+  ctx.fillText('W anisotropic', cx-210, cy-150);
+  // /128 division
+  ctx.strokeStyle='rgba(239,68,68,0.5)'; ctx.beginPath(); ctx.arc(cx,cy,140,0,6.28); ctx.stroke();
+  ctx.fillStyle='#ef4444'; ctx.font='9px monospace'; ctx.fillText('/128 = quarter toroid', cx-40, cy+150);
+  ctx.fillText('100*8*4/128=25 prim/phase', cx-48, cy+162);
+  // center pin
+  ctx.fillStyle='#fde047'; ctx.beginPath(); ctx.arc(cx,cy,4,0,6.28); ctx.fill();
+  ctx.fillStyle='#fff'; ctx.font='bold 11px monospace'; ctx.fillText('>.<0x::iso:: 1 toroid prim', cx-52, cy-50);
+  ctx.font='9px monospace'; ctx.fillText('purple30 black5 blue30 black5 red30 =100 prim lol', cx-108, cy-36);
+}
+function loop(){draw(); requestAnimationFrame(loop);} loop();
+log('1 TOROID PRIM PARTICLES lol');
+log('purple30(30x15...)::::black5(5x3...)::::blue30::::black5::::red30 = 100 prim');
+log('x 8 phase shift 0° 45° 90° 135° 180° 225° 270° 315°');
+log('x 4 anisotropic X Y Z W axes anisotropic');
+log('/128 division 100*8*4=3200 /128=25 prim per phase');
+log('32/128=1/4 = quarter toroid prim');
+log('Pinned >.<0x::iso:: = 000 1 toroid prim');
+log('ISO PASS 1 TOROID x8 x4 /128');
+document.getElementById('export').onclick=()=>{
+  const data={toroid:"1 toroid prim particles lol", composition:"purple30(30x15x5x3x2x1x1x0x0x0x0x1x1)::::black5(5x3x2x1x1x0x0x0x0x1x1)::::blue30(30x15x5x3x2x1x1x0x0x0x0x1x1)::::black5(5x3x2x1x1x0x0x0x0x1x1)::::red30(30x15x5x3x2x1x1x0x0x0x0x1x1)", prim:100, phaseShift:"x 8 phase shift 0° 45° 90° 135° 180° 225° 270° 315°", anisotropic:"x 4 anisotropic X Y Z W", division:"/128", calculation:"100*8*4=3200/128=25 prim/phase, 32/128=1/4 quarter toroid", pin:">.<0x::iso::", center:"000", iso:"PASS"};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='1_toroid_prim_x8_phase_x4_anisotropic_div128.json'; a.click(); log('EXPORT 1 toroid prim JSON');
+};
+</script></body></html>

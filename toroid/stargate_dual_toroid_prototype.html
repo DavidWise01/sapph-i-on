@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DT-½ Spinor Gate · Private Wireless Prototype</title>
+<style>
+  :root {
+    --bg: #07090d;
+    --panel: #10151c;
+    --ink: #d7e4ef;
+    --muted: #7f93a6;
+    --cyan: #3ee0ff;
+    --amber: #ffb347;
+    --home: #7dffb0;
+    --out: #5aa8ff;
+    --line: rgba(62,224,255,.18);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; min-height: 100%;
+    background:
+      radial-gradient(1200px 600px at 20% -10%, #143044 0%, transparent 55%),
+      radial-gradient(900px 500px at 90% 110%, #1a2410 0%, transparent 50%),
+      var(--bg);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  }
+  header {
+    padding: 22px 28px 8px;
+    display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    border-bottom: 1px solid var(--line);
+  }
+  .brand { font-size: 13px; letter-spacing: .28em; text-transform: uppercase; color: var(--cyan); }
+  h1 { margin: 6px 0 0; font-size: 22px; font-weight: 600; }
+  .meta { font-size: 12px; color: var(--muted); text-align: right; line-height: 1.6; }
+  main { display: grid; grid-template-columns: 1.15fr .85fr; gap: 18px; padding: 18px; }
+  @media (max-width: 980px) { main { grid-template-columns: 1fr; } }
+  .panel {
+    background: linear-gradient(180deg, rgba(16,21,28,.92), rgba(10,13,18,.96));
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px;
+  }
+  .stage { position: relative; height: 460px; overflow: hidden; }
+  svg { width: 100%; height: 100%; }
+  .addr {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 12px; color: var(--cyan);
+    background: #0a1016; border: 1px solid var(--line);
+    border-radius: 8px; padding: 10px 12px; word-break: break-all;
+  }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
+  button {
+    background: #15202a; color: var(--ink); border: 1px solid var(--line);
+    border-radius: 8px; padding: 10px 14px; cursor: pointer; font: inherit;
+  }
+  button.primary { background: #12313a; border-color: rgba(62,224,255,.45); color: var(--cyan); }
+  button.home { background: #12321f; border-color: rgba(125,255,176,.4); color: var(--home); }
+  button:disabled { opacity: .45; cursor: not-allowed; }
+  .seq { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0 14px; }
+  .chev {
+    min-width: 36px; height: 36px; display: grid; place-items: center;
+    border-radius: 8px; border: 1px solid #2a3a48; background: #0d141b;
+    font-family: ui-monospace, monospace; font-size: 14px;
+  }
+  .chev.lock-out { border-color: var(--out); color: var(--out); box-shadow: 0 0 10px rgba(90,168,255,.25); }
+  .chev.lock-home { border-color: var(--home); color: var(--home); box-shadow: 0 0 10px rgba(125,255,176,.22); }
+  .log {
+    height: 150px; overflow: auto; font-family: ui-monospace, monospace;
+    font-size: 11px; color: #9fb3c4; background: #080c11; border-radius: 8px;
+    padding: 10px; border: 1px solid var(--line); white-space: pre-wrap;
+  }
+  .status { display: flex; gap: 10px; flex-wrap: wrap; font-size: 12px; color: var(--muted); margin-top: 10px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--home); display: inline-block; margin-right: 6px; }
+  .dot.warn { background: var(--amber); }
+  .dot.idle { background: #4a5a68; }
+  footer { padding: 0 18px 18px; color: var(--muted); font-size: 12px; }
+  .note { margin-top: 10px; font-size: 13px; color: #b7c6d3; line-height: 1.55; }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <div class="brand">Private wireless · local mesh only</div>
+    <h1>DT-½ Dual Toroid Spinor Gate</h1>
+  </div>
+  <div class="meta">
+    Origin stamp: Today · 19 Sep 2026<br>
+    Link: encrypted peer-to-peer · no WAN route<br>
+    Prototype class: tabletop / lab ring
+  </div>
+</header>
+<main>
+  <section class="panel stage" aria-label="Dual toroid visualization">
+    <svg id="gate" viewBox="0 0 640 460">
+      <defs>
+        <radialGradient id="horizon" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#9ef6ff" stop-opacity=".18"/>
+          <stop offset="55%" stop-color="#1aa7c8" stop-opacity=".12"/>
+          <stop offset="100%" stop-color="#071018" stop-opacity="0"/>
+        </radialGradient>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="3" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <rect width="640" height="460" fill="#070b10"/>
+      <circle cx="320" cy="230" r="118" fill="url(#horizon)"/>
+      <g id="torusA" transform="translate(320 230)" filter="url(#glow)">
+        <ellipse rx="168" ry="62" fill="none" stroke="#3ee0ff" stroke-width="10" opacity=".85"/>
+        <ellipse rx="168" ry="62" fill="none" stroke="#8af6ff" stroke-width="2" opacity=".5"/>
+      </g>
+      <g id="torusB" transform="translate(320 230) rotate(90)" filter="url(#glow)">
+        <ellipse rx="168" ry="62" fill="none" stroke="#7dffb0" stroke-width="10" opacity=".8"/>
+        <ellipse rx="168" ry="62" fill="none" stroke="#d8ffe8" stroke-width="2" opacity=".4"/>
+      </g>
+      <g id="chevrons"></g>
+      <text x="320" y="226" text-anchor="middle" fill="#d7e4ef" font-size="13" font-family="ui-monospace,monospace">SPINOR SHEET</text>
+      <text id="sheetLabel" x="320" y="246" text-anchor="middle" fill="#3ee0ff" font-size="16" font-family="ui-monospace,monospace">+1/2  OUT</text>
+    </svg>
+  </section>
+  <section class="panel">
+    <div class="addr">[[ (d,toroid) ||| 0 0 1 1 2 4 6 | | 6 4 2 1 1 0 0 ||| (diorot,d) ]]</div>
+    <p class="note">
+      Dual toroid + spinor double cover. First half-turn locks destination
+      <b>(d,toroid)</b> on sequence <b>0 0 1 1 2 4 6</b>. Second half-turn
+      returns on the conjugate sheet <b>(diorot,d)</b> with
+      <b>6 4 2 1 1 0 0</b>. 360° is the other side; 720° is home.
+    </p>
+    <div>Outbound chevrons</div>
+    <div class="seq" id="outSeq"></div>
+    <div>Homebound chevrons</div>
+    <div class="seq" id="homeSeq"></div>
+    <div class="row">
+      <button class="primary" id="dialOut">Dial ½ · destination</button>
+      <button class="home" id="dialHome" disabled>Dial ½ · home</button>
+      <button id="reset">Kill wormhole</button>
+    </div>
+    <div class="log" id="log"></div>
+    <div class="status">
+      <span><span class="dot" id="meshDot"></span>mesh: local-only</span>
+      <span><span class="dot idle" id="lockDot"></span><span id="lockText">unlocked</span></span>
+      <span>angle: <b id="angle">0°</b></span>
+    </div>
+  </section>
+</main>
+<footer>
+  Conceptual lab prototype — not a physical wormhole. Wireless path is a private browser-local state machine
+  (no server, no public address). Geometry joke made rigorous: SU(2) double-covers SO(3).
+</footer>
+<script>
+const OUT = [0,0,1,1,2,4,6];
+const HOME = [6,4,2,1,1,0,0];
+const outEl = document.getElementById("outSeq");
+const homeEl = document.getElementById("homeSeq");
+const logEl = document.getElementById("log");
+const sheetLabel = document.getElementById("sheetLabel");
+const angleEl = document.getElementById("angle");
+const lockText = document.getElementById("lockText");
+const lockDot = document.getElementById("lockDot");
+const torusA = document.getElementById("torusA");
+const torusB = document.getElementById("torusB");
+const chevrons = document.getElementById("chevrons");
+
+let phase = 0; // 0 idle, 1 outbound locked, 2 home
+let angle = 0;
+let spinning = false;
+
+function chips(el, arr, cls) {
+  el.innerHTML = "";
+  arr.forEach((n, i) => {
+    const d = document.createElement("div");
+    d.className = "chev";
+    d.dataset.i = i;
+    d.textContent = n;
+    el.appendChild(d);
+  });
+}
+chips(outEl, OUT);
+chips(homeEl, HOME);
+
+function log(msg) {
+  const t = new Date().toLocaleTimeString();
+  logEl.textContent = `[${t}] ${msg}\n` + logEl.textContent;
+}
+
+function placeChevrons() {
+  chevrons.innerHTML = "";
+  for (let i = 0; i < 7; i++) {
+    const a = (i / 7) * Math.PI * 2 - Math.PI / 2;
+    const x = 320 + Math.cos(a) * 196;
+    const y = 230 + Math.sin(a) * 196;
+    const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    const p = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+    p.setAttribute("points", "-10,-14 10,-14 0,14");
+    p.setAttribute("fill", i < 7 && phase === 0 ? "#1b2730" : "#1b2730");
+    p.setAttribute("stroke", "#3ee0ff");
+    p.setAttribute("stroke-width", "1.2");
+    p.setAttribute("transform", `translate(${x} ${y}) rotate(${a * 180 / Math.PI + 90})`);
+    g.appendChild(p);
+    chevrons.appendChild(g);
+  }
+}
+placeChevrons();
+
+function animateTo(target, ms, onFrame) {
+  return new Promise(resolve => {
+    const start = angle;
+    const t0 = performance.now();
+    function tick(now) {
+      const k = Math.min(1, (now - t0) / ms);
+      const e = 1 - Math.pow(1 - k, 3);
+      angle = start + (target - start) * e;
+      angleEl.textContent = Math.round(angle) + "°";
+      torusA.setAttribute("transform", `translate(320 230) rotate(${angle})`);
+      torusB.setAttribute("transform", `translate(320 230) rotate(${90 - angle * 0.5})`);
+      onFrame && onFrame(k);
+      if (k < 1) requestAnimationFrame(tick);
+      else resolve();
+    }
+    requestAnimationFrame(tick);
+  });
+}
+
+function setLock(state, text) {
+  lockText.textContent = text;
+  lockDot.className = "dot " + state;
+}
+
+async function dialOut() {
+  if (spinning || phase !== 0) return;
+  spinning = true;
+  document.getElementById("dialOut").disabled = true;
+  log("Private mesh handshake… local peer only.");
+  log("Encoding (d,toroid) · outbound spinor sheet +½");
+  for (let i = 0; i < OUT.length; i++) {
+    await new Promise(r => setTimeout(r, 180));
+    outEl.children[i].classList.add("lock-out");
+    log(`Chevron ${i + 1} lock · glyph ${OUT[i]}`);
+  }
+  sheetLabel.textContent = "+1/2  OUT";
+  sheetLabel.setAttribute("fill", "#5aa8ff");
+  await animateTo(360, 1600);
+  phase = 1;
+  setLock("warn", "destination sheet locked");
+  log("360° complete. You are on the far sheet. Home requires the conjugate ½.");
+  document.getElementById("dialHome").disabled = false;
+  spinning = false;
+}
+
+async function dialHome() {
+  if (spinning || phase !== 1) return;
+  spinning = true;
+  document.getElementById("dialHome").disabled = true;
+  log("Encoding (diorot,d) · homebound spinor sheet −½");
+  for (let i = 0; i < HOME.length; i++) {
+    await new Promise(r => setTimeout(r, 180));
+    homeEl.children[i].classList.add("lock-home");
+    log(`Return chevron ${i + 1} lock · glyph ${HOME[i]}`);
+  }
+  sheetLabel.textContent = "−1/2  HOME";
+  sheetLabel.setAttribute("fill", "#7dffb0");
+  await animateTo(720, 1600);
+  phase = 2;
+  setLock("", "720° identity restored");
+  log("Double cover closed. Traveler is home. Wormhole can be dropped.");
+  spinning = false;
+}
+
+function reset() {
+  phase = 0; angle = 0; spinning = false;
+  angleEl.textContent = "0°";
+  torusA.setAttribute("transform", "translate(320 230)");
+  torusB.setAttribute("transform", "translate(320 230) rotate(90)");
+  sheetLabel.textContent = "+1/2  OUT";
+  sheetLabel.setAttribute("fill", "#3ee0ff");
+  [...outEl.children, ...homeEl.children].forEach(c => c.className = "chev");
+  document.getElementById("dialOut").disabled = false;
+  document.getElementById("dialHome").disabled = true;
+  setLock("idle", "unlocked");
+  log("Iris closed. Local mesh idle. Address retained.");
+}
+
+document.getElementById("dialOut").onclick = dialOut;
+document.getElementById("dialHome").onclick = dialHome;
+document.getElementById("reset").onclick = reset;
+log("DT-½ prototype online. Address bound to this console only.");
+</script>
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>1% BUBBLE → 0.[10].0 TOROID TRAP 2x1x2x2 HYPER BOXY v21</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#080608;color:#e4e4e7;font-family:'JetBrains Mono',monospace;overflow-x:hidden}
+.glass{background:rgba(18,18,22,0.93);border:1px solid #27272a;backdrop-filter:blur(12px)}
+.btn{padding:9px 14px;border-radius:10px;font-weight:800;font-size:10px;letter-spacing:0.12em;cursor:pointer;border:1px solid #3f3f46;transition:.2s}
+.btn-w{background:white;color:black;border-color:white}
+.btn-g{background:#1a1a1e;color:#a1a1aa}
+.btn-bubble{background:#1e1b4b;color:#93c5fd;border-color:#3b82f6;box-shadow:0 0 20px rgba(59,130,246,0.3)}
+.btn-toroid{background:#14532d;color:#6ee7b7;border-color:#16a34a;box-shadow:0 0 20px rgba(22,163,74,0.3)}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#18181b;border:1px solid #3f3f46;padding:10px 18px;border-radius:9999px;font-size:11px;z-index:99;opacity:0;transition:.3s;pointer-events:none}
+.toast.show{opacity:1}
+</style>
+</head>
+<body>
+<div style="max-width:1540px;margin:auto;padding:14px">
+<div class="glass" style="border-radius:14px;padding:10px 14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<div>
+<div style="font-size:11px;letter-spacing:0.16em">1% BUBBLE → 0.[10].0 TOROID TRAP ELEMENT INSIDE 2x1x2x2 HYPER BOXY v21</div>
+<div style="font-size:9px;color:#71717a">bubble left/right tips (1%) close into toroid at 0 → traps element → inside 2×1×2×2 hyper boxy ||||xxxx|||| ::xx::</div>
+</div>
+<div style="display:flex;gap:8px"><button id="closeBtn" class="btn btn-bubble">CLOSE BUBBLE → TOROID</button><button id="trapBtn" class="btn btn-toroid">TRAP ELEMENT</button><button id="walletBtn" class="btn btn-g">Phantom</button></div>
+</div>
+
+<div style="margin-top:14px;display:grid;grid-template-columns:1.6fr 1fr;gap:14px">
+<div class="glass" style="border-radius:16px;overflow:hidden">
+<div style="padding:10px 14px;background:#0e0e11;border-bottom:1px solid #27272a;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<span style="font-size:11px">BUBBLE → TOROID TRAP // 0.[10].0 inside 2x1x2x2 hyper</span><span id="trapInfo" style="font-size:10px;color:#6ee7b7">bubbles open 1% → closing → toroid trap</span>
+</div>
+<canvas id="trapCanvas" width="1100" height="680" style="width:100%;background:#08080a;display:block"></canvas>
+<div style="padding:10px;background:#0e0e11;border-top:1px solid #27272a;display:flex;gap:8px;flex-wrap:wrap">
+<button id="bubbleOpenBtn" class="btn btn-g">BUBBLE OPEN 1%</button>
+<button id="bubbleCloseBtn" class="btn btn-bubble">BUBBLE CLOSE → TOROID</button>
+<button id="hyperBtn" class="btn btn-g">2x1x2x2 HYPER BOXY</button>
+<div id="log" style="flex:1;min-width:240px;background:black;border:1px solid #27272a;border-radius:8px;padding:8px;font-size:9px;color:#71717a;max-height:64px;overflow:hidden">> 1% bubble left/right tips loaded<br>> 0.[10].0 middle pin<br>> awaiting close into toroid trap inside 2x1x2x2</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px">
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">BUBBLE → TOROID TRAP MECHANISM</div>
+<div style="margin-top:10px;font-size:9px;line-height:1.8;color:#a1a1aa">
+<b style="color:#93c5fd">1% bubble left/right tips</b> from v20 O-H polarity<br>
+• left tip bubble 1% traps H element<br>
+• right tip bubble 1% traps H element<br>
+• <b style="color:#6ee7b7">CLOSE → TOROID:</b> bubbles move to center 0.[10].0 and merge into toroid<br>
+• <b style="color:#6ee7b7">TOROID TRAP:</b> donut at 0 = 0::AEON = homeostatic toroid<br>
+• element trapped inside toroid = O-H element inside donut hole<br>
+• <b>inside 2x1x2x2 hyper boxy</b> = 2 wide ×1 tall ×2 deep ×2 time = 8 units hyper<br>
+• hyper boxy contains toroid trap = ||||xxxx|||| ::xx:: + toroid<br>
+• <b>60 layers ×3×2×2 = 720 force</b> razor fulcrum concentrates inside toroid
+</div>
+<div style="margin-top:12px">
+<label style="font-size:10px;color:#a1a1aa">Bubble close → toroid (0=open 1% bubbles, 100=closed toroid)</label><input id="closeSlider" type="range" min="0" max="100" value="0" style="width:100%;accent-color:#6ee7b7">
+<div id="closeVal" style="font-size:10px">0% open 1% bubbles left/right tips</div>
+</div>
+<div style="margin-top:8px">
+<label style="font-size:10px;color:#a1a1aa">Toroid trap tightness</label><input id="toroidTight" type="range" min="0" max="100" value="50" style="width:100%;accent-color:#16a34a">
+</div>
+<div style="margin-top:8px">
+<label style="font-size:10px;color:#a1a1aa">Hyper boxy 2x1x2x2 scale</label><input id="hyperScale" type="range" min="50" max="200" value="120" style="width:100%;accent-color:#a78bfa">
+</div>
+<div style="margin-top:10px;background:#08080a;border:1px solid #27272a;border-radius:10px;padding:10px">
+<div style="font-size:9px;color:#71717a">TRAP PHASES</div>
+<div id="phases" style="font-size:8px;margin-top:6px;line-height:1.6">
+0%: 1% bubble left tip + 1% bubble right tip separate<br>
+25%: bubbles move toward middle [10]<br>
+50%: bubbles touch at 0.[10].0<br>
+75%: bubbles merge into elliptical toroid<br>
+100%: closed toroid trap = donut at 0 traps element inside 2x1x2x2 hyper boxy
+</div>
+</div>
+</div>
+
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">HYPER BOXY TOROID TRAP 2x1x2x2</div>
+<canvas id="boxyTrap" width="340" height="180" style="width:100%;background:#08080a;border-radius:8px;border:1px solid #27272a;margin-top:8px"></canvas>
+<div style="margin-top:8px;font-size:8px;color:#71717a">toroid inside hyper boxy: each hyper face = ||||xxxx|||| ::xx:: + toroid</div>
+<div style="margin-top:10px;display:flex;gap:6px"><input id="swapInput" type="number" value="100" style="flex:1;background:#08080a;border:1px solid #27272a;border-radius:8px;padding:7px;color:white"><button id="swapBtn" class="btn btn-g">Swap</button><button id="mintBtn" class="btn btn-w">Mint Trap</button></div>
+<div id="txLog" style="font-size:9px;color:#71717a;margin-top:6px">Tx idle - close bubble to toroid first</div>
+</div>
+</div>
+</div>
+
+<div style="margin-top:14px;text-align:center;font-size:9px;color:#52525b" class="glass" style="border-radius:12px;padding:10px">
+1% bubble left/right tips (from O-H polarity) → close into 0.[10].0 → toroid at 0 homeostatic → traps element inside donut hole → inside 2×1×2×2 hyper boxy 8 units + 60 layers 720 force razor fulcrum = element trapped in toroid inside hyper boxy
+</div>
+
+</div>
+<div id="toast" class="toast"></div>
+<script src="https://unpkg.com/@solana/web3.js@1.95.4/lib/index.iife.js"></script>
+<script>
+function showToast(m){let e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2000)}
+
+let trapCanvas=document.getElementById('trapCanvas'),tctx=trapCanvas.getContext('2d');
+let boxyTrap=document.getElementById('boxyTrap'),bctx=boxyTrap.getContext('2d');
+let closePct=0,toroidTight=50,hyperScale=120,time=0;
+
+function drawTrap(){
+ let w=trapCanvas.width,h=trapCanvas.height;
+ tctx.fillStyle='#08080a';tctx.fillRect(0,0,w,h);
+ time+=0.02;
+ let cx=w/2, cy=h/2+10;
+ let dist=360*(1-closePct/100*0.85);
+ let leftX=cx - dist/2, rightX=cx + dist/2;
+ let leftY=cy, rightY=cy;
+ 
+ // hyper boxy 2x1x2x2 background
+ let hs=hyperScale;
+ tctx.strokeStyle='rgba(167,139,250,0.15)';tctx.lineWidth=1;
+ // outer hyper box 2 wide,1 tall,2 deep
+ tctx.strokeRect(cx-hs,cy-hs*0.5,hs*2,hs);
+ tctx.strokeRect(cx-hs+10,cy-hs*0.5+10,hs*2-20,hs-20);
+ for(let i=0;i<4;i++){
+  let x1=cx-hs + (i%2)*(hs*2), y1=cy-hs*0.5 + Math.floor(i/2)*(hs);
+  let x2=x1+10, y2=y1+10;
+  tctx.beginPath();tctx.moveTo(x1,y1);tctx.lineTo(x2,y2);tctx.stroke();
+ }
+ tctx.fillStyle='rgba(167,139,250,0.3)';tctx.font='8px monospace';tctx.textAlign='center';
+ tctx.fillText('2x1x2x2 hyper boxy',cx,cy-hs*0.5-10);
+ 
+ // 0.[10].0 middle pin
+ tctx.fillStyle='#6ee7b7';
+ tctx.beginPath();tctx.moveTo(cx,cy-10);tctx.lineTo(cx-10,cy+12);tctx.lineTo(cx+10,cy+12);tctx.closePath();tctx.fill();
+ tctx.fillStyle='black';tctx.font='bold 9px monospace';tctx.textAlign='center';tctx.fillText('[10]',cx,cy+6);
+ 
+ // bubbles left/right 1% tips
+ let bubbleR= 30+20*Math.sin(time);
+ let bubbleClose = closePct/100;
+ let lX = leftX*(1-bubbleClose) + cx*bubbleClose;
+ let rX = rightX*(1-bubbleClose) + cx*bubbleClose;
+ let lY = leftY, rY = rightY;
+ 
+ // left bubble
+ tctx.strokeStyle=`rgba(147,197,253,${0.8-bubbleClose*0.3})`;tctx.lineWidth=1.5;
+ tctx.beginPath();tctx.arc(lX,rY,bubbleR*(1-bubbleClose*0.3)+8,0,Math.PI*2);tctx.stroke();
+ tctx.fillStyle=`rgba(147,197,253,${0.08*(1-bubbleClose)+0.02})`;tctx.beginPath();tctx.arc(lX,lY,bubbleR*(1-bubbleClose*0.3)+8,0,Math.PI*2);tctx.fill();
+ tctx.fillStyle='#93c5fd';tctx.font='7px monospace';tctx.textAlign='center';
+ if(closePct<80) tctx.fillText('1% bubble left tip',lX,lY-bubbleR-14);
+ // element inside left bubble
+ tctx.fillStyle='#6ee7b7';tctx.beginPath();tctx.arc(lX,lY,4,0,Math.PI*2);tctx.fill();
+ 
+ // right bubble
+ tctx.strokeStyle=`rgba(110,231,183,${0.8-bubbleClose*0.3})`;
+ tctx.beginPath();tctx.arc(rX,rY,bubbleR*(1-bubbleClose*0.3)+8,0,Math.PI*2);tctx.stroke();
+ tctx.fillStyle=`rgba(110,231,183,${0.08*(1-bubbleClose)+0.02})`;tctx.beginPath();tctx.arc(rX,rY,bubbleR*(1-bubbleClose*0.3)+8,0,Math.PI*2);tctx.fill();
+ tctx.fillStyle='#6ee7b7';tctx.font='7px monospace';
+ if(closePct<80) tctx.fillText('1% bubble right tip',rX,rY-bubbleR-14);
+ tctx.fillStyle='#6ee7b7';tctx.beginPath();tctx.arc(rX,rY,4,0,Math.PI*2);tctx.fill();
+ 
+ // when closing, bubbles merge into toroid at 0
+ if(closePct>10){
+  // toroid forming
+  let toroidR = 20 + closePct*0.6 + toroidTight*0.2;
+  let tubeR = 12 + toroidTight*0.1;
+  let alpha = closePct/100;
+  
+  // toroid donut
+  tctx.strokeStyle=`rgba(110,231,183,${alpha})`;tctx.lineWidth=2;
+  tctx.beginPath();tctx.arc(cx,cy,toroidR,0,Math.PI*2);tctx.stroke();
+  tctx.lineWidth=1;
+  tctx.beginPath();tctx.arc(cx,cy,toroidR-tubeR,0,Math.PI*2);tctx.stroke();
+  tctx.beginPath();tctx.arc(cx,cy,toroidR+tubeR,0,Math.PI*2);tctx.stroke();
+  
+  if(closePct>50){
+   tctx.fillStyle=`rgba(110,231,183,${0.1*alpha+toroidTight/500})`;
+   tctx.beginPath();tctx.arc(cx,cy,toroidR,0,Math.PI*2);tctx.fill();
+  }
+  
+  // element trapped inside toroid hole
+  if(closePct>70){
+   tctx.fillStyle='#fbbf24';tctx.beginPath();tctx.arc(cx,cy,6,0,Math.PI*2);tctx.fill();
+   tctx.fillStyle='black';tctx.font='bold 6px monospace';tctx.textAlign='center';tctx.fillText('E',cx,cy+2);
+   tctx.fillStyle='#fbbf24';tctx.font='8px monospace';
+   tctx.fillText('element trapped inside toroid',cx,cy+toroidR+18);
+   tctx.fillText('0::AEON',cx,cy-8);
+  }
+  
+  if(closePct>=95){
+   tctx.fillStyle='#6ee7b7';tctx.font='10px monospace';tctx.textAlign='center';
+   tctx.fillText('TOROID TRAP CLOSED = 0.[10].0 homeostatic',cx,cy-toroidR-24);
+   tctx.font='8px monospace';
+   tctx.fillText('1% bubble left/right → toroid traps element inside 2x1x2x2 hyper',cx,cy-toroidR-36);
+  }
+ }
+ 
+ // seesaw line 0.[10].0
+ tctx.strokeStyle='rgba(63,63,70,0.4)';tctx.lineWidth=1.5;
+ tctx.beginPath();tctx.moveTo(lX,lY);tctx.lineTo(rX,rY);tctx.stroke();
+ // left 0 right 0
+ tctx.fillStyle='#fbbf24';tctx.beginPath();tctx.arc(lX,lY,10,0,Math.PI*2);tctx.fill();
+ tctx.fillStyle='black';tctx.font='bold 8px monospace';tctx.textAlign='center';tctx.fillText('0',lX,lY+2);
+ tctx.fillStyle='#a78bfa';tctx.beginPath();tctx.arc(rX,rY,10,0,Math.PI*2);tctx.fill();
+ tctx.fillStyle='black';tctx.fillText('0',rX,rY+2);
+ 
+ // labels
+ tctx.fillStyle='#71717a';tctx.font='10px monospace';tctx.textAlign='center';
+ tctx.fillText('0.[10].0 → bubble left/right 1% → toroid trap → element inside 2x1x2x2 hyper boxy',w/2,h-14);
+ 
+ let phase;
+ if(closePct<10) phase='bubbles open 1% left/right tips';
+ else if(closePct<50) phase='bubbles moving → middle [10]';
+ else if(closePct<80) phase='bubbles merging → elliptical toroid';
+ else phase='toroid trap closed = element trapped inside 2x1x2x2';
+ document.getElementById('trapInfo').textContent=phase+' | close '+closePct.toFixed(0)+'% tight '+toroidTight+'% hyper '+hyperScale;
+}
+
+function drawBoxyTrap(){
+ let w=boxyTrap.width,h=boxyTrap.height;
+ bctx.fillStyle='#08080a';bctx.fillRect(0,0,w,h);
+ // hyper boxy 2x1x2x2 with toroid inside
+ bctx.strokeStyle='rgba(167,139,250,0.4)';bctx.lineWidth=1;
+ bctx.strokeRect(w/2-60,h/2-30,120,60);
+ bctx.strokeRect(w/2-50,h/2-22,100,44);
+ // toroid inside
+ let torR=18+closePct*0.1;
+ bctx.strokeStyle='#6ee7b7';bctx.beginPath();bctx.arc(w/2,h/2,torR,0,Math.PI*2);bctx.stroke();
+ bctx.beginPath();bctx.arc(w/2,h/2,torR-6,0,Math.PI*2);bctx.stroke();
+ // element trapped
+ if(closePct>50){
+  bctx.fillStyle='#fbbf24';bctx.beginPath();bctx.arc(w/2,h/2,4,0,Math.PI*2);bctx.fill();
+ }
+ bctx.fillStyle='#6ee7b7';bctx.font='7px monospace';bctx.textAlign='center';
+ bctx.fillText('toroid trap inside hyper boxy',w/2,h-6);
+ bctx.fillText('2x1x2x2',w/2,h-16);
+}
+
+drawTrap();drawBoxyTrap();
+
+document.getElementById('closeSlider').addEventListener('input',e=>{
+ closePct=parseFloat(e.target.value);
+ document.getElementById('closeVal').textContent=closePct.toFixed(0)+'% '+(closePct<10?'open 1% bubbles left/right tips':closePct<50?'closing → middle [10]':closePct<80?'merging → elliptical toroid':'closed toroid trap');
+ drawTrap();drawBoxyTrap();
+});
+document.getElementById('toroidTight').addEventListener('input',e=>{toroidTight=parseFloat(e.target.value);drawTrap();});
+document.getElementById('hyperScale').addEventListener('input',e=>{hyperScale=parseFloat(e.target.value);drawTrap();});
+
+document.getElementById('closeBtn').onclick=()=>{
+ let start=closePct, target=100, t0=null;
+ function anim(t){
+  if(!t0)t0=t;
+  let p=Math.min(1,(t-t0)/2500);
+  closePct=start + (target-start)*p;
+  document.getElementById('closeSlider').value=closePct;
+  document.getElementById('closeVal').textContent=closePct.toFixed(0)+'% closing → toroid trap';
+  drawTrap();drawBoxyTrap();
+  if(p<1)requestAnimationFrame(anim); else {showToast('Closed bubble → toroid trap element inside hyper boxy');document.getElementById('log').innerHTML+='<br>> bubbles closed → toroid trap at 0<br>> element trapped inside 2x1x2x2';}
+ }
+ requestAnimationFrame(anim);
+};
+document.getElementById('bubbleOpenBtn').onclick=()=>{
+ closePct=0;document.getElementById('closeSlider').value=0;drawTrap();drawBoxyTrap();showToast('Bubble open 1% left/right tips');
+};
+document.getElementById('bubbleCloseBtn').onclick=()=>{document.getElementById('closeBtn').click();};
+document.getElementById('trapBtn').onclick=()=>{
+ document.getElementById('closeBtn').click();
+ setTimeout(()=>{showToast('Element trapped inside toroid inside hyper boxy');},2600);
+};
+document.getElementById('hyperBtn').onclick=()=>{showToast('2x1x2x2 hyper boxy contains toroid trap');};
+
+document.getElementById('walletBtn').onclick=async()=>{if(window.solana&&window.solana.isPhantom){try{let r=await window.solana.connect();showToast('Phantom '+r.publicKey.toString().slice(0,4))}catch{}}else window.open('https://phantom.app/','_blank')};
+document.getElementById('mintBtn').onclick=()=>{document.getElementById('txLog').textContent='SIMULATED MINT BUBBLE → TOROID TRAP 2x1x2x2 HYPER '+closePct.toFixed(0)+'%';showToast('Mint trap');};
+document.getElementById('swapBtn').onclick=()=>{document.getElementById('txLog').textContent='SIMULATED SWAP after bubble toroid trap';showToast('Swap after trap');};
+
+setInterval(()=>{drawTrap();},80);
+</script>
+</body>
+</html>

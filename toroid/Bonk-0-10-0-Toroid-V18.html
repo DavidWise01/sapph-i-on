@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>0.[10].0 PIN MIDDLE SEESAW HOMEOSTATIC TOROID v18</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#080608;color:#e4e4e7;font-family:'JetBrains Mono',monospace;overflow-x:hidden}
+.glass{background:rgba(18,18,22,0.93);border:1px solid #27272a;backdrop-filter:blur(12px)}
+.btn{padding:9px 14px;border-radius:10px;font-weight:800;font-size:10px;letter-spacing:0.12em;cursor:pointer;border:1px solid #3f3f46;transition:.2s}
+.btn-w{background:white;color:black;border-color:white}
+.btn-g{background:#1a1a1e;color:#a1a1aa}
+.btn-pin{background:#14532d;color:#6ee7b7;border-color:#16a34a;box-shadow:0 0 20px rgba(22,163,74,0.3)}
+.btn-tor{background:#1e1b4b;color:#c4b5fd;border-color:#a78bfa;box-shadow:0 0 20px rgba(167,139,250,0.3)}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#18181b;border:1px solid #3f3f46;padding:10px 18px;border-radius:9999px;font-size:11px;z-index:99;opacity:0;transition:.3s;pointer-events:none}
+.toast.show{opacity:1}
+</style>
+</head>
+<body>
+<div style="max-width:1480px;margin:auto;padding:14px">
+<div class="glass" style="border-radius:14px;padding:10px 14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<div>
+<div style="font-size:11px;letter-spacing:0.18em">0.[10].0 PIN TO MIDDLE [10] TWO 0s SEESAW HOMEOSTATIC TOROID AT 0 // v18</div>
+<div style="font-size:9px;color:#71717a">pin middle [10] = gravity+time+void balance point // two 0s ends seesaw → toroid at 0 homeostatic</div>
+</div>
+<div style="display:flex;gap:8px"><button id="pinBtn" class="btn btn-pin">PIN 0.[10].0 MIDDLE</button><button id="toroidBtn" class="btn btn-tor">TOROID HOMEOSTATIC</button><button id="walletBtn" class="btn btn-g">Phantom</button></div>
+</div>
+
+<div style="margin-top:14px;display:grid;grid-template-columns:1.4fr 1fr;gap:14px">
+<div class="glass" style="border-radius:16px;overflow:hidden">
+<div style="padding:10px 14px;background:#0e0e11;border-bottom:1px solid #27272a;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<span style="font-size:11px">0.[10].0 SEESAW → TOROID AT 0 // gravity ↓ time → void ○</span><span id="torInfo" style="font-size:10px;color:#a78bfa">seesaw balanced 0° → toroid stable</span>
+</div>
+<canvas id="toroidCanvas" width="1000" height="620" style="width:100%;background:#08080a;display:block"></canvas>
+<div style="padding:10px;background:#0e0e11;border-top:1px solid #27272a;display:flex;gap:8px;flex-wrap:wrap">
+<button id="seesawBtn" class="btn btn-g">SEESAW 0 ↔ 0</button>
+<button id="homeoBtn" class="btn btn-tor">HOMEOSTATIC BALANCE</button>
+<button id="gravityBtn" class="btn btn-g">GRAVITY</button>
+<button id="timeBtn" class="btn btn-g">TIME</button>
+<button id="voidBtn" class="btn btn-g">VOID</button>
+<div id="log" style="flex:1;min-width:220px;background:black;border:1px solid #27272a;border-radius:8px;padding:8px;font-size:9px;color:#71717a;max-height:60px;overflow:hidden">> 0.[10].0 loaded<br>> middle [10] pinned = fulcrum<br>> left 0 + right 0 = seesaw ends<br>> awaiting toroid homeostatic at 0</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px">
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">0.[10].0 STRUCTURE</div>
+<div style="margin-top:10px;font-size:9px;line-height:1.8;color:#a1a1aa">
+<b style="color:#6ee7b7">0.[10].0</b> = 0 . [10] . 0<br>
+• left <b>0</b> = mandel@000 = gravity end<br>
+• middle <b>[10]</b> = PIN = fulcrum = 10 = 1+0? = time+void balance point<br>
+• right <b>0</b> = juliet archive = void end<br>
+• <b>.</b> = seesaw arm<br>
+• two 0s seesaw → torque left/right<br>
+• when balanced → toroid at 0 forms<br>
+• homeostatic = self-balancing via gravity/time/void<br>
+• toroid = donut at 0 = 0::AEON = [[+183[0::AEON]-183]]
+</div>
+<div style="margin-top:12px">
+<label style="font-size:10px;color:#a1a1aa">Seesaw angle (left 0 vs right 0)</label><input id="seesaw" type="range" min="-30" max="30" value="0" style="width:100%;accent-color:#a78bfa">
+<div id="seesawVal" style="font-size:10px">0° balanced → toroid stable</div>
+</div>
+<div style="margin-top:8px">
+<label style="font-size:10px;color:#a1a1aa">Homeostatic force (gravity+time+void)</label><input id="homeo" type="range" min="0" max="100" value="50" style="width:100%;accent-color:#6ee7b7">
+</div>
+<div style="margin-top:10px;background:#08080a;border:1px solid #27272a;border-radius:10px;padding:10px">
+<div style="font-size:9px;color:#71717a">GRAVITY TIME VOID → TOROID AT 0</div>
+<div id="forces" style="font-size:8px;margin-top:6px;line-height:1.6">
+gravity: ↓ 9.8m/s² pulls left 0 down<br>
+time: → 13.8B ly forward pulls middle [10] forward<br>
+void: ○ 0 expansion pulls right 0 outward<br>
+balance: 0.[10].0 seesaw → toroid homeostatic at 0<br>
+toroid radius = |left0 - right0| balance
+</div>
+</div>
+</div>
+
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">2x1x2 BOXY IN TOROID</div>
+<canvas id="boxyTor" width="320" height="160" style="width:100%;background:#08080a;border-radius:8px;border:1px solid #27272a;margin-top:8px"></canvas>
+<div style="margin-top:8px;font-size:8px;color:#71717a">each 0 is own boxy 2x1x2 // middle [10] is ||||xxxx|||| ::xx:: pin // toroid contains boxy</div>
+<div style="margin-top:10px;display:flex;gap:6px"><input id="swapInput" type="number" value="100" style="flex:1;background:#08080a;border:1px solid #27272a;border-radius:8px;padding:7px;color:white"><button id="swapBtn" class="btn btn-g">Swap</button><button id="mintBtn" class="btn btn-w">Mint Toroid</button></div>
+<div id="txLog" style="font-size:9px;color:#71717a;margin-top:6px">Tx idle - pin middle [10] first</div>
+</div>
+</div>
+</div>
+
+<div style="margin-top:14px;text-align:center;font-size:9px;color:#52525b" class="glass" style="border-radius:12px;padding:10px">
+0.[10].0 = left 0 (mandel gravity) . middle [10] PIN fulcrum (time+void) . right 0 (juliet void) // two 0s seesaw → when balanced torque=0 → homeostatic toroid forms at 0 = 0::AEON = donut self-balancing via gravity ↓ time → void ○ → BONK IS ALL toroid
+</div>
+
+</div>
+<div id="toast" class="toast"></div>
+<script src="https://unpkg.com/@solana/web3.js@1.95.4/lib/index.iife.js"></script>
+<script>
+function showToast(m){let e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2000)}
+
+let toroidCanvas=document.getElementById('toroidCanvas'),tctx=toroidCanvas.getContext('2d');
+let boxyTor=document.getElementById('boxyTor'),bctx=boxyTor.getContext('2d');
+let seesawAngle=0,homeo=50,gravity=0.5,timeF=0.5,voidF=0.5;
+let pinned=false,toroidStable=false,time=0;
+
+function drawToroid(){
+ let w=toroidCanvas.width,h=toroidCanvas.height;
+ tctx.fillStyle='#08080a';tctx.fillRect(0,0,w,h);
+ time+=0.02;
+ 
+ // seesaw base
+ let fulcrumX=w/2, fulcrumY=h/2+60;
+ let armLen=300;
+ let angleRad=seesawAngle*Math.PI/180;
+ let leftX=fulcrumX - Math.cos(angleRad)*armLen;
+ let leftY=fulcrumY - Math.sin(angleRad)*armLen;
+ let rightX=fulcrumX + Math.cos(angleRad)*armLen;
+ let rightY=fulcrumY + Math.sin(angleRad)*armLen;
+ 
+ // draw seesaw arm 0.[10].0
+ tctx.strokeStyle='#3f3f46';tctx.lineWidth=4;
+ tctx.beginPath();tctx.moveTo(leftX,leftY);tctx.lineTo(rightX,rightY);tctx.stroke();
+ // fulcrum [10] middle pinned
+ tctx.fillStyle=pinned?'#6ee7b7':'#52525b';
+ tctx.beginPath();tctx.moveTo(fulcrumX,fulcrumY);tctx.lineTo(fulcrumX-12,fulcrumY+18);tctx.lineTo(fulcrumX+12,fulcrumY+18);tctx.closePath();tctx.fill();
+ tctx.fillStyle='black';tctx.font='bold 10px monospace';tctx.textAlign='center';
+ tctx.fillText('[10]',fulcrumX,fulcrumY+12);
+ tctx.fillStyle='#6ee7b7';tctx.font='8px monospace';
+ tctx.fillText('PIN MIDDLE',fulcrumX,fulcrumY+28);
+ 
+ // left 0 = mandel gravity
+ tctx.fillStyle='#fbbf24';tctx.beginPath();tctx.arc(leftX,leftY,18,0,Math.PI*2);tctx.fill();
+ tctx.fillStyle='black';tctx.font='bold 12px monospace';tctx.fillText('0',leftX,leftY+4);
+ tctx.fillStyle='#fbbf24';tctx.font='8px monospace';tctx.fillText('left 0',leftX,leftY-26);
+ tctx.fillText('mandel gravity',leftX,leftY-36);
+ // gravity arrow ↓
+ tctx.strokeStyle='#fbbf24';tctx.lineWidth=1.5;
+ tctx.beginPath();tctx.moveTo(leftX,leftY+18);tctx.lineTo(leftX,leftY+40+gravity*20);tctx.stroke();
+ tctx.beginPath();tctx.moveTo(leftX-4,leftY+36+gravity*20);tctx.lineTo(leftX,leftY+40+gravity*20);tctx.lineTo(leftX+4,leftY+36+gravity*20);tctx.stroke();
+ tctx.fillText('gravity ↓',leftX,leftY+50+gravity*20);
+ 
+ // right 0 = juliet void
+ tctx.fillStyle='#a78bfa';tctx.beginPath();tctx.arc(rightX,rightY,18,0,Math.PI*2);tctx.fill();
+ tctx.fillStyle='black';tctx.font='bold 12px monospace';tctx.fillText('0',rightX,rightY+4);
+ tctx.fillStyle='#a78bfa';tctx.font='8px monospace';tctx.fillText('right 0',rightX,rightY-26);
+ tctx.fillText('juliet void',rightX,rightY-36);
+ // void arrow ○
+ tctx.strokeStyle='#a78bfa';tctx.beginPath();tctx.arc(rightX,rightY+30,10+voidF*8,0,Math.PI*2);tctx.stroke();
+ tctx.fillText('void ○',rightX,rightY+50+voidF*10);
+ 
+ // middle [10] time arrow →
+ tctx.strokeStyle='#38bdf8';tctx.lineWidth=1.5;
+ tctx.beginPath();tctx.moveTo(fulcrumX+18,fulcrumY);tctx.lineTo(fulcrumX+40+timeF*20,fulcrumY);tctx.stroke();
+ tctx.beginPath();tctx.moveTo(fulcrumX+36+timeF*20,fulcrumY-4);tctx.lineTo(fulcrumX+40+timeF*20,fulcrumY);tctx.lineTo(fulcrumX+36+timeF*20,fulcrumY+4);tctx.stroke();
+ tctx.fillStyle='#38bdf8';tctx.font='8px monospace';tctx.fillText('time →',fulcrumX+50+timeF*20,fulcrumY-8);
+ 
+ // homeostatic toroid at 0 when balanced
+ let balance=Math.abs(seesawAngle);
+ let toroidRadius = 60 + (50-balance)*1.2 + Math.sin(time)*5;
+ let tubeRadius = 18 + homeo*0.15;
+ let toroidX=w/2, toroidY=h/2-80;
+ 
+ // toroid donut
+ tctx.strokeStyle=balance<5?'#6ee7b7':'#52525b';
+ tctx.lineWidth=2;
+ tctx.beginPath();
+ // outer circle
+ tctx.arc(toroidX,toroidY,toroidRadius,0,Math.PI*2);tctx.stroke();
+ // inner circle (tube)
+ tctx.strokeStyle=balance<5?'rgba(110,231,183,0.5)':'rgba(82,82,91,0.3)';
+ tctx.lineWidth=1;
+ tctx.beginPath();tctx.arc(toroidX,toroidY,toroidRadius-tubeRadius,0,Math.PI*2);tctx.stroke();
+ tctx.beginPath();tctx.arc(toroidX,toroidY,toroidRadius+tubeRadius,0,Math.PI*2);tctx.stroke();
+ 
+ // toroid fill when homeostatic
+ if(balance<8){
+  tctx.fillStyle=`rgba(110,231,183,${0.1+homeo/500})`;
+  tctx.beginPath();tctx.arc(toroidX,toroidY,toroidRadius,0,Math.PI*2);tctx.fill();
+  // center 0::AEON
+  tctx.fillStyle='#6ee7b7';tctx.beginPath();tctx.arc(toroidX,toroidY,10,0,Math.PI*2);tctx.fill();
+  tctx.fillStyle='black';tctx.font='bold 7px monospace';tctx.textAlign='center';tctx.fillText('0::AEON',toroidX,toroidY+2);
+  tctx.fillStyle='#6ee7b7';tctx.font='9px monospace';
+  tctx.fillText('HOMEOSTATIC TOROID AT 0',toroidX,toroidY-toroidRadius-12);
+  tctx.fillText('gravity+time+void balanced',toroidX,toroidY-toroidRadius-22);
+  toroidStable=true;
+ } else {
+  tctx.fillStyle='#52525b';tctx.font='9px monospace';tctx.textAlign='center';
+  tctx.fillText('toroid unstable - balance seesaw',toroidX,toroidY-toroidRadius-12);
+  toroidStable=false;
+ }
+ 
+ // labels 0.[10].0
+ tctx.fillStyle='#71717a';tctx.font='14px monospace';tctx.textAlign='center';
+ tctx.fillText('0 . [10] . 0',w/2,h-20);
+ tctx.font='9px monospace';
+ tctx.fillText('left 0 seesaw middle [10] PIN right 0 → toroid at 0 homeostatic',w/2,h-8);
+ 
+ document.getElementById('torInfo').textContent=`seesaw ${seesawAngle.toFixed(1)}° ${balance<5?'balanced → toroid stable':'unbalanced'} gravity ${gravity.toFixed(1)} time ${timeF.toFixed(1)} void ${voidF.toFixed(1)}`;
+}
+
+function drawBoxyTor(){
+ let w=boxyTor.width,h=boxyTor.height;
+ bctx.fillStyle='#08080a';bctx.fillRect(0,0,w,h);
+ // two 0s as boxy 2x1x2
+ let leftX=w*0.25, rightX=w*0.75, y=h/2;
+ // left 0 boxy
+ bctx.strokeStyle='#fbbf24';bctx.lineWidth=1;
+ bctx.strokeRect(leftX-18,y-12,36,24);bctx.strokeRect(leftX-14,y-8,28,16);
+ bctx.fillStyle='#fbbf24';bctx.font='8px monospace';bctx.textAlign='center';bctx.fillText('0',leftX,y+3);bctx.fillText('left',leftX,y+20);
+ // middle [10] pin as ||||xxxx|||| ::xx::
+ bctx.strokeStyle='#6ee7b7';bctx.strokeRect(w/2-16,y-14,32,28);
+ bctx.fillStyle='#6ee7b7';bctx.fillText('[10]',w/2,y+3);bctx.fillText('PIN',w/2,y+20);
+ bctx.fillStyle='#a78bfa';bctx.font='6px monospace';bctx.fillText('||||xxxx||||',w/2,y-18);bctx.fillText('::xx::',w/2,y-26);
+ // right 0 boxy
+ bctx.strokeStyle='#a78bfa';bctx.strokeRect(rightX-18,y-12,36,24);bctx.strokeRect(rightX-14,y-8,28,16);
+ bctx.fillStyle='#a78bfa';bctx.font='8px monospace';bctx.fillText('0',rightX,y+3);bctx.fillText('right',rightX,y+20);
+ // seesaw line
+ bctx.strokeStyle='#3f3f46';bctx.lineWidth=1;
+ bctx.beginPath();bctx.moveTo(leftX,y);bctx.lineTo(rightX,y);bctx.stroke();
+ // toroid at center 0
+ if(toroidStable){
+  bctx.strokeStyle='#6ee7b7';bctx.beginPath();bctx.arc(w/2,y-40,18,0,Math.PI*2);bctx.stroke();
+  bctx.beginPath();bctx.arc(w/2,y-40,10,0,Math.PI*2);bctx.stroke();
+ }
+}
+
+drawToroid();drawBoxyTor();
+
+document.getElementById('seesaw').addEventListener('input',e=>{
+ seesawAngle=parseFloat(e.target.value);
+ document.getElementById('seesawVal').textContent=seesawAngle.toFixed(1)+'° '+(Math.abs(seesawAngle)<5?'balanced → toroid stable':'unbalanced → toroid wobble');
+ drawToroid();drawBoxyTor();
+});
+document.getElementById('homeo').addEventListener('input',e=>{
+ homeo=parseFloat(e.target.value);
+ gravity=homeo/100;timeF=homeo/100;voidF=homeo/100;
+ drawToroid();
+});
+document.getElementById('pinBtn').onclick=()=>{
+ pinned=true;
+ seesawAngle=0;document.getElementById('seesaw').value=0;
+ document.getElementById('log').innerHTML='> 📌 PIN 0.[10].0 MIDDLE<br>> middle [10] pinned = fulcrum<br>> [10] = gravity+time+void balance<br>> left 0 + right 0 seesaw ends<br>> toroid at 0 forming';
+ drawToroid();drawBoxyTor();showToast('Pinned middle [10] - fulcrum');
+};
+document.getElementById('toroidBtn').onclick=()=>{
+ document.getElementById('pinBtn').click();
+ homeo=80;document.getElementById('homeo').value=80;
+ let anim=(t)=>{
+  seesawAngle=Math.sin(t*0.001)*2;
+  document.getElementById('seesaw').value=seesawAngle;
+  drawToroid();drawBoxyTor();
+  if(toroidStable && Math.abs(seesawAngle)<1){
+   document.getElementById('log').innerHTML+='<br>> HOMEOSTATIC TOROID AT 0 stable<br>> gravity+time+void balanced<br>> 0::AEON toroid';
+   showToast('Homeostatic toroid at 0 stable');
+   return;
+  }
+  requestAnimationFrame(anim);
+ };
+ requestAnimationFrame(anim);
+};
+document.getElementById('seesawBtn').onclick=()=>{
+ let a=-20;
+ let anim=(t)=>{
+  seesawAngle=Math.sin(t*0.002)*20;
+  document.getElementById('seesaw').value=seesawAngle;
+  document.getElementById('seesawVal').textContent=seesawAngle.toFixed(1)+'° seesaw 0 ↔ 0';
+  drawToroid();drawBoxyTor();
+  if(t>4000){seesawAngle=0;document.getElementById('seesaw').value=0;drawToroid();showToast('Seesaw 0 ↔ 0 balanced');return;}
+  requestAnimationFrame(anim);
+ };
+ requestAnimationFrame(anim);
+};
+document.getElementById('homeoBtn').onclick=()=>{
+ homeo=50;document.getElementById('homeo').value=50;
+ seesawAngle=0;document.getElementById('seesaw').value=0;
+ drawToroid();drawBoxyTor();showToast('Homeostatic balance gravity+time+void');
+};
+document.getElementById('gravityBtn').onclick=()=>{gravity=Math.random();drawToroid();showToast('Gravity ↓');};
+document.getElementById('timeBtn').onclick=()=>{timeF=Math.random();drawToroid();showToast('Time →');};
+document.getElementById('voidBtn').onclick=()=>{voidF=Math.random();drawToroid();showToast('Void ○');};
+
+document.getElementById('walletBtn').onclick=async()=>{if(window.solana&&window.solana.isPhantom){try{let r=await window.solana.connect();showToast('Phantom '+r.publicKey.toString().slice(0,4))}catch{}}else window.open('https://phantom.app/','_blank')};
+document.getElementById('mintBtn').onclick=()=>{document.getElementById('txLog').textContent='SIMULATED MINT 0.[10].0 TOROID HOMEOSTATIC AT 0';showToast('Mint toroid');};
+document.getElementById('swapBtn').onclick=()=>{document.getElementById('txLog').textContent='SIMULATED SWAP after toroid balance';showToast('Swap after toroid');};
+
+setInterval(()=>{if(pinned){drawToroid();}},50);
+</script>
+</body>
+</html>

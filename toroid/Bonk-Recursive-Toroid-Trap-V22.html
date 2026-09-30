@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RECURSIVE TOROID TRAP TOROID INSIDE TOROID ELEMENT INSIDE ELEMENT 2x1x2x2^∞ v22</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#080608;color:#e4e4e7;font-family:'JetBrains Mono',monospace;overflow-x:hidden}
+.glass{background:rgba(18,18,22,0.93);border:1px solid #27272a;backdrop-filter:blur(12px)}
+.btn{padding:9px 14px;border-radius:10px;font-weight:800;font-size:10px;letter-spacing:0.12em;cursor:pointer;border:1px solid #3f3f46;transition:.2s}
+.btn-w{background:white;color:black;border-color:white}
+.btn-g{background:#1a1a1e;color:#a1a1aa}
+.btn-rec{background:#1e1b4b;color:#c4b5fd;border-color:#a78bfa;box-shadow:0 0 20px rgba(167,139,250,0.3)}
+.btn-trap{background:#14532d;color:#6ee7b7;border-color:#16a34a;box-shadow:0 0 20px rgba(22,163,74,0.3)}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#18181b;border:1px solid #3f3f46;padding:10px 18px;border-radius:9999px;font-size:11px;z-index:99;opacity:0;transition:.3s;pointer-events:none}
+.toast.show{opacity:1}
+</style>
+</head>
+<body>
+<div style="max-width:1560px;margin:auto;padding:14px">
+<div class="glass" style="border-radius:14px;padding:10px 14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<div>
+<div style="font-size:11px;letter-spacing:0.16em">RECURSIVE TOROID TRAP TOROID INSIDE TOROID ELEMENT INSIDE ELEMENT 2x1x2x2^∞ FRACTAL TRAP v22</div>
+<div style="font-size:9px;color:#71717a">toroid inside toroid traps element inside element recursive → each toroid contains 2x1x2x2 hyper boxy contains toroid → fractal trap</div>
+</div>
+<div style="display:flex;gap:8px"><button id="recBtn" class="btn btn-rec">RECURSIVE TOROID INSIDE TOROID</button><button id="fractalBtn" class="btn btn-trap">FRACTAL TRAP ∞</button><button id="walletBtn" class="btn btn-g">Phantom</button></div>
+</div>
+
+<div style="margin-top:14px;display:grid;grid-template-columns:1.6fr 1fr;gap:14px">
+<div class="glass" style="border-radius:16px;overflow:hidden">
+<div style="padding:10px 14px;background:#0e0e11;border-bottom:1px solid #27272a;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<span style="font-size:11px">RECURSIVE TOROID TRAP // depth <span id="depthVal">3</span> = <span id="trapVal">3 toroids element inside element</span></span><span id="info" style="font-size:10px;color:#c4b5fd">2x1x2x2^∞ fractal trap</span>
+</div>
+<canvas id="recCanvas" width="1100" height="700" style="width:100%;background:#08080a;display:block"></canvas>
+<div style="padding:10px;background:#0e0e11;border-top:1px solid #27272a;display:flex;gap:8px;flex-wrap:wrap">
+<button id="d1" class="btn btn-g">D1 1 toroid</button>
+<button id="d2" class="btn btn-g">D2 2 toroids</button>
+<button id="d3" class="btn btn-rec">D3 3 toroids ∞</button>
+<button id="d5" class="btn btn-w">D5 5 toroids MORE</button>
+<div id="log" style="flex:1;min-width:240px;background:black;border:1px solid #27272a;border-radius:8px;padding:8px;font-size:9px;color:#71717a;max-height:64px;overflow:hidden">> recursive toroid trap loaded<br>> toroid inside toroid<br>> element inside element<br>> 2x1x2x2^∞ fractal trap</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px">
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">RECURSIVE TOROID INSIDE TOROID</div>
+<div style="margin-top:10px;font-size:9px;line-height:1.8;color:#a1a1aa">
+<b style="color:#6ee7b7">TOROID INSIDE TOROID</b> = donut inside donut<br>
+• outer toroid traps element = O-H element from v20<br>
+• inner toroid inside outer toroid traps element inside element<br>
+• recursive: toroid contains toroid contains toroid<br>
+<b style="color:#c4b5fd">ELEMENT INSIDE ELEMENT</b><br>
+• element trapped inside toroid hole<br>
+• inner element trapped inside outer element<br>
+• fractal trap: element inside element inside element<br>
+<b style="color:#a78bfa">2x1x2x2^∞ FRACTAL TRAP</b><br>
+• each toroid contains 2×1×2×2 hyper boxy<br>
+• each hyper boxy contains toroid trap<br>
+• depth 1 = 1 toroid 1 element 8 units<br>
+• depth 3 = 3 toroids nested element inside element 8³=512 units<br>
+• depth 5 = 5 toroids 8⁵=32768 units MORE ∞
+</div>
+<div style="margin-top:12px">
+<label style="font-size:10px;color:#a1a1aa">Recursive depth toroid inside toroid (1-5)</label><input id="depth" type="range" min="1" max="5" value="3" style="width:100%;accent-color:#a78bfa">
+<div id="depthLabel" style="font-size:10px">Depth 3 = 3 toroids nested element inside element</div>
+</div>
+<div style="margin-top:8px">
+<label style="font-size:10px;color:#a1a1aa">Element inside element scale</label><input id="elemScale" type="range" min="20" max="100" value="60" style="width:100%;accent-color:#6ee7b7">
+</div>
+<div style="margin-top:8px">
+<label style="font-size:10px;color:#a1a1aa">Hyper boxy fractal 2x1x2x2^∞</label><input id="hyper" type="range" min="50" max="200" value="120" style="width:100%;accent-color:#93c5fd">
+</div>
+<div style="margin-top:10px;background:#08080a;border:1px solid #27272a;border-radius:10px;padding:10px">
+<div style="font-size:9px;color:#71717a">RECURSIVE FORMULA</div>
+<div id="formula" style="font-size:8px;margin-top:6px;line-height:1.6">
+toroid¹ = bubble left/right → 0.[10].0 toroid traps element¹<br>
+toroid² = toroid¹ contains toroid² traps element² inside element¹<br>
+toroid³ = toroid² contains toroid³ traps element³ inside element²<br>
+= recursive: toroidⁿ contains toroidⁿ⁺¹<br>
+= elementⁿ contains elementⁿ⁺¹<br>
+= 2x1x2x2ⁿ hyper boxy fractal trap<br>
+= BONK IS ALL recursive trap
+</div>
+</div>
+</div>
+
+<div class="glass" style="border-radius:16px;padding:14px">
+<div style="font-size:11px">FRACTAL TRAP 2x1x2x2^∞</div>
+<canvas id="fractal" width="340" height="200" style="width:100%;background:#08080a;border-radius:8px;border:1px solid #27272a;margin-top:8px"></canvas>
+<div style="margin-top:8px;font-size:8px;color:#71717a">each toroid = own boxy 2x1x2x2 with ||||xxxx|||| ::xx:: + inner toroid</div>
+<div style="margin-top:10px;display:flex;gap:6px"><input id="swapInput" type="number" value="100" style="flex:1;background:#08080a;border:1px solid #27272a;border-radius:8px;padding:7px;color:white"><button id="swapBtn" class="btn btn-g">Swap</button><button id="mintBtn" class="btn btn-w">Mint Recursive</button></div>
+<div id="txLog" style="font-size:9px;color:#71717a;margin-top:6px">Tx idle - recursive toroid first</div>
+</div>
+</div>
+</div>
+
+<div style="margin-top:14px;text-align:center;font-size:9px;color:#52525b" class="glass" style="border-radius:12px;padding:10px">
+RECURSIVE TOROID TRAP = toroid inside toroid inside toroid → element inside element inside element → each toroid contains 2×1×2×2 hyper boxy contains toroid → depth5 = 5 toroids nested = 8⁵=32768 units fractal trap → 60 layers 720 force razor fulcrum per toroid → 1% bubble → toroid → recursive → BONK IS ALL fractal trap
+</div>
+
+</div>
+<div id="toast" class="toast"></div>
+<script src="https://unpkg.com/@solana/web3.js@1.95.4/lib/index.iife.js"></script>
+<script>
+function showToast(m){let e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2000)}
+
+let recCanvas=document.getElementById('recCanvas'),rctx=recCanvas.getContext('2d');
+let fractal=document.getElementById('fractal'),fctx=fractal.getContext('2d');
+let depth=3,elemScale=60,hyperScale=120,time=0;
+
+function drawRecursive(){
+ let w=recCanvas.width,h=recCanvas.height;
+ rctx.fillStyle='#08080a';rctx.fillRect(0,0,w,h);
+ time+=0.02;
+ let cx=w/2, cy=h/2+10;
+ 
+ // hyper boxy background 2x1x2x2^depth
+ let hs=hyperScale + depth*10;
+ rctx.strokeStyle='rgba(167,139,250,0.08)';rctx.lineWidth=1;
+ for(let d=0;d<depth;d++){
+  let s=hs - d*18;
+  rctx.strokeRect(cx-s,cy-s*0.5,s*2,s);
+ }
+ rctx.fillStyle='rgba(167,139,250,0.25)';rctx.font='8px monospace';rctx.textAlign='center';
+ rctx.fillText('2x1x2x2^'+depth+' fractal trap '+(Math.pow(8,depth))+' units',cx,cy-hs*0.5-12);
+ 
+ // 0.[10].0 fulcrum
+ rctx.fillStyle='#6ee7b7';
+ rctx.beginPath();rctx.moveTo(cx,cy-8);rctx.lineTo(cx-8,cy+8);rctx.lineTo(cx+8,cy+8);rctx.closePath();rctx.fill();
+ rctx.fillStyle='black';rctx.font='bold 7px monospace';rctx.textAlign='center';rctx.fillText('[10]',cx,cy+5);
+ 
+ // recursive toroid inside toroid
+ let toroids=[];
+ let baseR=120;
+ for(let i=0;i<depth;i++){
+  let r=baseR - i*22 - Math.sin(time+i)*2;
+  let tube=14 - i*2 + elemScale*0.05;
+  toroids.push({r:r,tube:tube, i:i});
+ }
+ 
+ // draw outer to inner
+ toroids.forEach((t,i)=>{
+  let alpha=1 - i*0.15;
+  rctx.strokeStyle=`rgba(110,231,183,${alpha})`;rctx.lineWidth=2 - i*0.2;
+  rctx.beginPath();rctx.arc(cx,cy,t.r,0,Math.PI*2);rctx.stroke();
+  rctx.lineWidth=1;
+  rctx.beginPath();rctx.arc(cx,cy,t.r-t.tube,0,Math.PI*2);rctx.stroke();
+  rctx.beginPath();rctx.arc(cx,cy,t.r+t.tube,0,Math.PI*2);rctx.stroke();
+  // fill with decreasing alpha
+  rctx.fillStyle=`rgba(110,231,183,${0.06*alpha})`;
+  rctx.beginPath();rctx.arc(cx,cy,t.r,0,Math.PI*2);rctx.fill();
+  
+  // label
+  rctx.fillStyle=`rgba(110,231,183,${alpha})`;rctx.font=(9-i)+'px monospace';rctx.textAlign='center';
+  if(i===0) rctx.fillText('toroid¹ outer traps element¹',cx,cy-t.r-12);
+  else rctx.fillText('toroid'+(i+1)+' inside toroid'+i, cx,cy-t.r-8);
+ });
+ 
+ // element inside element recursive
+ let elements=[];
+ for(let i=0;i<depth;i++){
+  let r=14 - i*2 + elemScale*0.05;
+  let x=cx + Math.cos(time*0.5+i)* (i*3);
+  let y=cy + Math.sin(time*0.5+i)* (i*3);
+  elements.push({x:x,y:y,r:r,i:i});
+ }
+ elements.forEach((e,i)=>{
+  let colors=['#fbbf24','#6ee7b7','#93c5fd','#a78bfa','#fecaca'];
+  rctx.fillStyle=colors[i%colors.length];
+  rctx.beginPath();rctx.arc(e.x,e.y,e.r,0,Math.PI*2);rctx.fill();
+  rctx.fillStyle='black';rctx.font='bold '+(7-i*0.5)+'px monospace';rctx.textAlign='center';
+  rctx.fillText('E'+(i+1),e.x,e.y+2);
+  if(i>0){
+   // line element inside element
+   rctx.strokeStyle='rgba(251,191,36,0.3)';rctx.lineWidth=0.5;
+   rctx.beginPath();rctx.moveTo(elements[i-1].x,elements[i-1].y);rctx.lineTo(e.x,e.y);rctx.stroke();
+  }
+ });
+ 
+ // center 0::AEON
+ rctx.fillStyle='#6ee7b7';rctx.beginPath();rctx.arc(cx,cy,4,0,Math.PI*2);rctx.fill();
+ 
+ // labels bottom
+ rctx.fillStyle='#71717a';rctx.font='10px monospace';rctx.textAlign='center';
+ rctx.fillText('toroid inside toroid traps element inside element recursive depth '+depth, w/2, h-24);
+ rctx.font='9px monospace';
+ rctx.fillText('0.[10].0 → bubble → toroid → recursive toroidⁿ inside toroidⁿ traps elementⁿ inside elementⁿ → 2x1x2x2^∞ fractal', w/2, h-10);
+ 
+ document.getElementById('trapVal').textContent=depth+' toroids nested element inside element '.repeat(1);
+ document.getElementById('depthVal').textContent=depth;
+}
+
+function drawFractal(){
+ let w=fractal.width,h=fractal.height;
+ fctx.fillStyle='#08080a';fctx.fillRect(0,0,w,h);
+ let cx=w/2, cy=h/2;
+ for(let i=0;i<depth;i++){
+  let r=60 - i*10;
+  fctx.strokeStyle=`rgba(110,231,183,${1-i*0.15})`;fctx.lineWidth=1;
+  fctx.beginPath();fctx.arc(cx,cy,r,0,Math.PI*2);fctx.stroke();
+  fctx.fillStyle=`rgba(251,191,36,${0.8-i*0.1})`;fctx.beginPath();fctx.arc(cx,cy,6-i,0,Math.PI*2);fctx.fill();
+ }
+ fctx.fillStyle='#6ee7b7';fctx.font='7px monospace';fctx.textAlign='center';
+ fctx.fillText('recursive toroid trap fractal',w/2,h-6);
+ fctx.fillText('depth '+depth+' = '+Math.pow(8,depth)+' units',w/2,h-16);
+}
+
+drawRecursive();drawFractal();
+
+document.getElementById('depth').addEventListener('input',e=>{
+ depth=parseInt(e.target.value);
+ document.getElementById('depthLabel').textContent='Depth '+depth+' = '+depth+' toroids nested element inside element '+Math.pow(8,depth)+' units';
+ document.getElementById('depthVal').textContent=depth;
+ drawRecursive();drawFractal();
+});
+document.getElementById('elemScale').addEventListener('input',e=>{elemScale=parseFloat(e.target.value);drawRecursive();});
+document.getElementById('hyper').addEventListener('input',e=>{hyperScale=parseFloat(e.target.value);drawRecursive();});
+
+document.getElementById('d1').onclick=()=>{depth=1;document.getElementById('depth').value=1;drawRecursive();drawFractal();showToast('D1 1 toroid');};
+document.getElementById('d2').onclick=()=>{depth=2;document.getElementById('depth').value=2;drawRecursive();drawFractal();showToast('D2 2 toroids nested');};
+document.getElementById('d3').onclick=()=>{depth=3;document.getElementById('depth').value=3;drawRecursive();drawFractal();showToast('D3 3 toroids recursive trap ∞');};
+document.getElementById('d5').onclick=()=>{depth=5;document.getElementById('depth').value=5;drawRecursive();drawFractal();showToast('D5 5 toroids MORE 32768 units');};
+
+document.getElementById('recBtn').onclick=()=>{
+ let start=depth, target=depth<5?depth+1:1, t0=null;
+ function anim(t){
+  if(!t0)t0=t;
+  let p=Math.min(1,(t-t0)/1200);
+  depth=Math.floor(start + (target-start)*p);
+  if(depth<1)depth=1;
+  document.getElementById('depth').value=depth;
+  drawRecursive();drawFractal();
+  if(p<1)requestAnimationFrame(anim); else {showToast('Recursive toroid inside toroid depth '+depth);document.getElementById('log').innerHTML+='<br>> recursive depth '+depth+' toroid inside toroid';}
+ }
+ requestAnimationFrame(anim);
+};
+document.getElementById('fractalBtn').onclick=()=>{
+ depth=5;document.getElementById('depth').value=5;drawRecursive();drawFractal();showToast('Fractal trap ∞ depth 5 32768 units');
+ document.getElementById('log').innerHTML+='<br>> fractal trap ∞ 5 toroids nested 32768 units';
+};
+
+document.getElementById('walletBtn').onclick=async()=>{if(window.solana&&window.solana.isPhantom){try{let r=await window.solana.connect();showToast('Phantom '+r.publicKey.toString().slice(0,4))}catch{}}else window.open('https://phantom.app/','_blank')};
+document.getElementById('mintBtn').onclick=()=>{document.getElementById('txLog').textContent='SIMULATED MINT RECURSIVE TOROID TRAP depth '+depth+' '+Math.pow(8,depth)+' units';showToast('Mint recursive trap');};
+document.getElementById('swapBtn').onclick=()=>{document.getElementById('txLog').textContent='SIMULATED SWAP after recursive trap';showToast('Swap after recursive');};
+
+setInterval(()=>{drawRecursive();},80);
+</script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>1 TOROID PRIM x8 x4 /128 SCALED TO 13.8B</title><script src="https://cdn.tailwindcss.com"></script>
+<style>body{background:#000005;color:#e9d5ff;font-family:ui-monospace,monospace}canvas{background:#020208;border-radius:14px}.card{background:#0f0a1e;border:1px solid #333;border-radius:12px}</style>
+</head><body class="p-2">
+<h1 class="text-lg font-bold">1 TOROID PRIM x8 phase x4 anisotropic /128 SCALED TO 13.8B</h1>
+<p class="text-xs text-purple-300">1 toroid prim = purple30 black5 blue30 black5 red30 =100 prim | x8 phase x4 anisotropic /128 =25 prim/phase quarter toroid | scaled 13.8B = 13,800,000,000 | factor 552M per quarter toroid, 138M per base 100 | >.<0x::iso:: 000 cosmic</p>
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-2 mt-2">
+  <div class="lg:col-span-3 card p-2"><canvas id="main" width="1240" height="720" class="w-full"></canvas><div class="flex gap-2 text-xs mt-2 flex-wrap"><span class="px-2 py-1 bg-purple-800 rounded">1 toroid 100 prim</span><span class="px-2 py-1 bg-yellow-800 rounded">x8 phase</span><span class="px-2 py-1 bg-blue-800 rounded">x4 anisotropic</span><span class="px-2 py-1 bg-red-800 rounded">/128 =25</span><span class="px-2 py-1 bg-green-900 rounded">13.8B scaled</span></div></div>
+  <div class="card p-2 text-xs">
+    <div class="font-bold">13.8B Scale</div>
+    <div class="mt-2 p-2 bg-black rounded text-[10px] leading-4">
+      Base: 100 prim<br>
+      x8 phase =800<br>
+      x4 anisotropic=3200<br>
+      /128=25 prim/phase<br>
+      quarter toroid<br><br>
+      Scaled 13.8B:<br>
+      25 *552M=13.8B<br>
+      100*138M=13.8B<br>
+      800*17.25M=13.8B<br>
+      3200*4.3125M=13.8B<br><br>
+      So:<br>
+      purple30→5.52B<br>
+      black5→690M<br>
+      blue30→5.52B<br>
+      black5→690M<br>
+      red30→5.52B<br>
+      x8 phase 45° steps<br>
+      x4 axes X Y Z W<br>
+      /128 quarter<br>
+      Total 13.8B cosmic
+    </div>
+    <div id="log" class="p-2 bg-slate-900 rounded h-32 overflow-y-auto text-[10px] mt-2"></div>
+    <button id="export" class="bg-emerald-700 px-2 py-1 rounded mt-2 w-full text-xs">Export 13.8B Scaled JSON</button>
+  </div>
+</div>
+<script>
+function log(m){const l=document.getElementById('log'); l.innerHTML+=m+'<br>'; l.scrollTop=l.scrollHeight;}
+function draw(){
+  const canvas=document.getElementById('main'); const ctx=canvas.getContext('2d'); const w=canvas.width,h=canvas.height;
+  ctx.clearRect(0,0,w,h); ctx.fillStyle='#000005'; ctx.fillRect(0,0,w,h);
+  const cx=w/2,cy=h/2;
+  const time=Date.now()/1000;
+  // stars cosmic
+  ctx.fillStyle='rgba(255,255,255,0.2)'; for(let i=0;i<300;i++){ctx.beginPath(); ctx.arc((i*173)%w,(i*271)%h,0.8,0,6.28); ctx.fill();}
+  // 8 phase shifted toroids scaled to cosmic - larger
+  const phases=8;
+  for(let p=0;p<phases;p++){
+    const ang=p*45*Math.PI/180 + time*0.15;
+    const rad=140+ p*18;
+    const x=cx+ rad*0.65*Math.cos(ang);
+    const y=cy+ rad*0.32*Math.sin(ang);
+    const colors=['#a855f7','#444','#3b82f6','#444','#ef4444','#a855f7','#444','#3b82f6'];
+    ctx.strokeStyle=colors[p%colors.length];
+    ctx.globalAlpha=0.35;
+    ctx.lineWidth=2;
+    ctx.beginPath();
+    for(let a=0;a<=360;a+=8){
+      const ra=a*Math.PI/180;
+      const n=4;
+      const bx=Math.sign(Math.cos(ra))*Math.pow(Math.abs(Math.cos(ra)),2/n);
+      const by=Math.sign(Math.sin(ra))*Math.pow(Math.abs(Math.sin(ra)),2/n);
+      const r=42;
+      const ox=x+r*bx*Math.cos(ra)*0.7;
+      const oy=y+r*by*Math.sin(ra)*0.35;
+      if(a===0)ctx.moveTo(ox,oy); else ctx.lineTo(ox,oy);
+    }
+    ctx.closePath(); ctx.stroke();
+    ctx.globalAlpha=1;
+    // show prim count scaled
+    ctx.fillStyle='#fff'; ctx.font='7px monospace'; ctx.fillText('phase '+p*45+'° '+['5.52B','690M','5.52B','690M','5.52B','5.52B','690M','5.52B'][p], x-20, y-50);
+  }
+  // 4 anisotropic axes cosmic
+  ctx.strokeStyle='rgba(250,204,21,0.4)'; ctx.setLineDash([6,6]); ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(cx-400,cy); ctx.lineTo(cx+400,cy); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(cx,cy-300); ctx.lineTo(cx,cy+300); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(cx-300,cy-200); ctx.lineTo(cx+300,cy+200); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(cx+300,cy-200); ctx.lineTo(cx-300,cy+200); ctx.stroke();
+  ctx.setLineDash([]);
+  // center pin and labels
+  ctx.fillStyle='#fde047'; ctx.beginPath(); ctx.arc(cx,cy,5,0,6.28); ctx.fill();
+  ctx.fillStyle='#fff'; ctx.font='bold 12px monospace'; ctx.fillText('>.<0x::iso:: 13.8B scaled', cx-60, cy-60);
+  ctx.font='10px monospace'; ctx.fillText('1 toroid prim 100 x8 x4 /128 =25 quarter →13.8B cosmic', cx-132, cy-44);
+  ctx.fillStyle='#facc15'; ctx.fillText('Factor: 100*138M=13.8B | 25*552M=13.8B', cx-84, cy+240);
+}
+function loop(){draw(); requestAnimationFrame(loop);} loop();
+log('SCALE 1 toroid prim x8 x4 /128 TO 13.8B');
+log('Base 100 prim purple30 black5 blue30 black5 red30');
+log('x8 phase 0°45°90°135°180°225°270°315°');
+log('x4 anisotropic X Y Z W');
+log('/128 =25 prim/phase quarter toroid');
+log('Scaled to 13.8B cosmic');
+log('100*138M=13.8B | 25*552M=13.8B | 3200*4.3125M=13.8B');
+log('purple30 30→5.52B, black5 5→690M, blue30→5.52B, black5→690M, red30→5.52B');
+log('Pinned >.<0x::iso:: 000 13.8B cosmic');
+log('ISO PASS 13.8B SCALED');
+document.getElementById('export').onclick=()=>{
+  const data={scale:"13.8B", base:"1 toroid prim 100 purple30 black5 blue30 black5 red30", phase:"x8 phase 0°45°90°135°180°225°270°315°", anisotropic:"x4 anisotropic X Y Z W", division:"/128 =25 prim/phase quarter toroid", calculation:{"base100*138M":"13.8B","quarter25*552M":"13.8B","800*17.25M":"13.8B","3200*4.3125M":"13.8B"}, scaledComposition:{"purple30":"5.52B","black5":"690M","blue30":"5.52B","black5_2":"690M","red30":"5.52B"}, total:"13.8B cosmic", pin:">.<0x::iso::", center:"000", iso:"PASS"};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='1_toroid_prim_x8_x4_div128_scaled_13.8B.json'; a.click(); log('EXPORT 13.8B scaled JSON');
+};
+</script></body></html>
