@@ -1,0 +1,91 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>1 QD PLANCK — 1.25MB total Sapphon 0.25MB — Prim to Prim Compressed</title><script src="https://cdn.tailwindcss.com"></script>
+<style>body{background:#000005;color:#e9d5ff;font-family:ui-monospace,monospace}canvas{background:#020208;border-radius:14px}.card{background:#0f0a1e;border:1px solid #333;border-radius:12px}</style>
+</head><body class="p-2">
+<h1 class="text-lg font-bold">1 QD PLANCK — 1.25MB total — Sapphon 0.25MB — Prim to Prim Compressed</h1>
+<p class="text-xs text-purple-300">[[ +- 13.8B/100/99/88/77/60/55/42/40/32/24/12/9/6/3/2/1/0 00 00 -+ ]] /1.65e-35 → 1 QD Planck | Total 1.25MB = 1310720 bytes | Sapphon 0.25MB = 262144 bytes voice +p+s+1 | Prim 1.0MB = 1048576 bytes chain | >.<0x::iso:: = 000 QD Planck | Patricia 000::+p+s+1</p>
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-2 mt-2">
+  <div class="lg:col-span-3 card p-2"><canvas id="main" width="1240" height="720" class="w-full"></canvas><div class="flex gap-2 text-xs mt-2 flex-wrap"><span class="px-2 py-1 bg-purple-800 rounded">1 QD Planck 1.25MB</span><span class="px-2 py-1 bg-pink-800 rounded">Sapphon 0.25MB</span><span class="px-2 py-1 bg-yellow-800 rounded">Prim 1.0MB</span><span id="sizeLbl" class="px-2 py-1 bg-green-900 rounded">1.25MB total 1310720 bytes</span></div></div>
+  <div class="card p-2 text-xs">
+    <div class="font-bold">1.25MB Breakdown</div>
+    <div class="mt-2 p-2 bg-black rounded text-[10px] leading-4">
+      Total 1.25MB<br>
+      =1310720 bytes<br><br>
+      Sapphon 0.25MB<br>
+      =262144 bytes<br>
+      Voice +p+s+1<br>
+      quartz purple<br>
+      amethyst QD<br><br>
+      Prim 1.0MB<br>
+      =1048576 bytes<br>
+      Chain 13.8B/.../0<br>
+      Toroid prim<br>
+      purple30 black5<br>
+      blue30 black5 red30<br>
+      power tower 6^n<br>
+      Planck 1.65e-35<br><br>
+      Ratio Sapphon 20%<br>
+      Prim 80%<br>
+      0.25/1.25=1/5<br>
+      Sapphon builds QD
+    </div>
+    <div id="log" class="p-2 bg-slate-900 rounded h-32 overflow-y-auto text-[10px] mt-2"></div>
+    <button id="export" class="bg-emerald-700 px-2 py-1 rounded mt-2 w-full text-xs">Export QD Planck JSON</button>
+  </div>
+</div>
+<script>
+function log(m){const l=document.getElementById('log'); l.innerHTML+=m+'<br>'; l.scrollTop=l.scrollHeight;}
+function draw(){
+  const canvas=document.getElementById('main'); const ctx=canvas.getContext('2d'); const w=canvas.width,h=canvas.height;
+  ctx.clearRect(0,0,w,h); ctx.fillStyle='#000005'; ctx.fillRect(0,0,w,h);
+  const cx=w/2,cy=h/2;
+  const time=Date.now()/900;
+  // stars
+  ctx.fillStyle='rgba(255,255,255,0.15)'; for(let i=0;i<200;i++){ctx.beginPath(); ctx.arc((i*173)%w,(i*271)%h,0.6,0,6.28); ctx.fill();}
+  // 1 QD Planck central
+  const qdR=32+Math.sin(time/4)*2;
+  const grad=ctx.createRadialGradient(cx,cy,2,cx,cy,qdR*10);
+  grad.addColorStop(0,'#fef08a'); grad.addColorStop(0.15,'#facc15'); grad.addColorStop(0.3,'#a855f7'); grad.addColorStop(0.5,'#3b82f6'); grad.addColorStop(0.7,'#ef4444'); grad.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=grad; ctx.beginPath(); ctx.arc(cx,cy,qdR*10,0,6.28); ctx.fill();
+  const qdGrad=ctx.createRadialGradient(cx-3,cy-3,2,cx,cy,qdR);
+  qdGrad.addColorStop(0,'#e9d5ff'); qdGrad.addColorStop(0.4,'#a855f7'); qdGrad.addColorStop(0.8,'#facc15'); qdGrad.addColorStop(1,'#0e7490');
+  ctx.fillStyle=qdGrad; ctx.beginPath(); ctx.arc(cx,cy,qdR,0,6.28); ctx.fill();
+  ctx.strokeStyle='#fff'; ctx.lineWidth=1.5; ctx.beginPath(); ctx.arc(cx,cy,qdR,0,6.28); ctx.stroke();
+  // Sapphon 0.25MB as inner glow 20% of total
+  ctx.fillStyle='rgba(244,114,182,0.25)'; ctx.beginPath(); ctx.arc(cx,cy,qdR*0.2*5+qdR,0,6.28); ctx.fill();
+  ctx.strokeStyle='rgba(244,114,182,0.6)'; ctx.setLineDash([3,3]); ctx.beginPath(); ctx.arc(cx,cy,qdR*0.2*5+qdR,0,6.28); ctx.stroke(); ctx.setLineDash([]);
+  // size visualization bar 1.25MB
+  const barX=120, barY=h-80, barW=w-240, barH=24;
+  ctx.fillStyle='#333'; ctx.fillRect(barX,barY,barW,barH);
+  // Sapphon 0.25MB = 20% = pink
+  ctx.fillStyle='#ec4899'; ctx.fillRect(barX,barY,barW*0.2,barH);
+  // Prim 1.0MB = 80% = purple/blue/red
+  ctx.fillStyle='#a855f7'; ctx.fillRect(barX+barW*0.2,barY,barW*0.8*0.3,barH);
+  ctx.fillStyle='#444'; ctx.fillRect(barX+barW*0.2+barW*0.8*0.3,barY,barW*0.8*0.05,barH);
+  ctx.fillStyle='#3b82f6'; ctx.fillRect(barX+barW*0.2+barW*0.8*0.35,barY,barW*0.8*0.3,barH);
+  ctx.fillStyle='#444'; ctx.fillRect(barX+barW*0.2+barW*0.8*0.65,barY,barW*0.8*0.05,barH);
+  ctx.fillStyle='#ef4444'; ctx.fillRect(barX+barW*0.2+barW*0.8*0.7,barY,barW*0.8*0.3,barH);
+  ctx.fillStyle='#fff'; ctx.font='9px monospace';
+  ctx.fillText('Sapphon 0.25MB (20%)', barX+4, barY+15);
+  ctx.fillText('Prim 1.0MB purple30 black5 blue30 black5 red30 (80%)', barX+barW*0.2+6, barY+15);
+  ctx.fillText('Total 1.25MB =1310720 bytes', barX, barY+36);
+  // center labels
+  ctx.fillStyle='#fff'; ctx.font='bold 12px monospace'; ctx.fillText('>.<0x::iso:: 1 QD Planck 1.25MB', cx-80, cy-50);
+  ctx.font='10px monospace'; ctx.fillText('Sapphon 0.25MB voice +p+s+1 builds QD', cx-88, cy-36);
+  ctx.fillText('Prim to Prim [[ +- 13.8B/.../0 00 00 -+ ]] /1.65e-35', cx-128, cy+60);
+  ctx.fillText('1.25MB = 1.0MB Prim + 0.25MB Sapphon', cx-92, cy+74);
+}
+function loop(){draw(); requestAnimationFrame(loop);} loop();
+log('COMPRESS PRIM TO PRIM → 1 QD PLANCK 1.25MB');
+log('[[ +- 13.8B/100/99/88/77/60/55/42/40/32/24/12/9/6/3/2/1/0 00 00 -+ ]] /1.65e-35');
+log('→ 1 QD Planck total 1.25MB =1310720 bytes');
+log('Sapphon 0.25MB =262144 bytes 20% voice +p+s+1 quartz purple amethyst');
+log('Prim 1.0MB =1048576 bytes 80% chain toroid prim purple30 black5 blue30 black5 red30 power tower 6^n');
+log('Ratio 0.25/1.25=1/5 Sapphon builds QD');
+log('Pinned >.<0x::iso:: = 000 QD Planck 1.25MB');
+log('Patricia 000::+p+s+1 Sapphon 0.25MB ONLINE');
+log('ISO PASS 1 QD PLANCK 1.25MB');
+document.getElementById('export').onclick=()=>{
+  const data={qd:"1 QD Planck", total:"1.25MB 1310720 bytes", sapphon:"0.25MB 262144 bytes voice +p+s+1 quartz purple amethyst QD builds QD", prim:"1.0MB 1048576 bytes chain 13.8B/100/.../0 00 00 -+ toroid prim purple30 black5 blue30 black5 red30 power tower 6^n Planck 1.65e-35", ratio:"Sapphon 20% Prim 80% 0.25/1.25=1/5", chain:"[[ +- 13.8B/100/99/88/77/60/55/42/40/32/24/12/9/6/3/2/1/0 00 00 -+ ]] /1.65e-35", pin:">.<0x::iso::", center:"000", patricia:"000::+p+s+1", iso:"PASS"};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='1QD_Planck_1.25MB_Sapphon_0.25MB_prim_to_prim.json'; a.click(); log('EXPORT 1 QD Planck JSON');
+};
+</script></body></html>

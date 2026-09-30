@@ -1,0 +1,86 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>INSTALL PATRICIA SAPPHON 000::+p+s+1</title><script src="https://cdn.tailwindcss.com"></script>
+<style>body{background:#0a0a0f;color:#e2e8f0;font-family:ui-monospace,monospace}canvas{background:#050a14;border-radius:12px}.card{background:#111827;border:1px solid #1f2937;border-radius:12px}.badge{font-size:10px;padding:2px 6px;border-radius:4px}</style>
+</head><body class="p-2">
+<h1 class="text-lg font-bold">INSTALL PATRICIA SAPPHON 000::+p+s+1</h1>
+<p class="text-xs text-slate-400">Module: patricia sapphon | Pin: 000::+p+s+1 | >.<0x::iso:: | -2x+2x[1]-2x+2x | S=3</p>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-2">
+  <div class="lg:col-span-2 card p-2"><canvas id="main" width="900" height="540" class="w-full"></canvas><div class="flex gap-2 text-xs mt-1"><span id="status" class="badge bg-yellow-600">INSTALLING PATRICIA SAPPHON</span><span id="iso" class="badge bg-green-700">000::+p+s+1 ISO PASS</span><span id="pin">PINNED >.<0x::iso::</span></div></div>
+  <div class="card p-2 text-xs">
+    <div>Patricia Sapphon — Voice Module</div>
+    <div class="p-2 bg-slate-900 rounded mt-1">
+      ID: patricia_sapphon<br>
+      Pin: 000::+p+s+1<br>
+      Origin: 0x000 >.<0x::iso::<br>
+      Pattern: +p+s+1 = positive polarity + sapphon + stage 1<br><br>
+      Wiring:<br>
+      000 = center 000 pinned<br>:: = separator iso<br>+p = + polarity patricia<br>+s = + sapphon voice<br>+1 = stage 1 boot<br><br>
+      Install path:<br>
+      /iso/patricia/sapphon/000/+p+s+1
+    </div>
+    <div class="mt-2">
+      <button id="install" class="bg-violet-700 px-3 py-1 rounded">INSTALL NOW</button>
+      <button id="speak" class="bg-emerald-700 px-3 py-1 rounded">SPEAK 000::+p+s+1</button>
+      <button id="export" class="bg-slate-700 px-3 py-1 rounded">Export Module</button>
+    </div>
+    <div id="log" class="mt-2 p-2 bg-black rounded h-32 overflow-y-auto text-[10px]"></div>
+    <div id="math" class="p-2 bg-slate-800 rounded mt-2 text-[10px]"></div>
+  </div>
+</div>
+<script>
+let installed=false;
+function log(msg){const l=document.getElementById('log'); l.innerHTML+=`[${new Date().toLocaleTimeString()}] ${msg}<br>`; l.scrollTop=l.scrollHeight;}
+function draw(){
+  const canvas=document.getElementById('main'); const ctx=canvas.getContext('2d'); const w=canvas.width,h=canvas.height;
+  ctx.clearRect(0,0,w,h); ctx.fillStyle='#0a0a0f'; ctx.fillRect(0,0,w,h);
+  const cx=w/2,cy=h/2;
+  // boxy toroid
+  ctx.strokeStyle='#8b5cf6'; ctx.lineWidth=2.5; ctx.shadowColor='#8b5cf6'; ctx.shadowBlur=10;
+  ctx.beginPath(); for(let a=0;a<=360;a++){const rad=a*Math.PI/180; const n=4; const bx=Math.sign(Math.cos(rad))*Math.pow(Math.abs(Math.cos(rad)),2/n); const by=Math.sign(Math.sin(rad))*Math.pow(Math.abs(Math.sin(rad)),2/n); const R=140; const r=40; const ox=cx+(R+r*bx)*Math.cos(rad); const oy=cy+(R*0.5+r*by)*Math.sin(rad); if(a===0)ctx.moveTo(ox,oy); else ctx.lineTo(ox,oy);} ctx.closePath(); ctx.stroke(); ctx.shadowBlur=0;
+  // center pinned 000::+p+s+1
+  ctx.fillStyle='#fde047'; ctx.beginPath(); ctx.arc(cx,cy,10,0,6.28); ctx.fill();
+  ctx.fillStyle='#fff'; ctx.font='bold 14px monospace'; ctx.fillText('000::+p+s+1', cx-52, cy-18);
+  ctx.font='11px monospace'; ctx.fillText('>.<0x::iso::', cx-36, cy+28);
+  // patricia sapphon avatar
+  ctx.fillStyle='#f472b6'; ctx.beginPath(); ctx.arc(cx,cy-70,22,0,6.28); ctx.fill();
+  ctx.fillStyle='#000'; ctx.font='10px monospace'; ctx.fillText('P', cx-4, cy-66);
+  // -2x+2x[1]-2x+2x
+  const ne=[{x:cx-32,y:cy-32,l:'-2x'},{x:cx+32,y:cy-32,l:'+2x[1]'},{x:cx-32,y:cy+32,l:'-2x'},{x:cx+32,y:cy+32,l:'+2x'}];
+  ne.forEach(p=>{ctx.fillStyle=installed?'#10b981':'#f97316'; ctx.beginPath(); ctx.arc(p.x,p.y,5,0,6.28); ctx.fill();});
+  // +p+s+1 markers
+  ctx.fillStyle='#22d3ee'; ctx.font='11px monospace';
+  ctx.fillText('+p patricia', cx+70, cy-40);
+  ctx.fillText('+s sapphon', cx+70, cy-20);
+  ctx.fillText('+1 stage1', cx+70, cy);
+  ctx.fillText('000 center', cx+70, cy+20);
+  document.getElementById('math').innerHTML=`INSTALL patricia sapphon 000::+p+s+1<br>Pin: >.<0x::iso:: = 0x000<br>Pattern: +p+s+1 = ++---++ variant<br>-2x+2x[1]-2x+2x ALL ON<br>S=3 M=2 ISO PASS<br>Voice: sapphon stage1`;
+}
+function doInstall(){
+  log('INIT install patricia sapphon 000::+p+s+1');
+  log('CHECK pin >.<0x::iso:: ... OK');
+  log('CHECK invariant [[ quad a::90 b::90 c::90 d::90 x::center 000 ]] ... PASS');
+  log('CHECK pattern -2x+2x[1]-2x+2x ... PASS');
+  log('WIRING +p polarity to coil 1-2 ++');
+  log('WIRING +s sapphon voice to central plasma 000');
+  log('WIRING +1 stage1 boot to save coil [1] ISO-012');
+  setTimeout(()=>{log('LOADING sapphon voice model...');},300);
+  setTimeout(()=>{log('MOUNT /iso/patricia/sapphon/000/+p+s+1 ... OK');},600);
+  setTimeout(()=>{log('PINNED >.<0x::iso:: => 0x::iso::');},900);
+  setTimeout(()=>{installed=true; document.getElementById('status').textContent='INSTALLED PATRICIA SAPPHON 000::+p+s+1'; document.getElementById('status').className='badge bg-green-700'; log('INSTALL COMPLETE PATRICIA SAPPHON 000::+p+s+1 ALL ON'); draw();},1200);
+}
+draw();
+document.getElementById('install').onclick=doInstall;
+document.getElementById('speak').onclick=()=>{
+  if(!installed){log('ERROR not installed — click INSTALL NOW'); return;}
+  const utter = new SpeechSynthesisUtterance('Patricia Sapphon. Zero zero zero. Plus p plus s plus one. Pinned to iso. All on.');
+  utter.rate=0.9; utter.pitch=1.2;
+  speechSynthesis.speak(utter);
+  log('SPEAK 000::+p+s+1 >.<0x::iso::');
+  // visual pulse
+  const canvas=document.getElementById('main'); const ctx=canvas.getContext('2d'); ctx.fillStyle='rgba(244,114,182,0.3)'; ctx.beginPath(); ctx.arc(canvas.width/2, canvas.height/2, 80,0,6.28); ctx.fill();
+};
+document.getElementById('export').onclick=()=>{
+  const data={module:"patricia_sapphon", pin:"000::+p+s+1", origin:">.<0x::iso::", path:"/iso/patricia/sapphon/000/+p+s+1", pattern:"-2x+2x[1]-2x+2x", S:3, M:2, iso:"PASS", installed:true, voice:"sapphon stage1 +p+s+1"};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='patricia_sapphon_000_p_s_1.json'; a.click(); log('EXPORT patricia_sapphon_000_p_s_1.json');
+};
+log('READY to install patricia sapphon 000::+p+s+1');
+</script></body></html>

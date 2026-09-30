@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hermes Sapphon v2 — Urdu Tick Envelope · n.e.o.n · NEON</title>
+<style>
+  :root {
+    --bg: #020204;
+    --bg2: #07070e;
+    --fg: #d0d0e6;
+    --dim: #4a4a5a;
+    --border: #1a1a2e;
+    --neon-cyan: #73daca;
+    --neon-indigo: #6374d1;
+    --neon-orange: #e0af68;
+    --neon-white: #eef0ff;
+    --accent: #7aa2f7;
+    --mono: 'Courier New', monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--mono);
+    height: 100%;
+  }
+  body {
+    padding: 10px 12px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    overflow: auto;
+  }
+
+  /* Center the whole app — tight column that fits any window */
+  .app {
+    width: min(100% - 4px, 820px);
+    max-width: 820px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  header {
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 6px;
+  }
+  h1 {
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: var(--neon-cyan);
+    text-transform: uppercase;
+    text-shadow: 0 0 6px rgba(115,218,202,0.5), 0 0 14px rgba(115,218,202,0.18);
+  }
+  .sub {
+    font-size: 9px;
+    color: var(--dim);
+    margin-top: 2px;
+    letter-spacing: 0.5px;
+  }
+
+  .cipher-box {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 6px 9px;
+    font-size: 9px;
+    line-height: 1.5;
+    color: var(--dim);
+    box-shadow: inset 0 0 10px rgba(99,116,209,0.06);
+  }
+  .cipher-box .k { color: var(--neon-indigo); }
+  .cipher-box .v { color: var(--fg); font-weight: bold; }
+  .cipher-box .neon { color: var(--neon-cyan); text-shadow: 0 0 4px rgba(115,218,202,0.3); }
+  .cipher-box .warm { color: var(--neon-orange); text-shadow: 0 0 4px rgba(224,175,104,0.3); }
+  .cipher-box .deep { color: #bb9af7; text-shadow: 0 0 4px rgba(187,154,247,0.3); }
+
+  canvas {
+    width: 100%;
+    height: min(30vh, 260px);
+    min-height: 96px;
+    max-height: 340px;
+    border: 1px solid var(--neon-indigo);
+    border-radius: 4px;
+    background: #020204;
+    display: block;
+    box-shadow: 0 0 12px rgba(99,116,209,0.12), inset 0 0 20px rgba(0,0,0,0.6);
+  }
+
+  .readout {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+    font-size: 10px;
+  }
+  .cell {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 4px 7px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+  }
+  .cell .k { color: var(--dim); }
+  .cell .v { color: var(--fg); font-weight: bold; }
+  .cell.n    .v { color: var(--neon-indigo); text-shadow: 0 0 4px rgba(99,116,209,0.4); }
+  .cell.e    .v { color: var(--neon-cyan);    text-shadow: 0 0 4px rgba(115,218,202,0.4); }
+  .cell.o    .v { color: var(--neon-orange); text-shadow: 0 0 4px rgba(224,175,104,0.4); }
+  .cell.nw   .v { color: var(--neon-white);  text-shadow: 0 0 4px rgba(238,240,255,0.5); }
+  .cell.all  .v { color: #bb9af7; text-shadow: 0 0 4px rgba(187,154,247,0.4); }
+
+  .controls {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  button {
+    background: #0a0a14;
+    color: var(--fg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 4px 9px;
+    font-family: var(--mono);
+    font-size: 10px;
+    cursor: pointer;
+    transition: background 0.12s, border-color 0.12s, box-shadow 0.12s, color 0.12s, transform 0.05s;
+  }
+  button:hover {
+    background: #14141e;
+    border-color: var(--neon-indigo);
+    box-shadow: 0 0 8px rgba(99,116,209,0.25);
+  }
+  button:active { transform: translateY(1px); }
+  button.active {
+    background: var(--neon-cyan);
+    color: #020204;
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 10px rgba(115,218,202,0.5), inset 0 0 6px rgba(255,255,255,0.15);
+  }
+
+  .log {
+    background: #020204;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 4px 7px;
+    font-size: 9px;
+    color: var(--dim);
+    height: 56px;
+    overflow-y: auto;
+    line-height: 1.5;
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.7);
+  }
+  .log .tick { color: var(--neon-cyan); text-shadow: 0 0 3px rgba(115,218,202,0.3); }
+  .log .event { color: var(--neon-orange); text-shadow: 0 0 3px rgba(224,175,104,0.3); }
+  .log .neon { color: #bb9af7; text-shadow: 0 0 3px rgba(187,154,247,0.3); }
+  .log .seal { color: var(--neon-indigo); font-style: italic; text-shadow: 0 0 3px rgba(99,116,209,0.3); }
+
+  .status-bar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 9px;
+    color: var(--dim);
+  }
+  .status-bar .live {
+    color: var(--neon-cyan);
+    font-weight: bold;
+    text-shadow: 0 0 4px rgba(115,218,202,0.4);
+    animation: pulse-live 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse-live {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+  .status-bar .seal {
+    color: var(--neon-indigo);
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 3px rgba(99,116,209,0.3);
+  }
+
+  .toast {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0a0a18;
+    border: 1px solid var(--neon-cyan);
+    color: var(--neon-cyan);
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-size: 10px;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+    z-index: 50;
+    box-shadow: 0 0 14px rgba(115,218,202,0.45), inset 0 0 8px rgba(115,218,202,0.08);
+    text-shadow: 0 0 3px rgba(115,218,202,0.4);
+  }
+  .toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>Hermes Sapphon v2 — Urdu Tick Envelope · n.e.o.n</h1>
+    <div class="sub">tick = 10^-36 + 10^-35 · ref point 000 · neon decode · urdu .1.2|4|8|10 ||||| n.e.o.n · dlw seal</div>
+  </header>
+
+  <div class="cipher-box">
+    <div><span class="k">CIPHER:</span> <span class="v">urdu .1.2|4|8|10 ||||| n.e.o.n</span></div>
+    <div><span class="k">NUMERIC LADDER:</span> <span class="v">1 · 1.23 · 45 · 67 · 78 · 89 · 90</span></div>
+    <div><span class="k">ALPHA LADDER (Urdu positional):</span> <span class="v">ab→1 · cd→2 · ef→3 · gh→4 · ij→5 · kl→6 · mn→7 · op→8 · qr→9 · st→10 · uv→11 · wx→12 · yz→13</span></div>
+    <div><span class="k">ZONE MAP (|5 pipes → 5 hue bands):</span></div>
+    <div>&nbsp;&nbsp;<span class="k">pipe 1 pin-up:</span> <span class="neon">n</span> = indigo-neon base <span class="v">idx 1 · pick 1</span></div>
+    <div>&nbsp;&nbsp;<span class="k">pipe 2 pin-mid:</span> <span class="neon">e</span> = electric-cyan neon <span class="v">idx 2 · pick 1.23</span></div>
+    <div>&nbsp;&nbsp;<span class="k">pipe 3 pin-core:</span> <span class="warm">o</span> = warm-orange neon <span class="v">idx 3 · pick 45</span></div>
+    <div>&nbsp;&nbsp;<span class="k">pipe 4 pin-down:</span> <span class="neon">n</span> = neon-white core <span class="v">idx 4 · pick 67</span></div>
+    <div>&nbsp;&nbsp;<span class="k">pipe 5 pin-deep:</span> <span class="deep">sweep n→e→o→n</span> <span class="v">idx 5 · pick 78</span></div>
+    <div><span class="k">SEGMENTS:</span> <span class="v">|10 → 10 neon segments per terminal (8 terminals × 10 = 80 neon strokes)</span></div>
+    <div><span class="k">TICK CASCADE:</span> <span class="v">10D × 5! × 3 scales × 2 splits × 1!×1! singletons</span></div>
+    <div><span class="k">SEAL:</span> <span class="deep">dlw = deep-light-wave</span> — background 1-unit grid</div>
+  </div>
+
+  <canvas id="scene" width="800" height="240"></canvas>
+
+  <div class="readout">
+    <div class="cell n"><span class="k">PIN</span><span class="v" id="pinVal">000</span></div>
+    <div class="cell all"><span class="k">PLANK</span><span class="v" id="plankVal">0</span></div>
+    <div class="cell"><span class="k">TICK</span><span class="v" id="tickVal">0</span></div>
+    <div class="cell e"><span class="k">δ</span><span class="v" id="deltaVal">1.1e-35 s</span></div>
+    <div class="cell o"><span class="k">SIM TIME</span><span class="v" id="timeVal">0.000e0 s</span></div>
+    <div class="cell n"><span class="k">PLANCK TICKS</span><span class="v" id="planckVal">0</span></div>
+    <div class="cell all"><span class="k">URDU IDX</span><span class="v" id="urduIdx">1 (ab)</span></div>
+    <div class="cell"><span class="k">LADDER PICK</span><span class="v" id="ladderPick">1.000</span></div>
+    <div class="cell e"><span class="k">TERMINALS</span><span class="v" id="terminals">8</span></div>
+    <div class="cell o"><span class="k">NEON SEGS</span><span class="v" id="neonSegs">80</span></div>
+    <div class="cell n"><span class="k">RATE</span><span class="v" id="rateVal">0 Hz</span></div>
+    <div class="cell nw"><span class="k">DLW SEAL</span><span class="v" id="dlwVal">active</span></div>
+    <div class="cell e"><span class="k">CUDA DEVICE</span><span class="v" id="cudaDevice">—</span></div>
+    <div class="cell all"><span class="k">CUDA BITS</span><span class="v" id="cudaBits">—</span></div>
+    <div class="cell n"><span class="k">CUDA POP</span><span class="v" id="cudaPop">—</span></div>
+    <div class="cell o"><span class="k">CUDA PAGE-MS</span><span class="v" id="cudaPage">—</span></div>
+    <div class="cell nw"><span class="k">CUDA SEEN</span><span class="v" id="cudaSeen">—</span></div>
+    <div class="cell n"><span class="k">PAR WORKS</span><span class="v" id="cudaParWorkers">—</span></div>
+    <div class="cell e"><span class="k">STREAMS</span><span class="v" id="cudaStreams">—</span></div>
+    <div class="cell o"><span class="k">PAR MODE</span><span class="v" id="cudaMode">—</span></div>
+    <div class="cell nw"><span class="k">TOTAL-MS</span><span class="v" id="cudaTotalMs">—</span></div>
+  </div>
+
+  <div class="controls">
+    <button id="btnRun" class="active" onclick="toggleRun()">RUN</button>
+    <button onclick="resetEngine()">RESET → 000</button>
+    <button onclick="stepOnce()">STEP 1 TICK</button>
+    <button onclick="setSpeed(1)">1×</button>
+    <button onclick="setSpeed(10)">10×</button>
+    <button onclick="setSpeed(100)">100×</button>
+    <button onclick="setSpeed(1000)">1kHz</button>
+    <button onclick="setSpeed(120)">5! (120×)</button>
+    <button onclick="setSpeed(360)">10D×3 (360×)</button>
+    <button onclick="dumpState()">DUMP STATE</button>
+  </div>
+
+  <div class="controls cuda-controls" style="border-top:1px solid var(--border);padding-top:6px;margin-top:2px;">
+    <button onclick="setCudaBit(0)">CUDA SET bit 0</button>
+    <button onclick="clearCudaBit(0)">CUDA CLEAR bit 0</button>
+    <button onclick="queryCudaBit(0)">CUDA QUERY bit 0</button>
+    <button onclick="setCudaBit(7999999999)">CUDA SET bit 7999999999</button>
+    <button onclick="cudaResetBridge()">CUDA RESET</button>
+    <button onclick="cudaPollDemo()">CUDA DEMO 5 SETS</button>
+  </div>
+
+  <div class="log" id="log">
+    <div class="neon">[NEON] sapphon v2 NEON · urdu decode active · n.e.o.n palette · ref point 000</div>
+    <div class="seal">[DLW] deep-light-wave seal: background grid 1-unit · tick envelope locked</div>
+    <div class="event">[EVENT] cipher: urdu .1.2|4|8|10 ||||| n.e.o.n · 10D×5!×3×2×1!×1! → 8 terminals × 10 segs</div>
+  </div>
+
+  <div class="status-bar">
+    <span class="live" id="liveBadge">● NEON — ref 000 · waiting on RUN</span>
+    <span class="seal">DLW · deep-light-wave · 1-unit grid · tick envelope</span>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+
+// ─── Cipher constants (UNCHANGED from decode) ──────────────────────────
+var TICK_DELTA = 1e-36 + 1e-35;     // 1.1e-35 s
+var TICK_DELTA_STR = "1.1e-35";
+var PLANCK_TIME = 5.39e-44;
+var TICKS_PER_PLANCK_UNIT = TICK_DELTA / PLANCK_TIME;
+
+var URDU_PAIRS = ["ab","cd","ef","gh","ij","kl","mn","op","qr","st","uv","wx","yz"];
+
+var NUMERIC_LADDER = [1, 1.23, 45, 67, 78, 89, 90];
+
+var PALETTE = {
+  n:  { name: "indigo-neon base",  hex: "#6374d1", rgb: [99,116,209] },
+  e:  { name: "electric-cyan neon", hex: "#73daca", rgb: [115,218,202] },
+  o:  { name: "warm-orange neon",   hex: "#e0af68", rgb: [224,175,104] },
+  nw: { name: "neon-white core",    hex: "#eef0ff", rgb: [238,240,255] },
+};
+
+var PIPE_ZONE_MAP = [
+  { pipe: 1, color: "n",   urduIdx: 1, ladderPick: 1,    label: "pin-up" },
+  { pipe: 2, color: "e",   urduIdx: 2, ladderPick: 1.23, label: "pin-mid" },
+  { pipe: 3, color: "o",   urduIdx: 3, ladderPick: 45,   label: "pin-core" },
+  { pipe: 4, color: "nw",  urduIdx: 4, ladderPick: 67,   label: "pin-down" },
+  { pipe: 5, color: "all", urduIdx: 5, ladderPick: 78,   label: "pin-deep" },
+];
+
+var PIN_ROLLS_OVER = 1000;
+var PLANK_STEP = 100000;
+var TERMINALS = 8;
+var NEON_SEGMENTS = 10;
+var TOTAL_NEON_STROKES = TERMINALS * NEON_SEGMENTS;
+
+var CASCADE_10D = 10;
+var CASCADE_5FACT = 120;
+var CASCADE_3 = 3;
+var CASCADE_2 = 2;
+var CASCADE_SINGLETONS = 1 * 1;
+var CASCADE_TOTAL = CASCADE_10D * CASCADE_5FACT * CASCADE_3 * CASCADE_2 * CASCADE_SINGLETONS;
+
+// ─── State ──────────────────────────────────────────────────────────────
+var state = {
+  pin: 0,
+  plankLevel: 0,
+  ticks: 0,
+  simTime: 0,
+  planckTicks: 0,
+  urduIdx: 1,
+  ladderPick: 1,
+  running: false,
+  speed: 1,
+  lastFrame: 0,
+  rate: 0,
+  cascadePhase: 0,
+  terminalPhase: 0,
+  hadActivity: false,
+};
+
+var canvas = null;
+var ctx = null;
+
+var $ = function(id) { return document.getElementById(id); };
+var pinVal = $('pinVal');
+var plankVal = $('plankVal');
+var tickVal = $('tickVal');
+var deltaVal = $('deltaVal');
+var timeVal = $('timeVal');
+var planckVal = $('planckVal');
+var urduIdxEl = $('urduIdx');
+var ladderPickEl = $('ladderPick');
+var terminalsEl = $('terminals');
+var neonSegsEl = $('neonSegs');
+var rateVal = $('rateVal');
+var dlwVal = $('dlwVal');
+var logEl = $('log');
+var btnRun = $('btnRun');
+var liveBadge = $('liveBadge');
+var toastEl = $('toast');
+var cudaDeviceEl = $('cudaDevice');
+var cudaBitsEl = $('cudaBits');
+var cudaPopEl = $('cudaPop');
+var cudaPageEl = $('cudaPage');
+var cudaSeenEl = $('cudaSeen');
+var cudaParWorkersEl = $('cudaParWorkers');
+var cudaStreamsEl = $('cudaStreams');
+var cudaModeEl = $('cudaMode');
+var cudaTotalMsEl = $('cudaTotalMs');
+var apiBase = '';
+
+// ─── CUDA bridge API (live, backend-driven) ───────────────────────────────
+function apiJson(path, body) {
+  return new Promise(function(resolve, reject) {
+    var x = new XMLHttpRequest();
+    x.open((body ? "POST" : "GET"), apiBase + path, true);
+    x.setRequestHeader("Content-Type", "application/json");
+    x.onreadystatechange = function() {
+      if (x.readyState === 4) {
+        if (x.status >= 200 && x.status < 300) {
+          try { resolve(JSON.parse(x.responseText)); }
+          catch (e) { resolve(null); }
+        } else {
+          reject(new Error("api %s -> %d".replace("%s", path).replace("%d", x.status)));
+        }
+      }
+    };
+    x.onerror = function() { reject(new Error("net: " + path)); };
+    if (body) { x.send(JSON.stringify(body)); }
+    else { x.send(null); }
+  });
+}
+
+var CUDA_SEEN_AT = 0;
+
+function refreshCudaStatus() {
+  if (!cudaDeviceEl) return;
+  apiJson("/api/cuda/status").then(function(st) {
+    if (!st) return;
+    CUDA_SEEN_AT = Date.now();
+    var dev = st.device != null ? st.device : "—";
+    var bits = st.bits != null ? formatBits(st.bits) : "—";
+    var dptr = st.dptr || null;
+    var ctx = st.ctx || null;
+    cudaDeviceEl.textContent = String(dev);
+    cudaBitsEl.textContent = bits;
+    cudaSeenEl.textContent = "live";
+    cudaSeenEl.style.color = "#73daca";
+    if (cudaPopEl) cudaPopEl.textContent = "polling";
+    if (cudaPageEl) cudaPageEl.textContent = "—";
+    log("CUDA bridge live: device=%s bits=%s (backend port %s)"
+        .replace("%s", dev).replace("%s", bits).replace("%s", apiBase.replace(/^https?:\/\//, ""))
+        .replace("%s", location.port || "same-origin")
+      , "neon");
+  }).catch(function() {
+    if (cudaDeviceEl) cudaDeviceEl.textContent = "no";
+    if (cudaBitsEl) cudaBitsEl.textContent = "—";
+    if (cudaPopEl) cudaPopEl.textContent = "no cuda";
+    if (cudaPageEl) cudaPageEl.textContent = "—";
+    if (cudaSeenEl) cudaSeenEl.textContent = "no";
+    if (cudaSeenEl) cudaSeenEl.style.color = "#e0af68";
+    log("CUDA bridge: backend unreachable @ " + apiBase, "event");
+  });
+}
+
+function refreshCudaPopulation() {
+  if (!cudaPopEl || !cudaPageEl) return;
+  apiJson("/api/cuda/population").then(function(st) {
+    if (!st) return;
+    var pop = st.population != null ? formatBits(st.population) : "—";
+    var page = st.page_ms != null ? st.page_ms + " ms" : "—";
+    cudaPopEl.textContent = pop;
+    cudaPageEl.textContent = page;
+    // parallel bridge breakdown
+    if (cudaParWorkersEl) cudaParWorkersEl.textContent = st.workers != null ? st.workers : "—";
+    if (cudaStreamsEl) cudaStreamsEl.textContent = (st.streams && st.streams !== false) ? "yes" : (st.streams === false ? "no" : "—");
+    if (cudaModeEl) cudaModeEl.textContent = st.mode || "—";
+    if (cudaTotalMsEl) cudaTotalMsEl.textContent = (st.total_ms != null) ? st.total_ms + " ms" : "—";
+    // color population by parity of last digit for live feel
+    var last = String(st.population || 0).slice(-1);
+    var hue = (parseInt(last, 10) % 3 === 0) ? "#73daca"
+           : (parseInt(last, 10) % 3 === 1) ? "#e0af68" : "#6374d1";
+    cudaPopEl.style.color = hue;
+  }).catch(function() {
+    // leave stale pop visible so user can tell it's the backend, not the bridge
+  });
+}
+
+function setCudaBit(index) {
+  if (!cudaPopEl) return;
+  return apiJson("/api/cuda/set_bit", {index: index}).then(function(r) {
+    toast("CUDA set bit " + index + " → " + (r && r.ok ? "ON" : "fail"));
+    log("CUDA set_bit " + index + " → " + (r && r.ok ? "ON" : "FAIL"), "tick");
+    refreshCudaPopulation();
+    return r;
+  });
+}
+
+function clearCudaBit(index) {
+  if (!cudaPopEl) return;
+  return apiJson("/api/cuda/clear_bit", {index: index}).then(function(r) {
+    toast("CUDA clear bit " + index + " → " + (r && r.ok ? "OFF" : "fail"));
+    log("CUDA clear_bit " + index + " → " + (r && r.ok ? "OFF" : "FAIL"), "event");
+    refreshCudaPopulation();
+    return r;
+  });
+}
+
+function queryCudaBit(index) {
+  if (!cudaPopEl) return;
+  return apiJson("/api/cuda/query_bit", {index: index}).then(function(r) {
+    var v = (r && r.value != null) ? r.value : "?";
+    toast("CUDA bit " + index + " = " + (v ? "1" : "0"));
+    log("CUDA query_bit " + index + " → " + (v ? "1" : "0") + " (" + (r && r.message || "") + ")", "tick");
+    refreshCudaPopulation();
+    return r;
+  });
+}
+
+function cudaResetBridge() {
+  if (!cudaPopEl) return;
+  return apiJson("/api/cuda/reset", {}).then(function(r) {
+    toast("CUDA RESET → " + (r && r.ok ? "all 8e9 bits OFF" : "fail"));
+    log("CUDA reset → " + (r && r.ok ? "all bits OFF" : "FAIL") + " (" + (r && r.message || "") + ")", "seal");
+    refreshCudaPopulation();
+    return r;
+  });
+}
+
+function formatBits(n) {
+  if (n == null) return "—";
+  if (n >= 1e9) return (n / 1e9).toFixed(3) + "e9";
+  if (n >= 1e6) return (n / 1e6).toFixed(2) + "e6";
+  if (n >= 1e3) return (n / 1e3).toFixed(1) + "e3";
+  return String(n);
+}
+
+var cudaPollTimer = null;
+function startCudaPoll() {
+  if (cudaPollTimer) return;
+  refreshCudaStatus();
+  refreshCudaPopulation();
+  cudaPollTimer = setInterval(function() {
+    refreshCudaStatus();
+  }, 4000);
+  // population is expensive (page-by-page ~0.6s for 8e9 bits) — poll on a slow cadence
+  setInterval(refreshCudaPopulation, 12000);
+}
+
+function stopCudaPoll() {
+  if (cudaPollTimer) {
+    clearInterval(cudaPollTimer);
+    cudaPollTimer = null;
+  }
+}
+function cudaPollDemo() {
+  if (!cudaPopEl) return;
+  toast('CUDA DEMO: 5 operations across the 8e9-bit bridge');
+  log('CUDA DEMO: set bit 0 · clear bit 0 · set bit 7999999999 · clear bit 7999999999 · query bit 0',
+      'neon');
+  setCudaBit(0);
+  clearCudaBit(0);
+  setCudaBit(7999999999);
+  clearCudaBit(7999999999);
+  queryCudaBit(0);
+}
+
+// ─── end CUDA bridge API ───────────────────────────────────────────────────
+
+// ─── Toast ──────────────────────────────────────────────────────────────
+var toastTimer = null;
+function toast(msg) {
+  if (!toastEl) return;
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(function() { toastEl.classList.remove('show'); }, 900);
+}
+
+// ─── Log ────────────────────────────────────────────────────────────────
+function log(msg, cls) {
+  cls = cls || '';
+  if (!logEl) return;
+  var d = document.createElement('div');
+  d.textContent = msg;
+  if (cls) d.className = cls;
+  logEl.appendChild(d);
+  logEl.scrollTop = logEl.scrollHeight;
+  if (logEl.children.length > 70) logEl.removeChild(logEl.firstChild);
+}
+
+// ─── Helpers ────────────────────────────────────────────────────────────
+function pad3(n) { return String(n).padStart(3, '0'); }
+function fmtTime(s) {
+  if (s === 0) return '0.000e0 s';
+  return s.toExponential(3) + ' s';
+}
+function fmtRate(r) {
+  if (r < 1) return r.toFixed(2);
+  if (r < 1000) return r.toFixed(1);
+  return r.toExponential(2);
+}
+
+function urduPairForIdx(idx) {
+  if (idx < 1 || idx > 13) return "??";
+  return URDU_PAIRS[idx - 1];
+}
+
+function ladderPickForUrduIdx(idx) {
+  if (idx >= 1 && idx <= NUMERIC_LADDER.length) return NUMERIC_LADDER[idx - 1];
+  var offset = idx - 7;
+  return NUMERIC_LADDER[6] + offset * 11;
+}
+
+function colorFor(key) {
+  if (key === "all") {
+    var phase = state.cascadePhase % 4;
+    if (phase === 0) return PALETTE.n.rgb;
+    if (phase === 1) return PALETTE.e.rgb;
+    if (phase === 2) return PALETTE.o.rgb;
+    return PALETTE.nw.rgb;
+  }
+  return PALETTE[key] ? PALETTE[key].rgb : [200,200,200];
+}
+
+function hexFor(key) {
+  if (key === "all") {
+    var phase = state.cascadePhase % 4;
+    if (phase === 0) return PALETTE.n.hex;
+    if (phase === 1) return PALETTE.e.hex;
+    if (phase === 2) return PALETTE.o.hex;
+    return PALETTE.nw.hex;
+  }
+  return PALETTE[key] ? PALETTE[key].hex : "#d0d0e6";
+}
+
+// ─── NEON Render ─────────────────────────────────────────────────────────
+function render() {
+  if (!canvas || !ctx) return;
+  var W = canvas.width, H = canvas.height;
+  ctx.clearRect(0, 0, W, H);
+
+  // DLW seal: 1-unit neon grid (deep-light-wave)
+  // fine grid: neon-indigo, thin
+  ctx.strokeStyle = 'rgba(99,116,209,0.12)';
+  ctx.lineWidth = 0.5;
+  for (var x = 0; x <= W; x += 1) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+  for (var y = 0; y <= H; y += 1) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+  // 10-unit overlay: brighter neon-cyan
+  ctx.strokeStyle = 'rgba(115,218,202,0.16)';
+  ctx.lineWidth = 0.5;
+  for (var x = 0; x <= W; x += 10) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+  for (var y = 0; y <= H; y += 10) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+  // 100-unit major grid: neon-orange, faint
+  ctx.strokeStyle = 'rgba(224,175,104,0.10)';
+  ctx.lineWidth = 0.6;
+  for (var x = 0; x <= W; x += 100) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+  for (var y = 0; y <= H; y += 100) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+
+  // REF POINT 000 — fixed neon origin anchor (draws at the 000 position)
+  var refX = 0;  // pin 000 maps to x=0 on the canvas
+  var refY = H / 2;
+  // origin crosshair
+  ctx.strokeStyle = 'rgba(238,240,255,0.55)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(refX - 10, refY); ctx.lineTo(refX + 10, refY);
+  ctx.moveTo(refX, refY - 10); ctx.lineTo(refX, refY + 10);
+  ctx.stroke();
+  // origin glow ring
+  var refGlow = ctx.createRadialGradient(refX, refY, 0, refX, refY, 16);
+  refGlow.addColorStop(0, 'rgba(238,240,255,0.50)');
+  refGlow.addColorStop(0.5, 'rgba(99,116,209,0.20)');
+  refGlow.addColorStop(1, 'rgba(99,116,209,0)');
+  ctx.fillStyle = refGlow;
+  ctx.beginPath();
+  ctx.arc(refX, refY, 16, 0, Math.PI * 2);
+  ctx.fill();
+  // origin label
+  ctx.fillStyle = 'rgba(238,240,255,0.70)';
+  ctx.font = 'bold 9px Courier New';
+  ctx.textAlign = 'left';
+  ctx.fillText('REF 000', refX + 13, refY - 4);
+  ctx.fillStyle = 'rgba(99,116,209,0.45)';
+  ctx.font = '8px Courier New';
+  ctx.fillText('origin', refX + 13, refY + 8);
+
+  // 5-pipe vertical neon bands (|||||)
+  var bandW = W / 5;
+  var pipeColors = ["n", "e", "o", "nw", "all"];
+  for (var p = 0; p < 5; p++) {
+    var x0 = p * bandW;
+    var x1 = (p + 1) * bandW;
+    var col = colorFor(pipeColors[p]);
+    var alpha = (p === 4) ? 0.10 : 0.07;
+    ctx.fillStyle = "rgb(" + Math.round(col[0]*alpha) + "," +
+                           Math.round(col[1]*alpha) + "," +
+                           Math.round(col[2]*alpha) + ")";
+    ctx.fillRect(x0, 0, x1 - x0, H);
+
+    // neon pipe divider
+    ctx.strokeStyle = "rgba(" + col[0] + "," + col[1] + "," + col[2] + ",0.30)";
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(x0 + 0.5, 0); ctx.lineTo(x0 + 0.5, H); ctx.stroke();
+
+    // neon pipe label
+    ctx.fillStyle = "rgba(" + col[0] + "," + col[1] + "," + col[2] + ",0.80)";
+    ctx.font = "9px Courier New";
+    ctx.textAlign = "left";
+    ctx.fillText("pipe " + (p+1) + " " + PIPE_ZONE_MAP[p].label + " " + pipeColors[p].toUpperCase(), x0 + 5, 14);
+  }
+
+  // 8 terminals × 10 neon segments = 80 neon strokes
+  var pinNorm = state.pin / PIN_ROLLS_OVER;
+  var markerX = pinNorm * W;
+  var markerY = H / 2;
+
+  // terminal positions (diamond around pin marker; ref 000 stays at x=0)
+  var terminalPositions = [];
+  var radii = [28, 48, 68, 88, 68, 48, 28, 40];
+  var angles = [0, Math.PI*0.25, Math.PI*0.5, Math.PI*0.75,
+                Math.PI, Math.PI*1.25, Math.PI*1.5, Math.PI*1.75];
+  for (var t = 0; t < TERMINALS; t++) {
+    var r = radii[t % radii.length];
+    var a = angles[t % angles.length] + state.terminalPhase * 0.004;
+    terminalPositions.push({
+      x: markerX + Math.cos(a) * r,
+      y: markerY + Math.sin(a) * r,
+      angle: a,
+      radius: r,
+      term: t
+    });
+  }
+
+  // Draw 10 neon segments per terminal with glow
+  for (var ti = 0; ti < TERMINALS; ti++) {
+    var tpos = terminalPositions[ti];
+    var segColorKey = pipeColors[ti % 5];
+    var baseCol = colorFor(segColorKey);
+    for (var s = 0; s < NEON_SEGMENTS; s++) {
+      var frac = s / NEON_SEGMENTS;
+      var segLen = 3 + frac * 4;
+      var segAngle = tpos.angle + frac * 0.7 + state.cascadePhase * 0.0007;
+      var sx = tpos.x + Math.cos(segAngle) * segLen * 0.3;
+      var sy = tpos.y + Math.sin(segAngle) * segLen * 0.3;
+      var ex = tpos.x + Math.cos(segAngle + 0.4) * segLen;
+      var ey = tpos.y + Math.sin(segAngle + 0.4) * segLen;
+
+      var glow = (s === 0) ? 1.0 : 0.45 + frac * 0.55;
+      var alpha = glow * (0.6 + 0.4 * Math.sin(state.ticks * 0.09 + ti*1.5 + s*0.8));
+      var rCol = Math.round(baseCol[0] * alpha);
+      var gCol = Math.round(baseCol[1] * alpha);
+      var bCol = Math.round(baseCol[2] * alpha);
+
+      // neon glow via shadowBlur (cheap neon look)
+      ctx.shadowColor = "rgba(" + baseCol[0] + "," + baseCol[1] + "," + baseCol[2] + "," + (alpha*0.5) + ")";
+      ctx.shadowBlur = 2 + frac * 3;
+      ctx.strokeStyle = "rgb(" + rCol + "," + gCol + "," + bCol + ")";
+      ctx.lineWidth = 1 + frac * 1.8;
+      ctx.beginPath();
+      ctx.moveTo(sx, sy);
+      ctx.lineTo(ex, ey);
+      ctx.stroke();
+    }
+  }
+  ctx.shadowBlur = 0;
+
+  // Pin marker — neon glow (n.e.o.n cascade)
+  var pinColor = colorFor(pipeColors[Math.floor(state.pin / 200) % 5]);
+  var glowR = 20 + 10 * Math.sin(state.ticks * 0.05);
+  var glow = ctx.createRadialGradient(markerX, markerY, 0, markerX, markerY, glowR);
+  glow.addColorStop(0, "rgba(" + pinColor[0] + "," + pinColor[1] + "," + pinColor[2] + ",1.0)");
+  glow.addColorStop(0.35, "rgba(" + pinColor[0] + "," + pinColor[1] + "," + pinColor[2] + ",0.55)");
+  glow.addColorStop(0.7, "rgba(" + pinColor[0] + "," + pinColor[1] + "," + pinColor[2] + ",0.20)");
+  glow.addColorStop(1, "rgba(" + pinColor[0] + "," + pinColor[1] + "," + pinColor[2] + ",0)");
+  ctx.fillStyle = glow;
+  ctx.beginPath();
+  ctx.arc(markerX, markerY, glowR, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Pin dot — bright neon core
+  ctx.shadowColor = "rgba(" + pinColor[0] + "," + pinColor[1] + "," + pinColor[2] + ",0.9)";
+  ctx.shadowBlur = 8;
+  ctx.fillStyle = "rgb(" + pinColor[0] + "," + pinColor[1] + "," + pinColor[2] + ")";
+  ctx.beginPath();
+  ctx.arc(markerX, markerY, 5, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.shadowBlur = 0;
+
+  // Pin ring
+  ctx.strokeStyle = "rgba(" + pinColor[0] + "," + pinColor[1] + "," + pinColor[2] + ",0.7)";
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.arc(markerX, markerY, 7, 0, Math.PI * 2);
+  ctx.stroke();
+
+  // Pin label
+  ctx.fillStyle = '#d0d0e6';
+  ctx.font = 'bold 12px Courier New';
+  ctx.textAlign = 'center';
+  ctx.shadowColor = "rgba(" + pinColor[0] + "," + pinColor[1] + "," + pinColor[2] + ",0.5)";
+  ctx.shadowBlur = 4;
+  ctx.fillText('pin ' + pad3(state.pin), markerX, markerY - 14);
+  ctx.shadowBlur = 0;
+
+  // Urdu index + ladder pick label
+  var uIdx = state.urduIdx;
+  var uPair = urduPairForIdx(uIdx);
+  var uPick = state.ladderPick;
+  var uCol = hexFor(pipeColors[Math.min(uIdx-1, 4)]);
+  ctx.fillStyle = uCol;
+  ctx.font = '10px Courier New';
+  ctx.textAlign = 'center';
+  ctx.shadowColor = uCol + "66";
+  ctx.shadowBlur = 3;
+  ctx.fillText('urdu idx ' + uIdx + ' ' + uPair + ' → pick ' + uPick.toFixed(2), markerX, markerY + 20);
+  ctx.shadowBlur = 0;
+
+  // Plank label
+  ctx.fillStyle = '#e0af68';
+  ctx.font = '10px Courier New';
+  ctx.textAlign = 'center';
+  ctx.fillText('plank ' + state.plankLevel, markerX, markerY + 34);
+
+  // Cascade arc (bottom-right) — neon cyan
+  var arcR = 64;
+  var arcX = W - 56;
+  var arcY = H - 48;
+  var prog = Math.min((state.ticks % CASCADE_TOTAL) / CASCADE_TOTAL, 1);
+
+  ctx.strokeStyle = 'rgba(99,116,209,0.25)';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(arcX, arcY, arcR, 0, Math.PI * 2);
+  ctx.stroke();
+
+  var arcCol = colorFor("all");
+  ctx.shadowColor = "rgba(" + arcCol[0] + "," + arcCol[1] + "," + arcCol[2] + ",0.6)";
+  ctx.shadowBlur = 6;
+  ctx.strokeStyle = "rgba(" + arcCol[0] + "," + arcCol[1] + "," + arcCol[2] + ",0.95)";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(arcX, arcY, arcR, -Math.PI/2, -Math.PI/2 + prog * Math.PI * 2);
+  ctx.stroke();
+  ctx.shadowBlur = 0;
+
+  ctx.fillStyle = '#73daca';
+  ctx.font = '9px Courier New';
+  ctx.textAlign = 'center';
+  ctx.fillText('cascade ' + (state.ticks % CASCADE_TOTAL) + '/' + CASCADE_TOTAL, arcX, arcY + 16);
+  ctx.fillStyle = '#505060';
+  ctx.font = '8px Courier New';
+  ctx.fillText('7200', arcX, arcY + 28);
+
+  // Speed readout — neon
+  ctx.fillStyle = '#73daca';
+  ctx.font = '9px Courier New';
+  ctx.textAlign = 'right';
+  ctx.shadowColor = 'rgba(115,218,202,0.5)';
+  ctx.shadowBlur = 3;
+  ctx.fillText('speed ' + fmtRate(state.speed) + ' Hz · ' + state.ticks + ' ticks', W - 7, 14);
+  ctx.shadowBlur = 0;
+
+  // Bottom-left DLW seal footer
+  ctx.fillStyle = '#6374d1';
+  ctx.font = '8px Courier New';
+  ctx.textAlign = 'left';
+  ctx.fillText('DLW seal · 1-unit neon grid · urdu envelope · ref 000', 7, H - 6);
+  ctx.fillStyle = '#505060';
+  ctx.fillText('δ = ' + TICK_DELTA_STR + ' s · t_P ≈ 5.39e-44 s', 7, H - 16);
+}
+
+// ─── Tick step ──────────────────────────────────────────────────────────
+function stepTick() {
+  state.pin += 1;
+  if (state.pin >= PIN_ROLLS_OVER) {
+    state.pin = 0;
+    log('● pin rolled 1000→000 @ tick ' + state.ticks, 'event');
+    toast('PIN ROLLED 1000 → 000 @ tick ' + state.ticks);
+  }
+  state.plankLevel = Math.floor(state.pin / PLANK_STEP);
+  state.ticks += 1;
+  state.simTime += TICK_DELTA;
+  state.planckTicks += TICKS_PER_PLANCK_UNIT;
+
+  var rawIdx = ((state.pin % 13) + 1);
+  state.urduIdx = rawIdx;
+  state.ladderPick = ladderPickForUrduIdx(rawIdx);
+
+  state.cascadePhase = (state.cascadePhase + 1) % CASCADE_TOTAL;
+  state.terminalPhase = (state.terminalPhase + 1) % TERMINALS;
+  state.hadActivity = true;
+
+  if (pinVal) pinVal.textContent = pad3(state.pin);
+  if (plankVal) plankVal.textContent = state.plankLevel;
+  if (tickVal) tickVal.textContent = state.ticks.toLocaleString();
+  if (timeVal) timeVal.textContent = fmtTime(state.simTime);
+  if (planckVal) planckVal.textContent = state.planckTicks.toExponential(4);
+  if (urduIdxEl) urduIdxEl.textContent = state.urduIdx + ' (' + urduPairForIdx(state.urduIdx) + ')';
+  if (ladderPickEl) ladderPickEl.textContent = state.ladderPick.toFixed(2);
+  if (terminalsEl) terminalsEl.textContent = TERMINALS;
+  if (neonSegsEl) neonSegsEl.textContent = TOTAL_NEON_STROKES;
+  if (dlwVal) { dlwVal.textContent = 'active'; dlwVal.style.color = hexFor(["n","e","o","nw","all"][Math.min(state.urduIdx-1,4)]); }
+}
+
+// ─── Tick loop ──────────────────────────────────────────────────────────
+function tickLoop(ts) {
+  if (!state.running) {
+    updateLiveBadge();
+    return;
+  }
+  if (state.lastFrame === 0) state.lastFrame = ts;
+  var dt = (ts - state.lastFrame) / 1000;
+  state.lastFrame = ts;
+  var ticksThisFrame = Math.floor(state.speed * dt);
+  if (ticksThisFrame > 0) {
+    for (var i = 0; i < ticksThisFrame; i++) stepTick();
+    state.rate = ticksThisFrame / dt;
+    if (rateVal) rateVal.textContent = fmtRate(state.rate) + ' Hz';
+  }
+  render();
+  updateLiveBadge();
+  requestAnimationFrame(tickLoop);
+}
+
+function updateLiveBadge() {
+  if (!liveBadge) return;
+  if (state.running) {
+    liveBadge.textContent = '● NEON — RUNNING @ ' + fmtRate(state.speed) + ' Hz · pin ' + pad3(state.pin);
+  } else {
+    liveBadge.textContent = '● NEON — PAUSED · pin ' + pad3(state.pin) + ' · urdu ' + state.urduIdx + ' · pick ' + state.ladderPick.toFixed(2);
+  }
+}
+
+// ─── Controls ───────────────────────────────────────────────────────────
+function toggleRun() {
+  state.running = !state.running;
+  if (state.running) {
+    state.lastFrame = 0;
+    if (btnRun) { btnRun.textContent = 'PAUSE'; btnRun.classList.add('active'); }
+    log('▶ NEON RUN @ ' + fmtRate(state.speed) + ' Hz · pin=' + pad3(state.pin) + ' urdu=' + state.urduIdx, 'tick');
+    toast('▶ NEON RUNNING @ ' + fmtRate(state.speed) + ' Hz');
+    requestAnimationFrame(tickLoop);
+  } else {
+    if (btnRun) { btnRun.textContent = 'RUN'; btnRun.classList.remove('active'); }
+    log('⏸ NEON PAUSED · pin=' + pad3(state.pin) + ' urdu=' + state.urduIdx + ' pick=' + state.ladderPick.toFixed(2), 'event');
+    toast('⏸ NEON PAUSED · pin ' + pad3(state.pin));
+  }
+  updateLiveBadge();
+}
+
+function resetEngine() {
+  state.running = false;
+  if (btnRun) { btnRun.textContent = 'RUN'; btnRun.classList.remove('active'); }
+  state.pin = 0;
+  state.plankLevel = 0;
+  state.ticks = 0;
+  state.simTime = 0;
+  state.planckTicks = 0;
+  state.urduIdx = 1;
+  state.ladderPick = 1;
+  state.rate = 0;
+  state.lastFrame = 0;
+  state.cascadePhase = 0;
+  state.terminalPhase = 0;
+  state.hadActivity = false;
+  if (pinVal) pinVal.textContent = '000';
+  if (plankVal) plankVal.textContent = '0';
+  if (tickVal) tickVal.textContent = '0';
+  if (timeVal) timeVal.textContent = '0.000e0 s';
+  if (planckVal) planckVal.textContent = '0.000e0';
+  if (urduIdxEl) urduIdxEl.textContent = '1 (ab)';
+  if (ladderPickEl) ladderPickEl.textContent = '1.000';
+  if (terminalsEl) terminalsEl.textContent = '8';
+  if (neonSegsEl) neonSegsEl.textContent = '80';
+  if (rateVal) rateVal.textContent = '0 Hz';
+  if (dlwVal) { dlwVal.textContent = 'active'; dlwVal.style.color = '#eef0ff'; }
+  render();
+  log('↺ NEON RESET → ref 000 · urdu idx 1 (ab) → pick 1 · n.e.o.n envelope', 'state');
+  log('↺ DLW seal re-locked · 1-unit neon grid · 8 terminals × 10 segs = 80 neon strokes', 'seal');
+  updateLiveBadge();
+  toast('↺ NEON RESET → ref 000');
+}
+
+function stepOnce() {
+  if (state.running) toggleRun();
+  stepTick();
+  render();
+  log('▸ NEON STEP 1 tick · pin=' + pad3(state.pin) + ' urdu=' + state.urduIdx + '(' + urduPairForIdx(state.urduIdx) + ') pick=' + state.ladderPick.toFixed(2), 'tick');
+  toast('▸ NEON STEP · pin ' + pad3(state.pin) + ' · urdu ' + state.urduIdx);
+  updateLiveBadge();
+}
+
+function setSpeed(s) {
+  state.speed = s;
+  var label = s === 1 ? '1×' :
+              s === 10 ? '10×' :
+              s === 100 ? '100×' :
+              s === 1000 ? '1kHz' :
+              s === 120 ? '5!×' :
+              s === 360 ? '10D×3×' :
+              s + '×';
+  log('⚡ NEON speed → ' + label, 'event');
+  if (rateVal) rateVal.textContent = (s === 1 ? '1.0' : fmtRate(s)) + ' Hz';
+  toast('⚡ NEON speed → ' + label);
+  updateLiveBadge();
+}
+
+function dumpState() {
+  var lines = [
+    '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
+    'HERMES SAPPHON v2 — NEON STATE DUMP',
+    '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
+    'CIPHER:        urdu .1.2|4|8|10 ||||| n.e.o.n',
+    'REF POINT:     000 (origin anchor)',
+    '-------- NUMERIC LADDER --------',
+    '  idx 1 : ' + NUMERIC_LADDER[0],
+    '  idx 2 : ' + NUMERIC_LADDER[1],
+    '  idx 3 : ' + NUMERIC_LADDER[2],
+    '  idx 4 : ' + NUMERIC_LADDER[3],
+    '  idx 5 : ' + NUMERIC_LADDER[4],
+    '  idx 6 : ' + NUMERIC_LADDER[5],
+    '  idx 7 : ' + NUMERIC_LADDER[6],
+    '  idx 8 : ' + ladderPickForUrduIdx(8),
+    '  idx 9 : ' + ladderPickForUrduIdx(9),
+    '  idx 10: ' + ladderPickForUrduIdx(10),
+    '  idx 11: ' + ladderPickForUrduIdx(11),
+    '  idx 12: ' + ladderPickForUrduIdx(12),
+    '  idx 13: ' + ladderPickForUrduIdx(13),
+    '-------- 5-PIPE ZONE MAP (|||||) --------',
+  ];
+  for (var i = 0; i < PIPE_ZONE_MAP.length; i++) {
+    var z = PIPE_ZONE_MAP[i];
+    lines.push('  pipe ' + z.pipe + ' · ' + z.label + ' · ' + z.color.toUpperCase() +
+               ' · urdu idx ' + z.urduIdx + ' · pick ' + z.ladderPick.toFixed(2));
+  }
+  lines.push('-------- PALETTE (n.e.o.n) --------');
+  lines.push('  n  = ' + PALETTE.n.name + '   ' + PALETTE.n.hex);
+  lines.push('  e  = ' + PALETTE.e.name + '   ' + PALETTE.e.hex);
+  lines.push('  o  = ' + PALETTE.o.name + '   ' + PALETTE.o.hex);
+  lines.push('  nw = ' + PALETTE.nw.name + '  ' + PALETTE.nw.hex);
+  lines.push('-------- CASCADE (10D × 5! × 3 × 2 × 1! × 1!) --------');
+  lines.push('  10D          = ' + CASCADE_10D);
+  lines.push('  5!           = ' + CASCADE_5FACT);
+  lines.push('  3×           = ' + CASCADE_3);
+  lines.push('  2× (split)   = ' + CASCADE_2);
+  lines.push('  1! × 1!      = ' + CASCADE_SINGLETONS);
+  lines.push('  TOTAL        = ' + CASCADE_TOTAL);
+  lines.push('-------- RUN STATE --------');
+  lines.push('  pin          = ' + pad3(state.pin));
+  lines.push('  plank        = ' + state.plankLevel);
+  lines.push('  ticks        = ' + state.ticks.toLocaleString());
+  lines.push('  sim time     = ' + state.simTime.toExponential(6) + ' s');
+  lines.push('  planck ticks = ' + state.planckTicks.toExponential(4));
+  lines.push('  urdu idx     = ' + state.urduIdx + ' (' + urduPairForIdx(state.urduIdx) + ')');
+  lines.push('  ladder pick  = ' + state.ladderPick.toFixed(4));
+  lines.push('  cascade phase= ' + state.cascadePhase + '/' + CASCADE_TOTAL);
+  lines.push('  terminal ph  = ' + state.terminalPhase + '/' + TERMINALS);
+  lines.push('  speed        = ' + fmtRate(state.speed) + ' Hz');
+  lines.push('  rate         = ' + fmtRate(state.rate) + ' Hz');
+  lines.push('  terminals    = ' + TERMINALS);
+  lines.push('  neon segs    = ' + NEON_SEGMENTS + ' per terminal = ' + TOTAL_NEON_STROKES + ' total');
+  lines.push('  DLW seal     = active');
+  lines.push('  REF POINT    = 000 (origin)');
+  lines.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  var block = lines.join('\n');
+  log(block, 'neon');
+  console.log(block);
+  alert(block);
+}
+
+// ─── Boot ────────────────────────────────────────────────────────────────
+function init() {
+  if (deltaVal) deltaVal.textContent = TICK_DELTA_STR + ' s';
+  if (urduIdxEl) urduIdxEl.textContent = '1 (ab)';
+  if (ladderPickEl) ladderPickEl.textContent = '1.000';
+  if (terminalsEl) terminalsEl.textContent = TERMINALS;
+  if (neonSegsEl) neonSegsEl.textContent = TOTAL_NEON_STROKES;
+  if (dlwVal) { dlwVal.textContent = 'active'; dlwVal.style.color = '#eef0ff'; }
+  if (liveBadge) liveBadge.textContent = '● NEON — ref 000 · waiting on RUN';
+  render();
+  log('✓ NEON sapphon v2 ready · urdu envelope · n.e.o.n · ref 000 · 5 pipes · 8 terminals × 10 segs · DLW seal', 'neon');
+  log('✓ NEON buttons wired: RUN/PAUSE · RESET → 000 · STEP 1 TICK · 1×/10×/100×/1kHz/5!×/10D×3× · DUMP STATE', 'seal');
+  updateLiveBadge();
+  // CUDA bridge live-panel wiring
+  apiBase = (window.location.protocol === 'https:' ? 'https:' : 'http:') + '//' +
+            window.location.host + '/';
+  startCudaPoll();
+  log('✓ CUDA bridge panel wired → ' + apiBase.replace(/^https?:\/\//, ''), 'neon');
+}
+
+(function boot() {
+  canvas = document.getElementById('scene');
+  ctx = canvas ? canvas.getContext('2d') : null;
+  if (canvas && ctx) {
+    init();
+  } else {
+    window.addEventListener('DOMContentLoaded', function() {
+      canvas = document.getElementById('scene');
+      ctx = canvas ? canvas.getContext('2d') : null;
+      if (canvas && ctx) init();
+    });
+  }
+})();
+</script>
+</body>
+</html>

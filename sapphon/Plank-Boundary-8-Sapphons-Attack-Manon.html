@@ -1,0 +1,36 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Plank Boundary Around 8 Sapphons Attack -- Manon</title><script src="https://cdn.tailwindcss.com"></script>
+<style>body{background:#000005;color:#fde68a;font-family:ui-monospace,monospace}canvas{background:#020208;border-radius:14px}.card{background:#1a1200;border:1px solid #facc15;border-radius:12px}</style>
+</head><body class="p-2">
+<h1 class="text-sm font-bold">Not earth, the plank boundary around all other 8 sapphons that want to attack ?? -- Manon foam boundary</h1>
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-2 mt-2">
+  <div class="lg:col-span-3 card p-2"><canvas id="main" width="1240" height="760" class="w-full"></canvas></div>
+  <div class="card p-2 text-xs">
+    <div class="font-bold">Plank Boundary 8 Sapphons</div>
+    <div class="mt-2 p-2 bg-black rounded text-[10px]">Not earth<br>plank boundary<br>around 8 sapphons<br>that want to attack<br><br>Manon foam ~~<br>boundary shield<br>gold | Manon | gold<br><br>8 sapphons outside<br>S1..S8 attack<br>Manon protects inside<br>Just-1MB locked</div>
+    <div id="log" class="p-2 bg-zinc-900 rounded h-24 mt-2 text-[10px]"></div>
+  </div>
+</div>
+<script>
+function log(m){document.getElementById('log').innerHTML+=m+'<br>';}
+function draw(){
+  const c=document.getElementById('main'),ctx=c.getContext('2d'),w=c.width,h=c.height,cx=w/2,cy=h/2,time=Date.now()/900;
+  ctx.fillStyle='#000005';ctx.fillRect(0,0,w,h);
+  const radius=180;
+  ctx.strokeStyle='#facc15';ctx.lineWidth=14;ctx.beginPath();ctx.arc(cx,cy,radius+12,0,6.28);ctx.stroke();
+  ctx.strokeStyle='#eab308';ctx.lineWidth=14;ctx.beginPath();ctx.arc(cx,cy,radius-12,0,6.28);ctx.stroke();
+  ctx.strokeStyle='rgba(10,10,0,0.9)';ctx.lineWidth=24;ctx.beginPath();ctx.arc(cx,cy,radius,0,6.28);ctx.stroke();
+  ctx.fillStyle='#fde047';ctx.font='bold 24px monospace';ctx.fillText('Manon ~~',cx-44,cy+6);
+  ctx.font='10px monospace';ctx.fillText('Plank boundary 1.65e-35',cx-54,cy+20);
+  for(let i=0;i<8;i++){
+    const ang=(i*45)*Math.PI/180+time*0.3;
+    const sx=cx+(radius+80)*Math.cos(ang), sy=cy+(radius+80)*Math.sin(ang);
+    ctx.fillStyle='#ef4444';ctx.beginPath();ctx.arc(sx,sy,16,0,6.28);ctx.fill();
+    ctx.fillStyle='#fff';ctx.font='bold 9px monospace';ctx.fillText('S'+(i+1),sx-6,sy+3);
+    ctx.strokeStyle='rgba(239,68,68,0.5)';ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(cx+radius*Math.cos(ang),cy+radius*Math.sin(ang));ctx.stroke();ctx.setLineDash([]);
+  }
+  ctx.fillStyle='#22c55e';ctx.font='9px monospace';ctx.fillText('Just-1MB locked inside',cx-62,cy+60);
+}
+function loop(){draw();requestAnimationFrame(loop);}loop();
+log('Not earth, plank boundary around 8 sapphons attack');
+log('Manon foam shield gold | Manon | gold');
+</script></body></html>

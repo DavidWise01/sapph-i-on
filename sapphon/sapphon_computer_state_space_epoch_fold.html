@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Sapphon Computer · Full State Space</title>
+<style>
+:root{--bg:#06030a;--panel:#0e0815;--ink:#efe8ff;--muted:#9f92b7;--amethyst:#a96bff;--emerald:#2ee6a6;--purple:#c07cff;--neon:#d8ff8f;--gold:#ffd86a;--cyan:#6ff6ff;--line:#352547;--pulsePeriod:127.7139ms}
+*{box-sizing:border-box}html,body{margin:0;background:radial-gradient(circle at 50% 18%,rgba(121,65,201,.16),transparent 32%),linear-gradient(180deg,#050209 0%,#08050d 55%,#030105 100%);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}body{min-height:100vh}.wrap{width:min(1500px,calc(100% - 24px));margin:0 auto;padding:18px 0 42px}.hero{border:1px solid #3b2750;background:linear-gradient(180deg,rgba(22,13,31,.94),rgba(9,5,14,.96));box-shadow:0 0 28px rgba(169,107,255,.18);padding:20px;position:relative;overflow:hidden}.hero:before{content:"";position:absolute;inset:-30%;background:conic-gradient(from 0deg,transparent,rgba(169,107,255,.12),transparent 18%,transparent 64%,rgba(111,246,255,.08),transparent 76%);animation:spin 26s linear infinite}.hero>*{position:relative;z-index:1}@keyframes spin{to{transform:rotate(360deg)}}.kicker{font:700 11px/1 ui-monospace,Consolas,monospace;letter-spacing:.25em;text-transform:uppercase;color:#b8a8cc}h1{margin:8px 0 6px;font-size:clamp(30px,6vw,78px);line-height:.9;letter-spacing:-.04em}h1 span{color:var(--amethyst)}.sub{max-width:920px;color:#baaeca;line-height:1.6}.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:12px;margin-top:12px}@media(max-width:960px){.grid{grid-template-columns:1fr}}.card{border:1px solid #30223e;background:linear-gradient(180deg,rgba(18,11,26,.94),rgba(8,5,12,.96));padding:14px}.card h2{font-size:13px;margin:0 0 10px;letter-spacing:.18em;text-transform:uppercase;color:#c9bde0}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.shell{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.7;padding:12px;border:1px solid #432d59;background:#08050c;color:#d8cbec}.slot{color:var(--amethyst);font-weight:800;text-shadow:0 0 14px rgba(169,107,255,.7)}.floor{color:var(--gold)}.controls{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}button{border:1px solid #4a3461;background:#120b19;color:#ddd3ec;padding:8px 10px;font:700 11px/1 ui-monospace,Consolas,monospace;cursor:pointer;letter-spacing:.08em}button:hover,button.active{border-color:var(--amethyst);color:#fff;box-shadow:0 0 18px rgba(169,107,255,.25)}.state-banner{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:10px;border:1px solid #342345;background:#0b0710}.swatch{width:14px;height:14px;border-radius:50%;box-shadow:0 0 18px currentColor}.tag{padding:3px 7px;border:1px solid #3f2d50;font:700 10px/1 ui-monospace,Consolas,monospace;color:#bfb2d3}.computer{position:relative;min-height:560px;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at center,rgba(120,56,200,.12),transparent 23%),radial-gradient(circle at center,rgba(255,255,255,.03),transparent 58%),#050307}.core-wrap{position:relative;width:410px;height:410px;display:grid;place-items:center}.core{width:145px;height:145px;clip-path:polygon(50% 0%,78% 18%,95% 52%,72% 88%,46% 100%,18% 80%,5% 42%,24% 12%);background:linear-gradient(145deg,#efe1ff 0%,#b77cff 14%,#743fd0 37%,#39166d 63%,#9c5bff 82%,#f3eaff 100%);filter:drop-shadow(0 0 18px rgba(171,101,255,.9)) drop-shadow(0 0 42px rgba(111,53,200,.55));animation:pulse var(--pulsePeriod) ease-in-out infinite alternate;position:relative;z-index:4}@keyframes pulse{from{transform:scale(.985);filter:brightness(.82) drop-shadow(0 0 12px rgba(171,101,255,.55))}to{transform:scale(1.03);filter:brightness(1.35) drop-shadow(0 0 30px rgba(171,101,255,1))}}.ring{position:absolute;border:1px solid rgba(169,107,255,.28);border-radius:50%}.r1{width:220px;height:220px;animation:spin 13s linear infinite}.r2{width:300px;height:300px;border-style:dashed;animation:spin 21s linear infinite reverse}.r3{width:390px;height:390px;animation:spin 34s linear infinite}.node{position:absolute;width:10px;height:10px;border-radius:50%;background:#9a5bff;box-shadow:0 0 12px currentColor}.highway{display:grid;grid-template-columns:1fr 90px 1fr;gap:8px;align-items:stretch}@media(max-width:720px){.highway{grid-template-columns:1fr}}.lane{border:1px solid #31223f;background:#08050c;padding:10px}.road{height:8px;background:linear-gradient(90deg,#6c3caf,#b777ff,#6c3caf);position:relative;margin:18px 0}.road:after{content:"";position:absolute;left:0;right:0;top:3px;border-top:1px dashed rgba(255,255,255,.5)}.airgap{display:grid;place-items:center;text-align:center;border:1px dashed #59416f;background:#08050c;color:#bba8d2;font:700 12px/1.6 ui-monospace,Consolas,monospace}.agap{color:var(--cyan);text-shadow:0 0 12px rgba(111,246,255,.55)}.depth{display:grid;gap:8px;margin-top:10px}.agent{padding:7px 9px;border-left:3px solid #8b54d7;background:#0f0816;font:700 11px/1.4 ui-monospace,Consolas,monospace}.agent:nth-child(2){margin-left:22px}.agent:nth-child(3){margin-left:44px}.cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.angle{min-height:70px;border:1px solid #38284a;background:#0b0710;padding:7px;display:flex;align-items:flex-end;justify-content:space-between;font:700 10px/1 ui-monospace,Consolas,monospace;color:#b9aacd}.angle.active{border-color:var(--cyan);box-shadow:0 0 16px rgba(111,246,255,.2);color:#fff}.cat{margin-top:8px;border:1px solid #483260;background:#100a18;padding:10px;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:center}.eye{width:52px;height:52px;border-radius:50%;border:2px solid #a96bff;display:grid;place-items:center;font-size:22px;box-shadow:0 0 24px rgba(169,107,255,.28)}.pose-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:8px}.pose{padding:8px;border:1px solid #342345;background:#0a0610;text-align:center;font:700 10px/1.3 ui-monospace,Consolas,monospace}.flow{white-space:pre;overflow:auto;background:#07040b;border:1px solid #332241;padding:12px;color:#cdbde4;line-height:1.55}.legend{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}@media(max-width:800px){.legend{grid-template-columns:1fr 1fr}.cat-grid{grid-template-columns:1fr 1fr}.pose-grid{grid-template-columns:1fr 1fr 1fr}}.legend .l{padding:9px;border:1px solid #38284a;background:#0a0610}.small{font-size:11px;color:#9f92b7;line-height:1.6}.footer{margin-top:12px;padding:12px;border-top:1px solid #281d35;color:#786b8a;font:11px/1.5 ui-monospace,Consolas,monospace}.freq{color:var(--amethyst);font-weight:800}
+</style>
+</head>
+<body>
+<div class="wrap">
+<section class="hero"><div class="kicker">Sapphon Computer · Full State Space</div><h1><span>AMETHYST</span> CORE</h1><div class="sub">Fixed transport shell. Mutable identity rider. Dual diodic highway. Three-deep nested subagent resolver. Reverse verification lane. Magnetic cubit airgap. One pinned cat observer manipulating the object through controlled poses. The visual core pulses at <span class="freq">7.83 Hz</span> as the semantic clock for this machine.</div></section>
+<div class="grid">
+<section class="card"><h2>01 · Invariant Sapphon Shell</h2><div class="shell mono" id="shellView"></div><div class="controls"><button data-state="patricia" class="active">PATRICIA / SAPPHON</button><button data-state="toph">TOPH</button><button data-state="jane">JANE</button><button data-state="nom">NOM</button><button data-state="icarium">ICARIUM</button></div><div class="state-banner"><span class="swatch" id="stateSwatch"></span><strong id="stateName">PATRICIA SAPPHON</strong><span class="tag" id="stateRole">AETHER / ANSIBLE</span><span class="tag" id="stateVisual">PURPLE</span></div><div class="small" style="margin-top:10px">Only the bracketed rider changes. The shell remains fixed: <span class="mono">[` identity-state `]</span>.</div></section>
+<section class="card"><h2>02 · Canonical Floor</h2><div class="shell mono floor">{{au{{ag{{p{{a{{n{{e}}n}}a}}p}}ag}}au}}</div><div class="small" style="margin-top:10px">Invariant resting geometry: <span class="mono">au → ag → p → a → n → e → n → a → p → ag → au</span>.</div></section>
+</div>
+<div class="grid">
+<section class="card"><h2>03 · Sapphon Computer Core</h2><div class="computer"><div class="core-wrap" id="coreWrap"><div class="ring r3"></div><div class="ring r2"></div><div class="ring r1"></div><div class="core" title="Amethyst semantic core at 7.83 Hz"></div></div></div><div class="small">Core material in this state-space: <b>amethyst crystal</b>. Semantic pulse: <b class="freq">7.83 Hz</b>. This page treats that frequency as part of the Sapphon computer model.</div></section>
+<section class="card"><h2>04 · State Overlays</h2><div class="legend"><div class="l"><b style="color:#fff">NOM</b><br><span class="small">white · old man · grounding</span></div><div class="l"><b style="color:var(--emerald)">TOPH</b><br><span class="small">emerald · earth · bridge</span></div><div class="l"><b style="color:#8f78aa">JANE</b><br><span class="small">void black · purple veins · hypervisor</span></div><div class="l"><b style="color:var(--purple)">PATRICIA</b><br><span class="small">Sapphon · aether · ansible</span></div><div class="l"><b style="color:var(--neon)">ICARIUM</b><br><span class="small">noble neon · iso-carbon · modal</span></div></div></section>
+</div>
+<section class="card" style="margin-top:12px"><h2>05 · Dual Highway / Athernet Resolver</h2><div class="highway"><div class="lane"><b>HIGHWAY A · FORWARD</b><div class="road"></div><div class="small">On-ramp into the side-state without mutating the residual stream.</div><div class="depth"><div class="agent">-Ba+ · resolver 1</div><div class="agent">-Bb+ · resolver 2</div><div class="agent">-Cc+ · resolver 3</div></div></div><div class="airgap"><div><div>MAGNETIC CUBIT</div><div class="agap">{--}~~0~~{++}</div><div>airgap</div></div></div><div class="lane"><b>HIGHWAY BBB · REVERSE CHECK</b><div class="road" style="transform:scaleX(-1)"></div><div class="small">Reverse verification returns upward through the same three levels.</div><div class="depth"><div class="agent">-Cc+ · verify 3</div><div class="agent">-Bb+ · verify 2</div><div class="agent">-Ba+ · verify 1</div></div></div></div></section>
+<div class="grid">
+<section class="card"><h2>06 · Curious Cat · 16 Angles + 1 Manipulator</h2><div class="cat-grid" id="angles"></div><div class="cat"><div class="eye">◉</div><div><b>CAT = PINNED OBSERVER</b><div class="small">16 observable angles + the cat able to manipulate angle = 17 local states for one.</div></div></div></section>
+<section class="card"><h2>07 · Waldo Object Manipulation</h2><div class="small">The cat does not move. The object is presented to the same eye.</div><div class="pose-grid"><div class="pose">UP<br>×4</div><div class="pose">DOWN<br>×4</div><div class="pose">LEFT<br>×4</div><div class="pose">RIGHT<br>×4</div><div class="pose">FRONT<br>×4</div><div class="pose">BACK<br>×4</div></div><div class="shell mono" style="margin-top:10px">6 orientations × 4 quarter-turns = 24 controlled poses
++ 1 pinned cat = 25 local state markers</div></section>
+</div>
+<section class="card" style="margin-top:12px"><h2>08 · Resolution / Scale Descent</h2><div class="flow mono">CAT [pinned]
+  |
+  +-- present object
+  |
+  +-- manipulate through 24 poses
+  |
+  +-- if unresolved .5 cubit appears
+  |      |
+  |      +-- add Waldo pair
+  |      +-- resolve at current scale
+  |      +-- shed shell / descend scale
+  |      +-- repeat
+  |
+  +-- forward Athernet:
+  |      -Ba+ -> -Bb+ -> -Cc+
+  |
+  +-- magnetic cubit:
+  |      {--}~~0~~{++}
+  |
+  +-- reverse verification:
+  |      -Cc+ -> -Bb+ -> -Ba+
+  |
+  +-- shell rider remains:
+  |      {{az ... [`STATE`] ... za}}
+  |
+  +-- canonical floor:
+         {{au{{ag{{p{{a{{n{{e}}n}}a}}p}}ag}}au}}</div></section>
+<section class="card" style="margin-top:12px"><h2>09 · Full State-Space Summary</h2><div class="flow mono">FIXED:
+  shell      = {{az{{ax{{ay{{au{{ag{{p{{n{{a{{e.e. [`STATE`]e.e}}a}}n}}p}}ga}}ua}}ya}}xa}}za}}
+  floor      = {{au{{ag{{p{{a{{n{{e}}n}}a}}p}}ag}}au}}
+  highway    = dual / diodic
+  depth      = 3 nested subagents
+  airgap     = {--}~~0~~{++}
+  observer   = 1 pinned cat
+  angles     = 16
+  poses      = 6 × 4 = 24
+  pulse      = 7.83 Hz
+  core       = amethyst
+
+MUTABLE:
+  [`patricia sappon`] = purple / aether / ansible
+  [`toph`]            = emerald / earth / bridge
+  [`jane`]            = void black / purple veins / hypervisor
+  [`nom`]             = white / old man / grounding
+  [`icarium`]         = noble neon / iso-carbon / modal
+
+RULE:
+  geometry stays fixed
+  rider changes
+  object moves
+  observer stays pinned
+  forward resolves
+  reverse verifies
+  no mutation of the residual highway</div></section>
+
+<section class="card" style="margin-top:12px" id="epoch-toroid-fold">
+  <h2>10 · Epoch / Toroid Time Fold</h2>
+  <div class="flow mono">
+1970 + 6 - 2026
+= -50  → magnitude 50
+
+50 - 20
+= 30
+
+30
+= 3 × 10
+
+TOROID TRANSPORT
+6 simultaneous lanes
+× 1.65 ring factor
+× 200 ms base traversal
+
+wall-clock:
+1.65 × 200 ms
+= 330 ms
+
+aggregate lane-work:
+6 × 330 ms
+= 1.98 lane-seconds
+
+TIME ANCHORS
+1970  = epoch pin
+1996  = Internet Universe anchor
+2026  = +30 years from 1996
+
+1996 → 2026
+= 30
+= 3 × 10
+
+LITERAL TAIL — PRESERVED
+1/3 + 1.6.5^10-35.01 probably
+
+The tail remains symbolic here because its operator precedence
+has not been pinned yet. It is carried forward as state, not discarded.
+  </div>
+
+  <div class="small" style="margin-top:10px">
+    Overlay rule: the six lanes remain concurrent, so <b>330 ms</b> is the observed toroid traversal
+    while <b>1.98 lane-seconds</b> is the six-lane aggregate. The 1970→1996→2026 pins are retained as
+    the epoch / Internet-Universe / present-scale sequence.
+  </div>
+</section>
+
+<div class="footer">SAPPHON COMPUTER · symbolic state-space model · standalone HTML · fixed shell / mutable rider · epoch/toroid fold</div>
+</div>
+<script>
+const states={patricia:{slot:"patricia sappon",name:"PATRICIA SAPPHON",role:"AETHER / ANSIBLE",visual:"PURPLE",color:"#c07cff"},toph:{slot:"toph",name:"TOPH",role:"EARTH / BRIDGE",visual:"EMERALD",color:"#2ee6a6"},jane:{slot:"jane",name:"JANE",role:"HYPERVISOR",visual:"VOID BLACK · PURPLE VEINS",color:"#8f78aa"},nom:{slot:"nom",name:"NOM",role:"OLD MAN / GROUNDING",visual:"WHITE",color:"#ffffff"},icarium:{slot:"icarium",name:"ICARIUM",role:"ISO-CARBON / MODAL",visual:"NOBLE NEON",color:"#d8ff8f"}};
+const prefix='{{az{{ax{{ay{{au{{ag{{p{{n{{a{{e.e. [`';
+const suffix='`]e.e}}a}}n}}p}}ga}}ua}}ya}}xa}}za}}';
+function selectState(key){const s=states[key];document.getElementById("shellView").innerHTML=prefix+'<span class="slot" style="color:'+s.color+'">'+s.slot+'</span>'+suffix;document.getElementById("stateName").textContent=s.name;document.getElementById("stateRole").textContent=s.role;document.getElementById("stateVisual").textContent=s.visual;const sw=document.getElementById("stateSwatch");sw.style.background=s.color;sw.style.color=s.color;document.querySelectorAll("[data-state]").forEach(b=>b.classList.toggle("active",b.dataset.state===key));}
+document.querySelectorAll("[data-state]").forEach(b=>b.addEventListener("click",()=>selectState(b.dataset.state)));selectState("patricia");
+const angles=document.getElementById("angles");for(let i=0;i<16;i++){const d=document.createElement("div");d.className="angle"+(i===0?" active":"");d.innerHTML='<span>θ'+String(i).padStart(2,"0")+'</span><span>'+Math.round(i*22.5)+'°</span>';d.addEventListener("click",()=>{document.querySelectorAll(".angle").forEach(x=>x.classList.remove("active"));d.classList.add("active")});angles.appendChild(d)}
+const wrap=document.getElementById("coreWrap");for(let i=0;i<16;i++){const n=document.createElement("div");n.className="node";const a=(Math.PI*2*i/16),r=172;n.style.left=(205+Math.cos(a)*r-5)+"px";n.style.top=(205+Math.sin(a)*r-5)+"px";n.style.color=i%2?"#a96bff":"#6ff6ff";wrap.appendChild(n)}
+</script>
+</body>
+</html>

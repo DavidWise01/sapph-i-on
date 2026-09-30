@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sapphon Spinor · the two-lap return (real SU(2))</title>
+<style>
+:root{--bg:#08080A;--cy:#3ff0ff;--am:#b07cff;--au:#ffc94a;--ag:#c8ccd6;--co:#3f6fb5;--dim:#6b6b7a;--fg:#d9dce6;--pn:#0f0f14;--red:#ff4d6d;--grn:#5dff9e}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--fg);font:12px/1.45 ui-monospace,"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace}
+header{display:flex;align-items:baseline;gap:18px;padding:10px 14px 6px;border-bottom:1px solid #1b1b24;flex-wrap:wrap}
+h1{margin:0;font-size:15px;letter-spacing:.18em;color:var(--cy);font-weight:600}
+.sub{color:var(--dim);font-size:11px}
+.stamp{display:inline-block;font-size:9.5px;letter-spacing:.08em;padding:0 5px;border-radius:3px;border:1px solid;margin-right:3px;vertical-align:1px}
+.lit{color:var(--grn);border-color:#2a6b47}.amber{color:var(--au);border-color:#7a6224}.wall{color:var(--red);border-color:#7a2a38}
+main{display:grid;grid-template-columns:340px 1fr 380px;gap:10px;padding:10px}
+.card{background:rgba(12,12,18,.86);border:1px solid #23232e;border-radius:6px;padding:8px 10px}
+.card h3{margin:0 0 6px;font-size:11px;letter-spacing:.14em;color:var(--dim);font-weight:500;text-transform:uppercase}
+.col{display:flex;flex-direction:column;gap:10px;min-width:0}
+canvas{display:block;width:100%}
+.row{display:flex;justify-content:space-between;gap:8px}
+.row b{color:var(--au);font-weight:500}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:1px 10px}
+.kv span:nth-child(odd){color:var(--dim)}
+.kv span:nth-child(even){text-align:right;color:var(--fg)}
+button,select{font:inherit;background:#15151d;color:var(--fg);border:1px solid #2c2c3a;border-radius:4px;padding:3px 8px;cursor:pointer}
+button:hover{border-color:var(--cy);color:var(--cy)}
+input[type=range]{width:100%;accent-color:#3ff0ff}
+.ctl{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.signs{display:grid;grid-template-columns:120px repeat(4,1fr) 90px;gap:5px;align-items:center;margin-top:4px}
+.sb{height:56px;position:relative;border:1px solid #23232e;border-radius:3px;background:#0b0b10;overflow:hidden}
+.sb i{position:absolute;left:3px;right:3px;background:var(--cy)}
+.sb em{position:absolute;top:1px;left:0;right:0;text-align:center;font-style:normal;font-size:9.5px;color:var(--dim)}
+.sb b{position:absolute;bottom:2px;left:0;right:0;text-align:center;font-size:15px;color:var(--fg)}
+.pat{font-size:18px;letter-spacing:.3em;color:var(--am);text-align:center}
+.lbl{color:var(--dim);font-size:10.5px}
+p{margin:4px 0}
+.note{color:#aab0c0;font-size:11px}
+.cite{font-size:10.5px;color:#9aa0b0}
+.cite li{margin:2px 0}
+.ok{color:var(--grn)}.bad{color:var(--red);font-weight:700}
+#checks div{display:flex;justify-content:space-between;gap:6px}
+.eq{color:var(--cy)}
+#leg{display:flex;gap:14px;flex-wrap:wrap;font-size:10.5px;color:#aab0c0;margin-top:3px}
+#leg i{display:inline-block;width:16px;height:4px;margin-right:5px;vertical-align:2px}
+</style></head>
+<body>
+<header>
+  <h1>SAPPHON SPINOR · THE TWO-LAP RETURN</h1>
+  <span class="sub">real SU(2): U(θ) = exp(−iθ σ·n / 2) acting on a spin-½ state · his −++− → +−−+ rule, measured against the physics</span>
+  <span class="sub" style="margin-left:auto"><span class="stamp lit">LIT</span>computed live, fail-loud <span class="stamp amber">AMBER</span>model-local / assigned mapping <span class="stamp wall">WALL</span>limit of the claim</span>
+</header>
+<main>
+<div class="col">
+  <div class="card"><h3>Bloch sphere · SO(3) picture</h3>
+    <canvas id="bloch" width="640" height="560"></canvas>
+    <p class="note">Gold arrow = spin direction ⟨σ⟩ (a vector: back at 360°). Purple = rotation axis n. The flag at the arrow tip shows the spinor's sign relative to the start: <span style="color:var(--cy)">+</span> / <span style="color:var(--red)">−</span>. At 360° the arrow is home but the flag reads −. Only at 720° does it read + again.</p>
+  </div>
+  <div class="card"><h3>Möbius band · the same topology <span class="stamp amber">ANALOGY</span></h3>
+    <canvas id="mob" width="640" height="380"></canvas>
+    <p class="note">Carry the normal arrow once around the band (one lap) and it points the other way. Twice around, it is back. SO(3) has the same double cover structure (π₁(SO(3)) = ℤ₂). The picture is an analogy, not a derivation.</p>
+  </div>
+</div>
+
+<div class="col">
+  <div class="card"><h3>Amplitudes over two laps (0° → 720°)</h3>
+    <canvas id="plot" width="1300" height="520"></canvas>
+    <div id="leg"></div>
+    <div class="ctl" style="margin-top:6px">
+      <button id="play">❚❚ pause</button>
+      <span class="lbl">speed</span><input id="spd" type="range" min="0" max="120" value="36" style="width:110px">
+      <span class="lbl">θ</span><input id="th" type="range" min="0" max="720" step="0.5" value="0" style="width:260px">
+      <button data-j="0">0°</button><button data-j="180">180°</button><button data-j="360">360°</button><button data-j="540">540°</button><button data-j="720">720°</button>
+      <span class="lbl">axis n</span>
+      <select id="axis">
+        <option value="z">z (⊥ spin, default)</option>
+        <option value="y">y (⊥ spin)</option>
+        <option value="x">x (∥ spin: pure phase)</option>
+        <option value="t">(x+z)/√2 (tilted)</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="card"><h3>His four signs <span class="stamp amber">MAPPING</span></h3>
+    <div class="signs" id="rawrow"></div>
+    <div class="signs" id="prjrow"></div>
+    <div class="note" style="margin-top:8px">
+      <p><b style="color:var(--au)">The mapping used here</b> (chosen for this page, so AMBER): his four signs are the signs of the four real numbers in a spin-½ state, (Re ψ↑, Im ψ↑, Re ψ↓, Im ψ↓). The start state <span class="eq">ψ₀ = ((−1+i)/2, (1−i)/2)</span> reads <b>−++−</b>. That state is spin along −x.</p>
+      <p><b>Row 1, the raw spinor ψ(θ) = U(θ)ψ₀.</b> Each component turns at half the rotation angle, so at 360° every one of the four numbers has changed sign: <b>+−−+</b>, because U(2π) = −1 for every axis. At 720° they are back to <b>−++−</b>, because U(4π) = +1. The four numbers never vanish together, since the state stays normalized, and each crosses zero at its own angle.</p>
+      <p><b>Row 2, the part of ψ(θ) along its start,</b> A(θ)·ψ₀ with A(θ) = ⟨ψ₀|ψ(θ)⟩. For an axis ⊥ to the spin (z or y), A(θ) = cos(θ/2) exactly. That makes row 2 his rule to the letter: <b>−++−</b> fades gradually, all four cross <b>zero at 180°</b>, it reads <b>+−−+</b> at 360°, crosses zero again at 540°, and returns at 720°. A(θ) is the quantity a neutron interferometer measures: the rotated beam interferes with the unrotated one, I ∝ 1 + cos(θ/2) (Rauch 1975, Werner 1975).</p>
+    </div>
+  </div>
+
+  <div class="card"><h3>Why the photon is different <span class="stamp wall">WALL</span></h3>
+    <p class="note">A photon is spin-1, a boson. Rotating a helicity state by θ multiplies it by e^(−iθ), so the gold curve cos θ is back to +1 at <b>360°</b>, not 720°. The physical polarization of light returns after one turn. The two-lap sign return is a spin-½ (fermion) property. For light, the same SU(2) mathematics appears only in the <i>description</i> of polarization: Jones vectors are spinors on the Poincaré sphere (Pancharatnam 1956), and light picks up geometric phase (see the Berry panel). This page therefore does not claim that a photon is a spinor. It shows where his two-lap rule is exact physics, which is spin-½, and where it is only an analogy, which is the photon.</p>
+  </div>
+</div>
+
+<div class="col">
+  <div class="card"><h3>Two clocks, side by side</h3>
+    <div class="kv" id="clock"></div>
+    <p class="note" style="margin-top:6px"><span class="stamp amber">AMBER</span>His lap frame: one lap = 8φ = 12.944 (0.035956 per degree), t = 0 at photon birth (+electrum), from A:\CONSTANTS.txt. <span class="stamp amber">AMBER</span>Bridge: this page <i>assumes</i> a lap is 8φ Planck lengths travelled at c, so one lap = 8φ·t<sub>P</sub>. <span class="stamp lit">LIT</span>t<sub>P</sub> = 5.391247(60)e-44 s (CODATA 2018). His decided l<sub>P</sub> = 1e-35 m with t<sub>P</sub> = 5.39e-44 s gives l<sub>P</sub>/t<sub>P</sub> = 1.855e8 m/s ≠ c, so the bridge only closes with the CODATA pair (see CONSTANTS_CODATA.txt).</p>
+    <p class="note"><span class="stamp lit">REAL</span>A lab clock for the same rotation: a neutron precessing in a field B turns at ω = γ<sub>n</sub>B, with γ<sub>n</sub> = 1.83247174e8 s⁻¹T⁻¹ (CODATA 2022, NIST). Werner et al. used this effect to see the 4π return.</p>
+    <div class="ctl"><span class="lbl">B (mT)</span><input id="bf" type="range" min="0.1" max="10" step="0.1" value="1" style="width:160px"><span id="bfv" class="lbl"></span></div>
+  </div>
+
+  <div class="card"><h3>Self-checks <span class="stamp lit">LIT</span></h3>
+    <div id="checks"></div>
+  </div>
+
+  <div class="card"><h3>Berry / geometric phase for light</h3>
+    <p class="note">Guide light through a helically wound fibre. Its direction k traces a cone on the sphere of directions, sweeping a solid angle Ω = 2π(1 − cos ϑ) per turn. The plane of linear polarization rotates by Ω. That is a geometric phase, independent of wavelength (Tomita & Chiao 1986; Berry 1984). A spin-½ particle taken around the same loop picks up phase Ω/2. The ½ is the spinor again.</p>
+    <div class="ctl"><span class="lbl">pitch ϑ</span><input id="pit" type="range" min="0" max="90" step="0.5" value="30" style="width:150px"><span class="lbl">turns</span><input id="trn" type="range" min="1" max="8" step="1" value="1" style="width:90px"></div>
+    <div class="kv" id="berry" style="margin-top:4px"></div>
+  </div>
+
+  <div class="card"><h3>Sources</h3>
+    <ul class="cite" style="padding-left:16px;margin:0">
+      <li>H. Rauch et al., “Verification of coherent spinor rotation of fermions”, Phys. Lett. A 54, 425 (1975).</li>
+      <li>S. A. Werner et al., “Observation of the phase shift of a neutron due to precession in a magnetic field”, Phys. Rev. Lett. 35, 1053 (1975).</li>
+      <li>A. Tomita &amp; R. Y. Chiao, “Observation of Berry's topological phase by use of an optical fiber”, Phys. Rev. Lett. 57, 937 (1986).</li>
+      <li>M. V. Berry, Proc. R. Soc. Lond. A 392, 45 (1984). S. Pancharatnam, Proc. Indian Acad. Sci. A 44, 247 (1956).</li>
+      <li>CODATA 2018: E. Tiesinga et al., Rev. Mod. Phys. 93, 025010 (2021). NIST CUU physics.nist.gov/cuu (t<sub>P</sub>, l<sub>P</sub>, γ<sub>n</sub>).</li>
+      <li>J. J. Sakurai &amp; J. Napolitano, <i>Modern Quantum Mechanics</i>, §3.2 (2π rotation of spin-½ gives −1).</li>
+      <li>Model: A:\CONSTANTS.txt (8φ lap, −++− → +−−+, t = 0 at +electrum), D. L. Wise.</li>
+    </ul>
+  </div>
+</div>
+</main>
+<script>
+(()=>{
+'use strict';
+// ---------- complex + SU(2) ----------
+const C=(re,im=0)=>({re,im});
+const add=(a,b)=>C(a.re+b.re,a.im+b.im), mul=(a,b)=>C(a.re*b.re-a.im*b.im,a.re*b.im+a.im*b.re);
+const conj=a=>C(a.re,-a.im), abs=a=>Math.hypot(a.re,a.im);
+const PHI=(1+Math.sqrt(5))/2, LAP=8*PHI, PERDEG=LAP/360;
+const TP=5.391247e-44, GAMMA_N=1.83247174e8, C_LIGHT=299792458;
+const AXES={z:[0,0,1],y:[0,1,0],x:[1,0,0],t:[Math.SQRT1_2,0,Math.SQRT1_2]};
+// U(θ) = cos(θ/2) I − i sin(θ/2) (n·σ);  n·σ = [[nz, nx−i ny],[nx+i ny, −nz]]
+function U(th,n){const c=Math.cos(th/2), s=Math.sin(th/2), [nx,ny,nz]=n;
+  return [[C(c,-s*nz), C(-s*ny,-s*nx)],[C(s*ny,-s*nx), C(c,s*nz)]];}
+const apply=(M,v)=>[add(mul(M[0][0],v[0]),mul(M[0][1],v[1])), add(mul(M[1][0],v[0]),mul(M[1][1],v[1]))];
+const inner=(a,b)=>add(mul(conj(a[0]),b[0]),mul(conj(a[1]),b[1]));
+const PSI0=[C(-.5,.5),C(.5,-.5)];              // reads −++−, spin along −x
+const bloch=v=>{const ab=mul(conj(v[0]),v[1]);return [2*ab.re,2*ab.im,abs(v[0])**2-abs(v[1])**2];};
+const reals=v=>[v[0].re,v[0].im,v[1].re,v[1].im];
+const sgn=x=>Math.abs(x)<1e-9?'0':(x>0?'+':'−');
+const pat=a=>a.map(sgn).join('');
+function state(thDeg,axis){const th=thDeg*Math.PI/180, n=AXES[axis], psi=apply(U(th,n),PSI0), A=inner(PSI0,psi);
+  return {th,psi,A,prj:[mul(A,PSI0[0]),mul(A,PSI0[1])],b:bloch(psi),n};}
+
+// ---------- LIT self-checks (fail-loud) ----------
+const checks=[];
+function chk(name,ok,val){checks.push({name,ok,val});}
+{ const I2=(M,s)=>Math.max(abs(add(M[0][0],C(-s))),abs(M[0][1]),abs(M[1][0]),abs(add(M[1][1],C(-s))));
+  let worst360=0,worst720=0,worstU=0;
+  for(const k in AXES){worst360=Math.max(worst360,I2(U(2*Math.PI,AXES[k]),-1));worst720=Math.max(worst720,I2(U(4*Math.PI,AXES[k]),1));
+    for(let d=0;d<=720;d+=7.5){const M=U(d*Math.PI/180,AXES[k]); // unitarity: columns orthonormal
+      const c0=[M[0][0],M[1][0]],c1=[M[0][1],M[1][1]];worstU=Math.max(worstU,Math.abs(abs(inner(c0,c0))-1),Math.abs(abs(inner(c1,c1))-1),abs(inner(c0,c1)));}}
+  chk('U(360°) = −1 (all axes)',worst360<1e-12,worst360.toExponential(1));
+  chk('U(720°) = +1 (all axes)',worst720<1e-12,worst720.toExponential(1));
+  chk('U unitary, 0…720°',worstU<1e-12,worstU.toExponential(1));
+  chk('pattern at 0° = −++−',pat(reals(PSI0))==='−++−',pat(reals(PSI0)));
+  const s360=state(360,'z'),s720=state(720,'z'),s180=state(180,'z');
+  chk('raw at 360° = +−−+',pat(reals(s360.psi))==='+−−+',pat(reals(s360.psi)));
+  chk('raw at 720° = −++−',pat(reals(s720.psi))==='−++−',pat(reals(s720.psi)));
+  chk('A(180°) = 0 (⊥ axis)',abs(s180.A)<1e-12,abs(s180.A).toExponential(1));
+  let wA=0;for(let d=0;d<=720;d+=5){const s=state(d,'z');wA=Math.max(wA,abs(add(s.A,C(-Math.cos(d*Math.PI/360)))));}
+  chk('A(θ) = cos(θ/2) (⊥ axis)',wA<1e-12,wA.toExponential(1));
+  const bb=s360.b;chk('Bloch vector home at 360°',Math.hypot(bb[0]+1,bb[1],bb[2])<1e-12,'Δ='+Math.hypot(bb[0]+1,bb[1],bb[2]).toExponential(1));
+  chk('spin-1: e^(−i·2π) = +1',Math.abs(Math.cos(2*Math.PI)-1)<1e-12&&Math.abs(Math.sin(2*Math.PI))<1e-12,'cos 360° = 1');
+  chk('8φ = 12.944271910',Math.abs(LAP-12.94427191)<1e-8,LAP.toFixed(9));
+  chk('8φ/360 = 0.0359563109',Math.abs(PERDEG-0.0359563109)<1e-10,PERDEG.toFixed(10));
+}
+const ALL_OK=checks.every(c=>c.ok);
+document.getElementById('checks').innerHTML=checks.map(c=>`<div><span>${c.name}</span><span class="${c.ok?'ok':'bad'}">${c.ok?'✓ '+c.val:'FAIL '+c.val}</span></div>`).join('')+
+  `<div style="margin-top:4px;border-top:1px solid #23232e;padding-top:4px"><span>overall</span><span class="${ALL_OK?'ok':'bad'}">${ALL_OK?'ALL '+checks.length+' PASS':'FAILED, do not trust this page'}</span></div>`;
+
+// ---------- UI state ----------
+let theta=0, total=0, playing=true, last=performance.now();
+const el=id=>document.getElementById(id);
+const thEl=el('th'), axEl=el('axis'), spdEl=el('spd');
+el('play').onclick=()=>{playing=!playing;el('play').textContent=playing?'❚❚ pause':'▶ play';};
+thEl.oninput=()=>{theta=+thEl.value;total=theta;playing=false;el('play').textContent='▶ play';};
+document.querySelectorAll('[data-j]').forEach(b=>b.onclick=()=>{theta=+b.dataset.j;total=theta;playing=false;el('play').textContent='▶ play';});
+axEl.onchange=()=>trail.length=0;
+
+// sign boxes
+function mkRow(id,label){const r=el(id);r.innerHTML=`<div class="lbl">${label}</div>`+['Re ψ↑','Im ψ↑','Re ψ↓','Im ψ↓'].map((t,i)=>`<div class="sb"><em>${t}</em><i></i><b></b></div>`).join('')+'<div class="pat"></div>';
+  return {bars:[...r.querySelectorAll('.sb')],pat:r.querySelector('.pat')};}
+const rawRow=mkRow('rawrow','raw ψ(θ)'), prjRow=mkRow('prjrow','A(θ)·ψ₀ (along start)');
+function fillRow(row,vals){vals.forEach((v,i)=>{const box=row.bars[i],bar=box.querySelector('i'),h=Math.min(1,Math.abs(v)/0.75)*16;
+  bar.style.height=h+'px';bar.style.top=(v>=0?31-h:31)+'px';bar.style.background=v>=0?'#3ff0ff':'#ff4d6d';box.querySelector('b').textContent=sgn(v);});
+  row.pat.textContent=pat(vals);}
+
+// ---------- canvases ----------
+function ctx(id){const c=el(id);return [c,c.getContext('2d')];}
+const [pc,px]=ctx('plot'), [bc,bx]=ctx('bloch'), [mc,mx]=ctx('mob');
+const trail=[];
+
+function drawPlot(s,deg){const W=pc.width,H=pc.height,L=70,R=20,T=24,B=78,w=W-L-R,h=H-T-B;
+  px.clearRect(0,0,W,H);px.font='20px ui-monospace,monospace';
+  const X=d=>L+d/720*w, Y=v=>T+h/2-v*h/2*0.92;
+  // lap shading
+  px.fillStyle='rgba(63,240,255,0.035)';px.fillRect(X(0),T,X(360)-X(0),h);px.fillStyle='rgba(176,124,255,0.045)';px.fillRect(X(360),T,X(720)-X(360),h);
+  px.fillStyle='#6b6b7a';px.fillText('lap 1',X(160),T+18);px.fillText('lap 2',X(520),T+18);
+  // grid
+  px.strokeStyle='#1e1e28';px.lineWidth=1;
+  for(let d=0;d<=720;d+=45){px.beginPath();px.moveTo(X(d),T);px.lineTo(X(d),T+h);px.stroke();}
+  [-1,0,1].forEach(v=>{px.strokeStyle=v?'#1e1e28':'#3a3a48';px.beginPath();px.moveTo(L,Y(v));px.lineTo(L+w,Y(v));px.stroke();px.fillStyle='#6b6b7a';px.fillText((v>0?'+':'')+v,L-40,Y(v)+7);});
+  [0,180,360,540,720].forEach(d=>{px.fillStyle=d%360?'#ff4d6d':'#ffc94a';px.fillText(d+'°',X(d)-(d?24:0),T+h+26);});
+  px.fillStyle='#6b6b7a';px.fillText('his frame: ×0.035956 → '+['0','6.472','12.944','19.416','25.889'].join(' · '),L,H-4);
+  // raw component curves (faint)
+  const cols=['rgba(63,240,255,.30)','rgba(63,240,255,.18)','rgba(176,124,255,.30)','rgba(176,124,255,.18)'];
+  for(let k=0;k<4;k++){px.strokeStyle=cols[k];px.lineWidth=2;px.beginPath();
+    for(let d=0;d<=720;d+=2){const v=reals(state(d,axEl.value).psi)[k]/0.7071;d?px.lineTo(X(d),Y(v)):px.moveTo(X(d),Y(v));}px.stroke();}
+  // spin-1 cos θ
+  px.strokeStyle='#ffc94a';px.lineWidth=2.5;px.setLineDash([10,7]);px.beginPath();
+  for(let d=0;d<=720;d+=2){const v=Math.cos(d*Math.PI/180);d?px.lineTo(X(d),Y(v)):px.moveTo(X(d),Y(v));}px.stroke();px.setLineDash([]);
+  // spin-1/2 Re A
+  px.strokeStyle='#3ff0ff';px.lineWidth=4;px.beginPath();
+  for(let d=0;d<=720;d+=2){const v=state(d,axEl.value).A.re;d?px.lineTo(X(d),Y(v)):px.moveTo(X(d),Y(v));}px.stroke();
+  if(axEl.value==='x'||axEl.value==='t'){px.strokeStyle='#b07cff';px.lineWidth=2;px.beginPath();
+    for(let d=0;d<=720;d+=2){const v=state(d,axEl.value).A.im;d?px.lineTo(X(d),Y(v)):px.moveTo(X(d),Y(v));}px.stroke();}
+  // markers
+  const mk=(d,t)=>{px.fillStyle='#d9dce6';px.beginPath();px.arc(X(d),Y(0),6,0,7);px.fill();px.fillText(t,X(d)+8,Y(0)-10);};
+  mk(180,'zero');mk(540,'zero');
+  px.fillStyle='#ff4d6d';px.beginPath();px.arc(X(360),Y(-1),7,0,7);px.fill();px.fillText('sign flip −1',X(360)+10,Y(-1)+24);
+  px.fillStyle='#5dff9e';px.beginPath();px.arc(X(720),Y(1),7,0,7);px.fill();px.fillText('return +1',X(720)-130,Y(1)-12);
+  px.fillStyle='#ffc94a';px.beginPath();px.arc(X(360),Y(1),6,0,7);px.fill();px.fillText('spin-1 home',X(360)+10,Y(1)-10);
+  // cursor
+  px.strokeStyle='#ffffff';px.lineWidth=1.5;px.beginPath();px.moveTo(X(deg),T);px.lineTo(X(deg),T+h);px.stroke();
+  px.fillStyle='#3ff0ff';px.beginPath();px.arc(X(deg),Y(s.A.re),8,0,7);px.fill();
+  px.fillStyle='#ffc94a';px.beginPath();px.arc(X(deg),Y(Math.cos(s.th)),6,0,7);px.fill();
+  el('leg').innerHTML=[['#3ff0ff','spin-½  Re A(θ) = Re⟨ψ₀|U(θ)ψ₀⟩ (= cos θ/2 for ⊥ axis)'],['#ffc94a','spin-1 / photon helicity  cos θ  (home at 360°)'],['rgba(63,240,255,.55)','raw spinor reals ×√2 (4 faint curves)']].concat(axEl.value==='x'||axEl.value==='t'?[['#b07cff','Im A(θ) (axis not ⊥ spin)']]:[]).map(([c,t])=>`<span><i style="background:${c}"></i>${t}</span>`).join('');
+}
+
+function proj3(v,W,H,Rr){const az=-0.62,el=0.38;const [x,y,z]=v;
+  const x1=x*Math.cos(az)-y*Math.sin(az), y1=x*Math.sin(az)+y*Math.cos(az);
+  const y2=y1*Math.cos(el)-z*Math.sin(el), z2=y1*Math.sin(el)+z*Math.cos(el);
+  return [W/2+x1*Rr, H/2-z2*Rr, y2];}
+function drawBloch(s,deg){const W=bc.width,H=bc.height,Rr=225;bx.clearRect(0,0,W,H);bx.font='20px ui-monospace,monospace';
+  bx.strokeStyle='#2a2a38';bx.lineWidth=1.5;bx.beginPath();bx.arc(W/2,H/2,Rr,0,7);bx.stroke();
+  const ring=(f)=>{bx.beginPath();for(let i=0;i<=72;i++){const p=proj3(f(i/72*2*Math.PI),W,H,Rr);i?bx.lineTo(p[0],p[1]):bx.moveTo(p[0],p[1]);}bx.stroke();};
+  bx.strokeStyle='#1f1f2b';ring(a=>[Math.cos(a),Math.sin(a),0]);ring(a=>[Math.cos(a),0,Math.sin(a)]);ring(a=>[0,Math.cos(a),Math.sin(a)]);
+  [['x',[1,0,0]],['y',[0,1,0]],['z',[0,0,1]]].forEach(([t,v])=>{const p=proj3(v,W,H,Rr*1.12);bx.fillStyle='#6b6b7a';bx.fillText(t,p[0]-6,p[1]+6);});
+  // trail
+  trail.push(s.b);if(trail.length>260)trail.shift();
+  bx.strokeStyle='rgba(255,201,74,.35)';bx.lineWidth=2;bx.beginPath();trail.forEach((b,i)=>{const p=proj3(b,W,H,Rr);i?bx.lineTo(p[0],p[1]):bx.moveTo(p[0],p[1]);});bx.stroke();
+  // axis
+  const a0=proj3(s.n.map(v=>-v),W,H,Rr*1.05),a1=proj3(s.n,W,H,Rr*1.05);bx.strokeStyle='#b07cff';bx.lineWidth=2;bx.setLineDash([8,6]);bx.beginPath();bx.moveTo(a0[0],a0[1]);bx.lineTo(a1[0],a1[1]);bx.stroke();bx.setLineDash([]);
+  bx.fillStyle='#b07cff';bx.fillText('n',a1[0]+6,a1[1]);
+  // spin arrow
+  const o=[W/2,H/2],p=proj3(s.b,W,H,Rr);bx.strokeStyle='#ffc94a';bx.lineWidth=5;bx.beginPath();bx.moveTo(o[0],o[1]);bx.lineTo(p[0],p[1]);bx.stroke();
+  bx.fillStyle='#ffc94a';bx.beginPath();bx.arc(p[0],p[1],8,0,7);bx.fill();
+  // spinor sign flag: sign of Re A for ⊥ axes; phase arg(A) generally
+  const plus=s.A.re>=0, mag=abs(s.A);
+  bx.fillStyle=plus?'#3ff0ff':'#ff4d6d';bx.font='bold 34px ui-monospace,monospace';bx.fillText(Math.abs(s.A.re)<1e-3?'0':(plus?'+':'−'),p[0]+14,p[1]-10);
+  bx.font='20px ui-monospace,monospace';bx.fillStyle='#aab0c0';
+  bx.fillText('θ = '+deg.toFixed(1)+'°   Re A = '+s.A.re.toFixed(3),14,26);
+  bx.fillText('⟨σ⟩ = ('+s.b.map(v=>v.toFixed(2)).join(', ')+')',14,52);
+  bx.fillStyle=deg%720<1e-6||Math.abs(deg-720)<0.6?'#5dff9e':(Math.abs(deg-360)<0.6?'#ff4d6d':'#6b6b7a');
+  bx.fillText(Math.abs(deg-360)<0.6?'360°: vector home, spinor = −ψ₀':(Math.abs(deg-720)<0.6||deg<0.6?'0°/720°: spinor = +ψ₀':''),14,H-14);
+}
+
+function drawMob(deg){const W=mc.width,H=mc.height,R=150,Wd=52,tl=1.05;mx.clearRect(0,0,W,H);mx.font='20px ui-monospace,monospace';
+  const S=(x,y,z)=>{const yd=y*Math.cos(tl)-z*Math.sin(tl), zv=y*Math.sin(tl)+z*Math.cos(tl);return [W/2+x,H/2+10-zv*0.62,yd];};
+  const P=(u,v)=>S((R+v*Math.cos(u/2))*Math.cos(u),(R+v*Math.cos(u/2))*Math.sin(u),v*Math.sin(u/2));
+  const quads=[];const N=160;for(let i=0;i<N;i++){const u0=i/N*2*Math.PI,u1=(i+1)/N*2*Math.PI,um=(u0+u1)/2;const a=P(u0,-Wd),b=P(u0,Wd),c=P(u1,Wd),d=P(u1,-Wd);
+    const dv=[Math.cos(um/2)*Math.cos(um),Math.cos(um/2)*Math.sin(um),Math.sin(um/2)],du=[-Math.sin(um),Math.cos(um),0];
+    const nz=du[0]*dv[1]-du[1]*dv[0], ny=du[2]*dv[0]-du[0]*dv[2];const lit=Math.abs(ny*Math.sin(tl)+nz*Math.cos(tl));
+    quads.push({pts:[a,b,c,d],z:(a[2]+b[2]+c[2]+d[2])/4,i,lit});}
+  quads.sort((p,q)=>q.z-p.z).forEach(q=>{mx.fillStyle=`hsla(${200+40*Math.cos(q.i/N*2*Math.PI)},55%,${16+34*q.lit}%,0.96)`;mx.strokeStyle=`hsla(200,40%,${10+20*q.lit}%,0.9)`;mx.lineWidth=1;
+    mx.beginPath();q.pts.forEach((p,k)=>k?mx.lineTo(p[0],p[1]):mx.moveTo(p[0],p[1]));mx.closePath();mx.fill();mx.stroke();});
+  // centre line
+  mx.strokeStyle='rgba(255,201,74,.5)';mx.lineWidth=1.5;mx.setLineDash([5,5]);mx.beginPath();for(let i=0;i<=N;i++){const p=P(i/N*2*Math.PI,0);i?mx.lineTo(p[0],p[1]):mx.moveTo(p[0],p[1]);}mx.stroke();mx.setLineDash([]);
+  // normal carried along the centre line: N(u) = ∂u × ∂v at v = 0; N(u+2π) = −N(u)
+  const u=deg*Math.PI/180;const du=[-Math.sin(u),Math.cos(u),0],dv=[Math.cos(u/2)*Math.cos(u),Math.cos(u/2)*Math.sin(u),Math.sin(u/2)];
+  let n=[du[1]*dv[2]-du[2]*dv[1],du[2]*dv[0]-du[0]*dv[2],du[0]*dv[1]-du[1]*dv[0]];const ln=Math.hypot(...n);n=n.map(v=>v/ln);
+  const base=[R*Math.cos(u),R*Math.sin(u),0],tip=base.map((v,k)=>v+n[k]*80);
+  const b0=S(...base),t0=S(...tip);const flipped=Math.cos(deg*Math.PI/360)<0;
+  mx.strokeStyle=flipped?'#ff4d6d':'#3ff0ff';mx.lineWidth=6;mx.beginPath();mx.moveTo(b0[0],b0[1]);mx.lineTo(t0[0],t0[1]);mx.stroke();
+  mx.fillStyle=flipped?'#ff4d6d':'#3ff0ff';mx.beginPath();mx.arc(t0[0],t0[1],7,0,7);mx.fill();
+  mx.fillStyle='#ffc94a';mx.beginPath();mx.arc(b0[0],b0[1],8,0,7);mx.fill();
+  mx.fillStyle='#aab0c0';mx.fillText('laps: '+(deg/360).toFixed(3)+'   normal '+(flipped?'reversed (−)':'original (+)'),14,26);
+}
+
+function clock(){const deg=total, laps=deg/360, his=deg*PERDEG, ticks=his, sec=ticks*TP, B=+el('bf').value*1e-3, tLab=(deg*Math.PI/180)/(GAMMA_N*B);
+  el('bfv').textContent=(+el('bf').value).toFixed(1)+' mT';
+  const f=(x,d=4)=>x.toFixed(d);
+  el('clock').innerHTML=[
+   ['rotation θ (total)',f(deg,1)+'°'],['laps',f(laps,4)],
+   ['<span class="stamp amber">AMBER</span>his measure θ·8φ/360',f(his,5)],
+   ['<span class="stamp amber">AMBER</span>Planck ticks (1 lap = 8φ t<sub>P</sub>)',f(ticks,4)+' t<sub>P</sub>'],
+   ['<span class="stamp lit">LIT</span>= seconds (CODATA t<sub>P</sub>)',sec.toExponential(4)+' s'],
+   ['720° = 25.8885 his units',(2*LAP*TP).toExponential(4)+' s'],
+   ['<span class="stamp lit">REAL</span>neutron θ/(γ<sub>n</sub>B)',(tLab*1e6).toFixed(3)+' µs'],
+   ['neutron 720° at B',(4*Math.PI/(GAMMA_N*B)*1e6).toFixed(3)+' µs'],
+  ].map(([k,v])=>`<span>${k}</span><span>${v}</span>`).join('');}
+
+function berry(){const th=+el('pit').value*Math.PI/180,N=+el('trn').value,Om=2*Math.PI*(1-Math.cos(th))*N,deg=Om*180/Math.PI;
+  el('berry').innerHTML=[['solid angle Ω',Om.toFixed(4)+' sr'],['light: polarization rotation',(deg%360).toFixed(2)+'° (total '+deg.toFixed(2)+'°)'],
+   ['spin-½ geometric phase Ω/2',(deg/2).toFixed(2)+'°'],['depends on λ?','no, geometric']].map(([k,v])=>`<span>${k}</span><span>${v}</span>`).join('');}
+['pit','trn'].forEach(id=>el(id).oninput=berry);berry();
+
+function frame(now){const dt=Math.min(0.1,(now-last)/1000);last=now;
+  if(playing){const w=+spdEl.value;total+=w*dt;theta=total%720;}
+  thEl.value=theta;
+  const deg=(Math.abs(theta-720)<1e-9)?720:theta, s=state(deg,axEl.value);
+  drawPlot(s,deg);drawBloch(s,deg);drawMob(deg);
+  fillRow(rawRow,reals(s.psi));fillRow(prjRow,reals(s.prj));clock();
+  requestAnimationFrame(frame);}
+requestAnimationFrame(frame);
+window.__spinor={ALL_OK,checks,set:(d,ax)=>{if(ax){axEl.value=ax;trail.length=0;}theta=d;total=d;playing=false;el('play').textContent='▶ play';},
+  pattern:d=>{const s=state(d,axEl.value);return {raw:pat(reals(s.psi)),prj:pat(reals(s.prj)),A:s.A};}};
+})();
+</script>
+</body></html>

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hermes Sapphon — Planck-Scale Tick Engine</title>
+<style>
+  :root {
+    --bg: #0a0a12;
+    --fg: #c8c8d0;
+    --dim: #606070;
+    --accent: #7aa2f7;
+    --green: #73daca;
+    --amber: #e0af68;
+    --red: #f7768e;
+    --border: #2a2a3a;
+    --mono: 'Courier New', monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--mono);
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  h1 {
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    width: 100%;
+    max-width: 720px;
+    text-align: center;
+  }
+  .spec {
+    background: #12121c;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 12px 16px;
+    width: 100%;
+    max-width: 720px;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+  .spec .label { color: var(--dim); }
+  .spec .value { color: var(--green); font-weight: bold; }
+  canvas {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: #06060a;
+    width: 100%;
+    max-width: 720px;
+    height: 280px;
+    display: block;
+  }
+  .readout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    width: 100%;
+    max-width: 720px;
+    font-size: 11px;
+  }
+  .cell {
+    background: #12121c;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cell .k { color: var(--dim); }
+  .cell .v { color: var(--fg); font-weight: bold; }
+  .cell.accent .v { color: var(--accent); }
+  .cell.green .v { color: var(--green); }
+  .cell.amber .v { color: var(--amber); }
+  .controls {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    max-width: 720px;
+    flex-wrap: wrap;
+  }
+  button {
+    background: #1a1a2a;
+    color: var(--fg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 6px 14px;
+    font-family: var(--mono);
+    font-size: 11px;
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+  button:hover { background: #2a2a3a; }
+  button.active { background: var(--accent); color: #000; border-color: var(--accent); }
+  .log {
+    width: 100%;
+    max-width: 720px;
+    background: #06060a;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 10px;
+    color: var(--dim);
+    height: 80px;
+    overflow-y: auto;
+    line-height: 1.5;
+  }
+  .log .tick { color: var(--green); }
+  .log .event { color: var(--amber); }
+  .log .state { color: var(--accent); }
+  .footer {
+    font-size: 9px;
+    color: var(--dim);
+    margin-top: 4px;
+  }
+</style>
+</head>
+<body>
+<h1>Hermes Sapphon — Planck-Scale Tick Engine</h1>
+
+<div class="spec">
+  <div><span class="label">TICK DEFINITION:</span> 1 tick = 10^-36 + 10^-35 = <span class="value" id="tickDef">1.1e-35 s</span></div>
+  <div><span class="label">START STATE:</span> pin <span class="value">000</span> → plank <span class="value">0</span></div>
+  <div><span class="label">SCALE:</span> Planck time t_P ≈ 5.39e-44 s · this tick = <span class="value">~2.04e8</span> × t_P</div>
+  <div><span class="label">DISCRETIZATION:</span> each tick advances pin index +1; plank level = floor(pin / 10^5)</div>
+  <div><span class="label">STATUS:</span> <span class="green" id="status">INITIALIZED</span></div>
+</div>
+
+<canvas id="scene" width="720" height="280"></canvas>
+
+<div class="readout">
+  <div class="cell accent"><span class="k">PIN</span><span class="v" id="pinVal">000</span></div>
+  <div class="cell accent"><span class="k">PLANK LEVEL</span><span class="v" id="plankVal">0</span></div>
+  <div class="cell"><span class="k">TICKS ELAPSED</span><span class="v" id="tickVal">0</span></div>
+  <div class="cell"><span class="k">SIM TIME</span><span class="v" id="timeVal">0.000e0 s</span></div>
+  <div class="cell green"><span class="k">PLANCK TICKS</span><span class="v" id="planckTickVal">0</span></div>
+  <div class="cell amber"><span class="k">RATE (ticks/s)</span><span class="v" id="rateVal">0</span></div>
+  <div class="cell"><span class="k">PIN WIDTH</span><span class="v" id="widthVal">3 digits</span></div>
+  <div class="cell"><span class="k">TICK δ</span><span class="v" id="deltaVal">1.1e-35 s</span></div>
+</div>
+
+<div class="controls">
+  <button id="btnRun" class="active" onclick="toggleRun()">RUN</button>
+  <button onclick="resetEngine()">RESET → 000</button>
+  <button onclick="stepOnce()">STEP 1 TICK</button>
+  <button onclick="setSpeed(1)">1×</button>
+  <button onclick="setSpeed(10)">10×</button>
+  <button onclick="setSpeed(100)">100×</button>
+  <button onclick="setSpeed(1000)">1kHz</button>
+  <button onclick="setSpeed(100000)">100kHz</button>
+</div>
+
+<div class="log" id="log">
+  <div class="state">[STATE] sapphon initialized — pin=000, plank=0, tick=1.1e-35 s</div>
+  <div class="state">[STATE] canvas 720×280 · tick engine idle · awaiting RUN</div>
+</div>
+
+<div class="footer">Hermes Sapphon · Planck-scale discretization artifact · tick = 10^-36 + 10^-35 · built for bridge-burner</div>
+
+<script>
+"use strict";
+
+const TICK_DELTA = 1e-36 + 1e-35;   // 1.1e-35 s
+const TICK_DELTA_STR = "1.1e-35";
+const PLANCK_TIME = 5.39e-44;
+const TICKS_PER_PLANCK_UNIT = TICK_DELTA / PLANCK_TIME;
+const PIN_ROLLS_OVER = 1000;
+const PLANK_STEP = 100000;
+
+let state = {
+  pin: 0,
+  plankLevel: 0,
+  ticks: 0,
+  simTime: 0,
+  planckTicks: 0,
+  running: false,
+  speed: 1,
+  lastFrame: 0,
+  rate: 0,
+};
+
+let canvas = null;
+let ctx = null;
+
+const $ = id => document.getElementById(id);
+const pinVal = $('pinVal');
+const plankVal = $('plankVal');
+const tickVal = $('tickVal');
+const timeVal = $('timeVal');
+const planckTickVal = $('planckTickVal');
+const rateVal = $('rateVal');
+const widthVal = $('widthVal');
+const deltaVal = $('deltaVal');
+const statusEl = $('status');
+const logEl = $('log');
+const btnRun = $('btnRun');
+
+function log(msg, cls) {
+  cls = cls || '';
+  var d = document.createElement('div');
+  d.textContent = msg;
+  if (cls) d.className = cls;
+  logEl.appendChild(d);
+  logEl.scrollTop = logEl.scrollHeight;
+  if (logEl.children.length > 50) logEl.removeChild(logEl.firstChild);
+}
+
+function fmtPin(n) { return String(n).padStart(3, '0'); }
+
+function fmtTime(s) {
+  if (s === 0) return '0.000e0 s';
+  return s.toExponential(3) + ' s';
+}
+
+function fmtRate(r) {
+  if (r < 1) return r.toFixed(2);
+  if (r < 1000) return r.toFixed(1);
+  return r.toExponential(2);
+}
+
+function render() {
+  if (!canvas || !ctx) return;
+  var W = canvas.width, H = canvas.height;
+  ctx.clearRect(0, 0, W, H);
+
+  ctx.strokeStyle = '#1a1a2a';
+  ctx.lineWidth = 0.5;
+  for (var x = 0; x <= W; x += 24) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+  for (var y = 0; y <= H; y += 24) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+
+  var plankColors = ['#7aa2f7', '#73daca', '#e0af68', '#f7768e', '#bb9af7'];
+  var maxPlank = Math.max(state.plankLevel, 1);
+  for (var p = 0; p <= Math.min(maxPlank, 8); p++) {
+    var x0 = (p * PLANK_STEP / PIN_ROLLS_OVER) * W;
+    var x1 = ((p + 1) * PLANK_STEP / PIN_ROLLS_OVER) * W;
+    ctx.fillStyle = plankColors[p % plankColors.length] + '15';
+    ctx.fillRect(x0, 0, x1 - x0, H);
+    ctx.strokeStyle = plankColors[p % plankColors.length] + '40';
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(x0, 0); ctx.lineTo(x0, H); ctx.stroke();
+    ctx.fillStyle = plankColors[p % plankColors.length] + '80';
+    ctx.font = '9px Courier New';
+    ctx.fillText('plank ' + p, x0 + 4, 14);
+  }
+
+  var pinNorm = state.pin / PIN_ROLLS_OVER;
+  var markerX = pinNorm * W;
+  var markerY = H / 2;
+
+  var glow = ctx.createRadialGradient(markerX, markerY, 0, markerX, markerY, 30);
+  glow.addColorStop(0, '#7aa2f7');
+  glow.addColorStop(0.4, '#7aa2f740');
+  glow.addColorStop(1, '#7aa2f700');
+  ctx.fillStyle = glow;
+  ctx.beginPath();
+  ctx.arc(markerX, markerY, 30, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = '#7aa2f7';
+  ctx.beginPath();
+  ctx.arc(markerX, markerY, 6, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = '#c8c8d0';
+  ctx.font = 'bold 12px Courier New';
+  ctx.textAlign = 'center';
+  ctx.fillText('pin ' + fmtPin(state.pin), markerX, markerY - 14);
+
+  ctx.fillStyle = '#e0af68';
+  ctx.font = '10px Courier New';
+  ctx.fillText('plank ' + state.plankLevel, markerX, markerY + 18);
+
+  var arcRadius = 110;
+  var arcCenterX = W - 50;
+  var arcCenterY = H - 50;
+  var arcProgress = Math.min(state.ticks / 1000, 1);
+
+  ctx.strokeStyle = '#2a2a3a';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(arcCenterX, arcCenterY, arcRadius, 0, Math.PI * 2);
+  ctx.stroke();
+
+  ctx.strokeStyle = '#73daca';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(arcCenterX, arcCenterY, arcRadius, -Math.PI / 2, -Math.PI / 2 + arcProgress * Math.PI * 2);
+  ctx.stroke();
+
+  ctx.fillStyle = '#73daca';
+  ctx.font = '9px Courier New';
+  ctx.textAlign = 'center';
+  ctx.fillText('ticks: ' + state.ticks, arcCenterX, arcCenterY + 30);
+
+  ctx.fillStyle = '#606070';
+  ctx.font = '9px Courier New';
+  ctx.textAlign = 'left';
+  ctx.fillText('δ = ' + TICK_DELTA_STR + ' s', 10, H - 8);
+  ctx.fillText('t_P ≈ 5.39e-44 s · tick ≈ ' + TICKS_PER_PLANCK_UNIT.toExponential(2) + ' t_P', 10, H - 20);
+}
+
+function stepTick() {
+  state.pin += 1;
+  if (state.pin >= PIN_ROLLS_OVER) {
+    state.pin = 0;
+    log('● pin rolled over 1000 → 000 @ tick ' + state.ticks, 'event');
+  }
+  state.plankLevel = Math.floor(state.pin / PLANK_STEP);
+  state.ticks += 1;
+  state.simTime += TICK_DELTA;
+  state.planckTicks += TICKS_PER_PLANCK_UNIT;
+
+  pinVal.textContent = fmtPin(state.pin);
+  plankVal.textContent = state.plankLevel;
+  tickVal.textContent = state.ticks.toLocaleString();
+  timeVal.textContent = fmtTime(state.simTime);
+  planckTickVal.textContent = state.planckTicks.toExponential(4);
+}
+
+function tickLoop(ts) {
+  if (!state.running) return;
+  if (state.lastFrame === 0) state.lastFrame = ts;
+  var dt = (ts - state.lastFrame) / 1000;
+  state.lastFrame = ts;
+
+  var ticksThisFrame = Math.floor(state.speed * dt);
+  if (ticksThisFrame > 0) {
+    for (var i = 0; i < ticksThisFrame; i++) {
+      stepTick();
+    }
+    state.rate = ticksThisFrame / dt;
+    rateVal.textContent = fmtRate(state.rate) + ' Hz';
+  }
+  render();
+  requestAnimationFrame(tickLoop);
+}
+
+function toggleRun() {
+  state.running = !state.running;
+  if (state.running) {
+    state.lastFrame = 0;
+    btnRun.textContent = 'PAUSE';
+    btnRun.classList.add('active');
+    log('▶ RUN @ ' + fmtRate(state.speed) + ' ticks/s · pin=' + fmtPin(state.pin), 'tick');
+    requestAnimationFrame(tickLoop);
+  } else {
+    btnRun.textContent = 'RUN';
+    btnRun.classList.remove('active');
+    log('⏸ PAUSED · pin=' + fmtPin(state.pin) + ' plank=' + state.plankLevel, 'state');
+  }
+}
+
+function resetEngine() {
+  state.running = false;
+  btnRun.textContent = 'RUN';
+  btnRun.classList.remove('active');
+  state.pin = 0;
+  state.plankLevel = 0;
+  state.ticks = 0;
+  state.simTime = 0;
+  state.planckTicks = 0;
+  state.rate = 0;
+  state.lastFrame = 0;
+  pinVal.textContent = '000';
+  plankVal.textContent = '0';
+  tickVal.textContent = '0';
+  timeVal.textContent = '0.000e0 s';
+  planckTickVal.textContent = '0.000e0';
+  rateVal.textContent = '0';
+  render();
+  log('↺ RESET → pin=000 plank=0 ticks=0', 'state');
+}
+
+function stepOnce() {
+  if (state.running) toggleRun();
+  stepTick();
+  render();
+  log('▸ STEP 1 tick · pin=' + fmtPin(state.pin) + ' plank=' + state.plankLevel, 'tick');
+}
+
+function setSpeed(s) {
+  state.speed = s;
+  log('⚡ speed → ' + (s === 1 ? '1×' : s === 10 ? '10×' : s === 100 ? '100×' : s === 1000 ? '1kHz' : s === 100000 ? '100kHz' : s + '×'), 'event');
+  if (s === 1) rateVal.textContent = '1.0 Hz';
+  else rateVal.textContent = fmtRate(s) + ' Hz';
+}
+
+function init() {
+  deltaVal.textContent = TICK_DELTA_STR + ' s';
+  widthVal.textContent = '3 digits (000–999)';
+  render();
+  log('✓ sapphon engine ready · tick=' + TICK_DELTA_STR + ' s · pin=000 plank=0', 'state');
+}
+
+// Boot: DOM-first — canvas must exist before first render().
+// Try immediately, then fall back to DOMContentLoaded.
+(function boot() {
+  canvas = document.getElementById('scene');
+  ctx = canvas ? canvas.getContext('2d') : null;
+  if (canvas && ctx) {
+    init();
+  } else {
+    window.addEventListener('DOMContentLoaded', function() {
+      canvas = document.getElementById('scene');
+      ctx = canvas ? canvas.getContext('2d') : null;
+      if (canvas && ctx) init();
+    });
+  }
+})();
+</script>
+</body>
+</html>
