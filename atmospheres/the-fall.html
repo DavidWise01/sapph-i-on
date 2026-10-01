@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Fall — SaPpH{{i}}on</title>
+<style>
+  :root { --ink:#102033; --dim:#4d5c70; --accent:#0f6e8c; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; color:var(--ink);
+    font:16px/1.5 "Segoe UI", ui-sans-serif, sans-serif;
+    background:
+      radial-gradient(800px 420px at 0% 0%, #bae6fd, transparent 60%),
+      radial-gradient(700px 420px at 100% 0%, #ddd6fe, transparent 55%),
+      linear-gradient(165deg, #f0f9ff, #e0f2fe 48%, #ecfeff);
+    background-color:#f0f9ff; min-height:100vh; overflow-wrap:anywhere;
+  }
+  a { color:var(--accent); overflow-wrap:anywhere; }
+  header, main, footer { width:min(980px, calc(100% - 28px)); margin:0 auto; min-width:0; }
+  header { padding:22px 0 0; }
+  .src, .mono { font:13px/1.45 ui-monospace, Consolas, monospace; color:var(--dim); word-break:break-word; }
+  h1 { margin:8px 0 0; font-size:clamp(32px, 6vw, 52px); letter-spacing:.02em; }
+  .kicker { letter-spacing:.16em; font-size:12px; color:var(--accent); font-weight:700; }
+  .stage { background:#f8fdff; border:1px solid rgba(16,32,51,.14); border-radius:18px; padding:14px; margin:14px 0; }
+  canvas { width:100%; height:auto; display:block; border-radius:14px; }
+  .head { font:18px/1.3 ui-monospace, Consolas, monospace; letter-spacing:.08em; margin:8px 0 0; overflow-wrap:anywhere; }
+  .row { display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin:6px 0; max-width:100%; }
+  .mark { width:28px; font:12px ui-monospace, Consolas, monospace; color:var(--dim); }
+  .chip {
+    min-width:54px; padding:4px 6px 3px; border-radius:10px; background:#fff;
+    border:1px solid rgba(16,32,51,.12); text-align:center;
+  }
+  .chip b { display:block; font-size:13px; }
+  .chip i { display:block; font-style:normal; font:10px ui-monospace, Consolas, monospace; color:var(--dim); }
+  .stamp { display:inline-block; padding:2px 8px; border-radius:999px; font:11px ui-monospace, Consolas, monospace; color:#fff; }
+  .lit { background:#0f766e; } .amber { background:#0f6e8c; } .wall { background:#9d174d; }
+  footer { color:var(--dim); font-size:13px; padding-bottom:28px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="src"><a href="../">SaPpH{{i}}on</a> · <a href="the-atmospheres.html">the atmospheres</a> · <a href="https://0root.ai/">0root.ai</a></div>
+  <div class="kicker">750 TO 0</div>
+  <h1>The Fall</h1>
+  <p>The same scale continues from 750 atmospheres down to 0 by steps of 1, and 751 elements continue after +Si in the fib and reverse fib order.</p>
+  <p class="head" id="head"></p>
+</header>
+<main>
+  <div class="stage">
+    <canvas id="sky" width="720" height="420" aria-label="Atmosphere ring from 750 down to 0, the rest of the scale"></canvas>
+    <div id="rows"></div>
+  </div>
+  <p class="mono" id="card"></p>
+  <p><span class="stamp lit">LIT</span> Step 250 is 750. The page then counts by steps of 1 through step 1000, which is 0. That is 751 overlays. Together with the 250 on the first page, the scale holds 1001, one element on every step from 1000 down to 0. The first chip is +P. The fold continues at the next slot, an 8, and the slot after that is the reverse 8. The short row of 3 on the first page stays short. A failed count throws.</p>
+  <p><span class="stamp amber">AMBER</span> The 118 symbols and names are the arrays in Downloads\Periodic-Table-Phd.html, read on 2026-10-01. The numbered copy was not used. The elements continue after +Si. The fold cursor continues. It does not go back and lengthen the short row. The order is assigned. This page is not one of those 144.</p>
+  <p><span class="stamp wall">WALL</span> This page does not publish the periodic-table application. A matching symbol is not a measurement of air, and the countdown is not a claim about weather, physics, or authority. The last row takes 1 of a 2 and does not finish that slot. Step 1001 is not drawn here. The wrap from 0 back to 1000 is the first page. The walk was already full, so this page is not seated.</p>
+</main>
+<footer>
+  David Lee Wise (ROOT0). Drafted by Grok (xAI) on 2026-10-01.
+  Birth seal ab10c66b0f5f41a05ac8cc0addb749fd4f1d7507a37cf3947190e6f63070143d. One host, <a href="https://davidwise01.github.io/sapph-i-on/atmospheres/the-fall.html">this page</a>.
+  Reference Periodic-Table-Phd.html.
+</footer>
+<script>
+"use strict";
+var SYMBOLS = ["H","He","Li","Be","B","C","N","O","F","Ne","Na","Mg","Al","Si","P","S","Cl","Ar","K","Ca","Sc","Ti","V","Cr","Mn","Fe","Co","Ni","Cu","Zn","Ga","Ge","As","Se","Br","Kr","Rb","Sr","Y","Zr","Nb","Mo","Tc","Ru","Rh","Pd","Ag","Cd","In","Sn","Sb","Te","I","Xe","Cs","Ba","La","Ce","Pr","Nd","Pm","Sm","Eu","Gd","Tb","Dy","Ho","Er","Tm","Yb","Lu","Hf","Ta","W","Re","Os","Ir","Pt","Au","Hg","Tl","Pb","Bi","Po","At","Rn","Fr","Ra","Ac","Th","Pa","U","Np","Pu","Am","Cm","Bk","Cf","Es","Fm","Md","No","Lr","Rf","Db","Sg","Bh","Hs","Mt","Ds","Rg","Cn","Nh","Fl","Mc","Lv","Ts","Og"];
+var NAMES = ["Hydrogen","Helium","Lithium","Beryllium","Boron","Carbon","Nitrogen","Oxygen","Fluorine","Neon","Sodium","Magnesium","Aluminium","Silicon","Phosphorus","Sulfur","Chlorine","Argon","Potassium","Calcium","Scandium","Titanium","Vanadium","Chromium","Manganese","Iron","Cobalt","Nickel","Copper","Zinc","Gallium","Germanium","Arsenic","Selenium","Bromine","Krypton","Rubidium","Strontium","Yttrium","Zirconium","Niobium","Molybdenum","Technetium","Ruthenium","Rhodium","Palladium","Silver","Cadmium","Indium","Tin","Antimony","Tellurium","Iodine","Xenon","Cesium","Barium","Lanthanum","Cerium","Praseodymium","Neodymium","Promethium","Samarium","Europium","Gadolinium","Terbium","Dysprosium","Holmium","Erbium","Thulium","Ytterbium","Lutetium","Hafnium","Tantalum","Tungsten","Rhenium","Osmium","Iridium","Platinum","Gold","Mercury","Thallium","Lead","Bismuth","Polonium","Astatine","Radon","Francium","Radium","Actinium","Thorium","Protactinium","Uranium","Neptunium","Plutonium","Americium","Curium","Berkelium","Californium","Einsteinium","Fermium","Mendelevium","Nobelium","Lawrencium","Rutherfordium","Dubnium","Seaborgium","Bohrium","Hassium","Meitnerium","Darmstadtium","Roentgenium","Copernicium","Nihonium","Flerovium","Moscovium","Livermorium","Tennessine","Oganesson"];
+
+function atmosphereAt(step) {
+  var span = 1001;
+  return ((1000 - step) % span + span) % span;
+}
+function proveFall(symbols, names) {
+  var faults = [];
+  if (symbols.length !== 118 || names.length !== 118) faults.push("table");
+  if (symbols[0] !== "H" || names[0] !== "Hydrogen") faults.push("hydrogen");
+  if (symbols[13] !== "Si" || names[13] !== "Silicon") faults.push("silicon");
+  if (symbols[14] !== "P" || names[14] !== "Phosphorus") faults.push("phosphorus");
+  if (symbols[117] !== "Og" || names[117] !== "Oganesson") faults.push("oganesson");
+  if (atmosphereAt(0) !== 1000 || atmosphereAt(1) !== 999 || atmosphereAt(249) !== 751) faults.push("head");
+  if (atmosphereAt(250) !== 750 || atmosphereAt(251) !== 749 || atmosphereAt(252) !== 748 || atmosphereAt(253) !== 747) faults.push("fallhead");
+  if (atmosphereAt(1000) !== 0) faults.push("zero");
+  if (atmosphereAt(1001) !== 1000) faults.push("wrap");
+  var step;
+  for (step = 250; step < 1000; step++) {
+    if (atmosphereAt(step) - atmosphereAt(step + 1) !== 1) { faults.push("step"); break; }
+  }
+  var asc = [1, 1, 2, 3, 5, 8];
+  var desc = [8, 5, 3, 2, 1, 1];
+  var f;
+  for (f = 0; f < 6; f++) if (desc[f] !== asc[5 - f]) faults.push("reverse");
+  var fold = asc.concat(desc);
+  var foldSum = 0;
+  fold.forEach(function (n) { foldSum += n; });
+  if (foldSum !== 40) faults.push("fold");
+  function lay(from, count, startFi) {
+    var rows = [];
+    var overlays = [];
+    var left = count;
+    var fi = startFi;
+    var n = 0;
+    while (left > 0) {
+      var want = fold[fi % fold.length];
+      var take = want < left ? want : left;
+      var c;
+      for (c = 0; c < take; c++) {
+        var at = from + n;
+        overlays.push({
+          label: "+" + symbols[at % 118],
+          name: names[at % 118],
+          number: (at % 118) + 1,
+          atm: atmosphereAt(at),
+          step: at
+        });
+        n++;
+      }
+      rows.push({ want: want, take: take, mark: (fi % 12) < 6 ? "/" : "\\" });
+      left -= take;
+      fi++;
+    }
+    return { rows: rows, overlays: overlays, nextFi: fi, placed: n };
+  }
+  var opened = lay(0, 250, 0);
+  var openedLast = opened.rows[opened.rows.length - 1];
+  if (opened.placed !== 250 || opened.rows.length !== 77 || opened.nextFi !== 77) faults.push("opened");
+  if (!openedLast || openedLast.want !== 5 || openedLast.take !== 3) faults.push("short");
+  if (opened.overlays[249].label !== "+Si" || opened.overlays[249].atm !== 751) faults.push("handoff");
+  var fall = lay(250, 751, opened.nextFi);
+  if (250 + 751 !== 1001 || fall.placed !== 751) faults.push("cover");
+  if (fall.overlays.length !== 751) faults.push("count");
+  if (fall.overlays[0].label !== "+P" || fall.overlays[0].name !== "Phosphorus" || fall.overlays[0].atm !== 750 || fall.overlays[0].step !== 250) faults.push("first");
+  var end = fall.overlays[750];
+  if (!end || end.step !== 1000 || end.atm !== 0) faults.push("endstep");
+  if (fall.rows[0].want !== 8 || fall.rows[0].take !== 8 || fall.rows[0].mark !== "/") faults.push("nextslot");
+  if (fall.rows[1].want !== 8 || fall.rows[1].take !== 8 || fall.rows[1].mark !== "\\") faults.push("reversepeak");
+  var sum = 0;
+  fall.rows.forEach(function (r) { sum += r.take; });
+  if (sum !== 751) faults.push("rowsum");
+  var prior = 0;
+  for (f = 0; f < 72; f++) prior += fold[f % 12];
+  if (prior !== 240) faults.push("prior");
+  return { faults: faults, fall: fall, opened: opened };
+}
+function paintRing(canvas, overlays) {
+  var ctx = canvas.getContext("2d");
+  var w = canvas.width, h = canvas.height;
+  var cx = w * 0.5, cy = h * 0.52;
+  var g = ctx.createLinearGradient(0, 0, 0, h);
+  g.addColorStop(0, "hsl(196,72%,64%)");
+  g.addColorStop(0.5, "hsl(222,48%,40%)");
+  g.addColorStop(1, "hsl(188,42%,28%)");
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, w, h);
+  var counts = { ticks: 0, overlay: 0, primary: 0 };
+  var i, ang, rad, x, y;
+  for (i = 0; i <= 1000; i++) {
+    ang = -Math.PI / 2 + (i / 1000) * Math.PI * 2;
+    rad = i >= 250 ? 132 : 168;
+    x = cx + Math.cos(ang) * rad;
+    y = cy + Math.sin(ang) * rad * 0.92;
+    ctx.fillStyle = i >= 250 ? "hsl(" + ((i * 17) % 360) + ",78%,70%)" : "hsla(190,40%,96%,0.45)";
+    ctx.beginPath();
+    ctx.arc(x, y, i >= 250 ? 2.2 : 1.1, 0, Math.PI * 2);
+    ctx.fill();
+    counts.ticks++;
+    if (i >= 250) counts.overlay++;
+  }
+  var sun = ctx.createRadialGradient(cx, cy, 4, cx, cy, 36);
+  sun.addColorStop(0, "hsl(186,100%,90%)");
+  sun.addColorStop(1, "hsla(200,90%,55%,0)");
+  ctx.fillStyle = sun;
+  ctx.beginPath();
+  ctx.arc(cx, cy, 36, 0, Math.PI * 2);
+  ctx.fill();
+  counts.primary++;
+  if (counts.ticks !== 1001 || counts.overlay !== 751 || counts.primary !== 1) throw new Error("LIT FAIL ring");
+  if (overlays.length !== 751) throw new Error("LIT FAIL ring overlays");
+  return counts;
+}
+
+function el(tag, cls, text) {
+  var n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text != null) n.textContent = text;
+  return n;
+}
+function draw(report) {
+  var fall = report.fall;
+  paintRing(document.getElementById("sky"), fall.overlays);
+  document.getElementById("head").textContent = "750  749  748  747";
+  var host = document.getElementById("rows");
+  var cursor = 0;
+  var chips = 0;
+  fall.rows.forEach(function (row) {
+    var line = el("div", "row");
+    line.appendChild(el("span", "mark", row.mark + row.take));
+    var c;
+    for (c = 0; c < row.take; c++) {
+      var item = fall.overlays[cursor++];
+      var chip = el("span", "chip");
+      chip.style.background = "hsl(" + ((item.number * 29) % 360) + ",70%,88%)";
+      chip.appendChild(el("b", "", item.label));
+      chip.appendChild(el("i", "", String(item.atm)));
+      chip.title = item.name + " · " + item.atm + " atmospheres";
+      line.appendChild(chip);
+      chips++;
+    }
+    host.appendChild(line);
+  });
+  if (chips !== 751 || cursor !== 751) throw new Error("LIT FAIL chips");
+  if (host.querySelector(".chip b").textContent !== "+P") throw new Error("LIT FAIL plus p");
+  var tail = host.querySelectorAll(".chip");
+  var endChip = tail[tail.length - 1];
+  if (!endChip || endChip.querySelector("i").textContent !== "0") throw new Error("LIT FAIL zero");
+}
+var report = proveFall(SYMBOLS, NAMES);
+var card = document.getElementById("card");
+if (!report || report.faults.length) {
+  var msg = (report && report.faults.join(", ")) || "no report";
+  card.innerHTML = "<span class='stamp wall'>WALL</span> LIT FAIL " + msg;
+  throw new Error("LIT FAIL " + msg);
+}
+var endRow = report.fall.rows[report.fall.rows.length - 1];
+var endItem = report.fall.overlays[750];
+card.innerHTML = "<span class='stamp lit'>LIT</span> 750 to 0 by 1 · 751 overlays · +P · ends " + endItem.label + " at 0 · last row " + endRow.take + " of " + endRow.want;
+draw(report);
+</script>
+</body>
+</html>
