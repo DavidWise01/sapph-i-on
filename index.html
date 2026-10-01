@@ -123,6 +123,10 @@
   }
   .card .mono { margin:8px 0 0; color:var(--dim); }
   .gui-nav { display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 0; }
+  .sky {
+    display:block; width:100%; height:auto; margin-top:14px;
+    border:0; border-radius:18px; background:#e7eefc;
+  }
   .gui-nav button {
     font:12px/1 var(--sans); padding:8px 12px; border-radius:999px;
     border:1px solid var(--line); background:#fff; cursor:pointer;
@@ -182,17 +186,17 @@
   .seat a { display:block; margin-top:6px; text-decoration:none; }
   .seat a:hover { text-decoration:underline; }
   .seat .addr { color:var(--dim); font:12px/1.4 var(--mono); margin:4px 0 6px; }
-  .corpus, .archive, .libraries, .folio, .strip, .nested, .nests, .qdot, .dots, .next, .plank, .bonk, .gold, .generative, .toroid, .onward, .gravity, .sapphon, .neon, .later {
+  .corpus, .archive, .libraries, .folio, .strip, .nested, .nests, .qdot, .dots, .next, .plank, .bonk, .gold, .generative, .toroid, .onward, .gravity, .sapphon, .neon, .later, .universe {
     display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
     gap:8px; margin:0 0 8px;
   }
-  .corpus a, .archive a, .libraries a, .folio a, .strip a, .nested a, .nests a, .qdot a, .dots a, .next a, .plank a, .bonk a, .gold a, .generative a, .toroid a, .onward a, .gravity a, .sapphon a, .neon a, .later a {
+  .corpus a, .archive a, .libraries a, .folio a, .strip a, .nested a, .nests a, .qdot a, .dots a, .next a, .plank a, .bonk a, .gold a, .generative a, .toroid a, .onward a, .gravity a, .sapphon a, .neon a, .later a, .universe a {
     display:block; padding:11px 12px; border-radius:14px;
     background:rgba(255,252,248,.8); border:1px solid var(--line);
     color:var(--ink); text-decoration:none; font-size:13.5px; line-height:1.35;
   }
   .corpus a:hover, .archive a:hover, .libraries a:hover, .folio a:hover, .strip a:hover,
-  .nested a:hover, .nests a:hover, .qdot a:hover, .dots a:hover, .next a:hover, .plank a:hover, .bonk a:hover, .gold a:hover, .generative a:hover, .toroid a:hover, .onward a:hover, .gravity a:hover, .sapphon a:hover, .neon a:hover, .later a:hover {
+  .nested a:hover, .nests a:hover, .qdot a:hover, .dots a:hover, .next a:hover, .plank a:hover, .bonk a:hover, .gold a:hover, .generative a:hover, .toroid a:hover, .onward a:hover, .gravity a:hover, .sapphon a:hover, .neon a:hover, .later a:hover, .universe a:hover {
     border-color:var(--sapphire); background:#fff;
   }
   .fold {
@@ -211,7 +215,7 @@
 <header>
   <p class="eyebrow"><a href="https://0root.ai/">0root.ai</a> · world 7 · order 7^3 · galaxy door · 24 spheres</p>
   <h1>SaPpH<span>{{i}}</span>on</h1>
-  <p class="lede">Select a cell. That sphere is the GUI.</p>
+  <p class="lede">Select a cell. That sphere is the GUI, and it is one full universe.</p>
   <p class="door-note">door number 7 · assigned · palindrome of five · unchanged</p>
 </header>
 <main>
@@ -247,14 +251,16 @@
       <h2 id="iname">center</h2>
       <p class="mono" id="ibody"></p>
       <div class="gui-nav" id="guinav"></div>
-      <p class="gui-wait" id="guiwait">Choose a held cell. Its sphere fills this frame. The keeper at the center is this door.</p>
+      <canvas class="sky" id="sky" width="640" height="280" aria-label="The generated universe of this sphere"></canvas>
+      <p class="mono" id="skycard"></p>
+      <p class="gui-wait" id="guiwait">Choose a held cell. Its sphere fills this frame. The sky above is generated for that cell. Each sphere is one full universe. The keeper at the center is this door.</p>
       <iframe class="gui" id="gui" title="The sphere on this cell" hidden></iframe>
     </div>
   </div>
 
   <details class="shelf">
     <summary>What this door holds</summary>
-    <p class="census">World 7 is the cube of 7. This page is the galaxy door: it counts the cube and throws if the count is wrong. A galaxy holds 24 spheres, three on each corner seat. Beside those seats are four more cubes of 24: a Downloads copy, an Internet Archive cube, a library cube, and a folio cube that alternates article and thought. A nested strip holds two spheres, minus-plus and plus-minus, offset 1, 2, 1, 2, 1, 2. Four mirrors close on the one-sided number 420024. A nested cube holds 24 files copied unchanged from Downloads, the newest nested cubes and nests, numbered copies skipped. A further nest holds the next 24. A quantum dot holds 24 files whose names say quantum, and the plant page says the payloads converge there. A dot cube holds the next 24. A next cube holds 24 files whose names say next. A plank cube holds 24 files whose names say plank. A bonk cube holds 24 files whose names say bonk. A gold cube holds 24 files whose names say gold. A generative cube holds 24 counts. Each page generates its figure and throws if the count fails. Twenty toroid files fill the cells that remained. The bytes are the Downloads files whose names say toroid. Select a cell and that sphere is the GUI. A further next holds 24 files whose names say next. A gravity set holds 24 files whose names say gravity. A sapphon set holds 24 files whose names say sapphon. A neon set holds 24 files whose names say neon. A later next holds 24 files whose names say next. The cells are full, so those 120 are published beside the cube and are not seated.</p>
+    <p class="census">World 7 is the cube of 7. This page is the galaxy door: it counts the cube and throws if the count is wrong. A galaxy holds 24 spheres, three on each corner seat. Beside those seats are four more cubes of 24: a Downloads copy, an Internet Archive cube, a library cube, and a folio cube that alternates article and thought. A nested strip holds two spheres, minus-plus and plus-minus, offset 1, 2, 1, 2, 1, 2. Four mirrors close on the one-sided number 420024. A nested cube holds 24 files copied unchanged from Downloads, the newest nested cubes and nests, numbered copies skipped. A further nest holds the next 24. A quantum dot holds 24 files whose names say quantum, and the plant page says the payloads converge there. A dot cube holds the next 24. A next cube holds 24 files whose names say next. A plank cube holds 24 files whose names say plank. A bonk cube holds 24 files whose names say bonk. A gold cube holds 24 files whose names say gold. A generative cube holds 24 counts. Each page generates its figure and throws if the count fails. Twenty toroid files fill the cells that remained. The bytes are the Downloads files whose names say toroid. Select a cell and that sphere is the GUI. A further next holds 24 files whose names say next. A gravity set holds 24 files whose names say gravity. A sapphon set holds 24 files whose names say sapphon. A neon set holds 24 files whose names say neon. A later next holds 24 files whose names say next. An evolution set holds 24 public repositories from DavidWise01, newest first. Each page generates one sky and asks GitHub for that repository. Each sphere is one full universe. The cells are full, so those 144 are published beside the cube and are not seated.</p>
   </details>
 
   <details class="shelf" open>
@@ -400,6 +406,13 @@
     <p class="mono" id="latercard"></p>
   </details>
 
+  <details class="shelf">
+    <summary>Evolution · 24</summary>
+    <p class="sub">The 24 newest public repositories on DavidWise01, excluding this cube and the hallway. Each page generates one sky and asks GitHub for that repository. Each sphere is one full universe. The bytes were not copied. The cells are full, so these 24 are not seated.</p>
+    <div class="universe" id="universe"></div>
+    <p class="mono" id="universecard"></p>
+  </details>
+
   <section class="read">
     <h2>WHAT THE PAGE PROVES</h2>
     <p><span class="stamp lit">LIT</span> Every cell of a 7×7×7 grid is visited once. Cells with 3 faces exposed are corners (8). Cells with 2 are edges (12×5 = 60). Cells with 1 are faces (6×25 = 150). Cells with 0 are interior (5³ = 125). Those four counts sum to 343, and 7×7×7 is 343. The odd side leaves exactly one center, at (3,3,3). 343 = (3+4)³, and 3, 4, 3 are the digits of 343. Complex multiplication gives i² = −1 and i³ = −i. A failed check throws and the grid is not drawn.</p>
@@ -425,8 +438,9 @@
     <p><span class="stamp amber">AMBER</span> The sapphon set is the 24 newest files whose names say sapphon, taken from Downloads and the Desktop. Sapphons is the same name. Numbered copies were skipped. The bytes were copied unchanged. The order is assigned.</p>
     <p><span class="stamp amber">AMBER</span> The neon set is the 24 newest Downloads files whose names say neon. Numbered copies were skipped. The bytes were copied unchanged. The order is assigned.</p>
     <p><span class="stamp amber">AMBER</span> The later next is the 24 newest Downloads files whose names say next, after the next cube and the further next. Numbered copies were skipped. The bytes were copied unchanged. The order is assigned.</p>
-    <p><span class="stamp wall">WALL</span> The walk has no cell left. The further next, the gravity set, the sapphon set, the neon set, and the later next are published beside the cube. They are not seated.</p>
-    <p><span class="stamp lit">LIT</span> 334 spheres sit on 334 cells. The walk is z, then y, then x. Corners and the keeper are skipped. One sphere, one cell. Selecting the cell opens that page.</p>
+    <p><span class="stamp amber">AMBER</span> The evolution set is the 24 newest public repositories on DavidWise01 as listed on 2026-10-01, excluding sapph-i-on and 0root. The account listed 2141 public repositories that day. Private repositories were not read. Each page generates one sky of 343 motes and one primary, and it asks GitHub for the repository name. The bytes were not copied. The order is assigned. A repository that belongs to another world stays on its own host. 2141 minus this cube, the hallway, and these 24 leaves 2115 public repositories on their own hosts.</p>
+    <p><span class="stamp wall">WALL</span> The walk has no cell left. The further next, the gravity set, the sapphon set, the neon set, the later next, and the evolution set are published beside the cube. They are not seated. The evolution shelf is not the rest of the account.</p>
+    <p><span class="stamp lit">LIT</span> 334 spheres sit on 334 cells. The walk is z, then y, then x. Corners and the keeper are skipped. One sphere, one cell. Selecting the cell opens that page. Each cell generates one sky. A corner generates one sky for each of its three spheres. The keeper generates one sky. That is 359 skies. Each sky places 343 motes and one primary. A failed count throws.</p>
     <p><span class="stamp amber">AMBER</span> The walk order is assigned. The eight corners still hold three spheres each, and selecting a corner opens those three. The keeper at (3,3,3) is the door, not one of the files.</p>
     <p><span class="stamp wall">WALL</span> This galaxy does not extend the palindrome [ W1 | W2 ‖ W3 ‖ W4 | W5 ] and does not record a world 6. i³ = −i is arithmetic. It does not locate the cube on a physical imaginary axis, and it is not a claim about mind, physics, or authority. The strip's check is the number 420024. It does not measure glass, and it does not fold a piece of paper.</p>
     <p class="mono" id="card"></p>
@@ -516,13 +530,13 @@ function describe(x, y, z) {
   var k = kindAt(x, y, z);
   var ci = cornerIndex(x, y, z);
   if (k === "keeper") {
-    return {title:"SaPpH{{i}}on", body:"keeper · cell (3,3,3) · the one center of an odd cube. This page is the galaxy door. The voice that says the keeper chose the cube is AMBER — assigned, not observed.", pages:[]};
+    return {title:"SaPpH{{i}}on", body:"keeper · cell (3,3,3) · the one center of an odd cube. This page is the galaxy door, and this sky is one full universe. The voice that says the keeper chose the cube is AMBER — assigned, not observed.", pages:[]};
   }
   if (ci >= 0) {
     var mine = SPHERES.filter(function (s) { return s.steward === APPEALS[ci]; });
     return {
       title: APPEALS[ci],
-      body: "corner (" + x + "," + y + "," + z + ") · three spheres · this seat's GUI.",
+      body: "corner (" + x + "," + y + "," + z + ") · three spheres · this seat's GUI. Each sphere is one full universe.",
       pages: mine.map(function (s) { return {title:s.title, href:"spheres/" + s.slug + ".html"}; })
     };
   }
@@ -530,7 +544,7 @@ function describe(x, y, z) {
   if (held) {
     return {
       title: faceTitle(held.title),
-      body: held.cube + " · cell (" + x + "," + y + "," + z + ") · this sphere is the GUI of the cell.",
+      body: held.cube + " · cell (" + x + "," + y + "," + z + ") · this sphere is the GUI of the cell, and it is one full universe.",
       pages: [{title:held.title, href:held.href}]
     };
   }
@@ -551,10 +565,11 @@ function show(x, y, z) {
       if (stage && stage.scrollIntoView) stage.scrollIntoView({block:"nearest"});
     }
   }
+  paintUniverse(x, y, z, 0);
   if (!d.pages.length) {
     gui.hidden = true;
     gui.removeAttribute("src");
-    if (wait) wait.hidden = false;
+    if (wait) wait.hidden = true;
     bring();
     return;
   }
@@ -567,6 +582,7 @@ function show(x, y, z) {
     b.className = i === 0 ? "on" : "";
     b.addEventListener("click", function (ev) {
       gui.src = p.href;
+      paintUniverse(x, y, z, i);
       for (var j = 0; j < nav.children.length; j++) nav.children[j].className = "";
       ev.currentTarget.className = "on";
     });
@@ -1461,6 +1477,60 @@ fetch("later/manifest.json").then(function (res) {
   throw err;
 });
 
+var UNIVERSE = [
+  "qd-prim-life-ledger.html",
+  "homer.html",
+  "nom.html",
+  "oasis.html",
+  "atlas.html",
+  "v126-his-brother-kcin.html",
+  "v128-full-family-ice.html",
+  "isomorphic-tut-cipher-3.html",
+  "ring-360-full-turn-sign.html",
+  "v107-uxinf-w1-final.html",
+  "360-dots-eating-themselves.html",
+  "four-into-the-zero.html",
+  "v108-pin-pna-triple.html",
+  "add-more-pin-nested.html",
+  "DavidWise01.github.io.html",
+  "super-sapphon.html",
+  "ud0.html",
+  "toroid-kernel.html",
+  "prairie-birch-civic-topaz.html",
+  "root0-philosophy-books.html",
+  "positronic-law.html",
+  "the-whetstone-seat.html",
+  "the-even-parity.html",
+  "the-l1-l2.html"
+];
+if (UNIVERSE.length !== 24) throw new Error("LIT FAIL universe count");
+if (2141 - 24 - 2 !== 2115) throw new Error("LIT FAIL evolution remainder");
+var seenUniverse = {};
+var universeEl = document.getElementById("universe");
+UNIVERSE.forEach(function (file) {
+  if (seenUniverse[file]) throw new Error("LIT FAIL universe duplicate");
+  seenUniverse[file] = 1;
+  var a = document.createElement("a");
+  a.href = "universe/" + file;
+  a.textContent = file.replace(/\.html$/, "");
+  universeEl.appendChild(a);
+});
+fetch("universe/manifest.json").then(function (res) {
+  if (!res.ok) throw new Error("LIT FAIL universe manifest");
+  return res.json();
+}).then(function (rows) {
+  if (!rows || rows.length !== 24) throw new Error("LIT FAIL universe manifest count");
+  rows.forEach(function (row, i) {
+    if (row.file !== UNIVERSE[i]) throw new Error("LIT FAIL universe order");
+    if (!/^[0-9a-f]{64}$/.test(row.sha256)) throw new Error("LIT FAIL universe hash");
+    if (row.repo !== "DavidWise01/" + row.file.replace(/\.html$/, "")) throw new Error("LIT FAIL universe repo");
+  });
+  document.getElementById("universecard").innerHTML = "<span class='stamp lit'>LIT</span> 24 evolution universes, manifest order matches";
+}).catch(function (err) {
+  document.getElementById("universecard").innerHTML = "<span class='stamp wall'>WALL</span> " + err.message;
+  throw err;
+});
+
 var ARCHIVE = [
   {steward:"ETHOS", slug:"the-civil-law", title:"The Civil Law"},
   {steward:"ETHOS", slug:"the-whole-body", title:"The Whole Body"},
@@ -1696,6 +1766,126 @@ if (layers) {
     layers.appendChild(lb);
   }
 }
+function skyRng(seed) {
+  var a = seed >>> 0;
+  return function () {
+    a = (a + 0x6D2B79F5) >>> 0;
+    var t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+function skySeed(x, y, z, which) {
+  var n = ((x + 1) * 73856093) ^ ((y + 1) * 19349663) ^ ((z + 1) * 83492791) ^ ((which + 1) * 2654435761);
+  return n >>> 0;
+}
+function universeOf(x, y, z, which) {
+  var faults = [];
+  if (x < 0 || y < 0 || z < 0 || x > 6 || y > 6 || z > 6) faults.push("cell");
+  if (which < 0 || which > 2) faults.push("which");
+  var corners = 0, edges = 0, faces = 0, interior = 0, n = 0;
+  var motes = [];
+  var zz, yy, xx, exposed;
+  for (zz = 0; zz < 7; zz++) for (yy = 0; yy < 7; yy++) for (xx = 0; xx < 7; xx++) {
+    exposed = (xx === 0 || xx === 6 ? 1 : 0) + (yy === 0 || yy === 6 ? 1 : 0) + (zz === 0 || zz === 6 ? 1 : 0);
+    if (exposed === 3) corners++;
+    else if (exposed === 2) edges++;
+    else if (exposed === 1) faces++;
+    else interior++;
+    n++;
+    motes.push({ x: xx, y: yy, z: zz, exposed: exposed });
+  }
+  if (n !== 343 || motes.length !== 343) faults.push("motes");
+  if (corners !== 8 || edges !== 60 || faces !== 150 || interior !== 125) faults.push("census");
+  if (corners + edges + faces + interior !== 343) faults.push("sum");
+  if (corners + edges + faces !== 218) faults.push("shell");
+  if ((3 + 4) * (3 + 4) * (3 + 4) !== 343) faults.push("digits");
+  return { faults: faults, motes: motes, primary: 1, seed: skySeed(x, y, z, which) };
+}
+function proveAllUniverses() {
+  var faults = [];
+  var skies = 0;
+  var z, y, x, span, w, u;
+  for (z = 0; z < 7; z++) for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+    span = kindAt(x, y, z) === "corner" ? 3 : 1;
+    for (w = 0; w < span; w++) {
+      u = universeOf(x, y, z, w);
+      if (u.faults.length || u.motes.length !== 343 || u.primary !== 1) faults.push(x + "," + y + "," + z + ":" + w);
+      skies++;
+    }
+  }
+  if (skies !== 359) faults.push("skies");
+  if (334 + 24 + 1 !== 359) faults.push("sphere skies");
+  if (343 + 16 !== 359) faults.push("cell skies");
+  return faults;
+}
+function paintUniverse(x, y, z, which) {
+  var u = universeOf(x, y, z, which);
+  if (u.faults.length || u.motes.length !== 343 || u.primary !== 1) {
+    throw new Error("LIT FAIL universe " + (u.faults.join(", ") || "count"));
+  }
+  var canvas = document.getElementById("sky");
+  var ctx = canvas.getContext("2d");
+  var w = canvas.width, h = canvas.height;
+  var hue = u.seed % 360;
+  var rng = skyRng(u.seed);
+  var counts = { puffs: 0, rings: 0, motes: 0, primary: 0 };
+  var g = ctx.createLinearGradient(0, 0, 0, h);
+  g.addColorStop(0, "hsl(" + hue + ",64%,48%)");
+  g.addColorStop(0.42, "hsl(" + ((hue + 24) % 360) + ",52%,30%)");
+  g.addColorStop(1, "hsl(" + ((hue + 48) % 360) + ",40%,16%)");
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, w, h);
+  var i, px, py, pr, puff;
+  for (i = 0; i < 4; i++) {
+    px = rng() * w; py = rng() * h; pr = 28 + rng() * 70;
+    puff = ctx.createRadialGradient(px, py, 4, px, py, pr);
+    puff.addColorStop(0, "hsla(" + ((hue + 30 + i * 18) % 360) + ",80%,74%,0.40)");
+    puff.addColorStop(1, "hsla(" + hue + ",40%,50%,0)");
+    ctx.fillStyle = puff;
+    ctx.beginPath();
+    ctx.arc(px, py, pr, 0, Math.PI * 2);
+    ctx.fill();
+    counts.puffs++;
+  }
+  var cx = w * (0.46 + rng() * 0.08);
+  var cy = h * (0.44 + rng() * 0.08);
+  ctx.strokeStyle = "hsla(" + ((hue + 40) % 360) + ",70%,86%,0.9)";
+  ctx.lineWidth = 1.25;
+  for (i = 1; i <= 2; i++) {
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, 42 * i, 16 * i, (rng() - 0.5) * 0.7, 0, Math.PI * 2);
+    ctx.stroke();
+    counts.rings++;
+  }
+  u.motes.forEach(function (m) {
+    var mx = 12 + rng() * (w - 24);
+    var my = 10 + rng() * (h - 20);
+    var mr = m.exposed === 3 ? 2.2 : m.exposed === 0 ? 0.7 : 1.2;
+    ctx.fillStyle = m.exposed === 3 ? "hsl(42,92%,74%)" : "hsla(" + ((hue + 16) % 360) + ",85%,94%," + (0.45 + m.exposed * 0.14) + ")";
+    ctx.beginPath();
+    ctx.arc(mx, my, mr, 0, Math.PI * 2);
+    ctx.fill();
+    counts.motes++;
+  });
+  var sun = ctx.createRadialGradient(cx, cy, 2, cx, cy, 26);
+  sun.addColorStop(0, "hsl(46,100%,88%)");
+  sun.addColorStop(0.42, "hsl(" + hue + ",92%,66%)");
+  sun.addColorStop(1, "hsla(" + hue + ",80%,50%,0)");
+  ctx.fillStyle = sun;
+  ctx.beginPath();
+  ctx.arc(cx, cy, 26, 0, Math.PI * 2);
+  ctx.fill();
+  counts.primary++;
+  if (counts.motes !== 343 || counts.primary !== 1 || counts.puffs !== 4 || counts.rings !== 2) {
+    throw new Error("LIT FAIL sky paint");
+  }
+  var k = kindAt(x, y, z);
+  var who = k === "keeper" ? "the door" : k === "corner" ? "corner sphere " + (which + 1) : "this sphere";
+  document.getElementById("skycard").innerHTML = "<span class='stamp lit'>LIT</span> one universe · " + who + " · (" + x + "," + y + "," + z + ") · 343 motes · 1 primary";
+}
+var skyFaults = proveAllUniverses();
+if (skyFaults.length) throw new Error("LIT FAIL skies " + skyFaults.slice(0, 4).join(" "));
 var opened = false;
 zInput.addEventListener("input", draw);
 document.addEventListener("keydown", function (e) {
