@@ -265,5 +265,18 @@ Hallway door
   commit: 660f72d8f118f5364c8f7b849f28df660f690bae
   message: name the atmospheres beside the 7^3 door
 
+The fall · 2026-10-01
+
+The walk was full, so this page is not seated. The same scale continues from step 250, which is 750 atmospheres, down by steps of 1 to step 1000, which is 0. That is 751 elements, beginning with +P after +Si. The fold cursor continues at the next slot, an 8, and does not lengthen the short row of 3. The last overlay is +La at 0. The last row takes 1 of a 2. 250 plus 751 is 1001, one element on every step from 1000 down to 0. The galaxy birth seal was not rewritten. The seated count stays 334. This page is not one of those 144.
+
+  commit: d1b6e05183c8c32f0741268395a406a45d295217
+  message: the fall, 750 to 0, beside the cube
+  file: atmospheres/the-fall.html, 13090 bytes, sha256 659f8adb4ace9bbc16c482efe90b108d1fb7147c2dd234698ef9f10fc3ef0116
+  check: node page: 751 chips, first +P at 750, the third step is 747, last +La at 0, 226 rows, first mark /8, descending mark \8, last row /1. The door seats 334. No atmosphere file is seated. The shelf links the-atmospheres.html then the-fall.html. Cell (0,0,4) stays dots/Quantum-Tunneler-Double-J.html. A short hash throws LIT FAIL atmospheres hash. A swapped file throws LIT FAIL atmospheres order. A wrong first element throws LIT FAIL fall overlay. Chrome showed the LIT card, the head 750  749  748  747, and 751 chips on a background of rgb(240, 249, 255). The first page still showed 250 chips beginning +H. The page did not overflow at 1280 or at innerWidth 390. The door at 1280 opened that cell and did not overflow. At a requested width of 390 Chrome reported innerWidth 444, and the door did not scroll past that window.
+
+Hallway door
+  commit: e5cabe3e57eb87634e1f5658888c85d73329f077
+  message: name the fall beside the 7^3 door
+
 
 
