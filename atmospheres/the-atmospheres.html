@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Atmospheres — SaPpH{{i}}on</title>
+<style>
+  :root { --ink:#1a1230; --dim:#5c5470; --accent:#b45309; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; color:var(--ink);
+    font:16px/1.5 "Segoe UI", ui-sans-serif, sans-serif;
+    background:
+      radial-gradient(800px 420px at 0% 0%, #fde68a, transparent 60%),
+      radial-gradient(700px 420px at 100% 0%, #c7d2fe, transparent 55%),
+      linear-gradient(165deg, #fff7ed, #f3e8ff 48%, #e0f2fe);
+    background-color:#fff7ed; min-height:100vh; overflow-wrap:anywhere;
+  }
+  a { color:var(--accent); overflow-wrap:anywhere; }
+  header, main, footer { width:min(980px, calc(100% - 28px)); margin:0 auto; min-width:0; }
+  header { padding:22px 0 0; }
+  .src, .mono { font:13px/1.45 ui-monospace, Consolas, monospace; color:var(--dim); word-break:break-word; }
+  h1 { margin:8px 0 0; font-size:clamp(32px, 6vw, 52px); letter-spacing:.02em; }
+  .kicker { letter-spacing:.16em; font-size:12px; color:var(--accent); font-weight:700; }
+  .stage { background:#fffaf3; border:1px solid rgba(26,18,48,.14); border-radius:18px; padding:14px; margin:14px 0; }
+  canvas { width:100%; height:auto; display:block; border-radius:14px; }
+  .head { font:18px/1.3 ui-monospace, Consolas, monospace; letter-spacing:.08em; margin:8px 0 0; overflow-wrap:anywhere; }
+  .row { display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin:6px 0; max-width:100%; }
+  .mark { width:28px; font:12px ui-monospace, Consolas, monospace; color:var(--dim); }
+  .chip {
+    min-width:54px; padding:4px 6px 3px; border-radius:10px; background:#fff;
+    border:1px solid rgba(26,18,48,.12); text-align:center;
+  }
+  .chip b { display:block; font-size:13px; }
+  .chip i { display:block; font-style:normal; font:10px ui-monospace, Consolas, monospace; color:var(--dim); }
+  .stamp { display:inline-block; padding:2px 8px; border-radius:999px; font:11px ui-monospace, Consolas, monospace; color:#fff; }
+  .lit { background:#047857; } .amber { background:#b45309; } .wall { background:#be185d; }
+  footer { color:var(--dim); font-size:13px; padding-bottom:28px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="src"><a href="../">SaPpH{{i}}on</a> · atmospheres · <a href="https://0root.ai/">0root.ai</a></div>
+  <div class="kicker">1000 TO 0</div>
+  <h1>The Atmospheres</h1>
+  <p>One scale counts from 1000 atmospheres down to 0 by steps of 1, and 250 elements beginning with +H lie on it in the fib and reverse fib order.</p>
+  <p class="head" id="head"></p>
+</header>
+<main>
+  <div class="stage">
+    <canvas id="sky" width="720" height="420" aria-label="Atmosphere ring from 1000 down to 0, with 250 elements overlaid"></canvas>
+    <div id="rows"></div>
+  </div>
+  <p class="mono" id="card"></p>
+  <p><span class="stamp lit">LIT</span> The scale is 1000, 999, 998, 997, and so on by steps of 1. Step 1000 lands on 0. Step 1001 wraps to 1000. The page overlays 250 elements. The first is +H. The row lengths are 1/1/2/3/5/8 and then the reverse 8\5\3\2\1\1, six times, and a remainder of 10. A failed count throws.</p>
+  <p><span class="stamp amber">AMBER</span> The 118 symbols and names are the arrays in Downloads\Periodic-Table-Phd.html, read on 2026-10-01. The numbered copy was not used. The elements advance from hydrogen and continue through the table, then from hydrogen again. The 250 overlays are steps 0 through 249, so their atmospheres run from 1000 down to 751. The fold is the house fold.</p>
+  <p><span class="stamp wall">WALL</span> This page does not publish the periodic-table application. A matching symbol is not a measurement of air, and the countdown is not a claim about weather, physics, or authority. The last row takes 3 of a 5 and does not close the fold. The walk was already full, so this page is not seated.</p>
+</main>
+<footer>
+  David Lee Wise (ROOT0). Drafted by Grok (xAI) on 2026-10-01.
+  Birth seal 6ac83887983243822fc9ce1a761eb50a9b829ccaa14fe050527d093fbd96146e. One host, <a href="https://davidwise01.github.io/sapph-i-on/atmospheres/the-atmospheres.html">this page</a>.
+  Reference Periodic-Table-Phd.html.
+</footer>
+<script>
+"use strict";
+var SYMBOLS = ["H","He","Li","Be","B","C","N","O","F","Ne","Na","Mg","Al","Si","P","S","Cl","Ar","K","Ca","Sc","Ti","V","Cr","Mn","Fe","Co","Ni","Cu","Zn","Ga","Ge","As","Se","Br","Kr","Rb","Sr","Y","Zr","Nb","Mo","Tc","Ru","Rh","Pd","Ag","Cd","In","Sn","Sb","Te","I","Xe","Cs","Ba","La","Ce","Pr","Nd","Pm","Sm","Eu","Gd","Tb","Dy","Ho","Er","Tm","Yb","Lu","Hf","Ta","W","Re","Os","Ir","Pt","Au","Hg","Tl","Pb","Bi","Po","At","Rn","Fr","Ra","Ac","Th","Pa","U","Np","Pu","Am","Cm","Bk","Cf","Es","Fm","Md","No","Lr","Rf","Db","Sg","Bh","Hs","Mt","Ds","Rg","Cn","Nh","Fl","Mc","Lv","Ts","Og"];
+var NAMES = ["Hydrogen","Helium","Lithium","Beryllium","Boron","Carbon","Nitrogen","Oxygen","Fluorine","Neon","Sodium","Magnesium","Aluminium","Silicon","Phosphorus","Sulfur","Chlorine","Argon","Potassium","Calcium","Scandium","Titanium","Vanadium","Chromium","Manganese","Iron","Cobalt","Nickel","Copper","Zinc","Gallium","Germanium","Arsenic","Selenium","Bromine","Krypton","Rubidium","Strontium","Yttrium","Zirconium","Niobium","Molybdenum","Technetium","Ruthenium","Rhodium","Palladium","Silver","Cadmium","Indium","Tin","Antimony","Tellurium","Iodine","Xenon","Cesium","Barium","Lanthanum","Cerium","Praseodymium","Neodymium","Promethium","Samarium","Europium","Gadolinium","Terbium","Dysprosium","Holmium","Erbium","Thulium","Ytterbium","Lutetium","Hafnium","Tantalum","Tungsten","Rhenium","Osmium","Iridium","Platinum","Gold","Mercury","Thallium","Lead","Bismuth","Polonium","Astatine","Radon","Francium","Radium","Actinium","Thorium","Protactinium","Uranium","Neptunium","Plutonium","Americium","Curium","Berkelium","Californium","Einsteinium","Fermium","Mendelevium","Nobelium","Lawrencium","Rutherfordium","Dubnium","Seaborgium","Bohrium","Hassium","Meitnerium","Darmstadtium","Roentgenium","Copernicium","Nihonium","Flerovium","Moscovium","Livermorium","Tennessine","Oganesson"];
+
+function atmosphereAt(step) {
+  var span = 1001;
+  return ((1000 - step) % span + span) % span;
+}
+function proveScale(symbols, names) {
+  var faults = [];
+  if (symbols.length !== 118 || names.length !== 118) faults.push("table");
+  if (symbols[0] !== "H" || names[0] !== "Hydrogen") faults.push("hydrogen");
+  if (symbols[117] !== "Og" || names[117] !== "Oganesson") faults.push("oganesson");
+  var seen = {};
+  symbols.forEach(function (s, n) {
+    if (seen[s] || !names[n]) faults.push("pair");
+    seen[s] = 1;
+  });
+  if (atmosphereAt(0) !== 1000 || atmosphereAt(1) !== 999 || atmosphereAt(2) !== 998 || atmosphereAt(3) !== 997) faults.push("head");
+  if (atmosphereAt(1000) !== 0) faults.push("wrap0");
+  if (atmosphereAt(1001) !== 1000) faults.push("wrap1000");
+  var step;
+  for (step = 0; step < 1000; step++) {
+    if (atmosphereAt(step) - atmosphereAt(step + 1) !== 1) { faults.push("step"); break; }
+  }
+  var asc = [1, 1, 2, 3, 5, 8];
+  var desc = [8, 5, 3, 2, 1, 1];
+  var f;
+  for (f = 0; f < 6; f++) if (desc[f] !== asc[5 - f]) faults.push("reverse");
+  var fold = asc.concat(desc);
+  var foldSum = 0;
+  fold.forEach(function (n) { foldSum += n; });
+  if (foldSum !== 40) faults.push("fold");
+  var overlays = [];
+  var i;
+  for (i = 0; i < 250; i++) {
+    overlays.push({
+      label: "+" + symbols[i % 118],
+      name: names[i % 118],
+      number: (i % 118) + 1,
+      atm: atmosphereAt(i)
+    });
+  }
+  if (overlays.length !== 250 || overlays[0].label !== "+H" || overlays[0].atm !== 1000) faults.push("overlay");
+  if (overlays[249].atm !== 751 || 1000 - 249 !== 751) faults.push("last");
+  var rows = [];
+  var left = 250;
+  var fi = 0;
+  while (left > 0) {
+    var want = fold[fi % fold.length];
+    var take = want < left ? want : left;
+    rows.push({ want: want, take: take, mark: (fi % 12) < 6 ? "/" : "\\" });
+    left -= take;
+    fi++;
+  }
+  var placed = 0;
+  rows.forEach(function (r) { placed += r.take; });
+  if (placed !== 250) faults.push("rows");
+  var full = 0;
+  for (i = 0; i < 72; i++) {
+    if (!rows[i] || rows[i].take !== fold[i % 12] || rows[i].want !== fold[i % 12]) faults.push("rhythm");
+    else full += rows[i].take;
+  }
+  if (full !== 240 || 6 * 40 !== 240) faults.push("full");
+  var rem = 0;
+  for (i = 72; i < rows.length; i++) rem += rows[i].take;
+  var last = rows[rows.length - 1];
+  if (rem !== 10 || !last || last.want !== 5 || last.take !== 3) faults.push("remainder");
+  return { faults: faults, overlays: overlays, rows: rows, fold: fold };
+}
+function paintRing(canvas, overlays) {
+  var ctx = canvas.getContext("2d");
+  var w = canvas.width, h = canvas.height;
+  var cx = w * 0.5, cy = h * 0.52;
+  var g = ctx.createLinearGradient(0, 0, 0, h);
+  g.addColorStop(0, "hsl(28,78%,62%)");
+  g.addColorStop(0.45, "hsl(210,62%,42%)");
+  g.addColorStop(1, "hsl(262,42%,28%)");
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, w, h);
+  var counts = { ticks: 0, overlay: 0, primary: 0 };
+  var i, ang, rad, x, y;
+  for (i = 0; i <= 1000; i++) {
+    ang = -Math.PI / 2 + (i / 1000) * Math.PI * 2;
+    rad = i < 250 ? 132 : 168;
+    x = cx + Math.cos(ang) * rad;
+    y = cy + Math.sin(ang) * rad * 0.92;
+    ctx.fillStyle = i < 250 ? "hsl(" + ((i * 17) % 360) + ",80%,72%)" : "hsla(40,40%,96%,0.55)";
+    ctx.beginPath();
+    ctx.arc(x, y, i < 250 ? 2.2 : 1.1, 0, Math.PI * 2);
+    ctx.fill();
+    counts.ticks++;
+    if (i < 250) counts.overlay++;
+  }
+  var sun = ctx.createRadialGradient(cx, cy, 4, cx, cy, 36);
+  sun.addColorStop(0, "hsl(46,100%,88%)");
+  sun.addColorStop(1, "hsla(28,90%,55%,0)");
+  ctx.fillStyle = sun;
+  ctx.beginPath();
+  ctx.arc(cx, cy, 36, 0, Math.PI * 2);
+  ctx.fill();
+  counts.primary++;
+  if (counts.ticks !== 1001 || counts.overlay !== 250 || counts.primary !== 1) throw new Error("LIT FAIL ring");
+  if (overlays.length !== 250) throw new Error("LIT FAIL ring overlays");
+  return counts;
+}
+
+function el(tag, cls, text) {
+  var n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text != null) n.textContent = text;
+  return n;
+}
+function draw(report) {
+  paintRing(document.getElementById("sky"), report.overlays);
+  document.getElementById("head").textContent = "1000  999  998  997";
+  var host = document.getElementById("rows");
+  var cursor = 0;
+  var chips = 0;
+  report.rows.forEach(function (row) {
+    var line = el("div", "row");
+    line.appendChild(el("span", "mark", row.mark + row.take));
+    var c;
+    for (c = 0; c < row.take; c++) {
+      var item = report.overlays[cursor++];
+      var chip = el("span", "chip");
+      chip.style.background = "hsl(" + ((item.number * 29) % 360) + ",75%,88%)";
+      chip.appendChild(el("b", "", item.label));
+      chip.appendChild(el("i", "", String(item.atm)));
+      chip.title = item.name + " · " + item.atm + " atmospheres";
+      line.appendChild(chip);
+      chips++;
+    }
+    host.appendChild(line);
+  });
+  if (chips !== 250 || cursor !== 250) throw new Error("LIT FAIL chips");
+  if (host.querySelector(".chip b").textContent !== "+H") throw new Error("LIT FAIL plus h");
+}
+var report = proveScale(SYMBOLS, NAMES);
+var card = document.getElementById("card");
+if (!report || report.faults.length) {
+  var msg = (report && report.faults.join(", ")) || "no report";
+  card.innerHTML = "<span class='stamp wall'>WALL</span> LIT FAIL " + msg;
+  throw new Error("LIT FAIL " + msg);
+}
+card.innerHTML = "<span class='stamp lit'>LIT</span> 1000 to 0 by 1 · wrap at step 1000 · 250 overlays · +H · fold then reverse fold";
+draw(report);
+</script>
+</body>
+</html>
