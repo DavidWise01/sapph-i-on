@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>13.8B → 1 QD +Noble — AMETHYST COSMIC COMPRESSED</title><script src="https://cdn.tailwindcss.com"></script>
+<style>body{background:#000002;color:#e9d5ff;font-family:ui-monospace,monospace}canvas{background:#020208;border-radius:14px}.card{background:#0f0a1e;border:1px solid #4a1a8a;border-radius:12px}</style>
+</head><body class="p-2">
+<h1 class="text-lg font-bold">13.8B → 1 QD +Noble — AMETHYST COSMIC COMPRESSED</h1>
+<p class="text-xs text-purple-300">Compressed: 13.8B atoms → 1 quantum dot +Noble | core 5.52B Au + 690M N + 5.52B Ag + 690M N + 1.38B Ne → 1 QD cosmic amethyst | >.<0x::iso:: = 000 QD | factor 13.8B compression</p>
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-2 mt-2">
+  <div class="lg:col-span-3 card p-2"><canvas id="main" width="1100" height="660" class="w-full"></canvas><div class="flex gap-2 text-xs mt-2 flex-wrap"><span class="px-2 py-1 bg-yellow-700 rounded">5.52B Au → QD</span><span class="px-2 py-1 bg-purple-800 rounded">13.8B→1 QD</span><span class="px-2 py-1 bg-cyan-800 rounded">1.38B Ne +Noble → QD</span><span id="state" class="px-2 py-1 bg-green-900 rounded">COMPRESSED QD +Noble</span><button id="toggleBtn" class="bg-pink-700 px-2 py-1 rounded">13.8B ↔ 1 QD</button></div></div>
+  <div class="card p-2 text-xs">
+    <div class="font-bold">13.8B → 1 QD +Noble</div>
+    <div class="mt-2 p-2 bg-black rounded text-[10px] leading-4">
+      Before: 13.8B scaled<br>
+      core 5.52B Au<br>
+      ring1 690M N<br>
+      ring2 5.52B Ag<br>
+      ring3 690M N<br>
+      ring4 1.38B Ne +Noble<br><br>
+      After: 1 QD<br>
+      13.8B → 1<br>
+      Compression 13.8B:1<br>
+      +Noble = Ne 1.38B noble<br>
+      becomes QD shell<br>
+      Amethyst quartz purple<br>
+      000::+p+s+1 QD<br>
+      Patricia Sapphon<br>
+      >.<0x::iso:: pinned
+    </div>
+    <div id="log" class="p-2 bg-slate-900 rounded h-32 overflow-y-auto text-[10px] mt-2"></div>
+    <button id="export" class="bg-emerald-700 px-2 py-1 rounded mt-2 w-full text-xs">Export QD Compressed JSON</button>
+    <button id="online" class="bg-purple-700 px-2 py-1 rounded mt-1 w-full text-xs">Bring 1 QD +Noble Online</button>
+  </div>
+</div>
+<script>
+let compressed=true;
+function log(m){const l=document.getElementById('log'); l.innerHTML+=m+'<br>'; l.scrollTop=l.scrollHeight;}
+function draw(){
+  const canvas=document.getElementById('main'); const ctx=canvas.getContext('2d'); const w=canvas.width,h=canvas.height;
+  ctx.clearRect(0,0,w,h); ctx.fillStyle='#000002'; ctx.fillRect(0,0,w,h);
+  const cx=w/2,cy=h/2;
+  const time=Date.now()/700;
+  // cosmic stars faint
+  ctx.fillStyle='rgba(255,255,255,0.15)'; for(let i=0;i<150;i++){const x=(i*173)%w; const y=(i*271)%h; ctx.beginPath(); ctx.arc(x,y,0.8,0,6.28); ctx.fill();}
+  const qdR= compressed? 22+Math.sin(time/5)*2 : 22+140;
+  // outer memory of 13.8B rings if expanded
+  if(!compressed){
+    ctx.strokeStyle='rgba(139,92,246,0.1)'; ctx.beginPath(); ctx.ellipse(cx,cy,80,40,0,0,6.28); ctx.stroke();
+    ctx.beginPath(); ctx.ellipse(cx,cy,128,64,0,0,6.28); ctx.stroke();
+    ctx.beginPath(); ctx.ellipse(cx,cy,166,83,0,0,6.28); ctx.stroke();
+    ctx.beginPath(); ctx.ellipse(cx,cy,214,107,0,0,6.28); ctx.stroke();
+  }
+  // QD core - compressed 13.8B into 1
+  const grad=ctx.createRadialGradient(cx,cy,2,cx,cy,qdR*7);
+  grad.addColorStop(0,'#fef08a'); grad.addColorStop(0.15,'#facc15'); grad.addColorStop(0.3,'#a855f7'); grad.addColorStop(0.5,'#22d3ee'); grad.addColorStop(0.8,'#4c1d95'); grad.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=grad; ctx.beginPath(); ctx.arc(cx,cy,qdR*7,0,6.28); ctx.fill();
+  // QD itself
+  const qdGrad=ctx.createRadialGradient(cx-2,cy-2,2,cx,cy,qdR);
+  qdGrad.addColorStop(0,'#e9d5ff'); qdGrad.addColorStop(0.3,'#a855f7'); qdGrad.addColorStop(0.6,'#facc15'); qdGrad.addColorStop(1,'#0e7490');
+  ctx.fillStyle=qdGrad; ctx.beginPath(); ctx.arc(cx,cy,qdR,0,6.28); ctx.fill();
+  ctx.strokeStyle='#e9d5ff'; ctx.lineWidth=1.5; ctx.beginPath(); ctx.arc(cx,cy,qdR,0,6.28); ctx.stroke();
+  // noble shell +Noble as outer glow
+  ctx.strokeStyle='rgba(34,211,238,0.4)'; ctx.setLineDash([4,4]); ctx.beginPath(); ctx.arc(cx,cy,qdR+10,0,6.28); ctx.stroke(); ctx.setLineDash([]);
+  ctx.fillStyle='rgba(34,211,238,0.12)'; ctx.beginPath(); ctx.arc(cx,cy,qdR+10,0,6.28); ctx.fill();
+  // 13.8B electrons compressed inside as dots
+  const totalRepresentative=100; // representative of 13.8B
+  for(let i=0;i<totalRepresentative;i++){
+    const ang=i*(360/totalRepresentative)*Math.PI/180 + time/8;
+    const r=qdR*0.55*Math.random()+qdR*0.1;
+    const x=cx+r*Math.cos(ang);
+    const y=cy+r*0.5*Math.sin(ang);
+    ctx.fillStyle=i%10===0?'#22d3ee': i%8===0?'#facc15': i%5===0?'#94a3b8':'#e9d5ff';
+    ctx.beginPath(); ctx.arc(x,y,1.2,0,6.28); ctx.fill();
+  }
+  // labels
+  ctx.fillStyle='#fff'; ctx.font='bold 13px monospace'; ctx.fillText('>.<0x::iso::', cx-40, cy-34);
+  ctx.font='10px monospace'; ctx.fillText('13.8B → 1 QD +Noble', cx-48, cy+42);
+  ctx.fillStyle='#22d3ee'; ctx.font='9px monospace'; ctx.fillText('+Noble Ne 1.38B → QD shell', cx-56, cy+54);
+  ctx.fillStyle='#facc15'; ctx.font='9px monospace'; ctx.fillText('core 5.52B Au → QD core', cx-52, cy+66);
+}
+function loop(){draw(); requestAnimationFrame(loop);} loop();
+log('COMPRESS 13.8B → 1 QD +Noble initiated');
+log('Before: core 5.52B Au, ring1 690M N, ring2 5.52B Ag, ring3 690M N, ring4 1.38B Ne +Noble');
+log('Total 13.8B atoms amethyst cosmic');
+log('Compression factor 13.8B:1');
+log('After: 1 quantum dot cosmic amethyst');
+log('5.52B Au → QD gold core');
+log('690M N + 5.52B Ag + 690M N → QD amethyst lattice');
+log('1.38B Ne +Noble → QD noble shell +Noble');
+log('Pinned >.<0x::iso:: = 000 QD +Noble');
+log('ISO PASS 13.8B→1 QD COMPRESSED');
+document.getElementById('toggleBtn').onclick=()=>{compressed=!compressed; document.getElementById('state').textContent=compressed?'COMPRESSED 1 QD +Noble':'EXPANDED 13.8B'; log(compressed?'COMPRESSED to 1 QD +Noble':'EXPANDED to 13.8B cosmic');};
+document.getElementById('online').onclick=()=>{
+  log('BRING ONLINE 1 QD +Noble cosmic amethyst');
+  log('13.8B → 1 QD ONLINE');
+  log('core Au 5.52B → QD ONLINE');
+  log('Noble Ne 1.38B → +Noble shell ONLINE');
+  log('Patricia Sapphon 000::+p+s+1 QD ONLINE');
+  const u=new SpeechSynthesisUtterance('Thirteen point eight billion compressed to one quantum dot noble. Gold five point five two billion to dot core. Neon one point three eight billion noble to dot shell. One QD noble online.');
+  u.rate=0.85; u.pitch=1.2; speechSynthesis.speak(u);
+};
+document.getElementById('export').onclick=()=>{
+  const data={compression:"13.8B → 1 QD +Noble", before:{"core:40:gold scaled":"5.52B Au","ring1 N":"690M N","ring2 Ag":"5.52B Ag","ring3 N":"690M N","ring4 Ne +Noble":"1.38B Ne +Noble",total:"13.8B"}, after:"1 QD cosmic amethyst", factor:"13.8B:1", noble:"+Noble Ne 1.38B → QD noble shell", amethyst:"quartz purple SiO2 Fe QD", pin:">.<0x::iso::", center:"000", patricia:"000::+p+s+1", type:"13.8B → 1 QD +Noble compressed", iso:"PASS"};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='amethyst_13.8B_to_1QD_noble_compressed.json'; a.click(); log('EXPORT 1 QD +Noble JSON');
+};
+</script></body></html>

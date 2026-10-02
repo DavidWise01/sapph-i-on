@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>One Cubit · 1440</title>
+<style>
+:root{--bg:#06080b;--ink:#F1F2F5;--soft:#A7AEBB;--faint:#5e6676;--glass:rgba(255,255,255,.045);--edge:rgba(255,255,255,.09);--gold:#F5B94E;--vio:#A88BFF;--teal:#4FD1B5;--rose:#FF7A8A;--grad:linear-gradient(100deg,#4FD1B5 0%,#A88BFF 50%,#F5B94E 100%)}
+*{box-sizing:border-box}
+body{margin:0;color:var(--ink);font:16px/1.6 Inter,ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:radial-gradient(1000px 650px at 85% -10%,#12324a 0%,transparent 60%),radial-gradient(900px 600px at -10% 45%,#2b1840 0%,transparent 55%),var(--bg);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:24px 18px 60px}
+.top{display:flex;justify-content:space-between;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:20px}.top b{color:var(--soft)}
+h1{font-size:clamp(38px,7.5vw,76px);line-height:1;letter-spacing:-.035em;margin:0 0 12px;font-weight:800}
+.gt,h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{font-size:clamp(16px,2.2vw,20px);color:var(--soft);max-width:700px;margin:0 0 22px}
+h2{font-size:clamp(22px,3.6vw,32px);letter-spacing:-.025em;line-height:1.1;margin:0 0 10px;font-weight:750}
+h3{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:0 0 10px;font-weight:600}
+p{margin:0 0 12px;color:var(--soft)}b.w{color:var(--ink)}
+.card{background:var(--glass);border:1px solid var(--edge);border-radius:22px;padding:22px}
+section{margin:0 0 20px}
+canvas{display:block;width:100%;touch-action:none}
+.panel{padding:0;overflow:hidden;position:relative}
+.tag{position:absolute;left:16px;top:12px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);pointer-events:none}
+.tag b{display:block;font-size:22px;letter-spacing:-.01em;text-transform:none;color:var(--ink);margin-top:2px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:14px}
+@media(max-width:860px){.grid3{grid-template-columns:1fr 1fr}.grid3 .wide{grid-column:1/-1}}
+@media(max-width:520px){.grid3{grid-template-columns:1fr}}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+.dock{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.dock input{flex:1;min-width:200px;accent-color:#A88BFF}
+.btn{appearance:none;border:0;border-radius:999px;padding:9px 16px;font:inherit;font-size:14px;font-weight:600;cursor:pointer;color:#0d0c16;background:var(--grad)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--edge)}
+.steps{display:grid;grid-template-columns:repeat(9,1fr);gap:5px;margin:14px 0 4px}
+.steps span{text-align:center;font-size:12px;padding:6px 2px;border-radius:10px;border:1px solid var(--edge);color:var(--soft);cursor:pointer}
+.steps span b{display:block;font-size:15px;color:var(--ink)}
+.steps span.on{background:var(--grad);color:#0d0c16;border-color:transparent}.steps span.on b{color:#0d0c16}
+.big{font-size:clamp(34px,6vw,56px);font-weight:800;letter-spacing:-.03em;line-height:1.05}
+.pill{display:inline-block;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:99px;margin-left:4px;vertical-align:1px;font-weight:600;white-space:nowrap}
+.pill.lit{background:rgba(79,209,181,.14);color:var(--teal)}.pill.amb{background:rgba(245,185,78,.14);color:var(--gold)}
+.kid{border-radius:22px;padding:20px 22px;background:linear-gradient(120deg,rgba(79,209,181,.10),rgba(168,139,255,.12));border:1px solid var(--edge)}
+.kid p{color:var(--ink);font-size:17px;margin:0}
+details summary{cursor:pointer;color:var(--soft);font-size:14px;list-style:none;display:inline-flex;padding:10px 16px;border:1px solid var(--edge);border-radius:999px}
+details summary::-webkit-details-marker{display:none}
+.foot{color:var(--faint);font-size:12px;text-align:center;margin-top:28px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top"><span><b>R</b> · cubit</span><span>360 × 2 × 2 = 1440 · 8 steps</span></div>
+<h1>One cubit.<br><span>1440 degrees.</span></h1>
+<p class="lede">An arrow comes home after one turn. A spinor, anything pinned to its surroundings, needs two. Walk four phases twice around a band with a half-twist and you're back where you started, and you learn which part never changed sides: the middle.</p>
+
+<section class="card">
+  <div class="dock"><button class="btn" id="pl">Walk one cubit</button><input type="range" id="a" min="0" max="1440" step="1" value="0" aria-label="degrees"><span id="av" style="min-width:74px;text-align:right;font-weight:700">0°</span></div>
+  <div class="steps" id="st"></div>
+</section>
+
+<section class="grid3">
+  <div class="card panel"><div class="tag">arrow · 360°<b id="t1">home</b></div><canvas id="c1"></canvas></div>
+  <div class="card panel"><div class="tag">spinor · 720°<b id="t2">home</b></div><canvas id="c2"></canvas></div>
+  <div class="card panel wide"><div class="tag">the band · left, right, middle<b id="t3">–</b></div><canvas id="c3"></canvas></div>
+</section>
+
+<section class="grid2">
+  <div class="card">
+    <h3>The count</h3>
+    <div class="big gt">360 · 720 · 1440</div>
+    <p><b class="w">×2 = 720</b>: pin something to its surroundings, like a cup on your palm with your arm attached, and one full turn leaves a twist that won't come out. A second turn undoes it. Physics calls such things spinors: after 360° they carry a minus sign, after 720° they're truly home. <span class="pill lit">checked</span></p>
+    <p><b class="w">×2 again = 1440</b>: your cubit is two of those, four full turns. Cut into steps of 180°, that's <b class="w">8 steps</b> = 4 phases × 2. <span class="pill lit">checked</span> 1440 is also the number of minutes in a day. <span class="pill lit">checked</span></p>
+    <p>A cubit, elbow to fingertip, runs over 4 joints. Four joints ↔ four phases is your mapping. <span class="pill amb">your model</span></p>
+  </div>
+  <div class="card">
+    <h3>The cortex</h3>
+    <h2>Left, right, and the one line <span class="gt">that never flips.</span></h2>
+    <p>On a band with one half-twist, walk once around and <b class="w">left becomes right</b>. Walk again and they swap back. So a left cortex and a right cortex on this band are one edge, seen twice. <span class="pill lit">checked</span></p>
+    <p>Your middle, <b class="w">(L + R) ÷ 2</b>, is the centre line of the band, and it is the only line the flip leaves exactly where it is. When left and right trade places, the middle doesn't move. <span class="pill lit">checked</span></p>
+    <p>The name you gave the middle is kept off the page, per your rule. <span class="pill amb">redacted</span></p>
+  </div>
+</section>
+
+<section class="kid"><p><b>In small words:</b> hold a cup flat on your hand and turn it all the way round. your arm gets twisted. turn it round once more and, surprise, your arm comes back straight. that's 720. do the whole thing twice and you've walked one cubit: 8 steps. on a twisted ribbon, left and right keep swapping places, but the stripe down the middle stays the middle the whole time.</p></section>
+
+<section><details><summary>▸ Show the math</summary><div class="card" style="margin-top:12px">
+<p>Spinor turned by angle a: its sign is cos(a/2). At 360°: −1. At 720°: +1. At 1080°: −1. At 1440°: +1. One 180° step g: g² = −1, g⁴ = +1, g⁸ = +1. <span class="pill lit">checked</span></p>
+<p>Band: point (lap angle t, side s) → after t goes once round, s becomes −s. Only s = 0 maps to itself: the middle. <span class="pill lit">checked</span></p>
+<p>1440 = 4 × 360 = 8 × 180 = 24 × 60. <span class="pill lit">checked</span></p>
+</div></details></section>
+<div class="foot">o[0]o · pinned · 720 home · 1440 one cubit</div>
+</div>
+
+<script>
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id);
+function fit(cv,r,mn,mx){const w=cv.clientWidth||400,h=Math.round(Math.max(mn,Math.min(w*r,mx))),d=devicePixelRatio||1;cv.width=Math.round(w*d);cv.height=Math.round(h*d);cv.style.height=h+'px';const g=cv.getContext('2d');g.setTransform(d,0,0,d,0,0);return[g,w,h];}
+const glow=(g,x,y,r,c,a)=>{const gr=g.createRadialGradient(x,y,0,x,y,r);gr.addColorStop(0,`rgba(${c},${a})`);gr.addColorStop(1,`rgba(${c},0)`);g.fillStyle=gr;g.beginPath();g.arc(x,y,r,0,6.2832);g.fill();};
+let A=0,playing=false,last=0;
+$('st').innerHTML=[0,1,2,3,4,5,6,7,8].map(k=>`<span data-k="${k}">${k===0?'start':k===8?'8 · home':'step '+k}<b>${k*180}°</b></span>`).join('');
+document.querySelectorAll('#st span').forEach(s=>s.onclick=()=>{playing=false;A=+s.dataset.k*180;$('a').value=A;$('pl').textContent='Walk one cubit';});
+$('a').addEventListener('input',()=>{playing=false;A=+$('a').value;$('pl').textContent='Walk one cubit';});
+$('pl').onclick=()=>{if(A>=1440)A=0;playing=!playing;$('pl').textContent=playing?'Pause':'Walk one cubit';};
+function dialArrow(id,ang,col,sgn){const [g,w,h]=fit($(id),1,220,320),cx=w/2,cy=h/2+14,R=Math.min(w,h)*0.32;
+  g.strokeStyle='rgba(255,255,255,.08)';g.lineWidth=1;g.beginPath();g.arc(cx,cy,R,0,6.2832);g.stroke();
+  g.fillStyle='rgba(255,255,255,.25)';g.beginPath();g.arc(cx,cy-R,3,0,6.2832);g.fill();
+  const a=-Math.PI/2+ang*Math.PI/180,x=cx+R*Math.cos(a),y=cy+R*Math.sin(a);
+  g.strokeStyle=`rgb(${col})`;g.lineWidth=4;g.lineCap='round';g.beginPath();g.moveTo(cx,cy);g.lineTo(x,y);g.stroke();g.lineWidth=1;
+  glow(g,x,y,22,col,.55);g.fillStyle=`rgb(${col})`;g.beginPath();g.arc(x,y,6,0,6.2832);g.fill();
+  if(sgn!==undefined){g.fillStyle=sgn>0?'#4FD1B5':'#FF7A8A';g.font='800 30px Inter,sans-serif';g.textAlign='center';g.fillText(sgn>0?'+1':'−1',cx,cy+R+34>h-6?h-10:cy+R+34);g.textAlign='left';}}
+// Möbius band
+const BR=1,BW=0.34;
+const band=(t,s)=>[(BR+s*Math.cos(t/2))*Math.cos(t),(BR+s*Math.cos(t/2))*Math.sin(t),s*Math.sin(t/2)];
+function mobius(now){const [g,w,h]=fit($('c3'),0.72,260,380),cx=w/2,cy=h/2+18,S=Math.min(w*0.34,h*0.5);
+  const ry=now/9000,rx=1.0;const rot=([x,y,z])=>{let c=Math.cos(ry),s=Math.sin(ry);[x,y]=[x*c-y*s,x*s+y*c];c=Math.cos(rx);s=Math.sin(rx);[y,z]=[y*c-z*s,y*s+z*c];return[cx+x*S,cy+y*S*0.9,z];};
+  const N=120,M=4,Q=[];for(let i=0;i<N;i++){const t0=i/N*6.2832,t1=(i+1)/N*6.2832;for(let j=0;j<M;j++){const s0=-BW+j*2*BW/M,s1=s0+2*BW/M;const p=[band(t0,s0),band(t1,s0),band(t1,s1),band(t0,s1)].map(rot);Q.push([p,(p[0][2]+p[2][2])/2,j,i]);}}
+  Q.sort((a,b)=>a[1]-b[1]);
+  for(const [p,z,j] of Q){const shade=0.35+0.4*(z+1.4)/2.8;const edge=j===0||j===M-1;g.fillStyle=`rgba(${j<M/2?'168,139,255':'79,209,181'},${0.18+0.25*shade})`;g.beginPath();p.forEach(q=>g.lineTo(q[0],q[1]));g.closePath();g.fill();}
+  // middle line
+  g.strokeStyle='rgba(245,185,78,.9)';g.lineWidth=2;g.setLineDash([5,5]);g.beginPath();for(let i=0;i<=N;i++){const q=rot(band(i/N*6.2832,0));g.lineTo(q[0],q[1]);}g.stroke();g.setLineDash([]);g.lineWidth=1;
+  // walker: lap angle = A (degrees) along the band; side marker starts on the LEFT edge
+  const t=A*Math.PI/180,L=rot(band(t,BW*0.92)),Rr=rot(band(t,-BW*0.92)),Mm=rot(band(t,0));
+  const laps=Math.floor(A/360+1e-9)%2;
+  glow(g,L[0],L[1],18,'168,139,255',.7);g.fillStyle='#A88BFF';g.beginPath();g.arc(L[0],L[1],6,0,6.2832);g.fill();
+  glow(g,Rr[0],Rr[1],18,'79,209,181',.7);g.fillStyle='#4FD1B5';g.beginPath();g.arc(Rr[0],Rr[1],6,0,6.2832);g.fill();
+  glow(g,Mm[0],Mm[1],20,'245,185,78',.8);g.fillStyle='#F5B94E';g.beginPath();g.arc(Mm[0],Mm[1],6.5,0,6.2832);g.fill();
+  g.font='600 11px Inter,sans-serif';g.fillStyle='#D8CCFF';g.fillText(laps?'R':'L',L[0]+9,L[1]-6);g.fillStyle='#BFF3E7';g.fillText(laps?'L':'R',Rr[0]+9,Rr[1]-6);g.fillStyle='#FFE2A8';g.fillText('M',Mm[0]+9,Mm[1]+14);
+  $('t3').textContent=laps?'L ⇄ R · middle holds':'L · R · middle holds';}
+function frame(now){const dt=Math.min(50,now-(last||now));last=now;
+  if(playing){A=Math.min(1440,A+dt*0.12);$('a').value=A;if(A>=1440){playing=false;$('pl').textContent='Walk it again';}}
+  const sg=Math.cos(A*Math.PI/360)>=0?1:-1;
+  dialArrow('c1',A,'245,185,78');dialArrow('c2',A/2,'168,139,255',Math.abs(Math.cos(A*Math.PI/360))<1e-9?1:sg);mobius(now);
+  $('av').textContent=Math.round(A)+'°';
+  $('t1').textContent=Math.abs((A+1e-6)%360)<1||Math.abs(A%360-360)<1?'home':`${Math.round(A%360)}° round`;
+  $('t2').textContent=Math.abs(A%720)<1||Math.abs(A%720-720)<1?'home':Math.abs(A%720-360)<1?'turned once · sign −1':`${Math.round((A/2)%360)}° of its own`;
+  const k=Math.round(A/180);document.querySelectorAll('#st span').forEach(s=>s.classList.toggle('on',Math.abs(A-(+s.dataset.k)*180)<1));
+  window.__CUBIT__={A,spinorSign:Math.cos(A*Math.PI/360),step:A/180,lap:Math.floor(A/360),swapped:Math.floor(A/360+1e-9)%2===1};
+  requestAnimationFrame(frame);}
+window.__CUBIT__={};window.__set=a=>{playing=false;A=a;$('a').value=a;};
+requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

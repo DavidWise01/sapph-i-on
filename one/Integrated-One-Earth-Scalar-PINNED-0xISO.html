@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PINNED >.<0x::iso::</title><script src="https://cdn.tailwindcss.com"></script>
+<style>body{background:#020208;color:#e2e8f0;font-family:ui-monospace,monospace}canvas{background:#050a14;border-radius:12px}.card{background:#0f172a;border:1px solid #1e293b;border-radius:12px}.badge{font-size:10px;padding:2px 6px;border-radius:4px}</style>
+</head><body class="p-2">
+<h1 class="text-lg font-bold">PINNED >.<0x::iso:: — FULL ISOMORPH</h1>
+<p class="text-xs text-slate-400">PIN: center 000 => >.<0x::iso:: | invariant locked | all quads 90,90,90,90 pinned | -2x+2x[1]-2x+2x pinned to 0x</p>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-2">
+  <div class="lg:col-span-2 card p-2"><canvas id="main" width="900" height="560" class="w-full"></canvas><div class="text-xs mt-1"><span id="pin" class="badge bg-yellow-600">PINNED >.<0x::iso::</span> <span id="iso" class="badge bg-green-700">ISO PASS</span> <span id="coord">0x::iso:: = 0x000</span></div></div>
+  <div class="card p-2 text-xs"><div>Pin Config</div><div class="p-2 bg-slate-900 rounded mt-1">
+    >.< = face center<br>0x = hex origin<br>::iso:: = isomorphic lock<br><br>
+    PINNED coords:<br>
+    > = quad a 90°<br>.< = quad b 90°<br>0x = quad c 90° center 000<br>::iso:: = quad d 90°<br><br>
+    -2x+2x[1]-2x+2x pinned to 0x<br>left -+30-+ right -+30-+ pinned<br>M=2 stable pinned<br>S=3 pinned
+  </div><div id="math" class="p-2 bg-slate-800 rounded mt-2 text-[10px]"></div><button id="export" class="bg-violet-700 px-2 py-1 rounded mt-2 text-xs">Export Pinned JSON</button></div>
+</div>
+<script>
+function draw(){
+  const canvas=document.getElementById('main'); const ctx=canvas.getContext('2d'); const w=canvas.width,h=canvas.height;
+  ctx.clearRect(0,0,w,h); ctx.fillStyle='#020208'; ctx.fillRect(0,0,w,h);
+  const cx=w/2,cy=h/2;
+  // boxy toroid pinned to 0x
+  ctx.strokeStyle='#8b5cf6'; ctx.lineWidth=3; ctx.shadowColor='#8b5cf6'; ctx.shadowBlur=12;
+  ctx.beginPath(); for(let a=0;a<=360;a++){const rad=a*Math.PI/180; const n=4; const bx=Math.sign(Math.cos(rad))*Math.pow(Math.abs(Math.cos(rad)),2/n); const by=Math.sign(Math.sin(rad))*Math.pow(Math.abs(Math.sin(rad)),2/n); const R=130; const r=38; const ox=cx+(R+r*bx)*Math.cos(rad); const oy=cy+(R*0.5+r*by)*Math.sin(rad); if(a===0)ctx.moveTo(ox,oy); else ctx.lineTo(ox,oy);} ctx.closePath(); ctx.stroke(); ctx.shadowBlur=0;
+  // quads pinned
+  ctx.fillStyle='rgba(255,255,255,0.1)'; ctx.font='11px monospace';
+  ctx.fillText('quad a :: 90 >', cx+50, cy-50);
+  ctx.fillText('quad b :: 90 .<', cx-110, cy-50);
+  ctx.fillText('quad c :: 90 0x PINNED', cx-110, cy+70);
+  ctx.fillText('quad d :: 90 ::iso::', cx+50, cy+70);
+  // center pinned >.<0x::iso::
+  ctx.fillStyle='#fde047'; ctx.beginPath(); ctx.arc(cx,cy,8,0,6.28); ctx.fill();
+  ctx.fillStyle='#fff'; ctx.font='bold 16px monospace'; ctx.fillText('>.<0x::iso::', cx-48, cy-16);
+  ctx.font='10px monospace'; ctx.fillText('000 PINNED 0x::iso::', cx-42, cy+22);
+  // -2x+2x[1]-2x+2x pinned
+  const ne=[{x:cx-30,y:cy-30,l:'-2x'},{x:cx+30,y:cy-30,l:'+2x[1]'},{x:cx-30,y:cy+30,l:'-2x'},{x:cx+30,y:cy+30,l:'+2x'}];
+  ne.forEach(p=>{ctx.fillStyle='#f97316'; ctx.beginPath(); ctx.arc(p.x,p.y,5,0,6.28); ctx.fill(); ctx.fillStyle='#fff'; ctx.fillText(p.l,p.x-12,p.y-9);});
+  // left right -+30-+ pinned to 0x
+  ctx.fillStyle='#fb923c'; [28,30,32].forEach(d=>{const rad=d*Math.PI/180; ctx.beginPath(); ctx.arc(cx+150*Math.cos(rad), cy+70*Math.sin(rad),3,0,6.28); ctx.fill(); ctx.beginPath(); ctx.arc(cx-150*Math.cos(rad), cy-70*Math.sin(rad),3,0,6.28); ctx.fill();});
+  document.getElementById('math').innerHTML=`PINNED >.<0x::iso:: = 0x000<br>S=3 n=4 e=1.5 δ=30°<br>Boxy: ((√(x²+y²)-R)/r)^4+(z/r)^4=1<br>Σ quads 90+90+90+90=360° PINNED<br>Pattern -2x+2x[1]-2x+2x PINNED to 0x<br>M=2 STABLE PINNED<br>ISO PASS ALL ON`;
+}
+draw();
+document.getElementById('export').onclick=()=>{
+  const data={pin:">.<0x::iso::", origin:"0x000", invariant:"[[ quad a::90 b::90 c::90 d::90 x::center 000 ]]", pattern:"-2x+2x[1]-2x+2x", left:"-+30-+", right:"-+30-+", S:3, n:4, e:1.5, delta:30, M:2, iso:"PASS", pinned:true};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='pinned_0x_iso.json'; a.click();
+};
+</script></body></html>

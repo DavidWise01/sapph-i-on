@@ -1,0 +1,94 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Integrated One Earth Scalar — ULTIMATE SYMMETRY ONLY — Full Cobalt Ring-11 0x11</title><script src="https://cdn.tailwindcss.com"></script>
+<style>body{background:#02030a;color:#cbd5e1;font-family:ui-monospace,monospace}canvas{background:#050a14;border-radius:14px}.card{background:#0f172a;border:1px solid #1e293b;border-radius:12px}.badge{font-size:10px;padding:2px 6px;border-radius:4px}select,input{background:#1e293b;border:1px solid #334155;border-radius:6px;padding:4px 6px;font-size:11px}</style>
+</head><body class="p-2">
+<h1 class="text-lg font-bold">Integrated One Earth Scalar — ULTIMATE SYMMETRY ONLY</h1>
+<p class="text-xs text-slate-400">ONE FILE ONLY — Pinned >.<0x::iso:: = 000::+p+s+1 Patricia Sapphon | Ring-11 Shell All Atoms 0x11=17 Co Full Shell 2,8,15,2 | [[ quad a::90 b::90 c::90 d::90 x::center 000 ]] Σ=360° | left -+30-+ ≅ right -+30-+ | -2x+2x[1]-2x+2x symmetric | ++---++ | S=3 M=2 | ISO ALL PASS SYMMETRY</p>
+
+<div class="grid grid-cols-3 md:grid-cols-8 gap-1 my-2 card p-2 text-xs">
+  <div>S<select id="S"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option></select></div>
+  <div>Polarity<select id="pol"><option>--+++--</option><option selected>++---++</option><option>+-+-+-</option><option>ALL ON</option></select></div>
+  <div>M<select id="M"><option value="2" selected>2 Stable</option><option value="4">4 Full</option><option value="1">1 Blowout</option></select></div>
+  <div>Shell<select id="shell"><option selected>Full Cobalt 0x11=17</option><option>Cobalt 2,8,15,2</option></select></div>
+  <div>Ring<select id="ring"><option selected>Ring-11 Symmetric</option><option>Ring-6 Hex</option></select></div>
+  <div>Pin<select id="pin"><option selected>>.<0x::iso:: PINNED</option></select></div>
+  <div>Patricia<select id="pat"><option selected>000::+p+s+1 ON</option></select></div>
+  <div><button id="symBtn" class="bg-violet-700 px-2 py-1 rounded">SYMMETRY ON</button></div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-2">
+  <div class="lg:col-span-3 card p-2"><canvas id="main" width="1100" height="620" class="w-full"></canvas><div class="flex gap-2 text-xs mt-2 flex-wrap"><span class="px-2 py-1 bg-blue-900 rounded">ULTIMATE SYMMETRY ONLY</span><span id="isoBadge" class="px-2 py-1 bg-green-900 rounded">ISO PASS ALL ON</span><span class="px-2 py-1 bg-yellow-900 rounded">PINNED >.<0x::iso::</span><span class="px-2 py-1 bg-pink-900 rounded">PATRICIA 000::+p+s+1</span><span id="field" class="px-2 py-1 bg-slate-800 rounded">Field NULL</span></div></div>
+  <div class="card p-2 text-xs">
+    <div class="font-bold">Ultimate Config — One File Only</div>
+    <div id="info" class="p-2 bg-black rounded mt-2 text-[10px] leading-4">
+      >.<0x::iso:: = 0x000 center pinned<br>
+      quad a :: 90 > mirrored c<br>
+      quad b :: 90 .< mirrored d<br>
+      left -+30-+ ≅ right -+30-+<br>
+      -2x+2x[1]-2x+2x symmetric<br>
+      Ring-11 0x11=17 Co atoms 21.176°<br>
+      Full cobalt shell 2,8,15,2<br>
+      S=3 0.3m M=2 stable<br>
+      Patricia 000::+p+s+1 +p +s +1<br>
+      ISO PASS SYMMETRY
+    </div>
+    <div id="log" class="mt-2 p-2 bg-slate-900 rounded h-32 overflow-y-auto text-[10px]"></div>
+    <button id="export" class="bg-emerald-700 px-2 py-1 rounded mt-2 w-full text-xs">Export Ultimate JSON</button>
+    <button id="speak" class="bg-pink-700 px-2 py-1 rounded mt-1 w-full text-xs">Speak Patricia 000::+p+s+1</button>
+  </div>
+</div>
+
+<script>
+let symOn=true;
+function log(m){const l=document.getElementById('log'); l.innerHTML+=m+'<br>'; l.scrollTop=l.scrollHeight;}
+function draw(){
+  const canvas=document.getElementById('main'); const ctx=canvas.getContext('2d'); const w=canvas.width,h=canvas.height;
+  ctx.clearRect(0,0,w,h); ctx.fillStyle='#02030a'; ctx.fillRect(0,0,w,h);
+  const cx=w/2,cy=h/2;
+  const S=parseInt(document.getElementById('S').value);
+  const R=140*(0.6+S/10);
+  // symmetry axes faint
+  if(symOn){ctx.strokeStyle='rgba(139,92,246,0.12)'; ctx.setLineDash([4,6]); ctx.beginPath(); ctx.moveTo(0,cy); ctx.lineTo(w,cy); ctx.stroke(); ctx.beginPath(); ctx.moveTo(cx,0); ctx.lineTo(cx,h); ctx.stroke(); ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(w,h); ctx.stroke(); ctx.beginPath(); ctx.moveTo(w,0); ctx.lineTo(0,h); ctx.stroke(); ctx.setLineDash([]);}
+  // central boxy toroid symmetric
+  ctx.strokeStyle='#8b5cf6'; ctx.lineWidth=3; ctx.shadowColor='#8b5cf6'; ctx.shadowBlur=14;
+  ctx.beginPath(); for(let a=0;a<=360;a++){const rad=a*Math.PI/180; const n=4; const bx=Math.sign(Math.cos(rad))*Math.pow(Math.abs(Math.cos(rad)),2/n); const by=Math.sign(Math.sin(rad))*Math.pow(Math.abs(Math.sin(rad)),2/n); const r=38; const ox=cx+(R*0.55+r*bx)*Math.cos(rad); const oy=cy+(R*0.32+r*by)*Math.sin(rad); if(a===0)ctx.moveTo(ox,oy); else ctx.lineTo(ox,oy);} ctx.closePath(); ctx.stroke(); ctx.shadowBlur=0;
+  // hex coils symmetric ++---++ (6)
+  const pol=document.getElementById('pol').value; const pattern = pol==='++---++'?'++---++': pol==='--+++--'?'--+++--':'+-+-+-';
+  for(let i=0;i<6;i++){const ang=i*60*Math.PI/180; const coilX=cx+R*Math.cos(ang); const coilY=cy+R*0.32*Math.sin(ang); const p=pattern[i]||'+'; ctx.strokeStyle=p==='+'?'#a78bfa':'#fb923c'; ctx.lineWidth=2; ctx.beginPath(); for(let a=0;a<=360;a+=8){const rad=a*Math.PI/180; const bx=Math.sign(Math.cos(rad))*Math.pow(Math.abs(Math.cos(rad)),2/4); const by=Math.sign(Math.sin(rad))*Math.pow(Math.abs(Math.sin(rad)),2/4); const r=14; const ox=coilX+r*bx*Math.cos(rad)*0.6; const oy=coilY+r*by*Math.sin(rad)*0.6; if(a===0)ctx.moveTo(ox,oy); else ctx.lineTo(ox,oy);} ctx.closePath(); ctx.stroke(); ctx.fillStyle='#fff'; ctx.font='9px monospace'; ctx.fillText(p,coilX-3,coilY+18);}
+  // center pinned
+  ctx.fillStyle='#fde047'; ctx.beginPath(); ctx.arc(cx,cy,9,0,6.28); ctx.fill();
+  ctx.fillStyle='#fff'; ctx.font='bold 14px monospace'; ctx.fillText('>.<0x::iso::', cx-44, cy-18); ctx.font='10px monospace'; ctx.fillText('000::+p+s+1 Patricia', cx-52, cy+28);
+  // -2x+2x[1]-2x+2x symmetric mirrored
+  const ne=[{x:cx-28,y:cy-28,l:'-2x'},{x:cx+28,y:cy-28,l:'+2x[1]'},{x:cx-28,y:cy+28,l:'-2x'},{x:cx+28,y:cy+28,l:'+2x'}];
+  ne.forEach(p=>{ctx.fillStyle='#f97316'; ctx.beginPath(); ctx.arc(p.x,p.y,5,0,6.28); ctx.fill(); ctx.fillStyle='#fff'; ctx.font='8px monospace'; ctx.fillText(p.l,p.x-12,p.y-8);});
+  // Full Cobalt Shell Ring-11 0x11=17 symmetric
+  const atomCount=17; const shellR=R+75;
+  ctx.strokeStyle='rgba(59,130,246,0.5)'; ctx.setLineDash([6,4]); ctx.beginPath(); ctx.ellipse(cx,cy,shellR,shellR*0.5,0,0,6.28); ctx.stroke(); ctx.setLineDash([]);
+  for(let i=0;i<atomCount;i++){
+    const ang=i*(360/atomCount)*Math.PI/180; const x=cx+shellR*Math.cos(ang); const y=cy+shellR*0.5*Math.sin(ang);
+    const grad=ctx.createRadialGradient(x-2,y-2,2,x,y,8); grad.addColorStop(0,'#bfdbfe'); grad.addColorStop(0.4,'#3b82f6'); grad.addColorStop(1,'#1e3a8a');
+    ctx.fillStyle=grad; ctx.beginPath(); ctx.arc(x,y,7,0,6.28); ctx.fill(); ctx.strokeStyle='#60a5fa'; ctx.stroke();
+    if(symOn && i<atomCount/2){const mx=cx+shellR*Math.cos(ang+Math.PI); const my=cy+shellR*0.5*Math.sin(ang+Math.PI); ctx.strokeStyle='rgba(96,165,250,0.1)'; ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(mx,my); ctx.stroke();}
+  }
+  // left right -+30-+ symmetric
+  [28,30,32].forEach(d=>{const rad=d*Math.PI/180; const lx=cx-(shellR+10)*Math.cos(rad); const ly=cy-(shellR*0.5+10)*Math.sin(rad)*0.5; const rx=cx+(shellR+10)*Math.cos(rad); const ry=cy+(shellR*0.5+10)*Math.sin(rad)*0.5; ctx.fillStyle='#fb923c'; ctx.beginPath(); ctx.arc(lx,ly,3,0,6.28); ctx.fill(); ctx.beginPath(); ctx.arc(rx,ry,3,0,6.28); ctx.fill();});
+  document.getElementById('field').textContent='Field NULL 000 SYMMETRY';
+}
+function loop(){draw(); requestAnimationFrame(loop);} loop();
+log('ULTIMATE SYMMETRY ONLY — one file baked');
+log('Pinned >.<0x::iso:: = 000::+p+s+1 Patricia Sapphon');
+log('Ring-11 Shell All Atoms 0x11=17 Co full shell 2,8,15,2 symmetric 21.176°');
+log('Quads 90,90,90,90 Σ=360° a↔c b↔d mirrored');
+log('Left -+30-+ ≅ Right -+30-+ symmetric');
+log('-2x+2x[1]-2x+2x symmetric mirrored');
+log('Polarity ++---++ / --+++-- symmetric');
+log('ISO PASS ALL ON CLEAN');
+document.getElementById('symBtn').onclick=function(){symOn=!symOn; this.textContent='SYMMETRY: '+(symOn?'ON':'OFF'); log('SYMMETRY '+(symOn?'ON':'OFF'));};
+document.getElementById('export').onclick=()=>{
+  const data={ultimate:"Integrated One Earth Scalar — ULTIMATE SYMMETRY ONLY", pin:">.<0x::iso::", patricia:"000::+p+s+1", ring:"Ring-11", atoms:"0x11=17 Co All Atoms symmetric", element:"Co Z=27 full shell 2,8,15,2", quads:[90,90,90,90], sum:360, center:"000", pattern:"-2x+2x[1]-2x+2x symmetric", left:"-+30-+", right:"-+30-+ mirrored", polarity:"++---++ symmetric", S:3, M:2, iso:"PASS", symmetry:"ALL ON", clean:true, oneFileOnly:true};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='ultimate_symmetry_only_0x11.json'; a.click(); log('EXPORT ultimate');
+};
+document.getElementById('speak').onclick=()=>{
+  const u=new SpeechSynthesisUtterance('Patricia Sapphon. Zero zero zero. Plus p plus s plus one. Pinned to iso. Ring eleven. Full cobalt shell. Symmetry all on.');
+  u.rate=0.9; u.pitch=1.1; speechSynthesis.speak(u); log('SPEAK Patricia 000::+p+s+1');
+};
+</script></body></html>

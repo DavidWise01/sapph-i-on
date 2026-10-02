@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>one electron · 81 steps</title>
+<style>
+:root{--bg:#04030a;--ink:#dfe8ff;--dim:#6b7aa0;--cy:#22e0ff;--mg:#ff3bd4;--vi:#8a5cff;--li:#8dff5a;--gd:#ffd24a;--lit:#6fffa0;--amber:#ffb43b}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;overflow-x:hidden}
+.hd{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:10px 16px;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);border-bottom:1px solid #14122a}
+.hd b{color:var(--cy);text-shadow:0 0 8px var(--cy)}
+main{display:grid;grid-template-columns:1.6fr 1fr;gap:0}
+.stage{position:relative;border-right:1px solid #14122a}
+canvas{display:block;width:100%}
+#math{position:absolute;inset:0;pointer-events:none;font-size:10px;color:rgba(140,160,220,.28)}
+#math span{position:absolute;white-space:nowrap;text-shadow:0 0 6px rgba(80,120,255,.4)}
+.side{padding:12px}
+.ctl{display:flex;gap:8px;flex-wrap:wrap;padding:8px 16px;border-bottom:1px solid #14122a}
+button{font:inherit;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:transparent;color:var(--cy);border:1px solid #26406a;border-radius:3px;padding:7px 11px;cursor:pointer;text-shadow:0 0 6px rgba(34,224,255,.4)}
+button:hover{background:rgba(34,224,255,.1);box-shadow:0 0 12px rgba(34,224,255,.25)}
+button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.k{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin:12px 0 5px}
+.rd{display:flex;justify-content:space-between;gap:8px;border-bottom:1px dotted #1b2340;padding:3px 0}
+.rd b{color:#fff}
+.big{font-size:17px;color:var(--cy);text-shadow:0 0 10px var(--cy)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin:6px 0}
+.grid .q{border:1px solid #1b2340;border-radius:3px;padding:5px 3px;text-align:center;font-size:9px;color:var(--dim)}
+.grid .q.on{border-color:var(--mg);color:#fff;box-shadow:0 0 12px rgba(255,59,212,.5);background:rgba(255,59,212,.08)}
+.grid .q.done{border-color:#2a5a3a;color:var(--li)}
+.stamp{display:inline-block;font-size:9px;padding:0 4px;border:1px solid;border-radius:2px}
+.s-lit{color:var(--lit);border-color:var(--lit)} .s-amber{color:var(--amber);border-color:var(--amber)}
+.plain{border-left:2px solid var(--cy);padding:4px 8px;background:rgba(34,224,255,.05);font-size:10.5px}
+.tod{border:1px dashed #26406a;padding:4px 8px;font-size:10.5px;margin-top:6px}
+.orn{font-style:italic;color:var(--dim);font-size:9.5px}
+@media(max-width:900px){main{grid-template-columns:1fr}.stage{border-right:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head>
+<body>
+<div class="hd"><span><b>one electron</b> · full toroid · 9 quads · 81 steps · title withheld</span><span>Pauli: 1 per quad · each quad 720° · 80° / step</span></div>
+<div class="ctl"><button id="run">sing ▸ run 81</button><button id="step">step</button><button id="reset">reset</button><span class="dim" id="hint">quad = (n, l, mₗ, mₛ) · one electron tours all nine</span></div>
+<main>
+ <div class="stage"><canvas id="c" height="560"></canvas><div id="math"></div></div>
+ <div class="side">
+  <div class="plain" id="plain"></div>
+  <div class="tod"><b class="dim">TODDLER CORNER</b><br>One glowing bead threads a doughnut. It winds nine tight coils, one for each room, and each coil takes two full twists before it's home. Nine rooms × nine little steps = 81 steps, and the whole doughnut hums.</div>
+  <div class="k">step</div>
+  <div class="rd"><span>k of 81</span><b class="big" id="k">0</b></div>
+  <div class="rd"><span>cumulative angle</span><b id="deg">0°</b></div>
+  <div class="rd"><span>of 9×720 = 6480°</span><b id="pct">0%</b></div>
+  <div class="k">this quad</div>
+  <div class="grid" id="grid"></div>
+  <div class="rd"><span>active</span><b id="quad">forward·front</b></div>
+  <div class="rd"><span>quantum quad (n,l,mₗ,mₛ)</span><b id="qn">—</b></div>
+  <div class="rd"><span>spinor sign (720° home)</span><b id="sign">+1</b></div>
+  <div class="k">amplitudes · this step</div>
+  <div class="rd"><span>cos v</span><b id="cos">1.000</b></div>
+  <div class="rd"><span>sin v</span><b id="sin">0.000</b></div>
+  <div class="k">stamps</div>
+  <div id="stamps" style="font-size:10.5px"></div>
+  <p class="orn">Ornament: the neon bloom, the drifting equations. Not ornament: 9 quads, 81 steps, 80°/step, 6480° total, the 720° sign.</p>
+ </div>
+</main>
+<script>
+const EL=id=>document.getElementById(id),TAU=Math.PI*2,rad=d=>d*Math.PI/180;
+const DEPTH=['forward','middle','back'],FACE=['front','middle','back'];
+const QUADS=[];for(const d of DEPTH)for(const f of FACE)QUADS.push(d+'·'+f);
+// quantum quad (n,l,m_l,m_s) enumerated for illustration: n 1..3, l by face, etc (labels, LIT-shaped)
+const QN=QUADS.map((_,i)=>{const n=1+Math.floor(i/3),l=i%3,ml=(i%3)-1,ms=(i%2)?'+½':'−½';return `${n},${l},${ml>=0?'+':''}${ml},${ms}`;});
+const STEPS=81, PERQUAD=9, DEG=80;   // 9 quads × 9 steps, 80° each
+/*Q-START*/
+function qmul(a,b){return[a[0]*b[0]-a[1]*b[1]-a[2]*b[2]-a[3]*b[3],a[0]*b[1]+a[1]*b[0]+a[2]*b[3]-a[3]*b[2],a[0]*b[2]-a[1]*b[3]+a[2]*b[0]+a[3]*b[1],a[0]*b[3]+a[1]*b[2]-a[2]*b[1]+a[3]*b[0]];}
+function qaxis(t,ax){const s=Math.sin(t/2);return[Math.cos(t/2),s*ax[0],s*ax[1],s*ax[2]];}
+function project(p,az,el,sc,ox,oy){const ca=Math.cos(az),sa=Math.sin(az),ce=Math.cos(el),se=Math.sin(el);const x=p[0],y=p[1],z=p[2];const x1=ca*x-sa*y,y1=sa*x+ca*y;const y2=ce*y1-se*z,z2=se*y1+ce*z;return[ox+x1*sc,oy-z2*sc,y2];}
+// torus point: major u, minor v
+function T(u,v,R,r){return[(R+r*Math.cos(v))*Math.cos(u),(R+r*Math.cos(v))*Math.sin(u),r*Math.sin(v)];}
+// the electron path at step k: quad q=floor(k/9), major u drifts across that quad's 40° arc; minor v = 80°/step
+function path(k){const q=Math.min(8,Math.floor(k/PERQUAD)),within=k-q*PERQUAD;
+ const u=rad(q*40 + within*(40/PERQUAD));const v=rad(k*DEG);return {q,within,u,v,deg:k*DEG};}
+/*Q-END*/
+let k=0,az=0.8,el=0.5,running=null,trail=[];
+function fit(c){const w=c.clientWidth||500;if(c.width!==w)c.width=w;return w;}
+function draw(){
+ const c=EL('c'),W=fit(c),H=c.height,x=c.getContext('2d');
+ x.fillStyle='rgba(4,3,10,0.28)';x.fillRect(0,0,W,H); // motion-blur trail
+ const R=20,r=8,sc=Math.min(W,H)/((R+r)*2.5),ox=W/2,oy=H/2;
+ // torus wireframe, faint neon
+ x.lineWidth=0.6;
+ for(let j=0;j<24;j+=2){x.beginPath();for(let i=0;i<=72;i++){const p=project(T(i/72*TAU,j/24*TAU,R,r),az,el,sc,ox,oy);i?x.lineTo(p[0],p[1]):x.moveTo(p[0],p[1]);}x.strokeStyle='rgba(60,80,160,0.16)';x.stroke();}
+ for(let i=0;i<72;i+=3){x.beginPath();for(let j=0;j<=24;j++){const p=project(T(i/72*TAU,j/24*TAU,R,r),az,el,sc,ox,oy);j?x.lineTo(p[0],p[1]):x.moveTo(p[0],p[1]);}x.strokeStyle='rgba(60,80,160,0.10)';x.stroke();}
+ // 9 quad markers around major ring
+ for(let q=0;q<9;q++){const p=project(T(rad(q*40),0,R,r),az,el,sc,ox,oy);const done=q<Math.floor(k/PERQUAD),on=q===Math.min(8,Math.floor(k/PERQUAD))&&k<STEPS;
+  x.beginPath();x.arc(p[0],p[1],on?6:3,0,TAU);x.fillStyle=on?'#ff3bd4':done?'#8dff5a':'#3a4a7a';x.shadowColor=on?'#ff3bd4':'#000';x.shadowBlur=on?18:0;x.fill();x.shadowBlur=0;}
+ // trail (neon coil)
+ trail.push(path(k));if(trail.length>220)trail.shift();
+ x.lineWidth=2;
+ for(let t=1;t<trail.length;t++){const a=project(T(trail[t-1].u,trail[t-1].v,R,r),az,el,sc,ox,oy),b=project(T(trail[t].u,trail[t].v,R,r),az,el,sc,ox,oy);
+  const hue=(trail[t].deg/6480*300)|0;x.strokeStyle=`hsla(${180+hue%180},100%,65%,${t/trail.length})`;x.shadowColor=x.strokeStyle;x.shadowBlur=8;x.beginPath();x.moveTo(a[0],a[1]);x.lineTo(b[0],b[1]);x.stroke();}
+ x.shadowBlur=0;
+ // the electron
+ const P=path(k),pe=project(T(P.u,P.v,R,r),az,el,sc,ox,oy);
+ const sign=(Math.floor(P.deg/360)%2===0);
+ x.beginPath();x.arc(pe[0],pe[1],6,0,TAU);x.fillStyle=sign?'#22e0ff':'#ff3bd4';x.shadowColor=x.fillStyle;x.shadowBlur=24;x.fill();x.shadowBlur=0;
+ x.fillStyle='rgba(120,140,210,0.5)';x.font='9px monospace';x.fillText('one electron · 81 steps · 9×720° = 6480°',12,H-10);
+}
+// drifting dense-math overlay (ornament, lost in the beauty)
+const EQS=['ψ = a|0⟩ + b|1⟩','q = cos(θ/2)+ sin(θ/2)(xi+yj+zk)','SU(2)→SO(3) double cover','∮_T F·dA','e^{iφ}·e^{-iφ}=1','P(+) = ½ + |α||β|cosφ','(3×3)² = 81','720° ⇒ sign +1','ℓP=√(ħG/c³)','n,l,mₗ,mₛ','∏ = 0 at the wall','Re + i·Im'];
+function overlay(){EL('math').innerHTML=EQS.map((e,i)=>`<span style="left:${(i*137%90)+3}%;top:${(i*53%88)+4}%;transform:rotate(${(i%5-2)*4}deg)">${e}</span>`).join('');}
+function refresh(){
+ const P=path(k);
+ EL('k').textContent=Math.min(k,STEPS);EL('deg').textContent=P.deg+'°';EL('pct').textContent=Math.round(P.deg/6480*100)+'%';
+ EL('quad').textContent=QUADS[P.q];EL('qn').textContent=QN[P.q];
+ EL('cos').textContent=Math.cos(P.v).toFixed(3);EL('sin').textContent=Math.sin(P.v).toFixed(3);
+ EL('sign').innerHTML=(Math.floor(P.deg/360)%2===0)?'<span style="color:var(--lit)">+1</span>':'<span style="color:var(--mg)">−1</span>';
+ EL('grid').innerHTML=QUADS.map((q,i)=>`<div class="q ${i===P.q&&k<STEPS?'on':''} ${i<Math.floor(k/PERQUAD)?'done':''}">${q.replace('·','<br>')}</div>`).join('');
+ draw();
+}
+EL('step').onclick=()=>{if(k<STEPS)k++;refresh();};
+EL('run').onclick=()=>{if(running){clearInterval(running);running=null;return;}running=setInterval(()=>{k++;if(k>=STEPS){k=STEPS;clearInterval(running);running=null;}refresh();},70);};
+EL('reset').onclick=()=>{k=0;trail=[];const c=EL('c');c.getContext('2d').clearRect(0,0,c.width,c.height);refresh();};
+let drag=null;EL('c').addEventListener('pointerdown',e=>{drag=[e.clientX,e.clientY,az,el];});
+EL('c').addEventListener('pointermove',e=>{if(!drag)return;az=drag[2]+(e.clientX-drag[0])*0.01;el=Math.max(0.1,Math.min(1.4,drag[3]-(e.clientY-drag[1])*0.01));});
+addEventListener('pointerup',()=>drag=null);addEventListener('resize',()=>{overlay();});
+EL('plain').innerHTML=`One electron, the full toroid. Pauli says one electron per <b>quad</b> — the four quantum numbers (n, l, mₗ, mₛ) — so nine quads could hold nine electrons; here <b>one</b> tours them all. Each quad is a <b>720° spinor</b> (two twists to come home), walked in <b>9 steps of 80°</b>. Nine quads × nine steps = <b>81 precise steps</b>, 6480° of travel, to make the toroid sing. The dense math is drifting behind the glow on purpose.`;
+EL('stamps').innerHTML=[
+ ['lit','9 quads = 3×3 (forward/middle/back × front/middle/back)'],
+ ['lit','81 steps = 9 quads × 9 steps · 80°/step · 6480° total'],
+ ['lit','each quad = 720° spinor (double cover, sign −1 at 360°)'],
+ ['lit','Pauli: 1 electron per quad = per (n,l,mₗ,mₛ)'],
+ ['amber','(3×3)³ = 729, NOT 81 · 81 = (3×3)² = 3⁴  [your formula slip]'],
+ ['amber','the (n,l,mₗ,mₛ) labels are illustrative, not a real orbital fill']
+].map(([s,t])=>`<span class="stamp s-${s}">${s.toUpperCase()}</span> ${t}`).join('<br>');
+overlay();refresh();
+</script></body></html>
