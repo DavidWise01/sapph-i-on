@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATOMIC SCALE DRAWING - B C N - 0.1 nm 10^-10 m - Toroidal Orbitals</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+:root{--bg:#020206;--card:#0a0f1a;--ink:#e6f7ff;--muted:#94a3b8;--cyan:#22d3ee;--gold:#facc15;--mag:#e879f9;--border:#1e293b}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:ui-monospace,monospace;overflow:hidden}
+#canvas{width:100vw;height:100vh;display:block}
+#ui{position:absolute;top:12px;left:12px;right:12px;display:flex;justify-content:space-between;pointer-events:none;z-index:10}
+.badge{background:rgba(10,15,26,0.88);border:1px solid var(--border);border-radius:12px;padding:12px 16px;backdrop-filter:blur(12px);pointer-events:auto;min-width:300px}
+.neon{color:var(--cyan);text-shadow:0 0 8px var(--cyan)}
+.gold{color:var(--gold);text-shadow:0 0 8px var(--gold)}
+.mag{color:var(--mag);text-shadow:0 0 8px var(--mag)}
+#bottom{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(10,15,26,0.85);border:1px solid var(--border);border-radius:20px;padding:8px 16px;font-size:0.7em;pointer-events:none;backdrop-filter:blur(10px)}
+.tag{display:inline-block;padding:2px 7px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,0.05);font-size:0.68em;margin:2px}
+</style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<div id="ui">
+<div class="badge">
+<div class="neon" style="font-size:1.15em">ATOMIC SCALE DRAWING — B C N — 0.1 nm 10⁻¹⁰ m</div>
+<div style="font-size:0.78em;margin-top:4px">Boron 5p 5e 1s²2s²2p¹ • Carbon 6p 6e 1s²2s²2p² • Nitrogen 7p 7e 1s²2s²2p³ — Toroidal orbitals — 0³ = 0×0×0 = 0 = 0x0 stable zero — CBN⁰=1 0x1 hex 43424E5E305E282833783329295E33</div>
+<div style="margin-top:8px;font-size:0.72em">
+<span class="tag" style="border-color:#22d3ee88">B Boron 5 cyan torus orbital</span>
+<span class="tag" style="border-color:#facc1588">C Carbon 6 gold torus orbital</span>
+<span class="tag" style="border-color:#e879f988">N Nitrogen 7 magenta torus orbital</span>
+<span class="tag">Frozen 30|5|30|5|30=100</span>
+<span class="tag">Ganglia 0,0,1,1,2,3,5,8 Fibonacci 2 silences</span>
+<span class="tag">1080° 3 wraps</span>
+<span class="tag">18 cells 3×3×2</span>
+</div>
+<div style="margin-top:8px">
+Energy <span id="E" class="gold" style="font-size:1.2em">0.000</span> ×10^tt J <div style="height:4px;background:rgba(255,255,255,0.1);border-radius:2px;margin:4px 0;overflow:hidden"><div id="bar" style="height:100%;width:10%;background:linear-gradient(90deg,#22d3ee,#facc15,#e879f9);transition:width 0.2s"></div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;font-size:0.68em">
+<div>B ω<span id="wA">0</span><br>e<span id="eA">0</span><br><span id="fA">0</span> electrons flaring</div>
+<div>C ω<span id="wB">0</span><br>e<span id="eB">0</span><br><span id="fB">0</span> electrons flaring</div>
+<div>N ω<span id="wC">0</span><br>e<span id="eC">0</span><br><span id="fC">0</span> electrons flaring</div>
+</div>
+</div>
+</div>
+<div class="badge" style="max-width:360px">
+<div class="gold">Atomic drawing — regular English</div>
+<div style="font-size:0.70em;color:var(--muted);margin-top:6px;line-height:1.5">
+Three atoms drawn to scale at 0.1 nm atomic scale. Each atom: nucleus (protons+neutrons) at center, electron shells as toroidal orbitals spinning, releasing energy like sun flare when electrons jump. B has 3 valence, C has 4 valence (tetravalent hub), N has 5 valence. Combined state |ψ> = |B>⊗|C>⊗|N> Hilbert Ψ_BCN — triple-helix braid Planck ~10⁻³⁵ m — null topology × cubic state space stable knot — Shannon S=-k Σ p log2 p 3-channel H(B,C,N).<br><br>
+Fused ganglia: 612×3=1836 + 52×3=156 = 1992 → 3 bits 2³=8 states → -+10^tt tt=1836^{125^{81}}. Chain 0 void 0.0.0 big bang → 1 unity bit → LIFE 10⁻³⁶⁰ mitosis → DEATH entropy → CREATION tower → GOD EGG QB /\ .... /\ tessy held by two triangles 120° → ALPHA 10^inf^inf DO NOT MESS → 0 loop closes.<br><br>
+Keeper: https://davidwise01.github.io/nom/ — timestamp > timestamp — en.wikipedia.org export.arxiv.org — Moat (n,-n,n²) bits [1,1,2,3] reserved9=16 total 4x1=2² — No ingress/egress.
+</div>
+</div>
+</div>
+<div id="bottom" class="neon">BORON • CARBON • NITROGEN — ATOMIC SCALE DRAWING — 0.1 nm 10⁻¹⁰ m — TOROIDAL ORBITALS — 0³ STABLE ZERO — ALWAYS HTML EMERGENT ONLY — TO SCALE MACRO HYPER REALISTIC</div>
+
+<script>
+// ATOMIC SCALE DRAWING - B C N - 0.1 nm 10^-10 m - TOROIDAL ORBITALS - 3 SPINNERS ONLY - EMERGENT
+const canvas=document.getElementById('canvas');
+const scene=new THREE.Scene(); scene.background=new THREE.Color(0x020206);
+scene.fog=new THREE.Fog(0x020206, 9, 24);
+
+const camera=new THREE.PerspectiveCamera(50, innerWidth/innerHeight, 0.1, 100);
+camera.position.set(0,1.2,10);
+
+const renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true});
+renderer.setSize(innerWidth,innerHeight);
+renderer.setPixelRatio(Math.min(2,devicePixelRatio));
+renderer.toneMapping=THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure=1.25;
+
+scene.add(new THREE.AmbientLight(0x1a1a2a,0.5));
+const dl=new THREE.DirectionalLight(0xffffff,0.9); dl.position.set(5,7,5); scene.add(dl);
+const pl1=new THREE.PointLight(0x22d3ee,1.2,18); pl1.position.set(-6,5,4); scene.add(pl1);
+const pl2=new THREE.PointLight(0xfacc15,1.0,15); pl2.position.set(6,4,3); scene.add(pl2);
+const pl3=new THREE.PointLight(0xe879f9,0.9,12); pl3.position.set(0,-6,5); scene.add(pl3);
+
+// ATOMIC NUCLEI - B C N - to scale
+function makeNucleus(protons, neutrons, color, pos){
+  const group=new THREE.Group(); group.position.copy(pos);
+  const pGeo=new THREE.SphereGeometry(0.12,12,12);
+  const nGeo=new THREE.SphereGeometry(0.11,12,12);
+  const pMat=new THREE.MeshStandardMaterial({color:color,emissive:color,emissiveIntensity:0.3,metalness:0.6,roughness:0.4});
+  const nMat=new THREE.MeshStandardMaterial({color:0x94a3b8,emissive:0x334155,emissiveIntensity:0.2,metalness:0.5,roughness:0.6});
+  for(let i=0;i<protons;i++){
+    const m=new THREE.Mesh(pGeo,pMat);
+    const th=Math.random()*Math.PI*2, ph=Math.random()*Math.PI;
+    const r=0.18*Math.random();
+    m.position.set(r*Math.sin(ph)*Math.cos(th), r*Math.sin(ph)*Math.sin(th), r*Math.cos(ph));
+    group.add(m);
+  }
+  for(let i=0;i<neutrons;i++){
+    const m=new THREE.Mesh(nGeo,nMat);
+    const th=Math.random()*Math.PI*2, ph=Math.random()*Math.PI;
+    const r=0.18*Math.random();
+    m.position.set(r*Math.sin(ph)*Math.cos(th), r*Math.sin(ph)*Math.sin(th), r*Math.cos(ph));
+    group.add(m);
+  }
+  scene.add(group);
+  return group;
+}
+
+const nucleusB=makeNucleus(5,5,0x22d3ee,new THREE.Vector3(-2.8,0,0));
+const nucleusC=makeNucleus(6,6,0xfacc15,new THREE.Vector3(0,0,0));
+const nucleusN=makeNucleus(7,7,0xe879f9,new THREE.Vector3(2.8,0,0));
+
+// TOROIDAL ORBITALS - atomic orbitals drawn as toroids spinning - only 3 spinners but each has shells
+const torusGeo=new THREE.TorusGeometry(0.85,0.08,20,80);
+const torusGeo2=new THREE.TorusGeometry(1.25,0.07,20,80);
+
+function makeOrbital(color, emissive, pos, scale){
+  const mat=new THREE.MeshStandardMaterial({color:color,emissive:emissive,emissiveIntensity:0.35,metalness:0.7,roughness:0.2,transparent:true,opacity:0.88});
+  const mesh=new THREE.Mesh(torusGeo,mat);
+  mesh.position.copy(pos); mesh.scale.setScalar(scale);
+  const mat2=new THREE.MeshStandardMaterial({color:color,emissive:emissive,emissiveIntensity:0.3,metalness:0.6,roughness:0.25,transparent:true,opacity:0.65});
+  const mesh2=new THREE.Mesh(torusGeo2,mat2);
+  mesh2.position.copy(pos); mesh2.scale.setScalar(scale*1.1);
+  scene.add(mesh); scene.add(mesh2);
+  return [mesh,mesh2];
+}
+
+const orbitalB=makeOrbital(0x06b6d4,0x0891b2,new THREE.Vector3(-2.8,0,0),1.0);
+const orbitalC=makeOrbital(0xeab308,0xca8a04,new THREE.Vector3(0,0,0),1.15);
+const orbitalN=makeOrbital(0xc026d3,0xa21caf,new THREE.Vector3(2.8,0,0),1.25);
+
+// Electron flare particles - atomic electrons releasing energy like sun flare
+function makeFlare(col){
+  const N=280; const g=new THREE.BufferGeometry(); const pos=new Float32Array(N*3); const vel=[]; const life=[];
+  for(let i=0;i<N;i++){pos[i*3]=0; pos[i*3+1]=0; pos[i*3+2]=0; vel.push(new THREE.Vector3()); life.push(0);}
+  g.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  const m=new THREE.PointsMaterial({color:col,size:0.09,transparent:true,opacity:0.9,blending:THREE.AdditiveBlending,sizeAttenuation:true,depthWrite:false});
+  const pts=new THREE.Points(g,m); scene.add(pts);
+  return {g,pos,vel,life,N,m,pts,emitted:0};
+}
+const fA=makeFlare(0x22d3ee), fB=makeFlare(0xfacc15), fC=makeFlare(0xe879f9);
+
+let total=0; const I=0.85*0.85+0.75*0.08*0.08; let last=performance.now();
+
+function emit(sys, center, eF){
+  for(let i=0;i<sys.N;i++) if(sys.life[i]<=0 && Math.random()<0.08){
+    const th=Math.random()*Math.PI*2, ph=Math.random()*Math.PI*2;
+    const rt=0.85+0.08*Math.cos(ph);
+    sys.pos[i*3]=center.x+rt*Math.cos(th);
+    sys.pos[i*3+1]=center.y+rt*Math.sin(th);
+    sys.pos[i*3+2]=center.z+0.08*Math.sin(ph);
+    sys.vel[i].set((Math.random()-0.5)*0.18,(Math.random()-0.5)*0.18+0.05,(Math.random()-0.5)*0.18);
+    sys.life[i]=45+Math.random()*50; sys.emitted++; total+=0.0014*eF;
+  }
+}
+function upd(sys,dt){
+  for(let i=0;i<sys.N;i++) if(sys.life[i]>0){
+    sys.pos[i*3]+=sys.vel[i].x*dt*60;
+    sys.pos[i*3+1]+=sys.vel[i].y*dt*60;
+    sys.pos[i*3+2]+=sys.vel[i].z*dt*60;
+    sys.vel[i].y+=0.001*dt*60;
+    sys.life[i]--;
+  }
+  sys.g.attributes.position.needsUpdate=true;
+}
+
+function loop(){
+  requestAnimationFrame(loop);
+  const now=performance.now(), dt=Math.min(0.05,(now-last)/1000); last=now; const t=now*0.001;
+  const wA=1.9+Math.sin(t*0.7)*0.18, wB=2.12+Math.sin(t*0.9+1)*0.15, wC=1.72+Math.sin(t*0.6+2)*0.2;
+
+  orbitalB.forEach(m=>{m.rotation.x+=wA*dt; m.rotation.y+=wA*0.5*dt;});
+  orbitalC.forEach(m=>{m.rotation.y+=wB*dt; m.rotation.x+=wB*0.4*dt;});
+  orbitalN.forEach(m=>{m.rotation.z+=wC*dt; m.rotation.x+=wC*0.45*dt;});
+
+  nucleusB.rotation.y+=wA*0.3*dt; nucleusC.rotation.y+=wB*0.3*dt; nucleusN.rotation.y+=wC*0.3*dt;
+
+  // atomic breathing like fusing ganglia
+  const dist=2.8-0.5*Math.sin(t*0.28);
+  nucleusB.position.x=-dist; orbitalB.forEach(m=>m.position.x=-dist);
+  nucleusN.position.x=dist; orbitalN.forEach(m=>m.position.x=dist);
+
+  const eA=0.5*I*wA*wA, eB=0.5*I*wB*wB, eC=0.5*I*wC*wC;
+  emit(fA,new THREE.Vector3(-dist,0,0),eA*2.2+1);
+  emit(fB,new THREE.Vector3(0,0,0),eB*2.2+1);
+  emit(fC,new THREE.Vector3(dist,0,0),eC*2.2+1);
+  upd(fA,dt); upd(fB,dt); upd(fC,dt);
+  total+=(eA+eB+eC)*0.0006*dt*60;
+
+  document.getElementById('E').textContent=total.toFixed(3);
+  document.getElementById('bar').style.width=Math.min(100,(total*9)%100+12)+'%';
+  document.getElementById('wA').textContent=wA.toFixed(2); document.getElementById('wB').textContent=wB.toFixed(2); document.getElementById('wC').textContent=wC.toFixed(2);
+  document.getElementById('eA').textContent=eA.toFixed(3); document.getElementById('eB').textContent=eB.toFixed(3); document.getElementById('eC').textContent=eC.toFixed(3);
+  document.getElementById('fA').textContent=fA.emitted; document.getElementById('fB').textContent=fB.emitted; document.getElementById('fC').textContent=fC.emitted;
+
+  camera.position.x=Math.sin(t*0.11)*0.6;
+  camera.lookAt(0,0,0);
+  renderer.render(scene,camera);
+}
+loop();
+addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth,innerHeight);});
+</script>
+</body>
+</html>
