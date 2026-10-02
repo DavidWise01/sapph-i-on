@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Plus Fifteen Degrees</title>
+<style>
+:root{--bg:#07080c;--ink:#F1F2F5;--soft:#A7AEBB;--faint:#5e6676;--glass:rgba(255,255,255,.045);--edge:rgba(255,255,255,.09);--gold:#F5B94E;--vio:#A88BFF;--teal:#4FD1B5;--rose:#FF7A8A;--grad:linear-gradient(100deg,#4FD1B5 0%,#A88BFF 50%,#F5B94E 100%)}
+*{box-sizing:border-box}html,body{overflow-x:hidden}
+body{margin:0;color:var(--ink);font:16px/1.6 Inter,ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:radial-gradient(1000px 650px at 85% -10%,#20304a 0%,transparent 60%),radial-gradient(900px 600px at -10% 45%,#2b1a36 0%,transparent 55%),var(--bg);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding:28px 16px 60px}
+.top{display:flex;justify-content:space-between;gap:10px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:20px}.top b{color:var(--soft)}
+h1{font-size:clamp(36px,7vw,70px);line-height:1;letter-spacing:-.035em;margin:0 0 12px;font-weight:800}
+h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{font-size:clamp(16px,2.2vw,20px);color:var(--soft);max-width:780px;margin:0 0 22px}
+h3{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:0 0 10px;font-weight:600}
+p{margin:0 0 12px;color:var(--soft)}b.w{color:var(--ink)}
+.card{background:var(--glass);border:1px solid var(--edge);border-radius:22px;padding:22px}
+section{margin:0 0 20px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}@media(max-width:820px){.grid2{grid-template-columns:1fr}}
+.pill{display:inline-block;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:99px;margin-left:4px;vertical-align:1px;font-weight:600;white-space:nowrap}
+.pill.lit{background:rgba(79,209,181,.14);color:var(--teal)}.pill.amb{background:rgba(245,185,78,.14);color:var(--gold)}
+.kid{border-radius:22px;padding:20px 22px;background:linear-gradient(120deg,rgba(79,209,181,.10),rgba(168,139,255,.12));border:1px solid var(--edge);margin-bottom:20px}
+.kid p{color:var(--ink);font-size:17px;margin:0}
+.btn{appearance:none;border:0;border-radius:999px;padding:8px 14px;font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;color:#0d0c16;background:var(--grad)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--edge)}.btn.ghost.on{border-color:var(--vio);background:rgba(168,139,255,.15)}
+.dock{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+input[type=range]{flex:1;min-width:220px;accent-color:#A88BFF}
+.pane{position:relative;border-radius:18px;overflow:hidden;background:#000}
+.pane canvas{display:block;width:100%}
+.pane .cap{position:absolute;left:12px;top:10px;font:600 12px/1.35 ui-monospace,Menlo,monospace;color:#fff;text-shadow:0 1px 3px #000;pointer-events:none}
+.stage{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.stage span{border:1px solid var(--edge);border-radius:12px;padding:8px 10px;font-size:12.5px;color:var(--soft);cursor:pointer}
+.stage span b{display:block;color:var(--ink);font-size:14px}
+.stage span.on{border-color:var(--vio);background:rgba(168,139,255,.12)}
+.ro{font:13px/1.65 ui-monospace,Menlo,monospace;color:var(--soft)}.ro b{color:var(--ink);font-weight:600}
+details summary{cursor:pointer;color:var(--soft);font-size:14px;list-style:none;display:inline-flex;padding:10px 16px;border:1px solid var(--edge);border-radius:999px}
+details summary::-webkit-details-marker{display:none}
+.foot{color:var(--faint);font-size:12px;text-align:center;margin-top:28px}
+</style></head>
+<body><div class="wrap">
+<div class="top"><span><b>R</b> · phase</span><span>15° × 24 = 360°</span></div>
+<h1>Plus <span>15°</span> off the fat belly.</h1>
+<p class="lede">Start at the dead centre of the Mandelbrot set's big body, c = 0, where the Julia set is a plain circle. Walk out at a 15° heading to the edge, then leave. The whole way, watch one point, z = 0, and where it goes. Inside, it spirals home turning 15° a step. At the edge it takes forever. Outside, it escapes.</p>
+<div class="kid"><p><b>Small words.</b> Drop a marble at 0 and keep doing "square it, add c". Inside the big body the marble swirls into a drain, turning a little each time, like water going down a sink. Right at the edge the drain is so weak the marble almost never gets there. Step outside and there's no drain at all, so the marble rolls away forever.</p></div>
+
+<section class="card">
+  <div class="dock"><button class="btn" id="play">Walk it</button><input type="range" id="t" min="0" max="2" step="0.001" value="0.6" aria-label="position along the walk"><button class="btn ghost" id="zoom">zoom the edge</button></div>
+  <div class="stage" id="stg">
+    <span data-t="0"><b>0 0 0</b>centre · c = 0</span>
+    <span data-t="1"><b>+15° edge</b>root of the 24-bulb</span>
+    <span data-t="1.6"><b>exit</b>outside, 0 escapes</span>
+  </div>
+  <div class="grid2">
+    <div class="pane"><canvas id="cp"></canvas><div class="cap" id="cpc">all the c values · path in gold</div></div>
+    <div class="pane"><canvas id="jp"></canvas><div class="cap" id="jpc">Julia set of this c · orbit of 0</div></div>
+  </div>
+  <div class="ro" id="ro" style="margin-top:12px"></div>
+</section>
+
+<section class="grid2">
+  <div class="card">
+    <h3>The three legs</h3>
+    <p><b class="w">Leg 1, inside the belly (0 → 1):</b> c = λ/2 − λ²/4, with λ = r · e^(i·15°) and r from 0 to 1. The Julia set has one home point that pulls with strength r and turns everything 15° a step. The orbit of 0 spirals into it. <span class="pill lit">checked</span></p>
+    <p><b class="w">The edge (r = 1):</b> the pull is exactly 1, so it barely pulls. 15° is 1/24 of a turn, so this edge point is where a small bulb with period 24 hangs off the belly. The Julia set pinches into 24 petals, and 0 creeps home through them. <span class="pill lit">checked</span></p>
+    <p><b class="w">Leg 2, the exit (1 → 2):</b> leaving along the one outside path that lands on that edge point: external ray 1/(2²⁴ − 1). The walk goes out to height 0.1. From the moment you leave, 0 escapes, and the further out you are, the sooner it goes. <span class="pill lit">checked</span></p>
+  </div>
+  <div class="card">
+    <h3>What's solid, what isn't</h3>
+    <p>▓ <b class="w">Measured turn:</b> over the last 24 steps before it lands, the orbit of 0 turns 15.00° a step at r = 0.9. At the edge it's also 15.00° over 24 steps, though single steps range from 10° to 28° as it hops from petal to petal. <span class="pill lit">checked</span> The page measures this live for wherever you stand. <span class="pill lit">checked</span></p>
+    <p><b class="w">At the edge 0 doesn't really arrive:</b> after 400,000 steps it's still 0.114 from home. <span class="pill lit">checked</span></p>
+    <p><b class="w">The exit path was traced, then read back:</b> 80 points along the ray each report their own height to within 2 parts in a billion. <span class="pill lit">checked</span> Rays land slowly at pinch points: at height 10⁻⁶ the path is still 0.0044 from the edge point. <span class="pill lit">checked</span></p>
+    <p>"0 0 0" as c = 0 at phase 0, "tracked by the Julia set at 0 0" as the point z = 0, and "exit trajectory" as the escaping orbit of 0 are my reading of your words. <span class="pill amb">my read</span></p>
+  </div>
+</section>
+
+<section><details><summary>▸ Show the math</summary><div class="card" style="margin-top:12px">
+<p>Home point: z* = (1 − √(1 − 4c)) ÷ 2. Its pull is f′(z*) = 2z* = λ. Checked to 10⁻¹² at every r. <span class="pill lit">checked</span></p>
+<p>Edge point (r = 1): c = e^(iπ/12)/2 − e^(iπ/6)/4 = 0.266457 + 0.004410i. Its pull has size 1.000000 at angle 15.000°. <span class="pill lit">checked</span></p>
+<p>15° = 1/24 turn. Two outside paths land on the root of the 1/24 bulb: 1/(2²⁴ − 1) and 2/(2²⁴ − 1). The lower one is used here. <span class="pill lit">checked</span></p>
+<p>On the exit leg, 0 escapes past 2 at step 4 (height 0.1), step 8 (0.01), step 11 (0.001), 14 (10⁻⁴), 18 (10⁻⁵), 21 (10⁻⁶). <span class="pill lit">checked</span></p>
+<p>15° × 24 = 360°: 24 steps of your phase make one full turn, the same 24 as the sentinel cubit. <span class="pill lit">checked</span></p>
+</div></details></section>
+<div class="foot">0 0 0 → +15° → edge of the 24-bulb → exit · rests between frames · no network, no storage</div>
+</div>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id),TAU=2*Math.PI,PHI=15*Math.PI/180;
+const RAY=[[1e-06,0.2691401904,0.000878553776],[1.15689e-06,0.2694695316,0.00078733023],[1.33839e-06,0.2698153209,0.000704434505],[1.54837e-06,0.2701767339,0.000629513944],[1.79128e-06,0.2705531643,0.000562084339],[2.07231e-06,0.2709442128,0.00050158938],[2.39743e-06,0.271349665,0.000447444231],[2.77356e-06,0.2717694675,0.000399066227],[3.2087e-06,0.272203705,0.000355895069],[3.71211e-06,0.2726525802,0.000317404532],[4.29449e-06,0.2731163981,0.000283107972],[4.96824e-06,0.2735955512,0.000252560129],[5.74769e-06,0.274090509,0.000225357013],[6.64944e-06,0.2746018095,0.000201134591],[7.69265e-06,0.2751300541,0.000179566355],[8.89953e-06,0.2756759041,0.000160360216],[1.02958e-05,0.2762400784,0.000143255255],[1.1911e-05,0.2768233516,0.000128018883],[1.37797e-05,0.2774265546,0.000114444166],[1.59416e-05,0.2780505757,0.000102347173],[1.84426e-05,0.2786963631,9.1564388e-05],[2.1336e-05,0.2793649266,8.1950415e-05],[2.46834e-05,0.2800573407,7.3376068e-05],[2.85559e-05,0.280774748,6.5726664e-05],[3.3036e-05,0.2815183643,5.8900389e-05],[3.82189e-05,0.2822894836,5.2806769e-05],[4.4215e-05,0.2830894834,4.7365372e-05],[5.11518e-05,0.2839198295,4.2504742e-05],[5.91769e-05,0.2847820838,3.8161426e-05],[6.8461e-05,0.2856779117,3.4279047e-05],[7.92016e-05,0.286609091,3.0807463e-05],[9.16274e-05,0.2875775197,2.7702061e-05],[0.000106003,0.2885852253,2.4923176e-05],[0.000122633,0.2896343764,2.2435553e-05],[0.000141873,0.2907272957,2.0207831e-05],[0.000164131,0.2918664727,1.8212073e-05],[0.000189881,0.2930545772,1.6423403e-05],[0.000219671,0.2942944754,1.481968e-05],[0.000254134,0.295589248,1.33812e-05],[0.000294005,0.2969422117,1.2090408e-05],[0.00034013,0.2983569397,1.0931645e-05],[0.000393493,0.299837285,9.890949e-06],[0.000455227,0.3013874074,8.955883e-06],[0.000526646,0.3030118052,8.115359e-06],[0.00060927,0.3047153496,7.359484e-06],[0.000704857,0.3065033211,6.679421e-06],[0.000815441,0.3083814504,6.067279e-06],[0.000943373,0.3103559663,5.516022e-06],[0.00109138,0.3124336514,5.019367e-06],[0.0012626,0.3146219023,4.571697e-06],[0.00146069,0.3169287962,4.167988e-06],[0.00168985,0.319363166,3.803749e-06],[0.00195497,0.3219346898,3.47497e-06],[0.00226168,0.3246539929,3.178063e-06],[0.0026165,0.3275327613,2.909816e-06],[0.003027,0.3305838686,2.667351e-06],[0.0035019,0.3338215242,2.448094e-06],[0.0040513,0.3372614478,2.249742e-06],[0.0046869,0.3409210699,2.070232e-06],[0.00542222,0.3448197595,1.907714e-06],[0.0062729,0.3489790862,1.76053e-06],[0.00725704,0.3534231283,1.627193e-06],[0.00839558,0.3581788401,1.506377e-06],[0.00971274,0.3632764785,1.396888e-06],[0.0112365,0.3687500989,1.297657e-06],[0.0129994,0.3746381388,1.207726e-06],[0.0150389,0.3809841186,1.126238e-06],[0.0173983,0.387837483,1.052429e-06],[0.0201279,0.3952546006,9.85614e-07],[0.0232857,0.4032999557,9.25181e-07],[0.0269389,0.4120475896,8.70584e-07],[0.0311653,0.421582864,8.21343e-07],[0.0360547,0.4320046216,7.77032e-07],[0.0417112,0.4434278251,7.37276e-07],[0.0482552,0.4559868009,7.01749e-07],[0.0558259,0.4698392802,6.70173e-07],[0.0645842,0.4851714823,6.42311e-07],[0.0747167,0.502204525,6.17974e-07],[0.0864388,0.5212025396,5.97013e-07],[0.1,0.5424830297,5.79325e-07]];
+const ROOT=[0.2664565621984245,0.004409522551260384];
+// complex helpers
+const mul=(a,b)=>[a[0]*b[0]-a[1]*b[1],a[0]*b[1]+a[1]*b[0]],sub=(a,b)=>[a[0]-b[0],a[1]-b[1]],abs=a=>Math.hypot(a[0],a[1]);
+function csqrt(a){const r=abs(a);let x=Math.sqrt((r+a[0])/2),y=Math.sqrt(Math.max(0,(r-a[0])/2));if(a[1]<0)y=-y;return[x,y];}
+function cOfR(r){const lam=[r*Math.cos(PHI),r*Math.sin(PHI)];const l2=mul(lam,lam);return[lam[0]/2-l2[0]/4,lam[1]/2-l2[1]/4];}
+function cOfT(t){if(t<=1)return{c:cOfR(t),leg:t<1?'inside':'edge',r:t};
+  const lg=-6+5*(t-1),G=Math.pow(10,lg);const L=RAY.map(p=>Math.log10(p[0]));let i=0;while(i<RAY.length-2&&L[i+1]<lg)i++;const f=Math.min(1,Math.max(0,(lg-L[i])/(L[i+1]-L[i])));
+  return{c:[RAY[i][1]+(RAY[i+1][1]-RAY[i][1])*f,RAY[i][2]+(RAY[i+1][2]-RAY[i][2])*f],leg:'outside',G};}
+// the scheduler: slices of at most 8 ms per frame, idle when empty
+const Q=[];let pumping=false;
+function pump(){const t0=performance.now();while(Q.length&&performance.now()-t0<8){const j=Q[0];if(j.cancel){Q.shift();continue;}if(j.it.next().done){j.done=true;Q.shift();if(j.after)j.after();}}if(Q.length)requestAnimationFrame(pump);else pumping=false;}
+function enqueue(j){Q.push(j);if(!pumping){pumping=true;requestAnimationFrame(pump);}return j;}
+// ---- parameter plane
+let ZOOM=false,MIMG={},cpView=null;
+function viewCP(w,h){if(ZOOM)return{x0:0.2,x1:0.34,yc:0.01,w,h};return{x0:-2.15,x1:0.85,yc:0,w,h};}
+let cpJob=null;
+function drawCP(){const cv=$('cp'),w=Math.min(cv.parentElement.clientWidth||400,560),h=w;cv.style.height=h+'px';const V=viewCP(w,h),key=(ZOOM?'z':'f')+w;cpView=V;
+  const g=cv.getContext('2d');
+  if(MIMG[key]){cv.width=w;cv.height=h;g.putImageData(MIMG[key],0,0);overlayCP();return;}
+  if(cpJob)cpJob.cancel=true;cv.width=w;cv.height=h;const img=g.createImageData(w,h),D=img.data,sc=(V.x1-V.x0)/w;
+  cpJob=enqueue({cancel:false,it:(function*(){for(let r=0;r<h;r++){const cy=(h/2-r)*sc+V.yc;for(let q=0;q<w;q++){const cx=V.x0+q*sc;let x=0,y=0,n=0;const N=ZOOM?1500:400;for(;n<N;n++){const t=x*x-y*y+cx;y=2*x*y+cy;x=t;if(x*x+y*y>1e8)break;}const o=(r*w+q)*4;
+      if(n>=N){D[o]=D[o+1]=D[o+2]=8;}else{const G=Math.log(x*x+y*y)/2/Math.pow(2,n+1);const lg=Math.log2(G),fr=lg-Math.floor(lg);const v=0.16+0.2/(1+G*6);let R=40*v*2.2,Gc=48*v*2.2,B=90*v*2.2;if(fr<0.05||fr>0.95){R*=.55;Gc*=.55;B*=.55;}D[o]=R;D[o+1]=Gc;D[o+2]=B;}D[o+3]=255;}
+    if(r%12===11)g.putImageData(img,0,0);yield;}g.putImageData(img,0,0);MIMG[key]=img;overlayCP();})()});}
+function overlayCP(){const cv=$('cp'),g=cv.getContext('2d'),V=cpView;if(!V)return;const sc=(V.x1-V.x0)/V.w,X=x=>(x-V.x0)/sc,Y=y=>V.h/2-(y-V.yc)/sc;
+  if(MIMG[(ZOOM?'z':'f')+V.w])g.putImageData(MIMG[(ZOOM?'z':'f')+V.w],0,0);
+  // path: inside leg, then exit ray
+  g.lineWidth=2;g.strokeStyle='rgba(245,185,78,.9)';g.beginPath();for(let k=0;k<=200;k++){const c=cOfR(k/200);k?g.lineTo(X(c[0]),Y(c[1])):g.moveTo(X(c[0]),Y(c[1]));}g.stroke();
+  g.strokeStyle='rgba(255,122,138,.9)';g.setLineDash([5,4]);g.beginPath();g.moveTo(X(ROOT[0]),Y(ROOT[1]));for(const p of RAY)g.lineTo(X(p[1]),Y(p[2]));g.stroke();g.setLineDash([]);
+  const c=cOfT(T).c;g.fillStyle='#fff';g.beginPath();g.arc(X(c[0]),Y(c[1]),5,0,TAU);g.fill();g.strokeStyle='#fff';g.lineWidth=1.5;g.beginPath();g.arc(X(c[0]),Y(c[1]),9,0,TAU);g.stroke();
+  g.fillStyle='#F5B94E';g.beginPath();g.arc(X(ROOT[0]),Y(ROOT[1]),3.5,0,TAU);g.fill();
+  g.font='600 11px ui-monospace,Menlo,monospace';g.fillStyle='rgba(241,242,245,.9)';
+  if(!ZOOM){g.fillText('0 0 0',X(0)-16,Y(0)+18);}else{g.fillText('+15° edge',X(ROOT[0])-70,Y(ROOT[1])-10);}
+  g.lineWidth=1;}
+// ---- Julia plane with the orbit of 0
+let jpJob=null,JIMG=null;
+function drawJP(res){const cv=$('jp'),w=Math.min(cv.parentElement.clientWidth||400,560);const px=res||w;cv.style.height=w+'px';const g=cv.getContext('2d');
+  const S=1.6,st=cOfT(T),c=st.c;if(jpJob)jpJob.cancel=true;
+  const off=document.createElement('canvas');off.width=px;off.height=px;const og=off.getContext('2d');const img=og.createImageData(px,px),D=img.data,sc=2*S/px,N=st.leg==='outside'?220:(st.leg==='edge'?400:260);
+  jpJob=enqueue({cancel:false,it:(function*(){for(let r=0;r<px;r++){const y0=S-r*sc;for(let q=0;q<px;q++){let x=-S+q*sc,y=y0,n=0;for(;n<N;n++){const t=x*x-y*y+c[0];y=2*x*y+c[1];x=t;if(x*x+y*y>1e8)break;}const o=(r*px+q)*4;
+      if(n>=N){D[o]=22;D[o+1]=18;D[o+2]=34;}else{const G=Math.log(x*x+y*y)/2/Math.pow(2,n);const lg=Math.log2(G),fr=lg-Math.floor(lg);const v=0.14+0.5/(1+G*4);let R=70*v,Gc=110*v,B=190*v;if(fr<0.05||fr>0.95){R*=.5;Gc*=.5;B*=.5;}D[o]=R;D[o+1]=Gc;D[o+2]=B;}D[o+3]=255;}yield;}
+    og.putImageData(img,0,0);JIMG={off,w};paintJP();})()});}
+function paintJP(){const cv=$('jp'),w=Math.min(cv.parentElement.clientWidth||400,560);if(cv.width!==w){cv.width=w;cv.height=w;}const g=cv.getContext('2d');g.imageSmoothingEnabled=true;
+  if(JIMG)g.drawImage(JIMG.off,0,0,w,w);else{g.fillStyle='#000';g.fillRect(0,0,w,w);}
+  const S=1.6,sc=2*S/w,X=x=>(x+S)/sc,Y=y=>(S-y)/sc,st=cOfT(T),c=st.c;
+  // orbit of 0
+  let z=[0,0];const pts=[[0,0]];const M=st.leg==='edge'?3000:600;let esc=-1;
+  for(let n=1;n<=M;n++){z=[z[0]*z[0]-z[1]*z[1]+c[0],2*z[0]*z[1]+c[1]];pts.push(z);if(abs(z)>2){esc=n;break;}}
+  const cl=v=>Math.max(-S*1.2,Math.min(S*1.2,v));g.lineWidth=1;g.strokeStyle=st.leg==='edge'?'rgba(245,185,78,.25)':'rgba(245,185,78,.6)';g.beginPath();pts.forEach((p,i)=>i?g.lineTo(X(cl(p[0])),Y(cl(p[1]))):g.moveTo(X(p[0]),Y(p[1])));g.stroke();
+  for(let i=0;i<Math.min(pts.length,st.leg==='edge'?3000:80);i++){const p=pts[i];g.fillStyle=i===0?'#fff':'rgba(245,185,78,.9)';g.beginPath();g.arc(X(p[0]),Y(p[1]),i===0?4:1.8,0,TAU);g.fill();}
+  if(st.leg!=='outside'){const zs=sub([0.5,0],mul([0.5,0],csqrt([1-4*c[0],-4*c[1]])));g.strokeStyle='#4FD1B5';g.lineWidth=2;g.beginPath();g.arc(X(zs[0]),Y(zs[1]),7,0,TAU);g.stroke();g.lineWidth=1;}
+  g.font='600 11px ui-monospace,Menlo,monospace';g.fillStyle='#fff';g.fillText('0',X(0)+6,Y(0)-6);
+  return esc;}
+// ---- readout
+function measure(c){const zs=sub([0.5,0],mul([0.5,0],csqrt([1-4*c[0],-4*c[1]])));const lam=[2*zs[0],2*zs[1]];let z=[0,0];const ws=[];
+  for(let n=0;n<40000;n++){z=[z[0]*z[0]-z[1]*z[1]+c[0],2*z[0]*z[1]+c[1]];const w=sub(z,zs);if(abs(w)<1e-12||abs(z)>2)break;ws.push(w);}
+  const tail=ws.slice(-25);let s=0,k=0;for(let i=1;i<tail.length;i++){const a=tail[i-1],b=tail[i];s+=Math.atan2(a[0]*b[1]-a[1]*b[0],a[0]*b[0]+a[1]*b[1]);k++;}
+  return{zs,lam,turn:k?s/k*180/Math.PI:NaN,steps:ws.length,last:ws.length?abs(ws[ws.length-1]):0};}
+function readout(esc){const st=cOfT(T),c=st.c;const f=v=>(v>=0?'+':'−')+Math.abs(v).toFixed(6);let h=`c = <b>${c[0].toFixed(6)} ${f(c[1])}i</b> · `;
+  if(T===0){h+=`the dead centre · pull <b>0</b><br>orbit of 0: <b>already home</b>. At c = 0 the home point is 0 itself, so 0 never moves. That's the 0 0 0.`;}
+  else if(st.leg!=='outside'){const m=measure(c);const L=abs(m.lam),A=Math.atan2(m.lam[1],m.lam[0])*180/Math.PI;
+    h+=`${st.leg==='edge'?'<b>the edge</b>':'inside the belly'} · pull <b>${L.toFixed(3)}</b> at <b>${A.toFixed(2)}°</b><br>`;
+    h+=`orbit of 0: turns <b>${isNaN(m.turn)?'–':m.turn.toFixed(2)+'°'}</b> a step near home · `+(st.leg==='edge'?`after ${m.steps.toLocaleString()} steps still <b>${m.last.toFixed(3)}</b> away`:`home within 10⁻¹² after <b>${m.steps}</b> steps`);}
+  else h+=`<b>outside</b> · height ${st.G.toExponential(2)} above the set<br>orbit of 0: <b>escapes past 2 at step ${esc}</b>. No home point pulls it back.`;
+  $('ro').innerHTML=h;
+  document.querySelectorAll('#stg span').forEach(s=>{const v=+s.dataset.t;s.classList.toggle('on',(v===0&&T<0.02)||(v===1&&Math.abs(T-1)<0.005)||(v===1.6&&T>1.0));});
+  $('jpc').textContent=`Julia set of this c · orbit of 0 (${st.leg})`;}
+// ---- wiring
+let T=0.6,playing=false,last=0;
+function update(fast){overlayCP();drawJP(fast?180:undefined);const esc=paintJP();readout(esc);}
+$('t').addEventListener('input',()=>{playing=false;$('play').textContent='Walk it';T=+$('t').value;update(true);clearTimeout(update.tm);update.tm=setTimeout(()=>update(false),180);});
+$('stg').addEventListener('click',e=>{const s=e.target.closest('[data-t]');if(!s)return;playing=false;$('play').textContent='Walk it';T=+s.dataset.t;$('t').value=T;update(false);});
+$('zoom').onclick=()=>{ZOOM=!ZOOM;$('zoom').classList.toggle('on',ZOOM);$('zoom').textContent=ZOOM?'full view':'zoom the edge';drawCP();};
+$('play').onclick=()=>{playing=!playing;$('play').textContent=playing?'Pause':'Walk it';if(playing&&T>=2)T=0;last=0;if(playing)requestAnimationFrame(step);};
+function step(now){if(!playing)return;const dt=last?Math.min(60,now-last):16;last=now;T=Math.min(2,T+dt/6000);$('t').value=T;update(true);if(T>=2){playing=false;$('play').textContent='Walk it';update(false);return;}setTimeout(()=>requestAnimationFrame(step),70);}
+let rs;addEventListener('resize',()=>{clearTimeout(rs);rs=setTimeout(()=>{MIMG={};drawCP();update(false);},200);});
+drawCP();update(false);
+window.__PH__={cOfT,measure,set:t=>{T=t;$('t').value=t;update(false);},get idle(){return !pumping&&Q.length===0},get T(){return T},paintJP};
+})();
+</script>
+</body></html>

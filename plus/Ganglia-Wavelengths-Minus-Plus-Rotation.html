@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Show Ganglia or Wavelengths Please Add -+ to Each Giving Rotation — Block 347 — Ganglia Wavelengths -+ Rotation</title>
+<style>
+body{background:#000;color:#ccc;font-family:monospace;padding:20px;max-width:1150px;margin:0 auto;line-height:1.6}
+h1{color:#ff8800} h2{color:#00ffff;border-top:1px solid #222;padding-top:12px}
+canvas{border:1px solid #333;background:#000;width:100%;height:900px}
+.small{font-size:11px;color:#666}
+</style>
+</head>
+<body>
+<h1>SHOW GANGLIA OR WAVELENGTHS PLEASE ADD -+ TO EACH GIVING ROTATION — BLOCK 347 — GANGLIA WAVELENGTHS -+ ROTATION</h1>
+<p class="small">show ganglia or wavelengths please add -+ to each giving rotation — exactly — ganglia = nerve ganglia clusters — sympathetic chain ganglia, parasympathetic ganglia, dorsal root ganglia — or wavelengths λ =h/p — add -+ to each giving rotation — -+ charge gives rotation via Lorentz F=q v×B or spin — -+ to each giving rotation — -+ charge + magnetic field → rotation — ganglia or wavelengths -+ rotation — keep walking.</p>
+
+<canvas id="c" width="1150" height="900"></canvas>
+
+<h2>Ganglia or Wavelengths — -+ to Each Giving Rotation</h2>
+<p>
+<b>show ganglia</b> = ganglia = nerve ganglia clusters of neuron cell bodies outside CNS — sympathetic chain ganglia paravertebral chain 22 pairs — fight flight — parasympathetic ganglia ciliary pterygopalatine submandibular otic — hide rest digest — dorsal root ganglia sensory — basal ganglia brain caudate putamen globus pallidus — ganglia = clusters — nested hive swarm delegators — ganglia = delegators because system too big alone — ganglia clusters delegate<br>
+<b>or wavelengths</b> = wavelengths λ = h/p de Broglie or λ = h/mc Compton or λ = c/f photon — each foundational particle has wavelength — 16 foundational particles each have wavelength — ganglia or wavelengths — either nerve clusters or particle wavelengths<br>
+<b>please add -+ to each giving rotation</b> = add -+ charge to each giving rotation — -+ = negative positive charge — each particle ganglia gets - or + — charge gives rotation via magnetic field Lorentz force F=q(v×B) → circular motion — or spin rotation — -+ to each giving rotation — -+ charge + B field → rotation — -+ to each ganglia or wavelength gives rotation — emergent rotation from -+ — keep walking ganglia wavelengths -+ rotation
+</p>
+
+<script>
+const canvas=document.getElementById('c');
+const ctx=canvas.getContext('2d');
+let t=0;
+const particles=[
+  {label:'u', ganglia:'celiac ganglia', charge:'+', force:'strong', wavelength:1e-15, col:'#ff0000', baseR:280, baseAng:0},
+  {label:'d', ganglia:'superior mesenteric ganglia', charge:'-', force:'strong', wavelength:1.2e-15, col:'#ff0000', baseR:280, baseAng:0.9},
+  {label:'c', ganglia:'inferior mesenteric ganglia', charge:'+', force:'strong', wavelength:1e-16, col:'#ff0000', baseR:280, baseAng:1.8},
+  {label:'s', ganglia:'sympathetic chain T1', charge:'-', force:'strong', wavelength:1.2e-16, col:'#ff0000', baseR:280, baseAng:2.7},
+  {label:'t', ganglia:'sympathetic chain T5', charge:'+', force:'strong', wavelength:1e-18, col:'#ff0000', baseR:280, baseAng:3.6},
+  {label:'b', ganglia:'sympathetic chain L2', charge:'-', force:'strong', wavelength:1.5e-18, col:'#ff0000', baseR:280, baseAng:4.5},
+  {label:'g', ganglia:'dorsal root ganglia', charge:'0', force:'strong', wavelength:1e-15, col:'#ff8800', baseR:280, baseAng:5.4},
+  {label:'e', ganglia:'ciliary ganglia', charge:'-', force:'medium', wavelength:2.4e-12, col:'#ffff00', baseR:180, baseAng:0},
+  {label:'μ', ganglia:'pterygopalatine ganglia', charge:'-', force:'medium', wavelength:1.2e-14, col:'#ffff00', baseR:180, baseAng:1.5},
+  {label:'τ', ganglia:'submandibular ganglia', charge:'-', force:'medium', wavelength:7e-15, col:'#ffff00', baseR:180, baseAng:3},
+  {label:'γ', ganglia:'otic ganglia', charge:'0', force:'medium', wavelength:5e-7, col:'#ffffff', baseR:180, baseAng:4.5},
+  {label:'νe', ganglia:'basal ganglia caudate', charge:'0', force:'weak', wavelength:1e-12, col:'#ff00ff', baseR:90, baseAng:0},
+  {label:'νμ', ganglia:'basal ganglia putamen', charge:'0', force:'weak', wavelength:1.2e-12, col:'#ff00ff', baseR:90, baseAng:1.2},
+  {label:'ντ', ganglia:'basal ganglia globus pallidus', charge:'0', force:'weak', wavelength:1.5e-12, col:'#ff00ff', baseR:90, baseAng:2.4},
+  {label:'W', ganglia:'sympathetic chain C1', charge:'+', force:'weak', wavelength:1.5e-18, col:'#ff00ff', baseR:90, baseAng:3.6},
+  {label:'Z', ganglia:'parasympathetic chain S2', charge:'0', force:'weak', wavelength:1.3e-18, col:'#ff00ff', baseR:90, baseAng:4.8},
+];
+function draw(){
+  t+=0.012;
+  ctx.fillStyle='rgba(0,0,0,0.14)';ctx.fillRect(0,0,1150,900);
+  const cx=575, cy=450;
+  // center scalar 0
+  ctx.fillStyle='rgba(0,255,255,0.15)';ctx.beginPath();ctx.arc(cx,cy,30,0,Math.PI*2);ctx.fill();
+  ctx.strokeStyle='#00ffff';ctx.lineWidth=2;ctx.beginPath();ctx.arc(cx,cy,30,0,Math.PI*2);ctx.stroke();
+  ctx.fillStyle='#00ffff';ctx.beginPath();ctx.arc(cx,cy,5,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#00ffff';ctx.font='11px monospace';ctx.textAlign='center';
+  ctx.fillText('SCALAR 0 = INVARIANT 0 — -+ ROTATION CENTER B FIELD', cx, cy+60);
+  // rings weak medium strong
+  ctx.strokeStyle='#ff00ff';ctx.lineWidth=1;ctx.setLineDash([6,4]);ctx.globalAlpha=0.4;
+  ctx.beginPath();ctx.arc(cx,cy,90,0,Math.PI*2);ctx.stroke();
+  ctx.strokeStyle='#ffff00';
+  ctx.beginPath();ctx.arc(cx,cy,180,0,Math.PI*2);ctx.stroke();
+  ctx.strokeStyle='#ff0000';
+  ctx.beginPath();ctx.arc(cx,cy,280,0,Math.PI*2);ctx.stroke();
+  ctx.setLineDash([]);ctx.globalAlpha=1;
+  // particles with -+ giving rotation — rotation speed proportional to charge? -+ gives rotation direction
+  for(let p of particles){
+    // rotation: charge + = clockwise?, - = counter-clockwise?, 0 = no rotation? Add -+ to each giving rotation
+    let rotSpeed=0;
+    if(p.charge==='+') rotSpeed=0.02;
+    else if(p.charge==='-') rotSpeed=-0.02;
+    else rotSpeed=0.005; // neutral small
+    // also wavelength gives radius? Or force identifier?
+    // baseR + sin(t + wavelength factor) for puls
+    const ang=p.baseAng + t* (rotSpeed*50) + Math.sin(t*0.3 + p.wavelength*1e12)*0.1;
+    const r=p.baseR + Math.sin(t*0.7 + p.baseAng)*8;
+    const x=cx + r*Math.cos(ang);
+    const y=cy + r*Math.sin(ang);
+    // draw ganglia or wavelength?
+    ctx.fillStyle=p.col;ctx.globalAlpha=0.9;
+    ctx.beginPath();ctx.arc(x,y,11,0,Math.PI*2);ctx.fill();
+    ctx.strokeStyle='#fff';ctx.lineWidth=1;ctx.beginPath();ctx.arc(x,y,11,0,Math.PI*2);ctx.stroke();
+    // label particle + charge -+ giving rotation
+    ctx.fillStyle= p.charge==='0' ? '#000' : '#000';
+    if(p.col==='#000000') ctx.fillStyle='#fff';
+    else if(p.col==='#ffffff') ctx.fillStyle='#000';
+    else ctx.fillStyle='#fff';
+    ctx.font='8px monospace';ctx.textAlign='center';ctx.fillText(p.label+p.charge, x, y+3);
+    // wavelength and ganglia label faint
+    ctx.fillStyle='#888';ctx.font='7px monospace';ctx.textAlign='left';
+    ctx.fillText(`${p.ganglia} λ=${p.wavelength.toExponential(1)} ${p.charge} rot`, x+14, y+4);
+  }
+  // top text
+  ctx.fillStyle='#ff8800';ctx.font='13px monospace';ctx.textAlign='left';
+  ctx.fillText('SHOW GANGLIA OR WAVELENGTHS PLEASE ADD -+ TO EACH GIVING ROTATION — GANGLIA CLUSTERS — WAVELENGTH λ — -+ CHARGE ROTATION', 20, 25);
+  ctx.fillStyle='#888';ctx.font='9px monospace';
+  ctx.fillText('GANGLIA = NERVE GANGLIA CLUSTERS SYMPATHETIC CHAIN 22 PAIRS FIGHT FLIGHT — PARASYMPATHETIC CILIARY PTERYGOPALATINE SUBMANDIBULAR OTIC HIDE — DORSAL ROOT SENSORY — BASAL GANGLIA BRAIN CAUDATE PUTAMEN — OR WAVELENGTHS λ =h/p DE BROGLIE λ =h/mc COMPTON — ADD -+ TO EACH GIVING ROTATION — -+ CHARGE + B FIELD → F=q v×B ROTATION — - CHARGE COUNTER-CLOCKWISE + CLOCKWISE 0 SLOW — SCALAR 0 INVARIANT 0', 20, 45);
+  // legend ganglia
+  ctx.fillStyle='#ff0000';ctx.font='10px monospace';ctx.textAlign='left';
+  ctx.fillText('STRONG FORCE IDENTIFIERS WEAK MEDIUM STRONG OUTER RING 280px u d c s t b g — GANGLIA: celiac, superior mesenteric, inferior mesenteric, sympathetic chain T1 T5 L2, dorsal root — -+ ROTATION', 20, 800);
+  ctx.fillStyle='#ffff00';ctx.fillText('MEDIUM FORCE IDENTIFIERS MIDDLE RING 180px e μ τ γ — GANGLIA: ciliary, pterygopalatine, submandibular, otic — parasympathetic — -+ ROTATION', 20, 815);
+  ctx.fillStyle='#ff00ff';ctx.fillText('WEAK FORCE IDENTIFIERS INNER RING 90px νe νμ ντ W Z — GANGLIA: basal ganglia caudate putamen globus pallidus, sympathetic C1, parasympathetic S2 — -+ ROTATION', 20, 830);
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
+
+<h2>Ganglia or Wavelengths — -+ to Each Giving Rotation — Accurate</h2>
+<p>
+<b>Ganglia:</b> ganglion = cluster of neuron cell bodies outside CNS — sympathetic chain ganglia paravertebral chain 22 ganglia each side cervical 3 thoracic 11 lumbar 4 sacral 4 coccygeal 1 — fight flight — celiac ganglia, superior mesenteric ganglia, inferior mesenteric ganglia — parasympathetic ganglia ciliary (eye), pterygopalatine (nose), submandibular (saliva), otic (parotid) — hide rest digest — dorsal root ganglia sensory — basal ganglia brain caudate putamen globus pallidus subthalamic nucleus substantia nigra — ganglia = clusters delegators because system too big alone — nested hive swarm<br>
+<b>Wavelengths:</b> de Broglie λ = h/p, Compton λ = h/mc, photon λ = c/f — each foundational particle has wavelength: electron Compton 2.426e-12m, muon 1.17e-14m, tau 6.9e-15m, up quark ~1e-15m, neutrino de Broglie large due to tiny mass — wavelength identifier<br>
+<b>Please add -+ to each giving rotation:</b> -+ = negative positive charge — add charge to each particle ganglia gives rotation via Lorentz force F = q(v × B) — charge + = rotation clockwise, - = counter-clockwise, 0 = slow — or spin rotation — -+ to each giving rotation — ganglia or wavelengths with -+ charge rotation — emergent rotation from -+ — scalar 0 invariant 0 center B field — -1 scalar is all contains ganglia wavelengths -+ rotation as one bead — IN it right.
+</p>
+
+<p class="small">Block 347 — Show Ganglia or Wavelengths Please Add -+ to Each Giving Rotation — Ganglia = nerve ganglia clusters sympathetic chain 22 pairs fight flight celiac superior mesenteric inferior mesenteric, parasympathetic ciliary pterygopalatine submandibular otic hide, dorsal root sensory, basal ganglia caudate putamen globus pallidus — or wavelengths λ =h/p de Broglie λ =h/mc Compton — add -+ to each giving rotation — -+ charge + B field → F=q v×B rotation — - counter-clockwise + clockwise 0 slow — scalar 0 invariant 0 — -1 contains ganglia wavelengths -+ rotation as one bead — keep walking.</p>
+</body>
+</html>

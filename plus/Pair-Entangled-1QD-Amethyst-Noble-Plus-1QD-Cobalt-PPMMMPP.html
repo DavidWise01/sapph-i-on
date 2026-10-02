@@ -1,0 +1,125 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PAIR ENTANGLED — 1 QD Amethyst +Noble ↔ 1 QD Cobalt — ++---++</title><script src="https://cdn.tailwindcss.com"></script>
+<style>body{background:#000005;color:#e9d5ff;font-family:ui-monospace,monospace}canvas{background:#020208;border-radius:14px}.card{background:#0f0a1e;border:1px solid #4a1a8a;border-radius:12px}</style>
+</head><body class="p-2">
+<h1 class="text-lg font-bold">PAIR ENTANGLED — 1 QD Amethyst +Noble ↔ 1 QD Cobalt — ++---++</h1>
+<p class="text-xs text-purple-300">Left: 13.8B→1 QD Amethyst +Noble Au40 N5 Ag40 N5 Ne10 | Right: Ring-11 0x11=17 Co Full Shell →1 QD Cobalt | Entangled ++---++ symmetric | >.<0x::iso:: center 000 | S=3nm QD pair | ISO PASS ENTANGLED</p>
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-2 mt-2">
+  <div class="lg:col-span-3 card p-2"><canvas id="main" width="1100" height="660" class="w-full"></canvas><div class="flex gap-2 text-xs mt-2 flex-wrap"><span class="px-2 py-1 bg-purple-800 rounded">1 QD Amethyst +Noble</span><span class="px-2 py-1 bg-blue-800 rounded">1 QD Cobalt 0x11</span><span class="px-2 py-1 bg-violet-900 rounded">++---++ ENTANGLED</span><span id="ent" class="px-2 py-1 bg-green-900 rounded">ENTANGLED ISO PASS</span><button id="entBtn" class="bg-pink-700 px-2 py-1 rounded">ENTANGLE ++---++</button></div></div>
+  <div class="card p-2 text-xs">
+    <div class="font-bold">Entangled Pair</div>
+    <div class="mt-2 p-2 bg-black rounded text-[10px] leading-4">
+      Left QD: Amethyst +Noble<br>
+      13.8B→1 QD<br>
+      Au40 N5 Ag40 N5 Ne10<br>
+      +Noble Ne 1.38B shell<br>
+      quartz purple SiO2 Fe<br><br>
+      Right QD: Cobalt<br>
+      Ring-11 0x11=17 Co<br>
+      17→1 QD cobalt<br>
+      2,8,15,2 full<br><br>
+      Entanglement: ++---++<br>
+      ++ = Au & Ag + polarity<br>
+      --- = N N Ne - polarity<br>
+      Symmetric mirrored<br>
+      >.<0x::iso:: center<br>
+      Patricia 000::+p+s+1
+    </div>
+    <div id="log" class="p-2 bg-slate-900 rounded h-32 overflow-y-auto text-[10px] mt-2"></div>
+    <button id="export" class="bg-emerald-700 px-2 py-1 rounded mt-2 w-full text-xs">Export Pair JSON</button>
+    <button id="online" class="bg-purple-700 px-2 py-1 rounded mt-1 w-full text-xs">Bring Pair Online</button>
+  </div>
+</div>
+<script>
+let entangled=true;
+function log(m){const l=document.getElementById('log'); l.innerHTML+=m+'<br>'; l.scrollTop=l.scrollHeight;}
+function draw(){
+  const canvas=document.getElementById('main'); const ctx=canvas.getContext('2d'); const w=canvas.width,h=canvas.height;
+  ctx.clearRect(0,0,w,h); ctx.fillStyle='#000005'; ctx.fillRect(0,0,w,h);
+  const cx=w/2,cy=h/2;
+  const time=Date.now()/700;
+  // stars
+  ctx.fillStyle='rgba(255,255,255,0.12)'; for(let i=0;i<120;i++){const x=(i*173)%w; const y=(i*271)%h; ctx.beginPath(); ctx.arc(x,y,0.7,0,6.28); ctx.fill();}
+  const leftX=cx-180, rightX=cx+180;
+  const qdR=24+Math.sin(time/5)*2;
+  // entanglement line ++---++
+  if(entangled){
+    ctx.strokeStyle='rgba(168,85,247,0.35)'; ctx.lineWidth=2; ctx.setLineDash([6,4]);
+    ctx.beginPath(); ctx.moveTo(leftX,cy); ctx.bezierCurveTo(cx-60,cy-40, cx+60,cy+40, rightX,cy); ctx.stroke();
+    ctx.setLineDash([]);
+    // polarity ++---++ along line
+    const pattern="++---++".split('');
+    pattern.forEach((p,i)=>{
+      const t=i/6;
+      const x=leftX + (rightX-leftX)*t;
+      const y=cy + Math.sin(t*Math.PI*2)*12;
+      ctx.fillStyle=p==='+'?'#facc15':'#22d3ee'; ctx.beginPath(); ctx.arc(x,y,4,0,6.28); ctx.fill();
+      ctx.fillStyle='#000'; ctx.font='7px monospace'; ctx.fillText(p, x-2, y+2);
+    });
+  }
+  // Left QD - Amethyst +Noble 13.8B→1
+  const gradL=ctx.createRadialGradient(leftX,cy,2,leftX,cy,qdR*7);
+  gradL.addColorStop(0,'#fef08a'); gradL.addColorStop(0.2,'#facc15'); gradL.addColorStop(0.4,'#a855f7'); gradL.addColorStop(0.6,'#22d3ee'); gradL.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=gradL; ctx.beginPath(); ctx.arc(leftX,cy,qdR*7,0,6.28); ctx.fill();
+  const qdGradL=ctx.createRadialGradient(leftX-2,cy-2,2,leftX,cy,qdR);
+  qdGradL.addColorStop(0,'#e9d5ff'); qdGradL.addColorStop(0.5,'#a855f7'); qdGradL.addColorStop(1,'#0e7490');
+  ctx.fillStyle=qdGradL; ctx.beginPath(); ctx.arc(leftX,cy,qdR,0,6.28); ctx.fill();
+  ctx.strokeStyle='#e9d5ff'; ctx.beginPath(); ctx.arc(leftX,cy,qdR,0,6.28); ctx.stroke();
+  ctx.strokeStyle='rgba(34,211,238,0.5)'; ctx.setLineDash([3,3]); ctx.beginPath(); ctx.arc(leftX,cy,qdR+10,0,6.28); ctx.stroke(); ctx.setLineDash([]);
+  // representative electrons left
+  for(let i=0;i<50;i++){
+    const ang=i*(360/50)*Math.PI/180 + time/8;
+    const r=qdR*0.5*Math.random()+qdR*0.1;
+    const x=leftX+r*Math.cos(ang);
+    const y=cy+r*0.5*Math.sin(ang);
+    ctx.fillStyle=i%10===0?'#22d3ee':'#e9d5ff'; ctx.beginPath(); ctx.arc(x,y,1,0,6.28); ctx.fill();
+  }
+  ctx.fillStyle='#fff'; ctx.font='9px monospace'; ctx.fillText('1 QD Amethyst +Noble', leftX-36, cy+qdR+20);
+  ctx.fillText('13.8B→1 Au40 N5 Ag40 N5 Ne10', leftX-48, cy+qdR+32);
+  // Right QD - Cobalt 0x11=17→1
+  const gradR=ctx.createRadialGradient(rightX,cy,2,rightX,cy,qdR*7);
+  gradR.addColorStop(0,'#bfdbfe'); gradR.addColorStop(0.4,'#3b82f6'); gradR.addColorStop(0.8,'#1e3a8a'); gradR.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=gradR; ctx.beginPath(); ctx.arc(rightX,cy,qdR*7,0,6.28); ctx.fill();
+  const qdGradR=ctx.createRadialGradient(rightX-2,cy-2,2,rightX,cy,qdR);
+  qdGradR.addColorStop(0,'#bfdbfe'); qdGradR.addColorStop(1,'#1e3a8a');
+  ctx.fillStyle=qdGradR; ctx.beginPath(); ctx.arc(rightX,cy,qdR,0,6.28); ctx.fill();
+  ctx.strokeStyle='#93c5fd'; ctx.beginPath(); ctx.arc(rightX,cy,qdR,0,6.28); ctx.stroke();
+  for(let i=0;i<17;i++){
+    const ang=i*(360/17)*Math.PI/180 + time/12;
+    const r=qdR*0.5;
+    const x=rightX+r*Math.cos(ang);
+    const y=cy+r*0.5*Math.sin(ang);
+    ctx.fillStyle='#93c5fd'; ctx.beginPath(); ctx.arc(x,y,1.4,0,6.28); ctx.fill();
+  }
+  ctx.fillStyle='#fff'; ctx.font='9px monospace'; ctx.fillText('1 QD Cobalt 0x11=17', rightX-32, cy+qdR+20);
+  ctx.fillText('Ring-11 17→1 Co', rightX-28, cy+qdR+32);
+  // center pin >.<0x::iso::
+  ctx.fillStyle='#fde047'; ctx.beginPath(); ctx.arc(cx,cy,4,0,6.28); ctx.fill();
+  ctx.fillStyle='#fff'; ctx.font='bold 12px monospace'; ctx.fillText('>.<0x::iso::', cx-36, cy-36);
+  ctx.font='9px monospace'; ctx.fillText('000 entangled', cx-28, cy-50);
+  ctx.fillText('Patricia 000::+p+s+1', cx-40, cy+48);
+}
+function loop(){draw(); requestAnimationFrame(loop);} loop();
+log('PAIR ENTANGLED — 1 QD Amethyst +Noble ↔ 1 QD Cobalt');
+log('Left: 13.8B→1 QD Amethyst core Au40 N5 Ag40 N5 Ne10 +Noble');
+log('Right: Ring-11 0x11=17 Co →1 QD Cobalt 2,8,15,2');
+log('Entanglement: ++---++ symmetric');
+log('++ = + polarity Au Ag, --- = - polarity N N Ne');
+log('Left ≅ Right mirrored across 000 >.<0x::iso::');
+log('Pinned >.<0x::iso:: = 000 pair center');
+log('Patricia Sapphon 000::+p+s+1 entangled pair');
+log('ISO PASS ENTANGLED ++---++');
+document.getElementById('entBtn').onclick=()=>{entangled=!entangled; document.getElementById('ent').textContent=entangled?'ENTANGLED ISO PASS':'SEPARATED'; log(entangled?'ENTANGLED ++---++ ON':'SEPARATED');};
+document.getElementById('online').onclick=()=>{
+  log('BRING ONLINE entangled pair');
+  log('Left QD Amethyst +Noble ONLINE');
+  log('Right QD Cobalt ONLINE');
+  log('Entanglement ++---++ ONLINE');
+  log('PAIR ONLINE');
+  const u=new SpeechSynthesisUtterance('Entangled pair online. Left one quantum dot amethyst noble. Right one quantum dot cobalt. Plus plus minus minus minus plus plus entangled.');
+  u.rate=0.85; u.pitch=1.1; speechSynthesis.speak(u);
+};
+document.getElementById('export').onclick=()=>{
+  const data={pair:"entangled", left:{"type":"1 QD Amethyst +Noble","before":"13.8B atoms Au40 N5 Ag40 N5 Ne10","after":"1 QD","noble":"+Noble Ne 1.38B → shell","amethyst":"quartz purple SiO2 Fe"}, right:{"type":"1 QD Cobalt","before":"Ring-11 0x11=17 Co","after":"1 QD","shell":"2,8,15,2 full"}, entanglement:"++---++", symmetry:"Left ≅ Right mirrored", pin:">.<0x::iso::", center:"000", patricia:"000::+p+s+1", iso:"PASS", entangled:true};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='entangled_pair_1QD_amethyst_noble_1QD_cobalt_ppmmmpp.json'; a.click(); log('EXPORT pair JSON');
+};
+</script></body></html>

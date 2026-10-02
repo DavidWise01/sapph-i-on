@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>the + side ladder at 1%</title>
+<style>
+:root{
+  --ground:#17120F; --rule:#3A3029; --ink:#EDE4DA; --ink-dim:#A0917F;
+  --earth:#C9A227; --earth-2:#8C6A32; --earth-bg:#1D1710;
+  --wood:#4FB089;  --wood-2:#2E7F68;  --wood-bg:#10191A;
+  --metal:#C6CBD1; --metal-2:#8A8F98; --metal-bg:#17181C;
+  --fire:#EE6B2D;  --fire-2:#F2A03D;  --fire-bg:#1F1310;
+  --water:#5487E0; --water-2:#2A3A8B; --water-bg:#0F1324;
+  --lit:#6FD08C; --amber:#F2A03D; --dead:#9A8A82; --cu:#D98A56; --am:#A77BD8;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ground);color:var(--ink);font-size:12px;line-height:1.45;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"DejaVu Sans Mono",monospace}
+.fail{display:none;position:sticky;top:0;z-index:9;background:#5a1410;color:#fff;padding:6px 14px;font-size:11px}
+.mast{padding:13px 16px 10px;border-bottom:1px solid var(--rule);display:flex;gap:18px;flex-wrap:wrap;justify-content:space-between;align-items:flex-end}
+.mast pre{margin:0;font-size:10px;line-height:1.3;color:var(--cu);white-space:pre;overflow-x:auto;max-width:100%}
+.sub{font-size:10px;color:var(--ink-dim);letter-spacing:.2em;text-transform:uppercase}
+.chi{font-size:10px;color:var(--ink-dim);letter-spacing:.12em} .chi b{color:var(--earth)}
+.pent{display:flex;width:100%}
+.win{flex:1 1 20%;width:20%;min-width:0;border-right:1px solid var(--rule);display:flex;flex-direction:column;min-height:calc(100vh - 100px)}
+.win:last-child{border-right:none}
+.win-hd{padding:9px 11px;border-bottom:1px solid var(--rule)}
+.win-hd .n{font-size:9px;letter-spacing:.28em;opacity:.75}
+.win-hd h2{margin:2px 0 0;font-size:13px;letter-spacing:.07em}
+.win-hd .el{font-size:9px;letter-spacing:.2em;opacity:.7;margin-top:2px}
+.win-bd{padding:11px;flex:1;overflow:auto}
+#w1{background:var(--earth-bg)} #w1 .win-hd{border-bottom-color:var(--earth-2)} #w1 h2,#w1 .n{color:var(--earth)}
+#w2{background:var(--wood-bg)}  #w2 .win-hd{border-bottom-color:var(--wood-2)}  #w2 h2,#w2 .n{color:var(--wood)}
+#w3{background:var(--metal-bg)} #w3 .win-hd{border-bottom-color:var(--metal-2)} #w3 h2,#w3 .n{color:var(--metal)}
+#w4{background:var(--fire-bg)}  #w4 .win-hd{border-bottom-color:var(--fire)}    #w4 h2,#w4 .n{color:var(--fire)}
+#w5{background:var(--water-bg)} #w5 .win-hd{border-bottom-color:var(--water-2)} #w5 h2,#w5 .n{color:var(--water)}
+button{font:inherit;font-size:10px;letter-spacing:.15em;text-transform:uppercase;background:transparent;color:inherit;border:1px solid currentColor;padding:6px 10px;cursor:pointer;border-radius:2px}
+button:hover{background:rgba(255,255,255,.06)} button[disabled]{opacity:.4;cursor:progress}
+button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+#w1 button{color:var(--earth)} #w2 button{color:var(--wood)} #w3 button{color:var(--metal)} #w4 button{color:var(--fire)} #w5 button{color:var(--water)}
+button.kb{border-style:dashed}
+input[type=range]{width:100%;accent-color:var(--fire)} #w5 input[type=range]{accent-color:var(--water)}
+.row{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:9px}
+.k{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);margin:12px 0 5px}
+pre.blk{margin:0 0 9px;font-size:10px;line-height:1.35;white-space:pre-wrap;word-break:break-word}
+.small{font-size:10px;color:var(--ink-dim)}
+.plain{border-left:2px solid currentColor;padding:5px 8px;margin:0 0 10px;font-size:10.5px;background:rgba(255,255,255,.03);color:var(--ink)}
+.plain b{font-size:9px;letter-spacing:.18em;opacity:.65;display:block;margin-bottom:2px}
+.stamp{display:inline-block;font-size:9px;padding:0 4px;border:1px solid;border-radius:2px;min-width:44px;text-align:center}
+.s-lit{color:var(--lit)} .s-amber{color:var(--amber)} .s-dead{color:var(--dead);text-decoration:line-through}
+canvas{display:block;width:100%;background:rgba(0,0,0,.32);border:1px solid var(--rule);border-radius:2px;touch-action:none}
+.rd{display:flex;justify-content:space-between;gap:8px;border-bottom:1px dotted var(--rule);padding:3px 0;font-size:10.5px}
+.rd b{font-weight:400;text-align:right}
+.board{border:1px solid var(--earth-2);border-radius:2px;padding:8px;background:rgba(0,0,0,.28)}
+.board .line{display:flex;justify-content:space-between;gap:6px;padding:2px 0;font-size:10px}
+.wait{color:var(--ink-dim)} .ok{color:var(--lit)} .bad{color:var(--fire)} .dis{color:var(--water)}
+.bar{height:9px;background:rgba(255,255,255,.07);border-radius:1px;overflow:hidden;margin:2px 0 7px}
+.bar i{display:block;height:100%;width:0;background:var(--wood);transition:width .5s}
+.cl{margin:0 0 7px;font-size:10px;line-height:1.4} .cl .q{color:var(--ink)} .cl .a{color:var(--ink-dim)}
+.wd{margin:0 0 7px;font-size:10px} .wd .his{color:var(--earth)} .wd .acc{color:var(--ink)} .wd .den{color:var(--ink-dim)}
+.bench{border-top:1px solid var(--rule);padding:12px 16px;background:#130f0c}
+.bench h3{margin:0 0 6px;font-size:11px;letter-spacing:.2em;color:var(--am);font-weight:400}
+.bench ol{margin:0;padding-left:20px;columns:2 360px;column-gap:28px} .bench li{margin:0 0 7px;font-size:10.5px;break-inside:avoid} .bench li b{color:var(--am);font-weight:400}
+.foot{padding:10px 16px;border-top:1px solid var(--rule);color:var(--ink-dim);font-size:10px}
+code,.mono{font-family:inherit;color:var(--wood)}
+@media (max-width:1180px){.pent{flex-wrap:wrap}.win{flex:1 1 100%;width:100%;min-height:auto;border-right:none;border-bottom:1px solid var(--rule)}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="fail" id="fail"></div>
+<div class="mast"><div><pre id="strip">…</pre>
+  <div class="sub">the + side ladder at 1% · ground FELDSPAR #17120F · title withheld · rev36 frozen beside it</div></div>
+  <div class="chi">CHI → <b>W1 EARTH</b> · W2 WOOD · W3 METAL · W4 FIRE · W5 WATER<br>feedback rises to W1 · function and flow over beauty</div></div>
+<div class="pent">
+<section class="win" id="w1"><div class="win-hd"><div class="n">W1</div><h2>SOURCE</h2><div class="el">EARTH · command position</div></div><div class="win-bd">
+  <div class="row"><button id="b1">Run audit</button><span class="small" id="b1s">idle</span></div>
+  <div class="plain"><b>Start here — plain English</b><span id="plaintext"></span></div>
+  <div class="small" id="flag" style="margin:-4px 0 10px"></div>
+  <div class="k">Your words · the accepted word · what it means</div><div id="words"></div>
+  <div class="k">The ladder, rung by rung</div><div id="claims"></div>
+  <div class="k">▓ Control catches, this build</div><pre class="blk" id="catches"></pre>
+  <div class="k">Toddler corner</div><pre class="blk" id="toddler"></pre>
+  <div class="k">Feedback board</div><div class="board" id="board"></div></div></section>
+<section class="win" id="w2"><div class="win-hd"><div class="n">W2</div><h2>CONTRIBUTIONS</h2><div class="el">WOOD · growth</div></div><div class="win-bd">
+  <div class="row"><button id="b2">Run tally</button><button id="b2x" class="kb">tamper the sites</button><span class="small" id="b2s">idle</span></div>
+  <div class="plain"><b>Plain English</b>Who did what (a judgement). Then the ladder's integers, written in your I-13 and run in your VM first: the letters, and how many cells of crystal a channel needs before 1% gives it one guest. The page recomputes; they must agree. The tamper tells the page's count there are 4 sites per cell instead of 3.</div>
+  <div id="contrib"></div>
+  <div class="k">I-13 · as run in your VM</div><pre class="blk" id="i13src" style="color:var(--wood);max-height:220px;overflow:auto"></pre>
+  <div class="k">VM result · page recompute</div><div id="i13cmp"></div>
+  <div class="k">Reports to W1</div><pre class="blk" id="rep2">— not run —</pre></div></section>
+<section class="win" id="w3"><div class="win-hd"><div class="n">W3</div><h2>1D · THE LADDER</h2><div class="el">METAL · focus</div></div><div class="win-bd">
+  <div class="row"><button id="b3">Climb 01 → 14</button><button id="b3t" class="kb">force indium to 1%</button><span class="small" id="b3s">idle</span></div>
+  <div class="plain"><b>Plain English</b>One axis: your rungs, 14 at the top. For each element, the bar is the most the crystal could hold if size were the only cost (log scale). The gold line is 1%. The grey band is the error bar found by checking two ions whose real amounts are known (iron and aluminium, shown at the bottom). Past the red line, 1% is out even with that error. The dashed button forces indium to 1% and shows what it would cost.</div>
+  <canvas id="c3" height="360"></canvas>
+  <div class="k">Measured</div>
+  <div class="rd"><span>rungs whose size allows 1%</span><b id="m3a">–</b></div>
+  <div class="rd"><span>in the error band</span><b id="m3b">–</b></div>
+  <div class="rd"><span>out at 1%</span><b id="m3c">–</b></div>
+  <div class="k">Reports to W1</div><pre class="blk" id="rep3">— not run —</pre></div></section>
+<section class="win" id="w4"><div class="win-hd"><div class="n">W4</div><h2>2D · SIZE × CHARGE</h2><div class="el">FIRE · visibility</div></div><div class="win-bd">
+  <div class="row"><button id="b4">Map it</button><button id="b4t" class="kb">grow it cold (300 K)</button></div>
+  <div class="plain"><b>Plain English</b>Across: how much too big or too small each guest is for its hole. Up: the charge it brings (above the line = the + side). The shaded strip is what 1% allows at the growth temperature. Warmer growth widens the door; the slider moves it. The dashed button grows the crystal at room temperature, where the door nearly closes.</div>
+  <canvas id="c4" height="260"></canvas>
+  <pre class="blk small" id="probe" style="min-height:26px">tap or hover a point…</pre>
+  <div class="k">growth temperature <span id="tgv">573</span> K</div><input type="range" id="tg" min="300" max="1100" step="5" value="573">
+  <div class="rd"><span>widest misfit 1% allows</span><b id="m4a">–</b></div>
+  <div class="rd"><span>+ side rungs inside at this temperature</span><b id="m4b">–</b></div>
+  <div class="k">Reports to W1</div><pre class="blk" id="rep4">— not run —</pre></div></section>
+<section class="win" id="w5"><div class="win-hd"><div class="n">W5</div><h2>3D · THE PRISM + THE CLOCK</h2><div class="el">WATER · wisdom / flow</div></div><div class="win-bd">
+  <div class="row"><button id="b5">Dope it at random</button><button id="b5r">rotate</button><span class="small" id="b5s">idle</span></div>
+  <div class="plain"><b>Plain English</b>Three axes: the 81 channels (9 × 9) and 18.0 nm of height, where 1% gives one guest per channel on average. Press dope: every one of the 8,019 silicon sites flips a 1-in-100 coin, fresh each time. Channels with exactly one guest glow; empty ones stay dark; crowded ones go red. W1–W4 fixed where the guests go. Chance doesn't put them one per channel.</div>
+  <canvas id="c5" height="260"></canvas>
+  <div class="rd"><span>channels with exactly one</span><b id="m5a">–</b></div>
+  <div class="rd"><span>empty · two or more</span><b id="m5b">–</b></div>
+  <div class="rd"><span>the K → Ar clock at 1% K</span><b id="m5c">–</b></div>
+  <div class="k">Dissent filed against W1</div><pre class="blk" id="dissent"></pre>
+  <div class="k">What W1–W4 left out</div><pre class="blk" id="left"></pre>
+  <div class="k">Reports to W1</div><pre class="blk" id="rep5">— not run —</pre></div></section>
+</div>
+<div class="foot" id="foot"></div>
+<script>const DATA = {"ladder": {"rungs": [{"n": 14, "letter": "m", "letter_written": true, "word": "modal", "element": null}, {"n": 13, "letter": "l", "letter_written": false, "word": "life", "element": null}, {"n": 12, "letter": "k", "letter_written": true, "word": "potassium", "element": "K", "site": "channel", "radius": 1.37, "charge": 1, "squeeze": 2.4016938553324714, "ceiling": null, "side": "+ (extra positive charge)"}, {"n": 11, "letter": "j", "letter_written": true, "word": "julietset", "element": null}, {"n": 10, "letter": "i", "letter_written": false, "word": "indigo", "element": "In", "site": "Si", "radius": 0.62, "charge": -1, "dr": 0.36, "E": 1.4401675462710313, "ceiling": 2.1698528527867702e-13, "side": "+ (a hole: the amethyst kind)"}, {"n": 9, "letter": "h", "letter_written": true, "word": "hermes", "element": "Hg", "site": "Si", "radius": 0.96, "charge": -2, "dr": 0.7, "E": 5.445077914142017, "ceiling": 1.3205737058480544e-48, "side": "+ (two holes)"}, {"n": 8, "letter": "g", "letter_written": true, "word": "+gaia-gravity", "element": "Ga", "site": "Si", "radius": 0.47, "charge": -1, "dr": 0.20999999999999996, "E": 0.49005701227278153, "ceiling": 4.907594127592488e-05, "side": "+ (a hole: the amethyst kind)"}, {"n": 7, "letter": "f", "letter_written": false, "word": "flouride", "element": "F", "site": "O", "radius": 1.285, "charge": 1, "dr": -0.06500000000000017, "E": 0.04694990650459214, "ceiling": 0.3865126557080786, "side": "+ (extra positive charge)"}, {"n": 6, "letter": "e", "letter_written": true, "word": "eclectrum", "element": "AuAg", "site": "none: metal", "radius": null, "charge": 0, "side": "neutral"}, {"n": 5, "letter": "d", "letter_written": true, "word": "david", "element": null}, {"n": 4, "letter": "c", "letter_written": true, "word": "cabon", "element": "C", "site": "Si", "radius": 0.15, "charge": 0, "dr": -0.11000000000000001, "E": 0.13446008726758865, "ceiling": 0.06571673458550699, "side": "neutral"}, {"n": 3, "letter": "b", "letter_written": true, "word": "boron", "element": "B", "site": "Si", "radius": 0.11, "charge": -1, "dr": -0.15000000000000002, "E": 0.2500290878942764, "ceiling": 0.006330872845444544, "side": "+ (a hole: the amethyst kind)"}, {"n": 2, "letter": "a", "letter_written": false, "word": "argon", "element": "Ar", "site": "none: noble gas", "radius": 1.88, "charge": 0, "side": "neutral"}, {"n": 1, "letter": "", "letter_written": false, "word": "arsenic", "element": "As", "site": "Si", "radius": 0.335, "charge": 1, "dr": 0.07500000000000001, "E": 0.0625072719735691, "ceiling": 0.2820758449409954, "side": "+ (extra positive charge)"}], "letters_ok": true, "n_letters": 13, "half_alphabet": "abcdefghijklm", "one_pct": {"Si_cm3": 2.6540425256647747e+22, "dopant_cm3": 2.6540425256647747e+20, "film_nm_one_per_channel": 18.017333333333333, "per_channel_20nm": 1.110042181602901, "amethyst_Fe_cm3": [1e+17, 1e+18], "x_over_amethyst": [265.40425256647745, 2654.0425256647745]}, "growth_T": 573.15, "G": 44000000000.0, "poisson": {"cells": 33, "sites_per_channel": 99, "mean": 0.99, "sim": [0.37019753086419754, 0.3689074074074074, 0.18288888888888888, 0.06019135802469136, 0.014506172839506172, 0.0027962962962962963, 0.00044444444444444447, 6.790123456790123e-05], "theory": [0.3715766910220457, 0.36786092411182525, 0.1820911574353535, 0.060090081953666656, 0.014872295283532497, 0.002944714466139434, 0.0004858778869130067, 6.871701543483951e-05]}, "potassium": {"Bq_per_gK": 31.71653961057598, "Bq_per_g_at_1pct": 0.3171653961057598, "Gy_per_yr_beta": 0.0008019358797138861, "Ar_branch": 0.107, "half_life_yr": 1248000000.0, "Ar_atoms_per_g_after_1Myr": 1070663367180.499, "yr_to_1kGy": 1246982.489867867}, "electrum": {"g_per_t": 10000.0}, "zero": {"rows": [". .", ", ,", ",.", ".,"], "pairs": [",,", ",.", ".,", ".."], "all_four": true, "close": "00 : 00"}, "calibration": [{"el": "Fe3+ (amethyst)", "radius": 0.49, "dr": 0.22999999999999998, "E": 0.5878461666492095, "ceiling": 6.776362342296289e-06, "real": [4e-06, 4e-05]}, {"el": "Al3+ (smoky quartz)", "radius": 0.39, "dr": 0.13, "E": 0.18779962601836753, "ceiling": 0.022317979530599674, "real": [1e-05, 0.0003]}], "E_1pct": 0.2274504864750076, "E_dead": 0.4549009729500152}, "i13": {"globals": {"a2": 97, "m14": 109, "letters": 1339, "cells": 34, "prism33": 8019, "zero": 4}, "error": "OK", "cortex": {"fp": 2905131532, "depth": 11, "addr": 2420233947, "mask": 63, "idem": true, "pass": true}}, "i13src": "// the + side ladder, as integers. rung n carries the (n-1)th letter: a at rung 2 ... m at rung 14.\ndef code(I n){ -> 95 + n }\ndef sumc(I a,I b){ if a > b { -> 0 } -> code(a) + sumc(a+1,b) }\n// quartz: 3 silicon sites per cell along a channel. at 1 %, how many cells until a channel expects one?\ndef sites(I cells){ -> 3 * cells }\ndef need(I cells){ if sites(cells) >= 100 { -> cells } -> need(cells+1) }\nI a2 <- code(2)\nI m14 <- code(14)\nI letters <- sumc(2,14)\nI cells <- need(1)\nI prism33 <- 81 * sites(33)\nI zero <- 2 * 2\n", "claims": {"plain": "Read as: 1% of the crystal is given over to guests, filled in your order, and every guest on this side adds positive charge (or a hole, the amethyst kind). Quartz decides who gets in by size. At 1%, only the small ones fit: arsenic (01), fluoride (07) and carbon (04, which is neutral, not +). Boron (03) is right at the edge. Gallium (08), indium (10) and mercury (09) are hundreds to millions of times too big to reach 1%. Potassium (12) is 2.4 times too wide for the channel. Argon (02) and electrum (06) have no place in the lattice at all. But potassium and argon are parent and daughter: potassium-40 decays into argon-40. So those two rungs turn the crystal into a clock and a slow self-writer. The four rungs that aren't elements (14 modal, 13 life, 11 julia set, 05 david) read as the lattice's vibrations, a level's lifetime, the keep-or-escape test, and the reader. 1% does make one guest per channel in an 18.0 nm film, on average. At random, though, only 37% of channels get exactly one.", "toddler": "the crystal is a house with tiny doors.\nyou want one guest in every hundred rooms.\nskinny guests (arsenic, fluoride) walk right in.\nwide guests (indium, mercury) get stuck in the door.\npotassium can't fit the hallway,\nbut it slowly turns into argon, and that ticks like a clock.\nif guests pick rooms at random, some rooms get two, some get none.", "flag": "one line: \"1%\" could mean the step between levels (the copper ladder steps 1.23%, 100 levels would be 1%) or a 1% share of the crystal. built as the share: it's the reading the + side and the element names point at", "words": [["1% on the + side", "a 1 mol% doping level, restricted to aliovalent substituents that leave a net positive charge or a hole", "one host site in a hundred swapped for an ion of different charge"], ["the order 14 → 01", "a ladder of substituents; each rung carries letter n − 1, so 14..02 are m..a, the first half of the alphabet (13 letters)", "the + side is a–m; by symmetry the − side would be n–z"], ["k · potassium", "K, the one rung named by its chemical symbol rather than its first letter", "every other rung's word starts with its letter"], ["indigo", "indium, In: named after the indigo line in its spectrum", "the colour word and the element are the same rung"], ["hermes", "mercury, Hg (Hermes is Mercury)", "alchemy's name for the metal"], ["gaia-gravity", "read as gallium, Ga (AMBER); the other reading, Earth's g = 9.81 m/s², has no site in a lattice", "the one rung where I had to choose"], ["eclectrum", "electrum: a natural gold–silver alloy", "a metal, not an ion; it lives in quartz as grains, not in the lattice"], ["the misfit", "Eshelby misfit energy, 8πG·r·Δr²", "the elastic cost of forcing a wrong-size ion into the hole"], ["00 rows", "delimiters as tokens: the four rows are every ordered pair over { . , } — a two-bit register; 00 : 00 is the pair of zeros", "four states, like a 2-bit cell, closing on ground"], ["flouride · cabon · eclectrum · julietset", "fluoride · carbon · electrum · the Julia set", "spelled as you wrote them on the ladder; flagged once here, never changed there"]], "claims": [["LIT", "the letters", "rung n carries letter n − 1: 13 letters a–m on rungs 2–14. 9 written, 4 implied (l, i, f, a) and each implied one begins its word (Lean: letters; your VM: 1339)"], ["LIT", "the zero side", "'. .' ', ,' ',.' '.,' are all four ordered pairs over two glyphs, none repeated: two bits (Lean: zero_side)"], ["AMBER", "01 arsenic, + side", "As⁵⁺ in a Si site gives +1. misfit 63 meV: size allows 28%, so 1% isn't ruled out"], ["AMBER", "07 fluoride, + side", "F⁻ in an O site gives +1. misfit 47 meV: allowed by size"], ["AMBER", "04 carbon", "C⁴⁺ in a Si site: size allows 6.6%, but it's neutral, not + side"], ["AMBER", "03 boron, a hole", "B³⁺ in a Si site leaves a hole (+). misfit 250 meV: ceiling 0.63%, between the 1% cut and the dead line"], ["DEAD", "08 gaia as gallium, at 1%", "Ga³⁺: misfit 490 meV, ceiling 49 ppm: 200× short"], ["DEAD", "10 indigo, indium, at 1%", "In³⁺: 1.44 eV of misfit, ceiling 2 × 10⁻¹³"], ["DEAD", "09 hermes, mercury, in the lattice", "Hg²⁺: 5.4 eV of misfit; no place"], ["DEAD", "12 potassium in the channel at 1%", "K⁺ needs 2.40× the channel's narrowest point; sodium (1.74×) is the widest that still moves"], ["LIT", "12 potassium → 02 argon: a clock", "K-40 decays to Ar-40 (10.7% of decays), half-life 1.25 billion years. at 1% K its betas give 0.8 mGy a year: ~1.2 million years to write a kilogray. a clock and a very slow writer"], ["DEAD", "02 argon as a guest", "a noble gas, 1.88 Å: no site. it's only ever a daughter, trapped where potassium was"], ["LIT", "06 electrum at 1%", "not in the lattice: grains. 1% gold–silver in quartz is 10,000 g per tonne, a bonanza vein"], ["LIT", "1% as one per channel", "3 Si per cell; one guest per channel needs 100 sites = 33.3 cells = 18.0 nm (inside your 10–20 nm film). 33 cells fall short, 34 pass (Lean: prism; your VM: 34)"], ["LIT", "but at random", "with a mean of one per channel, 37% of channels get exactly one, 37% none, 26% two or more (2,000 simulated prisms agree with Poisson to 0.2%)"], ["LIT", "1% vs amethyst", "1% of Si sites is 2.65 × 10²⁰ per cm³: 265 to 2,650 times the iron centres that make amethyst purple. a 5 mm slab would be black; the archive becomes a film"], ["AMBER", "14 modal · 13 life · 11 julietset · 05 david", "not elements. read as: the lattice's vibration modes (they set the 9.8 × 10¹² per second attempt rate behind every keep time); a level's lifetime; the Julia-set test (an orbit is kept or escapes, like a trapped charge); and the reader"]], "catches": ["▓1 CALIBRATION: the misfit ceiling was checked on two ions with known levels in quartz before judging his. Al: ceiling 2.2%, real ≤ 0.03% (ceiling holds, loosely). Fe: ceiling 7 ppm, real 4–40 ppm (real sits ABOVE it). so the ceiling is good to a factor of ~10, and the dead line was set 100× below 1%, not at it", "▓2 ORDER: the first draft called boron dead at 0.63% (it misses 1% by only 1.6×). with a factor-10 error bar, it's amber", "▓3 NAMING: rev34, rev35 and rev36 were named by rev number. since 09-08 the rule is: name the file for what it is. this one is, and descriptively named copies of those three ship beside it", "▓4 LOOKING: the cold-growth control first printed 'the control fires' whatever happened. a control that can't say it's broken isn't one. now it names what drops out (carbon) or prints BROKEN", "▓5 LOOKING: mercury's bar vanished — 10⁻⁴⁸ is off any scale. now it's marked and labelled"], "contributions": [{"who": "your ladder", "weight": 40, "what": "the order, the 1%, the + side, the letters, K and Ar ten rungs apart, the zero-side tokens"}, {"who": "me", "weight": 40, "what": "the decode, the misfit sort with its calibration, the channel test, the 18.0 nm film, the Poisson check, the K–Ar clock, I-13 port, Lean"}, {"who": "physics nobody owns", "weight": 20, "what": "ionic sizes, elasticity, radioactive decay, Poisson statistics"}]}};</script>
+<script>/* rev37 · ui.js — the + side ladder at 1%. numbers from DATA (verify/ladder.py, your VM) or recomputed here. */
+(function(){
+'use strict';
+const D=DATA, LD=D.ladder, EL=id=>document.getElementById(id);
+const kB=8.617333262e-5, eV=1.602176634e-19, SIO=1.61;
+const misfit=dr=>8*Math.PI*LD.G*SIO*1e-10*(dr*1e-10)**2/eV;
+const ceil=(dr,T)=>Math.exp(-misfit(dr)/(kB*T));
+const drMax=T=>Math.sqrt(kB*T*Math.log(100)*eV/(8*Math.PI*LD.G*SIO*1e-10))*1e10;   // widest |Δr| at which 1% survives
+function fit(cv,h){ const w=cv.clientWidth||300, dpr=window.devicePixelRatio||1; cv.width=Math.round(w*dpr); cv.height=Math.round(h*dpr); cv.style.height=h+'px'; const g=cv.getContext('2d'); g.setTransform(dpr,0,0,dpr,0,0); g.font='9px ui-monospace,monospace'; return [g,w,h]; }
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const sci=x=>{ if(x>=1e-3) return (100*x).toPrecision(2)+'%'; if(x>=1e-6) return (x*1e6).toPrecision(2)+' ppm'; const e=Math.floor(Math.log10(x)); return (x/10**e).toFixed(1)+'e'+e; };
+
+/* bus */
+const REPORTS={W2:null,W3:null,W4:null,W5:null};
+function report(w,p){ REPORTS[w]=p; drawBoard(); }
+function drawBoard(){ EL('board').innerHTML=[['W2','WOOD'],['W3','METAL'],['W4','FIRE'],['W5','WATER']].map(([w,e])=>{ const r=REPORTS[w];
+    if(!r) return `<div class="line"><span>${w} · ${e}</span><span class="wait">awaiting run</span></div>`;
+    const cls=r.kind==='dissent'?'dis':(r.agree===false?'bad':'ok'), mk=r.kind==='dissent'?'⚑':(r.agree===false?'✕':'✓');
+    return `<div class="line"><span>${w} · ${e}</span><span class="${cls}">${mk} ${r.text}</span></div>`; }).join('')+
+    `<div class="line" style="border-top:1px solid var(--earth-2);margin-top:5px;padding-top:5px"><span>reports filed</span><span>${Object.values(REPORTS).filter(Boolean).length} / 4</span></div>`; }
+
+/* page recompute of the VM's integers */
+function pageInts(sitesPerCell=3){ const code=n=>96+(n-1); let letters=0; for(let n=2;n<=14;n++) letters+=code(n);
+  let cells=1; while(sitesPerCell*cells<100) cells++; return {a2:code(2),m14:code(14),letters,cells,prism33:81*sitesPerCell*33,zero:2*2}; }
+const I13=D.i13.globals;
+function sortRungs(T){ const out={in:[],band:[],out:[]}; const cut=kB*T*Math.log(100), dead=kB*T*Math.log(1e4);
+  for(const r of LD.rungs) if(r.E!==undefined){ (r.E<=cut?out.in:r.E<=dead?out.band:out.out).push(r); } return out; }
+function selfcheck(){ const bad=[], P=pageInts();
+  for(const k of Object.keys(I13)) if(P[k]!==I13[k]) bad.push(`I-13 ${k}: VM ${I13[k]} ≠ page ${P[k]}`);
+  for(const r of LD.rungs) if(r.E!==undefined && Math.abs(misfit(r.dr)-r.E)>1e-9) bad.push('misfit disagrees for '+r.element);
+  const s=sortRungs(LD.growth_T); if(s.in.map(r=>r.element).join()!=='F,C,As'||s.band.map(r=>r.element).join()!=='B') bad.push('the 1% sort moved: '+s.in.map(r=>r.element));
+  if(!LD.zero.all_four||!LD.letters_ok) bad.push('letters or zero side');
+  if(bad.length) throw new Error(bad.join(' · ')); return true; }
+
+/* masthead: the ladder itself, bar = log of what size allows (0 = 1%) */
+function strip(){ const W=34; const rows=LD.rungs.map(r=>{ const tag=String(r.n).padStart(2,'0')+' '+(r.letter||' ')+' '+r.word.padEnd(14);
+    if(r.E===undefined) return tag+' '+(r.site==='channel'?'· channel '+r.squeeze.toFixed(1)+'× too tight':r.element?'· no site in the lattice':'· not an element'); const d=Math.log10(r.ceiling/0.01);
+    const w=Math.max(-17,Math.min(W-17,Math.round(d*3)));
+    return tag+' '+(w>=0?' '.repeat(17)+'|'+'█'.repeat(w):' '.repeat(17+w)+'░'.repeat(-w)+'|')+'  '+sci(r.ceiling); });
+  EL('strip').textContent='the + side ladder · bar = how far past (█) or short of (░) 1% size alone allows · | = 1%\n'+rows.join('\n')+'\n00 · '+LD.zero.rows.join(' · ')+' · '+LD.zero.close; }
+
+/* W1 */
+function w1(){ EL('plaintext').textContent=D.claims.plain; EL('flag').textContent='⚑ '+D.claims.flag;
+  EL('words').innerHTML=D.claims.words.map(([h,a,m])=>`<div class="wd"><span class="his">“${h}”</span> → <span class="acc">${a}</span><br><span class="den">${m}</span></div>`).join('');
+  EL('claims').innerHTML=D.claims.claims.map(([st,c,a])=>`<div class="cl"><span class="stamp s-${st.toLowerCase()}">${st}</span> <span class="q">${c}</span><br><span class="a">${a}</span></div>`).join('');
+  EL('catches').textContent=D.claims.catches.join('\n'); EL('toddler').textContent=D.claims.toddler; drawBoard();
+  EL('b1').onclick=()=>{ const b=EL('b1'); b.disabled=true; setTimeout(()=>{ const R=Object.values(REPORTS), n=R.filter(Boolean).length, bad=R.filter(r=>r&&r.agree===false).length, dis=R.filter(r=>r&&r.kind==='dissent').length;
+    let sc='ok'; try{ selfcheck(); }catch(e){ sc='FAIL'; } const st=D.claims.claims.reduce((m,c)=>(m[c[0]]=(m[c[0]]||0)+1,m),{});
+    EL('b1s').innerHTML=(n<4?`<span class="bad">incomplete — ${4-n} unrun</span>`:`<span class="${bad?'bad':'ok'}">${n}/4 in · ${bad} mismatch · ${dis} dissent</span>`)+` · self-check <span class="${sc==='ok'?'ok':'bad'}">${sc}</span> · LIT ${st.LIT||0} AMBER ${st.AMBER||0} DEAD ${st.DEAD||0}`;
+    b.disabled=false; },300); }; }
+
+/* W2 */
+let tampered=false;
+function w2(){ EL('contrib').innerHTML=D.claims.contributions.map((c,i)=>`<div style="margin-bottom:9px"><div style="display:flex;justify-content:space-between"><b style="font-weight:400">${c.who}</b><span class="small" id="cw${i}">0%</span></div><div class="bar"><i id="cb${i}"></i></div><div class="small">${c.what}</div></div>`).join('');
+  EL('i13src').textContent=D.i13src;
+  const cmp=()=>{ const P=pageInts(tampered?4:3); let ag=0,n=0,h=''; for(const k of Object.keys(I13)){ n++; const same=P[k]===I13[k]; ag+=same; h+=`<div class="rd"><span>${k}</span><b><span class="${same?'ok':'bad'}">${I13[k]} · ${P[k]} ${same?'✓':'✕'}</span></b></div>`; }
+    EL('i13cmp').innerHTML=h+`<div class="small" style="margin-top:4px">VM Cortex mask 0x${D.i13.cortex.mask.toString(16)} · ${D.i13.cortex.pass?'pass':'FAIL'} · 1339 = 97 + … + 109: a to m</div>`; return [ag,n]; };
+  cmp();
+  EL('b2x').onclick=()=>{ tampered=!tampered; EL('b2x').textContent=tampered?'untamper':'tamper the sites'; const [a,n]=cmp(); EL('b2s').innerHTML=tampered?`<span class="${a<n?'ok':'bad'}">tamper caught: ${n-a} of ${n} disagree</span>`:'restored'; };
+  EL('b2').onclick=()=>{ const b=EL('b2'); b.disabled=true; D.claims.contributions.forEach((c,i)=>setTimeout(()=>{ EL('cb'+i).style.width=c.weight+'%'; EL('cw'+i).textContent=c.weight+'%'; },90*i+60));
+    setTimeout(()=>{ const sm=D.claims.contributions.reduce((a,c)=>a+c.weight,0), [a,n]=cmp(); EL('b2s').innerHTML=`<span class="${sm===100&&a===n?'ok':'bad'}">sum ${sm}% · I-13 ${a}/${n}</span>`;
+      EL('rep2').textContent=`→ W1: I-13 VM vs page: ${a} of ${n} agree${tampered?' (TAMPERED)':''}\n   letters a–m on rungs 2–14; 34 cells for one guest per channel`;
+      report('W2',{agree:sm===100&&a===n,text:`I-13 ${a}/${n}`}); b.disabled=false; },420); }; }
+
+/* W3 · the ladder */
+let shown3=14, forced=false;
+function draw3(){ const [g,W,H]=fit(EL('c3'),360), Lf=86, R=W-8, T=10, rows=LD.rungs.length+2, rh=(H-T-18)/rows;
+  const lo=-14, hi=1; const X=l=>Lf+(R-Lf)*(l-lo)/(hi-lo);
+  const cut=X(-2), dead=X(-4);
+  g.fillStyle='rgba(160,145,127,.18)'; g.fillRect(dead,T,cut-dead,rows*rh);
+  g.strokeStyle=css('--earth'); g.beginPath(); g.moveTo(cut,T); g.lineTo(cut,T+rows*rh); g.stroke();
+  g.strokeStyle='#e0584f'; g.setLineDash([3,3]); g.beginPath(); g.moveTo(dead,T); g.lineTo(dead,T+rows*rh); g.stroke(); g.setLineDash([]);
+  g.fillStyle=css('--ink-dim'); for(const l of [-12,-8,-4,-2,0]) g.fillText(l===-2?'1%':l===0?'100%':'1e'+l,X(l)-8,H-4);
+  const all=LD.rungs.map(r=>({lab:String(r.n).padStart(2,'0')+' '+(r.letter||'·')+' '+r.word.slice(0,11),c:r.ceiling,el:r.element,n:r.n,sq:r.squeeze}))
+    .concat(LD.calibration.map(c=>({lab:'cal '+c.el.split(' ')[0],c:c.ceiling,real:c.real})));
+  all.forEach((r,i)=>{ const y=T+i*rh+rh*0.2, hh=rh*0.6, vis=r.real||r.n>=shown3;
+    g.fillStyle=r.real?css('--ink-dim'):css('--ink'); g.fillText(r.lab,2,y+hh-1);
+    if(!vis) return;
+    if(r.c===undefined||r.c===null){ g.fillStyle=r.sq?'#e0584f':css('--ink-dim'); g.fillText(r.sq?'channel: '+r.sq.toFixed(1)+'× too tight':r.el?'no site':'not an element',Lf+4,y+hh-1); return; }
+    if(Math.log10(r.c)<lo){ g.fillStyle='#e0584f'; g.fillRect(Lf,y,3,hh); g.fillText('off the scale: '+sci(r.c),Lf+7,y+hh-1); return; }
+    const l=Math.log10(r.c); g.fillStyle=l>=-2?'#6FD08C':l>=-4?'#F2A03D':'#e0584f'; g.fillRect(Lf,y,X(l)-Lf,hh);
+    if(r.real){ g.fillStyle='rgba(255,255,255,.75)'; g.fillRect(X(Math.log10(r.real[0])),y+hh/2-1,X(Math.log10(r.real[1]))-X(Math.log10(r.real[0])),3); } });
+  if(forced){ const In=LD.rungs.find(r=>r.element==='In'); g.fillStyle='rgba(60,10,6,.85)'; g.fillRect(Lf+6,T+40,R-Lf-12,110); g.fillStyle='#ff8a70'; g.font='11px ui-monospace,monospace';
+    g.fillText('indium forced to 1%:',Lf+14,T+62); g.fillText(`${In.E.toFixed(2)} eV of strain per ion`,Lf+14,T+80);
+    g.fillText(`${(In.E/(kB*573.15)).toFixed(0)} × the thermal energy at growth`,Lf+14,T+98); g.fillText(`size alone allows ${sci(In.ceiling)}`,Lf+14,T+116); g.fillText('the crystal throws it out as it grows',Lf+14,T+134); } }
+function w3(){ draw3(); const s=sortRungs(LD.growth_T);
+  EL('m3a').textContent=s.in.map(r=>String(r.n).padStart(2,'0')+' '+r.word.slice(0,8)).join(' · '); EL('m3b').textContent=s.band.map(r=>String(r.n).padStart(2,'0')+' '+r.word).join(' · '); EL('m3c').textContent=s.out.map(r=>String(r.n).padStart(2,'0')+' '+r.word.replace('+','').slice(0,6)).join(' · ');
+  EL('b3').onclick=()=>{ const b=EL('b3'); b.disabled=true; forced=false; shown3=15; const step=()=>{ shown3--; draw3(); EL('b3s').textContent='rung '+String(shown3).padStart(2,'0'); if(shown3>1) setTimeout(step,120); else {
+      b.disabled=false; const plus=s.in.filter(r=>r.charge>0); EL('rep3').textContent=`→ W1: size allows 1% for ${s.in.map(r=>r.element).join(', ')} (+ side: ${plus.map(r=>r.element).join(', ')}); boron in the band\n   gallium, indium, mercury out; potassium too wide for the channel`;
+      report('W3',{agree:plus.length===2,text:`+ side at 1%: ${plus.map(r=>r.element).join(', ')}`}); } }; step(); };
+  EL('b3t').onclick=()=>{ forced=!forced; draw3(); EL('b3s').innerHTML=forced?'<span class="ok">the control fires</span>':'idle'; }; }
+
+/* W4 · size × charge */
+function pts(){ return LD.rungs.filter(r=>r.dr!==undefined).map(r=>({x:r.dr,y:r.charge,lab:String(r.n).padStart(2,'0')+' '+r.element,r}))
+  .concat(LD.calibration.map(c=>({x:c.dr,y:-1,lab:c.el.split(' ')[0],cal:true}))); }
+function draw4(){ const T=+EL('tg').value, [g,W,H]=fit(EL('c4'),260), Lf=26, R=W-8, Tp=10, B=H-22, x0=-0.3, x1=0.75, y0=-2.5, y1=1.5;
+  const X=x=>Lf+(R-Lf)*(x-x0)/(x1-x0), Y=y=>B-(B-Tp)*(y-y0)/(y1-y0), dm=drMax(T);
+  g.fillStyle='rgba(111,208,140,.14)'; g.fillRect(X(-dm),Tp,X(dm)-X(-dm),B-Tp);
+  g.strokeStyle='#3A3029'; for(const y of [-2,-1,0,1]){ g.beginPath(); g.moveTo(Lf,Y(y)); g.lineTo(R,Y(y)); g.stroke(); } g.beginPath(); g.moveTo(X(0),Tp); g.lineTo(X(0),B); g.stroke();
+  g.fillStyle=css('--ink-dim'); for(const y of [-2,-1,0,1]) g.fillText((y>0?'+':'')+y,4,Y(y)+3); g.fillText('misfit Δr, Å →',Lf,H-4); g.fillText('+ side ↑ (charge; −1 = one hole)',Lf+4,Tp+8);
+  for(const p of pts()){ const inside=Math.abs(p.x)<=dm; g.fillStyle=p.cal?'#bbb':inside?'#6FD08C':'#e0584f'; g.beginPath(); g.arc(X(p.x),Y(p.y),p.cal?3:4.5,0,7); g.fill(); g.fillStyle=p.cal?css('--ink-dim'):css('--ink'); g.fillText(p.lab,X(p.x)+(p.cal?-4:6),Y(p.y)+(p.cal?(p.lab.startsWith('Fe')?24:14):-4)); }
+  EL('tgv').textContent=T; EL('m4a').textContent='±'+dm.toFixed(3)+' Å';
+  const plus=pts().filter(p=>!p.cal&&p.y!==0&&Math.abs(p.x)<=dm); EL('m4b').textContent=plus.map(p=>p.r.element).join(', ')||'none';
+  return {T,dm,plus}; }
+function w4(){ draw4(); EL('tg').oninput=draw4;
+  const cv=EL('c4'); const pr=e=>{ const r=cv.getBoundingClientRect(), x=e.clientX-r.left, y=e.clientY-r.top; let best=null,bd=400;
+    for(const p of pts()){ const px=26+(r.width-34)*(p.x+0.3)/1.05, py=238-(228)*(p.y+2.5)/4; const d=(px-x)**2+(py-y)**2; if(d<bd){bd=d;best=p;} }
+    if(best) EL('probe').textContent=`${best.lab}: Δr ${best.x.toFixed(3)} Å · misfit ${misfit(best.x).toFixed(3)} eV · size allows ${sci(ceil(best.x,+EL('tg').value))}`; };
+  cv.addEventListener('pointermove',pr); cv.addEventListener('pointerdown',pr);
+  EL('b4t').onclick=()=>{ const warm=pts().filter(p=>!p.cal&&Math.abs(p.x)<=drMax(573)).map(p=>p.r.element); EL('tg').value=300; const r=draw4();
+    const cold=pts().filter(p=>!p.cal&&Math.abs(p.x)<=r.dm).map(p=>p.r.element), lost=warm.filter(e=>!cold.includes(e));
+    EL('probe').innerHTML=`<span class="${lost.length?'ok':'bad'}">grown at 300 K the door shrinks to ±${r.dm.toFixed(3)} Å: ${lost.length?lost.join(', ')+' drop'+(lost.length>1?'':'s')+' out':'NOTHING changed: broken control'} · ${cold.join(', ')} still fit</span>`; };
+  EL('b4').onclick=()=>{ EL('tg').value=573; const r=draw4(); EL('rep4').textContent=`→ W1: at 573 K, 1% allows |Δr| ≤ ${r.dm.toFixed(3)} Å\n   + side inside: ${r.plus.map(p=>p.r.element).join(', ')}`;
+    report('W4',{agree:r.plus.length===2,text:`door ±${r.dm.toFixed(2)} Å`}); }; }
+
+/* W5 · the prism */
+let occ=null, ang=0.7, spin=null;
+function dope(){ const cells=LD.poisson.cells, sites=3*cells; occ=[]; for(let ch=0;ch<81;ch++){ const z=[]; for(let s=0;s<sites;s++) if(Math.random()<0.01) z.push(s/sites); occ.push(z); } return occ; }
+function draw5(){ const [g,W,H]=fit(EL('c5'),260), ca=Math.cos(ang), sa=Math.sin(ang), sc=Math.min(W/13,H/11);
+  const P=(x,y,z)=>{ const X=x*ca-y*sa, Y=x*sa+y*ca; return [W/2+X*sc*0.8, H*0.78-z*H*0.55+Y*sc*0.3, Y]; };
+  const cols=[]; for(let i=0;i<9;i++) for(let j=0;j<9;j++){ const x=(i-4)+(j-4)*0.5, y=(j-4)*0.866; cols.push({i,j,x,y,d:x*sa+y*ca}); }
+  cols.sort((p,q)=>q.d-p.d);
+  for(const c of cols){ const k=occ?occ[c.i*9+c.j].length:-1; const [ax,ay]=P(c.x,c.y,0), [bx,by]=P(c.x,c.y,1);
+    g.strokeStyle=k===1?'#6FD08C':k>1?'#e0584f':k===0?'rgba(160,145,127,.25)':'rgba(160,145,127,.5)'; g.lineWidth=k===1?2:1; g.beginPath(); g.moveTo(ax,ay); g.lineTo(bx,by); g.stroke();
+    if(occ) for(const z of occ[c.i*9+c.j]){ const [px,py]=P(c.x,c.y,z); g.fillStyle=k>1?'#ff8a70':'#b7f5c9'; g.beginPath(); g.arc(px,py,2.2,0,7); g.fill(); } }
+  g.lineWidth=1; g.fillStyle=css('--ink-dim'); g.fillText('81 channels · 18.0 nm tall (vertical not to scale) · a fresh random 1% each press',4,11); }
+function w5(){ const K=LD.potassium; EL('m5c').textContent=`${(K.Gy_per_yr_beta*1e3).toFixed(1)} mGy/yr · a kGy in ${(K.yr_to_1kGy/1e6).toFixed(1)} Myr`;
+  EL('dissent').textContent=`⚑ W1 reads 1% as one guest per channel, and on average it is: 18.0 nm of film, ${LD.poisson.sites_per_channel} sites a channel. but coins don't share out evenly. at random only ~37% of channels hold exactly one; ~37% hold none; ~26% hold two or more (2,000 prisms offline: ${(100*LD.poisson.sim[1]).toFixed(1)}% · ${(100*LD.poisson.sim[0]).toFixed(1)}% · ${(100*(1-LD.poisson.sim[0]-LD.poisson.sim[1])).toFixed(1)}%). one per channel needs placing each ion (implanting through a mask, or growing layer by layer), not dissolving 1% in.\n   W1 has not accepted this. Recorded.`;
+  EL('left').textContent=['the − side (n–z), if the ladder has one: not given, not built','the charge each + guest needs balancing: a + guest brings a − partner or a free electron somewhere','at 1% the archive is far darker than amethyst: a film, not a slab','whether gallium, boron, arsenic hole/electron centres keep as long as iron\'s (unmeasured)','potassium could sit in a different crystal (feldspar) that has room for it'].map(x=>'· '+x).join('\n');
+  draw5();
+  EL('b5').onclick=()=>{ dope(); draw5(); const one=occ.filter(z=>z.length===1).length, none=occ.filter(z=>z.length===0).length, more=81-one-none, tot=occ.reduce((a,z)=>a+z.length,0);
+    EL('m5a').textContent=`${one} / 81 (${(100*one/81).toFixed(0)}%)`; EL('m5b').textContent=`${none} · ${more}   (${tot} guests)`; EL('b5s').textContent='a fresh random draw';
+    EL('rep5').textContent=`→ W1 (dissent): ${one}/81 channels hold exactly one\n   at random, 1% isn't one per channel`; report('W5',{kind:'dissent',text:`${one}/81 exactly one`}); };
+  EL('b5r').onclick=()=>{ if(spin){ cancelAnimationFrame(spin); spin=null; return; } const t0=performance.now(), a0=ang; const f=t=>{ ang=a0+(t-t0)/1600; draw5(); spin=requestAnimationFrame(f); }; spin=requestAnimationFrame(f); }; }
+
+function rest(){ const st=D.claims.claims.reduce((m,c)=>(m[c[0]]=(m[c[0]]||0)+1,m),{});
+  EL('foot').innerHTML=`Every figure computed before this file was written (verify/ladder.py) and pulled back out of it by verify/crosscheck.js. The ladder: <span class="stamp s-lit">LIT</span> ${st.LIT} · <span class="stamp s-amber">AMBER</span> ${st.AMBER} · <span class="stamp s-dead">DEAD</span> ${st.DEAD}. `+
+   `LIT: the letters, the zero side, the 18.0 nm prism, the Poisson split, the potassium clock. AMBER: every misfit ceiling (a size-only estimate, checked on iron and aluminium and good to about ×10), the growth temperature (573 K), quartz's stiffness (44 GPa), which element each word names (gaia most of all). `+
+   `Ornament: none; the vertical scale of the prism is stretched and says so.`; }
+
+function init(){ try{ selfcheck(); }catch(e){ EL('fail').style.display='block'; EL('fail').textContent='SELF-CHECK FAILED: '+e.message; }
+  strip(); w1(); w2(); w3(); w4(); w5(); rest();
+  let t; addEventListener('resize',()=>{ clearTimeout(t); t=setTimeout(()=>{ draw3(); draw4(); draw5(); },120); }); }
+window.__REV37__={selfcheck,pageInts,misfit,drMax,sortRungs};
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
+})();
+</script>
+</body>
+</html>
