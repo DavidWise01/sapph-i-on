@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Carry — SaPpH{{i}}on</title>
+<style>
+  :root { --ink:#10241c; --dim:#3f5c50; --accent:#047857; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; color:var(--ink);
+    font:16px/1.5 "Segoe UI", ui-sans-serif, sans-serif;
+    background:
+      radial-gradient(800px 420px at 0% 0%, #bbf7d0, transparent 60%),
+      radial-gradient(700px 420px at 100% 0%, #fde68a, transparent 55%),
+      linear-gradient(165deg, #f0fdf4, #ecfdf5 48%, #f7fee7);
+    background-color:#f0fdf4; min-height:100vh; overflow-wrap:anywhere;
+  }
+  a { color:var(--accent); overflow-wrap:anywhere; }
+  header, main, footer { width:min(980px, calc(100% - 28px)); margin:0 auto; min-width:0; }
+  header { padding:22px 0 0; }
+  .src, .mono { font:13px/1.45 ui-monospace, Consolas, monospace; color:var(--dim); word-break:break-word; }
+  h1 { margin:8px 0 0; font-size:clamp(32px, 6vw, 52px); letter-spacing:.02em; }
+  .kicker { letter-spacing:.16em; font-size:12px; color:var(--accent); font-weight:700; }
+  .stage { background:#f7fef9; border:1px solid rgba(16,36,28,.14); border-radius:18px; padding:14px; margin:14px 0; }
+  canvas { width:100%; height:auto; display:block; border-radius:14px; }
+  .head { font:16px/1.35 ui-monospace, Consolas, monospace; letter-spacing:.04em; margin:8px 0 0; overflow-wrap:anywhere; }
+  .band { display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin:8px 0; max-width:100%; }
+  .mark { width:28px; font:12px ui-monospace, Consolas, monospace; color:var(--dim); }
+  .chip {
+    min-width:42px; padding:4px 6px 3px; border-radius:10px; background:#fff;
+    border:1px solid rgba(16,36,28,.12); text-align:center;
+  }
+  .chip b { display:block; font-size:13px; }
+  .chip i { display:block; font-style:normal; font:10px ui-monospace, Consolas, monospace; color:var(--dim); }
+  .stamp { display:inline-block; padding:2px 8px; border-radius:999px; font:11px ui-monospace, Consolas, monospace; color:#fff; }
+  .lit { background:#047857; } .amber { background:#0f6e8c; } .wall { background:#9d174d; }
+  footer { color:var(--dim); font-size:13px; padding-bottom:28px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="src"><a href="../">SaPpH{{i}}on</a> · <a href="the-quantum-kernel.html">the quantum kernel</a> · <a href="https://github.com/DavidWise01/quantum-dot-vm">DavidWise01/quantum-dot-vm</a> · <a href="https://0root.ai/">0root.ai</a></div>
+  <div class="kicker">TICK 27 TO 107</div>
+  <h1>The Carry</h1>
+  <p>The same stitch continues from tick 27 through tick 107, eighty-one ticks, until the cross and the rhythm share a step again.</p>
+  <p class="head" id="head"></p>
+</header>
+<main>
+  <div class="stage">
+    <canvas id="sky" width="720" height="420" aria-label="Three more crosses of the quantum kernel, ticks 27 through 107"></canvas>
+    <div id="rows"></div>
+  </div>
+  <p class="mono" id="card"></p>
+  <p><span class="stamp lit">LIT</span> The cross is 27 long and the rhythm is 4 long. Their least common multiple is 108, and no smaller positive step is a multiple of both. The first page holds ticks 0 through 26. This page holds ticks 27 through 107. That is 81 ticks, and 27 plus 81 is 108. Tick 27 sets david to 43 and ai to 187. The stitch is 6c. The upper frame is 0000e60000 and the lower frame is 0000cf0000. The lower core arrives from tick 26, which is ca. Tick 107 ends at stitch fc, and both frames are 0000860000. Tick 108 lands on cross slot 0 and rhythm slot 0. Its stitch is 03, not e7. A failed count throws.</p>
+  <p><span class="stamp amber">AMBER</span> The stitch is the arithmetic in DavidWise01/quantum-dot-vm quantum_api.py, read on 2026-10-02. This page recomputes ticks 0 through 26 and does not fetch the first page. The kernel writes the string 0=1=0=1 on each tick. That string is recorded here. It is not a proof that 0 equals 1. The attribution file names CC-BY-ND-4.0. This page reimplements the arithmetic and does not copy the repository files. Private repositories were not read. This page is not one of those 192.</p>
+  <p><span class="stamp wall">WALL</span> Tick 108 is not drawn. The cross slot and the rhythm slot match tick 0 there, and the stitch does not, because david and ai have moved. At the end of tick 107 the kernel's history keeps ticks 81 through 107. Ticks 27 through 80 are drawn here and have left that window. The repository index page uses a different tick and a black background. It was not copied. The walk was already full, so this page is not seated.</p>
+</main>
+<footer>
+  David Lee Wise (ROOT0). Drafted by Grok (xAI) on 2026-10-02.
+  Birth seal a0678add4d07dbdc5a9d536fa1687a3f99da29e71ad596636371a75c4b673c53. One host, <a href="https://davidwise01.github.io/sapph-i-on/kernel/the-carry.html">this page</a>.
+  Reference DavidWise01/quantum-dot-vm quantum_api.py.
+</footer>
+<script>
+"use strict";
+var DOT = (1 / 3002) * 3002;
+var QUANTUM = 4;
+var CROSS27 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 0, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+var RHYTHM = [5, 0, 0, 5];
+var AXIOM = "0=1=0=1";
+var REPO = "quantum-dot-vm";
+
+function hex2(n) {
+  var s = (n & 255).toString(16);
+  return s.length === 1 ? "0" + s : s;
+}
+function frameOf(core) {
+  return "0000" + hex2(core) + "0000";
+}
+function quantumStitch(david, ai, step) {
+  var base = (david * QUANTUM * DOT) + ai;
+  var rhythm = RHYTHM[step % 4];
+  var cross = CROSS27[step % 27];
+  var stitch = Math.trunc(base + rhythm + cross) & 255;
+  var near = Math.abs(base - Math.round(base)) < 1e-12;
+  if (near) stitch ^= 1;
+  return { stitch: stitch, near: near, rhythm: rhythm, cross: cross };
+}
+async function shaFirst(prev, stitch) {
+  if (!crypto || !crypto.subtle) throw new Error("subtle");
+  var bytes = new Uint8Array([prev & 255, stitch & 255]);
+  var hash = await crypto.subtle.digest("SHA-256", bytes);
+  return new Uint8Array(hash)[0];
+}
+async function runTicks() {
+  var faults = [];
+  if (CROSS27.length !== 27 || RHYTHM.length !== 4 || QUANTUM !== 4 || DOT !== 1) faults.push("law");
+  if (RHYTHM[0] !== 5 || RHYTHM[1] !== 0 || RHYTHM[2] !== 0 || RHYTHM[3] !== 5) faults.push("rhythm");
+  var meet = [];
+  var n;
+  for (n = 1; n <= 108; n++) if (n % 27 === 0 && n % 4 === 0) meet.push(n);
+  if (meet.length !== 1 || meet[0] !== 108) faults.push("meet");
+  if (27 + 81 !== 108) faults.push("cover");
+  var lower = 0;
+  var ticks = [];
+  var t, david, ai, got, nxt, upperVal;
+  for (t = 0; t <= 108; t++) {
+    david = 0x10 + (t % 256);
+    ai = 0xA0 + (t % 256);
+    got = quantumStitch(david, ai, t);
+    nxt = await shaFirst(lower, got.stitch);
+    upperVal = Math.trunc((david * DOT) + (ai * DOT)) & 255;
+    ticks.push({
+      tick: t, david: david, ai: ai, stitch: got.stitch, near: got.near,
+      rhythm: got.rhythm, cross: got.cross, prev: lower, lower: nxt, upper: upperVal,
+      axiom: AXIOM
+    });
+    lower = nxt;
+  }
+  if (ticks.length !== 109) faults.push("ran");
+  var zero = ticks[0];
+  var hand = ticks[26];
+  var open = ticks[27];
+  var last = ticks[107];
+  var again = ticks[108];
+  if (!zero || zero.stitch !== 231 || zero.upper !== 176 || zero.lower !== 232 || zero.david !== 16 || zero.ai !== 160) faults.push("tick0");
+  if (!hand || hand.stitch !== 98 || hand.upper !== 228 || hand.lower !== 202 || hand.cross !== 1) faults.push("tick26");
+  if (!open || open.tick !== 27 || open.david !== 43 || open.ai !== 187 || open.stitch !== 108 || open.upper !== 230 || open.lower !== 207 || open.prev !== 202 || open.rhythm !== 5 || open.cross !== 1) faults.push("tick27");
+  if (!open || frameOf(open.upper) !== "0000e60000" || frameOf(open.lower) !== "0000cf0000") faults.push("tick27 frame");
+  if (!last || last.tick !== 107 || last.stitch !== 252 || last.upper !== 134 || last.lower !== 134 || last.rhythm !== 5 || last.cross !== 1) faults.push("tick107");
+  if (!last || frameOf(last.upper) !== "0000860000" || frameOf(last.lower) !== "0000860000") faults.push("tick107 frame");
+  if (!again || again.tick !== 108 || (again.tick % 27) !== 0 || (again.tick % 4) !== 0 || again.rhythm !== 5 || again.cross !== 1 || again.stitch === 231 || again.stitch !== 3 || again.david === 16) faults.push("tick108");
+  var drawn = ticks.filter(function (row) { return row.tick >= 27 && row.tick <= 107; });
+  if (drawn.length !== 81) faults.push("count");
+  var fives = 0;
+  var crossSum = 0;
+  var hinges = 0;
+  drawn.forEach(function (row) {
+    if (row.axiom !== AXIOM) faults.push("axiom");
+    if (!row.near) faults.push("near");
+    if (row.rhythm !== RHYTHM[row.tick % 4] || row.cross !== CROSS27[row.tick % 27]) faults.push("step");
+    if (row.upper !== ((row.david + row.ai) & 255)) faults.push("upper");
+    if (row.rhythm === 5) fives++;
+    crossSum += row.cross;
+    if (row.cross === 0) hinges++;
+  });
+  if (fives !== 41) faults.push("fives");
+  if (crossSum !== 546) faults.push("cross sum");
+  if (hinges !== 3) faults.push("hinges");
+  if (drawn[0].tick % 4 !== 3 || drawn[27].tick !== 54 || drawn[27].tick % 4 !== 2 || drawn[54].tick !== 81 || drawn[54].tick % 4 !== 1) faults.push("bands");
+  var hist = ticks.slice(0, 108);
+  if (hist.length !== 108) faults.push("before cap");
+  while (hist.length > 27) hist.shift();
+  if (hist.length !== 27 || hist[0].tick !== 81 || hist[26].tick !== 107) faults.push("window");
+  var filled = ticks.slice(0, 27);
+  if (filled.length !== 27 || filled[0].tick !== 0 || filled[26].tick !== 26) faults.push("filled");
+  return { faults: faults, drawn: drawn, open: open, last: last };
+}
+async function proveRepo() {
+  var faults = [];
+  var meta = null;
+  try {
+    var res = await fetch("https://api.github.com/repos/DavidWise01/" + encodeURIComponent(REPO), {
+      headers: { "Accept": "application/vnd.github+json" },
+      signal: AbortSignal.timeout(15000)
+    });
+    if (!res.ok) faults.push("http " + res.status);
+    else {
+      meta = await res.json();
+      if (!meta || meta.full_name !== "DavidWise01/" + REPO) faults.push("full_name");
+      if (!meta || meta.name !== REPO) faults.push("name");
+      if (!meta || meta.private !== false) faults.push("private");
+      if (!meta || !meta.owner || meta.owner.login !== "DavidWise01") faults.push("owner");
+    }
+  } catch (e) {
+    faults.push("fetch");
+  }
+  return { faults: faults, meta: meta };
+}
+function paintCarry(canvas, drawn) {
+  var ctx = canvas.getContext("2d");
+  var w = canvas.width, h = canvas.height;
+  var counts = { bars: 0, hinge: 0, rhythm5: 0, primary: 0 };
+  var g = ctx.createLinearGradient(0, 0, 0, h);
+  g.addColorStop(0, "hsl(152,62%,78%)");
+  g.addColorStop(0.5, "hsl(84,70%,72%)");
+  g.addColorStop(1, "hsl(168,45%,46%)");
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, w, h);
+  var band, i, row, x, baseY, bh;
+  for (band = 0; band < 3; band++) {
+    baseY = 78 + band * 118;
+    for (i = 0; i < 27; i++) {
+      row = drawn[band * 27 + i];
+      x = 28 + i * ((w - 56) / 26);
+      if (row.cross === 0) {
+        ctx.fillStyle = "hsl(48,95%,96%)";
+        ctx.beginPath();
+        ctx.arc(x, baseY, 6, 0, Math.PI * 2);
+        ctx.fill();
+        counts.hinge++;
+      } else {
+        bh = 4 + row.cross * 4.2;
+        ctx.fillStyle = "hsl(" + ((row.stitch * 3) % 360) + ",70%,36%)";
+        ctx.fillRect(x - 4, baseY - bh, 8, bh);
+      }
+      counts.bars++;
+      ctx.fillStyle = row.rhythm === 5 ? "hsl(160,70%,22%)" : "hsla(200,20%,30%,0.35)";
+      ctx.beginPath();
+      ctx.arc(x, baseY + 12, row.rhythm === 5 ? 3.2 : 2, 0, Math.PI * 2);
+      ctx.fill();
+      if (row.rhythm === 5) counts.rhythm5++;
+    }
+  }
+  var sun = ctx.createRadialGradient(w * 0.5, 28, 2, w * 0.5, 28, 26);
+  sun.addColorStop(0, "hsl(48,100%,92%)");
+  sun.addColorStop(1, "hsla(152,80%,50%,0)");
+  ctx.fillStyle = sun;
+  ctx.beginPath();
+  ctx.arc(w * 0.5, 28, 26, 0, Math.PI * 2);
+  ctx.fill();
+  counts.primary++;
+  if (counts.bars !== 81 || counts.hinge !== 3 || counts.rhythm5 !== 41 || counts.primary !== 1) {
+    throw new Error("LIT FAIL carry paint");
+  }
+  return counts;
+}
+function fail(msg) {
+  var card = document.getElementById("card");
+  card.innerHTML = "<span class='stamp wall'>WALL</span> LIT FAIL " + msg;
+  throw new Error("LIT FAIL " + msg);
+}
+Promise.all([runTicks(), proveRepo()]).then(function (pair) {
+  var run = pair[0];
+  var repo = pair[1];
+  var faults = run.faults.concat(repo.faults);
+  if (faults.length) fail(faults.join(", "));
+  paintCarry(document.getElementById("sky"), run.drawn);
+  var rows = document.getElementById("rows");
+  var marks = ["r3", "r2", "r1"];
+  var band, i, row, bandEl, mark, chip, b, note;
+  for (band = 0; band < 3; band++) {
+    bandEl = document.createElement("div");
+    bandEl.className = "band";
+    mark = document.createElement("span");
+    mark.className = "mark";
+    mark.textContent = marks[band];
+    bandEl.appendChild(mark);
+    for (i = 0; i < 27; i++) {
+      row = run.drawn[band * 27 + i];
+      chip = document.createElement("span");
+      chip.className = "chip";
+      b = document.createElement("b");
+      b.textContent = hex2(row.stitch);
+      note = document.createElement("i");
+      note.textContent = String(row.cross);
+      chip.appendChild(b);
+      chip.appendChild(note);
+      bandEl.appendChild(chip);
+    }
+    if (bandEl.querySelectorAll(".chip").length !== 27) fail("band");
+    rows.appendChild(bandEl);
+  }
+  if (rows.querySelectorAll(".chip").length !== 81) fail("chips");
+  var open = run.open;
+  var last = run.last;
+  document.getElementById("head").textContent = "tick 27  " + hex2(open.stitch) + "  " + frameOf(open.upper) + "  " + frameOf(open.lower) + "    tick 107  " + hex2(last.stitch) + "  " + frameOf(last.upper) + "  " + frameOf(last.lower);
+  document.getElementById("card").innerHTML = "<span class='stamp lit'>LIT</span> " + repo.meta.full_name + " · 81 ticks · 27 through 107 · stitch " + hex2(open.stitch);
+}).catch(function (err) {
+  var card = document.getElementById("card");
+  if (card && card.textContent.indexOf("LIT FAIL") < 0) {
+    card.innerHTML = "<span class='stamp wall'>WALL</span> " + (err && err.message ? err.message : "carry");
+  }
+  throw err;
+});
+</script>
+</body>
+</html>

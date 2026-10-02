@@ -16,5 +16,28 @@
     ],
     "quantum": 4,
     "dot": "3002/3002"
+  },
+  {
+    "file": "the-carry.html",
+    "title": "The Carry",
+    "slug": "the-carry",
+    "bytes": 14170,
+    "sha256": "6043ef40ce1fc99cd06b749f9ee1602344212ddea1d2ae538ca1bebd21ae6076",
+    "birth": "a0678add4d07dbdc5a9d536fa1687a3f99da29e71ad596636371a75c4b673c53",
+    "repo": "DavidWise01/quantum-dot-vm",
+    "cross": 27,
+    "rhythm": [
+      5,
+      0,
+      0,
+      5
+    ],
+    "quantum": 4,
+    "dot": "3002/3002",
+    "ticks": 81,
+    "from": 27,
+    "through": 107,
+    "meet": 108,
+    "after": 26
   }
 ]
