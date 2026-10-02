@@ -278,5 +278,18 @@ Hallway door
   commit: e5cabe3e57eb87634e1f5658888c85d73329f077
   message: name the fall beside the 7^3 door
 
+After next · 2026-10-01
+
+The walk was full, so these 24 files are not seated. They are the newest unused Downloads HTML files whose names say next, after the next cube, the further next, and the later next. The 24th file is Next-Evo-Change-Phase.html, dated 2026-09-30 at 21:16. Numbered copies were skipped. Wakaku reaches 17 files and stays in Downloads. One file in this set also says wakaku. The files whose names say evo have an older 24th file, 2026-09-30 at 19:38. Thirty-six files named next remain in Downloads. The bytes are the source files. The galaxy birth seal was not rewritten. The seated count stays 334. With these 24, those 168 sit beside the cube. The atmosphere pages are not part of those 168.
+
+  commit: aa7ea6f1d24c9c6c43270a507915f58021188de2
+  message: 24 after next files, beside the cube
+  file: after/Next-Evo-Drop-1000.html, 176887 bytes, sha256 a3fcf75b76346894057335cd3c70321f957532006de74b8573ff10e9da49db18
+  check: node seats 334. The first link is after/Next-Evo-Drop-1000.html. Cell (0,0,4) stays dots/Quantum-Tunneler-Double-J.html. No after file is seated. A short hash throws LIT FAIL after hash. A swapped file throws LIT FAIL after order. The first atmosphere page stayed 11654 bytes, sha256 e04506471234a630b564df897d7367e4a6cc0182862d45ddc07fa7306308c3dc. The fall stayed 13090 bytes, sha256 659f8adb4ace9bbc16c482efe90b108d1fb7147c2dd234698ef9f10fc3ef0116. Chrome showed the door on a background of rgb(243, 239, 231). The door at innerWidth 1254 opened that cell and did not overflow. At a requested width of 390 Chrome reported innerWidth 444, and the door did not scroll past that window.
+
+Hallway door
+  commit: b57d44b706a8d24f39ee52ec1991df6b21f4bed3
+  message: name the after next beside the 7^3 door
+
 
 
