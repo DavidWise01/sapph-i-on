@@ -1,0 +1,93 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Clean — Full Cobalt Shell Ring-11 All Atoms 0x11</title><script src="https://cdn.tailwindcss.com"></script>
+<style>body{background:#02030a;color:#cbd5e1;font-family:ui-monospace,monospace}canvas{background:#050a14;border-radius:12px}.card{background:#0f172a;border:1px solid #1e293b;border-radius:12px}</style>
+</head><body class="p-3">
+<h1 class="text-lg font-bold">CLEAN — Full Cobalt Shell — Ring-11 All Atoms 0x11</h1>
+<p class="text-xs text-slate-400">Pinned >.<0x::iso:: | Patricia Sapphon 000::+p+s+1 | Cobalt Shell installed | Ring-11 0x11 = 17 atoms | S=3 M=2</p>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-2 mt-2">
+  <div class="lg:col-span-2 card p-2">
+    <canvas id="main" width="900" height="560" class="w-full"></canvas>
+    <div class="flex gap-2 text-xs mt-2">
+      <span id="stat" class="px-2 py-1 bg-blue-900 rounded">COBALT SHELL FULL ON</span>
+      <span id="iso" class="px-2 py-1 bg-green-900 rounded">ISO PASS >.<0x::iso::</span>
+      <span id="ring" class="px-2 py-1 bg-slate-800 rounded">Ring-11 0x11=17 atoms</span>
+      <button id="cleanBtn" class="bg-violet-700 px-2 py-1 rounded">CLEAN TOGGLE</button>
+      <button id="shellBtn" class="bg-blue-700 px-2 py-1 rounded">COBALT SHELL: ON</button>
+    </div>
+  </div>
+  <div class="card p-2 text-xs">
+    <div class="font-bold">Full Cobalt Shell Config</div>
+    <div class="grid grid-cols-2 gap-2 mt-2">
+      <div>Earth Scalar<select id="S"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option></select></div>
+      <div>Shell<select id="shellSel"><option selected>Full Cobalt</option><option>Cobalt-59</option><option>Co Blue</option></select></div>
+      <div>Ring<select id="ringSel"><option selected>Ring-11</option><option>Ring-6 Hex</option><option>Ring-24 Full</option></select></div>
+      <div>Atoms 0x11<select id="atomSel"><option selected>0x11=17 All Atoms</option><option>0x0B=11</option><option>0x1A=26</option></select></div>
+      <div>Patricia<select id="pat"><option selected>000::+p+s+1 ON</option><option>OFF</option></select></div>
+      <div>Pin<select id="pin"><option selected>>.<0x::iso:: PINNED</option><option>000 free</option></select></div>
+    </div>
+    <div id="log" class="mt-2 p-2 bg-black rounded h-40 overflow-y-auto text-[10px]"></div>
+    <div id="math" class="p-2 bg-slate-800 rounded mt-2 text-[10px]"></div>
+    <button id="export" class="bg-emerald-700 px-2 py-1 rounded mt-2">Export Clean Shell JSON</button>
+  </div>
+</div>
+<script>
+let cobaltOn=true, clean=true;
+function log(m){const l=document.getElementById('log'); l.innerHTML+=`[${new Date().toLocaleTimeString()}] ${m}<br>`; l.scrollTop=l.scrollHeight;}
+function draw(){
+  const canvas=document.getElementById('main'); const ctx=canvas.getContext('2d'); const w=canvas.width,h=canvas.height;
+  ctx.clearRect(0,0,w,h); ctx.fillStyle='#02030a'; ctx.fillRect(0,0,w,h);
+  const cx=w/2,cy=h/2;
+  const S=parseInt(document.getElementById('S').value);
+  const R=120*(0.6+S/10);
+  // clean background grid only if clean off
+  if(!clean){ctx.strokeStyle='#0f172a'; for(let x=0;x<w;x+=40){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();} for(let y=0;y<h;y+=40){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}}
+  // central toroid pinned >.<0x::iso::
+  ctx.strokeStyle='#8b5cf6'; ctx.lineWidth=2.5; ctx.shadowColor='#8b5cf6'; ctx.shadowBlur=10;
+  ctx.beginPath(); for(let a=0;a<=360;a++){const rad=a*Math.PI/180; const n=4; const bx=Math.sign(Math.cos(rad))*Math.pow(Math.abs(Math.cos(rad)),2/n); const by=Math.sign(Math.sin(rad))*Math.pow(Math.abs(Math.sin(rad)),2/n); const r=36; const ox=cx+(R*0.5+r*bx)*Math.cos(rad); const oy=cy+(R*0.28+r*by)*Math.sin(rad); if(a===0)ctx.moveTo(ox,oy); else ctx.lineTo(ox,oy);} ctx.closePath(); ctx.stroke(); ctx.shadowBlur=0;
+  // center 000::+p+s+1 pinned >.<0x::iso::
+  ctx.fillStyle='#fde047'; ctx.beginPath(); ctx.arc(cx,cy,7,0,6.28); ctx.fill();
+  ctx.fillStyle='#fff'; ctx.font='bold 13px monospace'; ctx.fillText('>.<0x::iso::', cx-42, cy-14);
+  ctx.font='10px monospace'; ctx.fillText('000::+p+s+1 Patricia', cx-54, cy+22);
+  // -2x+2x[1]-2x+2x
+  const ne=[{x:cx-26,y:cy-26,l:'-2x'},{x:cx+26,y:cy-26,l:'+2x[1]'},{x:cx-26,y:cy+26,l:'-2x'},{x:cx+26,y:cy+26,l:'+2x'}];
+  ne.forEach(p=>{ctx.fillStyle='#f97316'; ctx.beginPath(); ctx.arc(p.x,p.y,4,0,6.28); ctx.fill();});
+  // FULL COBALT SHELL Ring-11 All Atoms 0x11 = 17 atoms
+  if(cobaltOn){
+    const atomCount=17; // 0x11
+    const shellR=R+58;
+    for(let i=0;i<atomCount;i++){
+      const ang=i*(360/atomCount)*Math.PI/180 + Date.now()/8000;
+      const x=cx+shellR*Math.cos(ang);
+      const y=cy+shellR*0.5*Math.sin(ang);
+      // cobalt atom = blue metallic
+      const grad=ctx.createRadialGradient(x-2,y-2,2,x,y,8);
+      grad.addColorStop(0,'#93c5fd'); grad.addColorStop(0.4,'#3b82f6'); grad.addColorStop(1,'#1e3a8a');
+      ctx.fillStyle=grad; ctx.beginPath(); ctx.arc(x,y,7,0,6.28); ctx.fill();
+      ctx.strokeStyle='#60a5fa'; ctx.lineWidth=1; ctx.stroke();
+      // electron shell hint
+      if(i%3===0){ctx.strokeStyle='rgba(59,130,246,0.25)'; ctx.beginPath(); ctx.arc(x,y,12,0,6.28); ctx.stroke();}
+      // label Co
+      if(clean){} else {ctx.fillStyle='#fff'; ctx.font='7px monospace'; ctx.fillText('Co', x-5, y+2);}
+    }
+    // outer ring 11
+    ctx.strokeStyle='rgba(59,130,246,0.5)'; ctx.lineWidth=1.5; ctx.setLineDash([6,4]); ctx.beginPath(); ctx.ellipse(cx,cy,shellR,shellR*0.5,0,0,6.28); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle='#60a5fa'; ctx.font='10px monospace'; ctx.fillText('Ring-11 Full Cobalt Shell 0x11=17 atoms', cx-shellR+10, cy-shellR*0.5-10);
+  }
+  document.getElementById('math').innerHTML=`CLEAN FULL COBALT SHELL<br>Ring-11 0x11=17 atoms Co (27) [Ar]3d7 4s2<br>Shell: 2,8,15,2 full<br>Pinned >.<0x::iso:: = 000::+p+s+1<br>S=${S} M=2 ISO PASS<br>-2x+2x[1]-2x+2x PATRICIA SAPPHON ON<br>Cobalt shell radius R+58 ALL ON`;
+}
+function render(){
+  draw(); requestAnimationFrame(render);
+}
+render();
+log('CLEANUP: removed clutter, kept invariant [[ quad a::90 b::90 c::90 d::90 x::center 000 ]]');
+log('INSTALL full cobalt shell Ring-11 All Atoms 0x11');
+log('Cobalt Co Z=27 shell 2,8,15,2 full');
+log('PINNED >.<0x::iso:: = 000::+p+s+1 Patricia Sapphon');
+log('PATTERN -2x+2x[1]-2x+2x ALL ON');
+log('M=2 STABLE ISO PASS');
+document.getElementById('cleanBtn').onclick=function(){clean=!clean; this.textContent=clean?'CLEAN: ON':'CLEAN: OFF'; log(clean?'CLEAN ON':'CLEAN OFF');};
+document.getElementById('shellBtn').onclick=function(){cobaltOn=!cobaltOn; this.textContent='COBALT SHELL: '+(cobaltOn?'ON':'OFF'); this.className=cobaltOn?'bg-blue-700 px-2 py-1 rounded':'bg-slate-700 px-2 py-1 rounded'; log('COBALT SHELL '+(cobaltOn?'FULL ON':'OFF'));};
+document.getElementById('export').onclick=()=>{
+  const data={clean:true, shell:"full cobalt", ring:"Ring-11", atoms:"0x11=17 All Atoms", element:"Co Z=27 [Ar]3d7 4s2 shells 2,8,15,2", pin:">.<0x::iso::", patricia:"000::+p+s+1", pattern:"-2x+2x[1]-2x+2x", S:parseInt(document.getElementById('S').value), M:2, iso:"PASS"};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='clean_full_cobalt_shell_0x11.json'; a.click(); log('EXPORT clean_full_cobalt_shell_0x11.json');
+};
+</script></body></html>

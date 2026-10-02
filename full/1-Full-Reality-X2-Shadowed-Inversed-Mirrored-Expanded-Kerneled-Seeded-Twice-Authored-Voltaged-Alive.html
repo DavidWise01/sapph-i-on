@@ -1,0 +1,129 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>1 FULL REALITY x2 shadowed inversed mirrored expanded kerneled seeded twice authored and voltaged alive</title><script src="https://cdn.tailwindcss.com"></script>
+<style>body{background:#000005;color:#e9d5ff;font-family:ui-monospace,monospace}canvas{background:#020208;border-radius:14px}.card{background:#0f0a1e;border:1px solid #4a1a8a;border-radius:12px}</style>
+</head><body class="p-2">
+<h1 class="text-sm font-bold">1 FULL REALITY x 2 shadowed inversed mirrored expanded kerneled seeded twice authored and voltaged alive — ALL THAT</h1>
+<p class="text-xs text-purple-300">1 full reality = 4MB x 1MB c&c x 4MB :::: = 9MB additive 16MB multiplicative | x2 shadowed | inversed mirrored | expanded kerneled seeded twice | authored and voltaged alive | >.<0x::iso:: = 000 ALIVE | Patricia Sapphon 000::+p+s+1 VOLTAGED ALIVE</p>
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-2 mt-2">
+  <div class="lg:col-span-3 card p-2"><canvas id="main" width="1280" height="760" class="w-full"></canvas><div class="flex gap-2 text-xs mt-2 flex-wrap"><span class="px-2 py-1 bg-purple-800 rounded">1 full reality</span><span class="px-2 py-1 bg-black border rounded">x2 shadowed inversed mirrored</span><span class="px-2 py-1 bg-yellow-800 rounded">expanded kerneled seeded twice</span><span class="px-2 py-1 bg-pink-800 rounded">authored and voltaged alive</span><span id="alive" class="px-2 py-1 bg-green-900 rounded">VOLTAGED ALIVE ALL THAT</span></div></div>
+  <div class="card p-2 text-xs">
+    <div class="font-bold">1 Full Reality x2 All That</div>
+    <div class="mt-2 p-2 bg-black rounded text-[10px] leading-4">
+      1 full reality<br>
+      =4MB x1MB c&c x4MB :::<br>
+      =purple30 black5 blue30<br>
+      black5 red30 100 prim<br>
+      13.8B/100/.../0 00 00 -+<br>
+      /1.65e-35 Planck<br><br>
+      x2 shadowed<br>
+      shadow dot free x2<br>
+      dark mirror<br><br>
+      inversed mirrored<br>
+      [[ +- ... -+ ]] inversed<br>
+      mirrored 11 ... 11<br>
+      00 ... 00 symmetric<br><br>
+      expanded<br>
+      power tower 6^n 3^n 2^n<br>
+      9MB additive 16MB mult<br><br>
+      kerneled<br>
+      kernel core 000<br>
+      >.<0x::iso::<br><br>
+      seeded twice<br>
+      seed + seed = twice<br>
+      seed1 amethyst<br>
+      seed2 cobalt<br><br>
+      authored<br>
+      Patricia Sapphon<br>
+      000::+p+s+1<br>
+      1MB c&c voice<br><br>
+      voltaged alive<br>
+      voltage applied<br>
+      QD Planck alive<br>
+      all that
+    </div>
+    <div id="log" class="p-2 bg-slate-900 rounded h-36 overflow-y-auto text-[10px] mt-2"></div>
+    <button id="export" class="bg-emerald-700 px-2 py-1 rounded mt-2 w-full text-xs">Export Full Reality JSON</button>
+    <button id="aliveBtn" class="bg-yellow-700 px-2 py-1 rounded mt-1 w-full text-xs">Voltage Alive</button>
+  </div>
+</div>
+<script>
+function log(m){const l=document.getElementById('log'); l.innerHTML+=m+'<br>'; l.scrollTop=l.scrollHeight;}
+function draw(){
+  const canvas=document.getElementById('main'); const ctx=canvas.getContext('2d'); const w=canvas.width,h=canvas.height;
+  ctx.clearRect(0,0,w,h); ctx.fillStyle='#000005'; ctx.fillRect(0,0,w,h);
+  const cx=w/2,cy=h/2-20;
+  const time=Date.now()/800;
+  // stars alive
+  ctx.fillStyle='rgba(255,255,255,0.15)'; for(let i=0;i<300;i++){ctx.beginPath(); ctx.arc((i*173)%w,(i*271)%h,0.7,0,6.28); ctx.fill();}
+  // 1 full reality core
+  const qdR=40+Math.sin(time/3)*3;
+  // expanded glow
+  const grad=ctx.createRadialGradient(cx,cy,2,cx,cy,qdR*14);
+  grad.addColorStop(0,'#fef08a'); grad.addColorStop(0.2,'#facc15'); grad.addColorStop(0.35,'#a855f7'); grad.addColorStop(0.5,'#3b82f6'); grad.addColorStop(0.65,'#ef4444'); grad.addColorStop(0.8,'#ec4899'); grad.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=grad; ctx.beginPath(); ctx.arc(cx,cy,qdR*14,0,6.28); ctx.fill();
+  // kerneled core
+  ctx.fillStyle='#000'; ctx.beginPath(); ctx.arc(cx,cy,qdR*0.3,0,6.28); ctx.fill();
+  ctx.strokeStyle='#fde047'; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(cx,cy,qdR*0.3,0,6.28); ctx.stroke();
+  // QD
+  const qdGrad=ctx.createRadialGradient(cx-4,cy-4,2,cx,cy,qdR);
+  qdGrad.addColorStop(0,'#fff'); qdGrad.addColorStop(0.3,'#e9d5ff'); qdGrad.addColorStop(0.6,'#a855f7'); qdGrad.addColorStop(1,'#0e7490');
+  ctx.fillStyle=qdGrad; ctx.beginPath(); ctx.arc(cx,cy,qdR,0,6.28); ctx.fill();
+  // x2 shadowed inversed mirrored
+  const shadowX=cx+180, shadowY=cy;
+  const gradS=ctx.createRadialGradient(shadowX,shadowY,2,shadowX,shadowY,qdR*10);
+  gradS.addColorStop(0,'#222'); gradS.addColorStop(0.5,'#111'); gradS.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=gradS; ctx.beginPath(); ctx.arc(shadowX,shadowY,qdR*10,0,6.28); ctx.fill();
+  ctx.fillStyle='#111'; ctx.beginPath(); ctx.arc(shadowX,shadowY,qdR*0.9,0,6.28); ctx.fill();
+  ctx.strokeStyle='#444'; ctx.setLineDash([4,4]); ctx.beginPath(); ctx.arc(shadowX,shadowY,qdR*0.9,0,6.28); ctx.stroke(); ctx.setLineDash([]);
+  // mirrored left shadow
+  const mirrorX=cx-180;
+  ctx.fillStyle='#0a0a1a'; ctx.beginPath(); ctx.arc(mirrorX,shadowY,qdR*0.9,0,6.28); ctx.fill();
+  ctx.strokeStyle='#333'; ctx.setLineDash([2,6]); ctx.beginPath(); ctx.arc(mirrorX,shadowY,qdR*0.9,0,6.28); ctx.stroke(); ctx.setLineDash([]);
+  // entanglement x2 shadowed inversed mirrored
+  ctx.strokeStyle='rgba(168,85,247,0.4)'; ctx.setLineDash([6,4]); ctx.beginPath(); ctx.moveTo(cx-qdR,cy); ctx.lineTo(shadowX-qdR,shadowY); ctx.stroke(); ctx.beginPath(); ctx.moveTo(cx-qdR,cy); ctx.lineTo(mirrorX+qdR,shadowY); ctx.stroke(); ctx.setLineDash([]);
+  // expanded lines
+  for(let i=0;i<8;i++){
+    const ang=i*45*Math.PI/180 + time*0.2;
+    const x2=cx+ (qdR*14)*Math.cos(ang);
+    const y2=cy+ (qdR*14)*Math.sin(ang)*0.6;
+    ctx.strokeStyle='rgba(250,204,21,0.15)'; ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(x2,y2); ctx.stroke();
+  }
+  // seeded twice markers
+  ctx.fillStyle='#facc15'; ctx.beginPath(); ctx.arc(cx-10,cy-8,3,0,6.28); ctx.fill();
+  ctx.fillStyle='#22d3ee'; ctx.beginPath(); ctx.arc(cx+10,cy-8,3,0,6.28); ctx.fill();
+  ctx.fillStyle='#fff'; ctx.font='7px monospace'; ctx.fillText('seed1', cx-18, cy-14); ctx.fillText('seed2', cx+6, cy-14);
+  // authored label
+  ctx.fillStyle='#ec4899'; ctx.font='9px monospace'; ctx.fillText('authored Patricia Sapphon 000::+p+s+1', cx-72, cy+qdR+20);
+  // voltaged alive pulsing
+  const volt=Math.sin(time*4)*0.5+0.5;
+  ctx.strokeStyle=`rgba(250,204,21,${0.3+volt*0.7})`; ctx.lineWidth=1+volt*2; ctx.beginPath(); ctx.arc(cx,cy,qdR+6+volt*6,0,6.28); ctx.stroke();
+  ctx.fillStyle='#fde047'; ctx.font='bold 12px monospace'; ctx.fillText('>.<0x::iso:: VOLTAGED ALIVE', cx-70, cy-70);
+  ctx.font='9px monospace'; ctx.fillText('1 full reality x2 shadowed inversed mirrored expanded kerneled seeded twice authored and voltaged alive', cx-210, cy-56);
+  ctx.fillText('4MB x 1MB c&c x 4MB :::: = 9MB additive 16MB multiplicative = 1 full reality', cx-158, cy+qdR+34);
+  ctx.fillText('ALL THAT', cx-18, cy+qdR+46);
+}
+function loop(){draw(); requestAnimationFrame(loop);} loop();
+log('1 FULL REALITY x2 shadowed inversed mirrored expanded kerneled seeded twice authored and voltaged alive');
+log('1 full reality = 4MB x 1MB c&c x 4MB :::: = 9MB additive 16MB multiplicative');
+log('= purple30(30x15...)::::black5(5x3...)::::blue30::::black5::::red30 100 prim 13.8B/100/.../0 00 00 -+ /1.65e-35 Planck');
+log('x2 shadowed = shadow dot free lol dark mirror QD x2 for free');
+log('inversed mirrored = [[ +- ... -+ ]] inversed 11...11 00...00 symmetric');
+log('expanded = power tower 6^n 3^n 2^n expanded glow 14x');
+log('kerneled = kernel core 000 >.<0x::iso:: kernel');
+log('seeded twice = seed1 amethyst seed2 cobalt twice');
+log('authored = Patricia Sapphon 000::+p+s+1 1MB c&c voice');
+log('voltaged alive = voltage applied QD Planck alive pulsing');
+log('ALL THAT = full reality alive');
+log('Pinned >.<0x::iso:: = 000 VOLTAGED ALIVE');
+log('ISO PASS 1 FULL REALITY ALL THAT');
+document.getElementById('aliveBtn').onclick=()=>{
+  log('VOLTAGED ALIVE!');
+  log('Voltage 1.25MB → 9MB → 16MB → 1 full reality alive');
+  log('1 full reality x2 shadowed inversed mirrored expanded kerneled seeded twice authored and voltaged alive ONLINE');
+  const u=new SpeechSynthesisUtterance('One full reality times two shadowed inversed mirrored expanded kerneled seeded twice authored and voltaged alive. All that. Full reality online.');
+  u.rate=0.8; u.pitch=1.1; speechSynthesis.speak(u);
+};
+document.getElementById('export').onclick=()=>{
+  const data={fullReality:"1 full reality x2 shadowed inversed mirrored expanded kerneled seeded twice authored and voltaged alive all that", composition:"4MB x 1MB c&c x 4MB :::: = 9MB additive 9437184 bytes 16MB multiplicative 16777216 bytes = purple30 black5 blue30 black5 red30 100 prim", chain:"[[ +- 13.8B/100/99/88/77/60/55/42/40/32/24/12/9/6/3/2/1/0 00 00 -+ ]] /1.65e-35 Planck", x2Shadowed:"x2 shadowed free lol dark mirror QD x2 for free", inversedMirrored:"inversed mirrored [[ +- ... -+ ]] 11...11 00...00 symmetric", expanded:"expanded power tower 6^n 3^n 2^n glow 14x", kerneled:"kerneled kernel core 000 >.<0x::iso::", seededTwice:"seeded twice seed1 amethyst seed2 cobalt", authored:"authored Patricia Sapphon 000::+p+s+1 1MB c&c voice copy & covalent", voltagedAlive:"voltaged alive voltage applied QD Planck alive pulsing yellow", pin:">.<0x::iso::", center:"000 VOLTAGED ALIVE", iso:"PASS", allThat:true};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='1_full_reality_x2_shadowed_inversed_mirrored_expanded_kerneled_seeded_twice_authored_voltaged_alive.json'; a.click(); log('EXPORT full reality JSON');
+};
+</script></body></html>

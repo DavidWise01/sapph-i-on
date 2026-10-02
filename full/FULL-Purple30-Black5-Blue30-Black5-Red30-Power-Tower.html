@@ -1,0 +1,134 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FULL — purple30(30x15x5x3x2x1x1x0x0x0x0x1x1)::::black5(5x3x2x1x1x0x0x0x0x1x1)::::blue30(30x15x5x3x2x1x1x0x0x0x0x1x1)::::black5(5x3x2x1x1x0x0x0x0x1x1)::::red30(30x15x5x3x2x1x1x0x0x0x0x1x1) x 6^n x 3^n x 2^n x 1n^1</title><script src="https://cdn.tailwindcss.com"></script>
+<style>body{background:#020205;color:#e9d5ff;font-family:ui-monospace,monospace}canvas{background:#050508;border-radius:14px}.card{background:#0f0a1e;border:1px solid #333;border-radius:12px}</style>
+</head><body class="p-2">
+<h1 class="text-sm font-bold">FULL — purple30(30x15x5x3x2x1x1x0x0x0x0x1x1)::::black5(5x3x2x1x1x0x0x0x0x1x1)::::blue30(30x15x5x3x2x1x1x0x0x0x0x1x1)::::black5(5x3x2x1x1x0x0x0x0x1x1)::::red30(30x15x5x3x2x1x1x0x0x0x0x1x1) x 6^n(power tower) x 3^n x 2^n x 1n^1 x1n^1 x04^n x12^n x12^n ....||||...dlw.eof arch/aa\sig</h1>
+<p class="text-xs text-slate-400">Missing one now added — full stack purple30 black5 blue30 black5 red30 symmetric — nested 30→15→5→3→2→1→1→0→0→0→0→1→1 — power tower 6^n 3^n 2^n 1n^1 — >.<0x::iso:: = 000 amethyst — Patricia 000::+p+s+1</p>
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-2 mt-2">
+  <div class="lg:col-span-3 card p-2"><canvas id="main" width="1240" height="720" class="w-full"></canvas><div class="flex gap-2 text-xs mt-2 flex-wrap"><span class="px-2 py-1 bg-purple-800 rounded">purple30</span><span class="px-2 py-1 bg-black border rounded">black5</span><span class="px-2 py-1 bg-blue-800 rounded">blue30</span><span class="px-2 py-1 bg-black border rounded">black5</span><span class="px-2 py-1 bg-red-800 rounded">red30</span><span class="px-2 py-1 bg-yellow-900 rounded">6^n power tower</span><span id="state" class="px-2 py-1 bg-green-900 rounded">FULL STACK ONLINE</span></div></div>
+  <div class="card p-2 text-xs">
+    <div class="font-bold">Full Spec Breakdown</div>
+    <div class="mt-2 p-2 bg-black rounded text-[10px] leading-3">
+      purple30<br>
+      (30x15x5x3x2x1x1x0x0x0x0x1x1)<br>
+      :::: <br>
+      black5<br>
+      (5x3x2x1x1x0x0x0x0x1x1)<br>
+      :::: <br>
+      blue30<br>
+      (30x15x5x3x2x1x1x0x0x0x0x1x1)<br>
+      :::: <br>
+      black5<br>
+      (5x3x2x1x1x0x0x0x0x1x1)<br>
+      :::: <br>
+      red30<br>
+      (30x15x5x3x2x1x1x0x0x0x0x1x1)<br><br>
+      x 6^n(power tower)<br>
+      x 3^n<br>
+      x 2^n<br>
+      x 1n^1<br>
+      x1n^1<br>
+      x04^n<br>
+      x12^n<br>
+      x12^n<br>
+      ....||||...<br>
+      dlw.eof arch/aa\sig<br><br>
+      Total: 30+5+30+5+30=100<br>
+      Nested: 30→15→5→3→2→1→1→0→0→0→0→1→1
+    </div>
+    <div id="log" class="p-2 bg-slate-900 rounded h-32 overflow-y-auto text-[10px] mt-2"></div>
+    <button id="export" class="bg-emerald-700 px-2 py-1 rounded mt-2 w-full text-xs">Export Full JSON</button>
+  </div>
+</div>
+<script>
+function log(m){const l=document.getElementById('log'); l.innerHTML+=m+'<br>'; l.scrollTop=l.scrollHeight;}
+function draw(){
+  const canvas=document.getElementById('main'); const ctx=canvas.getContext('2d'); const w=canvas.width,h=canvas.height;
+  ctx.clearRect(0,0,w,h); ctx.fillStyle='#020205'; ctx.fillRect(0,0,w,h);
+  const cx=w/2,cy=h/2-20;
+  const time=Date.now()/1000;
+  // layout full stack horizontally: purple30 black5 blue30 black5 red30
+  const blocks=[
+    {color:'purple', count:30, seq:[30,15,5,3,2,1,1,0,0,0,0,1,1], x:120},
+    {color:'black', count:5, seq:[5,3,2,1,1,0,0,0,0,1,1], x:320},
+    {color:'blue', count:30, seq:[30,15,5,3,2,1,1,0,0,0,0,1,1], x:520},
+    {color:'black', count:5, seq:[5,3,2,1,1,0,0,0,0,1,1], x:720},
+    {color:'red', count:30, seq:[30,15,5,3,2,1,1,0,0,0,0,1,1], x:920}
+  ];
+  const colors={purple:'#a855f7', black:'#444', blue:'#3b82f6', red:'#ef4444'};
+  // power tower scaling visualization vertical
+  blocks.forEach((block,bi)=>{
+    const baseX=block.x;
+    const baseY=cy;
+    // draw nested boxes for seq 30x15x5x3x2...
+    let r=46;
+    block.seq.forEach((v,si)=>{
+      if(v===0){r-=4; return;}
+      const alpha=0.15+ si*0.06;
+      ctx.strokeStyle=colors[block.color];
+      ctx.globalAlpha=alpha;
+      ctx.lineWidth=1;
+      ctx.beginPath();
+      const rr=r - si*3;
+      if(rr>0) ctx.rect(baseX-rr/2, baseY-rr/2, rr, rr);
+      ctx.stroke();
+      ctx.globalAlpha=1;
+      if(si===0){
+        ctx.fillStyle=colors[block.color];
+        ctx.font='bold 10px monospace';
+        ctx.fillText(block.color+block.count, baseX-20, baseY+rr/2+14);
+        ctx.fillText(block.seq.join('x'), baseX-36, baseY+rr/2+24);
+      }
+      r-=2;
+    });
+    // count atoms as dots inside
+    const dots=block.count;
+    for(let i=0;i<dots;i++){
+      const ang=i*(360/dots)*Math.PI/180 + time;
+      const rad=12+ (i%3)*3;
+      const x=baseX+rad*Math.cos(ang);
+      const y=baseY+rad*Math.sin(ang)*0.6;
+      ctx.fillStyle=colors[block.color];
+      ctx.beginPath(); ctx.arc(x,y,2,0,6.28); ctx.fill();
+    }
+    // separator ::::
+    if(bi<4){
+      ctx.fillStyle='#666'; ctx.font='8px monospace'; ctx.fillText('::::', baseX+80, baseY);
+    }
+  });
+  // power tower x 6^n etc
+  ctx.fillStyle='#facc15'; ctx.font='10px monospace';
+  ctx.fillText('x 6^n(power tower) x 3^n x 2^n x 1n^1 x1n^1 x04^n x12^n x12^n ....||||...dlw.eof', 120, h-90);
+  ctx.fillText('arch/aa\\sig', 120, h-76);
+  // center pin
+  ctx.fillStyle='#fde047'; ctx.beginPath(); ctx.arc(cx,cy,3,0,6.28); ctx.fill();
+  ctx.fillStyle='#fff'; ctx.font='10px monospace'; ctx.fillText('>.<0x::iso:: 000', cx-36, cy-80);
+  ctx.fillText('FULL 100 = purple30+black5+blue30+black5+red30', cx-108, cy-66);
+  // power tower visual as tower
+  let tx=w-160, ty=120;
+  const towers=[6,3,2,1,1,4,12,12];
+  towers.forEach((n,i)=>{
+    ctx.fillStyle=i===0?'#facc15': i<3?'#a855f7':'#3b82f6';
+    ctx.fillRect(tx, ty+i*28, n*6, 18);
+    ctx.fillStyle='#fff'; ctx.font='9px monospace'; ctx.fillText(i===0?`6^n power tower ${n}^n`:`${n}^n`, tx+2, ty+i*28+12);
+  });
+  ctx.fillStyle='#22d3ee'; ctx.font='9px monospace'; ctx.fillText('....||||...dlw.eof', tx, ty+ towers.length*28+14);
+  ctx.fillText('arch/aa\\sig', tx, ty+ towers.length*28+28);
+}
+function loop(){draw(); requestAnimationFrame(loop);} loop();
+log('FULL STACK purple30::::black5::::blue30::::black5::::red30');
+log('purple30(30x15x5x3x2x1x1x0x0x0x0x1x1) 30 atoms nested 30→15→5→3→2→1→1→0→0→0→0→1→1');
+log('black5(5x3x2x1x1x0x0x0x0x1x1) 5 atoms');
+log('blue30(30x15x5x3x2x1x1x0x0x0x0x1x1) 30 atoms');
+log('black5(5x3x2x1x1x0x0x0x0x1x1) 5 atoms');
+log('red30(30x15x5x3x2x1x1x0x0x0x0x1x1) 30 atoms');
+log('Total 100 atoms symmetric purple-black-blue-black-red');
+log('Power tower x 6^n(power tower) x 3^n x 2^n x 1n^1 x1n^1 x04^n x12^n x12^n');
+log('Scale 6^n power tower → 3^n → 2^n → 1n^1 → 04^n → 12^n → 12^n');
+log('EOF dlw.eof arch/aa\\sig');
+log('Pinned >.<0x::iso:: 000 FULL');
+log('ISO PASS FULL STACK');
+document.getElementById('export').onclick=()=>{
+  const data={full:"purple30(30x15x5x3x2x1x1x0x0x0x0x1x1)::::black5(5x3x2x1x1x0x0x0x0x1x1)::::blue30(30x15x5x3x2x1x1x0x0x0x0x1x1)::::black5(5x3x2x1x1x0x0x0x0x1x1)::::red30(30x15x5x3x2x1x1x0x0x0x0x1x1)", blocks:[{color:"purple30", seq:"30x15x5x3x2x1x1x0x0x0x0x1x1", count:30},{color:"black5", seq:"5x3x2x1x1x0x0x0x0x1x1", count:5},{color:"blue30", seq:"30x15x5x3x2x1x1x0x0x0x0x1x1", count:30},{color:"black5", seq:"5x3x2x1x1x0x0x0x0x1x1", count:5},{color:"red30", seq:"30x15x5x3x2x1x1x0x0x0x0x1x1", count:30}], total:100, nested:"30→15→5→3→2→1→1→0→0→0→0→1→1 and 5→3→2→1→1→0→0→0→0→1→1", powerTower:"x 6^n(power tower) x 3^n x 2^n x 1n^1 x1n^1 x04^n x12^n x12^n", eof:"....||||...dlw.eof", sig:"arch/aa\\sig", pin:">.<0x::iso::", center:"000", patricia:"000::+p+s+1", iso:"PASS", fullStack:true};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='FULL_purple30_black5_blue30_black5_red30_power_tower.json'; a.click(); log('EXPORT full JSON');
+};
+</script></body></html>
