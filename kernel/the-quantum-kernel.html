@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Quantum Kernel — SaPpH{{i}}on</title>
+<style>
+  :root { --ink:#241424; --dim:#5c4d62; --accent:#9a3412; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; color:var(--ink);
+    font:16px/1.5 "Segoe UI", ui-sans-serif, sans-serif;
+    background:
+      radial-gradient(800px 420px at 0% 0%, #fde68a, transparent 60%),
+      radial-gradient(700px 420px at 100% 0%, #e9d5ff, transparent 55%),
+      linear-gradient(165deg, #fff7ed, #ffedd5 46%, #fae8ff);
+    background-color:#fff7ed; min-height:100vh; overflow-wrap:anywhere;
+  }
+  a { color:var(--accent); overflow-wrap:anywhere; }
+  header, main, footer { width:min(980px, calc(100% - 28px)); margin:0 auto; min-width:0; }
+  header { padding:22px 0 0; }
+  .src, .mono { font:13px/1.45 ui-monospace, Consolas, monospace; color:var(--dim); word-break:break-word; }
+  h1 { margin:8px 0 0; font-size:clamp(32px, 6vw, 52px); letter-spacing:.02em; }
+  .kicker { letter-spacing:.16em; font-size:12px; color:var(--accent); font-weight:700; }
+  .stage { background:#fffaf3; border:1px solid rgba(36,20,36,.14); border-radius:18px; padding:14px; margin:14px 0; }
+  canvas { width:100%; height:auto; display:block; border-radius:14px; }
+  .head { font:18px/1.3 ui-monospace, Consolas, monospace; letter-spacing:.06em; margin:8px 0 0; overflow-wrap:anywhere; }
+  .row { display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin:8px 0; max-width:100%; }
+  .chip {
+    min-width:42px; padding:4px 6px 3px; border-radius:10px; background:#fff;
+    border:1px solid rgba(36,20,36,.12); text-align:center;
+  }
+  .chip b { display:block; font-size:13px; }
+  .chip i { display:block; font-style:normal; font:10px ui-monospace, Consolas, monospace; color:var(--dim); }
+  .stamp { display:inline-block; padding:2px 8px; border-radius:999px; font:11px ui-monospace, Consolas, monospace; color:#fff; }
+  .lit { background:#9a3412; } .amber { background:#7c3aed; } .wall { background:#9d174d; }
+  footer { color:var(--dim); font-size:13px; padding-bottom:28px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="src"><a href="../">SaPpH{{i}}on</a> · <a href="https://github.com/DavidWise01/quantum-dot-vm">DavidWise01/quantum-dot-vm</a> · <a href="https://0root.ai/">0root.ai</a></div>
+  <div class="kicker">CROSS 27</div>
+  <h1>The Quantum Kernel</h1>
+  <p>The quantum stitch from DavidWise01/quantum-dot-vm, a cross of 27 and a rhythm of 5, 0, 0, 5, beside the cube.</p>
+  <p class="head" id="head"></p>
+</header>
+<main>
+  <div class="stage">
+    <canvas id="sky" width="720" height="420" aria-label="Twenty-seven stitches of the quantum kernel, the cross rising to 13 and falling through 0"></canvas>
+    <div class="row" id="chips"></div>
+  </div>
+  <p class="mono" id="card"></p>
+  <p><span class="stamp lit">LIT</span> The cross is 27 long: 1 through 13, then 0, then 13 through 1. Its sum is 182 and the center is 0. The rhythm is 5, 0, 0, 5. Across 27 ticks that rhythm places 13 fives. DOT is (1/3002) times 3002 and equals 1. QUANTUM is 4. Tick 0 sets david to 16 and ai to 160. The stitch is e7. The upper frame is 0000b00000 and the lower frame is 0000e80000. The seed frames are 0000080000 and 0000000000. A base within 1e-12 of an integer flips the low bit. A base that is not that close does not. The lower core is the first byte of sha256 of the previous lower core and the stitch, as two bytes. History holds 27 ticks and drops the oldest on the next one. A failed count throws.</p>
+  <p><span class="stamp amber">AMBER</span> The stitch is the arithmetic in DavidWise01/quantum-dot-vm quantum_api.py, read on 2026-10-02. The page asks GitHub for that repository's name. The kernel writes the string 0=1=0=1 on each tick. That string is recorded here. It is not a proof that 0 equals 1. The attribution file on that repository names CC-BY-ND-4.0. This page reimplements the arithmetic and does not copy the repository files. Private repositories were not read. This page is not one of those 192.</p>
+  <p><span class="stamp wall">WALL</span> No public repository on DavidWise01 was named quantum-kernel on 2026-10-02. The repository index page uses a different tick: david and ai start at 1 and 2 and both increment before the stitch, the rhythm index is the incremented count, the upper core adds the rhythm, and the lower hash is the first byte of sha256 of a text frame joined to the stitch digits. That page's background is black. It was not copied. This page does not publish the FastAPI service or the volume anchor. The walk was already full, so this page is not seated.</p>
+</main>
+<footer>
+  David Lee Wise (ROOT0). Drafted by Grok (xAI) on 2026-10-02.
+  Birth seal 884bbdf05adecd9194d38c3ad21b7c69096cf4c8c3674fd4fef0ab7b063c97d1. One host, <a href="https://davidwise01.github.io/sapph-i-on/kernel/the-quantum-kernel.html">this page</a>.
+  Reference DavidWise01/quantum-dot-vm quantum_api.py.
+</footer>
+<script>
+"use strict";
+var DOT = (1 / 3002) * 3002;
+var QUANTUM = 4;
+var CROSS27 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 0, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+var RHYTHM = [5, 0, 0, 5];
+var AXIOM = "0=1=0=1";
+var REPO = "quantum-dot-vm";
+
+function hex2(n) {
+  var s = (n & 255).toString(16);
+  return s.length === 1 ? "0" + s : s;
+}
+function frameOf(core) {
+  return "0000" + hex2(core) + "0000";
+}
+function quantumStitch(david, ai, step) {
+  var base = (david * QUANTUM * DOT) + ai;
+  var rhythm = RHYTHM[step % 4];
+  var cross = CROSS27[step % 27];
+  var stitch = Math.trunc(base + rhythm + cross) & 255;
+  var near = Math.abs(base - Math.round(base)) < 1e-12;
+  if (near) stitch ^= 1;
+  return { stitch: stitch, base: base, near: near, rhythm: rhythm, cross: cross };
+}
+function syncFaults() {
+  var faults = [];
+  if (CROSS27.length !== 27) faults.push("cross length");
+  var i, sum = 0, expect;
+  for (i = 0; i < 27; i++) {
+    expect = i < 13 ? i + 1 : i === 13 ? 0 : 27 - i;
+    if (CROSS27[i] !== expect) faults.push("cross");
+    if (CROSS27[i] !== CROSS27[26 - i]) faults.push("palindrome");
+    sum += CROSS27[i];
+  }
+  if (sum !== 182) faults.push("cross sum");
+  if (CROSS27[13] !== 0 || CROSS27[0] !== 1 || CROSS27[12] !== 13) faults.push("cross ends");
+  if (RHYTHM.length !== 4 || RHYTHM[0] !== 5 || RHYTHM[1] !== 0 || RHYTHM[2] !== 0 || RHYTHM[3] !== 5) faults.push("rhythm");
+  if (QUANTUM !== 4) faults.push("quantum");
+  if (DOT !== 1) faults.push("dot");
+  if ((1 / 3002) * 3002 !== DOT) faults.push("dot formula");
+  var fives = 0;
+  for (i = 0; i < 27; i++) if (RHYTHM[i % 4] === 5) fives++;
+  if (fives !== 13) faults.push("fives");
+  var far = quantumStitch(1, 0.1, 0);
+  if (far.near || far.stitch !== 10) faults.push("far base");
+  var open = quantumStitch(16, 160, 0);
+  if (!open.near || open.stitch !== 231 || open.rhythm !== 5 || open.cross !== 1) faults.push("tick0 stitch");
+  if (((Math.trunc(224 + 5 + 1) & 255) ^ 1) !== 231) faults.push("xor");
+  return faults;
+}
+async function shaFirst(prev, stitch) {
+  if (!crypto || !crypto.subtle) throw new Error("subtle");
+  var bytes = new Uint8Array([prev & 255, stitch & 255]);
+  var hash = await crypto.subtle.digest("SHA-256", bytes);
+  return new Uint8Array(hash)[0];
+}
+async function runTicks() {
+  var faults = [];
+  var lower = 0;
+  var upper = 0x08;
+  var ticks = [];
+  var t, david, ai, got, nxt, upperVal;
+  if (frameOf(upper) !== "0000080000" || frameOf(lower) !== "0000000000") faults.push("seed");
+  for (t = 0; t < 27; t++) {
+    david = 0x10 + (t % 256);
+    ai = 0xA0 + (t % 256);
+    got = quantumStitch(david, ai, t);
+    nxt = await shaFirst(lower, got.stitch);
+    upperVal = Math.trunc((david * DOT) + (ai * DOT)) & 255;
+    ticks.push({
+      tick: t, david: david, ai: ai, stitch: got.stitch, near: got.near,
+      rhythm: got.rhythm, cross: got.cross, prev: lower, lower: nxt, upper: upperVal,
+      axiom: AXIOM
+    });
+    lower = nxt;
+    upper = upperVal;
+  }
+  if (ticks.length !== 27) faults.push("count");
+  var zero = ticks[0];
+  if (!zero || zero.david !== 16 || zero.ai !== 160 || zero.stitch !== 231 || zero.upper !== 176 || zero.lower !== 232) faults.push("tick0");
+  if (!zero || frameOf(zero.upper) !== "0000b00000" || frameOf(zero.lower) !== "0000e80000") faults.push("tick0 frame");
+  var last = ticks[26];
+  if (!last || last.stitch !== 98 || last.upper !== 228 || last.lower !== 202 || last.cross !== 1) faults.push("tick26");
+  var drawn = 0;
+  ticks.forEach(function (row, i) {
+    if (row.axiom !== AXIOM) faults.push("axiom");
+    if (!row.near) faults.push("near");
+    if (row.rhythm !== RHYTHM[i % 4] || row.cross !== CROSS27[i % 27]) faults.push("step");
+    if (row.upper !== ((row.david + row.ai) & 255)) faults.push("upper");
+    drawn += row.cross;
+  });
+  if (drawn !== 182) faults.push("drawn sum");
+  var hist = ticks.slice();
+  var extra = quantumStitch(0x10 + (27 % 256), 0xA0 + (27 % 256), 27);
+  var extraLower = await shaFirst(lower, extra.stitch);
+  hist.push({ tick: 27, stitch: extra.stitch, lower: extraLower });
+  if (hist.length > 27) hist.shift();
+  if (hist.length !== 27 || hist[0].tick !== 1 || hist[26].tick !== 27) faults.push("cap");
+  if (extra.stitch !== 108 || extraLower !== 207) faults.push("tick27");
+  return { faults: faults, ticks: ticks };
+}
+async function proveRepo() {
+  var faults = [];
+  var meta = null;
+  try {
+    var res = await fetch("https://api.github.com/repos/DavidWise01/" + encodeURIComponent(REPO), {
+      headers: { "Accept": "application/vnd.github+json" },
+      signal: AbortSignal.timeout(15000)
+    });
+    if (!res.ok) faults.push("http " + res.status);
+    else {
+      meta = await res.json();
+      if (!meta || meta.full_name !== "DavidWise01/" + REPO) faults.push("full_name");
+      if (!meta || meta.name !== REPO) faults.push("name");
+      if (!meta || meta.private !== false) faults.push("private");
+      if (!meta || !meta.owner || meta.owner.login !== "DavidWise01") faults.push("owner");
+    }
+  } catch (e) {
+    faults.push("fetch");
+  }
+  return { faults: faults, meta: meta };
+}
+function paintKernel(canvas, ticks) {
+  var ctx = canvas.getContext("2d");
+  var w = canvas.width, h = canvas.height;
+  var counts = { bars: 0, hinge: 0, rhythm5: 0, primary: 0 };
+  var g = ctx.createLinearGradient(0, 0, 0, h);
+  g.addColorStop(0, "hsl(36,92%,78%)");
+  g.addColorStop(0.45, "hsl(268,48%,72%)");
+  g.addColorStop(1, "hsl(190,55%,62%)");
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, w, h);
+  var i, row, x, baseY, bh;
+  for (i = 0; i < ticks.length; i++) {
+    row = ticks[i];
+    x = 36 + i * ((w - 72) / 26);
+    baseY = h * 0.72;
+    if (row.cross === 0) {
+      ctx.fillStyle = "hsl(42,90%,96%)";
+      ctx.beginPath();
+      ctx.arc(x, baseY, 7, 0, Math.PI * 2);
+      ctx.fill();
+      counts.hinge++;
+    } else {
+      bh = 8 + row.cross * 12;
+      ctx.fillStyle = "hsl(" + ((row.stitch * 3) % 360) + ",72%,42%)";
+      ctx.fillRect(x - 6, baseY - bh, 12, bh);
+    }
+    counts.bars++;
+    ctx.fillStyle = row.rhythm === 5 ? "hsl(16,80%,32%)" : "hsla(220,30%,30%,0.35)";
+    ctx.beginPath();
+    ctx.arc(x, baseY + 16, row.rhythm === 5 ? 4 : 2.5, 0, Math.PI * 2);
+    ctx.fill();
+    if (row.rhythm === 5) counts.rhythm5++;
+  }
+  var sun = ctx.createRadialGradient(w * 0.5, h * 0.28, 4, w * 0.5, h * 0.28, 40);
+  sun.addColorStop(0, "hsl(42,100%,92%)");
+  sun.addColorStop(1, "hsla(28,90%,60%,0)");
+  ctx.fillStyle = sun;
+  ctx.beginPath();
+  ctx.arc(w * 0.5, h * 0.28, 40, 0, Math.PI * 2);
+  ctx.fill();
+  counts.primary++;
+  if (counts.bars !== 27 || counts.hinge !== 1 || counts.rhythm5 !== 13 || counts.primary !== 1) {
+    throw new Error("LIT FAIL kernel paint");
+  }
+  return counts;
+}
+function fail(msg) {
+  var card = document.getElementById("card");
+  card.innerHTML = "<span class='stamp wall'>WALL</span> LIT FAIL " + msg;
+  throw new Error("LIT FAIL " + msg);
+}
+var early = syncFaults();
+if (early.length) fail(early.join(", "));
+Promise.all([runTicks(), proveRepo()]).then(function (pair) {
+  var run = pair[0];
+  var repo = pair[1];
+  var faults = run.faults.concat(repo.faults);
+  if (faults.length) fail(faults.join(", "));
+  paintKernel(document.getElementById("sky"), run.ticks);
+  var chips = document.getElementById("chips");
+  run.ticks.forEach(function (row) {
+    var chip = document.createElement("span");
+    chip.className = "chip";
+    var b = document.createElement("b");
+    b.textContent = hex2(row.stitch);
+    var note = document.createElement("i");
+    note.textContent = String(row.cross);
+    chip.appendChild(b);
+    chip.appendChild(note);
+    chips.appendChild(chip);
+  });
+  if (chips.children.length !== 27) fail("chips");
+  var zero = run.ticks[0];
+  document.getElementById("head").textContent = "0000080000  0000000000    tick 0  " + hex2(zero.stitch) + "  " + frameOf(zero.upper) + "  " + frameOf(zero.lower);
+  var name = repo.meta && repo.meta.full_name;
+  document.getElementById("card").innerHTML = "<span class='stamp lit'>LIT</span> " + name + " · cross 27 · rhythm 5 0 0 5 · stitch " + hex2(zero.stitch);
+}).catch(function (err) {
+  var card = document.getElementById("card");
+  if (card && card.textContent.indexOf("LIT FAIL") < 0) {
+    card.innerHTML = "<span class='stamp wall'>WALL</span> " + (err && err.message ? err.message : "kernel");
+  }
+  throw err;
+});
+</script>
+</body>
+</html>
