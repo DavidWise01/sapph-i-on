@@ -306,3 +306,15 @@ Hallway door
 
 
 
+The quantum kernel · 2026-10-02
+
+The walk was full, so this page is not seated. It runs the stitch from DavidWise01/quantum-dot-vm. The cross is 27 long and the rhythm is 5, 0, 0, 5. DOT is (1/3002) times 3002. Tick 0 sets david to 16 and ai to 160. The stitch is e7. The upper frame is 0000b00000 and the lower frame is 0000e80000. The seed frames are 0000080000 and 0000000000. No public repository on DavidWise01 was named quantum-kernel. The repository index page uses a different tick and a black background, and that page was not copied. The galaxy birth seal was not rewritten. The seated count stays 334. This page is not one of those 192.
+
+  commit: fd3720c09163eef1b0481bb4232cf2ccf11c497a
+  message: the quantum kernel, beside the cube
+  file: kernel/the-quantum-kernel.html, 13382 bytes, sha256 641a5cf1e79c23820833325977d4802540c529b1a96bf0f8abe17130035b7394
+  check: node seats 334. The link is kernel/the-quantum-kernel.html. Cell (0,0,4) stays dots/Quantum-Tunneler-Double-J.html. No kernel file is seated. A short hash throws LIT FAIL kernel hash. A wrong cross throws LIT FAIL kernel cross. A wrong rhythm throws LIT FAIL kernel rhythm. The first atmosphere page stayed 11654 bytes, sha256 e04506471234a630b564df897d7367e4a6cc0182862d45ddc07fa7306308c3dc. The fall stayed 13090 bytes, sha256 659f8adb4ace9bbc16c482efe90b108d1fb7147c2dd234698ef9f10fc3ef0116. The first again file stayed 191616 bytes, sha256 95cbf87bd6aba998fa06e051305a8d5c7f748ebe9648dbcd7bbe62c07ff86f64. Chrome showed the door on a background of rgb(243, 239, 231) and the kernel page on rgb(255, 247, 237). The door at innerWidth 1254 opened that cell and did not overflow. At a requested width of 390 Chrome reported innerWidth 444, and the door did not scroll past that window. The kernel page showed 27 chips, stitch e7, and did not overflow at innerWidth 1254 or at innerWidth 390.
+
+Hallway door
+  commit: 7674a5e6e75ea8d617b68e6dcef404c502932575
+  message: name the quantum kernel beside the 7^3 door
