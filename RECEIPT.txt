@@ -318,3 +318,15 @@ The walk was full, so this page is not seated. It runs the stitch from DavidWise
 Hallway door
   commit: 7674a5e6e75ea8d617b68e6dcef404c502932575
   message: name the quantum kernel beside the 7^3 door
+The carry · 2026-10-02
+
+The walk was full, so this page is not seated. The same stitch continues from tick 27 through tick 107. That is 81 ticks. 27 plus 81 is 108. Tick 108 is the next step where the cross slot and the rhythm slot both match tick 0. The stitch there is 03, not e7. Tick 27 stitch is 6c, upper frame 0000e60000, lower frame 0000cf0000. Tick 107 ends with both frames 0000860000. The first kernel page was not rewritten. The galaxy birth seal was not rewritten. The seated count stays 334. This page is not one of those 192.
+
+  commit: 83aed40c7333296b1c39c799b34a0bfe312e4512
+  message: the carry, tick 27 to 107, beside the cube
+  file: kernel/the-carry.html, 14170 bytes, sha256 6043ef40ce1fc99cd06b749f9ee1602344212ddea1d2ae538ca1bebd21ae6076
+  check: node seats 334. The second link is kernel/the-carry.html. Cell (0,0,4) stays dots/Quantum-Tunneler-Double-J.html. No kernel file is seated. A short hash throws LIT FAIL kernel hash. A swapped file throws LIT FAIL kernel order. A wrong start tick throws LIT FAIL carry span. The first kernel page stayed 13382 bytes, sha256 641a5cf1e79c23820833325977d4802540c529b1a96bf0f8abe17130035b7394. The first atmosphere page stayed 11654 bytes, sha256 e04506471234a630b564df897d7367e4a6cc0182862d45ddc07fa7306308c3dc. The fall stayed 13090 bytes, sha256 659f8adb4ace9bbc16c482efe90b108d1fb7147c2dd234698ef9f10fc3ef0116. The first again file stayed 191616 bytes, sha256 95cbf87bd6aba998fa06e051305a8d5c7f748ebe9648dbcd7bbe62c07ff86f64. Chrome showed the door on a background of rgb(243, 239, 231) and the carry on rgb(240, 253, 244). The door at innerWidth 1254 opened that cell and did not overflow. At a requested width of 390 Chrome reported innerWidth 444, and the door did not scroll past that window. The carry showed 81 chips, stitch 6c, and did not overflow at innerWidth 1254 or at innerWidth 390. The first kernel page still showed 27 chips and stitch e7.
+
+Hallway door
+  commit: fca25c5a3b6a60381caa52e6d35426f430efa214
+  message: name the carry beside the 7^3 door
