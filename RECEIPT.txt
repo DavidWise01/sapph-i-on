@@ -456,3 +456,21 @@ Hallway door
   config: sha256:d2997c0e2f78237bbe66673f19ac52211a53500e34bc885d9eee6fae99b48174
   image created: 2026-10-06T20:05:25Z
   deployment imageDigest: sha256:d6259ba4fb5978dee6e5ec13872ada30b4ecd700ca0db10cea143d916c82b97b
+
+Speaker set · 2026-10-06
+
+The walk stayed full at 334. On 2026-10-06 the family whose 24th-newest unused file is most recent is wakaku. After same basenames were collapsed, the 24th file is Wakaku-Speaker-V101-Forest.html, 2026-10-05 at 17:16:04. The newest is Wakaku-Speaker-V125-4u.html, 2026-10-06 at 15:18:35. Every file also says speaker. Speaker is the same 24 files, so it is not a second shelf. The folder is speaker, because wakaku was already used. Next's 24th file is Next-Element-Americium-95-Lyre.html, 2026-10-05 at 16:56:35, so next does not win. Sixteen unseated 24-file shelves are those 384. The asked pages and the oasis proofs are not part of those 384. The bytes were copied unchanged. The copied sphere files were not rewritten. The galaxy birth seal was not rewritten. The seated count stays 334.
+
+  commit: 686771446ae9492b6a3dbe33b3b23d2619bbd0f1
+  message: 24 speaker files, beside the cube
+  file: speaker/Wakaku-Speaker-V125-4u.html, 711100 bytes, sha256 fd2661899e91a3e105aed1e5d504450b642b07723858476d3c7c18dc88325c26
+  check: Local and live Chrome read LIT 24 speaker files, manifest order matches. Oasis, beyond, asked, and one stayed LIT. QUEUE.length stayed 334. No speaker file is seated. The keeper sky summed to 117306 and the iframe stayed hidden. Cell (0,0,3) opened nests/shor_nested.html with sum 109074. The 24th file is 202494 bytes, sha256 f08a4acf044a587984d2cbcd5fc8e3131225d8ca00ee3821a0b905922c381931. All 24 titles are React Artifact and each file has 0 CR. The first one file stayed 179619 bytes. The outer edge stayed 4960 bytes. The Ytterbium file stayed 198080 bytes. Pages build of this commit was created 2026-10-06T20:38:30Z, status built, duration 37628, updated 2026-10-06T20:39:07Z. The door Last-Modified Tue, 06 Oct 2026 20:39:05 GMT, Content-Length 159396. At a requested width of 390 the door still reported scrollWidth 444.
+
+Hallway door
+  commit: 5666a4caa29dc5d69ef40a0d195e7ff38c6ad5d7
+  message: name the speaker set on the 7^3 door
+  railway: efb70fe5-bf7c-4989-bdc0-014e8faf9dad
+  image: sha256:c3af5cf235cfbb3ebaef5219d5a8a8011fedcf79512463bbc1083a1e22ee5780
+  config: sha256:a6de48367721c03c1ad50420c588c97cb26310df4805268b2a83bc660c358e74
+  image created: 2026-10-06T20:39:59Z
+  deployment imageDigest: sha256:e891975c329164919bb948349a9d49928067126d7ec2f9a43f2fb5b5db0083d4
