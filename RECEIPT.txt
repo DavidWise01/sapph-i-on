@@ -405,3 +405,19 @@ The walk was full, so these 24 are not seated. They are the newest unused files 
 Hallway door
   commit: 5f3d90d95819b1429d2233bb953303f1ab6fca2e
   message: name the one set beside the 7^3 door
+
+A world in each sphere · 2026-10-06
+
+The walk stayed full at 334. No Downloads file was copied. The copied sphere files were not rewritten. The galaxy birth seal was not rewritten. Selecting a sphere builds a world into it: seven layers, 343 cells, one keeper. A corner builds one world for each of its three spheres. The door builds one world. That is 359 worlds. The base is 58653. The world sum is that base plus 343 times the sphere key. The door's world at (3,3,3) sums to 117306. The seated count stays 334.
+
+  commit: 4708d825eae8b1b8286b42045d42222b19217547
+  message: a world is built into each sphere
+  check: node proved 359 worlds, distinct keys, and the door sum 117306. Chrome on the live door read that sum, hid the iframe on the keeper, and opened cell (0,0,3) on nests/shor_nested.html with sum 109074. Corner (0,0,0) built three worlds, sums 58653, 176302, and 293951, and opened The Odd Center, The Surface, and The Seal. The one manifest still matched. The first one file stayed 179619 bytes, sha256 88b39a2026733cd1bb607f4f4428f51252d8229a7d31611da470184ee024962c. The first scale file stayed 182245 bytes. The first plus file stayed 177595 bytes. The first full file stayed 193529 bytes. The first evo file stayed 190209 bytes. The first wakaku file stayed 195712 bytes. The carry stayed 14170 bytes. The first kernel page stayed 13382 bytes. The first atmosphere page stayed 11654 bytes. The fall stayed 13090 bytes. The first again file stayed 191616 bytes.
+
+Hallway door
+  commit: 26b0b09b21a2de7ba9729406fb57d765e42a964a
+  message: name the world inside each sphere on the 7^3 door
+  railway: 50ddc48c-ce54-41ec-b8d3-9c8133c5d5ab
+  image: sha256:51f4a05dedac4d52755d10edc98db7270c2b281aca58f20ab697936396834417
+  config: sha256:7704629b1bb4d49a57e27afa352d41c145064526983b6b819621387e6085e78a
+  image created: 2026-10-06T18:17:13Z
