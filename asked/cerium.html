@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>After Cerium — SaPpH{{i}}on</title>
+<style>
+  :root { --ink:#1a1230; --dim:#5c5470; --accent:hsl(50, 62%, 36%); }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; color:var(--ink);
+    font:16px/1.5 "Segoe UI", ui-sans-serif, sans-serif;
+    background:
+      radial-gradient(800px 420px at 0% 0%, color-mix(in srgb, var(--accent) 28%, white), transparent 60%),
+      radial-gradient(700px 420px at 100% 10%, hsl(50, 80%, 82%), transparent 55%),
+      linear-gradient(165deg, #f8f1e4, #f3e8ff 50%, #e7f0ff);
+    background-color:#f7f1e6; min-height:100vh;
+  }
+  a { color:var(--accent); }
+  header, main, footer { width:min(880px, calc(100% - 32px)); margin:0 auto; }
+  header { padding:22px 0 0; }
+  .src, .mono { font:13px/1.45 ui-monospace, Consolas, monospace; color:var(--dim); }
+  h1 { margin:8px 0 0; font-size:clamp(28px, 5vw, 44px); letter-spacing:.03em; }
+  .kicker { letter-spacing:.16em; font-size:12px; color:var(--accent); font-weight:700; }
+  .stage { display:flex; flex-wrap:wrap; gap:10px; align-items:flex-end; background:#fffaf3; border:1px solid rgba(26,18,48,.14); border-radius:18px; padding:14px; margin:14px 0; }
+  .plate { background:#fff; border:1px solid rgba(26,18,48,.08); border-radius:12px; padding:8px; }
+  .stamp { display:inline-block; padding:2px 8px; border-radius:999px; font:11px ui-monospace, Consolas, monospace; color:#fff; }
+  .lit { background:#047857; } .amber { background:#b45309; } .wall { background:#be185d; }
+  .nav { display:flex; justify-content:space-between; gap:12px; margin:8px 0 18px; flex-wrap:wrap; }
+  .layer { display:grid; grid-template-columns:repeat(7, 14px); gap:2px; }
+  .cell { width:14px; height:14px; border-radius:3px; background:#efe6d6; display:block; }
+  .cell.on { background:var(--accent); }
+  .cell.keep { background:#e8b84a; }
+  footer { color:var(--dim); font-size:13px; padding-bottom:28px; overflow-wrap:anywhere; }
+  .src, .mono, p, a { overflow-wrap:anywhere; }
+</style>
+</head>
+<body>
+<header>
+  <div class="src"><a href="../">SaPpH{{i}}on</a> · asked · sphere 17 of 24 · <a href="https://0root.ai/">0root.ai</a></div>
+  <div class="kicker">ASKED</div>
+  <h1>After Cerium</h1>
+  <p id="lead">After Cerium. This ask&#x27;s world sums to 58653 plus 343 times 16, and the cell is a face.</p>
+</header>
+<main>
+  <div class="nav">
+    <a href="darmstadtium.html">← Darmstadtium</a>
+    <a href="meitnerium.html">Meitnerium →</a>
+  </div>
+  <div class="stage" id="stage"></div>
+  <p class="mono" id="card"></p>
+  <p><span class="stamp lit">LIT</span> On load this page builds the cube of 7 and throws if this ask's count is wrong.</p>
+  <p><span class="stamp amber">AMBER</span> The question is the file <a href="../beyond/Next-Shell-After-Cerium.html">Next-Shell-After-Cerium.html</a>, copied unchanged into beyond/. This page does not read that file. The order is assigned. The door checks the copy.</p>
+  <p><span class="stamp wall">WALL</span> The name Cerium is not a chemical measurement. The answer is the count.</p>
+</main>
+<footer>
+  David Lee Wise (ROOT0). Drafted by Grok (xAI) on 2026-10-06.
+  Birth seal b391c31f6393980f359b53ed1c0d9078dd89fef6dcd3235d577bc4fa3e97fff8. One host, <a href="https://davidwise01.github.io/sapph-i-on/asked/cerium.html">this page</a>.
+</footer>
+<script>
+"use strict";
+function prove() {
+  var KEY = 16;
+  var AX = 2, AY = 2, AZ = 0;
+  var KIND = "face";
+  var detail = "After Cerium. This ask's world sums to 58653 plus 343 times 16, and the cell is a face.";
+  var faults = [];
+  var corners = 0, edges = 0, faces = 0, interior = 0, keeper = 0, n = 0;
+  var base = 0, xyz = 0, cornerKeys = 0;
+  var layers = [0, 0, 0, 0, 0, 0, 0];
+  var seen = {};
+  var zz, yy, xx, exposed, id, slot;
+  for (zz = 0; zz < 7; zz++) for (yy = 0; yy < 7; yy++) for (xx = 0; xx < 7; xx++) {
+    exposed = (xx === 0 || xx === 6 ? 1 : 0) + (yy === 0 || yy === 6 ? 1 : 0) + (zz === 0 || zz === 6 ? 1 : 0);
+    if (exposed === 3) corners++;
+    else if (exposed === 2) edges++;
+    else if (exposed === 1) faces++;
+    else interior++;
+    if (xx === 3 && yy === 3 && zz === 3) keeper++;
+    id = xx + 7 * yy + 49 * zz;
+    slot = xx + "," + yy + "," + zz;
+    if (seen[slot]) faults.push("slot");
+    seen[slot] = 1;
+    base += id;
+    xyz += xx + yy + zz;
+    n++;
+    layers[zz]++;
+    if (exposed === 3) cornerKeys += id;
+  }
+  if (n !== 343) faults.push("cells");
+  if (corners !== 8) faults.push("corners");
+  if (edges !== 60) faults.push("edges");
+  if (faces !== 150) faults.push("faces");
+  if (interior !== 125) faults.push("interior");
+  if (corners + edges + faces !== 218) faults.push("shell");
+  if (7 * 7 * 7 !== 343) faults.push("product");
+  if ((3 + 4) * (3 + 4) * (3 + 4) !== 343) faults.push("digits");
+  if (keeper !== 1) faults.push("keeper");
+  if (base !== 58653) faults.push("base");
+  if (xyz !== 3087) faults.push("xyz");
+  for (var li = 0; li < 7; li++) if (layers[li] !== 49) faults.push("layer");
+  if (343 - 1 - 8 !== 334) faults.push("seated");
+  if (334 + 24 + 1 !== 359) faults.push("worlds");
+  if (cornerKeys !== 1368) faults.push("corner keys");
+  if (58653 + 343 * 171 !== 117306) faults.push("door");
+  if (49 - 24 !== 25) faults.push("unasked");
+  if (KEY < 0 || KEY > 23) faults.push("key range");
+  if (AX + 7 * AY + 49 * AZ !== KEY) faults.push("cell key");
+  var askExposed = (AX === 0 || AX === 6 ? 1 : 0) + (AY === 0 || AY === 6 ? 1 : 0) + (AZ === 0 || AZ === 6 ? 1 : 0);
+  var askKind = askExposed === 3 ? "corner" : askExposed === 2 ? "edge" : askExposed === 1 ? "face" : "inside";
+  if (askKind !== KIND) faults.push("kind");
+  var worldSum = 58653 + 343 * KEY;
+  if (worldSum !== 58653 + 343 * KEY) faults.push("world");
+  if (worldSum !== 58653 + 343 * 16 || KEY !== 16 || KIND !== "face") faults.push("ask");
+  return {
+    faults: faults,
+    detail: detail,
+    hot: AX + "," + AY + "," + AZ,
+    worldSum: worldSum,
+    key: KEY,
+    kind: KIND,
+    lines: [
+      "key " + KEY + " at (" + AX + "," + AY + "," + AZ + ")",
+      "kind " + KIND + ", exposed " + askExposed,
+      "world sum " + worldSum
+    ]
+  };
+}
+var report = prove();
+function el(tag, cls, text) {
+  var node = document.createElement(tag);
+  if (cls) node.className = cls;
+  if (text != null) node.textContent = text;
+  return node;
+}
+function finish(r) {
+  var card = document.getElementById("card");
+  var lead = document.getElementById("lead");
+  var msg = "";
+  if (!r || r.faults.length) msg = (r && r.faults.join(", ")) || "no report";
+  else if (!lead || lead.textContent !== r.detail) msg = "lead";
+  if (msg) {
+    card.textContent = "";
+    card.appendChild(el("span", "stamp wall", "WALL"));
+    card.appendChild(document.createTextNode(" LIT FAIL " + msg));
+    throw new Error("LIT FAIL " + msg);
+  }
+  card.textContent = "";
+  card.appendChild(el("span", "stamp lit", "LIT"));
+  card.appendChild(document.createTextNode(" " + r.detail));
+  draw(r);
+}
+finish(report);
+function draw(r) {
+  var stage = document.getElementById("stage");
+  var set = {};
+  set[r.hot] = 1;
+  var z, y, x, wrap, layer, cls;
+  for (z = 0; z < 7; z++) {
+    wrap = el("div", "plate");
+    wrap.appendChild(el("div", "src", "z=" + z));
+    layer = el("div", "layer");
+    for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+      cls = "cell";
+      if (x === 3 && y === 3 && z === 3) cls = "cell keep";
+      if (set[x + "," + y + "," + z]) cls = "cell on";
+      layer.appendChild(el("i", cls));
+    }
+    wrap.appendChild(layer);
+    stage.appendChild(wrap);
+  }
+  (r.lines || []).forEach(function (line) { stage.appendChild(el("p", "mono", line)); });
+}
+</script>
+</body>
+</html>
