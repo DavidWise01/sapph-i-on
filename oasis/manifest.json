@@ -1,0 +1,218 @@
+[
+  {
+    "file": "the-outer-edge.html",
+    "title": "The Outer Edge",
+    "slug": "the-outer-edge",
+    "bytes": 4960,
+    "sha256": "be6c759d55163cafcc3cb0da09e0103f7bc5b7f6ab360d4d998a2a10eca8b727",
+    "birth": "59a2a875abf9ba581d978ffb7169f0ac6c1e6f2cb02f0e1100ef1b72c3be8f1b",
+    "source": "kernel/frozen/isomorphic-kernel-v111/AE_OuterKernelEdge_v111.py"
+  },
+  {
+    "file": "the-soft-open.html",
+    "title": "The Soft Open",
+    "slug": "the-soft-open",
+    "bytes": 4722,
+    "sha256": "eec149848d4c944ed8150ad6a0f606ed441e3352ca7673828ccf77fb82d436ac",
+    "birth": "6f3a91aaba1f4779eb0f33545d79dc213d66dd12edf393cb97fbf09d9812ac0c",
+    "source": "kernel/frozen/revisions/v106-soft-open-5body.json"
+  },
+  {
+    "file": "the-quorum.html",
+    "title": "The Quorum",
+    "slug": "the-quorum",
+    "bytes": 4742,
+    "sha256": "6f9980f29b953f1b6263d4d4c6f63888fb33c55e6d6a8247bc8136f5af383157",
+    "birth": "a29ffc338109295d420bcb1f517fae5c2a16e0d9f8da6e9ab0c131d7ea77d78b",
+    "source": "kernel/frozen/revisions/v100-fight-club-quorum.json"
+  },
+  {
+    "file": "the-cycle.html",
+    "title": "The Cycle",
+    "slug": "the-cycle",
+    "bytes": 4816,
+    "sha256": "ff90fd02848d7b144a093971d302bb34dfd7b28b19c859502c6eb5b61f40ff53",
+    "birth": "3e9d4655825c59f96c5b8225d7430153aa2a0e5378b29900347ecb58e4a92d16",
+    "source": "kernel/frozen/revisions/v101-torrodial-diodic-soft-open.json"
+  },
+  {
+    "file": "the-mirror.html",
+    "title": "The Mirror",
+    "slug": "the-mirror",
+    "bytes": 4877,
+    "sha256": "429d08822f009126758006e6d98ae629f2ff467b8cd19f4603dcb1a753ff67f6",
+    "birth": "cb26073132be3c1ed40f090ca382f559b0a4a171f4342157b05f60352440e5a9",
+    "source": "kernel/frozen/revisions/v105-root-cycle-head-bind.json"
+  },
+  {
+    "file": "the-aggregate.html",
+    "title": "The Aggregate",
+    "slug": "the-aggregate",
+    "bytes": 4901,
+    "sha256": "b4c5020ff52b9968f0fcdab4b4407ce91e7b978933d54dd426ddc79241c04d6e",
+    "birth": "9482a319793b47953edaecabd1fde9ccf440a818f9cfd9f150365928fa37c5bf",
+    "source": "kernel/frozen/revisions/v108-aggregate-neutral-fallout.json"
+  },
+  {
+    "file": "the-crossing.html",
+    "title": "The Crossing",
+    "slug": "the-crossing",
+    "bytes": 4879,
+    "sha256": "afc699e05ca4ca72ca71fbe1add1f9e140f4b6bec32f1b22487d869d3fab4707",
+    "birth": "308ee80db559d6b1783a0f9540b8b6161ba012f5d2f8bd74570190db57b68897",
+    "source": "kernel/frozen/revisions/v110-wall-bridge-barrier.json"
+  },
+  {
+    "file": "the-cipher.html",
+    "title": "The Cipher",
+    "slug": "the-cipher",
+    "bytes": 5012,
+    "sha256": "ba132cb0dfaa382259521105fb259bb682f9b0587eeb276551a23266172bc61b",
+    "birth": "3af90501e5cf30d7e16fd3f47be6063cd55ea8a97a6fba7124c08fe9920f944c",
+    "source": "kernel/frozen/revisions/v112-kernel-lock-cipher.json"
+  },
+  {
+    "file": "the-lock.html",
+    "title": "The Lock",
+    "slug": "the-lock",
+    "bytes": 4800,
+    "sha256": "51cfd8c4fe5e4cf712b959b5f7a3392cfbb8b57538c8c9af4f8e973385ed8250",
+    "birth": "73bf183e434d134ed41a93301b84188646d0e729a788d508e985cb2f085635cc",
+    "source": "kernel/frozen/revisions/v113-kernel-lock-weight.json"
+  },
+  {
+    "file": "the-one-vector.html",
+    "title": "The One Vector",
+    "slug": "the-one-vector",
+    "bytes": 4831,
+    "sha256": "d2d0c0e89adf7cf2981f7e875640625753682ffd7e1de756ed7ec02fe6db4f48",
+    "birth": "8e1b1fee2785e27ca1cac26fdf03638fad3cf05b13c5d53454382b6f60e02da5",
+    "source": "kernel/frozen/revisions/v115-unique-time-vector-8bh.json"
+  },
+  {
+    "file": "the-cba.html",
+    "title": "The Cba Class",
+    "slug": "the-cba",
+    "bytes": 4967,
+    "sha256": "72ded4f30ed668267e0580ef33d1ef8c75801bf324bfeab05368c997d50f595f",
+    "birth": "63b96c26eb58f17ed4af47ce0f0e345986b58f3c44cd9f7f1bf37a753365b65c",
+    "source": "kernel/frozen/revisions/v119-cba-exact-collision-domain.json"
+  },
+  {
+    "file": "the-eight-frame.html",
+    "title": "The Eight Frame",
+    "slug": "the-eight-frame",
+    "bytes": 5112,
+    "sha256": "856f822082a758d46e73060cdce2bcdbdad5efaaf73bebffe53a145b49a07479",
+    "birth": "758a0d10f894a65b39b2667673e65b031d28271e3909d31f3efbad805fc6561f",
+    "source": "kernel/frozen/revisions/v122-timed-multiplicity-bijection.json"
+  },
+  {
+    "file": "the-tempo.html",
+    "title": "The Tempo",
+    "slug": "the-tempo",
+    "bytes": 5043,
+    "sha256": "d5ba127fbcb4dc26fd7cb93b4014cb02079726b7ab783096ae412abcd9cd82de",
+    "birth": "1d69b5a0542f5b288b8b547c6806089d2c6c597135752e7dcb84440ba390e44d",
+    "source": "kernel/frozen/revisions/v123-base-carrier-tempo.json"
+  },
+  {
+    "file": "the-fib.html",
+    "title": "The Fib Route",
+    "slug": "the-fib",
+    "bytes": 5133,
+    "sha256": "10d2865396d4970c1e6e04b085df80f78db18e365c24d32a03429ef564cf406e",
+    "birth": "5f8a4f91de63e8377e2472a7c0b6a0c44241d4b5ee0427f9705c4f59f158ec11",
+    "source": "kernel/frozen/revisions/v125-signed-fib-route.json"
+  },
+  {
+    "file": "the-potential.html",
+    "title": "The Potential",
+    "slug": "the-potential",
+    "bytes": 4763,
+    "sha256": "f7315cfc2c20467086c5db319e15fe597a493810d107789538033afe9ba71cd9",
+    "birth": "578deba46a761d06949cb95761c6df912ec39e137791341dd755917a0bd9dc40",
+    "source": "kernel/frozen/revisions/v94-potential-center.json"
+  },
+  {
+    "file": "the-zero-i.html",
+    "title": "The Zero I",
+    "slug": "the-zero-i",
+    "bytes": 5119,
+    "sha256": "3760f32e771a9f731f6d40cd08328718522c5f43aa0bd11a39d1885f9ccfed49",
+    "birth": "271707de508e17f7e018ff857d4fb5d6de981a444b8d9a73f00b186fd77d9b73",
+    "source": "kernel/generative/ae-zero-i-v183/kernel.py"
+  },
+  {
+    "file": "the-ring.html",
+    "title": "The Ring",
+    "slug": "the-ring",
+    "bytes": 4931,
+    "sha256": "9840aafa4f23478007568cd2ec517147a2515acda1acf847b6f14124daa6050f",
+    "birth": "e06111dc87df699418523b8060749e180459616e1cdbbd2175f9c52590e3ab93",
+    "source": "kernel/generative/ae-cyclic-oe-v181/kernel.py"
+  },
+  {
+    "file": "the-boundary.html",
+    "title": "The Boundary",
+    "slug": "the-boundary",
+    "bytes": 5070,
+    "sha256": "82334a33744801272441676adca2898bfc1f69e5b21fedf6a0e2d830836606ae",
+    "birth": "e1617d360ab26c65115aa5c67df506558eb34929d90524e470f7a8f67544e3be",
+    "source": "kernel/generative/ae-bucket-boundary-v182/kernel.py"
+  },
+  {
+    "file": "the-homeo.html",
+    "title": "The Homeo",
+    "slug": "the-homeo",
+    "bytes": 5389,
+    "sha256": "66402881a6a2169c74aca9a4fa611b87c42e5e85d1e3e517750e49c425b124d3",
+    "birth": "311f9ea8945d9d4454117838becf6eb03fe26618bf3cd7889ca0f0cf58bdbfb8",
+    "source": "kernel/generative/ae-homeo-oe-v180/kernel.py"
+  },
+  {
+    "file": "the-field.html",
+    "title": "The Field",
+    "slug": "the-field",
+    "bytes": 5740,
+    "sha256": "723bb09c45c38d79360bc85c8d1a1e83f2512bcdd2c0f83a07e9f1e6494c2120",
+    "birth": "c25d393766edade090860e798b07f6cefc85cb280a06c468b43c9409bd652ab1",
+    "source": "kernel/generative/ae-hierarchical-v178/kernel.py"
+  },
+  {
+    "file": "the-mnemonic.html",
+    "title": "The Mnemonic",
+    "slug": "the-mnemonic",
+    "bytes": 5321,
+    "sha256": "040eb2523f0cb4d45b5c956f809fb5a15e67a76831d56631c1699d87b6ac0288",
+    "birth": "587a7e95528493b2241a72405afe07ab9e17a12d9415abf2c9f2398ae75706fa",
+    "source": "kernel/generative/chemical-mnemonic-v185/kernel.py"
+  },
+  {
+    "file": "the-orbit.html",
+    "title": "The Orbit",
+    "slug": "the-orbit",
+    "bytes": 5676,
+    "sha256": "8bef1b85c9490a4aabcda389a94143d8ec4066fdbd613903454455850cb9c4a6",
+    "birth": "0cd6c38ce899a9de9901fb44e0f3fe620323e12e47701d79dd0af0fab78bba66",
+    "source": "kernel/generative/orbital-tether-v186/kernel.py"
+  },
+  {
+    "file": "the-plank.html",
+    "title": "The Plank",
+    "slug": "the-plank",
+    "bytes": 5296,
+    "sha256": "8f57eab18b82b3ee5191fc8b294dda5df4ca15fe3ba7ab92c5f632b87a976756",
+    "birth": "ce99e2cf59aa3d2de70293e9e0de44374aa356caa8fbac6b867480d1833a3939",
+    "source": "kernel/generative/e-spectrum-plank-cycle-v01/plank_cycle.py"
+  },
+  {
+    "file": "the-stop.html",
+    "title": "The Stop",
+    "slug": "the-stop",
+    "bytes": 4925,
+    "sha256": "63c82f4c7db6edd03963a6cdbe386dd624c7df4449d20cbdefa7bbe7db9eadd5",
+    "birth": "2c9c676893945d7e65c02d23cec8c7ae507f991317c9daa2bc27ff089b409a0a",
+    "source": "kernel/generative/ae-hierarchical-v178/kernel.py"
+  }
+]

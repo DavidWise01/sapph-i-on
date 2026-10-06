@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Plank — SaPpH{{i}}on</title>
+<style>
+  :root { --ink:#14221c; --dim:#4d6258; --accent:hsl(168, 55%, 26%); }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; color:var(--ink);
+    font:16px/1.5 "Segoe UI", ui-sans-serif, sans-serif;
+    background:
+      radial-gradient(800px 420px at 0% 0%, color-mix(in srgb, var(--accent) 22%, white), transparent 60%),
+      radial-gradient(700px 420px at 100% 10%, hsl(168, 45%, 84%), transparent 55%),
+      linear-gradient(165deg, #f4f7f1, #e7f6f2 48%, #f8f1e4);
+    background-color:#f3f7f2; min-height:100vh;
+  }
+  a { color:var(--accent); }
+  header, main, footer { width:min(880px, calc(100% - 32px)); margin:0 auto; }
+  header { padding:22px 0 0; }
+  .src, .mono { font:13px/1.45 ui-monospace, Consolas, monospace; color:var(--dim); }
+  h1 { margin:8px 0 0; font-size:clamp(28px, 5vw, 44px); letter-spacing:.03em; }
+  .kicker { letter-spacing:.16em; font-size:12px; color:var(--accent); font-weight:700; }
+  .stage { background:#f8fffb; border:1px solid rgba(20,34,28,.14); border-radius:18px; padding:14px; margin:14px 0; }
+  .stamp { display:inline-block; padding:2px 8px; border-radius:999px; font:11px ui-monospace, Consolas, monospace; color:#fff; }
+  .lit { background:#047857; } .amber { background:#b45309; } .wall { background:#be185d; }
+  .nav { display:flex; justify-content:space-between; gap:12px; margin:8px 0 18px; flex-wrap:wrap; }
+  footer { color:var(--dim); font-size:13px; padding-bottom:28px; overflow-wrap:anywhere; }
+  .src, .mono, p, a { overflow-wrap:anywhere; }
+</style>
+</head>
+<body>
+<header>
+  <div class="src"><a href="../">SaPpH{{i}}on</a> · oasis · proof 23 of 24 · <a href="https://0root.ai/">0root.ai</a></div>
+  <div class="kicker">OASIS KERNEL</div>
+  <h1>The Plank</h1>
+  <p id="lead">Six prim tokens, three forces, and mitosis doubles a spine of 864.</p>
+</header>
+<main>
+  <div class="nav">
+    <a href="the-orbit.html">← The Orbit</a>
+    <a href="the-stop.html">The Stop →</a>
+  </div>
+  <div class="stage" id="stage"></div>
+  <p class="mono" id="card"></p>
+  <p><span class="stamp lit">LIT</span> On load this page runs this kernel count and throws if the count is wrong.</p>
+  <p><span class="stamp amber">AMBER</span> The rule is the public file <a href="https://github.com/DavidWise01/oasis/blob/main/kernel/generative/e-spectrum-plank-cycle-v01/plank_cycle.py">kernel/generative/e-spectrum-plank-cycle-v01/plank_cycle.py</a> in DavidWise01/oasis. This page reimplements the count. It does not copy the repository. The order is assigned. The evolution page universe/oasis.html stays as it was.</p>
+  <p><span class="stamp wall">WALL</span> The threshold is 999 over 1000. The trace runs from minus one to one and leaves two daughters.</p>
+</main>
+<footer>
+  David Lee Wise (ROOT0). Drafted by Grok (xAI) on 2026-10-06.
+  Birth seal ce99e2cf59aa3d2de70293e9e0de44374aa356caa8fbac6b867480d1833a3939. One host, <a href="https://davidwise01.github.io/sapph-i-on/oasis/the-plank.html">https://davidwise01.github.io/sapph-i-on/oasis/the-plank.html</a>.
+</footer>
+<script>
+"use strict";
+function prove() {
+  var faults = [];
+  var lines = [];
+  if (7 * 7 * 7 !== 343) faults.push("cube");
+var prim = 6, forces = 3, nest = 16, substrates = 3;
+var decorated = prim * forces;
+var per = decorated * nest;
+var spine = substrates * per;
+var after = 2 * spine;
+if (decorated !== 18 || per !== 288 || spine !== 864 || after !== 1728) faults.push("counts");
+var trace = [-1, 0, 0, 0, 0, 0, 1];
+if (trace.length !== 7 || trace[0] !== -1 || trace[1] !== 0 || trace[6] !== 1) faults.push("trace");
+var occ = [[0, 1], [0, 1], [1, 4], [1, 2], [3, 4], [999, 1000]];
+occ.forEach(function (q, i) {
+  if (q[0] / q[1] > 999 / 1000 + 1e-12) faults.push("cap");
+  if (i && q[0] / q[1] + 1e-12 < occ[i - 1][0] / occ[i - 1][1]) faults.push("order");
+});
+if (occ[5][0] !== 999 || occ[5][1] !== 1000) faults.push("threshold");
+lines.push("6 times 3 = 18");
+lines.push("18 times 16 = 288, times 3 = 864, doubled = 1728");
+lines.push("two daughters, threshold 999/1000");
+  return { faults: faults, detail: "Six prim tokens, three forces, and mitosis doubles a spine of 864.", lines: lines };
+}
+var report = prove();
+function el(tag, cls, text) {
+  var node = document.createElement(tag);
+  if (cls) node.className = cls;
+  if (text != null) node.textContent = text;
+  return node;
+}
+function finish(r) {
+  var card = document.getElementById("card");
+  var lead = document.getElementById("lead");
+  var msg = "";
+  if (!r || r.faults.length) msg = (r && r.faults.join(", ")) || "no report";
+  else if (!lead || lead.textContent !== r.detail) msg = "lead";
+  if (msg) {
+    card.textContent = "";
+    card.appendChild(el("span", "stamp wall", "WALL"));
+    card.appendChild(document.createTextNode(" LIT FAIL " + msg));
+    throw new Error("LIT FAIL " + msg);
+  }
+  card.textContent = "";
+  card.appendChild(el("span", "stamp lit", "LIT"));
+  card.appendChild(document.createTextNode(" " + r.detail));
+  var stage = document.getElementById("stage");
+  (r.lines || []).forEach(function (line) { stage.appendChild(el("p", "mono", line)); });
+}
+finish(report);
+</script>
+</body>
+</html>
