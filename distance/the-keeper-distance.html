@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Keeper Distance — SaPpH{{i}}on</title>
+<style>
+  :root { --ink:#24160f; --dim:#6a5348; --accent:#9a3412; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; color:var(--ink);
+    font:16px/1.5 "Segoe UI", ui-sans-serif, sans-serif;
+    background:
+      radial-gradient(820px 440px at 0% 0%, #fde68a, transparent 62%),
+      radial-gradient(680px 420px at 100% 8%, #e9d5ff, transparent 56%),
+      linear-gradient(165deg, #fff7ed, #ffedd5 48%, #fae8ff);
+    background-color:#fff7ed; min-height:100vh;
+  }
+  a { color:var(--accent); }
+  header, main, footer { width:min(880px, calc(100% - 32px)); margin:0 auto; }
+  header { padding:22px 0 0; }
+  .src, .mono { font:13px/1.45 ui-monospace, Consolas, monospace; color:var(--dim); }
+  h1 { margin:8px 0 0; font-size:clamp(28px, 5vw, 46px); letter-spacing:.03em; }
+  .kicker { letter-spacing:.16em; font-size:12px; color:var(--accent); font-weight:700; }
+  .stage { background:#fffaf3; border:1px solid rgba(36,22,15,.14); border-radius:18px; padding:12px; margin:14px 0; }
+  canvas { display:block; width:100%; height:auto; border-radius:12px; background:#fff6ea; }
+  .row { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+  .chip { min-width:52px; padding:4px 6px 3px; border-radius:10px; background:#fff; border:1px solid rgba(36,22,15,.12); text-align:center; }
+  .chip b { display:block; font-size:14px; }
+  .chip i { display:block; font-style:normal; font:10px ui-monospace, Consolas, monospace; color:var(--dim); }
+  .stamp { display:inline-block; padding:2px 8px; border-radius:999px; font:11px ui-monospace, Consolas, monospace; color:#fff; }
+  .lit { background:#047857; } .amber { background:#b45309; } .wall { background:#be185d; }
+  footer { color:var(--dim); font-size:13px; padding-bottom:28px; overflow-wrap:anywhere; }
+  .src, .mono, p, a { overflow-wrap:anywhere; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="src"><a href="../">SaPpH{{i}}on</a> · distance · <a href="https://0root.ai/">0root.ai</a></div>
+  <div class="kicker">SHELLS 0 THROUGH 9</div>
+  <h1>The Keeper Distance</h1>
+  <p id="lead">Each cell's steps to the keeper at (3,3,3). Ten shells, 0 through 9, sum to 343.</p>
+</header>
+<main>
+  <div class="stage">
+    <canvas id="stage" width="880" height="520" aria-label="Seven layers of the cube of 7, each cell colored by its steps to the keeper"></canvas>
+    <div class="row" id="chips"></div>
+  </div>
+  <p class="mono" id="card"></p>
+  <p><span class="stamp lit">LIT</span> A cell at (x, y, z), with each address from 0 through 6, is |x−3| + |y−3| + |z−3| steps from the keeper at (3,3,3). One axis sums to 12. Forty-nine lines on that axis, and three axes, are 3 × 49 × 12 = 1764. The walk of all 343 cells sums to the same 1764. The ten shells are 1, 6, 18, 38, 60, 72, 68, 48, 24, and 8. They sum to 343. Shell 0 is the keeper. Shell 9 is the eight corners. 343 minus 8 minus 1 is 334. A failed count throws.</p>
+  <p><span class="stamp amber">AMBER</span> The distance is the assigned taxicab on the cube's integer addresses. The shell order is that count. No Downloads file was copied. The page does not read another sphere. This page is not one of those 696.</p>
+  <p><span class="stamp wall">WALL</span> The count is arithmetic on addresses. It does not measure a road, a body, or authority. The walk was already full, so this page is not seated. A passing check is the shell count.</p>
+</main>
+<footer>
+  David Lee Wise (ROOT0). Drafted by Grok (xAI) on 2026-10-07.
+  Birth seal 797c003df4ebfb8e1f4c86f11bc6c231be3cc66767a62ec26c2b378de075a306. One host, <a href="https://davidwise01.github.io/sapph-i-on/distance/the-keeper-distance.html">https://davidwise01.github.io/sapph-i-on/distance/the-keeper-distance.html</a>.
+</footer>
+<script>
+"use strict";
+function keeperDistance() {
+  var shells = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  var distanceSum = 0;
+  var corners = 0;
+  var farCorners = 0;
+  var axis = 0;
+  var x, y, z, d;
+  for (x = 0; x < 7; x++) axis += Math.abs(x - 3);
+  for (z = 0; z < 7; z++) for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+    d = Math.abs(x - 3) + Math.abs(y - 3) + Math.abs(z - 3);
+    if (d < 0 || d > 9) throw new Error("LIT FAIL distance range");
+    shells[d]++;
+    distanceSum += d;
+    if ((x === 0 || x === 6) && (y === 0 || y === 6) && (z === 0 || z === 6)) {
+      corners++;
+      if (d === 9) farCorners++;
+    }
+  }
+  var n = 0;
+  var i;
+  for (i = 0; i < shells.length; i++) n += shells[i];
+  var byAxis = 3 * 49 * axis;
+  var faults = [];
+  if (shells.length !== 10) faults.push("shells");
+  if (n !== 343) faults.push("cells");
+  if (shells[0] !== 1) faults.push("keeper");
+  if (shells[9] !== 8) faults.push("outer");
+  if (corners !== 8 || farCorners !== 8) faults.push("corners");
+  if (343 - corners - shells[0] !== 334) faults.push("seated");
+  if (axis !== 12) faults.push("axis");
+  if (byAxis !== 1764 || distanceSum !== byAxis) faults.push("sum");
+  if (shells.join(",") !== "1,6,18,38,60,72,68,48,24,8") faults.push("shape");
+  return { faults: faults, shells: shells, n: n, distanceSum: distanceSum, byAxis: byAxis };
+}
+var report = keeperDistance();
+function finish(model) {
+  var card = document.getElementById("card");
+  if (!model || model.faults.length || model.n !== 343 || model.distanceSum !== 1764) {
+    var msg = (model && model.faults.join(", ")) || "no report";
+    card.innerHTML = "<span class='stamp wall'>WALL</span> LIT FAIL " + msg;
+    throw new Error("LIT FAIL " + msg);
+  }
+  card.innerHTML = "<span class='stamp lit'>LIT</span> " + model.shells.join(" + ") + " = " + model.n + " · distance sum " + model.distanceSum;
+}
+finish(report);
+var chips = document.getElementById("chips");
+report.shells.forEach(function (count, d) {
+  var chip = document.createElement("div");
+  chip.className = "chip";
+  chip.innerHTML = "<b>" + count + "</b><i>d " + d + "</i>";
+  chips.appendChild(chip);
+});
+var canvas = document.getElementById("stage");
+if (!canvas || !canvas.getContext) throw new Error("LIT FAIL distance stage");
+var ctx = canvas.getContext("2d");
+var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function frame(now) {
+  var t = (now || 0) / 1000;
+  var active = reduce ? -1 : Math.floor(t) % 10;
+  var sky = ctx.createLinearGradient(0, 0, 0, canvas.height);
+  sky.addColorStop(0, "#fff7ed");
+  sky.addColorStop(1, "#f3e8ff");
+  ctx.fillStyle = sky;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  var painted = 0;
+  var seen = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  var z, y, x, d, px, py, hue, lit;
+  for (z = 0; z < 7; z++) {
+    ctx.fillStyle = "#6a5348";
+    ctx.font = "12px ui-monospace, Consolas, monospace";
+    ctx.fillText("z " + z, 28 + z * 118, 28);
+    for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+      d = Math.abs(x - 3) + Math.abs(y - 3) + Math.abs(z - 3);
+      px = 36 + z * 118 + x * 14;
+      py = 40 + y * 64;
+      hue = 18 + d * 28;
+      lit = active === d;
+      ctx.fillStyle = lit ? "hsl(" + hue + ", 72%, 46%)" : "hsl(" + hue + ", 58%, 62%)";
+      ctx.beginPath();
+      ctx.roundRect(px, py, lit ? 12 : 10, lit ? 12 : 10, 3);
+      ctx.fill();
+      painted++;
+      seen[d]++;
+    }
+  }
+  if (painted !== 343) throw new Error("LIT FAIL distance paint");
+  for (d = 0; d < 10; d++) if (seen[d] !== report.shells[d]) throw new Error("LIT FAIL distance shell");
+  if (!reduce) requestAnimationFrame(frame);
+}
+frame(0);
+</script>
+</body>
+</html>
