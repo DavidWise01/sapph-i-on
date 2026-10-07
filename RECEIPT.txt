@@ -733,3 +733,24 @@ Hallway door
   snapshot: sha256:0f7be08b40ba6001f19d911d708bbfad362fdf408513192f1dafbed28004bf04
   instance: 1fc0a049-a5e7-4cbb-b8fc-0d129fe6a3cd RUNNING
   live: Last-Modified Wed, 07 Oct 2026 13:25:17 GMT, Content-Length 73228, CR 695, Server railway-hikari. The page contained A lyre set, A farther next, An encore set, A forward next, those 672, those 648, those 624, those 600, 2,049, and 24 spheres, 343 cells. The chain crew read goblin badger goblin badger. At a requested width of 1280 the hall reported scrollWidth 1265 and clientWidth 1265. At 390 the hall reported scrollWidth 390 and clientWidth 390.
+
+Cat set · 2026-10-07
+
+The walk stayed full at 334. These 24 are original animated cats, one for each corner sphere. No Downloads file was copied. Each page generates its cat and throws if the count fails. Each cat has 25 parts. The drawing keeps moving. The door sky draws that cat when a corner sphere is selected. These 24 are the first batch. They are not seated. They are not one of those 696. The copied sphere files were not rewritten. The galaxy birth seal was not rewritten. The seated count stays 334. The next 24 wait.
+
+  commit: d2bddd65ec54cefa82f39f49ccca240e6a02608e
+  message: 24 animated cats, beside the cube
+  file: cat/the-odd-center-cat.html, 10964 bytes, sha256 fb9bc0580bb2d1e95a2582ba5b2109fc4672857569f3e9f66b18e75289c72052
+  check: Local and live Edge read LIT 24 cat files, manifest order matches. QUEUE.length stayed 334 and the seat count stayed 334. No cat file is seated. The keeper sky summed to 117306 and the iframe stayed hidden. Cell (0,0,3) opened nests/shor_nested.html with sum 109074. Corner (0,0,0) read one cat, the odd center cat, 25 parts, 1 mark, sum 58653, and the iframe stayed spheres/the-odd-center.html. Corner (6,6,6), the third sphere, read one cat, the outside cat, 25 parts, 3 marks, sum 411257, and the iframe stayed spheres/the-outside.html. The first cat page read LIT Corner sphere 1 of 24. This cat has 25 parts and 1 coat mark. The 24th file is cat/the-outside-cat.html, 10954 bytes, sha256 80ea6153c7c9e7d8ff35e0cbec6b8cc4b82f35783159b1d0b92e448031b464d9. Birth of the first file is 4499c8338041dc6a8a5d0939896399d1d1f2952e9f0e9bc170ff29cb12318225. Birth of the 24th file is e8e06192e91fbb69b12eacdfb161c28dc143160ee345acfcadd05b1a3e419bd1. The 24th page read LIT Corner sphere 24 of 24. This cat has 25 parts and 3 coat marks. Each of the 24 files has 0 CR. Pages build of this commit was created 2026-10-07T22:16:38Z, status built, duration 38729, updated 2026-10-07T22:17:16Z. The door Last-Modified Wed, 07 Oct 2026 22:17:15 GMT, Content-Length 244659, 0 CR. At a requested width of 1280 the door reported scrollWidth 1265 and clientWidth 1265. At a requested width of 390 the door still reported scrollWidth 444 and clientWidth 390. The first cat page at 390 reported scrollWidth 390 and clientWidth 390.
+
+Hallway door
+  commit: a381103d1a4f5d800d56aa016fdbc91f45d31b10
+  message: name the cat set on the 7^3 door
+  railway: 81b852ad-21ed-4bfb-82fd-45d49452000f
+  image: sha256:faed940cc8e99e0f1c48361decdef154b0cd60fab7a05b577e05b3cc5a572f4d
+  config: sha256:94e3f501ac6ec45ac1c47dedd1038b3d074781951db95e3f94e0a02c8b45c5b4
+  image created: 2026-10-07T22:17:24Z
+  deployment imageDigest: sha256:90511e3256c49a74f9d1186f074e250d9f79a440d6ee96a752fa914edab142cf
+  snapshot: sha256:466ec6f1f74e499feb71527483901d0646ef76397f402051bf0278d872d1e90b
+  instance: e961c05a-9111-4d3e-9d66-8977a5f349c6 RUNNING
+  live: Last-Modified Wed, 07 Oct 2026 22:16:11 GMT, Content-Length 229788, CR 728, Server railway-hikari. The page contained A cat set, A reprise set, A lyre set, those 696, 2,049, and 24 spheres, 343 cells. The page contained Two blocks hold a goblin and Two blocks hold a honey badger. At a requested width of 1280 the hall reported scrollWidth 1265 and clientWidth 1265. At 390 the hall reported scrollWidth 390 and clientWidth 390.
