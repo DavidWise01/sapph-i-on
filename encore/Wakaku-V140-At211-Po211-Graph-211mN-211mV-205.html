@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v140 At-211 + Po-211 graph 211mN 211mV - artifact 205</title>
+<style>
+  :root{--bg:#050508;--fg:#eaeaea;--gold:#ffd700;--at:#0a0a0a;--po:#c8a0a0}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace}
+  .top{padding:14px 18px}
+  .kicker{font-size:10px;letter-spacing:.22em;opacity:.5;text-transform:uppercase}
+  .nline{font-size:11px;border-left:2px solid #222;padding-left:10px;white-space:pre-wrap;line-height:1.6}
+  .main{margin-top:10px;font-size:15px;font-weight:700;background:#0f0f12;border:1px solid #222;padding:10px;border-radius:8px}
+  .controls{padding:10px 12px;display:flex;gap:6px;flex-wrap:wrap}
+  .btn{font-family:inherit;font-size:10px;padding:5px 10px;border:1px solid #333;background:#15151a;color:#eaeaea;border-radius:6px;cursor:pointer}
+  .btn.active{border-color:#ffd700;color:#ffd700;background:#221a00}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:420px;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden}
+  .cwrap.full{grid-column:1 / -1;height:480px}
+  .cwrap.tall{height:560px}
+  .label{position:absolute;left:8px;top:8px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:.7;background:#000c;padding:3px 5px;border-radius:4px;z-index:5}
+  .graphWrap{position:relative;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden;height:320px}
+  canvas.graph{width:100%;height:100%;display:block}
+  .readout{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0 10px 10px}
+  @media(max-width:900px){.readout{grid-template-columns:1fr}}
+  .ro{background:#0c0c0f;border:1px solid #1e1e24;border-radius:6px;padding:8px;font-size:10px;line-height:1.6}
+  .ro b{color:#ffd700}
+  .card{margin:10px;background:#111115;border:1px solid #1f1f26;border-radius:8px;padding:10px}
+  .mono{font-size:10.5px;white-space:pre-wrap;word-break:break-word;line-height:1.7}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">wakaku v140 — At-211 + Po-211 GRAPH — -211mN vs -211mV — BLACK HALOGEN — METAL ANALOGS ONLY — artifact 205</div>
+  <div class="nline">At-211 7.2h α 5.87 MeV — 41.8% α → Bi-207 — 58.2% EC → Po-211 0.516s α 7.45 MeV → Pb-207 stable — medical α — simulated as -211mN force + -211mV voltage — metal analogs only
+Po-211 daughter: 7.45 MeV α — 1.27× more energetic — -211mN ×1.27 = -268mN analog — -211mV ×1.27 = -268mV analog
+Graph: force mN vs time + voltage mV vs time + decay chain count</div>
+  <div class="main">At-211 -211mN / -211mV + Po-211 -268mN / -268mV → Pb-207 stable — GRAPH + 3DJS — metal analogs only</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-fire">FIRE At-211 → -211mN / -211mV</button>
+  <button class="btn" id="btn-chain">FIRE CHAIN At-211 → Po-211 → Pb-207</button>
+  <button class="btn" id="btn-reset">RESET GRAPHS</button>
+  <button class="btn" id="btn-auto">AUTO: 1 per sec</button>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px">
+  <div class="graphWrap"><div class="label">GRAPH-1 — -211mN FORCE vs TIME — At-211 5.87 MeV — Po-211 7.45 MeV (-268mN)</div><canvas class="graph" id="g-mN"></canvas></div>
+  <div class="graphWrap"><div class="label">GRAPH-2 — -211mV VOLTAGE vs TIME — At-211 5.87 MeV — Po-211 7.45 MeV (-268mV)</div><canvas class="graph" id="g-mV"></canvas></div>
+  <div class="graphWrap" style="grid-column:1 / -1"><div class="label">GRAPH-3 — DECAY CHAIN COUNT — At-211 (7.2h) → Po-211 (0.516s) → Pb-207 stable — metal analogs</div><canvas class="graph" id="g-chain"></canvas></div>
+</div>
+
+<div class="readout">
+  <div class="ro" id="ro-mN">-211mN GRAPH: <b>0 decays</b><br>At-211: -211 mN analog — Po-211: -268 mN analog (7.45/5.87=1.27×)<br>Force recoil F=Δp/Δt — metal analog</div>
+  <div class="ro" id="ro-mV">-211mV GRAPH: <b>0 decays</b><br>At-211: -211 mV analog — Po-211: -268 mV analog<br>V=E/q — α q=2e — metal analog scaling</div>
+  <div class="ro" id="ro-chain">CHAIN: At-211 → Po-211 → Pb-207<br>At: <b>0</b> | Po: <b>0</b> | Pb: <b>0</b> stable<br>Branch: 58.2% EC → Po-211 — 41.8% α → Bi-207</div>
+</div>
+
+<div class="canvases">
+  <div class="cwrap tall" id="wrap-at"><div class="label">3DJS-1 — At-211 black halogen -211mN + -211mV + graph sync — metal analog</div></div>
+  <div class="cwrap tall" id="wrap-po"><div class="label">3DJS-2 — Po-211 daughter 0.516s -268mN -268mV — 7.45 MeV α — silver rare metal analog</div></div>
+  <div class="cwrap full" id="wrap-combined"><div class="label">3DJS-3 — COMBINED CHAIN At-211 → Po-211 → Pb-207 stable — -211mN -211mV → -268mN -268mV — metal analog therapy 90um</div></div>
+</div>
+
+<div class="card"><div class="mono" id="log">
+LOG — v140 At-211 + Po-211 graph
+
+At-211:
+- Z85 black halogen — 7.214h half-life — α 5.87 MeV 41.8% → Bi-207 stable? actually Bi-207 32.9y → EC branch 58.2% → Po-211 0.516s α 7.45 MeV → Pb-207 stable 22.1% abundant
+- -211mN analog: α momentum p=1.12e-19 — recoil force scaled to -211mN = -0.211 N metal analog
+- -211mV analog: V=E/q=2.94e6 V real → scaled to -211mV = -0.211 V metal analog
+
+Po-211 daughter:
+- Z84 Po — 0.516s half-life — α 7.45 MeV — 1.27× At-211 energy — -268mN analog (211×1.27) — -268mV analog
+- Po silvery rare radioactive — metal analog — melt 254°C boil 962°C
+- Po-211 → Pb-207 stable — 7.45 MeV α — most energetic natural α — -268mN thrust
+
+Graphs:
+- g-mN: x=time decays, y=force mN — At-211 spikes -211, Po-211 spikes -268 — red #ff4444
+- g-mV: x=time decays, y=voltage mV — At-211 spikes -211, Po-211 spikes -268 — blue #4488ff
+- g-chain: x=time, y=count — At-211 black #0a0a0a, Po-211 silver #c8a0a0, Pb-207 gold #ffd700 stable accumulates
+
+Metal analogs only: Au Ag Cu Hg Tl Pb Bi Po At Rn Obsidian Fe Pt — NO tachyon — ONLY metal
+
+Chain net: At-211 -211mN -211mV + Po-211 -268mN -268mV → Pb-207 0 — net zero metal analog — JET LI 1×1.618e-36 ×1/24!B×24!B=1
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+// GRAPH ENGINE
+function makeGraph(canvasId, color, yLabel){
+  const c=document.getElementById(canvasId);
+  const ctx=c.getContext('2d');
+  function resize(){ c.width=c.clientWidth*devicePixelRatio; c.height=c.clientHeight*devicePixelRatio; }
+  resize();
+  let data=[];
+  function push(val, color2){
+    data.push({val, color:color2||color, t:performance.now()});
+    if(data.length>80) data.shift();
+  }
+  function clear(){ data=[]; }
+  function draw(){
+    const w=c.width, h=c.height;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#08080a'; ctx.fillRect(0,0,w,h);
+    // grid
+    ctx.strokeStyle='#1e1e24'; ctx.lineWidth=1;
+    for(let i=0;i<=4;i++){ ctx.beginPath(); ctx.moveTo(0,h*i/4); ctx.lineTo(w,h*i/4); ctx.stroke(); }
+    for(let i=0;i<=8;i++){ ctx.beginPath(); ctx.moveTo(w*i/8,0); ctx.lineTo(w*i/8,h); ctx.stroke(); }
+    // zero line middle? for mN/mV negative, show -300 to 0
+    const minY=-300, maxY=20;
+    function yToPix(y){ return h - ((y-minY)/(maxY-minY))*h; }
+    // zero line
+    ctx.strokeStyle='#333'; ctx.beginPath(); ctx.moveTo(0,yToPix(0)); ctx.lineTo(w,yToPix(0)); ctx.stroke();
+    // -211 and -268 lines
+    ctx.setLineDash([6,6]);
+    ctx.strokeStyle='#444'; ctx.beginPath(); ctx.moveTo(0,yToPix(-211)); ctx.lineTo(w,yToPix(-211)); ctx.stroke();
+    ctx.strokeStyle='#555'; ctx.beginPath(); ctx.moveTo(0,yToPix(-268)); ctx.lineTo(w,yToPix(-268)); ctx.stroke();
+    ctx.setLineDash([]);
+    // labels
+    ctx.fillStyle='#666'; ctx.font=`${10*devicePixelRatio}px monospace`;
+    ctx.fillText('-211',4,yToPix(-211)-4);
+    ctx.fillText('-268 Po-211',4,yToPix(-268)-4);
+    ctx.fillText(yLabel,4,14*devicePixelRatio);
+    // data as spikes
+    if(data.length>1){
+      for(let i=0;i<data.length;i++){
+        const d=data[i];
+        const x=(i/(80-1))*w;
+        const y=yToPix(d.val);
+        ctx.fillStyle=d.color;
+        ctx.beginPath(); ctx.arc(x,y,3*devicePixelRatio,0,Math.PI*2); ctx.fill();
+        if(i>0){
+          const prev=data[i-1];
+          const px=((i-1)/79)*w;
+          const py=yToPix(prev.val);
+          // draw line to zero between spikes? show spike from zero
+          ctx.strokeStyle=d.color; ctx.lineWidth=1.5*devicePixelRatio;
+          ctx.beginPath(); ctx.moveTo(x,yToPix(0)); ctx.lineTo(x,y); ctx.stroke();
+        }
+      }
+    }
+  }
+  setInterval(draw, 50);
+  addEventListener('resize', resize);
+  return {push, clear, canvas:c};
+}
+
+const gMN = makeGraph('g-mN','#ff4444','-211mN FORCE');
+const gMV = makeGraph('g-mV','#4488ff','-211mV VOLTAGE');
+
+function makeChainGraph(){
+  const c=document.getElementById('g-chain');
+  const ctx=c.getContext('2d');
+  function resize(){ c.width=c.clientWidth*devicePixelRatio; c.height=c.clientHeight*devicePixelRatio; }
+  resize();
+  let at=[], po=[], pb=[];
+  function push(atV, poV, pbV){
+    at.push(atV); po.push(poV); pb.push(pbV);
+    if(at.length>80){ at.shift(); po.shift(); pb.shift(); }
+  }
+  function clear(){ at=[]; po=[]; pb=[]; }
+  function draw(){
+    const w=c.width, h=c.height;
+    ctx.clearRect(0,0,w,h); ctx.fillStyle='#08080a'; ctx.fillRect(0,0,w,h);
+    ctx.strokeStyle='#1e1e24'; ctx.lineWidth=1;
+    for(let i=0;i<=4;i++){ ctx.beginPath(); ctx.moveTo(0,h*i/4); ctx.lineTo(w,h*i/4); ctx.stroke(); }
+    const maxY=Math.max(10, ...at, ...po, ...pb);
+    function yToPix(y){ return h - (y/maxY)*h*0.9 - h*0.05; }
+    function drawLine(arr, col){
+      ctx.strokeStyle=col; ctx.lineWidth=2*devicePixelRatio; ctx.beginPath();
+      arr.forEach((v,i)=>{ const x=(i/79)*w; const y=yToPix(v); if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y); });
+      ctx.stroke();
+      ctx.fillStyle=col; arr.forEach((v,i)=>{ const x=(i/79)*w; const y=yToPix(v); ctx.beginPath(); ctx.arc(x,y,2.5*devicePixelRatio,0,Math.PI*2); ctx.fill(); });
+    }
+    drawLine(at,'#0a0a0a'); drawLine(po,'#c8a0a0'); drawLine(pb,'#ffd700');
+    ctx.fillStyle='#666'; ctx.font=`${10*devicePixelRatio}px monospace`;
+    ctx.fillText(`At-211 black: ${at[at.length-1]||0}`,4,14*devicePixelRatio);
+    ctx.fillText(`Po-211 silver: ${po[po.length-1]||0}`,4,28*devicePixelRatio);
+    ctx.fillText(`Pb-207 gold stable: ${pb[pb.length-1]||0}`,4,42*devicePixelRatio);
+  }
+  setInterval(draw,60);
+  addEventListener('resize', resize);
+  return {push, clear};
+}
+const gChain = makeChainGraph();
+
+let counts={at:0, po:0, pb:0, total:0};
+let autoId=null;
+
+function updateReadouts(isPo=false){
+  const atDecays = counts.total;
+  const force = isPo? -268 : -211;
+  const volt = isPo? -268 : -211;
+  gMN.push(force, isPo?'#ffaa88':'#ff4444');
+  gMV.push(volt, isPo?'#88aaff':'#4488ff');
+  document.getElementById('ro-mN').innerHTML = `-211mN GRAPH: <b>${counts.total} decays</b><br>Last: ${isPo?'Po-211 -268 mN':'At-211 -211 mN'} — ${force} mN analog<br>Force recoil F=Δp/Δt — metal analog`;
+  document.getElementById('ro-mV').innerHTML = `-211mV GRAPH: <b>${counts.total} decays</b><br>Last: ${isPo?'Po-211 -268 mV':'At-211 -211 mV'} — ${volt} mV analog<br>V=E/q — α q=2e — metal analog`;
+}
+
+function fireAt(){
+  counts.at++; counts.total++;
+  gChain.push(counts.at, counts.po, counts.pb);
+  updateReadouts(false);
+  // 58.2% branch to Po
+  if(Math.random()<0.582){
+    setTimeout(()=>{
+      counts.at=Math.max(0,counts.at-1);
+      counts.po++; counts.total++;
+      gChain.push(counts.at, counts.po, counts.pb);
+      updateReadouts(true);
+      // Po decays quickly to Pb
+      setTimeout(()=>{
+        counts.po=Math.max(0,counts.po-1);
+        counts.pb++;
+        gChain.push(counts.at, counts.po, counts.pb);
+        document.getElementById('ro-chain').innerHTML = `CHAIN: At-211 → Po-211 → Pb-207<br>At: <b>${counts.at}</b> | Po: <b>${counts.po}</b> | Pb: <b>${counts.pb}</b> stable<br>Branch: 58.2% EC → Po-211 — 41.8% α → Bi-207`;
+        trigger3D(true); // Po decay
+      }, 520);
+    }, 120);
+  } else {
+    // direct to Bi
+    counts.pb++; // treat as stable end for graph simplicity (Bi-207 long)
+  }
+  document.getElementById('ro-chain').innerHTML = `CHAIN: At-211 → Po-211 → Pb-207<br>At: <b>${counts.at}</b> | Po: <b>${counts.po}</b> | Pb: <b>${counts.pb}</b> stable<br>Branch: 58.2% EC → Po-211 — 41.8% α → Bi-207`;
+  trigger3D(false);
+}
+
+function fireChain(){
+  fireAt();
+  setTimeout(fireAt, 300);
+  setTimeout(fireAt, 650);
+}
+
+function resetAll(){
+  counts={at:0, po:0, pb:0, total:0};
+  gMN.clear(); gMV.clear(); gChain.clear();
+  document.getElementById('ro-mN').innerHTML=`-211mN GRAPH: <b>0 decays</b><br>At-211: -211 mN analog — Po-211: -268 mN analog (7.45/5.87=1.27×)<br>Force recoil F=Δp/Δt — metal analog`;
+  document.getElementById('ro-mV').innerHTML=`-211mV GRAPH: <b>0 decays</b><br>At-211: -211 mV analog — Po-211: -268 mV analog<br>V=E/q — α q=2e — metal analog scaling`;
+  document.getElementById('ro-chain').innerHTML=`CHAIN: At-211 → Po-211 → Pb-207<br>At: <b>0</b> | Po: <b>0</b> | Pb: <b>0</b> stable<br>Branch: 58.2% EC → Po-211 — 41.8% α → Bi-207`;
+}
+
+document.getElementById('btn-fire').onclick=fireAt;
+document.getElementById('btn-chain').onclick=fireChain;
+document.getElementById('btn-reset').onclick=resetAll;
+document.getElementById('btn-auto').onclick=(e)=>{
+  if(autoId){ clearInterval(autoId); autoId=null; e.target.textContent='AUTO: 1 per sec'; e.target.classList.remove('active'); }
+  else { autoId=setInterval(fireAt,1000); e.target.textContent='AUTO: STOP'; e.target.classList.add('active'); }
+};
+
+// 3D PART
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x08080a); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,0.5)); const d=new THREE.DirectionalLight(0xffffff,0.9); d.position.set(4,6,4); d.castShadow=true; s.add(d); }
+const matAt=new THREE.MeshStandardMaterial({color:0x0a0a0a, metalness:0.8, roughness:0.25, emissive:0x222222, emissiveIntensity:0.35});
+const matPo=new THREE.MeshStandardMaterial({color:0xc8a0a0, metalness:0.8, roughness:0.32, emissive:0x331111, emissiveIntensity:0.25});
+const matPb=new THREE.MeshStandardMaterial({color:0x6a6a72, metalness:0.85, roughness:0.4});
+const matAlpha=new THREE.MeshStandardMaterial({color:0xffd0a0, emissive:0xff8844, emissiveIntensity:1.1, transparent:true, opacity:0.95});
+const matAu=new THREE.MeshStandardMaterial({color:0xffd700, metalness:0.95, roughness:0.22});
+const matAg=new THREE.MeshStandardMaterial({color:0xd0d0d8, metalness:0.95, roughness:0.15});
+
+let trigger3D = ()=>{};
+
+let threeInstances=[];
+
+// At scene
+{
+  const wrap=document.getElementById('wrap-at');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(42, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,1.2,5.5);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const atCore=new THREE.Mesh(new THREE.SphereGeometry(0.7,40,40), matAt); atCore.castShadow=true; scene.add(atCore);
+  const alphas=new THREE.Group(); scene.add(alphas);
+  const forceLine=new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0,0,0), new THREE.Vector3(0,0,-1.5)]), new THREE.LineBasicMaterial({color:0xff4444, transparent:true, opacity:0.8})); scene.add(forceLine);
+  const voltRings=new THREE.Group(); scene.add(voltRings);
+  for(let i=0;i<4;i++){ const ring=new THREE.Mesh(new THREE.TorusGeometry(0.9+i*0.22,0.02,10,40), new THREE.MeshBasicMaterial({color:0x4488ff, transparent:true, opacity:0.2})); ring.rotation.x=Math.PI/2; voltRings.add(ring); }
+
+  function fire(isPo){
+    const a=new THREE.Mesh(new THREE.SphereGeometry(0.16,16,16), matAlpha.clone());
+    a.position.set(0,0,0);
+    const dir=new THREE.Vector3((Math.random()-0.5)*0.3,(Math.random()-0.5)*0.3,-1).normalize();
+    a.userData={dir, t:0, dist:0, isPo};
+    alphas.add(a);
+  }
+  threeInstances.push({fire, scene, atCore, alphas, forceLine, voltRings});
+
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.016;
+    atCore.rotation.y+=0.008; atCore.scale.setScalar(1+Math.sin(t*2)*0.03);
+    voltRings.rotation.z+=0.003;
+    alphas.children.forEach(a=>{
+      a.userData.t+=0.05; a.userData.dist+=0.07;
+      a.position.copy(a.userData.dir.clone().multiplyScalar(a.userData.dist));
+      a.material.opacity=Math.max(0,1-a.userData.dist*0.3);
+    });
+    for(let i=alphas.children.length-1;i>=0;i--){ if(alphas.children[i].material.opacity<=0) alphas.remove(alphas.children[i]); }
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+// Po scene
+{
+  const wrap=document.getElementById('wrap-po');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(42, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,1.2,5.5);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const poCore=new THREE.Mesh(new THREE.SphereGeometry(0.75,40,40), matPo); poCore.castShadow=true; scene.add(poCore);
+  const alphas=new THREE.Group(); scene.add(alphas);
+  function fire(isPo){
+    if(!isPo) return;
+    const a=new THREE.Mesh(new THREE.SphereGeometry(0.19,16,16), matAlpha.clone());
+    a.material.color.setHex(0xffaa88); a.material.emissive.setHex(0xff6622); a.material.emissiveIntensity=1.3;
+    a.position.set(0,0,0);
+    const dir=new THREE.Vector3((Math.random()-0.5)*0.4,(Math.random()-0.5)*0.4,-1).normalize();
+    a.userData={dir, dist:0};
+    alphas.add(a);
+  }
+  threeInstances.push({fire, scene, poCore, alphas});
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.016;
+    poCore.rotation.y+=0.009; poCore.scale.setScalar(1+Math.sin(t*2.5)*0.05);
+    alphas.children.forEach(a=>{ a.userData.dist+=0.09; a.position.copy(a.userData.dir.clone().multiplyScalar(a.userData.dist)); a.material.opacity=Math.max(0,1-a.userData.dist*0.25); });
+    for(let i=alphas.children.length-1;i>=0;i--){ if(alphas.children[i].material.opacity<=0) alphas.remove(alphas.children[i]); }
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+// combined chain
+{
+  const wrap=document.getElementById('wrap-combined');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,2,8);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const cell=new THREE.Mesh(new THREE.SphereGeometry(3.2,32,32), new THREE.MeshStandardMaterial({color:0x1a2a1a, transparent:true, opacity:0.15})); group.add(cell);
+  const carriers=new THREE.Group(); group.add(carriers);
+  for(let i=0;i<6;i++){ const c=new THREE.Mesh(new THREE.SphereGeometry(0.13,14,14), i%2?matAu:matAg); const ang=(i/6)*Math.PI*2; c.position.set(Math.cos(ang)*2.6, Math.sin(ang)*0.5, Math.sin(ang)*2.6); carriers.add(c); }
+  const atCore=new THREE.Mesh(new THREE.SphereGeometry(0.36,26,26), matAt); group.add(atCore);
+  const alphas=new THREE.Group(); group.add(alphas);
+  const pbs=new THREE.Group(); group.add(pbs);
+  function fire(isPo){
+    const a=new THREE.Mesh(new THREE.SphereGeometry(isPo?0.14:0.11,14,14), matAlpha.clone());
+    if(isPo){ a.material.color.setHex(0xffaa88); a.material.emissive.setHex(0xff6622); }
+    a.position.copy(atCore.position);
+    const dir=new THREE.Vector3((Math.random()-0.5),(Math.random()-0.5),(Math.random()-0.5)).normalize();
+    a.userData={dir, dist:0, isPo};
+    alphas.add(a);
+    if(isPo){
+      const pb=new THREE.Mesh(new THREE.SphereGeometry(0.32,20,20), matPb);
+      pb.position.copy(atCore.position.clone().add(dir.clone().multiplyScalar(-0.3)));
+      pb.userData={t:0};
+      pbs.add(pb);
+    }
+  }
+  threeInstances.push({fire, scene, group, alphas, pbs, carriers, cell});
+
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.016;
+    group.rotation.y+=0.0012; carriers.rotation.y+=0.007;
+    alphas.children.forEach(a=>{ a.userData.dist+=0.07; a.position.copy(a.userData.dir.clone().multiplyScalar(a.userData.dist)); a.material.opacity=Math.max(0,0.95-a.userData.dist*0.2); });
+    for(let i=alphas.children.length-1;i>=0;i--){ if(alphas.children[i].material.opacity<=0) alphas.remove(alphas.children[i]); }
+    pbs.children.forEach(pb=>{ pb.userData.t+=0.01; pb.position.y+=Math.sin(t+pb.userData.t)*0.002; });
+    if(pbs.children.length>12){ pbs.remove(pbs.children[0]); }
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+trigger3D = (isPo)=>{
+  threeInstances.forEach(inst=>inst.fire(isPo));
+};
+
+// initial
+resetAll();
+</script>
+</body>
+</html>

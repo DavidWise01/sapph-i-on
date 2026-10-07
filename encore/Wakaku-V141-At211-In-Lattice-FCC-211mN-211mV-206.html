@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v141 At-211 in lattice - FCC black halogen - artifact 206</title>
+<style>
+  :root{--bg:#050508;--fg:#eaeaea;--gold:#ffd700}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace}
+  .top{padding:14px 18px}
+  .kicker{font-size:10px;letter-spacing:.22em;opacity:.5;text-transform:uppercase}
+  .nline{font-size:11px;border-left:2px solid #222;padding-left:10px;white-space:pre-wrap;line-height:1.6}
+  .main{margin-top:10px;font-size:15px;font-weight:700;background:#0f0f12;border:1px solid #222;padding:10px;border-radius:8px}
+  .controls{padding:10px 12px;display:flex;gap:6px;flex-wrap:wrap}
+  .btn{font-family:inherit;font-size:10px;padding:5px 10px;border:1px solid #333;background:#15151a;color:#eaeaea;border-radius:6px;cursor:pointer}
+  .btn.active{border-color:#ffd700;color:#ffd700;background:#221a00}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:520px;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden}
+  .cwrap.full{grid-column:1 / -1;height:620px}
+  .label{position:absolute;left:8px;top:8px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:.7;background:#000c;padding:3px 5px;border-radius:4px;z-index:5}
+  .graphWrap{position:relative;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden;height:300px}
+  canvas.graph{width:100%;height:100%;display:block}
+  .readout{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0 10px 10px}
+  @media(max-width:900px){.readout{grid-template-columns:1fr}}
+  .ro{background:#0c0c0f;border:1px solid #1e1e24;border-radius:6px;padding:8px;font-size:10px;line-height:1.6}
+  .ro b{color:#ffd700}
+  .card{margin:10px;background:#111115;border:1px solid #1f1f26;border-radius:8px;padding:10px}
+  .mono{font-size:10.5px;white-space:pre-wrap;word-break:break-word;line-height:1.7}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">wakaku v141 — At-211 IN LATTICE — FCC BLACK HALOGEN + Au LATTICE — -211mN -211mV — METAL ANALOGS ONLY — artifact 206</div>
+  <div class="nline">At-211 in lattice — black halogen At Z85 in FCC lattice — substitutional in Au FCC lattice (Au lattice a=4.08 Å metal analog) — At replaces Au — At-211 7.2h α 5.87 MeV — -211mN recoil displaces lattice — -211mV ionizes neighbors — Po-211 7.45 MeV -268mN -268mV daughter — Pb-207 stable end — lattice damage + healing — metal analogs only: Au Ag Cu Hg Tl Pb Bi Po At Rn Obsidian Fe Pt
+FCC: 4 atoms per cell — At black in Au gold — lattice constant metal analog scaled ×1.618
+Channeling: α 5.87 MeV channels along [110] Au — -211mN thrust along lattice</div>
+  <div class="main">At-211 IN LATTICE — FCC Au (4.08Å) + At black substitutional — -211mN recoil knocks Au, -211mV ionizes Au — Po-211 -268mN -268mV second knock — Pb-207 stable stays in lattice — metal analogs only</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-lattice">LATTICE: Au FCC + At black</button>
+  <button class="btn" id="btn-fire">FIRE At-211 IN LATTICE → -211mN -211mV</button>
+  <button class="btn" id="btn-fire-po">FIRE Po-211 IN LATTICE → -268mN -268mV</button>
+  <button class="btn" id="btn-heal">HEAL LATTICE</button>
+  <button class="btn" id="btn-reset">RESET</button>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:10px">
+  <div class="graphWrap"><div class="label">GRAPH-1 — LATTICE DISPLACEMENT — Au atoms displaced by -211mN recoil — Å metal analog</div><canvas class="graph" id="g-disp"></canvas></div>
+  <div class="graphWrap"><div class="label">GRAPH-2 — LATTICE CHARGE — -211mV ionization — Au neighbors charge — mV metal analog</div><canvas class="graph" id="g-charge"></canvas></div>
+  <div class="graphWrap"><div class="label">GRAPH-3 — LATTICE ENERGY — -211mN × -211mV → damage — eV metal analog</div><canvas class="graph" id="g-energy"></canvas></div>
+</div>
+
+<div class="readout">
+  <div class="ro" id="ro-lattice">LATTICE: Au FCC a=4.08 Å metal analog — 4×4×4 cells = 256 Au + 1 At black substitutional<br>At position: [2,2,2] center — Au neighbors: 12 nearest — Au-Au bond metal analog</div>
+  <div class="ro" id="ro-damage">DAMAGE: <b>0 displaced</b> — -211mN recoil → knock-on — threshold 25 eV Au — metal analog<br>Po-211: -268mN = 1.27× displacement</div>
+  <div class="ro" id="ro-charge">CHARGE: <b>0 mV</b> — -211mV ionization — At → Bi + α → charge +2 — metal analog<br>Au neighbors ionize → -211mV drop</div>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-fcc"><div class="label">3DJS-1 — FCC LATTICE — Au gold 4×4×4 + At black substitutional [2,2,2] — metal analog</div></div>
+  <div class="cwrap" id="wrap-recoil"><div class="label">3DJS-2 — -211mN RECOIL IN LATTICE — At-211 α + Bi recoil knocks Au lattice — knock-on cascade — metal analog</div></div>
+  <div class="cwrap full" id="wrap-channel"><div class="label">3DJS-3 — CHANNELING + -211mV IONIZATION — α channels [110] Au — -211mV ionizes track — At→Po→Pb in lattice — metal analog therapy</div></div>
+</div>
+
+<div class="card"><div class="mono">
+v141 At-211 IN LATTICE — metal analogs only
+
+Lattice:
+- Au FCC: a=4.08 Å — 4 atoms per cubic cell — positions (0,0,0) (0.5,0.5,0) (0.5,0,0.5) (0,0.5,0.5) — 4×4×4 = 256 Au atoms — Au metallic yellow full d10 s1 blood gold core metal analog
+- At substitutional: replaces Au at [2,2,2] center — At black metallic halogen — 12 Au nearest neighbors — Au-At bond metal analog — lattice constant same metal analog scaled
+- Other metal analogs: Ag white electrum, Cu orange copper, Hg silvery liquid, Tl bluish, Pb gray, Bi brittle, Po silvery rare, Obsidian black glass, Fe blood, Pt white gold
+
+-211mN in lattice:
+- At-211 α 5.87 MeV — p=1.12e-19 kg m/s — recoil Bi-207 equal opposite — recoil energy E_recoil = p²/(2M) = ~90 keV real — metal analog scaled to -211mN thrust
+- Knock-on: Au displacement threshold ~25 eV — Bi recoil 90 keV >> 25 eV → displaces Au neighbors → cascade — 1 At → ~3-5 Au displaced metal analog — -211mN × lattice
+- Po-211 7.45 MeV — p=1.26e-19 — E_recoil ~114 keV — -268mN analog — 1.27× more displacement — ~4-7 Au displaced
+
+-211mV in lattice:
+- α q=2e — leaves At+? Actually At-211 → Bi-207 + α — At neutral → Bi-207 + α + recoil — charge +2 lost — ionization — Au neighbors capture charge — -211mV drop metal analog
+- Po-211 → Pb-207 + α — same — -268mV analog — larger ionization track — α creates electron-hole pairs along path — Au lattice ionizes
+- Voltage map: Au atoms near track get +mV, At site gets -211mV, track gets -211mV
+
+Healing:
+- Au lattice self-heals — displaced Au interstitial returns — vacancy + interstitial recombine — metal analog healing — Obsidian analog as vacancy
+
+Graph:
+- displacement vs decays — Å
+- charge mV vs decays — -211mV spikes
+- energy eV vs decays — damage energy
+
+Therapy: At-211 in Au nanoparticle lattice — AuNP 4nm FCC — At inside — -211mN recoil stays in NP? recoil 90 keV might eject Bi from NP — -211mV ionizes cell — 90um range — metal analog AuNP therapy
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+// GRAPHS
+function makeGraph(id, color, label, minY, maxY){
+  const c=document.getElementById(id);
+  const ctx=c.getContext('2d');
+  function resize(){ c.width=c.clientWidth*devicePixelRatio; c.height=c.clientHeight*devicePixelRatio; }
+  resize();
+  let data=[];
+  function push(v){
+    data.push(v); if(data.length>80) data.shift();
+  }
+  function clear(){ data=[]; }
+  function draw(){
+    const w=c.width, h=c.height;
+    ctx.clearRect(0,0,w,h); ctx.fillStyle='#08080a'; ctx.fillRect(0,0,w,h);
+    ctx.strokeStyle='#1e1e24'; ctx.lineWidth=1;
+    for(let i=0;i<=4;i++){ ctx.beginPath(); ctx.moveTo(0,h*i/4); ctx.lineTo(w,h*i/4); ctx.stroke(); }
+    function yToPix(y){ return h - ((y-minY)/(maxY-minY))*h; }
+    ctx.strokeStyle='#333'; ctx.beginPath(); ctx.moveTo(0,yToPix(0)); ctx.lineTo(w,yToPix(0)); ctx.stroke();
+    ctx.fillStyle='#666'; ctx.font=`${10*devicePixelRatio}px monospace`;
+    ctx.fillText(label,4,14*devicePixelRatio);
+    if(data.length>1){
+      ctx.strokeStyle=color; ctx.lineWidth=2*devicePixelRatio; ctx.beginPath();
+      data.forEach((v,i)=>{ const x=(i/79)*w; const y=yToPix(v); if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y); });
+      ctx.stroke();
+      ctx.fillStyle=color;
+      data.forEach((v,i)=>{ const x=(i/79)*w; const y=yToPix(v); ctx.beginPath(); ctx.arc(x,y,2.5*devicePixelRatio,0,Math.PI*2); ctx.fill(); });
+      if(data.length>0){ const last=data[data.length-1]; ctx.fillText(`${last.toFixed(1)}`, w-60*devicePixelRatio, yToPix(last)-6*devicePixelRatio); }
+    }
+  }
+  setInterval(draw,50); addEventListener('resize', resize);
+  return {push, clear};
+}
+const gDisp = makeGraph('g-disp','#ff8844','DISP Å',0,12);
+const gCharge = makeGraph('g-charge','#4488ff','CHARGE mV',-320,40);
+const gEnergy = makeGraph('g-energy','#ffd700','ENERGY eV',0,350);
+
+let counts={disp:0, charge:0, energy:0, at:0};
+
+function pushGraphs(isPo=false){
+  const d = isPo? (3+Math.random()*4) : (2+Math.random()*2.5);
+  const ch = isPo? -268 : -211;
+  const en = isPo? (90*1.27 + Math.random()*30) : (70 + Math.random()*25);
+  counts.disp+=d; counts.charge+=ch; counts.energy+=en; counts.at++;
+  gDisp.push(counts.disp);
+  gCharge.push(counts.charge);
+  gEnergy.push(counts.energy);
+  document.getElementById('ro-damage').innerHTML=`DAMAGE: <b>${counts.disp.toFixed(1)} Å total, ${counts.at} decays</b> — -211mN recoil → knock-on — threshold 25 eV Au — metal analog<br>Last: ${isPo?'-268mN Po-211 7.45 MeV':'-211mN At-211 5.87 MeV'} — ${d.toFixed(1)} Å displaced`;
+  document.getElementById('ro-charge').innerHTML=`CHARGE: <b>${counts.charge.toFixed(0)} mV total</b> — -211mV ionization — At → Bi + α — metal analog<br>Last: ${ch} mV — track ionization`;
+}
+
+// 3D
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x08080a); s.fog=new THREE.Fog(0x08080a,12,35); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,0.5)); const d=new THREE.DirectionalLight(0xffffff,0.9); d.position.set(5,7,5); d.castShadow=true; s.add(d); const p=new THREE.PointLight(0xffd700,0.4,15); p.position.set(-2,2,2); s.add(p); }
+
+const matAu=new THREE.MeshStandardMaterial({color:0xffd700, metalness:0.9, roughness:0.28});
+const matAu2=new THREE.MeshStandardMaterial({color:0xffc800, metalness:0.9, roughness:0.32});
+const matAt=new THREE.MeshStandardMaterial({color:0x0a0a0a, metalness:0.85, roughness:0.22, emissive:0x222222, emissiveIntensity:0.4});
+const matPo=new THREE.MeshStandardMaterial({color:0xc8a0a0, metalness:0.8, roughness:0.32, emissive:0x331111, emissiveIntensity:0.25});
+const matBi=new THREE.MeshStandardMaterial({color:0x9a8aa8, metalness:0.8, roughness:0.38});
+const matPb=new THREE.MeshStandardMaterial({color:0x6a6a72, metalness:0.85, roughness:0.4});
+const matAlpha=new THREE.MeshStandardMaterial({color:0xffd0a0, emissive:0xff8844, emissiveIntensity:1.2, transparent:true, opacity:0.95});
+const matVac=new THREE.MeshStandardMaterial({color:0x000000, transparent:true, opacity:0.6, wireframe:true});
+const matAg=new THREE.MeshStandardMaterial({color:0xd0d0d8, metalness:0.95, roughness:0.15});
+
+let latticeGroup=null;
+let latticeAtoms=[];
+let atAtom=null;
+let displaced=[];
+
+function buildLattice(scene, size=4){
+  if(latticeGroup) scene.remove(latticeGroup);
+  latticeGroup=new THREE.Group(); scene.add(latticeGroup);
+  latticeAtoms=[]; displaced=[];
+  const a=1.0; // lattice constant metal analog scaled (real Au 4.08 Å → 1.0 unit)
+  const geoAu=new THREE.SphereGeometry(0.18,16,16);
+  for(let x=0;x<size;x++) for(let y=0;y<size;y++) for(let z=0;z<size;z++){
+    const base=new THREE.Vector3(x*a, y*a, z*a);
+    const positions=[[0,0,0],[0.5,0.5,0],[0.5,0,0.5],[0,0.5,0.5]];
+    positions.forEach(p=>{
+      const pos=new THREE.Vector3(base.x+p[0]*a, base.y+p[1]*a, base.z+p[2]*a);
+      const isCenter = Math.abs(pos.x - size*a/2)<0.1 && Math.abs(pos.y - size*a/2)<0.1 && Math.abs(pos.z - size*a/2)<0.1;
+      if(isCenter){
+        const at=new THREE.Mesh(new THREE.SphereGeometry(0.26,24,24), matAt);
+        at.position.copy(pos); at.userData={orig:pos.clone(), isAt:true, type:'At'}; latticeGroup.add(at); atAtom=at; latticeAtoms.push(at);
+      } else {
+        const au=new THREE.Mesh(geoAu, Math.random()>0.5?matAu:matAu2);
+        au.position.copy(pos); au.userData={orig:pos.clone(), isAt:false, displaced:false, type:'Au', origPos:pos.clone()}; latticeGroup.add(au); latticeAtoms.push(au);
+      }
+    });
+  }
+  // center group
+  latticeGroup.position.set(-size*a/2, -size*a/2, -size*a/2);
+  return {group:latticeGroup, atoms:latticeAtoms, atAtom};
+}
+
+function displaceLattice(isPo=false){
+  if(!atAtom) return;
+  const recoilDir=new THREE.Vector3((Math.random()-0.5)*0.6,(Math.random()-0.5)*0.6,(Math.random()-0.5)*0.6).normalize();
+  const recoilMag=isPo?0.9:0.7;
+  // At becomes Bi/Pb
+  atAtom.material = isPo? matPb : matBi;
+  atAtom.userData.type = isPo? 'Pb':'Bi';
+  // find 12 nearest Au and displace
+  const center=atAtom.position.clone();
+  let nearest = latticeAtoms.filter(a=>!a.userData.isAt).map(a=>({a, d:a.position.distanceTo(center)})).sort((a,b)=>a.d-b.d).slice(0, isPo?7:5);
+  nearest.forEach(n=>{
+    n.a.userData.displaced=true;
+    const dir=n.a.position.clone().sub(center).normalize();
+    n.a.position.add(dir.multiplyScalar(recoilMag*0.4 + Math.random()*0.2));
+    displaced.push(n.a);
+  });
+  // alpha track
+  return {dir:recoilDir.clone().negate(), isPo};
+}
+
+function healLattice(){
+  latticeAtoms.forEach(a=>{
+    if(a.userData.orig){
+      // lerp back
+      a.position.lerp(a.userData.orig, 0.2);
+      if(a.position.distanceTo(a.userData.orig)<0.02){ a.position.copy(a.userData.orig); a.userData.displaced=false; }
+    }
+  });
+  if(atAtom){ atAtom.material=matAt; atAtom.userData.type='At'; }
+  displaced=[];
+}
+
+let threeFns=[];
+
+// 1) FCC lattice view
+{
+  const wrap=document.getElementById('wrap-fcc');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(4,4,7);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const {group}=buildLattice(scene,4);
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.01; group.rotation.y+=0.002; group.rotation.x=Math.sin(t*0.15)*0.08; controls.update(); renderer.render(scene,cam); }
+  animate();
+  threeFns.push({scene, group, type:'fcc'});
+}
+
+// 2) Recoil cascade
+{
+  const wrap=document.getElementById('wrap-recoil');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(42, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(2.5,2.5,5);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const {group, atoms, atAtom: at} = buildLattice(scene,4);
+  const alphas=new THREE.Group(); scene.add(alphas);
+  let t=0;
+  function fire(isPo=false){
+    const dirData=displaceLattice(isPo);
+    // alpha
+    const a=new THREE.Mesh(new THREE.SphereGeometry(isPo?0.18:0.14,16,16), matAlpha.clone());
+    if(isPo){ a.material.color.setHex(0xffaa88); a.material.emissive.setHex(0xff6622); }
+    a.position.copy(at.position.clone());
+    a.userData={dir:dirData.dir, dist:0, isPo};
+    alphas.add(a);
+    pushGraphs(isPo);
+  }
+  function heal(){ healLattice(); alphas.clear(); counts={disp:0, charge:0, energy:0, at:0}; }
+  function reset(){ buildLattice(scene,4); alphas.clear(); }
+
+  threeFns.push({fire, heal, reset, scene, group, alphas});
+
+  function animate(){
+    requestAnimationFrame(animate); t+=0.016;
+    group.rotation.y+=0.0015;
+    alphas.children.forEach(a=>{
+      a.userData.dist+=0.12;
+      a.position.copy(a.position.clone().add(a.userData.dir.clone().multiplyScalar(0.12)));
+      a.material.opacity=Math.max(0,1-a.userData.dist*0.18);
+    });
+    for(let i=alphas.children.length-1;i>=0;i--){ if(alphas.children[i].material.opacity<=0) alphas.remove(alphas.children[i]); }
+    // heal lerp
+    atoms.forEach(a=>{ if(a.userData.displaced){ a.position.lerp(a.userData.orig, 0.02); } });
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+// 3) Channeling + ionization track
+{
+  const wrap=document.getElementById('wrap-channel');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(5,3,6);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const {group, atoms} = buildLattice(scene,5);
+  const tracks=new THREE.Group(); scene.add(tracks);
+  const ionizations=new THREE.Group(); scene.add(ionizations);
+
+  function fire(isPo=false){
+    // channel along [110]
+    const dir=new THREE.Vector3(1,1,0).normalize(); // [110]
+    const start=new THREE.Vector3(0,0,0);
+    const a=new THREE.Mesh(new THREE.SphereGeometry(isPo?0.16:0.13,14,14), matAlpha.clone());
+    if(isPo){ a.material.color.setHex(0xffaa88); }
+    a.position.copy(start);
+    a.userData={dir, dist:0, isPo, steps:0};
+    tracks.add(a);
+    pushGraphs(isPo);
+    // ionization along track
+    for(let i=0;i<8;i++){
+      setTimeout(()=>{
+        const ion=new THREE.Mesh(new THREE.SphereGeometry(0.08,10,10), new THREE.MeshBasicMaterial({color:0x4488ff, transparent:true, opacity:0.6}));
+        ion.position.copy(dir.clone().multiplyScalar(i*0.6 + Math.random()*0.2));
+        ionizations.add(ion);
+        setTimeout(()=>{ ion.material.opacity=0.1; }, 400);
+      }, i*60);
+    }
+  }
+  function reset(){ buildLattice(scene,5); tracks.clear(); ionizations.clear(); }
+
+  threeFns.push({fire, reset, scene, group, tracks, ionizations});
+
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.012;
+    group.rotation.y+=0.0008;
+    tracks.children.forEach(a=>{
+      a.userData.dist+=0.1;
+      a.position.copy(a.userData.dir.clone().multiplyScalar(a.userData.dist));
+      a.material.opacity=Math.max(0,1-a.userData.dist*0.12);
+      a.userData.steps++;
+      if(a.userData.dist>8) a.material.opacity=0;
+    });
+    for(let i=tracks.children.length-1;i>=0;i--){ if(tracks.children[i].material.opacity<=0) tracks.remove(tracks.children[i]); }
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+// buttons
+document.getElementById('btn-fire').onclick=()=>{
+  threeFns.forEach(f=>{ if(f.fire) f.fire(false); });
+};
+document.getElementById('btn-fire-po').onclick=()=>{
+  threeFns.forEach(f=>{ if(f.fire) f.fire(true); });
+};
+document.getElementById('btn-heal').onclick=()=>{
+  threeFns.forEach(f=>{ if(f.heal) f.heal(); });
+};
+document.getElementById('btn-reset').onclick=()=>{
+  threeFns.forEach(f=>{ if(f.reset) f.reset(); });
+  counts={disp:0, charge:0, energy:0, at:0};
+  gDisp.clear(); gCharge.clear(); gEnergy.clear();
+  document.getElementById('ro-lattice').innerHTML=`LATTICE: Au FCC a=4.08 Å metal analog — 4×4×4 cells = 256 Au + 1 At black substitutional<br>At position: [2,2,2] center — Au neighbors: 12 nearest — Au-Au bond metal analog`;
+  document.getElementById('ro-damage').innerHTML=`DAMAGE: <b>0 displaced</b> — -211mN recoil → knock-on — threshold 25 eV Au — metal analog<br>Po-211: -268mN = 1.27× displacement`;
+  document.getElementById('ro-charge').innerHTML=`CHARGE: <b>0 mV</b> — -211mV ionization — At → Bi + α → charge +2 — metal analog<br>Au neighbors ionize → -211mV drop`;
+};
+
+// init graphs empty
+gDisp.clear(); gCharge.clear(); gEnergy.clear();
+</script>
+</body>
+</html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v144 ionic lattice vs BH tidal - At- falling into BH - artifact 209</title>
+<style>
+  :root{--bg:#050508;--fg:#eaeaea;--gold:#ffd700}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace}
+  .top{padding:14px 18px}
+  .kicker{font-size:10px;letter-spacing:.22em;opacity:.5;text-transform:uppercase}
+  .nline{font-size:11px;border-left:2px solid #222;padding-left:10px;white-space:pre-wrap;line-height:1.6}
+  .main{margin-top:10px;font-size:14px;font-weight:700;background:#0f0f12;border:1px solid #222;padding:10px;border-radius:8px}
+  .controls{padding:10px 12px;display:flex;gap:6px;flex-wrap:wrap}
+  .btn{font-family:inherit;font-size:10px;padding:5px 10px;border:1px solid #333;background:#15151a;color:#eaeaea;border-radius:6px;cursor:pointer}
+  .btn.active{border-color:#ffd700;color:#ffd700;background:#221a00}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:560px;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden}
+  .cwrap.full{grid-column:1 / -1;height:660px}
+  .label{position:absolute;left:8px;top:8px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:.8;background:#000c;padding:4px 6px;border-radius:4px;z-index:5}
+  .graphWrap{position:relative;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden;height:260px}
+  canvas.graph{width:100%;height:100%;display:block}
+  .readout{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 10px 10px}
+  .ro{background:#0c0c0f;border:1px solid #1e1e24;border-radius:6px;padding:8px;font-size:10px;line-height:1.6}
+  .ro b{color:#ffd700}
+  .card{margin:10px;background:#111115;border:1px solid #1f1f26;border-radius:8px;padding:10px}
+  .mono{font-size:10.5px;white-space:pre-wrap;word-break:break-word;line-height:1.7}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">wakaku v144 — IONIC LATTICE FALLING INTO BH — Au+ At- vs 0.07g BH TIDAL -211mN -211mV vs 1.5kt — artifact 209</div>
+  <div class="nline">next lol — ionic Au+ At- rocksalt lattice + 0.07g BH at center — black halogen ionic vs black hole tidal — At- ionic 2.27Å falls into BH r=1e-31m — tidal force F_tidal = 2GMmR/r³ — ionic bond -211mN vs tidal 1e10 N real → scaled — lattice spaghettification — Au+ At- ionic spaghettified — -211mN ionic vs BH 1.5kt — metal analogs ionic + BH analog — lol next</div>
+  <div class="main">IONIC FALLING INTO BH — Au+ 1.37Å + At- 2.27Å rocksalt lattice orbiting 0.07g BH — tidal -211mN vs ionic -211mN — spaghettification — At- black halogen ionic vs BH black hole — lol</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-fall">FALL: Au+ At- ionic → BH</button>
+  <button class="btn" id="btn-orbit">ORBIT: Au+ At- around BH</button>
+  <button class="btn" id="btn-spaghet">SPAGHETTIFICATION: tidal -211mN ×1000</button>
+  <button class="btn" id="btn-reset">RESET IONIC + BH</button>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px">
+  <div class="graphWrap"><div class="label">GRAPH-1 — TIDAL vs IONIC — tidal F=2GMmR/r³ vs ionic Coulomb -211mN — N log</div><canvas class="graph" id="g-tidal"></canvas></div>
+  <div class="graphWrap"><div class="label">GRAPH-2 — RADIUS vs TIME — Au+ At- ionic falling r(t) → BH r_s=1e-31m — m log</div><canvas class="graph" id="g-fall"></canvas></div>
+</div>
+
+<div class="readout">
+  <div class="ro" id="ro-fall">FALL: Au+ At- ionic lattice distance to BH — initial 5 units — tidal grows ∝1/r³ — ionic -211mN vs tidal — <b>orbiting</b></div>
+  <div class="ro" id="ro-tidal">TIDAL: 0.07g BH M=7e-5 kg — r_s=1e-31 m — tidal at 1m = 2GMmR/r³ = 9e-15 N real — scaled to -211mN × tidal factor — <b>spaghettification lol</b></div>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-orbit"><div class="label">3DJS-1 — ORBIT — Au+ At- ionic rocksalt cluster orbiting 0.07g BH — black halogen ionic vs black hole — metal analogs ionic + BH</div></div>
+  <div class="cwrap" id="wrap-fall"><div class="label">3DJS-2 — FALL — Au+ At- ionic falling into BH — -211mN ionic bond vs tidal — spaghettification — black halogen ionic vs BH</div></div>
+  <div class="cwrap full" id="wrap-spaghet"><div class="label">3DJS-3 — SPAGHETTIFICATION — Au+ At- ionic lattice stretched by BH tidal — ionic -211mN breaks — At- black halogen ionic spaghettified into BH — lol — metal analogs ionic + BH analog</div></div>
+</div>
+
+<div class="card"><div class="mono">
+v144 ionic → BH — Au+ At- ionic falling into 0.07g BH — lol next
+
+Setup:
+- BH: M=0.07g=7e-5 kg — r_s=1.04e-31 m — scaled to visible 0.6 — mass small but density insane — 0.07g BH = 1.5kt
+- Ionic cluster: Au+ At- rocksalt 3×3×3 = 54 ions — 27 Au+ 1.37Å small yellow + 27 At- 2.27Å large black — ionic bond -211mN Coulomb — -211mV Madelung — total ionic mass ~ 27×197 +27×210 amu = ~ 1.8e-23 kg metal analog scaled? Actually real mass tiny vs BH mass 7e-5 kg — BH 3e18× heavier than cluster — BH dominates
+- Orbit: cluster orbiting BH at 5 units — orbital velocity v=√(GM/r) — GM=6.67e-11×7e-5=4.67e-15 — v=√(4.67e-15/5)=3e-8 m/s real — scaled up for viz to 0.02 units/frame — metal analog orbital
+
+Tidal vs Ionic:
+- Ionic bond F_ionic = k q1q2/r² = -1.74e-9 N real → -211mN analog
+- Tidal F_tidal = 2GMmR/r³ — m=Au mass ~3e-25 kg, R=lattice size ~1e-9 m, r=distance to BH — at r=1m: F_tidal=2×6.67e-11×7e-5×3e-25×1e-9/1 =9.3e-44 N real — tiny because BH mass tiny — but at r=1e-6 m: F=9.3e-26 N — still tiny — actually 0.07g BH tidal is weak far away — need to get to r=1e-10 m to beat ionic — F_tidal=9.3e-14 N at 1e-10m — still < ionic 1e-9 N — need r~2e-11m to equal ionic — so ionic holds until very close — then spaghettification lol
+- Scaled for viz: tidal factor ×1e12 to show spaghettification at 5 units — so -211mN ionic vs tidal -211mN ×(5/r)³ — when r→0, tidal → ∞ — lattice stretches
+
+Spaghettification:
+- Au+ At- cluster stretched along radial direction — ΔR = F_tidal / k_ionic — k_ionic ~ ionic bond stiffness — stretch factor ∝1/r³ — at r=2 units: stretch 1.2×, at r=0.5: stretch 5×, at r=0.1: stretch 100× — At- black halogen ionic spaghettified — lol
+- Visual: ionic rocksalt elongated into noodle — Au+ yellow small + At- black large stretched — eventually falls into BH horizon 0.6 — Hawking flash
+
+-211mN vs BH:
+- Ionic -211mN holds lattice together
+- BH tidal -211mN × (5/r)³ tries to rip apart
+- At r=5: tidal = -211mN ×1 = equal — orbit stable
+- At r=1: tidal = -211mN ×125 = -26N analog — ionic breaks — spaghettification starts — lol
+- At r→0: tidal → ∞ — ionic lattice becomes spaghetti — At- black halogen ionic noodle into BH
+
+Energy:
+- Ionic lattice energy ~5 eV per pair ×27 pairs =135 eV =2e-17 J real — scaled to -211mV ×27 = -5.7 V analog
+- BH energy 6.3e12 J =1.5kt — 3e29× more than ionic — BH eats ionic lol
+
+Metal analogs ionic + BH analog — Au+ Ag+ At- black + BH black — both black but one ionic one hole lol next
+
+Aggregate ionic BH:
+Au+ At- ionic -{100{Au+{100{At-{100{Au+{100{At-}}}}}}} net zero ionic — BH {100{BH+{100{BH-}}}} → Hawking → 1.5kt → breaks net zero lol — BH analog breaks metal analog net zero — lol next
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeGraph(id, minLog, maxLog, label){
+  const c=document.getElementById(id);
+  const ctx=c.getContext('2d');
+  function resize(){ c.width=c.clientWidth*devicePixelRatio; c.height=c.clientHeight*devicePixelRatio; }
+  resize();
+  let data=[];
+  function push(v){ data.push(v); if(data.length>100) data.shift(); }
+  function clear(){ data=[]; }
+  function draw(){
+    const w=c.width, h=c.height;
+    ctx.clearRect(0,0,w,h); ctx.fillStyle='#08080a'; ctx.fillRect(0,0,w,h);
+    ctx.strokeStyle='#1e1e24'; for(let i=0;i<=4;i++){ ctx.beginPath(); ctx.moveTo(0,h*i/4); ctx.lineTo(w,h*i/4); ctx.stroke(); }
+    ctx.fillStyle='#666'; ctx.font=`${10*devicePixelRatio}px monospace`; ctx.fillText(label,4,14*devicePixelRatio);
+    if(data.length>1){
+      function logToY(logVal){ const frac=(logVal-minLog)/(maxLog-minLog); return h - frac*h*0.85 - h*0.08; }
+      // draw
+      ctx.strokeStyle='#ffd700'; ctx.lineWidth=2*devicePixelRatio; ctx.beginPath();
+      data.forEach((v,i)=>{
+        const logVal=Math.log10(Math.max(1e-30,Math.abs(v)));
+        const x=(i/99)*w; const y=logToY(logVal);
+        if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+      });
+      ctx.stroke();
+      // last value
+      if(data.length>0){
+        const last=data[data.length-1];
+        ctx.fillStyle='#fff'; ctx.fillText(`${last.toExponential(2)}`, w-80*devicePixelRatio, 20*devicePixelRatio);
+      }
+    }
+  }
+  setInterval(draw,50); addEventListener('resize', resize);
+  return {push, clear};
+}
+const gTidal=makeGraph('g-tidal',-12,2,'TIDAL vs IONIC N log');
+const gFall=makeGraph('g-fall',-2,2,'DISTANCE to BH log');
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x08080a); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,0.55)); const d=new THREE.DirectionalLight(0xffffff,0.9); d.position.set(4,6,4); d.castShadow=true; s.add(d); }
+
+const matAuPlus=new THREE.MeshStandardMaterial({color:0xffd700, metalness:0.6, roughness:0.4, emissive:0x221500, emissiveIntensity:0.2});
+const matAtMinus=new THREE.MeshStandardMaterial({color:0x0a0a0a, metalness:0.4, roughness:0.25, emissive:0x222222, emissiveIntensity:0.4});
+const matBH=new THREE.MeshBasicMaterial({color:0x000000});
+const matHawking=new THREE.MeshStandardMaterial({color:0x88ccff, emissive:0x4488ff, emissiveIntensity:1.2, transparent:true, opacity:0.9});
+const matAgPlus=new THREE.MeshStandardMaterial({color:0xd0d0d8, metalness:0.6, roughness:0.35});
+
+let fns=[];
+
+// ORBIT
+{
+  const wrap=document.getElementById('wrap-orbit');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(40, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,4,8);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const bh=new THREE.Mesh(new THREE.SphereGeometry(0.6,32,32), matBH); scene.add(bh);
+  const horizon=new THREE.Mesh(new THREE.SphereGeometry(0.62,24,24), new THREE.MeshBasicMaterial({color:0x222222, wireframe:true, transparent:true, opacity:0.25})); scene.add(horizon);
+  const disk=new THREE.Mesh(new THREE.RingGeometry(0.8,1.9,48), new THREE.MeshStandardMaterial({color:0xffd700, side:THREE.DoubleSide, transparent:true, opacity:0.22, metalness:0.7})); disk.rotation.x=Math.PI/2; scene.add(disk);
+  const cluster=new THREE.Group(); scene.add(cluster);
+  const ions=[];
+  for(let x=0;x<2;x++) for(let y=0;y<2;y++) for(let z=0;z<2;z++){
+    for(let dx=0;dx<2;dx++) for(let dy=0;dy<2;dy++) for(let dz=0;dz<2;dz++){
+      const isCation=(dx+dy+dz)%2===0;
+      const pos=new THREE.Vector3((x+dx*0.5-0.75)*1.1, (y+dy*0.5-0.75)*1.1, (z+dz*0.5-0.75)*1.1);
+      const geo=isCation? new THREE.SphereGeometry(0.22,12,12) : new THREE.SphereGeometry(0.36,16,16);
+      const mat=isCation? matAuPlus : matAtMinus;
+      const m=new THREE.Mesh(geo, mat); m.position.copy(pos); m.userData={isCation, orig:pos.clone()}; cluster.add(m); ions.push(m);
+    }
+  }
+  cluster.position.set(5,0,0);
+  let angle=0, radius=5, falling=false, spaghet=false;
+  function updateTidal(){
+    const dist=cluster.position.length();
+    const tidalFactor=Math.pow(5/Math.max(0.3,dist),3); // -211mN × factor
+    const tidal=211*tidalFactor;
+    gTidal.push(tidal);
+    gFall.push(dist);
+    document.getElementById('ro-tidal').innerHTML=`TIDAL: 0.07g BH M=7e-5 kg — dist ${dist.toFixed(2)} — tidal factor ${(tidalFactor).toFixed(1)}× — tidal ${tidal.toFixed(0)} mN vs ionic -211mN — <b>${tidal>211?'spaghettifying lol':'holding ionic'}</b>`;
+    document.getElementById('ro-fall').innerHTML=`FALL: Au+ At- ionic distance ${dist.toFixed(2)} → BH — tidal ∝1/r³ — ${falling?'falling':'orbiting'} ${spaghet?'— SPAGHET lol':''}`;
+    return tidalFactor;
+  }
+
+  function setMode(mode){
+    falling=mode==='fall'; spaghet=mode==='spaghet';
+    if(mode==='orbit'){ falling=false; spaghet=false; }
+  }
+
+  fns.push({setMode, cluster, getDist:()=>cluster.position.length()});
+
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.016;
+    angle+= falling?0.01:0.012;
+    if(falling){
+      radius=Math.max(0.4, radius-0.02);
+      cluster.position.set(Math.cos(angle)*radius, Math.sin(angle*0.7)*0.5, Math.sin(angle)*radius);
+    } else {
+      cluster.position.set(Math.cos(angle)*radius, Math.sin(angle*0.3)*0.3, Math.sin(angle)*radius);
+    }
+    const tidalFactor=updateTidal();
+    // spaghet stretch
+    if(spaghet || tidalFactor>2){
+      const stretch=Math.min(5, tidalFactor*0.3);
+      ions.forEach(m=>{
+        const dir=m.userData.orig.clone().normalize();
+        if(dir.length()<0.1) return;
+        const radial = cluster.position.clone().normalize();
+        const along = radial.clone().multiplyScalar(dir.dot(radial)*stretch*0.3);
+        const perp = dir.clone().sub(radial.clone().multiplyScalar(dir.dot(radial))).multiplyScalar(1/stretch);
+        m.position.copy(m.userData.orig.clone().add(along).add(perp));
+      });
+    } else {
+      ions.forEach(m=>{ if(m.userData.orig) m.position.lerp(m.userData.orig,0.1); });
+    }
+    cluster.rotation.y+=0.005;
+    bh.rotation.y+=0.015; horizon.rotation.y-=0.01; disk.rotation.z+=0.005;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+// FALL
+{
+  const wrap=document.getElementById('wrap-fall');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(42, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,3,7);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const bh=new THREE.Mesh(new THREE.SphereGeometry(0.6,32,32), matBH); scene.add(bh);
+  const horizon=new THREE.Mesh(new THREE.SphereGeometry(0.62,24,24), new THREE.MeshBasicMaterial({color:0x333333, wireframe:true, transparent:true, opacity:0.2})); scene.add(horizon);
+  const cluster=new THREE.Group(); scene.add(cluster);
+  const ions=[];
+  for(let x=0;x<3;x++) for(let y=0;y<3;y++) for(let z=0;z<3;z++){
+    if(x===1&&y===1&&z===1) continue;
+    const isCation=(x+y+z)%2===0;
+    const pos=new THREE.Vector3((x-1)*0.7, (y-1)*0.7, (z-1)*0.7);
+    const geo=isCation? new THREE.SphereGeometry(0.18,12,12) : new THREE.SphereGeometry(0.32,14,14);
+    const mat=isCation? matAuPlus : matAtMinus;
+    const m=new THREE.Mesh(geo, mat); m.position.copy(pos); m.userData={orig:pos.clone(), isCation}; cluster.add(m); ions.push(m);
+  }
+  // central At- black
+  const atCenter=new THREE.Mesh(new THREE.SphereGeometry(0.38,20,20), matAtMinus); atCenter.position.set(0,0,0); atCenter.userData={orig:new THREE.Vector3(0,0,0)}; cluster.add(atCenter); ions.push(atCenter);
+  cluster.position.set(0,0,6);
+  let falling=false, radius=6;
+  function setMode(mode){ falling=mode==='fall'||mode==='spaghet'; if(mode==='orbit') falling=false; }
+  fns.push({setMode, cluster});
+
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.016;
+    if(falling){
+      radius=Math.max(0.35, radius-0.03);
+      cluster.position.set(0,0,radius);
+      const tidalFactor=Math.pow(6/Math.max(0.3,radius),3);
+      ions.forEach(m=>{
+        if(!m.userData.orig) return;
+        const dir=m.userData.orig.clone();
+        const stretch=Math.min(6, tidalFactor*0.25);
+        // stretch along z (radial)
+        m.position.copy(m.userData.orig.clone());
+        m.position.z += dir.z*stretch*0.4;
+        m.position.x = dir.x / Math.max(1,stretch*0.5);
+        m.position.y = dir.y / Math.max(1,stretch*0.5);
+      });
+      if(radius<=0.7){
+        // absorbed
+        cluster.visible=false;
+        setTimeout(()=>{ cluster.visible=true; radius=6; falling=false; ions.forEach(m=>{ if(m.userData.orig) m.position.copy(m.userData.orig); }); }, 800);
+      }
+    } else {
+      cluster.position.set(Math.sin(t*0.5)*1.2, Math.cos(t*0.4)*0.5, 6+Math.sin(t*0.3)*0.3);
+      ions.forEach(m=>{ if(m.userData.orig) m.position.lerp(m.userData.orig,0.08); });
+    }
+    cluster.rotation.y+=0.008;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+// SPAGHET
+{
+  const wrap=document.getElementById('wrap-spaghet');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(36, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,2,10);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const bh=new THREE.Mesh(new THREE.SphereGeometry(0.7,32,32), matBH); bh.position.set(0,0,0); scene.add(bh);
+  const horizon=new THREE.Mesh(new THREE.SphereGeometry(0.72,32,32), new THREE.MeshBasicMaterial({color:0x444444, wireframe:true, transparent:true, opacity:0.2})); scene.add(horizon);
+  const accDisk=new THREE.Mesh(new THREE.RingGeometry(0.9,2.8,64), new THREE.MeshStandardMaterial({color:0xffd700, side:THREE.DoubleSide, transparent:true, opacity:0.18, metalness:0.8})); accDisk.rotation.x=Math.PI/2; scene.add(accDisk);
+  const noodles=new THREE.Group(); scene.add(noodles);
+  // create many ionic noodles falling
+  function createNoodle(){
+    const noodle=new THREE.Group();
+    const len=12;
+    for(let i=0;i<len;i++){
+      const isCation=i%2===0;
+      const geo=isCation? new THREE.SphereGeometry(0.14,10,10) : new THREE.SphereGeometry(0.24,12,12);
+      const mat=isCation? matAuPlus : matAtMinus;
+      const m=new THREE.Mesh(geo, mat);
+      m.position.set(0,0,i*0.45);
+      noodle.add(m);
+    }
+    noodle.position.set((Math.random()-0.5)*6, (Math.random()-0.5)*3, 6+Math.random()*2);
+    noodle.userData={dist:6+Math.random()*2, speed:0.04+Math.random()*0.03, stretch:1};
+    noodles.add(noodle);
+  }
+  for(let i=0;i<6;i++) createNoodle();
+
+  let t=0, spaghet=false;
+  function setMode(mode){ spaghet=mode==='spaghet'||mode==='fall'; }
+
+  fns.push({setMode});
+
+  function animate(){
+    requestAnimationFrame(animate); t+=0.016;
+    noodles.children.forEach(noodle=>{
+      if(spaghet || true){
+        noodle.userData.dist=Math.max(0.3, noodle.userData.dist-noodle.userData.speed);
+        noodle.position.set(noodle.position.x*0.995, noodle.position.y*0.995, noodle.userData.dist);
+        const tidalFactor=Math.pow(6/Math.max(0.3,noodle.userData.dist),3);
+        noodle.userData.stretch=Math.min(8, 1+tidalFactor*0.15);
+        noodle.children.forEach((m,i)=>{
+          m.position.z=i*0.45*noodle.userData.stretch;
+          m.position.x=(Math.random()-0.5)*0.05;
+          m.scale.set(1/noodle.userData.stretch, 1/noodle.userData.stretch, 1);
+        });
+        if(noodle.userData.dist<=0.8){
+          // absorbed into BH
+          noodle.position.set((Math.random()-0.5)*6, (Math.random()-0.5)*3, 6+Math.random()*2);
+          noodle.userData.dist=6+Math.random()*2;
+        }
+      }
+    });
+    bh.rotation.y+=0.02; horizon.rotation.y-=0.015; accDisk.rotation.z+=0.004;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+document.getElementById('btn-fall').onclick=()=>{ fns.forEach(f=>f.setMode&&f.setMode('fall')); };
+document.getElementById('btn-orbit').onclick=()=>{ fns.forEach(f=>f.setMode&&f.setMode('orbit')); };
+document.getElementById('btn-spaghet').onclick=()=>{ fns.forEach(f=>f.setMode&&f.setMode('spaghet')); };
+document.getElementById('btn-reset').onclick=()=>{
+  fns.forEach(f=>f.setMode&&f.setMode('orbit'));
+  gTidal.clear(); gFall.clear();
+};
+</script>
+</body>
+</html>

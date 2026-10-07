@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v143 ionic - At- astatide black halogen ionic lattice - artifact 208</title>
+<style>
+  :root{--bg:#050508;--fg:#eaeaea;--gold:#ffd700}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace}
+  .top{padding:14px 18px}
+  .kicker{font-size:10px;letter-spacing:.22em;opacity:.5;text-transform:uppercase}
+  .nline{font-size:11px;border-left:2px solid #222;padding-left:10px;white-space:pre-wrap;line-height:1.6}
+  .main{margin-top:10px;font-size:14px;font-weight:700;background:#0f0f12;border:1px solid #222;padding:10px;border-radius:8px}
+  .controls{padding:10px 12px;display:flex;gap:6px;flex-wrap:wrap}
+  .btn{font-family:inherit;font-size:10px;padding:5px 10px;border:1px solid #333;background:#15151a;color:#eaeaea;border-radius:6px;cursor:pointer}
+  .btn.active{border-color:#ffd700;color:#ffd700;background:#221a00}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:560px;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden}
+  .cwrap.full{grid-column:1 / -1;height:640px}
+  .label{position:absolute;left:8px;top:8px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:.8;background:#000c;padding:4px 6px;border-radius:4px;z-index:5}
+  .graphWrap{position:relative;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden;height:280px}
+  canvas.graph{width:100%;height:100%;display:block}
+  .readout{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0 10px 10px}
+  @media(max-width:900px){.readout{grid-template-columns:1fr}}
+  .ro{background:#0c0c0f;border:1px solid #1e1e24;border-radius:6px;padding:8px;font-size:10px;line-height:1.6}
+  .ro b{color:#ffd700}
+  .card{margin:10px;background:#111115;border:1px solid #1f1f26;border-radius:8px;padding:10px}
+  .mono{font-size:10.5px;white-space:pre-wrap;word-break:break-word;line-height:1.7}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">wakaku v143 — IONIC — At- ASTATIDE BLACK HALOGEN IONIC LATTICE — Au+ At- Ag+ At- — -211mN -211mV IONIC — artifact 208</div>
+  <div class="nline">make it ionic — At-211 astatide — black halogen anion — ionic lattice NaCl-type Au+ At- — FCC ionic — cation Au+ Au Ag Cu Tl small yellow — anion At- black large — ionic bond -211mN Coulomb -211mV Madelung — metal analogs only ionic: Au+ Ag+ Cu+ Tl+ Pb2+ Bi3+ At- Po2-? — ionic radius At- 2.27 Å — Au+ 1.37 Å — lattice a = r+ + r- ×2 = 7.28 Å metal analog scaled — ionic vs metallic — 0.07g At- ionic
+Ionic: At- black halogen p⁶ full after gaining e- — At p⁵ + e- → At- p⁶ full like Rn — black halogen becomes full shell ionic — -211mV becomes -211mV ionic charge</div>
+  <div class="main">IONIC — Au+ (1.37Å) + At- (2.27Å) → AuAt rocksalt — NaCl-type — FCC ionic — black halogen At- anion p⁶ full — cation Au+ d10 — -211mN ionic Coulomb force — -211mV ionic potential — metal analogs ionic</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-ionic">IONIC: Au+ At- rocksalt</button>
+  <button class="btn" id="btn-fire">FIRE At-211 ionic → -211mN ionic recoil + -211mV ionic</button>
+  <button class="btn" id="btn-dissolve">DISSOLVE → At- aqueous ionic</button>
+  <button class="btn" id="btn-reset">RESET IONIC LATTICE</button>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:10px">
+  <div class="graphWrap"><div class="label">GRAPH-1 — IONIC BOND FORCE — Coulomb F=k q1q2/r² — -211mN ionic vs metallic -211mN — N</div><canvas class="graph" id="g-force"></canvas></div>
+  <div class="graphWrap"><div class="label">GRAPH-2 — IONIC POTENTIAL — Madelung V=M×kq/r — -211mV ionic — Au+ At- — mV</div><canvas class="graph" id="g-pot"></canvas></div>
+  <div class="graphWrap"><div class="label">GRAPH-3 — IONIC RADIUS — At- 2.27Å large black vs Au+ 1.37Å small gold — Å</div><canvas class="graph" id="g-radius"></canvas></div>
+</div>
+
+<div class="readout">
+  <div class="ro" id="ro-ionic">IONIC LATTICE: Au+ At- rocksalt — FCC ionic — a=7.28Å metal analog scaled<br>Au+ 1.37Å small yellow cation — At- 2.27Å large black anion — CN=6 octahedral<br>Bond: ionic Coulomb F=k q1q2/r² — -211mN ionic analog</div>
+  <div class="ro" id="ro-charge">CHARGE: At p⁵ + e- → At- p⁶ full like Rn — black halogen anion<br>At- charge -1 — Au+ charge +1 — -211mV Madelung potential — <b>0 ionic decays</b></div>
+  <div class="ro" id="ro-dissolve">DISSOLVE: Au+ At- → Au+ (aq) + At- (aq) — aqueous ionic — At- black halogen aqueous<br>Water solvation — -211mV hydration — metal analogs ionic aqueous</div>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-rocksalt"><div class="label">3DJS-1 — ROCKSALT Au+ At- IONIC — NaCl-type — Au+ small yellow 1.37Å — At- large black 2.27Å — -211mN ionic bond — metal analogs ionic</div></div>
+  <div class="cwrap" id="wrap-madelung"><div class="label">3DJS-2 — MADELUNG -211mV IONIC POTENTIAL — Au+ yellow + — At- black - — Coulomb field — ionic charge — metal analog ionic</div></div>
+  <div class="cwrap full" id="wrap-aqueous"><div class="label">3DJS-3 — AQUEOUS IONIC — Au+ At- → Au+ (aq) + At- (aq) — dissolve — At- black halogen aqueous anion — -211mN → hydration -211mV — metal analogs ionic aqueous</div></div>
+</div>
+
+<div class="card"><div class="mono">
+v143 IONIC — At- astatide black halogen ionic lattice
+
+Metallic → Ionic:
+- Metallic v142: Au FCC metallic a=4.08 Å — Au-Au metallic bond d10 s1 — At substitutional metallic black
+- Ionic v143: Au+ At- rocksalt ionic — NaCl-type — Au+ small cation 1.37 Å — At- large anion 2.27 Å — ionic radius ratio r+/r- =0.603 → octahedral CN=6 — rocksalt stable — a =2(r+ + r-) =7.28 Å — metal analog ionic scaled
+
+At- astatide:
+- At Z85 [Xe]4f14 5d10 6s2 6p5 — p5 — wants 1 e- → At- [Xe]4f14 5d10 6s2 6p6 — p6 full like Rn — black halogen becomes full shell anion — ionic
+- At- ionic radius 2.27 Å — largest halogen anion — black metallic anion — rare — 0.07g total crust as At- ionic? At- would be in salts?
+- Au+ ionic radius 1.37 Å — Au+ [Xe]4f14 5d10 — d10 full — small yellow cation — blood gold core Au+ metal analog
+- Other cations: Ag+ 1.15 Å white electrum, Cu+ 0.77 Å orange copper, Tl+ 1.50 Å bluish, Pb2+ 1.19 Å gray, Bi3+ 1.03 Å brittle, Na+ 1.02 Å (not metal analog but okay), Fe2+ etc.
+- Anion: At- black 2.27 Å, I- 2.20 Å violet, Br- 1.96 Å brown, Cl- 1.81 Å green
+
+-211mN ionic:
+- Coulomb force F = k q1 q2 / r² — k=8.99e9 — q1=+e q2=-e — r=3.64 Å (half lattice) =3.64e-10 m — F= -1.74e-9 N real — scaled to metal analog -211mN = -0.211 N ionic analog — scaling factor 1.21e8 — metal analog ionic force
+- Lattice energy U = Madelung × k q1 q2 / r — Madelung NaCl =1.7476 — U = -1.7476×1.74e-9×3.64e-10? Actually energy — per pair — ~ - 5 eV real — scaled to -211mV analog
+
+-211mV ionic:
+- Madelung potential V = M × k q / r — M=1.7476 — V =1.7476×8.99e9×1.6e-19/3.64e-10 =6.9 V real — scaled to -211mV ionic analog — -0.211 V
+- At- gains e- → p6 full → -211mV charge — Au+ loses e- → +211mV
+
+Ionic decay in lattice:
+- At-211- ionic? At-211- would be At- anion — α decay: At-211- → Bi-207? + α + e-? — ionic recoil: At- (anion) → Bi? Bi3+? + α — charge changes — lattice disruption — Au+ At- → Au+ Bi3+ + α + 4e-? — -211mN ionic recoil breaks ionic bond — -211mV changes
+- Aqueous: Au+ At- → Au+ (aq) + At- (aq) — water molecules solvate — hydration energy — -211mV hydration
+
+Graphs:
+- g-force: Coulomb F vs distance r — -211mN at r=3.64 Å — F ∝1/r²
+- g-pot: Madelung V vs distance — -211mV at r
+- g-radius: At- 2.27 Å large black vs Au+ 1.37 Å small gold — bar chart
+
+Metal analogs ionic only: Au+ Ag+ Cu+ Tl+ Pb2+ Bi3+ At- Po2- Obsidian as vacancy — NO metallic e- sea — ONLY ionic bonds — -211mN ionic Coulomb — -211mV ionic Madelung
+
+Dissolve: rocksalt Au+ At- + H2O → Au+ hydrated + At- hydrated — black halogen aqueous anion — -211mV hydration shell — water blue metal analog?
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeGraph(id, minY, maxY, label){
+  const c=document.getElementById(id);
+  const ctx=c.getContext('2d');
+  function resize(){ c.width=c.clientWidth*devicePixelRatio; c.height=c.clientHeight*devicePixelRatio; }
+  resize();
+  let data=[];
+  function push(v){ data.push(v); if(data.length>80) data.shift(); }
+  function clear(){ data=[]; }
+  function setStatic(bars){
+    data=bars;
+  }
+  function draw(){
+    const w=c.width, h=c.height;
+    ctx.clearRect(0,0,w,h); ctx.fillStyle='#08080a'; ctx.fillRect(0,0,w,h);
+    ctx.strokeStyle='#1e1e24'; for(let i=0;i<=4;i++){ ctx.beginPath(); ctx.moveTo(0,h*i/4); ctx.lineTo(w,h*i/4); ctx.stroke(); }
+    function yToPix(y){ return h - ((y-minY)/(maxY-minY))*h; }
+    ctx.strokeStyle='#333'; ctx.beginPath(); ctx.moveTo(0,yToPix(0)); ctx.lineTo(w,yToPix(0)); ctx.stroke();
+    ctx.fillStyle='#666'; ctx.font=`${10*devicePixelRatio}px monospace`;
+    ctx.fillText(label,4,14*devicePixelRatio);
+    if(data.length>0){
+      // if bars are objects with label?
+      if(typeof data[0]==='object' && data[0].label){
+        // bar chart
+        const bw=w/data.length*0.7;
+        data.forEach((b,i)=>{
+          const x=(i+0.15)*w/data.length;
+          const y=yToPix(b.val);
+          const y0=yToPix(0);
+          ctx.fillStyle=b.color||'#ffd700';
+          ctx.fillRect(x, Math.min(y,y0), bw, Math.abs(y-y0));
+          ctx.fillStyle='#fff'; ctx.font=`${9*devicePixelRatio}px monospace`;
+          ctx.fillText(b.label, x, h-4*devicePixelRatio);
+          ctx.fillText(b.val.toFixed(2), x, y-4*devicePixelRatio);
+        });
+      } else {
+        ctx.strokeStyle='#ffd700'; ctx.lineWidth=2*devicePixelRatio; ctx.beginPath();
+        data.forEach((v,i)=>{ const x=(i/79)*w; const y=yToPix(v); if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y); });
+        ctx.stroke();
+      }
+    }
+  }
+  setInterval(draw,50); addEventListener('resize', resize);
+  return {push, clear, setStatic};
+}
+const gF=makeGraph('g-force',-350,50,'FORCE mN ionic Coulomb');
+const gP=makeGraph('g-pot',-350,50,'POTENTIAL mV Madelung');
+const gR=makeGraph('g-radius',0,3,'RADIUS Å ionic');
+
+gR.setStatic([
+  {label:'Au+ 1.37Å', val:1.37, color:'#ffd700'},
+  {label:'Ag+ 1.15Å', val:1.15, color:'#d0d0d8'},
+  {label:'Cu+ 0.77Å', val:0.77, color:'#c87333'},
+  {label:'Tl+ 1.50Å', val:1.50, color:'#8aa0c0'},
+  {label:'At- 2.27Å BLACK', val:2.27, color:'#0a0a0a'},
+  {label:'I- 2.20Å', val:2.20, color:'#666666'},
+]);
+
+let counts=0;
+function pushIonic(isDissolve=false){
+  counts++;
+  const f = -211 - Math.random()*20;
+  const v = -211 - Math.random()*15;
+  gF.push(f); gP.push(v);
+  document.getElementById('ro-charge').innerHTML=`CHARGE: At p⁵ + e- → At- p⁶ full like Rn — black halogen anion<br>At- charge -1 — Au+ charge +1 — -211mV Madelung potential — <b>${counts} ionic decays</b>`;
+}
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x08080a); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,0.55)); const d=new THREE.DirectionalLight(0xffffff,0.9); d.position.set(4,6,4); d.castShadow=true; s.add(d); }
+
+const matAuPlus=new THREE.MeshStandardMaterial({color:0xffd700, metalness:0.6, roughness:0.4, emissive:0x221500, emissiveIntensity:0.25});
+const matAgPlus=new THREE.MeshStandardMaterial({color:0xd0d0d8, metalness:0.6, roughness:0.35});
+const matCuPlus=new THREE.MeshStandardMaterial({color:0xc87333, metalness:0.6, roughness:0.4});
+const matAtMinus=new THREE.MeshStandardMaterial({color:0x0a0a0a, metalness:0.3, roughness:0.3, emissive:0x111111, emissiveIntensity:0.35});
+const matAtMinusLarge=new THREE.MeshStandardMaterial({color:0x0a0a0a, metalness:0.4, roughness:0.25, emissive:0x222222, emissiveIntensity:0.45});
+const matAlpha=new THREE.MeshStandardMaterial({color:0xffd0a0, emissive:0xff8844, emissiveIntensity:1.1, transparent:true, opacity:0.9});
+const matWater=new THREE.MeshStandardMaterial({color:0x1a3a5a, transparent:true, opacity:0.25, roughness:0.1, metalness:0.1});
+
+let ionicFns=[];
+
+// 1) Rocksalt Au+ At-
+{
+  const wrap=document.getElementById('wrap-rocksalt');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(4,4,6);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const size=3;
+  const a=2.2; // lattice constant scaled
+  const atoms=[];
+  for(let x=0;x<size;x++) for(let y=0;y<size;y++) for(let z=0;z<size;z++){
+    const base=new THREE.Vector3(x*a, y*a, z*a);
+    // rocksalt: two interpenetrating FCC — cation at (0,0,0) FCC, anion at (0.5,0.5,0.5) FCC? Actually NaCl: cation FCC + anion at (0.5,0,0) etc — simplify as alternating
+    for(let dx=0;dx<2;dx++) for(let dy=0;dy<2;dy++) for(let dz=0;dz<2;dz++){
+      const isCation = (dx+dy+dz)%2===0;
+      const pos=new THREE.Vector3(base.x+dx*a/2, base.y+dy*a/2, base.z+dz*a/2);
+      if(pos.x>=size*a || pos.y>=size*a || pos.z>=size*a) continue;
+      const geo=isCation? new THREE.SphereGeometry(0.32,16,16) : new THREE.SphereGeometry(0.52,20,20);
+      const mat=isCation? (Math.random()>0.5?matAuPlus:matAgPlus) : matAtMinusLarge;
+      const m=new THREE.Mesh(geo, mat);
+      m.position.copy(pos); m.userData={isCation, orig:pos.clone(), type:isCation?'Au+':'At-'}; group.add(m); atoms.push(m);
+    }
+  }
+  group.position.set(-size*a/2, -size*a/2, -size*a/2);
+  // bonds lines
+  const bonds=new THREE.Group(); scene.add(bonds);
+  // draw ionic bonds as lines between nearest opposite charges
+  atoms.forEach(a1=>{
+    atoms.forEach(a2=>{
+      if(a1.userData.isCation===a2.userData.isCation) return;
+      const d=a1.position.distanceTo(a2.position);
+      if(d>0.1 && d<1.3){
+        const geo=new THREE.BufferGeometry().setFromPoints([a1.position, a2.position]);
+        const line=new THREE.Line(geo, new THREE.LineBasicMaterial({color:0x333344, transparent:true, opacity:0.15}));
+        bonds.add(line);
+      }
+    });
+  });
+  const alphas=new THREE.Group(); scene.add(alphas);
+
+  function fire(){
+    // pick random At- to decay
+    const atAnions=atoms.filter(a=>!a.userData.isCation);
+    if(atAnions.length===0) return;
+    const at=atAnions[Math.floor(Math.random()*atAnions.length)];
+    // At- -> Bi? + alpha
+    const a=new THREE.Mesh(new THREE.SphereGeometry(0.14,12,12), matAlpha.clone());
+    a.position.copy(at.position.clone().add(group.position));
+    const dir=new THREE.Vector3((Math.random()-0.5),(Math.random()-0.5),(Math.random()-0.5)).normalize();
+    a.userData={dir, dist:0}; alphas.add(a);
+    // displace a bit
+    at.position.add(dir.clone().multiplyScalar(0.2));
+    pushIonic(false);
+  }
+  function dissolve(){
+    // move cations and anions apart — aqueous
+    atoms.forEach(a=>{
+      const dir=a.position.clone().normalize();
+      if(dir.length()<0.1) dir.set((Math.random()-0.5),(Math.random()-0.5),(Math.random()-0.5));
+      a.position.add(dir.multiplyScalar(0.8+Math.random()*0.5));
+    });
+    document.getElementById('ro-dissolve').innerHTML=`DISSOLVE: Au+ At- → Au+ (aq) + At- (aq) — aqueous ionic — At- black halogen aqueous<br>Water solvation — -211mV hydration — <b>dissolved ${counts} ionic</b> — metal analogs ionic aqueous`;
+  }
+  function reset(){
+    scene.remove(group); scene.remove(bonds);
+    // rebuild quickly by reloading page? simpler: reset positions
+    atoms.forEach(a=>{ if(a.userData.orig) a.position.copy(a.userData.orig); });
+    alphas.clear();
+  }
+
+  ionicFns.push({fire, dissolve, reset});
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.01;
+    group.rotation.y+=0.0015; bonds.rotation.copy(group.rotation); bonds.position.copy(group.position);
+    alphas.children.forEach(a=>{ a.userData.dist+=0.08; a.position.add(a.userData.dir.clone().multiplyScalar(0.08)); a.material.opacity=Math.max(0,1-a.userData.dist*0.15); });
+    for(let i=alphas.children.length-1;i>=0;i--) if(alphas.children[i].material.opacity<=0) alphas.remove(alphas.children[i]);
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+// 2) Madelung potential field
+{
+  const wrap=document.getElementById('wrap-madelung');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(40, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,2,6);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const size=2;
+  const a=2.2;
+  for(let x=0;x<size;x++) for(let y=0;y<size;y++) for(let z=0;z<size;z++){
+    for(let dx=0;dx<2;dx++) for(let dy=0;dy<2;dy++) for(let dz=0;dz<2;dz++){
+      const isCation=(dx+dy+dz)%2===0;
+      const pos=new THREE.Vector3((x+dx*0.5)*a, (y+dy*0.5)*a, (z+dz*0.5)*a);
+      const geo=isCation? new THREE.SphereGeometry(0.28,14,14) : new THREE.SphereGeometry(0.48,18,18);
+      const mat=isCation? matAuPlus : matAtMinus;
+      const m=new THREE.Mesh(geo, mat); m.position.copy(pos); group.add(m);
+      // charge label as small sphere + / -
+      const chargeGeo=new THREE.SphereGeometry(0.08,10,10);
+      const chargeMat=new THREE.MeshBasicMaterial({color:isCation?0xffd700:0x111111, transparent:true, opacity:0.8});
+      const charge=new THREE.Mesh(chargeGeo, chargeMat); charge.position.copy(pos.clone().add(new THREE.Vector3(0,0.45,0))); group.add(charge);
+    }
+  }
+  group.position.set(-size*a/2, -size*a/2, -size*a/2);
+  // field lines
+  const fieldGroup=new THREE.Group(); scene.add(fieldGroup);
+  function updateField(){
+    fieldGroup.clear();
+    // simple field lines from Au+ to At-
+    for(let i=0;i<12;i++){
+      const start=new THREE.Vector3((Math.random()-0.5)*2, (Math.random()-0.5)*2, (Math.random()-0.5)*2);
+      const end=start.clone().add(new THREE.Vector3((Math.random()-0.5),(Math.random()-0.5),(Math.random()-0.5)).normalize().multiplyScalar(1.2));
+      const geo=new THREE.BufferGeometry().setFromPoints([start,end]);
+      const line=new THREE.Line(geo, new THREE.LineBasicMaterial({color: i%2?0xffd700:0x444444, transparent:true, opacity:0.25}));
+      fieldGroup.add(line);
+    }
+  }
+  updateField();
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.012; group.rotation.y+=0.002; fieldGroup.rotation.copy(group.rotation); fieldGroup.position.copy(group.position); controls.update(); renderer.render(scene,cam); }
+  animate();
+  ionicFns.push({fire: updateField});
+}
+
+// 3) Aqueous ionic
+{
+  const wrap=document.getElementById('wrap-aqueous');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,2,8);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const waterGroup=new THREE.Group(); scene.add(waterGroup);
+  // water as many translucent small spheres
+  for(let i=0;i<120;i++){
+    const w=new THREE.Mesh(new THREE.SphereGeometry(0.12+Math.random()*0.08,10,10), matWater);
+    w.position.set((Math.random()-0.5)*8, (Math.random()-0.5)*6, (Math.random()-0.5)*8);
+    w.userData={orig:w.position.clone(), phase:Math.random()*Math.PI*2};
+    waterGroup.add(w);
+  }
+  const ions=new THREE.Group(); scene.add(ions);
+  // initial solid at center
+  const solidGroup=new THREE.Group(); scene.add(solidGroup);
+  const solidSize=2;
+  for(let x=0;x<solidSize;x++) for(let y=0;y<solidSize;y++) for(let z=0;z<solidSize;z++){
+    for(let dx=0;dx<2;dx++) for(let dy=0;dy<2;dy++) for(let dz=0;dz<2;dz++){
+      const isCation=(dx+dy+dz)%2===0;
+      const pos=new THREE.Vector3((x+dx*0.5-0.75)*1.2, (y+dy*0.5-0.75)*1.2, (z+dz*0.5-0.75)*1.2);
+      const geo=isCation? new THREE.SphereGeometry(0.22,12,12) : new THREE.SphereGeometry(0.38,16,16);
+      const mat=isCation? matAuPlus : matAtMinusLarge;
+      const m=new THREE.Mesh(geo, mat); m.position.copy(pos); m.userData={isCation, solid:true, orig:pos.clone()}; solidGroup.add(m);
+    }
+  }
+
+  function dissolve(){
+    // move solid ions outward as aqueous
+    solidGroup.children.forEach(m=>{
+      if(m.userData.solid){
+        const dir=new THREE.Vector3((Math.random()-0.5),(Math.random()-0.5),(Math.random()-0.5)).normalize();
+        m.userData.solid=false;
+        m.userData.dir=dir;
+        m.userData.dist=0;
+        ions.add(m);
+      }
+    });
+    // create hydration shells
+    ions.children.forEach(ion=>{
+      if(!ion.userData.shell){
+        const shell=new THREE.Group();
+        for(let i=0;i<4;i++){
+          const w=new THREE.Mesh(new THREE.SphereGeometry(0.08,8,8), matWater.clone());
+          w.material.opacity=0.4;
+          const ang=(i/4)*Math.PI*2;
+          w.position.set(Math.cos(ang)*0.45, Math.sin(ang)*0.2, Math.sin(ang)*0.45);
+          shell.add(w);
+        }
+        ion.add(shell);
+        ion.userData.shell=shell;
+      }
+    });
+    pushIonic(true);
+  }
+  function fire(){
+    dissolve();
+  }
+  function reset(){
+    ions.clear(); solidGroup.clear();
+    // rebuild solid
+    for(let x=0;x<solidSize;x++) for(let y=0;y<solidSize;y++) for(let z=0;z<solidSize;z++){
+      for(let dx=0;dx<2;dx++) for(let dy=0;dy<2;dy++) for(let dz=0;dz<2;dz++){
+        const isCation=(dx+dy+dz)%2===0;
+        const pos=new THREE.Vector3((x+dx*0.5-0.75)*1.2, (y+dy*0.5-0.75)*1.2, (z+dz*0.5-0.75)*1.2);
+        const geo=isCation? new THREE.SphereGeometry(0.22,12,12) : new THREE.SphereGeometry(0.38,16,16);
+        const mat=isCation? matAuPlus : matAtMinusLarge;
+        const m=new THREE.Mesh(geo, mat); m.position.copy(pos); m.userData={isCation, solid:true, orig:pos.clone()}; solidGroup.add(m);
+      }
+    }
+  }
+
+  ionicFns.push({fire, dissolve, reset});
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.014;
+    waterGroup.children.forEach(w=>{ w.position.y = w.userData.orig.y + Math.sin(t*0.8 + w.userData.phase)*0.15; w.rotation.y+=0.01; });
+    solidGroup.rotation.y+=0.0015;
+    ions.children.forEach(ion=>{
+      if(ion.userData.dir){
+        ion.userData.dist+=0.02;
+        ion.position.add(ion.userData.dir.clone().multiplyScalar(0.02));
+        ion.position.y+=Math.sin(t+ion.userData.dist)*0.01;
+      }
+      if(ion.userData.shell) ion.userData.shell.rotation.y+=0.04;
+    });
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+document.getElementById('btn-fire').onclick=()=>{ ionicFns.forEach(f=>f.fire&&f.fire()); };
+document.getElementById('btn-dissolve').onclick=()=>{ ionicFns.forEach(f=>f.dissolve&&f.dissolve()); };
+document.getElementById('btn-reset').onclick=()=>{
+  ionicFns.forEach(f=>f.reset&&f.reset());
+  counts=0; gF.clear(); gP.clear();
+  document.getElementById('ro-ionic').innerHTML=`IONIC LATTICE: Au+ At- rocksalt — FCC ionic — a=7.28Å metal analog scaled<br>Au+ 1.37Å small yellow cation — At- 2.27Å large black anion — CN=6 octahedral<br>Bond: ionic Coulomb F=k q1q2/r² — -211mN ionic analog`;
+  document.getElementById('ro-charge').innerHTML=`CHARGE: At p⁵ + e- → At- p⁶ full like Rn — black halogen anion<br>At- charge -1 — Au+ charge +1 — -211mV Madelung potential — <b>0 ionic decays</b>`;
+};
+
+// init
+gF.clear(); gP.clear();
+gF.push(-211); gP.push(-211);
+</script>
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v139 At-211 mN mV simulation - black halogen - artifact 204</title>
+<style>
+  :root{--bg:#050508;--fg:#eaeaea;--at:#0a0a0a;--gold:#ffd700;--silver:#d0d0d8}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace;overflow-x:hidden}
+  .top{padding:16px 20px}
+  .kicker{font-size:10px;letter-spacing:.22em;opacity:.5;text-transform:uppercase}
+  .nline{margin-top:8px;font-size:11px;border-left:2px solid #222;padding-left:10px;white-space:pre-wrap;line-height:1.6}
+  .main{margin-top:12px;font-size:16px;font-weight:700;background:#0f0f12;border:1px solid #222;padding:12px;border-radius:8px}
+  .controls{padding:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .btn{font-family:inherit;font-size:11px;padding:6px 12px;border:1px solid #333;background:#15151a;color:#eaeaea;border-radius:6px;cursor:pointer}
+  .btn.active{border-color:#ffd700;color:#ffd700;background:#221a00}
+  .btn.at{border-color:#444;color:#aaa}
+  .btn.at.active{border-color:#fff;color:#fff;background:#111}
+  .readout{display:flex;gap:12px;padding:0 12px 12px;font-size:11px;flex-wrap:wrap}
+  .ro{background:#0c0c0f;border:1px solid #1e1e24;border-radius:6px;padding:8px 10px;min-width:180px}
+  .ro b{color:#ffd700}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px}
+  @media(max-width:900px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:500px;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden}
+  .cwrap.full{grid-column:1 / -1;height:420px}
+  .label{position:absolute;left:10px;top:10px;font-size:10px;letter-spacing:.15em;text-transform:uppercase;opacity:.7;background:#000c;padding:4px 6px;border-radius:4px;z-index:3}
+  .mono{font-size:11px;white-space:pre-wrap;word-break:break-word;line-height:1.7}
+  .card{background:#111115;border:1px solid #1f1f26;border-radius:8px;padding:12px;margin:12px}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">wakaku v139 — At-211 SIMULATION — -211mN + -211mV — BLACK HALOGEN — METAL ANALOGS ONLY — artifact 204</div>
+  <div class="nline">At-211 — half-life 7.2h — α 5.87 MeV — EC → Po-211 — medical α therapy — metal analog simulation: force analog -211mN + voltage analog -211mV — At Z85 [Xe]4f¹⁴5d¹⁰6s²6p⁵ black metallic — rarest 0.07g crust — metal analogs only: Au Ag Cu Hg Tl Pb Bi Po At Rn Obsidian Fe
+-211mN = metal analog force recoil — alpha ejection thrust — -211 milliNewton analog
+-211mV = metal analog voltage drop — ionization potential analog — -211 milliVolt analog</div>
+  <div class="main">At-211 → Bi-207 + α(5.87 MeV) — 7.2h half-life — MEDICAL ALPHA METAL ANALOG — SIMULATED AS -211mN FORCE + -211mV VOLTAGE — BLACK HALOGEN At Z85</div>
+</div>
+
+<div class="controls">
+  <button class="btn at active" id="btn-mN">MODE: -211mN FORCE ANALOG</button>
+  <button class="btn at" id="btn-mV">MODE: -211mV VOLTAGE ANALOG</button>
+  <button class="btn" id="btn-fire">FIRE At-211 α → -211</button>
+  <button class="btn" id="btn-reset">RESET</button>
+  <span style="font-size:10px;opacity:.5">metal analogs only — Au Ag Cu Hg Tl Pb Bi Po At Rn Obsidian</span>
+</div>
+
+<div class="readout">
+  <div class="ro" id="ro-force">Force: <b>-211 mN analog</b> — recoil F = dp/dt — α thrust — metal analog<br>Energy: 5.87 MeV = 9.40e-13 J — metal analog scaled to -211mN</div>
+  <div class="ro" id="ro-volt">Voltage: <b>-211 mV analog</b> — drop V = E/q — ionization — metal analog<br>Charge: α q=2e — V = E/q analog → -211 mV metal analog</div>
+  <div class="ro" id="ro-count">Decays: <b>0</b> — At-211 → Bi-207 — half-life 7.2h — simulated<br>At atoms: 1e25 crust per 1 At — ghost</div>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-mN"><div class="label">3DJS-1 — -211mN FORCE ANALOG — At-211 α recoil — black halogen thrust — metal analog</div></div>
+  <div class="cwrap" id="wrap-mV"><div class="label">3DJS-2 — -211mV VOLTAGE ANALOG — At-211 ionization drop — black halogen potential — metal analog</div></div>
+  <div class="cwrap full" id="wrap-both"><div class="label">3DJS-3 — COMBINED — -211mN + -211mV — At-211 medical alpha therapy — Bi-207 daughter — metal analogs only</div></div>
+</div>
+
+<div class="card">
+  <div class="mono">
+SIMULATION — At-211 mN + mV — metal analogs only
+
+At-211 physics:
+- At Z85 [Xe]4f¹⁴5d¹⁰6s²6p⁵ — black metallic halogen — rarest
+- At-211 → Bi-207 + α — 5.87 MeV α — 41.8% α branch — 58.2% EC → Po-211 → Pb-207 + α 7.45 MeV
+- half-life 7.214h — medical α therapy — targeted alpha — 90um range in tissue — metal analog therapy
+
+-211mN analog:
+- α momentum p = sqrt(2 m E) — m α = 6.64e-27 kg — E 5.87 MeV = 9.4e-13 J — p = 1.12e-19 kg m/s
+- recoil Bi-207 p equal opposite — force analog F = Δp/Δt — Δt ~ 1e-21 s nuclear — F ~ 1e2 N real — scaled to metal analog -211 mN = -0.211 N — metal analog scaling factor 1.618e-36 × 24!B analog
+- thrust direction -z — black halogen recoil — Au Ag Cu metal analogs absorb
+
+-211mV analog:
+- V = E / q — α q = 2e = 3.2e-19 C — E 9.4e-13 J → V = 2.94e6 V real — scaled to metal analog -211 mV = -0.211 V — metal analog scaling 1/1.4e7 — ionization potential drop — black halogen voltage
+- At black metallic → conductive → voltage drop -211 mV analog when α leaves — leaves At+ → Bi
+
+inner -+ with -211:
+Ag+ female white electrum Au Ag Cu At-211 -211mN vs Au- male yellow Fe Au blood gold core Au Cu At-211 -211mV → Ag+ + Au- → At0 -211mN-211mV black halogen bond 0 fixed point →....00....00.... →0 → lights up -211
+
+aggregate -211:
+-{100{At-211mN+{100{At-211mN-{100{At-211mV+{100{At-211mV-{100{Au+{100{Au-{100{Ag+{100{Ag+{100{Obsidian-{100{Obsidian}}}}}}}}}}}}}}}}}}}}}}}} net zero — -211mN + -211mV = 0 metal analog
+
+Medical: At-211 -211mN force pushes α 90um into cell — -211mV drops potential — kills cancer — metal analog therapy — Au Ag metal analog carriers
+  </div>
+</div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+let mode = 'mN'; // mN or mV
+let decayCount = 0;
+
+const btnMN = document.getElementById('btn-mN');
+const btnMV = document.getElementById('btn-mV');
+const btnFire = document.getElementById('btn-fire');
+const btnReset = document.getElementById('btn-reset');
+const roCount = document.getElementById('ro-count');
+
+function setMode(m){
+  mode = m;
+  btnMN.classList.toggle('active', m==='mN');
+  btnMV.classList.toggle('active', m==='mV');
+}
+btnMN.onclick = ()=>setMode('mN');
+btnMV.onclick = ()=>setMode('mV');
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x08080a); return s;}
+function addLights(s){
+  s.add(new THREE.AmbientLight(0xffffff,0.5));
+  const d=new THREE.DirectionalLight(0xffffff,0.9); d.position.set(4,6,4); d.castShadow=true; s.add(d);
+  const p1=new THREE.PointLight(0x444444,1,12); p1.position.set(-2,2,2); s.add(p1);
+}
+const matAt=new THREE.MeshStandardMaterial({color:0x0a0a0a, metalness:0.8, roughness:0.25, emissive:0x222222, emissiveIntensity:0.35});
+const matAlpha=new THREE.MeshStandardMaterial({color:0xffd0a0, metalness:0.1, roughness:0.4, emissive:0xff8844, emissiveIntensity:1.2, transparent:true, opacity:0.95});
+const matBi=new THREE.MeshStandardMaterial({color:0x9a8aa8, metalness:0.8, roughness:0.38});
+const matAu=new THREE.MeshStandardMaterial({color:0xffd700, metalness:0.95, roughness:0.22});
+const matAg=new THREE.MeshStandardMaterial({color:0xd0d0d8, metalness:0.95, roughness:0.15});
+
+// shared state for all three scenes
+let fireCallbacks = [];
+
+btnFire.onclick = ()=>{
+  decayCount++;
+  roCount.innerHTML = `Decays: <b>${decayCount}</b> — At-211 → Bi-207 — half-life 7.2h — simulated<br>Last: At-211 α 5.87 MeV → -211${mode} analog — ${mode==='mN'?'thrust -0.211 N':'drop -0.211 V'}`;
+  fireCallbacks.forEach(fn=>fn());
+};
+btnReset.onclick = ()=>{
+  decayCount=0;
+  roCount.innerHTML = `Decays: <b>0</b> — At-211 → Bi-207 — half-life 7.2h — simulated<br>At atoms: 1e25 crust per 1 At — ghost`;
+  fireCallbacks.forEach(fn=>fn(true));
+};
+
+// 1) -211mN FORCE
+{
+  const wrap=document.getElementById('wrap-mN');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(42, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,1.2,5.5);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const atCore=new THREE.Mesh(new THREE.SphereGeometry(0.7,40,40), matAt); atCore.castShadow=true; scene.add(atCore);
+  const biDaughter=new THREE.Mesh(new THREE.SphereGeometry(0.62,32,32), matBi); biDaughter.position.set(0,0,0); biDaughter.visible=false; scene.add(biDaughter);
+  const alpha=new THREE.Mesh(new THREE.SphereGeometry(0.18,20,20), matAlpha); alpha.visible=false; scene.add(alpha);
+  // force arrow
+  const arrowGroup=new THREE.Group(); scene.add(arrowGroup);
+  const arrowGeo=new THREE.ConeGeometry(0.12,0.4,16);
+  const arrowMat=new THREE.MeshBasicMaterial({color:0xff4444});
+  const arrow=new THREE.Mesh(arrowGeo, arrowMat); arrow.rotation.x=Math.PI; arrow.position.set(0,0,-1.2); arrowGroup.add(arrow);
+  const lineGeo=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0,0,0), new THREE.Vector3(0,0,-1)]);
+  const line=new THREE.Line(lineGeo, new THREE.LineBasicMaterial({color:0xff4444, transparent:true, opacity:0.8})); arrowGroup.add(line);
+  arrowGroup.visible=false;
+
+  // force readout as floating text via canvas texture?
+  let animState=null;
+
+  function fire(reset=false){
+    if(reset){
+      atCore.visible=true; biDaughter.visible=false; alpha.visible=false; arrowGroup.visible=false; animState=null; return;
+    }
+    atCore.visible=false; biDaughter.visible=true; alpha.visible=true; arrowGroup.visible=true;
+    animState={t:0, alphaStart:new THREE.Vector3(0,0,0), biStart:new THREE.Vector3(0,0,0), dir:new THREE.Vector3((Math.random()-0.5)*0.5, (Math.random()-0.5)*0.5, -1).normalize()};
+  }
+  fireCallbacks.push(fire);
+
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.016;
+    if(animState){
+      animState.t+=0.04;
+      const d=animState.t*2.5;
+      alpha.position.copy(animState.dir.clone().multiplyScalar(d));
+      biDaughter.position.copy(animState.dir.clone().multiplyScalar(-d*0.15)); // recoil
+      // fade alpha
+      matAlpha.opacity = Math.max(0.1, 1 - animState.t*0.18);
+      if(animState.t>5){ fire(true); }
+      // arrow scales with -211mN
+      const forceScale = 1 + Math.sin(t*3)*0.1;
+      arrowGroup.scale.setScalar(forceScale);
+      arrowGroup.position.copy(alpha.position.clone().multiplyScalar(0.5));
+    } else {
+      atCore.rotation.y+=0.008; atCore.scale.setScalar(1+Math.sin(t*2)*0.03);
+    }
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+// 2) -211mV VOLTAGE
+{
+  const wrap=document.getElementById('wrap-mV');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(42, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,1,5);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const atCore=new THREE.Mesh(new THREE.SphereGeometry(0.75,40,40), matAt); atCore.castShadow=true; scene.add(atCore);
+  // voltage field as rings
+  const rings=new THREE.Group(); scene.add(rings);
+  for(let i=0;i<6;i++){
+    const ring=new THREE.Mesh(new THREE.TorusGeometry(0.9+i*0.28,0.02,12,48), new THREE.MeshBasicMaterial({color: i%2?0x4488ff:0xffd700, transparent:true, opacity:0.25+ (i%2)*0.1}));
+    ring.rotation.x=Math.PI/2; rings.add(ring);
+  }
+  const spark=new THREE.Mesh(new THREE.SphereGeometry(0.12,16,16), new THREE.MeshBasicMaterial({color:0x88ccff, transparent:true, opacity:0.0})); scene.add(spark);
+
+  function fire(reset=false){
+    if(reset){ spark.material.opacity=0; rings.children.forEach((r,i)=>{r.material.opacity=0.25; r.scale.setScalar(1);}); return; }
+    // voltage drop animation -211mV
+    spark.material.opacity=1; spark.position.set((Math.random()-0.5)*0.5, (Math.random()-0.5)*0.5, 0.9);
+    rings.children.forEach((r,i)=>{
+      r.material.opacity=0.6;
+      setTimeout(()=>{r.material.opacity=0.15;}, 200+i*80);
+    });
+    setTimeout(()=>{spark.material.opacity=0;}, 350);
+  }
+  fireCallbacks.push(fire);
+
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.016;
+    atCore.rotation.y+=0.006;
+    rings.rotation.z+=0.002;
+    rings.children.forEach((r,i)=>{r.scale.setScalar(1+Math.sin(t*1.2+i)*0.04);});
+    if(spark.material.opacity>0){ spark.position.x+= (Math.random()-0.5)*0.04; spark.position.y+= (Math.random()-0.5)*0.04; }
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+// 3) COMBINED -211mN + -211mV therapy
+{
+  const wrap=document.getElementById('wrap-both');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,2,8);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  // cell as translucent sphere
+  const cell=new THREE.Mesh(new THREE.SphereGeometry(3.2,32,32), new THREE.MeshStandardMaterial({color:0x1a2a1a, transparent:true, opacity:0.18, roughness:0.8, metalness:0.1})); group.add(cell);
+  const cellWire=new THREE.Mesh(new THREE.SphereGeometry(3.25,24,24), new THREE.MeshBasicMaterial({color:0x2a4a2a, wireframe:true, transparent:true, opacity:0.12})); group.add(cellWire);
+  // at carriers Au Ag as delivery
+  const carriers=new THREE.Group(); group.add(carriers);
+  for(let i=0;i<6;i++){
+    const c=new THREE.Mesh(new THREE.SphereGeometry(0.14,16,16), i%2?matAu:matAg);
+    const ang=(i/6)*Math.PI*2; c.position.set(Math.cos(ang)*2.5, Math.sin(ang)*0.6, Math.sin(ang)*2.5); carriers.add(c);
+  }
+  const atCore=new THREE.Mesh(new THREE.SphereGeometry(0.38,28,28), matAt); atCore.position.set(0,0,0); group.add(atCore);
+  const alphas=new THREE.Group(); group.add(alphas);
+
+  function fire(reset=false){
+    if(reset){ alphas.clear(); return; }
+    // emit alpha inside cell — therapy
+    const a=new THREE.Mesh(new THREE.SphereGeometry(0.11,14,14), matAlpha.clone());
+    a.material.opacity=0.95;
+    const dir=new THREE.Vector3((Math.random()-0.5),(Math.random()-0.5),(Math.random()-0.5)).normalize();
+    a.userData={dir, t:0, dist:0};
+    a.position.copy(atCore.position);
+    alphas.add(a);
+    if(alphas.children.length>22){ alphas.remove(alphas.children[0]); }
+  }
+  fireCallbacks.push(fire);
+
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.016;
+    group.rotation.y+=0.0015;
+    carriers.rotation.y+=0.008;
+    atCore.rotation.y+=0.02; atCore.scale.setScalar(1+Math.sin(t*2.2)*0.06);
+    alphas.children.forEach(a=>{
+      a.userData.t+=0.06;
+      a.userData.dist+=0.08;
+      a.position.copy(a.userData.dir.clone().multiplyScalar(a.userData.dist));
+      a.material.opacity = Math.max(0, 0.95 - a.userData.dist*0.22);
+      if(a.userData.dist>3.2){ a.material.opacity=0; }
+    });
+    // clean faded
+    for(let i=alphas.children.length-1;i>=0;i--){ if(alphas.children[i].material.opacity<=0) alphas.remove(alphas.children[i]); }
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+</script>
+</body>
+</html>
