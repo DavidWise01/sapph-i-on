@@ -95,17 +95,43 @@
   .cell {
     position:relative; width:100%; aspect-ratio:1; padding:0; border:0; border-radius:14px;
     font:11px/1 var(--mono); letter-spacing:.06em; cursor:pointer; color:var(--ink);
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.92),
+      inset 0 -10px 14px rgba(28,23,48,.08),
+      0 8px 16px rgba(28,23,48,.07);
     transition:transform .14s ease, box-shadow .14s ease;
   }
   .cell:hover { transform:translateY(-1px); }
-  .cell.corner { background:#f7c6dc; font-weight:650; }
-  .cell.edge { background:#f6e3a4; }
-  .cell.face { background:#c9ddfb; }
-  .cell.interior { background:#e4d4fb; }
+  .cell.corner {
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,0) 46%),
+      linear-gradient(155deg, #ffe4f0 0%, #f7c6dc 52%, #e7a3c4 100%);
+    font-weight:650;
+  }
+  .cell.edge {
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,255,255,0) 46%),
+      linear-gradient(155deg, #fff6d2 0%, #f6e3a4 54%, #e4c15f 100%);
+  }
+  .cell.face {
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.66), rgba(255,255,255,0) 46%),
+      linear-gradient(155deg, #eef4ff 0%, #c9ddfb 54%, #98baf0 100%);
+  }
+  .cell.interior {
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.62), rgba(255,255,255,0) 46%),
+      linear-gradient(155deg, #f7f0ff 0%, #e4d4fb 58%, #c9b0ee 100%);
+  }
   .cell.keeper {
-    background:linear-gradient(160deg, #ffe08a, #f5b942);
+    background:
+      radial-gradient(circle at 32% 24%, rgba(255,255,255,.85), rgba(255,255,255,0) 36%),
+      radial-gradient(circle at 35% 28%, #fff6cc 0%, #f5b942 48%, #c98312 100%);
     font-family:var(--serif); font-style:italic; font-size:18px; letter-spacing:0;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.95),
+      0 0 0 1px rgba(180,83,9,.16),
+      0 8px 18px rgba(180,83,9,.22);
   }
   .cell.held::after {
     content:""; position:absolute; right:5px; bottom:5px; width:6px; height:6px;
@@ -125,7 +151,10 @@
   .gui-nav { display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 0; }
   .sky {
     display:block; width:100%; height:auto; margin-top:14px;
-    border:0; border-radius:18px; background:#e7eefc;
+    border:0; border-radius:22px; background:#10141c;
+    box-shadow:
+      0 22px 44px rgba(28,23,48,.16),
+      inset 0 0 0 1px rgba(255,255,255,.42);
   }
   .gui-nav button {
     font:12px/1 var(--sans); padding:8px 12px; border-radius:999px;
@@ -3268,16 +3297,38 @@ function paintUniverse(x, y, z, which) {
   }
   var canvas = document.getElementById("sky");
   var ctx = canvas.getContext("2d");
-  var w = canvas.width, h = canvas.height;
+  canvas.width = 1280;
+  canvas.height = 720;
+  ctx.setTransform(2, 0, 0, 2, 0, 0);
+  var w = 640, h = 360;
   var hue = u.seed % 360;
   var rng = skyRng(u.seed);
   var counts = { puffs: 0, rings: 0, motes: 0, primary: 0, layers: [0, 0, 0, 0, 0, 0, 0] };
-  var g = ctx.createLinearGradient(0, 0, 0, h);
-  g.addColorStop(0, "hsl(" + hue + ",64%,48%)");
-  g.addColorStop(0.42, "hsl(" + ((hue + 24) % 360) + ",52%,30%)");
-  g.addColorStop(1, "hsl(" + ((hue + 48) % 360) + ",40%,16%)");
+  var g = ctx.createLinearGradient(0, 0, w * 0.2, h);
+  g.addColorStop(0, "hsl(" + hue + ", 42%, 20%)");
+  g.addColorStop(0.46, "hsl(" + ((hue + 18) % 360) + ", 46%, 10%)");
+  g.addColorStop(1, "hsl(" + ((hue + 46) % 360) + ", 34%, 6%)");
   ctx.fillStyle = g;
   ctx.fillRect(0, 0, w, h);
+  var sheen = ctx.createLinearGradient(0, h * 0.36, 0, h);
+  sheen.addColorStop(0, "hsla(" + hue + ", 70%, 70%, 0)");
+  sheen.addColorStop(0.2, "hsla(" + ((hue + 24) % 360) + ", 82%, 68%, 0.13)");
+  sheen.addColorStop(1, "hsla(" + hue + ", 30%, 20%, 0)");
+  ctx.fillStyle = sheen;
+  ctx.fillRect(0, 0, w, h);
+  var stars = skyRng(u.seed ^ 0x9e3779b9);
+  var si, sx, sy, sr;
+  for (si = 0; si < 56; si++) {
+    sx = stars() * w;
+    sy = stars() * h * 0.78;
+    sr = stars();
+    ctx.globalAlpha = 0.18 + sr * 0.62;
+    ctx.fillStyle = sr > 0.86 ? "hsl(46, 90%, 86%)" : "hsl(" + ((hue + 36) % 360) + ", 35%, 94%)";
+    ctx.beginPath();
+    ctx.arc(sx, sy, sr > 0.86 ? 1.15 : 0.55, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.globalAlpha = 1;
   var layerW = Math.floor(w / 4);
   var layerH = Math.floor((h - 12) / 2);
   var pitch = Math.floor((Math.min(layerW, layerH) - 18) / 7);
@@ -3298,27 +3349,58 @@ function paintUniverse(x, y, z, which) {
   var i, px, py, pr, puff;
   for (i = 0; i < 4; i++) {
     px = rng() * w; py = rng() * h; pr = 28 + rng() * 70;
-    puff = ctx.createRadialGradient(px, py, 4, px, py, pr);
-    puff.addColorStop(0, "hsla(" + ((hue + 30 + i * 18) % 360) + ",80%,74%,0.28)");
-    puff.addColorStop(1, "hsla(" + hue + ",40%,50%,0)");
+    puff = ctx.createRadialGradient(px, py, 0, px, py, pr);
+    puff.addColorStop(0, "hsla(" + ((hue + 30 + i * 18) % 360) + ", 86%, 74%, 0.30)");
+    puff.addColorStop(0.42, "hsla(" + ((hue + 12 + i * 14) % 360) + ", 72%, 58%, 0.10)");
+    puff.addColorStop(1, "hsla(" + hue + ", 40%, 50%, 0)");
     ctx.fillStyle = puff;
     ctx.beginPath();
     ctx.arc(px, py, pr, 0, Math.PI * 2);
     ctx.fill();
     counts.puffs++;
   }
-  ctx.strokeStyle = "hsla(" + ((hue + 40) % 360) + ",70%,86%,0.55)";
-  ctx.lineWidth = 1.25;
-  for (i = 1; i <= 2; i++) {
+  function glassPlate(plate) {
+    var x0 = plate.x - 7;
+    var y0 = plate.y - 7;
+    var pw = 7 * pitch + 10;
+    var ph = 7 * pitch + 10;
+    ctx.save();
+    ctx.shadowColor = "rgba(3, 6, 16, 0.45)";
+    ctx.shadowBlur = 16;
+    ctx.shadowOffsetY = 6;
     ctx.beginPath();
-    ctx.ellipse(keeperAt.x, keeperAt.y, 18 * i, 8 * i, (rng() - 0.5) * 0.7, 0, Math.PI * 2);
+    ctx.roundRect(x0, y0, pw, ph, 12);
+    var glass = ctx.createLinearGradient(x0, y0, x0 + pw, y0 + ph);
+    glass.addColorStop(0, "hsla(210, 60%, 100%, 0.20)");
+    glass.addColorStop(0.42, "hsla(222, 40%, 88%, 0.08)");
+    glass.addColorStop(1, "hsla(230, 28%, 60%, 0.04)");
+    ctx.fillStyle = glass;
+    ctx.fill();
+    ctx.shadowColor = "transparent";
+    ctx.shadowBlur = 0;
+    ctx.strokeStyle = "hsla(200, 70%, 96%, 0.38)";
+    ctx.lineWidth = 1;
     ctx.stroke();
-    counts.rings++;
+    ctx.beginPath();
+    ctx.roundRect(x0 + 2, y0 + 2, pw - 4, ph * 0.28, 10);
+    ctx.fillStyle = "hsla(0, 0%, 100%, 0.07)";
+    ctx.fill();
+    ctx.restore();
   }
-  for (i = 0; i < 7; i++) {
-    var plate = origin(i);
-    ctx.fillStyle = "hsla(220,40%,98%,0.14)";
-    ctx.fillRect(plate.x - 4, plate.y - 4, 7 * pitch + 4, 7 * pitch + 4);
+  for (i = 0; i < 7; i++) glassPlate(origin(i));
+  function gem(cx, cy, radius, gh, gs, gl) {
+    var body = ctx.createRadialGradient(cx - radius * 0.36, cy - radius * 0.42, radius * 0.08, cx, cy + radius * 0.15, radius);
+    body.addColorStop(0, "hsl(" + gh + ", " + Math.min(100, gs + 6) + "%, " + Math.min(96, gl + 22) + "%)");
+    body.addColorStop(0.58, "hsl(" + gh + ", " + gs + "%, " + gl + "%)");
+    body.addColorStop(1, "hsl(" + gh + ", " + Math.max(18, gs - 12) + "%, " + Math.max(10, gl - 24) + "%)");
+    ctx.fillStyle = body;
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = "hsla(0, 0%, 100%, 0.42)";
+    ctx.beginPath();
+    ctx.ellipse(cx - radius * 0.22, cy - radius * 0.28, radius * 0.24, radius * 0.12, -0.7, 0, Math.PI * 2);
+    ctx.fill();
   }
   var placed = {};
   u.motes.forEach(function (m) {
@@ -3326,21 +3408,46 @@ function paintUniverse(x, y, z, which) {
     if (placed[slot]) throw new Error("LIT FAIL world slot");
     placed[slot] = 1;
     var o = origin(m.z);
-    var mx = o.x + m.x * pitch;
-    var my = o.y + m.y * pitch;
-    var fill;
-    if (m.x === 3 && m.y === 3 && m.z === 3) fill = "hsl(46,96%,62%)";
-    else if (m.exposed === 3) fill = "hsl(338,72%,76%)";
-    else if (m.exposed === 2) fill = "hsl(40,78%,66%)";
-    else if (m.exposed === 1) fill = "hsl(" + hue + ",58%,64%)";
-    else fill = "hsl(" + ((hue + 28) % 360) + ",36%,80%)";
-    ctx.fillStyle = fill;
-    ctx.beginPath();
-    ctx.roundRect(mx, my, cell, cell, 2);
-    ctx.fill();
+    var cx = o.x + m.x * pitch + cell / 2;
+    var cy = o.y + m.y * pitch + cell / 2;
+    var radius = cell * 0.46;
+    if (m.x === 3 && m.y === 3 && m.z === 3) gem(cx, cy, radius, 46, 96, 62);
+    else if (m.exposed === 3) gem(cx, cy, radius, 338, 72, 76);
+    else if (m.exposed === 2) gem(cx, cy, radius, 40, 78, 66);
+    else if (m.exposed === 1) gem(cx, cy, radius, hue, 58, 64);
+    else gem(cx, cy, radius, (hue + 28) % 360, 36, 80);
     counts.motes++;
     counts.layers[m.z]++;
   });
+  var ringHue = (hue + 40) % 360;
+  for (i = 1; i <= 2; i++) {
+    var rot = (rng() - 0.5) * 0.7;
+    ctx.save();
+    ctx.translate(keeperAt.x, keeperAt.y);
+    ctx.rotate(rot);
+    ctx.strokeStyle = "hsla(" + ringHue + ", 85%, 90%, " + (0.34 + i * 0.16) + ")";
+    ctx.lineWidth = i === 1 ? 1.15 : 0.7;
+    ctx.shadowColor = "hsla(" + ringHue + ", 90%, 72%, 0.85)";
+    ctx.shadowBlur = 8;
+    ctx.beginPath();
+    ctx.ellipse(0, 0, 18 * i, 8 * i, 0, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.restore();
+    counts.rings++;
+  }
+  var vig = ctx.createRadialGradient(w / 2, h / 2, h * 0.28, w / 2, h * 0.45, h * 0.78);
+  vig.addColorStop(0, "rgba(0, 0, 0, 0)");
+  vig.addColorStop(1, "rgba(4, 6, 14, 0.42)");
+  ctx.fillStyle = vig;
+  ctx.fillRect(0, 0, w, h);
+  var bloom = ctx.createRadialGradient(keeperAt.x, keeperAt.y, 2, keeperAt.x, keeperAt.y, cell * 3.4);
+  bloom.addColorStop(0, "hsla(46, 100%, 76%, 0.55)");
+  bloom.addColorStop(0.45, "hsla(38, 92%, 54%, 0.16)");
+  bloom.addColorStop(1, "hsla(42, 90%, 50%, 0)");
+  ctx.fillStyle = bloom;
+  ctx.beginPath();
+  ctx.arc(keeperAt.x, keeperAt.y, cell * 3.4, 0, Math.PI * 2);
+  ctx.fill();
   var sun = ctx.createRadialGradient(keeperAt.x, keeperAt.y, 1, keeperAt.x, keeperAt.y, cell);
   sun.addColorStop(0, "hsl(46,100%,94%)");
   sun.addColorStop(0.55, "hsl(42,92%,58%)");
