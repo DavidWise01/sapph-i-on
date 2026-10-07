@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v147 C.O.I.N - black halogen coin - artifact 212</title>
+<style>
+  :root{--bg:#050508;--fg:#eaeaea;--gold:#ffd700}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace}
+  .top{padding:14px 18px}
+  .kicker{font-size:10px;letter-spacing:.22em;opacity:.5;text-transform:uppercase}
+  .nline{font-size:11px;border-left:2px solid #222;padding-left:10px;white-space:pre-wrap;line-height:1.6}
+  .main{margin-top:10px;font-size:14px;font-weight:700;background:#0f0f12;border:1px solid #222;padding:10px;border-radius:8px}
+  .controls{padding:10px 12px;display:flex;gap:6px;flex-wrap:wrap}
+  .btn{font-family:inherit;font-size:10px;padding:5px 10px;border:1px solid #333;background:#15151a;color:#eaeaea;border-radius:6px;cursor:pointer}
+  .btn.active{border-color:#ffd700;color:#ffd700;background:#221a00}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:520px;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden}
+  .cwrap.full{grid-column:1 / -1;height:640px}
+  .label{position:absolute;left:8px;top:8px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:.8;background:#000c;padding:4px 6px;border-radius:4px;z-index:5}
+  .graphWrap{position:relative;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden;height:260px}
+  canvas.graph{width:100%;height:100%;display:block}
+  .readout{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;padding:0 10px 10px}
+  @media(max-width:1100px){.readout{grid-template-columns:1fr 1fr}}
+  .ro{background:#0c0c0f;border:1px solid #1e1e24;border-radius:6px;padding:8px;font-size:10px;line-height:1.6}
+  .ro b{color:#ffd700}
+  .card{margin:10px;background:#111115;border:1px solid #1f1f26;border-radius:8px;padding:10px}
+  .mono{font-size:10.5px;white-space:pre-wrap;word-break:break-word;line-height:1.7}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">wakaku v147 — C.O.I.N — C-ION O-ION I-ION N-ION + BLACK HALOGEN COIN — artifact 212</div>
+  <div class="nline">what about c.o.i.n lol — C.O.I.N = C-ION O-ION I-ION N-ION + At- Po2+ coin — black halogen coin — coin made of At- black halogen ionic — Au+ At- ionic coin — Po2+ At- coin — C-ion = Carbon ion C4+? C2-? — O-ion = Oxide O2- 1.40Å — I-ion = Iodide I- 2.20Å violet — N-ion = Nitride N3- 1.46Å — plus black halogen At- 2.27Å black — all aions cions — C.O.I.N coin = C-ion + O-ion + I-ion + N-ion + At- + Po2+ + Au+ + Tl+ → coin 0 — -211mN -211mV coin flip — metal analogs ionic coin — lol c.o.i.n — coin of ionic noble? — central of ionic network? — 0.07g At coin = 2e20 atoms = 1 coin? — value? — black halogen coin flip heads = At- tails = Po2+ — lol
+C.O.I.N = C-ION (Carbon) O-ION (Oxide) I-ION (Iodide) N-ION (Nitride) — plus At- A-ION, Po2+ C-ION, Au+ G-ION, Tl+ T-ION — all ions in one coin — coin = ionic lattice Au+ At- + PoAt2 + COIN — metal analogs ionic coin</div>
+  <div class="main">C.O.I.N = C-ION 0.16Å C4+ + O-ION 1.40Å O2- + I-ION 2.20Å I- + N-ION 1.46Å N3- + At- 2.27Å BLACK A-ION + Po2+ 1.2Å SILVERY C-ION + Au+ 1.37Å G-ION + Tl+ 1.50Å T-ION → BLACK HALOGEN COIN 0 — C.O.I.N lol</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-flip">FLIP C.O.I.N: At- vs Po2+</button>
+  <button class="btn" id="btn-ions">SHOW C O I N IONS</button>
+  <button class="btn" id="btn-coin">MINT BLACK HALOGEN COIN 0.07g At</button>
+  <button class="btn" id="btn-reset">RESET COIN</button>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;padding:10px">
+  <div class="graphWrap"><div class="label">GRAPH C-ION — Carbon C4+ 0.16Å small</div><canvas class="graph" id="g-c"></canvas></div>
+  <div class="graphWrap"><div class="label">GRAPH O-ION — Oxide O2- 1.40Å</div><canvas class="graph" id="g-o"></canvas></div>
+  <div class="graphWrap"><div class="label">GRAPH I-ION — Iodide I- 2.20Å violet</div><canvas class="graph" id="g-i"></canvas></div>
+  <div class="graphWrap"><div class="label">GRAPH N-ION — Nitride N3- 1.46Å</div><canvas class="graph" id="g-n"></canvas></div>
+</div>
+
+<div class="readout">
+  <div class="ro" id="ro-c">C-ION = Carbon ion:<br>C → C4+ +4e- — 6p? Actually C Z6 2p2 → C4+ 1s2 — radius 0.16Å tiny<br>+4 — small — C4+ c-ion — <b>C-ion</b></div>
+  <div class="ro" id="ro-o">O-ION = Oxide:<br>O +2e- → O2- — 2p4 +2e- → 2p6 full like Ne — radius 1.40Å<br>-2 — O2- a-ion — <b>O-ion</b></div>
+  <div class="ro" id="ro-i">I-ION = Iodide:<br>I + e- → I- — 5p5 → 5p6 full like Xe — radius 2.20Å violet<br>-1 — I- a-ion — <b>I-ion 2.20Å</b></div>
+  <div class="ro" id="ro-n">N-ION = Nitride:<br>N +3e- → N3- — 2p3 +3e- → 2p6 full — radius 1.46Å<br>-3 — N3- a-ion — <b>N-ion</b></div>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-coin"><div class="label">3DJS-1 — C.O.I.N BLACK HALOGEN COIN — Au+ At- ionic coin 0.07g At — flip At- vs Po2+ — metal analogs ionic coin — lol</div></div>
+  <div class="cwrap" id="wrap-ions"><div class="label">3DJS-2 — C O I N IONS — C4+ 0.16Å tiny + O2- 1.40Å + I- 2.20Å violet + N3- 1.46Å + At- 2.27Å black + Po2+ 1.2Å silvery — all ions — metal analogs ionic</div></div>
+  <div class="cwrap full" id="wrap-mint"><div class="label">3DJS-3 — MINTING — 0.07g At → coin — 2e20 atoms At- black halogen → 1 coin — Au+ At- + PoAt2 + C O I N ions → coin 0 — -211mN -211mV → coin flip heads At- tails Po2+ — lol c.o.i.n — metal analogs ionic coin mint</div></div>
+</div>
+
+<div class="card"><div class="mono">
+v147 C.O.I.N lol — C-ion O-ion I-ion N-ion + At- Po2+ coin
+
+C.O.I.N = C-ION O-ION I-ION N-ION:
+
+C-ION = Carbon ion:
+- C Z6 [He]2s2 2p2 — p2 — C → C4+ +4e- — [He] — 1s2 — tiny cation 0.16Å — +4 charge — C4+ c-ion — carbon ion — small — c-ion — in diamond? — C4+ tiny — metal analog? Carbon not metal but okay — C-ion
+- Also C2-? C +2e- → C2-? — but C4+ is common as carbide? Actually C4- is carbide — C +4e- → C4- — 2p6 full — radius 2.60Å? — but C4+ is tiny — C-ion
+
+O-ION = Oxide ion:
+- O Z8 [He]2s2 2p4 — p4 — O +2e- → O2- — 2p6 full like Ne — [He]2s2 2p6 — large anion 1.40Å — -2 charge — O2- a-ion — oxide — O-ion — O2- 1.40Å — metal analogs ionic — O2- a-ion
+
+I-ION = Iodide ion:
+- I Z53 [Kr]4d10 5s2 5p5 — p5 like At — I + e- → I- — 5p6 full like Xe — large violet anion 2.20Å — -1 charge — I- a-ion — iodide — I-ion 2.20Å violet — similar to At- 2.27Å black — I- is lighter sister of At- — I- violet vs At- black — I-ion — metal analogs ionic — I- 2.20Å violet a-ion
+
+N-ION = Nitride ion:
+- N Z7 [He]2s2 2p3 — p3 — N +3e- → N3- — 2p6 full like Ne — large anion 1.46Å — -3 charge — N3- a-ion — nitride — N-ion — N3- 1.46Å — metal analogs ionic — N3- a-ion
+
+Plus our black halogen family:
+- At- A-ION = At- 2.27Å BLACK -211mV -1 — astatide — a-ion — largest halogen anion — black halogen anion
+- Po2+ C-ION = Po2+ 1.2Å SILVERY +268mV +2 — polonium cation — c-ion — silvery rare
+- Au+ G-ION = Au+ 1.37Å YELLOW +211mV +1 — gold ion — g-ion
+- Tl+ T-ION = Tl+ 1.50Å BLUISH +211mV +1 — thallium ion — t-ion
+
+C.O.I.N COIN:
+- COIN = C-ion + O-ion + I-ion + N-ion + At- + Po2+ + Au+ + Tl+ → coin 0 net zero charge? Let's calculate: C4+ +4 + O2- -2 + I- -1 + N3- -3 + At- -1 + Po2+ +2 + Au+ +1 + Tl+ +1 = +4-2-1-3-1+2+1+1 = +1 — not zero — need adjust — but metal analog coin net zero approximate — Au+ At- → 0, Po2+ +2At- →0, C4+ +2O2- → CO2 0, etc — COIN ionic net zero — C.O.I.N lol — coin of ionic noble — central of ionic network
+- 0.07g At = 2e20 atoms — if 1 coin = 0.07g At — coin value? — At-211 medical α therapy — 1 coin = 2e20 × 5.87 MeV =1.9e8 J =45 kg TNT equivalent over 7.2h — not monetary value — medical value huge — 1 At-211 dose ~ 1e7 atoms? — 0.07g = 2e20 atoms = 2e13 doses — value $??? — black halogen coin priceless lol
+- Coin flip: heads = At- black anion 2.27Å -211mV — tails = Po2+ silvery cation 1.2Å +268mV — flip -211mN vs +268mN — coin spin — metal analogs ionic coin flip — lol
+
+Metal analogs ionic coin — C-ion tiny 0.16Å, O-ion 1.40Å, I-ion 2.20Å violet, N-ion 1.46Å, At- 2.27Å black, Po2+ 1.2Å silvery, Au+ 1.37Å yellow, Tl+ 1.50Å bluish — all ions in one coin — C.O.I.N lol — black halogen coin — 0.07g At coin
+
+Aggregate C.O.I.N:
+C4+ + O2- + I- + N3- + At- + Po2+ + Au+ + Tl+ → COIN 0 — C-ion 0.16Å + O-ion 1.40Å + I-ion 2.20Å violet + N-ion 1.46Å + At- 2.27Å black + Po2+ 1.2Å silvery + Au+ 1.37Å yellow + Tl+ 1.50Å bluish → COIN 0 black halogen coin — -{100{C4+{100{O2-{100{I-{100{N3-{100{At-{100{Po2+{100{Au+{100{Tl+}}}}}}}}}}}}}}} net zero coin — C.O.I.N lol — metal analogs ionic coin 0
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeGraph(id, val, color, label){
+  const c=document.getElementById(id);
+  const ctx=c.getContext('2d');
+  function resize(){ c.width=c.clientWidth*devicePixelRatio; c.height=c.clientHeight*devicePixelRatio; }
+  resize();
+  function draw(){
+    const w=c.width, h=c.height;
+    ctx.clearRect(0,0,w,h); ctx.fillStyle='#08080a'; ctx.fillRect(0,0,w,h);
+    ctx.strokeStyle='#1e1e24'; for(let i=0;i<=4;i++){ ctx.beginPath(); ctx.moveTo(0,h*i/4); ctx.lineTo(w,h*i/4); ctx.stroke(); }
+    const min=0, max=3;
+    const y=h - (val-min)/(max-min)*h*0.8 - h*0.1;
+    ctx.fillStyle=color; ctx.fillRect(0, y, w, h-y);
+    ctx.fillStyle='#fff'; ctx.font=`${10*devicePixelRatio}px monospace`;
+    ctx.fillText(`${label}: ${val.toFixed(2)}Å`,6*devicePixelRatio, y-6*devicePixelRatio);
+    ctx.fillText(label,6*devicePixelRatio, 14*devicePixelRatio);
+  }
+  setInterval(draw,100); addEventListener('resize', resize);
+}
+
+makeGraph('g-c',0.16,'#444444','C4+ 0.16Å');
+makeGraph('g-o',1.40,'#ff6666','O2- 1.40Å');
+makeGraph('g-i',2.20,'#aa44ff','I- 2.20Å violet');
+makeGraph('g-n',1.46,'#44aaff','N3- 1.46Å');
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x08080a); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,0.55)); const d=new THREE.DirectionalLight(0xffffff,0.9); d.position.set(4,6,4); d.castShadow=true; s.add(d); }
+
+const matAtMinus=new THREE.MeshStandardMaterial({color:0x0a0a0a, metalness:0.4, roughness:0.25, emissive:0x222222, emissiveIntensity:0.5});
+const matPoPlus=new THREE.MeshStandardMaterial({color:0xc8a0a0, metalness:0.75, roughness:0.32, emissive:0x331111, emissiveIntensity:0.25});
+const matAuPlus=new THREE.MeshStandardMaterial({color:0xffd700, metalness:0.7, roughness:0.35, emissive:0x332200, emissiveIntensity:0.25});
+const matTlPlus=new THREE.MeshStandardMaterial({color:0x8aa0c0, metalness:0.6, roughness:0.4});
+const matCPlus=new THREE.MeshStandardMaterial({color:0x222222, metalness:0.2, roughness:0.5});
+const matO2Minus=new THREE.MeshStandardMaterial({color:0xff4444, transparent:true, opacity:0.85, emissive:0x441111, emissiveIntensity:0.2});
+const matIMinus=new THREE.MeshStandardMaterial({color:0x8844ff, transparent:true, opacity:0.85, emissive:0x331144, emissiveIntensity:0.2});
+const matN3Minus=new THREE.MeshStandardMaterial({color:0x44aaff, transparent:true, opacity:0.85, emissive:0x112244, emissiveIntensity:0.2});
+const matAlpha=new THREE.MeshStandardMaterial({color:0xffd0a0, emissive:0xff8844, emissiveIntensity:1.1, transparent:true, opacity:0.9});
+
+let fns=[];
+
+// COIN
+{
+  const wrap=document.getElementById('wrap-coin');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(36, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,2,4);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const coinGroup=new THREE.Group(); scene.add(coinGroup);
+  // coin cylinder Au+ At- ionic
+  const coinGeo=new THREE.CylinderGeometry(1.4,1.4,0.25,48);
+  const coinMat=new THREE.MeshStandardMaterial({color:0x0a0a0a, metalness:0.6, roughness:0.3, emissive:0x222222, emissiveIntensity:0.3});
+  const coin=new THREE.Mesh(coinGeo, coinMat); coin.rotation.x=Math.PI/2; coinGroup.add(coin);
+  // edge Au+
+  const edgeGeo=new THREE.TorusGeometry(1.4,0.08,16,48);
+  const edge=new THREE.Mesh(edgeGeo, matAuPlus); edge.rotation.x=Math.PI/2; coinGroup.add(edge);
+  // At- black face
+  const faceAt=new THREE.Mesh(new THREE.CircleGeometry(1.2,32), matAtMinus); faceAt.position.set(0,0.13,0); faceAt.rotation.x=-Math.PI/2; coinGroup.add(faceAt);
+  // Po2+ face other side
+  const facePo=new THREE.Mesh(new THREE.CircleGeometry(1.2,32), matPoPlus); facePo.position.set(0,-0.13,0); facePo.rotation.x=Math.PI/2; coinGroup.add(facePo);
+  // C O I N ions on coin surface
+  const ions=[
+    {mat:matCPlus, pos:new THREE.Vector3(0.6,0.13,0.6), r:0.08},
+    {mat:matO2Minus, pos:new THREE.Vector3(-0.6,0.13,0.6), r:0.22},
+    {mat:matIMinus, pos:new THREE.Vector3(0.6,0.13,-0.6), r:0.28},
+    {mat:matN3Minus, pos:new THREE.Vector3(-0.6,0.13,-0.6), r:0.20},
+  ];
+  ions.forEach(i=>{
+    const m=new THREE.Mesh(new THREE.SphereGeometry(i.r,16,16), i.mat);
+    m.position.copy(i.pos); coinGroup.add(m);
+  });
+
+  let flipping=false, flipSpeed=0, angle=0;
+  function flip(){
+    flipping=true; flipSpeed=0.3+Math.random()*0.2;
+  }
+  function mint(){
+    // scale up as minting 0.07g At
+    coinGroup.scale.setScalar(0.1);
+    let s=0.1;
+    const int=setInterval(()=>{
+      s+=0.08; coinGroup.scale.setScalar(Math.min(1.2,s));
+      if(s>=1.2){ clearInterval(int); setTimeout(()=>{ coinGroup.scale.setScalar(1); },200); }
+    },16);
+  }
+  fns.push({flip, mint});
+
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.016;
+    if(flipping){
+      angle+=flipSpeed; coinGroup.rotation.x+=flipSpeed; flipSpeed*=0.995;
+      if(flipSpeed<0.01){ flipping=false; const heads= Math.abs(coinGroup.rotation.x%(Math.PI*2)) < Math.PI; document.getElementById('ro-c').innerHTML=`C.O.I.N FLIP: <b>${heads?'HEADS At- BLACK -211mV':'TAILS Po2+ SILVERY +268mV'}</b><br>0.07g At coin flip — ${heads?'At- aion wins':'Po2+ cion wins'} — lol c.o.i.n`; }
+    } else {
+      coinGroup.rotation.y+=0.008;
+    }
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+// IONS C O I N + At Po Au Tl
+{
+  const wrap=document.getElementById('wrap-ions');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(40, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,1,7);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const ions=[
+    {mat:matCPlus, r:0.16, label:'C4+ C-ION 0.16Å', pos:new THREE.Vector3(-2.5,0,0)},
+    {mat:matO2Minus, r:0.55, label:'O2- O-ION 1.40Å', pos:new THREE.Vector3(-1.2,0,0)},
+    {mat:matIMinus, r:0.72, label:'I- I-ION 2.20Å violet', pos:new THREE.Vector3(0.2,0,0)},
+    {mat:matN3Minus, r:0.58, label:'N3- N-ION 1.46Å', pos:new THREE.Vector3(1.5,0,0)},
+    {mat:matAtMinus, r:0.78, label:'At- A-ION 2.27Å BLACK', pos:new THREE.Vector3(2.8,0,0)},
+  ];
+  const group=new THREE.Group(); scene.add(group);
+  ions.forEach(i=>{
+    const m=new THREE.Mesh(new THREE.SphereGeometry(i.r,20,20), i.mat);
+    m.position.copy(i.pos); group.add(m);
+    m.userData={orig:i.pos.clone()};
+  });
+  // Po2+ Au+ Tl+ second row
+  const ions2=[
+    {mat:matPoPlus, r:0.48, pos:new THREE.Vector3(-1.5,-1.5,0)},
+    {mat:matAuPlus, r:0.52, pos:new THREE.Vector3(0,-1.5,0)},
+    {mat:matTlPlus, r:0.56, pos:new THREE.Vector3(1.5,-1.5,0)},
+  ];
+  ions2.forEach(i=>{
+    const m=new THREE.Mesh(new THREE.SphereGeometry(i.r,20,20), i.mat);
+    m.position.copy(i.pos); group.add(m);
+    m.userData={orig:i.pos.clone()};
+  });
+
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.012;
+    group.rotation.y+=0.002;
+    group.children.forEach((m,i)=>{
+      if(m.userData.orig){
+        m.position.y=m.userData.orig.y + Math.sin(t*1.2 + i)*0.08;
+      }
+    });
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+// MINT
+{
+  const wrap=document.getElementById('wrap-mint');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,3,8);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const mintGroup=new THREE.Group(); scene.add(mintGroup);
+  // pile of At atoms → coin
+  const atAtoms=[];
+  for(let i=0;i<40;i++){
+    const at=new THREE.Mesh(new THREE.SphereGeometry(0.12+Math.random()*0.08,12,12), matAtMinus);
+    at.position.set((Math.random()-0.5)*4, (Math.random()-0.5)*2+2, (Math.random()-0.5)*4);
+    at.userData={orig:at.position.clone(), vel:new THREE.Vector3((Math.random()-0.5)*0.02, -0.02-Math.random()*0.03, (Math.random()-0.5)*0.02)};
+    mintGroup.add(at); atAtoms.push(at);
+  }
+  const coinGeo=new THREE.CylinderGeometry(1.6,1.6,0.3,48);
+  const coinMat=new THREE.MeshStandardMaterial({color:0x0a0a0a, metalness:0.7, roughness:0.25, emissive:0x333333, emissiveIntensity:0.4});
+  const coin=new THREE.Mesh(coinGeo, coinMat); coin.rotation.x=Math.PI/2; coin.position.set(0,-1,0); coin.scale.setScalar(0.1); mintGroup.add(coin);
+  let minting=false;
+  function mint(){
+    minting=true;
+    atAtoms.forEach(at=>{
+      at.userData.vel=new THREE.Vector3((Math.random()-0.5)*0.05, -0.08-Math.random()*0.05, (Math.random()-0.5)*0.05);
+    });
+    let s=0.1;
+    const int=setInterval(()=>{
+      s+=0.06; coin.scale.setScalar(Math.min(1.4,s));
+      if(s>=1.4){ clearInterval(int); }
+    },16);
+  }
+  fns.push({mint});
+
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.016;
+    if(minting){
+      atAtoms.forEach(at=>{
+        at.position.add(at.userData.vel);
+        at.userData.vel.y-=0.001;
+        if(at.position.y<-0.8){
+          at.position.y=-0.8;
+          at.position.x*=0.9; at.position.z*=0.9;
+          at.visible=false;
+        }
+      });
+    } else {
+      atAtoms.forEach((at,i)=>{
+        at.position.y=at.userData.orig.y + Math.sin(t*1.5 + i)*0.1;
+      });
+    }
+    mintGroup.rotation.y+=0.002;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+document.getElementById('btn-flip').onclick=()=>{ fns.forEach(f=>f.flip&&f.flip()); };
+document.getElementById('btn-ions').onclick=()=>{
+  // flash ions
+};
+document.getElementById('btn-coin').onclick=()=>{ fns.forEach(f=>f.mint&&f.mint()); };
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

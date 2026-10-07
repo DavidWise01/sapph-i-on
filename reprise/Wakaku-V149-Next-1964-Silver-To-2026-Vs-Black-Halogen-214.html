@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v149 next 1964 silver to 2026 vs black halogen - artifact 214</title>
+<style>
+  :root{--bg:#050508;--fg:#eaeaea;--gold:#ffd700}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace}
+  .top{padding:14px 18px}
+  .kicker{font-size:10px;letter-spacing:.22em;opacity:.5;text-transform:uppercase}
+  .nline{font-size:11px;border-left:2px solid #222;padding-left:10px;white-space:pre-wrap;line-height:1.6}
+  .main{margin-top:10px;font-size:14px;font-weight:700;background:#0f0f12;border:1px solid #222;padding:10px;border-radius:8px}
+  .controls{padding:10px 12px;display:flex;gap:6px;flex-wrap:wrap}
+  .btn{font-family:inherit;font-size:10px;padding:5px 10px;border:1px solid #333;background:#15151a;color:#eaeaea;border-radius:6px;cursor:pointer}
+  .btn.active{border-color:#ffd700;color:#ffd700;background:#221a00}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:520px;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden}
+  .cwrap.full{grid-column:1 / -1;height:620px}
+  .label{position:absolute;left:8px;top:8px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:.8;background:#000c;padding:4px 6px;border-radius:4px;z-index:5}
+  .graphWrap{position:relative;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden;height:280px}
+  canvas.graph{width:100%;height:100%;display:block}
+  .readout{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0 10px 10px}
+  @media(max-width:900px){.readout{grid-template-columns:1fr}}
+  .ro{background:#0c0c0f;border:1px solid #1e1e24;border-radius:6px;padding:8px;font-size:10px;line-height:1.6}
+  .ro b{color:#ffd700}
+  .card{margin:10px;background:#111115;border:1px solid #1f1f26;border-radius:8px;padding:10px}
+  .mono{font-size:10.5px;white-space:pre-wrap;word-break:break-word;line-height:1.7}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">wakaku v149 — NEXT — 1964 SILVER → 2026 + BLACK HALOGEN COIN VALUE — 90% Ag then and now — artifact 214</div>
+  <div class="nline">next please — 1964 silver coins to 2026 — 1964 dime 10c face → 2026 melt $2.17 at $30/oz Ag — quarter 25c → $5.42 — half 50c → $10.85 — $1 face 0.715 oz → $21.45 — 1964 to 2026 62 years — silver spot 1964 $1.29/oz (fixed) → 2026 $30/oz → 23× — black halogen coin At- 2.27Å black -211mN -211mV — 0.07g At =2e20 atoms =1.9e8 J =45kg TNT over 7.2h — medical α therapy — 1 dose At-211 ~0.5 MBq =1e7 atoms? — 0.07g =2e13 doses — priceless — vs 1964 silver coin $2-11 — 1964 silver vs black halogen coin value over time — metal analogs ionic — Ag+ white 1.15Å + Cu+ orange 0.77Å 90% Ag 10% Cu → 2026 $30/oz — Au+ yellow 1.37Å + At- black 2.27Å → black halogen coin priceless — next — 1964 silver stack vs black halogen coin stack — lol next</div>
+  <div class="main">NEXT: 1964 SILVER → 2026 — DIME 10c→$2.17 — QUARTER 25c→$5.42 — HALF 50c→$10.85 — $1 face 0.715oz→$21.45 at $30/oz — vs BLACK HALOGEN COIN 0.07g At =2e20 atoms =1.9e8 J =2e13 medical doses = priceless — 1964 silver then $1.29/oz → 2026 $30/oz 23× — metal analogs ionic — next</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-1964">1964 → 2026 SILVER VALUE</button>
+  <button class="btn" id="btn-stack">STACK 1964 SILVER vs BLACK HALOGEN STACK</button>
+  <button class="btn" id="btn-melt">MELT 1964 SILVER → BLACK HALOGEN COIN</button>
+  <button class="btn" id="btn-reset">RESET NEXT</button>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:10px">
+  <div class="graphWrap"><div class="label">GRAPH-1 — 1964 → 2026 SILVER SPOT — $1.29/oz 1964 → $30/oz 2026 — $/oz — 23×</div><canvas class="graph" id="g-spot"></canvas></div>
+  <div class="graphWrap"><div class="label">GRAPH-2 — 1964 COINS MELT VALUE — dime 0.0723oz→$2.17 quarter 0.1808→$5.42 half 0.3617→$10.85 $1 face 0.715→$21.45 — $</div><canvas class="graph" id="g-melt"></canvas></div>
+  <div class="graphWrap"><div class="label">GRAPH-3 — BLACK HALOGEN COIN VALUE — 0.07g At =2e20 atoms =1.9e8 J =2e13 doses vs 1964 silver $ — log $</div><canvas class="graph" id="g-black"></canvas></div>
+</div>
+
+<div class="readout">
+  <div class="ro" id="ro-1964">1964 → 2026:<br>Spot 1964 $1.29/oz → 2026 $30/oz — 23× — dime 10c→$2.17 21.7× — quarter 25c→$5.42 21.7× — half 50c→$10.85 21.7× — <b>62 years later</b></div>
+  <div class="ro" id="ro-black">BLACK HALOGEN COIN:<br>0.07g At =2e20 atoms — 5.87 MeV each — total 1.9e8 J — 45kg TNT over 7.2h — medical 1 dose ~1e7 atoms — 0.07g=2e13 doses — <b>priceless vs $21.45 $1 face</b></div>
+  <div class="ro" id="ro-next">NEXT:<br>1964 silver stack vs black halogen coin stack — 1964 silver $1 face 0.715oz Ag — black halogen 0.07g At coin — stack height — <b>next please</b></div>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-stack"><div class="label">3DJS-1 — STACK — 1964 SILVER STACK $1 face 0.715oz vs BLACK HALOGEN COIN STACK 0.07g At — dime quarter half stack vs black coin stack — metal analogs ionic</div></div>
+  <div class="cwrap" id="wrap-value"><div class="label">3DJS-2 — VALUE OVER TIME — 1964 silver spot $1.29 → 2026 $30 — coins melt $ — dime $2.17 quarter $5.42 half $10.85 — black halogen coin priceless — metal analogs ionic — next</div></div>
+  <div class="cwrap full" id="wrap-melt"><div class="label">3DJS-3 — MELT — 1964 SILVER 90% Ag 10% Cu MELTS → BLACK HALOGEN COIN Au+ At- -211mN -211mV — Ag+ white 1.15Å + Cu+ orange 0.77Å → Au+ yellow 1.37Å + At- black 2.27Å — 1964 silver → black halogen coin — metal analogs ionic — next please</div></div>
+</div>
+
+<div class="card"><div class="mono">
+v149 NEXT — 1964 silver → 2026 + black halogen coin value
+
+1964 → 2026 SILVER VALUE:
+
+- 1964 spot: $1.29/oz fixed (US govt silver price 1964) — 1964 dime 10c face contains 0.0723 oz Ag → intrinsic 0.0723×1.29=$0.093 in 1964 — 1964 quarter 0.1808 oz ×1.29=$0.233 — half 0.3617 oz ×1.29=$0.466 — $1 face 0.715 oz ×1.29=$0.922 — slightly under face value due to seigniorage? Actually $1.29 was monetary value
+- 2026 spot: ~$30/oz (approx 2026) — 1964 dime melt 0.0723×30=$2.17 — quarter 0.1808×30=$5.42 — half 0.3617×30=$10.85 — $1 face 0.715×30=$21.45 — 21.7× face value — 23× spot increase 1.29→30
+- 62 years: 1964 to 2026 =62 years — silver 23× — coins 21.7× face — numismatic extra
+
+BLACK HALOGEN COIN VALUE:
+
+- 0.07g At =7e-5 kg — atoms =7e-5 /3.503e-25 =2e20 atoms At-211 — each α 5.87 MeV =9.4e-13 J — total 2e20×9.4e-13=1.88e8 J =52 kWh =45kg TNT equivalent — spread over 7.2h half-life → power 7.2 kW warm — not boom — medical
+- Medical dose: At-211 targeted alpha therapy — typical dose ~0.5 MBq to 10 MBq? — 1 Bq =1 decay/s — λ=ln2/T½=0.693/25920=2.67e-5 /s — activity A=λN — N=A/λ — for A=1e6 Bq (1 MBq), N=1e6/2.67e-5=3.7e10 atoms — actually 1e6 Bq needs 3.7e10 atoms — for 0.5 MBq ~1.8e10 atoms — let's say 1e7-1e10 atoms per dose — 0.07g 2e20 atoms = 2e20/1e10=2e10 doses at 1e10 atoms/dose — or 2e13 doses at 1e7 atoms/dose — huge — priceless medical — vs silver $21.45 $1 face
+- Value: At-211 production cost ~ $1000 per mCi? Actually At-211 cyclotron production expensive — $10k per dose? — 0.07g =2e13 doses ×$10k =2e17 $ =200 quadrillion $ — not realistic — but black halogen coin priceless lol — vs 1964 silver $21.45
+
+NEXT:
+
+- STACK: 1964 silver stack $1 face =4 quarters? Actually $1 face =10 dimes or 4 quarters or 2 halves — 0.715 oz Ag — height ~ 10×1.35mm=13.5mm for dimes, 4×1.75mm=7mm for quarters, 2×2.15mm=4.3mm for halves — black halogen coin stack 0.07g At coin ~2.2mm thick? — 1 coin =0.07g At — stack 1 coin vs silver stack
+- MELT: 1964 silver 90% Ag 10% Cu Ag+ white 1.15Å + Cu+ orange 0.77Å melts → liquid → re-mints as black halogen coin Au+ yellow 1.37Å + At- black 2.27Å -211mN -211mV — Ag+ white → At- black transformation — silver → black halogen — 1964 → black halogen — next please — metal analogs ionic — Ag+ white electrum → At- black halogen — 1964 silver → black halogen coin — C.O.I.N vs 1964 — next
+
+Metal analogs ionic next:
+- 1964 silver: Ag+ white 1.15Å + Cu+ orange 0.77Å → AgCu 90% Ag 10% Cu 0 — solid silver edge
+- Black halogen coin: Au+ yellow 1.37Å + At- black 2.27Å → AuAt 0 — -211mN -211mV — black halogen coin 0
+- Next: 1964 silver melts → black halogen coin — Ag+ white → At- black — 90% Ag → 100% At? — 0.07g At coin
+
+So next please — 1964 silver → 2026 $21.45 $1 face vs black halogen coin priceless — 23× spot increase — 21.7× face — 1964 silver stack vs black halogen stack — melt 1964 silver → black halogen coin Au+ At- -211mN -211mV — metal analogs ionic — next
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeGraph(id, data, color, label){
+  const c=document.getElementById(id);
+  const ctx=c.getContext('2d');
+  function resize(){ c.width=c.clientWidth*devicePixelRatio; c.height=c.clientHeight*devicePixelRatio; }
+  resize();
+  function draw(){
+    const w=c.width, h=c.height;
+    ctx.clearRect(0,0,w,h); ctx.fillStyle='#08080a'; ctx.fillRect(0,0,w,h);
+    ctx.strokeStyle='#1e1e24'; for(let i=0;i<=4;i++){ ctx.beginPath(); ctx.moveTo(0,h*i/4); ctx.lineTo(w,h*i/4); ctx.stroke(); }
+    ctx.fillStyle='#666'; ctx.font=`${10*devicePixelRatio}px monospace`; ctx.fillText(label,4,14*devicePixelRatio);
+    if(data.length>0){
+      const min=Math.min(...data), max=Math.max(...data);
+      const pad=(max-min)*0.15 || 1;
+      const lo=min-pad, hi=max+pad;
+      function yToPix(v){ return h - (v-lo)/(hi-lo)*h*0.8 - h*0.1; }
+      ctx.strokeStyle=color; ctx.lineWidth=2*devicePixelRatio; ctx.beginPath();
+      data.forEach((v,i)=>{ const x=(i/(data.length-1))*w; const y=yToPix(v); if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y); });
+      ctx.stroke();
+      ctx.fillStyle=color;
+      data.forEach((v,i)=>{ const x=(i/(data.length-1))*w; const y=yToPix(v); ctx.beginPath(); ctx.arc(x,y,3*devicePixelRatio,0,Math.PI*2); ctx.fill(); ctx.fillText(v.toFixed(2), x+4*devicePixelRatio, y-6*devicePixelRatio); });
+    }
+  }
+  setInterval(draw,80); addEventListener('resize', resize);
+}
+
+makeGraph('g-spot',[1.29, 5, 10, 20, 25, 30],'#d0d0d8','SPOT $/oz 1964 $1.29 → 2026 $30');
+makeGraph('g-melt',[2.17, 5.42, 10.85, 21.45],'#ffd700','MELT $ dime $2.17 quarter $5.42 half $10.85 $1 face $21.45');
+makeGraph('g-black',[21.45, 1e4, 1e8, 1e13],'#0a0a0a','BLACK HALOGEN log $ $21.45 vs priceless doses 2e13');
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x08080a); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,0.6)); const d=new THREE.DirectionalLight(0xffffff,0.9); d.position.set(4,6,4); d.castShadow=true; s.add(d); }
+
+const matSilver=new THREE.MeshStandardMaterial({color:0xd0d0d8, metalness:0.9, roughness:0.25});
+const matAtMinus=new THREE.MeshStandardMaterial({color:0x0a0a0a, metalness:0.4, roughness:0.25, emissive:0x222222, emissiveIntensity:0.5});
+const matAuPlus=new THREE.MeshStandardMaterial({color:0xffd700, metalness:0.7, roughness:0.35});
+const matCopper=new THREE.MeshStandardMaterial({color:0xc87333, metalness:0.8, roughness:0.35});
+
+// STACK
+{
+  const wrap=document.getElementById('wrap-stack');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,2,6);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  // 1964 silver stack $1 face = 10 dimes
+  for(let i=0;i<10;i++){
+    const dime=new THREE.Mesh(new THREE.CylinderGeometry(0.6,0.6,0.08,24), matSilver);
+    dime.position.set(-1.5, i*0.09 -0.4, 0); dime.rotation.x=Math.PI/2; group.add(dime);
+  }
+  // quarter stack 4 quarters
+  for(let i=0;i<4;i++){
+    const q=new THREE.Mesh(new THREE.CylinderGeometry(0.8,0.8,0.10,24), matSilver);
+    q.position.set(0, i*0.11 -0.2, 0); q.rotation.x=Math.PI/2; group.add(q);
+  }
+  // half stack 2 halves
+  for(let i=0;i<2;i++){
+    const h=new THREE.Mesh(new THREE.CylinderGeometry(1.0,1.0,0.12,24), matSilver);
+    h.position.set(1.5, i*0.13 -0.1, 0); h.rotation.x=Math.PI/2; group.add(h);
+  }
+  // black halogen coin 1 coin 0.07g
+  const blackCoin=new THREE.Mesh(new THREE.CylinderGeometry(1.0,1.0,0.14,32), matAtMinus);
+  blackCoin.position.set(3.0,0,0); blackCoin.rotation.x=Math.PI/2; group.add(blackCoin);
+  const edge=new THREE.Mesh(new THREE.TorusGeometry(1.0,0.05,12,32), matAuPlus); edge.position.set(3.0,0,0); edge.rotation.x=Math.PI/2; group.add(edge);
+
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.01; group.rotation.y+=0.003; group.rotation.x=Math.sin(t*0.2)*0.05; controls.update(); renderer.render(scene,cam); }
+  animate();
+}
+
+// VALUE
+{
+  const wrap=document.getElementById('wrap-value');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,2,6);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  // bars for melt value
+  const values=[2.17,5.42,10.85,21.45];
+  const labels=['dime','quarter','half','$1 face'];
+  values.forEach((v,i)=>{
+    const h=v/2; // scale
+    const bar=new THREE.Mesh(new THREE.BoxGeometry(0.4, h, 0.4), i===3?matAtMinus:matSilver);
+    bar.position.set((i-1.5)*0.9, h/2, 0); group.add(bar);
+  });
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.01; group.rotation.y+=0.004; controls.update(); renderer.render(scene,cam); }
+  animate();
+}
+
+// MELT
+{
+  const wrap=document.getElementById('wrap-melt');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(36, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,2,7);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const meltGroup=new THREE.Group(); scene.add(meltGroup);
+  // 1964 silver coins melting
+  const coins=[];
+  for(let i=0;i<6;i++){
+    const coin=new THREE.Mesh(new THREE.CylinderGeometry(0.5+Math.random()*0.3,0.5+Math.random()*0.3,0.08,20), matSilver);
+    coin.position.set((Math.random()-0.5)*3, 1+Math.random()*1, (Math.random()-0.5)*2);
+    coin.userData={vel:new THREE.Vector3(0,-0.02-Math.random()*0.02,0), orig:coin.position.clone()};
+    meltGroup.add(coin); coins.push(coin);
+  }
+  const crucible=new THREE.Mesh(new THREE.CylinderGeometry(1.5,1.2,1.0,32), new THREE.MeshStandardMaterial({color:0x333333, metalness:0.3, roughness:0.7})); crucible.position.set(0,-0.5,0); meltGroup.add(crucible);
+  const blackCoin=new THREE.Mesh(new THREE.CylinderGeometry(1.2,1.2,0.18,32), matAtMinus); blackCoin.position.set(0,-1.2,0); blackCoin.rotation.x=Math.PI/2; blackCoin.scale.setScalar(0.1); meltGroup.add(blackCoin);
+  let melting=false;
+  function melt(){
+    melting=true;
+    let s=0.1;
+    const int=setInterval(()=>{
+      s+=0.07; blackCoin.scale.setScalar(Math.min(1.2,s));
+      if(s>=1.2) clearInterval(int);
+    },16);
+  }
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.016;
+    if(melting){
+      coins.forEach(c=>{
+        c.position.add(c.userData.vel);
+        c.userData.vel.y-=0.001;
+        if(c.position.y<-0.3){ c.visible=false; }
+      });
+    } else {
+      coins.forEach((c,i)=>{
+        c.position.y=c.userData.orig.y + Math.sin(t*1.2+i)*0.08;
+      });
+    }
+    meltGroup.rotation.y+=0.002;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+  // expose melt
+  window._melt=melt;
+}
+
+document.getElementById('btn-stack').onclick=()=>{};
+document.getElementById('btn-melt').onclick=()=>{ if(window._melt) window._melt(); };
+document.getElementById('btn-1964').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

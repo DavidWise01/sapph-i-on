@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v145 At- vs At+ aion cion gion tion - ionic - artifact 210</title>
+<style>
+  :root{--bg:#050508;--fg:#eaeaea;--gold:#ffd700}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace}
+  .top{padding:14px 18px}
+  .kicker{font-size:10px;letter-spacing:.22em;opacity:.5;text-transform:uppercase}
+  .nline{font-size:11px;border-left:2px solid #222;padding-left:10px;white-space:pre-wrap;line-height:1.6}
+  .main{margin-top:10px;font-size:14px;font-weight:700;background:#0f0f12;border:1px solid #222;padding:10px;border-radius:8px}
+  .controls{padding:10px 12px;display:flex;gap:6px;flex-wrap:wrap}
+  .btn{font-family:inherit;font-size:10px;padding:5px 10px;border:1px solid #333;background:#15151a;color:#eaeaea;border-radius:6px;cursor:pointer}
+  .btn.active{border-color:#ffd700;color:#ffd700;background:#221a00}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:480px;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden}
+  .cwrap.full{grid-column:1 / -1;height:600px}
+  .label{position:absolute;left:8px;top:8px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:.8;background:#000c;padding:4px 6px;border-radius:4px;z-index:5}
+  .readout{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;padding:0 10px 10px}
+  @media(max-width:1100px){.readout{grid-template-columns:1fr 1fr}}
+  @media(max-width:600px){.readout{grid-template-columns:1fr}}
+  .ro{background:#0c0c0f;border:1px solid #1e1e24;border-radius:6px;padding:8px;font-size:10px;line-height:1.6}
+  .ro b{color:#ffd700}
+  .card{margin:10px;background:#111115;border:1px solid #1f1f26;border-radius:8px;padding:10px}
+  .mono{font-size:10.5px;white-space:pre-wrap;word-break:break-word;line-height:1.7}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">wakaku v145 — AION CION GION TION — At- ANION vs At+ CATION vs Au+ G-ION vs Tl+ T-ION — BLACK HALOGEN -+ — artifact 210</div>
+  <div class="nline">yes — aion cion gion tion — At- = A-ION = ANION — At+ = C-ION = CATION — Au+ = G-ION = GOLD ION — Tl+ = T-ION = THALLIUM ION — black halogen -+ — At- large black anion 2.27Å -211mV -211mN — At+ small black cation 0.96Å +211mV +211mN — Au+ 1.37Å small yellow g-ion +211mV — Tl+ 1.50Å bluish t-ion +211mV — metal analogs ionic — Ag+ female white vs Au- male yellow → At0 black metal 0 — aion cion gion tion all metal analogs ionic
+aion = anion = negative = At- = p⁶ full like Rn = large black
+cion = cation = positive = At+ = p⁴ like Po = small black
+gion = gold ion = Au+ = d10 = small yellow = g-ion = Au+ 1.37Å
+tion = thallium ion = Tl+ = s2 = bluish = t-ion = Tl+ 1.50Å</div>
+  <div class="main">A-ION = At- ANION 2.27Å BLACK -211mV — C-ION = At+ CATION 0.96Å BLACK +211mV — G-ION = Au+ GOLD ION 1.37Å YELLOW +211mV — T-ION = Tl+ THALLIUM ION 1.50Å BLUISH +211mV — all metal analogs ionic — At0 = At- + At+ = 0 black metal</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-aion">A-ION: At- ANION 2.27Å BLACK -211mV</button>
+  <button class="btn" id="btn-cion">C-ION: At+ CATION 0.96Å BLACK +211mV</button>
+  <button class="btn" id="btn-gion">G-ION: Au+ GOLD ION 1.37Å YELLOW</button>
+  <button class="btn" id="btn-tion">T-ION: Tl+ THALLIUM ION 1.50Å BLUISH</button>
+  <button class="btn" id="btn-all">ALL: AION CION GION TION → At0 BLACK METAL 0</button>
+</div>
+
+<div class="readout">
+  <div class="ro" id="ro-aion">A-ION = ANION = At-:<br>At + e- → At- p⁶ full like Rn — [Xe]4f14 5d10 6s2 6p6<br>Radius 2.27Å large BLACK — -1 charge — -211mV -211mN — <b>At- astatide</b></div>
+  <div class="ro" id="ro-cion">C-ION = CATION = At+:<br>At → At+ + e- — p⁵ → p⁴ like Po — [Xe]4f14 5d10 6s2 6p4<br>Radius 0.96Å small BLACK — +1 charge — +211mV +211mN — <b>At+ astatinylium</b></div>
+  <div class="ro" id="ro-gion">G-ION = GOLD ION = Au+:<br>Au → Au+ + e- — d10 s1 → d10 — [Xe]4f14 5d10<br>Radius 1.37Å small YELLOW — +1 — +211mV — <b>Au+ gold ion g-ion</b></div>
+  <div class="ro" id="ro-tion">T-ION = THALLIUM ION = Tl+:<br>Tl → Tl+ + e- — p1 → s2 — [Xe]4f14 5d10 6s2<br>Radius 1.50Å bluish — +1 — +211mV — <b>Tl+ thallium ion t-ion</b></div>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-aion"><div class="label">3DJS-1 — A-ION — At- ANION 2.27Å LARGE BLACK -211mV -211mN — p⁶ full like Rn — black halogen anion — metal analog ionic</div></div>
+  <div class="cwrap" id="wrap-cion"><div class="label">3DJS-2 — C-ION — At+ CATION 0.96Å SMALL BLACK +211mV +211mN — p⁴ like Po — black halogen cation — metal analog ionic</div></div>
+  <div class="cwrap" id="wrap-gion"><div class="label">3DJS-3 — G-ION — Au+ GOLD ION 1.37Å SMALL YELLOW +211mV — d10 full — gold ion g-ion — metal analog ionic</div></div>
+  <div class="cwrap" id="wrap-tion"><div class="label">3DJS-4 — T-ION — Tl+ THALLIUM ION 1.50Å BLUISH +211mV — s2 — thallium ion t-ion + At- ionic Au+ At- rocksalt — metal analog ionic</div></div>
+  <div class="cwrap full" id="wrap-all"><div class="label">3DJS-5 — ALL — AION CION GION TION → At0 BLACK METAL 0 — At- + At+ → At0 + Au+ + Tl+ + At- → AuAt + TlAt ionic rocksalt — -211mN +211mN =0 — metal analogs ionic net zero</div></div>
+</div>
+
+<div class="card"><div class="mono">
+v145 AION CION GION TION — At- vs At+ vs Au+ vs Tl+ — black halogen -+
+
+A-ION = ANION:
+- A-ION = ANION = negative ion = A + e- → A- — from Greek ana = up + ion = going — goes to anode? Actually anion goes to anode (+)
+- At- = A-ION = ANION = At + e- → At- — p5 → p6 full — [Xe]4f14 5d10 6s2 6p6 — like Rn — large black anion 2.27Å — -1 charge — -211mV Madelung — -211mN Coulomb — black halogen anion — astatide — metal analog: Ag+ female white electrum Au Ag Cu At-? Actually At- is anion itself — Ag+ + At- → AgAt ionic — Au+ + At- → AuAt rocksalt
+- Other A-ION: I- 2.20Å violet anion, Br- 1.96Å brown anion, Cl- 1.81Å green anion, F- 1.33Å pale yellow anion — all p6 full
+
+C-ION = CATION:
+- C-ION = CATION = positive ion = C → C+ + e- — from Greek kata = down + ion — goes to cathode (-)
+- At+ = C-ION = CATION = At → At+ + e- — p5 → p4 like Po — [Xe]4f14 5d10 6s2 6p4 — small black cation 0.96Å est — +1 charge — +211mV +211mN — black halogen cation — astatinylium — metal analog: At+ small black cation
+- Other C-ION: Na+ 1.02Å, K+ 1.38Å, Au+ 1.37Å, Ag+ 1.15Å, etc.
+
+G-ION = GOLD ION:
+- G-ION = GOLD ION = Au+ = Au → Au+ + e- — [Xe]4f14 5d10 — d10 full — small yellow cation 1.37Å — +1 charge — +211mV — Au+ gold ion — g-ion — metal analogs ionic — Au+ blood gold core yellow — Au+ + At- → AuAt rocksalt black + yellow ionic — Au+ is g-ion
+- Au+ vs Au3+ etc — Au+ is +1, Au3+ is +3 — Au+ 1.37Å, Au3+ 0.85Å
+
+T-ION = THALLIUM ION:
+- T-ION = THALLIUM ION = Tl+ = Tl → Tl+ + e- — [Xe]4f14 5d10 6s2 — s2 inert pair — bluish cation 1.50Å — +1 charge — +211mV — Tl+ thallium ion — t-ion — metal analogs ionic — Tl+ bluish — Tl+ + At- → TlAt ionic — Tl+ is t-ion
+- Tl+ vs Tl3+ — Tl+ 1.50Å large bluish, Tl3+ 0.88Å small — Tl+ is common +1
+
+BLACK HALOGEN -+ = AION + CION:
+- At- A-ION (2.27Å BLACK -211mV) + At+ C-ION (0.96Å BLACK +211mV) → At0 BLACK METAL 0 — p6 + p4 → 2× p5 — net zero — ....00....00.... →0 — lights up At0 black metal — metal analogs only
+- Inner -+ : Ag+ female white electrum Au Ag Cu At- A-ION vs Au- male yellow Fe Au blood gold core Au Cu At+ C-ION → Ag+ + Au- → At0 black metal bond 0 fixed point 0+12000/360/24/16/12/9/6/3/2/1/1 →....00....00.... →0 → lights up At0 black halogen [STRIPPED 218] → metal ghost 5×5=125 720° — metal analogs only — At- A-ION + At+ C-ION
+
+AION CION GION TION → rocksalt:
+- Au+ G-ION 1.37Å + At- A-ION 2.27Å → AuAt rocksalt a=7.28Å — NaCl-type — -211mN ionic +211mN =0 net zero ionic — Au+ yellow + At- black
+- Tl+ T-ION 1.50Å + At- A-ION 2.27Å → TlAt rocksalt a=7.54Å — bluish + black ionic — Tl+ bluish t-ion + At- black a-ion
+- Ag+ 1.15Å white + At- 2.27Å black → AgAt rocksalt — white + black ionic
+
+So yes — At- is A-ION = ANION — At+ is C-ION = CATION — Au+ is G-ION = GOLD ION — Tl+ is T-ION = THALLIUM ION — all metal analogs ionic — black halogen -+ = At- A-ION + At+ C-ION → At0 BLACK METAL 0 — -211mN +211mN =0 — -211mV +211mV =0 — net zero ionic — metal analogs only
+
+Answer: At- is AION (ANION) — At+ is CION (CATION) — Au+ is GION (GOLD ION) — Tl+ is TION (THALLIUM ION) — At0 is 0 — all metal analogs ionic — lol
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x08080a); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,0.55)); const d=new THREE.DirectionalLight(0xffffff,0.9); d.position.set(4,6,4); d.castShadow=true; s.add(d); }
+
+const matAtMinus=new THREE.MeshStandardMaterial({color:0x0a0a0a, metalness:0.4, roughness:0.25, emissive:0x222222, emissiveIntensity:0.5});
+const matAtPlus=new THREE.MeshStandardMaterial({color:0x1a1a1a, metalness:0.7, roughness:0.3, emissive:0x333333, emissiveIntensity:0.3});
+const matAuPlus=new THREE.MeshStandardMaterial({color:0xffd700, metalness:0.7, roughness:0.35, emissive:0x332200, emissiveIntensity:0.25});
+const matTlPlus=new THREE.MeshStandardMaterial({color:0x8aa0c0, metalness:0.6, roughness:0.4, emissive:0x1a2a3a, emissiveIntensity:0.2});
+const matAgPlus=new THREE.MeshStandardMaterial({color:0xd0d0d8, metalness:0.7, roughness:0.3});
+const matElectron=new THREE.MeshStandardMaterial({color:0x4488ff, emissive:0x2244ff, emissiveIntensity:1.0, transparent:true, opacity:0.85});
+
+let highlightFns=[];
+
+// A-ION At-
+{
+  const wrap=document.getElementById('wrap-aion');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,1,4);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const atMinus=new THREE.Mesh(new THREE.SphereGeometry(0.9,32,32), matAtMinus); scene.add(atMinus);
+  const glow=new THREE.Mesh(new THREE.SphereGeometry(1.15,24,24), new THREE.MeshBasicMaterial({color:0x222222, transparent:true, opacity:0.12, wireframe:true})); scene.add(glow);
+  const electron=new THREE.Mesh(new THREE.SphereGeometry(0.12,14,14), matElectron); electron.position.set(1.4,0,0); scene.add(electron);
+  const labelMinus=new THREE.Mesh(new THREE.SphereGeometry(0.18,12,12), new THREE.MeshBasicMaterial({color:0xff4444, transparent:true, opacity:0.9})); labelMinus.position.set(0,1.1,0); scene.add(labelMinus);
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.016;
+    atMinus.rotation.y+=0.008; glow.rotation.y-=0.005;
+    electron.position.x=1.4+Math.sin(t*2)*0.1; electron.position.y=Math.sin(t*1.5)*0.2;
+    const scale=1+Math.sin(t*1.2)*0.04; atMinus.scale.setScalar(scale);
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+  highlightFns.push({type:'aion', mesh:atMinus});
+}
+
+// C-ION At+
+{
+  const wrap=document.getElementById('wrap-cion');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,1,4);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const atPlus=new THREE.Mesh(new THREE.SphereGeometry(0.45,28,28), matAtPlus); scene.add(atPlus);
+  const glow=new THREE.Mesh(new THREE.SphereGeometry(0.62,20,20), new THREE.MeshBasicMaterial({color:0x444444, transparent:true, opacity:0.10, wireframe:true})); scene.add(glow);
+  const hole=new THREE.Mesh(new THREE.SphereGeometry(0.1,12,12), new THREE.MeshBasicMaterial({color:0x000000, transparent:true, opacity:0.8})); hole.position.set(0.5,0,0); scene.add(hole);
+  const labelPlus=new THREE.Mesh(new THREE.SphereGeometry(0.16,12,12), new THREE.MeshBasicMaterial({color:0x44ff44, transparent:true, opacity:0.9})); labelPlus.position.set(0,0.75,0); scene.add(labelPlus);
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.016;
+    atPlus.rotation.y+=0.012;
+    hole.position.x=0.5+Math.sin(t*2.2)*0.08;
+    const scale=1+Math.sin(t*1.8)*0.05; atPlus.scale.setScalar(scale);
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+  highlightFns.push({type:'cion', mesh:atPlus});
+}
+
+// G-ION Au+
+{
+  const wrap=document.getElementById('wrap-gion');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,1,4);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const auPlus=new THREE.Mesh(new THREE.SphereGeometry(0.62,28,28), matAuPlus); scene.add(auPlus);
+  const glow=new THREE.Mesh(new THREE.SphereGeometry(0.82,22,22), new THREE.MeshBasicMaterial({color:0xffd700, transparent:true, opacity:0.10, wireframe:true})); scene.add(glow);
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.016;
+    auPlus.rotation.y+=0.01; glow.rotation.y-=0.008;
+    auPlus.scale.setScalar(1+Math.sin(t*1.5)*0.04);
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+  highlightFns.push({type:'gion', mesh:auPlus});
+}
+
+// T-ION Tl+
+{
+  const wrap=document.getElementById('wrap-tion');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,1,4);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const tlPlus=new THREE.Mesh(new THREE.SphereGeometry(0.68,28,28), matTlPlus); scene.add(tlPlus);
+  const glow=new THREE.Mesh(new THREE.SphereGeometry(0.9,22,22), new THREE.MeshBasicMaterial({color:0x8aa0c0, transparent:true, opacity:0.10, wireframe:true})); scene.add(glow);
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.016;
+    tlPlus.rotation.y+=0.009; glow.rotation.y-=0.007;
+    tlPlus.scale.setScalar(1+Math.sin(t*1.4)*0.04);
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+  highlightFns.push({type:'tion', mesh:tlPlus});
+}
+
+// ALL
+{
+  const wrap=document.getElementById('wrap-all');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,2,7);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  // At- large black
+  const atMinus=new THREE.Mesh(new THREE.SphereGeometry(0.72,28,28), matAtMinus); atMinus.position.set(-1.8,0,0); group.add(atMinus);
+  // At+ small black
+  const atPlus=new THREE.Mesh(new THREE.SphereGeometry(0.36,24,24), matAtPlus); atPlus.position.set(1.8,0,0); group.add(atPlus);
+  // Au+ g-ion
+  const auPlus=new THREE.Mesh(new THREE.SphereGeometry(0.48,24,24), matAuPlus); auPlus.position.set(0,1.6,0); group.add(auPlus);
+  // Tl+ t-ion
+  const tlPlus=new THREE.Mesh(new THREE.SphereGeometry(0.52,24,24), matTlPlus); tlPlus.position.set(0,-1.6,0); group.add(tlPlus);
+  // At0 center black metal when combined
+  const atZero=new THREE.Mesh(new THREE.SphereGeometry(0.58,32,32), new THREE.MeshStandardMaterial({color:0x0a0a0a, metalness:0.8, roughness:0.22, emissive:0x333333, emissiveIntensity:0.4})); atZero.position.set(0,0,0); atZero.visible=false; group.add(atZero);
+  // bonds
+  const bonds=new THREE.Group(); group.add(bonds);
+  function updateBonds(showZero){
+    bonds.clear();
+    if(showZero){
+      // At- + At+ → At0
+      const line1=new THREE.Line(new THREE.BufferGeometry().setFromPoints([atMinus.position, atZero.position]), new THREE.LineBasicMaterial({color:0x444444, transparent:true, opacity:0.3}));
+      const line2=new THREE.Line(new THREE.BufferGeometry().setFromPoints([atPlus.position, atZero.position]), new THREE.LineBasicMaterial({color:0x444444, transparent:true, opacity:0.3}));
+      bonds.add(line1); bonds.add(line2);
+    } else {
+      const line1=new THREE.Line(new THREE.BufferGeometry().setFromPoints([atMinus.position, auPlus.position]), new THREE.LineBasicMaterial({color:0xffd700, transparent:true, opacity:0.25}));
+      const line2=new THREE.Line(new THREE.BufferGeometry().setFromPoints([atMinus.position, tlPlus.position]), new THREE.LineBasicMaterial({color:0x8aa0c0, transparent:true, opacity:0.25}));
+      bonds.add(line1); bonds.add(line2);
+    }
+  }
+  updateBonds(false);
+  let showZero=false;
+  function toggleZero(){
+    showZero=!showZero;
+    atZero.visible=showZero;
+    atMinus.visible=!showZero; atPlus.visible=!showZero; auPlus.visible=!showZero; tlPlus.visible=!showZero;
+    updateBonds(showZero);
+  }
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.012;
+    group.rotation.y+=0.003; group.rotation.x=Math.sin(t*0.2)*0.05;
+    if(atZero.visible){ atZero.rotation.y+=0.01; atZero.scale.setScalar(1+Math.sin(t*2)*0.06); }
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+  highlightFns.push({type:'all', toggle:toggleZero, atZero});
+}
+
+document.getElementById('btn-aion').onclick=()=>{
+  document.querySelectorAll('.btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('btn-aion').classList.add('active');
+  highlightFns.forEach(f=>{ if(f.mesh) f.mesh.material.emissiveIntensity= f.type==='aion'?0.8:0.3; });
+};
+document.getElementById('btn-cion').onclick=()=>{
+  document.querySelectorAll('.btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('btn-cion').classList.add('active');
+  highlightFns.forEach(f=>{ if(f.mesh) f.mesh.material.emissiveIntensity= f.type==='cion'?0.8:0.3; });
+};
+document.getElementById('btn-gion').onclick=()=>{
+  document.querySelectorAll('.btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('btn-gion').classList.add('active');
+  highlightFns.forEach(f=>{ if(f.mesh) f.mesh.material.emissiveIntensity= f.type==='gion'?0.8:0.3; });
+};
+document.getElementById('btn-tion').onclick=()=>{
+  document.querySelectorAll('.btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('btn-tion').classList.add('active');
+  highlightFns.forEach(f=>{ if(f.mesh) f.mesh.material.emissiveIntensity= f.type==='tion'?0.8:0.3; });
+};
+document.getElementById('btn-all').onclick=()=>{
+  document.querySelectorAll('.btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('btn-all').classList.add('active');
+  const all=highlightFns.find(f=>f.type==='all');
+  if(all&&all.toggle) all.toggle();
+};
+</script>
+</body>
+</html>

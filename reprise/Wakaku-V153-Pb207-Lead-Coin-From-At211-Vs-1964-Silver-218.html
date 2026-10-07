@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v153 Pb-207 lead coin from At-211 vs 1964 silver - next - artifact 218</title>
+<style>
+  :root{--bg:#050508;--fg:#eaeaea;--gold:#ffd700}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace}
+  .top{padding:14px 18px}
+  .kicker{font-size:10px;letter-spacing:.22em;opacity:.5;text-transform:uppercase}
+  .nline{font-size:11px;border-left:2px solid #222;padding-left:10px;white-space:pre-wrap;line-height:1.6}
+  .main{margin-top:10px;font-size:14px;font-weight:700;background:#0f0f12;border:1px solid #222;padding:10px;border-radius:8px}
+  .controls{padding:10px 12px;display:flex;gap:6px;flex-wrap:wrap}
+  .btn{font-family:inherit;font-size:10px;padding:5px 10px;border:1px solid #333;background:#15151a;color:#eaeaea;border-radius:6px;cursor:pointer}
+  .btn.active{border-color:#ffd700;color:#ffd700;background:#221a00}
+  .canvases{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:10px}
+  @media(max-width:1100px){.canvases{grid-template-columns:1fr 1fr}}
+  @media(max-width:700px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:460px;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden}
+  .cwrap.full{grid-column:1 / -1;height:620px}
+  .label{position:absolute;left:8px;top:8px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:.8;background:#000c;padding:4px 6px;border-radius:4px;z-index:5}
+  .readout{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0 10px 10px}
+  @media(max-width:900px){.readout{grid-template-columns:1fr}}
+  .ro{background:#0c0c0f;border:1px solid #1e1e24;border-radius:6px;padding:8px;font-size:10px;line-height:1.6}
+  .ro b{color:#ffd700}
+  .card{margin:10px;background:#111115;border:1px solid #1f1f26;border-radius:8px;padding:10px}
+  .mono{font-size:10.5px;white-space:pre-wrap;word-break:break-word;line-height:1.7}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">wakaku v153 — Pb-207 LEAD COIN from At-211 vs 1964 SILVER — next — artifact 218</div>
+  <div class="nline">next — Pb-207 lead coin from At-211 decay vs 1964 silver — At-211 black halogen 2.27Å black -211mN 7.2h → Pb-207 stable gray 1.19Å Pb2+ gray — Pb-207 lead coin — lead coin from black halogen coin decay — Pb-207 stable gray 1.19Å Pb2+ — vs 1964 silver 90% Ag 10% Cu Ag+ white 1.15Å + Cu+ orange 0.77Å solid silver edge stable — At- black decays → Pb gray lead coin — Pb-207 lead coin 207 amu — Pb melt 327°C boil 1749°C — soft gray metal — Pb2+ 1.19Å gray ionic — vs Ag+ white 1.15Å — Pb coin vs Ag coin — metal analogs ionic — At- black → Pb gray — black halogen coin → lead coin — 1964 silver stable vs lead from black halogen — next — Pb-207 lead coin 0.07g? — 0.07g Pb = same atoms but stable — vs 0.07g At decays — next please</div>
+  <div class="main">NEXT: Pb-207 LEAD COIN FROM At-211 DECAY vs 1964 SILVER — At-211 2.27Å black -211mN 7.2h → Pb-207 1.19Å gray Pb2+ stable — Pb-207 lead coin gray — vs 1964 90% Ag 10% Cu Ag+ white + Cu+ orange solid silver edge stable — black → gray — At- → Pb — lead coin from black halogen coin — next</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-pb">Pb-207 LEAD COIN gray 1.19Å from At-211</button>
+  <button class="btn" id="btn-ag">1964 SILVER Ag+ white stable 90% Ag</button>
+  <button class="btn" id="btn-trans">TRANSFORM At- black → Pb gray lead coin</button>
+  <button class="btn" id="btn-reset">RESET</button>
+</div>
+
+<div class="readout">
+  <div class="ro" id="ro-pb">Pb-207 LEAD COIN:<br>From At-211 decay — At-211 7.2h → Pb-207 stable — Pb2+ 1.19Å gray — melt 327°C — soft gray metal — Pb-207 stable — <b>Pb gray lead coin</b></div>
+  <div class="ro" id="ro-ag">1964 SILVER:<br>90% Ag 10% Cu — Ag+ white 1.15Å + Cu+ orange 0.77Å — solid silver edge — stable 62y — <b>Ag+ white stable</b></div>
+  <div class="ro" id="ro-trans">TRANSFORM:<br>At- black 2.27Å -211mV 7.2h → Pb-207 gray 1.19Å Pb2+ stable + α — black → gray — black halogen → lead — <b>At- → Pb</b></div>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-pb"><div class="label">Pb-207 LEAD COIN — Pb2+ 1.19Å gray — from At-211 black halogen decay — At- 2.27Å black -211mN 7.2h → Pb-207 gray stable — lead coin gray — metal analogs ionic</div></div>
+  <div class="cwrap" id="wrap-ag"><div class="label">1964 SILVER — Ag+ white 1.15Å + Cu+ orange 0.77Å 90% Ag 10% Cu solid silver edge — stable 62y — Ag+ white stable — metal analogs ionic</div></div>
+  <div class="cwrap" id="wrap-trans"><div class="label">TRANSFORM — At- black 2.27Å -211mV → Pb gray 1.19Å Pb2+ + α -211mN — black halogen coin → lead coin — At- black → Pb gray — metal analogs ionic — next</div></div>
+  <div class="cwrap full" id="wrap-all"><div class="label">ALL — Pb-207 lead coin gray from At-211 black halogen vs 1964 silver white — At- black 2.27Å -211mN 7.2h → Pb-207 gray 1.19Å stable + α — vs Ag+ white 1.15Å stable 90% Ag — black → gray vs white stable — metal analogs ionic — next</div></div>
+</div>
+
+<div class="card"><div class="mono">
+v153 NEXT — Pb-207 lead coin from At-211 black halogen vs 1964 silver
+
+Pb-207 LEAD COIN FROM At-211:
+
+- At-211 black halogen 2.27Å black -211mV -211mN 7.2h → 41.8% α Bi-207 + α → Pb-207 stable + 58.2% EC Po-211 0.516s 7.45 MeV -268mN → Pb-207 stable — final Pb-207 stable gray — Pb2+ 1.19Å gray ionic — Pb Z82 [Xe]4f14 5d10 6s2 6p2 — p2 — Pb2+ [Xe]4f14 5d10 6s2 — s2 — 1.19Å gray — melt 327°C boil 1749°C — soft gray metal — Pb-207 stable isotope — lead coin gray — from At-211 black halogen coin decay — 0.07g At =2e20 atoms → 0.07g Pb ~2e20 atoms Pb-207 stable (mass similar 211 vs 207) — 0.07g Pb coin gray — vs 0.07g At coin black — black → gray — At- → Pb — black halogen coin → lead coin
+
+1964 SILVER:
+
+- 90% Ag 10% Cu — Ag+ white 1.15Å + Cu+ orange 0.77Å — solid silver edge — stable — Ag-107 stable Ag-109 stable — Cu-63 stable Cu-65 stable — 90% Ag 10% Cu stable forever — 1964→2026 62y still 90% Ag — Ag+ white stable — vs Pb gray from At- black — white stable vs gray from black decay
+
+TRANSFORM:
+
+- At- black 2.27Å -211mV -1 anion 7.2h → Pb2+ gray 1.19Å +2 cation stable + α 5.87 MeV -211mN — black anion - → gray cation + — -211mV → +? — -1 → +2 + α (He2+) — charge: -1 → +2 +2 =+4? Not balanced — nuclear — but ionic analog: At- -211mV black → Pb2+ gray + α — black → gray — At- → Pb — black halogen coin → lead coin — metal analogs ionic — At- black 2.27Å -211mV 7.2h → Pb gray 1.19Å stable
+
+Metal analogs ionic next:
+
+- At- black anion 2.27Å -211mV -1 7.2h → Pb2+ gray cation 1.19Å stable +2 + α -211mN — black → gray — At- → Pb — black halogen → lead
+- Ag+ white cation 1.15Å +1 stable + Cu+ orange 0.77Å +1 stable → AgCu 90% Ag 10% Cu solid silver edge stable 62y — white + orange stable
+
+So next = Pb-207 lead coin gray from At-211 black halogen black → gray vs 1964 silver white stable — At- black 7.2h → Pb gray stable + α vs Ag+ white stable forever — black → gray vs white stable — metal analogs ionic — next please
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x08080a); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,0.6)); const d=new THREE.DirectionalLight(0xffffff,0.9); d.position.set(4,6,4); d.castShadow=true; s.add(d); }
+
+const matSilver=new THREE.MeshStandardMaterial({color:0xd0d0d8, metalness:0.9, roughness:0.25});
+const matAtMinus=new THREE.MeshStandardMaterial({color:0x0a0a0a, metalness:0.4, roughness:0.25, emissive:0x222222, emissiveIntensity:0.5});
+const matPb=new THREE.MeshStandardMaterial({color:0x6a6a72, metalness:0.8, roughness:0.4});
+const matAuPlus=new THREE.MeshStandardMaterial({color:0xffd700, metalness:0.7, roughness:0.35});
+const matAlpha=new THREE.MeshStandardMaterial({color:0xffd0a0, emissive:0xff8844, emissiveIntensity:1.2, transparent:true, opacity:0.9});
+
+// Pb
+{
+  const wrap=document.getElementById('wrap-pb');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,1.5,3.5);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const coin=new THREE.Mesh(new THREE.CylinderGeometry(1.2,1.2,0.20,48), matPb); coin.rotation.x=Math.PI/2; scene.add(coin);
+  const edge=new THREE.Mesh(new THREE.TorusGeometry(1.2,0.05,16,48), matPb); edge.rotation.x=Math.PI/2; scene.add(edge);
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.01; coin.rotation.y+=0.008; edge.rotation.y+=0.008; controls.update(); renderer.render(scene,cam); }
+  animate();
+}
+
+// Ag
+{
+  const wrap=document.getElementById('wrap-ag');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,1.5,3.5);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const coin=new THREE.Mesh(new THREE.CylinderGeometry(1.2,1.2,0.18,48), matSilver); coin.rotation.x=Math.PI/2; scene.add(coin);
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.01; coin.rotation.y+=0.008; controls.update(); renderer.render(scene,cam); }
+  animate();
+}
+
+// TRANS
+{
+  const wrap=document.getElementById('wrap-trans');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,1.5,4);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const at=new THREE.Mesh(new THREE.SphereGeometry(0.6,24,24), matAtMinus); at.position.set(-1.2,0,0); group.add(at);
+  const pb=new THREE.Mesh(new THREE.SphereGeometry(0.5,24,24), matPb); pb.position.set(1.2,0,0); group.add(pb);
+  const arrow=new THREE.Mesh(new THREE.CylinderGeometry(0.05,0.05,1.5,8), new THREE.MeshBasicMaterial({color:0x444444})); arrow.position.set(0,0,0); arrow.rotation.z=Math.PI/2; group.add(arrow);
+  const alphas=new THREE.Group(); scene.add(alphas);
+  function transform(){
+    for(let i=0;i<2;i++){
+      const a=new THREE.Mesh(new THREE.SphereGeometry(0.13,12,12), matAlpha.clone());
+      a.position.copy(at.position);
+      const dir=new THREE.Vector3(1, (Math.random()-0.5)*0.5, (Math.random()-0.5)*0.5).normalize();
+      a.userData={dir, dist:0}; alphas.add(a);
+    }
+    at.material=matPb;
+    setTimeout(()=>{ at.material=matAtMinus; }, 1000);
+  }
+  window._trans=transform;
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.01;
+    group.rotation.y+=0.004;
+    alphas.children.forEach(a=>{ a.userData.dist+=0.07; a.position.add(a.userData.dir.clone().multiplyScalar(0.07)); a.material.opacity=Math.max(0,1-a.userData.dist*0.15); });
+    for(let i=alphas.children.length-1;i>=0;i--) if(alphas.children[i].material.opacity<=0) alphas.remove(alphas.children[i]);
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+// ALL
+{
+  const wrap=document.getElementById('wrap-all');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(36, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,2,7);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const coin1964=new THREE.Mesh(new THREE.CylinderGeometry(0.8,0.8,0.12,32), matSilver); coin1964.position.set(-2,0,0); coin1964.rotation.x=Math.PI/2; group.add(coin1964);
+  const coinPb=new THREE.Mesh(new THREE.CylinderGeometry(0.8,0.8,0.14,32), matPb); coinPb.position.set(0,0,0); coinPb.rotation.x=Math.PI/2; group.add(coinPb);
+  const coinBlack=new THREE.Mesh(new THREE.CylinderGeometry(0.8,0.8,0.14,32), new THREE.MeshStandardMaterial({color:0x0a0a0a, metalness:0.6, roughness:0.3, emissive:0x333333, emissiveIntensity:0.4})); coinBlack.position.set(2,0,0); coinBlack.rotation.x=Math.PI/2; group.add(coinBlack);
+  const edge=new THREE.Mesh(new THREE.TorusGeometry(0.8,0.04,12,32), matAuPlus); edge.position.set(2,0,0); edge.rotation.x=Math.PI/2; group.add(edge);
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.01; group.rotation.y+=0.003; controls.update(); renderer.render(scene,cam); }
+  animate();
+}
+
+document.getElementById('btn-trans').onclick=()=>{ if(window._trans) window._trans(); };
+document.getElementById('btn-pb').onclick=()=>{ if(window._trans) window._trans(); };
+</script>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v148 1964 silver coins vs black halogen coin - artifact 213</title>
+<style>
+  :root{--bg:#050508;--fg:#eaeaea;--gold:#ffd700}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace}
+  .top{padding:14px 18px}
+  .kicker{font-size:10px;letter-spacing:.22em;opacity:.5;text-transform:uppercase}
+  .nline{font-size:11px;border-left:2px solid #222;padding-left:10px;white-space:pre-wrap;line-height:1.6}
+  .main{margin-top:10px;font-size:14px;font-weight:700;background:#0f0f12;border:1px solid #222;padding:10px;border-radius:8px}
+  .controls{padding:10px 12px;display:flex;gap:6px;flex-wrap:wrap}
+  .btn{font-family:inherit;font-size:10px;padding:5px 10px;border:1px solid #333;background:#15151a;color:#eaeaea;border-radius:6px;cursor:pointer}
+  .btn.active{border-color:#ffd700;color:#ffd700;background:#221a00}
+  .canvases{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:10px}
+  @media(max-width:1100px){.canvases{grid-template-columns:1fr 1fr}}
+  @media(max-width:700px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:460px;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden}
+  .cwrap.full{grid-column:1 / -1;height:620px}
+  .label{position:absolute;left:8px;top:8px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:.8;background:#000c;padding:4px 6px;border-radius:4px;z-index:5}
+  .readout{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0 10px 10px}
+  @media(max-width:900px){.readout{grid-template-columns:1fr}}
+  .ro{background:#0c0c0f;border:1px solid #1e1e24;border-radius:6px;padding:8px;font-size:10px;line-height:1.6}
+  .ro b{color:#ffd700}
+  .card{margin:10px;background:#111115;border:1px solid #1f1f26;border-radius:8px;padding:10px}
+  .mono{font-size:10.5px;white-space:pre-wrap;word-break:break-word;line-height:1.7}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">wakaku v148 — 1964 SILVER COINS vs BLACK HALOGEN COIN — 90% Ag 10% Cu — LAST SILVER YEAR — artifact 213</div>
+  <div class="nline">1964 silver coins — last year US dimes quarters halves 90% silver 10% copper — constitutional silver — 1964 Kennedy half only 90% silver year — 1964 dime 0.0723 oz Ag, quarter 0.1808 oz Ag, half 0.3617 oz Ag — $1 face = 0.715 oz Ag — solid silver edge vs copper stripe clad — 1964 silver coins vs black halogen coin At- 2.27Å black -211mN vs 90% Ag coin 90% silver 10% copper — metal analogs ionic — Ag+ 1.15Å white electrum + Cu+ 0.77Å orange copper + At- black halogen coin — 1964 silver coins are Ag+ C-ION? Actually Ag+ gion? — Ag+ 1.15Å white electrum — 90% Ag coin = Ag+ ionic + Cu+ ionic — black halogen coin = Au+ At- ionic — 1964 silver coins vs black halogen coin — C.O.I.N vs 1964 silver — lol
+1964: dime Roosevelt, quarter Washington, half Kennedy (only 90% silver Kennedy), dollar Peace 1964-D not released — composition 90% silver 10% copper — all 1964 or earlier 90% silver — 1965+ clad copper-nickel — 1964 silver edge solid silver vs clad copper stripe — weight slightly more silver</div>
+  <div class="main">1964 SILVER COINS: DIME 0.0723 oz Ag — QUARTER 0.1808 oz Ag — HALF 0.3617 oz Ag — 90% Ag 10% Cu — LAST 90% SILVER YEAR — vs BLACK HALOGEN COIN Au+ At- -211mN -211mV — 1964 silver = Ag+ white electrum 1.15Å + Cu+ orange 0.77Å — black halogen coin = At- 2.27Å black -211mV</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-1964">1964: 90% Ag 10% Cu — dime quarter half</button>
+  <button class="btn" id="btn-black">BLACK HALOGEN COIN: Au+ At- -211mN -211mV</button>
+  <button class="btn" id="btn-flip">FLIP 1964 vs BLACK HALOGEN</button>
+  <button class="btn" id="btn-edge">EDGE: solid silver vs copper stripe</button>
+</div>
+
+<div class="readout">
+  <div class="ro" id="ro-dime"><b>1964 DIME Roosevelt</b> — 90% Ag 10% Cu — 0.0723 oz Ag — 17.91mm — 2.5g — solid silver edge — last silver dime — <b>90% silver</b></div>
+  <div class="ro" id="ro-quarter"><b>1964 QUARTER Washington</b> — 90% Ag 10% Cu — 0.1808 oz Ag — 24.3mm — 6.25g — solid silver edge — last silver quarter — <b>90% silver</b></div>
+  <div class="ro" id="ro-half"><b>1964 HALF Kennedy</b> — 90% Ag 10% Cu — 0.3617 oz Ag — 30.6mm — 12.5g — ONLY 90% silver Kennedy year — 1965+ 40% then 0% — <b>90% silver</b></div>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-dime"><div class="label">1964 DIME — Roosevelt — 90% Ag 10% Cu — 0.0723 oz Ag — 17.91mm — solid silver edge — Ag+ white 1.15Å + Cu+ orange 0.77Å — metal analog ionic</div></div>
+  <div class="cwrap" id="wrap-quarter"><div class="label">1964 QUARTER — Washington — 90% Ag 10% Cu — 0.1808 oz Ag — 24.3mm — solid silver edge — Ag+ white + Cu+ orange — metal analog ionic</div></div>
+  <div class="cwrap" id="wrap-half"><div class="label">1964 HALF — Kennedy — 90% Ag 10% Cu — 0.3617 oz Ag — 30.6mm — ONLY 90% silver Kennedy — Ag+ white + Cu+ orange — metal analog ionic</div></div>
+  <div class="cwrap" id="wrap-edge"><div class="label">EDGE — SOLID SILVER vs COPPER STRIPE — 1964 90% Ag solid silver edge vs 1965+ clad copper stripe — 90% silver heavier — metal analogs ionic</div></div>
+  <div class="cwrap" id="wrap-black"><div class="label">BLACK HALOGEN COIN — Au+ At- ionic — At- 2.27Å black -211mV -211mN — Au+ 1.37Å yellow +211mV — vs 1964 90% Ag coin — black halogen vs silver — metal analogs ionic</div></div>
+  <div class="cwrap full" id="wrap-all"><div class="label">ALL — 1964 SILVER COINS vs BLACK HALOGEN COIN — 90% Ag 10% Cu dimes quarters halves + black halogen At- 2.27Å black Au+ At- coin — C.O.I.N vs 1964 — metal analogs ionic — $1 face =0.715 oz Ag — 0.07g At =2e20 atoms =1 coin — lol</div></div>
+</div>
+
+<div class="card"><div class="mono">
+v148 1964 silver coins — 90% Ag 10% Cu — last silver year — vs black halogen coin
+
+1964 SILVER COINS — 90% silver 10% copper — constitutional silver — also known as junk silver:
+
+- Composition: 90% silver, 10% copper — all US silver coins struck 1964 or earlier — starting 1965 dimes quarters switched to copper-nickel clad — halves 1965-1970 40% silver clad, 1971+ copper-nickel no silver
+- $1 face value = 0.715 troy oz actual silver — $1000 face bag =715 oz Ag
+- Edge: silver coins show solid silver-colored edge, clad show copper stripe — silver weigh slightly more due to silver content
+
+1964 DIME Roosevelt:
+- Specs: 90% Ag 10% Cu — silver content 0.0723 oz Ag — diameter 17.91mm — weight 2.5g — mintage 1964-P etc — designer John Sinnock — silver dimes minted 1946-1964 — after 1964 nickel/clad — solid silver edge — Ag+ white electrum 1.15Å + Cu+ orange copper 0.77Å ionic — metal analogs ionic — -211mN? Actually Ag+ +211mV? — Ag+ white electrum
+- Value: intrinsic silver value tied to spot price — plus numismatic
+
+1964 QUARTER Washington:
+- Specs: 90% Ag 10% Cu — silver content 0.1808 oz Ag — diameter 24.3mm — weight 6.25g — last silver quarter for circulation — highly favored by numismatists — solid silver edge vs copper stripe — Ag+ white + Cu+ orange — 90% silver — metal analogs ionic
+- Why valuable: silver bullion appeal + historical importance last silver quarter
+
+1964 HALF Kennedy:
+- Specs: 90% Ag 10% Cu — silver content 0.3617 oz Ag — diameter 30.6mm — weight 12.5g — ONLY year Kennedy half struck in 90% silver — starting 1965 40% silver clad, by 1971 copper-nickel no silver — sole 90% silver year in entire Kennedy series — accounts for demand in junk silver market — designed after JFK assassination Nov 1963 — Gilroy Roberts and Frank Gasparro modified dies — quick turnaround replaced Franklin half — 90% Ag 10% Cu — solid silver edge — Ag+ white + Cu+ orange — metal analogs ionic
+- Only 1964 strikings contained 90% silver, future releases 40% etc.
+
+1964 DOLLAR Peace 1964-D:
+- Not released for circulation — minted Denver but melted — not part of 1964 silver circulation — but would have been 90% Ag
+
+BLACK HALOGEN COIN vs 1964 SILVER:
+- 1964 silver coin: Ag+ 1.15Å white electrum + Cu+ 0.77Å orange copper ionic — 90% Ag 10% Cu — 0.0723/0.1808/0.3617 oz Ag — solid silver edge — -? Actually Ag+ +211mV? — Ag+ white + Cu+ orange → AgCu metallic? — metal analogs ionic — 90% Ag coin = Ag+ + Cu+
+- Black halogen coin: Au+ 1.37Å yellow + At- 2.27Å black -211mV -211mN ionic — Au+ At- rocksalt a=7.28Å — black halogen coin At- black -211mV — Au+ yellow +211mV → AuAt 0 — metal analogs ionic — 0.07g At =2e20 atoms =1 black halogen coin =45kg TNT equivalent over 7.2h — vs 1964 silver coin 0.0723 oz Ag =2.25g Ag = ~$2 silver value — black halogen coin priceless medical α therapy — At-211 7.2h α 5.87 MeV -211mN -211mV — Po-211 7.45 MeV -268mN -268mV — black halogen coin vs silver coin — C.O.I.N vs 1964 — lol
+
+C.O.I.N vs 1964:
+- C.O.I.N = C-ion 0.16Å + O-ion 1.40Å + I-ion 2.20Å violet + N-ion 1.46Å + At- 2.27Å black + Po2+ 1.2Å silvery + Au+ 1.37Å yellow + Tl+ 1.50Å bluish → COIN 0
+- 1964 silver = Ag+ 1.15Å white + Cu+ 0.77Å orange → AgCu 90% Ag 10% Cu coin 0 — $1 face =0.715 oz Ag — solid silver edge
+- Black halogen coin = Au+ 1.37Å yellow + At- 2.27Å black → AuAt 0 — black halogen coin — -211mN -211mV — 0.07g At coin
+
+Edge test:
+- 1964 90% Ag: edge solid silver-colored — no copper stripe — weight slightly more — 2.5g dime, 6.25g quarter, 12.5g half — silver content 0.0723/0.1808/0.3617 oz
+- 1965+ clad: edge shows copper stripe — copper-nickel clad — weight slightly less — no silver
+
+So 1964 silver coins = last 90% silver year — dime quarter half — 90% Ag 10% Cu — 0.715 oz per $1 face — solid silver edge — vs black halogen coin Au+ At- -211mN -211mV black vs silver — metal analogs ionic — Ag+ white electrum vs At- black halogen — C.O.I.N vs 1964 silver lol — 1964 silver coins are Ag+ white + Cu+ orange ionic, black halogen coin is Au+ yellow + At- black ionic
+
+Value: 1964 dime ~$2-3 silver melt, quarter ~$5-6, half ~$10-12 at $30/oz Ag spot — black halogen coin 0.07g At = 2e20 atoms = priceless medical — not monetary — 1 At-211 dose ~1e7 atoms — 0.07g =2e13 doses — value huge — black halogen coin >1964 silver coin lol
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x08080a); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,0.6)); const d=new THREE.DirectionalLight(0xffffff,0.9); d.position.set(4,6,4); d.castShadow=true; s.add(d); }
+
+const matSilver=new THREE.MeshStandardMaterial({color:0xd0d0d8, metalness:0.9, roughness:0.25, emissive:0x111122, emissiveIntensity:0.15});
+const matCopper=new THREE.MeshStandardMaterial({color:0xc87333, metalness:0.8, roughness:0.35});
+const matAtMinus=new THREE.MeshStandardMaterial({color:0x0a0a0a, metalness:0.4, roughness:0.25, emissive:0x222222, emissiveIntensity:0.5});
+const matAuPlus=new THREE.MeshStandardMaterial({color:0xffd700, metalness:0.7, roughness:0.35, emissive:0x332200, emissiveIntensity:0.2});
+const matAgPlus=new THREE.MeshStandardMaterial({color:0xd0d0d8, metalness:0.85, roughness:0.22});
+const matCuPlus=new THREE.MeshStandardMaterial({color:0xc87333, metalness:0.75, roughness:0.32});
+
+let fns=[];
+
+// DIME
+{
+  const wrap=document.getElementById('wrap-dime');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,1.5,3);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const dimeGeo=new THREE.CylinderGeometry(0.9,0.9,0.12,48);
+  const dime=new THREE.Mesh(dimeGeo, matSilver); dime.rotation.x=Math.PI/2; scene.add(dime);
+  // edge solid silver
+  const edge=new THREE.Mesh(new THREE.TorusGeometry(0.9,0.03,12,48), matSilver); edge.rotation.x=Math.PI/2; scene.add(edge);
+  // Roosevelt profile as small bump
+  const profile=new THREE.Mesh(new THREE.SphereGeometry(0.35,16,16), matSilver); profile.position.set(0,0.07,0.15); profile.scale.set(1,1.2,0.3); scene.add(profile);
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.012; dime.rotation.y+=0.008; edge.rotation.y+=0.008; profile.rotation.y+=0.008; controls.update(); renderer.render(scene,cam); }
+  animate();
+}
+
+// QUARTER
+{
+  const wrap=document.getElementById('wrap-quarter');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,1.5,3.5);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const quarterGeo=new THREE.CylinderGeometry(1.2,1.2,0.15,48);
+  const quarter=new THREE.Mesh(quarterGeo, matSilver); quarter.rotation.x=Math.PI/2; scene.add(quarter);
+  const edge=new THREE.Mesh(new THREE.TorusGeometry(1.2,0.04,12,48), matSilver); edge.rotation.x=Math.PI/2; scene.add(edge);
+  const eagle=new THREE.Mesh(new THREE.SphereGeometry(0.45,16,16), matSilver); eagle.position.set(0,0.09,0.2); eagle.scale.set(1.2,0.8,0.3); scene.add(eagle);
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.012; quarter.rotation.y+=0.007; edge.rotation.y+=0.007; eagle.rotation.y+=0.007; controls.update(); renderer.render(scene,cam); }
+  animate();
+}
+
+// HALF
+{
+  const wrap=document.getElementById('wrap-half');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,1.5,4);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const halfGeo=new THREE.CylinderGeometry(1.5,1.5,0.18,48);
+  const half=new THREE.Mesh(halfGeo, matSilver); half.rotation.x=Math.PI/2; scene.add(half);
+  const edge=new THREE.Mesh(new THREE.TorusGeometry(1.5,0.05,12,48), matSilver); edge.rotation.x=Math.PI/2; scene.add(edge);
+  const kennedy=new THREE.Mesh(new THREE.SphereGeometry(0.55,18,18), matSilver); kennedy.position.set(0,0.1,0.25); kennedy.scale.set(1,1.3,0.35); scene.add(kennedy);
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.012; half.rotation.y+=0.006; edge.rotation.y+=0.006; kennedy.rotation.y+=0.006; controls.update(); renderer.render(scene,cam); }
+  animate();
+}
+
+// EDGE solid vs copper stripe
+{
+  const wrap=document.getElementById('wrap-edge');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(40, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,1,4);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  // 1964 solid silver edge
+  const coin1964=new THREE.Mesh(new THREE.CylinderGeometry(1.0,1.0,0.25,32), matSilver); coin1964.position.set(-1.2,0,0); coin1964.rotation.x=Math.PI/2; group.add(coin1964);
+  // 1965 clad copper stripe edge
+  const coin1965=new THREE.Group(); coin1965.position.set(1.2,0,0); group.add(coin1965);
+  const topLayer=new THREE.Mesh(new THREE.CylinderGeometry(1.0,1.0,0.08,32), matSilver); topLayer.position.set(0,0.09,0); topLayer.rotation.x=Math.PI/2; coin1965.add(topLayer);
+  const midLayer=new THREE.Mesh(new THREE.CylinderGeometry(1.0,1.0,0.09,32), matCopper); midLayer.position.set(0,0,0); midLayer.rotation.x=Math.PI/2; coin1965.add(midLayer);
+  const botLayer=new THREE.Mesh(new THREE.CylinderGeometry(1.0,1.0,0.08,32), matSilver); botLayer.position.set(0,-0.09,0); botLayer.rotation.x=Math.PI/2; coin1965.add(botLayer);
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.01; group.rotation.y+=0.008; controls.update(); renderer.render(scene,cam); }
+  animate();
+}
+
+// BLACK HALOGEN COIN
+{
+  const wrap=document.getElementById('wrap-black');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,1.5,3.5);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const coinGroup=new THREE.Group(); scene.add(coinGroup);
+  const coinGeo=new THREE.CylinderGeometry(1.3,1.3,0.22,48);
+  const coin=new THREE.Mesh(coinGeo, new THREE.MeshStandardMaterial({color:0x0a0a0a, metalness:0.6, roughness:0.3, emissive:0x222222, emissiveIntensity:0.3})); coin.rotation.x=Math.PI/2; coinGroup.add(coin);
+  const edge=new THREE.Mesh(new THREE.TorusGeometry(1.3,0.07,16,48), matAuPlus); edge.rotation.x=Math.PI/2; coinGroup.add(edge);
+  const atFace=new THREE.Mesh(new THREE.CircleGeometry(1.1,32), matAtMinus); atFace.position.set(0,0.12,0); atFace.rotation.x=-Math.PI/2; coinGroup.add(atFace);
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.012; coinGroup.rotation.y+=0.008; coinGroup.rotation.x=Math.sin(t*0.3)*0.15; controls.update(); renderer.render(scene,cam); }
+  animate();
+}
+
+// ALL
+{
+  const wrap=document.getElementById('wrap-all');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(36, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,2,7);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  // 1964 coins row
+  const dime=new THREE.Mesh(new THREE.CylinderGeometry(0.6,0.6,0.08,32), matSilver); dime.position.set(-2.5,0,0); dime.rotation.x=Math.PI/2; group.add(dime);
+  const quarter=new THREE.Mesh(new THREE.CylinderGeometry(0.8,0.8,0.10,32), matSilver); quarter.position.set(-1.2,0,0); quarter.rotation.x=Math.PI/2; group.add(quarter);
+  const half=new THREE.Mesh(new THREE.CylinderGeometry(1.0,1.0,0.12,32), matSilver); half.position.set(0.2,0,0); half.rotation.x=Math.PI/2; group.add(half);
+  // black halogen coin
+  const blackCoin=new THREE.Mesh(new THREE.CylinderGeometry(1.0,1.0,0.14,32), new THREE.MeshStandardMaterial({color:0x0a0a0a, metalness:0.6, roughness:0.3, emissive:0x333333, emissiveIntensity:0.4})); blackCoin.position.set(2.0,0,0); blackCoin.rotation.x=Math.PI/2; group.add(blackCoin);
+  const edge=new THREE.Mesh(new THREE.TorusGeometry(1.0,0.05,12,32), matAuPlus); edge.position.set(2.0,0,0); edge.rotation.x=Math.PI/2; group.add(edge);
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.01; group.rotation.y+=0.003; group.rotation.x=Math.sin(t*0.2)*0.05; controls.update(); renderer.render(scene,cam); }
+  animate();
+}
+
+document.getElementById('btn-flip').onclick=()=>{
+  document.querySelectorAll('.cwrap').forEach(w=>{
+    w.style.transform='scale(1.05)'; setTimeout(()=>w.style.transform='scale(1)',200);
+  });
+};
+</script>
+</body>
+</html>

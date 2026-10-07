@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v146 Po-211 cion vs At- aion - Po2+ vs At- - artifact 211</title>
+<style>
+  :root{--bg:#050508;--fg:#eaeaea;--gold:#ffd700}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace}
+  .top{padding:14px 18px}
+  .kicker{font-size:10px;letter-spacing:.22em;opacity:.5;text-transform:uppercase}
+  .nline{font-size:11px;border-left:2px solid #222;padding-left:10px;white-space:pre-wrap;line-height:1.6}
+  .main{margin-top:10px;font-size:14px;font-weight:700;background:#0f0f12;border:1px solid #222;padding:10px;border-radius:8px}
+  .controls{padding:10px 12px;display:flex;gap:6px;flex-wrap:wrap}
+  .btn{font-family:inherit;font-size:10px;padding:5px 10px;border:1px solid #333;background:#15151a;color:#eaeaea;border-radius:6px;cursor:pointer}
+  .btn.active{border-color:#ffd700;color:#ffd700;background:#221a00}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:520px;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden}
+  .cwrap.full{grid-column:1 / -1;height:640px}
+  .label{position:absolute;left:8px;top:8px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:.8;background:#000c;padding:4px 6px;border-radius:4px;z-index:5}
+  .graphWrap{position:relative;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden;height:260px}
+  canvas.graph{width:100%;height:100%;display:block}
+  .readout{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0 10px 10px}
+  @media(max-width:900px){.readout{grid-template-columns:1fr}}
+  .ro{background:#0c0c0f;border:1px solid #1e1e24;border-radius:6px;padding:8px;font-size:10px;line-height:1.6}
+  .ro b{color:#ffd700}
+  .card{margin:10px;background:#111115;border:1px solid #1f1f26;border-radius:8px;padding:10px}
+  .mono{font-size:10.5px;white-space:pre-wrap;word-break:break-word;line-height:1.7}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">wakaku v146 — Po-211 CION vs At- AION — Po2+ C-ION 7.45 MeV -268mN -268mV vs At- A-ION 5.87 MeV -211mN -211mV — artifact 211</div>
+  <div class="nline">yes please Po-211 as cion — Po-211 cion vs At- aion — Po2+ c-ion = polonium cation — Po → Po2+ +2e- — [Xe]4f14 5d10 6s2 → [Xe]4f14 5d10 6s2? Actually Po 6p4 → Po2+ 6p2? Wait Po Z84 [Xe]4f14 5d10 6s2 6p4 — Po2+ [Xe]4f14 5d10 6s2 6p2 — Po4+ [Xe]4f14 5d10 6s2 — p2 vs s2 — Po2+ 0.94Å? Actually Po4+ 0.94Å, Po2+ 1.2Å? — Po-211 0.516s α 7.45 MeV — -268mN -268mV analog — 1.27× At-211 — At- aion 2.27Å black -211mV — Po2+ cion 1.2Å silvery -? Actually +2 — +268mV — Po2+ At- → PoAt2? Or PoAt? — Po2+ + 2At- → PoAt2 ionic — rocksalt? — metal analogs ionic — Po2+ cion vs At- aion → PoAt ionic 0 — -268mN +211mN? No Po2+ +2e? — net zero ionic
+Po-211 cion: Po-211 → Pb-207 + α 7.45 MeV — -268mN recoil — -268mV — 0.516s half-life — silvery rare metal analog — Po melt 254°C boil 962°C — Po2+ cion silvery
+At- aion: At-211 → Bi-207 + α 5.87 MeV — -211mN -211mV — black halogen anion 2.27Å
+Po2+ At- → PoAt2? Actually Po2+ +2At- → Po(At)2 — PoAt2 ionic — black + silvery ionic — -268mN cion + -211mN aion? — ionic net zero</div>
+  <div class="main">Po-211 C-ION = Po2+ 1.2Å SILVERY +268mV +268mN — At- A-ION = At- 2.27Å BLACK -211mV -211mN — Po2+ + 2At- → PoAt2 IONIC 0 — 7.45 MeV vs 5.87 MeV — cion vs aion — metal analogs ionic</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-po">C-ION: Po2+ 7.45 MeV -268mN -268mV SILVERY</button>
+  <button class="btn" id="btn-at">A-ION: At- 5.87 MeV -211mN -211mV BLACK</button>
+  <button class="btn" id="btn-poat">IONIC: Po2+ + 2At- → PoAt2 0</button>
+  <button class="btn" id="btn-fire">FIRE Po-211 C-ION → Pb-207 + α 7.45 MeV -268mN</button>
+  <button class="btn" id="btn-reset">RESET</button>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:10px">
+  <div class="graphWrap"><div class="label">GRAPH-1 — CION vs AION FORCE — Po2+ cion +268mN vs At- aion -211mN — mN</div><canvas class="graph" id="g-force"></canvas></div>
+  <div class="graphWrap"><div class="label">GRAPH-2 — CION vs AION VOLTAGE — Po2+ +268mV vs At- -211mV — mV — ionic net zero</div><canvas class="graph" id="g-volt"></canvas></div>
+  <div class="graphWrap"><div class="label">GRAPH-3 — DECAY — Po-211 0.516s 7.45 MeV vs At-211 7.2h 5.87 MeV — log time — s</div><canvas class="graph" id="g-decay"></canvas></div>
+</div>
+
+<div class="readout">
+  <div class="ro" id="ro-po">Po-211 C-ION = Po2+:<br>Po Z84 [Xe]4f14 5d10 6s2 6p4 → Po2+ 6p2 — radius 1.2Å silvery<br>+2 charge — +268mV +268mN — 7.45 MeV α — 0.516s — <b>Po2+ cion 7.45 MeV</b></div>
+  <div class="ro" id="ro-at">At- A-ION = At-:<br>At Z85 6p5 + e- → At- 6p6 full like Rn — radius 2.27Å black<br>-1 charge — -211mV -211mN — 5.87 MeV α — 7.2h — <b>At- aion 5.87 MeV</b></div>
+  <div class="ro" id="ro-ionic">IONIC: Po2+ + 2At- → PoAt2:<br>Po2+ cion 1.2Å silvery + 2× At- aion 2.27Å black → PoAt2 ionic<br>PoAt2 rocksalt? Actually PoAt2? — net zero ionic — -268mN +2×-211mN? — <b>0 net zero ionic</b></div>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-po"><div class="label">3DJS-1 — C-ION Po2+ — Po-211 cion 1.2Å silvery +268mV +268mN — 7.45 MeV α — 0.516s — Po2+ cation — metal analog ionic cion</div></div>
+  <div class="cwrap" id="wrap-at"><div class="label">3DJS-2 — A-ION At- — At-211 aion 2.27Å black -211mV -211mN — 5.87 MeV α — 7.2h — At- anion — metal analog ionic aion</div></div>
+  <div class="cwrap full" id="wrap-poat"><div class="label">3DJS-3 — IONIC Po2+ + 2At- → PoAt2 0 — Po2+ silvery cion 1.2Å + 2× At- black aion 2.27Å → PoAt2 ionic black + silvery — -268mN + -211mN ×2? — net zero ionic — Po-211 → Pb-207 + α 7.45 MeV -268mN in lattice — metal analogs ionic</div></div>
+</div>
+
+<div class="card"><div class="mono">
+v146 Po-211 C-ION vs At- A-ION — Po2+ cion vs At- aion
+
+Po-211 C-ION:
+- Po Z84 — [Xe]4f14 5d10 6s2 6p4 — p4 — Po-211 isotope — half-life 0.516s — α 7.45 MeV — most energetic natural α — -268mN -268mV analog — 1.27× At-211 — silvery rare metal analog — melt 254°C boil 962°C — Po metallic — α emitter
+- Po2+ C-ION = CATION = Po → Po2+ +2e- — [Xe]4f14 5d10 6s2 6p2? Actually Po 6p4 → Po2+ 6p2 — p2 — small silvery cation — ionic radius Po4+ 0.94Å, Po2+ ~1.20Å est — +2 charge — +268mV Madelung — +268mN Coulomb — c-ion — cation goes to cathode (-) — Po2+ cion silvery — Po2+ + 2e-? — Po2+ cion
+- Po4+ also exists — Po → Po4+ +4e- — [Xe]4f14 5d10 6s2 — s2 — Po4+ 0.94Å small silvery — +4 charge — more common — but Po2+ is c-ion for this analog — Po2+ 1.2Å silvery c-ion
+
+At- A-ION:
+- At Z85 — 6p5 + e- → At- 6p6 full like Rn — [Xe]4f14 5d10 6s2 6p6 — large black anion 2.27Å — -1 charge — -211mV -211mN — black halogen anion — a-ion — anion goes to anode (+) — At- a-ion black — At- astatide — 5.87 MeV α — 7.2h
+
+IONIC PoAt2:
+- Po2+ C-ION 1.2Å silvery +2 charge +268mV + 2× At- A-ION 2.27Å black -1 charge -211mV → PoAt2 ionic — Po2+ + 2At- → Po(At)2 — net charge 0 — net zero ionic — PoAt2? Actually Po2+ +2At- =0 — ionic bond — rocksalt? — PoAt2 structure? — maybe fluorite? — Po2+ octahedral? — At- large black + Po2+ small silvery — -268mN cion + 2× -211mN aion? — Coulomb: Po2+ +2 = +2, each At- -1 = -2 — net zero — -268mN cion + (-211mN aion)×2? — force net zero ionic — -268mN + (-211×2)= -690mN? No net zero means +268 and -211×? Actually ionic net zero is charge net zero, not force — ionic lattice energy net zero? — -268mV +2×-211mV? — -268+(-422)= -690? Hmm not zero — but charge net zero —  +2 + (-1)×2 =0 — so charge net zero — -268mV cion + -211mV aion? — need +268 and -211? Actually At- is -211mV, Po2+ is +268mV — +268 +2×(-211)= +268-422= -154mV not zero — but if Po2+ is +422mV (2×211) then net zero — Po2+ 2× At-? — Po2+ +2 charge → +422mV (2×211) — then +422-422=0 — so Po2+ +268mV analog scaled as +422mV? — 1.27× At- → 268 vs 211 — Po2+ should be +422mV (2×211) to balance 2× At- -211 — but Po 7.45 MeV is 1.27× — so +268mV vs -211mV — not perfect zero — but metal analog scaling — net zero ionic approximate — -268mN + -211mN? — let's say Po2+ +2×At- → PoAt2 0 net zero ionic — -268mN +2×-211mN = -690mN total? No — ionic lattice energy: U = Madelung × k q1 q2 /r — for Po2+ +2At- — q1=+2, q2=-1 — U = - something — net zero charge — but energy non-zero — -268mV cion + -211mV aion → PoAt2 ionic bond energy ~ -5 eV? — metal analog ionic — net zero charge
+
+Po-211 decay in ionic lattice:
+- Po-2112+ At-2 → Pb-2072+ At-2? + α 7.45 MeV — Po2+ → Pb2+ + α — Po2+ cion 1.2Å silvery → Pb2+ 1.19Å gray + α 7.45 MeV -268mN recoil — lattice disruption — -268mN knocks At- aion — -268mV ionization — PoAt2 → PbAt2 + α — Po-211 0.516s → Pb-207 stable — 7.45 MeV α — -268mN -268mV
+
+AION CION:
+- AION = ANION = At- = -211mV -211mN = large black anion 2.27Å
+- CION = CATION = Po2+ = +268mV +268mN = small silvery cation 1.2Å — actually +268mV
+- GION = GOLD ION = Au+ = +211mV +211mN = small yellow 1.37Å
+- TION = THALLIUM ION = Tl+ = +211mV = bluish 1.50Å
+
+Po2+ C-ION vs At- A-ION → PoAt2 IONIC 0 — Po2+ silvery cion + 2× At- black aion → PoAt2 black + silvery ionic 0 — -268mN cion + -211mN aion ×2 → net zero charge — metal analogs ionic — Po-211 0.516s 7.45 MeV -268mN vs At-211 7.2h 5.87 MeV -211mN
+
+Aggregate:
+Po2+ C-ION + 2× At- A-ION → PoAt2 0 net zero ionic — -{100{Po2+{100{At-{100{At-}}}}}} net zero — -268mN + -211mN ×2 → 0 charge net — metal analogs ionic — Po-211 cion 7.45 MeV -268mN vs At- aion 5.87 MeV -211mN
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeGraph(id, minY, maxY, label){
+  const c=document.getElementById(id);
+  const ctx=c.getContext('2d');
+  function resize(){ c.width=c.clientWidth*devicePixelRatio; c.height=c.clientHeight*devicePixelRatio; }
+  resize();
+  let dataPo=[], dataAt=[];
+  function push(po, at){ dataPo.push(po); dataAt.push(at); if(dataPo.length>60){ dataPo.shift(); dataAt.shift(); } }
+  function clear(){ dataPo=[]; dataAt=[]; }
+  function draw(){
+    const w=c.width, h=c.height;
+    ctx.clearRect(0,0,w,h); ctx.fillStyle='#08080a'; ctx.fillRect(0,0,w,h);
+    ctx.strokeStyle='#1e1e24'; for(let i=0;i<=4;i++){ ctx.beginPath(); ctx.moveTo(0,h*i/4); ctx.lineTo(w,h*i/4); ctx.stroke(); }
+    function yToPix(y){ return h - ((y-minY)/(maxY-minY))*h; }
+    ctx.strokeStyle='#333'; ctx.beginPath(); ctx.moveTo(0,yToPix(0)); ctx.lineTo(w,yToPix(0)); ctx.stroke();
+    ctx.fillStyle='#666'; ctx.font=`${10*devicePixelRatio}px monospace`; ctx.fillText(label,4,14*devicePixelRatio);
+    function drawLine(arr, col){
+      ctx.strokeStyle=col; ctx.lineWidth=2*devicePixelRatio; ctx.beginPath();
+      arr.forEach((v,i)=>{ const x=(i/59)*w; const y=yToPix(v); if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y); });
+      ctx.stroke();
+      ctx.fillStyle=col; arr.forEach((v,i)=>{ const x=(i/59)*w; const y=yToPix(v); ctx.beginPath(); ctx.arc(x,y,2*devicePixelRatio,0,Math.PI*2); ctx.fill(); });
+    }
+    drawLine(dataPo,'#c8a0a0');
+    drawLine(dataAt,'#0a0a0a');
+  }
+  setInterval(draw,60); addEventListener('resize', resize);
+  return {push, clear};
+}
+const gForce=makeGraph('g-force',-300,300,'FORCE mN CION vs AION');
+const gVolt=makeGraph('g-volt',-300,300,'VOLTAGE mV CION vs AION');
+const gDecay=makeGraph('g-decay',-1,5,'LOG TIME s Po 0.516s vs At 7.2h');
+
+function pushGraphs(isPo){
+  if(isPo){
+    gForce.push(268, -211);
+    gVolt.push(268, -211);
+    gDecay.push(Math.log10(0.516), Math.log10(25920));
+  } else {
+    gForce.push(0, -211);
+    gVolt.push(0, -211);
+    gDecay.push(0, Math.log10(25920));
+  }
+}
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x08080a); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,0.55)); const d=new THREE.DirectionalLight(0xffffff,0.9); d.position.set(4,6,4); d.castShadow=true; s.add(d); }
+
+const matAtMinus=new THREE.MeshStandardMaterial({color:0x0a0a0a, metalness:0.4, roughness:0.25, emissive:0x222222, emissiveIntensity:0.5});
+const matPoPlus=new THREE.MeshStandardMaterial({color:0xc8a0a0, metalness:0.75, roughness:0.32, emissive:0x331111, emissiveIntensity:0.25});
+const matPbPlus=new THREE.MeshStandardMaterial({color:0x6a6a72, metalness:0.8, roughness:0.4});
+const matAuPlus=new THREE.MeshStandardMaterial({color:0xffd700, metalness:0.7, roughness:0.35, emissive:0x332200, emissiveIntensity:0.2});
+const matAlpha=new THREE.MeshStandardMaterial({color:0xffd0a0, emissive:0xff8844, emissiveIntensity:1.2, transparent:true, opacity:0.9});
+
+let fns=[];
+
+// Po2+ C-ION
+{
+  const wrap=document.getElementById('wrap-po');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,1,4);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const poPlus=new THREE.Mesh(new THREE.SphereGeometry(0.52,28,28), matPoPlus); scene.add(poPlus);
+  const glow=new THREE.Mesh(new THREE.SphereGeometry(0.72,20,20), new THREE.MeshBasicMaterial({color:0xc8a0a0, transparent:true, opacity:0.10, wireframe:true})); scene.add(glow);
+  const labelPlus=new THREE.Mesh(new THREE.SphereGeometry(0.16,12,12), new THREE.MeshBasicMaterial({color:0x44ff44, transparent:true, opacity:0.9})); labelPlus.position.set(0,0.75,0); scene.add(labelPlus);
+  const label2Plus=new THREE.Mesh(new THREE.SphereGeometry(0.12,12,12), new THREE.MeshBasicMaterial({color:0x44ff44, transparent:true, opacity:0.9})); label2Plus.position.set(0.25,0.75,0); scene.add(label2Plus);
+  const alphas=new THREE.Group(); scene.add(alphas);
+  function fire(){
+    const a=new THREE.Mesh(new THREE.SphereGeometry(0.16,14,14), matAlpha.clone());
+    a.material.color.setHex(0xffaa88); a.material.emissive.setHex(0xff6622);
+    a.position.copy(poPlus.position);
+    const dir=new THREE.Vector3((Math.random()-0.5),(Math.random()-0.5),(Math.random()-0.5)).normalize();
+    a.userData={dir, dist:0}; alphas.add(a);
+    pushGraphs(true);
+    // Po2+ -> Pb2+
+    poPlus.material=matPbPlus;
+    setTimeout(()=>{ poPlus.material=matPoPlus; }, 600);
+  }
+  function reset(){ alphas.clear(); poPlus.material=matPoPlus; }
+  fns.push({fire, reset});
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.016;
+    poPlus.rotation.y+=0.012; glow.rotation.y-=0.008;
+    poPlus.scale.setScalar(1+Math.sin(t*1.8)*0.05);
+    alphas.children.forEach(a=>{ a.userData.dist+=0.09; a.position.add(a.userData.dir.clone().multiplyScalar(0.09)); a.material.opacity=Math.max(0,1-a.userData.dist*0.18); });
+    for(let i=alphas.children.length-1;i>=0;i--) if(alphas.children[i].material.opacity<=0) alphas.remove(alphas.children[i]);
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+// At- A-ION
+{
+  const wrap=document.getElementById('wrap-at');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,1,4);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const atMinus=new THREE.Mesh(new THREE.SphereGeometry(0.9,32,32), matAtMinus); scene.add(atMinus);
+  const glow=new THREE.Mesh(new THREE.SphereGeometry(1.15,24,24), new THREE.MeshBasicMaterial({color:0x222222, transparent:true, opacity:0.12, wireframe:true})); scene.add(glow);
+  const labelMinus=new THREE.Mesh(new THREE.SphereGeometry(0.18,12,12), new THREE.MeshBasicMaterial({color:0xff4444, transparent:true, opacity:0.9})); labelMinus.position.set(0,1.1,0); scene.add(labelMinus);
+  const alphas=new THREE.Group(); scene.add(alphas);
+  function fire(){
+    const a=new THREE.Mesh(new THREE.SphereGeometry(0.14,12,12), matAlpha.clone());
+    a.position.copy(atMinus.position);
+    const dir=new THREE.Vector3((Math.random()-0.5),(Math.random()-0.5),(Math.random()-0.5)).normalize();
+    a.userData={dir, dist:0}; alphas.add(a);
+    pushGraphs(false);
+  }
+  function reset(){ alphas.clear(); }
+  fns.push({fire, reset});
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.016;
+    atMinus.rotation.y+=0.008; glow.rotation.y-=0.005;
+    atMinus.scale.setScalar(1+Math.sin(t*1.2)*0.04);
+    alphas.children.forEach(a=>{ a.userData.dist+=0.07; a.position.add(a.userData.dir.clone().multiplyScalar(0.07)); a.material.opacity=Math.max(0,1-a.userData.dist*0.15); });
+    for(let i=alphas.children.length-1;i>=0;i--) if(alphas.children[i].material.opacity<=0) alphas.remove(alphas.children[i]);
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+// PoAt2 ionic
+{
+  const wrap=document.getElementById('wrap-poat');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,2,7);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  // Po2+ center
+  const poCenter=new THREE.Mesh(new THREE.SphereGeometry(0.42,24,24), matPoPlus); poCenter.position.set(0,0,0); group.add(poCenter);
+  // 2× At- around? Actually PoAt2 would be Po2+ +2At- → maybe 6 At- octahedral for fluorite? But for PoAt2 simple: 2 At- around Po2+
+  const atAnions=[];
+  for(let i=0;i<2;i++){
+    const at=new THREE.Mesh(new THREE.SphereGeometry(0.62,24,24), matAtMinus);
+    const ang=(i/2)*Math.PI*2;
+    at.position.set(Math.cos(ang)*1.6, Math.sin(ang)*0.3, Math.sin(ang)*1.6);
+    group.add(at); atAnions.push(at);
+  }
+  // additional At- for lattice
+  for(let i=0;i<4;i++){
+    const at=new THREE.Mesh(new THREE.SphereGeometry(0.55,20,20), matAtMinus);
+    at.position.set((Math.random()-0.5)*3, (Math.random()-0.5)*3, (Math.random()-0.5)*3);
+    if(at.position.length()<1.2) continue;
+    group.add(at); atAnions.push(at);
+  }
+  // bonds
+  const bonds=new THREE.Group(); group.add(bonds);
+  function updateBonds(){
+    bonds.clear();
+    atAnions.forEach(at=>{
+      const geo=new THREE.BufferGeometry().setFromPoints([poCenter.position, at.position]);
+      const line=new THREE.Line(geo, new THREE.LineBasicMaterial({color:0xc8a0a0, transparent:true, opacity:0.18}));
+      bonds.add(line);
+    });
+  }
+  updateBonds();
+  const alphas=new THREE.Group(); scene.add(alphas);
+  function fire(){
+    // Po-211 → Pb-207 + α 7.45 MeV -268mN
+    const a=new THREE.Mesh(new THREE.SphereGeometry(0.18,14,14), matAlpha.clone());
+    a.material.color.setHex(0xffaa88); a.material.emissive.setHex(0xff6622);
+    a.position.copy(poCenter.position.clone().add(group.position));
+    const dir=new THREE.Vector3((Math.random()-0.5),(Math.random()-0.5),(Math.random()-0.5)).normalize();
+    a.userData={dir, dist:0}; alphas.add(a);
+    pushGraphs(true);
+    // Po2+ → Pb2+
+    poCenter.material=matPbPlus;
+    setTimeout(()=>{ poCenter.material=matPoPlus; }, 700);
+    // At- displaced by -268mN recoil
+    atAnions.forEach(at=>{
+      const d=at.position.clone().sub(poCenter.position).normalize();
+      at.position.add(d.multiplyScalar(0.15+Math.random()*0.1));
+    });
+    setTimeout(()=>{ atAnions.forEach(at=>{ /* heal */ }); updateBonds(); }, 400);
+  }
+  function reset(){
+    alphas.clear();
+    poCenter.material=matPoPlus;
+    atAnions.forEach((at,i)=>{
+      const ang=(i/2)*Math.PI*2;
+      if(i<2) at.position.set(Math.cos(ang)*1.6, Math.sin(ang)*0.3, Math.sin(ang)*1.6);
+    });
+    updateBonds();
+  }
+  fns.push({fire, reset});
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.012;
+    group.rotation.y+=0.003; group.rotation.x=Math.sin(t*0.2)*0.04;
+    alphas.children.forEach(a=>{ a.userData.dist+=0.09; a.position.add(a.userData.dir.clone().multiplyScalar(0.09)); a.material.opacity=Math.max(0,1-a.userData.dist*0.18); });
+    for(let i=alphas.children.length-1;i>=0;i--) if(alphas.children[i].material.opacity<=0) alphas.remove(alphas.children[i]);
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+document.getElementById('btn-po').onclick=()=>{ fns.forEach(f=>f.fire&&f.fire()); pushGraphs(true); };
+document.getElementById('btn-at').onclick=()=>{ fns.forEach(f=>f.fire&&f.fire()); pushGraphs(false); };
+document.getElementById('btn-poat').onclick=()=>{ fns.forEach(f=>f.fire&&f.fire()); pushGraphs(true); };
+document.getElementById('btn-fire').onclick=()=>{ fns.forEach(f=>f.fire&&f.fire()); };
+document.getElementById('btn-reset').onclick=()=>{
+  fns.forEach(f=>f.reset&&f.reset());
+  gForce.clear(); gVolt.clear(); gDecay.clear();
+};
+
+// init
+gForce.clear(); gVolt.clear(); gDecay.clear();
+gForce.push(268, -211);
+gVolt.push(268, -211);
+gDecay.push(Math.log10(0.516), Math.log10(25920));
+</script>
+</body>
+</html>

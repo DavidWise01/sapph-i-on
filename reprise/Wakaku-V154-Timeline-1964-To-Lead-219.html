@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v154 timeline 1964 to black halogen to lead - next - artifact 219</title>
+<style>
+  :root{--bg:#050508;--fg:#eaeaea;--gold:#ffd700}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace}
+  .top{padding:14px 18px}
+  .kicker{font-size:10px;letter-spacing:.22em;opacity:.5;text-transform:uppercase}
+  .nline{font-size:11px;border-left:2px solid #222;padding-left:10px;white-space:pre-wrap;line-height:1.6}
+  .main{margin-top:10px;font-size:14px;font-weight:700;background:#0f0f12;border:1px solid #222;padding:10px;border-radius:8px}
+  .controls{padding:10px 12px;display:flex;gap:6px;flex-wrap:wrap}
+  .btn{font-family:inherit;font-size:10px;padding:5px 10px;border:1px solid #333;background:#15151a;color:#eaeaea;border-radius:6px;cursor:pointer}
+  .btn.active{border-color:#ffd700;color:#ffd700;background:#221a00}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:520px;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden}
+  .cwrap.full{grid-column:1 / -1;height:640px}
+  .label{position:absolute;left:8px;top:8px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:.8;background:#000c;padding:4px 6px;border-radius:4px;z-index:5}
+  .graphWrap{position:relative;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden;height:260px}
+  canvas.graph{width:100%;height:100%;display:block}
+  .readout{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;padding:0 10px 10px}
+  @media(max-width:1100px){.readout{grid-template-columns:1fr 1fr}}
+  .ro{background:#0c0c0f;border:1px solid #1e1e24;border-radius:6px;padding:8px;font-size:10px;line-height:1.6}
+  .ro b{color:#ffd700}
+  .card{margin:10px;background:#111115;border:1px solid #1f1f26;border-radius:8px;padding:10px}
+  .mono{font-size:10.5px;white-space:pre-wrap;word-break:break-word;line-height:1.7}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">wakaku v154 — TIMELINE 1964 → 1971 → 2026 → BLACK HALOGEN → LEAD — next — artifact 219</div>
+  <div class="nline">next — timeline 1964 90% Ag solid silver edge → 1965 clad copper stripe 0% Ag → 1971 no silver 0% Ag → 2026 $30/oz $21.45 $1 face → black halogen Au+ At- -211mN -211mV At- 2.27Å black 7.2h → Pb-207 lead coin gray 1.19Å Pb2+ stable — timeline 1964 silver stable 62y vs black halogen decays 7.2h → lead stable forever — metal analogs ionic — Ag+ white 1.15Å + Cu+ orange 0.77Å 90% Ag solid edge 1964 → Cu+ orange + Ni2+ silvery 75% Cu 25% Ni copper stripe 1971 → Au+ yellow + At- black -211mV black halogen coin → Pb2+ gray 1.19Å lead coin stable — next — timeline next — 1964 → black halogen → lead — next please — metal analogs ionic timeline — lol next</div>
+  <div class="main">TIMELINE NEXT: 1964 90% Ag solid edge 0.715oz/$1 → 1965 clad copper stripe 0% Ag → 1971 0% Ag copper-nickel → 2026 $30/oz $21.45 melt → BLACK HALOGEN Au+ At- -211mN 7.2h At- black 2.27Å → Pb-207 LEAD COIN gray 1.19Å stable — 1964 silver stable 62y vs black decays 7.2h → lead stable forever — next</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-timeline">TIMELINE 1964 → 1971 → 2026 → BLACK HALOGEN → LEAD</button>
+  <button class="btn" id="btn-1964">1964 90% Ag solid edge</button>
+  <button class="btn" id="btn-1971">1971 0% Ag copper stripe</button>
+  <button class="btn" id="btn-black">BLACK HALOGEN → LEAD</button>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;padding:10px">
+  <div class="graphWrap"><div class="label">1964 90% Ag 0.715oz/$1 solid edge — $/oz 1.29→30 — 62y stable</div><canvas class="graph" id="g-1964"></canvas></div>
+  <div class="graphWrap"><div class="label">1971 0% Ag copper stripe — Cu+ Ni2+ — 0% Ag — stable — face value only</div><canvas class="graph" id="g-1971"></canvas></div>
+  <div class="graphWrap"><div class="label">2026 $30/oz melt — dime $2.17 quarter $5.42 half $10.85 $1 $21.45 — $</div><canvas class="graph" id="g-2026"></canvas></div>
+  <div class="graphWrap"><div class="label">BLACK HALOGEN → LEAD — At- 7.2h 2.27Å black -211mN → Pb gray 1.19Å stable — decay vs stable</div><canvas class="graph" id="g-black"></canvas></div>
+</div>
+
+<div class="readout">
+  <div class="ro" id="ro-1964">1964 90% Ag:<br>Solid silver edge — Ag+ white 1.15Å + Cu+ orange 0.77Å — 0.0723 dime 0.1808 quarter 0.3617 half — $1 face 0.715oz — <b>last silver year</b></div>
+  <div class="ro" id="ro-1971">1971 0% Ag:<br>Copper stripe — outer 75% Cu 25% Ni core 100% Cu — Cu+ orange + Ni2+ silvery — 0% Ag — <b>0% silver era</b></div>
+  <div class="ro" id="ro-2026">2026 MELT:<br>Spot $30/oz — dime $2.17 quarter $5.42 half $10.85 $1 $21.45 — 23× spot 1.29→30 — 21.7× face — <b>62y later</b></div>
+  <div class="ro" id="ro-black">BLACK → LEAD:<br>At- black 2.27Å -211mV 7.2h → Pb gray 1.19Å stable + α -211mN — black halogen → lead coin — <b>At- → Pb stable</b></div>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-timeline"><div class="label">TIMELINE — 1964 90% Ag solid edge → 1965 clad → 1971 0% Ag copper stripe → 2026 $30/oz → BLACK HALOGEN Au+ At- -211mN → Pb-207 LEAD gray stable — 1964 silver stable 62y vs black decays 7.2h → lead stable forever — metal analogs ionic — next</div></div>
+  <div class="cwrap" id="wrap-coins"><div class="label">COINS — 1964 dime quarter half 90% Ag + 1971 clad copper stripe 0% Ag + 2026 melt + black halogen At- black + lead Pb gray — all coins timeline — metal analogs ionic — next</div></div>
+  <div class="cwrap full" id="wrap-all"><div class="label">ALL TIMELINE NEXT — 1964 90% Ag solid silver edge Ag+ white + Cu+ orange → 1965 clad 75% Cu 25% Ni copper stripe → 1971 0% Ag Cu+ + Ni2+ → 2026 $21.45 $1 face → BLACK HALOGEN Au+ yellow + At- black 2.27Å -211mV 7.2h → Pb-207 gray 1.19Å lead coin stable forever — 1964 stable vs black decays vs lead stable — metal analogs ionic timeline — next please</div></div>
+</div>
+
+<div class="card"><div class="mono">
+v154 NEXT — TIMELINE 1964 →1971 →2026 → BLACK HALOGEN → LEAD — next
+
+TIMELINE:
+
+1964 90% Ag 10% Cu solid silver edge:
+- 90% Ag 10% Cu — Ag+ white 1.15Å + Cu+ orange 0.77Å — solid silver-colored edge no copper stripe — weight more — 2.5g dime 6.25g quarter 12.5g half — 0.0723 dime 0.1808 quarter 0.3617 half $1 face 0.715oz — last silver year — stable 62y 1964→2026 still 90% Ag — Ag+ white stable
+
+1965 CLAD copper stripe 0% Ag (except half 40% 1965-70):
+- Outer 75% Cu 25% Ni + core 100% Cu — copper stripe edge shows copper — 0% silver dime quarter — Cu+ orange 0.77Å + Ni2+ 0.69Å silvery — clad sandwich — weight less — face value only — 1965 clad begins — Cu+ + Ni2+
+
+1971 NO SILVER 0% Ag:
+- Outer 75% Cu 25% Ni + core 100% Cu — copper stripe — 0% silver all denominations — dime quarter half Ike dollar copper-nickel — 0% Ag era — Cu+ orange + Ni2+ silvery — stable — face value only — 1971 no silver era
+
+2026 MELT:
+- Spot ~$30/oz — 1964 dime 0.0723×30=$2.17 quarter 0.1808×30=$5.42 half 0.3617×30=$10.85 $1 face 0.715×30=$21.45 — 23× spot 1.29→30 — 21.7× face — 62y later — 1964 silver $21.45 $1 face vs 1971 clad $0 melt
+
+BLACK HALOGEN → LEAD:
+
+- Black halogen coin Au+ yellow 1.37Å + At- black 2.27Å -211mV -211mN ionic — AuAt rocksalt a=7.28Å — At- large black anion 2.27Å -1 -211mV 7.2h — 0.07g At =2e20 atoms =1.9e8 J =45kg TNT over 7.2h — priceless medical — At-211 7.2h α 5.87 MeV -211mN → Bi-207 + α 41.8% + EC Po-211 0.516s 7.45 MeV -268mN → Pb-207 stable 58.2% — final Pb-207 stable gray 1.19Å Pb2+ — lead coin gray — soft gray metal melt 327°C — Pb2+ 1.19Å gray ionic — Pb-207 stable forever — black → gray — At- black 7.2h → Pb gray stable + α — black halogen coin → lead coin — vs 1964 silver stable
+
+Timeline next:
+
+1964 90% Ag solid edge stable 62y → 1965 clad copper stripe 0% Ag stable → 1971 0% Ag copper stripe stable → 2026 $30/oz melt $21.45 $1 face → black halogen Au+ At- -211mN 7.2h At- black 2.27Å → Pb-207 gray 1.19Å lead coin stable forever — 1964 silver stable vs black decays vs lead stable — metal analogs ionic — Ag+ white + Cu+ orange → Cu+ orange + Ni2+ silvery → Au+ yellow + At- black → Pb2+ gray — 90% Ag → 0% Ag → At- black → Pb gray — timeline next — next please — metal analogs ionic timeline
+
+So timeline next = 1964 silver stable 62y 90% Ag solid edge → 1971 clad 0% Ag copper stripe → 2026 melt $21.45 → black halogen At- black 7.2h -211mN → lead Pb gray stable forever — 1964 stable vs black decays vs lead stable — next
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeGraph(id, vals, color, label){
+  const c=document.getElementById(id);
+  const ctx=c.getContext('2d');
+  function resize(){ c.width=c.clientWidth*devicePixelRatio; c.height=c.clientHeight*devicePixelRatio; }
+  resize();
+  function draw(){
+    const w=c.width, h=c.height;
+    ctx.clearRect(0,0,w,h); ctx.fillStyle='#08080a'; ctx.fillRect(0,0,w,h);
+    ctx.strokeStyle='#1e1e24'; for(let i=0;i<=4;i++){ ctx.beginPath(); ctx.moveTo(0,h*i/4); ctx.lineTo(w,h*i/4); ctx.stroke(); }
+    ctx.fillStyle='#666'; ctx.font=`${10*devicePixelRatio}px monospace`; ctx.fillText(label,4,14*devicePixelRatio);
+    const min=Math.min(...vals), max=Math.max(...vals);
+    const lo=min*0.8, hi=max*1.2;
+    vals.forEach((v,i)=>{
+      const x=(i/(vals.length-1))*w;
+      const y=h - (v-lo)/(hi-lo)*h*0.8 - h*0.1;
+      ctx.fillStyle=color; ctx.fillRect(x-12*devicePixelRatio, y, 24*devicePixelRatio, h-y);
+      ctx.fillStyle='#fff'; ctx.fillText(v.toFixed(2), x-10*devicePixelRatio, y-6*devicePixelRatio);
+    });
+  }
+  setInterval(draw,100); addEventListener('resize', resize);
+}
+
+makeGraph('g-1964',[0.715],'#d0d0d8','1964 $1 face 0.715oz Ag');
+makeGraph('g-1971',[0],'#c87333','1971 0% Ag copper stripe');
+makeGraph('g-2026',[2.17,5.42,10.85,21.45],'#ffd700','2026 melt dime $2.17 quarter $5.42 half $10.85 $1 $21.45');
+makeGraph('g-black',[100,10,1],'#0a0a0a','BLACK HALOGEN At- 100% →10% 7.2h →1% 24h → Pb gray stable');
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x08080a); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,0.6)); const d=new THREE.DirectionalLight(0xffffff,0.9); d.position.set(4,6,4); d.castShadow=true; s.add(d); }
+
+const matSilver=new THREE.MeshStandardMaterial({color:0xd0d0d8, metalness:0.9, roughness:0.25});
+const matCopper=new THREE.MeshStandardMaterial({color:0xc87333, metalness:0.8, roughness:0.35});
+const matNickel=new THREE.MeshStandardMaterial({color:0xa8a8a8, metalness:0.85, roughness:0.28});
+const matAtMinus=new THREE.MeshStandardMaterial({color:0x0a0a0a, metalness:0.4, roughness:0.25, emissive:0x222222, emissiveIntensity:0.5});
+const matPb=new THREE.MeshStandardMaterial({color:0x6a6a72, metalness:0.8, roughness:0.4});
+const matAuPlus=new THREE.MeshStandardMaterial({color:0xffd700, metalness:0.7, roughness:0.35});
+
+// TIMELINE
+{
+  const wrap=document.getElementById('wrap-timeline');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(36, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,2,8);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  // 1964
+  const coin1964=new THREE.Mesh(new THREE.CylinderGeometry(0.6,0.6,0.10,24), matSilver); coin1964.position.set(-3,0,0); coin1964.rotation.x=Math.PI/2; group.add(coin1964);
+  // 1971 clad
+  const g1971=new THREE.Group(); g1971.position.set(-1,0,0); group.add(g1971);
+  const top=new THREE.Mesh(new THREE.CylinderGeometry(0.6,0.6,0.03,24), matNickel); top.position.set(0,0.04,0); top.rotation.x=Math.PI/2; g1971.add(top);
+  const mid=new THREE.Mesh(new THREE.CylinderGeometry(0.6,0.6,0.04,24), matCopper); mid.position.set(0,0,0); mid.rotation.x=Math.PI/2; g1971.add(mid);
+  const bot=new THREE.Mesh(new THREE.CylinderGeometry(0.6,0.6,0.03,24), matNickel); bot.position.set(0,-0.04,0); bot.rotation.x=Math.PI/2; g1971.add(bot);
+  // 2026 melt bar?
+  const coin2026=new THREE.Mesh(new THREE.CylinderGeometry(0.6,0.6,0.12,24), matSilver); coin2026.position.set(1,0,0); coin2026.rotation.x=Math.PI/2; group.add(coin2026);
+  // black halogen
+  const black=new THREE.Mesh(new THREE.CylinderGeometry(0.6,0.6,0.14,24), matAtMinus); black.position.set(3,0,0); black.rotation.x=Math.PI/2; group.add(black);
+  const edge=new THREE.Mesh(new THREE.TorusGeometry(0.6,0.03,12,24), matAuPlus); edge.position.set(3,0,0); edge.rotation.x=Math.PI/2; group.add(edge);
+  // lead
+  const lead=new THREE.Mesh(new THREE.CylinderGeometry(0.6,0.6,0.14,24), matPb); lead.position.set(5,0,0); lead.rotation.x=Math.PI/2; group.add(lead);
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.01; group.rotation.y+=0.002; group.rotation.x=Math.sin(t*0.2)*0.05; controls.update(); renderer.render(scene,cam); }
+  animate();
+}
+
+// COINS
+{
+  const wrap=document.getElementById('wrap-coins');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,2,6);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  for(let i=0;i<5;i++){
+    const mat=i===3?matAtMinus:i===4?matPb:matSilver;
+    const coin=new THREE.Mesh(new THREE.CylinderGeometry(0.5+Math.random()*0.2,0.5+Math.random()*0.2,0.08+Math.random()*0.04,20), mat);
+    coin.position.set((Math.random()-0.5)*4, Math.random()*2, (Math.random()-0.5)*2);
+    coin.rotation.x=Math.PI/2+ (Math.random()-0.5)*0.3;
+    group.add(coin);
+  }
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.01; group.rotation.y+=0.003; controls.update(); renderer.render(scene,cam); }
+  animate();
+}
+
+// ALL
+{
+  const wrap=document.getElementById('wrap-all');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(36, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,3,9);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const years=[{year:1964, pos:-4, mat:matSilver, label:'1964 90% Ag'},{year:1971, pos:-2, mat:null, label:'1971 0% Ag'},{year:2026, pos:0, mat:matSilver, label:'2026 $21.45'},{year:'At', pos:2, mat:matAtMinus, label:'At- black 7.2h'},{year:'Pb', pos:4, mat:matPb, label:'Pb gray stable'}];
+  years.forEach(y=>{
+    if(y.mat){
+      const coin=new THREE.Mesh(new THREE.CylinderGeometry(0.7,0.7,0.12,24), y.mat); coin.position.set(y.pos,0,0); coin.rotation.x=Math.PI/2; group.add(coin);
+      if(y.year==='At'){
+        const edge=new THREE.Mesh(new THREE.TorusGeometry(0.7,0.04,12,24), matAuPlus); edge.position.set(y.pos,0,0); edge.rotation.x=Math.PI/2; group.add(edge);
+      }
+    } else {
+      const g=new THREE.Group(); g.position.set(y.pos,0,0); group.add(g);
+      const top=new THREE.Mesh(new THREE.CylinderGeometry(0.7,0.7,0.04,24), matNickel); top.position.set(0,0.05,0); top.rotation.x=Math.PI/2; g.add(top);
+      const mid=new THREE.Mesh(new THREE.CylinderGeometry(0.7,0.7,0.05,24), matCopper); mid.position.set(0,0,0); mid.rotation.x=Math.PI/2; g.add(mid);
+      const bot=new THREE.Mesh(new THREE.CylinderGeometry(0.7,0.7,0.04,24), matNickel); bot.position.set(0,-0.05,0); bot.rotation.x=Math.PI/2; g.add(bot);
+    }
+  });
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.01; group.rotation.y+=0.002; controls.update(); renderer.render(scene,cam); }
+  animate();
+}
+</script>
+</body>
+</html>
