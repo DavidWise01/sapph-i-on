@@ -754,3 +754,24 @@ Hallway door
   snapshot: sha256:466ec6f1f74e499feb71527483901d0646ef76397f402051bf0278d872d1e90b
   instance: e961c05a-9111-4d3e-9d66-8977a5f349c6 RUNNING
   live: Last-Modified Wed, 07 Oct 2026 22:16:11 GMT, Content-Length 229788, CR 728, Server railway-hikari. The page contained A cat set, A reprise set, A lyre set, those 696, 2,049, and 24 spheres, 343 cells. The page contained Two blocks hold a goblin and Two blocks hold a honey badger. At a requested width of 1280 the hall reported scrollWidth 1265 and clientWidth 1265. At 390 the hall reported scrollWidth 390 and clientWidth 390.
+
+Keeper distance · 2026-10-07
+
+The walk stayed full at 334. This is one original page. It counts each cell's steps to the keeper at (3,3,3). The ten shells are 1, 6, 18, 38, 60, 72, 68, 48, 24, and 8. They sum to 343. Shell 0 is the keeper. Shell 9 is the eight corners. One axis sums to 12, and 3 times 49 times 12 is 1764, the same sum as the walk of the cells. No Downloads file was copied. The page is not seated. It is not one of those 696. The copied sphere files were not rewritten. The galaxy birth seal was not rewritten. The seated count stays 334.
+
+  commit: 06bfcdd74be62338a2f7a33cd99c1aa1d49f76fe
+  message: the keeper distance, beside the cube
+  file: distance/the-keeper-distance.html, 7651 bytes, sha256 4bc9cf576165230cb7210308c3a3ca59d1233a81c8b521edee38fdb6f1fbb301
+  check: Local and live Edge read LIT 1 + 6 + 18 + 38 + 60 + 72 + 68 + 48 + 24 + 8 = 343, distance sum 1764. The page drew 10 shell chips. Its background was rgb(255, 247, 237). Birth is 797c003df4ebfb8e1f4c86f11bc6c231be3cc66767a62ec26c2b378de075a306. The file has 0 CR. The cat card stayed LIT 24 cat files, manifest order matches. QUEUE.length stayed 334 and the seat count stayed 334. No distance file is seated. The keeper sky summed to 117306 and the iframe stayed hidden. Cell (0,0,3) opened nests/shor_nested.html with sum 109074. Corner (0,0,0) read the odd center cat, 25 parts, 1 mark, sum 58653, and the iframe stayed spheres/the-odd-center.html. Pages build of this commit was created 2026-10-07T23:12:36Z, status built, duration 38989, updated 2026-10-07T23:13:14Z. The door Last-Modified Wed, 07 Oct 2026 23:13:13 GMT, Content-Length 248289, 0 CR. At a requested width of 1280 the door reported scrollWidth 1265 and clientWidth 1265. At a requested width of 390 the door still reported scrollWidth 444 and clientWidth 390. The distance page at 390 reported scrollWidth 390 and clientWidth 390.
+
+Hallway door
+  commit: b2257494ada7a08bfb0fe721d9d501f2de5e0d46
+  message: name the keeper distance on the 7^3 door
+  railway: fc685cdd-b62e-424d-89e3-c4bb5c62d503
+  image: sha256:c67974b03be25aa8cd1e7fbce7c95b607d3d9e3fd221a5fe2c028b24ee1b5cf7
+  config: sha256:c8e454c24d157bce4b75df380515ae975a475b24469fe08436eee78c7227cebd
+  image created: 2026-10-07T23:13:06Z
+  deployment imageDigest: sha256:f0c646ba15153382e3457de6398600e2f2d4a60b7530537cf5ac0d7fb9b3df3d
+  snapshot: sha256:456e6f35c9449cfca09cc7777a55cff14dc3cd5ad9bcff1e3305bf917c01cecd
+  instance: 76280b0f-dc90-4135-9174-3bdc29f5f90a RUNNING
+  live: Last-Modified Wed, 07 Oct 2026 23:11:29 GMT, Content-Length 230398, CR 728, Server railway-hikari. The page contained A keeper distance page, A cat set, those 696, 2,049, and 24 spheres, 343 cells. The page contained Two blocks hold a goblin and Two blocks hold a honey badger. At a requested width of 1280 the hall reported scrollWidth 1265 and clientWidth 1265. At 390 the hall reported scrollWidth 390 and clientWidth 390.
