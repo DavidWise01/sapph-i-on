@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MYTHOS Faces — SaPpH{{i}}on</title>
+<style>
+  :root { --ink:#2e1065; --dim:#6d28d9; --accent:#6d28d9; --bg:#f5f3ff; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; color:var(--ink);
+    font:16px/1.5 "Segoe UI", ui-sans-serif, sans-serif;
+    background:
+      radial-gradient(820px 420px at 100% 0%, #ede9fe, transparent 58%),
+      linear-gradient(165deg, #f5f3ff, #ede9fe 72%, #f5f3ff);
+    background-color:var(--bg); min-height:100vh;
+  }
+  a { color:var(--accent); }
+  header, main, footer { width:min(880px, calc(100% - 32px)); margin:0 auto; }
+  header { padding:22px 0 0; }
+  .src, .mono { font:13px/1.45 ui-monospace, Consolas, monospace; color:var(--dim); }
+  h1 { margin:8px 0 0; font-size:clamp(28px, 5vw, 48px); letter-spacing:.04em; }
+  h2 { margin:22px 0 8px; font-size:13px; letter-spacing:.14em; }
+  .kicker { letter-spacing:.16em; font-size:12px; color:var(--accent); font-weight:700; }
+  .stage { background:#fff; border:1px solid rgba(36,22,15,.12); border-radius:18px; padding:12px; margin:14px 0; }
+  canvas { display:block; width:100%; height:auto; border-radius:12px; background:#ede9fe; }
+  .ring { display:flex; flex-wrap:wrap; gap:8px; }
+  .ring a, .parent {
+    display:block; padding:10px 12px; border-radius:14px; text-decoration:none;
+    background:#fff; border:1px solid rgba(36,22,15,.14); color:var(--ink);
+  }
+  .ring a.on { border-color:var(--accent); font-weight:700; }
+  .stamp { display:inline-block; padding:2px 8px; border-radius:999px; font:11px ui-monospace, Consolas, monospace; color:#fff; }
+  .lit { background:#047857; } .amber { background:#b45309; } .wall { background:#be185d; }
+  footer { color:var(--dim); font-size:13px; padding-bottom:28px; overflow-wrap:anywhere; }
+  .src, .mono, p, a, h1 { overflow-wrap:anywhere; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="src"><a href="../">SaPpH{{i}}on</a> · domain · <a href="../stewards/mythos.html">MYTHOS</a> · <a href="https://0root.ai/">0root.ai</a></div>
+  <div class="kicker">THREE FACES · 127 · (6,6,0)</div>
+  <h1>MYTHOS Faces</h1>
+  <p id="lead">Three faces meet at corner (6,6,0). Their cells number 127.</p>
+</header>
+<main>
+  <div class="stage">
+    <canvas id="stage" width="880" height="220" aria-label="Seven layers, with the three faces of this corner filled"></canvas>
+  </div>
+  <p class="mono" id="card"></p>
+  <h2>THE RING</h2>
+  <nav class="ring" id="ring">
+    <a href="ethos.html">ETHOS</a>
+    <a href="pathos.html">PATHOS</a>
+    <a href="logos.html">LOGOS</a>
+    <a class="on" href="mythos.html">MYTHOS</a>
+    <a href="episteme.html">EPISTEME</a>
+    <a href="techne.html">TECHNE</a>
+    <a href="phronesis.html">PHRONESIS</a>
+    <a href="kairos.html">KAIROS</a>
+  </nav>
+  <p><span class="stamp lit">LIT</span> The three faces through corner (6,6,0) are the planes x=6, y=6, and z=0. Each plane holds 49 cells. Each pair of planes meets in 7 cells. All three meet in the one corner. 49 times 3, minus 7 times 3, plus 1, is 127. The walk finds 127. The keeper at (3,3,3) is on none of the three planes. The opposite corner is on none of them. A failed count throws.</p>
+  <p><span class="stamp amber">AMBER</span> The hallway names this appeal the story. This domain sits under <a href="../stewards/mythos.html">MYTHOS</a>. No Downloads file was copied. This page reads no other sphere. The sphere files, the steward pages, and the birth seal were not rewritten. The walk is full, so this page is not seated. It is not one of those 696.</p>
+  <p><span class="stamp wall">WALL</span> The count is cells on three address planes. It does not measure a wall, a body, or authority. A passing check is the 127 cells.</p>
+</main>
+<footer>
+  David Lee Wise (ROOT0). Drafted by Grok (xAI) on 2026-10-08.
+  Birth seal 99f04d9af407d584cd7fff393c86eea5007f56e96a180b5b6cd52dfa5e6beec6. One host, <a href="https://davidwise01.github.io/sapph-i-on/domains/mythos.html">https://davidwise01.github.io/sapph-i-on/domains/mythos.html</a>.
+</footer>
+<script>
+"use strict";
+var APPEAL = "MYTHOS";
+var FILE = "mythos.html";
+var BIT = 3;
+var AT = [6, 6, 0];
+var RING = ["ethos.html","pathos.html","logos.html","mythos.html","episteme.html","techne.html","phronesis.html","kairos.html"];
+function faceCount() {
+  var plane = [0, 0, 0];
+  var edge = [0, 0, 0];
+  var corner = 0;
+  var union = 0;
+  var keeper = 0;
+  var opposite = 0;
+  var x, y, z, onX, onY, onZ, n;
+  if (!((AT[0] === 0 || AT[0] === 6) && (AT[1] === 0 || AT[1] === 6) && (AT[2] === 0 || AT[2] === 6))) {
+    throw new Error("LIT FAIL face address");
+  }
+  for (z = 0; z < 7; z++) for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+    onX = x === AT[0];
+    onY = y === AT[1];
+    onZ = z === AT[2];
+    n = (onX ? 1 : 0) + (onY ? 1 : 0) + (onZ ? 1 : 0);
+    if (onX) plane[0]++;
+    if (onY) plane[1]++;
+    if (onZ) plane[2]++;
+    if (onX && onY) edge[0]++;
+    if (onX && onZ) edge[1]++;
+    if (onY && onZ) edge[2]++;
+    if (n === 3) corner++;
+    if (n > 0) union++;
+    if (n > 0 && x === 3 && y === 3 && z === 3) keeper++;
+    if (x === 6 - AT[0] && y === 6 - AT[1] && z === 6 - AT[2] && n > 0) opposite++;
+  }
+  if (plane[0] !== 49 || plane[1] !== 49 || plane[2] !== 49) throw new Error("LIT FAIL face plane");
+  if (edge[0] !== 7 || edge[1] !== 7 || edge[2] !== 7) throw new Error("LIT FAIL face edge");
+  if (corner !== 1 || keeper !== 0 || opposite !== 0) throw new Error("LIT FAIL face corner");
+  if (49 * 3 - 7 * 3 + 1 !== 127 || union !== 127) throw new Error("LIT FAIL face union");
+  if (RING.length !== 8 || RING[BIT] !== FILE) throw new Error("LIT FAIL face ring");
+  return union;
+}
+function checkDom() {
+  var ring = document.querySelectorAll("#ring a");
+  var i;
+  if (ring.length !== 8) throw new Error("LIT FAIL ring");
+  for (i = 0; i < 8; i++) if (ring[i].getAttribute("href") !== RING[i]) throw new Error("LIT FAIL ring name");
+  var parent = document.querySelector("header .src a[href^='../stewards/']");
+  if (!parent || parent.getAttribute("href") !== "../stewards/" + FILE) throw new Error("LIT FAIL steward link");
+}
+function paint(frame) {
+  var union = faceCount();
+  var canvas = document.getElementById("stage");
+  var ctx = canvas.getContext("2d");
+  var cell = 16;
+  var gap = 18;
+  var layer = 7 * cell;
+  var origin = Math.round((canvas.width - (7 * layer + 6 * gap)) / 2);
+  var y0 = 28;
+  var painted = 0;
+  var marked = 0;
+  var z, y, x, px, py, on;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.font = "12px ui-monospace, Consolas, monospace";
+  ctx.fillStyle = "#2e1065";
+  ctx.fillText(APPEAL + " faces  127  (" + AT[0] + "," + AT[1] + "," + AT[2] + ")", origin, 16);
+  for (z = 0; z < 7; z++) {
+    px = origin + z * (layer + gap);
+    ctx.fillStyle = "#6d28d9";
+    ctx.fillText("z" + z, px, y0 + layer + 16);
+    for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+      on = x === AT[0] || y === AT[1] || z === AT[2];
+      py = y0 + y * cell;
+      ctx.fillStyle = on ? "#6d28d9" : "#fff";
+      ctx.fillRect(px + x * cell + 1, py + 1, cell - 2, cell - 2);
+      if (on && x === AT[0] && y === AT[1] && z === AT[2] && (frame % 40) < 20) {
+        ctx.strokeStyle = "#2e1065";
+        ctx.strokeRect(px + x * cell + 0.5, py + 0.5, cell - 1, cell - 1);
+      }
+      painted++;
+      if (on) marked++;
+    }
+  }
+  if (painted !== 343 || marked !== union || marked !== 127) throw new Error("LIT FAIL paint");
+}
+var card = document.getElementById("card");
+try {
+  checkDom();
+  paint(0);
+  card.innerHTML = "<span class='stamp lit'>LIT</span> (" + AT[0] + "," + AT[1] + "," + AT[2] + ") · 3 faces · 127 cells";
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    var frame = 0;
+    (function tick() {
+      frame++;
+      paint(frame);
+      requestAnimationFrame(tick);
+    })();
+  }
+} catch (err) {
+  card.innerHTML = "<span class='stamp wall'>WALL</span> " + err.message;
+  throw err;
+}
+</script>
+</body>
+</html>
