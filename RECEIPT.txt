@@ -775,3 +775,35 @@ Hallway door
   snapshot: sha256:456e6f35c9449cfca09cc7777a55cff14dc3cd5ad9bcff1e3305bf917c01cecd
   instance: 76280b0f-dc90-4135-9174-3bdc29f5f90a RUNNING
   live: Last-Modified Wed, 07 Oct 2026 23:11:29 GMT, Content-Length 230398, CR 728, Server railway-hikari. The page contained A keeper distance page, A cat set, those 696, 2,049, and 24 spheres, 343 cells. The page contained Two blocks hold a goblin and Two blocks hold a honey badger. At a requested width of 1280 the hall reported scrollWidth 1265 and clientWidth 1265. At 390 the hall reported scrollWidth 390 and clientWidth 390.
+
+Stewards · 2026-10-08
+
+The walk stayed full at 334. Eight steward pages ledger the eight appeals. Each page walks the cube and throws unless the eight corners are bits 0 through 7, each once, and its own corner matches. Each ledger names the three spheres already seated on that appeal. No Downloads file was copied. The pages are not seated. They are not one of those 696. The copied sphere files were not rewritten. The galaxy birth seal was not rewritten. The seated count stays 334.
+
+The hallway sentence for the keeper distance was shortened, and the steward sentence was appended in the same two places.
+
+  commit: 0172f87cd5fe350c78e91ed5cc9f7f3d540b1f97
+  message: eight steward pages, beside the cube
+  door: index.html, 251745 bytes, 0 CR, sha256 72e7fee1e8ea2f30698d0462f1ef90ab56ff3f1b6a3fe662aac56bc18f0b71a8
+  file: stewards/ethos.html, 8366 bytes, sha256 090741a1a91c60983da7e632f756330aa51792a70db5498fe09dc07deb198b6f, birth 3a143191642eee97a2a665d1207fc2ef71844a97c8a92abbcb0f0e6c77b89b46, corner (0,0,0), bit 0
+  file: stewards/pathos.html, 8368 bytes, sha256 4aa5eec038dbc3636bdc5950410f090ca0eea17b2cfaaf48005dbbf2b36b685b, birth 2d6dc2188a7919d6d83ee62d94e662391e7af362ee193acf503a4d2bb7a80103, corner (6,0,0), bit 1
+  file: stewards/logos.html, 8367 bytes, sha256 174b2e39e649a279d834aa47d146ecefb7177e8c8a0b0127485c7f96bafbe656, birth e6c16e56a3526d0db0e7923f9f7ae465e85c1e5ee5a8d395454f3e7edb934a2f, corner (0,6,0), bit 2
+  file: stewards/mythos.html, 8386 bytes, sha256 00535db9366ace473427ee9881eefc06a06a7d80338c62981680f1c70268ff38, birth e4f2e3170544be5338880ef8b03eb384098f1727bc5a8bbc124b3d3c002ad680, corner (6,6,0), bit 3
+  file: stewards/episteme.html, 8394 bytes, sha256 f4f5595324624b05f3019fa5da4a0bfb460855bcca845ca09169d89b0c2a3c51, birth 0fb6d000cbec1adef856dbef3281ca334ef94187cbbce58fc58127879adb0744, corner (0,0,6), bit 4
+  file: stewards/techne.html, 8358 bytes, sha256 3aa0dfc33b1ac7791a685822057b720b519fa0d6a9d5f30e7d1eb9635116de8c, birth 40a844fa01ad7480bc7afecfc286630fab2713ec4d7c61b69d2647dde8ad315f, corner (6,0,6), bit 5
+  file: stewards/phronesis.html, 8381 bytes, sha256 c90fd59db5b7515927c5d0ce1503af4a4c6eaa3e6592ec2eefa6c562913e7afc, birth 8d36f538879aa312072bc97f2b5cead782e4e57f6a1d9c58fc66342d10ec9807, corner (0,6,6), bit 6
+  file: stewards/kairos.html, 8371 bytes, sha256 9581bc29b00ae59721b36a1a68991c7925f19895567e1278a8bcea38d4a09053, birth 6216135fca68c3b6be6c94d26a181cd2d8205c2afc1d7f782866ba247ee30d7d, corner (6,6,6), bit 7
+  check: Local and live Edge read LIT 8 stewards, 3 spheres each, 24. ETHOS read LIT bit 0 at (0,0,0), 8 ring links, 3 ledger links, background rgb(255, 241, 242). The first ledger link is spheres/the-odd-center.html. Clicking the ring opened PATHOS, LIT bit 1 at (6,0,0). Clicking its first ledger link opened spheres/the-layers.html, title The Layers. KAIROS locally read LIT bit 7 at (6,6,6), ledger the-twenty-four, the-sum, the-outside, background rgb(253, 242, 248). The distance card stayed LIT 1 + 6 + 18 + 38 + 60 + 72 + 68 + 48 + 24 + 8 = 343, distance sum 1764. The cat card stayed LIT 24 cat files, manifest order matches. QUEUE.length stayed 334 and the seat count stayed 334. No steward file is seated. The keeper sky summed to 117306 and the iframe stayed hidden. Cell (0,0,3) opened nests/shor_nested.html with sum 109074. Corner (0,0,0) read the odd center cat, 25 parts, 1 mark, sum 58653, and the iframe stayed spheres/the-odd-center.html. Live ethos.html is 8366 bytes, 0 CR, sha256 090741a1a91c60983da7e632f756330aa51792a70db5498fe09dc07deb198b6f. Pages build of this commit was created 2026-10-08T01:28:42Z, status built, duration 241534, updated 2026-10-08T01:32:43Z, error null. The door Last-Modified Thu, 08 Oct 2026 01:29:17 GMT, Content-Length 251745, 0 CR. At a requested width of 1280 the door reported scrollWidth 1265 and clientWidth 1265. At a requested width of 390 the door still reported scrollWidth 444 and clientWidth 390. ETHOS at 1280 was 1265/1265 and at 390 was 390/390. Door paper stayed rgb(243, 239, 231).
+
+Hallway door
+  commit: b88588364587f61b04b230734eff1a2071658c34
+  message: name the eight stewards on the 7^3 door
+  railway: c9f0efdd-7480-4eb8-a2ee-0789978ef1cb
+  status: SUCCESS
+  created: 2026-10-08T01:29:02.793Z
+  image: sha256:d15b201d05c3bbedeca8840bb08d0809bab342d489a65f592ed5e5bee97f6b29
+  config: sha256:1d6b600f65ab73f83dceeb3f5063baa5e1e15044bd4db0ea80663a1a10b0791a
+  image created: 2026-10-08T01:29:26Z
+  deployment imageDigest: sha256:daca39712cb37144c2d333d22b0042a2695da1869bb2e56ae73fc303a443ef98
+  snapshot: sha256:8d32a0ed469e39dadbad7d1d46c3fe9da7bc63dc0dbd86435fe443bb8850a0fb
+  live: Last-Modified Thu, 08 Oct 2026 01:26:53 GMT, Content-Length 229984, CR 728, Server railway-hikari. The page contained A keeper distance counts ten shells around (3,3,3). Eight steward pages ledger the eight appeals. That sentence occurred twice. The longer keeper-distance sentence was not on the page. The page contained A cat set, those 696, 2,049, and 24 spheres, 343 cells. The page contained Two blocks hold a goblin and Two blocks hold a honey badger. At 1280 the hall was 1265/1265. At 390 the hall was 390/390. The deployment list did not include an instance id.
