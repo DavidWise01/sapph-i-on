@@ -1,0 +1,40 @@
+[
+  {
+    "file": "the-skills.html",
+    "title": "The Skills",
+    "slug": "the-skills",
+    "bytes": 10269,
+    "sha256": "e2b4e5d66d6d10af31a4d920db0d47705f97d6d239324e31153a3bbe2081f553",
+    "birth": "3e2c2ffa8dbcbf7dd3d572e287d50e7859961b581ba561eeffbff9fa0370448d",
+    "skills": 22,
+    "workflows": 2,
+    "names": [
+      "build-with-ai",
+      "code-review",
+      "create-skill",
+      "create-workflow",
+      "design",
+      "docx",
+      "execute-plan",
+      "game-assets",
+      "imagine",
+      "implement",
+      "learn",
+      "long-running-background-tasks",
+      "pdf",
+      "pptx",
+      "pr-babysit",
+      "resume-claude",
+      "resume-codex",
+      "resume-cursor",
+      "review",
+      "skill-design-principles",
+      "statusline",
+      "threejs-frame-conventions"
+    ],
+    "flows": [
+      "deep-research",
+      "learn-traces"
+    ]
+  }
+]

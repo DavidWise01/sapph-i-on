@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Skills — SaPpH{{i}}on</title>
+<style>
+  :root { --ink:#14532d; --dim:#3f6212; --accent:#047857; --bg:#f0fdf4; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; color:var(--ink);
+    font:16px/1.5 "Segoe UI", ui-sans-serif, sans-serif;
+    background:
+      radial-gradient(820px 440px at 0% 0%, #bbf7d0, transparent 60%),
+      radial-gradient(680px 420px at 100% 0%, #fde68a, transparent 55%),
+      linear-gradient(165deg, #f0fdf4, #ecfccb 70%, #f0fdf4);
+    background-color:var(--bg); min-height:100vh;
+  }
+  a { color:var(--accent); }
+  header, main, footer { width:min(880px, calc(100% - 32px)); margin:0 auto; }
+  header { padding:22px 0 0; }
+  .src, .mono { font:13px/1.45 ui-monospace, Consolas, monospace; color:var(--dim); }
+  h1 { margin:8px 0 0; font-size:clamp(28px, 5vw, 46px); letter-spacing:.03em; }
+  h2 { margin:18px 0 8px; font-size:13px; letter-spacing:.14em; }
+  .kicker { letter-spacing:.16em; font-size:12px; color:var(--accent); font-weight:700; }
+  .stage { background:#fff; border:1px solid rgba(20,83,45,.14); border-radius:18px; padding:12px; margin:14px 0; }
+  canvas { display:block; width:100%; height:auto; border-radius:12px; background:#f0fdf4; }
+  .row { display:block; width:100%; text-align:left; margin:0 0 8px; padding:10px 12px; border-radius:14px; background:#fff; border:1px solid rgba(20,83,45,.14); color:var(--ink); font:inherit; cursor:pointer; }
+  .row b { display:block; font-size:15px; }
+  .row i { display:block; font-style:normal; color:var(--dim); font-size:14px; }
+  .row.on { border-color:var(--accent); }
+  .stamp { display:inline-block; padding:2px 8px; border-radius:999px; font:11px ui-monospace, Consolas, monospace; color:#fff; }
+  .lit { background:#047857; } .amber { background:#b45309; } .wall { background:#be185d; }
+  footer { color:var(--dim); font-size:13px; padding-bottom:28px; overflow-wrap:anywhere; }
+  .src, .mono, p, a, h1, button { overflow-wrap:anywhere; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="src"><a href="../">SaPpH{{i}}on</a> · skills · <a href="https://0root.ai/">0root.ai</a></div>
+  <div class="kicker">ONE PAGE · READ FROM THE SHELF</div>
+  <h1>The Skills</h1>
+  <p id="lead">Twenty-two skills this builder can read, and two workflows beside them.</p>
+</header>
+<main>
+  <div class="stage">
+    <canvas id="stage" width="880" height="572" aria-label="Twenty-two skill squares and two workflow squares"></canvas>
+  </div>
+  <p class="mono" id="card"></p>
+  <p class="mono" id="pick">No row selected.</p>
+  <h2>SKILLS · 22</h2>
+  <div id="ledger"></div>
+  <h2>WORKFLOWS · 2</h2>
+  <div id="flows"></div>
+  <p><span class="stamp lit">LIT</span> This page lists 22 skills and 2 workflows. The skill names are sorted. None of them is named shared. Each row has a name and a line. The canvas draws 22 skill squares and 2 workflow squares. A failed count throws.</p>
+  <p><span class="stamp amber">AMBER</span> The 22 names and the two workflow names were read from this builder's bundled skill shelf on 2026-10-07. Each line is a short reading of that file's own description. No Downloads file was copied. This page is not one of those 696.</p>
+  <p><span class="stamp wall">WALL</span> A name on this page is a file that was opened. Opening a file is not a run. This page does not claim that a skill did its job. No separate user skill shelf was present, so no extra names were added. The helper folder shared has no skill file, so it is not listed. The two workflows are not skills. The walk is full, so this page is not seated.</p>
+</main>
+<footer>
+  David Lee Wise (ROOT0). Drafted by Grok (xAI) on 2026-10-07.
+  Birth seal 3e2c2ffa8dbcbf7dd3d572e287d50e7859961b581ba561eeffbff9fa0370448d. One host, <a href="https://davidwise01.github.io/sapph-i-on/skills/the-skills.html">https://davidwise01.github.io/sapph-i-on/skills/the-skills.html</a>.
+</footer>
+<script>
+"use strict";
+var SKILLS = [{"name":"build-with-ai","line":"Defaults to SpaceXAI when an app gains an AI or LLM feature."},{"name":"code-review","line":"A strict review of abstraction, giant files, and tangled conditions."},{"name":"create-skill","line":"Creates a new skill file, with optional scripts."},{"name":"create-workflow","line":"Authors a Rhai workflow, checks one path, and saves the name."},{"name":"design","line":"Writes a design document with a reviewer until they agree, plus a PR plan."},{"name":"docx","line":"Creates, reads, and edits Word documents."},{"name":"execute-plan","line":"Runs a PR plan with isolated workers and a required review."},{"name":"game-assets","line":"Makes game art and textured 3D models with the Imagine tools."},{"name":"imagine","line":"Guides image and video generation with the Imagine tools."},{"name":"implement","line":"Implements, reviews, and fixes until the reviewers report no issues."},{"name":"learn","line":"Tunes skills and servers from this builder's own sessions."},{"name":"long-running-background-tasks","line":"Covers work that keeps running after it is started."},{"name":"pdf","line":"Reads, creates, and transforms PDF files, including forms."},{"name":"pptx","line":"Creates, reads, and edits slide decks."},{"name":"pr-babysit","line":"Watches pull requests, CI, review comments, and stacks."},{"name":"resume-claude","line":"Continues work from a recent Claude Code session."},{"name":"resume-codex","line":"Continues work from a recent Codex session."},{"name":"resume-cursor","line":"Continues work from a recent Cursor session."},{"name":"review","line":"Reviews a branch, a working tree, a pull request, or a stack."},{"name":"skill-design-principles","line":"States short principles for writing a skill."},{"name":"statusline","line":"Configures the status line."},{"name":"threejs-frame-conventions","line":"Keeps Three.js controls, camera, facing, and collision on one frame."}];
+var FLOWS = [{"name":"deep-research","line":"Researches a query in parallel, cross-checks the evidence, and writes a cited report."},{"name":"learn-traces","line":"Reduces collected sessions into harness changes. The learn skill launches it."}];
+function roster() {
+  var faults = [];
+  var seen = {};
+  var i, names = [], flowNames = [];
+  if (SKILLS.length !== 22) faults.push("skills");
+  if (FLOWS.length !== 2) faults.push("flows");
+  for (i = 0; i < SKILLS.length; i++) {
+    if (!SKILLS[i].name || !SKILLS[i].line) faults.push("blank");
+    if (seen[SKILLS[i].name]) faults.push("duplicate");
+    seen[SKILLS[i].name] = 1;
+    if (SKILLS[i].name === "shared") faults.push("shared");
+    names.push(SKILLS[i].name);
+  }
+  for (i = 0; i < FLOWS.length; i++) {
+    if (!FLOWS[i].name || !FLOWS[i].line) faults.push("flow blank");
+    if (seen[FLOWS[i].name]) faults.push("flow duplicate");
+    seen[FLOWS[i].name] = 1;
+    flowNames.push(FLOWS[i].name);
+  }
+  if (names.join(",") !== names.slice().sort().join(",")) faults.push("order");
+  if (flowNames.join(",") !== "deep-research,learn-traces") faults.push("flow order");
+  return { faults: faults, names: names, flowNames: flowNames };
+}
+var report = roster();
+function finish(model) {
+  var card = document.getElementById("card");
+  if (!model || model.faults.length || model.names.length !== 22 || model.flowNames.length !== 2) {
+    var msg = (model && model.faults.join(", ")) || "no report";
+    card.innerHTML = "<span class='stamp wall'>WALL</span> LIT FAIL " + msg;
+    throw new Error("LIT FAIL " + msg);
+  }
+  card.innerHTML = "<span class='stamp lit'>LIT</span> 22 skills · 2 workflows";
+}
+finish(report);
+function addRows(host, rows, kind) {
+  rows.forEach(function (row) {
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "row";
+    btn.setAttribute("data-name", row.name);
+    btn.setAttribute("data-kind", kind);
+    btn.innerHTML = "<b>" + row.name + "</b><i>" + row.line + "</i>";
+    btn.addEventListener("click", function () {
+      var name = btn.getAttribute("data-name");
+      var known = kind === "skill" ? report.names.indexOf(name) : report.flowNames.indexOf(name);
+      if (known < 0) throw new Error("LIT FAIL skill pick");
+      var all = document.querySelectorAll(".row");
+      var n;
+      for (n = 0; n < all.length; n++) all[n].classList.remove("on");
+      btn.classList.add("on");
+      document.getElementById("pick").textContent = kind + " · " + name;
+    });
+    host.appendChild(btn);
+  });
+}
+var ledger = document.getElementById("ledger");
+var flowHost = document.getElementById("flows");
+addRows(ledger, SKILLS, "skill");
+addRows(flowHost, FLOWS, "flow");
+if (ledger.children.length !== 22 || flowHost.children.length !== 2) throw new Error("LIT FAIL skill render");
+var canvas = document.getElementById("stage");
+if (!canvas || !canvas.getContext) throw new Error("LIT FAIL skill stage");
+var ctx = canvas.getContext("2d");
+var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var bg = window.getComputedStyle(document.body).backgroundColor;
+if (bg === "rgb(0, 0, 0)" || bg === "rgba(0, 0, 0, 1)") throw new Error("LIT FAIL skill paper");
+function frame(now) {
+  var t = (now || 0) / 1000;
+  var active = reduce ? -1 : Math.floor(t) % 22;
+  ctx.fillStyle = "#f0fdf4";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.font = "14px ui-monospace, Consolas, monospace";
+  var painted = 0;
+  var flowsPainted = 0;
+  var i, y;
+  for (i = 0; i < SKILLS.length; i++) {
+    y = 12 + i * 22;
+    ctx.fillStyle = i === active ? "#047857" : "#86efac";
+    ctx.fillRect(16, y, 18, 14);
+    ctx.fillStyle = "#14532d";
+    ctx.fillText(SKILLS[i].name, 42, y + 12);
+    painted++;
+  }
+  for (i = 0; i < FLOWS.length; i++) {
+    y = 12 + 22 * 22 + 10 + i * 22;
+    ctx.fillStyle = "#fbbf24";
+    ctx.fillRect(16, y, 18, 14);
+    ctx.fillStyle = "#78350f";
+    ctx.fillText(FLOWS[i].name, 42, y + 12);
+    flowsPainted++;
+  }
+  if (painted !== 22) throw new Error("LIT FAIL skill paint");
+  if (flowsPainted !== 2) throw new Error("LIT FAIL flow paint");
+  if (!reduce) requestAnimationFrame(frame);
+}
+frame(0);
+</script>
+</body>
+</html>
