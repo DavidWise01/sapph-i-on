@@ -839,3 +839,28 @@ Hallway door
   deployment imageDigest: sha256:a5081ee345a103a6a203ad811b12426038b6d63033bde6cabccca1cfc8a68abc
   snapshot: sha256:723bb079505303acee0897e6810141457d87cc926612ae12bfc47ec2348d544f
   live: Last-Modified Thu, 08 Oct 2026 02:11:55 GMT, Content-Length 230086, CR 728, Server railway-hikari. The sentence Eight face domains count 127 cells at each corner occurred twice. The page contained A cat set, those 696, 2,049, and 24 spheres, 343 cells. The page contained Two blocks hold a goblin and Two blocks hold a honey badger. At 1280 the hall was 1265/1265. At 390 the hall was 390/390. The deployment list did not include an instance id.
+
+Skills · 2026-10-08
+
+The walk stayed full at 334. One page lists 22 skills read from this builder's bundled skill shelf, and two workflows beside them. The skill names are sorted. The helper folder shared has no skill file, so it is not listed. No separate user skill shelf was present. A name on the page is a file that was opened. The page does not claim that a skill did its job. No Downloads file was copied. The page is not seated. It is not one of those 696. The copied sphere files, the steward pages, the face domains, and the galaxy birth seal were not rewritten. The seated count stays 334.
+
+The hallway sentence gained one short line in the same two places.
+
+  commit: 6780357040cbb512972dc8b515bda492ac8304b1
+  message: one skill page, beside the cube
+  door: index.html, 258141 bytes, 0 CR, sha256 056debd6b8f6cac610a41b7b953f3ef1959eca5ab28aaae751e6e62881335d5f
+  file: skills/the-skills.html, 10269 bytes, sha256 e2b4e5d66d6d10af31a4d920db0d47705f97d6d239324e31153a3bbe2081f553, birth 3e2c2ffa8dbcbf7dd3d572e287d50e7859961b581ba561eeffbff9fa0370448d
+  check: Local and live Edge read LIT 22 skills, 2 workflows. Clicking the first skill row read skill, build-with-ai. Clicking a workflow row read the workflow name. The skill page background was rgb(240, 253, 244). The door link opened skills/the-skills.html and the card stayed LIT 22 skills, 2 workflows. The domain card stayed LIT 8 corners, 3 faces, 127 cells. The local distance card stayed LIT 1 + 6 + 18 + 38 + 60 + 72 + 68 + 48 + 24 + 8 = 343, distance sum 1764. The seat count stayed 334. The keeper sky summed to 117306 and the iframe stayed hidden. Cell (0,0,3) stayed nests/shor_nested.html with sum 109074. Corner (0,0,0) opened spheres/the-odd-center.html with sum 58653. Live skills/the-skills.html is 10269 bytes, 0 CR, sha256 e2b4e5d66d6d10af31a4d920db0d47705f97d6d239324e31153a3bbe2081f553. Pages build of this commit was created 2026-10-08T02:26:05Z, status built, duration 34600, updated 2026-10-08T02:26:39Z, error null. The door Last-Modified Thu, 08 Oct 2026 02:26:37 GMT, Content-Length 258141, 0 CR. At a requested width of 1280 the door reported scrollWidth 1265 and clientWidth 1265. At a requested width of 390 the door still reported scrollWidth 444 and clientWidth 390. The skill page at 1280 was 1265/1265 and at 390 was 390/390. Door paper stayed rgb(243, 239, 231). The page footer date is 2026-10-07.
+
+Hallway door
+  commit: 1e1f7a7ad9cb9a50d1125a26e30da46734a3cc33
+  message: name the skill page on the 7^3 door
+  railway: ef3c4cd1-6cb9-4893-bb1f-8a4a4d424c39
+  status: SUCCESS
+  created: 2026-10-08T02:27:01.614Z
+  image: sha256:a23578f66b5f301ef2d422b6aa1341df2eefac90b32bbde57ccd94047b53a54d
+  config: sha256:195881975f09cf1c142d788d8607f443cf655ba3887e6171b640f246dd77f2ce
+  image created: 2026-10-08T02:27:36Z
+  deployment imageDigest: sha256:20654bdeb2a4b6a1e273797a95b643bc212dbeea04338b281efb9d434c90ba8d
+  snapshot: sha256:9f738e2f88b73aef7fc6ee979e9dc65c92fd7498cc7847eff544339cf2086c93
+  live: Last-Modified Thu, 08 Oct 2026 02:23:53 GMT, Content-Length 230196, CR 728, sha256 3627caa28054b16db63e83cc20d271dc388ff31de45f0f07d6ab3fe100b5c2a5, Server railway-hikari. The sentence One skill page lists the skills this builder can read occurred twice. The page contained A cat set, those 696, 2,049, and 24 spheres, 343 cells. The page contained Two blocks hold a goblin and Two blocks hold a honey badger. At 1280 the hall was 1265/1265. At 390 the hall was 390/390. The Last-Modified header is earlier than the deployment created time. The deployment list did not include an instance id.
