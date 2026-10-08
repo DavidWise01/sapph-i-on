@@ -807,3 +807,35 @@ Hallway door
   deployment imageDigest: sha256:daca39712cb37144c2d333d22b0042a2695da1869bb2e56ae73fc303a443ef98
   snapshot: sha256:8d32a0ed469e39dadbad7d1d46c3fe9da7bc63dc0dbd86435fe443bb8850a0fb
   live: Last-Modified Thu, 08 Oct 2026 01:26:53 GMT, Content-Length 229984, CR 728, Server railway-hikari. The page contained A keeper distance counts ten shells around (3,3,3). Eight steward pages ledger the eight appeals. That sentence occurred twice. The longer keeper-distance sentence was not on the page. The page contained A cat set, those 696, 2,049, and 24 spheres, 343 cells. The page contained Two blocks hold a goblin and Two blocks hold a honey badger. At 1280 the hall was 1265/1265. At 390 the hall was 390/390. The deployment list did not include an instance id.
+
+Domains · 2026-10-08
+
+The walk stayed full at 334. Eight face domains sit under the eight stewards. Each page counts the three faces that meet at its corner. Each face holds 49 cells. Each pair meets in 7. All three meet in the one corner. 49 times 3, minus 7 times 3, plus 1, is 127, and the walk finds 127. The keeper at (3,3,3) is on none of those planes. No Downloads file was copied. The pages are not seated. They are not one of those 696. The copied sphere files, the steward pages, and the galaxy birth seal were not rewritten. The seated count stays 334.
+
+The hallway sentence gained one short line in the same two places.
+
+  commit: 1a8bfa935d91d9ab9b3b79862d65aa75b4623c7f
+  message: eight face domains, beside the cube
+  door: index.html, 255184 bytes, 0 CR, sha256 57c3d83f347a1d3a5561f6265dd77993f9d8cfecd63edeb1539260f525d580ce
+  file: domains/ethos.html, 8101 bytes, sha256 436b73876dd6a56902796b6f5c26c44a0287eb2bdd056ca60160b6b6db7d4e61, birth 81f705c97f140070a5895b60918317a8a0159ee76afe21155139e89d98afb474, corner (0,0,0), bit 0
+  file: domains/pathos.html, 8109 bytes, sha256 bb372283110838a40f4c789d25aee3ca65036a9e02c812004b5640633e36652b, birth 6fff0a30fa292ca7d93b813e1d4b7bfbda15c2ab1cb7f267bb01a5a29fb055f9, corner (6,0,0), bit 1
+  file: domains/logos.html, 8098 bytes, sha256 4f6589468a3cab18813d4f8a05ac9fce2086a5360bc6aa361ad6ebe9aed314d7, birth 693bdfc570b024cb53bdfa7c3251c899db7fa56189931031da6903099347696b, corner (0,6,0), bit 2
+  file: domains/mythos.html, 8107 bytes, sha256 b75d88fb1c075c4442defa2a1dfcbd5120411c022698faed3d15ff92306c84b4, birth 99f04d9af407d584cd7fff393c86eea5007f56e96a180b5b6cd52dfa5e6beec6, corner (6,6,0), bit 3
+  file: domains/episteme.html, 8131 bytes, sha256 cbd8ae44aee2262efe2f1aac53eb0181ae3e73ad3ed82c4e0dc4524936c4fc48, birth ff2866e20a68c138b256bb4907c9a94d8e820557fa55fd9e28a047dedc911437, corner (0,0,6), bit 4
+  file: domains/techne.html, 8107 bytes, sha256 03bf3c01622cb4007b0c85e2a6b531be525da4fcf613cdba3d4ed8bc26a4724c, birth d3bda33aef64f2263a4fdcf97aed543741092d450b462781a8c908c3c3440b11, corner (6,0,6), bit 5
+  file: domains/phronesis.html, 8140 bytes, sha256 a93ddfdfd6e34b10b56280a68d13d037206672153b725dc64042066c38fc65a2, birth 2b03be9c290c52c377a961d7092ed92668dcc0425c14a8d64b635fbbbe1f461f, corner (0,6,6), bit 6
+  file: domains/kairos.html, 8108 bytes, sha256 5b6a9cac6e1328ebb7d126473c954c7df4dab8b83014f5c98b41bc3096f49b5b, birth 24bb09577880754de1d220a221e7efed46f3c0a5215f22f7e020b431dd807577, corner (6,6,6), bit 7
+  check: Local and live Edge read LIT 8 corners, 3 faces, 127 cells. ETHOS Faces read LIT (0,0,0), 3 faces, 127 cells, 8 ring links, steward link stewards/ethos.html, background rgb(255, 244, 232). Clicking the ring opened PATHOS Faces, LIT (6,0,0), 3 faces, 127 cells. Locally, KAIROS Faces read LIT (6,6,6) and its steward link opened stewards/kairos.html, LIT bit 7. The steward card stayed LIT 8 stewards, 3 spheres each, 24. The distance card stayed LIT 1 + 6 + 18 + 38 + 60 + 72 + 68 + 48 + 24 + 8 = 343, distance sum 1764. The cat card stayed LIT 24 cat files, manifest order matches. QUEUE.length stayed 334 and the seat count stayed 334. No domain file is seated. The keeper sky summed to 117306 and the iframe stayed hidden. Cell (0,0,3) opened nests/shor_nested.html with sum 109074. Corner (0,0,0) read the odd center cat, 25 parts, 1 mark, sum 58653, and the iframe stayed spheres/the-odd-center.html. Live domains/ethos.html is 8101 bytes, 0 CR, sha256 436b73876dd6a56902796b6f5c26c44a0287eb2bdd056ca60160b6b6db7d4e61. Pages build of this commit was created 2026-10-08T02:13:25Z, status built, duration 37621, updated 2026-10-08T02:14:02Z, error null. The door Last-Modified Thu, 08 Oct 2026 02:14:01 GMT, Content-Length 255184, 0 CR. At a requested width of 1280 the door reported scrollWidth 1265 and clientWidth 1265. At a requested width of 390 the door still reported scrollWidth 444 and clientWidth 390. ETHOS Faces at 1280 was 1265/1265 and at 390 was 390/390. Door paper stayed rgb(243, 239, 231).
+
+Hallway door
+  commit: d8c8cde3864bf0a40e065ccbf50e80c4dbddb07c
+  message: name the face domains on the 7^3 door
+  railway: e2c98eef-c7c0-4967-abb9-49c137f792ff
+  status: SUCCESS
+  created: 2026-10-08T02:13:40.008Z
+  image: sha256:3d64c8197d0774875e166e61eaed2015efdfa4151971ee801e1cb2d4e418f094
+  config: sha256:c6a867533db6c745c9bdad2276c0a4154f9dd7a7272ed70bcb3d17eef7065f32
+  image created: 2026-10-08T02:14:14Z
+  deployment imageDigest: sha256:a5081ee345a103a6a203ad811b12426038b6d63033bde6cabccca1cfc8a68abc
+  snapshot: sha256:723bb079505303acee0897e6810141457d87cc926612ae12bfc47ec2348d544f
+  live: Last-Modified Thu, 08 Oct 2026 02:11:55 GMT, Content-Length 230086, CR 728, Server railway-hikari. The sentence Eight face domains count 127 cells at each corner occurred twice. The page contained A cat set, those 696, 2,049, and 24 spheres, 343 cells. The page contained Two blocks hold a goblin and Two blocks hold a honey badger. At 1280 the hall was 1265/1265. At 390 the hall was 390/390. The deployment list did not include an instance id.
