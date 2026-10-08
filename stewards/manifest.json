@@ -1,0 +1,146 @@
+[
+  {
+    "file": "ethos.html",
+    "title": "ETHOS",
+    "slug": "ethos",
+    "bytes": 8366,
+    "sha256": "090741a1a91c60983da7e632f756330aa51792a70db5498fe09dc07deb198b6f",
+    "birth": "3a143191642eee97a2a665d1207fc2ef71844a97c8a92abbcb0f0e6c77b89b46",
+    "appeal": "ETHOS",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "index": 0,
+    "spheres": [
+      "the-odd-center",
+      "the-surface",
+      "the-seal"
+    ]
+  },
+  {
+    "file": "pathos.html",
+    "title": "PATHOS",
+    "slug": "pathos",
+    "bytes": 8368,
+    "sha256": "4aa5eec038dbc3636bdc5950410f090ca0eea17b2cfaaf48005dbbf2b36b685b",
+    "birth": "2d6dc2188a7919d6d83ee62d94e662391e7af362ee193acf503a4d2bb7a80103",
+    "appeal": "PATHOS",
+    "x": 6,
+    "y": 0,
+    "z": 0,
+    "index": 1,
+    "spheres": [
+      "the-layers",
+      "the-checker",
+      "the-taxicab"
+    ]
+  },
+  {
+    "file": "logos.html",
+    "title": "LOGOS",
+    "slug": "logos",
+    "bytes": 8367,
+    "sha256": "174b2e39e649a279d834aa47d146ecefb7177e8c8a0b0127485c7f96bafbe656",
+    "birth": "e6c16e56a3526d0db0e7923f9f7ae465e85c1e5ee5a8d395454f3e7edb934a2f",
+    "appeal": "LOGOS",
+    "x": 0,
+    "y": 6,
+    "z": 0,
+    "index": 2,
+    "spheres": [
+      "the-partition",
+      "the-friedman",
+      "the-euler"
+    ]
+  },
+  {
+    "file": "mythos.html",
+    "title": "MYTHOS",
+    "slug": "mythos",
+    "bytes": 8386,
+    "sha256": "00535db9366ace473427ee9881eefc06a06a7d80338c62981680f1c70268ff38",
+    "birth": "e4f2e3170544be5338880ef8b03eb384098f1727bc5a8bbc124b3d3c002ad680",
+    "appeal": "MYTHOS",
+    "x": 6,
+    "y": 6,
+    "z": 0,
+    "index": 3,
+    "spheres": [
+      "the-braces",
+      "the-six-around",
+      "the-imaginary"
+    ]
+  },
+  {
+    "file": "episteme.html",
+    "title": "EPISTEME",
+    "slug": "episteme",
+    "bytes": 8394,
+    "sha256": "f4f5595324624b05f3019fa5da4a0bfb460855bcca845ca09169d89b0c2a3c51",
+    "birth": "0fb6d000cbec1adef856dbef3281ca334ef94187cbbce58fc58127879adb0744",
+    "appeal": "EPISTEME",
+    "x": 0,
+    "y": 0,
+    "z": 6,
+    "index": 4,
+    "spheres": [
+      "the-prime-power",
+      "the-mod-nine",
+      "the-gap"
+    ]
+  },
+  {
+    "file": "techne.html",
+    "title": "TECHNE",
+    "slug": "techne",
+    "bytes": 8358,
+    "sha256": "3aa0dfc33b1ac7791a685822057b720b519fa0d6a9d5f30e7d1eb9635116de8c",
+    "birth": "40a844fa01ad7480bc7afecfc286630fab2713ec4d7c61b69d2647dde8ad315f",
+    "appeal": "TECHNE",
+    "x": 6,
+    "y": 0,
+    "z": 6,
+    "index": 5,
+    "spheres": [
+      "the-shells",
+      "the-address",
+      "the-lines"
+    ]
+  },
+  {
+    "file": "phronesis.html",
+    "title": "PHRONESIS",
+    "slug": "phronesis",
+    "bytes": 8381,
+    "sha256": "c90fd59db5b7515927c5d0ce1503af4a4c6eaa3e6592ec2eefa6c562913e7afc",
+    "birth": "8d36f538879aa312072bc97f2b5cead782e4e57f6a1d9c58fc66342d10ec9807",
+    "appeal": "PHRONESIS",
+    "x": 0,
+    "y": 6,
+    "z": 6,
+    "index": 6,
+    "spheres": [
+      "the-dual",
+      "the-diagonal",
+      "the-bonds"
+    ]
+  },
+  {
+    "file": "kairos.html",
+    "title": "KAIROS",
+    "slug": "kairos",
+    "bytes": 8371,
+    "sha256": "9581bc29b00ae59721b36a1a68991c7925f19895567e1278a8bcea38d4a09053",
+    "birth": "6216135fca68c3b6be6c94d26a181cd2d8205c2afc1d7f782866ba247ee30d7d",
+    "appeal": "KAIROS",
+    "x": 6,
+    "y": 6,
+    "z": 6,
+    "index": 7,
+    "spheres": [
+      "the-twenty-four",
+      "the-sum",
+      "the-outside"
+    ]
+  }
+]

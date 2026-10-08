@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KAIROS — SaPpH{{i}}on</title>
+<style>
+  :root { --ink:#500724; --dim:#be185d; --accent:#be185d; --bg:#fdf2f8; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; color:var(--ink);
+    font:16px/1.5 "Segoe UI", ui-sans-serif, sans-serif;
+    background:
+      radial-gradient(820px 420px at 0% 0%, #fce7f3, transparent 60%),
+      linear-gradient(165deg, #fdf2f8, #fce7f3 70%, #fdf2f8);
+    background-color:var(--bg); min-height:100vh;
+  }
+  a { color:var(--accent); }
+  header, main, footer { width:min(880px, calc(100% - 32px)); margin:0 auto; }
+  header { padding:22px 0 0; }
+  .src, .mono { font:13px/1.45 ui-monospace, Consolas, monospace; color:var(--dim); }
+  h1 { margin:8px 0 0; font-size:clamp(32px, 6vw, 56px); letter-spacing:.08em; }
+  h2 { margin:22px 0 8px; font-size:13px; letter-spacing:.14em; }
+  .kicker { letter-spacing:.16em; font-size:12px; color:var(--accent); font-weight:700; }
+  .stage { background:#fff; border:1px solid rgba(36,22,15,.12); border-radius:18px; padding:12px; margin:14px 0; }
+  canvas { display:block; width:100%; height:auto; border-radius:12px; background:#fce7f3; }
+  .ring, .ledger { display:flex; flex-wrap:wrap; gap:8px; }
+  .ring a, .ledger a {
+    display:block; padding:10px 12px; border-radius:14px; text-decoration:none;
+    background:#fff; border:1px solid rgba(36,22,15,.14); color:var(--ink);
+  }
+  .ring a.on { border-color:var(--accent); font-weight:700; }
+  .ledger a b { display:block; letter-spacing:.04em; }
+  .ledger a i { display:block; font-style:normal; font:12px ui-monospace, Consolas, monospace; color:var(--dim); }
+  .stamp { display:inline-block; padding:2px 8px; border-radius:999px; font:11px ui-monospace, Consolas, monospace; color:#fff; }
+  .lit { background:#047857; } .amber { background:#b45309; } .wall { background:#be185d; }
+  footer { color:var(--dim); font-size:13px; padding-bottom:28px; overflow-wrap:anywhere; }
+  .src, .mono, p, a, h1 { overflow-wrap:anywhere; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="src"><a href="../">SaPpH{{i}}on</a> · steward · <a href="https://0root.ai/">0root.ai</a></div>
+  <div class="kicker">BIT 7 · (6,6,6)</div>
+  <h1>KAIROS</h1>
+  <p id="lead">KAIROS keeps corner (6,6,6), bit 7. Three spheres sit on that appeal.</p>
+</header>
+<main>
+  <div class="stage">
+    <canvas id="stage" width="880" height="220" aria-label="Seven layers of the cube, with this steward corner marked"></canvas>
+  </div>
+  <p class="mono" id="card"></p>
+  <h2>THE RING</h2>
+  <nav class="ring" id="ring">
+    <a href="ethos.html">ETHOS</a>
+    <a href="pathos.html">PATHOS</a>
+    <a href="logos.html">LOGOS</a>
+    <a href="mythos.html">MYTHOS</a>
+    <a href="episteme.html">EPISTEME</a>
+    <a href="techne.html">TECHNE</a>
+    <a href="phronesis.html">PHRONESIS</a>
+    <a class="on" href="kairos.html">KAIROS</a>
+  </nav>
+  <h2>THE LEDGER · 3</h2>
+  <nav class="ledger" id="ledger">
+    <a href="../spheres/the-twenty-four.html"><b>The Twenty-Four</b><i>the-twenty-four</i></a>
+    <a href="../spheres/the-sum.html"><b>The Sum</b><i>the-sum</i></a>
+    <a href="../spheres/the-outside.html"><b>The Outside</b><i>the-outside</i></a>
+  </nav>
+  <p><span class="stamp lit">LIT</span> A corner is a cell whose three addresses are each 0 or 6. Its bit is 1 when x is 6, plus 2 when y is 6, plus 4 when z is 6. The eight corners are bits 0 through 7, each once. This page is bit 7 at (6,6,6). The keeper at (3,3,3) is not a corner. The ledger lists three spheres. Eight appeals times three is 24. A failed count throws.</p>
+  <p><span class="stamp amber">AMBER</span> The hallway names this appeal the moment. The three sphere names are the cube's assigned seating for this corner. No Downloads file was copied. This page reads no other sphere. The sphere files and the birth seal were not rewritten. The walk is full, so this page is not seated. It is not one of those 696.</p>
+  <p><span class="stamp wall">WALL</span> The bit is an address code. It does not measure character, feeling, knowledge, or authority. A passing check is the corner count and the three names on this page.</p>
+</main>
+<footer>
+  David Lee Wise (ROOT0). Drafted by Grok (xAI) on 2026-10-07.
+  Birth seal 6216135fca68c3b6be6c94d26a181cd2d8205c2afc1d7f782866ba247ee30d7d. One host, <a href="https://davidwise01.github.io/sapph-i-on/stewards/kairos.html">https://davidwise01.github.io/sapph-i-on/stewards/kairos.html</a>.
+</footer>
+<script>
+"use strict";
+var APPEAL = "KAIROS";
+var SLUG = "kairos";
+var FILE = "kairos.html";
+var BIT = 7;
+var AT = [6, 6, 6];
+var NAMES = ["the-twenty-four","the-sum","the-outside"];
+var RING = ["ethos.html","pathos.html","logos.html","mythos.html","episteme.html","techne.html","phronesis.html","kairos.html"];
+function cornerBit(x, y, z) {
+  if (!((x === 0 || x === 6) && (y === 0 || y === 6) && (z === 0 || z === 6))) return -1;
+  return (x === 6 ? 1 : 0) + (y === 6 ? 2 : 0) + (z === 6 ? 4 : 0);
+}
+function stewardCensus() {
+  var found = [0, 0, 0, 0, 0, 0, 0, 0];
+  var corners = 0;
+  var x, y, z, bit;
+  for (z = 0; z < 7; z++) for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+    bit = cornerBit(x, y, z);
+    if (bit < 0) continue;
+    found[bit]++;
+    corners++;
+  }
+  if (corners !== 8) throw new Error("LIT FAIL corners");
+  for (bit = 0; bit < 8; bit++) if (found[bit] !== 1) throw new Error("LIT FAIL bit");
+  if (cornerBit(AT[0], AT[1], AT[2]) !== BIT) throw new Error("LIT FAIL address");
+  if (cornerBit(3, 3, 3) !== -1) throw new Error("LIT FAIL keeper");
+  if (NAMES.length !== 3 || RING.length !== 8 || RING[BIT] !== FILE) throw new Error("LIT FAIL ledger size");
+  if (8 * 3 !== 24) throw new Error("LIT FAIL galaxy");
+  return { corners: corners };
+}
+function checkDom() {
+  var ledger = document.querySelectorAll("#ledger a");
+  var ring = document.querySelectorAll("#ring a");
+  var i;
+  if (ledger.length !== 3) throw new Error("LIT FAIL ledger");
+  for (i = 0; i < 3; i++) {
+    if (ledger[i].getAttribute("href") !== "../spheres/" + NAMES[i] + ".html") throw new Error("LIT FAIL sphere name");
+  }
+  if (ring.length !== 8) throw new Error("LIT FAIL ring");
+  for (i = 0; i < 8; i++) if (ring[i].getAttribute("href") !== RING[i]) throw new Error("LIT FAIL ring name");
+}
+function paint(frame) {
+  stewardCensus();
+  var canvas = document.getElementById("stage");
+  var ctx = canvas.getContext("2d");
+  var cell = 16;
+  var gap = 18;
+  var layer = 7 * cell;
+  var origin = Math.round((canvas.width - (7 * layer + 6 * gap)) / 2);
+  var y0 = 28;
+  var painted = 0;
+  var marked = 0;
+  var corners = 0;
+  var z, y, x, px, py, bit, here;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.font = "12px ui-monospace, Consolas, monospace";
+  ctx.fillStyle = "#500724";
+  ctx.fillText(APPEAL + "  bit " + BIT + "  (" + AT[0] + "," + AT[1] + "," + AT[2] + ")", origin, 16);
+  for (z = 0; z < 7; z++) {
+    px = origin + z * (layer + gap);
+    ctx.fillStyle = "#be185d";
+    ctx.fillText("z" + z, px, y0 + layer + 16);
+    for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+      bit = cornerBit(x, y, z);
+      here = x === AT[0] && y === AT[1] && z === AT[2];
+      py = y0 + y * cell;
+      ctx.fillStyle = here ? "#be185d" : (bit >= 0 ? "#fce7f3" : "#fff");
+      ctx.fillRect(px + x * cell + 1, py + 1, cell - 2, cell - 2);
+      if (here && (frame % 40) < 20) {
+        ctx.strokeStyle = "#500724";
+        ctx.strokeRect(px + x * cell + 0.5, py + 0.5, cell - 1, cell - 1);
+      }
+      painted++;
+      if (bit >= 0) corners++;
+      if (here) marked++;
+    }
+  }
+  if (painted !== 343 || corners !== 8 || marked !== 1) throw new Error("LIT FAIL paint");
+}
+var card = document.getElementById("card");
+try {
+  checkDom();
+  paint(0);
+  card.innerHTML = "<span class='stamp lit'>LIT</span> bit " + BIT + " · (" + AT[0] + "," + AT[1] + "," + AT[2] + ") · 3 spheres · 8 corners";
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    var frame = 0;
+    (function tick() {
+      frame++;
+      paint(frame);
+      requestAnimationFrame(tick);
+    })();
+  }
+} catch (err) {
+  card.innerHTML = "<span class='stamp wall'>WALL</span> " + err.message;
+  throw err;
+}
+</script>
+</body>
+</html>
