@@ -150,6 +150,16 @@ New spheres built one at a time, each an emergent page with its own local rule, 
 - [Nickel · Z 28](./grown/the-atom-nickel.html): TECHNE domain 52. Emerges: a living nickel atom: random excitations, relaxations and a flicker of its 341.476 nm, 352.454 nm lines. LIT · MODEL shells 8–10.
 - [Chromium · Z 24](./grown/the-atom-chromium.html): EPISTEME domain 56. Emerges: a living chromium atom: random excitations, relaxations and a flicker of its 357.868 nm, 425.433 nm lines. LIT · MODEL shells 8–10.
 - [Xenon · Z 54](./grown/the-atom-xenon.html): TECHNE domain 53. Emerges: a living xenon atom: random excitations, relaxations and a flicker of its 823.164 nm, 828.012 nm lines. LIT · MODEL shells 8–10.
+- [Mendelevium · Z 101](./grown/the-atom-mendelevium.html): EPISTEME domain 57. Emerges: a living mendelevium atom: random excitations, relaxations and a flicker of photons. LIT · MODEL shells 8–10.
+- [Flerovium · Z 114](./grown/the-atom-flerovium.html): TECHNE domain 54. Emerges: a living flerovium atom: random excitations, relaxations and a flicker of photons. AMBER config · WALL lines · MODEL shells 8–10.
+- [Ytterbium · Z 70](./grown/the-atom-ytterbium.html): EPISTEME domain 58. Emerges: a living ytterbium atom: random excitations, relaxations and a flicker of its 398.799 nm, 555.647 nm lines. LIT · MODEL shells 8–10.
+- [Hafnium · Z 72](./grown/the-atom-hafnium.html): TECHNE domain 55. Emerges: a living hafnium atom: random excitations, relaxations and a flicker of its 286.637 nm, 307.288 nm lines. LIT · MODEL shells 8–10.
+- [Dubnium · Z 105](./grown/the-atom-dubnium.html): EPISTEME domain 59. Emerges: a living dubnium atom: random excitations, relaxations and a flicker of photons. AMBER config · WALL lines · MODEL shells 8–10.
+- [Argon · Z 18](./grown/the-atom-argon.html): TECHNE domain 56. Emerges: a living argon atom: random excitations, relaxations and a flicker of its 811.531 nm, 912.297 nm lines. LIT · MODEL shells 8–10.
+- [Tin · Z 50](./grown/the-atom-tin.html): EPISTEME domain 60. Emerges: a living tin atom: random excitations, relaxations and a flicker of its 283.998 nm, 242.95 nm lines. LIT · MODEL shells 8–10.
+- [Fermium · Z 100](./grown/the-atom-fermium.html): TECHNE domain 57. Emerges: a living fermium atom: random excitations, relaxations and a flicker of photons. LIT · MODEL shells 8–10.
+- [Livermorium · Z 116](./grown/the-atom-livermorium.html): EPISTEME domain 61. Emerges: a living livermorium atom: random excitations, relaxations and a flicker of photons. AMBER config · WALL lines · MODEL shells 8–10.
+- [Actinium · Z 89](./grown/the-atom-actinium.html): TECHNE domain 58. Emerges: a living actinium atom: random excitations, relaxations and a flicker of its 417.998 nm, 418.312 nm lines. LIT · MODEL shells 8–10.
 
 ## The 88 groups
 - g/sapphon-NN.html (42 groups of 4 members), g/ion-NN.html (45 groups of 3 members) and g/center.html (1). 42×4 + 45×3 + 1 = 304 member slots; 42 + 45 + 1 = 88 groups.
