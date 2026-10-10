@@ -90,6 +90,16 @@ New spheres built one at a time, each an emergent page with its own local rule, 
 - [Sulfur · Z 16](./grown/the-atom-sulfur.html): TECHNE domain 22. Emerges: a living sulfur atom: random excitations, relaxations and a flicker of its 921.287 nm, 922.809 nm lines. LIT · MODEL shells 8–10.
 - [Cesium · Z 55](./grown/the-atom-cesium.html): EPISTEME domain 26. Emerges: a living cesium atom: random excitations, relaxations and a flicker of its 852.347 nm, 894.347 nm lines. LIT · MODEL shells 8–10.
 - [Mercury · Z 80](./grown/the-atom-mercury.html): TECHNE domain 23. Emerges: a living mercury atom: random excitations, relaxations and a flicker of its 253.652 nm, 435.833 nm, 546.074 nm lines. LIT · MODEL shells 8–10.
+- [Aluminum · Z 13](./grown/the-atom-aluminum.html): EPISTEME domain 27. Emerges: a living aluminum atom: random excitations, relaxations and a flicker of its 396.152 nm, 394.401 nm lines. LIT · MODEL shells 8–10.
+- [Terbium · Z 65](./grown/the-atom-terbium.html): TECHNE domain 24. Emerges: a living terbium atom: random excitations, relaxations and a flicker of its 432.647 nm, 431.885 nm lines. LIT · MODEL shells 8–10.
+- [Gallium · Z 31](./grown/the-atom-gallium.html): EPISTEME domain 28. Emerges: a living gallium atom: random excitations, relaxations and a flicker of its 417.204 nm, 403.298 nm lines. LIT · MODEL shells 8–10.
+- [Copper · Z 29](./grown/the-atom-copper.html): TECHNE domain 25. Emerges: a living copper atom: random excitations, relaxations and a flicker of its 324.754 nm, 327.396 nm lines. LIT · MODEL shells 8–10.
+- [Beryllium · Z 4](./grown/the-atom-beryllium.html): EPISTEME domain 29. Emerges: a living beryllium atom: random excitations, relaxations and a flicker of its 234.861 nm lines. LIT · MODEL shells 8–10.
+- [Protactinium · Z 91](./grown/the-atom-protactinium.html): TECHNE domain 26. Emerges: a living protactinium atom: random excitations, relaxations and a flicker of its 398.223 nm, 694.572 nm lines. LIT · MODEL shells 8–10.
+- [Rutherfordium · Z 104](./grown/the-atom-rutherfordium.html): EPISTEME domain 30. Emerges: a living rutherfordium atom: random excitations, relaxations and a flicker of photons. AMBER config · WALL lines · MODEL shells 8–10.
+- [Thulium · Z 69](./grown/the-atom-thulium.html): TECHNE domain 27. Emerges: a living thulium atom: random excitations, relaxations and a flicker of its 409.419 nm, 410.584 nm lines. LIT · MODEL shells 8–10.
+- [Tennessine · Z 117](./grown/the-atom-tennessine.html): EPISTEME domain 31. Emerges: a living tennessine atom: random excitations, relaxations and a flicker of photons. AMBER config · WALL lines · MODEL shells 8–10.
+- [Boron · Z 5](./grown/the-atom-boron.html): TECHNE domain 28. Emerges: a living boron atom: random excitations, relaxations and a flicker of its 249.772 nm lines. LIT · MODEL shells 8–10.
 
 ## The 88 groups
 - g/sapphon-NN.html (42 groups of 4 members), g/ion-NN.html (45 groups of 3 members) and g/center.html (1). 42×4 + 45×3 + 1 = 304 member slots; 42 + 45 + 1 = 88 groups.
