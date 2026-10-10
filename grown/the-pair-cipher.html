@@ -129,7 +129,7 @@ function draw(t){var g=$('c').getContext('2d');g.fillStyle='#000';g.fillRect(0,0
  $('o').textContent='mode '+MODES[mode]+' · lines '+n+'/26 · Σ coefficients '+s+' · cancelled letters '+z+' · value (a=1..z=26) '+val(C)+(n>=20?'\n−t+s: the chain turns back at s; u…z close as mirrored pairs':'');requestAnimationFrame(draw)}
 $('st').onclick=function(){n=n>=26?0:n+1;LED.commit('line',{n:n,v:val(coef(n))})};$('c').onclick=$('st').onclick;
 $('md').onclick=function(){mode=(mode+1)%3;this.textContent='mode: '+MODES[mode];LED.commit('mode',{m:MODES[mode]})};$('rs').onclick=function(){n=0;LED.commit('reset',{})};
-n=SEED%27;requestAnimationFrame(draw);
+n=(SEED*7)%27;mode=SEED%3;$('md').textContent='mode: '+MODES[mode];requestAnimationFrame(draw);
 LED.init().then(function(){LED.commit('open',{seed:SEED});var m0=mode;mode=0;var C=coef(26),ev=0,od=0,s=0;for(var c in C){var k=c.charCodeAt(0)-97;if(k%2)ev+=Math.abs(C[c]);else if(C[c]>0)od++;s+=C[c]}
  LED.pagecheck('literal: all 13 even letters cancel, 13 odd survive',ev===0&&od===13,ev+'/'+od);
  LED.pagecheck('literal: Σ coefficients = 26 = line count, value 356',s===26&&val(C)===356,s+' / '+val(C));
