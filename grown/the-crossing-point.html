@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>THE CROSSING POINT · SaPpH{{i}}on</title><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<style>
+:root{--bg:#0b0716;--ink:#f1ecff;--dim:#bcabe4;--acc:#4db1f0}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#24124a,var(--bg));color:var(--ink);font:15px/1.55 system-ui,sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:18px 16px 40px}a{color:var(--dim)}
+nav{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-align:center}
+h1{margin:.2em 0 0;text-align:center;color:var(--acc);letter-spacing:.06em;font-size:clamp(26px,5vw,42px)}
+.tag{text-align:center;color:var(--dim);font-style:italic;font-size:14px}
+.stage{margin:14px 0 6px;border:1px solid rgba(179,140,240,.3);border-radius:14px;overflow:hidden;background:#090512;touch-action:none}
+canvas{display:block;width:100%}#plot{height:70px;border-top:1px solid rgba(179,140,240,.2)}
+.hud{font:12.5px ui-monospace,monospace;text-align:center;color:var(--ink);min-height:1.6em}
+.ctl{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin:8px 0 14px;font-size:13px;color:var(--dim)}
+button{background:#1a1030;color:var(--ink);border:1px solid rgba(179,140,240,.45);border-radius:8px;padding:6px 12px;font:600 12px ui-monospace,monospace;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.panel{background:rgba(26,16,48,.6);border:1px solid rgba(179,140,240,.22);border-radius:12px;padding:12px 16px;margin:12px 0}
+.panel h2{margin:0 0 6px;font-size:12px;letter-spacing:.16em;color:var(--acc)}
+.st{display:inline-block;font:700 11px ui-monospace,monospace;padding:1px 6px;border-radius:5px;border:1px solid;margin-right:6px}
+.lit{color:#7dffa8}.amb{color:#f4c740}.wall{color:#ff8a8a}
+</style></head><body><div class="wrap">
+<nav><a href="https://0root.ai/">the hallway</a> &#8250; <a href="../index.html">SaPpH{{i}}on</a> &#8250; <a href="../k/logos.html">LOGOS</a> &#8250; <a href="../d/logos-15.html">domain 15</a></nav>
+<h1>THE CROSSING POINT</h1><div class="tag">open sites one by one until a path crosses</div>
+<div class="stage"><canvas id="cv" role="img" aria-label="a sharp threshold: the spanning cluster (gold) appears suddenly near p ≈ 0.593"></canvas><canvas id="plot" aria-hidden="true"></canvas></div>
+<div class="hud" id="hud"></div>
+<div class="ctl"><button type="button" id="reseed">NEW SEED</button><button type="button" id="pause">PAUSE</button></div>
+<div class="panel"><h2>THE RULE</h2><p>Sites open one at a time in random order. Neighbouring open sites join into clusters, tracked with union&ndash;find. The page watches for the moment a single cluster first touches both top and bottom.</p><p style="color:var(--dim);font-size:13px">Tap to open a site yourself. Each run restarts after it spans. The same <code>?seed=</code> always gives the same run.</p></div>
+<div class="panel"><h2>WHAT IS CLAIMED</h2><p><span class="st lit">LIT</span>Site percolation on the square lattice, p<sub>c</sub> &asymp; 0.592746. Every 30 steps the open-site count and the cluster-size totals are checked, or the page throws.</p><p><span class="st amb">AMBER</span>On a finite grid the measured p varies from run to run, around p<sub>c</sub>.</p></div>
+</div>
+<script>
+"use strict";
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+var SEED=(location.search.match(/seed=(\d+)/)||[])[1];SEED=SEED?+SEED:(Math.random()*1e9)|0;var R=mulberry32(SEED);
+var QD=["#f0a886","#ff5aa0","#4db1f0","#a87bff","#3fd0a0","#c98a55","#8fb85a","#ff8a3a"];
+var REDUCE=matchMedia("(prefers-reduced-motion: reduce)").matches,DPR=Math.min(2,devicePixelRatio||1);
+var cv=document.getElementById("cv"),pc=document.getElementById("plot"),g,pg,W,H,PW,PH,tick=0,paused=false,SER=[];
+function fit(){W=cv.parentNode.clientWidth;H=Math.round(W*(W<560?1.05:.56));cv.width=W*DPR;cv.height=H*DPR;cv.style.height=H+"px";g=cv.getContext("2d");g.setTransform(DPR,0,0,DPR,0,0);
+ PW=W;PH=70;pc.width=PW*DPR;pc.height=PH*DPR;pg=pc.getContext("2d");pg.setTransform(DPR,0,0,DPR,0,0);}
+fit();
+function fail(m){throw new Error("SELF-CHECK FAILED: "+m);}
+function plot(){pg.clearRect(0,0,PW,PH);if(SER.length<2)return;var mx=-1e9,mn=1e9;SER.forEach(function(v){mx=Math.max(mx,v);mn=Math.min(mn,v);});if(mx===mn){mx+=1;}
+ pg.strokeStyle=getComputedStyle(document.body).getPropertyValue("--acc");pg.lineWidth=1.5;pg.beginPath();SER.forEach(function(v,i){var x=i/(SER.length-1)*PW,y=PH-6-(v-mn)/(mx-mn)*(PH-12);i?pg.lineTo(x,y):pg.moveTo(x,y);});pg.stroke();
+ pg.fillStyle="#bcabe4";pg.font="11px ui-monospace,monospace";pg.fillText(SIM.label+"  "+(+SER[SER.length-1].toFixed(3)),8,13);}
+function pos(e){var r=cv.getBoundingClientRect();return [e.clientX-r.left,e.clientY-r.top];}
+// Site percolation: sites open one at a time in random order. The clusters are tracked with union–find, and the page watches for one that spans TOPV to bottom.
+var N=80,M,open,par,sz,order,k=0,TOPV,BOTV,img,spanAt=-1,runs=[],big=0;
+function find(a){while(par[a]!==a){par[a]=par[par[a]];a=par[a];}return a;}
+function uni(a,b){a=find(a);b=find(b);if(a===b)return;if(sz[a]<sz[b]){var t=a;a=b;b=t;}par[b]=a;sz[a]+=sz[b];if(a<N*M&&sz[a]>big)big=sz[a];}
+var SIM={spf:1,checkEvery:30,label:"largest cluster / sites",
+init:function(){M=Math.round(N*H/W);SIM.reset();img=g.createImageData(N,M);},
+reset:function(){var n=N*M;open=new Uint8Array(n);par=new Int32Array(n+2);sz=new Int32Array(n+2);for(var i=0;i<n+2;i++){par[i]=i;sz[i]=i<n?1:0;}TOPV=n;BOTV=n+1;order=[];for(var i=0;i<n;i++)order.push(i);for(var i=n-1;i>0;i--){var j=(R()*(i+1))|0,t=order[i];order[i]=order[j];order[j]=t;}k=0;spanAt=-1;big=0;},
+openSite:function(i){if(open[i])return;open[i]=1;var x=i%N,y=(i/N)|0;if(big<1)big=1;if(y===0)uni(i,TOPV);if(y===M-1)uni(i,BOTV);[[1,0],[-1,0],[0,1],[0,-1]].forEach(function(d){var nx=x+d[0],ny=y+d[1];if(nx>=0&&ny>=0&&nx<N&&ny<M&&open[ny*N+nx])uni(i,ny*N+nx);});
+ if(spanAt<0&&find(TOPV)===find(BOTV)){spanAt=k/(N*M);runs.push(spanAt);if(runs.length>20)runs.shift();}},
+step:function(){var per=Math.max(1,(N*M/900)|0);for(var s=0;s<per;s++){if(k>=N*M){SIM.reset();return;}SIM.openSite(order[k++]);}if(spanAt>=0&&k>Math.min(N*M,spanAt*N*M+N*M*.25)){SIM.reset();}},
+poke:function(x,y){var i=((y/H*M)|0)*N+((x/W*N)|0);if(!open[i]){var at=order.indexOf(i,k);if(at>=0){order[at]=order[k];order[k]=i;k++;SIM.openSite(i);}}},
+check:function(){var cnt=0,n=N*M;for(var i=0;i<n;i++)if(open[i])cnt++;if(cnt!==k)fail("open sites "+cnt+" ≠ steps "+k);var s=0,seen={};for(var i=0;i<n;i++)if(open[i]){var r=find(i);if(!seen[r]){seen[r]=1;s+=sz[r]-(sz[r]-0);}}var tot=0;for(var r in seen)tot+=sz[r];if(tot!==cnt)fail("cluster sizes "+tot+" ≠ open "+cnt);},
+series:function(){var b=0,n=N*M;for(var i=0;i<n;i++)if(open[i]){var r=find(i);if(sz[r]>b)b=sz[r];}return b/n;},
+draw:function(){var n=N*M,sp=spanAt>=0?find(TOPV):-1,bigR=-1,bs=0;for(var i=0;i<n;i++)if(open[i]){var r=find(i);if(sz[r]>bs){bs=sz[r];bigR=r;}}
+ for(var i=0;i<n;i++){var r,gg,b;if(!open[i]){r=11;gg=7;b=22;}else{var rt=find(i);if(rt===sp){r=244;gg=199;b=64;}else if(rt===bigR){r=168;gg=123;b=255;}else{var c=QD[rt%8];r=parseInt(c.slice(1,3),16)*.45;gg=parseInt(c.slice(3,5),16)*.45;b=parseInt(c.slice(5,7),16)*.45;}}img.data[i*4]=r;img.data[i*4+1]=gg;img.data[i*4+2]=b;img.data[i*4+3]=255;}
+ var o=document.createElement("canvas");o.width=N;o.height=M;o.getContext("2d").putImageData(img,0,0);g.imageSmoothingEnabled=false;g.drawImage(o,0,0,W,H);},
+hud:function(){var m=runs.length?runs.reduce(function(a,b){return a+b;},0)/runs.length:0;return "p "+(k/(N*M)).toFixed(3)+(spanAt>=0?" · SPANS (at p = "+spanAt.toFixed(3)+")":" · no spanning cluster yet")+" · mean spanning p over "+runs.length+" runs "+(runs.length?m.toFixed(3):"…")+" · p_c ≈ 0.593";},
+sig:function(){return k+":"+order.slice(0,20).join(",");}};
+
+SIM.init();
+cv.addEventListener("pointerdown",function(e){var p=pos(e);SIM.poke(p[0],p[1]);});
+document.getElementById("reseed").onclick=function(){location.search="?seed="+((Math.random()*1e9)|0);};
+document.getElementById("pause").onclick=function(){paused=!paused;this.textContent=paused?"PLAY":"PAUSE";};
+var hud=document.getElementById("hud");
+function frame(){for(var s=0;s<SIM.spf;s++){SIM.step();tick++;}if(tick%SIM.checkEvery<SIM.spf)SIM.check();
+ if(tick%4<SIM.spf){SER.push(SIM.series());if(SER.length>300)SER.shift();}SIM.draw();plot();hud.textContent="seed "+SEED+" · "+SIM.hud();}
+window.SPHERE={get tick(){return tick;},sig:function(){return SIM.sig();},run:function(n){for(var i=0;i<n;i++){SIM.step();tick++;}SIM.check();}};
+if(REDUCE){SPHERE.run(SIM.spf*600);SIM.draw();hud.textContent="seed "+SEED+" · "+SIM.hud();}
+else(function loop(){if(!paused)frame();requestAnimationFrame(loop);})();
+</script></body></html>

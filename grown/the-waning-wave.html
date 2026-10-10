@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>THE WANING WAVE · SaPpH{{i}}on</title><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<style>
+:root{--bg:#0b0716;--ink:#f1ecff;--dim:#bcabe4;--acc:#ff5aa0}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#24124a,var(--bg));color:var(--ink);font:15px/1.55 system-ui,sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:18px 16px 40px}a{color:var(--dim)}
+nav{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-align:center}
+h1{margin:.2em 0 0;text-align:center;color:var(--acc);letter-spacing:.06em;font-size:clamp(26px,5vw,42px)}
+.tag{text-align:center;color:var(--dim);font-style:italic;font-size:14px}
+.stage{margin:14px 0 6px;border:1px solid rgba(179,140,240,.3);border-radius:14px;overflow:hidden;background:#090512;touch-action:none}
+canvas{display:block;width:100%}#plot{height:70px;border-top:1px solid rgba(179,140,240,.2)}
+.hud{font:12.5px ui-monospace,monospace;text-align:center;color:var(--ink);min-height:1.6em}
+.ctl{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin:8px 0 14px;font-size:13px;color:var(--dim)}
+button{background:#1a1030;color:var(--ink);border:1px solid rgba(179,140,240,.45);border-radius:8px;padding:6px 12px;font:600 12px ui-monospace,monospace;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.panel{background:rgba(26,16,48,.6);border:1px solid rgba(179,140,240,.22);border-radius:12px;padding:12px 16px;margin:12px 0}
+.panel h2{margin:0 0 6px;font-size:12px;letter-spacing:.16em;color:var(--acc)}
+.st{display:inline-block;font:700 11px ui-monospace,monospace;padding:1px 6px;border-radius:5px;border:1px solid;margin-right:6px}
+.lit{color:#7dffa8}.amb{color:#f4c740}.wall{color:#ff8a8a}
+</style></head><body><div class="wrap">
+<nav><a href="https://0root.ai/">the hallway</a> &#8250; <a href="../index.html">SaPpH{{i}}on</a> &#8250; <a href="../k/pathos.html">PATHOS</a> &#8250; <a href="../d/pathos-16.html">domain 16</a></nav>
+<h1>THE WANING WAVE</h1><div class="tag">infection, recovery, and immunity that fades</div>
+<div class="stage"><canvas id="cv" role="img" aria-label="travelling epidemic waves and spirals that return again and again as immunity wanes"></canvas><canvas id="plot" aria-hidden="true"></canvas></div>
+<div class="hud" id="hud"></div>
+<div class="ctl"><button type="button" id="reseed">NEW SEED</button><button type="button" id="pause">PAUSE</button></div>
+<div class="panel"><h2>THE RULE</h2><p>Each infected cell infects each susceptible neighbour with probability &beta;, recovers with probability &gamma;, and recovered cells lose their immunity with probability &omega;.</p><p style="color:var(--dim);font-size:13px">Tap to start an outbreak. The same <code>?seed=</code> always gives the same run.</p></div>
+<div class="panel"><h2>WHAT IS CLAIMED</h2><p><span class="st lit">LIT</span>A stochastic SIRS model on a lattice. S + I + R must equal N, and the tallies must match a fresh recount, every 30 steps, or the page throws.</p><p><span class="st wall">WALL</span>Not an epidemiological forecast.</p></div>
+</div>
+<script>
+"use strict";
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+var SEED=(location.search.match(/seed=(\d+)/)||[])[1];SEED=SEED?+SEED:(Math.random()*1e9)|0;var R=mulberry32(SEED);
+var QD=["#f0a886","#ff5aa0","#4db1f0","#a87bff","#3fd0a0","#c98a55","#8fb85a","#ff8a3a"];
+var REDUCE=matchMedia("(prefers-reduced-motion: reduce)").matches,DPR=Math.min(2,devicePixelRatio||1);
+var cv=document.getElementById("cv"),pc=document.getElementById("plot"),g,pg,W,H,PW,PH,tick=0,paused=false,SER=[];
+function fit(){W=cv.parentNode.clientWidth;H=Math.round(W*(W<560?1.05:.56));cv.width=W*DPR;cv.height=H*DPR;cv.style.height=H+"px";g=cv.getContext("2d");g.setTransform(DPR,0,0,DPR,0,0);
+ PW=W;PH=70;pc.width=PW*DPR;pc.height=PH*DPR;pg=pc.getContext("2d");pg.setTransform(DPR,0,0,DPR,0,0);}
+fit();
+function fail(m){throw new Error("SELF-CHECK FAILED: "+m);}
+function plot(){pg.clearRect(0,0,PW,PH);if(SER.length<2)return;var mx=-1e9,mn=1e9;SER.forEach(function(v){mx=Math.max(mx,v);mn=Math.min(mn,v);});if(mx===mn){mx+=1;}
+ pg.strokeStyle=getComputedStyle(document.body).getPropertyValue("--acc");pg.lineWidth=1.5;pg.beginPath();SER.forEach(function(v,i){var x=i/(SER.length-1)*PW,y=PH-6-(v-mn)/(mx-mn)*(PH-12);i?pg.lineTo(x,y):pg.moveTo(x,y);});pg.stroke();
+ pg.fillStyle="#bcabe4";pg.font="11px ui-monospace,monospace";pg.fillText(SIM.label+"  "+(+SER[SER.length-1].toFixed(3)),8,13);}
+function pos(e){var r=cv.getBoundingClientRect();return [e.clientX-r.left,e.clientY-r.top];}
+// SIR on a lattice with waning immunity: an infected cell infects each neighbour with probability β, recovers with γ, and recovered cells become susceptible again with ω.
+var N=120,M,G,G2,beta,gam,om,img,c=[0,0,0];
+var SIM={spf:1,checkEvery:30,label:"share infected",
+init:function(){M=Math.round(N*H/W);G=new Uint8Array(N*M);G2=new Uint8Array(N*M);beta=.18+R()*.2;gam=.08+R()*.1;om=.004+R()*.012;for(var k=0;k<6;k++)G[(R()*G.length)|0]=1;SIM.count();img=g.createImageData(N,M);},
+count:function(){c=[0,0,0];for(var i=0;i<G.length;i++)c[G[i]]++;},
+step:function(){for(var y=0;y<M;y++)for(var x=0;x<N;x++){var i=y*N+x,v=G[i];
+ if(v===0){var inf=0;if(G[y*N+(x+1)%N]===1)inf++;if(G[y*N+(x-1+N)%N]===1)inf++;if(G[((y+1)%M)*N+x]===1)inf++;if(G[((y-1+M)%M)*N+x]===1)inf++;G2[i]=R()<1-Math.pow(1-beta,inf)?1:0;}
+ else if(v===1)G2[i]=R()<gam?2:1;else G2[i]=R()<om?0:2;}var t=G;G=G2;G2=t;SIM.count();
+ if(c[1]===0&&R()<.02){var i=(R()*G.length)|0;if(G[i]===0){G[i]=1;c[0]--;c[1]++;}}},
+poke:function(x,y){var cx=(x/W*N)|0,cy=(y/H*M)|0;for(var dy=-2;dy<=2;dy++)for(var dx=-2;dx<=2;dx++){var i=((cy+dy+M)%M)*N+(cx+dx+N)%N;if(G[i]===0){G[i]=1;c[0]--;c[1]++;}}},
+check:function(){var s=c[0],i=c[1],r=c[2];SIM.count();if(s!==c[0]||i!==c[1]||r!==c[2])fail("compartment tallies drifted");if(c[0]+c[1]+c[2]!==G.length)fail("S+I+R ≠ N");},
+series:function(){return c[1]/G.length;},
+draw:function(){for(var i=0;i<G.length;i++){var v=G[i];img.data[i*4]=v===1?255:v===2?77:20;img.data[i*4+1]=v===1?90:v===2?177:14;img.data[i*4+2]=v===1?160:v===2?240:40;img.data[i*4+3]=255;}
+ var o=document.createElement("canvas");o.width=N;o.height=M;o.getContext("2d").putImageData(img,0,0);g.imageSmoothingEnabled=false;g.drawImage(o,0,0,W,H);},
+hud:function(){return "S "+c[0]+" · I "+c[1]+" · R "+c[2]+" · β "+beta.toFixed(2)+" · γ "+gam.toFixed(2)+" · ω "+om.toFixed(3)+" · R0≈"+(4*beta/gam).toFixed(1);},
+sig:function(){return c.join(":");}};
+
+SIM.init();
+cv.addEventListener("pointerdown",function(e){var p=pos(e);SIM.poke(p[0],p[1]);});
+document.getElementById("reseed").onclick=function(){location.search="?seed="+((Math.random()*1e9)|0);};
+document.getElementById("pause").onclick=function(){paused=!paused;this.textContent=paused?"PLAY":"PAUSE";};
+var hud=document.getElementById("hud");
+function frame(){for(var s=0;s<SIM.spf;s++){SIM.step();tick++;}if(tick%SIM.checkEvery<SIM.spf)SIM.check();
+ if(tick%4<SIM.spf){SER.push(SIM.series());if(SER.length>300)SER.shift();}SIM.draw();plot();hud.textContent="seed "+SEED+" · "+SIM.hud();}
+window.SPHERE={get tick(){return tick;},sig:function(){return SIM.sig();},run:function(n){for(var i=0;i<n;i++){SIM.step();tick++;}SIM.check();}};
+if(REDUCE){SPHERE.run(SIM.spf*600);SIM.draw();hud.textContent="seed "+SEED+" · "+SIM.hud();}
+else(function loop(){if(!paused)frame();requestAnimationFrame(loop);})();
+</script></body></html>

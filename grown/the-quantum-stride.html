@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>THE QUANTUM STRIDE · SaPpH{{i}}on</title><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<style>
+:root{--bg:#0b0716;--ink:#f1ecff;--dim:#bcabe4;--acc:#3fd0a0}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#24124a,var(--bg));color:var(--ink);font:15px/1.55 system-ui,sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:18px 16px 40px}a{color:var(--dim)}
+nav{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-align:center}
+h1{margin:.2em 0 0;text-align:center;color:var(--acc);letter-spacing:.06em;font-size:clamp(26px,5vw,42px)}
+.tag{text-align:center;color:var(--dim);font-style:italic;font-size:14px}
+.stage{margin:14px 0 6px;border:1px solid rgba(179,140,240,.3);border-radius:14px;overflow:hidden;background:#090512;touch-action:none}
+canvas{display:block;width:100%}#plot{height:70px;border-top:1px solid rgba(179,140,240,.2)}
+.hud{font:12.5px ui-monospace,monospace;text-align:center;color:var(--ink);min-height:1.6em}
+.ctl{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin:8px 0 14px;font-size:13px;color:var(--dim)}
+button{background:#1a1030;color:var(--ink);border:1px solid rgba(179,140,240,.45);border-radius:8px;padding:6px 12px;font:600 12px ui-monospace,monospace;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.panel{background:rgba(26,16,48,.6);border:1px solid rgba(179,140,240,.22);border-radius:12px;padding:12px 16px;margin:12px 0}
+.panel h2{margin:0 0 6px;font-size:12px;letter-spacing:.16em;color:var(--acc)}
+.st{display:inline-block;font:700 11px ui-monospace,monospace;padding:1px 6px;border-radius:5px;border:1px solid;margin-right:6px}
+.lit{color:#7dffa8}.amb{color:#f4c740}.wall{color:#ff8a8a}
+</style></head><body><div class="wrap">
+<nav><a href="https://0root.ai/">the hallway</a> &#8250; <a href="../index.html">SaPpH{{i}}on</a> &#8250; <a href="../k/episteme.html">EPISTEME</a> &#8250; <a href="../d/episteme-18.html">domain 18</a></nav>
+<h1>THE QUANTUM STRIDE</h1><div class="tag">a walker that interferes with itself</div>
+<div class="stage"><canvas id="cv" role="img" aria-label="ballistic spread: the quantum spread grows as t, against √t for the classical walker, with two horn peaks"></canvas><canvas id="plot" aria-hidden="true"></canvas></div>
+<div class="hud" id="hud"></div>
+<div class="ctl"><button type="button" id="reseed">NEW SEED</button><button type="button" id="pause">PAUSE</button></div>
+<div class="panel"><h2>THE RULE</h2><p>The walker carries a two-state spin. Each step a Hadamard coin mixes the spin, then the walker moves left or right according to it. The gold curve is a classical coin-flip walker from the same start.</p><p style="color:var(--dim);font-size:13px">Tap to change the starting spin. The same <code>?seed=</code> always gives the same run.</p></div>
+<div class="panel"><h2>WHAT IS CLAIMED</h2><p><span class="st lit">LIT</span>The discrete-time Hadamard quantum walk. Every step the total probability (quantum and classical) must be 1 to within 10<sup>&minus;9</sup>, or the page throws.</p><p><span class="st amb">AMBER</span>A spin-&frac12; coin returns to itself only after 720&deg;; the walk uses the coin, not the rotation.</p></div>
+</div>
+<script>
+"use strict";
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+var SEED=(location.search.match(/seed=(\d+)/)||[])[1];SEED=SEED?+SEED:(Math.random()*1e9)|0;var R=mulberry32(SEED);
+var QD=["#f0a886","#ff5aa0","#4db1f0","#a87bff","#3fd0a0","#c98a55","#8fb85a","#ff8a3a"];
+var REDUCE=matchMedia("(prefers-reduced-motion: reduce)").matches,DPR=Math.min(2,devicePixelRatio||1);
+var cv=document.getElementById("cv"),pc=document.getElementById("plot"),g,pg,W,H,PW,PH,tick=0,paused=false,SER=[];
+function fit(){W=cv.parentNode.clientWidth;H=Math.round(W*(W<560?1.05:.56));cv.width=W*DPR;cv.height=H*DPR;cv.style.height=H+"px";g=cv.getContext("2d");g.setTransform(DPR,0,0,DPR,0,0);
+ PW=W;PH=70;pc.width=PW*DPR;pc.height=PH*DPR;pg=pc.getContext("2d");pg.setTransform(DPR,0,0,DPR,0,0);}
+fit();
+function fail(m){throw new Error("SELF-CHECK FAILED: "+m);}
+function plot(){pg.clearRect(0,0,PW,PH);if(SER.length<2)return;var mx=-1e9,mn=1e9;SER.forEach(function(v){mx=Math.max(mx,v);mn=Math.min(mn,v);});if(mx===mn){mx+=1;}
+ pg.strokeStyle=getComputedStyle(document.body).getPropertyValue("--acc");pg.lineWidth=1.5;pg.beginPath();SER.forEach(function(v,i){var x=i/(SER.length-1)*PW,y=PH-6-(v-mn)/(mx-mn)*(PH-12);i?pg.lineTo(x,y):pg.moveTo(x,y);});pg.stroke();
+ pg.fillStyle="#bcabe4";pg.font="11px ui-monospace,monospace";pg.fillText(SIM.label+"  "+(+SER[SER.length-1].toFixed(3)),8,13);}
+function pos(e){var r=cv.getBoundingClientRect();return [e.clientX-r.left,e.clientY-r.top];}
+// Discrete-time quantum walk on a line: a Hadamard coin acts on the walker's two-state spin, then the walker shifts left or right according to the spin. Compare the classical random walk.
+var L,aR,aI,bR,bI,t=0,cls,c0;
+function reset(){L=Math.max(81,Math.min(301,(W/3)|0));if(L%2===0)L++;aR=new Float64Array(L);aI=new Float64Array(L);bR=new Float64Array(L);bI=new Float64Array(L);var m=(L/2)|0;
+ var C=[[1,0,0,0],[0,0,1,0],[Math.SQRT1_2,0,0,Math.SQRT1_2]][c0];aR[m]=C[0];aI[m]=C[1];bR[m]=C[2];bI[m]=C[3];cls=new Float64Array(L);cls[m]=1;t=0;}
+var SIM={spf:1,checkEvery:1,label:"spread σ (quantum, in cells)",
+init:function(){c0=(R()*3)|0;reset();},
+step:function(){if(t>=(L/2|0)-2){reset();return;}var s=Math.SQRT1_2,nAR=new Float64Array(L),nAI=new Float64Array(L),nBR=new Float64Array(L),nBI=new Float64Array(L);
+ for(var x=0;x<L;x++){var ar=aR[x],ai=aI[x],br=bR[x],bi=bI[x],uR=s*(ar+br),uI=s*(ai+bi),dR=s*(ar-br),dI=s*(ai-bi);if(x>0){nAR[x-1]=uR;nAI[x-1]=uI;}if(x<L-1){nBR[x+1]=dR;nBI[x+1]=dI;}}
+ aR=nAR;aI=nAI;bR=nBR;bI=nBI;var nc=new Float64Array(L);for(var x=0;x<L;x++){if(x>0)nc[x-1]+=cls[x]/2;if(x<L-1)nc[x+1]+=cls[x]/2;}cls=nc;t++;},
+prob:function(x){return aR[x]*aR[x]+aI[x]*aI[x]+bR[x]*bR[x]+bI[x]*bI[x];},
+poke:function(x,y){c0=(c0+1)%3;reset();},
+check:function(){var p=0,q=0;for(var x=0;x<L;x++){p+=SIM.prob(x);q+=cls[x];}if(Math.abs(p-1)>1e-9)fail("quantum probability "+p+" ≠ 1");if(Math.abs(q-1)>1e-9)fail("classical probability ≠ 1");},
+sigma:function(f){var m=(L/2)|0,mu=0,v=0;for(var x=0;x<L;x++)mu+=f(x)*(x-m);for(var x=0;x<L;x++)v+=f(x)*(x-m-mu)*(x-m-mu);return Math.sqrt(v);},
+series:function(){return SIM.sigma(SIM.prob);},
+draw:function(){g.fillStyle="#090512";g.fillRect(0,0,W,H);var bw=W/L,mx=0;for(var x=0;x<L;x++)mx=Math.max(mx,SIM.prob(x),cls[x]);mx=Math.max(mx,.02);
+ for(var x=0;x<L;x++){var p=SIM.prob(x),h=p/mx*(H-40);g.fillStyle="#a87bff";g.fillRect(x*bw,H-20-h,Math.max(1,bw-.5),h);}
+ g.strokeStyle="#f4c740";g.beginPath();var started=false;for(var x=0;x<L;x++){if(cls[x]===0&&!started)continue;var X=(x+.5)*bw,Y=H-20-cls[x]/mx*(H-40);started?g.lineTo(X,Y):g.moveTo(X,Y);started=true;}g.stroke();
+ g.fillStyle="#bcabe4";g.font="11px ui-monospace,monospace";g.textAlign="left";g.fillText("violet: quantum |ψ|²   gold: classical random walk",8,14);},
+hud:function(){var q=SIM.sigma(SIM.prob),c=SIM.sigma(function(x){return cls[x];});return "step "+t+" · coin start "+["|↑⟩","|↓⟩","(|↑⟩+i|↓⟩)/√2"][c0]+" · σ quantum "+q.toFixed(2)+" (∝ t) · σ classical "+c.toFixed(2)+" (∝ √t)";},
+sig:function(){return c0+":"+t;}};
+
+SIM.init();
+cv.addEventListener("pointerdown",function(e){var p=pos(e);SIM.poke(p[0],p[1]);});
+document.getElementById("reseed").onclick=function(){location.search="?seed="+((Math.random()*1e9)|0);};
+document.getElementById("pause").onclick=function(){paused=!paused;this.textContent=paused?"PLAY":"PAUSE";};
+var hud=document.getElementById("hud");
+function frame(){for(var s=0;s<SIM.spf;s++){SIM.step();tick++;}if(tick%SIM.checkEvery<SIM.spf)SIM.check();
+ if(tick%4<SIM.spf){SER.push(SIM.series());if(SER.length>300)SER.shift();}SIM.draw();plot();hud.textContent="seed "+SEED+" · "+SIM.hud();}
+window.SPHERE={get tick(){return tick;},sig:function(){return SIM.sig();},run:function(n){for(var i=0;i<n;i++){SIM.step();tick++;}SIM.check();}};
+if(REDUCE){SPHERE.run(SIM.spf*600);SIM.draw();hud.textContent="seed "+SEED+" · "+SIM.hud();}
+else(function loop(){if(!paused)frame();requestAnimationFrame(loop);})();
+</script></body></html>

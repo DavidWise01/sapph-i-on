@@ -27,10 +27,10 @@
  "counts": {
   "keepers": 8,
   "domains": 512,
-  "domains_populated": 112,
-  "domains_open": 400,
-  "spheres": 1511,
-  "zero_spheres": 400,
+  "domains_populated": 122,
+  "domains_open": 390,
+  "spheres": 1521,
+  "zero_spheres": 390,
   "balance": 0,
   "workshop": 343
  },
@@ -3894,23 +3894,71 @@
     },
     {
      "n": 14,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE COPYING CROWD",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Copying Crowd",
+       "h": "grown/the-copying-crowd.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-copying-crowd.html",
+       "grown": true,
+       "emerges": "coarsening: opinion territories grow and opinions go extinct until consensus, with no persuasion at all",
+       "label": "LIT · WALL",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#f0a886",
+         "#f1ecff",
+         "#7dffa8"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-34"
+      }
+     ],
      "page": "d/ethos-14.html",
-     "zero_page": "z/ethos-14.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-14.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-14.html"
+     "zero_url": null
     },
     {
      "n": 15,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE FOUR-COLOUR LIFE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Four-Colour Life",
+       "h": "grown/the-four-colour-life.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-four-colour-life.html",
+       "grown": true,
+       "emerges": "gliders, oscillators and still lifes, with colour lineages that spread and compete",
+       "label": "LIT",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#f0a886",
+         "#f1ecff",
+         "#7dffa8"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-34"
+      }
+     ],
      "page": "d/ethos-15.html",
-     "zero_page": "z/ethos-15.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-15.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-15.html"
+     "zero_url": null
     },
     {
      "n": 16,
@@ -9090,13 +9138,37 @@
     },
     {
      "n": 16,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE WANING WAVE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Waning Wave",
+       "h": "grown/the-waning-wave.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-waning-wave.html",
+       "grown": true,
+       "emerges": "travelling epidemic waves and spirals that return again and again as immunity wanes",
+       "label": "LIT · WALL",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#ff5aa0",
+         "#f1ecff",
+         "#7dffa8"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-35"
+      }
+     ],
      "page": "d/pathos-16.html",
-     "zero_page": "z/pathos-16.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-16.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-16.html"
+     "zero_url": null
     },
     {
      "n": 17,
@@ -13273,13 +13345,37 @@
     },
     {
      "n": 15,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE CROSSING POINT",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Crossing Point",
+       "h": "grown/the-crossing-point.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-crossing-point.html",
+       "grown": true,
+       "emerges": "a sharp threshold: the spanning cluster (gold) appears suddenly near p ≈ 0.593",
+       "label": "LIT",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#4db1f0",
+         "#f1ecff",
+         "#7dffa8"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-35"
+      }
+     ],
      "page": "d/logos-15.html",
-     "zero_page": "z/logos-15.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-15.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-15.html"
+     "zero_url": null
     },
     {
      "n": 16,
@@ -16998,13 +17094,37 @@
     },
     {
      "n": 13,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE GOLD MOULD",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Gold Mould",
+       "h": "grown/the-gold-mould.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-gold-mould.html",
+       "grown": true,
+       "emerges": "a transport network linking the food, like Physarum’s famous Tokyo rail map",
+       "label": "LIT model",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#a87bff",
+         "#7dffa8",
+         "#f1ecff"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-35"
+      }
+     ],
      "page": "d/mythos-13.html",
-     "zero_page": "z/mythos-13.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-13.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-13.html"
+     "zero_url": null
     },
     {
      "n": 14,
@@ -22564,13 +22684,37 @@
     },
     {
      "n": 18,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE QUANTUM STRIDE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Quantum Stride",
+       "h": "grown/the-quantum-stride.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-quantum-stride.html",
+       "grown": true,
+       "emerges": "ballistic spread: the quantum spread grows as t, against √t for the classical walker, with two horn peaks",
+       "label": "LIT",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#3fd0a0",
+         "#f4c740",
+         "#a87bff"
+        ],
+        "bg": "#090512",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-36"
+      }
+     ],
      "page": "d/episteme-18.html",
-     "zero_page": "z/episteme-18.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/episteme-18.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/episteme-18.html"
+     "zero_url": null
     },
     {
      "n": 19,
@@ -26653,23 +26797,71 @@
     },
     {
      "n": 14,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE ONE-WAY FLICKER",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The One-Way Flicker",
+       "h": "grown/the-one-way-flicker.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-one-way-flicker.html",
+       "grown": true,
+       "emerges": "directed transport out of pure noise, which stops when the flashing stops",
+       "label": "LIT",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#c98a55",
+         "#7dffa8",
+         "#4db1f0"
+        ],
+        "bg": "#090512",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-36"
+      }
+     ],
      "page": "d/techne-14.html",
-     "zero_page": "z/techne-14.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/techne-14.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/techne-14.html"
+     "zero_url": null
     },
     {
      "n": 15,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE TURNING GATES",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Turning Gates",
+       "h": "grown/the-turning-gates.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-turning-gates.html",
+       "grown": true,
+       "emerges": "a strikingly round disc with intricate rotor patterns inside it, from a fully deterministic rule",
+       "label": "LIT",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#c98a55",
+         "#f1ecff",
+         "#7dffa8"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-36"
+      }
+     ],
      "page": "d/techne-15.html",
-     "zero_page": "z/techne-15.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/techne-15.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/techne-15.html"
+     "zero_url": null
     },
     {
      "n": 16,
@@ -30090,13 +30282,37 @@
     },
     {
      "n": 13,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE GATHERING CALL",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Gathering Call",
+       "h": "grown/the-gathering-call.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-gathering-call.html",
+       "grown": true,
+       "emerges": "aggregation: uniform cells collapse into streams and mounds, like Dictyostelium",
+       "label": "LIT model",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#8fb85a",
+         "#f0a886",
+         "#f1ecff"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-37"
+      }
+     ],
      "page": "d/phronesis-13.html",
-     "zero_page": "z/phronesis-13.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-13.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-13.html"
+     "zero_url": null
     },
     {
      "n": 14,
@@ -35057,13 +35273,37 @@
     },
     {
      "n": 17,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE QUIET OF THE FLOCK",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Quiet Of The Flock",
+       "h": "grown/the-quiet-of-the-flock.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-quiet-of-the-flock.html",
+       "grown": true,
+       "emerges": "a phase transition from disorder to collective motion as the noise drops",
+       "label": "LIT",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#ff8a3a",
+         "#f1ecff",
+         "#7dffa8"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-37"
+      }
+     ],
      "page": "d/kairos-17.html",
-     "zero_page": "z/kairos-17.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-17.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-17.html"
+     "zero_url": null
     },
     {
      "n": 18,
@@ -35546,8 +35786,8 @@
   "world": 1,
   "keepers": 8,
   "domains": 512,
-  "zero_spheres": 400,
-  "generated_total": 1009,
+  "zero_spheres": 390,
+  "generated_total": 999,
   "groups": 88
  },
  "workshop": [
@@ -43817,7 +44057,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1511
+   "pages": 1521
   },
   "list": [
    {
@@ -46304,14 +46544,16 @@
       "after/Next-Evo-After-Burn-Bonk-Ashes-Water-Rebirth.html",
       "after/Next-Evo-After-Void-New-Cycle-Big-Bang.html",
       "after/Next-Evo-Autonomous.html",
-      "after/Next-Evo-Change-Phase.html"
+      "after/Next-Evo-Change-Phase.html",
+      "grown/the-copying-crowd.html"
      ],
      [
       "after/Next-Evo-Drop-1000.html",
       "after/Next-Evo-Electrum-Trapped.html",
       "after/Next-Evo-Fixed-Point.html",
       "after/Next-Evo-Go-Up-Aetheric-Layer.html",
-      "after/Next-Evo-Hot-Frozen.html"
+      "after/Next-Evo-Hot-Frozen.html",
+      "grown/the-four-colour-life.html"
      ]
     ]
    },
@@ -46326,20 +46568,23 @@
       "after/Next-Evo-Spinning.html",
       "after/Next-Evo-Wavy-Inf.html",
       "after/Next-Step-Ascend-E-Gold-Silver-Organic-Obsidian-Nested.html",
-      "again/Next-Evo-100hz-Walk.html"
+      "again/Next-Evo-100hz-Walk.html",
+      "grown/the-waning-wave.html"
      ],
      [
       "again/Next-Evo-3m-3p.html",
       "again/Next-Evo-Amplify-X3.html",
       "again/Next-Evo-Color-Sound.html",
-      "again/Next-Evo-Evolve.html"
+      "again/Next-Evo-Evolve.html",
+      "grown/the-crossing-point.html"
      ],
      [
       "again/Next-Evo-Furthest-Meets.html",
       "again/Next-Evo-Inverse-N-Plus-First-Minus-N-Plus.html",
       "again/Next-Evo-Play-Harmonies.html",
       "ahead/Next-After-Have-Them.html",
-      "ahead/Next-After-Overlays-Ag.html"
+      "ahead/Next-After-Overlays-Ag.html",
+      "grown/the-gold-mould.html"
      ]
     ]
    },
@@ -46354,21 +46599,24 @@
       "ahead/Next-Element-Neodymium-60-Lyre.html",
       "ahead/Next-Element-Tin-50-Lyre.html",
       "ahead/Next-Gas-After-Boron.html",
-      "another/Next-Element-Berkelium-97-Lyre.html"
+      "another/Next-Element-Berkelium-97-Lyre.html",
+      "grown/the-quantum-stride.html"
      ],
      [
       "another/Next-Element-Californium-98-Lyre.html",
       "another/Next-Element-Mendelevium-101-Lyre.html",
       "another/Next-Shell-After-Lutetium.html",
       "another/Next-Shell-After-Palladium.html",
-      "beyond/Next-Element-Copernicium-112-Lyre.html"
+      "beyond/Next-Element-Copernicium-112-Lyre.html",
+      "grown/the-one-way-flicker.html"
      ],
      [
       "beyond/Next-Element-Hassium-108-Lyre.html",
       "beyond/Next-Element-Nihonium-113-Lyre.html",
       "dots/Aeon-Upgraded-Dot-V2.html",
       "dots/All-Dots-Special-Cypher.html",
-      "encore/Wakaku-Speaker-V29-Love.html"
+      "encore/Wakaku-Speaker-V29-Love.html",
+      "grown/the-turning-gates.html"
      ]
     ]
    },
@@ -46383,14 +46631,16 @@
       "evo/Fractal-Galactic-Center-Evo.html",
       "evo/Next-Evo-0roborous-Restart.html",
       "evo/Next-Evo-C3-Infinite.html",
-      "evo/Next-Evo-Enangle-Sound-Air-Wave-Mnemonic-Choose-Language.html"
+      "evo/Next-Evo-Enangle-Sound-Air-Wave-Mnemonic-Choose-Language.html",
+      "grown/the-gathering-call.html"
      ],
      [
       "evo/Next-Evo-Heka-Binding-At-0root-X4.html",
       "evo/Next-Evo-Next-Stage.html",
       "evo/Next-Evo-Octa-Brain.html",
       "evo/Next-Evo-Resonant-Harmonics.html",
-      "evo/Next-Evo-Sound-Air-Tongue-Ear-Info-Air-Tongue.html"
+      "evo/Next-Evo-Sound-Air-Tongue-Ear-Info-Air-Tongue.html",
+      "grown/the-quiet-of-the-flock.html"
      ],
      [
       "evo/Next-Evo-Stage12-Meta-Loop.html",

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>THE QUIET OF THE FLOCK · SaPpH{{i}}on</title><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<style>
+:root{--bg:#0b0716;--ink:#f1ecff;--dim:#bcabe4;--acc:#ff8a3a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#24124a,var(--bg));color:var(--ink);font:15px/1.55 system-ui,sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:18px 16px 40px}a{color:var(--dim)}
+nav{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-align:center}
+h1{margin:.2em 0 0;text-align:center;color:var(--acc);letter-spacing:.06em;font-size:clamp(26px,5vw,42px)}
+.tag{text-align:center;color:var(--dim);font-style:italic;font-size:14px}
+.stage{margin:14px 0 6px;border:1px solid rgba(179,140,240,.3);border-radius:14px;overflow:hidden;background:#090512;touch-action:none}
+canvas{display:block;width:100%}#plot{height:70px;border-top:1px solid rgba(179,140,240,.2)}
+.hud{font:12.5px ui-monospace,monospace;text-align:center;color:var(--ink);min-height:1.6em}
+.ctl{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin:8px 0 14px;font-size:13px;color:var(--dim)}
+button{background:#1a1030;color:var(--ink);border:1px solid rgba(179,140,240,.45);border-radius:8px;padding:6px 12px;font:600 12px ui-monospace,monospace;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.panel{background:rgba(26,16,48,.6);border:1px solid rgba(179,140,240,.22);border-radius:12px;padding:12px 16px;margin:12px 0}
+.panel h2{margin:0 0 6px;font-size:12px;letter-spacing:.16em;color:var(--acc)}
+.st{display:inline-block;font:700 11px ui-monospace,monospace;padding:1px 6px;border-radius:5px;border:1px solid;margin-right:6px}
+.lit{color:#7dffa8}.amb{color:#f4c740}.wall{color:#ff8a8a}
+</style></head><body><div class="wrap">
+<nav><a href="https://0root.ai/">the hallway</a> &#8250; <a href="../index.html">SaPpH{{i}}on</a> &#8250; <a href="../k/kairos.html">KAIROS</a> &#8250; <a href="../d/kairos-17.html">domain 17</a></nav>
+<h1>THE QUIET OF THE FLOCK</h1><div class="tag">turn down the noise and a direction appears</div>
+<div class="stage"><canvas id="cv" role="img" aria-label="a phase transition from disorder to collective motion as the noise drops"></canvas><canvas id="plot" aria-hidden="true"></canvas></div>
+<div class="hud" id="hud"></div>
+<div class="ctl"><button type="button" id="reseed">NEW SEED</button><button type="button" id="pause">PAUSE</button></div>
+<div class="panel"><h2>THE RULE</h2><p>Every particle moves at the same speed and adopts the average heading of its neighbours within r, plus a random twist of size &eta;.</p><p style="color:var(--dim);font-size:13px">Drag the noise &eta;. Tap to scramble a region. The same <code>?seed=</code> always gives the same run.</p></div>
+<div class="panel"><h2>WHAT IS CLAIMED</h2><p><span class="st lit">LIT</span>The Vicsek model (1995). Every heading must stay finite and the order parameter &phi; must stay in [0, 1], or the page throws.</p><p><span class="st amb">AMBER</span>Different from the Zero Flock: no cohesion and no separation, only alignment and noise.</p></div>
+</div>
+<script>
+"use strict";
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+var SEED=(location.search.match(/seed=(\d+)/)||[])[1];SEED=SEED?+SEED:(Math.random()*1e9)|0;var R=mulberry32(SEED);
+var QD=["#f0a886","#ff5aa0","#4db1f0","#a87bff","#3fd0a0","#c98a55","#8fb85a","#ff8a3a"];
+var REDUCE=matchMedia("(prefers-reduced-motion: reduce)").matches,DPR=Math.min(2,devicePixelRatio||1);
+var cv=document.getElementById("cv"),pc=document.getElementById("plot"),g,pg,W,H,PW,PH,tick=0,paused=false,SER=[];
+function fit(){W=cv.parentNode.clientWidth;H=Math.round(W*(W<560?1.05:.56));cv.width=W*DPR;cv.height=H*DPR;cv.style.height=H+"px";g=cv.getContext("2d");g.setTransform(DPR,0,0,DPR,0,0);
+ PW=W;PH=70;pc.width=PW*DPR;pc.height=PH*DPR;pg=pc.getContext("2d");pg.setTransform(DPR,0,0,DPR,0,0);}
+fit();
+function fail(m){throw new Error("SELF-CHECK FAILED: "+m);}
+function plot(){pg.clearRect(0,0,PW,PH);if(SER.length<2)return;var mx=-1e9,mn=1e9;SER.forEach(function(v){mx=Math.max(mx,v);mn=Math.min(mn,v);});if(mx===mn){mx+=1;}
+ pg.strokeStyle=getComputedStyle(document.body).getPropertyValue("--acc");pg.lineWidth=1.5;pg.beginPath();SER.forEach(function(v,i){var x=i/(SER.length-1)*PW,y=PH-6-(v-mn)/(mx-mn)*(PH-12);i?pg.lineTo(x,y):pg.moveTo(x,y);});pg.stroke();
+ pg.fillStyle="#bcabe4";pg.font="11px ui-monospace,monospace";pg.fillText(SIM.label+"  "+(+SER[SER.length-1].toFixed(3)),8,13);}
+function pos(e){var r=cv.getBoundingClientRect();return [e.clientX-r.left,e.clientY-r.top];}
+// Vicsek model: every particle moves at the same speed and takes the mean heading of its neighbours within r, plus noise η. Lower the noise and order appears.
+var P=[],N,v0=1.6,r=22,eta,phi=0;
+var SIM={spf:1,checkEvery:30,label:"order parameter φ",
+init:function(){N=Math.round(Math.min(500,W*H/900));eta=.3+R()*2.2;for(var i=0;i<N;i++)P.push({x:R()*W,y:R()*H,a:R()*6.283});
+ var c=document.querySelector(".ctl"),l=document.createElement("label");l.innerHTML='noise η <input id="eta" type="range" min="0" max="6.28" step="0.05" aria-label="noise">';c.appendChild(l);var e=document.getElementById("eta");e.value=eta;e.oninput=function(){eta=+e.value;};},
+step:function(){var cs=r,grid={};P.forEach(function(p,i){var k=((p.x/cs)|0)+","+((p.y/cs)|0);(grid[k]||(grid[k]=[])).push(i);});
+ var na=P.map(function(p){var sx=0,sy=0,gx=(p.x/cs)|0,gy=(p.y/cs)|0;for(var dx=-1;dx<=1;dx++)for(var dy=-1;dy<=1;dy++){var L=grid[(gx+dx)+","+(gy+dy)];if(!L)continue;L.forEach(function(j){var q=P[j];if(Math.hypot(q.x-p.x,q.y-p.y)<r){sx+=Math.cos(q.a);sy+=Math.sin(q.a);}});}return Math.atan2(sy,sx)+eta*(R()-.5);});
+ var cx=0,cy=0;P.forEach(function(p,i){p.a=na[i];p.x=(p.x+Math.cos(p.a)*v0+W)%W;p.y=(p.y+Math.sin(p.a)*v0+H)%H;cx+=Math.cos(p.a);cy+=Math.sin(p.a);});phi=Math.hypot(cx,cy)/N;},
+poke:function(x,y){P.forEach(function(p){if(Math.hypot(p.x-x,p.y-y)<80)p.a=R()*6.283;});},
+check:function(){var cx=0,cy=0;P.forEach(function(p){if(!isFinite(p.a))fail("heading lost");cx+=Math.cos(p.a)*v0;cy+=Math.sin(p.a)*v0;});var f=Math.hypot(cx,cy)/(N*v0);if(f<0||f>1+1e-9)fail("φ outside [0,1]");},
+series:function(){return phi;},
+draw:function(){g.fillStyle="rgba(9,5,18,.35)";g.fillRect(0,0,W,H);P.forEach(function(p){var hue=((p.a%6.283)+6.283)%6.283;g.strokeStyle=QD[(hue/6.283*8)|0];g.beginPath();g.moveTo(p.x,p.y);g.lineTo(p.x-Math.cos(p.a)*6,p.y-Math.sin(p.a)*6);g.stroke();});},
+hud:function(){return "particles "+N+" · radius "+r+" · noise η "+eta.toFixed(2)+" · φ "+phi.toFixed(3)+(phi>.7?" · ordered":phi<.3?" · disordered":" · near the transition");},
+sig:function(){return P.slice(0,6).map(function(p){return Math.round(p.x)+","+Math.round(p.y);}).join("|");}};
+
+SIM.init();
+cv.addEventListener("pointerdown",function(e){var p=pos(e);SIM.poke(p[0],p[1]);});
+document.getElementById("reseed").onclick=function(){location.search="?seed="+((Math.random()*1e9)|0);};
+document.getElementById("pause").onclick=function(){paused=!paused;this.textContent=paused?"PLAY":"PAUSE";};
+var hud=document.getElementById("hud");
+function frame(){for(var s=0;s<SIM.spf;s++){SIM.step();tick++;}if(tick%SIM.checkEvery<SIM.spf)SIM.check();
+ if(tick%4<SIM.spf){SER.push(SIM.series());if(SER.length>300)SER.shift();}SIM.draw();plot();hud.textContent="seed "+SEED+" · "+SIM.hud();}
+window.SPHERE={get tick(){return tick;},sig:function(){return SIM.sig();},run:function(n){for(var i=0;i<n;i++){SIM.step();tick++;}SIM.check();}};
+if(REDUCE){SPHERE.run(SIM.spf*600);SIM.draw();hud.textContent="seed "+SEED+" · "+SIM.hud();}
+else(function loop(){if(!paused)frame();requestAnimationFrame(loop);})();
+</script></body></html>
