@@ -27,10 +27,10 @@
  "counts": {
   "keepers": 8,
   "domains": 512,
-  "domains_populated": 182,
-  "domains_open": 330,
-  "spheres": 1581,
-  "zero_spheres": 330,
+  "domains_populated": 192,
+  "domains_open": 320,
+  "spheres": 1591,
+  "zero_spheres": 320,
   "balance": 0,
   "workshop": 343
  },
@@ -23738,53 +23738,173 @@
     },
     {
      "n": 37,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THORIUM · Z 90",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Thorium · Z 90",
+       "h": "grown/the-atom-thorium.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-atom-thorium.html",
+       "grown": true,
+       "emerges": "a living thorium atom: random excitations, relaxations and a flicker of its 371.943 nm, 380.308 nm lines",
+       "label": "LIT · MODEL shells 8–10",
+       "icon": {
+        "pal": [
+         "#ff2bd6",
+         "#00f0ff",
+         "#b6ff00",
+         "#bcabe4"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-10"
+      }
+     ],
      "page": "d/episteme-37.html",
-     "zero_page": "z/episteme-37.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/episteme-37.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/episteme-37.html"
+     "zero_url": null
     },
     {
      "n": 38,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "BERKELIUM · Z 97",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Berkelium · Z 97",
+       "h": "grown/the-atom-berkelium.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-atom-berkelium.html",
+       "grown": true,
+       "emerges": "a living berkelium atom: random excitations, relaxations and a flicker of its 325.219 nm, 328.875 nm lines",
+       "label": "LIT · MODEL shells 8–10",
+       "icon": {
+        "pal": [
+         "#ff2bd6",
+         "#00f0ff",
+         "#b6ff00",
+         "#bcabe4"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-10"
+      }
+     ],
      "page": "d/episteme-38.html",
-     "zero_page": "z/episteme-38.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/episteme-38.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/episteme-38.html"
+     "zero_url": null
     },
     {
      "n": 39,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "SAMARIUM · Z 62",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Samarium · Z 62",
+       "h": "grown/the-atom-samarium.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-atom-samarium.html",
+       "grown": true,
+       "emerges": "a living samarium atom: random excitations, relaxations and a flicker of its 429.674 nm, 374.547 nm lines",
+       "label": "LIT · MODEL shells 8–10",
+       "icon": {
+        "pal": [
+         "#ff2bd6",
+         "#00f0ff",
+         "#b6ff00",
+         "#bcabe4"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-10"
+      }
+     ],
      "page": "d/episteme-39.html",
-     "zero_page": "z/episteme-39.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/episteme-39.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/episteme-39.html"
+     "zero_url": null
     },
     {
      "n": 40,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "INDIUM · Z 49",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Indium · Z 49",
+       "h": "grown/the-atom-indium.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-atom-indium.html",
+       "grown": true,
+       "emerges": "a living indium atom: random excitations, relaxations and a flicker of its 451.13 nm, 410.175 nm lines",
+       "label": "LIT · MODEL shells 8–10",
+       "icon": {
+        "pal": [
+         "#ff2bd6",
+         "#00f0ff",
+         "#b6ff00",
+         "#bcabe4"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-11"
+      }
+     ],
      "page": "d/episteme-40.html",
-     "zero_page": "z/episteme-40.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/episteme-40.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/episteme-40.html"
+     "zero_url": null
     },
     {
      "n": 41,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "MEITNERIUM · Z 109",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Meitnerium · Z 109",
+       "h": "grown/the-atom-meitnerium.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-atom-meitnerium.html",
+       "grown": true,
+       "emerges": "a living meitnerium atom: random excitations, relaxations and a flicker of photons",
+       "label": "AMBER config · WALL lines · MODEL shells 8–10",
+       "icon": {
+        "pal": [
+         "#ff2bd6",
+         "#00f0ff",
+         "#b6ff00",
+         "#bcabe4"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-11"
+      }
+     ],
      "page": "d/episteme-41.html",
-     "zero_page": "z/episteme-41.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/episteme-41.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/episteme-41.html"
+     "zero_url": null
     },
     {
      "n": 42,
@@ -28317,53 +28437,173 @@
     },
     {
      "n": 34,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "CALCIUM · Z 20",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Calcium · Z 20",
+       "h": "grown/the-atom-calcium.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-atom-calcium.html",
+       "grown": true,
+       "emerges": "a living calcium atom: random excitations, relaxations and a flicker of its 422.673 nm, 643.907 nm lines",
+       "label": "LIT · MODEL shells 8–10",
+       "icon": {
+        "pal": [
+         "#ff2bd6",
+         "#00f0ff",
+         "#b6ff00",
+         "#bcabe4"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-11"
+      }
+     ],
      "page": "d/techne-34.html",
-     "zero_page": "z/techne-34.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/techne-34.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/techne-34.html"
+     "zero_url": null
     },
     {
      "n": 35,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "RADON · Z 86",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Radon · Z 86",
+       "h": "grown/the-atom-radon.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-atom-radon.html",
+       "grown": true,
+       "emerges": "a living radon atom: random excitations, relaxations and a flicker of its 745.0 nm, 705.542 nm lines",
+       "label": "LIT · MODEL shells 8–10",
+       "icon": {
+        "pal": [
+         "#ff2bd6",
+         "#00f0ff",
+         "#b6ff00",
+         "#bcabe4"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-11"
+      }
+     ],
      "page": "d/techne-35.html",
-     "zero_page": "z/techne-35.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/techne-35.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/techne-35.html"
+     "zero_url": null
     },
     {
      "n": 36,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "KRYPTON · Z 36",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Krypton · Z 36",
+       "h": "grown/the-atom-krypton.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-atom-krypton.html",
+       "grown": true,
+       "emerges": "a living krypton atom: random excitations, relaxations and a flicker of its 811.29 nm, 877.675 nm lines",
+       "label": "LIT · MODEL shells 8–10",
+       "icon": {
+        "pal": [
+         "#ff2bd6",
+         "#00f0ff",
+         "#b6ff00",
+         "#bcabe4"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-12"
+      }
+     ],
      "page": "d/techne-36.html",
-     "zero_page": "z/techne-36.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/techne-36.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/techne-36.html"
+     "zero_url": null
     },
     {
      "n": 37,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "RUBIDIUM · Z 37",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Rubidium · Z 37",
+       "h": "grown/the-atom-rubidium.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-atom-rubidium.html",
+       "grown": true,
+       "emerges": "a living rubidium atom: random excitations, relaxations and a flicker of its 780.027 nm, 794.76 nm lines",
+       "label": "LIT · MODEL shells 8–10",
+       "icon": {
+        "pal": [
+         "#ff2bd6",
+         "#00f0ff",
+         "#b6ff00",
+         "#bcabe4"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-12"
+      }
+     ],
      "page": "d/techne-37.html",
-     "zero_page": "z/techne-37.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/techne-37.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/techne-37.html"
+     "zero_url": null
     },
     {
      "n": 38,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "NIHONIUM · Z 113",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Nihonium · Z 113",
+       "h": "grown/the-atom-nihonium.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-atom-nihonium.html",
+       "grown": true,
+       "emerges": "a living nihonium atom: random excitations, relaxations and a flicker of photons",
+       "label": "AMBER config · WALL lines · MODEL shells 8–10",
+       "icon": {
+        "pal": [
+         "#ff2bd6",
+         "#00f0ff",
+         "#b6ff00",
+         "#bcabe4"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-12"
+      }
+     ],
      "page": "d/techne-38.html",
-     "zero_page": "z/techne-38.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/techne-38.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/techne-38.html"
+     "zero_url": null
     },
     {
      "n": 39,
@@ -37226,8 +37466,8 @@
   "world": 1,
   "keepers": 8,
   "domains": 512,
-  "zero_spheres": 330,
-  "generated_total": 939,
+  "zero_spheres": 320,
+  "generated_total": 929,
   "groups": 88
  },
  "workshop": [
@@ -45497,7 +45737,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1581
+   "pages": 1591
   },
   "list": [
    {
@@ -45876,21 +46116,24 @@
       "corpus/sapphon_single_page_incisions_flay_ancestry.html",
       "corpus/sapphon_single_page_lateral_primitive_nn2.html",
       "dots/360-Dots-Eating-Themselves.html",
-      "dots/Bind-Littlest-Dot-Little.html"
+      "dots/Bind-Littlest-Dot-Little.html",
+      "grown/the-atom-thorium.html"
      ],
      [
       "dots/Bind-Rail-Dots-Wave.html",
       "dots/Expanded-Dot-Embedded-Blueprint.html",
       "dots/Lol-Dot-Minimal-Language.html",
       "dots/One-Dot-Or-P125n125.html",
-      "echo/Wakaku-Speaker-V129-Forest.html"
+      "echo/Wakaku-Speaker-V129-Forest.html",
+      "grown/the-atom-berkelium.html"
      ],
      [
       "echo/Wakaku-Speaker-V62-Flowering.html",
       "echo/Wakaku-Speaker-V63-Forest.html",
       "echo/Wakaku-Speaker-V65-First.html",
       "echo/Wakaku-Speaker-V66-Mesosphere.html",
-      "echo/Wakaku-Speaker-V67-Thermosphere.html"
+      "echo/Wakaku-Speaker-V67-Thermosphere.html",
+      "grown/the-atom-samarium.html"
      ]
     ]
    },
@@ -45905,28 +46148,32 @@
       "echo/Wakaku-Speaker-V71-Heliosphere.html",
       "echo/Wakaku-Speaker-V74-Growth.html",
       "echo/Wakaku-Speaker-V76-Universe.html",
-      "echo/Wakaku-Speaker-V77-Forest.html"
+      "echo/Wakaku-Speaker-V77-Forest.html",
+      "grown/the-atom-indium.html"
      ],
      [
       "echo/Wakaku-Speaker-V78-Iodide.html",
       "echo/Wakaku-Speaker-V79-Oscilloscope.html",
       "echo/Wakaku-Speaker-V80-Pixelated.html",
       "echo/Wakaku-Speaker-V81-Pixelated.html",
-      "encore/Wakaku-Speaker-V30-Time.html"
+      "encore/Wakaku-Speaker-V30-Time.html",
+      "grown/the-atom-meitnerium.html"
      ],
      [
       "encore/Wakaku-Speaker-V33-Brackish.html",
       "encore/Wakaku-Speaker-V35-Unbound.html",
       "encore/Wakaku-Speaker-V36-Rebound.html",
       "encore/Wakaku-V133-Forest-1225.html",
-      "encore/Wakaku-V134-Clean-Tachyons.html"
+      "encore/Wakaku-V134-Clean-Tachyons.html",
+      "grown/the-atom-calcium.html"
      ],
      [
       "encore/Wakaku-V134-Tachyons-Positrons.html",
       "encore/Wakaku-V135-Skin-Cell.html",
       "encore/Wakaku-V136-Clean-Metal-Analogs-3djs-201.html",
       "encore/Wakaku-V137-Clean-Metal-Analogs-3djs-202-Closes-P6.html",
-      "encore/Wakaku-V138-Black-Halogen-At-Deep-Dive-Metal-Analogs-3djs-203.html"
+      "encore/Wakaku-V138-Black-Halogen-At-Deep-Dive-Metal-Analogs-3djs-203.html",
+      "grown/the-atom-radon.html"
      ]
     ]
    },
@@ -45940,21 +46187,24 @@
       "encore/Wakaku-V139-At211-MN-MV-Simulation-Black-Halogen-204.html",
       "encore/Wakaku-V140-At211-Po211-Graph-211mN-211mV-205.html",
       "encore/Wakaku-V141-At211-In-Lattice-FCC-211mN-211mV-206.html",
-      "encore/Wakaku-V142-0-07g-At-Vs-0-07g-BH-Black-Halogen-Vs-Black-Hole-207.html"
+      "encore/Wakaku-V142-0-07g-At-Vs-0-07g-BH-Black-Halogen-Vs-Black-Hole-207.html",
+      "grown/the-atom-krypton.html"
      ],
      [
       "encore/Wakaku-V143-Ionic-AuPlus-AtMinus-Rocksalt-211mN-211mV-208.html",
       "encore/Wakaku-V144-Ionic-Falling-Into-BH-Spaghettification-209.html",
       "farther/Next-Iteration-Silver-Female.html",
       "forward/Next-After-Aggregate-Metals.html",
-      "forward/Next-Iteration-Interstellar-Beyond.html"
+      "forward/Next-Iteration-Interstellar-Beyond.html",
+      "grown/the-atom-rubidium.html"
      ],
      [
       "gold/After-White-Gold-Star-Collapse.html",
       "gold/Gold-Wrap-Lead-Pb.html",
       "gold/It-Strobes-Timing-Gold.html",
       "gold/One-Atom-Gold-Swap.html",
-      "gold/Prim-Palindromic-Gold-79060097.html"
+      "gold/Prim-Palindromic-Gold-79060097.html",
+      "grown/the-atom-nihonium.html"
      ],
      [
       "gold/Qds-Blinking-Gold-Silver.html",
