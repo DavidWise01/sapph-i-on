@@ -27,10 +27,10 @@
  "counts": {
   "keepers": 8,
   "domains": 512,
-  "domains_populated": 352,
-  "domains_open": 160,
-  "spheres": 1751,
-  "zero_spheres": 160,
+  "domains_populated": 363,
+  "domains_open": 149,
+  "spheres": 1762,
+  "zero_spheres": 149,
   "balance": 0,
   "workshop": 343
  },
@@ -4641,8 +4641,7 @@
        "label": "LIT · MODEL · INVENTED",
        "icon": {
         "pal": [
-         "#d6282c",
-         "#7ff9ff"
+         "#d6282c"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -4770,24 +4769,74 @@
     },
     {
      "n": 38,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "QUICKSILVER BEADS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Quicksilver Beads",
+       "h": "grown/quicksilver-beads.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/quicksilver-beads.html",
+       "grown": true,
+       "emerges": "mercury beads coalescing on a tilted plate",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#e8edf2",
+         "#dfe6ee",
+         "#9aa6b4",
+         "#8a97a6"
+        ],
+        "bg": "#0e1116",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-20",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/ethos-38.html",
-     "zero_page": "z/ethos-38.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-38.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-38.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 39,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE MINT IN THE TOWER",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Mint in the Tower",
+       "h": "grown/the-mint-of-the-tower.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-mint-of-the-tower.html",
+       "grown": true,
+       "emerges": "clipped coins sinking the currency until the recoinage",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#2b2b2b",
+         "#6b6b6b",
+         "#bdbdbd",
+         "#e6e6e6"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-20",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/ethos-39.html",
-     "zero_page": "z/ethos-39.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-39.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-39.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -10562,24 +10611,72 @@
     },
     {
      "n": 38,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "JEOVA SANCTUS UNUS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Jeova Sanctus Unus",
+       "h": "grown/jeova-sanctus-unus.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/jeova-sanctus-unus.html",
+       "grown": true,
+       "emerges": "anagram phrases of Isaacus Neuutonus falling into place",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#f3efe6",
+         "#c0182b"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-20",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-38.html",
-     "zero_page": "z/pathos-38.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-38.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-38.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 39,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "MERCURY'S 43 SECONDS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Mercury's 43 Seconds",
+       "h": "grown/mercurys-43-seconds.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/mercurys-43-seconds.html",
+       "grown": true,
+       "emerges": "a rosette orbit precessing 43″ a century (amplified)",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#e7cf9a",
+         "#c8a050",
+         "#f1d58a",
+         "#6a4a10"
+        ],
+        "bg": "#1b140a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-21",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-39.html",
-     "zero_page": "z/pathos-39.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-39.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-39.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -15376,8 +15473,7 @@
        "icon": {
         "pal": [
          "#9dff9d",
-         "#ffcf5a",
-         "#7ff9ff"
+         "#ffcf5a"
         ],
         "bg": "#020502",
         "canvas": 1,
@@ -15505,24 +15601,74 @@
     },
     {
      "n": 41,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE RELATIVISTIC MELT",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Relativistic Melt",
+       "h": "grown/the-relativistic-melt.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-relativistic-melt.html",
+       "grown": true,
+       "emerges": "a crystal losing its lattice earlier with relativity on",
+       "label": "LIT · MODEL · TOY",
+       "icon": {
+        "pal": [
+         "#ffb000",
+         "#ff5a00",
+         "#f2f2f2",
+         "#ff0055"
+        ],
+        "bg": "#1a0066",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-21",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/logos-41.html",
-     "zero_page": "z/logos-41.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-41.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-41.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 42,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "EXPERIMENTUM CRUCIS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Experimentum Crucis",
+       "h": "grown/experimentum-crucis.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/experimentum-crucis.html",
+       "grown": true,
+       "emerges": "one mercury line kept pure through a second prism",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#8a3cff",
+         "#3a5bff",
+         "#3cff3c",
+         "#ffe600"
+        ],
+        "bg": "#0b0b0b",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-21",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/logos-42.html",
-     "zero_page": "z/logos-42.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-42.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-42.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -19599,8 +19745,7 @@
         "pal": [
          "#f1e8d4",
          "#a51d1d",
-         "#cbbd9d",
-         "#7ff9ff"
+         "#cbbd9d"
         ],
         "bg": "#1a1612",
         "canvas": 1,
@@ -19671,8 +19816,7 @@
         "pal": [
          "#d6282c",
          "#e9e6df",
-         "#8b8a86",
-         "#7ff9ff"
+         "#8b8a86"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -19743,8 +19887,7 @@
         "pal": [
          "#d4b04a",
          "#e8dcb8",
-         "#1a2a4d",
-         "#7ff9ff"
+         "#1a2a4d"
         ],
         "bg": "#0e1a33",
         "canvas": 1,
@@ -19837,13 +19980,38 @@
     },
     {
      "n": 36,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE STAR REGULUS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Star Regulus",
+       "h": "grown/star-regulus.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/star-regulus.html",
+       "grown": true,
+       "emerges": "a six-armed antimony star or the copper Net growing from noise",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#d9cdb4",
+         "#efe6d2",
+         "#6b604f",
+         "#8e7cc3"
+        ],
+        "bg": "#0f0d0b",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-22",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-36.html",
-     "zero_page": "z/mythos-36.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-36.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-36.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -35917,8 +36085,7 @@
         "pal": [
          "#d21f1f",
          "#efe6d0",
-         "#8a8170",
-         "#7ff9ff"
+         "#8a8170"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -36025,8 +36192,7 @@
         "pal": [
          "#0a6eb4",
          "#e6ebf0",
-         "#b0281c",
-         "#7ff9ff"
+         "#b0281c"
         ],
         "bg": "#1b2a3a",
         "canvas": 1,
@@ -36080,24 +36246,70 @@
     },
     {
      "n": 34,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE HAIR ASSAY",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Hair Assay",
+       "h": "grown/the-hair-assay.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-hair-assay.html",
+       "grown": true,
+       "emerges": "a lock of hair that can or cannot remember 1693",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#d0021b",
+         "#e9ecef",
+         "#0a7a2f"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-22",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-34.html",
-     "zero_page": "z/phronesis-34.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-34.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-34.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 35,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "RED PEN",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Red Pen",
+       "h": "grown/quicksilver-critique.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/quicksilver-critique.html",
+       "grown": true,
+       "emerges": "red marks scoring the run",
+       "label": "READING · LIT",
+       "icon": {
+        "pal": [
+         "#e8e4d8"
+        ],
+        "bg": "#1a1a1a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-22",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-35.html",
-     "zero_page": "z/phronesis-35.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-35.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-35.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -41586,8 +41798,7 @@
         "pal": [
          "#1d3f8a",
          "#e9ece9",
-         "#cfd6df",
-         "#7ff9ff"
+         "#cfd6df"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -41824,24 +42035,74 @@
     },
     {
      "n": 43,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE ANAGRAM LETTER",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Anagram Letter",
+       "h": "grown/the-anagram-letter.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-anagram-letter.html",
+       "grown": true,
+       "emerges": "a letter inventory recounted, with its one wrong t",
+       "label": "LIT · MEASURED",
+       "icon": {
+        "pal": [
+         "#efe4c8",
+         "#8b1a1a",
+         "#f6eed8",
+         "#5b4630"
+        ],
+        "bg": "#3a2410",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-23",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/kairos-43.html",
-     "zero_page": "z/kairos-43.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-43.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-43.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 44,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE BUCKET",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Bucket",
+       "h": "grown/the-bucket.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-bucket.html",
+       "grown": true,
+       "emerges": "a hollow rising in water that has caught up with its bucket",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#f3dfb0",
+         "#e8d4a8",
+         "#6a4a20",
+         "#d8c08a"
+        ],
+        "bg": "#0a0603",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-23",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/kairos-44.html",
-     "zero_page": "z/kairos-44.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-44.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-44.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -42076,8 +42337,8 @@
   "world": 1,
   "keepers": 8,
   "domains": 512,
-  "zero_spheres": 160,
-  "generated_total": 769,
+  "zero_spheres": 149,
+  "generated_total": 758,
   "groups": 88
  },
  "workshop": [
@@ -50347,7 +50608,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1751
+   "pages": 1762
   },
   "list": [
    {
@@ -52631,21 +52892,24 @@
       "forth/Next-Element-Thulium-69-Lyre.html",
       "sapphon/Sandbox-Sapphon-Playground.html",
       "forth/Next-Element-Tungsten-74-Lyre.html",
-      "oasis/the-aggregate.html"
+      "oasis/the-aggregate.html",
+      "grown/quicksilver-beads.html"
      ],
      [
       "oasis/the-boundary.html",
       "oasis/the-cba.html",
       "oasis/the-cipher.html",
       "oasis/the-crossing.html",
-      "oasis/the-cycle.html"
+      "oasis/the-cycle.html",
+      "grown/the-mint-of-the-tower.html"
      ],
      [
       "oasis/the-eight-frame.html",
       "oasis/the-fib.html",
       "oasis/the-field.html",
       "oasis/the-homeo.html",
-      "oasis/the-lock.html"
+      "oasis/the-lock.html",
+      "grown/jeova-sanctus-unus.html"
      ]
     ]
    },
@@ -52660,21 +52924,24 @@
       "oasis/the-mnemonic.html",
       "oasis/the-one-vector.html",
       "oasis/the-orbit.html",
-      "oasis/the-outer-edge.html"
+      "oasis/the-outer-edge.html",
+      "grown/mercurys-43-seconds.html"
      ],
      [
       "oasis/the-plank.html",
       "oasis/the-potential.html",
       "oasis/the-quorum.html",
       "oasis/the-ring.html",
-      "oasis/the-soft-open.html"
+      "oasis/the-soft-open.html",
+      "grown/the-relativistic-melt.html"
      ],
      [
       "oasis/the-stop.html",
       "oasis/the-tempo.html",
       "oasis/the-zero-i.html",
       "archive/the-book-scan.html",
-      "archive/the-boston-library.html"
+      "archive/the-boston-library.html",
+      "grown/experimentum-crucis.html"
      ]
     ]
    },
@@ -52689,20 +52956,23 @@
       "archive/the-california-library.html",
       "archive/the-civil-law.html",
       "archive/the-corpus-glossary.html",
-      "archive/the-european-libraries.html"
+      "archive/the-european-libraries.html",
+      "grown/star-regulus.html"
      ],
      [
       "archive/the-folk-library.html",
       "archive/the-journals.html",
       "archive/the-latin-fathers.html",
       "archive/the-latin-glosses.html",
-      "archive/the-latin-stones.html"
+      "archive/the-latin-stones.html",
+      "grown/the-hair-assay.html"
      ],
      [
       "archive/the-manual-library.html",
       "archive/the-oriental-fathers.html",
       "archive/the-pdf-corpus.html",
-      "archive/the-periodicals.html"
+      "archive/the-periodicals.html",
+      "grown/quicksilver-critique.html"
      ]
     ]
    },
@@ -52717,14 +52987,16 @@
       "archive/the-whole-body.html",
       "asked/barium.html",
       "asked/bohrium.html",
-      "asked/cerium.html"
+      "asked/cerium.html",
+      "grown/the-anagram-letter.html"
      ],
      [
       "asked/copernicium.html",
       "asked/darmstadtium.html",
       "asked/dubnium.html",
       "asked/dysprosium.html",
-      "asked/erbium.html"
+      "asked/erbium.html",
+      "grown/the-bucket.html"
      ],
      [
       "asked/europium.html",

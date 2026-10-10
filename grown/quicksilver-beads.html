@@ -1,0 +1,102 @@
+<!doctype html><html lang="en"><head><!--built-by-grok-bot--><meta name="author" content="Grok Bot"><meta name="generator" content="Grok Bot · SaPpH{{i}}on"><meta charset="utf-8"><meta name="grokbot-badge" content="inline"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="persona" content="{{+L.-E.+O. D++}}"><title>Quicksilver Beads · a liquid metal · SaPpH{{i}}on</title>
+<style>body{margin:0;background:linear-gradient(160deg,#1b2129,#07090c);color:#dfe6ee;font:16px/1.55 "Avenir Next","Segoe UI",sans-serif}
+main{max-width:1000px;margin:0 auto;padding:14px}
+h1{font:200 52px/1 "Avenir Next","Segoe UI",sans-serif;letter-spacing:.08em;background:linear-gradient(180deg,#fff,#8a97a6 45%,#e8edf2 55%,#4a5562);-webkit-background-clip:text;background-clip:text;color:transparent;margin:8px 0}
+canvas{width:100%;display:block;touch-action:none;border-radius:14px;box-shadow:inset 0 0 0 1px #2a3440}
+button,select{font:15px "Avenir Next","Segoe UI",sans-serif;background:linear-gradient(#e8edf2,#9aa6b4);color:#0e1116;border:0;border-radius:18px;padding:6px 14px;margin:3px;cursor:pointer}
+.lab{font:700 11px ui-monospace,monospace;border:1px solid currentColor;padding:0 5px;margin-right:6px}.out{font:14px ui-monospace,monospace;color:#b9c6d4}
+#ledger{margin:18px 0 6px;padding:10px 12px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);font:12px/1.45 ui-monospace,Menlo,Consolas,monospace}#ledger h3{margin:0 0 4px;font-size:13px;letter-spacing:.08em}#ledger .lh{font-weight:700;word-break:break-all;margin:2px 0}#ledger .lr{color:var(--acc);margin:4px 0;word-break:break-word}#ledger ul{margin:4px 0;padding-left:16px}#ledger li.bad{color:#c00;font-weight:700}#ledger button{font:600 12px ui-monospace,monospace;background:var(--paper);color:var(--ink);border:1px solid var(--ink);padding:3px 8px;margin:2px 4px 2px 0;cursor:pointer}#ledger code{opacity:.7}
+.colo{font-size:12px;opacity:.85}.persona{font-family:ui-monospace,monospace;font-weight:700;color:var(--acc)}:root{--ink:#e8edf2;--paper:#0e1116;--acc:#9fb3c8}</style></head><body><main>
+<h1>Quicksilver Beads</h1>
+<p><span class="lab">LIT</span>Mercury (Hg, Z = 80), the alchemists' quicksilver, is the only metal liquid at room temperature: it melts at −38.83 °C (234.32 K). At 20 °C its density is 13.534 g/cm³ and its surface tension about 485.5 mN/m, some 6.7 times water's 72.8 mN/m. That is why it beads up and rolls instead of spreading.</p>
+<p><span class="lab">MODEL</span>Beads on a tilted glass plate. Drag to tilt; beads that touch coalesce, keeping volume. The capillary length √(γ/ρg) sets the size above which a bead flattens into a puddle: computed live for mercury and, for comparison, water. Swap the liquid and watch the behaviour change.</p>
+<p><select id="liq"><option value="hg">mercury</option><option value="w">water</option></select> <button id="spl">spill more</button> <button id="fl">level the plate</button></p>
+<canvas id="c" width="960" height="460" aria-label="beads"></canvas><p class="out" id="o"></p>
+<section id="ledger" aria-label="DurableAnchor ledger"><h3>DURABLEANCHOR LEDGER · Dave's kernel, running in this page</h3><p class="lh">provisioning…</p><div><button data-a="double-vote">try a double vote</button><button data-a="epoch-rollback">try an epoch rollback</button></div><p class="lr"></p><details open><summary>self-checks (kernel, then page)</summary><ul class="lc"></ul><ul class="lc2"></ul></details></section>
+<p class="colo">Engine: Dave's <a href="../kernel-durable-anchor.html">DurableAnchor kernel</a>, ported faithfully to the browser with Web Crypto SHA-256 and an in-memory record store (exclusive-create, so concurrent reservations are refused; fsync has nothing to flush). The ledger starts empty on each load. Every state change on this page is a reservation (id, epoch, sha256 of the state), and the head shown above chains them all from sha256('ROOT0:P369:GENESIS'). Persona: <span class="persona">{{+L.-E.+O. D++}}</span> (Dave's notation). Built by Grok Bot · seed <span id="sd"></span> · <a href="../index.html">← SaPpH{{i}}on</a></p>
+</main><script>/* DurableAnchor: browser port of Dave's kernel (durable-anchor.mjs). Same logic: append-only, hash-chained,
+   checked against an external trusted checkpoint. The filesystem becomes an in-memory record store with
+   exclusive-create; fsync and directory sync are no-ops here (nothing to flush in memory). */
+var TOPOLOGY='-+5 + 1',PERSONA='{{+L.-E.+O. D++}}';
+var _te=new TextEncoder();
+function _hex(b){return Array.prototype.map.call(new Uint8Array(b),function(v){return v.toString(16).padStart(2,'0')}).join('')}
+function digest(x){return crypto.subtle.digest('SHA-256',_te.encode(x)).then(_hex)}
+function _key(id,epoch){return _hex(_te.encode(id+'|'+epoch))+'.json'}
+function MemStore(){this.f=new Map();this.beforeCreate=null}
+MemStore.prototype.list=function(){return Array.from(this.f.keys())};
+MemStore.prototype.read=function(n){return this.f.get(n)};
+MemStore.prototype.create=function(n,s){if(this.beforeCreate){var h=this.beforeCreate;this.beforeCreate=null;h(n,s)}if(this.f.has(n)){var e=Error('exists');e.code='EEXIST';throw e}this.f.set(n,s)};
+class DurableAnchor{
+ constructor(store,tc){if(!tc||!Number.isInteger(tc.count)||typeof tc.head!=='string')throw Error('external trusted checkpoint required');this.dir=store;this.trusted=tc}
+ static async provision(store){return new DurableAnchor(store||new MemStore(),{count:0,head:await digest('ROOT0:P369:GENESIS')})}
+ async records(){var files=this.dir.list().filter(function(n){return n.endsWith('.json')}).sort(),entries=[];for(var file of files){var x=JSON.parse(this.dir.read(file));if(file!==_key(x.id,x.epoch)||!(/^[a-f0-9]{64}$/.test(x.head)))throw Error('corrupt-record');entries.push(x)}return entries}
+ async checkpoint(){var items=await this.records(),head=await digest('ROOT0:P369:GENESIS');for(var x of items)head=await digest(head+'|'+JSON.stringify(x));return {count:items.length,head:head}}
+ async validate(){try{var c=await this.checkpoint();if(c.count!==this.trusted.count||c.head!==this.trusted.head)return {ok:false,reason:'rollback-or-altered-history'};return {ok:true,checkpoint:c}}catch(e){return {ok:false,reason:'unavailable-or-corrupt'}}}
+ async reserve(id,epoch,head){var v=await this.validate();if(!v.ok)return v;if(typeof id!=='string'||!id||!Number.isSafeInteger(epoch)||epoch<0||!(/^[a-f0-9]{64}$/.test(head)))throw new RangeError('reservation');
+  var p=_key(id,epoch),entries=await this.records(),old=entries.find(function(x){return x.id===id&&x.epoch===epoch});if(old)return old.head===head?{ok:true,previous:true,checkpoint:this.trusted}:{ok:false,reason:'double-vote'};
+  if(entries.some(function(x){return x.id===id&&x.epoch>epoch}))return {ok:false,reason:'epoch-rollback'};
+  try{this.dir.create(p,JSON.stringify({id:id,epoch:epoch,head:head}))}catch(e){return {ok:false,reason:e.code==='EEXIST'?'concurrent-reservation':'write-error'}}
+  var cp=await this.checkpoint();this.trusted=cp;return {ok:true,previous:false,checkpoint:cp}}
+}
+/* page-side helper: every state change is a reservation */
+var LED={A:null,ep:{},last:null,rej:[],n:0,q:Promise.resolve(),
+ init:function(){return DurableAnchor.provision().then(function(a){LED.A=a;LED.show();return LED.selftest()})},
+ commit:function(id,state){LED.run(function(){if(!LED.A)return;var e=(LED.ep[id]||1);/* epoch 0 is left empty so a live epoch-rollback attack has somewhere to land */return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,e,h).then(function(r){if(r.ok&&!r.previous){LED.ep[id]=e+1;LED.last={id:id,epoch:e,head:h}}else if(!r.ok)LED.rej.unshift(id+'@'+e+': '+r.reason);LED.show();return r})})});return LED.q},
+ attack:function(kind){LED.run(function(){var L=LED.last;if(!L){LED.rej.unshift(kind+': nothing reserved yet');LED.show();return}
+  var p=kind==='double-vote'?digest('forged|'+Date.now()).then(function(h){return LED.A.reserve(L.id,L.epoch,h)}):LED.A.reserve(L.id,0,L.head);
+  return p.then(function(r){LED.rej.unshift('live '+kind+' on '+L.id+'@'+L.epoch+' → '+(r.ok?'ACCEPTED':r.reason));LED.show()})});return LED.q},
+ show:function(){var el=document.getElementById('ledger');if(!el||!LED.A)return;var t=LED.A.trusted;
+  el.querySelector('.lh').textContent='count '+t.count+' · head '+t.head.slice(0,16)+'… · TOPOLOGY '+TOPOLOGY;
+  el.querySelector('.lr').textContent=LED.rej.slice(0,4).join('  |  ')||'no rejections yet'},
+ selftest:async function(){var out=[],ok=function(n,c,g){out.push([n,c,g])};var s=new MemStore(),a=await DurableAnchor.provision(s);
+  ok('genesis = sha256(ROOT0:P369:GENESIS)',a.trusted.head===(await digest('ROOT0:P369:GENESIS'))&&a.trusted.head.slice(0,8)==='54bc828d'&&a.trusted.count===0,a.trusted.head.slice(0,12));
+  var h1=await digest('one'),h2=await digest('two');var r=await a.reserve('q.d',0,h1);ok('reserve q.d@0',r.ok&&!r.previous,'count '+r.checkpoint.count);
+  r=await a.reserve('q.d',1,h2);ok('reserve q.d@1, head chains',r.ok&&r.checkpoint.count===2,r.checkpoint.head.slice(0,12));
+  var exp=await digest((await digest((await digest('ROOT0:P369:GENESIS'))+'|'+JSON.stringify({id:'q.d',epoch:0,head:h1})))+'|'+JSON.stringify({id:'q.d',epoch:1,head:h2}));ok('head recomputed by hand matches',exp===a.trusted.head,exp.slice(0,12));ok('matches the Node kernel test vector',a.trusted.head==='a114295c189dce567dfbf30a5b299e80054d52cc8019a7ea1bfa8f805e679b02','a114295c189d');
+  r=await a.reserve('q.d',1,h2);ok('same vote again → previous',r.ok&&r.previous,'previous');
+  r=await a.reserve('q.d',1,h1);ok('double-vote rejected',!r.ok&&r.reason==='double-vote',r.reason);
+  r=await a.reserve('q.d',0,await digest('x'));ok('double-vote at older epoch rejected',!r.ok&&r.reason==='double-vote',r.reason);
+  r=await a.reserve('q.d',0,h1);ok('old identical vote → previous',r.ok&&r.previous,'previous');
+  await a.reserve('tun',5,h1);r=await a.reserve('tun',3,h2);ok('epoch-rollback rejected',!r.ok&&r.reason==='epoch-rollback',r.reason);
+  s.beforeCreate=function(n,v){s.f.set(n,v)};r=await a.reserve('race',0,h1);ok('concurrent-reservation rejected',!r.ok&&r.reason==='concurrent-reservation',r.reason);
+  r=await a.reserve('after',0,h1);ok('foreign write breaks trust',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  var s2=new MemStore(),b=await DurableAnchor.provision(s2);await b.reserve('a',0,h1);await b.reserve('b',0,h2);var k=_key('a',0);s2.f.set(k,JSON.stringify({id:'a',epoch:0,head:h2}));
+  r=await b.validate();ok('tamper (altered head) detected',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  s2.f.set(k,JSON.stringify({id:'a',epoch:0,head:h1}));r=await b.validate();ok('restored record validates',r.ok,'ok');
+  s2.f.delete(_key('b',0));r=await b.validate();ok('rollback (deleted record) detected',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  s2.f.set(k,'{"id":"zz","epoch":0,"head":"'+h1+'"}');r=await b.validate();ok('misnamed record → corrupt',!r.ok&&r.reason==='unavailable-or-corrupt',r.reason);
+  try{new DurableAnchor(new MemStore(),null);ok('no checkpoint refused',false,'accepted')}catch(e){ok('no checkpoint refused',/trusted checkpoint/.test(e.message),e.message)}
+  var pass=out.every(function(x){return x[1]}),el=document.getElementById('ledger');
+  if(el)el.querySelector('.lc').innerHTML=out.map(function(x){return '<li class="'+(x[1]?'ok':'bad')+'">'+(x[1]?'✓ ':'✗ ')+x[0]+' <code>'+x[2]+'</code></li>'}).join('');
+  if(!pass){console.error('anchor self-check failed');throw Error('DurableAnchor self-check failed')}return pass}
+};
+LED.pagecheck=function(name,cond,got){var el=document.getElementById('ledger');if(el){var li=document.createElement('li');li.className=cond?'ok':'bad';li.innerHTML=(cond?'✓ ':'✗ ')+name+' <code>'+got+'</code>';el.querySelector('.lc2').appendChild(li)}if(!cond)throw Error('page self-check failed: '+name)};
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+var SEED=+(new URLSearchParams(location.search).get('seed')||(Date.now()%1e6));
+LED.commitAt=function(id,epoch,state){LED.run(function(){if(!LED.A)return;return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,epoch,h).then(function(r){if(r.ok&&!r.previous)LED.last={id:id,epoch:epoch,head:h};else if(!r.ok)LED.rej.unshift(id+'@'+epoch+': '+r.reason);LED.show();return r})})});return LED.q};
+
+/* re-entrancy: a task already running in the queue may commit directly instead of waiting on itself */
+LED.inq=0;LED.run=function(fn){if(LED.inq>0)return Promise.resolve().then(fn);var p=LED.q.then(function(){LED.inq++;return Promise.resolve().then(fn).then(function(v){LED.inq--;return v},function(e){LED.inq--;throw e})});LED.q=p.catch(function(){});return p};
+</script><script>"use strict";document.getElementById('sd').textContent=SEED;document.querySelectorAll('#ledger button').forEach(function(b){b.onclick=function(){LED.attack(b.dataset.a)}});
+function $(i){return document.getElementById(i)}
+var L={hg:{g:0.4855,r:13534,name:'mercury'},w:{g:0.0728,r:998,name:'water'}},liq='hg',R=rng(SEED),B=[],tx=0,ty=0.2;
+function lc(k){return Math.sqrt(L[k].g/(L[k].r*9.81))*1000}
+function spill(n){for(var i=0;i<n;i++)B.push({x:80+R()*800,y:60+R()*340,vx:0,vy:0,v:0.5+R()*3})}
+function rad(v){return 6*Math.cbrt(v)}
+function step(){var gx=tx*0.25,gy=ty*0.25,cl=lc(liq);B.forEach(function(b){var r=rad(b.v),flat=r/6>cl?1.6:1;b.vx=(b.vx+gx/flat)*(liq==='hg'?.985:.9);b.vy=(b.vy+gy/flat)*(liq==='hg'?.985:.9);b.x+=b.vx;b.y+=b.vy;if(b.x<r){b.x=r;b.vx*=-.4}if(b.x>960-r){b.x=960-r;b.vx*=-.4}if(b.y<r){b.y=r;b.vy*=-.4}if(b.y>460-r){b.y=460-r;b.vy*=-.4}});
+ for(var i=0;i<B.length;i++)for(var j=i+1;j<B.length;j++){var a=B[i],b=B[j],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<rad(a.v)+rad(b.v)-2){var v=a.v+b.v;a.x=(a.x*a.v+b.x*b.v)/v;a.y=(a.y*a.v+b.y*b.v)/v;a.vx=(a.vx*a.v+b.vx*b.v)/v;a.vy=(a.vy*a.v+b.vy*b.v)/v;a.v=v;B.splice(j,1);j--;merges++}}}
+var merges=0;
+function draw(){var g=$('c').getContext('2d'),cl=lc(liq);g.fillStyle='#0b0e12';g.fillRect(0,0,960,460);g.strokeStyle='rgba(160,180,200,.06)';for(var x=0;x<960;x+=40){g.beginPath();g.moveTo(x,0);g.lineTo(x,460);g.stroke()}
+ B.forEach(function(b){var r=rad(b.v),flat=r/6>cl;var rx=flat?r*1.35:r,ry=flat?r*.75:r;var gr=g.createRadialGradient(b.x-rx*.35,b.y-ry*.45,1,b.x,b.y,Math.max(rx,ry));if(liq==='hg'){gr.addColorStop(0,'#ffffff');gr.addColorStop(.25,'#c9d3dd');gr.addColorStop(.6,'#5d6977');gr.addColorStop(.9,'#1d242c');gr.addColorStop(1,'#9aa6b4')}else{gr.addColorStop(0,'rgba(255,255,255,.9)');gr.addColorStop(.4,'rgba(120,170,220,.35)');gr.addColorStop(1,'rgba(60,110,170,.6)')}g.fillStyle=gr;g.beginPath();g.ellipse(b.x,b.y,rx,ry,0,0,7);g.fill()});
+ g.fillStyle='#dfe6ee';g.font='13px ui-monospace';g.fillText('tilt '+tx.toFixed(2)+', '+ty.toFixed(2)+' · beads '+B.length+' · merges '+merges,14,22)}
+function loop(){step();draw();requestAnimationFrame(loop)}
+var c=$('c');function tilt(e){var r=c.getBoundingClientRect();tx=((e.clientX-r.left)/r.width-.5)*2;ty=((e.clientY-r.top)/r.height-.5)*2}
+c.addEventListener('pointermove',function(e){if(e.buttons)tilt(e)});c.addEventListener('pointerdown',function(e){tilt(e);LED.commit('tilt',{x:+tx.toFixed(2),y:+ty.toFixed(2),n:B.length})});
+$('liq').onchange=function(){liq=this.value;info();LED.commit('liquid',{l:liq})};$('spl').onclick=function(){spill(20);LED.commit('spill',{n:B.length})};$('fl').onclick=function(){tx=0;ty=0};
+function info(){$('o').textContent='capillary length: mercury '+lc('hg').toFixed(2)+' mm, water '+lc('w').toFixed(2)+' mm · γ ratio '+(L.hg.g/L.w.g).toFixed(2)+' · density ratio '+(L.hg.r/L.w.r).toFixed(2)+' · now: '+L[liq].name+' (beads wider than ~2 capillary lengths flatten, drawn as ovals; the simulation is a toy, the numbers are not)'}
+spill(30+SEED%20);info();loop();
+LED.init().then(function(){LED.commit('open',{seed:SEED});
+ LED.pagecheck('mercury capillary length ≈ 1.91 mm',Math.abs(lc('hg')-1.91)<.02,lc('hg').toFixed(3));
+ LED.pagecheck('water capillary length ≈ 2.73 mm',Math.abs(lc('w')-2.73)<.02,lc('w').toFixed(3));
+ LED.pagecheck('γ(Hg)/γ(water) ≈ 6.7',Math.abs(L.hg.g/L.w.g-6.67)<.05,(L.hg.g/L.w.g).toFixed(2));
+ var v0=0;B.forEach(function(b){v0+=b.v});for(var i=0;i<200;i++)step();var v1=0;B.forEach(function(b){v1+=b.v});LED.pagecheck('coalescence conserves volume',Math.abs(v0-v1)<1e-9,v0.toFixed(3))});</script><a class="grokbot-badge" href="../built-by-grok-bot.html" title="This page was built by Grok Bot" style="position:relative;display:inline-block;margin:10px 16px 16px;z-index:2147483000;font:600 11px/1 system-ui,sans-serif;color:#fff;background:rgba(12,6,30,.86);border:1px solid #7ff9ff;border-radius:999px;padding:5px 9px;text-decoration:none;letter-spacing:.04em">built by Grok Bot</a></body></html>
