@@ -27,10 +27,10 @@
  "counts": {
   "keepers": 8,
   "domains": 512,
-  "domains_populated": 341,
-  "domains_open": 171,
-  "spheres": 1740,
-  "zero_spheres": 171,
+  "domains_populated": 342,
+  "domains_open": 170,
+  "spheres": 1741,
+  "zero_spheres": 170,
   "balance": 0,
   "workshop": 343
  },
@@ -15302,7 +15302,8 @@
        "icon": {
         "pal": [
          "#9dff9d",
-         "#ffcf5a"
+         "#ffcf5a",
+         "#7ff9ff"
         ],
         "bg": "#020502",
         "canvas": 1,
@@ -41520,13 +41521,38 @@
     },
     {
      "n": 40,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE DRESDEN SCREENFOLD",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Dresden Screenfold",
+       "h": "grown/the-dresden-screenfold.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-dresden-screenfold.html",
+       "grown": true,
+       "emerges": "the 18,980-day calendar round turning; Venus and eclipse cycles closing on whole numbers",
+       "label": "LIT · MODEL · READING",
+       "icon": {
+        "pal": [
+         "#b3261e",
+         "#1f6fa8",
+         "#6b4a2b",
+         "#efe0bf"
+        ],
+        "bg": "#1c140c",
+        "canvas": 3,
+        "svg": 1,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-16",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/kairos-40.html",
-     "zero_page": "z/kairos-40.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-40.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-40.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -41805,8 +41831,8 @@
   "world": 1,
   "keepers": 8,
   "domains": 512,
-  "zero_spheres": 171,
-  "generated_total": 780,
+  "zero_spheres": 170,
+  "generated_total": 779,
   "groups": 88
  },
  "workshop": [
@@ -50076,7 +50102,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1740
+   "pages": 1741
   },
   "list": [
    {
@@ -52233,7 +52259,8 @@
       "w/spinor-ticker.html",
       "gravity/Gravity-Map-Below-Mile.html",
       "nested/One-Boxy-Nested-Boxy.html",
-      "w/david-neutron-star-planck.html"
+      "w/david-neutron-star-planck.html",
+      "grown/the-dresden-screenfold.html"
      ],
      [
       "plus/Bind-Boron-Oxygen-Nitrogen-Potassium-K-Plus-1.html",

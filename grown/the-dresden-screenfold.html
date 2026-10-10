@@ -1,0 +1,153 @@
+<!doctype html><html lang="en"><head><!--built-by-grok-bot--><meta name="author" content="Grok Bot"><meta name="generator" content="Grok Bot · SaPpH{{i}}on"><meta charset="utf-8"><meta name="grokbot-badge" content="inline"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="persona" content="{{+L.-E.+O. D++}}"><title>The Dresden Screenfold · bar, dot and shell · SaPpH{{i}}on</title>
+<style>body{margin:0;background:#6b4a2b radial-gradient(circle at 30% 20%,#8a6239,#4a311b);color:#1c140c;font:16px/1.55 Georgia,"Palatino Linotype",serif}
+main{max-width:1000px;margin:0 auto;padding:14px}
+.fold{display:flex;overflow-x:auto;gap:0;scroll-snap-type:x mandatory;padding:8px 0 14px}
+.leaf{flex:0 0 min(92vw,470px);scroll-snap-align:start;background:#efe0bf;background-image:repeating-linear-gradient(93deg,rgba(120,80,30,.07) 0 2px,transparent 2px 7px),repeating-linear-gradient(2deg,rgba(90,60,20,.06) 0 1px,transparent 1px 11px),radial-gradient(circle at 70% 30%,#f6ead0,#e3cfa3);border-left:1px solid rgba(60,30,10,.35);box-shadow:inset 8px 0 14px -10px rgba(60,30,10,.6),0 6px 16px rgba(0,0,0,.35);padding:16px 18px;box-sizing:border-box}
+.leaf h2{font:700 20px Georgia,serif;color:#b3261e;margin:0 0 6px;border-bottom:3px solid #b3261e;letter-spacing:.04em}
+h1{font:700 34px/1.1 Georgia,serif;color:#f4e6c6;margin:6px 0;text-shadow:0 2px 0 #2a1a0c}.intro{color:#f4e6c6}
+.mb{color:#1f6fa8;font-weight:700}.red{color:#b3261e}
+button,input,select{font:15px Georgia,serif;background:#f6ead0;color:#1c140c;border:2px solid #1c140c;border-radius:3px;padding:3px 9px;margin:2px;cursor:pointer}
+input[type=text],input[type=number]{cursor:text;width:min(100%,280px)}
+.num{display:flex;flex-direction:column;align-items:center;gap:3px;margin:6px 0}
+.row{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end}
+.cell{border:2px solid #b3261e;padding:4px 6px;min-width:46px;text-align:center;background:rgba(255,250,235,.35)}
+.cell small{display:block;font-size:11px;color:#6b4a2b}
+.lab{display:inline-block;background:#efe0bf;font:700 11px ui-monospace,monospace;padding:1px 5px;border:1px solid currentColor;margin-right:4px}
+.lit{color:#1f6fa8}.mod{color:#6b4a2b}.inv{color:#b3261e}
+canvas{width:100%;display:block;touch-action:manipulation}
+table{border-collapse:collapse;font-size:13px}td,th{border:1px solid #6b4a2b;padding:2px 5px;text-align:right}
+.src{font-size:12px;color:#f4e6c6}.src a{color:#cfe6ff}
+#ledger{margin:18px 0 6px;padding:10px 12px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);font:12px/1.45 ui-monospace,Menlo,Consolas,monospace}#ledger h3{margin:0 0 4px;font-size:13px;letter-spacing:.08em}#ledger .lh{font-weight:700;word-break:break-all;margin:2px 0}#ledger .lr{color:var(--acc);margin:4px 0;word-break:break-word}#ledger ul{margin:4px 0;padding-left:16px}#ledger li.bad{color:#c00;font-weight:700}#ledger button{font:600 12px ui-monospace,monospace;background:var(--paper);color:var(--ink);border:1px solid var(--ink);padding:3px 8px;margin:2px 4px 2px 0;cursor:pointer}#ledger code{opacity:.7}
+.colo{font-size:12px;opacity:.85}.persona{font-family:ui-monospace,monospace;font-weight:700;color:var(--acc)}:root{--ink:#1c140c;--paper:#efe0bf;--acc:#b3261e}</style></head><body><main>
+<h1>The Dresden Screenfold</h1>
+<p class="intro">A screenfold of bark paper (amate), read in red and black like the <i>Codex Dresdensis</i>, the oldest surviving Maya book. Swipe the leaves sideways. Each leaf works: a bar-and-dot calculator, Dave's typed cipher read as Maya numbers, the real Venus table, the real eclipse-warning intervals, and the calendar-round wheel. Every change is recorded on Dave's DurableAnchor ledger below. Labels: <span class="lab lit">LIT</span> sourced fact · <span class="lab mod">MODEL</span> computed here · <span class="lab inv">READING</span> an interpretation, not a decipherment.</p>
+<div class="fold">
+<section class="leaf"><h2>I · Bar, dot, shell</h2><p><span class="lab lit">LIT</span>Maya numerals are written with a dot for 1, a bar for 5 and a shell for 0, stacked in places of 20 (bottom place first). Calendar counts use 18 in the third place (1 tun = 360 days).</p>
+<p><input id="cn" type="number" min="0" max="99999999" value="584" aria-label="number"> <button id="cm">−1</button><button id="cp">+1</button> <label><input id="clc" type="checkbox"> calendar (18 in 3rd place)</label></p><div id="cout" class="row"></div><p id="ctxt"></p></section>
+<section class="leaf"><h2>II · Dave's cipher</h2><p><span class="lab inv">READING</span>Type dots <b>.</b> and bars <b>|</b>; spaces separate glyphs. Each group is read as one Maya numeral. A valid glyph has at most 4 dots and 3 bars (0–19).</p>
+<p><input id="dp" type="text" value="..||..| .... | . ... |... |" aria-label="pattern"> <button id="dgo">read</button> <button id="dold">earlier string</button></p><div id="dout" class="row"></div><p id="dtxt"></p></section>
+<section class="leaf"><h2>III · Venus table</h2><p><span class="lab lit">LIT</span>Dresden pp. 24 and 46–50. Each Venus round of 584 days is split 236 (morning star) + 90 (gone) + 250 (evening star) + 8 (gone). Five rounds fill 2920 days = 8 haab years; the table runs 13 times: 37,960 days = 146 tzolk'in = 104 years.</p><canvas id="vc" width="900" height="300" aria-label="Venus round"></canvas><p><input id="vd" type="range" min="0" max="2919" value="0" style="width:100%" aria-label="day"> <span id="vt"></span></p></section>
+<section class="leaf"><h2>IV · Eclipse warnings</h2><p><span class="lab lit">LIT</span>Dresden pp. 51–58: 69 stations over 405 lunations, 11,960 days. Most steps are 177 days (6 moons, written 8.17), a few are 148 (5 moons, written 7.8) before each of the 10 eclipse pictures; some 177s are counted as 178 (7 in the column summary used here, giving 11,959; the stated span is 11,960, and the literature discusses both 11,959- and 11,960-day versions). Step through and the station lights when an eclipse window is warned.</p><canvas id="ec" width="900" height="260" aria-label="eclipse stations"></canvas><p><button id="eb">◀</button><button id="ef">next station ▶</button> <span id="et"></span></p></section>
+<section class="leaf"><h2>V · Calendar round</h2><p><span class="lab lit">LIT</span>The tzolk'in (13 numbers × 20 day names = 260) and haab (18 months × 20 + 5 Wayeb = 365) mesh like gears; they realign every 18,980 days (52 years). <span class="lab mod">MODEL</span>Dates use the GMT correlation 584283; creation day 4 Ajaw 8 Kumk'u.</p><canvas id="wc" width="700" height="700" aria-label="calendar round"></canvas><p><button id="w1">+1 day</button><button id="w20">+20</button><button id="w260">+260</button><button id="wt">today</button> <span id="wtx"></span></p></section>
+</div>
+<p class="src">Sources: <a href="https://www.slub-dresden.de/en/explore/manuscripts/the-dresden-maya-codex/content">SLUB Dresden, codex contents (page map)</a>; <a href="https://digital.slub-dresden.de/werkansicht/dlf/2967/1">SLUB digital facsimile</a>; H. M. Bricker &amp; V. R. Bricker, <i>Astronomy in the Maya Codices</i> (2011) and <a href="https://www.journals.uchicago.edu/doi/10.1086/202931">"Classic Maya Prediction of Solar Eclipses", Current Anthropology 24 (1983)</a>; J. E. S. Thompson, <i>A Commentary on the Dresden Codex</i> (1972); <a href="https://pubmed.ncbi.nlm.nih.gov/41124270/">Justeson &amp; Bricker, Science Advances (2025)</a>. Stated interval groups follow the eclipse-table column summary in Gates (1932) as tabulated in Spanish-language reviews. Drawings here are original, not copied glyphs.</p>
+<section id="ledger" aria-label="DurableAnchor ledger"><h3>DURABLEANCHOR LEDGER · Dave's kernel, running in this page</h3><p class="lh">provisioning…</p><div><button data-a="double-vote">try a double vote</button><button data-a="epoch-rollback">try an epoch rollback</button></div><p class="lr"></p><details open><summary>self-checks (kernel, then page)</summary><ul class="lc"></ul><ul class="lc2"></ul></details></section>
+<p class="colo">Engine: Dave's <a href="../kernel-durable-anchor.html">DurableAnchor kernel</a>, ported faithfully to the browser with Web Crypto SHA-256 and an in-memory record store (exclusive-create, so concurrent reservations are refused; fsync has nothing to flush). The ledger starts empty on each load. Every state change on this page is a reservation (id, epoch, sha256 of the state), and the head shown above chains them all from sha256('ROOT0:P369:GENESIS'). Persona: <span class="persona">{{+L.-E.+O. D++}}</span> (Dave's notation). Built by Grok Bot · seed <span id="sd"></span> · <a href="../index.html">← SaPpH{{i}}on</a></p>
+</main><script>/* DurableAnchor: browser port of Dave's kernel (durable-anchor.mjs). Same logic: append-only, hash-chained,
+   checked against an external trusted checkpoint. The filesystem becomes an in-memory record store with
+   exclusive-create; fsync and directory sync are no-ops here (nothing to flush in memory). */
+var TOPOLOGY='-+5 + 1',PERSONA='{{+L.-E.+O. D++}}';
+var _te=new TextEncoder();
+function _hex(b){return Array.prototype.map.call(new Uint8Array(b),function(v){return v.toString(16).padStart(2,'0')}).join('')}
+function digest(x){return crypto.subtle.digest('SHA-256',_te.encode(x)).then(_hex)}
+function _key(id,epoch){return _hex(_te.encode(id+'|'+epoch))+'.json'}
+function MemStore(){this.f=new Map();this.beforeCreate=null}
+MemStore.prototype.list=function(){return Array.from(this.f.keys())};
+MemStore.prototype.read=function(n){return this.f.get(n)};
+MemStore.prototype.create=function(n,s){if(this.beforeCreate){var h=this.beforeCreate;this.beforeCreate=null;h(n,s)}if(this.f.has(n)){var e=Error('exists');e.code='EEXIST';throw e}this.f.set(n,s)};
+class DurableAnchor{
+ constructor(store,tc){if(!tc||!Number.isInteger(tc.count)||typeof tc.head!=='string')throw Error('external trusted checkpoint required');this.dir=store;this.trusted=tc}
+ static async provision(store){return new DurableAnchor(store||new MemStore(),{count:0,head:await digest('ROOT0:P369:GENESIS')})}
+ async records(){var files=this.dir.list().filter(function(n){return n.endsWith('.json')}).sort(),entries=[];for(var file of files){var x=JSON.parse(this.dir.read(file));if(file!==_key(x.id,x.epoch)||!(/^[a-f0-9]{64}$/.test(x.head)))throw Error('corrupt-record');entries.push(x)}return entries}
+ async checkpoint(){var items=await this.records(),head=await digest('ROOT0:P369:GENESIS');for(var x of items)head=await digest(head+'|'+JSON.stringify(x));return {count:items.length,head:head}}
+ async validate(){try{var c=await this.checkpoint();if(c.count!==this.trusted.count||c.head!==this.trusted.head)return {ok:false,reason:'rollback-or-altered-history'};return {ok:true,checkpoint:c}}catch(e){return {ok:false,reason:'unavailable-or-corrupt'}}}
+ async reserve(id,epoch,head){var v=await this.validate();if(!v.ok)return v;if(typeof id!=='string'||!id||!Number.isSafeInteger(epoch)||epoch<0||!(/^[a-f0-9]{64}$/.test(head)))throw new RangeError('reservation');
+  var p=_key(id,epoch),entries=await this.records(),old=entries.find(function(x){return x.id===id&&x.epoch===epoch});if(old)return old.head===head?{ok:true,previous:true,checkpoint:this.trusted}:{ok:false,reason:'double-vote'};
+  if(entries.some(function(x){return x.id===id&&x.epoch>epoch}))return {ok:false,reason:'epoch-rollback'};
+  try{this.dir.create(p,JSON.stringify({id:id,epoch:epoch,head:head}))}catch(e){return {ok:false,reason:e.code==='EEXIST'?'concurrent-reservation':'write-error'}}
+  var cp=await this.checkpoint();this.trusted=cp;return {ok:true,previous:false,checkpoint:cp}}
+}
+/* page-side helper: every state change is a reservation */
+var LED={A:null,ep:{},last:null,rej:[],n:0,q:Promise.resolve(),
+ init:function(){return DurableAnchor.provision().then(function(a){LED.A=a;LED.show();return LED.selftest()})},
+ commit:function(id,state){LED.run(function(){if(!LED.A)return;var e=(LED.ep[id]||1);/* epoch 0 is left empty so a live epoch-rollback attack has somewhere to land */return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,e,h).then(function(r){if(r.ok&&!r.previous){LED.ep[id]=e+1;LED.last={id:id,epoch:e,head:h}}else if(!r.ok)LED.rej.unshift(id+'@'+e+': '+r.reason);LED.show();return r})})});return LED.q},
+ attack:function(kind){LED.run(function(){var L=LED.last;if(!L){LED.rej.unshift(kind+': nothing reserved yet');LED.show();return}
+  var p=kind==='double-vote'?digest('forged|'+Date.now()).then(function(h){return LED.A.reserve(L.id,L.epoch,h)}):LED.A.reserve(L.id,0,L.head);
+  return p.then(function(r){LED.rej.unshift('live '+kind+' on '+L.id+'@'+L.epoch+' → '+(r.ok?'ACCEPTED':r.reason));LED.show()})});return LED.q},
+ show:function(){var el=document.getElementById('ledger');if(!el||!LED.A)return;var t=LED.A.trusted;
+  el.querySelector('.lh').textContent='count '+t.count+' · head '+t.head.slice(0,16)+'… · TOPOLOGY '+TOPOLOGY;
+  el.querySelector('.lr').textContent=LED.rej.slice(0,4).join('  |  ')||'no rejections yet'},
+ selftest:async function(){var out=[],ok=function(n,c,g){out.push([n,c,g])};var s=new MemStore(),a=await DurableAnchor.provision(s);
+  ok('genesis = sha256(ROOT0:P369:GENESIS)',a.trusted.head===(await digest('ROOT0:P369:GENESIS'))&&a.trusted.head.slice(0,8)==='54bc828d'&&a.trusted.count===0,a.trusted.head.slice(0,12));
+  var h1=await digest('one'),h2=await digest('two');var r=await a.reserve('q.d',0,h1);ok('reserve q.d@0',r.ok&&!r.previous,'count '+r.checkpoint.count);
+  r=await a.reserve('q.d',1,h2);ok('reserve q.d@1, head chains',r.ok&&r.checkpoint.count===2,r.checkpoint.head.slice(0,12));
+  var exp=await digest((await digest((await digest('ROOT0:P369:GENESIS'))+'|'+JSON.stringify({id:'q.d',epoch:0,head:h1})))+'|'+JSON.stringify({id:'q.d',epoch:1,head:h2}));ok('head recomputed by hand matches',exp===a.trusted.head,exp.slice(0,12));ok('matches the Node kernel test vector',a.trusted.head==='a114295c189dce567dfbf30a5b299e80054d52cc8019a7ea1bfa8f805e679b02','a114295c189d');
+  r=await a.reserve('q.d',1,h2);ok('same vote again → previous',r.ok&&r.previous,'previous');
+  r=await a.reserve('q.d',1,h1);ok('double-vote rejected',!r.ok&&r.reason==='double-vote',r.reason);
+  r=await a.reserve('q.d',0,await digest('x'));ok('double-vote at older epoch rejected',!r.ok&&r.reason==='double-vote',r.reason);
+  r=await a.reserve('q.d',0,h1);ok('old identical vote → previous',r.ok&&r.previous,'previous');
+  await a.reserve('tun',5,h1);r=await a.reserve('tun',3,h2);ok('epoch-rollback rejected',!r.ok&&r.reason==='epoch-rollback',r.reason);
+  s.beforeCreate=function(n,v){s.f.set(n,v)};r=await a.reserve('race',0,h1);ok('concurrent-reservation rejected',!r.ok&&r.reason==='concurrent-reservation',r.reason);
+  r=await a.reserve('after',0,h1);ok('foreign write breaks trust',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  var s2=new MemStore(),b=await DurableAnchor.provision(s2);await b.reserve('a',0,h1);await b.reserve('b',0,h2);var k=_key('a',0);s2.f.set(k,JSON.stringify({id:'a',epoch:0,head:h2}));
+  r=await b.validate();ok('tamper (altered head) detected',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  s2.f.set(k,JSON.stringify({id:'a',epoch:0,head:h1}));r=await b.validate();ok('restored record validates',r.ok,'ok');
+  s2.f.delete(_key('b',0));r=await b.validate();ok('rollback (deleted record) detected',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  s2.f.set(k,'{"id":"zz","epoch":0,"head":"'+h1+'"}');r=await b.validate();ok('misnamed record → corrupt',!r.ok&&r.reason==='unavailable-or-corrupt',r.reason);
+  try{new DurableAnchor(new MemStore(),null);ok('no checkpoint refused',false,'accepted')}catch(e){ok('no checkpoint refused',/trusted checkpoint/.test(e.message),e.message)}
+  var pass=out.every(function(x){return x[1]}),el=document.getElementById('ledger');
+  if(el)el.querySelector('.lc').innerHTML=out.map(function(x){return '<li class="'+(x[1]?'ok':'bad')+'">'+(x[1]?'✓ ':'✗ ')+x[0]+' <code>'+x[2]+'</code></li>'}).join('');
+  if(!pass){console.error('anchor self-check failed');throw Error('DurableAnchor self-check failed')}return pass}
+};
+LED.pagecheck=function(name,cond,got){var el=document.getElementById('ledger');if(el){var li=document.createElement('li');li.className=cond?'ok':'bad';li.innerHTML=(cond?'✓ ':'✗ ')+name+' <code>'+got+'</code>';el.querySelector('.lc2').appendChild(li)}if(!cond)throw Error('page self-check failed: '+name)};
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+var SEED=+(new URLSearchParams(location.search).get('seed')||(Date.now()%1e6));
+LED.commitAt=function(id,epoch,state){LED.run(function(){if(!LED.A)return;return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,epoch,h).then(function(r){if(r.ok&&!r.previous)LED.last={id:id,epoch:epoch,head:h};else if(!r.ok)LED.rej.unshift(id+'@'+epoch+': '+r.reason);LED.show();return r})})});return LED.q};
+
+/* re-entrancy: a task already running in the queue may commit directly instead of waiting on itself */
+LED.inq=0;LED.run=function(fn){if(LED.inq>0)return Promise.resolve().then(fn);var p=LED.q.then(function(){LED.inq++;return Promise.resolve().then(fn).then(function(v){LED.inq--;return v},function(e){LED.inq--;throw e})});LED.q=p.catch(function(){});return p};
+</script><script>"use strict";document.getElementById('sd').textContent=SEED;document.querySelectorAll('#ledger button').forEach(function(b){b.onclick=function(){LED.attack(b.dataset.a)}});
+var DN=["Imix","Ik'","Ak'bal","K'an","Chikchan","Kimi","Manik'","Lamat","Muluk","Ok","Chuwen","Eb","Ben","Ix","Men","Kib","Kaban","Etz'nab","Kawak","Ajaw"],HM=["Pop","Wo","Sip","Sotz'","Sek","Xul","Yaxk'in","Mol","Ch'en","Yax","Sak'","Keh","Mak","K'ank'in","Muwan","Pax","K'ayab","Kumk'u","Wayeb"];
+function $(i){return document.getElementById(i)}
+function glyph(v){var s='<svg width="44" height="'+(v===0?26:14+12*Math.floor(v/5)+4)+'" viewBox="0 0 44 '+(v===0?26:14+12*Math.floor(v/5)+4)+'">';if(v===0){s+='<ellipse cx="22" cy="13" rx="18" ry="9" fill="#efe0bf" stroke="#1c140c" stroke-width="2.5"/><path d="M8 13 Q22 3 36 13 M12 16 Q22 9 32 16" fill="none" stroke="#1f6fa8" stroke-width="2"/>'}else{var d=v%5,b=Math.floor(v/5);for(var i=0;i<d;i++){var x=22+(i-(d-1)/2)*10;s+='<circle cx="'+x+'" cy="7" r="4" fill="#1c140c"/>'}for(var k=0;k<b;k++)s+='<rect x="3" y="'+(14+12*k)+'" width="38" height="7" rx="2" fill="#1c140c"/>'}return s+'</svg>'}
+function places(n,lc){if(n===0)return[0];var o=[],i=0;while(n>0){var b=(lc&&i===2)?18:20;o.push(n%b);n=Math.floor(n/b);i++}return o.reverse()}
+function fromPlaces(p,lc){var n=0,w=1;for(var i=p.length-1,j=0;i>=0;i--,j++){n+=p[i]*w;w*=(lc&&j===1)?18:20}return n}
+var NAMED={584:'Venus round',2920:'5 Venus rounds = 8 haab',37960:'Venus table total',236:'Venus morning star',90:'Venus hidden (superior)',250:'Venus evening star',8:'Venus hidden (inferior)',177:'eclipse step, 6 moons',178:'eclipse step (177 counted 178)',148:'eclipse step, 5 moons',11960:'eclipse table span',405:'lunations in the eclipse table',780:'Mars round (Dresden 43b–45b)',78:'Mars table multiple',260:"tzolk'in",365:'haab',18980:'calendar round',1820:'5 haab = 7 tzolk\'in (Dresden 61–74)',360:'tun',7200:"k'atun",144000:"b'ak'tun"};
+function calc(push){var n=Math.max(0,Math.min(99999999,parseInt($('cn').value)||0));$('cn').value=n;var lc=$('clc').checked,p=places(n,lc);$('cout').innerHTML=p.map(function(v,i){return '<div class="cell">'+glyph(v)+'<small>'+v+'</small></div>'}).join('');$('ctxt').innerHTML=n+' = '+p.join('.')+(lc?' (calendar)':' (base 20)')+(NAMED[n]?' · <b class="red">'+NAMED[n]+'</b>':'');if(push)LED.commit('calc',{n:n,lc:lc,p:p})}
+$('cn').oninput=function(){calc(1)};$('cm').onclick=function(){$('cn').value=(+$('cn').value||0)-1;calc(1)};$('cp').onclick=function(){$('cn').value=(+$('cn').value||0)+1;calc(1)};$('clc').onchange=function(){calc(1)};
+function readGlyph(t){if(!/^[.|]+$/.test(t))return null;var d=t.split('.').length-1,b=t.split('|').length-1;return d<=4&&b<=3?d+5*b:null}
+function decode(str){var g=str.trim().split(/\s+/).filter(Boolean),v=g.map(readGlyph),ok=v.every(function(x){return x!==null});var bits=str.replace(/[^.|]/g,'').replace(/\./g,'0').replace(/\|/g,'1');return {g:g,v:v,ok:ok,sum:ok?v.reduce(function(a,b){return a+b},0):null,b20:ok&&v.length<=8?fromPlaces(v,false):null,bits:bits,bin:bits?parseInt(bits,2):0}}
+function dave(push){var r=decode($('dp').value);$('dout').innerHTML=r.g.map(function(t,i){return '<div class="cell">'+(r.v[i]===null?'<b class="red">?</b>':glyph(r.v[i]))+'<small>'+t+' = '+(r.v[i]===null?'not one glyph':r.v[i])+'</small></div>'}).join('');
+ var hit=[];if(r.ok){r.v.forEach(function(x){if(NAMED[x]&&x>20)hit.push(x)});for(var i=0;i+1<r.v.length;i++){var q=r.v[i]*20+r.v[i+1];if(NAMED[q])hit.push(r.v[i]+'.'+r.v[i+1]+'='+q+' ('+NAMED[q]+')')}}
+ $('dtxt').innerHTML=(r.ok?'Digits '+r.v.join(' · ')+' · sum '+r.sum+(r.b20!==null?' · as one base-20 number '+r.b20.toLocaleString():''):'One group is not a single valid glyph (more than 4 dots or 3 bars); split it with spaces.')+'<br>Binary (dot 0, bar 1): '+r.bits+' = '+r.bin+'<br><b>Dresden match for whole groups / adjacent pairs:</b> '+(hit.length?hit.join(', '):'none. This reading does not reproduce a Venus, eclipse, Mars or calendar number.');if(push)LED.commit('cipher',{p:$('dp').value,v:r.v})}
+$('dgo').onclick=function(){dave(1)};$('dp').onchange=function(){dave(1)};$('dold').onclick=function(){$('dp').value='..||..| ....|';dave(1)};
+// Venus
+var VP=[[236,'morning star','#1f6fa8'],[90,'hidden (superior conjunction)','#6b4a2b'],[250,'evening star','#b3261e'],[8,'hidden (inferior conjunction)','#1c140c']];
+function venus(push){var d=+$('vd').value,c=$('vc'),g=c.getContext('2d');g.clearRect(0,0,900,300);for(var r=0;r<5;r++){var x0=20,y=30+r*50,acc=0;VP.forEach(function(p){g.fillStyle=p[2];g.globalAlpha=.85;g.fillRect(x0+acc/584*860,y,p[0]/584*860-2,30);acc+=p[0]});g.globalAlpha=1;g.fillStyle='#1c140c';g.font='13px Georgia';g.fillText('round '+(r+1)+' · days '+(r*584)+'–'+(r*584+583),24,y-4)}
+ var rr=Math.floor(d/584),dd=d%584,x=20+dd/584*860,y=30+rr*50;g.strokeStyle='#efe0bf';g.lineWidth=4;g.beginPath();g.moveTo(x,y-6);g.lineTo(x,y+36);g.stroke();g.strokeStyle='#1c140c';g.lineWidth=2;g.stroke();
+ var acc=0,ph;for(var i=0;i<4;i++){if(dd<acc+VP[i][0]){ph=VP[i];break}acc+=VP[i][0]}$('vt').textContent='day '+d+' of 2920 · round '+(rr+1)+' · '+ph[1]+' · haab year '+(Math.floor(d/365)+1)+' of 8';if(push)LED.commit('venus',{d:d})}
+$('vd').oninput=function(){venus(1)};
+// Eclipse groups (Gates 1932 column summary): [steps, number of 177s counted as 178]
+var EG=[[[177,177,148],0,'53a'],[[177,177,177,177,177,177,177,177,177,148],1,'55a'],[[177,177,177,177,177,148],1,'56a'],[[177,177,177,177,177,177,148],1,'57a'],[[177,177,177,177,177,177,177,177,177,148],1,'52b'],[[177,177,177,177,177,148],1,'53b'],[[177,177,177,177,177,177,148],0,'54b'],[[177,177,177,177,177,177,177,177,148],1,'56b'],[[177,177,177,177,177,177,148],1,'57b'],[[177,177,177,177],0,'58b']];
+var ST=[];(function(){var t=0;EG.forEach(function(G,gi){var extra=G[1];G[0].forEach(function(s,k){var v=s;if(s===177&&extra>0&&k===Math.min(3,G[0].length-2)){v=178;extra--}t+=v;ST.push({step:v,shown:s,total:t,pic:s===148,grp:gi,pg:G[2]})});if(extra>0){var L=ST[ST.length-1];L.total+=extra;}})})();
+var ei=0;function ecl(push){var c=$('ec'),g=c.getContext('2d');g.clearRect(0,0,900,260);var N=ST.length;for(var i=0;i<N;i++){var x=20+(ST[i].total/11960)*860,y=ST[i].pic?70:130;g.fillStyle=i<=ei?(ST[i].pic?'#b3261e':'#1c140c'):'rgba(28,20,12,.25)';g.beginPath();g.arc(x,y,ST[i].pic?8:5,0,7);g.fill()}
+ g.strokeStyle='#1f6fa8';g.lineWidth=3;g.beginPath();g.moveTo(20,180);g.lineTo(20+ST[ei].total/11960*860,180);g.stroke();g.fillStyle='#1c140c';g.font='14px Georgia';g.fillText('0',14,205);g.fillText('11,960 days · 405 moons',700,205);g.fillStyle='#b3261e';g.fillText('red = 148-day step before an eclipse picture',20,40);
+ var s=ST[ei];$('et').textContent='station '+(ei+1)+' of '+N+' · step '+s.shown+(s.step!==s.shown?' (counted 178)':'')+' = '+places(s.shown).join('.')+' · running total '+s.total+' days'+(s.pic?' · ECLIPSE PICTURE, group ending '+s.pg:'');if(push)LED.commit('eclipse',{i:ei,t:s.total})}
+$('ef').onclick=function(){ei=Math.min(ST.length-1,ei+1);ecl(1)};$('eb').onclick=function(){ei=Math.max(0,ei-1);ecl(1)};
+// Calendar round
+function jdnNow(){return Math.floor(Date.now()/864e5)+2440588}
+var CORR=584283,day=jdnNow()-CORR;
+function cr(d){var t=((4+d)%13+13)%13;if(t===0)t=13;var n=((19+d)%20+20)%20,h=((348+d)%365+365)%365;return {tn:t,tname:DN[n],ti:n,hd:h%20,hm:Math.floor(h/20),h:h}}
+function lcStr(d){return places(d,true).join('.')}
+function wheel(push){var c=$('wc'),g=c.getContext('2d'),R=cr(day);g.clearRect(0,0,700,700);var cx=250,cy=300;
+ function ring(x,y,r,n,labels,cur,col){g.strokeStyle='#1c140c';g.lineWidth=3;g.beginPath();g.arc(x,y,r,0,7);g.stroke();for(var i=0;i<n;i++){var a=(i-cur)/n*6.2832-1.5708,px=x+Math.cos(a)*(r-18),py=y+Math.sin(a)*(r-18);g.fillStyle=i===cur?col:'#1c140c';g.font=(i===cur?'bold 15px':'11px')+' Georgia';g.textAlign='center';g.fillText(labels[i],px,py+4)}}
+ ring(cx,cy,190,20,DN,R.ti,'#b3261e');ring(cx,cy,100,13,[1,2,3,4,5,6,7,8,9,10,11,12,13].map(String),R.tn-1,'#b3261e');
+ var hl=[];for(var i=0;i<19;i++)hl.push(HM[i]);ring(520,470,160,19,hl,R.hm,'#1f6fa8');
+ g.fillStyle='#1f6fa8';g.beginPath();g.moveTo(cx,cy-205);g.lineTo(cx-9,cy-222);g.lineTo(cx+9,cy-222);g.fill();g.beginPath();g.moveTo(520,470-175);g.lineTo(511,470-192);g.lineTo(529,470-192);g.fill();
+ g.textAlign='left';g.fillStyle='#1c140c';g.font='bold 22px Georgia';g.fillText(R.tn+' '+R.tname+' · '+R.hd+' '+HM[R.hm],20,650);g.font='14px Georgia';g.fillText('Long Count '+lcStr(day)+' · day '+day.toLocaleString()+' since creation · position '+((day%18980+18980)%18980)+' of 18,980',20,676);
+ var gd=new Date((day+CORR-2440588)*864e5);$('wtx').textContent=gd.toISOString().slice(0,10)+' (proleptic Gregorian, GMT 584283)';if(push)LED.commit('round',{day:day})}
+$('w1').onclick=function(){day+=1;wheel(1)};$('w20').onclick=function(){day+=20;wheel(1)};$('w260').onclick=function(){day+=260;wheel(1)};$('wt').onclick=function(){day=jdnNow()-CORR;wheel(1)};
+// seed sets the opening calculator number and Venus day
+var R0=rng(SEED);$('vd').value=Math.floor(R0()*2920);$('cn').value=[584,2920,177,148,780,18980,1820][SEED%7];
+calc(0);dave(0);venus(0);ecl(0);wheel(0);
+LED.init().then(function(){LED.commit('open',{seed:SEED});
+ function gcd(a,b){return b?gcd(b,a%b):a}
+ LED.pagecheck('5 × 584 = 2920 = 8 × 365',5*584===2920&&8*365===2920,'2920');
+ LED.pagecheck('Venus phases 236+90+250+8 = 584',236+90+250+8===584,'584');
+ LED.pagecheck('13 × 2920 = 146 × 260 = 37960',13*2920===37960&&146*260===37960,'37960');
+ var tot=ST[ST.length-1].total;LED.pagecheck('eclipse table: 69 stations, 11,959–11,960 days',ST.length===69&&tot>=11959&&tot<=11960,ST.length+' / '+tot);
+ LED.pagecheck('177 = 8.17 and 148 = 7.8 in Maya notation',places(177).join('.')==='8.17'&&places(148).join('.')==='7.8','8.17 / 7.8');
+ LED.pagecheck('calendar round = lcm(260,365) = 18980',260*365/gcd(260,365)===18980,'18980');
+ var z=cr(2456283-CORR);LED.pagecheck("21 Dec 2012 = 13.0.0.0.0 4 Ajaw 3 K'ank'in",lcStr(2456283-CORR)==='13.0.0.0.0'&&z.tn===4&&z.tname==='Ajaw'&&z.hd===3&&HM[z.hm]==="K'ank'in",lcStr(2456283-CORR)+' '+z.tn+' '+z.tname+' '+z.hd+' '+HM[z.hm]);
+ var dz=decode('..||..| .... | . ... |... |');LED.pagecheck("Dave's string reads 19·4·5·1·3·8·5",dz.v.join('.')==='19.4.5.1.3.8.5','19.4.5.1.3.8.5');
+ LED.pagecheck('584 round-trips through bar-and-dot',fromPlaces(places(584))===584&&places(584).join('.')==='1.9.4','1.9.4')});</script><a class="grokbot-badge" href="../built-by-grok-bot.html" title="This page was built by Grok Bot" style="position:relative;display:inline-block;margin:10px 16px 16px;z-index:2147483000;font:600 11px/1 system-ui,sans-serif;color:#fff;background:rgba(12,6,30,.86);border:1px solid #7ff9ff;border-radius:999px;padding:5px 9px;text-decoration:none;letter-spacing:.04em">built by Grok Bot</a></body></html>
