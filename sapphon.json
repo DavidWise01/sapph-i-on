@@ -20163,7 +20163,8 @@
         "pal": [
          "#ff2d6f",
          "#2dffb2",
-         "#2d8bff"
+         "#2d8bff",
+         "#7ff9ff"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -36548,7 +36549,8 @@
        "icon": {
         "pal": [
          "#ff4a4a",
-         "#ff2a2a"
+         "#ff2a2a",
+         "#7ff9ff"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -42389,9 +42391,7 @@
        "label": "LIT · COMPUTED",
        "icon": {
         "pal": [
-         "#2a5740",
-         "#4f4909",
-         "#bcabe4"
+         "#7ff9ff"
         ],
         "bg": "#120a26",
         "canvas": 1,

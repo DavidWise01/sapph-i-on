@@ -94,7 +94,7 @@ function table(){$('t').innerHTML='<tr><th>lattice</th><th>sourced anchor</th>'+
 function setW(a){W=a;document.querySelectorAll('#w input').forEach(function(x,i){x.value=a[i]});LED.commit('weights',{w:W.join(','),top:rank()[0][0]})}
 document.querySelectorAll('#w input').forEach(function(x){x.oninput=function(){W[+x.dataset.i]=+x.value};x.onchange=function(){LED.commit('weights',{w:W.join(','),top:rank()[0][0]})}});
 $('mem').onclick=function(){setW([3,.5,.5,.5,0])};$('rt').onclick=function(){setW([.5,3,.5,.5,0])};$('sc').onclick=function(){setW([.5,0,3,1,0])};$('c').onclick=function(){setW(CAT.map(function(){return Math.round(Math.random()*12)/4}))};
-var pre=[[1,1,1,1,1],[3,.5,.5,.5,0],[.5,3,.5,.5,0],[.5,0,3,1,0]][SEED%4];W=pre.slice();document.querySelectorAll('#w input').forEach(function(x,i){x.value=W[i]});table();draw();
+var pre=[[1,1,1,1,1],[2,.5,1,.5,.5],[.5,2,1,.5,0],[1,0,2,1,.5]][SEED%4];W=pre.slice();document.querySelectorAll('#w input').forEach(function(x,i){x.value=W[i]});table();draw();
 LED.init().then(function(){LED.commit('open',{seed:SEED});
  var w0=W;W=[1,1,1,1,1];var eq=rank()[0][0];W=[3,.5,.5,.5,0];var m=rank()[0][0];W=[.5,3,.5,.5,0];var rt=rank()[0][0];W=[.5,0,3,1,0];var sc=rank()[0][0];W=w0;
  LED.pagecheck('equal weights pick ²⁸Si',eq==='²⁸Si (donors, dots)',eq);LED.pagecheck('no single winner: memory / room-T / scale tops differ',new Set([m,rt,sc]).size>=2,[m,rt,sc].join(' | '));
