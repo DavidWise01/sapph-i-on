@@ -27,10 +27,10 @@
  "counts": {
   "keepers": 8,
   "domains": 512,
-  "domains_populated": 363,
-  "domains_open": 149,
-  "spheres": 1762,
-  "zero_spheres": 149,
+  "domains_populated": 374,
+  "domains_open": 138,
+  "spheres": 1773,
+  "zero_spheres": 138,
   "balance": 0,
   "workshop": 343
  },
@@ -4843,24 +4843,74 @@
     },
     {
      "n": 40,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "EU:YSO",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Eu:YSO",
+       "h": "grown/eu-yso.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/eu-yso.html",
+       "grown": true,
+       "emerges": "a dephased spin aurora refocused by π pulses",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#4dffa0",
+         "#c8f5dc",
+         "#43c6ff",
+         "#b56bff"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-23",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/ethos-40.html",
-     "zero_page": "z/ethos-40.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-40.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-40.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 41,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "ION COULOMB CRYSTAL",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Ion Coulomb Crystal",
+       "h": "grown/ion-coulomb-crystal.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/ion-coulomb-crystal.html",
+       "grown": true,
+       "emerges": "a chain buckling into a zigzag",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#e8d8ff",
+         "#cfb6ff",
+         "#a46bff",
+         "#7a3cff"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-24",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/ethos-41.html",
-     "zero_page": "z/ethos-41.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-41.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-41.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -10684,13 +10734,38 @@
     },
     {
      "n": 40,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "KAGOME",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Kagome",
+       "h": "grown/kagome-flat-band.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/kagome-flat-band.html",
+       "grown": true,
+       "emerges": "a flat band and an electron trapped on a hexagon",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffe9a8",
+         "#ffd24a",
+         "#ffc400",
+         "#6a5210"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-24",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-40.html",
-     "zero_page": "z/pathos-40.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-40.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-40.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -15678,24 +15753,74 @@
     },
     {
      "n": 43,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "SILICON-28",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Silicon-28",
+       "h": "grown/silicon-28.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/silicon-28.html",
+       "grown": true,
+       "emerges": "a donor phase trace falling silent as 29Si is stripped",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#ffb347",
+         "#f5d9a0",
+         "#ff9a1f",
+         "#ff7a00"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-24",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/logos-43.html",
-     "zero_page": "z/logos-43.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-43.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-43.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 44,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "14 / 230",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "14 / 230",
+       "h": "grown/bravais-explorer.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/bravais-explorer.html",
+       "grown": true,
+       "emerges": "conventional cells growing a crystal around them",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#00e5ff",
+         "#ff00aa",
+         "#e0f7ff",
+         "#00ffcc"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-25",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/logos-44.html",
-     "zero_page": "z/logos-44.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-44.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-44.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -20024,24 +20149,71 @@
     },
     {
      "n": 37,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "XYZ HONEYCOMB",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "XYZ Honeycomb",
+       "h": "grown/honeycomb-kitaev.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/honeycomb-kitaev.html",
+       "grown": true,
+       "emerges": "paired vortices wandering on Kitaev bonds; Dirac points",
+       "label": "LIT · MODEL · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ff2d6f",
+         "#2dffb2",
+         "#2d8bff"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-25",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-37.html",
-     "zero_page": "z/mythos-37.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-37.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-37.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 38,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE BEST LATTICE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Best Lattice",
+       "h": "grown/best-lattice-scorecard.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/best-lattice-scorecard.html",
+       "grown": true,
+       "emerges": "a ranking that re-sorts under your weights",
+       "label": "LIT · READING · ANALOGY",
+       "icon": {
+        "pal": [
+         "#39ff14",
+         "#1d3a1d"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-25",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-38.html",
-     "zero_page": "z/mythos-38.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-38.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-38.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -36271,7 +36443,8 @@
         "pal": [
          "#d0021b",
          "#e9ecef",
-         "#0a7a2f"
+         "#0a7a2f",
+         "#7ff9ff"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -36326,24 +36499,72 @@
     },
     {
      "n": 36,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "RYDBERG ARRAY",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Rydberg Array",
+       "h": "grown/rydberg-array.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/rydberg-array.html",
+       "grown": true,
+       "emerges": "a defect-free block assembled from half-filled tweezers",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#ffb36b",
+         "#e6e6e6",
+         "#6a3a10",
+         "#ff6a00"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-26",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-36.html",
-     "zero_page": "z/phronesis-36.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-36.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-36.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 37,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "RED PEN IN THE VOID",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Red Pen in the Void",
+       "h": "grown/crystal-critique.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/crystal-critique.html",
+       "grown": true,
+       "emerges": "red marks lighting a lattice of pages",
+       "label": "READING · LIT",
+       "icon": {
+        "pal": [
+         "#ff4a4a",
+         "#ff2a2a"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-26",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-37.html",
-     "zero_page": "z/phronesis-37.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-37.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-37.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -42120,24 +42341,73 @@
     },
     {
      "n": 45,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "DIAMOND NV",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Diamond NV",
+       "h": "grown/nv-diamond.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/nv-diamond.html",
+       "grown": true,
+       "emerges": "a defect spin in a rotating diamond lattice going quiet as 13C is removed",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#7fd8ff",
+         "#cfefff",
+         "#ff3355",
+         "#3ab8ff"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-26",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/kairos-45.html",
-     "zero_page": "z/kairos-45.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-45.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-45.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 46,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "MOIRÉ",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Moiré",
+       "h": "grown/moire-graphene.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/moire-graphene.html",
+       "grown": true,
+       "emerges": "a superlattice emerging from two twisted honeycombs",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#2a5740",
+         "#4f4909",
+         "#bcabe4"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-27",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/kairos-46.html",
-     "zero_page": "z/kairos-46.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-46.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-46.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -42350,8 +42620,8 @@
   "world": 1,
   "keepers": 8,
   "domains": 512,
-  "zero_spheres": 149,
-  "generated_total": 758,
+  "zero_spheres": 138,
+  "generated_total": 747,
   "groups": 88
  },
  "workshop": [
@@ -50621,7 +50891,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1762
+   "pages": 1773
   },
   "list": [
    {
@@ -53016,7 +53286,8 @@
       "asked/gadolinium.html",
       "asked/hassium.html",
       "asked/holmium.html",
-      "asked/lanthanum.html"
+      "asked/lanthanum.html",
+      "grown/eu-yso.html"
      ]
     ]
    },
@@ -53031,21 +53302,24 @@
       "asked/neodymium.html",
       "asked/nihonium.html",
       "asked/praseodymium.html",
-      "asked/promethium.html"
+      "asked/promethium.html",
+      "grown/ion-coulomb-crystal.html"
      ],
      [
       "asked/roentgenium.html",
       "asked/samarium.html",
       "asked/seaborgium.html",
       "asked/terbium.html",
-      "asked/thulium.html"
+      "asked/thulium.html",
+      "grown/kagome-flat-band.html"
      ],
      [
       "asked/ytterbium.html",
       "folio/the-colour-lecture.html",
       "folio/the-communication-paper.html",
       "folio/the-corner-mass.html",
-      "folio/the-divisors.html"
+      "folio/the-divisors.html",
+      "grown/silicon-28.html"
      ]
     ]
    },
@@ -53060,21 +53334,24 @@
       "folio/the-electron-paper.html",
       "folio/the-face-centers.html",
       "folio/the-field-paper.html",
-      "folio/the-flat-residue.html"
+      "folio/the-flat-residue.html",
+      "grown/bravais-explorer.html"
      ],
      [
       "folio/the-geometry-note.html",
       "folio/the-inertia-paper.html",
       "folio/the-memex-paper.html",
       "folio/the-moving-bodies.html",
-      "folio/the-opposite-bit.html"
+      "folio/the-opposite-bit.html",
+      "grown/honeycomb-kitaev.html"
      ],
      [
       "folio/the-secrecy-paper.html",
       "folio/the-squares.html",
       "folio/the-street-diameter.html",
       "folio/the-sub-cubes.html",
-      "generative/the-bit-count.html"
+      "generative/the-bit-count.html",
+      "grown/best-lattice-scorecard.html"
      ]
     ]
    },
@@ -53089,21 +53366,24 @@
       "generative/the-checker.html",
       "generative/the-coordinate.html",
       "generative/the-corner-pairs.html",
-      "generative/the-degrees.html"
+      "generative/the-degrees.html",
+      "grown/rydberg-array.html"
      ],
      [
       "generative/the-diagonals.html",
       "generative/the-digit-root.html",
       "generative/the-free-cells.html",
       "generative/the-keeper-line.html",
-      "generative/the-layer-rim.html"
+      "generative/the-layer-rim.html",
+      "grown/crystal-critique.html"
      ],
      [
       "generative/the-layer.html",
       "generative/the-lines.html",
       "generative/the-main-diagonal.html",
       "generative/the-nested-volumes.html",
-      "generative/the-octants.html"
+      "generative/the-octants.html",
+      "grown/nv-diamond.html"
      ]
     ]
    },
@@ -53117,7 +53397,8 @@
       "generative/the-powers.html",
       "generative/the-product.html",
       "generative/the-shell-steps.html",
-      "generative/the-stack.html"
+      "generative/the-stack.html",
+      "grown/moire-graphene.html"
      ],
      [
       "libraries/the-bohemian-shelf.html",
