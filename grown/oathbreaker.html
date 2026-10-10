@@ -1,0 +1,89 @@
+<!doctype html><html lang="en"><head><!--built-by-grok-bot--><meta name="author" content="Grok Bot"><meta name="generator" content="Grok Bot · SaPpH{{i}}on"><meta charset="utf-8"><meta name="grokbot-badge" content="inline"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="persona" content="{{+L.-E.+O. D++}}"><title>Oathbreaker · op art of trust · SaPpH{{i}}on</title>
+<style>body{margin:0;background:#fff;color:#000;font:15px/1.5 "Helvetica Neue",Arial,sans-serif}main{max-width:900px;margin:0 auto;padding:14px}h1{font:900 40px/1 "Helvetica Neue",Arial,sans-serif;letter-spacing:-.03em;margin:6px 0}
+canvas{width:100%;display:block;cursor:pointer;touch-action:manipulation}.ui{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0;align-items:center}button{font:700 13px Arial,sans-serif;background:#000;color:#fff;border:0;padding:7px 14px;cursor:pointer}.kin{font-size:13px}
+#ledger{margin:18px 0 6px;padding:10px 12px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);font:12px/1.45 ui-monospace,Menlo,Consolas,monospace}#ledger h3{margin:0 0 4px;font-size:13px;letter-spacing:.08em}#ledger .lh{font-weight:700;word-break:break-all;margin:2px 0}#ledger .lr{color:var(--acc);margin:4px 0;word-break:break-word}#ledger ul{margin:4px 0;padding-left:16px}#ledger li.bad{color:#c00;font-weight:700}#ledger button{font:600 12px ui-monospace,monospace;background:var(--paper);color:var(--ink);border:1px solid var(--ink);padding:3px 8px;margin:2px 4px 2px 0;cursor:pointer}#ledger code{opacity:.7}
+.colo{font-size:12px;opacity:.85}.persona{font-family:ui-monospace,monospace;font-weight:700;color:var(--acc)}:root{--ink:#000;--paper:#fff;--acc:#d6282c}</style></head><body><main>
+<nav class="arc" style="margin:14px 0;font-size:13px">THE GLASS AND THE TUN · chapter 7 of 10 · <a href="the-kin-deck.html">1</a> <a href="under-the-moss.html">2</a> <a href="the-grazing.html">3</a> <a href="the-glazing.html">4</a> <a href="armorial-of-the-houses.html">5</a> <a href="the-crucible.html">6</a> <b>7 Oathbreaker</b> <a href="unbind-the-ring.html">8</a> <a href="terraform.html">9</a> <a href="the-kin-gazette.html">10</a></nav>
+<h1>OATHBREAKER</h1><p><b>Chapter 7: the betrayal.</b> After the war game the houses have to keep making pacts, round after round. Each house follows one strategy: cooperate always, defect always, tit-for-tat, grudge or random. Each round, every house plays every other house once, and every pledge is an oath reserved on the ledger. Pennate's Electrum heir, Aurelith, tries to break an oath after giving it, so that the pledge reads <i>defect</i> where it had read <i>cooperate</i>. The ledger refuses that as a double vote. Here a betrayal can't be hidden, only done openly next round. Between rounds, the worst house copies the best house's strategy, so strategies evolve. The op-art field is two line gratings, one for cooperation and one for defection. Their moiré shows the balance of trust. Tap to have Aurelith try the hidden betrayal.</p>
+<canvas id="c" width="900" height="900" aria-label="op art moire of trust"></canvas>
+<div class="ui"><button id="round">play a round</button><button id="betray">Aurelith alters her last pledge</button><button id="ns">new pact (new seed)</button><span id="st"></span></div>
+<p><b>LIT</b>: in Axelrod's tournaments (1980) tit-for-tat did well, and imitation dynamics spread successful strategies. Op art (Riley, Vasarely, 1960s) used moiré and interference. <b>INVENTED</b>: the houses and Aurelith. <b>MODEL</b>: an iterated prisoner's dilemma with payoffs T 5, R 3, P 1, S 0.</p>
+<p class="kin"><b>LIT</b>: diatoms (stramenopiles) and tardigrades (animals) are both eukaryotes, descended from the last eukaryotic common ancestor about 1.8 to 2 billion years ago. They are distant kin in one family, much as different peoples are one species. Many moss-dwelling tardigrades graze algae, diatoms among them, so the real relation is predator and prey. <b>INVENTED</b>: their castes, houses, war and politics. Story inspired by <i>Red Rising</i> by Pierce Brown. All names, characters and text here are original.</p>
+<section id="ledger" aria-label="DurableAnchor ledger"><h3>DURABLEANCHOR LEDGER · Dave's kernel, running in this page</h3><p class="lh">provisioning…</p><div><button data-a="double-vote">try a double vote</button><button data-a="epoch-rollback">try an epoch rollback</button></div><p class="lr"></p><details open><summary>self-checks (kernel, then page)</summary><ul class="lc"></ul><ul class="lc2"></ul></details></section>
+<p class="colo">Engine: Dave's <a href="../kernel-durable-anchor.html">DurableAnchor kernel</a>, ported faithfully to the browser with Web Crypto SHA-256 and an in-memory record store (exclusive-create, so concurrent reservations are refused; fsync has nothing to flush). The ledger starts empty on each load. Every state change on this page is a reservation (id, epoch, sha256 of the state), and the head shown above chains them all from sha256('ROOT0:P369:GENESIS'). Persona: <span class="persona">{{+L.-E.+O. D++}}</span> (Dave's notation). Built by Grok Bot · seed <span id="sd"></span> · <a href="../index.html">← SaPpH{{i}}on</a></p>
+</main><script>/* DurableAnchor: browser port of Dave's kernel (durable-anchor.mjs). Same logic: append-only, hash-chained,
+   checked against an external trusted checkpoint. The filesystem becomes an in-memory record store with
+   exclusive-create; fsync and directory sync are no-ops here (nothing to flush in memory). */
+var TOPOLOGY='-+5 + 1',PERSONA='{{+L.-E.+O. D++}}';
+var _te=new TextEncoder();
+function _hex(b){return Array.prototype.map.call(new Uint8Array(b),function(v){return v.toString(16).padStart(2,'0')}).join('')}
+function digest(x){return crypto.subtle.digest('SHA-256',_te.encode(x)).then(_hex)}
+function _key(id,epoch){return _hex(_te.encode(id+'|'+epoch))+'.json'}
+function MemStore(){this.f=new Map();this.beforeCreate=null}
+MemStore.prototype.list=function(){return Array.from(this.f.keys())};
+MemStore.prototype.read=function(n){return this.f.get(n)};
+MemStore.prototype.create=function(n,s){if(this.beforeCreate){var h=this.beforeCreate;this.beforeCreate=null;h(n,s)}if(this.f.has(n)){var e=Error('exists');e.code='EEXIST';throw e}this.f.set(n,s)};
+class DurableAnchor{
+ constructor(store,tc){if(!tc||!Number.isInteger(tc.count)||typeof tc.head!=='string')throw Error('external trusted checkpoint required');this.dir=store;this.trusted=tc}
+ static async provision(store){return new DurableAnchor(store||new MemStore(),{count:0,head:await digest('ROOT0:P369:GENESIS')})}
+ async records(){var files=this.dir.list().filter(function(n){return n.endsWith('.json')}).sort(),entries=[];for(var file of files){var x=JSON.parse(this.dir.read(file));if(file!==_key(x.id,x.epoch)||!(/^[a-f0-9]{64}$/.test(x.head)))throw Error('corrupt-record');entries.push(x)}return entries}
+ async checkpoint(){var items=await this.records(),head=await digest('ROOT0:P369:GENESIS');for(var x of items)head=await digest(head+'|'+JSON.stringify(x));return {count:items.length,head:head}}
+ async validate(){try{var c=await this.checkpoint();if(c.count!==this.trusted.count||c.head!==this.trusted.head)return {ok:false,reason:'rollback-or-altered-history'};return {ok:true,checkpoint:c}}catch(e){return {ok:false,reason:'unavailable-or-corrupt'}}}
+ async reserve(id,epoch,head){var v=await this.validate();if(!v.ok)return v;if(typeof id!=='string'||!id||!Number.isSafeInteger(epoch)||epoch<0||!(/^[a-f0-9]{64}$/.test(head)))throw new RangeError('reservation');
+  var p=_key(id,epoch),entries=await this.records(),old=entries.find(function(x){return x.id===id&&x.epoch===epoch});if(old)return old.head===head?{ok:true,previous:true,checkpoint:this.trusted}:{ok:false,reason:'double-vote'};
+  if(entries.some(function(x){return x.id===id&&x.epoch>epoch}))return {ok:false,reason:'epoch-rollback'};
+  try{this.dir.create(p,JSON.stringify({id:id,epoch:epoch,head:head}))}catch(e){return {ok:false,reason:e.code==='EEXIST'?'concurrent-reservation':'write-error'}}
+  var cp=await this.checkpoint();this.trusted=cp;return {ok:true,previous:false,checkpoint:cp}}
+}
+/* page-side helper: every state change is a reservation */
+var LED={A:null,ep:{},last:null,rej:[],n:0,q:Promise.resolve(),
+ init:function(){return DurableAnchor.provision().then(function(a){LED.A=a;LED.show();return LED.selftest()})},
+ commit:function(id,state){LED.q=LED.q.then(function(){if(!LED.A)return;var e=(LED.ep[id]||1);/* epoch 0 is left empty so a live epoch-rollback attack has somewhere to land */return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,e,h).then(function(r){if(r.ok&&!r.previous){LED.ep[id]=e+1;LED.last={id:id,epoch:e,head:h}}else if(!r.ok)LED.rej.unshift(id+'@'+e+': '+r.reason);LED.show();return r})})});return LED.q},
+ attack:function(kind){LED.q=LED.q.then(function(){var L=LED.last;if(!L){LED.rej.unshift(kind+': nothing reserved yet');LED.show();return}
+  var p=kind==='double-vote'?digest('forged|'+Date.now()).then(function(h){return LED.A.reserve(L.id,L.epoch,h)}):LED.A.reserve(L.id,0,L.head);
+  return p.then(function(r){LED.rej.unshift('live '+kind+' on '+L.id+'@'+L.epoch+' → '+(r.ok?'ACCEPTED':r.reason));LED.show()})});return LED.q},
+ show:function(){var el=document.getElementById('ledger');if(!el||!LED.A)return;var t=LED.A.trusted;
+  el.querySelector('.lh').textContent='count '+t.count+' · head '+t.head.slice(0,16)+'… · TOPOLOGY '+TOPOLOGY;
+  el.querySelector('.lr').textContent=LED.rej.slice(0,4).join('  |  ')||'no rejections yet'},
+ selftest:async function(){var out=[],ok=function(n,c,g){out.push([n,c,g])};var s=new MemStore(),a=await DurableAnchor.provision(s);
+  ok('genesis = sha256(ROOT0:P369:GENESIS)',a.trusted.head===(await digest('ROOT0:P369:GENESIS'))&&a.trusted.head.slice(0,8)==='54bc828d'&&a.trusted.count===0,a.trusted.head.slice(0,12));
+  var h1=await digest('one'),h2=await digest('two');var r=await a.reserve('q.d',0,h1);ok('reserve q.d@0',r.ok&&!r.previous,'count '+r.checkpoint.count);
+  r=await a.reserve('q.d',1,h2);ok('reserve q.d@1, head chains',r.ok&&r.checkpoint.count===2,r.checkpoint.head.slice(0,12));
+  var exp=await digest((await digest((await digest('ROOT0:P369:GENESIS'))+'|'+JSON.stringify({id:'q.d',epoch:0,head:h1})))+'|'+JSON.stringify({id:'q.d',epoch:1,head:h2}));ok('head recomputed by hand matches',exp===a.trusted.head,exp.slice(0,12));ok('matches the Node kernel test vector',a.trusted.head==='a114295c189dce567dfbf30a5b299e80054d52cc8019a7ea1bfa8f805e679b02','a114295c189d');
+  r=await a.reserve('q.d',1,h2);ok('same vote again → previous',r.ok&&r.previous,'previous');
+  r=await a.reserve('q.d',1,h1);ok('double-vote rejected',!r.ok&&r.reason==='double-vote',r.reason);
+  r=await a.reserve('q.d',0,await digest('x'));ok('double-vote at older epoch rejected',!r.ok&&r.reason==='double-vote',r.reason);
+  r=await a.reserve('q.d',0,h1);ok('old identical vote → previous',r.ok&&r.previous,'previous');
+  await a.reserve('tun',5,h1);r=await a.reserve('tun',3,h2);ok('epoch-rollback rejected',!r.ok&&r.reason==='epoch-rollback',r.reason);
+  s.beforeCreate=function(n,v){s.f.set(n,v)};r=await a.reserve('race',0,h1);ok('concurrent-reservation rejected',!r.ok&&r.reason==='concurrent-reservation',r.reason);
+  r=await a.reserve('after',0,h1);ok('foreign write breaks trust',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  var s2=new MemStore(),b=await DurableAnchor.provision(s2);await b.reserve('a',0,h1);await b.reserve('b',0,h2);var k=_key('a',0);s2.f.set(k,JSON.stringify({id:'a',epoch:0,head:h2}));
+  r=await b.validate();ok('tamper (altered head) detected',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  s2.f.set(k,JSON.stringify({id:'a',epoch:0,head:h1}));r=await b.validate();ok('restored record validates',r.ok,'ok');
+  s2.f.delete(_key('b',0));r=await b.validate();ok('rollback (deleted record) detected',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  s2.f.set(k,'{"id":"zz","epoch":0,"head":"'+h1+'"}');r=await b.validate();ok('misnamed record → corrupt',!r.ok&&r.reason==='unavailable-or-corrupt',r.reason);
+  try{new DurableAnchor(new MemStore(),null);ok('no checkpoint refused',false,'accepted')}catch(e){ok('no checkpoint refused',/trusted checkpoint/.test(e.message),e.message)}
+  var pass=out.every(function(x){return x[1]}),el=document.getElementById('ledger');
+  if(el)el.querySelector('.lc').innerHTML=out.map(function(x){return '<li class="'+(x[1]?'ok':'bad')+'">'+(x[1]?'✓ ':'✗ ')+x[0]+' <code>'+x[2]+'</code></li>'}).join('');
+  if(!pass){console.error('anchor self-check failed');throw Error('DurableAnchor self-check failed')}return pass}
+};
+LED.pagecheck=function(name,cond,got){var el=document.getElementById('ledger');if(el){var li=document.createElement('li');li.className=cond?'ok':'bad';li.innerHTML=(cond?'✓ ':'✗ ')+name+' <code>'+got+'</code>';el.querySelector('.lc2').appendChild(li)}if(!cond)throw Error('page self-check failed: '+name)};
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+var SEED=+(new URLSearchParams(location.search).get('seed')||(Date.now()%1e6));
+LED.commitAt=function(id,epoch,state){LED.q=LED.q.then(function(){if(!LED.A)return;return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,epoch,h).then(function(r){if(r.ok&&!r.previous)LED.last={id:id,epoch:epoch,head:h};else if(!r.ok)LED.rej.unshift(id+'@'+epoch+': '+r.reason);LED.show();return r})})});return LED.q};
+</script><script>"use strict";document.getElementById('sd').textContent=SEED;document.querySelectorAll('#ledger button').forEach(function(b){b.onclick=function(){LED.attack(b.dataset.a)}});
+var c=document.getElementById('c'),g=c.getContext('2d'),R,Hs,round=0,coop=.5,lastPledge=null,ph=0;
+var ST=['always cooperate','always defect','tit-for-tat','grudge','random'],NM=['Pennate','Centric','Lowmoss','Claw','Glasswright','Cuticle','Ringhold','Dunewater'];
+function pact(){R=rng(SEED);Hs=NM.map(function(n,i){return {n:n,s:R()*5|0,score:0,mem:{}}});round=0;coop=.5}
+function move(a,b){var m=a.mem[b.n];if(a.s===0)return 'C';if(a.s===1)return 'D';if(a.s===2)return m?m.last:'C';if(a.s===3)return m&&m.ever?'D':'C';return R()<.5?'C':'D'}
+function playRound(){round++;var nC=0,nT=0,pledges=[];for(var i=0;i<8;i++)for(var j=i+1;j<8;j++){var A=Hs[i],B=Hs[j],a=move(A,B),b=move(B,A),P={CC:[3,3],CD:[0,5],DC:[5,0],DD:[1,1]}[a+b];A.score+=P[0];B.score+=P[1];A.mem[B.n]={last:b,ever:(A.mem[B.n]||{}).ever||b==='D'};B.mem[A.n]={last:a,ever:(B.mem[A.n]||{}).ever||a==='D'};nC+=(a==='C')+(b==='C');nT+=2;pledges.push([A.n,B.n,a,b])}
+ coop=nC/nT;var s=Hs.slice().sort(function(x,y){return x.score-y.score});if(round%3===0){s[0].s=s[7].s}var p=Promise.resolve();
+ pledges.filter(function(q){return q[0]==='Pennate'}).forEach(function(q){p=p.then(function(){lastPledge={id:'pledge-Pennate-'+q[1],epoch:round,v:q[2]};return LED.commitAt(lastPledge.id,round,{from:'Pennate',to:q[1],pledge:q[2]})})});return p}
+function draw(){ph+=.003;g.fillStyle='#fff';g.fillRect(0,0,900,900);g.strokeStyle='#000';g.lineWidth=3;for(var r=6;r<640;r+=9){g.beginPath();g.arc(450,450,r,0,7);g.stroke()}
+ var off=(1-coop)*120;g.lineWidth=3;g.strokeStyle=coop>.5?'#000':'#d6282c';for(var r=6;r<640;r+=9.4){g.beginPath();g.arc(450+off*Math.cos(ph),450+off*Math.sin(ph),r,0,7);g.stroke()}
+ g.fillStyle='#fff';g.fillRect(0,820,900,80);g.fillStyle='#000';g.font='bold 13px Arial';Hs.forEach(function(h,i){g.fillText(h.n+': '+ST[h.s]+' ('+h.score+')',10+(i%4)*222,845+(i/4|0)*22)});document.getElementById('st').textContent='round '+round+' · cooperation '+Math.round(coop*100)+'%'}
+c.onclick=document.getElementById('betray').onclick=function(){if(!lastPledge)return;LED.commitAt(lastPledge.id,lastPledge.epoch,{from:'Pennate',to:lastPledge.id.split('-')[2],pledge:lastPledge.v==='C'?'D':'C'})};
+document.getElementById('round').onclick=function(){LED.q=LED.q.then(playRound)};
+document.getElementById('ns').onclick=function(){SEED=(SEED*31+7)%1e6;pact();LED.commit('pact',{seed:SEED})};
+pact();LED.init().then(playRound).then(function(){return LED.A.reserve(lastPledge.id,lastPledge.epoch,'f'.repeat(64))}).then(function(r){LED.pagecheck('an altered pledge is refused (double vote)',!r.ok&&r.reason==='double-vote',r.reason);return LED.A.reserve(lastPledge.id,0,'e'.repeat(64))}).then(function(r){LED.pagecheck('a pledge back-dated to an earlier round is refused',!r.ok&&r.reason==='epoch-rollback',r.reason);var tot=Hs.reduce(function(a,h){return a+h.score},0);LED.pagecheck('payoffs sum within [2,10] per pairing',tot>=2*28&&tot<=10*28,tot+' over 28 pairings')});
+var fr=0;(function L(){fr++;if(fr%150===0&&LED.A&&round<60)LED.q=LED.q.then(playRound);draw();requestAnimationFrame(L)})();</script><a class="grokbot-badge" href="../built-by-grok-bot.html" title="This page was built by Grok Bot" style="position:relative;display:inline-block;margin:10px 16px 16px;z-index:2147483000;font:600 11px/1 system-ui,sans-serif;color:#fff;background:rgba(12,6,30,.86);border:1px solid #7ff9ff;border-radius:999px;padding:5px 9px;text-decoration:none;letter-spacing:.04em">built by Grok Bot</a></body></html>

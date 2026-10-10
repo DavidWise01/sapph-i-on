@@ -1,0 +1,86 @@
+<!doctype html><html lang="en"><head><!--built-by-grok-bot--><meta name="author" content="Grok Bot"><meta name="generator" content="Grok Bot · SaPpH{{i}}on"><meta charset="utf-8"><meta name="grokbot-badge" content="inline"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="persona" content="{{+L.-E.+O. D++}}"><title>Unbind the Ring · stencil graffiti · SaPpH{{i}}on</title>
+<style>body{margin:0;background:#8b8a86;color:#111;font:15px/1.5 "Arial Black",Impact,sans-serif}main{max-width:1000px;margin:0 auto;padding:14px}h1{font:900 44px/1 Impact,"Arial Black",sans-serif;text-transform:uppercase;margin:6px 0;color:#d6282c;text-shadow:3px 3px 0 #111}
+p{font-family:Arial,sans-serif;background:#e9e6df;padding:8px 12px}canvas{width:100%;display:block;cursor:crosshair;touch-action:manipulation}.ui{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0;align-items:center}button{font:900 13px Impact,"Arial Black",sans-serif;letter-spacing:.06em;text-transform:uppercase;background:#d6282c;color:#fff;border:0;padding:7px 14px;cursor:pointer}.kin{font-size:13px}
+#ledger{margin:18px 0 6px;padding:10px 12px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);font:12px/1.45 ui-monospace,Menlo,Consolas,monospace}#ledger h3{margin:0 0 4px;font-size:13px;letter-spacing:.08em}#ledger .lh{font-weight:700;word-break:break-all;margin:2px 0}#ledger .lr{color:var(--acc);margin:4px 0;word-break:break-word}#ledger ul{margin:4px 0;padding-left:16px}#ledger li.bad{color:#c00;font-weight:700}#ledger button{font:600 12px ui-monospace,monospace;background:var(--paper);color:var(--ink);border:1px solid var(--ink);padding:3px 8px;margin:2px 4px 2px 0;cursor:pointer}#ledger code{opacity:.7}
+.colo{font-size:12px;opacity:.85}.persona{font-family:ui-monospace,monospace;font-weight:700;color:var(--acc)}:root{--ink:#111;--paper:#e9e6df;--acc:#d6282c}</style></head><body><main>
+<nav class="arc" style="margin:14px 0;font-size:13px">THE GLASS AND THE TUN · chapter 8 of 10 · <a href="the-kin-deck.html">1</a> <a href="under-the-moss.html">2</a> <a href="the-grazing.html">3</a> <a href="the-glazing.html">4</a> <a href="armorial-of-the-houses.html">5</a> <a href="the-crucible.html">6</a> <a href="oathbreaker.html">7</a> <b>8 Unbind the Ring</b> <a href="terraform.html">9</a> <a href="the-kin-gazette.html">10</a></nav>
+<h1>Unbind the Ring</h1><p><b>Chapter 8: the rising.</b> Kessa comes back down into the moss carrying the truth about the aquifer, and the walls of the warrens take up her mark: a tun breaking an electrum ring. The mark spreads by one rule. A wall section near marked walls catches it with a probability that grows with how many of its neighbours are marked. Frustulate whitewash (patrols) covers marks at a fixed rate, and a covered wall is <i>wary</i> for a while. Waves, refuges and sudden tipping points all emerge from that. Every new district reached is a reservation on the ledger. Tap to spray a mark yourself.</p>
+<canvas id="c" width="1000" height="620" aria-label="stencil graffiti spreading on walls"></canvas>
+<div class="ui"><button id="patrol">double the patrols</button><button id="ns">new warren (new seed)</button><span id="st"></span></div>
+<p><b>LIT</b>: contagion models with recovery (SIRS) show thresholds and waves. Stencil graffiti is a fast, reproducible protest medium. <b>INVENTED</b>: the rising and its mark. <b>MODEL</b>: SIRS on a grid, with infection 1 − (1 − β)^k for k marked neighbours.</p>
+<p class="kin"><b>LIT</b>: diatoms (stramenopiles) and tardigrades (animals) are both eukaryotes, descended from the last eukaryotic common ancestor about 1.8 to 2 billion years ago. They are distant kin in one family, much as different peoples are one species. Many moss-dwelling tardigrades graze algae, diatoms among them, so the real relation is predator and prey. <b>INVENTED</b>: their castes, houses, war and politics. Story inspired by <i>Red Rising</i> by Pierce Brown. All names, characters and text here are original.</p>
+<section id="ledger" aria-label="DurableAnchor ledger"><h3>DURABLEANCHOR LEDGER · Dave's kernel, running in this page</h3><p class="lh">provisioning…</p><div><button data-a="double-vote">try a double vote</button><button data-a="epoch-rollback">try an epoch rollback</button></div><p class="lr"></p><details open><summary>self-checks (kernel, then page)</summary><ul class="lc"></ul><ul class="lc2"></ul></details></section>
+<p class="colo">Engine: Dave's <a href="../kernel-durable-anchor.html">DurableAnchor kernel</a>, ported faithfully to the browser with Web Crypto SHA-256 and an in-memory record store (exclusive-create, so concurrent reservations are refused; fsync has nothing to flush). The ledger starts empty on each load. Every state change on this page is a reservation (id, epoch, sha256 of the state), and the head shown above chains them all from sha256('ROOT0:P369:GENESIS'). Persona: <span class="persona">{{+L.-E.+O. D++}}</span> (Dave's notation). Built by Grok Bot · seed <span id="sd"></span> · <a href="../index.html">← SaPpH{{i}}on</a></p>
+</main><script>/* DurableAnchor: browser port of Dave's kernel (durable-anchor.mjs). Same logic: append-only, hash-chained,
+   checked against an external trusted checkpoint. The filesystem becomes an in-memory record store with
+   exclusive-create; fsync and directory sync are no-ops here (nothing to flush in memory). */
+var TOPOLOGY='-+5 + 1',PERSONA='{{+L.-E.+O. D++}}';
+var _te=new TextEncoder();
+function _hex(b){return Array.prototype.map.call(new Uint8Array(b),function(v){return v.toString(16).padStart(2,'0')}).join('')}
+function digest(x){return crypto.subtle.digest('SHA-256',_te.encode(x)).then(_hex)}
+function _key(id,epoch){return _hex(_te.encode(id+'|'+epoch))+'.json'}
+function MemStore(){this.f=new Map();this.beforeCreate=null}
+MemStore.prototype.list=function(){return Array.from(this.f.keys())};
+MemStore.prototype.read=function(n){return this.f.get(n)};
+MemStore.prototype.create=function(n,s){if(this.beforeCreate){var h=this.beforeCreate;this.beforeCreate=null;h(n,s)}if(this.f.has(n)){var e=Error('exists');e.code='EEXIST';throw e}this.f.set(n,s)};
+class DurableAnchor{
+ constructor(store,tc){if(!tc||!Number.isInteger(tc.count)||typeof tc.head!=='string')throw Error('external trusted checkpoint required');this.dir=store;this.trusted=tc}
+ static async provision(store){return new DurableAnchor(store||new MemStore(),{count:0,head:await digest('ROOT0:P369:GENESIS')})}
+ async records(){var files=this.dir.list().filter(function(n){return n.endsWith('.json')}).sort(),entries=[];for(var file of files){var x=JSON.parse(this.dir.read(file));if(file!==_key(x.id,x.epoch)||!(/^[a-f0-9]{64}$/.test(x.head)))throw Error('corrupt-record');entries.push(x)}return entries}
+ async checkpoint(){var items=await this.records(),head=await digest('ROOT0:P369:GENESIS');for(var x of items)head=await digest(head+'|'+JSON.stringify(x));return {count:items.length,head:head}}
+ async validate(){try{var c=await this.checkpoint();if(c.count!==this.trusted.count||c.head!==this.trusted.head)return {ok:false,reason:'rollback-or-altered-history'};return {ok:true,checkpoint:c}}catch(e){return {ok:false,reason:'unavailable-or-corrupt'}}}
+ async reserve(id,epoch,head){var v=await this.validate();if(!v.ok)return v;if(typeof id!=='string'||!id||!Number.isSafeInteger(epoch)||epoch<0||!(/^[a-f0-9]{64}$/.test(head)))throw new RangeError('reservation');
+  var p=_key(id,epoch),entries=await this.records(),old=entries.find(function(x){return x.id===id&&x.epoch===epoch});if(old)return old.head===head?{ok:true,previous:true,checkpoint:this.trusted}:{ok:false,reason:'double-vote'};
+  if(entries.some(function(x){return x.id===id&&x.epoch>epoch}))return {ok:false,reason:'epoch-rollback'};
+  try{this.dir.create(p,JSON.stringify({id:id,epoch:epoch,head:head}))}catch(e){return {ok:false,reason:e.code==='EEXIST'?'concurrent-reservation':'write-error'}}
+  var cp=await this.checkpoint();this.trusted=cp;return {ok:true,previous:false,checkpoint:cp}}
+}
+/* page-side helper: every state change is a reservation */
+var LED={A:null,ep:{},last:null,rej:[],n:0,q:Promise.resolve(),
+ init:function(){return DurableAnchor.provision().then(function(a){LED.A=a;LED.show();return LED.selftest()})},
+ commit:function(id,state){LED.q=LED.q.then(function(){if(!LED.A)return;var e=(LED.ep[id]||1);/* epoch 0 is left empty so a live epoch-rollback attack has somewhere to land */return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,e,h).then(function(r){if(r.ok&&!r.previous){LED.ep[id]=e+1;LED.last={id:id,epoch:e,head:h}}else if(!r.ok)LED.rej.unshift(id+'@'+e+': '+r.reason);LED.show();return r})})});return LED.q},
+ attack:function(kind){LED.q=LED.q.then(function(){var L=LED.last;if(!L){LED.rej.unshift(kind+': nothing reserved yet');LED.show();return}
+  var p=kind==='double-vote'?digest('forged|'+Date.now()).then(function(h){return LED.A.reserve(L.id,L.epoch,h)}):LED.A.reserve(L.id,0,L.head);
+  return p.then(function(r){LED.rej.unshift('live '+kind+' on '+L.id+'@'+L.epoch+' → '+(r.ok?'ACCEPTED':r.reason));LED.show()})});return LED.q},
+ show:function(){var el=document.getElementById('ledger');if(!el||!LED.A)return;var t=LED.A.trusted;
+  el.querySelector('.lh').textContent='count '+t.count+' · head '+t.head.slice(0,16)+'… · TOPOLOGY '+TOPOLOGY;
+  el.querySelector('.lr').textContent=LED.rej.slice(0,4).join('  |  ')||'no rejections yet'},
+ selftest:async function(){var out=[],ok=function(n,c,g){out.push([n,c,g])};var s=new MemStore(),a=await DurableAnchor.provision(s);
+  ok('genesis = sha256(ROOT0:P369:GENESIS)',a.trusted.head===(await digest('ROOT0:P369:GENESIS'))&&a.trusted.head.slice(0,8)==='54bc828d'&&a.trusted.count===0,a.trusted.head.slice(0,12));
+  var h1=await digest('one'),h2=await digest('two');var r=await a.reserve('q.d',0,h1);ok('reserve q.d@0',r.ok&&!r.previous,'count '+r.checkpoint.count);
+  r=await a.reserve('q.d',1,h2);ok('reserve q.d@1, head chains',r.ok&&r.checkpoint.count===2,r.checkpoint.head.slice(0,12));
+  var exp=await digest((await digest((await digest('ROOT0:P369:GENESIS'))+'|'+JSON.stringify({id:'q.d',epoch:0,head:h1})))+'|'+JSON.stringify({id:'q.d',epoch:1,head:h2}));ok('head recomputed by hand matches',exp===a.trusted.head,exp.slice(0,12));ok('matches the Node kernel test vector',a.trusted.head==='a114295c189dce567dfbf30a5b299e80054d52cc8019a7ea1bfa8f805e679b02','a114295c189d');
+  r=await a.reserve('q.d',1,h2);ok('same vote again → previous',r.ok&&r.previous,'previous');
+  r=await a.reserve('q.d',1,h1);ok('double-vote rejected',!r.ok&&r.reason==='double-vote',r.reason);
+  r=await a.reserve('q.d',0,await digest('x'));ok('double-vote at older epoch rejected',!r.ok&&r.reason==='double-vote',r.reason);
+  r=await a.reserve('q.d',0,h1);ok('old identical vote → previous',r.ok&&r.previous,'previous');
+  await a.reserve('tun',5,h1);r=await a.reserve('tun',3,h2);ok('epoch-rollback rejected',!r.ok&&r.reason==='epoch-rollback',r.reason);
+  s.beforeCreate=function(n,v){s.f.set(n,v)};r=await a.reserve('race',0,h1);ok('concurrent-reservation rejected',!r.ok&&r.reason==='concurrent-reservation',r.reason);
+  r=await a.reserve('after',0,h1);ok('foreign write breaks trust',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  var s2=new MemStore(),b=await DurableAnchor.provision(s2);await b.reserve('a',0,h1);await b.reserve('b',0,h2);var k=_key('a',0);s2.f.set(k,JSON.stringify({id:'a',epoch:0,head:h2}));
+  r=await b.validate();ok('tamper (altered head) detected',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  s2.f.set(k,JSON.stringify({id:'a',epoch:0,head:h1}));r=await b.validate();ok('restored record validates',r.ok,'ok');
+  s2.f.delete(_key('b',0));r=await b.validate();ok('rollback (deleted record) detected',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  s2.f.set(k,'{"id":"zz","epoch":0,"head":"'+h1+'"}');r=await b.validate();ok('misnamed record → corrupt',!r.ok&&r.reason==='unavailable-or-corrupt',r.reason);
+  try{new DurableAnchor(new MemStore(),null);ok('no checkpoint refused',false,'accepted')}catch(e){ok('no checkpoint refused',/trusted checkpoint/.test(e.message),e.message)}
+  var pass=out.every(function(x){return x[1]}),el=document.getElementById('ledger');
+  if(el)el.querySelector('.lc').innerHTML=out.map(function(x){return '<li class="'+(x[1]?'ok':'bad')+'">'+(x[1]?'✓ ':'✗ ')+x[0]+' <code>'+x[2]+'</code></li>'}).join('');
+  if(!pass){console.error('anchor self-check failed');throw Error('DurableAnchor self-check failed')}return pass}
+};
+LED.pagecheck=function(name,cond,got){var el=document.getElementById('ledger');if(el){var li=document.createElement('li');li.className=cond?'ok':'bad';li.innerHTML=(cond?'✓ ':'✗ ')+name+' <code>'+got+'</code>';el.querySelector('.lc2').appendChild(li)}if(!cond)throw Error('page self-check failed: '+name)};
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+var SEED=+(new URLSearchParams(location.search).get('seed')||(Date.now()%1e6));
+LED.commitAt=function(id,epoch,state){LED.q=LED.q.then(function(){if(!LED.A)return;return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,epoch,h).then(function(r){if(r.ok&&!r.previous)LED.last={id:id,epoch:epoch,head:h};else if(!r.ok)LED.rej.unshift(id+'@'+epoch+': '+r.reason);LED.show();return r})})});return LED.q};
+</script><script>"use strict";document.getElementById('sd').textContent=SEED;document.querySelectorAll('#ledger button').forEach(function(b){b.onclick=function(){LED.attack(b.dataset.a)}});
+var c=document.getElementById('c'),g=c.getContext('2d'),W=50,H=31,S=20,st,age,R,beta=.05,gam=.025,dist=new Set(),fr=0,o=document.createElement('canvas');o.width=1000;o.height=620;var og=o.getContext('2d');
+function warren(){R=rng(SEED);st=new Uint8Array(W*H);age=new Uint16Array(W*H);dist=new Set();for(var k=0;k<3;k++)st[(R()*H|0)*W+(R()*W|0)]=1;wall()}
+function wall(){og.fillStyle='#e9e6df';og.fillRect(0,0,1000,620);for(var y=0;y<620;y+=26)for(var x=(y/26%2)*30;x<1000;x+=60){og.fillStyle='rgba(120,110,100,'+(.1+R()*.15)+')';og.fillRect(x+1,y+1,58,24)}}
+function step(){var n=new Uint8Array(st);for(var y=0;y<H;y++)for(var x=0;x<W;x++){var i=y*W+x;age[i]++;if(st[i]===0){var k=0;for(var dy=-1;dy<=1;dy++)for(var dx=-1;dx<=1;dx++){var X=x+dx,Y=y+dy;if(X>=0&&Y>=0&&X<W&&Y<H&&st[Y*W+X]===1)k++}if(k&&R()<1-Math.pow(1-beta,k)){n[i]=1;age[i]=0;stencil(x,y);var d=(x/10|0)+','+(y/10|0);if(!dist.has(d)){dist.add(d);LED.commitAt('district-'+d,1,{seed:SEED,frame:fr})}}}
+  else if(st[i]===1&&R()<gam){n[i]=2;age[i]=0;og.fillStyle='rgba(240,238,232,.92)';og.fillRect(x*S,y*S,S,S)}else if(st[i]===2&&age[i]>220){n[i]=0}}st=n}
+function stencil(x,y){var cx=x*S+10,cy=y*S+10,s=.4+R()*.25,a=(R()-.5)*.5;og.save();og.translate(cx,cy);og.rotate(a);og.scale(s,s);og.fillStyle='#d6282c';og.globalAlpha=.85;og.lineWidth=5;og.strokeStyle='#111';og.beginPath();og.arc(0,0,20,.3,Math.PI*2-.3);og.stroke();og.beginPath();og.moveTo(-6,-22);og.lineTo(14,6);og.lineTo(-14,6);og.closePath();og.fill();og.fillStyle='rgba(214,40,44,.3)';for(var k=0;k<8;k++)og.fillRect((R()-.5)*50,(R()-.5)*50,2,2);og.restore()}
+function draw(){g.drawImage(o,0,0);var m=0,w=0;for(var i=0;i<W*H;i++){if(st[i]===1)m++;if(st[i]===2)w++}g.fillStyle='#111';g.font='900 18px Impact,sans-serif';g.fillText('MARKED '+m+' · WARY '+w+' · DISTRICTS '+dist.size+'/20',12,606);document.getElementById('st').textContent='β '+beta+' · patrol γ '+gam.toFixed(3)}
+function loop(){fr++;if(fr%3===0)step();draw();requestAnimationFrame(loop)}
+c.onclick=function(e){var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width*W|0,y=(e.clientY-r.top)/r.height*H|0;st[y*W+x]=1;stencil(x,y);LED.commit('spray',{x:x,y:y})};
+document.getElementById('patrol').onclick=function(){gam=gam>.03?.02:.05;LED.commit('patrols',{gam:gam})};
+document.getElementById('ns').onclick=function(){SEED=(SEED*37+11)%1e6;warren();LED.commit('warren',{seed:SEED})};
+warren();LED.init().then(function(){var s0=st,a0=age,d0=dist;st=new Uint8Array(W*H);age=new Uint16Array(W*H);dist=new Set();var save=LED.commitAt;LED.commitAt=function(){};var ok=true;for(var k=0;k<40;k++){step();for(var i=0;i<W*H;i++)if(st[i]>2)ok=false}var none=st.every(function(v){return v===0});LED.commitAt=save;LED.pagecheck('no mark appears from nothing (0 marked stays 0)',none,'0 after 40 steps');LED.pagecheck('states ∈ {clean, marked, wary}',ok,'3 states');st=s0;age=a0;dist=d0;wall();LED.commit('warren',{seed:SEED})});loop();</script><a class="grokbot-badge" href="../built-by-grok-bot.html" title="This page was built by Grok Bot" style="position:relative;display:inline-block;margin:10px 16px 16px;z-index:2147483000;font:600 11px/1 system-ui,sans-serif;color:#fff;background:rgba(12,6,30,.86);border:1px solid #7ff9ff;border-radius:999px;padding:5px 9px;text-decoration:none;letter-spacing:.04em">built by Grok Bot</a></body></html>

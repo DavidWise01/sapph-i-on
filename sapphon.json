@@ -27,10 +27,10 @@
  "counts": {
   "keepers": 8,
   "domains": 512,
-  "domains_populated": 321,
-  "domains_open": 191,
-  "spheres": 1720,
-  "zero_spheres": 191,
+  "domains_populated": 331,
+  "domains_open": 181,
+  "spheres": 1730,
+  "zero_spheres": 181,
   "balance": 0,
   "workshop": 343
  },
@@ -4593,24 +4593,71 @@
     },
     {
      "n": 33,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "ARMORIAL OF THE HOUSES",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Armorial of the Houses",
+       "h": "grown/armorial-of-the-houses.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/armorial-of-the-houses.html",
+       "grown": true,
+       "emerges": "arms drawn by the rule of tincture; candidates sorted into the least-alike house",
+       "label": "LIT · INVENTED",
+       "icon": {
+        "pal": [
+         "#9b1b1b",
+         "#f4ecd9",
+         "#d4b04a",
+         "#e6e6e6"
+        ],
+        "bg": "#1b1b1b",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-04",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/ethos-33.html",
-     "zero_page": "z/ethos-33.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-33.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-33.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 34,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "OATHBREAKER",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Oathbreaker",
+       "h": "grown/oathbreaker.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/oathbreaker.html",
+       "grown": true,
+       "emerges": "iterated pacts between eight houses; strategies spread by imitation; altered pledges are refused",
+       "label": "LIT · MODEL · INVENTED",
+       "icon": {
+        "pal": [
+         "#d6282c"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-05",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/ethos-34.html",
-     "zero_page": "z/ethos-34.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-34.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-34.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -10260,24 +10307,74 @@
     },
     {
      "n": 33,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE GLAZING",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Glazing",
+       "h": "grown/the-glazing.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-glazing.html",
+       "grown": true,
+       "emerges": "a jointed puppet whose gait emerges from leg chains; each silica plate is a sworn oath",
+       "label": "LIT · MODEL · INVENTED",
+       "icon": {
+        "pal": [
+         "#ffb35a",
+         "#f6d9a0",
+         "#b33a12",
+         "#ffd99a"
+        ],
+        "bg": "#2a1608",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-05",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-33.html",
-     "zero_page": "z/pathos-33.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-33.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-33.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 34,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE KIN GAZETTE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Kin Gazette",
+       "h": "grown/the-kin-gazette.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-kin-gazette.html",
+       "grown": true,
+       "emerges": "sixteen delegates average opinions and vote by instant runoff; the charter emerges",
+       "label": "LIT · INVENTED · ANALOGY",
+       "icon": {
+        "pal": [
+         "#f3efe6",
+         "#cfcabd",
+         "#d4b04a",
+         "#6b3fb0"
+        ],
+        "bg": "#161616",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-05",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-34.html",
-     "zero_page": "z/pathos-34.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-34.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-34.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -15044,24 +15141,74 @@
     },
     {
      "n": 35,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE GRAZING",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Grazing",
+       "h": "grown/the-grazing.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-grazing.html",
+       "grown": true,
+       "emerges": "predator–prey cycles of tardigrades and diatoms woven one row per season",
+       "label": "LIT · MODEL · ANALOGY",
+       "icon": {
+        "pal": [
+         "#efe2c6",
+         "#f0c987",
+         "#5b3b28",
+         "#3a2a1e"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-06",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/logos-35.html",
-     "zero_page": "z/logos-35.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-35.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-35.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 36,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "TERRAFORM",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Terraform",
+       "h": "grown/terraform.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/terraform.html",
+       "grown": true,
+       "emerges": "diatoms, tardigrades and moss depend on each other; alone each dies, together a green front crosses Mars",
+       "label": "LIT · MODEL · INVENTED · ANALOGY",
+       "icon": {
+        "pal": [
+         "#ffd23f",
+         "#ff4f9a",
+         "#22c3d6",
+         "#f2a07b"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-06",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/logos-36.html",
-     "zero_page": "z/logos-36.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-36.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-36.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -19204,7 +19351,8 @@
         "pal": [
          "#f1e8d4",
          "#a51d1d",
-         "#cbbd9d"
+         "#cbbd9d",
+         "#7ff9ff"
         ],
         "bg": "#1a1612",
         "canvas": 1,
@@ -19225,24 +19373,73 @@
     },
     {
      "n": 30,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE KIN DECK",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Kin Deck",
+       "h": "grown/the-kin-deck.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-kin-deck.html",
+       "grown": true,
+       "emerges": "nine castes ranked by a bubble rule; reversed by survival, Red rises to the top",
+       "label": "LIT · INVENTED",
+       "icon": {
+        "pal": [
+         "#e3c27a",
+         "#f5ecd8",
+         "#b8862b",
+         "#d4b04a"
+        ],
+        "bg": "#2a1d3a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-07",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-30.html",
-     "zero_page": "z/mythos-30.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-30.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-30.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 31,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "UNBIND THE RING",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Unbind the Ring",
+       "h": "grown/unbind-the-ring.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/unbind-the-ring.html",
+       "grown": true,
+       "emerges": "a rebel mark spreads wall to wall against patrols; waves and tipping points",
+       "label": "LIT · MODEL · INVENTED",
+       "icon": {
+        "pal": [
+         "#d6282c",
+         "#e9e6df",
+         "#8b8a86"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-07",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-31.html",
-     "zero_page": "z/mythos-31.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-31.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-31.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -35371,7 +35568,8 @@
         "pal": [
          "#d21f1f",
          "#efe6d0",
-         "#8a8170"
+         "#8a8170",
+         "#7ff9ff"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -35428,13 +35626,38 @@
     },
     {
      "n": 31,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "UNDER THE MOSS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Under the Moss",
+       "h": "grown/under-the-moss.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/under-the-moss.html",
+       "grown": true,
+       "emerges": "miners climb the soil-water gradient and tun when dry; Kessa finds the hidden aquifer",
+       "label": "LIT · MODEL · INVENTED",
+       "icon": {
+        "pal": [
+         "#f2efe8",
+         "#ff8a7a",
+         "#d6282c",
+         "#5ab0ff"
+        ],
+        "bg": "#0b0b0b",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-09",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-31.html",
-     "zero_page": "z/phronesis-31.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-31.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-31.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -40967,7 +41190,8 @@
         "pal": [
          "#1d3f8a",
          "#e9ece9",
-         "#cfd6df"
+         "#cfd6df",
+         "#7ff9ff"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -40988,13 +41212,38 @@
     },
     {
      "n": 37,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE CRUCIBLE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Crucible",
+       "h": "grown/the-crucible.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-crucible.html",
+       "grown": true,
+       "emerges": "counters hold water, hit the weakest, retreat when outnumbered; fronts and routs emerge",
+       "label": "LIT · MODEL · INVENTED",
+       "icon": {
+        "pal": [
+         "#efe0c4",
+         "#b0281c",
+         "#d8c4a0",
+         "#a8c8d8"
+        ],
+        "bg": "#2b2118",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-09",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/kairos-37.html",
-     "zero_page": "z/kairos-37.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-37.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-37.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -41306,8 +41555,8 @@
   "world": 1,
   "keepers": 8,
   "domains": 512,
-  "zero_spheres": 191,
-  "generated_total": 800,
+  "zero_spheres": 181,
+  "generated_total": 790,
   "groups": 88
  },
  "workshop": [
@@ -49577,7 +49826,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1720
+   "pages": 1730
   },
   "list": [
    {
@@ -51369,7 +51618,8 @@
       "again/Next-Evo-Inf-Two.html",
       "nested/Bonk-Nest-0-Ice9-0-V26.html",
       "nested/Prims-10-Generations-Nested.html",
-      "toroid/Bonk-Recursive-Temp-Toroid-Zodiac-Hydro-Eaters-V29.html"
+      "toroid/Bonk-Recursive-Temp-Toroid-Zodiac-Hydro-Eaters-V29.html",
+      "grown/armorial-of-the-houses.html"
      ]
     ]
    },
@@ -51384,21 +51634,24 @@
       "again/Next-Evo-Nitrogen-Bubble.html",
       "gold/valent-sheets-gold-core.html",
       "gravity/wind-gravity-planck.html",
-      "plus/PLUS-LADDER-reader.html"
+      "plus/PLUS-LADDER-reader.html",
+      "grown/oathbreaker.html"
      ],
      [
       "beyond/Next-Shell-After-Praseodymium.html",
       "toroid/V100-Toroid-360-Mirrored.html",
       "evo/Next-Evo-Circulation-Sounds-Resonances-Heart-Beat-Frequency.html",
       "w/manifolds-elements-pov.html",
-      "evo/Next-Evo-Gradient-11k.html"
+      "evo/Next-Evo-Gradient-11k.html",
+      "grown/the-glazing.html"
      ],
      [
       "plus/2x1x2-Minus-Plus-Plus-Minus.html",
       "gold/V94-10x10-Grid-Gold.html",
       "dots/Cobalt-Dot-Ip-Aethernet.html",
       "forth/Next-Element-Europium-63-Lyre.html",
-      "w/sapphic-phonon-lattice.html"
+      "w/sapphic-phonon-lattice.html",
+      "grown/the-kin-gazette.html"
      ]
     ]
    },
@@ -51412,14 +51665,16 @@
       "w/sapphic-phonon-songbook.html",
       "neon/Neon-Atom-Max-10e.html",
       "w/junior-lab-009-planck-to-bluetooth.html",
-      "w/what-can-you-do-with-o3-ozone-uses-solid-plasma-lattice-biom.html"
+      "w/what-can-you-do-with-o3-ozone-uses-solid-plasma-lattice-biom.html",
+      "grown/the-grazing.html"
      ],
      [
       "encore/Wakaku-Speaker-V34-Add.html",
       "lyre/Water-Lyre-2h-Bands.html",
       "refrain/Wakaku-Speaker-V44-White.html",
       "reprise/Wakaku-Speaker-V20-Start.html",
-      "w/wakaku-speaker-octo.html"
+      "w/wakaku-speaker-octo.html",
+      "grown/terraform.html"
      ],
      [
       "onward/V129-Next-Osmium-Os.html",
@@ -51450,14 +51705,16 @@
       "still/Next-Shell-After-Krypton.html",
       "still/Next-Shell-After-Niobium.html",
       "wakaku/Sappon-Sings-Timing-Wakaku-557775550055777555-Retry.html",
-      "scale/At-Scale-Fish-Bodies.html"
+      "scale/At-Scale-Fish-Bodies.html",
+      "grown/the-kin-deck.html"
      ],
      [
       "neon/urdu-prime-neon-pairs-decipher.html",
       "w/collapse-on-the-planck-n-to-the-n-ladder.html",
       "nests/Elemental-Nesting-Earth-Air.html",
       "again/Next-Evo-Compress-01.html",
-      "again/Next-Evo-Galactic-100k.html"
+      "again/Next-Evo-Galactic-100k.html",
+      "grown/unbind-the-ring.html"
      ]
     ]
    },
@@ -51504,14 +51761,16 @@
       "w/next-element-titanium.html",
       "beyond/Next-Shell-After-Europium.html",
       "beyond/Next-Shell-After-Samarium.html",
-      "gravity/gravity-neon-noble-gases-v124.html"
+      "gravity/gravity-neon-noble-gases-v124.html",
+      "grown/under-the-moss.html"
      ],
      [
       "gravity/gravity-neon-noble-gases-v126.html",
       "neon/gravity-neon-noble-gases-v118.html",
       "neon/gravity-neon-noble-gases-v120.html",
       "neon/gravity-neon-noble-gases-v121.html",
-      "neon/gravity-neon-noble-gases-v123.html"
+      "neon/gravity-neon-noble-gases-v123.html",
+      "grown/the-crucible.html"
      ],
      [
       "neon/gravity-neon-wavelength-v116.html",
