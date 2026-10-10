@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>THE METRONOME CHOIR · SaPpH{{i}}on</title><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<style>
+:root{--bg:#0b0716;--ink:#f1ecff;--dim:#bcabe4;--acc:#ff8a3a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#24124a,var(--bg));color:var(--ink);font:15px/1.55 system-ui,sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:18px 16px 40px}a{color:var(--dim)}
+nav{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-align:center}
+h1{margin:.2em 0 0;text-align:center;color:var(--acc);letter-spacing:.06em;font-size:clamp(26px,5vw,42px)}
+.tag{text-align:center;color:var(--dim);font-style:italic;font-size:14px}
+.stage{margin:14px 0 6px;border:1px solid rgba(179,140,240,.3);border-radius:14px;overflow:hidden;background:#090512;touch-action:none}
+canvas{display:block;width:100%}#plot{height:70px;border-top:1px solid rgba(179,140,240,.2)}
+.hud{font:12.5px ui-monospace,monospace;text-align:center;color:var(--ink);min-height:1.6em}
+.ctl{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin:8px 0 14px;font-size:13px;color:var(--dim)}
+button{background:#1a1030;color:var(--ink);border:1px solid rgba(179,140,240,.45);border-radius:8px;padding:6px 12px;font:600 12px ui-monospace,monospace;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.panel{background:rgba(26,16,48,.6);border:1px solid rgba(179,140,240,.22);border-radius:12px;padding:12px 16px;margin:12px 0}
+.panel h2{margin:0 0 6px;font-size:12px;letter-spacing:.16em;color:var(--acc)}
+.st{display:inline-block;font:700 11px ui-monospace,monospace;padding:1px 6px;border-radius:5px;border:1px solid;margin-right:6px}
+.lit{color:#7dffa8}.amb{color:#f4c740}.wall{color:#ff8a8a}
+</style></head><body><div class="wrap">
+<nav><a href="https://0root.ai/">the hallway</a> &#8250; <a href="../index.html">SaPpH{{i}}on</a> &#8250; <a href="../k/kairos.html">KAIROS</a> &#8250; <a href="../d/kairos-21.html">domain 21</a></nav>
+<h1>THE METRONOME CHOIR</h1><div class="tag">different tempos, one beat</div>
+<div class="stage"><canvas id="cv" role="img" aria-label="spontaneous synchrony: above K<sub>c</sub> a locked core (gold) appears and r jumps from 0"></canvas><canvas id="plot" aria-hidden="true"></canvas></div>
+<div class="hud" id="hud"></div>
+<div class="ctl"><button type="button" id="reseed">NEW SEED</button><button type="button" id="pause">PAUSE</button></div>
+<div class="panel"><h2>THE RULE</h2><p>120 oscillators, each with its own natural frequency, each nudged toward the group&rsquo;s mean phase with strength K.</p><p style="color:var(--dim);font-size:13px">Drag K. Tap to scatter phases. The same <code>?seed=</code> always gives the same run.</p></div>
+<div class="panel"><h2>WHAT IS CLAIMED</h2><p><span class="st lit">LIT</span>The Kuramoto model (1975), K<sub>c</sub> = 2/(&pi;g(0)) for the Lorentzian spread used here. r must stay in [0, 1], or the page throws.</p><p><span class="st amb">AMBER</span>Phases are continuous, unlike the pulse-coupled Firefly sphere.</p></div>
+</div>
+<script>
+"use strict";
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+var SEED=(location.search.match(/seed=(\d+)/)||[])[1];SEED=SEED?+SEED:(Math.random()*1e9)|0;var R=mulberry32(SEED);
+var QD=["#f0a886","#ff5aa0","#4db1f0","#a87bff","#3fd0a0","#c98a55","#8fb85a","#ff8a3a"];
+var REDUCE=matchMedia("(prefers-reduced-motion: reduce)").matches,DPR=Math.min(2,devicePixelRatio||1);
+var cv=document.getElementById("cv"),pc=document.getElementById("plot"),g,pg,W,H,PW,PH,tick=0,paused=false,SER=[];
+function fit(){W=cv.parentNode.clientWidth;H=Math.round(W*(W<560?1.05:.56));cv.width=W*DPR;cv.height=H*DPR;cv.style.height=H+"px";g=cv.getContext("2d");g.setTransform(DPR,0,0,DPR,0,0);
+ PW=W;PH=70;pc.width=PW*DPR;pc.height=PH*DPR;pg=pc.getContext("2d");pg.setTransform(DPR,0,0,DPR,0,0);}
+fit();
+function fail(m){throw new Error("SELF-CHECK FAILED: "+m);}
+function plot(){pg.clearRect(0,0,PW,PH);if(SER.length<2)return;var mx=-1e9,mn=1e9;SER.forEach(function(v){mx=Math.max(mx,v);mn=Math.min(mn,v);});if(mx===mn){mx+=1;}
+ pg.strokeStyle=getComputedStyle(document.body).getPropertyValue("--acc");pg.lineWidth=1.5;pg.beginPath();SER.forEach(function(v,i){var x=i/(SER.length-1)*PW,y=PH-6-(v-mn)/(mx-mn)*(PH-12);i?pg.lineTo(x,y):pg.moveTo(x,y);});pg.stroke();
+ pg.fillStyle="#bcabe4";pg.font="11px ui-monospace,monospace";pg.fillText(SIM.label+"  "+(+SER[SER.length-1].toFixed(3)),8,13);}
+function pos(e){var r=cv.getBoundingClientRect();return [e.clientX-r.left,e.clientY-r.top];}
+// Kuramoto oscillators: 120 metronomes, each with its own natural frequency ω, each nudged toward the others by K·sin(θj − θi), averaged.
+var n=120,th=[],om=[],K,Kc,r=0;
+var SIM={spf:2,checkEvery:30,label:"order parameter r",
+init:function(){var w=.3+R()*.4;for(var i=0;i<n;i++){th.push(R()*6.283);var u=R()-.5;om.push(w*Math.tan(Math.PI*u*.96)*.25);}Kc=2*w*.25;K=Kc*(.5+R()*2);
+ var c=document.querySelector(".ctl"),l=document.createElement("label");l.innerHTML='coupling K <input id="kk" type="range" min="0" max="'+(Kc*4).toFixed(3)+'" step="0.001" aria-label="coupling">';c.appendChild(l);var e=document.getElementById("kk");e.value=K;e.oninput=function(){K=+e.value;};},
+step:function(){var dt=.1,cx=0,sy=0;for(var i=0;i<n;i++){cx+=Math.cos(th[i]);sy+=Math.sin(th[i]);}cx/=n;sy/=n;r=Math.hypot(cx,sy);var psi=Math.atan2(sy,cx);for(var i=0;i<n;i++)th[i]+=dt*(om[i]+K*r*Math.sin(psi-th[i]));},
+poke:function(x,y){for(var i=0;i<n;i++)th[i]=R()*6.283;},
+check:function(){if(!(r>=0&&r<=1+1e-9))fail("r outside [0,1]");th.forEach(function(t){if(!isFinite(t))fail("phase lost");});},
+series:function(){return r;},
+draw:function(){g.fillStyle="rgba(9,5,18,.35)";g.fillRect(0,0,W,H);var cx=W/2,cy=H/2,R0=Math.min(W,H)*.38;g.strokeStyle="rgba(188,171,228,.3)";g.beginPath();g.arc(cx,cy,R0,0,6.283);g.stroke();var mx=0,my=0;
+ th.forEach(function(t,i){mx+=Math.cos(t);my+=Math.sin(t);var s=Math.abs(om[i])<K*r?"#f4c740":"#4db1f0";g.fillStyle=s;g.beginPath();g.arc(cx+Math.cos(t)*R0,cy+Math.sin(t)*R0,3,0,6.283);g.fill();});
+ g.strokeStyle="#ff5aa0";g.lineWidth=3;g.beginPath();g.moveTo(cx,cy);g.lineTo(cx+mx/n*R0,cy+my/n*R0);g.stroke();g.lineWidth=1;},
+hud:function(){var locked=om.filter(function(w){return Math.abs(w)<K*r;}).length;return "oscillators "+n+" · K "+K.toFixed(3)+" (K_c ≈ "+Kc.toFixed(3)+") · r "+r.toFixed(3)+" · locked (gold) "+locked;},
+sig:function(){return th.slice(0,4).map(function(t){return t.toFixed(3);}).join(",");}};
+
+SIM.init();
+cv.addEventListener("pointerdown",function(e){var p=pos(e);SIM.poke(p[0],p[1]);});
+document.getElementById("reseed").onclick=function(){location.search="?seed="+((Math.random()*1e9)|0);};
+document.getElementById("pause").onclick=function(){paused=!paused;this.textContent=paused?"PLAY":"PAUSE";};
+var hud=document.getElementById("hud");
+function frame(){for(var s=0;s<SIM.spf;s++){SIM.step();tick++;}if(tick%SIM.checkEvery<SIM.spf)SIM.check();
+ if(tick%4<SIM.spf){SER.push(SIM.series());if(SER.length>300)SER.shift();}SIM.draw();plot();hud.textContent="seed "+SEED+" · "+SIM.hud();}
+function refresh(){SER.push(SIM.series());if(SER.length>300)SER.shift();SIM.draw();plot();hud.textContent="seed "+SEED+" · "+SIM.hud();}
+window.SPHERE={get tick(){return tick;},sig:function(){return SIM.sig();},run:function(n){for(var i=0;i<n;i++){SIM.step();tick++;}SIM.check();refresh();}};
+if(REDUCE){SPHERE.run(SIM.spf*600);cv.addEventListener("pointerup",function(){SPHERE.run(SIM.spf*60);});document.querySelector(".ctl").addEventListener("input",function(){SPHERE.run(SIM.spf*60);});}
+else(function loop(){if(!paused)frame();requestAnimationFrame(loop);})();
+</script></body></html>

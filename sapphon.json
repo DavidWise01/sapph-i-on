@@ -27,10 +27,10 @@
  "counts": {
   "keepers": 8,
   "domains": 512,
-  "domains_populated": 142,
-  "domains_open": 370,
-  "spheres": 1541,
-  "zero_spheres": 370,
+  "domains_populated": 152,
+  "domains_open": 360,
+  "spheres": 1551,
+  "zero_spheres": 360,
   "balance": 0,
   "workshop": 343
  },
@@ -4064,23 +4064,71 @@
     },
     {
      "n": 19,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE CULTURE MAP",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Culture Map",
+       "h": "grown/the-culture-map.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-culture-map.html",
+       "grown": true,
+       "emerges": "cultural regions: one shared culture when q is small, a frozen mosaic of incompatible regions when q is large",
+       "label": "LIT · WALL",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#f0a886",
+         "#f1ecff",
+         "#7dffa8"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-02"
+      }
+     ],
      "page": "d/ethos-19.html",
-     "zero_page": "z/ethos-19.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-19.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-19.html"
+     "zero_url": null
     },
     {
      "n": 20,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE RIVER MAKER",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The River Maker",
+       "h": "grown/the-river-maker.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-river-maker.html",
+       "grown": true,
+       "emerges": "branching drainage networks (blue) with a few big basins and many small ones",
+       "label": "LIT · AMBER",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#f0a886",
+         "#f1ecff",
+         "#7dffa8"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-02"
+      }
+     ],
      "page": "d/ethos-20.html",
-     "zero_page": "z/ethos-20.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-20.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-20.html"
+     "zero_url": null
     },
     {
      "n": 21,
@@ -9346,23 +9394,71 @@
     },
     {
      "n": 20,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE SORTING TISSUE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Sorting Tissue",
+       "h": "grown/the-sorting-tissue.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-sorting-tissue.html",
+       "grown": true,
+       "emerges": "sorting: the stickier type gathers into islands or a core, the way embryonic tissues sort out",
+       "label": "LIT",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#ff5aa0",
+         "#f1ecff",
+         "#7dffa8"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-02"
+      }
+     ],
      "page": "d/pathos-20.html",
-     "zero_page": "z/pathos-20.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-20.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-20.html"
+     "zero_url": null
     },
     {
      "n": 21,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE QUORUM GLOW",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Quorum Glow",
+       "h": "grown/the-quorum-glow.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-quorum-glow.html",
+       "grown": true,
+       "emerges": "a collective switch: below a density nothing glows, above it the whole colony lights up together",
+       "label": "LIT",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#ff5aa0",
+         "#7dffa8",
+         "#f1ecff"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-02"
+      }
+     ],
      "page": "d/pathos-21.html",
-     "zero_page": "z/pathos-21.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-21.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-21.html"
+     "zero_url": null
     },
     {
      "n": 22,
@@ -13591,13 +13687,37 @@
     },
     {
      "n": 18,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE BUTTERFLY CLOUD",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Butterfly Cloud",
+       "h": "grown/the-butterfly-cloud.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-butterfly-cloud.html",
+       "grown": true,
+       "emerges": "sensitive dependence: the cloud stretches exponentially until it fills the butterfly attractor",
+       "label": "LIT",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#4db1f0",
+         "#f1ecff",
+         "#7dffa8"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-43"
+      }
+     ],
      "page": "d/logos-18.html",
-     "zero_page": "z/logos-18.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-18.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-18.html"
+     "zero_url": null
     },
     {
      "n": 19,
@@ -17422,13 +17542,37 @@
     },
     {
      "n": 17,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE FIRST PLANETS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The First Planets",
+       "h": "grown/the-first-planets.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-first-planets.html",
+       "grown": true,
+       "emerges": "a few dominant planets that sweep out their lanes; runaway growth",
+       "label": "LIT · AMBER",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#a87bff",
+         "#f4c740",
+         "#4db1f0"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-43"
+      }
+     ],
      "page": "d/mythos-17.html",
-     "zero_page": "z/mythos-17.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-17.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-17.html"
+     "zero_url": null
     },
     {
      "n": 18,
@@ -23050,13 +23194,37 @@
     },
     {
      "n": 21,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE LEARNING SHEET",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Learning Sheet",
+       "h": "grown/the-learning-sheet.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-learning-sheet.html",
+       "grown": true,
+       "emerges": "a topology-preserving map: the sheet unfolds and drapes over the square, ring, cross or ellipse",
+       "label": "LIT",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#3fd0a0",
+         "#4db1f0",
+         "#f1ecff"
+        ],
+        "bg": "#090512",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-03"
+      }
+     ],
      "page": "d/episteme-21.html",
-     "zero_page": "z/episteme-21.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/episteme-21.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/episteme-21.html"
+     "zero_url": null
     },
     {
      "n": 22,
@@ -27245,13 +27413,37 @@
     },
     {
      "n": 18,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE UNMIXING ALLOY",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Unmixing Alloy",
+       "h": "grown/the-unmixing-alloy.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-unmixing-alloy.html",
+       "grown": true,
+       "emerges": "spinodal decomposition: labyrinths near 50/50, droplets off balance, both coarsening over time",
+       "label": "LIT · AMBER",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#c98a55",
+         "#f1ecff",
+         "#7dffa8"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-03"
+      }
+     ],
      "page": "d/techne-18.html",
-     "zero_page": "z/techne-18.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/techne-18.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/techne-18.html"
+     "zero_url": null
     },
     {
      "n": 19,
@@ -30744,13 +30936,37 @@
     },
     {
      "n": 16,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE CROWDED BAR",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Crowded Bar",
+       "h": "grown/the-crowded-bar.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-crowded-bar.html",
+       "grown": true,
+       "emerges": "self-organised coordination: attendance hovers near half, and for good memory sizes it fluctuates less than coin-flipping would",
+       "label": "LIT · WALL",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#8fb85a",
+         "#f4c740",
+         "#4db1f0"
+        ],
+        "bg": "#090512",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-03"
+      }
+     ],
      "page": "d/phronesis-16.html",
-     "zero_page": "z/phronesis-16.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-16.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-16.html"
+     "zero_url": null
     },
     {
      "n": 17,
@@ -35817,13 +36033,37 @@
     },
     {
      "n": 21,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE METRONOME CHOIR",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Metronome Choir",
+       "h": "grown/the-metronome-choir.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-metronome-choir.html",
+       "grown": true,
+       "emerges": "spontaneous synchrony: above K<sub>c</sub> a locked core (gold) appears and r jumps from 0",
+       "label": "LIT",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#ff8a3a",
+         "#f4c740",
+         "#ff5aa0"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-03"
+      }
+     ],
      "page": "d/kairos-21.html",
-     "zero_page": "z/kairos-21.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-21.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-21.html"
+     "zero_url": null
     },
     {
      "n": 22,
@@ -36266,8 +36506,8 @@
   "world": 1,
   "keepers": 8,
   "domains": 512,
-  "zero_spheres": 370,
-  "generated_total": 979,
+  "zero_spheres": 360,
+  "generated_total": 969,
   "groups": 88
  },
  "workshop": [
@@ -44537,7 +44777,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1541
+   "pages": 1551
   },
   "list": [
    {
@@ -44591,27 +44831,31 @@
       "evo/Next-Evo-Sync-Handshake.html",
       "plus/plus-side-ladder-one-percent-in-quartz.html",
       "w/planet-manifold-blackholes.html",
-      "w/gold-red-memristor-out.html"
+      "w/gold-red-memristor-out.html",
+      "grown/the-culture-map.html"
      ],
      [
       "bonk/Bonk-Self-Similar-Eat-Itself-Pulsar-Quasar-V52.html",
       "farther/Next-Element-Selenium-34.html",
       "onward/88-Mph-Next.html",
       "qdot/Bonk-Quantum-Dot-Itself-Black-Hole-Owns-You-V51.html",
-      "w/cubi-harmonic-lattice.html"
+      "w/cubi-harmonic-lattice.html",
+      "grown/the-river-maker.html"
      ],
      [
       "lyre/Ne10-Lyre-Neon-Full.html",
       "beyond/Next-Element-Darmstadtium-110-Lyre.html",
       "corpus/V127-Each-Shell-Sapphon.html",
-      "w/next-infinite-lattice.html"
+      "w/next-infinite-lattice.html",
+      "grown/the-sorting-tissue.html"
      ],
      [
       "nests/the-nest-hydrogen-carried-inside-neon.html",
       "beyond/Next-Shell-After-Neodymium.html",
       "forward/Next-Shell-After-Bismuth.html",
       "forward/Next-Shell-After-Lead.html",
-      "kernel/the-quantum-kernel.html"
+      "kernel/the-quantum-kernel.html",
+      "grown/the-quorum-glow.html"
      ]
     ]
    },
@@ -44626,28 +44870,32 @@
       "w/nested-shells.html",
       "cat/the-address-cat.html",
       "cat/the-bonds-cat.html",
-      "cat/the-braces-cat.html"
+      "cat/the-braces-cat.html",
+      "grown/the-learning-sheet.html"
      ],
      [
       "cat/the-checker-cat.html",
       "cat/the-diagonal-cat.html",
       "cat/the-dual-cat.html",
       "cat/the-euler-cat.html",
-      "cat/the-friedman-cat.html"
+      "cat/the-friedman-cat.html",
+      "grown/the-unmixing-alloy.html"
      ],
      [
       "cat/the-gap-cat.html",
       "cat/the-imaginary-cat.html",
       "cat/the-layers-cat.html",
       "cat/the-lines-cat.html",
-      "cat/the-mod-nine-cat.html"
+      "cat/the-mod-nine-cat.html",
+      "grown/the-crowded-bar.html"
      ],
      [
       "cat/the-odd-center-cat.html",
       "cat/the-outside-cat.html",
       "cat/the-partition-cat.html",
       "cat/the-prime-power-cat.html",
-      "cat/the-seal-cat.html"
+      "cat/the-seal-cat.html",
+      "grown/the-metronome-choir.html"
      ]
     ]
    },
@@ -47306,14 +47554,16 @@
       "w/wakaku-speaker-osmotic.html",
       "w/wakaku-speaker-polychromatic.html",
       "w/wakaku-speaker-ro.html",
-      "w/wakaku-speaker-wave.html"
+      "w/wakaku-speaker-wave.html",
+      "grown/the-butterfly-cloud.html"
      ],
      [
       "w/wakaku-speaker-wrap.html",
       "w/wakaku-speaker.html",
       "wakaku/Wakaku-Speaker-V12-16.html",
       "wakaku/Wakaku-Speaker-V13-Words.html",
-      "wakaku/Wakaku-Speaker-V3-42.html"
+      "wakaku/Wakaku-Speaker-V3-42.html",
+      "grown/the-first-planets.html"
      ],
      [
       "wakaku/Wakaku-Vacuum-01-Air-Retry.html",

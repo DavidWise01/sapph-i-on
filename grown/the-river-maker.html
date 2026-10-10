@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>THE RIVER MAKER · SaPpH{{i}}on</title><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<style>
+:root{--bg:#0b0716;--ink:#f1ecff;--dim:#bcabe4;--acc:#f0a886}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#24124a,var(--bg));color:var(--ink);font:15px/1.55 system-ui,sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:18px 16px 40px}a{color:var(--dim)}
+nav{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-align:center}
+h1{margin:.2em 0 0;text-align:center;color:var(--acc);letter-spacing:.06em;font-size:clamp(26px,5vw,42px)}
+.tag{text-align:center;color:var(--dim);font-style:italic;font-size:14px}
+.stage{margin:14px 0 6px;border:1px solid rgba(179,140,240,.3);border-radius:14px;overflow:hidden;background:#090512;touch-action:none}
+canvas{display:block;width:100%}#plot{height:70px;border-top:1px solid rgba(179,140,240,.2)}
+.hud{font:12.5px ui-monospace,monospace;text-align:center;color:var(--ink);min-height:1.6em}
+.ctl{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin:8px 0 14px;font-size:13px;color:var(--dim)}
+button{background:#1a1030;color:var(--ink);border:1px solid rgba(179,140,240,.45);border-radius:8px;padding:6px 12px;font:600 12px ui-monospace,monospace;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.panel{background:rgba(26,16,48,.6);border:1px solid rgba(179,140,240,.22);border-radius:12px;padding:12px 16px;margin:12px 0}
+.panel h2{margin:0 0 6px;font-size:12px;letter-spacing:.16em;color:var(--acc)}
+.st{display:inline-block;font:700 11px ui-monospace,monospace;padding:1px 6px;border-radius:5px;border:1px solid;margin-right:6px}
+.lit{color:#7dffa8}.amb{color:#f4c740}.wall{color:#ff8a8a}
+</style></head><body><div class="wrap">
+<nav><a href="https://0root.ai/">the hallway</a> &#8250; <a href="../index.html">SaPpH{{i}}on</a> &#8250; <a href="../k/ethos.html">ETHOS</a> &#8250; <a href="../d/ethos-20.html">domain 20</a></nav>
+<h1>THE RIVER MAKER</h1><div class="tag">rain falls anywhere; rivers choose themselves</div>
+<div class="stage"><canvas id="cv" role="img" aria-label="branching drainage networks (blue) with a few big basins and many small ones"></canvas><canvas id="plot" aria-hidden="true"></canvas></div>
+<div class="hud" id="hud"></div>
+<div class="ctl"><button type="button" id="reseed">NEW SEED</button><button type="button" id="pause">PAUSE</button></div>
+<div class="panel"><h2>THE RULE</h2><p>Every cell drains to its lowest neighbour. Flow piling up downstream erodes the bed faster, which captures more flow; gentle uplift renews the land.</p><p style="color:var(--dim);font-size:13px">Tap to raise a hill and watch rivers reroute. The same <code>?seed=</code> always gives the same run.</p></div>
+<div class="panel"><h2>WHAT IS CLAIMED</h2><p><span class="st lit">LIT</span>Stream-power erosion and drainage-network models (Rodr&iacute;guez-Iturbe &amp; Rinaldo). The landscape must stay finite, or the page throws.</p><p><span class="st amb">AMBER</span>Parameters are illustrative.</p></div>
+</div>
+<script>
+"use strict";
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+var SEED=(location.search.match(/seed=(\d+)/)||[])[1];SEED=SEED?+SEED:(Math.random()*1e9)|0;var R=mulberry32(SEED);
+var QD=["#f0a886","#ff5aa0","#4db1f0","#a87bff","#3fd0a0","#c98a55","#8fb85a","#ff8a3a"];
+var REDUCE=matchMedia("(prefers-reduced-motion: reduce)").matches,DPR=Math.min(2,devicePixelRatio||1);
+var cv=document.getElementById("cv"),pc=document.getElementById("plot"),g,pg,W,H,PW,PH,tick=0,paused=false,SER=[];
+function fit(){W=cv.parentNode.clientWidth;H=Math.round(W*(W<560?1.05:.56));cv.width=W*DPR;cv.height=H*DPR;cv.style.height=H+"px";g=cv.getContext("2d");g.setTransform(DPR,0,0,DPR,0,0);
+ PW=W;PH=70;pc.width=PW*DPR;pc.height=PH*DPR;pg=pc.getContext("2d");pg.setTransform(DPR,0,0,DPR,0,0);}
+fit();
+function fail(m){throw new Error("SELF-CHECK FAILED: "+m);}
+function plot(){pg.clearRect(0,0,PW,PH);if(SER.length<2)return;var mx=-1e9,mn=1e9;SER.forEach(function(v){mx=Math.max(mx,v);mn=Math.min(mn,v);});if(mx===mn){mx+=1;}
+ pg.strokeStyle=getComputedStyle(document.body).getPropertyValue("--acc");pg.lineWidth=1.5;pg.beginPath();SER.forEach(function(v,i){var x=i/(SER.length-1)*PW,y=PH-6-(v-mn)/(mx-mn)*(PH-12);i?pg.lineTo(x,y):pg.moveTo(x,y);});pg.stroke();
+ pg.fillStyle="#bcabe4";pg.font="11px ui-monospace,monospace";pg.fillText(SIM.label+"  "+(+SER[SER.length-1].toFixed(3)),8,13);}
+function pos(e){var r=cv.getBoundingClientRect();return [e.clientX-r.left,e.clientY-r.top];}
+// Rain on a random landscape: each cell drains to its lowest neighbour. Water collected upstream erodes the cell (deeper with more flow), which pulls in more flow. A small uplift keeps the land renewed.
+var N=90,M,Z,A,D,img,kE,up=.0005;
+var SIM={spf:1,checkEvery:30,label:"cells carrying > 50 units of flow (channels)",
+init:function(){M=Math.round(N*H/W);Z=new Float64Array(N*M);A=new Float64Array(N*M);D=new Int32Array(N*M);for(var y=0;y<M;y++)for(var x=0;x<N;x++)Z[y*N+x]=y/M*.5+R()*.2;kE=.0003+R()*.0006;img=g.createImageData(N,M);},
+step:function(){for(var i=0;i<Z.length;i++){var x=i%N,y=(i/N)|0,b=-1,bz=Z[i];for(var dy=-1;dy<=1;dy++)for(var dx=-1;dx<=1;dx++){var xx=x+dx,yy=y+dy;if((!dx&&!dy)||xx<0||xx>=N||yy<0||yy>=M)continue;var j=yy*N+xx;if(Z[j]<bz){bz=Z[j];b=j;}}D[i]=b;}
+ var ord=Array.from({length:Z.length},function(_,i){return i;}).sort(function(a,b){return Z[b]-Z[a];});A.fill(1);ord.forEach(function(i){if(D[i]>=0)A[D[i]]+=A[i];});
+ for(var i=0;i<Z.length;i++){var y=(i/N)|0;if(y===0)continue;var d=D[i];if(d>=0){var s=Z[i]-Z[d];Z[i]-=kE*Math.sqrt(A[i])*s*5;}Z[i]+=up*(y/M);}
+ for(var i=0;i<Z.length;i++)if(D[i]<0&&((i/N)|0)>0)Z[i]+=.002;},
+poke:function(x,y){var cx=(x/W*N)|0,cy=(y/H*M)|0;for(var dy=-4;dy<=4;dy++)for(var dx=-4;dx<=4;dx++){var xx=cx+dx,yy=cy+dy;if(xx>=0&&yy>=0&&xx<N&&yy<M)Z[yy*N+xx]+=.15*Math.exp(-(dx*dx+dy*dy)/8);}},
+check:function(){var tot=0;for(var i=0;i<Z.length;i++){if(!isFinite(Z[i]))fail("landscape blew up");}},
+series:function(){var c=0;for(var i=0;i<A.length;i++)if(A[i]>50)c++;return c;},
+draw:function(){var mx=0,mn=1e9;for(var i=0;i<Z.length;i++){if(Z[i]>mx)mx=Z[i];if(Z[i]<mn)mn=Z[i];}for(var i=0;i<Z.length;i++){var h=(Z[i]-mn)/(mx-mn+1e-9),a=Math.log(A[i]+1)/Math.log(Z.length);var c=a>.45?[77,177,240]:[60+h*120,40+h*90,90+h*60];img.data[i*4]=c[0];img.data[i*4+1]=c[1];img.data[i*4+2]=c[2];img.data[i*4+3]=255;}var o=document.createElement("canvas");o.width=N;o.height=M;o.getContext("2d").putImageData(img,0,0);g.imageSmoothingEnabled=false;g.drawImage(o,0,0,W,H);
+ g.fillStyle="#bcabe4";g.font="11px ui-monospace,monospace";g.textAlign="center";g.fillText("sea along the top edge",W/2,12);},
+hud:function(){var mx=0;for(var i=0;i<A.length;i++)if(A[i]>mx)mx=A[i];return "erosion k "+kE.toFixed(5)+" · channel cells "+SIM.series()+" · largest basin "+mx+" cells · tap to raise a hill";},
+sig:function(){return Z[500].toFixed(6)+":"+SIM.series();}};
+
+SIM.init();
+cv.addEventListener("pointerdown",function(e){var p=pos(e);SIM.poke(p[0],p[1]);});
+document.getElementById("reseed").onclick=function(){location.search="?seed="+((Math.random()*1e9)|0);};
+document.getElementById("pause").onclick=function(){paused=!paused;this.textContent=paused?"PLAY":"PAUSE";};
+var hud=document.getElementById("hud");
+function frame(){for(var s=0;s<SIM.spf;s++){SIM.step();tick++;}if(tick%SIM.checkEvery<SIM.spf)SIM.check();
+ if(tick%4<SIM.spf){SER.push(SIM.series());if(SER.length>300)SER.shift();}SIM.draw();plot();hud.textContent="seed "+SEED+" · "+SIM.hud();}
+function refresh(){SER.push(SIM.series());if(SER.length>300)SER.shift();SIM.draw();plot();hud.textContent="seed "+SEED+" · "+SIM.hud();}
+window.SPHERE={get tick(){return tick;},sig:function(){return SIM.sig();},run:function(n){for(var i=0;i<n;i++){SIM.step();tick++;}SIM.check();refresh();}};
+if(REDUCE){SPHERE.run(SIM.spf*600);cv.addEventListener("pointerup",function(){SPHERE.run(SIM.spf*60);});document.querySelector(".ctl").addEventListener("input",function(){SPHERE.run(SIM.spf*60);});}
+else(function loop(){if(!paused)frame();requestAnimationFrame(loop);})();
+</script></body></html>
