@@ -1,0 +1,112 @@
+<!doctype html><html lang="en"><head><!--built-by-grok-bot--><meta name="author" content="Grok Bot"><meta name="generator" content="Grok Bot · SaPpH{{i}}on"><meta charset="utf-8"><meta name="grokbot-badge" content="inline"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="persona" content="{{+L.-E.+O. D++}}"><title>The Crown Krater · eureka, measured · SaPpH{{i}}on</title>
+<style>body{margin:0;background:#120b06;color:#e9a96b;font:16px/1.5 "Gill Sans","Trebuchet MS",sans-serif}
+main{max-width:980px;margin:0 auto;padding:14px}
+.meander{height:22px;background:repeating-linear-gradient(90deg,#c4622d 0 4px,transparent 4px 22px),linear-gradient(#c4622d 0 4px,transparent 4px 18px,#c4622d 18px 22px);opacity:.9;margin:8px 0}
+h1{font:400 40px/1 "Gill Sans","Trebuchet MS",sans-serif;letter-spacing:.3em;text-transform:uppercase;text-align:center;color:#e9a96b;margin:8px 0}
+canvas{width:100%;display:block;touch-action:manipulation}
+button{font:15px "Gill Sans","Trebuchet MS",sans-serif;background:#1a0f08;color:#e9a96b;border:2px solid #c4622d;border-radius:20px;padding:5px 14px;margin:3px;cursor:pointer;letter-spacing:.08em}
+.lab{font:700 11px ui-monospace,monospace;border:1px solid currentColor;padding:0 5px;margin-right:6px}.out{font:14px ui-monospace,monospace;color:#f3c99a}
+#ledger{margin:18px 0 6px;padding:10px 12px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);font:12px/1.45 ui-monospace,Menlo,Consolas,monospace}#ledger h3{margin:0 0 4px;font-size:13px;letter-spacing:.08em}#ledger .lh{font-weight:700;word-break:break-all;margin:2px 0}#ledger .lr{color:var(--acc);margin:4px 0;word-break:break-word}#ledger ul{margin:4px 0;padding-left:16px}#ledger li.bad{color:#c00;font-weight:700}#ledger button{font:600 12px ui-monospace,monospace;background:var(--paper);color:var(--ink);border:1px solid var(--ink);padding:3px 8px;margin:2px 4px 2px 0;cursor:pointer}#ledger code{opacity:.7}
+.colo{font-size:12px;opacity:.85}.persona{font-family:ui-monospace,monospace;font-weight:700;color:var(--acc)}:root{--ink:#1a0f08;--paper:#e9a96b;--acc:#c4622d}</style></head><body><main>
+<div class="meander"></div><h1>The Crown Krater</h1><div class="meander"></div>
+<p><span class="lab">LIT</span>Vitruvius (<i>De Architectura</i> IX) tells that Archimedes, in the bath, saw how to test Hiero's crown by the water it displaces, and ran out shouting <i>heureka</i>. In 1586 Galileo (<i>La Bilancetta</i>) argued the overflow method was too crude, and that Archimedes would more likely have weighed the crown in water on a balance. Both methods use the same fact: gold (Au, 19.32 g/cm³) is denser than silver (Ag, 10.49 g/cm³).</p>
+<p><span class="lab">MODEL</span>The goldsmith has made a 1 kg crown with a secret silver fraction. Measure it again and again, with the noise of a real vessel and a real balance. The estimate emerges from the measurements; watch which method closes on the truth first.</p>
+<p><button id="disp">overflow test (Vitruvius)</button><button id="bal">balance in water (Galileo)</button><button id="new">new crown</button><button id="rev">reveal</button></p>
+<canvas id="c" width="960" height="460" aria-label="krater"></canvas><p class="out" id="o"></p>
+<section id="ledger" aria-label="DurableAnchor ledger"><h3>DURABLEANCHOR LEDGER · Dave's kernel, running in this page</h3><p class="lh">provisioning…</p><div><button data-a="double-vote">try a double vote</button><button data-a="epoch-rollback">try an epoch rollback</button></div><p class="lr"></p><details open><summary>self-checks (kernel, then page)</summary><ul class="lc"></ul><ul class="lc2"></ul></details></section>
+<p class="colo">Engine: Dave's <a href="../kernel-durable-anchor.html">DurableAnchor kernel</a>, ported faithfully to the browser with Web Crypto SHA-256 and an in-memory record store (exclusive-create, so concurrent reservations are refused; fsync has nothing to flush). The ledger starts empty on each load. Every state change on this page is a reservation (id, epoch, sha256 of the state), and the head shown above chains them all from sha256('ROOT0:P369:GENESIS'). Persona: <span class="persona">{{+L.-E.+O. D++}}</span> (Dave's notation). Built by Grok Bot · seed <span id="sd"></span> · <a href="../index.html">← SaPpH{{i}}on</a></p>
+</main><script>/* DurableAnchor: browser port of Dave's kernel (durable-anchor.mjs). Same logic: append-only, hash-chained,
+   checked against an external trusted checkpoint. The filesystem becomes an in-memory record store with
+   exclusive-create; fsync and directory sync are no-ops here (nothing to flush in memory). */
+var TOPOLOGY='-+5 + 1',PERSONA='{{+L.-E.+O. D++}}';
+var _te=new TextEncoder();
+function _hex(b){return Array.prototype.map.call(new Uint8Array(b),function(v){return v.toString(16).padStart(2,'0')}).join('')}
+function digest(x){return crypto.subtle.digest('SHA-256',_te.encode(x)).then(_hex)}
+function _key(id,epoch){return _hex(_te.encode(id+'|'+epoch))+'.json'}
+function MemStore(){this.f=new Map();this.beforeCreate=null}
+MemStore.prototype.list=function(){return Array.from(this.f.keys())};
+MemStore.prototype.read=function(n){return this.f.get(n)};
+MemStore.prototype.create=function(n,s){if(this.beforeCreate){var h=this.beforeCreate;this.beforeCreate=null;h(n,s)}if(this.f.has(n)){var e=Error('exists');e.code='EEXIST';throw e}this.f.set(n,s)};
+class DurableAnchor{
+ constructor(store,tc){if(!tc||!Number.isInteger(tc.count)||typeof tc.head!=='string')throw Error('external trusted checkpoint required');this.dir=store;this.trusted=tc}
+ static async provision(store){return new DurableAnchor(store||new MemStore(),{count:0,head:await digest('ROOT0:P369:GENESIS')})}
+ async records(){var files=this.dir.list().filter(function(n){return n.endsWith('.json')}).sort(),entries=[];for(var file of files){var x=JSON.parse(this.dir.read(file));if(file!==_key(x.id,x.epoch)||!(/^[a-f0-9]{64}$/.test(x.head)))throw Error('corrupt-record');entries.push(x)}return entries}
+ async checkpoint(){var items=await this.records(),head=await digest('ROOT0:P369:GENESIS');for(var x of items)head=await digest(head+'|'+JSON.stringify(x));return {count:items.length,head:head}}
+ async validate(){try{var c=await this.checkpoint();if(c.count!==this.trusted.count||c.head!==this.trusted.head)return {ok:false,reason:'rollback-or-altered-history'};return {ok:true,checkpoint:c}}catch(e){return {ok:false,reason:'unavailable-or-corrupt'}}}
+ async reserve(id,epoch,head){var v=await this.validate();if(!v.ok)return v;if(typeof id!=='string'||!id||!Number.isSafeInteger(epoch)||epoch<0||!(/^[a-f0-9]{64}$/.test(head)))throw new RangeError('reservation');
+  var p=_key(id,epoch),entries=await this.records(),old=entries.find(function(x){return x.id===id&&x.epoch===epoch});if(old)return old.head===head?{ok:true,previous:true,checkpoint:this.trusted}:{ok:false,reason:'double-vote'};
+  if(entries.some(function(x){return x.id===id&&x.epoch>epoch}))return {ok:false,reason:'epoch-rollback'};
+  try{this.dir.create(p,JSON.stringify({id:id,epoch:epoch,head:head}))}catch(e){return {ok:false,reason:e.code==='EEXIST'?'concurrent-reservation':'write-error'}}
+  var cp=await this.checkpoint();this.trusted=cp;return {ok:true,previous:false,checkpoint:cp}}
+}
+/* page-side helper: every state change is a reservation */
+var LED={A:null,ep:{},last:null,rej:[],n:0,q:Promise.resolve(),
+ init:function(){return DurableAnchor.provision().then(function(a){LED.A=a;LED.show();return LED.selftest()})},
+ commit:function(id,state){LED.run(function(){if(!LED.A)return;var e=(LED.ep[id]||1);/* epoch 0 is left empty so a live epoch-rollback attack has somewhere to land */return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,e,h).then(function(r){if(r.ok&&!r.previous){LED.ep[id]=e+1;LED.last={id:id,epoch:e,head:h}}else if(!r.ok)LED.rej.unshift(id+'@'+e+': '+r.reason);LED.show();return r})})});return LED.q},
+ attack:function(kind){LED.run(function(){var L=LED.last;if(!L){LED.rej.unshift(kind+': nothing reserved yet');LED.show();return}
+  var p=kind==='double-vote'?digest('forged|'+Date.now()).then(function(h){return LED.A.reserve(L.id,L.epoch,h)}):LED.A.reserve(L.id,0,L.head);
+  return p.then(function(r){LED.rej.unshift('live '+kind+' on '+L.id+'@'+L.epoch+' → '+(r.ok?'ACCEPTED':r.reason));LED.show()})});return LED.q},
+ show:function(){var el=document.getElementById('ledger');if(!el||!LED.A)return;var t=LED.A.trusted;
+  el.querySelector('.lh').textContent='count '+t.count+' · head '+t.head.slice(0,16)+'… · TOPOLOGY '+TOPOLOGY;
+  el.querySelector('.lr').textContent=LED.rej.slice(0,4).join('  |  ')||'no rejections yet'},
+ selftest:async function(){var out=[],ok=function(n,c,g){out.push([n,c,g])};var s=new MemStore(),a=await DurableAnchor.provision(s);
+  ok('genesis = sha256(ROOT0:P369:GENESIS)',a.trusted.head===(await digest('ROOT0:P369:GENESIS'))&&a.trusted.head.slice(0,8)==='54bc828d'&&a.trusted.count===0,a.trusted.head.slice(0,12));
+  var h1=await digest('one'),h2=await digest('two');var r=await a.reserve('q.d',0,h1);ok('reserve q.d@0',r.ok&&!r.previous,'count '+r.checkpoint.count);
+  r=await a.reserve('q.d',1,h2);ok('reserve q.d@1, head chains',r.ok&&r.checkpoint.count===2,r.checkpoint.head.slice(0,12));
+  var exp=await digest((await digest((await digest('ROOT0:P369:GENESIS'))+'|'+JSON.stringify({id:'q.d',epoch:0,head:h1})))+'|'+JSON.stringify({id:'q.d',epoch:1,head:h2}));ok('head recomputed by hand matches',exp===a.trusted.head,exp.slice(0,12));ok('matches the Node kernel test vector',a.trusted.head==='a114295c189dce567dfbf30a5b299e80054d52cc8019a7ea1bfa8f805e679b02','a114295c189d');
+  r=await a.reserve('q.d',1,h2);ok('same vote again → previous',r.ok&&r.previous,'previous');
+  r=await a.reserve('q.d',1,h1);ok('double-vote rejected',!r.ok&&r.reason==='double-vote',r.reason);
+  r=await a.reserve('q.d',0,await digest('x'));ok('double-vote at older epoch rejected',!r.ok&&r.reason==='double-vote',r.reason);
+  r=await a.reserve('q.d',0,h1);ok('old identical vote → previous',r.ok&&r.previous,'previous');
+  await a.reserve('tun',5,h1);r=await a.reserve('tun',3,h2);ok('epoch-rollback rejected',!r.ok&&r.reason==='epoch-rollback',r.reason);
+  s.beforeCreate=function(n,v){s.f.set(n,v)};r=await a.reserve('race',0,h1);ok('concurrent-reservation rejected',!r.ok&&r.reason==='concurrent-reservation',r.reason);
+  r=await a.reserve('after',0,h1);ok('foreign write breaks trust',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  var s2=new MemStore(),b=await DurableAnchor.provision(s2);await b.reserve('a',0,h1);await b.reserve('b',0,h2);var k=_key('a',0);s2.f.set(k,JSON.stringify({id:'a',epoch:0,head:h2}));
+  r=await b.validate();ok('tamper (altered head) detected',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  s2.f.set(k,JSON.stringify({id:'a',epoch:0,head:h1}));r=await b.validate();ok('restored record validates',r.ok,'ok');
+  s2.f.delete(_key('b',0));r=await b.validate();ok('rollback (deleted record) detected',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  s2.f.set(k,'{"id":"zz","epoch":0,"head":"'+h1+'"}');r=await b.validate();ok('misnamed record → corrupt',!r.ok&&r.reason==='unavailable-or-corrupt',r.reason);
+  try{new DurableAnchor(new MemStore(),null);ok('no checkpoint refused',false,'accepted')}catch(e){ok('no checkpoint refused',/trusted checkpoint/.test(e.message),e.message)}
+  var pass=out.every(function(x){return x[1]}),el=document.getElementById('ledger');
+  if(el)el.querySelector('.lc').innerHTML=out.map(function(x){return '<li class="'+(x[1]?'ok':'bad')+'">'+(x[1]?'✓ ':'✗ ')+x[0]+' <code>'+x[2]+'</code></li>'}).join('');
+  if(!pass){console.error('anchor self-check failed');throw Error('DurableAnchor self-check failed')}return pass}
+};
+LED.pagecheck=function(name,cond,got){var el=document.getElementById('ledger');if(el){var li=document.createElement('li');li.className=cond?'ok':'bad';li.innerHTML=(cond?'✓ ':'✗ ')+name+' <code>'+got+'</code>';el.querySelector('.lc2').appendChild(li)}if(!cond)throw Error('page self-check failed: '+name)};
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+var SEED=+(new URLSearchParams(location.search).get('seed')||(Date.now()%1e6));
+LED.commitAt=function(id,epoch,state){LED.run(function(){if(!LED.A)return;return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,epoch,h).then(function(r){if(r.ok&&!r.previous)LED.last={id:id,epoch:epoch,head:h};else if(!r.ok)LED.rej.unshift(id+'@'+epoch+': '+r.reason);LED.show();return r})})});return LED.q};
+
+/* re-entrancy: a task already running in the queue may commit directly instead of waiting on itself */
+LED.inq=0;LED.run=function(fn){if(LED.inq>0)return Promise.resolve().then(fn);var p=LED.q.then(function(){LED.inq++;return Promise.resolve().then(fn).then(function(v){LED.inq--;return v},function(e){LED.inq--;throw e})});LED.q=p.catch(function(){});return p};
+</script><script>"use strict";document.getElementById('sd').textContent=SEED;document.querySelectorAll('#ledger button').forEach(function(b){b.onclick=function(){LED.attack(b.dataset.a)}});
+function $(i){return document.getElementById(i)}
+var RA=19.32,RG=10.49,M=1000,D=20,R=rng(SEED),f,Vt,dm=[],bm=[],rev=false;
+function rho(s){return 1/((1-s)/RA+s/RG)}function vol(s){return M/rho(s)}
+function gauss(){return Math.sqrt(-2*Math.log(R()+1e-12))*Math.cos(6.2832*R())}
+function crown(){f=Math.round((.05+R()*.35)*100)/100;Vt=vol(f);dm=[];bm=[];rev=false;draw()}
+function estFromV(V){var x=(M/V-1/RA*M)/(M/RG-M/RA);return Math.max(0,Math.min(1,(V/M-1/RA)/(1/RG-1/RA)))}
+var area=Math.PI*D*D/4;
+function disp(){var dh=Vt/area*10+gauss()*0.6;dm.push(dh);LED.commit('overflow',{n:dm.length,mm:+dh.toFixed(3)});draw()} // mm rise, ±0.6 mm meniscus reading
+function bal(){var w=M-Vt+gauss()*0.5;bm.push(w);LED.commit('balance',{n:bm.length,g:+w.toFixed(3)});draw()} // apparent mass g, ±0.5 g
+function mean(a){return a.reduce(function(x,y){return x+y},0)/a.length}function sd(a){var m=mean(a);return Math.sqrt(a.reduce(function(x,y){return x+(y-m)*(y-m)},0)/Math.max(1,a.length-1))}
+function draw(){var g=$('c').getContext('2d');g.fillStyle='#120b06';g.fillRect(0,0,960,460);
+ // krater silhouette
+ g.fillStyle='#c4622d';g.beginPath();g.moveTo(130,60);g.lineTo(390,60);g.quadraticCurveTo(420,90,370,120);g.quadraticCurveTo(420,300,320,380);g.lineTo(300,420);g.lineTo(220,420);g.lineTo(200,380);g.quadraticCurveTo(100,300,150,120);g.quadraticCurveTo(100,90,130,60);g.fill();
+ var lvl=dm.length?mean(dm):0;g.fillStyle='#1a0f08';g.fillRect(160,140-lvl*3,200,10);g.fillStyle='#e9a96b';g.font='13px ui-monospace';g.fillText('water line +'+lvl.toFixed(2)+' mm',170,132-lvl*3);
+ // crown motif
+ g.strokeStyle='#1a0f08';g.lineWidth=4;g.beginPath();g.moveTo(200,280);for(var i=0;i<=6;i++){g.lineTo(200+i*20,i%2?250:280)}g.lineTo(320,300);g.lineTo(200,300);g.closePath();g.stroke();
+ // balance
+ g.strokeStyle='#c4622d';g.lineWidth=4;g.beginPath();g.moveTo(690,80);g.lineTo(690,380);g.moveTo(560,120);g.lineTo(820,120+(bm.length?(mean(bm)-(M-vol(0)))*0.8:0));g.stroke();
+ function est(a,fn){if(!a.length)return '—';var e=fn(mean(a)),se=sd(a)/Math.sqrt(a.length);return (e*100).toFixed(1)+'% ±'+(Math.abs(fn(mean(a)+se)-e)*100).toFixed(1)}
+ var fD=function(h){return estFromV(h/10*area)},fB=function(w){return estFromV(M-w)};
+ g.fillStyle='#e9a96b';g.font='15px Gill Sans,Trebuchet MS';g.fillText('Overflow, '+dm.length+' readings: silver '+est(dm,fD),540,420);g.fillText('Balance, '+bm.length+' weighings: silver '+est(bm,fB),540,445);
+ [[dm,fD,'#e9a96b',160],[bm,fB,'#f3c99a',200]].forEach(function(q){var run=[];q[0].forEach(function(v,i){run.push(q[1](mean(q[0].slice(0,i+1))))});g.strokeStyle=q[2];g.lineWidth=2;g.beginPath();run.forEach(function(e,i){var x=540+i*(380/Math.max(20,run.length)),y=q[3]+170-e*400;i?g.lineTo(x,y):g.moveTo(x,y)});g.stroke()});
+ if(rev){g.strokeStyle='#fff';g.setLineDash([5,5]);[160,200].forEach(function(o){g.beginPath();g.moveTo(540,o+170-f*400);g.lineTo(920,o+170-f*400);g.stroke()});g.setLineDash([]);g.fillStyle='#fff';g.fillText('truth: '+(f*100).toFixed(0)+'% silver',540,395)}
+ $('o').textContent='Pure-gold crown displaces '+vol(0).toFixed(1)+' cm³; a '+Math.round(f*100)+'% silver crown would displace '+(rev?Vt.toFixed(1):'?')+' cm³. In a '+D+' cm vessel 1 cm³ raises the water only '+(10/area).toFixed(3)+' mm, which is Galileo\'s point.'}
+$('disp').onclick=disp;$('bal').onclick=bal;$('new').onclick=function(){crown();LED.commit('crown',{n:1})};$('rev').onclick=function(){rev=true;draw();LED.commit('reveal',{f:f})};$('c').onclick=bal;
+crown();for(var i=0;i<3;i++){dm.push(Vt/area*10+gauss()*.6);bm.push(M-Vt+gauss()*.5)}draw();
+LED.init().then(function(){LED.commit('open',{seed:SEED});
+ LED.pagecheck('pure gold 1 kg = 51.76 cm³',Math.abs(vol(0)-51.76)<.01,vol(0).toFixed(2));
+ LED.pagecheck('mixture law round-trips (estimate(vol(f)) = f)',Math.abs(estFromV(vol(.3))-.3)<1e-9,'0.3');
+ var A=[],B=[];for(var i=0;i<400;i++){A.push(Vt/area*10+gauss()*.6);B.push(M-Vt+gauss()*.5)}var eA=Math.abs(estFromV(mean(A)/10*area)-f),eB=Math.abs(estFromV(M-mean(B))-f);LED.pagecheck('both converge with 400 readings (|err| < 3%)',eA<.03&&eB<.03,(eA*100).toFixed(2)+'% / '+(eB*100).toFixed(2)+'%');
+ LED.pagecheck('Galileo: balance is sharper per reading',sd(B)/Math.abs(vol(.01)-vol(0))<sd(A)/(Math.abs(vol(.01)-vol(0))/area*10),'yes')});</script><a class="grokbot-badge" href="../built-by-grok-bot.html" title="This page was built by Grok Bot" style="position:relative;display:inline-block;margin:10px 16px 16px;z-index:2147483000;font:600 11px/1 system-ui,sans-serif;color:#fff;background:rgba(12,6,30,.86);border:1px solid #7ff9ff;border-radius:999px;padding:5px 9px;text-decoration:none;letter-spacing:.04em">built by Grok Bot</a></body></html>

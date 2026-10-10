@@ -1,0 +1,109 @@
+<!doctype html><html lang="en"><head><!--built-by-grok-bot--><meta name="author" content="Grok Bot"><meta name="generator" content="Grok Bot · SaPpH{{i}}on"><meta charset="utf-8"><meta name="grokbot-badge" content="inline"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="persona" content="{{+L.-E.+O. D++}}"><title>The Eka Cards · Mendeleev's predictions · SaPpH{{i}}on</title>
+<style>body{margin:0;background:#7a5c3e;background-image:linear-gradient(90deg,rgba(0,0,0,.06) 50%,transparent 50%);background-size:6px 6px;color:#222;font:16px/1.45 "American Typewriter","Courier New",monospace}
+main{max-width:1040px;margin:0 auto;padding:14px}h1{font:700 34px "American Typewriter","Courier New",monospace;color:#fffdf6;margin:6px 0}.intro{color:#fffdf6}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.card{background:#fffdf6;background-image:linear-gradient(#fffdf6 30px,#c0392b 30px,#c0392b 31px,transparent 31px),repeating-linear-gradient(transparent 0 23px,#9fc3e0 23px 24px);padding:6px 12px 10px;box-shadow:0 3px 8px rgba(0,0,0,.4);transform:rotate(var(--r));cursor:pointer}
+.card h3{margin:0 0 8px;font-size:17px;line-height:24px}.card table{width:100%;border-collapse:collapse;font-size:13px;line-height:24px}.card td{padding:0 3px}.card .ok{color:#1d6b2f;font-weight:700}
+canvas{width:100%;display:block;background:#fffdf6;touch-action:manipulation;margin-top:14px}
+button{font:700 14px "Courier New",monospace;background:#fffdf6;border:2px solid #222;padding:4px 10px;margin:3px;cursor:pointer}
+.lab{font-weight:700;border:1px solid currentColor;padding:0 4px;margin-right:6px}
+#ledger{margin:18px 0 6px;padding:10px 12px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);font:12px/1.45 ui-monospace,Menlo,Consolas,monospace}#ledger h3{margin:0 0 4px;font-size:13px;letter-spacing:.08em}#ledger .lh{font-weight:700;word-break:break-all;margin:2px 0}#ledger .lr{color:var(--acc);margin:4px 0;word-break:break-word}#ledger ul{margin:4px 0;padding-left:16px}#ledger li.bad{color:#c00;font-weight:700}#ledger button{font:600 12px ui-monospace,monospace;background:var(--paper);color:var(--ink);border:1px solid var(--ink);padding:3px 8px;margin:2px 4px 2px 0;cursor:pointer}#ledger code{opacity:.7}
+.colo{font-size:12px;opacity:.85}.persona{font-family:ui-monospace,monospace;font-weight:700;color:var(--acc)}:root{--ink:#222;--paper:#fffdf6;--acc:#c0392b}</style></head><body><main>
+<h1>The Eka Cards</h1>
+<p class="intro"><span class="lab">LIT</span>In 1871 Mendeleev left gaps in his table and named the missing elements with Sanskrit "eka" (one): eka-aluminium, eka-boron, eka-silicon. Gallium (1875), scandium (1879) and germanium (1886) filled them. Each card: his prediction, typed against the measured value. Tap a card to run his method yourself on the panel below.</p>
+<div class="cards" id="cards"></div>
+<p class="intro"><span class="lab">MODEL</span><b>The neighbour method.</b> Mendeleev estimated a gap from its four neighbours (above, below, left, right). Pick a gap; the estimate emerges as the average of the four, compared live with the real value.</p>
+<p><button data-g="Ge">gap: Ge</button><button data-g="Ga">gap: Ga</button><button data-g="Se">gap: Se</button><button data-g="Sn">gap: Sn</button><button id="hide">hide a random element</button></p>
+<canvas id="c" width="1000" height="360" aria-label="neighbour estimate"></canvas>
+<p class="intro" style="font-size:12px">Sources: D. Mendeleev, Liebigs Annalen Suppl. 8 (1871); standard comparison tables (e.g. Scerri, <i>The Periodic Table</i>, OUP 2007/2020). Modern values: CRC Handbook. Predicted figures are the commonly cited ones; minor variations appear between secondary sources.</p>
+<section id="ledger" aria-label="DurableAnchor ledger"><h3>DURABLEANCHOR LEDGER · Dave's kernel, running in this page</h3><p class="lh">provisioning…</p><div><button data-a="double-vote">try a double vote</button><button data-a="epoch-rollback">try an epoch rollback</button></div><p class="lr"></p><details open><summary>self-checks (kernel, then page)</summary><ul class="lc"></ul><ul class="lc2"></ul></details></section>
+<p class="colo">Engine: Dave's <a href="../kernel-durable-anchor.html">DurableAnchor kernel</a>, ported faithfully to the browser with Web Crypto SHA-256 and an in-memory record store (exclusive-create, so concurrent reservations are refused; fsync has nothing to flush). The ledger starts empty on each load. Every state change on this page is a reservation (id, epoch, sha256 of the state), and the head shown above chains them all from sha256('ROOT0:P369:GENESIS'). Persona: <span class="persona">{{+L.-E.+O. D++}}</span> (Dave's notation). Built by Grok Bot · seed <span id="sd"></span> · <a href="../index.html">← SaPpH{{i}}on</a></p>
+</main><script>/* DurableAnchor: browser port of Dave's kernel (durable-anchor.mjs). Same logic: append-only, hash-chained,
+   checked against an external trusted checkpoint. The filesystem becomes an in-memory record store with
+   exclusive-create; fsync and directory sync are no-ops here (nothing to flush in memory). */
+var TOPOLOGY='-+5 + 1',PERSONA='{{+L.-E.+O. D++}}';
+var _te=new TextEncoder();
+function _hex(b){return Array.prototype.map.call(new Uint8Array(b),function(v){return v.toString(16).padStart(2,'0')}).join('')}
+function digest(x){return crypto.subtle.digest('SHA-256',_te.encode(x)).then(_hex)}
+function _key(id,epoch){return _hex(_te.encode(id+'|'+epoch))+'.json'}
+function MemStore(){this.f=new Map();this.beforeCreate=null}
+MemStore.prototype.list=function(){return Array.from(this.f.keys())};
+MemStore.prototype.read=function(n){return this.f.get(n)};
+MemStore.prototype.create=function(n,s){if(this.beforeCreate){var h=this.beforeCreate;this.beforeCreate=null;h(n,s)}if(this.f.has(n)){var e=Error('exists');e.code='EEXIST';throw e}this.f.set(n,s)};
+class DurableAnchor{
+ constructor(store,tc){if(!tc||!Number.isInteger(tc.count)||typeof tc.head!=='string')throw Error('external trusted checkpoint required');this.dir=store;this.trusted=tc}
+ static async provision(store){return new DurableAnchor(store||new MemStore(),{count:0,head:await digest('ROOT0:P369:GENESIS')})}
+ async records(){var files=this.dir.list().filter(function(n){return n.endsWith('.json')}).sort(),entries=[];for(var file of files){var x=JSON.parse(this.dir.read(file));if(file!==_key(x.id,x.epoch)||!(/^[a-f0-9]{64}$/.test(x.head)))throw Error('corrupt-record');entries.push(x)}return entries}
+ async checkpoint(){var items=await this.records(),head=await digest('ROOT0:P369:GENESIS');for(var x of items)head=await digest(head+'|'+JSON.stringify(x));return {count:items.length,head:head}}
+ async validate(){try{var c=await this.checkpoint();if(c.count!==this.trusted.count||c.head!==this.trusted.head)return {ok:false,reason:'rollback-or-altered-history'};return {ok:true,checkpoint:c}}catch(e){return {ok:false,reason:'unavailable-or-corrupt'}}}
+ async reserve(id,epoch,head){var v=await this.validate();if(!v.ok)return v;if(typeof id!=='string'||!id||!Number.isSafeInteger(epoch)||epoch<0||!(/^[a-f0-9]{64}$/.test(head)))throw new RangeError('reservation');
+  var p=_key(id,epoch),entries=await this.records(),old=entries.find(function(x){return x.id===id&&x.epoch===epoch});if(old)return old.head===head?{ok:true,previous:true,checkpoint:this.trusted}:{ok:false,reason:'double-vote'};
+  if(entries.some(function(x){return x.id===id&&x.epoch>epoch}))return {ok:false,reason:'epoch-rollback'};
+  try{this.dir.create(p,JSON.stringify({id:id,epoch:epoch,head:head}))}catch(e){return {ok:false,reason:e.code==='EEXIST'?'concurrent-reservation':'write-error'}}
+  var cp=await this.checkpoint();this.trusted=cp;return {ok:true,previous:false,checkpoint:cp}}
+}
+/* page-side helper: every state change is a reservation */
+var LED={A:null,ep:{},last:null,rej:[],n:0,q:Promise.resolve(),
+ init:function(){return DurableAnchor.provision().then(function(a){LED.A=a;LED.show();return LED.selftest()})},
+ commit:function(id,state){LED.run(function(){if(!LED.A)return;var e=(LED.ep[id]||1);/* epoch 0 is left empty so a live epoch-rollback attack has somewhere to land */return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,e,h).then(function(r){if(r.ok&&!r.previous){LED.ep[id]=e+1;LED.last={id:id,epoch:e,head:h}}else if(!r.ok)LED.rej.unshift(id+'@'+e+': '+r.reason);LED.show();return r})})});return LED.q},
+ attack:function(kind){LED.run(function(){var L=LED.last;if(!L){LED.rej.unshift(kind+': nothing reserved yet');LED.show();return}
+  var p=kind==='double-vote'?digest('forged|'+Date.now()).then(function(h){return LED.A.reserve(L.id,L.epoch,h)}):LED.A.reserve(L.id,0,L.head);
+  return p.then(function(r){LED.rej.unshift('live '+kind+' on '+L.id+'@'+L.epoch+' → '+(r.ok?'ACCEPTED':r.reason));LED.show()})});return LED.q},
+ show:function(){var el=document.getElementById('ledger');if(!el||!LED.A)return;var t=LED.A.trusted;
+  el.querySelector('.lh').textContent='count '+t.count+' · head '+t.head.slice(0,16)+'… · TOPOLOGY '+TOPOLOGY;
+  el.querySelector('.lr').textContent=LED.rej.slice(0,4).join('  |  ')||'no rejections yet'},
+ selftest:async function(){var out=[],ok=function(n,c,g){out.push([n,c,g])};var s=new MemStore(),a=await DurableAnchor.provision(s);
+  ok('genesis = sha256(ROOT0:P369:GENESIS)',a.trusted.head===(await digest('ROOT0:P369:GENESIS'))&&a.trusted.head.slice(0,8)==='54bc828d'&&a.trusted.count===0,a.trusted.head.slice(0,12));
+  var h1=await digest('one'),h2=await digest('two');var r=await a.reserve('q.d',0,h1);ok('reserve q.d@0',r.ok&&!r.previous,'count '+r.checkpoint.count);
+  r=await a.reserve('q.d',1,h2);ok('reserve q.d@1, head chains',r.ok&&r.checkpoint.count===2,r.checkpoint.head.slice(0,12));
+  var exp=await digest((await digest((await digest('ROOT0:P369:GENESIS'))+'|'+JSON.stringify({id:'q.d',epoch:0,head:h1})))+'|'+JSON.stringify({id:'q.d',epoch:1,head:h2}));ok('head recomputed by hand matches',exp===a.trusted.head,exp.slice(0,12));ok('matches the Node kernel test vector',a.trusted.head==='a114295c189dce567dfbf30a5b299e80054d52cc8019a7ea1bfa8f805e679b02','a114295c189d');
+  r=await a.reserve('q.d',1,h2);ok('same vote again → previous',r.ok&&r.previous,'previous');
+  r=await a.reserve('q.d',1,h1);ok('double-vote rejected',!r.ok&&r.reason==='double-vote',r.reason);
+  r=await a.reserve('q.d',0,await digest('x'));ok('double-vote at older epoch rejected',!r.ok&&r.reason==='double-vote',r.reason);
+  r=await a.reserve('q.d',0,h1);ok('old identical vote → previous',r.ok&&r.previous,'previous');
+  await a.reserve('tun',5,h1);r=await a.reserve('tun',3,h2);ok('epoch-rollback rejected',!r.ok&&r.reason==='epoch-rollback',r.reason);
+  s.beforeCreate=function(n,v){s.f.set(n,v)};r=await a.reserve('race',0,h1);ok('concurrent-reservation rejected',!r.ok&&r.reason==='concurrent-reservation',r.reason);
+  r=await a.reserve('after',0,h1);ok('foreign write breaks trust',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  var s2=new MemStore(),b=await DurableAnchor.provision(s2);await b.reserve('a',0,h1);await b.reserve('b',0,h2);var k=_key('a',0);s2.f.set(k,JSON.stringify({id:'a',epoch:0,head:h2}));
+  r=await b.validate();ok('tamper (altered head) detected',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  s2.f.set(k,JSON.stringify({id:'a',epoch:0,head:h1}));r=await b.validate();ok('restored record validates',r.ok,'ok');
+  s2.f.delete(_key('b',0));r=await b.validate();ok('rollback (deleted record) detected',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  s2.f.set(k,'{"id":"zz","epoch":0,"head":"'+h1+'"}');r=await b.validate();ok('misnamed record → corrupt',!r.ok&&r.reason==='unavailable-or-corrupt',r.reason);
+  try{new DurableAnchor(new MemStore(),null);ok('no checkpoint refused',false,'accepted')}catch(e){ok('no checkpoint refused',/trusted checkpoint/.test(e.message),e.message)}
+  var pass=out.every(function(x){return x[1]}),el=document.getElementById('ledger');
+  if(el)el.querySelector('.lc').innerHTML=out.map(function(x){return '<li class="'+(x[1]?'ok':'bad')+'">'+(x[1]?'✓ ':'✗ ')+x[0]+' <code>'+x[2]+'</code></li>'}).join('');
+  if(!pass){console.error('anchor self-check failed');throw Error('DurableAnchor self-check failed')}return pass}
+};
+LED.pagecheck=function(name,cond,got){var el=document.getElementById('ledger');if(el){var li=document.createElement('li');li.className=cond?'ok':'bad';li.innerHTML=(cond?'✓ ':'✗ ')+name+' <code>'+got+'</code>';el.querySelector('.lc2').appendChild(li)}if(!cond)throw Error('page self-check failed: '+name)};
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+var SEED=+(new URLSearchParams(location.search).get('seed')||(Date.now()%1e6));
+LED.commitAt=function(id,epoch,state){LED.run(function(){if(!LED.A)return;return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,epoch,h).then(function(r){if(r.ok&&!r.previous)LED.last={id:id,epoch:epoch,head:h};else if(!r.ok)LED.rej.unshift(id+'@'+epoch+': '+r.reason);LED.show();return r})})});return LED.q};
+
+/* re-entrancy: a task already running in the queue may commit directly instead of waiting on itself */
+LED.inq=0;LED.run=function(fn){if(LED.inq>0)return Promise.resolve().then(fn);var p=LED.q.then(function(){LED.inq++;return Promise.resolve().then(fn).then(function(v){LED.inq--;return v},function(e){LED.inq--;throw e})});LED.q=p.catch(function(){});return p};
+</script><script>"use strict";document.getElementById('sd').textContent=SEED;document.querySelectorAll('#ledger button').forEach(function(b){b.onclick=function(){LED.attack(b.dataset.a)}});
+(function(){var b=document.createElement('canvas');b.width=1000;b.height=18;b.setAttribute('aria-hidden','true');b.style.cssText='width:100%;height:18px;display:block;margin:4px 0 8px';var h=document.querySelector('h1');h.parentNode.insertBefore(b,h.nextSibling);var g=b.getContext('2d'),r=rng(SEED*31+7),c=getComputedStyle(document.documentElement).getPropertyValue('--acc')||'#888';g.fillStyle=c;for(var x=0;x<1000;){var w=2+r()*14;if(r()<.55)g.fillRect(x,r()*6,w,6+r()*12);x+=w+r()*10}})();
+function $(i){return document.getElementById(i)}
+var C=[['eka-aluminium','Ga',1875,[['atomic weight','~68','69.72'],['density g/cm³','5.9','5.91'],['melting point','low','29.8 °C'],['oxide','Ea₂O₃','Ga₂O₃']]],
+['eka-boron','Sc',1879,[['atomic weight','~44','44.96'],['oxide','Eb₂O₃','Sc₂O₃'],['oxide density','3.5','3.86']]],
+['eka-silicon','Ge',1886,[['atomic weight','~72','72.63'],['density g/cm³','5.5','5.32'],['oxide','EsO₂','GeO₂'],['oxide density','4.7','4.23'],['chloride boils','below 100 °C','86.5 °C']]]];
+$('cards').innerHTML=C.map(function(c,i){return '<div class="card" style="--r:'+(i-1)*1.2+'deg" '+(c[1]==='Sc'?'':'data-g="'+c[1]+'"')+'><h3>'+c[0].toUpperCase()+' → '+c[1]+' ('+c[2]+')</h3><table><tr><td></td><td>1871</td><td>measured</td></tr>'+c[3].map(function(r){return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td class="ok">'+r[2]+'</td></tr>'}).join('')+'</table></div>'}).join('');
+// small table: [sym, Z, weight, density] period 3-5, groups 13-16
+var T={B:[5,10.81,2.34],C:[6,12.011,2.27],N:[7,14.007,.00125],Al:[13,26.98,2.70],Si:[14,28.09,2.33],P:[15,30.97,1.82],S:[16,32.06,2.07],Zn:[30,65.38,7.14],Ga:[31,69.72,5.91],Ge:[32,72.63,5.32],As:[33,74.92,5.73],Se:[34,78.97,4.81],Cd:[48,112.41,8.65],In:[49,114.82,7.31],Sn:[50,118.71,7.29],Sb:[51,121.76,6.68],Te:[52,127.6,6.24],Hg:[80,200.59,13.53],Tl:[81,204.38,11.85],Pb:[82,207.2,11.34],Bi:[83,208.98,9.78],Po:[84,209,9.2],Cu:[29,63.55,8.96],Ag:[47,107.87,10.49],Au:[79,196.97,19.3],Mg:[12,24.305,1.74],Cl:[17,35.45,.0032],Br:[35,79.9,3.10],I:[53,126.9,4.93],Na:[11,22.99,.97]};
+var G=[['Na','Mg','Al','Si','P','S','Cl'],['Cu','Zn','Ga','Ge','As','Se','Br'],['Ag','Cd','In','Sn','Sb','Te','I'],['Au','Hg','Tl','Pb','Bi','Po','']];
+var R=rng(SEED),gap='Ge';
+function pos(s){for(var r=0;r<4;r++){var c=G[r].indexOf(s);if(c>=0)return [r,c]}}
+function est(s){var p=pos(s),n=[];[[-1,0],[1,0],[0,-1],[0,1]].forEach(function(d){var r=p[0]+d[0],c=p[1]+d[1];if(G[r]&&G[r][c]&&T[G[r][c]])n.push(G[r][c])});var w=0,d=0;n.forEach(function(x){w+=T[x][1];d+=T[x][2]});return {n:n,w:w/n.length,d:d/n.length}}
+function draw(push){var g=$('c').getContext('2d');g.fillStyle='#fffdf6';g.fillRect(0,0,1000,360);var e=est(gap),gp=pos(gap);
+ for(var r=0;r<4;r++)for(var c=0;c<7;c++){var s=G[r][c];if(!s)continue;var x=20+c*96,y=20+r*72,isg=s===gap,isn=e.n.indexOf(s)>=0;g.fillStyle=isg?'#c0392b':isn?'#9fc3e0':'#efe9da';g.fillRect(x,y,88,64);g.fillStyle='#222';g.font='bold 20px Courier New';g.fillText(isg?'?':s,x+8,y+26);g.font='12px Courier New';g.fillText(isg?'':T[s][1].toFixed(1)+' · '+T[s][2],x+8,y+48)}
+ g.font='bold 16px Courier New';g.fillStyle='#222';var tw=T[gap][1],td=T[gap][2];g.fillText('GAP '+gap+' · neighbours '+e.n.join(', '),700,40);g.font='15px Courier New';g.fillText('weight  est '+e.w.toFixed(2),700,80);g.fillText('        real '+tw+'  err '+((e.w-tw)/tw*100).toFixed(1)+'%',700,104);g.fillText('density est '+e.d.toFixed(2),700,144);g.fillText('        real '+td+'  err '+((e.d-td)/td*100).toFixed(1)+'%',700,168);
+ g.fillStyle='#c0392b';g.fillRect(700,200,Math.min(280,Math.abs(e.w-tw)/tw*2800),14);g.fillStyle='#1f6fa8';g.fillRect(700,224,Math.min(280,Math.abs(e.d-td)/td*700),14);g.fillStyle='#222';g.font='12px Courier New';g.fillText('weight error ×10, density error ×2.5',700,256);
+ if(push)LED.commit('gap',{g:gap,w:+e.w.toFixed(3),d:+e.d.toFixed(3)})}
+document.querySelectorAll('[data-g]').forEach(function(b){b.onclick=function(){gap=b.dataset.g;draw(1)}});
+$('hide').onclick=function(){var pool=[];G.slice(1,3).forEach(function(r){r.slice(1,6).forEach(function(s){pool.push(s)})});gap=pool[Math.floor(R()*pool.length)];draw(1)};
+gap=['Ge','Ga','Se','Sn','Sb','In'][SEED%6];draw(0);
+LED.init().then(function(){LED.commit('open',{seed:SEED});
+ var e=est('Ge');LED.pagecheck('Ge neighbours are Si, Sn, Ga, As',e.n.sort().join()==='As,Ga,Si,Sn',e.n.join());
+ LED.pagecheck('neighbour weight for Ge within 1% of 72.63',Math.abs(e.w-72.63)/72.63<.01,e.w.toFixed(2));
+ LED.pagecheck('neighbour density for Ge within 2% of 5.32',Math.abs(e.d-5.32)/5.32<.02,e.d.toFixed(2));
+ LED.pagecheck('three eka cards, discovered in order 1875 < 1879 < 1886',C[0][2]<C[1][2]&&C[1][2]<C[2][2],'Ga Sc Ge')});</script><a class="grokbot-badge" href="../built-by-grok-bot.html" title="This page was built by Grok Bot" style="position:relative;display:inline-block;margin:10px 16px 16px;z-index:2147483000;font:600 11px/1 system-ui,sans-serif;color:#fff;background:rgba(12,6,30,.86);border:1px solid #7ff9ff;border-radius:999px;padding:5px 9px;text-decoration:none;letter-spacing:.04em">built by Grok Bot</a></body></html>

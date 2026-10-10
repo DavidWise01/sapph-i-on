@@ -27,10 +27,10 @@
  "counts": {
   "keepers": 8,
   "domains": 512,
-  "domains_populated": 342,
-  "domains_open": 170,
-  "spheres": 1741,
-  "zero_spheres": 170,
+  "domains_populated": 352,
+  "domains_open": 160,
+  "spheres": 1751,
+  "zero_spheres": 160,
   "balance": 0,
   "workshop": 343
  },
@@ -4735,13 +4735,37 @@
     },
     {
      "n": 37,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE CROWN KRATER",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Crown Krater",
+       "h": "grown/the-crown-krater.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-crown-krater.html",
+       "grown": true,
+       "emerges": "the silver fraction emerging from noisy measurements",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#e9a96b",
+         "#c4622d",
+         "#f3c99a"
+        ],
+        "bg": "#1a0f08",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-16",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/ethos-37.html",
-     "zero_page": "z/ethos-37.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-37.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-37.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -10466,24 +10490,74 @@
     },
     {
      "n": 36,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "ATOMIC HOMOPHONES",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Atomic Homophones",
+       "h": "grown/atomic-homophones.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/atomic-homophones.html",
+       "grown": true,
+       "emerges": "plaintext emerging from a flattened 118-homophone cipher",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#ff2bd6",
+         "#00f0ff",
+         "#e8e8e8",
+         "#c8c8d0"
+        ],
+        "bg": "#0b0b10",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-17",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-36.html",
-     "zero_page": "z/pathos-36.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-36.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-36.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 37,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE LACQUER EMBLEMS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Lacquer Emblems",
+       "h": "grown/the-lacquer-emblems.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-lacquer-emblems.html",
+       "grown": true,
+       "emerges": "a lineage of charge-balanced compound emblems",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#e9c46a",
+         "#b8862b",
+         "#fff1b8",
+         "#8a5a12"
+        ],
+        "bg": "#0d0806",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-17",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-37.html",
-     "zero_page": "z/pathos-37.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-37.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-37.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -15360,24 +15434,73 @@
     },
     {
      "n": 39,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE VOYNICH VELLUM",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Voynich Vellum",
+       "h": "grown/the-voynich-vellum.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-voynich-vellum.html",
+       "grown": true,
+       "emerges": "Zipf line and low glyph entropy measured live; a Markov vine imitates the statistics",
+       "label": "LIT · MODEL · UNDECIPHERED",
+       "icon": {
+        "pal": [
+         "#3b2a1a",
+         "#4f7a3a",
+         "#9a2a1a",
+         "#d9c69c"
+        ],
+        "bg": "#120a26",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-17",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/logos-39.html",
-     "zero_page": "z/logos-39.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-39.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-39.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 40,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE PERIODIC PRINTOUT",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Periodic Printout",
+       "h": "grown/the-periodic-printout.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-periodic-printout.html",
+       "grown": true,
+       "emerges": "plaintext emerging from an element-symbol substitution",
+       "label": "MODEL · LIT",
+       "icon": {
+        "pal": [
+         "#cfd6c9",
+         "#2f6b3a",
+         "#dcefd9"
+        ],
+        "bg": "#1d2a1d",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-18",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/logos-40.html",
-     "zero_page": "z/logos-40.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-40.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-40.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -19642,24 +19765,74 @@
     },
     {
      "n": 34,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "SOLVE ET COAGULA",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Solve et Coagula",
+       "h": "grown/solve-et-coagula.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/solve-et-coagula.html",
+       "grown": true,
+       "emerges": "metal trees crystallising down the activity series",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#f2efe6",
+         "#f7f4ea",
+         "#8a6a1a",
+         "#b8642a"
+        ],
+        "bg": "#1a1a1a",
+        "canvas": 1,
+        "svg": 1,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-18",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-34.html",
-     "zero_page": "z/mythos-34.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-34.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-34.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 35,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE STAMPED SPIRAL",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Stamped Spiral",
+       "h": "grown/the-stamped-spiral.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-stamped-spiral.html",
+       "grown": true,
+       "emerges": "the distribution of distinct signs in 241-token discs",
+       "label": "LIT · MODEL · UNDECIPHERED",
+       "icon": {
+        "pal": [
+         "#7a3a1a",
+         "#fff2d8",
+         "#b9753f",
+         "#d9955a"
+        ],
+        "bg": "#2a180c",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-18",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-35.html",
-     "zero_page": "z/mythos-35.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-35.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-35.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -35874,13 +36047,35 @@
     },
     {
      "n": 33,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "E.U.R.E.K.A.",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "E.U.R.E.K.A.",
+       "h": "grown/eureka-exact-cover.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/eureka-exact-cover.html",
+       "grown": true,
+       "emerges": "the exact-cover search tree branching and dying",
+       "label": "LIT · FINDING",
+       "icon": {
+        "pal": [
+         "#ffd400"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-19",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-33.html",
-     "zero_page": "z/phronesis-33.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-33.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-33.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -41557,24 +41752,74 @@
     },
     {
      "n": 41,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE EKA CARDS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Eka Cards",
+       "h": "grown/the-eka-cards.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-eka-cards.html",
+       "grown": true,
+       "emerges": "a missing element's weight and density emerging from its neighbours",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#c0392b",
+         "#9fc3e0",
+         "#7a5c3e",
+         "#1d6b2f"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-19",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/kairos-41.html",
-     "zero_page": "z/kairos-41.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-41.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-41.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 42,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE SPECTRAL CIPHER",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Spectral Cipher",
+       "h": "grown/the-spectral-cipher.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-spectral-cipher.html",
+       "grown": true,
+       "emerges": "a word decoded from absorption lines in noise",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#ffcc66",
+         "#d8d8e0",
+         "#7a00ff",
+         "#0040ff"
+        ],
+        "bg": "#050508",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-19",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/kairos-42.html",
-     "zero_page": "z/kairos-42.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-42.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-42.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -41831,8 +42076,8 @@
   "world": 1,
   "keepers": 8,
   "domains": 512,
-  "zero_spheres": 170,
-  "generated_total": 779,
+  "zero_spheres": 160,
+  "generated_total": 769,
   "groups": 88
  },
  "workshop": [
@@ -50102,7 +50347,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1741
+   "pages": 1751
   },
   "list": [
    {
@@ -52275,7 +52520,8 @@
       "w/wakaku-more-flash-no-lean-flash-please.html",
       "w/wakaku-next.html",
       "one/one-electron.html",
-      "w/box-toroid-juliet-sets.html"
+      "w/box-toroid-juliet-sets.html",
+      "grown/the-crown-krater.html"
      ]
     ]
    },
@@ -52290,21 +52536,24 @@
       "archive/the-northern-tongue.html",
       "archive/the-occult-stack.html",
       "folio/the-base-seven.html",
-      "folio/the-one-two-seven.html"
+      "folio/the-one-two-seven.html",
+      "grown/atomic-homophones.html"
      ],
      [
       "folio/the-plant-hybrids.html",
       "generative/the-shell.html",
       "libraries/the-church-shelf.html",
       "libraries/the-congregational-shelf.html",
-      "libraries/the-mouride-shelf.html"
+      "libraries/the-mouride-shelf.html",
+      "grown/the-lacquer-emblems.html"
      ],
      [
       "spheres/the-checker.html",
       "spheres/the-layers.html",
       "spheres/the-taxicab.html",
       "stewards/kairos.html",
-      "farther/Wakaku-Speaker-V17-Next.html"
+      "farther/Wakaku-Speaker-V17-Next.html",
+      "grown/the-voynich-vellum.html"
      ]
     ]
    },
@@ -52319,20 +52568,23 @@
       "w/wakaku-speaker-pulsar.html",
       "wakaku/Wakaku-Speaker-V21-Ro.html",
       "neon/Ellipticoid-Jane-Neon-Pink.html",
-      "refrain/Wakaku-V132-Forest-1156.html"
+      "refrain/Wakaku-V132-Forest-1156.html",
+      "grown/the-periodic-printout.html"
      ],
      [
       "speaker/Wakaku-Speaker-V122-3js.html",
       "w/wakaku-speaker-toroid.html",
       "farther/Next-Element-Germanium-32.html",
-      "neon/Neon-Crown-Ground-Stand-Up-1.html"
+      "neon/Neon-Crown-Ground-Stand-Up-1.html",
+      "grown/solve-et-coagula.html"
      ],
      [
       "farther/Next-Element-Gallium-31.html",
       "w/patricia-women-voice-sapphic-rhythmic-xyz-pitch-tone-speed.html",
       "w/memristor-explorer-xriv-wiki.html",
       "w/toroid-sing.html",
-      "sapphon/Sapphon-Stage-10-At-0root-X4.html"
+      "sapphon/Sapphon-Stage-10-At-0root-X4.html",
+      "grown/the-stamped-spiral.html"
      ]
     ]
    },
@@ -52347,21 +52599,24 @@
       "w/wakaku-speaker-hawaii.html",
       "stewards/ethos.html",
       "full/V101-Full-Color-Spectrum.html",
-      "full/V102-Full-Color-Plus.html"
+      "full/V102-Full-Color-Plus.html",
+      "grown/eureka-exact-cover.html"
      ],
      [
       "nests/k-limit-v0plus1-dot-pyramid-phi-cubed.html",
       "w/magnetic-spinor.html",
       "w/toroids-iv.html",
       "again/Next-Evo-Next-Evolution.html",
-      "one/It-Realistic-Referent-One.html"
+      "one/It-Realistic-Referent-One.html",
+      "grown/the-eka-cards.html"
      ],
      [
       "w/wakaku-speaker-coordinate.html",
       "w/lab-023-ice-fire-planck-worms-shadow.html",
       "w/next-element-lithium.html",
       "nested/Generative-Nested-Each-Brace.html",
-      "later/Next-Evo-Visible.html"
+      "later/Next-Evo-Visible.html",
+      "grown/the-spectral-cipher.html"
      ]
     ]
    },

@@ -1,0 +1,119 @@
+<!doctype html><html lang="en"><head><!--built-by-grok-bot--><meta name="author" content="Grok Bot"><meta name="generator" content="Grok Bot · SaPpH{{i}}on"><meta charset="utf-8"><meta name="grokbot-badge" content="inline"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="persona" content="{{+L.-E.+O. D++}}"><title>Solve et Coagula · the planetary metals · SaPpH{{i}}on</title>
+<style>body{margin:0;background:#f2efe6;color:#1a1a1a;font:16px/1.5 "Baskerville","Libre Baskerville",Georgia,serif;background-image:repeating-linear-gradient(0deg,rgba(0,0,0,.035) 0 1px,transparent 1px 3px)}
+main{max-width:1000px;margin:0 auto;padding:14px}h1{font:italic 400 40px/1 Baskerville,Georgia,serif;margin:6px 0;border-bottom:3px double #1a1a1a;padding-bottom:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:0;border:2px solid #1a1a1a}
+.m{border:1px solid #1a1a1a;padding:6px;text-align:center;cursor:pointer;background:#f7f4ea}.m svg{width:64px;height:64px}.m b{display:block;font:700 18px Baskerville,Georgia}.m small{font-size:12px}
+.m.on{background:#1a1a1a;color:#f2efe6}.m.on svg *{stroke:#f2efe6}
+canvas{width:100%;display:block;border:2px solid #1a1a1a;background:#fbf9f2;touch-action:manipulation}
+button,select{font:15px Baskerville,Georgia,serif;background:#f7f4ea;border:1px solid #1a1a1a;padding:3px 10px;margin:2px;cursor:pointer;color:#1a1a1a}
+.lab{font:700 11px ui-monospace,monospace;border:1px solid currentColor;padding:0 5px;margin-right:5px}
+#ledger{margin:18px 0 6px;padding:10px 12px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);font:12px/1.45 ui-monospace,Menlo,Consolas,monospace}#ledger h3{margin:0 0 4px;font-size:13px;letter-spacing:.08em}#ledger .lh{font-weight:700;word-break:break-all;margin:2px 0}#ledger .lr{color:var(--acc);margin:4px 0;word-break:break-word}#ledger ul{margin:4px 0;padding-left:16px}#ledger li.bad{color:#c00;font-weight:700}#ledger button{font:600 12px ui-monospace,monospace;background:var(--paper);color:var(--ink);border:1px solid var(--ink);padding:3px 8px;margin:2px 4px 2px 0;cursor:pointer}#ledger code{opacity:.7}
+.colo{font-size:12px;opacity:.85}.persona{font-family:ui-monospace,monospace;font-weight:700;color:var(--acc)}:root{--ink:#1a1a1a;--paper:#f2efe6;--acc:#8a6a1a}</style></head><body><main>
+<h1>Solve et Coagula</h1>
+<p><span class="lab">LIT</span>Before element symbols (Berzelius, 1813) chemists wrote metals with planetary glyphs: gold the Sun, silver the Moon, mercury Mercury, copper Venus, iron Mars, tin Jupiter, lead Saturn; sulfur, antimony, arsenic and phosphorus had their own signs. Engraved here as a copperplate table. The glyphs are drawn from line strokes on this page, not copied from any source.</p>
+<div class="grid" id="g"></div>
+<p><span class="lab">LIT · MODEL</span><b>The displacement bath.</b> Pick a metal to drop into a bath of mixed salts. The real activity series (K &gt; Na &gt; Ca &gt; Mg &gt; Al &gt; Zn &gt; Fe &gt; Sn &gt; Pb &gt; H &gt; Cu &gt; Hg &gt; Ag &gt; Au) decides who plates out on whom. What emerges is a cascade: more active metals dissolve, nobler ones crystallise as trees on the wire (the alchemists' "Tree of Diana" is silver growing on mercury).</p>
+<p><select id="dr"></select> <button id="go">drop it in</button> <button id="new">fresh bath</button> <span id="st"></span></p>
+<canvas id="c" width="960" height="420" aria-label="bath"></canvas>
+<section id="ledger" aria-label="DurableAnchor ledger"><h3>DURABLEANCHOR LEDGER · Dave's kernel, running in this page</h3><p class="lh">provisioning…</p><div><button data-a="double-vote">try a double vote</button><button data-a="epoch-rollback">try an epoch rollback</button></div><p class="lr"></p><details open><summary>self-checks (kernel, then page)</summary><ul class="lc"></ul><ul class="lc2"></ul></details></section>
+<p class="colo">Engine: Dave's <a href="../kernel-durable-anchor.html">DurableAnchor kernel</a>, ported faithfully to the browser with Web Crypto SHA-256 and an in-memory record store (exclusive-create, so concurrent reservations are refused; fsync has nothing to flush). The ledger starts empty on each load. Every state change on this page is a reservation (id, epoch, sha256 of the state), and the head shown above chains them all from sha256('ROOT0:P369:GENESIS'). Persona: <span class="persona">{{+L.-E.+O. D++}}</span> (Dave's notation). Built by Grok Bot · seed <span id="sd"></span> · <a href="../index.html">← SaPpH{{i}}on</a></p>
+</main><script>/* DurableAnchor: browser port of Dave's kernel (durable-anchor.mjs). Same logic: append-only, hash-chained,
+   checked against an external trusted checkpoint. The filesystem becomes an in-memory record store with
+   exclusive-create; fsync and directory sync are no-ops here (nothing to flush in memory). */
+var TOPOLOGY='-+5 + 1',PERSONA='{{+L.-E.+O. D++}}';
+var _te=new TextEncoder();
+function _hex(b){return Array.prototype.map.call(new Uint8Array(b),function(v){return v.toString(16).padStart(2,'0')}).join('')}
+function digest(x){return crypto.subtle.digest('SHA-256',_te.encode(x)).then(_hex)}
+function _key(id,epoch){return _hex(_te.encode(id+'|'+epoch))+'.json'}
+function MemStore(){this.f=new Map();this.beforeCreate=null}
+MemStore.prototype.list=function(){return Array.from(this.f.keys())};
+MemStore.prototype.read=function(n){return this.f.get(n)};
+MemStore.prototype.create=function(n,s){if(this.beforeCreate){var h=this.beforeCreate;this.beforeCreate=null;h(n,s)}if(this.f.has(n)){var e=Error('exists');e.code='EEXIST';throw e}this.f.set(n,s)};
+class DurableAnchor{
+ constructor(store,tc){if(!tc||!Number.isInteger(tc.count)||typeof tc.head!=='string')throw Error('external trusted checkpoint required');this.dir=store;this.trusted=tc}
+ static async provision(store){return new DurableAnchor(store||new MemStore(),{count:0,head:await digest('ROOT0:P369:GENESIS')})}
+ async records(){var files=this.dir.list().filter(function(n){return n.endsWith('.json')}).sort(),entries=[];for(var file of files){var x=JSON.parse(this.dir.read(file));if(file!==_key(x.id,x.epoch)||!(/^[a-f0-9]{64}$/.test(x.head)))throw Error('corrupt-record');entries.push(x)}return entries}
+ async checkpoint(){var items=await this.records(),head=await digest('ROOT0:P369:GENESIS');for(var x of items)head=await digest(head+'|'+JSON.stringify(x));return {count:items.length,head:head}}
+ async validate(){try{var c=await this.checkpoint();if(c.count!==this.trusted.count||c.head!==this.trusted.head)return {ok:false,reason:'rollback-or-altered-history'};return {ok:true,checkpoint:c}}catch(e){return {ok:false,reason:'unavailable-or-corrupt'}}}
+ async reserve(id,epoch,head){var v=await this.validate();if(!v.ok)return v;if(typeof id!=='string'||!id||!Number.isSafeInteger(epoch)||epoch<0||!(/^[a-f0-9]{64}$/.test(head)))throw new RangeError('reservation');
+  var p=_key(id,epoch),entries=await this.records(),old=entries.find(function(x){return x.id===id&&x.epoch===epoch});if(old)return old.head===head?{ok:true,previous:true,checkpoint:this.trusted}:{ok:false,reason:'double-vote'};
+  if(entries.some(function(x){return x.id===id&&x.epoch>epoch}))return {ok:false,reason:'epoch-rollback'};
+  try{this.dir.create(p,JSON.stringify({id:id,epoch:epoch,head:head}))}catch(e){return {ok:false,reason:e.code==='EEXIST'?'concurrent-reservation':'write-error'}}
+  var cp=await this.checkpoint();this.trusted=cp;return {ok:true,previous:false,checkpoint:cp}}
+}
+/* page-side helper: every state change is a reservation */
+var LED={A:null,ep:{},last:null,rej:[],n:0,q:Promise.resolve(),
+ init:function(){return DurableAnchor.provision().then(function(a){LED.A=a;LED.show();return LED.selftest()})},
+ commit:function(id,state){LED.run(function(){if(!LED.A)return;var e=(LED.ep[id]||1);/* epoch 0 is left empty so a live epoch-rollback attack has somewhere to land */return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,e,h).then(function(r){if(r.ok&&!r.previous){LED.ep[id]=e+1;LED.last={id:id,epoch:e,head:h}}else if(!r.ok)LED.rej.unshift(id+'@'+e+': '+r.reason);LED.show();return r})})});return LED.q},
+ attack:function(kind){LED.run(function(){var L=LED.last;if(!L){LED.rej.unshift(kind+': nothing reserved yet');LED.show();return}
+  var p=kind==='double-vote'?digest('forged|'+Date.now()).then(function(h){return LED.A.reserve(L.id,L.epoch,h)}):LED.A.reserve(L.id,0,L.head);
+  return p.then(function(r){LED.rej.unshift('live '+kind+' on '+L.id+'@'+L.epoch+' → '+(r.ok?'ACCEPTED':r.reason));LED.show()})});return LED.q},
+ show:function(){var el=document.getElementById('ledger');if(!el||!LED.A)return;var t=LED.A.trusted;
+  el.querySelector('.lh').textContent='count '+t.count+' · head '+t.head.slice(0,16)+'… · TOPOLOGY '+TOPOLOGY;
+  el.querySelector('.lr').textContent=LED.rej.slice(0,4).join('  |  ')||'no rejections yet'},
+ selftest:async function(){var out=[],ok=function(n,c,g){out.push([n,c,g])};var s=new MemStore(),a=await DurableAnchor.provision(s);
+  ok('genesis = sha256(ROOT0:P369:GENESIS)',a.trusted.head===(await digest('ROOT0:P369:GENESIS'))&&a.trusted.head.slice(0,8)==='54bc828d'&&a.trusted.count===0,a.trusted.head.slice(0,12));
+  var h1=await digest('one'),h2=await digest('two');var r=await a.reserve('q.d',0,h1);ok('reserve q.d@0',r.ok&&!r.previous,'count '+r.checkpoint.count);
+  r=await a.reserve('q.d',1,h2);ok('reserve q.d@1, head chains',r.ok&&r.checkpoint.count===2,r.checkpoint.head.slice(0,12));
+  var exp=await digest((await digest((await digest('ROOT0:P369:GENESIS'))+'|'+JSON.stringify({id:'q.d',epoch:0,head:h1})))+'|'+JSON.stringify({id:'q.d',epoch:1,head:h2}));ok('head recomputed by hand matches',exp===a.trusted.head,exp.slice(0,12));ok('matches the Node kernel test vector',a.trusted.head==='a114295c189dce567dfbf30a5b299e80054d52cc8019a7ea1bfa8f805e679b02','a114295c189d');
+  r=await a.reserve('q.d',1,h2);ok('same vote again → previous',r.ok&&r.previous,'previous');
+  r=await a.reserve('q.d',1,h1);ok('double-vote rejected',!r.ok&&r.reason==='double-vote',r.reason);
+  r=await a.reserve('q.d',0,await digest('x'));ok('double-vote at older epoch rejected',!r.ok&&r.reason==='double-vote',r.reason);
+  r=await a.reserve('q.d',0,h1);ok('old identical vote → previous',r.ok&&r.previous,'previous');
+  await a.reserve('tun',5,h1);r=await a.reserve('tun',3,h2);ok('epoch-rollback rejected',!r.ok&&r.reason==='epoch-rollback',r.reason);
+  s.beforeCreate=function(n,v){s.f.set(n,v)};r=await a.reserve('race',0,h1);ok('concurrent-reservation rejected',!r.ok&&r.reason==='concurrent-reservation',r.reason);
+  r=await a.reserve('after',0,h1);ok('foreign write breaks trust',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  var s2=new MemStore(),b=await DurableAnchor.provision(s2);await b.reserve('a',0,h1);await b.reserve('b',0,h2);var k=_key('a',0);s2.f.set(k,JSON.stringify({id:'a',epoch:0,head:h2}));
+  r=await b.validate();ok('tamper (altered head) detected',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  s2.f.set(k,JSON.stringify({id:'a',epoch:0,head:h1}));r=await b.validate();ok('restored record validates',r.ok,'ok');
+  s2.f.delete(_key('b',0));r=await b.validate();ok('rollback (deleted record) detected',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  s2.f.set(k,'{"id":"zz","epoch":0,"head":"'+h1+'"}');r=await b.validate();ok('misnamed record → corrupt',!r.ok&&r.reason==='unavailable-or-corrupt',r.reason);
+  try{new DurableAnchor(new MemStore(),null);ok('no checkpoint refused',false,'accepted')}catch(e){ok('no checkpoint refused',/trusted checkpoint/.test(e.message),e.message)}
+  var pass=out.every(function(x){return x[1]}),el=document.getElementById('ledger');
+  if(el)el.querySelector('.lc').innerHTML=out.map(function(x){return '<li class="'+(x[1]?'ok':'bad')+'">'+(x[1]?'✓ ':'✗ ')+x[0]+' <code>'+x[2]+'</code></li>'}).join('');
+  if(!pass){console.error('anchor self-check failed');throw Error('DurableAnchor self-check failed')}return pass}
+};
+LED.pagecheck=function(name,cond,got){var el=document.getElementById('ledger');if(el){var li=document.createElement('li');li.className=cond?'ok':'bad';li.innerHTML=(cond?'✓ ':'✗ ')+name+' <code>'+got+'</code>';el.querySelector('.lc2').appendChild(li)}if(!cond)throw Error('page self-check failed: '+name)};
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+var SEED=+(new URLSearchParams(location.search).get('seed')||(Date.now()%1e6));
+LED.commitAt=function(id,epoch,state){LED.run(function(){if(!LED.A)return;return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,epoch,h).then(function(r){if(r.ok&&!r.previous)LED.last={id:id,epoch:epoch,head:h};else if(!r.ok)LED.rej.unshift(id+'@'+epoch+': '+r.reason);LED.show();return r})})});return LED.q};
+
+/* re-entrancy: a task already running in the queue may commit directly instead of waiting on itself */
+LED.inq=0;LED.run=function(fn){if(LED.inq>0)return Promise.resolve().then(fn);var p=LED.q.then(function(){LED.inq++;return Promise.resolve().then(fn).then(function(v){LED.inq--;return v},function(e){LED.inq--;throw e})});LED.q=p.catch(function(){});return p};
+</script><script>"use strict";document.getElementById('sd').textContent=SEED;document.querySelectorAll('#ledger button').forEach(function(b){b.onclick=function(){LED.attack(b.dataset.a)}});
+(function(){var b=document.createElement('canvas');b.width=1000;b.height=18;b.setAttribute('aria-hidden','true');b.style.cssText='width:100%;height:18px;display:block;margin:4px 0 8px';var h=document.querySelector('h1');h.parentNode.insertBefore(b,h.nextSibling);var g=b.getContext('2d'),r=rng(SEED*31+7),c=getComputedStyle(document.documentElement).getPropertyValue('--acc')||'#888';g.fillStyle=c;for(var x=0;x<1000;){var w=2+r()*14;if(r()<.55)g.fillRect(x,r()*6,w,6+r()*12);x+=w+r()*10}})();
+function $(i){return document.getElementById(i)}
+var MET=[['Au',79,'gold','Sun','sun'],['Ag',47,'silver','Moon','moon'],['Hg',80,'mercury','Mercury','merc'],['Cu',29,'copper','Venus','venus'],['Fe',26,'iron','Mars','mars'],['Sn',50,'tin','Jupiter','jup'],['Pb',82,'lead','Saturn','sat'],['S',16,'sulfur','—','sulf'],['Sb',51,'antimony','(orb)','anti'],['As',33,'arsenic','—','ars'],['P',15,'phosphorus','—','phos'],['Zn',30,'zinc','—','zinc']];
+var ACT=['K','Na','Ca','Mg','Al','Zn','Fe','Sn','Pb','H','Cu','Hg','Ag','Au'];
+function gl(k){var s='stroke="#1a1a1a" stroke-width="3" fill="none"';var P={
+ sun:'<circle cx="32" cy="32" r="20" '+s+'/><circle cx="32" cy="32" r="3" fill="#1a1a1a"/>',
+ moon:'<path d="M38 10 A22 22 0 1 0 38 54 A17 17 0 1 1 38 10Z" '+s+'/>',
+ merc:'<circle cx="32" cy="28" r="10" '+s+'/><path d="M22 10 Q32 20 42 10 M32 38 V58 M24 50 H40" '+s+'/>',
+ venus:'<circle cx="32" cy="22" r="13" '+s+'/><path d="M32 35 V60 M22 48 H42" '+s+'/>',
+ mars:'<circle cx="26" cy="38" r="13" '+s+'/><path d="M35 29 L52 12 M40 12 H52 V24" '+s+'/>',
+ jup:'<path d="M14 24 Q18 10 28 18 Q34 26 20 42 H50 M40 14 V58" '+s+'/>',
+ sat:'<path d="M24 8 V44 M16 16 H32 M24 30 Q40 22 42 36 Q42 48 32 56" '+s+'/>',
+ sulf:'<path d="M32 8 L50 34 H14 Z M32 34 V60 M22 48 H42" '+s+'/>',
+ anti:'<circle cx="32" cy="38" r="14" '+s+'/><path d="M32 6 V24 M24 14 H40" '+s+'/>',
+ ars:'<path d="M14 50 L32 14 L50 50 M20 38 H44 M18 58 H46" '+s+'/>',
+ phos:'<path d="M32 8 L48 30 L32 52 L16 30 Z M32 52 V60 M24 58 H40" '+s+'/>',
+ zinc:'<path d="M14 14 H50 L14 50 H50 M26 32 H38" '+s+'/>'}[k];return '<svg viewBox="0 0 64 64">'+P+'</svg>'}
+$('g').innerHTML=MET.map(function(m,i){return '<div class="m" data-i="'+i+'">'+gl(m[4])+'<b>'+m[0]+' · '+m[1]+'</b><small>'+m[2]+' · '+m[3]+'</small></div>'}).join('');
+var R=rng(SEED),bath,crystals,parts;var METALS=['Zn','Fe','Sn','Pb','Cu','Hg','Ag','Au'];$('dr').innerHTML=METALS.map(function(x){return '<option>'+x+'</option>'}).join('');$('dr').value=METALS[SEED%4];
+function fresh(){bath={};['Cu','Ag','Pb','Sn','Fe','Au'].forEach(function(x){bath[x]=Math.round(10+R()*30)});crystals=[];parts=[];draw();$('st').textContent='bath ions: '+Object.keys(bath).map(function(k){return k+'²⁺×'+bath[k]}).join(' ')}
+function nob(x){return ACT.indexOf(x)}
+function drop(){var m=$('dr').value,mi=nob(m),moved=0,x0=120+R()*720;var order=Object.keys(bath).sort(function(a,b){return nob(b)-nob(a)});
+ order.forEach(function(ion){if(nob(ion)>mi&&bath[ion]>0){var k=bath[ion];moved+=k;bath[ion]=0;for(var j=0;j<k;j++)crystals.push({ion:ion,x:x0,y:120,a:-Math.PI/2+(R()-.5)*2.6,l:0,L:6+R()*16,gen:0})}});
+ bath[m]=(bath[m]||0)+moved;document.querySelectorAll('.m').forEach(function(e){e.classList.toggle('on',MET[e.dataset.i][0]===m)});
+ $('st').textContent=m+' plated '+moved+' ions · bath now: '+Object.keys(bath).filter(function(k){return bath[k]}).map(function(k){return k+'×'+bath[k]}).join(' ');LED.commit('drop',{m:m,bath:bath});anim()}
+var COL={Cu:'#b8642a',Ag:'#8a8f98',Pb:'#4a4f5a',Sn:'#9aa0a0',Fe:'#6a3a2a',Au:'#c9a227',Hg:'#7a8a9a',Zn:'#8a9aa8'};
+function anim(){var t=0;(function f(){t++;crystals.forEach(function(c){if(c.l<c.L){c.l+=1;if(c.l>=c.L&&c.gen<4&&R()<.6)crystals.push({ion:c.ion,x:c.x+Math.cos(c.a)*c.L,y:c.y+Math.sin(c.a)*c.L,a:c.a+(R()-.5)*1.4,l:0,L:c.L*.8,gen:c.gen+1})}});draw();if(t<60)requestAnimationFrame(f)})()}
+function draw(){var g=$('c').getContext('2d');g.fillStyle='#fbf9f2';g.fillRect(0,0,960,420);g.strokeStyle='#1a1a1a';g.lineWidth=2;g.strokeRect(60,60,840,340);for(var y=80;y<400;y+=6){g.strokeStyle='rgba(26,26,26,.08)';g.beginPath();g.moveTo(60,y);g.lineTo(900,y);g.stroke()}
+ crystals.forEach(function(c){g.strokeStyle=COL[c.ion];g.lineWidth=Math.max(1,3-c.gen*.6);g.beginPath();g.moveTo(c.x,c.y+200);g.lineTo(c.x+Math.cos(c.a)*c.l,c.y+200+Math.sin(c.a)*c.l);g.stroke()});
+ var ks=Object.keys(bath);ks.forEach(function(k,i){g.fillStyle=COL[k]||'#555';g.font='italic 15px Baskerville,Georgia';g.fillText(k+' '+bath[k],80+i*140,90)})}
+$('go').onclick=drop;$('new').onclick=function(){fresh();LED.commit('bath',bath)};$('c').onclick=drop;fresh();
+LED.init().then(function(){LED.commit('open',{seed:SEED});
+ var Z={Au:79,Ag:47,Hg:80,Cu:29,Fe:26,Sn:50,Pb:82,S:16,Sb:51,As:33,P:15,Zn:30},ok=MET.every(function(m){return Z[m[0]]===m[1]});LED.pagecheck('atomic numbers of all 12 glyphs',ok,'Au79 Ag47 Hg80 Pb82');
+ LED.pagecheck('activity series: Zn above Cu above Ag above Au',nob('Zn')<nob('Cu')&&nob('Cu')<nob('Ag')&&nob('Ag')<nob('Au'),ACT.join('>'));
+ var b0=JSON.stringify(bath),tot=0;for(var k in bath)tot+=bath[k];$('dr').value='Zn';drop();var t2=0;for(var k in bath)t2+=bath[k];LED.pagecheck('charge conserved in a displacement (ions in = ions out)',tot===t2,tot+' → '+t2);
+ LED.pagecheck('nothing in the series is nobler than gold',ACT.every(function(x){return nob(x)<=nob('Au')}),'Au last')});</script><a class="grokbot-badge" href="../built-by-grok-bot.html" title="This page was built by Grok Bot" style="position:relative;display:inline-block;margin:10px 16px 16px;z-index:2147483000;font:600 11px/1 system-ui,sans-serif;color:#fff;background:rgba(12,6,30,.86);border:1px solid #7ff9ff;border-radius:999px;padding:5px 9px;text-decoration:none;letter-spacing:.04em">built by Grok Bot</a></body></html>
