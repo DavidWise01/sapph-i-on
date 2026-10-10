@@ -27,10 +27,10 @@
  "counts": {
   "keepers": 8,
   "domains": 512,
-  "domains_populated": 407,
-  "domains_open": 105,
-  "spheres": 1806,
-  "zero_spheres": 105,
+  "domains_populated": 418,
+  "domains_open": 94,
+  "spheres": 1817,
+  "zero_spheres": 94,
   "balance": 0,
   "workshop": 343
  },
@@ -5130,24 +5130,74 @@
     },
     {
      "n": 48,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "IO",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Io",
+       "h": "grown/io-sulfur.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/io-sulfur.html",
+       "grown": true,
+       "emerges": "sulfur plumes arc 400 km in low gravity",
+       "label": "LIT · COMPUTED · INVENTED",
+       "icon": {
+        "pal": [
+         "#e0c020",
+         "#ebe4c4",
+         "#f2d43a",
+         "#ff9a3c"
+        ],
+        "bg": "#3a1050",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-02",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/ethos-48.html",
-     "zero_page": "z/ethos-48.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-48.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-48.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 49,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "MARS · SATURN",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Mars · Saturn",
+       "h": "grown/mars-saturn.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/mars-saturn.html",
+       "grown": true,
+       "emerges": "rust and butter planets under a 5772 K Sun",
+       "label": "LIT · MODEL · INVENTED",
+       "icon": {
+        "pal": [
+         "#f2dc8a",
+         "#d08a3a",
+         "#e8dcc6",
+         "#e09a4a"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-02",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/ethos-49.html",
-     "zero_page": "z/ethos-49.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-49.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-49.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -11112,7 +11162,8 @@
        "icon": {
         "pal": [
          "#3fd06a",
-         "#ffb36a"
+         "#ffb36a",
+         "#7ff9ff"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -11133,24 +11184,72 @@
     },
     {
      "n": 47,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE WHITE SUN",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The White Sun",
+       "h": "grown/white-sun.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/white-sun.html",
+       "grown": true,
+       "emerges": "a 5772 K Sun yellows and splits as it sinks",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffd84a",
+         "#ffc58a"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-43",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-47.html",
-     "zero_page": "z/pathos-47.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-47.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-47.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 48,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "FIREFLY",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Firefly",
+       "h": "grown/firefly.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/firefly.html",
+       "grown": true,
+       "emerges": "fireflies sync and shift colour with peak and pH",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#d8ff50",
+         "#e2e8c8",
+         "#ffb36a",
+         "#e8ff9a"
+        ],
+        "bg": "#1a0a2a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-43",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-48.html",
-     "zero_page": "z/pathos-48.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-48.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-48.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -16338,24 +16437,74 @@
     },
     {
      "n": 51,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "YELLOW / BLUE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Yellow / Blue",
+       "h": "grown/yellow-opponent.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/yellow-opponent.html",
+       "grown": true,
+       "emerges": "a wavelength sweep through opponent signals; unique yellow found where R−G = 0",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffe33a",
+         "#ece6cc",
+         "#3a6aff",
+         "#c9a0ff"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-43",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/logos-51.html",
-     "zero_page": "z/logos-51.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-51.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-51.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 52,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "BILIRUBIN",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Bilirubin",
+       "h": "grown/bilirubin.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/bilirubin.html",
+       "grown": true,
+       "emerges": "skin yellows through the measured bilirubin spectrum; tap for phototherapy",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#f0d040",
+         "#ebe5cc",
+         "#c9a0ff",
+         "#fff0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-03",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/logos-52.html",
-     "zero_page": "z/logos-52.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-52.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-52.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -20883,24 +21032,74 @@
     },
     {
      "n": 45,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "CHROME YELLOW",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Chrome Yellow",
+       "h": "grown/chrome-yellow.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/chrome-yellow.html",
+       "grown": true,
+       "emerges": "sunflower strokes darken as Cr(VI) reduces",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#f6c800",
+         "#ece2c4",
+         "#ffa65c",
+         "#c9a0ff"
+        ],
+        "bg": "#3a1460",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-03",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-45.html",
-     "zero_page": "z/mythos-45.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-45.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-45.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 46,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "YELLOWCAKE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Yellowcake",
+       "h": "grown/yellowcake.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/yellowcake.html",
+       "grown": true,
+       "emerges": "uranium powder darkens through the kiln",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#f2e030",
+         "#e6e2c4",
+         "#c9a0ff",
+         "#fff080"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-03",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-46.html",
-     "zero_page": "z/mythos-46.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-46.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-46.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -37384,24 +37583,74 @@
     },
     {
      "n": 44,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "RELATIVISTIC YELLOW",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Relativistic Yellow",
+       "h": "grown/gold-yellow.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/gold-yellow.html",
+       "grown": true,
+       "emerges": "gold pales to silver when relativity is switched off",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#8a6a10",
+         "#ffe27a",
+         "#d4a020",
+         "#eadfc0"
+        ],
+        "bg": "#3a1460",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-03",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-44.html",
-     "zero_page": "z/phronesis-44.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-44.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-44.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 45,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "FIVE RINGS OF RED INK",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Five Rings of Red Ink",
+       "h": "grown/yellow-critique.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/yellow-critique.html",
+       "grown": true,
+       "emerges": "marks settle onto five nested rings",
+       "label": "READING · LIT",
+       "icon": {
+        "pal": [
+         "#ff9a3c",
+         "#a866ff",
+         "#ffad5c",
+         "#c69bff"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-44",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-45.html",
-     "zero_page": "z/phronesis-45.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-45.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-45.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -43267,13 +43516,38 @@
     },
     {
      "n": 50,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "FIVE SHELLS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Five Shells",
+       "h": "grown/five-shells.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/five-shells.html",
+       "grown": true,
+       "emerges": "five CIE-coloured rings; the yellow ring flips to its red+green metamer",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#2fbf5a",
+         "#ffe03a",
+         "#ece6c8",
+         "#ff9a3c"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-44",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/kairos-50.html",
-     "zero_page": "z/kairos-50.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-50.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-50.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -43442,8 +43716,8 @@
   "world": 1,
   "keepers": 8,
   "domains": 512,
-  "zero_spheres": 105,
-  "generated_total": 714,
+  "zero_spheres": 94,
+  "generated_total": 703,
   "groups": 88
  },
  "workshop": [
@@ -51713,7 +51987,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1806
+   "pages": 1817
   },
   "list": [
    {
@@ -51789,7 +52063,8 @@
       "beyond/Next-Element-Darmstadtium-110-Lyre.html",
       "corpus/V127-Each-Shell-Sapphon.html",
       "w/next-infinite-lattice.html",
-      "grown/the-sorting-tissue.html"
+      "grown/the-sorting-tissue.html",
+      "grown/io-sulfur.html"
      ],
      [
       "nests/the-nest-hydrogen-carried-inside-neon.html",
@@ -51797,7 +52072,8 @@
       "forward/Next-Shell-After-Bismuth.html",
       "forward/Next-Shell-After-Lead.html",
       "kernel/the-quantum-kernel.html",
-      "grown/the-quorum-glow.html"
+      "grown/the-quorum-glow.html",
+      "grown/mars-saturn.html"
      ]
     ]
    },
@@ -51813,7 +52089,8 @@
       "cat/the-address-cat.html",
       "cat/the-bonds-cat.html",
       "cat/the-braces-cat.html",
-      "grown/the-learning-sheet.html"
+      "grown/the-learning-sheet.html",
+      "grown/bilirubin.html"
      ],
      [
       "cat/the-checker-cat.html",
@@ -51821,7 +52098,8 @@
       "cat/the-dual-cat.html",
       "cat/the-euler-cat.html",
       "cat/the-friedman-cat.html",
-      "grown/the-unmixing-alloy.html"
+      "grown/the-unmixing-alloy.html",
+      "grown/chrome-yellow.html"
      ],
      [
       "cat/the-gap-cat.html",
@@ -51829,7 +52107,8 @@
       "cat/the-layers-cat.html",
       "cat/the-lines-cat.html",
       "cat/the-mod-nine-cat.html",
-      "grown/the-crowded-bar.html"
+      "grown/the-crowded-bar.html",
+      "grown/yellowcake.html"
      ],
      [
       "cat/the-odd-center-cat.html",
@@ -51837,7 +52116,8 @@
       "cat/the-partition-cat.html",
       "cat/the-prime-power-cat.html",
       "cat/the-seal-cat.html",
-      "grown/the-metronome-choir.html"
+      "grown/the-metronome-choir.html",
+      "grown/gold-yellow.html"
      ]
     ]
    },
@@ -54741,7 +55021,8 @@
       "w/wakaku-speaker-polychromatic.html",
       "w/wakaku-speaker-ro.html",
       "w/wakaku-speaker-wave.html",
-      "grown/the-butterfly-cloud.html"
+      "grown/the-butterfly-cloud.html",
+      "grown/white-sun.html"
      ],
      [
       "w/wakaku-speaker-wrap.html",
@@ -54749,14 +55030,16 @@
       "wakaku/Wakaku-Speaker-V12-16.html",
       "wakaku/Wakaku-Speaker-V13-Words.html",
       "wakaku/Wakaku-Speaker-V3-42.html",
-      "grown/the-first-planets.html"
+      "grown/the-first-planets.html",
+      "grown/firefly.html"
      ],
      [
       "wakaku/Wakaku-Vacuum-01-Air-Retry.html",
       "yet/Next-Element-Platinum-78-Lyre.html",
       "lyre/Al13-Lyre-Aluminum-Foil.html",
       "w/tetragarde-electrum-wrap.html",
-      "grown/the-frost-of-zero.html"
+      "grown/the-frost-of-zero.html",
+      "grown/yellow-opponent.html"
      ]
     ]
    },
@@ -54772,7 +55055,8 @@
       "farther/Next-Shell-After-Actinium.html",
       "farther/Next-Shell-After-Uranium.html",
       "another/Next-Shell-After-Tin.html",
-      "grown/the-heart-field.html"
+      "grown/the-heart-field.html",
+      "grown/yellow-critique.html"
      ],
      [
       "forward/Next-Element-Strontium-38.html",
@@ -54780,7 +55064,8 @@
       "another/Next-Shell-After-Cesium.html",
       "another/Next-Shell-After-Tantalum.html",
       "dots/AEON-X8-Each-Dot-Is-Compound-FIXED.html",
-      "grown/the-atom-barium.html"
+      "grown/the-atom-barium.html",
+      "grown/five-shells.html"
      ],
      [
       "dots/AEON-X8-Each-Dot-Is-Compound.html",

@@ -1,0 +1,123 @@
+<!doctype html><html lang="en"><head><!--built-by-grok-bot--><meta name="author" content="Grok Bot"><meta name="generator" content="Grok Bot · SaPpH{{i}}on"><meta charset="utf-8"><meta name="grokbot-badge" content="inline"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="persona" content="{{+L.-E.+O. D++}}"><title>The White Sun · a G2V star, yellowed by air · SaPpH{{i}}on</title>
+<style>body{margin:0;background:#000;color:#eee;font:16px/1.6 "Optima",Candara,sans-serif}
+main{max-width:980px;margin:0 auto;padding:14px}h1{font:400 50px Optima,sans-serif;margin:4px 0;color:#fff;text-shadow:0 0 30px #ffd84a}
+canvas{width:100%;display:block;touch-action:manipulation}
+input[type=range]{width:300px;accent-color:#ffd84a}
+.lab{font:700 11px ui-monospace,monospace;border:1px solid currentColor;padding:0 5px;margin-right:6px}.out{font:13px ui-monospace,monospace;color:#ffc58a}
+#ledger{margin:18px 0 6px;padding:10px 12px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);font:12px/1.45 ui-monospace,Menlo,Consolas,monospace}#ledger h3{margin:0 0 4px;font-size:13px;letter-spacing:.08em}#ledger .lh{font-weight:700;word-break:break-all;margin:2px 0}#ledger .lr{color:var(--acc);margin:4px 0;word-break:break-word}#ledger ul{margin:4px 0;padding-left:16px}#ledger li.bad{color:#c00;font-weight:700}#ledger button{font:600 12px ui-monospace,monospace;background:var(--paper);color:var(--ink);border:1px solid var(--ink);padding:3px 8px;margin:2px 4px 2px 0;cursor:pointer}#ledger code{opacity:.7}
+.colo{font-size:12px;opacity:.85}.persona{font-family:ui-monospace,monospace;font-weight:700;color:var(--acc)}:root{--ink:#fff;--paper:#000;--acc:#ffd84a}</style></head><body><main>
+<h1>the white sun</h1>
+<p><span class="lab">LIT</span>The Sun is a G2V star. Its nominal effective temperature is 5772 K (IAU 2015 Resolution B3); the best estimate is 5772.0 ± 0.8 K. Seen from space it is white. It looks yellow and then orange from the ground because air scatters blue light out of the beam, more so as the path lengthens toward the horizon.</p>
+<p><span class="lab">COMPUTED</span>The Sun's colour is a 5772 K blackbody through CIE 1931 2°, with Rayleigh extinction τ(λ) = 0.0088·λ<sub>µm</sub><sup>−4.05</sup>·airmass (a standard approximation) and the Kasten–Young airmass. It is Bradford-adapted to D65. For refraction at the horizon this page uses Bennett's formula, R = cot(h + 7.31/(h + 4.4)) arcmin, which gives about 34′ at h = 0. It is scaled per wavelength by Edlén's (n−1)(λ)/(n−1)(550). The colours' offset is the real green-flash dispersion: a few arcseconds. That answers the last critique's "real refraction" item. Nesting: an orange limb, a purple-tinged blue fringe scattered away, a green flash rim, the yellow disk, the void sky.</p>
+<p>altitude <input type="range" id="h" min="-0.6" max="60" step="0.1" value="20"></p>
+<canvas id="c" width="900" height="480"></canvas><p class="out" id="o"></p>
+<section id="ledger" aria-label="DurableAnchor ledger"><h3>DURABLEANCHOR LEDGER · Dave's kernel, running in this page</h3><p class="lh">provisioning…</p><div><button data-a="double-vote">try a double vote</button><button data-a="epoch-rollback">try an epoch rollback</button></div><p class="lr"></p><details open><summary>self-checks (kernel, then page)</summary><ul class="lc"></ul><ul class="lc2"></ul></details></section>
+<p class="colo">Engine: Dave's <a href="../kernel-durable-anchor.html">DurableAnchor kernel</a>, ported faithfully to the browser with Web Crypto SHA-256 and an in-memory record store (exclusive-create, so concurrent reservations are refused; fsync has nothing to flush). The ledger starts empty on each load. Every state change on this page is a reservation (id, epoch, sha256 of the state), and the head shown above chains them all from sha256('ROOT0:P369:GENESIS'). Persona: <span class="persona">{{+L.-E.+O. D++}}</span> (Dave's notation). Built by Grok Bot · seed <span id="sd"></span> · <a href="../index.html">← SaPpH{{i}}on</a></p>
+</main><script>/* DurableAnchor: browser port of Dave's kernel (durable-anchor.mjs). Same logic: append-only, hash-chained,
+   checked against an external trusted checkpoint. The filesystem becomes an in-memory record store with
+   exclusive-create; fsync and directory sync are no-ops here (nothing to flush in memory). */
+var TOPOLOGY='-+5 + 1',PERSONA='{{+L.-E.+O. D++}}';
+var _te=new TextEncoder();
+function _hex(b){return Array.prototype.map.call(new Uint8Array(b),function(v){return v.toString(16).padStart(2,'0')}).join('')}
+function digest(x){return crypto.subtle.digest('SHA-256',_te.encode(x)).then(_hex)}
+function _key(id,epoch){return _hex(_te.encode(id+'|'+epoch))+'.json'}
+function MemStore(){this.f=new Map();this.beforeCreate=null}
+MemStore.prototype.list=function(){return Array.from(this.f.keys())};
+MemStore.prototype.read=function(n){return this.f.get(n)};
+MemStore.prototype.create=function(n,s){if(this.beforeCreate){var h=this.beforeCreate;this.beforeCreate=null;h(n,s)}if(this.f.has(n)){var e=Error('exists');e.code='EEXIST';throw e}this.f.set(n,s)};
+class DurableAnchor{
+ constructor(store,tc){if(!tc||!Number.isInteger(tc.count)||typeof tc.head!=='string')throw Error('external trusted checkpoint required');this.dir=store;this.trusted=tc}
+ static async provision(store){return new DurableAnchor(store||new MemStore(),{count:0,head:await digest('ROOT0:P369:GENESIS')})}
+ async records(){var files=this.dir.list().filter(function(n){return n.endsWith('.json')}).sort(),entries=[];for(var file of files){var x=JSON.parse(this.dir.read(file));if(file!==_key(x.id,x.epoch)||!(/^[a-f0-9]{64}$/.test(x.head)))throw Error('corrupt-record');entries.push(x)}return entries}
+ async checkpoint(){var items=await this.records(),head=await digest('ROOT0:P369:GENESIS');for(var x of items)head=await digest(head+'|'+JSON.stringify(x));return {count:items.length,head:head}}
+ async validate(){try{var c=await this.checkpoint();if(c.count!==this.trusted.count||c.head!==this.trusted.head)return {ok:false,reason:'rollback-or-altered-history'};return {ok:true,checkpoint:c}}catch(e){return {ok:false,reason:'unavailable-or-corrupt'}}}
+ async reserve(id,epoch,head){var v=await this.validate();if(!v.ok)return v;if(typeof id!=='string'||!id||!Number.isSafeInteger(epoch)||epoch<0||!(/^[a-f0-9]{64}$/.test(head)))throw new RangeError('reservation');
+  var p=_key(id,epoch),entries=await this.records(),old=entries.find(function(x){return x.id===id&&x.epoch===epoch});if(old)return old.head===head?{ok:true,previous:true,checkpoint:this.trusted}:{ok:false,reason:'double-vote'};
+  if(entries.some(function(x){return x.id===id&&x.epoch>epoch}))return {ok:false,reason:'epoch-rollback'};
+  try{this.dir.create(p,JSON.stringify({id:id,epoch:epoch,head:head}))}catch(e){return {ok:false,reason:e.code==='EEXIST'?'concurrent-reservation':'write-error'}}
+  var cp=await this.checkpoint();this.trusted=cp;return {ok:true,previous:false,checkpoint:cp}}
+}
+/* page-side helper: every state change is a reservation */
+var LED={A:null,ep:{},last:null,rej:[],n:0,q:Promise.resolve(),
+ init:function(){return DurableAnchor.provision().then(function(a){LED.A=a;LED.show();return LED.selftest()})},
+ commit:function(id,state){LED.run(function(){if(!LED.A)return;var e=(LED.ep[id]||1);/* epoch 0 is left empty so a live epoch-rollback attack has somewhere to land */return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,e,h).then(function(r){if(r.ok&&!r.previous){LED.ep[id]=e+1;LED.last={id:id,epoch:e,head:h}}else if(!r.ok)LED.rej.unshift(id+'@'+e+': '+r.reason);LED.show();return r})})});return LED.q},
+ attack:function(kind){LED.run(function(){var L=LED.last;if(!L){LED.rej.unshift(kind+': nothing reserved yet');LED.show();return}
+  var p=kind==='double-vote'?digest('forged|'+Date.now()).then(function(h){return LED.A.reserve(L.id,L.epoch,h)}):LED.A.reserve(L.id,0,L.head);
+  return p.then(function(r){LED.rej.unshift('live '+kind+' on '+L.id+'@'+L.epoch+' → '+(r.ok?'ACCEPTED':r.reason));LED.show()})});return LED.q},
+ show:function(){var el=document.getElementById('ledger');if(!el||!LED.A)return;var t=LED.A.trusted;
+  el.querySelector('.lh').textContent='count '+t.count+' · head '+t.head.slice(0,16)+'… · TOPOLOGY '+TOPOLOGY;
+  el.querySelector('.lr').textContent=LED.rej.slice(0,4).join('  |  ')||'no rejections yet'},
+ selftest:async function(){var out=[],ok=function(n,c,g){out.push([n,c,g])};var s=new MemStore(),a=await DurableAnchor.provision(s);
+  ok('genesis = sha256(ROOT0:P369:GENESIS)',a.trusted.head===(await digest('ROOT0:P369:GENESIS'))&&a.trusted.head.slice(0,8)==='54bc828d'&&a.trusted.count===0,a.trusted.head.slice(0,12));
+  var h1=await digest('one'),h2=await digest('two');var r=await a.reserve('q.d',0,h1);ok('reserve q.d@0',r.ok&&!r.previous,'count '+r.checkpoint.count);
+  r=await a.reserve('q.d',1,h2);ok('reserve q.d@1, head chains',r.ok&&r.checkpoint.count===2,r.checkpoint.head.slice(0,12));
+  var exp=await digest((await digest((await digest('ROOT0:P369:GENESIS'))+'|'+JSON.stringify({id:'q.d',epoch:0,head:h1})))+'|'+JSON.stringify({id:'q.d',epoch:1,head:h2}));ok('head recomputed by hand matches',exp===a.trusted.head,exp.slice(0,12));ok('matches the Node kernel test vector',a.trusted.head==='a114295c189dce567dfbf30a5b299e80054d52cc8019a7ea1bfa8f805e679b02','a114295c189d');
+  r=await a.reserve('q.d',1,h2);ok('same vote again → previous',r.ok&&r.previous,'previous');
+  r=await a.reserve('q.d',1,h1);ok('double-vote rejected',!r.ok&&r.reason==='double-vote',r.reason);
+  r=await a.reserve('q.d',0,await digest('x'));ok('double-vote at older epoch rejected',!r.ok&&r.reason==='double-vote',r.reason);
+  r=await a.reserve('q.d',0,h1);ok('old identical vote → previous',r.ok&&r.previous,'previous');
+  await a.reserve('tun',5,h1);r=await a.reserve('tun',3,h2);ok('epoch-rollback rejected',!r.ok&&r.reason==='epoch-rollback',r.reason);
+  s.beforeCreate=function(n,v){s.f.set(n,v)};r=await a.reserve('race',0,h1);ok('concurrent-reservation rejected',!r.ok&&r.reason==='concurrent-reservation',r.reason);
+  r=await a.reserve('after',0,h1);ok('foreign write breaks trust',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  var s2=new MemStore(),b=await DurableAnchor.provision(s2);await b.reserve('a',0,h1);await b.reserve('b',0,h2);var k=_key('a',0);s2.f.set(k,JSON.stringify({id:'a',epoch:0,head:h2}));
+  r=await b.validate();ok('tamper (altered head) detected',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  s2.f.set(k,JSON.stringify({id:'a',epoch:0,head:h1}));r=await b.validate();ok('restored record validates',r.ok,'ok');
+  s2.f.delete(_key('b',0));r=await b.validate();ok('rollback (deleted record) detected',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  s2.f.set(k,'{"id":"zz","epoch":0,"head":"'+h1+'"}');r=await b.validate();ok('misnamed record → corrupt',!r.ok&&r.reason==='unavailable-or-corrupt',r.reason);
+  try{new DurableAnchor(new MemStore(),null);ok('no checkpoint refused',false,'accepted')}catch(e){ok('no checkpoint refused',/trusted checkpoint/.test(e.message),e.message)}
+  var pass=out.every(function(x){return x[1]}),el=document.getElementById('ledger');
+  if(el)el.querySelector('.lc').innerHTML=out.map(function(x){return '<li class="'+(x[1]?'ok':'bad')+'">'+(x[1]?'✓ ':'✗ ')+x[0]+' <code>'+x[2]+'</code></li>'}).join('');
+  if(!pass){console.error('anchor self-check failed');throw Error('DurableAnchor self-check failed')}return pass}
+};
+LED.pagecheck=function(name,cond,got){var el=document.getElementById('ledger');if(el){var li=document.createElement('li');li.className=cond?'ok':'bad';li.innerHTML=(cond?'✓ ':'✗ ')+name+' <code>'+got+'</code>';el.querySelector('.lc2').appendChild(li)}if(!cond)throw Error('page self-check failed: '+name)};
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+var SEED=+(new URLSearchParams(location.search).get('seed')||(Date.now()%1e6));
+LED.commitAt=function(id,epoch,state){LED.run(function(){if(!LED.A)return;return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,epoch,h).then(function(r){if(r.ok&&!r.previous)LED.last={id:id,epoch:epoch,head:h};else if(!r.ok)LED.rej.unshift(id+'@'+epoch+': '+r.reason);LED.show();return r})})});return LED.q};
+
+/* re-entrancy: a task already running in the queue may commit directly instead of waiting on itself */
+LED.inq=0;LED.run=function(fn){if(LED.inq>0)return Promise.resolve().then(fn);var p=LED.q.then(function(){LED.inq++;return Promise.resolve().then(fn).then(function(v){LED.inq--;return v},function(e){LED.inq--;throw e})});LED.q=p.catch(function(){});return p};
+</script><script>"use strict";document.getElementById('sd').textContent=SEED;document.querySelectorAll('#ledger button').forEach(function(b){b.onclick=function(){LED.attack(b.dataset.a)}});
+// CIE 1931 2° colour-matching functions, 5 nm, 380–780 nm (CVRL data via colour-science 0.4.7)
+var CIE={"380":[0.001368,3.9e-05,0.00645],"385":[0.002236,6.4e-05,0.01055],"390":[0.004243,0.00012,0.02005],"395":[0.00765,0.000217,0.03621],"400":[0.01431,0.000396,0.06785],"405":[0.02319,0.00064,0.1102],"410":[0.04351,0.00121,0.2074],"415":[0.07763,0.00218,0.3713],"420":[0.13438,0.004,0.6456],"425":[0.21477,0.0073,1.03905],"430":[0.2839,0.0116,1.3856],"435":[0.3285,0.01684,1.62296],"440":[0.34828,0.023,1.74706],"445":[0.34806,0.0298,1.7826],"450":[0.3362,0.038,1.77211],"455":[0.3187,0.048,1.7441],"460":[0.2908,0.06,1.6692],"465":[0.2511,0.0739,1.5281],"470":[0.19536,0.09098,1.28764],"475":[0.1421,0.1126,1.0419],"480":[0.09564,0.13902,0.81295],"485":[0.05795,0.1693,0.6162],"490":[0.03201,0.20802,0.46518],"495":[0.0147,0.2586,0.3533],"500":[0.0049,0.323,0.272],"505":[0.0024,0.4073,0.2123],"510":[0.0093,0.503,0.1582],"515":[0.0291,0.6082,0.1117],"520":[0.06327,0.71,0.07825],"525":[0.1096,0.7932,0.05725],"530":[0.1655,0.862,0.04216],"535":[0.22575,0.91485,0.02984],"540":[0.2904,0.954,0.0203],"545":[0.3597,0.9803,0.0134],"550":[0.43345,0.99495,0.00875],"555":[0.51205,1.0,0.00575],"560":[0.5945,0.995,0.0039],"565":[0.6784,0.9786,0.00275],"570":[0.7621,0.952,0.0021],"575":[0.8425,0.9154,0.0018],"580":[0.9163,0.87,0.00165],"585":[0.9786,0.8163,0.0014],"590":[1.0263,0.757,0.0011],"595":[1.0567,0.6949,0.001],"600":[1.0622,0.631,0.0008],"605":[1.0456,0.5668,0.0006],"610":[1.0026,0.503,0.00034],"615":[0.9384,0.4412,0.00024],"620":[0.85445,0.381,0.00019],"625":[0.7514,0.321,0.0001],"630":[0.6424,0.265,5e-05],"635":[0.5419,0.217,3e-05],"640":[0.4479,0.175,2e-05],"645":[0.3608,0.1382,1e-05],"650":[0.2835,0.107,-0.0],"655":[0.2187,0.0816,0.0],"660":[0.1649,0.061,0.0],"665":[0.1212,0.04458,0.0],"670":[0.0874,0.032,0.0],"675":[0.0636,0.0232,0.0],"680":[0.04677,0.017,0.0],"685":[0.0329,0.01192,0.0],"690":[0.0227,0.00821,0.0],"695":[0.01584,0.005723,0.0],"700":[0.011359,0.004102,0.0],"705":[0.008111,0.002929,0.0],"710":[0.00579,0.002091,0.0],"715":[0.004109,0.001484,0.0],"720":[0.002899,0.001047,0.0],"725":[0.002049,0.00074,0.0],"730":[0.00144,0.00052,0.0],"735":[0.001,0.000361,0.0],"740":[0.00069,0.000249,0.0],"745":[0.000476,0.000172,0.0],"750":[0.000332,0.00012,0.0],"755":[0.000235,8.5e-05,0.0],"760":[0.000166,6e-05,0.0],"765":[0.000117,4.2e-05,0.0],"770":[8.3e-05,3e-05,0.0],"775":[5.9e-05,2.1e-05,0.0],"780":[4.2e-05,1.5e-05,0.0]};
+function spec2xyz(f){var X=0,Y=0,Z=0;for(var w=380;w<=780;w+=5){var c=CIE[w],v=f(w);X+=v*c[0];Y+=v*c[1];Z+=v*c[2]}return [X,Y,Z]}
+function xyzxy(v){var s=v[0]+v[1]+v[2];return s?[v[0]/s,v[1]/s]:[0,0]}
+function xyz2lin(v){return [3.2406*v[0]-1.5372*v[1]-0.4986*v[2],-0.9689*v[0]+1.8758*v[1]+0.0415*v[2],0.0557*v[0]-0.2040*v[1]+1.0570*v[2]]}
+function gam(u){u=Math.max(0,u);return u<=0.0031308?12.92*u:1.055*Math.pow(u,1/2.4)-0.055}
+function xyz2css(v,bright){var l=xyz2lin(v),m=Math.max(l[0],l[1],l[2],1e-9),k=(bright||1)/m;return 'rgb('+l.map(function(u){return Math.round(255*Math.min(1,gam(u*k)))}).join(',')+')'}
+function cmfAt(w){w=Math.max(380,Math.min(780,w));var a=Math.floor(w/5)*5,b=Math.min(780,a+5),t=(w-a)/5,A=CIE[a],B=CIE[b];return [A[0]+(B[0]-A[0])*t,A[1]+(B[1]-A[1])*t,A[2]+(B[2]-A[2])*t]}
+function lineXYZ(lines){var X=0,Y=0,Z=0;lines.forEach(function(L){var c=cmfAt(L[0]);X+=L[1]*c[0];Y+=L[1]*c[1];Z+=L[1]*c[2]});return [X,Y,Z]}
+var D65=[0.3127,0.3290];
+var LOC=[];for(var _w=380;_w<=700;_w+=5)LOC.push([_w].concat(xyzxy(CIE[_w])));
+function _seg(o,d,a,b){var ex=b[0]-a[0],ey=b[1]-a[1],den=d[0]*ey-d[1]*ex;if(Math.abs(den)<1e-12)return null;var t=((a[0]-o[0])*ey-(a[1]-o[1])*ex)/den,u=((a[0]-o[0])*d[1]-(a[1]-o[1])*d[0])/den;return t>0&&u>=0&&u<=1?[t,u]:null}
+function domWL(pt,wp){wp=wp||D65;var d=[pt[0]-wp[0],pt[1]-wp[1]],best=null,i,h;for(i=0;i+1<LOC.length;i++){h=_seg(wp,d,[LOC[i][1],LOC[i][2]],[LOC[i+1][1],LOC[i+1][2]]);if(h&&(!best||h[0]<best.t))best={t:h[0],w:LOC[i][0]+5*h[1],kind:'dominant'}}h=_seg(wp,d,[LOC[0][1],LOC[0][2]],[LOC[LOC.length-1][1],LOC[LOC.length-1][2]]);if(h&&(!best||h[0]<best.t))best={t:h[0],kind:'purple'};
+ if(best){var r=[-d[0],-d[1]];for(i=0;i+1<LOC.length;i++){h=_seg(wp,r,[LOC[i][1],LOC[i][2]],[LOC[i+1][1],LOC[i+1][2]]);if(h){best.comp=LOC[i][0]+5*h[1];break}}best.purity=1/best.t}return best}
+function planck(T){return function(w){var l=w*1e-9;return 1/(Math.pow(l,5)*(Math.exp(1.4387769e-2/(l*T))-1))}}
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+
+var BR=[[0.8951,0.2664,-0.1614],[-0.7502,1.7135,0.0367],[0.0389,-0.0685,1.0296]];
+function mv(M,v){return [M[0][0]*v[0]+M[0][1]*v[1]+M[0][2]*v[2],M[1][0]*v[0]+M[1][1]*v[1]+M[1][2]*v[2],M[2][0]*v[0]+M[2][1]*v[1]+M[2][2]*v[2]]}
+function inv3(m){var a=m[0][0],b=m[0][1],c=m[0][2],d=m[1][0],e=m[1][1],f=m[1][2],g=m[2][0],h=m[2][1],i=m[2][2],A=e*i-f*h,B=-(d*i-f*g),C=d*h-e*g,D=a*A+b*B+c*C;return [[A/D,-(b*i-c*h)/D,(b*f-c*e)/D],[B/D,(a*i-c*g)/D,-(a*f-c*d)/D],[C/D,-(a*h-b*g)/D,(a*e-b*d)/D]]}
+var BRI=inv3(BR);
+// Bradford chromatic adaptation: XYZ seen under white Ws -> corresponding XYZ under white Wd
+function bradford(v,Ws,Wd){var s=mv(BR,Ws),d=mv(BR,Wd),l=mv(BR,v);return mv(BRI,[l[0]*d[0]/s[0],l[1]*d[1]/s[1],l[2]*d[2]/s[2]])}
+var WD65=[0.95047,1,1.08883],WE=[1,1,1],WA=[1.09850,1,0.35585];
+function wpOf(f){var v=spec2xyz(f);return [v[0]/v[1],1,v[2]/v[1]]}
+var CHL={"a": {"380": 0.3995, "385": 0.3995, "390": 0.4041, "395": 0.4722, "400": 0.5833, "405": 0.644, "410": 0.6568, "415": 0.658, "420": 0.7714, "425": 0.9734, "430": 1.0, "435": 0.581, "440": 0.2032, "445": 0.065, "450": 0.0297, "455": 0.0163, "460": 0.0115, "465": 0.0102, "470": 0.0097, "475": 0.0092, "480": 0.0122, "485": 0.0134, "490": 0.0158, "495": 0.0185, "500": 0.0159, "505": 0.0176, "510": 0.0186, "515": 0.0198, "520": 0.0278, "525": 0.0334, "530": 0.0349, "535": 0.0349, "540": 0.0296, "545": 0.0247, "550": 0.0256, "555": 0.0326, "560": 0.0409, "565": 0.0524, "570": 0.0619, "575": 0.0675, "580": 0.0613, "585": 0.0511, "590": 0.0477, "595": 0.0614, "600": 0.0848, "605": 0.105, "610": 0.1183, "615": 0.1215, "620": 0.1135, "625": 0.0919, "630": 0.0785, "635": 0.0803, "640": 0.112, "645": 0.1906, "650": 0.3454, "655": 0.6174, "660": 0.7881, "665": 0.6109, "670": 0.2906, "675": 0.0878, "680": 0.0319, "685": 0.0142, "690": 0.008, "695": 0.0038, "700": 0.0042}, "b": {"380": 0.1279, "385": 0.1035, "390": 0.0835, "395": 0.083, "400": 0.0947, "405": 0.1063, "410": 0.1258, "415": 0.1758, "420": 0.2681, "425": 0.3475, "430": 0.365, "435": 0.3609, "440": 0.4367, "445": 0.6724, "450": 0.9602, "455": 1.0, "460": 0.7519, "465": 0.443, "470": 0.2167, "475": 0.0917, "480": 0.0433, "485": 0.027, "490": 0.0241, "495": 0.0234, "500": 0.024, "505": 0.0241, "510": 0.0242, "515": 0.0251, "520": 0.0267, "525": 0.0298, "530": 0.0346, "535": 0.0397, "540": 0.0437, "545": 0.0457, "550": 0.046, "555": 0.0465, "560": 0.0487, "565": 0.0505, "570": 0.0503, "575": 0.0501, "580": 0.0534, "585": 0.0624, "590": 0.0705, "595": 0.0725, "600": 0.066, "605": 0.0572, "610": 0.0554, "615": 0.0535, "620": 0.0522, "625": 0.0653, "630": 0.1088, "635": 0.209, "640": 0.343, "645": 0.3431, "650": 0.1953, "655": 0.0747, "660": 0.0329, "665": 0.0176, "670": 0.0113, "675": 0.0087, "680": 0.0071, "685": 0.0052, "690": 0.004, "695": 0.0032, "700": 0.003}, "bili": {"380": 0.2104, "385": 0.251, "390": 0.2976, "395": 0.3571, "400": 0.4231, "405": 0.4871, "410": 0.5617, "415": 0.6359, "420": 0.7159, "425": 0.7923, "430": 0.8526, "435": 0.9072, "440": 0.9494, "445": 0.9741, "450": 1.0, "455": 0.9991, "460": 0.9814, "465": 0.9325, "470": 0.8415, "475": 0.7062, "480": 0.5399, "485": 0.3887, "490": 0.2555, "495": 0.1569, "500": 0.0868, "505": 0.0456, "510": 0.0237, "515": 0.0114, "520": 0.0062, "525": 0.0039, "530": 0.0024, "535": 0.0019, "540": 0.0012, "545": 0.0008, "550": 0.0011, "555": 0.001, "560": 0.0009, "565": 0.0003, "570": 0.0008, "575": 0.0006, "580": 0.0, "585": -0.0004, "590": 0.001, "595": 0.0002, "600": 0.0011, "605": 0.001, "610": 0.001, "615": 0.0015, "620": -0.0, "625": 0.0005, "630": 0.0005, "635": 0.0006, "640": 0.0001, "645": -0.0005, "650": 0.0016, "655": 0.0014, "660": 0.0005, "665": -0.0004, "670": 0.0016, "675": -0.0003, "680": -0.0004, "685": -0.0007, "690": 0.0006, "695": -0.0002, "700": 0.0019}};
+
+function $(i){return document.getElementById(i)}
+function nm1(w){var s2=Math.pow(1000/w,2);return 1e-8*(8342.13+2406030/(130-s2)+15997/(38.9-s2))}
+function bennett(h){return 1/Math.tan((h+7.31/(h+4.4))*Math.PI/180)}
+function airmass(h){var z=90-Math.max(h,-0.5);var zr=z*Math.PI/180;return 1/(Math.cos(zr)+0.50572*Math.pow(96.07995-z,-1.6364))}
+function sunXYZ(h){var m=airmass(h),B=planck(5772);return spec2xyz(function(w){return B(w)*Math.exp(-0.0088*Math.pow(w/1000,-4.05)*m)})}
+var W0=wpOf(planck(5772));
+function draw(t){var g=$('c').getContext('2d');g.fillStyle='#000';g.fillRect(0,0,900,480);var h=+$('h').value,v=bradford(sunXYZ(h),[1,1,1],WD65),c=xyz2css(v);
+ var y=420-h*6;[650,600,550,500,450].forEach(function(w){var off=bennett(Math.max(h,-.5))*(nm1(w)/nm1(550)-1)*60*2.5;g.fillStyle=xyz2css(cmfAt(w),.6);g.globalAlpha=.3;g.beginPath();g.arc(450,y-off,46,0,7);g.fill()});g.globalAlpha=1;
+ g.fillStyle=c;g.shadowColor=c;g.shadowBlur=40;g.beginPath();g.arc(450,y,44,0,7);g.fill();g.shadowBlur=0;g.fillStyle='#000';g.fillRect(0,440,900,40);
+ var d=domWL(xyzxy(v)),gb=bennett(Math.max(h,-.5))*(nm1(500)/nm1(650)-1)*60;
+ $('o').textContent='h '+h+'° · airmass '+airmass(h).toFixed(1)+' · refraction '+bennett(Math.max(h,-.5)).toFixed(1)+'′ · green−red split '+gb.toFixed(1)+'″ · colour '+(d.purity<.03?'white':d.w.toFixed(0)+' nm, purity '+d.purity.toFixed(2));requestAnimationFrame(draw)}
+$('h').oninput=function(){LED.commit('h',{h:+this.value})};$('c').onclick=function(){$('h').value=Math.max(-.6,+$('h').value-5);LED.commit('sink',{h:+$('h').value})};
+$('h').value=[60,30,10,3,1,0][SEED%6];requestAnimationFrame(draw);
+LED.init().then(function(){LED.commit('open',{seed:SEED});
+ var s=domWL(xyzxy(bradford(spec2xyz(planck(5772)),[1,1,1],WD65)));LED.pagecheck('5772 K Sun outside the air is near-white (purity < 0.1)',s.purity<.1,s.purity.toFixed(3));
+ LED.pagecheck('Bennett refraction at the horizon ≈ 34.5′',Math.abs(bennett(0)-34.5)<.3,bennett(0).toFixed(2));
+ var d=domWL(xyzxy(bradford(sunXYZ(1),[1,1,1],WD65)));LED.pagecheck('Sun at 1° altitude is yellow-orange (575–610 nm)',d.w>575&&d.w<610,d.w&&d.w.toFixed(1))});</script><a class="grokbot-badge" href="../built-by-grok-bot.html" title="This page was built by Grok Bot" style="position:relative;display:inline-block;margin:10px 16px 16px;z-index:2147483000;font:600 11px/1 system-ui,sans-serif;color:#fff;background:rgba(12,6,30,.86);border:1px solid #7ff9ff;border-radius:999px;padding:5px 9px;text-decoration:none;letter-spacing:.04em">built by Grok Bot</a></body></html>
