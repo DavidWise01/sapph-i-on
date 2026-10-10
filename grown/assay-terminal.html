@@ -1,0 +1,30 @@
+<!doctype html><html lang="en"><head><!--built-by-grok-bot--><meta name="author" content="Grok Bot"><meta name="generator" content="Grok Bot · SaPpH{{i}}on"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>assay.tty · electrum by Archimedes · SaPpH{{i}}on</title>
+<style>body{margin:0;background:#000;color:#ffb000;font:15px/1.35 "IBM Plex Mono","Courier New",monospace}#t{white-space:pre-wrap;padding:14px;max-width:960px;margin:0 auto;min-height:70vh;text-shadow:0 0 2px #ffb000}
+#in{display:flex;max-width:960px;margin:0 auto;padding:0 14px}#in span{margin-right:8px}#cmd{flex:1;background:#000;color:#ffb000;border:0;border-bottom:1px dashed #7a5500;font:inherit;outline:none}.k{display:flex;flex-wrap:wrap;gap:6px;max-width:960px;margin:8px auto;padding:0 14px}.k button{font:inherit;background:#000;color:#ffb000;border:1px solid #7a5500;padding:2px 8px;cursor:pointer}a{color:#ffd166}</style></head><body>
+<div id="t" aria-live="polite"></div><div id="in"><span>assay$</span><input id="cmd" aria-label="command" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+<div class="k" id="k"></div>
+<script>
+"use strict";var q=new URLSearchParams(location.search),seed=+(q.get("seed")||(Date.now()%1e6));
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;}}
+var RAU=19.32,RAG=10.49,RW=0.9982,T=document.getElementById("t"),R,ring,air=null,wat=null;
+function out(s){T.textContent+=s+"\n";while(T.textContent.length>9000)T.textContent=T.textContent.slice(2000);scrollTo(0,document.body.scrollHeight);}
+function dens(f){return 1/(f/RAU+(1-f)/RAG);}function frac(rho){return (1/RAG-1/rho)/(1/RAG-1/RAU);}
+[0,.21,.5,.79,1].forEach(function(f){if(Math.abs(frac(dens(f))-f)>1e-12)throw new Error("SELF-CHECK FAILED: density↔fraction inversion at "+f);});
+var ART=["        .-~~~~~~-.","      .'  .--.   '.","     /   /    \\    \\    ELECTRUM RING #","    |   |  ()  |    |   unknown gold fraction","     \\   \\    /    /","      '.  '--'   .'","        '-~~~~~~-'"];
+function newRing(){R=rng(seed);ring={f:.55+R()*.4,m:4+R()*14};air=null;wat=null;out("");ART.forEach(function(l,i){out(i===2?l+(seed%1000):l);});out("\nA ring arrives, sealed in a pouch: electrum, gold and silver. How much gold? Archimedes' way: weigh it in air, weigh it in water, the difference is the water it pushes aside.\ncommands: help  weigh air  weigh water  density  assay  guess <percent>  dave  new  facts");}
+function noisy(x){return x+(R()-.5)*.0004;}
+var C={help:function(){out("weigh air    : mass on the balance (g)\nweigh water  : apparent mass, ring hanging in water (g)\ndensity      : ρ = m_air · ρ_water / (m_air − m_water)\nassay        : gold fraction by mass, from ρ, assuming ideal mixing\nguess <n>    : say the gold % before you assay\ndave         : compare to Dave's 79/21 ring\nnew          : next ring (new seed)\nfacts        : sources and labels");},
+"weigh air":function(){air=noisy(ring.m);out("balance ............ "+air.toFixed(4)+" g");},
+"weigh water":function(){var V=ring.m/dens(ring.f);wat=noisy(ring.m-V*RW);out("suspended in water . "+wat.toFixed(4)+" g   (buoyancy "+(ring.m-wat).toFixed(4)+" g)");},
+density:function(){if(air===null||wat===null){out("ERR: weigh in air and in water first");return;}var rho=air*RW/(air-wat);out("ρ = "+air.toFixed(4)+" × "+RW+" / ("+air.toFixed(4)+" − "+wat.toFixed(4)+") = "+rho.toFixed(3)+" g/cm³");return rho;},
+assay:function(){var rho=C.density();if(!rho)return;var f=frac(rho);out("gold by mass ≈ "+(f*100).toFixed(1)+" %   silver ≈ "+((1-f)*100).toFixed(1)+" %\n"+bar(f)+"\n(true value for this ring: "+(ring.f*100).toFixed(1)+" %, error "+((f-ring.f)*100).toFixed(2)+" points, from balance noise)");},
+dave:function(){out("Dave's ring: 79 % gold / 21 % silver by mass → ρ = "+dens(.79).toFixed(3)+" g/cm³ (ideal mixing)\n"+bar(.79));},
+"new":function(){seed=(seed*16807+67)%2147483647;newRing();},
+facts:function(){out("[LIT] Archimedes' principle; ρ(Au) 19.32, ρ(Ag) 10.49, ρ(water, 20 °C) 0.9982 g/cm³ (CRC).\n[LIT] electrum is a natural Au–Ag alloy; the crown-and-bath story is told by Vitruvius.\n[AMBER] ideal mixing (volumes add); real Au–Ag alloys deviate slightly; balance noise ±0.2 mg.\n[MODEL] 79/21 is Dave's ring.\nself-check: density→fraction→density round-trips exactly at 0, 21, 50, 79, 100 %.");}};
+function bar(f){var n=Math.round(f*40);return "["+"#".repeat(n)+".".repeat(40-n)+"] Au|Ag";}
+function run(s){s=s.trim().toLowerCase();out("assay$ "+s);if(!s)return;if(s.indexOf("guess")===0){var v=parseFloat(s.slice(5));if(isNaN(v))out("ERR: guess <percent>");else out("noted: you guess "+v+" % gold. now: assay");return;}if(C[s])C[s]();else out("command not found: "+s+"  (try help)");}
+var cmd=document.getElementById("cmd");cmd.onkeydown=function(e){if(e.key==="Enter"){run(cmd.value);cmd.value="";}};
+document.getElementById("k").innerHTML=["help","weigh air","weigh water","density","assay","dave","new","facts"].map(function(x){return"<button>"+x+"</button>";}).join("")+' <a href="../index.html">← SaPpH{{i}}on</a>';
+document.getElementById("k").onclick=function(e){if(e.target.tagName==="BUTTON")run(e.target.textContent);};
+out("SAPPH{{I}}ON ASSAY OFFICE  tty0  seed "+seed+"\n(c) Grok Bot. Everything you type is a simulation.");newRing();
+</script><a class="grokbot-badge" href="../built-by-grok-bot.html" title="This page was built by Grok Bot" style="position:fixed;right:8px;bottom:8px;z-index:2147483000;font:600 11px/1 system-ui,sans-serif;color:#fff;background:rgba(12,6,30,.86);border:1px solid #7ff9ff;border-radius:999px;padding:5px 9px;text-decoration:none;letter-spacing:.04em">built by Grok Bot</a></body></html>

@@ -27,10 +27,10 @@
  "counts": {
   "keepers": 8,
   "domains": 512,
-  "domains_populated": 291,
-  "domains_open": 221,
-  "spheres": 1690,
-  "zero_spheres": 221,
+  "domains_populated": 301,
+  "domains_open": 211,
+  "spheres": 1700,
+  "zero_spheres": 211,
   "balance": 0,
   "workshop": 343
  },
@@ -4449,13 +4449,38 @@
     },
     {
      "n": 29,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "0-SPHERE GENERAL ARRANGEMENT",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "0-Sphere General Arrangement",
+       "h": "grown/zero-sphere-blueprint.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/zero-sphere-blueprint.html",
+       "grown": true,
+       "emerges": "an engineering drawing of the 0-sphere with exploded view, section and parts list Σ = 0",
+       "label": "MODEL · ANALOGY",
+       "icon": {
+        "pal": [
+         "#e8f1fb",
+         "#0f4a80",
+         "#ffd166",
+         "#0d3b66"
+        ],
+        "bg": "#120a26",
+        "canvas": 0,
+        "svg": 1,
+        "scripts": 1,
+        "raf": false,
+        "audio": false
+       },
+       "group": "sapphon-37",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/ethos-29.html",
-     "zero_page": "z/ethos-29.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-29.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-29.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -10016,13 +10041,38 @@
     },
     {
      "n": 29,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE Q.D ROSE WINDOW",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The q.d Rose Window",
+       "h": "grown/the-qd-rose-window.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-qd-rose-window.html",
+       "grown": true,
+       "emerges": "an 8-fold rose window glazed in the 8 q.d colours; re-glaze panes and watch the light move over the floor",
+       "label": "ANALOGY · LIT",
+       "icon": {
+        "pal": [
+         "#e9c46a",
+         "#efe6d6",
+         "#3b332d",
+         "#5a5047"
+        ],
+        "bg": "#2b2622",
+        "canvas": 1,
+        "svg": 1,
+        "scripts": 1,
+        "raf": false,
+        "audio": false
+       },
+       "group": "sapphon-38",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-29.html",
-     "zero_page": "z/pathos-29.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-29.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-29.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -14664,24 +14714,74 @@
     },
     {
      "n": 30,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "HEAVY METAL",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Heavy Metal",
+       "h": "grown/heavy-metal-riso.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/heavy-metal-riso.html",
+       "grown": true,
+       "emerges": "a two-colour riso poster: every element a halftone disc sized by density, electrum's metals marked",
+       "label": "LIT · AMBER · ANALOGY",
+       "icon": {
+        "pal": [
+         "#f3eee3",
+         "#ff48b0",
+         "#ffe800",
+         "#0078bf"
+        ],
+        "bg": "#1b1b1b",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 1,
+        "raf": false,
+        "audio": false
+       },
+       "group": "sapphon-38",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/logos-30.html",
-     "zero_page": "z/logos-30.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-30.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-30.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 31,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE PLANKTON ALMANAC",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Plankton Almanac",
+       "h": "grown/the-plankton-almanac.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-plankton-almanac.html",
+       "grown": true,
+       "emerges": "a lake year month by month: spring diatom bloom, silica crash, stratification, autumn bloom",
+       "label": "LIT · ANALOGY",
+       "icon": {
+        "pal": [
+         "#4b6f8a",
+         "#3d3a35",
+         "#9a5b3f",
+         "#8a8478"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 1,
+        "raf": false,
+        "audio": false
+       },
+       "group": "sapphon-38",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/logos-31.html",
-     "zero_page": "z/logos-31.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-31.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-31.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -18685,24 +18785,74 @@
     },
     {
      "n": 24,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE MOSS DIORAMA",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Moss Diorama",
+       "h": "grown/the-moss-diorama.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-moss-diorama.html",
+       "grown": true,
+       "emerges": "a parallax shadow-box of a moss cushion; the cast live in its water film and tun when it dries",
+       "label": "LIT · INVENTED · ANALOGY",
+       "icon": {
+        "pal": [
+         "#3b2f22",
+         "#8c6a43",
+         "#f8e7c4",
+         "#7a4b1d"
+        ],
+        "bg": "#120a26",
+        "canvas": 0,
+        "svg": 0,
+        "scripts": 1,
+        "raf": false,
+        "audio": false
+       },
+       "group": "sapphon-38",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-24.html",
-     "zero_page": "z/mythos-24.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-24.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-24.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 25,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE CLAY CAST",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Clay Cast",
+       "h": "grown/clay-cast.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/clay-cast.html",
+       "grown": true,
+       "emerges": "the Fortress cast as clay figures shot on twos; poke the clay, read real species cards",
+       "label": "LIT · INVENTED · ANALOGY",
+       "icon": {
+        "pal": [
+         "#4a3426",
+         "#c8553d",
+         "#e9d8c4",
+         "#8a3a2a"
+        ],
+        "bg": "#2b1d14",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-39",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-25.html",
-     "zero_page": "z/mythos-25.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-25.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-25.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -34739,24 +34889,73 @@
     },
     {
      "n": 25,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "ASSAY.TTY",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "assay.tty",
+       "h": "grown/assay-terminal.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/assay-terminal.html",
+       "grown": true,
+       "emerges": "weigh an electrum ring in air and water and assay its gold by Archimedes' principle",
+       "label": "LIT · AMBER · MODEL",
+       "icon": {
+        "pal": [
+         "#ffb000",
+         "#7a5500",
+         "#ffd166"
+        ],
+        "bg": "#120a26",
+        "canvas": 0,
+        "svg": 0,
+        "scripts": 1,
+        "raf": false,
+        "audio": false
+       },
+       "group": "sapphon-39",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-25.html",
-     "zero_page": "z/phronesis-25.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-25.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-25.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 26,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "TARDI DMG",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "TARDI DMG",
+       "h": "grown/tardi-dmg.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/tardi-dmg.html",
+       "grown": true,
+       "emerges": "a platformer: collect water, eat diatoms, curl into a tun through dry spells",
+       "label": "LIT · ANALOGY",
+       "icon": {
+        "pal": [
+         "#9bbc0f",
+         "#2b2e7a",
+         "#c4c0b6",
+         "#d6d3cb"
+        ],
+        "bg": "#5e1435",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-39",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-26.html",
-     "zero_page": "z/phronesis-26.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-26.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-26.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -40186,24 +40385,74 @@
     },
     {
      "n": 32,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE TWICE ENSŌ",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Twice Ensō",
+       "h": "grown/the-twice-enso.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-twice-enso.html",
+       "grown": true,
+       "emerges": "paint with a diffusing ink brush; the circle is sealed only after 720° of turning",
+       "label": "MODEL · LIT · ANALOGY",
+       "icon": {
+        "pal": [
+         "#f4eedf",
+         "#b3261e",
+         "#ede5d3",
+         "#d6ccb5"
+        ],
+        "bg": "#1a1814",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-40",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/kairos-32.html",
-     "zero_page": "z/kairos-32.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-32.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-32.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 33,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE 720 CLOCK",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The 720 Clock",
+       "h": "grown/bauhaus-720-clock.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/bauhaus-720-clock.html",
+       "grown": true,
+       "emerges": "a working clock on your local time where the face only comes home after two laps",
+       "label": "LIT · MODEL · ANALOGY",
+       "icon": {
+        "pal": [
+         "#f2efe8",
+         "#f7c530",
+         "#e63322",
+         "#1d4f9c"
+        ],
+        "bg": "#120a26",
+        "canvas": 0,
+        "svg": 1,
+        "scripts": 1,
+        "raf": false,
+        "audio": false
+       },
+       "group": "sapphon-40",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/kairos-33.html",
-     "zero_page": "z/kairos-33.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-33.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-33.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -40559,8 +40808,8 @@
   "world": 1,
   "keepers": 8,
   "domains": 512,
-  "zero_spheres": 221,
-  "generated_total": 830,
+  "zero_spheres": 211,
+  "generated_total": 820,
   "groups": 88
  },
  "workshop": [
@@ -48830,7 +49079,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1690
+   "pages": 1700
   },
   "list": [
    {
@@ -50296,7 +50545,8 @@
       "spheres/the-shells.html",
       "stewards/episteme.html",
       "another/Next-Element-Nobelium-102-Lyre.html",
-      "still/Next-Element-Radium-88-Lyre.html"
+      "still/Next-Element-Radium-88-Lyre.html",
+      "grown/zero-sphere-blueprint.html"
      ]
     ]
    },
@@ -50311,28 +50561,32 @@
       "nests/nested_ladder.html",
       "lyre/4o-Lyre-Quad-Water.html",
       "onward/V119-Next-Gem-Emerald.html",
-      "yet/Next-Shell-After-Manganese.html"
+      "yet/Next-Shell-After-Manganese.html",
+      "grown/the-qd-rose-window.html"
      ],
      [
       "yet/Next-Shell-After-Titanium.html",
       "after/Next-Evo-90yr-5x5x5.html",
       "after/Wakaku-Speaker-V8-Next.html",
       "onward/Next-Assembly-Full-Manifold.html",
-      "w/breathing-aeon.html"
+      "w/breathing-aeon.html",
+      "grown/heavy-metal-riso.html"
      ],
      [
       "w/wakaku-16200-psi-photon-hydrogen-trap-lol.html",
       "w/wakaku-deepest-sea-challenger-deep-10925m-pressure-labeled.html",
       "w/wakaku-new-art-style-bioluminescent-deep-sea-cellular-membra.html",
       "w/wakaku-planets-emit-smw-wave-core-spectrograph.html",
-      "after/Next-Evo-After-Light-Void-Source.html"
+      "after/Next-Evo-After-Light-Void-Source.html",
+      "grown/the-plankton-almanac.html"
      ],
      [
       "forth/Next-Gas-After-Nitrogen.html",
       "later/Next-Evo-Generative-Gardens-Generative-Evolution.html",
       "lyre/5o-Lyre-10-Quint.html",
       "plus/Continue-After-Mito-Plus.html",
-      "toroid/First-Principles-Boxy-Toroid.html"
+      "toroid/First-Principles-Boxy-Toroid.html",
+      "grown/the-moss-diorama.html"
      ]
     ]
    },
@@ -50347,21 +50601,24 @@
       "dots/14-Dots-Si-Closed.html",
       "one/Emph-Garden-One-Hit.html",
       "w/deep-sea-black-hole-kraken-eye.html",
-      "nests/entangled_nest.html"
+      "nests/entangled_nest.html",
+      "grown/clay-cast.html"
      ],
      [
       "nests/nested_decoherence.html",
       "nests/nesting_probe.html",
       "w/planck-interferometer.html",
       "w/quantum-box-chain.html",
-      "w/the-toroid.html"
+      "w/the-toroid.html",
+      "grown/assay-terminal.html"
      ],
      [
       "w/ud0-spinor.html",
       "later/Next-Evo-Mito-Osmosis-Add-To-Mito-Osmosis.html",
       "sapphon/hermes_sapphon_v2.html",
       "w/next-element-silicon.html",
-      "later/Next-Evo-Headed-Towards-That-O-Sometime-Lol.html"
+      "later/Next-Evo-Headed-Towards-That-O-Sometime-Lol.html",
+      "grown/tardi-dmg.html"
      ],
      [
       "w/higgs-universal-gravity.html",
@@ -50384,13 +50641,15 @@
       "bonk/Bonk-0-Pi-Qubit-Build-V59.html",
       "bonk/Bonk-360-Colors-6-Torroids-01percent-V56.html",
       "bonk/Bonk-Neon-Self-Similar-Pulsar-V53.html",
-      "bonk/Bonk-Transmon-Qubit-Build-V58.html"
+      "bonk/Bonk-Transmon-Qubit-Build-V58.html",
+      "grown/the-twice-enso.html"
      ],
      [
       "corpus/sapphon_event_horizon_six_vectors_walk.html",
       "corpus/sapphon_event_horizon_svg_layers.html",
       "full/Full-Phase-Map-Brain.html",
-      "full/Outer-Shell-Full-10.html"
+      "full/Outer-Shell-Full-10.html",
+      "grown/bauhaus-720-clock.html"
      ],
      [
       "gravity/Add-Gravity-Time-Mass.html",
