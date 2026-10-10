@@ -18,13 +18,26 @@ Every 0-sphere is 2 quantum dots (0, 0), 2 vectors (−1, −1) and 2 edges (+1,
 - w/<slug>.html: original pages from David's workshop, served unchanged apart from a favicon link where it was safe to add.
 - Existing sphere pages stay at their original paths.
 
+## Grown spheres
+New spheres built one at a time, each an emergent page with its own local rule, a seed, interaction and a fail-loud self-check. They live in grown/<slug>.html and are seated in an open domain.
+- [The Avalanche Table](./grown/the-avalanche-table.html): KAIROS domain 08. Emerges: self-organised criticality: avalanches of every size, with no tuning. LIT.
+- [The Firefly Clock](./grown/the-firefly-clock.html): KAIROS domain 15. Emerges: synchrony: past a critical coupling a coherent cluster forms out of scattered phases. LIT · AMBER dial.
+- [The Turing Garden](./grown/the-turing-garden.html): LOGOS domain 09. Emerges: Turing patterns (spots, stripes, mitosis, waves) from a uniform field. LIT.
+- [The Zero Magnet](./grown/the-zero-magnet.html): LOGOS domain 12. Emerges: magnetic domains and a phase transition: order below Tc, noise above it. LIT.
+- [The Frost Of Zero](./grown/the-frost-of-zero.html): TECHNE domain 08. Emerges: a branching fractal (dimension ≈ 1.7) that no walker plans. LIT.
+- [The Ladder Thermostat](./grown/the-ladder-thermostat.html): PHRONESIS domain 08. Emerges: homeostasis: the crowd settles toward rung 0 against the heat, while Σ stays exactly 0. AMBER.
+- [The Zero Flock](./grown/the-zero-flock.html): PATHOS domain 09. Emerges: flocking: the polarisation climbs from 0 toward 1 as headings align, and the flock splits and heals around the hawk. LIT model · AMBER mapping.
+- [The Pheromone Roads](./grown/the-pheromone-roads.html): EPISTEME domain 08. Emerges: roads: shortest-ish trails between the nest and food, made by many ants and no plan. LIT model.
+- [The Eight Neighbourhoods](./grown/the-eight-neighbourhoods.html): ETHOS domain 09. Emerges: segregation: large single-colour districts, even when every agent would accept a mixed street. LIT · WALL.
+- [The Hunger Lattice](./grown/the-hunger-lattice.html): MYTHOS domain 08. Emerges: predator–prey cycles and travelling spiral waves; the net charge swings around 0 instead of sitting on it. LIT.
+
 ## The 88 groups
 - g/sapphon-NN.html (42 groups of 4 members), g/ion-NN.html (45 groups of 3 members) and g/center.html (1). 42×4 + 45×3 + 1 = 304 member slots; 42 + 45 + 1 = 88 groups.
 - Each member is a bundle of pages that are neighbours by palette. Each group page is an icon swarm that links directly to the original pages. In sapphon.json, "groups" lists every member, and each sphere carries its "group".
 - In the world, sapphons and ions are bonded clusters of exactly 4 and exactly 3 that emerge under the same local rules. The world checks 42×4 + 45×3 + 1 = 304 and 42 + 45 + 1 = 88 on load and throws if either fails.
 
 ## Icons
-Each sphere and workshop page appears as an icon generated from its own source: pal = its most frequent CSS colours, bg = its darkest colour, a ring per canvas, a spoke per script block, a centre dot for SVG, a wavy ring for sound, and spin if it animates. The icon links directly to the original page (spheres["h"], workshop["page"]); there is no page in between.
+{src['icons']}
 
 ## Evidence
 LIT: Σ = 0 is recomputed every frame (world: each 0-sphere, each bond and the total; 0-sphere: net charge). Icon counts are checked against the data. Any failure throws. AMBER: keeper names follow the order they emerge in, and voices are assigned. The birth seal b7350267c9df90491f3a2c45297e9a0f756c65d2c23a323f6f68abc3426d33fe is never rewritten.

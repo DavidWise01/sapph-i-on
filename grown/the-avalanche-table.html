@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>THE AVALANCHE TABLE · SaPpH{{i}}on</title><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<style>
+:root{--bg:#0b0716;--ink:#f1ecff;--dim:#bcabe4;--acc:#ff8a3a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#24124a,var(--bg));color:var(--ink);font:15px/1.55 system-ui,sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:18px 16px 40px}a{color:var(--dim)}
+nav{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-align:center}
+h1{margin:.2em 0 0;text-align:center;color:var(--acc);letter-spacing:.06em;font-size:clamp(26px,5vw,42px)}
+.tag{text-align:center;color:var(--dim);font-style:italic;font-size:14px}
+.stage{margin:14px 0 6px;border:1px solid rgba(179,140,240,.3);border-radius:14px;overflow:hidden;background:#090512;touch-action:none}
+canvas{display:block;width:100%}#plot{height:70px;border-top:1px solid rgba(179,140,240,.2)}
+.hud{font:12.5px ui-monospace,monospace;text-align:center;color:var(--ink);min-height:1.6em}
+.ctl{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin:8px 0 14px;font-size:13px;color:var(--dim)}
+button{background:#1a1030;color:var(--ink);border:1px solid rgba(179,140,240,.45);border-radius:8px;padding:6px 12px;font:600 12px ui-monospace,monospace;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.panel{background:rgba(26,16,48,.6);border:1px solid rgba(179,140,240,.22);border-radius:12px;padding:12px 16px;margin:12px 0}
+.panel h2{margin:0 0 6px;font-size:12px;letter-spacing:.16em;color:var(--acc)}
+.st{display:inline-block;font:700 11px ui-monospace,monospace;padding:1px 6px;border-radius:5px;border:1px solid;margin-right:6px}
+.lit{color:#7dffa8}.amb{color:#f4c740}.wall{color:#ff8a8a}
+</style></head><body><div class="wrap">
+<nav><a href="https://0root.ai/">the hallway</a> &#8250; <a href="../index.html">SaPpH{{i}}on</a> &#8250; <a href="../k/kairos.html">KAIROS</a> &#8250; <a href="../d/kairos-08.html">domain 08</a></nav>
+<h1>THE AVALANCHE TABLE</h1><div class="tag">grains, one at a time, until the table is critical</div>
+<div class="stage"><canvas id="cv" role="img" aria-label="self-organised criticality: avalanches of every size, with no tuning"></canvas><canvas id="plot" aria-hidden="true"></canvas></div>
+<div class="hud" id="hud"></div>
+<div class="ctl"><button type="button" id="reseed">NEW SEED</button><button type="button" id="pause">PAUSE</button></div>
+<div class="panel"><h2>THE RULE</h2><p>Grains drop one at a time onto random cells. A cell that reaches 4 grains topples, sending one grain to each of its four neighbours. Grains that fall over the edge are gone. No cell knows anything about the table as a whole.</p><p style="color:var(--dim);font-size:13px">Tap to pour 40 grains on one spot. The same <code>?seed=</code> always gives the same run.</p></div>
+<div class="panel"><h2>WHAT IS CLAIMED</h2><p><span class="st lit">LIT</span>The topple rule is Bak–Tang–Wiesenfeld (1987). Every 120 steps the page checks that grains on the table = grains dropped − grains lost and that no cell is left holding 4 or more, and it throws if not.</p><p><span class="st amb">AMBER</span>That a power law emerges is what this page shows you; it is not proved on the page.</p></div>
+</div>
+<script>
+"use strict";
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+var SEED=(location.search.match(/seed=(\d+)/)||[])[1];SEED=SEED?+SEED:(Math.random()*1e9)|0;var R=mulberry32(SEED);
+var QD=["#f0a886","#ff5aa0","#4db1f0","#a87bff","#3fd0a0","#c98a55","#8fb85a","#ff8a3a"];
+var REDUCE=matchMedia("(prefers-reduced-motion: reduce)").matches,DPR=Math.min(2,devicePixelRatio||1);
+var cv=document.getElementById("cv"),pc=document.getElementById("plot"),g,pg,W,H,PW,PH,tick=0,paused=false,SER=[];
+function fit(){W=cv.parentNode.clientWidth;H=Math.round(W*(W<560?1.05:.56));cv.width=W*DPR;cv.height=H*DPR;cv.style.height=H+"px";g=cv.getContext("2d");g.setTransform(DPR,0,0,DPR,0,0);
+ PW=W;PH=70;pc.width=PW*DPR;pc.height=PH*DPR;pg=pc.getContext("2d");pg.setTransform(DPR,0,0,DPR,0,0);}
+fit();
+function fail(m){throw new Error("SELF-CHECK FAILED: "+m);}
+function plot(){pg.clearRect(0,0,PW,PH);if(SER.length<2)return;var mx=-1e9,mn=1e9;SER.forEach(function(v){mx=Math.max(mx,v);mn=Math.min(mn,v);});if(mx===mn){mx+=1;}
+ pg.strokeStyle=getComputedStyle(document.body).getPropertyValue("--acc");pg.lineWidth=1.5;pg.beginPath();SER.forEach(function(v,i){var x=i/(SER.length-1)*PW,y=PH-6-(v-mn)/(mx-mn)*(PH-12);i?pg.lineTo(x,y):pg.moveTo(x,y);});pg.stroke();
+ pg.fillStyle="#bcabe4";pg.font="11px ui-monospace,monospace";pg.fillText(SIM.label+"  "+(+SER[SER.length-1].toFixed(3)),8,13);}
+function pos(e){var r=cv.getBoundingClientRect();return [e.clientX-r.left,e.clientY-r.top];}
+// Bak–Tang–Wiesenfeld sandpile: a cell holding 4 grains topples, giving one to each neighbour; grains fall off the edge.
+var N=72,M,G,added=0,lost=0,lastAv=0,avs=[],img;
+var SIM={spf:4,checkEvery:120,label:"avalanche size (log10, last 40)",
+init:function(){M=Math.round(N*H/W);G=new Uint8Array(N*M);for(var i=0;i<G.length;i++){G[i]=(R()*4)|0;added+=G[i];}img=g.createImageData(N,M);},
+drop:function(i){G[i]++;added++;var st=[i],sz=0;while(st.length){var c=st.pop();if(G[c]<4)continue;G[c]-=4;sz++;var x=c%N,y=(c/N)|0;
+ [[1,0],[-1,0],[0,1],[0,-1]].forEach(function(d){var nx=x+d[0],ny=y+d[1];if(nx<0||ny<0||nx>=N||ny>=M){lost++;return;}var n=ny*N+nx;G[n]++;if(G[n]>=4)st.push(n);});if(G[c]>=4)st.push(c);}
+ lastAv=sz;if(sz){avs.push(sz);if(avs.length>40)avs.shift();}},
+step:function(){SIM.drop((R()*G.length)|0);},
+poke:function(x,y){var i=((y/H*M)|0)*N+((x/W*N)|0);for(var k=0;k<40;k++)SIM.drop(i);},
+check:function(){var s=0;for(var i=0;i<G.length;i++){if(G[i]>3)fail("unstable cell");s+=G[i];}if(s!==added-lost)fail("grains not conserved: "+s+" vs "+(added-lost));},
+series:function(){var m=0;avs.forEach(function(a){m+=Math.log10(1+a);});return avs.length?m/avs.length:0;},
+draw:function(){var C=[[11,7,22],[77,177,240],[168,123,255],[244,199,64]];for(var i=0;i<G.length;i++){var c=C[G[i]];img.data[i*4]=c[0];img.data[i*4+1]=c[1];img.data[i*4+2]=c[2];img.data[i*4+3]=255;}
+ var o=document.createElement("canvas");o.width=N;o.height=M;o.getContext("2d").putImageData(img,0,0);g.imageSmoothingEnabled=false;g.drawImage(o,0,0,W,H);},
+hud:function(){var big=avs.reduce(function(a,b){return Math.max(a,b);},0);return "grains in "+added+" · fell off "+lost+" · on table "+(added-lost)+" · last avalanche "+lastAv+" · largest recent "+big;},
+sig:function(){return added+":"+lost+":"+Array.prototype.slice.call(G,0,60).join("");}};
+
+SIM.init();
+cv.addEventListener("pointerdown",function(e){var p=pos(e);SIM.poke(p[0],p[1]);});
+document.getElementById("reseed").onclick=function(){location.search="?seed="+((Math.random()*1e9)|0);};
+document.getElementById("pause").onclick=function(){paused=!paused;this.textContent=paused?"PLAY":"PAUSE";};
+var hud=document.getElementById("hud");
+function frame(){for(var s=0;s<SIM.spf;s++){SIM.step();tick++;}if(tick%SIM.checkEvery<SIM.spf)SIM.check();
+ if(tick%4<SIM.spf){SER.push(SIM.series());if(SER.length>300)SER.shift();}SIM.draw();plot();hud.textContent="seed "+SEED+" · "+SIM.hud();}
+window.SPHERE={get tick(){return tick;},sig:function(){return SIM.sig();},run:function(n){for(var i=0;i<n;i++){SIM.step();tick++;}SIM.check();}};
+if(REDUCE){SPHERE.run(SIM.spf*600);SIM.draw();hud.textContent="seed "+SEED+" · "+SIM.hud();}
+else(function loop(){if(!paused)frame();requestAnimationFrame(loop);})();
+</script></body></html>

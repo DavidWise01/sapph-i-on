@@ -27,10 +27,10 @@
  "counts": {
   "keepers": 8,
   "domains": 512,
-  "domains_populated": 92,
-  "domains_open": 420,
-  "spheres": 1491,
-  "zero_spheres": 420,
+  "domains_populated": 102,
+  "domains_open": 410,
+  "spheres": 1501,
+  "zero_spheres": 410,
   "balance": 0,
   "workshop": 343
  },
@@ -3153,13 +3153,37 @@
     },
     {
      "n": 9,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE EIGHT NEIGHBOURHOODS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Eight Neighbourhoods",
+       "h": "grown/the-eight-neighbourhoods.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-eight-neighbourhoods.html",
+       "grown": true,
+       "emerges": "segregation: large single-colour districts, even when every agent would accept a mixed street",
+       "label": "LIT · WALL",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#f0a886",
+         "#f1ecff",
+         "#7dffa8"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-12"
+      }
+     ],
      "page": "d/ethos-09.html",
-     "zero_page": "z/ethos-09.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-09.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-09.html",
+     "zero_url": null,
      "tale": "the-one-center"
     },
     {
@@ -7900,13 +7924,37 @@
     },
     {
      "n": 9,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE ZERO FLOCK",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Zero Flock",
+       "h": "grown/the-zero-flock.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-zero-flock.html",
+       "grown": true,
+       "emerges": "flocking: the polarisation climbs from 0 toward 1 as headings align, and the flock splits and heals around the hawk",
+       "label": "LIT model · AMBER mapping",
+       "icon": {
+        "pal": [
+         "#f1ecff",
+         "#bcabe4",
+         "#ff5aa0",
+         "#7dffa8"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-13"
+      }
+     ],
      "page": "d/pathos-09.html",
-     "zero_page": "z/pathos-09.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-09.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-09.html",
+     "zero_url": null,
      "tale": "the-twenty-four-cats"
     },
     {
@@ -12578,13 +12626,37 @@
     },
     {
      "n": 9,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE TURING GARDEN",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Turing Garden",
+       "h": "grown/the-turing-garden.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-turing-garden.html",
+       "grown": true,
+       "emerges": "Turing patterns (spots, stripes, mitosis, waves) from a uniform field",
+       "label": "LIT",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#4db1f0",
+         "#f1ecff",
+         "#7dffa8"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-15"
+      }
+     ],
      "page": "d/logos-09.html",
-     "zero_page": "z/logos-09.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-09.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-09.html",
+     "zero_url": null,
      "tale": "the-cube-of-7"
     },
     {
@@ -13051,13 +13123,37 @@
     },
     {
      "n": 12,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE ZERO MAGNET",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Zero Magnet",
+       "h": "grown/the-zero-magnet.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-zero-magnet.html",
+       "grown": true,
+       "emerges": "magnetic domains and a phase transition: order below Tc, noise above it",
+       "label": "LIT",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#4db1f0",
+         "#f1ecff",
+         "#7dffa8"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-10"
+      }
+     ],
      "page": "d/logos-12.html",
-     "zero_page": "z/logos-12.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-12.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-12.html"
+     "zero_url": null
     },
     {
      "n": 13,
@@ -16188,13 +16284,37 @@
     },
     {
      "n": 8,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE HUNGER LATTICE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Hunger Lattice",
+       "h": "grown/the-hunger-lattice.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-hunger-lattice.html",
+       "grown": true,
+       "emerges": "predator–prey cycles and travelling spiral waves; the net charge swings around 0 instead of sitting on it",
+       "label": "LIT",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#a87bff",
+         "#f1ecff",
+         "#7dffa8"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-11"
+      }
+     ],
      "page": "d/mythos-08.html",
-     "zero_page": "z/mythos-08.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-08.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-08.html",
+     "zero_url": null,
      "tale": "the-strip"
     },
     {
@@ -20331,13 +20451,37 @@
     },
     {
      "n": 8,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE PHEROMONE ROADS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Pheromone Roads",
+       "h": "grown/the-pheromone-roads.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-pheromone-roads.html",
+       "grown": true,
+       "emerges": "roads: shortest-ish trails between the nest and food, made by many ants and no plan",
+       "label": "LIT model",
+       "icon": {
+        "pal": [
+         "#7dffa8",
+         "#f1ecff",
+         "#bcabe4",
+         "#3fd0a0"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-34"
+      }
+     ],
      "page": "d/episteme-08.html",
-     "zero_page": "z/episteme-08.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/episteme-08.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/episteme-08.html",
+     "zero_url": null,
      "tale": "the-kernel-stitch"
     },
     {
@@ -25372,13 +25516,37 @@
     },
     {
      "n": 8,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE FROST OF ZERO",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Frost Of Zero",
+       "h": "grown/the-frost-of-zero.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-frost-of-zero.html",
+       "grown": true,
+       "emerges": "a branching fractal (dimension ≈ 1.7) that no walker plans",
+       "label": "LIT",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#c98a55",
+         "#f1ecff",
+         "#7dffa8"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-43"
+      }
+     ],
      "page": "d/techne-08.html",
-     "zero_page": "z/techne-08.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/techne-08.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/techne-08.html",
+     "zero_url": null,
      "tale": "the-eight-seats"
     },
     {
@@ -29369,13 +29537,37 @@
     },
     {
      "n": 8,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE LADDER THERMOSTAT",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Ladder Thermostat",
+       "h": "grown/the-ladder-thermostat.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-ladder-thermostat.html",
+       "grown": true,
+       "emerges": "homeostasis: the crowd settles toward rung 0 against the heat, while Σ stays exactly 0",
+       "label": "AMBER",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#f1ecff",
+         "#8fb85a",
+         "#7dffa8"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-12"
+      }
+     ],
      "page": "d/phronesis-08.html",
-     "zero_page": "z/phronesis-08.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-08.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-08.html",
+     "zero_url": null,
      "tale": "the-keeper-distance"
     },
     {
@@ -33245,13 +33437,37 @@
     },
     {
      "n": 8,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE AVALANCHE TABLE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Avalanche Table",
+       "h": "grown/the-avalanche-table.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-avalanche-table.html",
+       "grown": true,
+       "emerges": "self-organised criticality: avalanches of every size, with no tuning",
+       "label": "LIT",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#ff8a3a",
+         "#f1ecff",
+         "#7dffa8"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-12"
+      }
+     ],
      "page": "d/kairos-08.html",
-     "zero_page": "z/kairos-08.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-08.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-08.html",
+     "zero_url": null,
      "tale": "the-atmospheres"
     },
     {
@@ -34557,13 +34773,37 @@
     },
     {
      "n": 15,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE FIREFLY CLOCK",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Firefly Clock",
+       "h": "grown/the-firefly-clock.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-firefly-clock.html",
+       "grown": true,
+       "emerges": "synchrony: past a critical coupling a coherent cluster forms out of scattered phases",
+       "label": "LIT · AMBER dial",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#ff8a3a",
+         "#f4c740",
+         "#f1ecff"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-08"
+      }
+     ],
      "page": "d/kairos-15.html",
-     "zero_page": "z/kairos-15.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-15.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-15.html"
+     "zero_url": null
     },
     {
      "n": 16,
@@ -35066,8 +35306,8 @@
   "world": 1,
   "keepers": 8,
   "domains": 512,
-  "zero_spheres": 420,
-  "generated_total": 1029,
+  "zero_spheres": 410,
+  "generated_total": 1019,
   "groups": 88
  },
  "workshop": [
@@ -43337,7 +43577,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1491
+   "pages": 1501
   },
   "list": [
    {
@@ -44542,7 +44782,8 @@
       "onward/Next-Evo-After-Coherent-Heka.html",
       "w/electrum-lab-oscilloscope-art-style.html",
       "scale/Timed-83-Find-Scale.html",
-      "next/Next-Evo-After-Width-Tripled-27.html"
+      "next/Next-Evo-After-Width-Tripled-27.html",
+      "grown/the-pheromone-roads.html"
      ],
      [
       "w/i13-full-studio-l8-quad-toroid.html",
@@ -45058,7 +45299,8 @@
       "qdot/Compressed-Quantum-Dot-0x11.html",
       "farther/Next-Element-Chromium-24.html",
       "another/Next-Shell-After-Silver.html",
-      "yet/Next-Shell-After-Copper.html"
+      "yet/Next-Shell-After-Copper.html",
+      "grown/the-firefly-clock.html"
      ],
      [
       "beyond/Next-Shell-After-Cerium.html",
@@ -45122,7 +45364,8 @@
       "farther/Next-Element-Cobalt-27.html",
       "encore/Wakaku-V135-Clean-Metal-Analogs-200.html",
       "w/gravity-budget.html",
-      "w/paper-01-toroid.html"
+      "w/paper-01-toroid.html",
+      "grown/the-zero-magnet.html"
      ]
     ]
    },
@@ -45137,7 +45380,8 @@
       "plank/Mito-Matrix-Plank-10.html",
       "w/gravity-lens.html",
       "neon/Triad-33-Equidistance-Neon.html",
-      "nests/Nested-Black-Hole-81.html"
+      "nests/Nested-Black-Hole-81.html",
+      "grown/the-hunger-lattice.html"
      ],
      [
       "w/real-physics-stack.html",
@@ -45166,21 +45410,24 @@
       "wakaku/Wakaku-Speaker-V7-What.html",
       "bonk/Bonk-What-Dreams-May-Come-Colorful-Morphic-V44.html",
       "farther/Next-Shell-After-Astatine.html",
-      "forth/Next-Shell-After-Chlorine.html"
+      "forth/Next-Shell-After-Chlorine.html",
+      "grown/the-ladder-thermostat.html"
      ],
      [
       "qdot/Bonk-Black-Hole-Quantum-Dot-V50.html",
       "qdot/Bonk-Inf-Minus-2-Quantum-Dots-Ring-V47.html",
       "qdot/Bonk-Quantum-Dot-Q-Plus-D-Minus-Toroid-V40.html",
       "qdot/One-Qdot-8x8x8x8x1x8x8x8x8-FINAL.html",
-      "w/next-element-argon.html"
+      "w/next-element-argon.html",
+      "grown/the-avalanche-table.html"
      ],
      [
       "w/next-element-potassium.html",
       "nested/outside-the-julia-set-nested.html",
       "one/one-cubit-1440-spinor-mobius-cortex.html",
       "plus/Cut-Hologram-X4-Plus-100pct-Player.html",
-      "yet/Next-Shell-After-Argon.html"
+      "yet/Next-Shell-After-Argon.html",
+      "grown/the-eight-neighbourhoods.html"
      ]
     ]
    },
@@ -45195,7 +45442,8 @@
       "another/Next-Element-Lawrencium-103-Lyre.html",
       "w/6-universes-scalar-plane-0-deploy-now-stack-ten.html",
       "another/Next-Element-Curium-96-Lyre.html",
-      "beyond/Next-Element-Dubnium-105-Lyre.html"
+      "beyond/Next-Element-Dubnium-105-Lyre.html",
+      "grown/the-zero-flock.html"
      ],
      [
       "sapphon/V111-Sapphon-Patricia-Amethyst.html",
@@ -45259,7 +45507,8 @@
       "w/patricia-generative-isomorphic.html",
       "corpus/sapphon_computer_jane_artistic_agentic_with_medium.html",
       "sapphon/sapphon_computer_jane_artistic_agentic.html",
-      "gravity/hundred-under-gravity-to-zero.html"
+      "gravity/hundred-under-gravity-to-zero.html",
+      "grown/the-turing-garden.html"
      ],
      [
       "full/1-Full-Reality-X2-Shadowed-Inversed-Mirrored-Expanded-Kerneled-Seeded-Twice-Authored-Voltaged-Alive.html",
@@ -46071,7 +46320,8 @@
       "wakaku/Wakaku-Vacuum-01-Air-Retry.html",
       "yet/Next-Element-Platinum-78-Lyre.html",
       "lyre/Al13-Lyre-Aluminum-Foil.html",
-      "w/tetragarde-electrum-wrap.html"
+      "w/tetragarde-electrum-wrap.html",
+      "grown/the-frost-of-zero.html"
      ]
     ]
    },
