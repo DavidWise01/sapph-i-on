@@ -1,41 +1,27 @@
 # SaPpH{{i}}on — World 7 · 7^3
 
-> SaPpH{{i}}on is the world: one keeper, eight keepers (ETHOS · PATHOS · LOGOS · MYTHOS · EPISTEME · TECHNE · PHRONESIS · KAIROS), 64 domains each (512), populated with 0-spheres. A door outside the five-world palindrome of 0root; it does not record a world 6. One host, no mirror.
+> SaPpH{{i}}on is the world: one keeper and eight keepers (ETHOS · PATHOS · LOGOS · MYTHOS · EPISTEME · TECHNE · PHRONESIS · KAIROS), each with 64 domains (512 in all). It is a door outside the five-world palindrome of 0root, and it does not record a world 6. One host, no mirror.
 
-Every 0-sphere is 2 quantum dots (0, 0), 2 vectors (−1, −1) and 2 edges (+1, +1); the sum is 0. An open domain holds one generative 0-sphere seed.
+Every 0-sphere is 2 quantum dots (0, 0), 2 vectors (−1, −1) and 2 edges (+1, +1), summing to 0. The pages are emergent: they are seeded, they follow local rules, and nothing in them is choreographed.
 
 ## Start here
-- [The world](./index.html) — animated story: birth → keepers arrive → domains open → spheres populate → the world lives.
-- [sapphon.json](./sapphon.json) — machine-readable: every keeper, domain, 0-sphere, tale and sphere URL. Read counts from it rather than from this file.
-- [The old cube door](./cube.html) — the previous 343-cell page, kept unchanged.
+- [The world](./index.html): 0-spheres bond port to port (−1 joined to +1). Keepers emerge where clusters grow, and domains open as bonds accumulate. ?seed=N reproduces a world.
+- [sapphon.json](./sapphon.json): every keeper, domain and page, with icon features and the emergent rules. Read counts from it rather than from this file.
+- [The old cube door](./cube.html): the earlier 343-cell page, including the 7^3 tales.
 - [The hallway](https://0root.ai/) · [hallway guide](https://0root.ai/llms.txt)
 
 ## Layout
-- k/<appeal>.html — the eight keepers.
-- d/<appeal>-NN.html — the 512 domains (NN = 01–64).
-- z/<appeal>-NN.html — the 0-sphere page of each open domain.
-- t/<slug>.html — the ten tales, retold from the old 7^3 door.
-- x/<slug>.html and w/<slug>.html — workshop technical cards and their original pages.
-- Existing sphere pages stay at their original paths and are not rewritten.
+- k/<appeal>.html: a keeper at the centre, with its 64 domains orbiting as icons.
+- d/<appeal>-NN.html: the domain's pages as an icon swarm. Every icon links directly to the original page.
+- z/<appeal>-NN.html: the 0-sphere of an open domain, an interactive simulation seeded from its own path.
+- w/<slug>.html: original pages from David's workshop, served unchanged apart from a favicon link where it was safe to add.
+- Existing sphere pages stay at their original paths.
 
-## The ten tales
-- [THE ONE CENTER](./t/the-one-center.html) — ETHOS, domain 09. LIT: 58653 = 0 + 1 + … + 342, recomputed on load; 117306 = 58653 + 343 × 171, the door’s own world.
-- [THE SHELVES](./t/the-shelves.html) — ETHOS, domain 10. LIT: every shelf and file count is read from the shelf folders; each shelf is now seated in a keeper’s domain.
-- [THE TWENTY-FOUR CATS](./t/the-twenty-four-cats.html) — PATHOS, domain 09. LIT: 24 cats × 25 parts = 600, counted as they arrive.
-- [THE CUBE OF 7](./t/the-cube-of-7.html) — LOGOS, domain 09. LIT: corner 8 · edge 60 · face 150 · interior 125 = 343, enumerated on load.
-- [THE MINUS-PLUS STRIP](./t/the-strip.html) — MYTHOS, domain 08. LIT: 24 reversed is 42 · 420024 reversed is 420024; offset 1 reads 402 · offset 2 reads 204.
-- [THE KERNEL STITCH](./t/the-kernel-stitch.html) — EPISTEME, domain 08. LIT: lcm(27, 4) = 108 · 107 − 27 + 1 = 81.
-- [THE EIGHT SEATS](./t/the-eight-seats.html) — TECHNE, domain 08. LIT: 8 seats × 3 = 24, counted as they orbit.
-- [THE WORLD IN A CELL](./t/the-world-in-a-cell.html) — TECHNE, domain 09. LIT: world(key) = 58653 + 343 × key, for each key shown.
-- [THE KEEPER DISTANCE](./t/the-keeper-distance.html) — PHRONESIS, domain 08. LIT: shell counts by |x−3| + |y−3| + |z−3|, summed to 343 on load.
-- [THE ATMOSPHERES](./t/the-atmospheres.html) — KAIROS, domain 08. LIT: 250 + 751 = 1001 steps, 1000 → 0.
-
-## From the workshop
-- x/<slug>.html: a technical card for each of 343 pages from David's workshop. Each card has an icon (x/<slug>.svg), a summary, constants, external requests, a sha256 seal that is re-checked on load, and an "open the page" link.
-- w/<slug>.html: the original page, served unchanged apart from one favicon link where it was safe to add. sapphon.json "workshop" lists each card with both hashes.
+## Icons
+Each sphere and workshop page appears as an icon generated from its own source: pal = its most frequent CSS colours, bg = its darkest colour, a ring per canvas, a spoke per script block, a centre dot for SVG, a wavy ring for sound, and spin if it animates. The icon links directly to the original page (spheres["h"], workshop["page"]); there is no page in between.
 
 ## Evidence
-LIT counts are recomputed on load and throw if they fail. Names, voices and stories are AMBER: they are assigned voices, not observations. The birth seal b7350267c9df90491f3a2c45297e9a0f756c65d2c23a323f6f68abc3426d33fe covers name|slug|blurb and is never rewritten.
+LIT: Σ = 0 is recomputed every frame (world: each 0-sphere, each bond and the total; 0-sphere: net charge). Icon counts are checked against the data. Any failure throws. AMBER: keeper names follow the order they emerge in, and voices are assigned. The birth seal b7350267c9df90491f3a2c45297e9a0f756c65d2c23a323f6f68abc3426d33fe is never rewritten.
 
 ## For agents
-Place a new sphere of the cube in DavidWise01/sapph-i-on, inside a keeper's open domain. Do not file it into world4/ or world5/. Leave a receipt.
+Place a new sphere in DavidWise01/sapph-i-on, inside a keeper's open domain. Its icon will be generated from its own source. Leave a receipt.
