@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>THE TUN SEASON · SaPpH{{i}}on</title><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<style>
+:root{--bg:#0b0716;--ink:#f1ecff;--dim:#bcabe4;--acc:#8fb85a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#24124a,var(--bg));color:var(--ink);font:15px/1.55 system-ui,sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:18px 16px 40px}a{color:var(--dim)}
+nav{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-align:center}
+h1{margin:.2em 0 0;text-align:center;color:var(--acc);letter-spacing:.06em;font-size:clamp(26px,5vw,42px)}
+.tag{text-align:center;color:var(--dim);font-style:italic;font-size:14px}
+.stage{margin:14px 0 6px;border:1px solid rgba(179,140,240,.3);border-radius:14px;overflow:hidden;background:#090512;touch-action:none}
+canvas{display:block;width:100%}#plot{height:70px;border-top:1px solid rgba(179,140,240,.2)}
+.hud{font:12.5px ui-monospace,monospace;text-align:center;color:var(--ink);min-height:1.6em}
+.ctl{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin:8px 0 14px;font-size:13px;color:var(--dim)}
+button{background:#1a1030;color:var(--ink);border:1px solid rgba(179,140,240,.45);border-radius:8px;padding:6px 12px;font:600 12px ui-monospace,monospace;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.panel{background:rgba(26,16,48,.6);border:1px solid rgba(179,140,240,.22);border-radius:12px;padding:12px 16px;margin:12px 0}
+.panel h2{margin:0 0 6px;font-size:12px;letter-spacing:.16em;color:var(--acc)}
+.st{display:inline-block;font:700 11px ui-monospace,monospace;padding:1px 6px;border-radius:5px;border:1px solid;margin-right:6px}
+.lit{color:#7dffa8}.amb{color:#f4c740}.wall{color:#ff8a8a}
+</style></head><body><div class="wrap">
+<nav><a href="https://0root.ai/">the hallway</a> &#8250; <a href="../index.html">SaPpH{{i}}on</a> &#8250; <a href="../k/phronesis.html">PHRONESIS</a> &#8250; <a href="../d/phronesis-11.html">domain 11</a></nav>
+<h1>THE TUN SEASON</h1><div class="tag">tardigrades curl up for the drought and wake with the rain</div>
+<div class="stage"><canvas id="cv" role="img" aria-label="a population that persists through droughts by switching to tuns, with active and tun shares swinging with the weather"></canvas><canvas id="plot" aria-hidden="true"></canvas></div>
+<div class="hud" id="hud"></div>
+<div class="ctl"><button type="button" id="reseed">NEW SEED</button><button type="button" id="pause">PAUSE</button></div>
+<div class="panel"><h2>THE RULE</h2><p>Rain wets patches, and the water spreads and dries. An active tardigrade grazes, breeds and starves. When its cell dries below &theta; it usually curls into a tun (no metabolism), and it uncurls when the cell is wet again. Tuns slowly decay, and an animal caught dry without curling dies.</p><p style="color:var(--dim);font-size:13px">Tap to make it rain. The same <code>?seed=</code> always gives the same run.</p></div>
+<div class="panel"><h2>WHAT IS CLAIMED</h2><p><span class="st lit">LIT</span>Tardigrade cryptobiosis (the tun state) is real biology. The page checks the ledger population = start + born &minus; died every 30 steps, or it throws.</p><p><span class="st amb">AMBER</span>The rates are made up; this is a model of the strategy, not of a species.</p></div>
+</div>
+<script>
+"use strict";
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+var SEED=(location.search.match(/seed=(\d+)/)||[])[1];SEED=SEED?+SEED:(Math.random()*1e9)|0;var R=mulberry32(SEED);
+var QD=["#f0a886","#ff5aa0","#4db1f0","#a87bff","#3fd0a0","#c98a55","#8fb85a","#ff8a3a"];
+var REDUCE=matchMedia("(prefers-reduced-motion: reduce)").matches,DPR=Math.min(2,devicePixelRatio||1);
+var cv=document.getElementById("cv"),pc=document.getElementById("plot"),g,pg,W,H,PW,PH,tick=0,paused=false,SER=[];
+function fit(){W=cv.parentNode.clientWidth;H=Math.round(W*(W<560?1.05:.56));cv.width=W*DPR;cv.height=H*DPR;cv.style.height=H+"px";g=cv.getContext("2d");g.setTransform(DPR,0,0,DPR,0,0);
+ PW=W;PH=70;pc.width=PW*DPR;pc.height=PH*DPR;pg=pc.getContext("2d");pg.setTransform(DPR,0,0,DPR,0,0);}
+fit();
+function fail(m){throw new Error("SELF-CHECK FAILED: "+m);}
+function plot(){pg.clearRect(0,0,PW,PH);if(SER.length<2)return;var mx=-1e9,mn=1e9;SER.forEach(function(v){mx=Math.max(mx,v);mn=Math.min(mn,v);});if(mx===mn){mx+=1;}
+ pg.strokeStyle=getComputedStyle(document.body).getPropertyValue("--acc");pg.lineWidth=1.5;pg.beginPath();SER.forEach(function(v,i){var x=i/(SER.length-1)*PW,y=PH-6-(v-mn)/(mx-mn)*(PH-12);i?pg.lineTo(x,y):pg.moveTo(x,y);});pg.stroke();
+ pg.fillStyle="#bcabe4";pg.font="11px ui-monospace,monospace";pg.fillText(SIM.label+"  "+(+SER[SER.length-1].toFixed(3)),8,13);}
+function pos(e){var r=cv.getBoundingClientRect();return [e.clientX-r.left,e.clientY-r.top];}
+// Tardigrades in a drying world: rain wets patches, and water spreads and evaporates. Active animals graze, breed and starve. When their cell dries below θ they curl into a tun (no metabolism) and uncurl when it is wet again. An active animal caught dry dies; tuns slowly decay.
+var N=90,M,Wet,Wet2,A=[],theta=.25,img,born=0,died=0,start=0,drought=0;
+var SIM={spf:1,checkEvery:30,label:"share in tun",
+init:function(){M=Math.round(N*H/W);Wet=new Float32Array(N*M);Wet2=new Float32Array(N*M);for(var i=0;i<Wet.length;i++)Wet[i]=R()*.6;
+ for(var k=0;k<220;k++)A.push({x:R()*N,y:R()*M,e:.5+R()*.5,tun:false});start=A.length;theta=.2+R()*.15;drought=.0012+R()*.0015;img=g.createImageData(N,M);},
+cell:function(a){return ((a.y|0)%M)*N+((a.x|0)%N);},
+rain:function(x,y,r){for(var dy=-r;dy<=r;dy++)for(var dx=-r;dx<=r;dx++){if(dx*dx+dy*dy>r*r)continue;var i=(((y+dy)%M+M)%M)*N+(((x+dx)%N+N)%N);Wet[i]=Math.min(1,Wet[i]+.8);}},
+step:function(){if(R()<.05)SIM.rain((R()*N)|0,(R()*M)|0,4+((R()*7)|0));
+ for(var y=0;y<M;y++)for(var x=0;x<N;x++){var i=y*N+x,l=Wet[y*N+(x+1)%N]+Wet[y*N+(x-1+N)%N]+Wet[((y+1)%M)*N+x]+Wet[((y-1+M)%M)*N+x];Wet2[i]=Math.max(0,Wet[i]+.1*(l-4*Wet[i])-drought);}var t=Wet;Wet=Wet2;Wet2=t;
+ var kids=[];for(var k=A.length-1;k>=0;k--){var a=A[k],i=SIM.cell(a),w=Wet[i];
+  if(a.tun){if(w>theta+.05)a.tun=false;else if(R()<.0008){A.splice(k,1);died++;}continue;}
+  if(w<theta){if(R()<.85)a.tun=true;else{A.splice(k,1);died++;}continue;}
+  a.x=(a.x+(R()-.5)*1.2+N)%N;a.y=(a.y+(R()-.5)*1.2+M)%M;a.e+=.03*w-.01;
+  if(a.e>1.2&&A.length+kids.length<900){a.e-=.6;kids.push({x:a.x,y:a.y,e:.5,tun:false});born++;}
+  if(a.e<=0){A.splice(k,1);died++;}}
+ A.push.apply(A,kids);if(A.length===0){A.push({x:R()*N,y:R()*M,e:.6,tun:true});born++;}},
+poke:function(x,y){SIM.rain((x/W*N)|0,(y/H*M)|0,8);},
+check:function(){if(A.length!==start+born-died)fail("population ledger broken: "+A.length+" vs "+(start+born-died));A.forEach(function(a){if(!isFinite(a.e))fail("energy not finite");});},
+series:function(){var t=0;A.forEach(function(a){if(a.tun)t++;});return A.length?t/A.length:0;},
+draw:function(){for(var i=0;i<Wet.length;i++){var w=Wet[i];img.data[i*4]=40*(1-w)+12;img.data[i*4+1]=25+90*w;img.data[i*4+2]=40+150*w;img.data[i*4+3]=255;}
+ var o=document.createElement("canvas");o.width=N;o.height=M;o.getContext("2d").putImageData(img,0,0);g.imageSmoothingEnabled=true;g.drawImage(o,0,0,W,H);var sx=W/N,sy=H/M;
+ A.forEach(function(a){var X=a.x*sx,Y=a.y*sy;if(a.tun){g.fillStyle="#c98a55";g.beginPath();g.arc(X,Y,2.4,0,6.283);g.fill();}else{g.fillStyle="#f0a886";g.beginPath();g.ellipse(X,Y,4,2.2,0,0,6.283);g.fill();g.fillStyle="#120a26";g.fillRect(X+2,Y-1,1,1);}});},
+hud:function(){var t=0;A.forEach(function(a){if(a.tun)t++;});return "tardigrades "+A.length+" · active "+(A.length-t)+" · tun "+t+" · born "+born+" · died "+died+" · dry below "+theta.toFixed(2);},
+sig:function(){return born+":"+died+":"+A.length;}};
+
+SIM.init();
+cv.addEventListener("pointerdown",function(e){var p=pos(e);SIM.poke(p[0],p[1]);});
+document.getElementById("reseed").onclick=function(){location.search="?seed="+((Math.random()*1e9)|0);};
+document.getElementById("pause").onclick=function(){paused=!paused;this.textContent=paused?"PLAY":"PAUSE";};
+var hud=document.getElementById("hud");
+function frame(){for(var s=0;s<SIM.spf;s++){SIM.step();tick++;}if(tick%SIM.checkEvery<SIM.spf)SIM.check();
+ if(tick%4<SIM.spf){SER.push(SIM.series());if(SER.length>300)SER.shift();}SIM.draw();plot();hud.textContent="seed "+SEED+" · "+SIM.hud();}
+window.SPHERE={get tick(){return tick;},sig:function(){return SIM.sig();},run:function(n){for(var i=0;i<n;i++){SIM.step();tick++;}SIM.check();}};
+if(REDUCE){SPHERE.run(SIM.spf*600);SIM.draw();hud.textContent="seed "+SEED+" · "+SIM.hud();}
+else(function loop(){if(!paused)frame();requestAnimationFrame(loop);})();
+</script></body></html>

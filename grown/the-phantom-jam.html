@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>THE PHANTOM JAM · SaPpH{{i}}on</title><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<style>
+:root{--bg:#0b0716;--ink:#f1ecff;--dim:#bcabe4;--acc:#ff8a3a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#24124a,var(--bg));color:var(--ink);font:15px/1.55 system-ui,sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:18px 16px 40px}a{color:var(--dim)}
+nav{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-align:center}
+h1{margin:.2em 0 0;text-align:center;color:var(--acc);letter-spacing:.06em;font-size:clamp(26px,5vw,42px)}
+.tag{text-align:center;color:var(--dim);font-style:italic;font-size:14px}
+.stage{margin:14px 0 6px;border:1px solid rgba(179,140,240,.3);border-radius:14px;overflow:hidden;background:#090512;touch-action:none}
+canvas{display:block;width:100%}#plot{height:70px;border-top:1px solid rgba(179,140,240,.2)}
+.hud{font:12.5px ui-monospace,monospace;text-align:center;color:var(--ink);min-height:1.6em}
+.ctl{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin:8px 0 14px;font-size:13px;color:var(--dim)}
+button{background:#1a1030;color:var(--ink);border:1px solid rgba(179,140,240,.45);border-radius:8px;padding:6px 12px;font:600 12px ui-monospace,monospace;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.panel{background:rgba(26,16,48,.6);border:1px solid rgba(179,140,240,.22);border-radius:12px;padding:12px 16px;margin:12px 0}
+.panel h2{margin:0 0 6px;font-size:12px;letter-spacing:.16em;color:var(--acc)}
+.st{display:inline-block;font:700 11px ui-monospace,monospace;padding:1px 6px;border-radius:5px;border:1px solid;margin-right:6px}
+.lit{color:#7dffa8}.amb{color:#f4c740}.wall{color:#ff8a8a}
+</style></head><body><div class="wrap">
+<nav><a href="https://0root.ai/">the hallway</a> &#8250; <a href="../index.html">SaPpH{{i}}on</a> &#8250; <a href="../k/kairos.html">KAIROS</a> &#8250; <a href="../d/kairos-16.html">domain 16</a></nav>
+<h1>THE PHANTOM JAM</h1><div class="tag">a ring road twice round the dial, and jams from nowhere</div>
+<div class="stage"><canvas id="cv" role="img" aria-label="stop-and-go waves that travel backwards with no crash and no cause"></canvas><canvas id="plot" aria-hidden="true"></canvas></div>
+<div class="hud" id="hud"></div>
+<div class="ctl"><button type="button" id="reseed">NEW SEED</button><button type="button" id="pause">PAUSE</button></div>
+<div class="panel"><h2>THE RULE</h2><p>Each car speeds up by 1 (up to 5), brakes to the gap ahead, dawdles by 1 with probability p, and then moves. The road loops the dial twice, so one lap is 720&deg;.</p><p style="color:var(--dim);font-size:13px">Tap a car to make it stop for a moment. The same <code>?seed=</code> always gives the same run.</p></div>
+<div class="panel"><h2>WHAT IS CLAIMED</h2><p><span class="st lit">LIT</span>The Nagel&ndash;Schreckenberg model (1992). Every 10 steps the page checks one car per cell, speeds within 0&ndash;5 and a constant car count, or it throws.</p><p><span class="st amb">AMBER</span>The 720&deg; road is the site&rsquo;s two-lap dial.</p></div>
+</div>
+<script>
+"use strict";
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+var SEED=(location.search.match(/seed=(\d+)/)||[])[1];SEED=SEED?+SEED:(Math.random()*1e9)|0;var R=mulberry32(SEED);
+var QD=["#f0a886","#ff5aa0","#4db1f0","#a87bff","#3fd0a0","#c98a55","#8fb85a","#ff8a3a"];
+var REDUCE=matchMedia("(prefers-reduced-motion: reduce)").matches,DPR=Math.min(2,devicePixelRatio||1);
+var cv=document.getElementById("cv"),pc=document.getElementById("plot"),g,pg,W,H,PW,PH,tick=0,paused=false,SER=[];
+function fit(){W=cv.parentNode.clientWidth;H=Math.round(W*(W<560?1.05:.56));cv.width=W*DPR;cv.height=H*DPR;cv.style.height=H+"px";g=cv.getContext("2d");g.setTransform(DPR,0,0,DPR,0,0);
+ PW=W;PH=70;pc.width=PW*DPR;pc.height=PH*DPR;pg=pc.getContext("2d");pg.setTransform(DPR,0,0,DPR,0,0);}
+fit();
+function fail(m){throw new Error("SELF-CHECK FAILED: "+m);}
+function plot(){pg.clearRect(0,0,PW,PH);if(SER.length<2)return;var mx=-1e9,mn=1e9;SER.forEach(function(v){mx=Math.max(mx,v);mn=Math.min(mn,v);});if(mx===mn){mx+=1;}
+ pg.strokeStyle=getComputedStyle(document.body).getPropertyValue("--acc");pg.lineWidth=1.5;pg.beginPath();SER.forEach(function(v,i){var x=i/(SER.length-1)*PW,y=PH-6-(v-mn)/(mx-mn)*(PH-12);i?pg.lineTo(x,y):pg.moveTo(x,y);});pg.stroke();
+ pg.fillStyle="#bcabe4";pg.font="11px ui-monospace,monospace";pg.fillText(SIM.label+"  "+(+SER[SER.length-1].toFixed(3)),8,13);}
+function pos(e){var r=cv.getBoundingClientRect();return [e.clientX-r.left,e.clientY-r.top];}
+// Nagel–Schreckenberg traffic on a ring road that laps the dial twice (720°): accelerate by 1, brake to the gap ahead, dawdle with probability p, then move.
+var L=400,C=[],VMAX=5,p,flow=[],moved=0;
+var SIM={spf:1,checkEvery:10,label:"flow (cars passing a point per 20 steps)",
+init:function(){var n=Math.round(L*(.12+R()*.2));p=.1+R()*.25;var cells=[];for(var i=0;i<L;i++)cells.push(i);for(var i=L-1;i>0;i--){var j=(R()*(i+1))|0,t=cells[i];cells[i]=cells[j];cells[j]=t;}
+ cells.slice(0,n).sort(function(a,b){return a-b;}).forEach(function(x,i){C.push({x:x,v:(R()*VMAX)|0,id:i,hold:0});});},
+step:function(){var n=C.length;for(var i=0;i<n;i++){var c=C[i],nx=C[(i+1)%n],gap=(nx.x-c.x-1+L)%L;if(n===1)gap=L-1;
+  if(c.hold>0){c.hold--;c.v=0;continue;}c.v=Math.min(c.v+1,VMAX,gap);if(c.v>0&&R()<p)c.v--;}
+ for(var i=0;i<n;i++){var c=C[i];if(c.x+c.v>=L)moved++;c.x=(c.x+c.v)%L;}
+ var k=C.findIndex(function(c,i){return i>0&&c.x<C[i-1].x;});if(k>0)C=C.slice(k).concat(C.slice(0,k));
+ if(tick%20===0){flow.push(moved);moved=0;if(flow.length>100)flow.shift();}},
+poke:function(x,y){var best=null,bd=1e9;C.forEach(function(c){var q=SIM.xy(c.x),d=Math.hypot(q[0]-x,q[1]-y);if(d<bd){bd=d;best=c;}});if(best){best.hold=25;}},
+xy:function(x){var a=x/L*4*Math.PI-Math.PI/2,lap=x<L/2?0:1,R0=Math.min(W,H)*(lap?.30:.42);return [W/2+Math.cos(a)*R0,H/2+Math.sin(a)*R0];},
+check:function(){var seen={};C.forEach(function(c){if(seen[c.x])fail("two cars in one cell");seen[c.x]=1;if(c.v<0||c.v>VMAX)fail("speed out of range");});if(C.length!==Object.keys(seen).length)fail("car count changed");},
+series:function(){return flow.length?flow[flow.length-1]:0;},
+draw:function(){g.fillStyle="rgba(9,5,18,.5)";g.fillRect(0,0,W,H);g.strokeStyle="rgba(188,171,228,.25)";g.lineWidth=8;g.beginPath();for(var x=0;x<=L;x++){var q=SIM.xy(x%L);x?g.lineTo(q[0],q[1]):g.moveTo(q[0],q[1]);}g.stroke();g.lineWidth=1;
+ C.forEach(function(c){var q=SIM.xy(c.x);g.fillStyle=c.hold?"#f4c740":c.v===0?"#ff5aa0":c.v<3?"#ff8a3a":"#7dffa8";g.beginPath();g.arc(q[0],q[1],3.2,0,6.283);g.fill();});
+ g.fillStyle="#bcabe4";g.font="11px ui-monospace,monospace";g.textAlign="center";g.fillText("one lap of the road = 720°",W/2,H/2+4);},
+hud:function(){var st=C.filter(function(c){return c.v===0;}).length;return "cars "+C.length+" on "+L+" cells · density "+(C.length/L).toFixed(2)+" · dawdle p "+p.toFixed(2)+" · stopped "+st;},
+sig:function(){return C.slice(0,10).map(function(c){return c.x;}).join(",");}};
+
+SIM.init();
+cv.addEventListener("pointerdown",function(e){var p=pos(e);SIM.poke(p[0],p[1]);});
+document.getElementById("reseed").onclick=function(){location.search="?seed="+((Math.random()*1e9)|0);};
+document.getElementById("pause").onclick=function(){paused=!paused;this.textContent=paused?"PLAY":"PAUSE";};
+var hud=document.getElementById("hud");
+function frame(){for(var s=0;s<SIM.spf;s++){SIM.step();tick++;}if(tick%SIM.checkEvery<SIM.spf)SIM.check();
+ if(tick%4<SIM.spf){SER.push(SIM.series());if(SER.length>300)SER.shift();}SIM.draw();plot();hud.textContent="seed "+SEED+" · "+SIM.hud();}
+window.SPHERE={get tick(){return tick;},sig:function(){return SIM.sig();},run:function(n){for(var i=0;i<n;i++){SIM.step();tick++;}SIM.check();}};
+if(REDUCE){SPHERE.run(SIM.spf*600);SIM.draw();hud.textContent="seed "+SEED+" · "+SIM.hud();}
+else(function loop(){if(!paused)frame();requestAnimationFrame(loop);})();
+</script></body></html>

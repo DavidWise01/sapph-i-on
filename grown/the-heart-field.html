@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>THE HEART FIELD · SaPpH{{i}}on</title><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<style>
+:root{--bg:#0b0716;--ink:#f1ecff;--dim:#bcabe4;--acc:#ff5aa0}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#24124a,var(--bg));color:var(--ink);font:15px/1.55 system-ui,sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:18px 16px 40px}a{color:var(--dim)}
+nav{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-align:center}
+h1{margin:.2em 0 0;text-align:center;color:var(--acc);letter-spacing:.06em;font-size:clamp(26px,5vw,42px)}
+.tag{text-align:center;color:var(--dim);font-style:italic;font-size:14px}
+.stage{margin:14px 0 6px;border:1px solid rgba(179,140,240,.3);border-radius:14px;overflow:hidden;background:#090512;touch-action:none}
+canvas{display:block;width:100%}#plot{height:70px;border-top:1px solid rgba(179,140,240,.2)}
+.hud{font:12.5px ui-monospace,monospace;text-align:center;color:var(--ink);min-height:1.6em}
+.ctl{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin:8px 0 14px;font-size:13px;color:var(--dim)}
+button{background:#1a1030;color:var(--ink);border:1px solid rgba(179,140,240,.45);border-radius:8px;padding:6px 12px;font:600 12px ui-monospace,monospace;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.panel{background:rgba(26,16,48,.6);border:1px solid rgba(179,140,240,.22);border-radius:12px;padding:12px 16px;margin:12px 0}
+.panel h2{margin:0 0 6px;font-size:12px;letter-spacing:.16em;color:var(--acc)}
+.st{display:inline-block;font:700 11px ui-monospace,monospace;padding:1px 6px;border-radius:5px;border:1px solid;margin-right:6px}
+.lit{color:#7dffa8}.amb{color:#f4c740}.wall{color:#ff8a8a}
+</style></head><body><div class="wrap">
+<nav><a href="https://0root.ai/">the hallway</a> &#8250; <a href="../index.html">SaPpH{{i}}on</a> &#8250; <a href="../k/pathos.html">PATHOS</a> &#8250; <a href="../d/pathos-15.html">domain 15</a></nav>
+<h1>THE HEART FIELD</h1><div class="tag">rest, fire, recover &mdash; and the spirals come by themselves</div>
+<div class="stage"><canvas id="cv" role="img" aria-label="self-sustaining spiral waves, like re-entry in heart tissue"></canvas><canvas id="plot" aria-hidden="true"></canvas></div>
+<div class="hud" id="hud"></div>
+<div class="ctl"><button type="button" id="reseed">NEW SEED</button><button type="button" id="pause">PAUSE</button></div>
+<div class="panel"><h2>THE RULE</h2><p>A resting cell fires if at least &theta; of its 8 neighbours are firing. A firing cell then steps through K&minus;2 refractory states and back to rest. The seed sets K and &theta;, and the field starts from a few broken wave fragments.</p><p style="color:var(--dim);font-size:13px">Tap to fire a patch. The same <code>?seed=</code> always gives the same run.</p></div>
+<div class="panel"><h2>WHAT IS CLAIMED</h2><p><span class="st lit">LIT</span>The Greenberg&ndash;Hastings excitable medium (1978). Every step, the count in refractory state k must equal the previous count in state k&minus;1, or the page throws.</p><p><span class="st wall">WALL</span>A cartoon of excitable tissue, not a cardiac model.</p></div>
+</div>
+<script>
+"use strict";
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+var SEED=(location.search.match(/seed=(\d+)/)||[])[1];SEED=SEED?+SEED:(Math.random()*1e9)|0;var R=mulberry32(SEED);
+var QD=["#f0a886","#ff5aa0","#4db1f0","#a87bff","#3fd0a0","#c98a55","#8fb85a","#ff8a3a"];
+var REDUCE=matchMedia("(prefers-reduced-motion: reduce)").matches,DPR=Math.min(2,devicePixelRatio||1);
+var cv=document.getElementById("cv"),pc=document.getElementById("plot"),g,pg,W,H,PW,PH,tick=0,paused=false,SER=[];
+function fit(){W=cv.parentNode.clientWidth;H=Math.round(W*(W<560?1.05:.56));cv.width=W*DPR;cv.height=H*DPR;cv.style.height=H+"px";g=cv.getContext("2d");g.setTransform(DPR,0,0,DPR,0,0);
+ PW=W;PH=70;pc.width=PW*DPR;pc.height=PH*DPR;pg=pc.getContext("2d");pg.setTransform(DPR,0,0,DPR,0,0);}
+fit();
+function fail(m){throw new Error("SELF-CHECK FAILED: "+m);}
+function plot(){pg.clearRect(0,0,PW,PH);if(SER.length<2)return;var mx=-1e9,mn=1e9;SER.forEach(function(v){mx=Math.max(mx,v);mn=Math.min(mn,v);});if(mx===mn){mx+=1;}
+ pg.strokeStyle=getComputedStyle(document.body).getPropertyValue("--acc");pg.lineWidth=1.5;pg.beginPath();SER.forEach(function(v,i){var x=i/(SER.length-1)*PW,y=PH-6-(v-mn)/(mx-mn)*(PH-12);i?pg.lineTo(x,y):pg.moveTo(x,y);});pg.stroke();
+ pg.fillStyle="#bcabe4";pg.font="11px ui-monospace,monospace";pg.fillText(SIM.label+"  "+(+SER[SER.length-1].toFixed(3)),8,13);}
+function pos(e){var r=cv.getBoundingClientRect();return [e.clientX-r.left,e.clientY-r.top];}
+// Greenberg–Hastings excitable medium: rest (0) fires (1) if at least θ neighbours are firing; firing then runs through refractory states 2..K−1 and back to rest.
+var N=120,M,G,G2,K,TH,img,prevCounts;
+function counts(A){var c=new Array(K).fill(0);for(var i=0;i<A.length;i++)c[A[i]]++;return c;}
+var SIM={spf:1,checkEvery:1,label:"share of tissue firing",
+init:function(){M=Math.round(N*H/W);G=new Uint8Array(N*M);G2=new Uint8Array(N*M);K=6+((R()*6)|0);TH=1+((R()*2)|0);
+ for(var b=0;b<5;b++){var x0=(R()*N)|0,y0=(R()*M)|0,len=10+((R()*30)|0);for(var t=0;t<len;t++){var x=(x0+t)%N;for(var k=0;k<3;k++)G[((y0+k)%M)*N+x]=1+k;}}img=g.createImageData(N,M);prevCounts=counts(G);},
+step:function(){for(var y=0;y<M;y++)for(var x=0;x<N;x++){var i=y*N+x,v=G[i];if(v>0){G2[i]=(v+1)%K;continue;}var e=0;
+ for(var dy=-1;dy<=1;dy++)for(var dx=-1;dx<=1;dx++){if(!dx&&!dy)continue;if(G[((y+dy+M)%M)*N+(x+dx+N)%N]===1)e++;}G2[i]=e>=TH?1:0;}
+ var c=counts(G2);for(var k=2;k<K;k++)if(c[k]!==prevCounts[k-1])fail("refractory chain broken at state "+k);prevCounts=c;var t=G;G=G2;G2=t;},
+poke:function(x,y){var cx=(x/W*N)|0,cy=(y/H*M)|0;for(var dy=-2;dy<=2;dy++)for(var dx=-2;dx<=2;dx++){var i=((cy+dy+M)%M)*N+(cx+dx+N)%N;if(G[i]===0)G[i]=1;}prevCounts=counts(G);},
+check:function(){var c=counts(G),s=0;c.forEach(function(v){s+=v;});if(s!==G.length)fail("cells lost");},
+series:function(){var f=0;for(var i=0;i<G.length;i++)if(G[i]===1)f++;return f/G.length;},
+draw:function(){for(var i=0;i<G.length;i++){var v=G[i],r,gg,b;if(v===0){r=11;gg=7;b=22;}else if(v===1){r=255;gg=246;b=176;}else{var f=1-(v-1)/(K-1);r=255*f*.9+11;gg=90*f+7;b=160*f+22;}img.data[i*4]=r;img.data[i*4+1]=gg;img.data[i*4+2]=b;img.data[i*4+3]=255;}
+ var o=document.createElement("canvas");o.width=N;o.height=M;o.getContext("2d").putImageData(img,0,0);g.imageSmoothingEnabled=false;g.drawImage(o,0,0,W,H);},
+hud:function(){return "states "+K+" (1 firing, "+(K-2)+" refractory) · threshold "+TH+" · firing "+(SIM.series()*100).toFixed(2)+"%";},
+sig:function(){var s=0;for(var i=0;i<G.length;i++)s=(s*31+G[i])%1000000007;return K+":"+s;}};
+
+SIM.init();
+cv.addEventListener("pointerdown",function(e){var p=pos(e);SIM.poke(p[0],p[1]);});
+document.getElementById("reseed").onclick=function(){location.search="?seed="+((Math.random()*1e9)|0);};
+document.getElementById("pause").onclick=function(){paused=!paused;this.textContent=paused?"PLAY":"PAUSE";};
+var hud=document.getElementById("hud");
+function frame(){for(var s=0;s<SIM.spf;s++){SIM.step();tick++;}if(tick%SIM.checkEvery<SIM.spf)SIM.check();
+ if(tick%4<SIM.spf){SER.push(SIM.series());if(SER.length>300)SER.shift();}SIM.draw();plot();hud.textContent="seed "+SEED+" · "+SIM.hud();}
+window.SPHERE={get tick(){return tick;},sig:function(){return SIM.sig();},run:function(n){for(var i=0;i<n;i++){SIM.step();tick++;}SIM.check();}};
+if(REDUCE){SPHERE.run(SIM.spf*600);SIM.draw();hud.textContent="seed "+SEED+" · "+SIM.hud();}
+else(function loop(){if(!paused)frame();requestAnimationFrame(loop);})();
+</script></body></html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>THE SPEED OF EVERYONE · SaPpH{{i}}on</title><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<style>
+:root{--bg:#0b0716;--ink:#f1ecff;--dim:#bcabe4;--acc:#4db1f0}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#24124a,var(--bg));color:var(--ink);font:15px/1.55 system-ui,sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:18px 16px 40px}a{color:var(--dim)}
+nav{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-align:center}
+h1{margin:.2em 0 0;text-align:center;color:var(--acc);letter-spacing:.06em;font-size:clamp(26px,5vw,42px)}
+.tag{text-align:center;color:var(--dim);font-style:italic;font-size:14px}
+.stage{margin:14px 0 6px;border:1px solid rgba(179,140,240,.3);border-radius:14px;overflow:hidden;background:#090512;touch-action:none}
+canvas{display:block;width:100%}#plot{height:70px;border-top:1px solid rgba(179,140,240,.2)}
+.hud{font:12.5px ui-monospace,monospace;text-align:center;color:var(--ink);min-height:1.6em}
+.ctl{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin:8px 0 14px;font-size:13px;color:var(--dim)}
+button{background:#1a1030;color:var(--ink);border:1px solid rgba(179,140,240,.45);border-radius:8px;padding:6px 12px;font:600 12px ui-monospace,monospace;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.panel{background:rgba(26,16,48,.6);border:1px solid rgba(179,140,240,.22);border-radius:12px;padding:12px 16px;margin:12px 0}
+.panel h2{margin:0 0 6px;font-size:12px;letter-spacing:.16em;color:var(--acc)}
+.st{display:inline-block;font:700 11px ui-monospace,monospace;padding:1px 6px;border-radius:5px;border:1px solid;margin-right:6px}
+.lit{color:#7dffa8}.amb{color:#f4c740}.wall{color:#ff8a8a}
+</style></head><body><div class="wrap">
+<nav><a href="https://0root.ai/">the hallway</a> &#8250; <a href="../index.html">SaPpH{{i}}on</a> &#8250; <a href="../k/logos.html">LOGOS</a> &#8250; <a href="../d/logos-14.html">domain 14</a></nav>
+<h1>THE SPEED OF EVERYONE</h1><div class="tag">all discs start equal; collisions make a distribution</div>
+<div class="stage"><canvas id="cv" role="img" aria-label="the 2D Maxwell–Boltzmann speed distribution, built only from collisions"></canvas><canvas id="plot" aria-hidden="true"></canvas></div>
+<div class="hud" id="hud"></div>
+<div class="ctl"><button type="button" id="reseed">NEW SEED</button><button type="button" id="pause">PAUSE</button></div>
+<div class="panel"><h2>THE RULE</h2><p>Hard discs move in straight lines and collide elastically. Every disc starts at the same speed.</p><p style="color:var(--dim);font-size:13px">Tap to heat a region and watch the curve re-form at the new temperature. The same <code>?seed=</code> always gives the same run.</p></div>
+<div class="panel"><h2>WHAT IS CLAIMED</h2><p><span class="st lit">LIT</span>Elastic hard-disc dynamics. Total kinetic energy must stay constant to 1 part in 10<sup>6</sup>, or the page throws. The gold curve is f(v) = (v/kT)&middot;e<sup>&minus;v&sup2;/2kT</sup>.</p></div>
+</div>
+<script>
+"use strict";
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+var SEED=(location.search.match(/seed=(\d+)/)||[])[1];SEED=SEED?+SEED:(Math.random()*1e9)|0;var R=mulberry32(SEED);
+var QD=["#f0a886","#ff5aa0","#4db1f0","#a87bff","#3fd0a0","#c98a55","#8fb85a","#ff8a3a"];
+var REDUCE=matchMedia("(prefers-reduced-motion: reduce)").matches,DPR=Math.min(2,devicePixelRatio||1);
+var cv=document.getElementById("cv"),pc=document.getElementById("plot"),g,pg,W,H,PW,PH,tick=0,paused=false,SER=[];
+function fit(){W=cv.parentNode.clientWidth;H=Math.round(W*(W<560?1.05:.56));cv.width=W*DPR;cv.height=H*DPR;cv.style.height=H+"px";g=cv.getContext("2d");g.setTransform(DPR,0,0,DPR,0,0);
+ PW=W;PH=70;pc.width=PW*DPR;pc.height=PH*DPR;pg=pc.getContext("2d");pg.setTransform(DPR,0,0,DPR,0,0);}
+fit();
+function fail(m){throw new Error("SELF-CHECK FAILED: "+m);}
+function plot(){pg.clearRect(0,0,PW,PH);if(SER.length<2)return;var mx=-1e9,mn=1e9;SER.forEach(function(v){mx=Math.max(mx,v);mn=Math.min(mn,v);});if(mx===mn){mx+=1;}
+ pg.strokeStyle=getComputedStyle(document.body).getPropertyValue("--acc");pg.lineWidth=1.5;pg.beginPath();SER.forEach(function(v,i){var x=i/(SER.length-1)*PW,y=PH-6-(v-mn)/(mx-mn)*(PH-12);i?pg.lineTo(x,y):pg.moveTo(x,y);});pg.stroke();
+ pg.fillStyle="#bcabe4";pg.font="11px ui-monospace,monospace";pg.fillText(SIM.label+"  "+(+SER[SER.length-1].toFixed(3)),8,13);}
+function pos(e){var r=cv.getBoundingClientRect();return [e.clientX-r.left,e.clientY-r.top];}
+// Hard-disc gas: every disc starts at the same speed; elastic collisions share energy, and the speed histogram relaxes to the 2D Maxwell–Boltzmann form.
+var P=[],N,RAD=3.2,E0,PX0,PY0,hist=[];
+function ke(){var e=0;P.forEach(function(p){e+=.5*(p.vx*p.vx+p.vy*p.vy);});return e;}
+var SIM={spf:2,checkEvery:30,label:"distance from Maxwell–Boltzmann (L1)",
+init:function(){N=Math.round(Math.min(420,W*H/900));var v0=1.2+R();for(var i=0;i<N;i++){var a=R()*6.283;P.push({x:RAD+R()*(W-2*RAD),y:RAD+R()*(H-2*RAD),vx:Math.cos(a)*v0,vy:Math.sin(a)*v0});}E0=ke();},
+step:function(){var cs=RAD*4,grid={};P.forEach(function(p,i){p.x+=p.vx;p.y+=p.vy;if(p.x<RAD){p.x=RAD;p.vx=Math.abs(p.vx);}if(p.x>W-RAD){p.x=W-RAD;p.vx=-Math.abs(p.vx);}if(p.y<RAD){p.y=RAD;p.vy=Math.abs(p.vy);}if(p.y>H-RAD){p.y=H-RAD;p.vy=-Math.abs(p.vy);}
+  var k=((p.x/cs)|0)+","+((p.y/cs)|0);(grid[k]||(grid[k]=[])).push(i);});
+ P.forEach(function(p,i){var gx=(p.x/cs)|0,gy=(p.y/cs)|0;for(var dx=-1;dx<=1;dx++)for(var dy=-1;dy<=1;dy++){var L=grid[(gx+dx)+","+(gy+dy)];if(!L)continue;L.forEach(function(j){if(j<=i)return;var q=P[j],ddx=q.x-p.x,ddy=q.y-p.y,d2=ddx*ddx+ddy*ddy;if(d2>=4*RAD*RAD||d2===0)return;
+  var d=Math.sqrt(d2),nx=ddx/d,ny=ddy/d,rv=(q.vx-p.vx)*nx+(q.vy-p.vy)*ny;if(rv>=0)return;p.vx+=rv*nx;p.vy+=rv*ny;q.vx-=rv*nx;q.vy-=rv*ny;var ov=(2*RAD-d)/2;p.x-=nx*ov;p.y-=ny*ov;q.x+=nx*ov;q.y+=ny*ov;});}});},
+poke:function(x,y){P.forEach(function(p){if(Math.hypot(p.x-x,p.y-y)<60){p.vx*=1.6;p.vy*=1.6;}});E0=ke();},
+check:function(){var e=ke();if(Math.abs(e-E0)>1e-6*E0)fail("energy not conserved: "+e+" vs "+E0);},
+mb:function(){var T=E0/N,bins=24,vmax=4*Math.sqrt(T),h=new Array(bins).fill(0);P.forEach(function(p){var b=Math.min(bins-1,(Math.hypot(p.vx,p.vy)/vmax*bins)|0);h[b]++;});
+ var th=[],dv=vmax/bins;for(var b=0;b<bins;b++){var v=(b+.5)*dv;th.push(N*dv*v/T*Math.exp(-v*v/(2*T)));}return [h,th,vmax];},
+series:function(){var m=SIM.mb(),s=0;for(var b=0;b<m[0].length;b++)s+=Math.abs(m[0][b]-m[1][b]);return s/N;},
+draw:function(){g.fillStyle="#090512";g.fillRect(0,0,W,H);P.forEach(function(p){var s=Math.hypot(p.vx,p.vy);g.fillStyle=QD[Math.min(7,(s/Math.sqrt(E0/N)*2)|0)];g.beginPath();g.arc(p.x,p.y,RAD,0,6.283);g.fill();});
+ var m=SIM.mb(),bw=Math.min(W*.35,260),bh=H*.3,ox=W-bw-12,oy=12,mx=Math.max.apply(null,m[0].concat(m[1]));g.fillStyle="rgba(18,10,38,.8)";g.fillRect(ox-6,oy-4,bw+12,bh+20);
+ m[0].forEach(function(c,b){g.fillStyle="#a87bff";g.fillRect(ox+b*bw/m[0].length,oy+bh-c/mx*bh,bw/m[0].length-1,c/mx*bh);});
+ g.strokeStyle="#f4c740";g.beginPath();m[1].forEach(function(c,b){var X=ox+(b+.5)*bw/m[1].length,Y=oy+bh-c/mx*bh;b?g.lineTo(X,Y):g.moveTo(X,Y);});g.stroke();g.fillStyle="#bcabe4";g.font="10px ui-monospace,monospace";g.fillText("speeds vs Maxwell–Boltzmann",ox,oy+bh+12);},
+hud:function(){return "discs "+N+" · energy "+ke().toFixed(3)+" (fixed) · kT "+(E0/N).toFixed(3)+" · L1 from MB "+SIM.series().toFixed(3);},
+sig:function(){return P.slice(0,6).map(function(p){return Math.round(p.x)+","+Math.round(p.y);}).join("|");}};
+
+SIM.init();
+cv.addEventListener("pointerdown",function(e){var p=pos(e);SIM.poke(p[0],p[1]);});
+document.getElementById("reseed").onclick=function(){location.search="?seed="+((Math.random()*1e9)|0);};
+document.getElementById("pause").onclick=function(){paused=!paused;this.textContent=paused?"PLAY":"PAUSE";};
+var hud=document.getElementById("hud");
+function frame(){for(var s=0;s<SIM.spf;s++){SIM.step();tick++;}if(tick%SIM.checkEvery<SIM.spf)SIM.check();
+ if(tick%4<SIM.spf){SER.push(SIM.series());if(SER.length>300)SER.shift();}SIM.draw();plot();hud.textContent="seed "+SEED+" · "+SIM.hud();}
+window.SPHERE={get tick(){return tick;},sig:function(){return SIM.sig();},run:function(n){for(var i=0;i<n;i++){SIM.step();tick++;}SIM.check();}};
+if(REDUCE){SPHERE.run(SIM.spf*600);SIM.draw();hud.textContent="seed "+SEED+" · "+SIM.hud();}
+else(function loop(){if(!paused)frame();requestAnimationFrame(loop);})();
+</script></body></html>
