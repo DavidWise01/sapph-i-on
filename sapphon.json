@@ -27,10 +27,10 @@
  "counts": {
   "keepers": 8,
   "domains": 512,
-  "domains_populated": 331,
-  "domains_open": 181,
-  "spheres": 1730,
-  "zero_spheres": 181,
+  "domains_populated": 341,
+  "domains_open": 171,
+  "spheres": 1740,
+  "zero_spheres": 171,
   "balance": 0,
   "workshop": 343
  },
@@ -4662,24 +4662,74 @@
     },
     {
      "n": 35,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "STAMPS OF THE CHARTER",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Stamps of the Charter",
+       "h": "grown/stamps-of-the-charter.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/stamps-of-the-charter.html",
+       "grown": true,
+       "emerges": "a postal network whose paved trunk routes cross the old caste line",
+       "label": "LIT · MODEL · INVENTED",
+       "icon": {
+        "pal": [
+         "#2a2a2a",
+         "#d9d2c0",
+         "#b0281c",
+         "#1f5a8a"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-09",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/ethos-35.html",
-     "zero_page": "z/ethos-35.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-35.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-35.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 36,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "OUTWARD",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Outward",
+       "h": "grown/outward.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/outward.html",
+       "grown": true,
+       "emerges": "new colonies wherever the wind sets a tun and a diatom together",
+       "label": "LIT · MODEL · INVENTED",
+       "icon": {
+        "pal": [
+         "#ffcf3a",
+         "#e8492e",
+         "#f4f1e6",
+         "#3fc46a"
+        ],
+        "bg": "#0f1b3d",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-10",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/ethos-36.html",
-     "zero_page": "z/ethos-36.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-36.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-36.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -10379,13 +10429,38 @@
     },
     {
      "n": 35,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE DSUP CODEX",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Dsup Codex",
+       "h": "grown/the-dsup-codex.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-dsup-codex.html",
+       "grown": true,
+       "emerges": "one ancestor recovered from two drifted texts",
+       "label": "LIT · MODEL · INVENTED",
+       "icon": {
+        "pal": [
+         "#7a1f1f",
+         "#f7f1e3",
+         "#cdbfa0",
+         "#1e5a8a"
+        ],
+        "bg": "#1e1a16",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-10",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-35.html",
-     "zero_page": "z/pathos-35.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-35.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-35.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -15213,24 +15288,72 @@
     },
     {
      "n": 37,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE SIGNAL",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Signal",
+       "h": "grown/the-signal.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-signal.html",
+       "grown": true,
+       "emerges": "a spectral peak rising out of noise: the chytrid burst period",
+       "label": "LIT · MODEL · INVENTED",
+       "icon": {
+        "pal": [
+         "#9dff9d",
+         "#ffcf5a"
+        ],
+        "bg": "#020502",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-11",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/logos-37.html",
-     "zero_page": "z/logos-37.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-37.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-37.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 38,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE RED QUEEN PANEL",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Red Queen Panel",
+       "h": "grown/the-red-queen-panel.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-red-queen-panel.html",
+       "grown": true,
+       "emerges": "resistance alleles cycling with no lasting winner",
+       "label": "LIT · MODEL · INVENTED",
+       "icon": {
+        "pal": [
+         "#e9c46a",
+         "#f2e6c8",
+         "#c9952b",
+         "#1f5aa8"
+        ],
+        "bg": "#2a1a0a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-11",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/logos-38.html",
-     "zero_page": "z/logos-38.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-38.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-38.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -19351,8 +19474,7 @@
         "pal": [
          "#f1e8d4",
          "#a51d1d",
-         "#cbbd9d",
-         "#7ff9ff"
+         "#cbbd9d"
         ],
         "bg": "#1a1612",
         "canvas": 1,
@@ -19444,24 +19566,73 @@
     },
     {
      "n": 32,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE ARK-RAFT",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Ark-Raft",
+       "h": "grown/the-ark-raft.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-ark-raft.html",
+       "grown": true,
+       "emerges": "an inlaid raft picture from scraps, no designer",
+       "label": "LIT · MODEL · INVENTED",
+       "icon": {
+        "pal": [
+         "#e8c18a",
+         "#f0e2c8",
+         "#5a3820",
+         "#7a3e16"
+        ],
+        "bg": "#3a2412",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-13",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-32.html",
-     "zero_page": "z/mythos-32.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-32.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-32.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 33,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE SKY OVER THE RIM",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Sky over the Rim",
+       "h": "grown/the-sky-over-the-rim.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-sky-over-the-rim.html",
+       "grown": true,
+       "emerges": "the Martian sky wheeling round a pole near Deneb",
+       "label": "LIT · MODEL · INVENTED",
+       "icon": {
+        "pal": [
+         "#d4b04a",
+         "#e8dcb8",
+         "#1a2a4d"
+        ],
+        "bg": "#0e1a33",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-13",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-33.html",
-     "zero_page": "z/mythos-33.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-33.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-33.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -35568,8 +35739,7 @@
         "pal": [
          "#d21f1f",
          "#efe6d0",
-         "#8a8170",
-         "#7ff9ff"
+         "#8a8170"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -35662,13 +35832,37 @@
     },
     {
      "n": 32,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "QUARANTINE FINDINGS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Quarantine Findings",
+       "h": "grown/quarantine-findings.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/quarantine-findings.html",
+       "grown": true,
+       "emerges": "a conclusion written by the data, not in advance",
+       "label": "LIT · MODEL · INVENTED",
+       "icon": {
+        "pal": [
+         "#0a6eb4",
+         "#e6ebf0",
+         "#b0281c"
+        ],
+        "bg": "#1b2a3a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-14",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-32.html",
-     "zero_page": "z/phronesis-32.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-32.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-32.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -41190,8 +41384,7 @@
         "pal": [
          "#1d3f8a",
          "#e9ece9",
-         "#cfd6df",
-         "#7ff9ff"
+         "#cfd6df"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -41248,24 +41441,74 @@
     },
     {
      "n": 38,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE CAPILLARY LINE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Capillary Line",
+       "h": "grown/the-capillary-line.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-capillary-line.html",
+       "grown": true,
+       "emerges": "a transit network with interchanges, planned by one greedy rule; the Kinline",
+       "label": "LIT · MODEL · INVENTED",
+       "icon": {
+        "pal": [
+         "#e3242b",
+         "#0098d4",
+         "#00843d",
+         "#ffd300"
+        ],
+        "bg": "#1a1a1a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-14",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/kairos-38.html",
-     "zero_page": "z/kairos-38.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-38.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-38.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 39,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "FIELD NOTES OUTWARD",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Field Notes Outward",
+       "h": "grown/field-notes-outward.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/field-notes-outward.html",
+       "grown": true,
+       "emerges": "belief and truth drifting apart and re-converging at landmarks",
+       "label": "LIT · MODEL · INVENTED",
+       "icon": {
+        "pal": [
+         "#2d2a24",
+         "#f3ecd8",
+         "#7a5a2a",
+         "#bfb294"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-15",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/kairos-39.html",
-     "zero_page": "z/kairos-39.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-39.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-39.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -41555,8 +41798,8 @@
   "world": 1,
   "keepers": 8,
   "domains": 512,
-  "zero_spheres": 181,
-  "generated_total": 790,
+  "zero_spheres": 171,
+  "generated_total": 780,
   "groups": 88
  },
  "workshop": [
@@ -49826,7 +50069,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1730
+   "pages": 1740
   },
   "list": [
    {
@@ -51777,7 +52020,8 @@
       "w/gravity-torus.html",
       "nests/nested_decoherence_v2.html",
       "w/gravity-line.html",
-      "w/toroids-i.html"
+      "w/toroids-i.html",
+      "grown/stamps-of-the-charter.html"
      ]
     ]
    },
@@ -51791,14 +52035,16 @@
       "w/toroids-ii.html",
       "w/toroids-iii.html",
       "scale/Scale-Atom-Full-Mandel.html",
-      "scale/Zoom-Factions-Scale-24.html"
+      "scale/Zoom-Factions-Scale-24.html",
+      "grown/outward.html"
      ],
      [
       "w/box-toroid-fib-bulbs.html",
       "stewards/logos.html",
       "scale/Scale-Into-Light-Fixed.html",
       "gold/nail-sheet-gold-then-silver.html",
-      "w/diamond-in-diamond-2-sapphires-2-black-diamonds.html"
+      "w/diamond-in-diamond-2-sapphires-2-black-diamonds.html",
+      "grown/the-dsup-codex.html"
      ],
      [
       "sapphon/hermes_sapphon.html",
@@ -51829,14 +52075,16 @@
       "w/walkdown-00-to-planck-every-nm-crossover.html",
       "next/Next-Evo-512-Full.html",
       "forth/Next-Element-Erbium-68-Lyre.html",
-      "forth/Next-Element-Gadolinium-64-Lyre.html"
+      "forth/Next-Element-Gadolinium-64-Lyre.html",
+      "grown/the-signal.html"
      ],
      [
       "w/lab-033-full-capacity-toroid-motherboard-kernel.html",
       "full/Clean-Full-Cobalt-Shell-0x11.html",
       "one/Integrated-One-Earth-Scalar-PINNED-0xISO.html",
       "one/Integrated-One-Earth-Scalar-ULTIMATE-SYMMETRY-ONLY.html",
-      "sapphon/Integrated-One-Earth-Scalar-PATRICIA-SAPPHON-000-P-S-1.html"
+      "sapphon/Integrated-One-Earth-Scalar-PATRICIA-SAPPHON-000-P-S-1.html",
+      "grown/the-red-queen-panel.html"
      ]
     ]
    },
@@ -51891,14 +52139,16 @@
       "w/series1-toroid.html",
       "yet/Next-Element-Thallium-81-Lyre.html",
       "stewards/mythos.html",
-      "ahead/Next-Phase-Plasma-Mitosis.html"
+      "ahead/Next-Phase-Plasma-Mitosis.html",
+      "grown/the-ark-raft.html"
      ],
      [
       "beyond/Next-Element-Bohrium-107-Lyre.html",
       "domains/mythos.html",
       "still/Next-Element-Neptunium-93-Lyre.html",
       "still/Next-Element-Protactinium-91-Lyre.html",
-      "farther/Next-Element-Manganese-25.html"
+      "farther/Next-Element-Manganese-25.html",
+      "grown/the-sky-over-the-rim.html"
      ]
     ]
    },
@@ -51913,13 +52163,15 @@
       "w/250-elements-5x5.html",
       "ahead/Next-Element-Promethium-61-Lyre.html",
       "dots/Tail-Cypher-Mutated-Dot.html",
-      "full/FULL-Purple30-Black5-Blue30-Black5-Red30-Power-Tower.html"
+      "full/FULL-Purple30-Black5-Blue30-Black5-Red30-Power-Tower.html",
+      "grown/quarantine-findings.html"
      ],
      [
       "nests/Nested-Hamilton-Slexov.html",
       "sapphon/1-QD-Planck-1-25MB-Sapphon-0-25MB.html",
       "toroid/1-Toroid-Prim-Particles-X8-Phase-Shift-X4-Anisotropic-Div128.html",
-      "toroid/1-Toroid-Prim-X8-X4-Div128-Scaled-13-8B.html"
+      "toroid/1-Toroid-Prim-X8-X4-Div128-Scaled-13-8B.html",
+      "grown/the-capillary-line.html"
      ],
      [
       "sapphon/sapphon_computer_state_space.html",
@@ -51958,7 +52210,8 @@
       "one/Amethyst-13-8B-Compressed-To-One-QD-Noble.html",
       "onward/V120-Next-Gen-Gen0.html",
       "plus/Pair-Entangled-1QD-Amethyst-Noble-Plus-1QD-Cobalt-PPMMMPP.html",
-      "spheres/the-surface.html"
+      "spheres/the-surface.html",
+      "grown/field-notes-outward.html"
      ]
     ]
    },

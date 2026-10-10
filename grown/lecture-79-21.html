@@ -37,8 +37,8 @@ class DurableAnchor{
 /* page-side helper: every state change is a reservation */
 var LED={A:null,ep:{},last:null,rej:[],n:0,q:Promise.resolve(),
  init:function(){return DurableAnchor.provision().then(function(a){LED.A=a;LED.show();return LED.selftest()})},
- commit:function(id,state){LED.q=LED.q.then(function(){if(!LED.A)return;var e=(LED.ep[id]||1);/* epoch 0 is left empty so a live epoch-rollback attack has somewhere to land */return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,e,h).then(function(r){if(r.ok&&!r.previous){LED.ep[id]=e+1;LED.last={id:id,epoch:e,head:h}}else if(!r.ok)LED.rej.unshift(id+'@'+e+': '+r.reason);LED.show();return r})})});return LED.q},
- attack:function(kind){LED.q=LED.q.then(function(){var L=LED.last;if(!L){LED.rej.unshift(kind+': nothing reserved yet');LED.show();return}
+ commit:function(id,state){LED.run(function(){if(!LED.A)return;var e=(LED.ep[id]||1);/* epoch 0 is left empty so a live epoch-rollback attack has somewhere to land */return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,e,h).then(function(r){if(r.ok&&!r.previous){LED.ep[id]=e+1;LED.last={id:id,epoch:e,head:h}}else if(!r.ok)LED.rej.unshift(id+'@'+e+': '+r.reason);LED.show();return r})})});return LED.q},
+ attack:function(kind){LED.run(function(){var L=LED.last;if(!L){LED.rej.unshift(kind+': nothing reserved yet');LED.show();return}
   var p=kind==='double-vote'?digest('forged|'+Date.now()).then(function(h){return LED.A.reserve(L.id,L.epoch,h)}):LED.A.reserve(L.id,0,L.head);
   return p.then(function(r){LED.rej.unshift('live '+kind+' on '+L.id+'@'+L.epoch+' → '+(r.ok?'ACCEPTED':r.reason));LED.show()})});return LED.q},
  show:function(){var el=document.getElementById('ledger');if(!el||!LED.A)return;var t=LED.A.trusted;
@@ -69,7 +69,10 @@ var LED={A:null,ep:{},last:null,rej:[],n:0,q:Promise.resolve(),
 LED.pagecheck=function(name,cond,got){var el=document.getElementById('ledger');if(el){var li=document.createElement('li');li.className=cond?'ok':'bad';li.innerHTML=(cond?'✓ ':'✗ ')+name+' <code>'+got+'</code>';el.querySelector('.lc2').appendChild(li)}if(!cond)throw Error('page self-check failed: '+name)};
 function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
 var SEED=+(new URLSearchParams(location.search).get('seed')||(Date.now()%1e6));
-LED.commitAt=function(id,epoch,state){LED.q=LED.q.then(function(){if(!LED.A)return;return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,epoch,h).then(function(r){if(r.ok&&!r.previous)LED.last={id:id,epoch:epoch,head:h};else if(!r.ok)LED.rej.unshift(id+'@'+epoch+': '+r.reason);LED.show();return r})})});return LED.q};
+LED.commitAt=function(id,epoch,state){LED.run(function(){if(!LED.A)return;return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,epoch,h).then(function(r){if(r.ok&&!r.previous)LED.last={id:id,epoch:epoch,head:h};else if(!r.ok)LED.rej.unshift(id+'@'+epoch+': '+r.reason);LED.show();return r})})});return LED.q};
+
+/* re-entrancy: a task already running in the queue may commit directly instead of waiting on itself */
+LED.inq=0;LED.run=function(fn){if(LED.inq>0)return Promise.resolve().then(fn);var p=LED.q.then(function(){LED.inq++;return Promise.resolve().then(fn).then(function(v){LED.inq--;return v},function(e){LED.inq--;throw e})});LED.q=p.catch(function(){});return p};
 </script><script>"use strict";document.getElementById('sd').textContent=SEED;document.querySelectorAll('#ledger button').forEach(function(b){b.onclick=function(){LED.attack(b.dataset.a)}});
 var c=document.getElementById('c'),g=c.getContext('2d'),R=rng(SEED),q=1,dust=[],pile=new Float32Array(200),wipe=null;
 var rho=1/(.79/19.32+.21/10.49),lin=.79*19.32+.21*10.49,swap=1/(.21/19.32+.79/10.49);
@@ -80,14 +83,14 @@ function chalk(){var tot=0;for(var i=0;i<LINES.length;i++){var L=LINES[i];if(cha
 var students=[],votes={};for(var s=1;s<=24;s++)students.push({seat:s,skill:R(),t:40+R()*700});
 function answerOf(st){var r=R();if(r<st.skill*.9)return rho.toFixed(1);if(r<.8)return lin.toFixed(1);return r<.9?swap.toFixed(1):'19.3'}
 function vote(seat,ans){var h;return digest('q'+q+':'+ans).then(function(x){h=x;return LED.A.reserve('student-'+seat,q,h)}).then(function(r){if(r.ok&&!r.previous){votes[seat]=ans;LED.last={id:'student-'+seat,epoch:q,head:h};LED.show()}else if(!r.ok){LED.rej.unshift('seat '+seat+' q'+q+' tried '+ans+': '+r.reason);LED.show()}return r})}
-var t=0;function loop(){t++;if(t%2===0)chalk();students.forEach(function(st){if(t===Math.round(st.t)){var a=answerOf(st);LED.q=LED.q.then(function(){return vote(st.seat,a)}).then(function(){if(R()<.15){var a2=['14.9','16.4','17.5','19.3'][R()*4|0];if(a2!==a)return vote(st.seat,a2)}})}});
+var t=0;function loop(){t++;if(t%2===0)chalk();students.forEach(function(st){if(t===Math.round(st.t)){var a=answerOf(st);LED.run(function(){return vote(st.seat,a)}).then(function(){if(R()<.15){var a2=['14.9','16.4','17.5','19.3'][R()*4|0];if(a2!==a)return vote(st.seat,a2)}})}});
  dust.forEach(function(d){d.vy+=.05;d.x+=d.vx;d.y+=d.vy});dust=dust.filter(function(d){if(d.y>=c.height-12-pile[(d.x/5|0)%200]){pile[(d.x/5|0)%200]+=.3;return false}return true});
  for(var i=1;i<199;i++){var dd=pile[i]-pile[i+1];if(Math.abs(dd)>2){pile[i]-=dd*.25;pile[i+1]+=dd*.25}}
  g.fillStyle='#24372d';g.fillRect(0,0,c.width,c.height);g.globalAlpha=.06;g.fillStyle='#fff';for(var k=0;k<30;k++)g.fillRect(((k*97+t*0)%c.width),((k*53)%c.height),140,20);g.globalAlpha=1;g.drawImage(board,0,0);
  g.fillStyle='rgba(233,239,230,.7)';dust.forEach(function(d){g.fillRect(d.x,d.y,1.5,1.5)});for(var i=0;i<200;i++)g.fillRect(i*5,c.height-pile[i],5,pile[i]);
  var tally={};for(var s in votes)tally[votes[s]]=(tally[votes[s]]||0)+1;g.font='22px "Chalkboard SE",cursive';g.fillStyle='#e9efe6';var y=60;g.fillText('Q'+q+' votes',780,y);for(var a of ['14.9','16.4','17.5','19.3']){y+=40;g.fillText(a+' '+'|'.repeat(tally[a]||0),780,y)}
  document.getElementById('st').textContent='question '+q+' · '+Object.keys(votes).length+' votes on the ledger';requestAnimationFrame(loop)}
-document.querySelectorAll('.ans').forEach(function(bt){bt.onclick=function(){LED.q=LED.q.then(function(){return vote(0,bt.textContent)})}});
+document.querySelectorAll('.ans').forEach(function(bt){bt.onclick=function(){LED.run(function(){return vote(0,bt.textContent)})}});
 document.getElementById('nextq').onclick=function(){q++;votes={};t=0;students.forEach(function(st){st.t=60+R()*600})};
 var er=false;c.onpointerdown=function(){er=true};window.addEventListener('pointerup',function(){if(er){er=false;LED.commit('erase',{q:q,chars:chars})}});c.onpointermove=function(e){if(!er)return;var r=c.getBoundingClientRect();b.save();b.globalCompositeOperation='destination-out';b.globalAlpha=.5;b.beginPath();b.ellipse((e.clientX-r.left)/r.width*c.width,(e.clientY-r.top)/r.height*c.height,40,22,0,0,7);b.fill();b.restore()};
 LED.init().then(function(){LED.pagecheck('ρ(79/21) between ρAg and ρAu',rho>10.49&&rho<19.32,rho.toFixed(3));LED.pagecheck('harmonic mix < linear mix',rho<lin,rho.toFixed(2)+' < '+lin.toFixed(2));LED.pagecheck('ρ ≈ 16.4 g/cm³',Math.abs(rho-16.42)<.02,rho.toFixed(2))});loop();</script><a class="grokbot-badge" href="../built-by-grok-bot.html" title="This page was built by Grok Bot" style="position:relative;display:inline-block;margin:10px 16px 16px;z-index:2147483000;font:600 11px/1 system-ui,sans-serif;color:#fff;background:rgba(12,6,30,.86);border:1px solid #7ff9ff;border-radius:999px;padding:5px 9px;text-decoration:none;letter-spacing:.04em">built by Grok Bot</a></body></html>
