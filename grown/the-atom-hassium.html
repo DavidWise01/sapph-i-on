@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HASSIUM &middot; Z 108 · SaPpH{{i}}on</title><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<style>
+:root{--bg:#0b0716;--ink:#f1ecff;--dim:#bcabe4;--acc:#ff5aa0}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#24124a,var(--bg));color:var(--ink);font:15px/1.55 system-ui,sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:18px 16px 40px}a{color:var(--dim)}
+nav{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-align:center}
+h1{margin:.2em 0 0;text-align:center;color:var(--acc);letter-spacing:.06em;font-size:clamp(26px,5vw,42px)}
+.tag{text-align:center;color:var(--dim);font-style:italic;font-size:14px}
+.stage{margin:14px 0 6px;border:1px solid rgba(179,140,240,.3);border-radius:14px;overflow:hidden;background:#090512;touch-action:none}
+canvas{display:block;width:100%}#plot{height:70px;border-top:1px solid rgba(179,140,240,.2)}
+.hud{font:12.5px ui-monospace,monospace;text-align:center;color:var(--ink);min-height:1.6em}
+.ctl{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin:8px 0 14px;font-size:13px;color:var(--dim)}
+button{background:#1a1030;color:var(--ink);border:1px solid rgba(179,140,240,.45);border-radius:8px;padding:6px 12px;font:600 12px ui-monospace,monospace;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.panel{background:rgba(26,16,48,.6);border:1px solid rgba(179,140,240,.22);border-radius:12px;padding:12px 16px;margin:12px 0}
+.panel h2{margin:0 0 6px;font-size:12px;letter-spacing:.16em;color:var(--acc)}
+.st{display:inline-block;font:700 11px ui-monospace,monospace;padding:1px 6px;border-radius:5px;border:1px solid;margin-right:6px}
+.lit{color:#7dffa8}.amb{color:#f4c740}.wall{color:#ff8a8a}
+</style></head><body><div class="wrap">
+<nav><a href="https://0root.ai/">the hallway</a> &#8250; <a href="../index.html">SaPpH{{i}}on</a> &#8250; <a href="../k/pathos.html">PATHOS</a> &#8250; <a href="../d/pathos-22.html">domain 22</a></nav>
+<h1>HASSIUM &middot; Z 108</h1><div class="tag">Hs, 7s2 outermost, in a 10-shell frame</div>
+<div class="stage"><canvas id="cv" role="img" aria-label="a living hassium atom: random excitations, relaxations and a flicker of photons"></canvas><canvas id="plot" aria-hidden="true"></canvas></div>
+<div class="hud" id="hud"></div>
+<div class="ctl"><button type="button" id="reseed">NEW SEED</button><button type="button" id="pause">PAUSE</button></div>
+<div class="panel"><h2>THE RULE</h2><p>108 electrons sit in their real ground-state shells (K 2 &middot; L 8 &middot; M 18 &middot; N 32 &middot; O 32 &middot; P 14 &middot; Q 2 &middot; 8 0 &middot; 9 0 &middot; 10 0). Each orbits and jitters as an agent. Heat or a tap lifts one into a higher shell (up to shell 10); it relaxes back and emits a photon.</p><p style="color:var(--dim);font-size:13px">Tap near an electron to excite it. The same <code>?seed=</code> always gives the same run.</p></div>
+<div class="panel"><h2>WHAT IS CLAIMED</h2><p><span class="st lit">LIT</span>Z = 108, Hs, Hassium. Standard atomic weight 269 (mass number of the longest-lived isotope). Group 8, period 7, d-block.</p><p><span class="st amb">AMBER</span>Ground-state configuration 1s2 2s2 2p6 3s2 3p6 4s2 3d10 4p6 5s2 4d10 5p6 6s2 4f14 5d10 6p6 5f14 6d6 7s2 (predicted, not measured; verified 2026-10-10 against the Wikipedia element infobox data, <a href="https://en.wikipedia.org/wiki/Template:Infobox_element/symbol-to-electron-configuration">https://en.wikipedia.org/wiki/Template:Infobox_element/symbol-to-electron-configuration</a>, which draws on relativistic calculations. I did not check the primary papers). Shells: K 2 &middot; L 8 &middot; M 18 &middot; N 32 &middot; O 32 &middot; P 14 &middot; Q 2 &middot; 8 0 &middot; 9 0 &middot; 10 0.</p><p><span class="st amb">AMBER</span>First ionization energy about 7.60 eV, a theoretical prediction, not measured.</p><p><span class="st amb">AMBER</span>Isotopes: no stable isotope; longest-lived: <sup>269</sup>Hs t<sub>&frac12;</sub> 15 sec, <sup>270</sup>Hs t<sub>&frac12;</sub> 9 sec, <sup>268</sup>Hs t<sub>&frac12;</sub> 1.4 sec. Superheavy half-lives are few-atom measurements with large uncertainties.</p><p><span class="st wall">WALL</span>No emission line is used: the NIST Handbook of Basic Atomic Spectroscopic Data has no strong-lines table for this element, so photons are drawn uncoloured.</p><p><span class="st wall">WALL</span>Shells 8, 9 and 10 are MODEL, Dave&rsquo;s 10-shell frame: no ground-state atom uses more than 7 shells, so they stay empty unless an electron is excited into them.</p><p><span class="st amb">AMBER</span>The orbiting dots are a cartoon (ANALOGY), not orbitals; electron colour is by home shell (q.d), and the nucleus colour is by block (s, p, d, f). The self-check confirms the electron total equals Z, the shell counts sum to Z, every shell is within 2n&sup2;, and shells 8 to 10 are empty in the ground state; any failure throws.</p></div>
+</div>
+<script>
+"use strict";
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+var SEED=(location.search.match(/seed=(\d+)/)||[])[1];SEED=SEED?+SEED:(Math.random()*1e9)|0;var R=mulberry32(SEED);
+var QD=["#f0a886","#ff5aa0","#4db1f0","#a87bff","#3fd0a0","#c98a55","#8fb85a","#ff8a3a"];
+var REDUCE=matchMedia("(prefers-reduced-motion: reduce)").matches,DPR=Math.min(2,devicePixelRatio||1);
+var cv=document.getElementById("cv"),pc=document.getElementById("plot"),g,pg,W,H,PW,PH,tick=0,paused=false,SER=[];
+function fit(){W=cv.parentNode.clientWidth;H=Math.round(W*(W<560?1.05:.56));cv.width=W*DPR;cv.height=H*DPR;cv.style.height=H+"px";g=cv.getContext("2d");g.setTransform(DPR,0,0,DPR,0,0);
+ PW=W;PH=70;pc.width=PW*DPR;pc.height=PH*DPR;pg=pc.getContext("2d");pg.setTransform(DPR,0,0,DPR,0,0);}
+fit();
+function fail(m){throw new Error("SELF-CHECK FAILED: "+m);}
+function plot(){pg.clearRect(0,0,PW,PH);if(SER.length<2)return;var mx=-1e9,mn=1e9;SER.forEach(function(v){mx=Math.max(mx,v);mn=Math.min(mn,v);});if(mx===mn){mx+=1;}
+ pg.strokeStyle=getComputedStyle(document.body).getPropertyValue("--acc");pg.lineWidth=1.5;pg.beginPath();SER.forEach(function(v,i){var x=i/(SER.length-1)*PW,y=PH-6-(v-mn)/(mx-mn)*(PH-12);i?pg.lineTo(x,y):pg.moveTo(x,y);});pg.stroke();
+ pg.fillStyle="#bcabe4";pg.font="11px ui-monospace,monospace";pg.fillText(SIM.label+"  "+(+SER[SER.length-1].toFixed(3)),8,13);}
+function pos(e){var r=cv.getBoundingClientRect();return [e.clientX-r.left,e.clientY-r.top];}
+var ELEM={"Z": 108, "sym": "Hs", "name": "Hassium", "cfg": "1s2 2s2 2p6 3s2 3p6 4s2 3d10 4p6 5s2 4d10 5p6 6s2 4f14 5d10 6p6 5f14 6d6 7s2", "block": "d", "lines": []};
+// 10-shell atom. Electrons are agents in their home shells (n = 1..10 = K, L, M, N, O, P, Q, 8, 9, 10), filled from the ground-state configuration.
+// Tap: the nearest electron jumps to a higher shell, then relaxes back and emits a photon.
+(function(){var st=document.createElement("style");st.textContent=
+"body{background:#000!important;color:#fff;font-family:'Arial Black','Helvetica Neue',Impact,system-ui,sans-serif!important;letter-spacing:.01em}"+
+"h1{font-weight:900!important;text-transform:uppercase;color:#fff!important;text-shadow:0 0 6px #ff2bd6,0 0 18px #ff2bd6,0 0 34px #ff2bd6}"+
+".stage{background:#000!important;border:3px solid #00f0ff!important;border-radius:0!important;box-shadow:0 0 14px #00f0ff,inset 0 0 14px rgba(0,240,255,.35);position:relative}"+
+".stage::after{content:'';position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.28) 0 1px,transparent 1px 3px)}"+
+".panel{background:#050505!important;border:2px solid #b6ff00!important;border-radius:0!important;box-shadow:0 0 10px rgba(182,255,0,.45)}"+
+"button{background:#000!important;color:#fff!important;border:2px solid #ff2bd6!important;border-radius:0!important;font-weight:900!important;text-transform:uppercase;box-shadow:0 0 8px #ff2bd6}"+
+"button:hover,button:focus-visible{background:#ff2bd6!important;color:#000!important}"+
+"a{color:#00f0ff!important}#hud,.hud{color:#eaffb0!important;font-weight:700}"+
+"@media (prefers-reduced-motion:reduce){h1{text-shadow:0 0 4px #ff2bd6}.stage{box-shadow:none}}";
+document.head.appendChild(st);})();
+var NEON=["#ff2bd6","#00f0ff","#b6ff00"];
+var SH=["K","L","M","N","O","P","Q","8","9","10"],EL=[],PH=[],CNT=[],emitted=0,temp;
+function parseCfg(s){var c=new Array(10).fill(0);s.split(" ").forEach(function(t){var m=t.match(/^(\d+)[spdfg](\d+)$/);if(m)c[+m[1]-1]+=+m[2];});return c;}
+function wl2rgb(l){var r=0,g2=0,b=0;if(l<380||l>780)return l<380?"#c9a8ff":"#ff6a6a";if(l<440){r=(440-l)/60;b=1;}else if(l<490){g2=(l-440)/50;b=1;}else if(l<510){g2=1;b=(510-l)/20;}else if(l<580){r=(l-510)/70;g2=1;}else if(l<645){r=1;g2=(645-l)/65;}else r=1;return "rgb("+[r,g2,b].map(function(v){return Math.round(255*Math.pow(v,.8));}).join(",")+")";}
+var BLK={s:QD[3],p:QD[5],d:QD[1],f:QD[6]};
+var SIM={spf:1,checkEvery:10,label:"electrons excited",
+init:function(){CNT=parseCfg(ELEM.cfg);temp=.0004+R()*.0012;var k=0;for(var n=0;n<10;n++)for(var j=0;j<CNT[n];j++){EL.push({home:n,n:n,a:R()*6.283,j:0,life:0,k:k++});}},
+rad:function(n){return Math.min(W,H)*(.06+.044*n);},
+step:function(){EL.forEach(function(e){e.a+=.04/Math.pow(e.n+1,1.1);e.j=(e.j+(R()-.5)*.6)*.92;if(e.n>e.home){e.life--;if(e.life<=0)SIM.relax(e);}else if(R()<temp/(e.home+1)*(e.home>=SIM.outer()-1?6:.2))SIM.excite(e);});
+ PH.forEach(function(p){p.r+=3;});PH=PH.filter(function(p){return p.r<Math.max(W,H);});},
+outer:function(){var o=0;for(var n=0;n<10;n++)if(CNT[n])o=n;return o;},
+excite:function(e){if(e.n>e.home)return;e.n=Math.min(9,e.home+1+((R()*3)|0));e.life=40+((R()*120)|0);},
+relax:function(e){var from=e.n;e.n=e.home;emitted++;var lam=ELEM.lines.length?ELEM.lines[(R()*ELEM.lines.length)|0]:null;PH.push({x:W/2+Math.cos(e.a)*SIM.rad(from),y:H/2+Math.sin(e.a)*SIM.rad(from),a:e.a,r:SIM.rad(from),c:lam?wl2rgb(lam):"#fff6b0",lam:lam});SIM.lastLam=lam;},
+poke:function(x,y){var best=null,bd=1e9;EL.forEach(function(e){var r=SIM.rad(e.n)+e.j,ex=W/2+Math.cos(e.a)*r,ey=H/2+Math.sin(e.a)*r,d=(ex-x)*(ex-x)+(ey-y)*(ey-y);if(d<bd&&e.n===e.home){bd=d;best=e;}});if(best)SIM.excite(best);},
+check:function(){if(EL.length!==ELEM.Z)fail("electron total "+EL.length+" ≠ Z "+ELEM.Z);var c=new Array(10).fill(0),s=0;EL.forEach(function(e){c[e.home]++;});for(var n=0;n<10;n++){s+=CNT[n];if(c[n]!==CNT[n])fail("shell "+SH[n]+" holds "+c[n]+", configuration says "+CNT[n]);if(CNT[n]>2*(n+1)*(n+1))fail("shell "+SH[n]+" over capacity 2n² = "+2*(n+1)*(n+1));}if(s!==ELEM.Z)fail("shell counts sum to "+s+", not Z "+ELEM.Z);for(var n=7;n<10;n++)if(CNT[n])fail("shell "+SH[n]+" should be empty in the ground state");},
+series:function(){return EL.filter(function(e){return e.n>e.home;}).length;},
+draw:function(){g.fillStyle=REDUCE?"#000":"rgba(0,0,0,.5)";g.fillRect(0,0,W,H);var cx=W/2,cy=H/2;
+ g.save();for(var n=0;n<10;n++){var on=CNT[n]>0,model=n>=7,c=model?"#ff2bd6":on?"#00f0ff":"#2a4a55";g.strokeStyle=c;g.lineWidth=model?2:on?4:2;g.shadowColor=c;g.shadowBlur=REDUCE||!on&&!model?0:12;g.setLineDash(model?[10,8]:[]);g.globalAlpha=model?.55:on?.95:.6;g.beginPath();g.arc(cx,cy,SIM.rad(n),0,6.283);g.stroke();}g.restore();g.setLineDash([]);
+ var col=BLK[ELEM.block]||QD[0],nr=Math.min(W,H)*.04;g.save();g.shadowColor=col;g.shadowBlur=REDUCE?0:30;g.fillStyle=col;g.fillRect(cx-nr,cy-nr,nr*2,nr*2);g.restore();g.strokeStyle="#fff";g.lineWidth=3;g.strokeRect(cx-nr,cy-nr,nr*2,nr*2);g.lineWidth=1;
+ g.fillStyle="#000";g.font="900 "+Math.round(nr*1.1)+"px 'Arial Black',Impact,sans-serif";g.textAlign="center";g.textBaseline="middle";g.fillText(ELEM.sym,cx,cy+1);g.textBaseline="alphabetic";
+ g.globalCompositeOperation="lighter";EL.forEach(function(e){var r=SIM.rad(e.n)+e.j,x=cx+Math.cos(e.a)*r,y=cy+Math.sin(e.a)*r,c=e.n>e.home?"#ffffff":NEON[e.home%3],s=e.n>e.home?4.2:3;g.fillStyle=c;g.globalAlpha=.22;g.beginPath();g.arc(x,y,s*2.6,0,6.283);g.fill();g.globalAlpha=1;g.fillRect(x-s/2-.5,y-s/2-.5,s+1,s+1);});
+ PH.forEach(function(p){g.save();g.strokeStyle=p.c;g.shadowColor=p.c;g.shadowBlur=REDUCE?0:22;g.lineWidth=4;g.beginPath();for(var k=0;k<16;k++){var rr=p.r+k*2.4,w=Math.sin(k*1.3)*4;var x=cx+Math.cos(p.a)*rr-Math.sin(p.a)*w,y=cy+Math.sin(p.a)*rr+Math.cos(p.a)*w;k?g.lineTo(x,y):g.moveTo(x,y);}g.stroke();g.lineWidth=1.5;g.strokeStyle="#fff";g.stroke();g.restore();});
+ g.globalCompositeOperation="source-over";g.globalAlpha=1;
+ g.font="900 12px 'Arial Black',Impact,sans-serif";g.textAlign="left";for(var n=0;n<10;n++){g.fillStyle="#000";g.fillRect(4,5+n*16,96,15);g.fillStyle=n>=7?"#ff7ae6":CNT[n]?"#b6ff00":"#9aa";g.fillText(SH[n]+" "+CNT[n]+"/"+2*(n+1)*(n+1)+(n>=7?" MODEL":""),8,17+n*16);}},
+hud:function(){var ex=SIM.series();return "Z "+ELEM.Z+" "+ELEM.sym+" · shells "+CNT.map(function(c,n){return SH[n]+":"+c;}).join(" ")+" · excited "+ex+" · photons "+emitted+(SIM.lastLam?" · last line "+SIM.lastLam+" nm":ELEM.lines.length?"":" · no line used");},
+sig:function(){return EL.slice(0,6).map(function(e){return e.a.toFixed(3);}).join(",")+":"+temp.toFixed(5);}};
+
+SIM.init();
+cv.addEventListener("pointerdown",function(e){var p=pos(e);SIM.poke(p[0],p[1]);});
+document.getElementById("reseed").onclick=function(){location.search="?seed="+((Math.random()*1e9)|0);};
+document.getElementById("pause").onclick=function(){paused=!paused;this.textContent=paused?"PLAY":"PAUSE";};
+var hud=document.getElementById("hud");
+function frame(){for(var s=0;s<SIM.spf;s++){SIM.step();tick++;}if(tick%SIM.checkEvery<SIM.spf)SIM.check();
+ if(tick%4<SIM.spf){SER.push(SIM.series());if(SER.length>300)SER.shift();}SIM.draw();plot();hud.textContent="seed "+SEED+" · "+SIM.hud();}
+function refresh(){SER.push(SIM.series());if(SER.length>300)SER.shift();SIM.draw();plot();hud.textContent="seed "+SEED+" · "+SIM.hud();}
+window.SPHERE={get tick(){return tick;},sig:function(){return SIM.sig();},run:function(n){for(var i=0;i<n;i++){SIM.step();tick++;}SIM.check();refresh();}};
+if(REDUCE){SPHERE.run(SIM.spf*600);cv.addEventListener("pointerup",function(){SPHERE.run(SIM.spf*60);});document.querySelector(".ctl").addEventListener("input",function(){SPHERE.run(SIM.spf*60);});}
+else(function loop(){if(!paused)frame();requestAnimationFrame(loop);})();
+</script></body></html>
