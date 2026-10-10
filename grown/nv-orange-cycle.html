@@ -1,0 +1,97 @@
+<!doctype html><html lang="en"><head><!--built-by-grok-bot--><meta name="author" content="Grok Bot"><meta name="generator" content="Grok Bot · SaPpH{{i}}on"><meta charset="utf-8"><meta name="grokbot-badge" content="inline"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="persona" content="{{+L.-E.+O. D++}}"><title>NV Cycle · the red that reads a spin · SaPpH{{i}}on</title>
+<style>body{margin:0;background:#000;color:#e9a070;font:14px/1.6 "Helvetica Neue",Arial,sans-serif}
+main{max-width:1000px;margin:0 auto;padding:14px}h1{font:300 40px "Helvetica Neue",Arial;color:#ff7a2a;margin:6px 0;letter-spacing:.05em}
+canvas{width:100%;display:block;touch-action:manipulation;background:#000}
+button{font:13px "Helvetica Neue",Arial;background:#000;color:#ff7a2a;border:1px solid #4a2200;padding:5px 12px;margin:3px;cursor:pointer}
+.lab{font:700 11px ui-monospace,monospace;border:1px solid currentColor;padding:0 5px;margin-right:6px}.out{font:13px ui-monospace,monospace}
+#ledger{margin:18px 0 6px;padding:10px 12px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);font:12px/1.45 ui-monospace,Menlo,Consolas,monospace}#ledger h3{margin:0 0 4px;font-size:13px;letter-spacing:.08em}#ledger .lh{font-weight:700;word-break:break-all;margin:2px 0}#ledger .lr{color:var(--acc);margin:4px 0;word-break:break-word}#ledger ul{margin:4px 0;padding-left:16px}#ledger li.bad{color:#c00;font-weight:700}#ledger button{font:600 12px ui-monospace,monospace;background:var(--paper);color:var(--ink);border:1px solid var(--ink);padding:3px 8px;margin:2px 4px 2px 0;cursor:pointer}#ledger code{opacity:.7}
+.colo{font-size:12px;opacity:.85}.persona{font-family:ui-monospace,monospace;font-weight:700;color:var(--acc)}:root{--ink:#ff7a2a;--paper:#000;--acc:#ff7a2a}</style></head><body><main>
+<h1>NV cycle: orange in, red out</h1>
+<p><span class="lab">LIT</span>The negatively charged NV centre in diamond has a triplet ground state ³A₂ and an excited triplet ³E 1.945 eV above it; its zero-phonon line is at 637 nm, red rather than orange. A singlet pair (¹A₁ → ¹E) sits 1.190 eV apart (1042 nm, infrared). Green or orange light pumps the spin. The m_s = ±1 states leak more often into the dark singlets and come back as m_s = 0, so the spin polarises and the |±1⟩ states fluoresce less. That contrast is how the spin is read optically.</p>
+<p><span class="lab">MODEL</span>A schematic population simulation of the five-level cycle with toy rates. Pump light pours in as orange (−: m_s=0 channel, cooler; +: m_s=±1 channel, hotter); red photons leave. A microwave π pulse swaps 0 ↔ ±1, and the fluorescence dips: the dip is an ODMR signal emerging from the rates.</p>
+<p><button id="mw">microwave π pulse</button><button id="dark">laser on/off</button></p>
+<canvas id="c" width="960" height="480" aria-label="nv levels"></canvas><p class="out" id="o"></p>
+<section id="ledger" aria-label="DurableAnchor ledger"><h3>DURABLEANCHOR LEDGER · Dave's kernel, running in this page</h3><p class="lh">provisioning…</p><div><button data-a="double-vote">try a double vote</button><button data-a="epoch-rollback">try an epoch rollback</button></div><p class="lr"></p><details open><summary>self-checks (kernel, then page)</summary><ul class="lc"></ul><ul class="lc2"></ul></details></section>
+<p class="colo">Engine: Dave's <a href="../kernel-durable-anchor.html">DurableAnchor kernel</a>, ported faithfully to the browser with Web Crypto SHA-256 and an in-memory record store (exclusive-create, so concurrent reservations are refused; fsync has nothing to flush). The ledger starts empty on each load. Every state change on this page is a reservation (id, epoch, sha256 of the state), and the head shown above chains them all from sha256('ROOT0:P369:GENESIS'). Persona: <span class="persona">{{+L.-E.+O. D++}}</span> (Dave's notation). Built by Grok Bot · seed <span id="sd"></span> · <a href="../index.html">← SaPpH{{i}}on</a></p>
+</main><script>/* DurableAnchor: browser port of Dave's kernel (durable-anchor.mjs). Same logic: append-only, hash-chained,
+   checked against an external trusted checkpoint. The filesystem becomes an in-memory record store with
+   exclusive-create; fsync and directory sync are no-ops here (nothing to flush in memory). */
+var TOPOLOGY='-+5 + 1',PERSONA='{{+L.-E.+O. D++}}';
+var _te=new TextEncoder();
+function _hex(b){return Array.prototype.map.call(new Uint8Array(b),function(v){return v.toString(16).padStart(2,'0')}).join('')}
+function digest(x){return crypto.subtle.digest('SHA-256',_te.encode(x)).then(_hex)}
+function _key(id,epoch){return _hex(_te.encode(id+'|'+epoch))+'.json'}
+function MemStore(){this.f=new Map();this.beforeCreate=null}
+MemStore.prototype.list=function(){return Array.from(this.f.keys())};
+MemStore.prototype.read=function(n){return this.f.get(n)};
+MemStore.prototype.create=function(n,s){if(this.beforeCreate){var h=this.beforeCreate;this.beforeCreate=null;h(n,s)}if(this.f.has(n)){var e=Error('exists');e.code='EEXIST';throw e}this.f.set(n,s)};
+class DurableAnchor{
+ constructor(store,tc){if(!tc||!Number.isInteger(tc.count)||typeof tc.head!=='string')throw Error('external trusted checkpoint required');this.dir=store;this.trusted=tc}
+ static async provision(store){return new DurableAnchor(store||new MemStore(),{count:0,head:await digest('ROOT0:P369:GENESIS')})}
+ async records(){var files=this.dir.list().filter(function(n){return n.endsWith('.json')}).sort(),entries=[];for(var file of files){var x=JSON.parse(this.dir.read(file));if(file!==_key(x.id,x.epoch)||!(/^[a-f0-9]{64}$/.test(x.head)))throw Error('corrupt-record');entries.push(x)}return entries}
+ async checkpoint(){var items=await this.records(),head=await digest('ROOT0:P369:GENESIS');for(var x of items)head=await digest(head+'|'+JSON.stringify(x));return {count:items.length,head:head}}
+ async validate(){try{var c=await this.checkpoint();if(c.count!==this.trusted.count||c.head!==this.trusted.head)return {ok:false,reason:'rollback-or-altered-history'};return {ok:true,checkpoint:c}}catch(e){return {ok:false,reason:'unavailable-or-corrupt'}}}
+ async reserve(id,epoch,head){var v=await this.validate();if(!v.ok)return v;if(typeof id!=='string'||!id||!Number.isSafeInteger(epoch)||epoch<0||!(/^[a-f0-9]{64}$/.test(head)))throw new RangeError('reservation');
+  var p=_key(id,epoch),entries=await this.records(),old=entries.find(function(x){return x.id===id&&x.epoch===epoch});if(old)return old.head===head?{ok:true,previous:true,checkpoint:this.trusted}:{ok:false,reason:'double-vote'};
+  if(entries.some(function(x){return x.id===id&&x.epoch>epoch}))return {ok:false,reason:'epoch-rollback'};
+  try{this.dir.create(p,JSON.stringify({id:id,epoch:epoch,head:head}))}catch(e){return {ok:false,reason:e.code==='EEXIST'?'concurrent-reservation':'write-error'}}
+  var cp=await this.checkpoint();this.trusted=cp;return {ok:true,previous:false,checkpoint:cp}}
+}
+/* page-side helper: every state change is a reservation */
+var LED={A:null,ep:{},last:null,rej:[],n:0,q:Promise.resolve(),
+ init:function(){return DurableAnchor.provision().then(function(a){LED.A=a;LED.show();return LED.selftest()})},
+ commit:function(id,state){LED.run(function(){if(!LED.A)return;var e=(LED.ep[id]||1);/* epoch 0 is left empty so a live epoch-rollback attack has somewhere to land */return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,e,h).then(function(r){if(r.ok&&!r.previous){LED.ep[id]=e+1;LED.last={id:id,epoch:e,head:h}}else if(!r.ok)LED.rej.unshift(id+'@'+e+': '+r.reason);LED.show();return r})})});return LED.q},
+ attack:function(kind){LED.run(function(){var L=LED.last;if(!L){LED.rej.unshift(kind+': nothing reserved yet');LED.show();return}
+  var p=kind==='double-vote'?digest('forged|'+Date.now()).then(function(h){return LED.A.reserve(L.id,L.epoch,h)}):LED.A.reserve(L.id,0,L.head);
+  return p.then(function(r){LED.rej.unshift('live '+kind+' on '+L.id+'@'+L.epoch+' → '+(r.ok?'ACCEPTED':r.reason));LED.show()})});return LED.q},
+ show:function(){var el=document.getElementById('ledger');if(!el||!LED.A)return;var t=LED.A.trusted;
+  el.querySelector('.lh').textContent='count '+t.count+' · head '+t.head.slice(0,16)+'… · TOPOLOGY '+TOPOLOGY;
+  el.querySelector('.lr').textContent=LED.rej.slice(0,4).join('  |  ')||'no rejections yet'},
+ selftest:async function(){var out=[],ok=function(n,c,g){out.push([n,c,g])};var s=new MemStore(),a=await DurableAnchor.provision(s);
+  ok('genesis = sha256(ROOT0:P369:GENESIS)',a.trusted.head===(await digest('ROOT0:P369:GENESIS'))&&a.trusted.head.slice(0,8)==='54bc828d'&&a.trusted.count===0,a.trusted.head.slice(0,12));
+  var h1=await digest('one'),h2=await digest('two');var r=await a.reserve('q.d',0,h1);ok('reserve q.d@0',r.ok&&!r.previous,'count '+r.checkpoint.count);
+  r=await a.reserve('q.d',1,h2);ok('reserve q.d@1, head chains',r.ok&&r.checkpoint.count===2,r.checkpoint.head.slice(0,12));
+  var exp=await digest((await digest((await digest('ROOT0:P369:GENESIS'))+'|'+JSON.stringify({id:'q.d',epoch:0,head:h1})))+'|'+JSON.stringify({id:'q.d',epoch:1,head:h2}));ok('head recomputed by hand matches',exp===a.trusted.head,exp.slice(0,12));ok('matches the Node kernel test vector',a.trusted.head==='a114295c189dce567dfbf30a5b299e80054d52cc8019a7ea1bfa8f805e679b02','a114295c189d');
+  r=await a.reserve('q.d',1,h2);ok('same vote again → previous',r.ok&&r.previous,'previous');
+  r=await a.reserve('q.d',1,h1);ok('double-vote rejected',!r.ok&&r.reason==='double-vote',r.reason);
+  r=await a.reserve('q.d',0,await digest('x'));ok('double-vote at older epoch rejected',!r.ok&&r.reason==='double-vote',r.reason);
+  r=await a.reserve('q.d',0,h1);ok('old identical vote → previous',r.ok&&r.previous,'previous');
+  await a.reserve('tun',5,h1);r=await a.reserve('tun',3,h2);ok('epoch-rollback rejected',!r.ok&&r.reason==='epoch-rollback',r.reason);
+  s.beforeCreate=function(n,v){s.f.set(n,v)};r=await a.reserve('race',0,h1);ok('concurrent-reservation rejected',!r.ok&&r.reason==='concurrent-reservation',r.reason);
+  r=await a.reserve('after',0,h1);ok('foreign write breaks trust',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  var s2=new MemStore(),b=await DurableAnchor.provision(s2);await b.reserve('a',0,h1);await b.reserve('b',0,h2);var k=_key('a',0);s2.f.set(k,JSON.stringify({id:'a',epoch:0,head:h2}));
+  r=await b.validate();ok('tamper (altered head) detected',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  s2.f.set(k,JSON.stringify({id:'a',epoch:0,head:h1}));r=await b.validate();ok('restored record validates',r.ok,'ok');
+  s2.f.delete(_key('b',0));r=await b.validate();ok('rollback (deleted record) detected',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  s2.f.set(k,'{"id":"zz","epoch":0,"head":"'+h1+'"}');r=await b.validate();ok('misnamed record → corrupt',!r.ok&&r.reason==='unavailable-or-corrupt',r.reason);
+  try{new DurableAnchor(new MemStore(),null);ok('no checkpoint refused',false,'accepted')}catch(e){ok('no checkpoint refused',/trusted checkpoint/.test(e.message),e.message)}
+  var pass=out.every(function(x){return x[1]}),el=document.getElementById('ledger');
+  if(el)el.querySelector('.lc').innerHTML=out.map(function(x){return '<li class="'+(x[1]?'ok':'bad')+'">'+(x[1]?'✓ ':'✗ ')+x[0]+' <code>'+x[2]+'</code></li>'}).join('');
+  if(!pass){console.error('anchor self-check failed');throw Error('DurableAnchor self-check failed')}return pass}
+};
+LED.pagecheck=function(name,cond,got){var el=document.getElementById('ledger');if(el){var li=document.createElement('li');li.className=cond?'ok':'bad';li.innerHTML=(cond?'✓ ':'✗ ')+name+' <code>'+got+'</code>';el.querySelector('.lc2').appendChild(li)}if(!cond)throw Error('page self-check failed: '+name)};
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+var SEED=+(new URLSearchParams(location.search).get('seed')||(Date.now()%1e6));
+LED.commitAt=function(id,epoch,state){LED.run(function(){if(!LED.A)return;return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,epoch,h).then(function(r){if(r.ok&&!r.previous)LED.last={id:id,epoch:epoch,head:h};else if(!r.ok)LED.rej.unshift(id+'@'+epoch+': '+r.reason);LED.show();return r})})});return LED.q};
+
+/* re-entrancy: a task already running in the queue may commit directly instead of waiting on itself */
+LED.inq=0;LED.run=function(fn){if(LED.inq>0)return Promise.resolve().then(fn);var p=LED.q.then(function(){LED.inq++;return Promise.resolve().then(fn).then(function(v){LED.inq--;return v},function(e){LED.inq--;throw e})});LED.q=p.catch(function(){});return p};
+</script><script>"use strict";document.getElementById('sd').textContent=SEED;document.querySelectorAll('#ledger button').forEach(function(b){b.onclick=function(){LED.attack(b.dataset.a)}});
+function $(i){return document.getElementById(i)}
+var R=rng(SEED),P={g0:.34,g1:.66,e0:0,e1:0,s:0},on=true,fl=[],ph=[];
+var k={pump:.08,rad:.25,isc0:.01,isc1:.12,back0:.05,back1:.005};
+function step(){var d={g0:0,g1:0,e0:0,e1:0,s:0};if(on){d.g0-=k.pump*P.g0;d.e0+=k.pump*P.g0;d.g1-=k.pump*P.g1;d.e1+=k.pump*P.g1}
+ d.e0-=k.rad*P.e0+k.isc0*P.e0;d.g0+=k.rad*P.e0;d.e1-=k.rad*P.e1+k.isc1*P.e1;d.g1+=k.rad*P.e1;d.s+=k.isc0*P.e0+k.isc1*P.e1;d.s-=(k.back0+k.back1)*P.s;d.g0+=k.back0*P.s;d.g1+=k.back1*P.s;for(var x in P)P[x]+=d[x];return k.rad*(P.e0+P.e1)}
+function draw(){var f=0;for(var i=0;i<3;i++)f=step();fl.push(f);if(fl.length>420)fl.shift();var g=$('c').getContext('2d');g.fillStyle='#000';g.fillRect(0,0,960,480);
+ function lvl(x,y,w,lab,p,col){g.strokeStyle=col;g.lineWidth=2;g.beginPath();g.moveTo(x,y);g.lineTo(x+w,y);g.stroke();g.fillStyle=col;g.globalAlpha=.25+.75*Math.min(1,p*2);g.fillRect(x,y-6,w*Math.min(1,p*2),4);g.globalAlpha=1;g.fillStyle='#e9a070';g.font='12px ui-monospace';g.fillText(lab+' '+p.toFixed(3),x,y+16)}
+ lvl(60,400,120,'³A₂ m=0',P.g0,'#d98a3a');lvl(220,390,120,'³A₂ m=±1',P.g1,'#ff5a00');lvl(60,120,120,'³E m=0',P.e0,'#d98a3a');lvl(220,110,120,'³E m=±1',P.e1,'#ff5a00');lvl(400,260,120,'singlets',P.s,'#7a4a2a');
+ if(on){g.strokeStyle='rgba(255,140,40,.6)';g.beginPath();g.moveTo(120,395);g.lineTo(120,125);g.moveTo(280,385);g.lineTo(280,115);g.stroke()}
+ if(R()<f*4)ph.push({x:150+R()*160,y:250,v:2+R()*2});ph=ph.filter(function(p){p.x+=p.v*2.4;p.y+=(R()-.5)*2;g.fillStyle='#ff2a1a';g.fillRect(p.x,p.y,3,3);return p.x<560});
+ g.strokeStyle='#ff2a1a';g.beginPath();fl.forEach(function(v,i){var y=440-v*1600;i?g.lineTo(560+i*.9,y):g.moveTo(560+i*.9,y)});g.stroke();g.fillStyle='#e9a070';g.fillText('red fluorescence (637 nm ZPL + sideband)',560,60);
+ $('o').textContent='m_s=0 share of ground state: '+(P.g0/(P.g0+P.g1)).toFixed(3)+' · '+(on?'pumping':'dark');requestAnimationFrame(draw)}
+$('mw').onclick=function(){var a=P.g0;P.g0=P.g1;P.g1=a;LED.commit('mw',{g0:+P.g0.toFixed(3)})};$('dark').onclick=function(){on=!on;LED.commit('laser',{on:on})};$('c').onclick=$('mw').onclick;
+for(var i=0;i<SEED%7*40;i++)step();draw();
+LED.init().then(function(){LED.commit('open',{seed:SEED});
+ LED.pagecheck('ZPL: 1239.84/1.945 eV = 637 nm',Math.abs(1239.84/1.945-637.4)<.5,(1239.84/1.945).toFixed(1));
+ var save=JSON.stringify(P);P={g0:1/3,g1:2/3,e0:0,e1:0,s:0};for(var i=0;i<3000;i++)step();var pol=P.g0/(P.g0+P.g1);LED.pagecheck('optical pumping polarises into m_s = 0',pol>.6,pol.toFixed(3));
+ var f0=step();var a=P.g0;P.g0=P.g1;P.g1=a;for(var i=0;i<5;i++)step();var f1=step();LED.pagecheck('π pulse dims the fluorescence (ODMR dip)',f1<f0,f0.toFixed(4)+' → '+f1.toFixed(4));P=JSON.parse(save)});</script><a class="grokbot-badge" href="../built-by-grok-bot.html" title="This page was built by Grok Bot" style="position:relative;display:inline-block;margin:10px 16px 16px;z-index:2147483000;font:600 11px/1 system-ui,sans-serif;color:#fff;background:rgba(12,6,30,.86);border:1px solid #7ff9ff;border-radius:999px;padding:5px 9px;text-decoration:none;letter-spacing:.04em">built by Grok Bot</a></body></html>

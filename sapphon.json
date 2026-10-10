@@ -27,10 +27,10 @@
  "counts": {
   "keepers": 8,
   "domains": 512,
-  "domains_populated": 374,
-  "domains_open": 138,
-  "spheres": 1773,
-  "zero_spheres": 138,
+  "domains_populated": 385,
+  "domains_open": 127,
+  "spheres": 1784,
+  "zero_spheres": 127,
   "balance": 0,
   "workshop": 343
  },
@@ -4915,24 +4915,71 @@
     },
     {
      "n": 42,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "FALSE-COLOUR RING",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "False-Colour Ring",
+       "h": "grown/false-colour-ring.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/false-colour-ring.html",
+       "grown": true,
+       "emerges": "one dataset dressed in four colour maps",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#ffa64d",
+         "#ff7b00",
+         "#5a2e00"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-27",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/ethos-42.html",
-     "zero_page": "z/ethos-42.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-42.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-42.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 43,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "LAVA CRUST",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Lava Crust",
+       "h": "grown/lava-crust.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/lava-crust.html",
+       "grown": true,
+       "emerges": "cracks glowing through a cooling black crust",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#ff6a00",
+         "#d99060"
+        ],
+        "bg": "#4a1e00",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-27",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/ethos-43.html",
-     "zero_page": "z/ethos-43.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-43.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-43.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -10770,24 +10817,73 @@
     },
     {
      "n": 41,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "HOW HEAVY IS AN ORANGE BLACK HOLE?",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "How Heavy Is an Orange Black Hole?",
+       "h": "grown/hawking-orange.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/hawking-orange.html",
+       "grown": true,
+       "emerges": "a black hole that would glow orange, solved for its mass",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ff8c1a",
+         "#e8a060",
+         "#4a2600"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-28",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-41.html",
-     "zero_page": "z/pathos-41.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-41.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-41.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 42,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "− BETELGEUSE · ARCTURUS +",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "− Betelgeuse · Arcturus +",
+       "h": "grown/betelgeuse-arcturus.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/betelgeuse-arcturus.html",
+       "grown": true,
+       "emerges": "two orange giants, one veiled by dust",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#ffa040",
+         "#d8a070",
+         "#ffb060",
+         "#4a2a00"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-28",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-42.html",
-     "zero_page": "z/pathos-42.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-42.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-42.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -15825,24 +15921,73 @@
     },
     {
      "n": 45,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "PLANCK EMBER",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Planck Ember",
+       "h": "grown/planck-ember.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/planck-ember.html",
+       "grown": true,
+       "emerges": "three coals, −2000 K, 0, +3000 K, glowing from Planck's law",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#ff7a1a",
+         "#f0a060",
+         "#ffa040"
+        ],
+        "bg": "#3a1800",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-28",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/logos-45.html",
-     "zero_page": "z/logos-45.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-45.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-45.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 46,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "CHERENKOV, NOT ORANGE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Cherenkov, Not Orange",
+       "h": "grown/cherenkov-not-orange.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/cherenkov-not-orange.html",
+       "grown": true,
+       "emerges": "a blue cone opening against an orange blackbody",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ff8c1a",
+         "#3aa0ff",
+         "#e6a060",
+         "#4a2600"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-29",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/logos-46.html",
-     "zero_page": "z/logos-46.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-46.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-46.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -20198,7 +20343,8 @@
        "icon": {
         "pal": [
          "#39ff14",
-         "#1d3a1d"
+         "#1d3a1d",
+         "#7ff9ff"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -20219,24 +20365,73 @@
     },
     {
      "n": 39,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE ORANGE DOT",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Orange Dot",
+       "h": "grown/cdse-orange-dot.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/cdse-orange-dot.html",
+       "grown": true,
+       "emerges": "vials glowing by size, solved for 600 nm",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ff9a3c",
+         "#f5b070",
+         "#4a2800"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-29",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-39.html",
-     "zero_page": "z/mythos-39.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-39.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-39.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 40,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "COPPER · GOLD",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Copper · Gold",
+       "h": "grown/copper-gold-edge.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/copper-gold-edge.html",
+       "grown": true,
+       "emerges": "metal plates whose colour comes from a d-band edge, relativity toggled",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#d8a070",
+         "#e0904a",
+         "#b87333",
+         "#e3a36a"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-29",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-40.html",
-     "zero_page": "z/mythos-40.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-40.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-40.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -36571,24 +36766,72 @@
     },
     {
      "n": 38,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "NV CYCLE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "NV Cycle",
+       "h": "grown/nv-orange-cycle.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/nv-orange-cycle.html",
+       "grown": true,
+       "emerges": "spin polarisation and an ODMR dip from the optical cycle",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#ff7a2a",
+         "#e9a070",
+         "#d98a3a",
+         "#ff5a00"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-30",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-38.html",
-     "zero_page": "z/phronesis-38.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-38.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-38.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 39,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "RED PEN, −ORANGE+",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Red Pen, −Orange+",
+       "h": "grown/orange-critique.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/orange-critique.html",
+       "grown": true,
+       "emerges": "orange marks lighting a lattice of pages",
+       "label": "READING · LIT",
+       "icon": {
+        "pal": [
+         "#ff9a3c",
+         "#ff7a1a"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-30",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-39.html",
-     "zero_page": "z/phronesis-39.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-39.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-39.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -42412,13 +42655,38 @@
     },
     {
      "n": 47,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "−D1 · 0 · D2+",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "−D1 · 0 · D2+",
+       "h": "grown/sodium-doublet.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/sodium-doublet.html",
+       "grown": true,
+       "emerges": "the sodium doublet mirrored about zero, Doppler-broadening with heat",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ff9500",
+         "#ffb347",
+         "#ff6a00",
+         "#5a3000"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-30",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/kairos-47.html",
-     "zero_page": "z/kairos-47.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-47.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-47.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -42620,8 +42888,8 @@
   "world": 1,
   "keepers": 8,
   "domains": 512,
-  "zero_spheres": 138,
-  "generated_total": 747,
+  "zero_spheres": 127,
+  "generated_total": 736,
   "groups": 88
  },
  "workshop": [
@@ -50891,7 +51159,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1773
+   "pages": 1784
   },
   "list": [
    {
@@ -53405,14 +53673,16 @@
       "libraries/the-building-shelf.html",
       "libraries/the-community-shelf.html",
       "libraries/the-islamic-shelf.html",
-      "libraries/the-mcgill-shelf.html"
+      "libraries/the-mcgill-shelf.html",
+      "grown/false-colour-ring.html"
      ],
      [
       "libraries/the-microfilm-shelf.html",
       "libraries/the-million-shelf.html",
       "libraries/the-nasa-shelf.html",
       "libraries/the-newspaper-shelf.html",
-      "libraries/the-ocean-shelf.html"
+      "libraries/the-ocean-shelf.html",
+      "grown/lava-crust.html"
      ]
     ]
    },
@@ -53427,21 +53697,24 @@
       "libraries/the-padua-shelf.html",
       "libraries/the-portugal-brazil-shelf.html",
       "libraries/the-scottish-shelf.html",
-      "libraries/the-smithsonian-shelf.html"
+      "libraries/the-smithsonian-shelf.html",
+      "grown/hawking-orange.html"
      ],
      [
       "libraries/the-tripitaka-shelf.html",
       "libraries/the-universal-shelf.html",
       "libraries/the-weekly-shelf.html",
       "spheres/the-bonds.html",
-      "spheres/the-braces.html"
+      "spheres/the-braces.html",
+      "grown/betelgeuse-arcturus.html"
      ],
      [
       "spheres/the-diagonal.html",
       "spheres/the-dual.html",
       "spheres/the-gap.html",
       "spheres/the-imaginary.html",
-      "spheres/the-mod-nine.html"
+      "spheres/the-mod-nine.html",
+      "grown/planck-ember.html"
      ]
     ]
    },
@@ -53456,21 +53729,24 @@
       "spheres/the-outside.html",
       "spheres/the-prime-power.html",
       "spheres/the-seal.html",
-      "spheres/the-six-around.html"
+      "spheres/the-six-around.html",
+      "grown/cherenkov-not-orange.html"
      ],
      [
       "spheres/the-sum.html",
       "spheres/the-twenty-four.html",
       "universe/360-dots-eating-themselves.html",
       "universe/DavidWise01.github.io.html",
-      "universe/add-more-pin-nested.html"
+      "universe/add-more-pin-nested.html",
+      "grown/cdse-orange-dot.html"
      ],
      [
       "universe/atlas.html",
       "universe/four-into-the-zero.html",
       "universe/homer.html",
       "universe/isomorphic-tut-cipher-3.html",
-      "universe/nom.html"
+      "universe/nom.html",
+      "grown/copper-gold-edge.html"
      ]
     ]
    },
@@ -53485,21 +53761,24 @@
       "universe/positronic-law.html",
       "universe/prairie-birch-civic-topaz.html",
       "universe/qd-prim-life-ledger.html",
-      "universe/ring-360-full-turn-sign.html"
+      "universe/ring-360-full-turn-sign.html",
+      "grown/nv-orange-cycle.html"
      ],
      [
       "universe/root0-philosophy-books.html",
       "universe/super-sapphon.html",
       "universe/the-even-parity.html",
       "universe/the-l1-l2.html",
-      "universe/the-whetstone-seat.html"
+      "universe/the-whetstone-seat.html",
+      "grown/orange-critique.html"
      ],
      [
       "universe/toroid-kernel.html",
       "universe/ud0.html",
       "universe/v107-uxinf-w1-final.html",
       "universe/v108-pin-pna-triple.html",
-      "universe/v126-his-brother-kcin.html"
+      "universe/v126-his-brother-kcin.html",
+      "grown/sodium-doublet.html"
      ]
     ]
    },
