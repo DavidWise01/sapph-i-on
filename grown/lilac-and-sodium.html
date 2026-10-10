@@ -107,7 +107,7 @@ function draw(t){var g=$('c').getContext('2d');g.fillStyle='#000';g.fillRect(0,0
  var xy=xyzxy(kx),d=domWL(xy);$('o').textContent='flame xy = ('+xy[0].toFixed(3)+', '+xy[1].toFixed(3)+') → '+(d.kind==='purple'?'NON-SPECTRAL purple (complementary '+(d.comp?d.comp.toFixed(0):'?')+' nm)':'dominant '+d.w.toFixed(1)+' nm')+' · Na alone dominant '+domWL(xyzxy(lineXYZ(NA))).w.toFixed(1)+' nm'+(cobalt?' · cobalt on':'');requestAnimationFrame(draw)}
 $('r').oninput=$('na').oninput=function(){LED.commit('mix',{r:+$('r').value,na:+$('na').value})};
 $('co').onclick=function(){cobalt=!cobalt;LED.commit('cobalt',{on:cobalt})};$('sw').onclick=function(){swap=!swap;LED.commit('swap',{swap:swap})};
-$('r').value=[0.04,0.08,0.12,0.2,0.4,0.8,1.5][SEED%7];requestAnimationFrame(draw);
+$('c').onclick=function(){swap=!swap;LED.commit('swap',{swap:swap,via:'canvas'})};$('na').value=[0,.1,.2,.3][SEED%4];$('r').value=[0.04,0.08,0.12,0.2,0.4,0.8,1.5][SEED%7];requestAnimationFrame(draw);
 LED.init().then(function(){LED.commit('open',{seed:SEED});
  var dn=domWL(xyzxy(lineXYZ(NA)));LED.pagecheck('sodium D is spectral: dominant ≈ 589 nm',dn.kind==='dominant'&&Math.abs(dn.w-589.2)<1.5,dn.w.toFixed(2));
  var dk=domWL(xyzxy(lineXYZ(K(0.1))));LED.pagecheck('potassium mix with red-weighted lines is non-spectral (line of purples)',dk.kind==='purple',dk.kind);var dv=domWL(xyzxy(lineXYZ(K(2))));LED.pagecheck('with violet-weighted lines it sits on the spectral violet end instead',dv.kind==='dominant'&&dv.w<405,dv.w&&dv.w.toFixed(1));
