@@ -27,10 +27,10 @@
  "counts": {
   "keepers": 8,
   "domains": 512,
-  "domains_populated": 429,
-  "domains_open": 83,
-  "spheres": 1828,
-  "zero_spheres": 83,
+  "domains_populated": 440,
+  "domains_open": 72,
+  "spheres": 1839,
+  "zero_spheres": 72,
   "balance": 0,
   "workshop": 343
  },
@@ -5274,24 +5274,74 @@
     },
     {
      "n": 52,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THREE IN FOUR · THE RED DWARFS NEXT DOOR",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Three in Four · the red dwarfs next door",
+       "h": "grown/red-dwarfs.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/red-dwarfs.html",
+       "grown": true,
+       "emerges": "the 373-star 10 pc census coloured by blackbody; red dwarfs compute orange",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#d0401a",
+         "#e8d8d0",
+         "#ff6a3a",
+         "#ffb36a"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-05",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/ethos-52.html",
-     "zero_page": "z/ethos-52.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-52.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-52.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 53,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE OPTICAL WINDOW · WHY RED GOES THROUGH YOU",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Optical Window · why red goes through you",
+       "h": "grown/optical-window.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/optical-window.html",
+       "grown": true,
+       "emerges": "a torch through tissue: rays die by measured Hb absorption, red emerges",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#ff4a3a",
+         "#e8d4d0",
+         "#c9a0ff",
+         "#ff7060"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-06",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/ethos-53.html",
-     "zero_page": "z/ethos-53.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-53.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-53.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -11377,24 +11427,74 @@
     },
     {
      "n": 51,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "REDSHIFT · LIGHT WALKING OFF THE RED EDGE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Redshift · light walking off the red edge",
+       "h": "grown/redshift-cmb.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/redshift-cmb.html",
+       "grown": true,
+       "emerges": "the sky cooling from 3000 K yellow-orange to void as z falls; Hα walks off the red edge",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ff5a3a",
+         "#e6d6d2",
+         "#ffc58a",
+         "#ff9a80"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-06",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-51.html",
-     "zero_page": "z/pathos-51.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-51.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-51.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 52,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "RUBY · 694.3 NM, 16 MAY 1960",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Ruby · 694.3 nm, 16 May 1960",
+       "h": "grown/ruby-laser.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/ruby-laser.html",
+       "grown": true,
+       "emerges": "three-level rate equation crossing threshold into a 694.3 nm beam",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#e8d2d6",
+         "#ff2a4a",
+         "#d0103a",
+         "#ffd84a"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-06",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-52.html",
-     "zero_page": "z/pathos-52.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-52.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-52.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -16682,24 +16782,74 @@
     },
     {
      "n": 55,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "H-ALPHA · 656.28 NM, THE RED OF NEBULAE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "H-alpha · 656.28 nm, the red of nebulae",
+       "h": "grown/h-alpha.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/h-alpha.html",
+       "grown": true,
+       "emerges": "a breathing H II nebula whose camera-vs-eye colour is CIE-mixed from Rydberg Hα/Hβ",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#e01a3a",
+         "#ff9a3c",
+         "#ead6d8",
+         "#ff3a5a"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-06",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/logos-55.html",
-     "zero_page": "z/logos-55.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-55.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-55.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 56,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "VERMILION · QUICKSILVER'S RED",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Vermilion · quicksilver's red",
+       "h": "grown/vermilion.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/vermilion.html",
+       "grown": true,
+       "emerges": "quicksilver and sulfur drops meeting to form vermilion grains",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#e0301a",
+         "#ead6d0",
+         "#ff3a1a",
+         "#c0c8d0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-07",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/logos-56.html",
-     "zero_page": "z/logos-56.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-56.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-56.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -21327,24 +21477,74 @@
     },
     {
      "n": 49,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "OXY / DEOXY · THE TWO REDS OF BLOOD",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Oxy / Deoxy · the two reds of blood",
+       "h": "grown/haemoglobin.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/haemoglobin.html",
+       "grown": true,
+       "emerges": "flowing cells coloured by measured Prahl oxy/deoxy spectra and Beer–Lambert",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ff3a3a",
+         "#e8d4d4",
+         "#8a1a5a",
+         "#ffc58a"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-07",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-49.html",
-     "zero_page": "z/mythos-49.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-49.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-49.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 50,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "TWO REDS · OXYGEN'S 630 AND MARS' RUST",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Two Reds · oxygen's 630 and Mars' rust",
+       "h": "grown/two-reds.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/two-reds.html",
+       "grown": true,
+       "emerges": "O(1D) 630 nm glow surviving quenching only at altitude, beside Mars",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#c03020",
+         "#e8d6d0",
+         "#ff5a3a",
+         "#7aff9a"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-07",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-50.html",
-     "zero_page": "z/mythos-50.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-50.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-50.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -37928,24 +38128,74 @@
     },
     {
      "n": 48,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "COCHINEAL · RED FROM AN INSECT",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Cochineal · red from an insect",
+       "h": "grown/cochineal.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/cochineal.html",
+       "grown": true,
+       "emerges": "harvesting insects into a dye vat whose pH sets the colour",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#e0204a",
+         "#c01a4a",
+         "#ead4da",
+         "#ffb36a"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-07",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-48.html",
-     "zero_page": "z/phronesis-48.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-48.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-48.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 49,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "SEVEN RINGS · CRITIQUE OF THE SEVEN-LAYER RED RUN",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Seven Rings · critique of the seven-layer red run",
+       "h": "grown/red-critique.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/red-critique.html",
+       "grown": true,
+       "emerges": "severity rings of the seven-layer run",
+       "label": "READING",
+       "icon": {
+        "pal": [
+         "#e0201a",
+         "#ff9a3c",
+         "#ff7a6a",
+         "#ffc58a"
+        ],
+        "bg": "#2a0a0a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-08",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-49.html",
-     "zero_page": "z/phronesis-49.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-49.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-49.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -43839,13 +44089,38 @@
     },
     {
      "n": 52,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "SEVEN SHELLS · SEVEN OF EIGHT, AND THE WHITE THAT IS MISSING",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Seven Shells · seven of eight, and the white that is missing",
+       "h": "grown/seven-shells.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/seven-shells.html",
+       "grown": true,
+       "emerges": "six coloured shells solved to mix into white, the missing 8th q.d colour",
+       "label": "COMPUTED",
+       "icon": {
+        "pal": [
+         "#e0201a",
+         "#ff9a3c",
+         "#e8d8d4",
+         "#8a3cff"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-08",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/kairos-52.html",
-     "zero_page": "z/kairos-52.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-52.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-52.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -43992,8 +44267,8 @@
   "world": 1,
   "keepers": 8,
   "domains": 512,
-  "zero_spheres": 83,
-  "generated_total": 692,
+  "zero_spheres": 72,
+  "generated_total": 681,
   "groups": 88
  },
  "workshop": [
@@ -52263,7 +52538,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1828
+   "pages": 1839
   },
   "list": [
    {
@@ -52479,7 +52754,8 @@
       "yet/Next-Element-Rhenium-75-Lyre.html",
       "ahead/Next-Element-Antimony-51-Lyre.html",
       "lyre/Livermorium-116-Lyre-30.html",
-      "grown/the-atom-beryllium.html"
+      "grown/the-atom-beryllium.html",
+      "grown/red-dwarfs.html"
      ]
     ]
    },
@@ -52495,7 +52771,8 @@
       "archive/the-gutenberg-shelf.html",
       "archive/the-heritage-library.html",
       "atmospheres/the-atmospheres.html",
-      "grown/the-atom-rutherfordium.html"
+      "grown/the-atom-rutherfordium.html",
+      "grown/optical-window.html"
      ],
      [
       "domains/techne.html",
@@ -52503,7 +52780,8 @@
       "folio/the-machinery-paper.html",
       "folio/the-undecidable-paper.html",
       "generative/the-face-rim.html",
-      "grown/the-atom-tennessine.html"
+      "grown/the-atom-tennessine.html",
+      "grown/redshift-cmb.html"
      ],
      [
       "generative/the-midplanes.html",
@@ -52511,7 +52789,8 @@
       "libraries/the-canadian-shelf.html",
       "libraries/the-cornell-shelf.html",
       "spheres/the-euler.html",
-      "grown/the-atom-terbium.html"
+      "grown/the-atom-terbium.html",
+      "grown/ruby-laser.html"
      ],
      [
       "spheres/the-friedman.html",
@@ -52519,7 +52798,8 @@
       "still/Next-Shell-After-Bromine.html",
       "forth/Next-Element-Dysprosium-66-Lyre.html",
       "w/next-element-platinum-78-lyre.html",
-      "grown/the-atom-copper.html"
+      "grown/the-atom-copper.html",
+      "grown/h-alpha.html"
      ]
     ]
    },
@@ -52535,7 +52815,8 @@
       "w/fock-darwin-kernel.html",
       "w/folded-kernel-spinor.html",
       "w/planck-e30-dmz.html",
-      "grown/the-atom-protactinium.html"
+      "grown/the-atom-protactinium.html",
+      "grown/vermilion.html"
      ],
      [
       "w/sapphire-sing.html",
@@ -52543,7 +52824,8 @@
       "w/the-sapphire-fork.html",
       "w/the-spinor.html",
       "w/wakaku-2-power-3-layered-bk-wt-rd-bl-gr-yw-pr-orange-shell-i.html",
-      "grown/the-atom-thulium.html"
+      "grown/the-atom-thulium.html",
+      "grown/haemoglobin.html"
      ],
      [
       "w/wakaku-next-please-layered-inversion-active.html",
@@ -52551,7 +52833,8 @@
       "wakaku/Wakaku-Singer-Primitive-Kernel-V1-Build.html",
       "nests/deep_nest_27.html",
       "nests/hooked_nest.html",
-      "grown/the-atom-boron.html"
+      "grown/the-atom-boron.html",
+      "grown/two-reds.html"
      ],
      [
       "nests/shor_nested.html",
@@ -52559,7 +52842,8 @@
       "w/spinor-circuit.html",
       "dots/Quantum-Tunneler-Double-J.html",
       "w/toroidal-pulsar-toroidal-neutron.html",
-      "grown/the-atom-chlorine.html"
+      "grown/the-atom-chlorine.html",
+      "grown/cochineal.html"
      ]
     ]
    },
@@ -52575,7 +52859,8 @@
       "w/spinor.html",
       "bonk/Bonk-Spin-Light-4-Copper-Coils-Gravity-Vacuum-V54.html",
       "w/l0-kernel-two-scalars-boron-x-robot.html",
-      "grown/the-atom-iridium.html"
+      "grown/the-atom-iridium.html",
+      "grown/red-critique.html"
      ],
      [
       "w/orange-in-planck-length.html",
@@ -52583,7 +52868,8 @@
       "yet/Next-Shell-After-Calcium.html",
       "yet/Next-Shell-After-Nickel.html",
       "w/gravity-lens-2.html",
-      "grown/the-atom-uranium.html"
+      "grown/the-atom-uranium.html",
+      "grown/seven-shells.html"
      ],
      [
       "w/nested-dodecahedra.html",
