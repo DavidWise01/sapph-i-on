@@ -27,10 +27,10 @@
  "counts": {
   "keepers": 8,
   "domains": 512,
-  "domains_populated": 385,
-  "domains_open": 127,
-  "spheres": 1784,
-  "zero_spheres": 127,
+  "domains_populated": 396,
+  "domains_open": 116,
+  "spheres": 1795,
+  "zero_spheres": 116,
   "balance": 0,
   "workshop": 343
  },
@@ -4929,7 +4929,8 @@
         "pal": [
          "#ffa64d",
          "#ff7b00",
-         "#5a2e00"
+         "#5a2e00",
+         "#7ff9ff"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -4963,7 +4964,8 @@
        "icon": {
         "pal": [
          "#ff6a00",
-         "#d99060"
+         "#d99060",
+         "#7ff9ff"
         ],
         "bg": "#4a1e00",
         "canvas": 1,
@@ -4984,24 +4986,74 @@
     },
     {
      "n": 44,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "LILAC & SODIUM",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Lilac & Sodium",
+       "h": "grown/lilac-and-sodium.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/lilac-and-sodium.html",
+       "grown": true,
+       "emerges": "a flame whose CIE colour crosses onto the line of purples",
+       "label": "LIT · COMPUTED · MODEL",
+       "icon": {
+        "pal": [
+         "#e6d4f5",
+         "#a05cff",
+         "#d6a8ff",
+         "#ff9a3c"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-31",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/ethos-44.html",
-     "zero_page": "z/ethos-44.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-44.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-44.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 45,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE GREAT RED SPOT",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Great Red Spot",
+       "h": "grown/great-red-spot.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/great-red-spot.html",
+       "grown": true,
+       "emerges": "a Rankine vortex shrinking between 1979 and 2017",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#ff8c3a",
+         "#ead8cc",
+         "#d1a0ff",
+         "#6a2aa0"
+        ],
+        "bg": "#2a1240",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-31",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/ethos-45.html",
-     "zero_page": "z/ethos-45.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-45.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-45.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -10831,7 +10883,8 @@
         "pal": [
          "#ff8c1a",
          "#e8a060",
-         "#4a2600"
+         "#4a2600",
+         "#7ff9ff"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -10888,24 +10941,74 @@
     },
     {
      "n": 43,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "PERKIN'S FLASK",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Perkin's Flask",
+       "h": "grown/perkins-flask.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/perkins-flask.html",
+       "grown": true,
+       "emerges": "mauve spreads hat to hat across an engraved crowd",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#ff9a3c",
+         "#8a3fb0",
+         "#d8c4e6",
+         "#c98cff"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-31",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-43.html",
-     "zero_page": "z/pathos-43.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-43.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-43.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 44,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "COSMIC LATTE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Cosmic Latte",
+       "h": "grown/cosmic-latte.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/cosmic-latte.html",
+       "grown": true,
+       "emerges": "a galaxy field averages to one pale colour that changes with white point",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#ff9a3c",
+         "#6a2ab0",
+         "#efe6d6",
+         "#ffc58a"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-32",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-44.html",
-     "zero_page": "z/pathos-44.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-44.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-44.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -15935,7 +16038,8 @@
         "pal": [
          "#ff7a1a",
          "#f0a060",
-         "#ffa040"
+         "#ffa040",
+         "#7ff9ff"
         ],
         "bg": "#3a1800",
         "canvas": 1,
@@ -15992,24 +16096,74 @@
     },
     {
      "n": 47,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "TWELVE THOUSAND SHELLS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Twelve Thousand Shells",
+       "h": "grown/tyrian-murex.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/tyrian-murex.html",
+       "grown": true,
+       "emerges": "tesserae turn purple only as fast as the snail arithmetic allows",
+       "label": "LIT · COMPUTED · INVENTED",
+       "icon": {
+        "pal": [
+         "#ffb14a",
+         "#6b1a8a",
+         "#e2cdf2",
+         "#ffcf8a"
+        ],
+        "bg": "#16051f",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-32",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/logos-47.html",
-     "zero_page": "z/logos-47.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-47.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-47.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 48,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "VIOLET ≠ PURPLE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Violet ≠ Purple",
+       "h": "grown/violet-is-not-purple.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/violet-is-not-purple.html",
+       "grown": true,
+       "emerges": "one wavelength against a two-wavelength mix, classified live",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#e2d6f2",
+         "#8c4cff",
+         "#b77dff",
+         "#ff9233"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-32",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/logos-48.html",
-     "zero_page": "z/logos-48.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-48.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-48.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -20379,7 +20533,8 @@
         "pal": [
          "#ff9a3c",
          "#f5b070",
-         "#4a2800"
+         "#4a2800",
+         "#7ff9ff"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -20436,24 +20591,74 @@
     },
     {
      "n": 41,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "AURORA STRATA",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Aurora Strata",
+       "h": "grown/aurora-strata.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/aurora-strata.html",
+       "grown": true,
+       "emerges": "curtains coloured by CIE mixes of real auroral lines by altitude",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#9a4cff",
+         "#7a3cff",
+         "#dcd0f0",
+         "#ff7a2a"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-33",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-41.html",
-     "zero_page": "z/mythos-41.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-41.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-41.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 42,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "AUTUMN PIGMENTS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Autumn Pigments",
+       "h": "grown/autumn-pigments.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/autumn-pigments.html",
+       "grown": true,
+       "emerges": "chlorophyll fades to reveal a carotenoid core and anthocyanin rim",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#8a2ab0",
+         "#ecdccc",
+         "#ff9a2c",
+         "#a04ad0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-33",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-42.html",
-     "zero_page": "z/mythos-42.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-42.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-42.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -36815,7 +37020,8 @@
        "icon": {
         "pal": [
          "#ff9a3c",
-         "#ff7a1a"
+         "#ff7a1a",
+         "#7ff9ff"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -36836,24 +37042,74 @@
     },
     {
      "n": 40,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE OPPONENT AXIS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Opponent Axis",
+       "h": "grown/opponent-afterimage.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/opponent-afterimage.html",
+       "grown": true,
+       "emerges": "stare at the orange core and its complement appears",
+       "label": "LIT · COMPUTED · MODEL",
+       "icon": {
+        "pal": [
+         "#ff8a1a",
+         "#e9dcf7",
+         "#5b1f99",
+         "#c8a0ff"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-33",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-40.html",
-     "zero_page": "z/phronesis-40.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-40.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-40.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 41,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THREE RINGS OF RED INK",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Three Rings of Red Ink",
+       "h": "grown/purple-critique.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/purple-critique.html",
+       "grown": true,
+       "emerges": "red marks settle onto core, shell and void rings by severity",
+       "label": "READING · LIT",
+       "icon": {
+        "pal": [
+         "#ff9a3c",
+         "#a866ff",
+         "#ffad5c",
+         "#c69bff"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-34",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-41.html",
-     "zero_page": "z/phronesis-41.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-41.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-41.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -42691,13 +42947,38 @@
     },
     {
      "n": 48,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE LINE OF PURPLES",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Line of Purples",
+       "h": "grown/line-of-purples.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/line-of-purples.html",
+       "grown": true,
+       "emerges": "a ray from white through any colour finds a wavelength or falls on the purple line",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#d9c6f0",
+         "#ff8a1a",
+         "#ff9a3c",
+         "#6a1fb8"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-41",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/kairos-48.html",
-     "zero_page": "z/kairos-48.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-48.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-48.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -42888,8 +43169,8 @@
   "world": 1,
   "keepers": 8,
   "domains": 512,
-  "zero_spheres": 127,
-  "generated_total": 736,
+  "zero_spheres": 116,
+  "generated_total": 725,
   "groups": 88
  },
  "workshop": [
@@ -51159,7 +51440,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1784
+   "pages": 1795
   },
   "list": [
    {
@@ -53792,21 +54073,24 @@
       "universe/v128-full-family-ice.html",
       "gravity/Eight-Gravity-Wells-Natures-Box.html",
       "w/field-06-gravity.html",
-      "w/crystal-lattice-scalar-fork-0-redo.html"
+      "w/crystal-lattice-scalar-fork-0-redo.html",
+      "grown/lilac-and-sodium.html"
      ],
      [
       "w/toroid-active-now-live.html",
       "w/toroid-tethered-live-fixed.html",
       "another/Next-Shell-After-Hafnium.html",
       "bonk/Bonk-Aol-Age-Sex-Location-Color-Frequency-V35.html",
-      "bonk/Bonk-Modular-Append-Only-Nibble-V39.html"
+      "bonk/Bonk-Modular-Append-Only-Nibble-V39.html",
+      "grown/great-red-spot.html"
      ],
      [
       "bonk/Bonk-Red-Minerals-Permute-Square-Princess-V34.html",
       "bonk/Bonk-Referent-Kana-Anak-Timing-Waka-Ku-V38.html",
       "bonk/Bonk-Resonate-Phased-11111-55555-V37.html",
       "bonk/Bonk-Wired-For-Sound-Work-V36.html",
-      "toroid/Bonk-Recursive-Toroid-Cnft-V23.html"
+      "toroid/Bonk-Recursive-Toroid-Cnft-V23.html",
+      "grown/perkins-flask.html"
      ]
     ]
    },
@@ -53821,21 +54105,24 @@
       "toroid/Bonk-Temp-Toroid-Trap-V28.html",
       "w/bonk-aeon-fractal.html",
       "nests/heart-nested-agents-depth-budget.html",
-      "bonk/Bonk-0-Pi-Bone-White-Fresh-V60.html"
+      "bonk/Bonk-0-Pi-Bone-White-Fresh-V60.html",
+      "grown/cosmic-latte.html"
      ],
      [
       "w/earthbend-toph-vs-azula.html",
       "neon/Immutable-Portal-Noble-Neon-Barriers.html",
       "scale/Scale-Carbon-Dating-Half-Life-Atomic-Weight.html",
       "w/aeon-bh-mass-fixed-brace.html",
-      "w/three-bit-kernel-a-b-and-the-wall.html"
+      "w/three-bit-kernel-a-b-and-the-wall.html",
+      "grown/tyrian-murex.html"
      ],
      [
       "neon/i-declared-ion-in-neon-in-oxygen-in-nitrogen.html",
       "still/Next-Shell-After-Germanium.html",
       "plank/plank-knalp-self-similar-i.html",
       "nested/eight-into-zero-colour-cube.html",
-      "w/universe-in-silicon.html"
+      "w/universe-in-silicon.html",
+      "grown/violet-is-not-purple.html"
      ]
     ]
    },
@@ -53850,21 +54137,24 @@
       "gold/gold-silver-nail-grid-10x10.html",
       "gold/two-sheets-gold-core-512.html",
       "w/elementary-level.html",
-      "w/sapphic-telegraph.html"
+      "w/sapphic-telegraph.html",
+      "grown/aurora-strata.html"
      ],
      [
       "another/Next-Shell-After-Iodine.html",
       "forth/Next-Element-Ytterbium-70-Lyre.html",
       "forward/Next-Element-Krypton-36.html",
       "forward/Next-Iteration-Yttrium-39.html",
-      "ahead/Next-Element-Indium-49.html"
+      "ahead/Next-Element-Indium-49.html",
+      "grown/autumn-pigments.html"
      ],
      [
       "beyond/Next-Element-Roentgenium-111-Lyre.html",
       "bonk/Bonk-1-Percent-Ring-30au30ag-V48.html",
       "bonk/Bonk-Black-Hole-Outer-Diameter-V49.html",
       "bonk/Bonk-Dantes-Inferno-15x-15-Offset-V44.html",
-      "bonk/Bonk-Emergence-Isomorphs-1-Per-Color-V45.html"
+      "bonk/Bonk-Emergence-Isomorphs-1-Per-Color-V45.html",
+      "grown/opponent-afterimage.html"
      ]
     ]
    },
@@ -53879,7 +54169,8 @@
       "bonk/Bonk-Mobius-Magnets-Ring27-V32.html",
       "bonk/Bonk-Ruby-Toroid-Trap-V31.html",
       "bonk/Bonk-Windmill-15px-Per-Windmill-V43.html",
-      "qdot/Bonk-Quantum-Dots-At-Plank-V46.html"
+      "qdot/Bonk-Quantum-Dots-At-Plank-V46.html",
+      "grown/purple-critique.html"
      ],
      [
       "yet/Next-Shell-After-Vanadium.html",
@@ -54101,7 +54392,8 @@
       "still/Next-Element-Plutonium-94-Lyre.html",
       "still/Next-Element-Radon-86-Lyre-Fresh.html",
       "still/Next-Element-Uranium-92-Lyre.html",
-      "grown/the-eight-kingdoms.html"
+      "grown/the-eight-kingdoms.html",
+      "grown/line-of-purples.html"
      ],
      [
       "still/Next-Shell-After-Arsenic.html",
