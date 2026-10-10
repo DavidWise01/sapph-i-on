@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>THE TURING GARDEN · SaPpH{{i}}on</title><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<title>THE DRIFTING EIGHT · SaPpH{{i}}on</title><link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <style>
-:root{--bg:#0b0716;--ink:#f1ecff;--dim:#bcabe4;--acc:#4db1f0}
+:root{--bg:#0b0716;--ink:#f1ecff;--dim:#bcabe4;--acc:#ff5aa0}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#24124a,var(--bg));color:var(--ink);font:15px/1.55 system-ui,sans-serif}
 .wrap{max-width:980px;margin:0 auto;padding:18px 16px 40px}a{color:var(--dim)}
 nav{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-align:center}
@@ -19,13 +19,13 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-of
 .st{display:inline-block;font:700 11px ui-monospace,monospace;padding:1px 6px;border-radius:5px;border:1px solid;margin-right:6px}
 .lit{color:#7dffa8}.amb{color:#f4c740}.wall{color:#ff8a8a}
 </style></head><body><div class="wrap">
-<nav><a href="https://0root.ai/">the hallway</a> &#8250; <a href="../index.html">SaPpH{{i}}on</a> &#8250; <a href="../k/logos.html">LOGOS</a> &#8250; <a href="../d/logos-09.html">domain 09</a></nav>
-<h1>THE TURING GARDEN</h1><div class="tag">two chemicals, one reaction, a garden of spots and stripes</div>
-<div class="stage"><canvas id="cv" role="img" aria-label="Turing patterns (spots, stripes, mitosis, waves) from a uniform field"></canvas><canvas id="plot" aria-hidden="true"></canvas></div>
+<nav><a href="https://0root.ai/">the hallway</a> &#8250; <a href="../index.html">SaPpH{{i}}on</a> &#8250; <a href="../k/pathos.html">PATHOS</a> &#8250; <a href="../d/pathos-17.html">domain 17</a></nav>
+<h1>THE DRIFTING EIGHT</h1><div class="tag">no fitness, no favourite, and still one colour wins</div>
+<div class="stage"><canvas id="cv" role="img" aria-label="fixation: alleles are lost one by one to pure chance until one colour holds the whole population"></canvas><canvas id="plot" aria-hidden="true"></canvas></div>
 <div class="hud" id="hud"></div>
 <div class="ctl"><button type="button" id="reseed">NEW SEED</button><button type="button" id="pause">PAUSE</button></div>
-<div class="panel"><h2>THE RULE</h2><p>Every cell holds two concentrations, U and V. They diffuse to their neighbours (U twice as fast as V), react by U + 2V &rarr; 3V, U is fed in at rate F, and V is removed at rate F + k. The seed picks F and k.</p><p style="color:var(--dim);font-size:13px">Tap to drop a blot of V. The colours are the 8 q.d colours by V level. The same <code>?seed=</code> always gives the same run.</p></div>
-<div class="panel"><h2>WHAT IS CLAIMED</h2><p><span class="st lit">LIT</span>Gray–Scott (Pearson 1993) integrated with Euler steps. Every 200 steps all concentrations must stay inside [0, 1], or the page throws.</p><p><span class="st amb">AMBER</span>Mapping V to the 8 q.d colours is decoration.</p></div>
+<div class="panel"><h2>THE RULE</h2><p>Each generation, every individual picks one parent at random from the previous generation. There is no selection: every allele is equally fit.</p><p style="color:var(--dim);font-size:13px">Tap to plant a new allele. The same <code>?seed=</code> always gives the same run.</p></div>
+<div class="panel"><h2>WHAT IS CLAIMED</h2><p><span class="st lit">LIT</span>Wright&ndash;Fisher drift. The expected heterozygosity is H<sub>0</sub>(1&minus;1/N)<sup>t</sup> (the gold dashed line). The page checks the population size and the allele set every 10 steps, or it throws.</p><p><span class="st amb">AMBER</span>The 8 alleles are the 8 q.d colours.</p></div>
 </div>
 <script>
 "use strict";
@@ -42,23 +42,20 @@ function plot(){pg.clearRect(0,0,PW,PH);if(SER.length<2)return;var mx=-1e9,mn=1e
  pg.strokeStyle=getComputedStyle(document.body).getPropertyValue("--acc");pg.lineWidth=1.5;pg.beginPath();SER.forEach(function(v,i){var x=i/(SER.length-1)*PW,y=PH-6-(v-mn)/(mx-mn)*(PH-12);i?pg.lineTo(x,y):pg.moveTo(x,y);});pg.stroke();
  pg.fillStyle="#bcabe4";pg.font="11px ui-monospace,monospace";pg.fillText(SIM.label+"  "+(+SER[SER.length-1].toFixed(3)),8,13);}
 function pos(e){var r=cv.getBoundingClientRect();return [e.clientX-r.left,e.clientY-r.top];}
-// Gray–Scott reaction–diffusion: U + 2V → 3V; feed U at rate F; remove V at rate F + k.
-var N=110,M,U,V,U2,V2,F,k,img,PRE=[[.037,.06,"spots"],[.03,.062,"mitosis"],[.025,.06,"pulsing"],[.042,.059,"stripes"],[.014,.054,"waves"]],pre;
-var SIM={spf:8,checkEvery:200,label:"amount of V",
-init:function(){M=Math.round(N*H/W);U=new Float32Array(N*M).fill(1);V=new Float32Array(N*M);U2=new Float32Array(N*M);V2=new Float32Array(N*M);pre=PRE[(R()*PRE.length)|0];F=pre[0];k=pre[1];
- for(var s=0;s<8;s++)SIM.blot((R()*N)|0,(R()*M)|0);img=g.createImageData(N,M);},
-blot:function(x,y){for(var dy=-3;dy<=3;dy++)for(var dx=-3;dx<=3;dx++){var xx=(x+dx+N)%N,yy=(y+dy+M)%M;V[yy*N+xx]=.5+R()*.1;U[yy*N+xx]=.5;}},
-step:function(){for(var y=0;y<M;y++){var ym=((y-1+M)%M)*N,yp=((y+1)%M)*N,yc=y*N;for(var x=0;x<N;x++){var xm=(x-1+N)%N,xp=(x+1)%N,i=yc+x;
- var lu=U[yc+xm]+U[yc+xp]+U[ym+x]+U[yp+x]-4*U[i],lv=V[yc+xm]+V[yc+xp]+V[ym+x]+V[yp+x]-4*V[i],uvv=U[i]*V[i]*V[i];
- U2[i]=U[i]+(0.2*lu-uvv+F*(1-U[i]));V2[i]=V[i]+(0.1*lv+uvv-(F+k)*V[i]);}}var t=U;U=U2;U2=t;t=V;V=V2;V2=t;},
-poke:function(x,y){SIM.blot((x/W*N)|0,(y/H*M)|0);},
-check:function(){for(var i=0;i<U.length;i++){if(!(U[i]>=-1e-3&&U[i]<=1.001&&V[i]>=-1e-3&&V[i]<=1.001))fail("concentration left [0,1] at "+i);}},
-series:function(){var s=0;for(var i=0;i<V.length;i++)s+=V[i];return s/V.length;},
-draw:function(){for(var i=0;i<V.length;i++){var v=Math.min(1,V[i]*3),c=QD[(Math.min(7,(V[i]*20)|0))],r=parseInt(c.slice(1,3),16),gg=parseInt(c.slice(3,5),16),b=parseInt(c.slice(5,7),16);
- img.data[i*4]=r*v+11*(1-v);img.data[i*4+1]=gg*v+7*(1-v);img.data[i*4+2]=b*v+22*(1-v);img.data[i*4+3]=255;}
- var o=document.createElement("canvas");o.width=N;o.height=M;o.getContext("2d").putImageData(img,0,0);g.imageSmoothingEnabled=true;g.drawImage(o,0,0,W,H);},
-hud:function(){return "F "+F+" · k "+k+" · regime "+pre[2]+" · mean V "+SIM.series().toFixed(4);},
-sig:function(){var s=0;for(var i=0;i<V.length;i+=97)s+=V[i];return F+":"+s.toFixed(5);}};
+// Wright–Fisher genetic drift: each generation, every one of N individuals picks a parent from the last generation uniformly at random. There is no selection and no advantage, only sampling.
+var N=0,A,B,H0=0,gen=0,alleles=8,img,W0,H1;
+function het(){var c=new Array(8).fill(0);for(var i=0;i<N;i++)c[A[i]]++;var h=1;c.forEach(function(k){h-=(k/N)*(k/N);});return h;}
+var SIM={spf:1,checkEvery:10,label:"heterozygosity H (gold: expected)",
+init:function(){var side=Math.round(Math.min(40,Math.max(16,Math.sqrt(W*H)/14)));W0=side;H1=Math.round(side*H/W);N=W0*H1;A=new Uint8Array(N);B=new Uint8Array(N);alleles=4+((R()*5)|0);for(var i=0;i<N;i++)A[i]=(R()*alleles)|0;H0=het();img=g.createImageData(W0,H1);SIM.exp=[];},
+step:function(){if(tick%6)return;for(var i=0;i<N;i++)B[i]=A[(R()*N)|0];var t=A;A=B;B=t;gen++;if(het()===0&&gen>5){SIM.fixedAt=gen;}},
+poke:function(x,y){var c=(R()*8)|0,cx=(x/W*W0)|0,cy=(y/H*H1)|0;for(var dy=-1;dy<=1;dy++)for(var dx=-1;dx<=1;dx++){var xx=cx+dx,yy=cy+dy;if(xx>=0&&yy>=0&&xx<W0&&yy<H1)A[yy*W0+xx]=c;}H0=het();gen=0;},
+check:function(){var c=new Array(8).fill(0);for(var i=0;i<N;i++){if(A[i]>7)fail("unknown allele");c[A[i]]++;}if(c.reduce(function(a,b){return a+b;},0)!==N)fail("population size changed");},
+series:function(){return het();},
+draw:function(){for(var i=0;i<N;i++){var c=QD[A[i]];img.data[i*4]=parseInt(c.slice(1,3),16);img.data[i*4+1]=parseInt(c.slice(3,5),16);img.data[i*4+2]=parseInt(c.slice(5,7),16);img.data[i*4+3]=255;}
+ var o=document.createElement("canvas");o.width=W0;o.height=H1;o.getContext("2d").putImageData(img,0,0);g.imageSmoothingEnabled=false;g.drawImage(o,0,0,W,H);
+ if(SER.length>1){pg.strokeStyle="#f4c740";pg.setLineDash([3,3]);pg.beginPath();for(var k=0;k<SER.length;k++){var e=H0*Math.pow(1-1/N,(gen-(SER.length-1-k)*4/6));var mx=Math.max.apply(null,SER),mn=Math.min.apply(null,SER);if(mx===mn)mx+=1;var X=k/(SER.length-1)*PW,Y=PH-6-(e-mn)/(mx-mn)*(PH-12);k?pg.lineTo(X,Y):pg.moveTo(X,Y);}pg.stroke();pg.setLineDash([]);}},
+hud:function(){var c=new Array(8).fill(0);for(var i=0;i<N;i++)c[A[i]]++;var alive=c.filter(function(k){return k>0;}).length;return "N "+N+" · generation "+gen+" · alleles left "+alive+" of "+alleles+" · H "+het().toFixed(3)+" · expected H₀(1−1/N)^t "+(H0*Math.pow(1-1/N,gen)).toFixed(3);},
+sig:function(){return Array.prototype.slice.call(A,0,60).join("");}};
 
 SIM.init();
 cv.addEventListener("pointerdown",function(e){var p=pos(e);SIM.poke(p[0],p[1]);});

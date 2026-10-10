@@ -50,7 +50,7 @@ count:function(){c=[0,0,0];for(var i=0;i<G.length;i++)c[G[i]]++;},
 step:function(){for(var y=0;y<M;y++)for(var x=0;x<N;x++){var i=y*N+x,v=G[i];
  if(v===0){var inf=0;if(G[y*N+(x+1)%N]===1)inf++;if(G[y*N+(x-1+N)%N]===1)inf++;if(G[((y+1)%M)*N+x]===1)inf++;if(G[((y-1+M)%M)*N+x]===1)inf++;G2[i]=R()<1-Math.pow(1-beta,inf)?1:0;}
  else if(v===1)G2[i]=R()<gam?2:1;else G2[i]=R()<om?0:2;}var t=G;G=G2;G2=t;SIM.count();
- if(c[1]===0&&R()<.02){var i=(R()*G.length)|0;if(G[i]===0){G[i]=1;c[0]--;c[1]++;}}},
+ if(R()<(c[1]===0?.05:.004)){var i=(R()*G.length)|0;if(G[i]===0){G[i]=1;c[0]--;c[1]++;}}},
 poke:function(x,y){var cx=(x/W*N)|0,cy=(y/H*M)|0;for(var dy=-2;dy<=2;dy++)for(var dx=-2;dx<=2;dx++){var i=((cy+dy+M)%M)*N+(cx+dx+N)%N;if(G[i]===0){G[i]=1;c[0]--;c[1]++;}}},
 check:function(){var s=c[0],i=c[1],r=c[2];SIM.count();if(s!==c[0]||i!==c[1]||r!==c[2])fail("compartment tallies drifted");if(c[0]+c[1]+c[2]!==G.length)fail("S+I+R ≠ N");},
 series:function(){return c[1]/G.length;},
@@ -66,7 +66,8 @@ document.getElementById("pause").onclick=function(){paused=!paused;this.textCont
 var hud=document.getElementById("hud");
 function frame(){for(var s=0;s<SIM.spf;s++){SIM.step();tick++;}if(tick%SIM.checkEvery<SIM.spf)SIM.check();
  if(tick%4<SIM.spf){SER.push(SIM.series());if(SER.length>300)SER.shift();}SIM.draw();plot();hud.textContent="seed "+SEED+" · "+SIM.hud();}
-window.SPHERE={get tick(){return tick;},sig:function(){return SIM.sig();},run:function(n){for(var i=0;i<n;i++){SIM.step();tick++;}SIM.check();}};
-if(REDUCE){SPHERE.run(SIM.spf*600);SIM.draw();hud.textContent="seed "+SEED+" · "+SIM.hud();}
+function refresh(){SER.push(SIM.series());if(SER.length>300)SER.shift();SIM.draw();plot();hud.textContent="seed "+SEED+" · "+SIM.hud();}
+window.SPHERE={get tick(){return tick;},sig:function(){return SIM.sig();},run:function(n){for(var i=0;i<n;i++){SIM.step();tick++;}SIM.check();refresh();}};
+if(REDUCE){SPHERE.run(SIM.spf*600);cv.addEventListener("pointerup",function(){SPHERE.run(SIM.spf*60);});document.querySelector(".ctl").addEventListener("input",function(){SPHERE.run(SIM.spf*60);});}
 else(function loop(){if(!paused)frame();requestAnimationFrame(loop);})();
 </script></body></html>

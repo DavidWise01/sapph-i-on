@@ -27,10 +27,10 @@
  "counts": {
   "keepers": 8,
   "domains": 512,
-  "domains_populated": 122,
-  "domains_open": 390,
-  "spheres": 1521,
-  "zero_spheres": 390,
+  "domains_populated": 132,
+  "domains_open": 380,
+  "spheres": 1531,
+  "zero_spheres": 380,
   "balance": 0,
   "workshop": 343
  },
@@ -3962,23 +3962,71 @@
     },
     {
      "n": 16,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE KALEIDOSCOPE DILEMMA",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Kaleidoscope Dilemma",
+       "h": "grown/the-kaleidoscope-dilemma.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-kaleidoscope-dilemma.html",
+       "grown": true,
+       "emerges": "cooperators and defectors coexist forever in shifting kaleidoscope patterns, with no memory and no reputation",
+       "label": "LIT · WALL",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#f0a886",
+         "#f1ecff",
+         "#7dffa8"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-37"
+      }
+     ],
      "page": "d/ethos-16.html",
-     "zero_page": "z/ethos-16.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-16.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-16.html"
+     "zero_url": null
     },
     {
      "n": 17,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE FIRST CRYSTAL",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The First Crystal",
+       "h": "grown/the-first-crystal.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-first-crystal.html",
+       "grown": true,
+       "emerges": "nucleation and growth: a long wait, then one droplet passes the critical size and sweeps the lattice; the waiting times vary run to run",
+       "label": "LIT",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#f0a886",
+         "#f1ecff",
+         "#7dffa8"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-38"
+      }
+     ],
      "page": "d/ethos-17.html",
-     "zero_page": "z/ethos-17.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-17.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-17.html"
+     "zero_url": null
     },
     {
      "n": 18,
@@ -9172,23 +9220,71 @@
     },
     {
      "n": 17,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE DRIFTING EIGHT",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Drifting Eight",
+       "h": "grown/the-drifting-eight.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-drifting-eight.html",
+       "grown": true,
+       "emerges": "fixation: alleles are lost one by one to pure chance until one colour holds the whole population",
+       "label": "LIT",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#ff5aa0",
+         "#f4c740",
+         "#f1ecff"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-38"
+      }
+     ],
      "page": "d/pathos-17.html",
-     "zero_page": "z/pathos-17.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-17.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-17.html"
+     "zero_url": null
     },
     {
      "n": 18,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE HODGEPODGE PULSE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Hodgepodge Pulse",
+       "h": "grown/the-hodgepodge-pulse.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-hodgepodge-pulse.html",
+       "grown": true,
+       "emerges": "target rings and spirals like the Belousov–Zhabotinsky reaction",
+       "label": "LIT · WALL",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#ff5aa0",
+         "#f1ecff",
+         "#7dffa8"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-38"
+      }
+     ],
      "page": "d/pathos-18.html",
-     "zero_page": "z/pathos-18.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-18.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-18.html"
+     "zero_url": null
     },
     {
      "n": 19,
@@ -13379,13 +13475,37 @@
     },
     {
      "n": 16,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE ROUGH SHORE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Rough Shore",
+       "h": "grown/the-rough-shore.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-rough-shore.html",
+       "grown": true,
+       "emerges": "a rough front whose width grows as t<sup>1/3</sup>, the KPZ universality class",
+       "label": "LIT",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#4db1f0",
+         "#f1ecff",
+         "#7dffa8"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-39"
+      }
+     ],
      "page": "d/logos-16.html",
-     "zero_page": "z/logos-16.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-16.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-16.html"
+     "zero_url": null
     },
     {
      "n": 17,
@@ -17128,13 +17248,37 @@
     },
     {
      "n": 14,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE ECHO OF SPINS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Echo Of Spins",
+       "h": "grown/the-echo-of-spins.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-echo-of-spins.html",
+       "grown": true,
+       "emerges": "a spin echo: the magnetisation comes back out of apparent disorder; small random kicks make each echo weaker (T<sub>2</sub>)",
+       "label": "LIT · AMBER dial",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#a87bff",
+         "#f4c740",
+         "#f1ecff"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-39"
+      }
+     ],
      "page": "d/mythos-14.html",
-     "zero_page": "z/mythos-14.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-14.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-14.html"
+     "zero_url": null
     },
     {
      "n": 15,
@@ -22718,13 +22862,37 @@
     },
     {
      "n": 19,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE LEARNING AXIS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Learning Axis",
+       "h": "grown/the-learning-axis.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-learning-axis.html",
+       "grown": true,
+       "emerges": "the weight vector (gold) turns onto the cloud’s principal axis and settles at length 1, with no supervision",
+       "label": "LIT",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#3fd0a0",
+         "#f4c740",
+         "#f1ecff"
+        ],
+        "bg": "#090512",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-39"
+      }
+     ],
      "page": "d/episteme-19.html",
-     "zero_page": "z/episteme-19.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/episteme-19.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/episteme-19.html"
+     "zero_url": null
     },
     {
      "n": 20,
@@ -26865,13 +27033,37 @@
     },
     {
      "n": 16,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE ELECTRUM WELD",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Electrum Weld",
+       "h": "grown/the-electrum-weld.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-electrum-weld.html",
+       "grown": true,
+       "emerges": "an interdiffusion zone that widens as √t, and a net flow of atoms across the weld (the Kirkendall imbalance)",
+       "label": "LIT model · AMBER alloy",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#c98a55",
+         "#ff5aa0",
+         "#f1ecff"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-40"
+      }
+     ],
      "page": "d/techne-16.html",
-     "zero_page": "z/techne-16.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/techne-16.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/techne-16.html"
+     "zero_url": null
     },
     {
      "n": 17,
@@ -30316,13 +30508,37 @@
     },
     {
      "n": 14,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE WEAKEST LINK",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Weakest Link",
+       "h": "grown/the-weakest-link.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-weakest-link.html",
+       "grown": true,
+       "emerges": "punctuated equilibrium: almost every fitness climbs above f<sub>c</sub> ≈ 0.667, with avalanches of extinction of every size",
+       "label": "LIT · WALL",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#8fb85a",
+         "#7dffa8",
+         "#ff5aa0"
+        ],
+        "bg": "#090512",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-40"
+      }
+     ],
      "page": "d/phronesis-14.html",
-     "zero_page": "z/phronesis-14.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-14.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-14.html"
+     "zero_url": null
     },
     {
      "n": 15,
@@ -35307,13 +35523,37 @@
     },
     {
      "n": 18,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE CHAOS LOOM",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Chaos Loom",
+       "h": "grown/the-chaos-loom.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-chaos-loom.html",
+       "grown": true,
+       "emerges": "spatiotemporal chaos, frozen domains, travelling defects and synchronised stripes, depending on ε",
+       "label": "LIT",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#ff8a3a",
+         "#f1ecff",
+         "#7dffa8"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-40"
+      }
+     ],
      "page": "d/kairos-18.html",
-     "zero_page": "z/kairos-18.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-18.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-18.html"
+     "zero_url": null
     },
     {
      "n": 19,
@@ -35786,8 +36026,8 @@
   "world": 1,
   "keepers": 8,
   "domains": 512,
-  "zero_spheres": 390,
-  "generated_total": 999,
+  "zero_spheres": 380,
+  "generated_total": 989,
   "groups": 88
  },
  "workshop": [
@@ -44057,7 +44297,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1521
+   "pages": 1531
   },
   "list": [
    {
@@ -46647,7 +46887,8 @@
       "evo/Next-Evo-Supercolony.html",
       "farther/Next-Element-Nickel-28.html",
       "farther/Next-Shell-After-Protactinium.html",
-      "farther/Wakaku-Speaker-V23-Next.html"
+      "farther/Wakaku-Speaker-V23-Next.html",
+      "grown/the-kaleidoscope-dilemma.html"
      ]
     ]
    },
@@ -46662,21 +46903,24 @@
       "forth/Next-Element-Samarium-62-Lyre.html",
       "forth/Next-Gas-After-Oxygen.html",
       "forward/Next-Element-Rhodium-45.html",
-      "full/Aeon-Zeon-Full-Map.html"
+      "full/Aeon-Zeon-Full-Map.html",
+      "grown/the-first-crystal.html"
      ],
      [
       "full/Flux-Full-Charge-21.html",
       "full/Full-Mantissa-55-366.html",
       "full/Seed-It-Full-Compliment.html",
       "full/V114-Reverse-Full-Shell.html",
-      "later/Next-Evo-32.html"
+      "later/Next-Evo-32.html",
+      "grown/the-drifting-eight.html"
      ],
      [
       "later/Next-Evo-64.html",
       "later/Next-Evo-Generative.html",
       "later/Next-Evo-Hemostatic-System-Blood-Coagulation-Cascade.html",
       "later/Next-Evo-Prim-Internal.html",
-      "later/Next-Evo-Prim.html"
+      "later/Next-Evo-Prim.html",
+      "grown/the-hodgepodge-pulse.html"
      ]
     ]
    },
@@ -46691,20 +46935,23 @@
       "nests/37-Nested-Rings-12.html",
       "nests/Hypercube-Vectors-Sides-Ingress.html",
       "next/Next-Evo-Planck-Time.html",
-      "next/Next-Evolution-Gravity-Garden.html"
+      "next/Next-Evolution-Gravity-Garden.html",
+      "grown/the-rough-shore.html"
      ],
      [
       "next/Perm-Explorer-Next-Perm.html",
       "next/X3-Triple-Next-Evolution.html",
       "one/Gen-50-Singularity-One.html",
       "one/One-Cell-512x8-4096.html",
-      "one/One-Life-Zipper-90.html"
+      "one/One-Life-Zipper-90.html",
+      "grown/the-echo-of-spins.html"
      ],
      [
       "onward/Evolve-Next-Perp-Loop-At-0root.html",
       "onward/Next-Evo-After-Polarity-Wave.html",
       "onward/Next-Evo-Beyond-Ne.html",
-      "onward/Next-Evo-Photon-Collapse.html"
+      "onward/Next-Evo-Photon-Collapse.html",
+      "grown/the-learning-axis.html"
      ]
     ]
    },
@@ -46719,21 +46966,24 @@
       "plank/257-Planck.html",
       "plank/Scale-Planck-Photon-Pinned-0.html",
       "plus/Folded-16d-Plus-1.html",
-      "qdot/Freeze-Singularity-Quantum-Or.html"
+      "qdot/Freeze-Singularity-Quantum-Or.html",
+      "grown/the-electrum-weld.html"
      ],
      [
       "qdot/Upgraded-Final-Farm-Quantum.html",
       "refrain/Wakaku-Speaker-V45-Black.html",
       "refrain/Wakaku-Speaker-V46-Scalar.html",
       "reprise/Wakaku-Speaker-V12-Learn.html",
-      "reprise/Wakaku-Speaker-V18-Evolve.html"
+      "reprise/Wakaku-Speaker-V18-Evolve.html",
+      "grown/the-weakest-link.html"
      ],
      [
       "reprise/Wakaku-Speaker-V22-Www.html",
       "reprise/Wakaku-Speaker-V24-Collective.html",
       "reprise/Wakaku-Speaker-V26-Meta.html",
       "scale/Diy-Scale-Simulator.html",
-      "speaker/Wakaku-Speaker-V110-Forest.html"
+      "speaker/Wakaku-Speaker-V110-Forest.html",
+      "grown/the-chaos-loom.html"
      ]
     ]
    },
