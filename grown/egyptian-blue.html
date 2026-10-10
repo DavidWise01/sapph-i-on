@@ -111,7 +111,7 @@ var BL=xyz2css(spec2xyz(function(w){return 0.1+0.7*Math.exp(-Math.pow((w-470)/45
 function draw(t){var g=$('c').getContext('2d');g.fillStyle='#000';g.fillRect(0,0,900,460);ex*=.97;
  tiles.forEach(function(p){if(Math.abs(p.y-230)>180)return;var col=p.c==='blue'?BL:p.c;if(ir){var I=p.c==='blue'?Math.min(1,.4+ex*.6+.1*Math.sin(t/300+p.f*9)):.04;col='rgba(255,'+Math.round(80+120*I)+','+Math.round(40*I)+','+I+')'}g.fillStyle=col;g.fillRect(p.x,p.y,p.s,p.s*.6)});
  var v=cmfAt(910);$('o').textContent=(ir?'IR view (false colour)':'visible')+' · CIE at 910 nm: '+(v[1]===0||isNaN(v[1])||910>780?'outside 380–780 nm table → invisible':'?')+' · CaCuSi₄O₁₀ M = '+M.toFixed(2)+' g/mol · photons out per 100 in: 10.5';requestAnimationFrame(draw)}
-$('ir').onclick=function(){ir=!ir;this.textContent=ir?'visible':'IR camera';LED.commit('ir',{on:ir})};$('ex').onclick=function(){ex=1;LED.commit('flash',{})};$('c').onclick=$('ir').onclick;
+$('ir').onclick=function(){ir=!ir;this.textContent=ir?'visible':'IR camera';LED.commit('ir',{on:ir})};$('ex').onclick=function(){ex=1;LED.commit('flash',{})};$('c').onclick=$('ex').onclick;
 $('ir').textContent=ir?'visible':'IR camera';requestAnimationFrame(draw);
 LED.init().then(function(){LED.commit('open',{seed:SEED});
  LED.pagecheck('CaCuSi4O10 = 375.95 g/mol',Math.abs(M-375.95)<.02,M.toFixed(3));

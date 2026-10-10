@@ -112,7 +112,7 @@ function draw(t){var g=$('c').getContext('2d');g.fillStyle='#000';g.fillRect(0,0
  cones.forEach(function(c){var lit=Math.hypot(c.x-450,c.y-240)<drad;var col=c.t==='S'?(lit?'#7aa0ff':'#2a3a9a'):c.t==='L'?(c.deg<.4?'#ff8a2a':'#8a3a3a'):'#2a7a3a';if(lit&&c.t!=='S')col='#333';g.fillStyle=col;g.fillRect(c.x,c.y,2.5,2.5)});
  var s=cones.filter(function(c){return c.t==='S'}).length,sc=cones.filter(function(c){return c.t==='S'&&c.deg<20/60}).length,hit=cones.filter(function(c){return c.t==='S'&&Math.hypot(c.x-450,c.y-240)<drad}).length;
  $('o').textContent='S fraction '+(100*s/cones.length).toFixed(1)+'% · S inside 20′: '+sc+' · S cones hit by the dot: '+hit+(drad===12&&hit===0?' → tritanopic: the dot is not seen as blue':'');requestAnimationFrame(draw)}
-$('dot').onclick=function(){dot=1;LED.commit('dot',{size:'tiny'})};$('big').onclick=function(){dot=2;LED.commit('dot',{size:'big'})};$('c').onclick=$('dot').onclick;
+$('dot').onclick=function(){dot=1;LED.commit('dot',{size:'tiny'})};$('big').onclick=function(){dot=2;LED.commit('dot',{size:'big'})};var taps=0;$('c').onclick=function(){taps++;dot=2;$('dot').textContent='tiny blue dot ('+taps+')';LED.commit('tap',{taps:taps})};
 dot=[0,1,2][SEED%3];requestAnimationFrame(draw);
 LED.init().then(function(){LED.commit('open',{seed:SEED});
  var p=speak();LED.pagecheck('Stockman–Sharpe S-cone peak at 440–445 nm',p>=435&&p<=445,p);
