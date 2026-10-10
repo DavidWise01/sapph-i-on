@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>THE DRIFTING EIGHT · SaPpH{{i}}on</title><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<title>THE FAIR MARKET · SaPpH{{i}}on</title><link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <style>
-:root{--bg:#0b0716;--ink:#f1ecff;--dim:#bcabe4;--acc:#ff5aa0}
+:root{--bg:#0b0716;--ink:#f1ecff;--dim:#bcabe4;--acc:#8fb85a}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#24124a,var(--bg));color:var(--ink);font:15px/1.55 system-ui,sans-serif}
 .wrap{max-width:980px;margin:0 auto;padding:18px 16px 40px}a{color:var(--dim)}
 nav{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-align:center}
@@ -19,13 +19,13 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-of
 .st{display:inline-block;font:700 11px ui-monospace,monospace;padding:1px 6px;border-radius:5px;border:1px solid;margin-right:6px}
 .lit{color:#7dffa8}.amb{color:#f4c740}.wall{color:#ff8a8a}
 </style></head><body><div class="wrap">
-<nav><a href="https://0root.ai/">the hallway</a> &#8250; <a href="../index.html">SaPpH{{i}}on</a> &#8250; <a href="../k/pathos.html">PATHOS</a> &#8250; <a href="../d/pathos-17.html">domain 17</a></nav>
-<h1>THE DRIFTING EIGHT</h1><div class="tag">no fitness, no favourite, and still one colour wins</div>
-<div class="stage"><canvas id="cv" role="img" aria-label="fixation: alleles are lost one by one to pure chance until one colour holds the whole population"></canvas><canvas id="plot" aria-hidden="true"></canvas></div>
+<nav><a href="https://0root.ai/">the hallway</a> &#8250; <a href="../index.html">SaPpH{{i}}on</a> &#8250; <a href="../k/phronesis.html">PHRONESIS</a> &#8250; <a href="../d/phronesis-15.html">domain 15</a></nav>
+<h1>THE FAIR MARKET</h1><div class="tag">everyone starts equal, and the trades are fair</div>
+<div class="stage"><canvas id="cv" role="img" aria-label="inequality: wealth settles into the Boltzmann–Gibbs exponential (Gini ≈ 0.5) from perfectly fair exchanges, or a gamma-like hump if agents save"></canvas><canvas id="plot" aria-hidden="true"></canvas></div>
 <div class="hud" id="hud"></div>
 <div class="ctl"><button type="button" id="reseed">NEW SEED</button><button type="button" id="pause">PAUSE</button></div>
-<div class="panel"><h2>THE RULE</h2><p>Each generation, every individual picks one parent at random from the previous generation. There is no selection: every allele is equally fit.</p><p style="color:var(--dim);font-size:13px">Tap to plant a new allele. The same <code>?seed=</code> always gives the same run.</p></div>
-<div class="panel"><h2>WHAT IS CLAIMED</h2><p><span class="st lit">LIT</span>Wright&ndash;Fisher drift. The expected heterozygosity is H<sub>0</sub>(1&minus;1/N)<sup>t</sup> (the gold dashed line). The page checks the population size and the allele set every 10 steps, or it throws.</p><p><span class="st amb">AMBER</span>The 8 alleles are the 8 q.d colours.</p></div>
+<div class="panel"><h2>THE RULE</h2><p>600 agents start with 100 each. Random pairs pool their money and split it at a random point; the seed may let each agent save a share &lambda;. Nobody can go into debt.</p><p style="color:var(--dim);font-size:13px">Tap to reset everyone to equal. The same <code>?seed=</code> always gives the same run.</p></div>
+<div class="panel"><h2>WHAT IS CLAIMED</h2><p><span class="st lit">LIT</span>Dr&#259;gulescu &amp; Yakovenko (2000); saving propensity: Chakraborti &amp; Chakrabarti (2000). Total money must stay fixed and nobody may go into debt, or the page throws.</p><p><span class="st wall">WALL</span>A physics toy, not an economy.</p></div>
 </div>
 <script>
 "use strict";
@@ -42,20 +42,20 @@ function plot(){pg.clearRect(0,0,PW,PH);if(SER.length<2)return;var mx=-1e9,mn=1e
  pg.strokeStyle=getComputedStyle(document.body).getPropertyValue("--acc");pg.lineWidth=1.5;pg.beginPath();SER.forEach(function(v,i){var x=i/(SER.length-1)*PW,y=PH-6-(v-mn)/(mx-mn)*(PH-12);i?pg.lineTo(x,y):pg.moveTo(x,y);});pg.stroke();
  pg.fillStyle="#bcabe4";pg.font="11px ui-monospace,monospace";pg.fillText(SIM.label+"  "+(+SER[SER.length-1].toFixed(3)),8,13);}
 function pos(e){var r=cv.getBoundingClientRect();return [e.clientX-r.left,e.clientY-r.top];}
-// Wright–Fisher genetic drift: each generation, every one of N individuals picks a parent from the last generation uniformly at random. There is no selection and no advantage, only sampling.
-var N=0,A,B,H0=0,gen=0,alleles=8,img,W0,H1;
-function het(){var c=new Array(8).fill(0);for(var i=0;i<N;i++)c[A[i]]++;var h=1;c.forEach(function(k){h-=(k/N)*(k/N);});return h;}
-var SIM={spf:1,checkEvery:10,label:"heterozygosity H (gold: expected)",
-init:function(){var side=Math.round(Math.min(40,Math.max(16,Math.sqrt(W*H)/14)));W0=side;H1=Math.round(side*H/W);N=W0*H1;A=new Uint8Array(N);B=new Uint8Array(N);alleles=4+((R()*5)|0);for(var i=0;i<N;i++)A[i]=(R()*alleles)|0;H0=het();img=g.createImageData(W0,H1);SIM.exp=[];},
-step:function(){if(tick%6)return;for(var i=0;i<N;i++)B[i]=A[(R()*N)|0];var t=A;A=B;B=t;gen++;if(het()===0&&gen>5){SIM.fixedAt=gen;}},
-poke:function(x,y){var c=(R()*8)|0,cx=(x/W*W0)|0,cy=(y/H*H1)|0;for(var dy=-1;dy<=1;dy++)for(var dx=-1;dx<=1;dx++){var xx=cx+dx,yy=cy+dy;if(xx>=0&&yy>=0&&xx<W0&&yy<H1)A[yy*W0+xx]=c;}H0=het();gen=0;},
-check:function(){var c=new Array(8).fill(0);for(var i=0;i<N;i++){if(A[i]>7)fail("unknown allele");c[A[i]]++;}if(c.reduce(function(a,b){return a+b;},0)!==N)fail("population size changed");},
-series:function(){return het();},
-draw:function(){for(var i=0;i<N;i++){var c=QD[A[i]];img.data[i*4]=parseInt(c.slice(1,3),16);img.data[i*4+1]=parseInt(c.slice(3,5),16);img.data[i*4+2]=parseInt(c.slice(5,7),16);img.data[i*4+3]=255;}
- var o=document.createElement("canvas");o.width=W0;o.height=H1;o.getContext("2d").putImageData(img,0,0);g.imageSmoothingEnabled=false;g.drawImage(o,0,0,W,H);
- if(SER.length>1){pg.strokeStyle="#f4c740";pg.setLineDash([3,3]);pg.beginPath();for(var k=0;k<SER.length;k++){var e=H0*Math.pow(1-1/N,(gen-(SER.length-1-k)*4/6));var mx=Math.max.apply(null,SER),mn=Math.min.apply(null,SER);if(mx===mn)mx+=1;var X=k/(SER.length-1)*PW,Y=PH-6-(e-mn)/(mx-mn)*(PH-12);k?pg.lineTo(X,Y):pg.moveTo(X,Y);}pg.stroke();pg.setLineDash([]);}},
-hud:function(){var c=new Array(8).fill(0);for(var i=0;i<N;i++)c[A[i]]++;var alive=c.filter(function(k){return k>0;}).length;return "N "+N+" · generation "+gen+" · alleles alive "+alive+" (started "+alleles+")" · H "+het().toFixed(3)+" · expected H₀(1−1/N)^t "+(H0*Math.pow(1-1/N,gen)).toFixed(3);},
-sig:function(){return Array.prototype.slice.call(A,0,60).join("");}};
+// Kinetic wealth exchange (Drăgulescu–Yakovenko): random pairs meet, and the winner of a coin flip takes a slice Δ from the other, with no debt allowed. Total money is fixed.
+var n=600,mny,total,save,img;
+var SIM={spf:1,checkEvery:30,label:"Gini coefficient",
+init:function(){mny=new Float64Array(n);for(var i=0;i<n;i++)mny[i]=100;total=100*n;save=R()<.5?0:.2+R()*.5;},
+step:function(){for(var k=0;k<2000;k++){var i=(R()*n)|0,j=(R()*n)|0;if(i===j)continue;var pot=(1-save)*(mny[i]+mny[j]),e=R()*pot;var ni=save*mny[i]+e,nj=save*mny[j]+(pot-e);mny[i]=ni;mny[j]=nj;}},
+poke:function(x,y){for(var i=0;i<n;i++)mny[i]=total/n;},
+check:function(){var s=0;for(var i=0;i<n;i++){if(mny[i]<-1e-9)fail("debt appeared");s+=mny[i];}if(Math.abs(s-total)>1e-6*total)fail("money not conserved: "+s);},
+series:function(){var a=Array.prototype.slice.call(mny).sort(function(x,y){return x-y;}),c=0,s=0;for(var i=0;i<n;i++){c+=a[i]*(i+1);s+=a[i];}return (2*c)/(n*s)-(n+1)/n;},
+draw:function(){g.fillStyle="#090512";g.fillRect(0,0,W,H);var B=40,h=new Array(B).fill(0),mx=500;for(var i=0;i<n;i++)h[Math.min(B-1,(mny[i]/mx*B)|0)]++;var top=Math.max.apply(null,h);
+ for(var b=0;b<B;b++){var bh=h[b]/top*H*.8;g.fillStyle=QD[b%8];g.fillRect(b/B*W+1,H-bh-20,W/B-2,bh);}
+ var T=total/n;g.strokeStyle="#fff6b0";g.lineWidth=2;g.beginPath();for(var b=0;b<B;b++){var m=(b+.5)/B*mx,e=save?null:n*(mx/B)/T*Math.exp(-m/T);if(e===null)break;var X=(b+.5)/B*W,Y=H-20-e/top*H*.8;b?g.lineTo(X,Y):g.moveTo(X,Y);}g.stroke();g.lineWidth=1;
+ g.fillStyle="#bcabe4";g.font="11px ui-monospace,monospace";g.textAlign="left";g.fillText(save?"with saving λ, the exponential gives way to a gamma-like hump":"cream curve: Boltzmann–Gibbs e^(−m/T)",8,H-6);},
+hud:function(){var mx=0;for(var i=0;i<n;i++)if(mny[i]>mx)mx=mny[i];return "agents "+n+" · total "+total+" (fixed) · saving λ "+save.toFixed(2)+" · richest "+mx.toFixed(0)+" · Gini "+SIM.series().toFixed(3)+" · tap to redistribute equally";},
+sig:function(){return Array.prototype.slice.call(mny,0,4).map(function(v){return v.toFixed(2);}).join(",");}};
 
 SIM.init();
 cv.addEventListener("pointerdown",function(e){var p=pos(e);SIM.poke(p[0],p[1]);});

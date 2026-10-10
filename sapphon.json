@@ -27,10 +27,10 @@
  "counts": {
   "keepers": 8,
   "domains": 512,
-  "domains_populated": 132,
-  "domains_open": 380,
-  "spheres": 1531,
-  "zero_spheres": 380,
+  "domains_populated": 142,
+  "domains_open": 370,
+  "spheres": 1541,
+  "zero_spheres": 370,
   "balance": 0,
   "workshop": 343
  },
@@ -4030,13 +4030,37 @@
     },
     {
      "n": 18,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE EIGHT KINGDOMS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Eight Kingdoms",
+       "h": "grown/the-eight-kingdoms.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-eight-kingdoms.html",
+       "grown": true,
+       "emerges": "coarsening: domains grow as walls shorten, and colours go extinct one by one",
+       "label": "LIT",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#f0a886",
+         "#f1ecff",
+         "#7dffa8"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-41"
+      }
+     ],
      "page": "d/ethos-18.html",
-     "zero_page": "z/ethos-18.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-18.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-18.html"
+     "zero_url": null
     },
     {
      "n": 19,
@@ -9288,13 +9312,37 @@
     },
     {
      "n": 19,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE TERMITE PILES",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Termite Piles",
+       "h": "grown/the-termite-piles.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-termite-piles.html",
+       "grown": true,
+       "emerges": "piles: scattered chips gather into fewer, bigger heaps without any termite knowing where a heap is",
+       "label": "LIT · WALL",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#ff5aa0",
+         "#f1ecff",
+         "#7dffa8"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-41"
+      }
+     ],
      "page": "d/pathos-19.html",
-     "zero_page": "z/pathos-19.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-19.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-19.html"
+     "zero_url": null
     },
     {
      "n": 20,
@@ -13509,13 +13557,37 @@
     },
     {
      "n": 17,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE EIGHT-CASE RULEBOOK",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Eight-Case Rulebook",
+       "h": "grown/the-eight-case-rulebook.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-eight-case-rulebook.html",
+       "grown": true,
+       "emerges": "order, nesting triangles, chaos (rule 30) or travelling particles (rule 110, which is Turing-complete)",
+       "label": "LIT",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#4db1f0",
+         "#f1ecff",
+         "#7dffa8"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-41"
+      }
+     ],
      "page": "d/logos-17.html",
-     "zero_page": "z/logos-17.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-17.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-17.html"
+     "zero_url": null
     },
     {
      "n": 18,
@@ -17282,23 +17354,71 @@
     },
     {
      "n": 15,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE COLD COLLAPSE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Cold Collapse",
+       "h": "grown/the-cold-collapse.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-cold-collapse.html",
+       "grown": true,
+       "emerges": "violent relaxation: collapse, bounce, then a lumpy halo with a dense core and clumps",
+       "label": "LIT",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#a87bff",
+         "#f1ecff",
+         "#7dffa8"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-01"
+      }
+     ],
      "page": "d/mythos-15.html",
-     "zero_page": "z/mythos-15.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-15.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-15.html"
+     "zero_url": null
     },
     {
      "n": 16,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE SIX-ARMED FROST",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Six-Armed Frost",
+       "h": "grown/the-six-armed-frost.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-six-armed-frost.html",
+       "grown": true,
+       "emerges": "a snowflake: plates, dendrites or stars depending on β and γ",
+       "label": "LIT",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#a87bff",
+         "#4db1f0",
+         "#f1ecff"
+        ],
+        "bg": "#090512",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-01"
+      }
+     ],
      "page": "d/mythos-16.html",
-     "zero_page": "z/mythos-16.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-16.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-16.html"
+     "zero_url": null
     },
     {
      "n": 17,
@@ -22896,13 +23016,37 @@
     },
     {
      "n": 20,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE FIRING FIELD",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Firing Field",
+       "h": "grown/the-firing-field.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-firing-field.html",
+       "grown": true,
+       "emerges": "neuronal avalanches: bursts of every size, from one cell to most of the grid",
+       "label": "LIT · AMBER",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#3fd0a0",
+         "#f1ecff",
+         "#7dffa8"
+        ],
+        "bg": "#090512",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-01"
+      }
+     ],
      "page": "d/episteme-20.html",
-     "zero_page": "z/episteme-20.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/episteme-20.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/episteme-20.html"
+     "zero_url": null
     },
     {
      "n": 21,
@@ -27067,13 +27211,37 @@
     },
     {
      "n": 17,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE FREEZING BOX",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Freezing Box",
+       "h": "grown/the-freezing-box.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-freezing-box.html",
+       "grown": true,
+       "emerges": "freezing: hexagonal crystal grains (gold), with defects at the grain boundaries (blue = 5 neighbours, pink = 7)",
+       "label": "LIT",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#c98a55",
+         "#f4c740",
+         "#ff5aa0"
+        ],
+        "bg": "#090512",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-01"
+      }
+     ],
      "page": "d/techne-17.html",
-     "zero_page": "z/techne-17.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/techne-17.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/techne-17.html"
+     "zero_url": null
     },
     {
      "n": 18,
@@ -30542,13 +30710,37 @@
     },
     {
      "n": 15,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE FAIR MARKET",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Fair Market",
+       "h": "grown/the-fair-market.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-fair-market.html",
+       "grown": true,
+       "emerges": "inequality: wealth settles into the Boltzmann–Gibbs exponential (Gini ≈ 0.5) from perfectly fair exchanges, or a gamma-like hump if agents save",
+       "label": "LIT · WALL",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#8fb85a",
+         "#f1ecff",
+         "#7dffa8"
+        ],
+        "bg": "#090512",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-42"
+      }
+     ],
      "page": "d/phronesis-15.html",
-     "zero_page": "z/phronesis-15.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-15.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-15.html"
+     "zero_url": null
     },
     {
      "n": 16,
@@ -35557,23 +35749,71 @@
     },
     {
      "n": 19,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE RIPPLE TANK",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Ripple Tank",
+       "h": "grown/the-ripple-tank.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-ripple-tank.html",
+       "grown": true,
+       "emerges": "interference: nodal lines and fringes where the waves cancel or add",
+       "label": "LIT",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#ff8a3a",
+         "#f1ecff",
+         "#7dffa8"
+        ],
+        "bg": "#0b0716",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-42"
+      }
+     ],
      "page": "d/kairos-19.html",
-     "zero_page": "z/kairos-19.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-19.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-19.html"
+     "zero_url": null
     },
     {
      "n": 20,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE BEAN MACHINE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Bean Machine",
+       "h": "grown/the-bean-machine.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-bean-machine.html",
+       "grown": true,
+       "emerges": "the binomial bell (cream curve) built from individually unpredictable paths",
+       "label": "LIT",
+       "icon": {
+        "pal": [
+         "#bcabe4",
+         "#ff8a3a",
+         "#f4c740",
+         "#f1ecff"
+        ],
+        "bg": "#090512",
+        "canvas": 2,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-42"
+      }
+     ],
      "page": "d/kairos-20.html",
-     "zero_page": "z/kairos-20.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-20.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-20.html"
+     "zero_url": null
     },
     {
      "n": 21,
@@ -36026,8 +36266,8 @@
   "world": 1,
   "keepers": 8,
   "domains": 512,
-  "zero_spheres": 380,
-  "generated_total": 989,
+  "zero_spheres": 370,
+  "generated_total": 979,
   "groups": 88
  },
  "workshop": [
@@ -44297,7 +44537,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1531
+   "pages": 1541
   },
   "list": [
    {
@@ -44311,28 +44551,32 @@
       "w/box-toroid-enterprise-juliet.html",
       "domains/pathos.html",
       "neon/Hexagonal-Mobo-Elements-Red-David-Ganglia-Gold-Silver-Boron-Argon-Neon-Oxygen.html",
-      "nested/Photon-Out-Shell-Black-Hole-Infinite-Nesting-Void.html"
+      "nested/Photon-Out-Shell-Black-Hole-Infinite-Nesting-Void.html",
+      "grown/the-cold-collapse.html"
      ],
      [
       "plank/Size-99-99xinf-1-Black-Hole-Plank-Scale.html",
       "plus/Ganglia-Wavelengths-Minus-Plus-Rotation.html",
       "w/best-core-for-intelligence-not-pink-sapphire.html",
       "w/one-cubit-1440-spinor-mobius-cortex.html",
-      "w/wakaku-2-power-3-plus-1-quantum-dot-9.html"
+      "w/wakaku-2-power-3-plus-1-quantum-dot-9.html",
+      "grown/the-six-armed-frost.html"
      ],
      [
       "w/wakaku-bk-wt-rd-bl-x-yl-gr-pr-or.html",
       "w/wakaku-keep-going-please-infinite-nested.html",
       "w/wakaku-next-fractal-infinite.html",
       "w/wakaku-next-please-nested-8-evolves-infinite.html",
-      "w/wakaku-next-please-quantum-fractal.html"
+      "w/wakaku-next-please-quantum-fractal.html",
+      "grown/the-firing-field.html"
      ],
      [
       "w/wakaku-planar-0-red-blue-shift.html",
       "w/wakaku-under-press-99-9-inf-inf.html",
       "w/wakaku-white-black-red-blue-green-yellow-purple-orange-neste.html",
       "forward/Next-Element-Rubidium-37.html",
-      "later/Next-Evo-That-O-Itself-Oxygen-Lol-O-Infinite.html"
+      "later/Next-Evo-That-O-Itself-Oxygen-Lol-O-Infinite.html",
+      "grown/the-freezing-box.html"
      ]
     ]
    },
@@ -46998,21 +47242,24 @@
       "still/Next-Element-Astatine-85-Lyre.html",
       "still/Next-Element-Plutonium-94-Lyre.html",
       "still/Next-Element-Radon-86-Lyre-Fresh.html",
-      "still/Next-Element-Uranium-92-Lyre.html"
+      "still/Next-Element-Uranium-92-Lyre.html",
+      "grown/the-eight-kingdoms.html"
      ],
      [
       "still/Next-Shell-After-Arsenic.html",
       "still/Next-Shell-After-Molybdenum.html",
       "still/Next-Shell-After-Technetium.html",
       "still/Next-Shell-After-Zirconium.html",
-      "voice/Wakaku-Speaker-V84-Enhance.html"
+      "voice/Wakaku-Speaker-V84-Enhance.html",
+      "grown/the-termite-piles.html"
      ],
      [
       "voice/Wakaku-Speaker-V97-Rooting.html",
       "w/aeon-colorful-i13-executable.html",
       "w/aeon-furby-compact.html",
       "w/aeon-furby-flurby-right-to-left.html",
-      "w/base-time-control-kernel.html"
+      "w/base-time-control-kernel.html",
+      "grown/the-eight-case-rulebook.html"
      ]
     ]
    },
@@ -47027,21 +47274,24 @@
       "w/gravity-bounce-minus-g-plus.html",
       "w/gray-static-tv-overlay-quantum.html",
       "w/infinite-lattice-singularity.html",
-      "w/missed-golds-silver-tetras.html"
+      "w/missed-golds-silver-tetras.html",
+      "grown/the-fair-market.html"
      ],
      [
       "w/morphic-kernel-rollback.html",
       "w/next-cycle-enter-quantum.html",
       "w/next-element-boron.html",
       "w/next-element-nitrogen.html",
-      "w/one-tetra-10-ring.html"
+      "w/one-tetra-10-ring.html",
+      "grown/the-ripple-tank.html"
      ],
      [
       "w/solid-plasma-lattice-upgrade-boring-crystal-lattice-biome-oz.html",
       "w/tetragarde-role-defined.html",
       "w/transformers-2-transitive-speech-wave-function-half-gravity-.html",
       "w/wakaku-speaker-collapse.html",
-      "w/wakaku-speaker-ha.html"
+      "w/wakaku-speaker-ha.html",
+      "grown/the-bean-machine.html"
      ]
     ]
    },
