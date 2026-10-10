@@ -11,7 +11,7 @@ button,input{font:16px Garamond,Georgia,serif;background:#f6eed8;color:#3a2410;b
 table{border-collapse:collapse;font:14px "Courier New",monospace}td,th{border:1px solid rgba(58,36,16,.3);padding:1px 5px;text-align:center}.bad{background:#8b1a1a;color:#fff}
 #ledger{margin:18px 0 6px;padding:10px 12px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);font:12px/1.45 ui-monospace,Menlo,Consolas,monospace}#ledger h3{margin:0 0 4px;font-size:13px;letter-spacing:.08em}#ledger .lh{font-weight:700;word-break:break-all;margin:2px 0}#ledger .lr{color:var(--acc);margin:4px 0;word-break:break-word}#ledger ul{margin:4px 0;padding-left:16px}#ledger li.bad{color:#c00;font-weight:700}#ledger button{font:600 12px ui-monospace,monospace;background:var(--paper);color:var(--ink);border:1px solid var(--ink);padding:3px 8px;margin:2px 4px 2px 0;cursor:pointer}#ledger code{opacity:.7}
 .colo{font-size:12px;opacity:.85}.persona{font-family:ui-monospace,monospace;font-weight:700;color:var(--acc)}:root{--ink:#3a2410;--paper:#efe4c8;--acc:#8b1a1a}</style></head><body><main>
-<div class="lt"><div class="seal">I N<br>1677</div><h1>The Anagram Letter</h1>
+<div class="lt"><div class="seal">I N<br>1677</div><h1>The Anagram Letter</h1><div id="band" style="height:8px;margin:2px 0 8px"></div>
 <p><span class="lab">LIT</span>In his second letter for Leibniz (the <i>Epistola posterior</i>, dated 24 October 1676, sent through Oldenburg and received in 1677), Newton hid the core of his method of fluxions as a letter inventory:</p>
 <p class="code">6accdae13eff7i3l9n4o4qrr4s8t12ux</p>
 <p>It counts the letters of <i>"Data aequatione quotcunque fluentes quantitates involvente, fluxiones invenire; et vice versa"</i>, "given an equation involving any number of fluent quantities, to find the fluxions, and vice versa" (the fundamental theorem of calculus, in his terms). Only the author could later produce the sentence, so it fixed his priority without revealing the method: a trusted timestamp. Dave's ledger, below, does the same job with SHA-256.</p>
@@ -86,6 +86,7 @@ LED.commitAt=function(id,epoch,state){LED.run(function(){if(!LED.A)return;return
 /* re-entrancy: a task already running in the queue may commit directly instead of waiting on itself */
 LED.inq=0;LED.run=function(fn){if(LED.inq>0)return Promise.resolve().then(fn);var p=LED.q.then(function(){LED.inq++;return Promise.resolve().then(fn).then(function(v){LED.inq--;return v},function(e){LED.inq--;throw e})});LED.q=p.catch(function(){});return p};
 </script><script>"use strict";document.getElementById('sd').textContent=SEED;document.querySelectorAll('#ledger button').forEach(function(b){b.onclick=function(){LED.attack(b.dataset.a)}});
+(function(){var r=rng(SEED*7+3),h=Math.floor(r()*360),w=20+Math.floor(r()*60);document.getElementById("band").style.background="repeating-linear-gradient(90deg,hsl("+h+",45%,40%) 0 "+w+"px,transparent "+w+"px "+(w+6+Math.floor(r()*30))+"px)"})();
 function $(i){return document.getElementById(i)}
 var S="Data aequatione quotcunque fluentes quantitates involvente, fluxiones invenire; et vice versa",CODE="6accdae13eff7i3l9n4o4qrr4s8t12ux";
 function inv(s){var t=s.toLowerCase().replace(/v/g,'u').replace(/ae/g,'æ').replace(/[^a-zæ]/g,''),c={};for(var i=0;i<t.length;i++)c[t[i]]=(c[t[i]]||0)+1;return c}
