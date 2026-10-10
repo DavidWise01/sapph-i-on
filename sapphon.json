@@ -27,10 +27,10 @@
  "counts": {
   "keepers": 8,
   "domains": 512,
-  "domains_populated": 396,
-  "domains_open": 116,
-  "spheres": 1795,
-  "zero_spheres": 116,
+  "domains_populated": 407,
+  "domains_open": 105,
+  "spheres": 1806,
+  "zero_spheres": 105,
   "balance": 0,
   "workshop": 343
  },
@@ -5058,24 +5058,74 @@
     },
     {
      "n": 46,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE GREEN FLASH",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Green Flash",
+       "h": "grown/green-flash.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/green-flash.html",
+       "grown": true,
+       "emerges": "a setting sun splits into offset coloured images; green survives last",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#4fff7a",
+         "#dfe9de",
+         "#ff9a3c",
+         "#6a2ab0"
+        ],
+        "bg": "#2a1a40",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-41",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/ethos-46.html",
-     "zero_page": "z/ethos-46.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-46.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-46.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 47,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "COPPER GREENS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Copper Greens",
+       "h": "grown/copper-green.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/copper-green.html",
+       "grown": true,
+       "emerges": "malachite grows ring by ring; a copper flame flares",
+       "label": "LIT · COMPUTED · MODEL",
+       "icon": {
+        "pal": [
+         "#1fae7a",
+         "#cfe6dd",
+         "#2fe0a0",
+         "#ffa65c"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-41",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/ethos-47.html",
-     "zero_page": "z/ethos-47.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-47.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-47.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -11013,24 +11063,72 @@
     },
     {
      "n": 45,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "PURPLE EARTH",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Purple Earth",
+       "h": "grown/purple-earth.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/purple-earth.html",
+       "grown": true,
+       "emerges": "purple and green mats compete for one light budget",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#b06cff",
+         "#e2d4ee",
+         "#4fd06a",
+         "#ffa45c"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-01",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-45.html",
-     "zero_page": "z/pathos-45.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-45.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-45.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 46,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "NO GREEN STARS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "No Green Stars",
+       "h": "grown/no-green-stars.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/no-green-stars.html",
+       "grown": true,
+       "emerges": "a temperature slider walks the Planck locus past the green it never reaches",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#3fd06a",
+         "#ffb36a"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-01",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-46.html",
-     "zero_page": "z/pathos-46.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-46.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-46.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -16168,24 +16266,74 @@
     },
     {
      "n": 49,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE GREEN GAP",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Green Gap",
+       "h": "grown/the-green-gap.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-green-gap.html",
+       "grown": true,
+       "emerges": "a leaf layer whose colour comes from measured chlorophyll spectra",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#d4ead2",
+         "#5fe07a",
+         "#ffb36a",
+         "#d0ffd0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-01",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/logos-49.html",
-     "zero_page": "z/logos-49.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-49.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-49.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 50,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE GREEN PROTEIN",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Green Protein",
+       "h": "grown/gfp-jellyfish.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/gfp-jellyfish.html",
+       "grown": true,
+       "emerges": "calcium sparks turn aequorin blue into GFP green",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#38ff88",
+         "#d0e8dc",
+         "#b48cff",
+         "#ffb36a"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-01",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/logos-50.html",
-     "zero_page": "z/logos-50.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-50.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-50.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -20663,24 +20811,74 @@
     },
     {
      "n": 43,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "GREEN OVER PURPLE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Green Over Purple",
+       "h": "grown/aurora-green-wrap.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/aurora-green-wrap.html",
+       "grown": true,
+       "emerges": "557.7 green curtains wrapping N2+ purple, Bradford-adapted",
+       "label": "LIT · COMPUTED · MODEL",
+       "icon": {
+        "pal": [
+         "#d4ecd8",
+         "#5fff8a",
+         "#c69bff",
+         "#2f9a4a"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-42",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-43.html",
-     "zero_page": "z/mythos-43.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-43.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-43.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 44,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "555",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "555",
+       "h": "grown/uranium-555.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/uranium-555.html",
+       "grown": true,
+       "emerges": "a UV lamp lights uranium-glass shards over the real ȳ curve",
+       "label": "LIT · COMPUTED · MODEL",
+       "icon": {
+        "pal": [
+         "#b8ff40",
+         "#e2eccf",
+         "#c08cff",
+         "#ffb36a"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-42",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-44.html",
-     "zero_page": "z/mythos-44.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-44.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-44.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -37114,24 +37312,74 @@
     },
     {
      "n": 42,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "ARSENIC DAMASK",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Arsenic Damask",
+       "h": "grown/arsenic-wallpaper.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/arsenic-wallpaper.html",
+       "grown": true,
+       "emerges": "damp spreads and blackens an arsenic-green damask",
+       "label": "LIT · INVENTED",
+       "icon": {
+        "pal": [
+         "#dbe6cf",
+         "#7fd04a",
+         "#ffa65c",
+         "#6a2ab0"
+        ],
+        "bg": "#0a0a0a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-42",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-42.html",
-     "zero_page": "z/phronesis-42.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-42.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-42.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 43,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "FOUR RINGS OF RED INK",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Four Rings of Red Ink",
+       "h": "grown/green-critique.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/green-critique.html",
+       "grown": true,
+       "emerges": "red marks settle onto core, purple, green and void rings",
+       "label": "READING · LIT",
+       "icon": {
+        "pal": [
+         "#ff9a3c",
+         "#a866ff",
+         "#ffad5c",
+         "#c69bff"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-02",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-43.html",
-     "zero_page": "z/phronesis-43.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-43.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-43.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -42983,13 +43231,38 @@
     },
     {
      "n": 49,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "FOUR SHELLS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Four Shells",
+       "h": "grown/four-shells.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/four-shells.html",
+       "grown": true,
+       "emerges": "orange, purple, green rings at CIE colours; purple’s complement computed",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#2fbf5a",
+         "#d6ecd8",
+         "#ff9a3c",
+         "#8a3cff"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-02",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/kairos-49.html",
-     "zero_page": "z/kairos-49.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-49.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-49.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -43169,8 +43442,8 @@
   "world": 1,
   "keepers": 8,
   "domains": 512,
-  "zero_spheres": 116,
-  "generated_total": 725,
+  "zero_spheres": 105,
+  "generated_total": 714,
   "groups": 88
  },
  "workshop": [
@@ -51440,7 +51713,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1795
+   "pages": 1806
   },
   "list": [
    {
@@ -51455,7 +51728,8 @@
       "domains/pathos.html",
       "neon/Hexagonal-Mobo-Elements-Red-David-Ganglia-Gold-Silver-Boron-Argon-Neon-Oxygen.html",
       "nested/Photon-Out-Shell-Black-Hole-Infinite-Nesting-Void.html",
-      "grown/the-cold-collapse.html"
+      "grown/the-cold-collapse.html",
+      "grown/purple-earth.html"
      ],
      [
       "plank/Size-99-99xinf-1-Black-Hole-Plank-Scale.html",
@@ -51463,7 +51737,8 @@
       "w/best-core-for-intelligence-not-pink-sapphire.html",
       "w/one-cubit-1440-spinor-mobius-cortex.html",
       "w/wakaku-2-power-3-plus-1-quantum-dot-9.html",
-      "grown/the-six-armed-frost.html"
+      "grown/the-six-armed-frost.html",
+      "grown/no-green-stars.html"
      ],
      [
       "w/wakaku-bk-wt-rd-bl-x-yl-gr-pr-or.html",
@@ -51471,7 +51746,8 @@
       "w/wakaku-next-fractal-infinite.html",
       "w/wakaku-next-please-nested-8-evolves-infinite.html",
       "w/wakaku-next-please-quantum-fractal.html",
-      "grown/the-firing-field.html"
+      "grown/the-firing-field.html",
+      "grown/the-green-gap.html"
      ],
      [
       "w/wakaku-planar-0-red-blue-shift.html",
@@ -51479,7 +51755,8 @@
       "w/wakaku-white-black-red-blue-green-yellow-purple-orange-neste.html",
       "forward/Next-Element-Rubidium-37.html",
       "later/Next-Evo-That-O-Itself-Oxygen-Lol-O-Infinite.html",
-      "grown/the-freezing-box.html"
+      "grown/the-freezing-box.html",
+      "grown/gfp-jellyfish.html"
      ]
     ]
    },
@@ -51495,7 +51772,8 @@
       "plus/plus-side-ladder-one-percent-in-quartz.html",
       "w/planet-manifold-blackholes.html",
       "w/gold-red-memristor-out.html",
-      "grown/the-culture-map.html"
+      "grown/the-culture-map.html",
+      "grown/green-critique.html"
      ],
      [
       "bonk/Bonk-Self-Similar-Eat-Itself-Pulsar-Quasar-V52.html",
@@ -51503,7 +51781,8 @@
       "onward/88-Mph-Next.html",
       "qdot/Bonk-Quantum-Dot-Itself-Black-Hole-Owns-You-V51.html",
       "w/cubi-harmonic-lattice.html",
-      "grown/the-river-maker.html"
+      "grown/the-river-maker.html",
+      "grown/four-shells.html"
      ],
      [
       "lyre/Ne10-Lyre-Neon-Full.html",
@@ -54401,7 +54680,8 @@
       "still/Next-Shell-After-Technetium.html",
       "still/Next-Shell-After-Zirconium.html",
       "voice/Wakaku-Speaker-V84-Enhance.html",
-      "grown/the-termite-piles.html"
+      "grown/the-termite-piles.html",
+      "grown/green-flash.html"
      ],
      [
       "voice/Wakaku-Speaker-V97-Rooting.html",
@@ -54409,7 +54689,8 @@
       "w/aeon-furby-compact.html",
       "w/aeon-furby-flurby-right-to-left.html",
       "w/base-time-control-kernel.html",
-      "grown/the-eight-case-rulebook.html"
+      "grown/the-eight-case-rulebook.html",
+      "grown/copper-green.html"
      ]
     ]
    },
@@ -54425,7 +54706,8 @@
       "w/gray-static-tv-overlay-quantum.html",
       "w/infinite-lattice-singularity.html",
       "w/missed-golds-silver-tetras.html",
-      "grown/the-fair-market.html"
+      "grown/the-fair-market.html",
+      "grown/aurora-green-wrap.html"
      ],
      [
       "w/morphic-kernel-rollback.html",
@@ -54433,7 +54715,8 @@
       "w/next-element-boron.html",
       "w/next-element-nitrogen.html",
       "w/one-tetra-10-ring.html",
-      "grown/the-ripple-tank.html"
+      "grown/the-ripple-tank.html",
+      "grown/uranium-555.html"
      ],
      [
       "w/solid-plasma-lattice-upgrade-boring-crystal-lattice-biome-oz.html",
@@ -54441,7 +54724,8 @@
       "w/transformers-2-transitive-speech-wave-function-half-gravity-.html",
       "w/wakaku-speaker-collapse.html",
       "w/wakaku-speaker-ha.html",
-      "grown/the-bean-machine.html"
+      "grown/the-bean-machine.html",
+      "grown/arsenic-wallpaper.html"
      ]
     ]
    },
