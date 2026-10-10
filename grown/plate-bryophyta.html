@@ -1,0 +1,97 @@
+<!doctype html><html lang="en"><head><!--built-by-grok-bot--><meta name="author" content="Grok Bot"><meta name="generator" content="Grok Bot · SaPpH{{i}}on"><meta charset="utf-8"><meta name="grokbot-badge" content="inline"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="persona" content="{{+L.-E.+O. D++}}"><title>Plate IV · Bryophyta et Tardigrada · SaPpH{{i}}on</title>
+<style>body{margin:0;background:#e8dcc0;color:#3a2b1a;font:15px/1.55 "Baskerville","Libre Baskerville",Georgia,serif}main{max-width:820px;margin:0 auto;padding:14px}
+h1{font:400 26px/1.2 Baskerville,Georgia,serif;text-align:center;letter-spacing:.25em;text-transform:uppercase;margin:8px 0 2px}.sub{text-align:center;font-style:italic;margin:0 0 8px}
+canvas{width:100%;display:block;background:#f3ead3;box-shadow:inset 0 0 60px rgba(120,90,40,.25),0 8px 20px rgba(60,40,10,.25);cursor:crosshair;touch-action:manipulation}.ui{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0;align-items:center;justify-content:center}button{font:italic 15px Baskerville,Georgia,serif;background:#f3ead3;border:1px solid #3a2b1a;padding:4px 12px;cursor:pointer}
+#ledger{margin:18px 0 6px;padding:10px 12px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);font:12px/1.45 ui-monospace,Menlo,Consolas,monospace}#ledger h3{margin:0 0 4px;font-size:13px;letter-spacing:.08em}#ledger .lh{font-weight:700;word-break:break-all;margin:2px 0}#ledger .lr{color:var(--acc);margin:4px 0;word-break:break-word}#ledger ul{margin:4px 0;padding-left:16px}#ledger li.bad{color:#c00;font-weight:700}#ledger button{font:600 12px ui-monospace,monospace;background:var(--paper);color:var(--ink);border:1px solid var(--ink);padding:3px 8px;margin:2px 4px 2px 0;cursor:pointer}#ledger code{opacity:.7}
+.colo{font-size:12px;opacity:.85}.persona{font-family:ui-monospace,monospace;font-weight:700;color:var(--acc)}:root{--ink:#3a2b1a;--paper:#f3ead3;--acc:#7a3b2a}</style></head><body><main>
+<h1>Plate IV</h1><p class="sub">Bryophyta et Tardigrada · drawn from life, coloured by hand</p>
+<canvas id="c" width="800" height="1000" aria-label="hand-coloured botanical plate of a moss with tardigrades"></canvas>
+<div class="ui"><button id="grow">grow</button><button id="spec">next specimen (new seed)</button><span id="st"></span></div>
+<p>Each moss shoot grows by <i>space colonisation</i>. A cloud of hormone points fills a cushion shape, and every tip grows toward the points nearest it. A point is used up once a tip reaches it. The branching that emerges is never drawn by hand. Tardigrades settle in the leaf axils where water would collect, and every figure is numbered as it appears. Tap the plate to scatter more hormone and steer the growth. Each growth generation and each new figure is a reservation on the ledger.</p>
+<p><b>LIT</b>: moss leaf axils and cushions hold water films, and limno-terrestrial tardigrades live in them (e.g. <i>Ramazzottius</i>, <i>Milnesium</i>). <b>MODEL</b>: space-colonisation algorithm (Runions et al., 2007). <b>ANALOGY</b>: hand-colouring is simulated with transparent washes.</p>
+<section id="ledger" aria-label="DurableAnchor ledger"><h3>DURABLEANCHOR LEDGER · Dave's kernel, running in this page</h3><p class="lh">provisioning…</p><div><button data-a="double-vote">try a double vote</button><button data-a="epoch-rollback">try an epoch rollback</button></div><p class="lr"></p><details open><summary>self-checks (kernel, then page)</summary><ul class="lc"></ul><ul class="lc2"></ul></details></section>
+<p class="colo">Engine: Dave's <a href="../kernel-durable-anchor.html">DurableAnchor kernel</a>, ported faithfully to the browser with Web Crypto SHA-256 and an in-memory record store (exclusive-create, so concurrent reservations are refused; fsync has nothing to flush). The ledger starts empty on each load. Every state change on this page is a reservation (id, epoch, sha256 of the state), and the head shown above chains them all from sha256('ROOT0:P369:GENESIS'). Persona: <span class="persona">{{+L.-E.+O. D++}}</span> (Dave's notation). Built by Grok Bot · seed <span id="sd"></span> · <a href="../index.html">← SaPpH{{i}}on</a></p>
+</main><script>/* DurableAnchor: browser port of Dave's kernel (durable-anchor.mjs). Same logic: append-only, hash-chained,
+   checked against an external trusted checkpoint. The filesystem becomes an in-memory record store with
+   exclusive-create; fsync and directory sync are no-ops here (nothing to flush in memory). */
+var TOPOLOGY='-+5 + 1',PERSONA='{{+L.-E.+O. D++}}';
+var _te=new TextEncoder();
+function _hex(b){return Array.prototype.map.call(new Uint8Array(b),function(v){return v.toString(16).padStart(2,'0')}).join('')}
+function digest(x){return crypto.subtle.digest('SHA-256',_te.encode(x)).then(_hex)}
+function _key(id,epoch){return _hex(_te.encode(id+'|'+epoch))+'.json'}
+function MemStore(){this.f=new Map();this.beforeCreate=null}
+MemStore.prototype.list=function(){return Array.from(this.f.keys())};
+MemStore.prototype.read=function(n){return this.f.get(n)};
+MemStore.prototype.create=function(n,s){if(this.beforeCreate){var h=this.beforeCreate;this.beforeCreate=null;h(n,s)}if(this.f.has(n)){var e=Error('exists');e.code='EEXIST';throw e}this.f.set(n,s)};
+class DurableAnchor{
+ constructor(store,tc){if(!tc||!Number.isInteger(tc.count)||typeof tc.head!=='string')throw Error('external trusted checkpoint required');this.dir=store;this.trusted=tc}
+ static async provision(store){return new DurableAnchor(store||new MemStore(),{count:0,head:await digest('ROOT0:P369:GENESIS')})}
+ async records(){var files=this.dir.list().filter(function(n){return n.endsWith('.json')}).sort(),entries=[];for(var file of files){var x=JSON.parse(this.dir.read(file));if(file!==_key(x.id,x.epoch)||!(/^[a-f0-9]{64}$/.test(x.head)))throw Error('corrupt-record');entries.push(x)}return entries}
+ async checkpoint(){var items=await this.records(),head=await digest('ROOT0:P369:GENESIS');for(var x of items)head=await digest(head+'|'+JSON.stringify(x));return {count:items.length,head:head}}
+ async validate(){try{var c=await this.checkpoint();if(c.count!==this.trusted.count||c.head!==this.trusted.head)return {ok:false,reason:'rollback-or-altered-history'};return {ok:true,checkpoint:c}}catch(e){return {ok:false,reason:'unavailable-or-corrupt'}}}
+ async reserve(id,epoch,head){var v=await this.validate();if(!v.ok)return v;if(typeof id!=='string'||!id||!Number.isSafeInteger(epoch)||epoch<0||!(/^[a-f0-9]{64}$/.test(head)))throw new RangeError('reservation');
+  var p=_key(id,epoch),entries=await this.records(),old=entries.find(function(x){return x.id===id&&x.epoch===epoch});if(old)return old.head===head?{ok:true,previous:true,checkpoint:this.trusted}:{ok:false,reason:'double-vote'};
+  if(entries.some(function(x){return x.id===id&&x.epoch>epoch}))return {ok:false,reason:'epoch-rollback'};
+  try{this.dir.create(p,JSON.stringify({id:id,epoch:epoch,head:head}))}catch(e){return {ok:false,reason:e.code==='EEXIST'?'concurrent-reservation':'write-error'}}
+  var cp=await this.checkpoint();this.trusted=cp;return {ok:true,previous:false,checkpoint:cp}}
+}
+/* page-side helper: every state change is a reservation */
+var LED={A:null,ep:{},last:null,rej:[],n:0,q:Promise.resolve(),
+ init:function(){return DurableAnchor.provision().then(function(a){LED.A=a;LED.show();return LED.selftest()})},
+ commit:function(id,state){LED.q=LED.q.then(function(){if(!LED.A)return;var e=(LED.ep[id]||1);/* epoch 0 is left empty so a live epoch-rollback attack has somewhere to land */return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,e,h).then(function(r){if(r.ok&&!r.previous){LED.ep[id]=e+1;LED.last={id:id,epoch:e,head:h}}else if(!r.ok)LED.rej.unshift(id+'@'+e+': '+r.reason);LED.show();return r})})});return LED.q},
+ attack:function(kind){LED.q=LED.q.then(function(){var L=LED.last;if(!L){LED.rej.unshift(kind+': nothing reserved yet');LED.show();return}
+  var p=kind==='double-vote'?digest('forged|'+Date.now()).then(function(h){return LED.A.reserve(L.id,L.epoch,h)}):LED.A.reserve(L.id,0,L.head);
+  return p.then(function(r){LED.rej.unshift('live '+kind+' on '+L.id+'@'+L.epoch+' → '+(r.ok?'ACCEPTED':r.reason));LED.show()})});return LED.q},
+ show:function(){var el=document.getElementById('ledger');if(!el||!LED.A)return;var t=LED.A.trusted;
+  el.querySelector('.lh').textContent='count '+t.count+' · head '+t.head.slice(0,16)+'… · TOPOLOGY '+TOPOLOGY;
+  el.querySelector('.lr').textContent=LED.rej.slice(0,4).join('  |  ')||'no rejections yet'},
+ selftest:async function(){var out=[],ok=function(n,c,g){out.push([n,c,g])};var s=new MemStore(),a=await DurableAnchor.provision(s);
+  ok('genesis = sha256(ROOT0:P369:GENESIS)',a.trusted.head===(await digest('ROOT0:P369:GENESIS'))&&a.trusted.head.slice(0,8)==='54bc828d'&&a.trusted.count===0,a.trusted.head.slice(0,12));
+  var h1=await digest('one'),h2=await digest('two');var r=await a.reserve('q.d',0,h1);ok('reserve q.d@0',r.ok&&!r.previous,'count '+r.checkpoint.count);
+  r=await a.reserve('q.d',1,h2);ok('reserve q.d@1, head chains',r.ok&&r.checkpoint.count===2,r.checkpoint.head.slice(0,12));
+  var exp=await digest((await digest((await digest('ROOT0:P369:GENESIS'))+'|'+JSON.stringify({id:'q.d',epoch:0,head:h1})))+'|'+JSON.stringify({id:'q.d',epoch:1,head:h2}));ok('head recomputed by hand matches',exp===a.trusted.head,exp.slice(0,12));ok('matches the Node kernel test vector',a.trusted.head==='a114295c189dce567dfbf30a5b299e80054d52cc8019a7ea1bfa8f805e679b02','a114295c189d');
+  r=await a.reserve('q.d',1,h2);ok('same vote again → previous',r.ok&&r.previous,'previous');
+  r=await a.reserve('q.d',1,h1);ok('double-vote rejected',!r.ok&&r.reason==='double-vote',r.reason);
+  r=await a.reserve('q.d',0,await digest('x'));ok('double-vote at older epoch rejected',!r.ok&&r.reason==='double-vote',r.reason);
+  r=await a.reserve('q.d',0,h1);ok('old identical vote → previous',r.ok&&r.previous,'previous');
+  await a.reserve('tun',5,h1);r=await a.reserve('tun',3,h2);ok('epoch-rollback rejected',!r.ok&&r.reason==='epoch-rollback',r.reason);
+  s.beforeCreate=function(n,v){s.f.set(n,v)};r=await a.reserve('race',0,h1);ok('concurrent-reservation rejected',!r.ok&&r.reason==='concurrent-reservation',r.reason);
+  r=await a.reserve('after',0,h1);ok('foreign write breaks trust',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  var s2=new MemStore(),b=await DurableAnchor.provision(s2);await b.reserve('a',0,h1);await b.reserve('b',0,h2);var k=_key('a',0);s2.f.set(k,JSON.stringify({id:'a',epoch:0,head:h2}));
+  r=await b.validate();ok('tamper (altered head) detected',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  s2.f.set(k,JSON.stringify({id:'a',epoch:0,head:h1}));r=await b.validate();ok('restored record validates',r.ok,'ok');
+  s2.f.delete(_key('b',0));r=await b.validate();ok('rollback (deleted record) detected',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  s2.f.set(k,'{"id":"zz","epoch":0,"head":"'+h1+'"}');r=await b.validate();ok('misnamed record → corrupt',!r.ok&&r.reason==='unavailable-or-corrupt',r.reason);
+  try{new DurableAnchor(new MemStore(),null);ok('no checkpoint refused',false,'accepted')}catch(e){ok('no checkpoint refused',/trusted checkpoint/.test(e.message),e.message)}
+  var pass=out.every(function(x){return x[1]}),el=document.getElementById('ledger');
+  if(el)el.querySelector('.lc').innerHTML=out.map(function(x){return '<li class="'+(x[1]?'ok':'bad')+'">'+(x[1]?'✓ ':'✗ ')+x[0]+' <code>'+x[2]+'</code></li>'}).join('');
+  if(!pass){console.error('anchor self-check failed');throw Error('DurableAnchor self-check failed')}return pass}
+};
+LED.pagecheck=function(name,cond,got){var el=document.getElementById('ledger');if(el){var li=document.createElement('li');li.className=cond?'ok':'bad';li.innerHTML=(cond?'✓ ':'✗ ')+name+' <code>'+got+'</code>';el.querySelector('.lc2').appendChild(li)}if(!cond)throw Error('page self-check failed: '+name)};
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+var SEED=+(new URLSearchParams(location.search).get('seed')||(Date.now()%1e6));
+LED.commitAt=function(id,epoch,state){LED.q=LED.q.then(function(){if(!LED.A)return;return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,epoch,h).then(function(r){if(r.ok&&!r.previous)LED.last={id:id,epoch:epoch,head:h};else if(!r.ok)LED.rej.unshift(id+'@'+epoch+': '+r.reason);LED.show();return r})})});return LED.q};
+</script><script>"use strict";document.getElementById('sd').textContent=SEED;document.querySelectorAll('#ledger button').forEach(function(b){b.onclick=function(){LED.attack(b.dataset.a)}});
+var c=document.getElementById('c'),g=c.getContext('2d'),R,A,Nd,gen,figs,done;
+function spec(){R=rng(SEED);A=[];Nd=[];gen=0;figs=[];done=false;var cx=400,base=820;for(var i=0;i<700;i++){var a=R()*Math.PI,r=Math.sqrt(R())*300;A.push({x:cx+Math.cos(a)*r*1.1,y:base-Math.sin(a)*r*1.5})}
+ var n=3+(R()*3|0);for(var k=0;k<n;k++)Nd.push({x:cx-120+k*240/(n-1||1)+(R()-.5)*30,y:base+20,p:null,d:0,kids:0})}
+function step(){var D=12,K=14,I=110,dirs=new Map();A.forEach(function(a){var best=null,bd=I;Nd.forEach(function(n,i){var d=Math.hypot(a.x-n.x,a.y-n.y);if(d<bd){bd=d;best=i}});if(best!==null){var v=dirs.get(best)||[0,0];v[0]+=(a.x-Nd[best].x)/bd;v[1]+=(a.y-Nd[best].y)/bd;dirs.set(best,v)}});
+ if(!dirs.size){done=true;return 0}var added=0;dirs.forEach(function(v,i){var m=Math.hypot(v[0],v[1])||1,p=Nd[i];Nd.push({x:p.x+v[0]/m*D,y:p.y+v[1]/m*D,p:i,d:p.d+1,kids:0});p.kids++;added++});
+ A=A.filter(function(a){return !Nd.some(function(n){return Math.hypot(a.x-n.x,a.y-n.y)<K})});gen++;
+ Nd.forEach(function(n,i){if(n.kids>=2&&!n.fig&&R()<.25&&figs.length<9){n.fig=figs.length+1;figs.push(i);LED.commit('figure',{seed:SEED,fig:n.fig,x:n.x|0,y:n.y|0})}});
+ if(gen%5===0)LED.commit('generation',{seed:SEED,gen:gen,nodes:Nd.length});return added}
+function draw(){g.fillStyle='#f3ead3';g.fillRect(0,0,c.width,c.height);g.strokeStyle='#3a2b1a';g.lineWidth=1.2;g.strokeRect(30,30,c.width-60,c.height-60);g.strokeRect(36,36,c.width-72,c.height-72);
+ g.fillStyle='rgba(120,140,40,.18)';Nd.forEach(function(n){if(n.p!==null){g.beginPath();g.ellipse(n.x,n.y,9,4,Math.atan2(n.y-Nd[n.p].y,n.x-Nd[n.p].x)+.8,0,7);g.fill()}});
+ Nd.forEach(function(n){if(n.p===null)return;var p=Nd[n.p];g.strokeStyle='#3a2b1a';g.lineWidth=Math.max(.6,3.2-n.d*.12);g.beginPath();g.moveTo(p.x,p.y);g.lineTo(n.x,n.y);g.stroke();
+  if(n.d%2===0){var a=Math.atan2(n.y-p.y,n.x-p.x);for(var s of[-1,1]){g.lineWidth=.6;g.beginPath();g.moveTo(n.x,n.y);g.quadraticCurveTo(n.x+Math.cos(a+s*.7)*6,n.y+Math.sin(a+s*.7)*6,n.x+Math.cos(a+s*.5)*11,n.y+Math.sin(a+s*.5)*11);g.stroke()}}});
+ g.fillStyle='rgba(170,120,70,.25)';g.fillRect(60,830,680,40);g.strokeStyle='#3a2b1a';for(var x=60;x<740;x+=4){g.beginPath();g.moveTo(x,836+((x*7)%9));g.lineTo(x+3,866);g.lineWidth=.4;g.stroke()}
+ figs.forEach(function(i,k){var n=Nd[i];g.save();g.translate(n.x,n.y);g.fillStyle='rgba(205,150,120,.55)';g.beginPath();g.ellipse(0,0,10,5,0,0,7);g.fill();g.strokeStyle='#3a2b1a';g.lineWidth=.7;g.stroke();for(var l=0;l<4;l++){g.beginPath();g.moveTo(-6+l*4,4);g.lineTo(-7+l*4,8);g.stroke()}g.restore();
+  g.font='italic 13px Baskerville,Georgia,serif';g.fillStyle='#3a2b1a';g.fillText('Fig. '+(k+1),n.x+13,n.y-6)});
+ g.font='italic 15px Baskerville,Georgia,serif';g.textAlign='center';g.fillText('Moss cushion with '+figs.length+' tardigrades in the leaf axils.  ×40',400,925);g.font='12px Baskerville,Georgia,serif';g.fillText('Gen. '+gen+' · '+Nd.length+' internodes · Spec. No. '+SEED,400,950);g.textAlign='left';
+ document.getElementById('st').textContent=done?'specimen complete':'growing · generation '+gen}
+function loop(){if(!done&&!paused)step();draw();setTimeout(loop,120)}var paused=false;
+document.getElementById('grow').onclick=function(){paused=false;done=false;for(var k=0;k<4;k++)step()};
+document.getElementById('spec').onclick=function(){SEED=(SEED*29+5)%1e6;spec();LED.commit('specimen',{seed:SEED})};
+c.onclick=function(e){var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width*c.width,y=(e.clientY-r.top)/r.height*c.height;for(var i=0;i<60;i++)A.push({x:x+(R()-.5)*120,y:y+(R()-.5)*120});done=false;LED.commit('hormone',{x:x|0,y:y|0})};
+spec();LED.init().then(function(){var s=new Set();for(var k=0;k<30;k++)step();var ok=Nd.every(function(n){return n.p===null||n.p<Nd.indexOf(n)});LED.pagecheck('every internode grows from an older one (a tree, no cycles)',ok,Nd.length+' internodes');
+ LED.pagecheck('figures numbered 1…n without gaps',figs.every(function(i,k){return Nd[i].fig===k+1}),figs.length+' figs');LED.commit('specimen',{seed:SEED})});loop();</script><a class="grokbot-badge" href="../built-by-grok-bot.html" title="This page was built by Grok Bot" style="position:relative;display:inline-block;margin:10px 16px 16px;z-index:2147483000;font:600 11px/1 system-ui,sans-serif;color:#fff;background:rgba(12,6,30,.86);border:1px solid #7ff9ff;border-radius:999px;padding:5px 9px;text-decoration:none;letter-spacing:.04em">built by Grok Bot</a></body></html>

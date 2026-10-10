@@ -1,0 +1,93 @@
+<!doctype html><html lang="en"><head><!--built-by-grok-bot--><meta name="author" content="Grok Bot"><meta name="generator" content="Grok Bot · SaPpH{{i}}on"><meta charset="utf-8"><meta name="grokbot-badge" content="inline"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="persona" content="{{+L.-E.+O. D++}}"><title>Lecture 79/21 · chalkboard · SaPpH{{i}}on</title>
+<style>body{margin:0;background:#3d2a1c;color:#e9efe6;font:16px/1.5 "Comic Sans MS","Chalkboard SE","Segoe Print",cursive}main{max-width:1000px;margin:0 auto;padding:14px}
+h1{font:400 34px/1 "Chalkboard SE","Segoe Print",cursive;margin:4px 0;color:#f5d76e}canvas{width:100%;display:block;border:16px solid #6b4a2e;border-bottom-width:26px;box-sizing:border-box;border-radius:4px;touch-action:none;cursor:crosshair}
+.ui{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;align-items:center}button{font:15px "Chalkboard SE","Segoe Print",cursive;background:#24372d;color:#e9efe6;border:2px solid #e9efe6;border-radius:8px;padding:4px 12px;cursor:pointer}button.ans{border-color:#f5d76e}a{color:#f5d76e}
+#ledger{margin:18px 0 6px;padding:10px 12px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);font:12px/1.45 ui-monospace,Menlo,Consolas,monospace}#ledger h3{margin:0 0 4px;font-size:13px;letter-spacing:.08em}#ledger .lh{font-weight:700;word-break:break-all;margin:2px 0}#ledger .lr{color:var(--acc);margin:4px 0;word-break:break-word}#ledger ul{margin:4px 0;padding-left:16px}#ledger li.bad{color:#c00;font-weight:700}#ledger button{font:600 12px ui-monospace,monospace;background:var(--paper);color:var(--ink);border:1px solid var(--ink);padding:3px 8px;margin:2px 4px 2px 0;cursor:pointer}#ledger code{opacity:.7}
+.colo{font-size:12px;opacity:.85}.persona{font-family:ui-monospace,monospace;font-weight:700;color:var(--acc)}:root{--ink:#e9efe6;--paper:#24372d;--acc:#f5d76e}</style></head><body><main>
+<h1>Lecture 79/21: the density of electrum</h1><p>The derivation is written on the board in chalk, and the falling chalk dust collects in the tray. Twenty-four student bots work it out with noisy arithmetic and then vote. Each vote is a reservation on Dave's ledger: (student, question) is the id and epoch, and sha256 of the answer is the head. A student who tries to change their vote is refused, because that is a <i>double vote</i>. Vote yourself as seat 0, then try voting again. Drag across the board to erase.</p>
+<canvas id="c" width="1000" height="560" aria-label="chalkboard derivation"></canvas>
+<div class="ui">Your vote (seat 0): <button class="ans">14.9</button><button class="ans">16.4</button><button class="ans">17.5</button><button class="ans">19.3</button><button id="nextq">next question</button><span id="st"></span></div>
+<p><b>LIT</b>: ρ(Au) = 19.32 g/cm³ and ρ(Ag) = 10.49 g/cm³. <b>MODEL</b>: ideal mixing by mass fraction, 1/ρ = w/ρ_Au + (1−w)/ρ_Ag. Real alloys deviate by about 1%. With w = 0.79 this gives about 16.4 g/cm³. The other choices are distractors: 17.5 is the naïve linear average, 19.3 is pure gold, and 14.9 is the result if you swap the fractions. <b>INVENTED</b>: the student bots.</p>
+<section id="ledger" aria-label="DurableAnchor ledger"><h3>DURABLEANCHOR LEDGER · Dave's kernel, running in this page</h3><p class="lh">provisioning…</p><div><button data-a="double-vote">try a double vote</button><button data-a="epoch-rollback">try an epoch rollback</button></div><p class="lr"></p><details open><summary>self-checks (kernel, then page)</summary><ul class="lc"></ul><ul class="lc2"></ul></details></section>
+<p class="colo">Engine: Dave's <a href="../kernel-durable-anchor.html">DurableAnchor kernel</a>, ported faithfully to the browser with Web Crypto SHA-256 and an in-memory record store (exclusive-create, so concurrent reservations are refused; fsync has nothing to flush). The ledger starts empty on each load. Every state change on this page is a reservation (id, epoch, sha256 of the state), and the head shown above chains them all from sha256('ROOT0:P369:GENESIS'). Persona: <span class="persona">{{+L.-E.+O. D++}}</span> (Dave's notation). Built by Grok Bot · seed <span id="sd"></span> · <a href="../index.html">← SaPpH{{i}}on</a></p>
+</main><script>/* DurableAnchor: browser port of Dave's kernel (durable-anchor.mjs). Same logic: append-only, hash-chained,
+   checked against an external trusted checkpoint. The filesystem becomes an in-memory record store with
+   exclusive-create; fsync and directory sync are no-ops here (nothing to flush in memory). */
+var TOPOLOGY='-+5 + 1',PERSONA='{{+L.-E.+O. D++}}';
+var _te=new TextEncoder();
+function _hex(b){return Array.prototype.map.call(new Uint8Array(b),function(v){return v.toString(16).padStart(2,'0')}).join('')}
+function digest(x){return crypto.subtle.digest('SHA-256',_te.encode(x)).then(_hex)}
+function _key(id,epoch){return _hex(_te.encode(id+'|'+epoch))+'.json'}
+function MemStore(){this.f=new Map();this.beforeCreate=null}
+MemStore.prototype.list=function(){return Array.from(this.f.keys())};
+MemStore.prototype.read=function(n){return this.f.get(n)};
+MemStore.prototype.create=function(n,s){if(this.beforeCreate){var h=this.beforeCreate;this.beforeCreate=null;h(n,s)}if(this.f.has(n)){var e=Error('exists');e.code='EEXIST';throw e}this.f.set(n,s)};
+class DurableAnchor{
+ constructor(store,tc){if(!tc||!Number.isInteger(tc.count)||typeof tc.head!=='string')throw Error('external trusted checkpoint required');this.dir=store;this.trusted=tc}
+ static async provision(store){return new DurableAnchor(store||new MemStore(),{count:0,head:await digest('ROOT0:P369:GENESIS')})}
+ async records(){var files=this.dir.list().filter(function(n){return n.endsWith('.json')}).sort(),entries=[];for(var file of files){var x=JSON.parse(this.dir.read(file));if(file!==_key(x.id,x.epoch)||!(/^[a-f0-9]{64}$/.test(x.head)))throw Error('corrupt-record');entries.push(x)}return entries}
+ async checkpoint(){var items=await this.records(),head=await digest('ROOT0:P369:GENESIS');for(var x of items)head=await digest(head+'|'+JSON.stringify(x));return {count:items.length,head:head}}
+ async validate(){try{var c=await this.checkpoint();if(c.count!==this.trusted.count||c.head!==this.trusted.head)return {ok:false,reason:'rollback-or-altered-history'};return {ok:true,checkpoint:c}}catch(e){return {ok:false,reason:'unavailable-or-corrupt'}}}
+ async reserve(id,epoch,head){var v=await this.validate();if(!v.ok)return v;if(typeof id!=='string'||!id||!Number.isSafeInteger(epoch)||epoch<0||!(/^[a-f0-9]{64}$/.test(head)))throw new RangeError('reservation');
+  var p=_key(id,epoch),entries=await this.records(),old=entries.find(function(x){return x.id===id&&x.epoch===epoch});if(old)return old.head===head?{ok:true,previous:true,checkpoint:this.trusted}:{ok:false,reason:'double-vote'};
+  if(entries.some(function(x){return x.id===id&&x.epoch>epoch}))return {ok:false,reason:'epoch-rollback'};
+  try{this.dir.create(p,JSON.stringify({id:id,epoch:epoch,head:head}))}catch(e){return {ok:false,reason:e.code==='EEXIST'?'concurrent-reservation':'write-error'}}
+  var cp=await this.checkpoint();this.trusted=cp;return {ok:true,previous:false,checkpoint:cp}}
+}
+/* page-side helper: every state change is a reservation */
+var LED={A:null,ep:{},last:null,rej:[],n:0,q:Promise.resolve(),
+ init:function(){return DurableAnchor.provision().then(function(a){LED.A=a;LED.show();return LED.selftest()})},
+ commit:function(id,state){LED.q=LED.q.then(function(){if(!LED.A)return;var e=(LED.ep[id]||1);/* epoch 0 is left empty so a live epoch-rollback attack has somewhere to land */return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,e,h).then(function(r){if(r.ok&&!r.previous){LED.ep[id]=e+1;LED.last={id:id,epoch:e,head:h}}else if(!r.ok)LED.rej.unshift(id+'@'+e+': '+r.reason);LED.show();return r})})});return LED.q},
+ attack:function(kind){LED.q=LED.q.then(function(){var L=LED.last;if(!L){LED.rej.unshift(kind+': nothing reserved yet');LED.show();return}
+  var p=kind==='double-vote'?digest('forged|'+Date.now()).then(function(h){return LED.A.reserve(L.id,L.epoch,h)}):LED.A.reserve(L.id,0,L.head);
+  return p.then(function(r){LED.rej.unshift('live '+kind+' on '+L.id+'@'+L.epoch+' → '+(r.ok?'ACCEPTED':r.reason));LED.show()})});return LED.q},
+ show:function(){var el=document.getElementById('ledger');if(!el||!LED.A)return;var t=LED.A.trusted;
+  el.querySelector('.lh').textContent='count '+t.count+' · head '+t.head.slice(0,16)+'… · TOPOLOGY '+TOPOLOGY;
+  el.querySelector('.lr').textContent=LED.rej.slice(0,4).join('  |  ')||'no rejections yet'},
+ selftest:async function(){var out=[],ok=function(n,c,g){out.push([n,c,g])};var s=new MemStore(),a=await DurableAnchor.provision(s);
+  ok('genesis = sha256(ROOT0:P369:GENESIS)',a.trusted.head===(await digest('ROOT0:P369:GENESIS'))&&a.trusted.head.slice(0,8)==='54bc828d'&&a.trusted.count===0,a.trusted.head.slice(0,12));
+  var h1=await digest('one'),h2=await digest('two');var r=await a.reserve('q.d',0,h1);ok('reserve q.d@0',r.ok&&!r.previous,'count '+r.checkpoint.count);
+  r=await a.reserve('q.d',1,h2);ok('reserve q.d@1, head chains',r.ok&&r.checkpoint.count===2,r.checkpoint.head.slice(0,12));
+  var exp=await digest((await digest((await digest('ROOT0:P369:GENESIS'))+'|'+JSON.stringify({id:'q.d',epoch:0,head:h1})))+'|'+JSON.stringify({id:'q.d',epoch:1,head:h2}));ok('head recomputed by hand matches',exp===a.trusted.head,exp.slice(0,12));ok('matches the Node kernel test vector',a.trusted.head==='a114295c189dce567dfbf30a5b299e80054d52cc8019a7ea1bfa8f805e679b02','a114295c189d');
+  r=await a.reserve('q.d',1,h2);ok('same vote again → previous',r.ok&&r.previous,'previous');
+  r=await a.reserve('q.d',1,h1);ok('double-vote rejected',!r.ok&&r.reason==='double-vote',r.reason);
+  r=await a.reserve('q.d',0,await digest('x'));ok('double-vote at older epoch rejected',!r.ok&&r.reason==='double-vote',r.reason);
+  r=await a.reserve('q.d',0,h1);ok('old identical vote → previous',r.ok&&r.previous,'previous');
+  await a.reserve('tun',5,h1);r=await a.reserve('tun',3,h2);ok('epoch-rollback rejected',!r.ok&&r.reason==='epoch-rollback',r.reason);
+  s.beforeCreate=function(n,v){s.f.set(n,v)};r=await a.reserve('race',0,h1);ok('concurrent-reservation rejected',!r.ok&&r.reason==='concurrent-reservation',r.reason);
+  r=await a.reserve('after',0,h1);ok('foreign write breaks trust',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  var s2=new MemStore(),b=await DurableAnchor.provision(s2);await b.reserve('a',0,h1);await b.reserve('b',0,h2);var k=_key('a',0);s2.f.set(k,JSON.stringify({id:'a',epoch:0,head:h2}));
+  r=await b.validate();ok('tamper (altered head) detected',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  s2.f.set(k,JSON.stringify({id:'a',epoch:0,head:h1}));r=await b.validate();ok('restored record validates',r.ok,'ok');
+  s2.f.delete(_key('b',0));r=await b.validate();ok('rollback (deleted record) detected',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  s2.f.set(k,'{"id":"zz","epoch":0,"head":"'+h1+'"}');r=await b.validate();ok('misnamed record → corrupt',!r.ok&&r.reason==='unavailable-or-corrupt',r.reason);
+  try{new DurableAnchor(new MemStore(),null);ok('no checkpoint refused',false,'accepted')}catch(e){ok('no checkpoint refused',/trusted checkpoint/.test(e.message),e.message)}
+  var pass=out.every(function(x){return x[1]}),el=document.getElementById('ledger');
+  if(el)el.querySelector('.lc').innerHTML=out.map(function(x){return '<li class="'+(x[1]?'ok':'bad')+'">'+(x[1]?'✓ ':'✗ ')+x[0]+' <code>'+x[2]+'</code></li>'}).join('');
+  if(!pass){console.error('anchor self-check failed');throw Error('DurableAnchor self-check failed')}return pass}
+};
+LED.pagecheck=function(name,cond,got){var el=document.getElementById('ledger');if(el){var li=document.createElement('li');li.className=cond?'ok':'bad';li.innerHTML=(cond?'✓ ':'✗ ')+name+' <code>'+got+'</code>';el.querySelector('.lc2').appendChild(li)}if(!cond)throw Error('page self-check failed: '+name)};
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+var SEED=+(new URLSearchParams(location.search).get('seed')||(Date.now()%1e6));
+LED.commitAt=function(id,epoch,state){LED.q=LED.q.then(function(){if(!LED.A)return;return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,epoch,h).then(function(r){if(r.ok&&!r.previous)LED.last={id:id,epoch:epoch,head:h};else if(!r.ok)LED.rej.unshift(id+'@'+epoch+': '+r.reason);LED.show();return r})})});return LED.q};
+</script><script>"use strict";document.getElementById('sd').textContent=SEED;document.querySelectorAll('#ledger button').forEach(function(b){b.onclick=function(){LED.attack(b.dataset.a)}});
+var c=document.getElementById('c'),g=c.getContext('2d'),R=rng(SEED),q=1,dust=[],pile=new Float32Array(200),wipe=null;
+var rho=1/(.79/19.32+.21/10.49),lin=.79*19.32+.21*10.49,swap=1/(.21/19.32+.79/10.49);
+var LINES=['electrum = 79% Au + 21% Ag  (by mass)','1/ρ = w/ρAu + (1−w)/ρAg','1/ρ = 0.79/19.32 + 0.21/10.49','    = '+(.79/19.32).toFixed(5)+' + '+(.21/10.49).toFixed(5),'    = '+(1/rho).toFixed(5)+'  cm³/g','ρ ≈ '+rho.toFixed(2)+' g/cm³   ✓','(not 0.79·19.32+0.21·10.49 = '+lin.toFixed(2)+' !)'];
+var board=document.createElement('canvas');board.width=c.width;board.height=c.height;var b=board.getContext('2d'),wrote=0,chars=0;
+function chalk(){var tot=0;for(var i=0;i<LINES.length;i++){var L=LINES[i];if(chars<tot+L.length){var ch=chars-tot;b.save();b.font='30px "Chalkboard SE","Segoe Print",cursive';var x=40+b.measureText(L.slice(0,ch)).width,y=60+i*62+Math.sin(ch*.4)*1.5;
+  for(var k=0;k<4;k++){b.globalAlpha=.25+R()*.5;b.fillStyle=i===5?'#f5d76e':'#e9efe6';b.fillText(L[ch],x+(R()-.5)*1.4,y+(R()-.5)*1.4)}b.restore();for(var d=0;d<3;d++)dust.push({x:x+10,y:y,vx:(R()-.5)*.6,vy:0});chars++;return}tot+=L.length}}
+var students=[],votes={};for(var s=1;s<=24;s++)students.push({seat:s,skill:R(),t:40+R()*700});
+function answerOf(st){var r=R();if(r<st.skill*.9)return rho.toFixed(1);if(r<.8)return lin.toFixed(1);return r<.9?swap.toFixed(1):'19.3'}
+function vote(seat,ans){var h;return digest('q'+q+':'+ans).then(function(x){h=x;return LED.A.reserve('student-'+seat,q,h)}).then(function(r){if(r.ok&&!r.previous){votes[seat]=ans;LED.last={id:'student-'+seat,epoch:q,head:h};LED.show()}else if(!r.ok){LED.rej.unshift('seat '+seat+' q'+q+' tried '+ans+': '+r.reason);LED.show()}return r})}
+var t=0;function loop(){t++;if(t%2===0)chalk();students.forEach(function(st){if(t===Math.round(st.t)){var a=answerOf(st);LED.q=LED.q.then(function(){return vote(st.seat,a)}).then(function(){if(R()<.15){var a2=['14.9','16.4','17.5','19.3'][R()*4|0];if(a2!==a)return vote(st.seat,a2)}})}});
+ dust.forEach(function(d){d.vy+=.05;d.x+=d.vx;d.y+=d.vy});dust=dust.filter(function(d){if(d.y>=c.height-12-pile[(d.x/5|0)%200]){pile[(d.x/5|0)%200]+=.3;return false}return true});
+ for(var i=1;i<199;i++){var dd=pile[i]-pile[i+1];if(Math.abs(dd)>2){pile[i]-=dd*.25;pile[i+1]+=dd*.25}}
+ g.fillStyle='#24372d';g.fillRect(0,0,c.width,c.height);g.globalAlpha=.06;g.fillStyle='#fff';for(var k=0;k<30;k++)g.fillRect(((k*97+t*0)%c.width),((k*53)%c.height),140,20);g.globalAlpha=1;g.drawImage(board,0,0);
+ g.fillStyle='rgba(233,239,230,.7)';dust.forEach(function(d){g.fillRect(d.x,d.y,1.5,1.5)});for(var i=0;i<200;i++)g.fillRect(i*5,c.height-pile[i],5,pile[i]);
+ var tally={};for(var s in votes)tally[votes[s]]=(tally[votes[s]]||0)+1;g.font='22px "Chalkboard SE",cursive';g.fillStyle='#e9efe6';var y=60;g.fillText('Q'+q+' votes',780,y);for(var a of ['14.9','16.4','17.5','19.3']){y+=40;g.fillText(a+' '+'|'.repeat(tally[a]||0),780,y)}
+ document.getElementById('st').textContent='question '+q+' · '+Object.keys(votes).length+' votes on the ledger';requestAnimationFrame(loop)}
+document.querySelectorAll('.ans').forEach(function(bt){bt.onclick=function(){LED.q=LED.q.then(function(){return vote(0,bt.textContent)})}});
+document.getElementById('nextq').onclick=function(){q++;votes={};t=0;students.forEach(function(st){st.t=60+R()*600})};
+var er=false;c.onpointerdown=function(){er=true};window.addEventListener('pointerup',function(){if(er){er=false;LED.commit('erase',{q:q,chars:chars})}});c.onpointermove=function(e){if(!er)return;var r=c.getBoundingClientRect();b.save();b.globalCompositeOperation='destination-out';b.globalAlpha=.5;b.beginPath();b.ellipse((e.clientX-r.left)/r.width*c.width,(e.clientY-r.top)/r.height*c.height,40,22,0,0,7);b.fill();b.restore()};
+LED.init().then(function(){LED.pagecheck('ρ(79/21) between ρAg and ρAu',rho>10.49&&rho<19.32,rho.toFixed(3));LED.pagecheck('harmonic mix < linear mix',rho<lin,rho.toFixed(2)+' < '+lin.toFixed(2));LED.pagecheck('ρ ≈ 16.4 g/cm³',Math.abs(rho-16.42)<.02,rho.toFixed(2))});loop();</script><a class="grokbot-badge" href="../built-by-grok-bot.html" title="This page was built by Grok Bot" style="position:relative;display:inline-block;margin:10px 16px 16px;z-index:2147483000;font:600 11px/1 system-ui,sans-serif;color:#fff;background:rgba(12,6,30,.86);border:1px solid #7ff9ff;border-radius:999px;padding:5px 9px;text-decoration:none;letter-spacing:.04em">built by Grok Bot</a></body></html>

@@ -27,10 +27,10 @@
  "counts": {
   "keepers": 8,
   "domains": 512,
-  "domains_populated": 301,
-  "domains_open": 211,
-  "spheres": 1700,
-  "zero_spheres": 211,
+  "domains_populated": 311,
+  "domains_open": 201,
+  "spheres": 1710,
+  "zero_spheres": 201,
   "balance": 0,
   "workshop": 343
  },
@@ -4485,13 +4485,38 @@
     },
     {
      "n": 30,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE SAMPLER",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Sampler",
+       "h": "grown/the-sampler.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-sampler.html",
+       "grown": true,
+       "emerges": "a sampler stitched row by row from an elementary cellular automaton in the 8 q.d floss colours",
+       "label": "LIT · ANALOGY",
+       "icon": {
+        "pal": [
+         "#3b2a20",
+         "#f6f0e2",
+         "#cfc3a8",
+         "#8a6a3e"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-40",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/ethos-30.html",
-     "zero_page": "z/ethos-30.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-30.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-30.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -10077,24 +10102,74 @@
     },
     {
      "n": 30,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "SUN PRINT",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Sun Print",
+       "h": "grown/sun-print.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/sun-print.html",
+       "grown": true,
+       "emerges": "drifting diatoms shade a cyanotype; the image is the history of where they were",
+       "label": "LIT · MODEL · ANALOGY",
+       "icon": {
+        "pal": [
+         "#0d2f6b",
+         "#e9e4d6",
+         "#c9c1ab",
+         "#eef3f7"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-40",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-30.html",
-     "zero_page": "z/pathos-30.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-30.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-30.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 31,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "TESSERAE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Tesserae",
+       "h": "grown/tesserae.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/tesserae.html",
+       "grown": true,
+       "emerges": "tesserae laid one by one along the 0-sphere's field lines (opus vermiculatum)",
+       "label": "LIT · ANALOGY",
+       "icon": {
+        "pal": [
+         "#efe7dc",
+         "#b8862b",
+         "#2b55c4",
+         "#1f8f9a"
+        ],
+        "bg": "#2a2420",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-41",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-31.html",
-     "zero_page": "z/pathos-31.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-31.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-31.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -14786,24 +14861,74 @@
     },
     {
      "n": 32,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "LECTURE 79/21",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Lecture 79/21",
+       "h": "grown/lecture-79-21.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/lecture-79-21.html",
+       "grown": true,
+       "emerges": "electrum's density derived in chalk; 24 student bots vote and the ledger refuses changed votes",
+       "label": "LIT · MODEL · INVENTED",
+       "icon": {
+        "pal": [
+         "#e9efe6",
+         "#f5d76e",
+         "#24372d",
+         "#3d2a1c"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-41",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/logos-32.html",
-     "zero_page": "z/logos-32.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-32.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-32.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 33,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "PLATE IV · BRYOPHYTA ET TARDIGRADA",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Plate IV · Bryophyta et Tardigrada",
+       "h": "grown/plate-bryophyta.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/plate-bryophyta.html",
+       "grown": true,
+       "emerges": "a moss grows by space colonisation; tardigrades settle in the axils and are numbered as figures",
+       "label": "LIT · MODEL · ANALOGY",
+       "icon": {
+        "pal": [
+         "#3a2b1a",
+         "#f3ead3",
+         "#e8dcc0",
+         "#7a3b2a"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "sapphon-41",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/logos-33.html",
-     "zero_page": "z/logos-33.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-33.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-33.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -18857,24 +18982,74 @@
     },
     {
      "n": 26,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE GOUGE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Gouge",
+       "h": "grown/the-gouge.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-gouge.html",
+       "grown": true,
+       "emerges": "thirty gouges cut along the contour field around Patricia; the background swirls of a woodcut emerge",
+       "label": "ANALOGY · LIT",
+       "icon": {
+        "pal": [
+         "#efe6d2",
+         "#d9cdb3",
+         "#5a3b22",
+         "#a3241b"
+        ],
+        "bg": "#1a1410",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-41",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-26.html",
-     "zero_page": "z/mythos-26.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-26.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-26.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 27,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE GREAT WAVE OFF THE MOSS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Great Wave off the Moss",
+       "h": "grown/great-wave-moss.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/great-wave-moss.html",
+       "grown": true,
+       "emerges": "a driven 1-D wave steepens and breaks into recursive foam claws; Patricia rides a tun-boat",
+       "label": "LIT · MODEL · ANALOGY",
+       "icon": {
+        "pal": [
+         "#1c2a44",
+         "#efe3c8",
+         "#b23a2a",
+         "#1d3f78"
+        ],
+        "bg": "#14284d",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-42",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-27.html",
-     "zero_page": "z/mythos-27.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-27.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-27.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -34903,7 +35078,8 @@
         "pal": [
          "#ffb000",
          "#7a5500",
-         "#ffd166"
+         "#ffd166",
+         "#7ff9ff"
         ],
         "bg": "#120a26",
         "canvas": 0,
@@ -34960,24 +35136,74 @@
     },
     {
      "n": 27,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "COLONY BLOCKS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Colony Blocks",
+       "h": "grown/colony-blocks.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/colony-blocks.html",
+       "grown": true,
+       "emerges": "tardigrades drop moss bricks; BTW sandpile avalanches build terraces nobody planned",
+       "label": "LIT · INVENTED · ANALOGY",
+       "icon": {
+        "pal": [
+         "#2c2a4a",
+         "#e0603a",
+         "#bfe3f2",
+         "#f4e8d0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-42",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-27.html",
-     "zero_page": "z/phronesis-27.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-27.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-27.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 28,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE TUN SURVEY",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Tun Survey",
+       "h": "grown/tun-survey.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/tun-survey.html",
+       "grown": true,
+       "emerges": "a water film diffuses and dries over a moss cushion; marching-squares contours, tardigrades tun where it thins",
+       "label": "LIT · MODEL · ANALOGY",
+       "icon": {
+        "pal": [
+         "#4a3520",
+         "#f6f1e1",
+         "#2f6fb0",
+         "#8a5a2b"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-42",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-28.html",
-     "zero_page": "z/phronesis-28.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-28.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-28.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -40457,13 +40683,38 @@
     },
     {
      "n": 34,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE BOOK OF HOURS OF 720",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Book of Hours of 720",
+       "h": "grown/book-of-hours.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/book-of-hours.html",
+       "grown": true,
+       "emerges": "48 hours of the 720° cycle, the current hour gilded; rinceaux vines curl and branch in the margins",
+       "label": "LIT · INVENTED · ANALOGY",
+       "icon": {
+        "pal": [
+         "#f2e6c9",
+         "#9b1b1b",
+         "#e9c46a",
+         "#2b55c4"
+        ],
+        "bg": "#2a1a10",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-42",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/kairos-34.html",
-     "zero_page": "z/kairos-34.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-34.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-34.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -40808,8 +41059,8 @@
   "world": 1,
   "keepers": 8,
   "domains": 512,
-  "zero_spheres": 211,
-  "generated_total": 820,
+  "zero_spheres": 201,
+  "generated_total": 810,
   "groups": 88
  },
  "workshop": [
@@ -49079,7 +49330,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1700
+   "pages": 1710
   },
   "list": [
    {
@@ -50656,14 +50907,16 @@
       "gravity/Epigenetic-Gravity-Worksuite.html",
       "gravity/Model-Planck-Scale-Gravity.html",
       "neon/Final-3d-Neon-Full-Code-Buried.html",
-      "neon/Final-3d-Neon-Ganglia-Fuse.html"
+      "neon/Final-3d-Neon-Ganglia-Fuse.html",
+      "grown/the-sampler.html"
      ],
      [
       "neon/Forces-Crisper-Neon-Svg.html",
       "neon/Moms-10-Noble-Neon-Dads-10-Neon-11-12-13-Acid-Sugar-Salt.html",
       "neon/Neon-Shell-Exponential-Growth.html",
       "nested/Wrapped-Nested-Exponential-Tower.html",
-      "plank/Planck-Scale-Ansible-Antenna.html"
+      "plank/Planck-Scale-Ansible-Antenna.html",
+      "grown/sun-print.html"
      ]
     ]
    },
@@ -50678,28 +50931,32 @@
       "plank/Plank-1x1-6161-Human.html",
       "qdot/Photon-Quantum-Dot-16.html",
       "qdot/Quantum-Box-Tessy-Full.html",
-      "toroid/11-Toroids-Superposition-Ring.html"
+      "toroid/11-Toroids-Superposition-Ring.html",
+      "grown/tesserae.html"
      ],
      [
       "toroid/3x3x3-Toroid-O3-Stitch.html",
       "toroid/Model-Toroid-Boxy-Universe.html",
       "toroid/Toroid-Reactor-Clones-Lab.html",
       "w/aeon-boot-breakdown.html",
-      "w/electrum-lab-brutalist-art-style.html"
+      "w/electrum-lab-brutalist-art-style.html",
+      "grown/lecture-79-21.html"
      ],
      [
       "w/h-o-e-hydrogen-oxygen-electrum.html",
       "w/neon-gravity-locked.html",
       "w/observer-meta-aeon.html",
       "w/quasar-spinor-worksuite.html",
-      "w/super-sapphon-viewer-chunked.html"
+      "w/super-sapphon-viewer-chunked.html",
+      "grown/plate-bryophyta.html"
      ],
      [
       "w/em-coming-from-electrum.html",
       "w/neon-gravity-workers.html",
       "plus/3x120-Plus-Control-Bits.html",
       "sapphon/sapphon-spinor.html",
-      "w/toroid-box-re.html"
+      "w/toroid-box-re.html",
+      "grown/the-gouge.html"
      ]
     ]
    },
@@ -50714,28 +50971,32 @@
       "evo/Next-Evo-Heart-Not-Pumping-But-Creating-Minus-Plus-Push-Pull.html",
       "w/tardi-electrum-blackhole.html",
       "w/tardi-inside-blackhole.html",
-      "w/tardis-implicit-valence.html"
+      "w/tardis-implicit-valence.html",
+      "grown/great-wave-moss.html"
      ],
      [
       "w/tardis.html",
       "later/Next-Evo-Fluidic-Body.html",
       "evo/Next-Evo-Broadcast-Admosphere.html",
       "next/Next-Evo-21-Colony.html",
-      "w/teon-aeon-switcher.html"
+      "w/teon-aeon-switcher.html",
+      "grown/colony-blocks.html"
      ],
      [
       "w/tardis-elixir.html",
       "evo/Next-Evo-11k-Photons.html",
       "w/wakaku-next-brighter-cube-volume-1-lean-proofs.html",
       "w/wakaku-next-encapsulate-into-cubit-space.html",
-      "w/wakaku-put-inside-c-ubit-nested-cubit.html"
+      "w/wakaku-put-inside-c-ubit-nested-cubit.html",
+      "grown/tun-survey.html"
      ],
      [
       "w/spinor-walker.html",
       "atmospheres/the-fall.html",
       "domains/phronesis.html",
       "domains/logos.html",
-      "ahead/Next-Element-Silver-47.html"
+      "ahead/Next-Element-Silver-47.html",
+      "grown/book-of-hours.html"
      ]
     ]
    },
@@ -52104,5 +52365,23 @@
   "pages": 1030,
   "rule": "Pages generated by Grok Bot carry author \"Grok Bot\", a meta author tag and a badge. Dave's originals carry no author field and are unchanged.",
   "fortress": "grown/the-fortress-of-solitude.html"
+ },
+ "kernel": {
+  "name": "DurableAnchor",
+  "author": "Dave (David Wise)",
+  "source": "https://davidwise01.github.io/sapph-i-on/durable-anchor.mjs",
+  "page": "https://davidwise01.github.io/sapph-i-on/kernel-durable-anchor.html",
+  "topology": "-+5 + 1",
+  "genesis": "sha256(\"ROOT0:P369:GENESIS\")",
+  "chain": "head_n = sha256(head_(n-1) + \"|\" + JSON.stringify(record)), records sorted by key = hex(id|epoch).json",
+  "rejects": [
+   "rollback-or-altered-history",
+   "unavailable-or-corrupt",
+   "double-vote",
+   "epoch-rollback",
+   "concurrent-reservation"
+  ],
+  "used_by": "Grok Bot originals batch 4 (grown.json batch 22): each page runs a browser port (Web Crypto SHA-256, in-memory exclusive-create store) and makes every state change a reservation (id, epoch, sha256(state)); its self-checks replay double-vote, epoch-rollback, concurrent-reservation, tamper and rollback detection live, and match the Node kernel test vector a114295c189dce567dfbf30a5b299e80054d52cc8019a7ea1bfa8f805e679b02.",
+  "persona": "{{+L.-E.+O. D++}} (Dave's persona notation, quoted verbatim; batch 4 is signed with it)"
  }
 }

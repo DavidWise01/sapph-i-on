@@ -1,0 +1,91 @@
+<!doctype html><html lang="en"><head><!--built-by-grok-bot--><meta name="author" content="Grok Bot"><meta name="generator" content="Grok Bot · SaPpH{{i}}on"><meta charset="utf-8"><meta name="grokbot-badge" content="inline"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="persona" content="{{+L.-E.+O. D++}}"><title>The Sampler · cross-stitch from one rule · SaPpH{{i}}on</title>
+<style>body{margin:0;background:#cfc3a8 repeating-linear-gradient(45deg,rgba(0,0,0,.03) 0 2px,transparent 2px 5px);color:#3b2a20;font:15px/1.5 "Trebuchet MS",sans-serif}main{max-width:900px;margin:0 auto;padding:14px}
+h1{font:700 30px/1 "Courier New",monospace;letter-spacing:.2em;margin:6px 0}canvas{width:100%;display:block;border:14px solid #8a6a3e;border-radius:6px;box-sizing:border-box;cursor:pointer;touch-action:manipulation}
+button,select{font:14px "Trebuchet MS",sans-serif;background:#f6f0e2;border:1px dashed #3b2a20;padding:5px 10px;cursor:pointer}.ui{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0;align-items:center}
+#ledger{margin:18px 0 6px;padding:10px 12px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);font:12px/1.45 ui-monospace,Menlo,Consolas,monospace}#ledger h3{margin:0 0 4px;font-size:13px;letter-spacing:.08em}#ledger .lh{font-weight:700;word-break:break-all;margin:2px 0}#ledger .lr{color:var(--acc);margin:4px 0;word-break:break-word}#ledger ul{margin:4px 0;padding-left:16px}#ledger li.bad{color:#c00;font-weight:700}#ledger button{font:600 12px ui-monospace,monospace;background:var(--paper);color:var(--ink);border:1px solid var(--ink);padding:3px 8px;margin:2px 4px 2px 0;cursor:pointer}#ledger code{opacity:.7}
+.colo{font-size:12px;opacity:.85}.persona{font-family:ui-monospace,monospace;font-weight:700;color:var(--acc)}:root{--ink:#3b2a20;--paper:#f6f0e2;--acc:#b0283a}</style></head><body><main>
+<h1>THE SAMPLER</h1><p>This sampler is stitched one row at a time on 14-count Aida. Each row follows a single local rule: a stitch's thread is set by its three neighbours in the row above (an elementary cellular automaton), and the floss colour is one of the eight q.d colours, chosen by how many of those neighbours are stitched. The border mirrors itself, and the motto band at the top is stitched first, as a pattern taken from the character codes of “SaPpH{i}on”. Tap any square to add or unpick a stitch, and every row below it re-forms.</p>
+<canvas id="c" width="900" height="660" aria-label="cross-stitch sampler being stitched"></canvas>
+<div class="ui"><label>rule <select id="rule"><option>90</option><option>150</option><option>30</option><option>110</option><option>105</option><option>73</option></select></label><button id="restitch">unpick &amp; restitch</button><button id="ns">new cloth (new seed)</button><span id="st"></span></div>
+<p><b>LIT</b>: elementary cellular automata (Wolfram numbering 0–255); rule 90 gives the Sierpiński triangle, and rule 110 is Turing-complete (Cook, 2004). <b>ANALOGY</b>: the eight q.d floss colours stand in for the q.d spectrum.</p>
+<section id="ledger" aria-label="DurableAnchor ledger"><h3>DURABLEANCHOR LEDGER · Dave's kernel, running in this page</h3><p class="lh">provisioning…</p><div><button data-a="double-vote">try a double vote</button><button data-a="epoch-rollback">try an epoch rollback</button></div><p class="lr"></p><details open><summary>self-checks (kernel, then page)</summary><ul class="lc"></ul><ul class="lc2"></ul></details></section>
+<p class="colo">Engine: Dave's <a href="../kernel-durable-anchor.html">DurableAnchor kernel</a>, ported faithfully to the browser with Web Crypto SHA-256 and an in-memory record store (exclusive-create, so concurrent reservations are refused; fsync has nothing to flush). The ledger starts empty on each load. Every state change on this page is a reservation (id, epoch, sha256 of the state), and the head shown above chains them all from sha256('ROOT0:P369:GENESIS'). Persona: <span class="persona">{{+L.-E.+O. D++}}</span> (Dave's notation). Built by Grok Bot · seed <span id="sd"></span> · <a href="../index.html">← SaPpH{{i}}on</a></p>
+</main><script>/* DurableAnchor: browser port of Dave's kernel (durable-anchor.mjs). Same logic: append-only, hash-chained,
+   checked against an external trusted checkpoint. The filesystem becomes an in-memory record store with
+   exclusive-create; fsync and directory sync are no-ops here (nothing to flush in memory). */
+var TOPOLOGY='-+5 + 1',PERSONA='{{+L.-E.+O. D++}}';
+var _te=new TextEncoder();
+function _hex(b){return Array.prototype.map.call(new Uint8Array(b),function(v){return v.toString(16).padStart(2,'0')}).join('')}
+function digest(x){return crypto.subtle.digest('SHA-256',_te.encode(x)).then(_hex)}
+function _key(id,epoch){return _hex(_te.encode(id+'|'+epoch))+'.json'}
+function MemStore(){this.f=new Map();this.beforeCreate=null}
+MemStore.prototype.list=function(){return Array.from(this.f.keys())};
+MemStore.prototype.read=function(n){return this.f.get(n)};
+MemStore.prototype.create=function(n,s){if(this.beforeCreate){var h=this.beforeCreate;this.beforeCreate=null;h(n,s)}if(this.f.has(n)){var e=Error('exists');e.code='EEXIST';throw e}this.f.set(n,s)};
+class DurableAnchor{
+ constructor(store,tc){if(!tc||!Number.isInteger(tc.count)||typeof tc.head!=='string')throw Error('external trusted checkpoint required');this.dir=store;this.trusted=tc}
+ static async provision(store){return new DurableAnchor(store||new MemStore(),{count:0,head:await digest('ROOT0:P369:GENESIS')})}
+ async records(){var files=this.dir.list().filter(function(n){return n.endsWith('.json')}).sort(),entries=[];for(var file of files){var x=JSON.parse(this.dir.read(file));if(file!==_key(x.id,x.epoch)||!(/^[a-f0-9]{64}$/.test(x.head)))throw Error('corrupt-record');entries.push(x)}return entries}
+ async checkpoint(){var items=await this.records(),head=await digest('ROOT0:P369:GENESIS');for(var x of items)head=await digest(head+'|'+JSON.stringify(x));return {count:items.length,head:head}}
+ async validate(){try{var c=await this.checkpoint();if(c.count!==this.trusted.count||c.head!==this.trusted.head)return {ok:false,reason:'rollback-or-altered-history'};return {ok:true,checkpoint:c}}catch(e){return {ok:false,reason:'unavailable-or-corrupt'}}}
+ async reserve(id,epoch,head){var v=await this.validate();if(!v.ok)return v;if(typeof id!=='string'||!id||!Number.isSafeInteger(epoch)||epoch<0||!(/^[a-f0-9]{64}$/.test(head)))throw new RangeError('reservation');
+  var p=_key(id,epoch),entries=await this.records(),old=entries.find(function(x){return x.id===id&&x.epoch===epoch});if(old)return old.head===head?{ok:true,previous:true,checkpoint:this.trusted}:{ok:false,reason:'double-vote'};
+  if(entries.some(function(x){return x.id===id&&x.epoch>epoch}))return {ok:false,reason:'epoch-rollback'};
+  try{this.dir.create(p,JSON.stringify({id:id,epoch:epoch,head:head}))}catch(e){return {ok:false,reason:e.code==='EEXIST'?'concurrent-reservation':'write-error'}}
+  var cp=await this.checkpoint();this.trusted=cp;return {ok:true,previous:false,checkpoint:cp}}
+}
+/* page-side helper: every state change is a reservation */
+var LED={A:null,ep:{},last:null,rej:[],n:0,q:Promise.resolve(),
+ init:function(){return DurableAnchor.provision().then(function(a){LED.A=a;LED.show();return LED.selftest()})},
+ commit:function(id,state){LED.q=LED.q.then(function(){if(!LED.A)return;var e=(LED.ep[id]||1);/* epoch 0 is left empty so a live epoch-rollback attack has somewhere to land */return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,e,h).then(function(r){if(r.ok&&!r.previous){LED.ep[id]=e+1;LED.last={id:id,epoch:e,head:h}}else if(!r.ok)LED.rej.unshift(id+'@'+e+': '+r.reason);LED.show();return r})})});return LED.q},
+ attack:function(kind){LED.q=LED.q.then(function(){var L=LED.last;if(!L){LED.rej.unshift(kind+': nothing reserved yet');LED.show();return}
+  var p=kind==='double-vote'?digest('forged|'+Date.now()).then(function(h){return LED.A.reserve(L.id,L.epoch,h)}):LED.A.reserve(L.id,0,L.head);
+  return p.then(function(r){LED.rej.unshift('live '+kind+' on '+L.id+'@'+L.epoch+' → '+(r.ok?'ACCEPTED':r.reason));LED.show()})});return LED.q},
+ show:function(){var el=document.getElementById('ledger');if(!el||!LED.A)return;var t=LED.A.trusted;
+  el.querySelector('.lh').textContent='count '+t.count+' · head '+t.head.slice(0,16)+'… · TOPOLOGY '+TOPOLOGY;
+  el.querySelector('.lr').textContent=LED.rej.slice(0,4).join('  |  ')||'no rejections yet'},
+ selftest:async function(){var out=[],ok=function(n,c,g){out.push([n,c,g])};var s=new MemStore(),a=await DurableAnchor.provision(s);
+  ok('genesis = sha256(ROOT0:P369:GENESIS)',a.trusted.head===(await digest('ROOT0:P369:GENESIS'))&&a.trusted.head.slice(0,8)==='54bc828d'&&a.trusted.count===0,a.trusted.head.slice(0,12));
+  var h1=await digest('one'),h2=await digest('two');var r=await a.reserve('q.d',0,h1);ok('reserve q.d@0',r.ok&&!r.previous,'count '+r.checkpoint.count);
+  r=await a.reserve('q.d',1,h2);ok('reserve q.d@1, head chains',r.ok&&r.checkpoint.count===2,r.checkpoint.head.slice(0,12));
+  var exp=await digest((await digest((await digest('ROOT0:P369:GENESIS'))+'|'+JSON.stringify({id:'q.d',epoch:0,head:h1})))+'|'+JSON.stringify({id:'q.d',epoch:1,head:h2}));ok('head recomputed by hand matches',exp===a.trusted.head,exp.slice(0,12));ok('matches the Node kernel test vector',a.trusted.head==='a114295c189dce567dfbf30a5b299e80054d52cc8019a7ea1bfa8f805e679b02','a114295c189d');
+  r=await a.reserve('q.d',1,h2);ok('same vote again → previous',r.ok&&r.previous,'previous');
+  r=await a.reserve('q.d',1,h1);ok('double-vote rejected',!r.ok&&r.reason==='double-vote',r.reason);
+  r=await a.reserve('q.d',0,await digest('x'));ok('double-vote at older epoch rejected',!r.ok&&r.reason==='double-vote',r.reason);
+  r=await a.reserve('q.d',0,h1);ok('old identical vote → previous',r.ok&&r.previous,'previous');
+  await a.reserve('tun',5,h1);r=await a.reserve('tun',3,h2);ok('epoch-rollback rejected',!r.ok&&r.reason==='epoch-rollback',r.reason);
+  s.beforeCreate=function(n,v){s.f.set(n,v)};r=await a.reserve('race',0,h1);ok('concurrent-reservation rejected',!r.ok&&r.reason==='concurrent-reservation',r.reason);
+  r=await a.reserve('after',0,h1);ok('foreign write breaks trust',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  var s2=new MemStore(),b=await DurableAnchor.provision(s2);await b.reserve('a',0,h1);await b.reserve('b',0,h2);var k=_key('a',0);s2.f.set(k,JSON.stringify({id:'a',epoch:0,head:h2}));
+  r=await b.validate();ok('tamper (altered head) detected',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  s2.f.set(k,JSON.stringify({id:'a',epoch:0,head:h1}));r=await b.validate();ok('restored record validates',r.ok,'ok');
+  s2.f.delete(_key('b',0));r=await b.validate();ok('rollback (deleted record) detected',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  s2.f.set(k,'{"id":"zz","epoch":0,"head":"'+h1+'"}');r=await b.validate();ok('misnamed record → corrupt',!r.ok&&r.reason==='unavailable-or-corrupt',r.reason);
+  try{new DurableAnchor(new MemStore(),null);ok('no checkpoint refused',false,'accepted')}catch(e){ok('no checkpoint refused',/trusted checkpoint/.test(e.message),e.message)}
+  var pass=out.every(function(x){return x[1]}),el=document.getElementById('ledger');
+  if(el)el.querySelector('.lc').innerHTML=out.map(function(x){return '<li class="'+(x[1]?'ok':'bad')+'">'+(x[1]?'✓ ':'✗ ')+x[0]+' <code>'+x[2]+'</code></li>'}).join('');
+  if(!pass){console.error('anchor self-check failed');throw Error('DurableAnchor self-check failed')}return pass}
+};
+LED.pagecheck=function(name,cond,got){var el=document.getElementById('ledger');if(el){var li=document.createElement('li');li.className=cond?'ok':'bad';li.innerHTML=(cond?'✓ ':'✗ ')+name+' <code>'+got+'</code>';el.querySelector('.lc2').appendChild(li)}if(!cond)throw Error('page self-check failed: '+name)};
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+var SEED=+(new URLSearchParams(location.search).get('seed')||(Date.now()%1e6));
+LED.commitAt=function(id,epoch,state){LED.q=LED.q.then(function(){if(!LED.A)return;return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,epoch,h).then(function(r){if(r.ok&&!r.previous)LED.last={id:id,epoch:epoch,head:h};else if(!r.ok)LED.rej.unshift(id+'@'+epoch+': '+r.reason);LED.show();return r})})});return LED.q};
+</script><script>"use strict";document.getElementById('sd').textContent=SEED;document.querySelectorAll('#ledger button').forEach(function(b){b.onclick=function(){LED.attack(b.dataset.a)}});
+var c=document.getElementById('c'),g=c.getContext('2d'),N=61,M=44,cell=c.width/N,grid,row=0,rule=90,R,QD=['#d6282c','#ef7a22','#f2c12e','#3f9b48','#1f8f9a','#2b55c4','#6b3fb0','#c2338f'];
+var FONT={S:'0111100001110001111',a:'0000011101011110111'};
+function cloth(){R=rng(SEED);grid=[];for(var y=0;y<M;y++){grid.push(new Int8Array(N).fill(-1))}row=0;var r0=grid[6];var k=N>>1;r0[k]=0;if(R()<.5){r0[(k+7+(R()*10|0))%N]=3}
+ var txt='SaPpH{i}on';for(var i=0;i<txt.length;i++){var cc=txt.charCodeAt(i);for(var b=0;b<15;b++)if((cc*2654435761>>>b)&1&&b%3!==1){var x=6+i*5+(b%3),y=1+((b/3)|0);if(x<N-2)grid[y][x]=7}}}
+function stitchRow(y){if(y<7||y>=M-1)return;var up=grid[y-1];for(var x=1;x<N-1;x++){var l=up[x-1]>=0?1:0,m=up[x]>=0?1:0,r=up[x+1]>=0?1:0,bit=(rule>>(l*4+m*2+r))&1;grid[y][x]=bit?((l+m+r)*2+y)%8:-1}grid[y][0]=grid[y][N-1]=y%2?6:-1}
+function stitch(x,y,col){var s=cell,p=x*s,q=y*s,j=(Math.sin(x*12.9+y*78.2)*43758)%1*1.5;g.lineCap='round';g.lineWidth=s*.32;g.strokeStyle='rgba(0,0,0,.25)';g.beginPath();g.moveTo(p+s*.2+1,q+s*.2+1);g.lineTo(p+s*.8+1,q+s*.8+1);g.moveTo(p+s*.8+1,q+s*.2+1);g.lineTo(p+s*.2+1,q+s*.8+1);g.stroke();
+ g.strokeStyle=col;g.beginPath();g.moveTo(p+s*.2,q+s*.2+j);g.lineTo(p+s*.8,q+s*.8);g.stroke();g.beginPath();g.moveTo(p+s*.8,q+s*.2);g.lineTo(p+s*.2,q+s*.8-j);g.stroke();g.strokeStyle='rgba(255,255,255,.35)';g.lineWidth=s*.08;g.beginPath();g.moveTo(p+s*.8-1,q+s*.22);g.lineTo(p+s*.4,q+s*.6);g.stroke()}
+function draw(){g.fillStyle='#f6f0e2';g.fillRect(0,0,c.width,c.height);g.fillStyle='rgba(120,100,70,.18)';for(var y=0;y<=M;y++)for(var x=0;x<=N;x++)g.fillRect(x*cell-1,y*cell-1,2.2,2.2);
+ for(var y=0;y<M;y++)for(var x=0;x<N;x++)if(grid[y][x]>=0&&(y<7||y<row))stitch(x,y,QD[grid[y][x]]);
+ if(row<M){g.strokeStyle='#999';g.lineWidth=1;g.beginPath();g.moveTo(0,row*cell);g.lineTo(c.width,row*cell);g.stroke()}
+ var n=0;grid.forEach(function(r){r.forEach(function(v){if(v>=0)n++})});document.getElementById('st').textContent='rule '+rule+' · row '+Math.min(row,M)+'/'+M+' · '+n+' stitches · seed '+SEED}
+var acc=0;function loop(){acc++;if(acc%6===0&&row<M){if(row>=7)stitchRow(row);row++;if(row%4===0)LED.commit('row',{seed:SEED,rule:rule,row:row,s:grid.map(function(r){return Array.from(r).join(',')}).join('|').length})}draw();requestAnimationFrame(loop)}
+c.onclick=function(e){var r=c.getBoundingClientRect(),x=((e.clientX-r.left)/r.width*N)|0,y=((e.clientY-r.top)/r.height*M)|0;if(y<6)return;grid[y][x]=grid[y][x]>=0?-1:(x+y)%8;for(var yy=y+1;yy<Math.min(row,M);yy++)stitchRow(yy);LED.commit('hand',{x:x,y:y,v:grid[y][x]})};
+document.getElementById('rule').onchange=function(e){rule=+e.target.value;cloth();LED.commit('rule',{seed:SEED,rule:rule})};
+document.getElementById('restitch').onclick=function(){row=7;LED.commit('unpick',{seed:SEED})};
+document.getElementById('ns').onclick=function(){SEED=(SEED*13+1)%1e6;cloth();LED.commit('cloth',{seed:SEED})};
+rule=[90,150,30,110,105,73][SEED%6];document.getElementById('rule').value=rule;cloth();LED.init().then(function(){for(var y=0;y<M;y++)stitchRow(y);var ok=true;for(var y=8;y<M-1;y++)for(var x=1;x<N-1;x++){var u=grid[y-1],b=(rule>>((u[x-1]>=0)*4+(u[x]>=0)*2+(u[x+1]>=0)))&1;if(b!==(grid[y][x]>=0?1:0))ok=false}
+ LED.pagecheck('every stitch obeys rule '+rule+' from the row above',ok,ok?'all rows':'mismatch');LED.pagecheck('floss colours ⊂ 8 q.d colours',QD.length===8,'8');cloth();LED.commit('cloth',{seed:SEED,rule:rule})});loop();</script><a class="grokbot-badge" href="../built-by-grok-bot.html" title="This page was built by Grok Bot" style="position:relative;display:inline-block;margin:10px 16px 16px;z-index:2147483000;font:600 11px/1 system-ui,sans-serif;color:#fff;background:rgba(12,6,30,.86);border:1px solid #7ff9ff;border-radius:999px;padding:5px 9px;text-decoration:none;letter-spacing:.04em">built by Grok Bot</a></body></html>

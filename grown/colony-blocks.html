@@ -1,0 +1,90 @@
+<!doctype html><html lang="en"><head><!--built-by-grok-bot--><meta name="author" content="Grok Bot"><meta name="generator" content="Grok Bot · SaPpH{{i}}on"><meta charset="utf-8"><meta name="grokbot-badge" content="inline"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="persona" content="{{+L.-E.+O. D++}}"><title>Colony Blocks · an isometric moss-brick sandpile · SaPpH{{i}}on</title>
+<style>body{margin:0;background:linear-gradient(#bfe3f2,#f4e8d0);color:#2c2a4a;font:15px/1.5 "Segoe UI",system-ui,sans-serif}main{max-width:1000px;margin:0 auto;padding:14px}h1{font:800 32px/1 system-ui,sans-serif;margin:4px 0;letter-spacing:-.02em}
+canvas{width:100%;display:block;cursor:pointer;touch-action:manipulation}.ui{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0;align-items:center}button{font:600 14px system-ui;background:#fff;color:#2c2a4a;border:0;border-radius:10px;padding:7px 14px;box-shadow:0 3px 0 #2c2a4a;cursor:pointer}
+#ledger{margin:18px 0 6px;padding:10px 12px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);font:12px/1.45 ui-monospace,Menlo,Consolas,monospace}#ledger h3{margin:0 0 4px;font-size:13px;letter-spacing:.08em}#ledger .lh{font-weight:700;word-break:break-all;margin:2px 0}#ledger .lr{color:var(--acc);margin:4px 0;word-break:break-word}#ledger ul{margin:4px 0;padding-left:16px}#ledger li.bad{color:#c00;font-weight:700}#ledger button{font:600 12px ui-monospace,monospace;background:var(--paper);color:var(--ink);border:1px solid var(--ink);padding:3px 8px;margin:2px 4px 2px 0;cursor:pointer}#ledger code{opacity:.7}
+.colo{font-size:12px;opacity:.85}.persona{font-family:ui-monospace,monospace;font-weight:700;color:var(--acc)}:root{--ink:#2c2a4a;--paper:#fbf7ee;--acc:#e0603a}</style></head><body><main>
+<h1>Colony Blocks</h1><p>Twelve tardigrades carry moss bricks onto a 14×14 isometric plot. Their only rule is to drop a brick where they stand and wander on. The plot follows the Bak–Tang–Wiesenfeld sandpile rule: a column taller than 3 topples, sending one brick to each of its four neighbours. Terraces, cliffs and avalanches of every size emerge, and nobody plans them. Every avalanche is a reservation on the ledger. Tap a tile to drop a brick yourself.</p>
+<canvas id="c" width="1000" height="620" aria-label="isometric sandpile city"></canvas>
+<div class="ui"><button id="burst">drop 50 bricks</button><button id="rain">rain (wash an edge)</button><button id="ns">new plot (new seed)</button><span id="st"></span></div>
+<p><b>LIT</b>: the BTW sandpile (1987) is the classic example of self-organised criticality, with avalanche sizes following a power law. The total number of bricks is conserved except at the edge, where they fall off. <b>INVENTED</b>: tardigrades as builders. <b>ANALOGY</b>: real tardigrades eat moss and don't build with it.</p>
+<section id="ledger" aria-label="DurableAnchor ledger"><h3>DURABLEANCHOR LEDGER · Dave's kernel, running in this page</h3><p class="lh">provisioning…</p><div><button data-a="double-vote">try a double vote</button><button data-a="epoch-rollback">try an epoch rollback</button></div><p class="lr"></p><details open><summary>self-checks (kernel, then page)</summary><ul class="lc"></ul><ul class="lc2"></ul></details></section>
+<p class="colo">Engine: Dave's <a href="../kernel-durable-anchor.html">DurableAnchor kernel</a>, ported faithfully to the browser with Web Crypto SHA-256 and an in-memory record store (exclusive-create, so concurrent reservations are refused; fsync has nothing to flush). The ledger starts empty on each load. Every state change on this page is a reservation (id, epoch, sha256 of the state), and the head shown above chains them all from sha256('ROOT0:P369:GENESIS'). Persona: <span class="persona">{{+L.-E.+O. D++}}</span> (Dave's notation). Built by Grok Bot · seed <span id="sd"></span> · <a href="../index.html">← SaPpH{{i}}on</a></p>
+</main><script>/* DurableAnchor: browser port of Dave's kernel (durable-anchor.mjs). Same logic: append-only, hash-chained,
+   checked against an external trusted checkpoint. The filesystem becomes an in-memory record store with
+   exclusive-create; fsync and directory sync are no-ops here (nothing to flush in memory). */
+var TOPOLOGY='-+5 + 1',PERSONA='{{+L.-E.+O. D++}}';
+var _te=new TextEncoder();
+function _hex(b){return Array.prototype.map.call(new Uint8Array(b),function(v){return v.toString(16).padStart(2,'0')}).join('')}
+function digest(x){return crypto.subtle.digest('SHA-256',_te.encode(x)).then(_hex)}
+function _key(id,epoch){return _hex(_te.encode(id+'|'+epoch))+'.json'}
+function MemStore(){this.f=new Map();this.beforeCreate=null}
+MemStore.prototype.list=function(){return Array.from(this.f.keys())};
+MemStore.prototype.read=function(n){return this.f.get(n)};
+MemStore.prototype.create=function(n,s){if(this.beforeCreate){var h=this.beforeCreate;this.beforeCreate=null;h(n,s)}if(this.f.has(n)){var e=Error('exists');e.code='EEXIST';throw e}this.f.set(n,s)};
+class DurableAnchor{
+ constructor(store,tc){if(!tc||!Number.isInteger(tc.count)||typeof tc.head!=='string')throw Error('external trusted checkpoint required');this.dir=store;this.trusted=tc}
+ static async provision(store){return new DurableAnchor(store||new MemStore(),{count:0,head:await digest('ROOT0:P369:GENESIS')})}
+ async records(){var files=this.dir.list().filter(function(n){return n.endsWith('.json')}).sort(),entries=[];for(var file of files){var x=JSON.parse(this.dir.read(file));if(file!==_key(x.id,x.epoch)||!(/^[a-f0-9]{64}$/.test(x.head)))throw Error('corrupt-record');entries.push(x)}return entries}
+ async checkpoint(){var items=await this.records(),head=await digest('ROOT0:P369:GENESIS');for(var x of items)head=await digest(head+'|'+JSON.stringify(x));return {count:items.length,head:head}}
+ async validate(){try{var c=await this.checkpoint();if(c.count!==this.trusted.count||c.head!==this.trusted.head)return {ok:false,reason:'rollback-or-altered-history'};return {ok:true,checkpoint:c}}catch(e){return {ok:false,reason:'unavailable-or-corrupt'}}}
+ async reserve(id,epoch,head){var v=await this.validate();if(!v.ok)return v;if(typeof id!=='string'||!id||!Number.isSafeInteger(epoch)||epoch<0||!(/^[a-f0-9]{64}$/.test(head)))throw new RangeError('reservation');
+  var p=_key(id,epoch),entries=await this.records(),old=entries.find(function(x){return x.id===id&&x.epoch===epoch});if(old)return old.head===head?{ok:true,previous:true,checkpoint:this.trusted}:{ok:false,reason:'double-vote'};
+  if(entries.some(function(x){return x.id===id&&x.epoch>epoch}))return {ok:false,reason:'epoch-rollback'};
+  try{this.dir.create(p,JSON.stringify({id:id,epoch:epoch,head:head}))}catch(e){return {ok:false,reason:e.code==='EEXIST'?'concurrent-reservation':'write-error'}}
+  var cp=await this.checkpoint();this.trusted=cp;return {ok:true,previous:false,checkpoint:cp}}
+}
+/* page-side helper: every state change is a reservation */
+var LED={A:null,ep:{},last:null,rej:[],n:0,q:Promise.resolve(),
+ init:function(){return DurableAnchor.provision().then(function(a){LED.A=a;LED.show();return LED.selftest()})},
+ commit:function(id,state){LED.q=LED.q.then(function(){if(!LED.A)return;var e=(LED.ep[id]||1);/* epoch 0 is left empty so a live epoch-rollback attack has somewhere to land */return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,e,h).then(function(r){if(r.ok&&!r.previous){LED.ep[id]=e+1;LED.last={id:id,epoch:e,head:h}}else if(!r.ok)LED.rej.unshift(id+'@'+e+': '+r.reason);LED.show();return r})})});return LED.q},
+ attack:function(kind){LED.q=LED.q.then(function(){var L=LED.last;if(!L){LED.rej.unshift(kind+': nothing reserved yet');LED.show();return}
+  var p=kind==='double-vote'?digest('forged|'+Date.now()).then(function(h){return LED.A.reserve(L.id,L.epoch,h)}):LED.A.reserve(L.id,0,L.head);
+  return p.then(function(r){LED.rej.unshift('live '+kind+' on '+L.id+'@'+L.epoch+' → '+(r.ok?'ACCEPTED':r.reason));LED.show()})});return LED.q},
+ show:function(){var el=document.getElementById('ledger');if(!el||!LED.A)return;var t=LED.A.trusted;
+  el.querySelector('.lh').textContent='count '+t.count+' · head '+t.head.slice(0,16)+'… · TOPOLOGY '+TOPOLOGY;
+  el.querySelector('.lr').textContent=LED.rej.slice(0,4).join('  |  ')||'no rejections yet'},
+ selftest:async function(){var out=[],ok=function(n,c,g){out.push([n,c,g])};var s=new MemStore(),a=await DurableAnchor.provision(s);
+  ok('genesis = sha256(ROOT0:P369:GENESIS)',a.trusted.head===(await digest('ROOT0:P369:GENESIS'))&&a.trusted.head.slice(0,8)==='54bc828d'&&a.trusted.count===0,a.trusted.head.slice(0,12));
+  var h1=await digest('one'),h2=await digest('two');var r=await a.reserve('q.d',0,h1);ok('reserve q.d@0',r.ok&&!r.previous,'count '+r.checkpoint.count);
+  r=await a.reserve('q.d',1,h2);ok('reserve q.d@1, head chains',r.ok&&r.checkpoint.count===2,r.checkpoint.head.slice(0,12));
+  var exp=await digest((await digest((await digest('ROOT0:P369:GENESIS'))+'|'+JSON.stringify({id:'q.d',epoch:0,head:h1})))+'|'+JSON.stringify({id:'q.d',epoch:1,head:h2}));ok('head recomputed by hand matches',exp===a.trusted.head,exp.slice(0,12));ok('matches the Node kernel test vector',a.trusted.head==='a114295c189dce567dfbf30a5b299e80054d52cc8019a7ea1bfa8f805e679b02','a114295c189d');
+  r=await a.reserve('q.d',1,h2);ok('same vote again → previous',r.ok&&r.previous,'previous');
+  r=await a.reserve('q.d',1,h1);ok('double-vote rejected',!r.ok&&r.reason==='double-vote',r.reason);
+  r=await a.reserve('q.d',0,await digest('x'));ok('double-vote at older epoch rejected',!r.ok&&r.reason==='double-vote',r.reason);
+  r=await a.reserve('q.d',0,h1);ok('old identical vote → previous',r.ok&&r.previous,'previous');
+  await a.reserve('tun',5,h1);r=await a.reserve('tun',3,h2);ok('epoch-rollback rejected',!r.ok&&r.reason==='epoch-rollback',r.reason);
+  s.beforeCreate=function(n,v){s.f.set(n,v)};r=await a.reserve('race',0,h1);ok('concurrent-reservation rejected',!r.ok&&r.reason==='concurrent-reservation',r.reason);
+  r=await a.reserve('after',0,h1);ok('foreign write breaks trust',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  var s2=new MemStore(),b=await DurableAnchor.provision(s2);await b.reserve('a',0,h1);await b.reserve('b',0,h2);var k=_key('a',0);s2.f.set(k,JSON.stringify({id:'a',epoch:0,head:h2}));
+  r=await b.validate();ok('tamper (altered head) detected',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  s2.f.set(k,JSON.stringify({id:'a',epoch:0,head:h1}));r=await b.validate();ok('restored record validates',r.ok,'ok');
+  s2.f.delete(_key('b',0));r=await b.validate();ok('rollback (deleted record) detected',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  s2.f.set(k,'{"id":"zz","epoch":0,"head":"'+h1+'"}');r=await b.validate();ok('misnamed record → corrupt',!r.ok&&r.reason==='unavailable-or-corrupt',r.reason);
+  try{new DurableAnchor(new MemStore(),null);ok('no checkpoint refused',false,'accepted')}catch(e){ok('no checkpoint refused',/trusted checkpoint/.test(e.message),e.message)}
+  var pass=out.every(function(x){return x[1]}),el=document.getElementById('ledger');
+  if(el)el.querySelector('.lc').innerHTML=out.map(function(x){return '<li class="'+(x[1]?'ok':'bad')+'">'+(x[1]?'✓ ':'✗ ')+x[0]+' <code>'+x[2]+'</code></li>'}).join('');
+  if(!pass){console.error('anchor self-check failed');throw Error('DurableAnchor self-check failed')}return pass}
+};
+LED.pagecheck=function(name,cond,got){var el=document.getElementById('ledger');if(el){var li=document.createElement('li');li.className=cond?'ok':'bad';li.innerHTML=(cond?'✓ ':'✗ ')+name+' <code>'+got+'</code>';el.querySelector('.lc2').appendChild(li)}if(!cond)throw Error('page self-check failed: '+name)};
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+var SEED=+(new URLSearchParams(location.search).get('seed')||(Date.now()%1e6));
+LED.commitAt=function(id,epoch,state){LED.q=LED.q.then(function(){if(!LED.A)return;return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,epoch,h).then(function(r){if(r.ok&&!r.previous)LED.last={id:id,epoch:epoch,head:h};else if(!r.ok)LED.rej.unshift(id+'@'+epoch+': '+r.reason);LED.show();return r})})});return LED.q};
+</script><script>"use strict";document.getElementById('sd').textContent=SEED;document.querySelectorAll('#ledger button').forEach(function(b){b.onclick=function(){LED.attack(b.dataset.a)}});
+var c=document.getElementById('c'),g=c.getContext('2d'),N=14,h,T,R,aval=0,biggest=0,dropped=0,lost=0,hist={};
+function plot(){R=rng(SEED);h=new Int32Array(N*N);for(var i=0;i<N*N;i++)h[i]=R()*4|0;T=[];for(var k=0;k<12;k++)T.push({x:R()*N|0,y:R()*N|0,c:['#e0603a','#3a8fe0','#7a4fd0','#e0b03a'][k%4]})}
+function drop(x,y){h[y*N+x]++;dropped++;var st=[y*N+x],sz=0;while(st.length){var i=st.pop();if(h[i]<4)continue;h[i]-=4;sz++;var X=i%N,Y=i/N|0;[[1,0],[-1,0],[0,1],[0,-1]].forEach(function(d){var nx=X+d[0],ny=Y+d[1];if(nx<0||ny<0||nx>=N||ny>=N){lost++;return}h[ny*N+nx]++;if(h[ny*N+nx]>=4)st.push(ny*N+nx)});if(h[i]>=4)st.push(i)}
+ if(sz){aval++;biggest=Math.max(biggest,sz);var b=Math.ceil(Math.log2(sz+1));hist[b]=(hist[b]||0)+1;if(sz>=12||aval%30===0)LED.commit('avalanche',{seed:SEED,size:sz,n:aval})}}
+var TW=34,TH=17,BH=13,ox=500,oy=150;function iso(x,y,z){return [ox+(x-y)*TW,oy+(x+y)*TH-z*BH]}
+function cube(x,y,z,top){var p=iso(x,y,z);g.fillStyle=top;g.beginPath();g.moveTo(p[0],p[1]-TH);g.lineTo(p[0]+TW,p[1]);g.lineTo(p[0],p[1]+TH);g.lineTo(p[0]-TW,p[1]);g.fill();
+ g.fillStyle='#6f8f3a';g.beginPath();g.moveTo(p[0]-TW,p[1]);g.lineTo(p[0],p[1]+TH);g.lineTo(p[0],p[1]+TH+BH);g.lineTo(p[0]-TW,p[1]+BH);g.fill();g.fillStyle='#54702a';g.beginPath();g.moveTo(p[0]+TW,p[1]);g.lineTo(p[0],p[1]+TH);g.lineTo(p[0],p[1]+TH+BH);g.lineTo(p[0]+TW,p[1]+BH);g.fill()}
+function draw(){g.clearRect(0,0,c.width,c.height);for(var s=0;s<2*N;s++)for(var x=0;x<N;x++){var y=s-x;if(y<0||y>=N)continue;cube(x,y,-1,'#c9a46a');for(var z=0;z<h[y*N+x];z++)cube(x,y,z,z===3?'#e9f5a0':'#9cc45a');
+  T.forEach(function(t){if(t.x===x&&t.y===y){var p=iso(x,y,h[y*N+x]);g.fillStyle=t.c;g.beginPath();g.ellipse(p[0],p[1]-6,11,6,0,0,7);g.fill();g.fillStyle='#2c2a4a';for(var l=0;l<4;l++)g.fillRect(p[0]-8+l*5,p[1]-2,2,4);g.fillRect(p[0]+9,p[1]-8,2,2)}})}
+ var ks=Object.keys(hist).map(Number).sort(function(a,b){return a-b}),bx=20;g.fillStyle='#2c2a4a';g.font='12px system-ui';g.fillText('avalanche sizes (log₂ bins)',20,c.height-110);ks.forEach(function(k){var v=Math.log2(hist[k]+1)*12;g.fillRect(bx+k*16,c.height-20-v,12,v);g.fillText(k,bx+k*16+2,c.height-6)});
+ var tot=0;for(var i=0;i<N*N;i++)tot+=h[i];document.getElementById('st').textContent=dropped+' dropped · '+aval+' avalanches · biggest '+biggest+' topples · '+tot+' on plot · '+lost+' fell off';return tot}
+var fr=0;function loop(){fr++;if(fr%10===0)T.forEach(function(t){var d=[[1,0],[-1,0],[0,1],[0,-1]][R()*4|0];t.x=Math.max(0,Math.min(N-1,t.x+d[0]));t.y=Math.max(0,Math.min(N-1,t.y+d[1]));if(R()<.5)drop(t.x,t.y)});draw();requestAnimationFrame(loop)}
+c.onclick=function(e){var r=c.getBoundingClientRect(),mx=(e.clientX-r.left)/r.width*c.width-ox,my=(e.clientY-r.top)/r.height*c.height-oy,a=mx/TW,b=my/TH,x=Math.round((a+b)/2),y=Math.round((b-a)/2);if(x>=0&&y>=0&&x<N&&y<N){drop(x,y);LED.commit('hand-brick',{x:x,y:y})}};
+document.getElementById('burst').onclick=function(){for(var k=0;k<50;k++)drop(R()*N|0,R()*N|0)};
+document.getElementById('rain').onclick=function(){for(var x=0;x<N;x++){lost+=h[x];h[x]=0}LED.commit('rain',{seed:SEED,lost:lost})};
+document.getElementById('ns').onclick=function(){SEED=(SEED*17+3)%1e6;plot();LED.commit('plot',{seed:SEED})};
+plot();LED.init().then(function(){var t0=0;for(var i=0;i<N*N;i++)t0+=h[i];var d0=dropped,l0=lost;for(var k=0;k<200;k++)drop(R()*N|0,R()*N|0);var t1=0,mx=0;for(var i=0;i<N*N;i++){t1+=h[i];mx=Math.max(mx,h[i])}
+ LED.pagecheck('bricks conserved: on plot = before + dropped − fell off',t1===t0+(dropped-d0)-(lost-l0),t1+' = '+t0+'+'+(dropped-d0)+'−'+(lost-l0));LED.pagecheck('stable: no column above 3',mx<=3,'max '+mx);LED.commit('plot',{seed:SEED})});loop();</script><a class="grokbot-badge" href="../built-by-grok-bot.html" title="This page was built by Grok Bot" style="position:relative;display:inline-block;margin:10px 16px 16px;z-index:2147483000;font:600 11px/1 system-ui,sans-serif;color:#fff;background:rgba(12,6,30,.86);border:1px solid #7ff9ff;border-radius:999px;padding:5px 9px;text-decoration:none;letter-spacing:.04em">built by Grok Bot</a></body></html>

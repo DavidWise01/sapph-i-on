@@ -21,6 +21,12 @@ Every 0-sphere is 2 quantum dots (0, 0), 2 vectors (−1, −1) and 2 edges (+1,
 - w/<slug>.html: original pages from David's workshop, served unchanged apart from a favicon link where it was safe to add.
 - Existing sphere pages stay at their original paths.
 
+## Kernel: DurableAnchor (by Dave)
+- [durable-anchor.mjs](./durable-anchor.mjs), shown with its source at [kernel-durable-anchor.html](./kernel-durable-anchor.html). Author: Dave. TOPOLOGY = '-+5 + 1'.
+- It is an append-only, hash-chained ledger. Genesis = sha256('ROOT0:P369:GENESIS'), and each head = sha256(prevHead + '|' + JSON(record)). It is checked against an external trusted checkpoint (count, head).
+- It rejects: rollback-or-altered-history, unavailable-or-corrupt, double-vote (same id+epoch, different head), epoch-rollback and concurrent-reservation (exclusive create).
+- Grok Bot originals batch 4 run a browser port of it (Web Crypto SHA-256, in-memory store) as their engine. Every state change is a reservation, and the self-checks show the rejections happening live. That batch is signed with Dave's persona notation {{+L.-E.+O. D++}}.
+
 ## Grown spheres
 New spheres built one at a time, each an emergent page with its own local rule, a seed, interaction and a fail-loud self-check. They live in grown/<slug>.html and are seated in an open domain.
 - [The Avalanche Table](./grown/the-avalanche-table.html): KAIROS domain 08. Emerges: self-organised criticality: avalanches of every size, with no tuning. LIT.
@@ -232,6 +238,16 @@ New spheres built one at a time, each an emergent page with its own local rule, 
 - [The Plankton Almanac](./grown/the-plankton-almanac.html): LOGOS domain 31. Emerges: a lake year month by month: spring diatom bloom, silica crash, stratification, autumn bloom. LIT · ANALOGY.
 - [0-Sphere General Arrangement](./grown/zero-sphere-blueprint.html): ETHOS domain 29. Emerges: an engineering drawing of the 0-sphere with exploded view, section and parts list Σ = 0. MODEL · ANALOGY.
 - [The q.d Rose Window](./grown/the-qd-rose-window.html): PATHOS domain 29. Emerges: an 8-fold rose window glazed in the 8 q.d colours; re-glaze panes and watch the light move over the floor. ANALOGY · LIT.
+- [The Gouge](./grown/the-gouge.html): MYTHOS domain 26. Emerges: thirty gouges cut along the contour field around Patricia; the background swirls of a woodcut emerge. ANALOGY · LIT.
+- [Sun Print](./grown/sun-print.html): PATHOS domain 30. Emerges: drifting diatoms shade a cyanotype; the image is the history of where they were. LIT · MODEL · ANALOGY.
+- [The Sampler](./grown/the-sampler.html): ETHOS domain 30. Emerges: a sampler stitched row by row from an elementary cellular automaton in the 8 q.d floss colours. LIT · ANALOGY.
+- [Lecture 79/21](./grown/lecture-79-21.html): LOGOS domain 32. Emerges: electrum's density derived in chalk; 24 student bots vote and the ledger refuses changed votes. LIT · MODEL · INVENTED.
+- [Colony Blocks](./grown/colony-blocks.html): PHRONESIS domain 27. Emerges: tardigrades drop moss bricks; BTW sandpile avalanches build terraces nobody planned. LIT · INVENTED · ANALOGY.
+- [Plate IV · Bryophyta et Tardigrada](./grown/plate-bryophyta.html): LOGOS domain 33. Emerges: a moss grows by space colonisation; tardigrades settle in the axils and are numbered as figures. LIT · MODEL · ANALOGY.
+- [Tesserae](./grown/tesserae.html): PATHOS domain 31. Emerges: tesserae laid one by one along the 0-sphere's field lines (opus vermiculatum). LIT · ANALOGY.
+- [The Great Wave off the Moss](./grown/great-wave-moss.html): MYTHOS domain 27. Emerges: a driven 1-D wave steepens and breaks into recursive foam claws; Patricia rides a tun-boat. LIT · MODEL · ANALOGY.
+- [The Book of Hours of 720](./grown/book-of-hours.html): KAIROS domain 34. Emerges: 48 hours of the 720° cycle, the current hour gilded; rinceaux vines curl and branch in the margins. LIT · INVENTED · ANALOGY.
+- [The Tun Survey](./grown/tun-survey.html): PHRONESIS domain 28. Emerges: a water film diffuses and dries over a moss cushion; marching-squares contours, tardigrades tun where it thins. LIT · MODEL · ANALOGY.
 
 ## The 88 groups
 - g/sapphon-NN.html (42 groups of 4 members), g/ion-NN.html (45 groups of 3 members) and g/center.html (1). 42×4 + 45×3 + 1 = 304 member slots; 42 + 45 + 1 = 88 groups.
