@@ -1,0 +1,33 @@
+<!doctype html><html lang="en"><head><!--built-by-grok-bot--><meta name="author" content="Grok Bot"><meta name="generator" content="Grok Bot · SaPpH{{i}}on"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The 720 Typist · a rhythm game · SaPpH{{i}}on</title>
+<style>body{margin:0;background:#0a0a0a;color:#f5f5f5;font:15px/1.4 "Menlo",ui-monospace,monospace;overflow:hidden}canvas{display:block;width:100vw;height:70vh}
+.top{display:flex;justify-content:space-between;padding:8px 14px;font-size:13px}h1{margin:0;font:800 18px Menlo,monospace;color:#39ff14}.bot{padding:8px 14px}button{font:inherit;background:#39ff14;color:#000;border:0;padding:6px 14px;cursor:pointer;margin-right:6px}
+#kb{display:none;gap:4px;flex-wrap:wrap}#kb button{background:#222;color:#fff;min-width:40px}p{margin:6px 0;color:#bbb;font-size:13px;max-width:900px}b{color:#39ff14}a{color:#39ff14}@media (pointer:coarse){#kb{display:flex}}</style></head><body>
+<div class="top"><h1>THE 720 TYPIST</h1><span id="st"></span></div><canvas id="c" role="img" aria-label="letters riding round a two-lap clock toward a strike line"></canvas>
+<div class="bot"><button id="go">start</button><button id="ns">new seed</button><span id="kb"></span>
+<p>Letters ride round a clock that needs two laps, 720°, to come home. Type each letter as it crosses the strike line at the top. A first-lap letter (cyan) is worth +1, a second-lap letter (magenta) is worth −1 if missed. Your score is a balance: keep it near zero by catching what you can. The phrase is from SaPpH{{i}}on. Timing windows: perfect ±60 ms, good ±150 ms.<br><b>MODEL</b> the 720° clock is Dave's; <b>ANALOGY</b> spinor phase as rhythm. Self-check: the beat grid is exact (each note on a 16th at the chosen tempo) and every note is judged once. <a href="../index.html">← SaPpH{{i}}on</a></p></div>
+<script>
+"use strict";var q=new URLSearchParams(location.search),seed=+(q.get("seed")||(Date.now()%1e6));
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;}}
+var PH=["sapphion","zero point","two laps home","keepers emerge","sum to zero","electrum ring","tardigrade tun"],c=document.getElementById("c"),g=c.getContext("2d"),W,H,N,T0=null,BPM,LAP,stats,ctx=null,RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
+function fit(){var d=devicePixelRatio||1;W=c.clientWidth;H=c.clientHeight;c.width=W*d;c.height=H*d;g.setTransform(d,0,0,d,0,0);}
+function setup(){var R=rng(seed);BPM=84+Math.floor(R()*48);var s16=60/BPM/4,txt=PH[Math.floor(R()*PH.length)].replace(/ /g,"");LAP=s16*16;N=[];var slot=4;
+for(var i=0;i<txt.length;i++){slot+=1+Math.floor(R()*3);N.push({ch:txt[i],t:slot*s16,lap:R()<.5?1:2,done:null});}
+N.forEach(function(n,i){var k=n.t/s16;if(Math.abs(k-Math.round(k))>1e-9)throw new Error("SELF-CHECK FAILED: off-grid note");if(i&&n.t<=N[i-1].t)throw new Error("SELF-CHECK FAILED: notes out of order");});
+stats={p:0,g:0,m:0,bal:0};T0=null;document.getElementById("kb").innerHTML=Array.from(new Set(txt.split(""))).map(function(ch){return'<button data-k="'+ch+'">'+ch+'</button>';}).join("");}
+function now(){return T0===null?0:(performance.now()-T0)/1000;}
+function blip(f){if(!ctx)return;var o=ctx.createOscillator(),gg=ctx.createGain();o.frequency.value=f;gg.gain.setValueAtTime(.12,ctx.currentTime);gg.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.12);o.connect(gg).connect(ctx.destination);o.start();o.stop(ctx.currentTime+.13);}
+function hit(k){if(T0===null)return;var t=now(),best=null,bd=1;N.forEach(function(n){if(n.done===null&&n.ch===k){var d=Math.abs(n.t+LAP*(n.lap-1)-t);if(d<bd){bd=d;best=n;}}});
+if(best&&bd<.15){best.done=bd<.06?"perfect":"good";stats[bd<.06?"p":"g"]++;if(best.lap===1)stats.bal+=1;blip(bd<.06?880:660);}else blip(220);}
+addEventListener("keydown",function(e){if(e.key.length===1)hit(e.key.toLowerCase());});document.getElementById("kb").onclick=function(e){if(e.target.dataset.k)hit(e.target.dataset.k);};
+function draw(){var t=now();g.fillStyle="rgba(10,10,10,"+(RM?1:.35)+")";g.fillRect(0,0,W,H);var cx=W/2,cy=H/2+10,r=Math.min(W,H)*.38;
+g.strokeStyle="#333";g.lineWidth=2;g.beginPath();g.arc(cx,cy,r,0,7);g.stroke();g.beginPath();g.arc(cx,cy,r*.72,0,7);g.stroke();g.strokeStyle="#39ff14";g.lineWidth=4;g.beginPath();g.moveTo(cx,cy-r-18);g.lineTo(cx,cy-r*.72+18);g.stroke();
+var beat=(t*BPM/60)%1;g.fillStyle="rgba(57,255,20,"+(T0===null?0:.4*(1-beat))+")";g.beginPath();g.arc(cx,cy,10+beat*8,0,7);g.fill();
+N.forEach(function(n){var due=n.t+LAP*(n.lap-1),dt=due-t;if(n.done===null&&dt<-.15){n.done="miss";stats.m++;if(n.lap===2)stats.bal-=1;}
+var lapsLeft=dt/LAP;if(lapsLeft>2||lapsLeft<-.1)return;var ang=-Math.PI/2-lapsLeft*Math.PI*2*(n.lap===2?.5:1),rr=n.lap===1?r:r*.72;
+g.font="bold "+Math.round(r*.14)+"px Menlo,monospace";g.textAlign="center";g.textBaseline="middle";g.fillStyle=n.done==="miss"?"#555":n.done?"#fff":n.lap===1?"#00e5ff":"#ff2bd6";g.fillText(n.ch,cx+Math.cos(ang)*rr,cy+Math.sin(ang)*rr);});
+var judged=N.filter(function(n){return n.done!==null;}).length;if(judged!==stats.p+stats.g+stats.m)throw new Error("SELF-CHECK FAILED: a note was judged twice");
+document.getElementById("st").textContent="seed "+seed+" · "+BPM+" bpm · perfect "+stats.p+" · good "+stats.g+" · miss "+stats.m+" · balance "+(stats.bal>0?"+":"")+stats.bal+(judged===N.length&&T0!==null?" · DONE":"");}
+document.getElementById("go").onclick=function(){if(!ctx)ctx=new (window.AudioContext||window.webkitAudioContext)();setup();T0=performance.now()+600;};
+document.getElementById("ns").onclick=function(){seed=(seed*16807+41)%2147483647;setup();};addEventListener("resize",fit);fit();setup();T0=performance.now()+1500;
+(function L(){draw();requestAnimationFrame(L);})();
+</script><a class="grokbot-badge" href="../built-by-grok-bot.html" title="This page was built by Grok Bot" style="position:fixed;right:8px;bottom:8px;z-index:2147483000;font:600 11px/1 system-ui,sans-serif;color:#fff;background:rgba(12,6,30,.86);border:1px solid #7ff9ff;border-radius:999px;padding:5px 9px;text-decoration:none;letter-spacing:.04em">built by Grok Bot</a></body></html>

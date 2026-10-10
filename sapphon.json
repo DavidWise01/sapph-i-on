@@ -27,10 +27,10 @@
  "counts": {
   "keepers": 8,
   "domains": 512,
-  "domains_populated": 281,
-  "domains_open": 231,
-  "spheres": 1680,
-  "zero_spheres": 231,
+  "domains_populated": 291,
+  "domains_open": 221,
+  "spheres": 1690,
+  "zero_spheres": 221,
   "balance": 0,
   "workshop": 343
  },
@@ -4355,7 +4355,8 @@
         "pal": [
          "#dfe9e4",
          "#6aa8c8",
-         "#5a8faa"
+         "#5a8faa",
+         "#7ff9ff"
         ],
         "bg": "#14281d",
         "canvas": 0,
@@ -4376,24 +4377,74 @@
     },
     {
      "n": 27,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE WEB OF KEEPERS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Web of Keepers",
+       "h": "grown/the-web-of-keepers.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-web-of-keepers.html",
+       "grown": true,
+       "emerges": "a force-directed graph of centre, keepers, pages and groups read live from sapphon.json",
+       "label": "LIT",
+       "icon": {
+        "pal": [
+         "#e5e7eb",
+         "#4b5563",
+         "#93c5fd",
+         "#9ca3af"
+        ],
+        "bg": "#0b0c10",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-35",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/ethos-27.html",
-     "zero_page": "z/ethos-27.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-27.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-27.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 28,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE FRUSTULE FOUNDRY",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Frustule Foundry",
+       "h": "grown/the-frustule-foundry.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-frustule-foundry.html",
+       "grown": true,
+       "emerges": "engraved SVG diatom valves from symmetry rules, with 8 mutated siblings and SVG download",
+       "label": "LIT · ANALOGY",
+       "icon": {
+        "pal": [
+         "#f7f3ea",
+         "#6b4f2a",
+         "#b9ad95",
+         "#e9e4d8"
+        ],
+        "bg": "#2a2620",
+        "canvas": 0,
+        "svg": 3,
+        "scripts": 1,
+        "raf": false,
+        "audio": false
+       },
+       "group": "sapphon-35",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/ethos-28.html",
-     "zero_page": "z/ethos-28.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-28.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-28.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -9894,24 +9945,73 @@
     },
     {
      "n": 27,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE GLASS CATHEDRAL",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Glass Cathedral",
+       "h": "grown/the-glass-cathedral.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-glass-cathedral.html",
+       "grown": true,
+       "emerges": "a raymarched 3D centric diatom frustule: valves, girdle bands, ribs and pores, orbitable",
+       "label": "LIT · ANALOGY",
+       "icon": {
+        "pal": [
+         "#8fe3ff",
+         "#e8f4ff",
+         "#7ff9ff"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-35",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-27.html",
-     "zero_page": "z/pathos-27.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-27.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-27.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 28,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE AUXOSPORE GARDEN",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Auxospore Garden",
+       "h": "grown/the-auxospore-garden.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-auxospore-garden.html",
+       "grown": true,
+       "emerges": "3D L-system plants grown generation by generation, with diatom-rosette flowers",
+       "label": "LIT · ANALOGY",
+       "icon": {
+        "pal": [
+         "#d8f3dc",
+         "#74c69d",
+         "#95d5b2",
+         "#ffd6a5"
+        ],
+        "bg": "#0b1d13",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-36",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-28.html",
-     "zero_page": "z/pathos-28.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-28.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-28.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -14434,7 +14534,8 @@
         "pal": [
          "#d7263d",
          "#1b4dd8",
-         "#f2efe6"
+         "#f2efe6",
+         "#7ff9ff"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -14491,24 +14592,74 @@
     },
     {
      "n": 28,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE ZERO ORBIT",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Zero Orbit",
+       "h": "grown/the-zero-orbit.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-zero-orbit.html",
+       "grown": true,
+       "emerges": "launch bodies around a star; bound vs free orbits split at E = 0; energy and momentum watched",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#ffd166",
+         "#cfd8ff",
+         "#9fb0ff",
+         "#3c4a8a"
+        ],
+        "bg": "#101436",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-36",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/logos-28.html",
-     "zero_page": "z/logos-28.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-28.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-28.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 29,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE SPECTROSCOPE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Spectroscope",
+       "h": "grown/the-spectroscope.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-spectroscope.html",
+       "grown": true,
+       "emerges": "NIST strong lines of 99 elements through a prism; mix elements, guess a mystery one",
+       "label": "LIT · ANALOGY",
+       "icon": {
+        "pal": [
+         "#d9b26f",
+         "#efe3c8",
+         "#d9c7a0",
+         "#5b4523"
+        ],
+        "bg": "#15110c",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 1,
+        "raf": false,
+        "audio": false
+       },
+       "group": "sapphon-36",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/logos-29.html",
-     "zero_page": "z/logos-29.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-29.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-29.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -18498,13 +18649,38 @@
     },
     {
      "n": 23,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "PATRICIA'S DROUGHT",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Patricia's Drought",
+       "h": "grown/patricias-drought.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/patricias-drought.html",
+       "grown": true,
+       "emerges": "a six-panel seeded comic of one tardigrade's dry spell, revealed panel by panel",
+       "label": "LIT · INVENTED",
+       "icon": {
+        "pal": [
+         "#e63946",
+         "#6d597a",
+         "#1d3557",
+         "#ffe066"
+        ],
+        "bg": "#120a26",
+        "canvas": 0,
+        "svg": 1,
+        "scripts": 1,
+        "raf": false,
+        "audio": false
+       },
+       "group": "sapphon-36",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-23.html",
-     "zero_page": "z/mythos-23.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-23.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-23.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -34470,7 +34646,8 @@
         "pal": [
          "#eadfc8",
          "#6b5a48",
-         "#1d7a3a"
+         "#1d7a3a",
+         "#7ff9ff"
         ],
         "bg": "#2b2118",
         "canvas": 0,
@@ -34504,7 +34681,8 @@
        "icon": {
         "pal": [
          "#0057b8",
-         "#eef1f5"
+         "#eef1f5",
+         "#7ff9ff"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -34525,13 +34703,38 @@
     },
     {
      "n": 24,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "ZERO HAND",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Zero Hand",
+       "h": "grown/zero-hand.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/zero-hand.html",
+       "grown": true,
+       "emerges": "a card game against a bot with a 36-card deck of six 0-spheres; close Σ = 0 bonds to score",
+       "label": "MODEL",
+       "icon": {
+        "pal": [
+         "#ffe8a3",
+         "#7b2cbf",
+         "#5a189a",
+         "#1f7a4a"
+        ],
+        "bg": "#120a26",
+        "canvas": 0,
+        "svg": 0,
+        "scripts": 1,
+        "raf": false,
+        "audio": false
+       },
+       "group": "sapphon-37",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-24.html",
-     "zero_page": "z/phronesis-24.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-24.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-24.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -39911,24 +40114,74 @@
     },
     {
      "n": 30,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE Q.D SEQUENCER",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The q.d Sequencer",
+       "h": "grown/the-qd-sequencer.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-qd-sequencer.html",
+       "grown": true,
+       "emerges": "an 8×16 step sequencer whose pattern can evolve by copy/mutate/rest rules",
+       "label": "LIT · ANALOGY",
+       "icon": {
+        "pal": [
+         "#ff9f1c",
+         "#3a3a3a",
+         "#ff1744",
+         "#ff9100"
+        ],
+        "bg": "#1d1d1d",
+        "canvas": 0,
+        "svg": 0,
+        "scripts": 1,
+        "raf": false,
+        "audio": true
+       },
+       "group": "sapphon-37",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/kairos-30.html",
-     "zero_page": "z/kairos-30.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-30.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-30.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 31,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE 720 TYPIST",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The 720 Typist",
+       "h": "grown/the-720-typist.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-720-typist.html",
+       "grown": true,
+       "emerges": "type letters as they cross the strike line of a two-lap clock; keep the balance near zero",
+       "label": "MODEL · ANALOGY",
+       "icon": {
+        "pal": [
+         "#39ff14",
+         "#f5f5f5",
+         "#00e5ff",
+         "#ff2bd6"
+        ],
+        "bg": "#0a0a0a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 1,
+        "raf": true,
+        "audio": true
+       },
+       "group": "sapphon-37",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/kairos-31.html",
-     "zero_page": "z/kairos-31.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-31.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-31.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -40306,8 +40559,8 @@
   "world": 1,
   "keepers": 8,
   "domains": 512,
-  "zero_spheres": 231,
-  "generated_total": 840,
+  "zero_spheres": 221,
+  "generated_total": 830,
   "groups": 88
  },
  "workshop": [
@@ -48577,7 +48830,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1680
+   "pages": 1690
   },
   "list": [
    {
@@ -49948,21 +50201,24 @@
       "w/kernel.html",
       "ahead/Next-After-Weak-Field.html",
       "bonk/Bonk-Upgrade-Spin-Coils-V55.html",
-      "lyre/H1-Lyre-Minimal-Loop.html"
+      "lyre/H1-Lyre-Minimal-Loop.html",
+      "grown/the-web-of-keepers.html"
      ],
      [
       "lyre/Mg12-Lyre-Magnesium-Chlorophyll.html",
       "refrain/Wakaku-Speaker-V39-Forest.html",
       "refrain/Wakaku-Speaker-V50-Flowering.html",
       "scale/Scale-Road-Gaia-Cosmic.html",
-      "speaker/Wakaku-Speaker-V104-Forest.html"
+      "speaker/Wakaku-Speaker-V104-Forest.html",
+      "grown/the-frustule-foundry.html"
      ],
      [
       "speaker/Wakaku-Speaker-V105-Forest.html",
       "speaker/Wakaku-Speaker-V108-Forest.html",
       "speaker/Wakaku-Speaker-V109-Forest.html",
       "voice/Wakaku-Speaker-V83-Dna.html",
-      "voice/Wakaku-Speaker-V85-Protein.html"
+      "voice/Wakaku-Speaker-V85-Protein.html",
+      "grown/the-glass-cathedral.html"
      ]
     ]
    },
@@ -49977,28 +50233,32 @@
       "voice/Wakaku-Speaker-V98-Canopy.html",
       "w/5-octet-shadow-toroid.html",
       "w/overlay-5-0-nested-pattern.html",
-      "w/wakaku-6-plank-bubbles-each-10-35-timed-to-10-360-3-3.html"
+      "w/wakaku-6-plank-bubbles-each-10-35-timed-to-10-360-3-3.html",
+      "grown/the-auxospore-garden.html"
      ],
      [
       "w/wakaku-and-gravity-99-9-inf-inf.html",
       "w/wakaku-brighter-with-lean-proofs.html",
       "w/wakaku-lol-i-call-a-qubit-a-cubit.html",
       "w/wakaku-next-brighter-with-lean-proofs-face-area-1.html",
-      "w/wakaku-next-evo-1g-outside-0-6g-inside-evolves.html"
+      "w/wakaku-next-evo-1g-outside-0-6g-inside-evolves.html",
+      "grown/the-zero-orbit.html"
      ],
      [
       "w/wakaku-next-evo-anti-gravity.html",
       "w/wakaku-next-evo-evolution.html",
       "w/wakaku-plank-bubble-electrum-oscillating-phase-10-1440-s-x6-.html",
       "sapphon/Next-Evo-I-Id-Sid-Lol-At-Sapphon-Stage-10-X4.html",
-      "w/electron-lattice-3x3x.html"
+      "w/electron-lattice-3x3x.html",
+      "grown/the-spectroscope.html"
      ],
      [
       "w/photon-lattice-3x3x.html",
       "sapphon/Jev-Quad-Cortex-Sapphon.html",
       "w/toph-aeon-lattice-full.html",
       "one/Handbuilt-One-Window-Only.html",
-      "bonk/Bonk-Toroid-Windmill-Steepled-Memsistor-Plank-V41.html"
+      "bonk/Bonk-Toroid-Windmill-Steepled-Memsistor-Plank-V41.html",
+      "grown/patricias-drought.html"
      ]
     ]
    },
@@ -50013,20 +50273,23 @@
       "toroid/Bonk-Bubble-Toroid-Trap-V21.html",
       "toroid/Bonk-Recursive-Toroid-Trap-V22.html",
       "another/Next-Element-Rutherfordium-104-Lyre.html",
-      "one/the-zero-one-principle.html"
+      "one/the-zero-one-principle.html",
+      "grown/zero-hand.html"
      ],
      [
       "one/Each-Box-Is-One.html",
       "scale/Next-Scale-Trans-Planckian-Googol.html",
       "w/quantum-eraser.html",
-      "later/Next-Evo-Mito-Plus-Plus-Powers-1408-Gardens-X8.html"
+      "later/Next-Evo-Mito-Plus-Plus-Powers-1408-Gardens-X8.html",
+      "grown/the-qd-sequencer.html"
      ],
      [
       "another/Next-Element-Einsteinium-99-Lyre.html",
       "generative/the-prime-side.html",
       "kernel/the-carry.html",
       "skills/the-skills.html",
-      "spheres/the-address.html"
+      "spheres/the-address.html",
+      "grown/the-720-typist.html"
      ],
      [
       "spheres/the-lines.html",
