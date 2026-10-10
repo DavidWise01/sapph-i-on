@@ -27,10 +27,10 @@
  "counts": {
   "keepers": 8,
   "domains": 512,
-  "domains_populated": 440,
-  "domains_open": 72,
-  "spheres": 1839,
-  "zero_spheres": 72,
+  "domains_populated": 451,
+  "domains_open": 61,
+  "spheres": 1850,
+  "zero_spheres": 61,
   "balance": 0,
   "workshop": 343
  },
@@ -5346,24 +5346,73 @@
     },
     {
      "n": 54,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "CLOUDS AND MILK · MIE WHITENESS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Clouds and Milk · Mie whiteness",
+       "h": "grown/clouds-and-milk.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/clouds-and-milk.html",
+       "grown": true,
+       "emerges": "drifting droplets whose colour follows ADA Mie extinction vs size",
+       "label": "LIT · COMPUTED · MODEL",
+       "icon": {
+        "pal": [
+         "#e8eaf0",
+         "#ffe0a0",
+         "#cfe0ff"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-08",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/ethos-54.html",
-     "zero_page": "z/ethos-54.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-54.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-54.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 55,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "SNOW · WHITE ON TOP, BLUE IN THE HOLE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Snow · white on top, blue in the hole",
+       "h": "grown/snow.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/snow.html",
+       "grown": true,
+       "emerges": "digging into snow: escaping light turns blue with depth",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#9ad0ff",
+         "#e6eef8",
+         "#ffe0a0",
+         "#eef4ff"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-08",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/ethos-55.html",
-     "zero_page": "z/ethos-55.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-55.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-55.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -11499,24 +11548,70 @@
     },
     {
      "n": 53,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "WHICH WHITE · D65, E AND A THROUGH BRADFORD",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Which White · D65, E and A through Bradford",
+       "h": "grown/white-points.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/white-points.html",
+       "grown": true,
+       "emerges": "patches under D65/E/A with Bradford adaptation toggled",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#e8e8e8",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-09",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-53.html",
-     "zero_page": "z/pathos-53.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-53.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-53.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 54,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "−Λ / +Λ · COMPLEMENTARY PAIRS THAT MAKE WHITE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "−λ / +λ · complementary pairs that make white",
+       "h": "grown/complement-mirror.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/complement-mirror.html",
+       "grown": true,
+       "emerges": "−λ/+λ complementary pairs solved to white",
+       "label": "LIT · COMPUTED · READING",
+       "icon": {
+        "pal": [
+         "#eaeaea",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-09",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-54.html",
-     "zero_page": "z/pathos-54.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-54.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-54.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -16854,24 +16949,74 @@
     },
     {
      "n": 57,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE PAIR CIPHER · A+B- … -Z+Y, TELESCOPED LIVE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Pair Cipher · a+b- … -z+y, telescoped live",
+       "h": "grown/the-pair-cipher.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-pair-cipher.html",
+       "grown": true,
+       "emerges": "Dave's 26-line pair cipher telescoping live; evens cancel, odds survive, s/t break",
+       "label": "MATCH · MODEL",
+       "icon": {
+        "pal": [
+         "#ff9a3c",
+         "#9a4cff",
+         "#3fd06a",
+         "#ffe33a"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-09",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/logos-57.html",
-     "zero_page": "z/logos-57.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-57.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-57.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 58,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "TITANIUM WHITE · THE WHITEST PAINT",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Titanium White · the whitest paint",
+       "h": "grown/titanium-white.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/titanium-white.html",
+       "grown": true,
+       "emerges": "Kubelka–Munk coats of rutile/anatase/lead/zinc white",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#ffe0a0",
+         "#e8e8e8",
+         "#ff9a3c",
+         "#9a4cff"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-09",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/logos-58.html",
-     "zero_page": "z/logos-58.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-58.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-58.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -21549,24 +21694,74 @@
     },
     {
      "n": 51,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "SIRIUS B · THE WHITE DWARF",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Sirius B · the white dwarf",
+       "h": "grown/sirius-b.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/sirius-b.html",
+       "grown": true,
+       "emerges": "a white dwarf cooling along its blackbody colour beside Sirius A",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#e4e8f0",
+         "#f0f4ff",
+         "#cfe0ff",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-10",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-51.html",
-     "zero_page": "z/mythos-51.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-51.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-51.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 52,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "WHITER THAN WHITE · OPTICAL BRIGHTENERS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Whiter than White · optical brighteners",
+       "h": "grown/whiter-than-white.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/whiter-than-white.html",
+       "grown": true,
+       "emerges": "optical brightener neutralising yellow paper; UV lamp",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#b0b0ff",
+         "#e8e8f4",
+         "#ffe0a0",
+         "#f0f0ff"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-10",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-52.html",
-     "zero_page": "z/mythos-52.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-52.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-52.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -38200,24 +38395,74 @@
     },
     {
      "n": 50,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "RECOMBINATION · NEWTON PUTS WHITE BACK TOGETHER",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Recombination · Newton puts white back together",
+       "h": "grown/newton-recombines.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/newton-recombines.html",
+       "grown": true,
+       "emerges": "prism fan recombined by a lens; block bands with Newton's comb",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ece6dc",
+         "#ffe9c0",
+         "#a08050",
+         "#ffe0a0"
+        ],
+        "bg": "#151515",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-10",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-50.html",
-     "zero_page": "z/phronesis-50.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-50.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-50.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 51,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "EIGHT RINGS · CRITIQUE OF THE PURENESS RUN",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Eight Rings · critique of the pureness run",
+       "h": "grown/white-critique.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/white-critique.html",
+       "grown": true,
+       "emerges": "severity rings of the eight-layer run",
+       "label": "READING",
+       "icon": {
+        "pal": [
+         "#ff9a3c",
+         "#ff7a6a",
+         "#ffc58a",
+         "#9a4cff"
+        ],
+        "bg": "#2a0a0a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-10",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-51.html",
-     "zero_page": "z/phronesis-51.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-51.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-51.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -44125,13 +44370,38 @@
     },
     {
      "n": 53,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "EIGHT SHELLS · PURENESS COMPLETES THE Q.D",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Eight Shells · pureness completes the q.d",
+       "h": "grown/eight-shells.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/eight-shells.html",
+       "grown": true,
+       "emerges": "six coloured shells pour into a solved D65 white: all 8 q.d",
+       "label": "COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffe0a0",
+         "#ff4a3a",
+         "#4a7aff",
+         "#3fd06a"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-11",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/kairos-53.html",
-     "zero_page": "z/kairos-53.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-53.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-53.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -44267,8 +44537,8 @@
   "world": 1,
   "keepers": 8,
   "domains": 512,
-  "zero_spheres": 72,
-  "generated_total": 681,
+  "zero_spheres": 61,
+  "generated_total": 670,
   "groups": 88
  },
  "workshop": [
@@ -52538,7 +52808,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1839
+   "pages": 1850
   },
   "list": [
    {
@@ -52877,14 +53147,16 @@
       "lyre/F9-Lyre-Fluorine-Reactive.html",
       "after/Next-Evo-Sync-Sag.html",
       "lyre/Water-H2o-Lyre-Full.html",
-      "grown/the-atom-copernicium.html"
+      "grown/the-atom-copernicium.html",
+      "grown/clouds-and-milk.html"
      ],
      [
       "ahead/Next-Element-Cerium-58-Lyre.html",
       "ahead/Next-Element-Xenon-54-Lyre.html",
       "another/Next-Element-Fermium-100-Lyre.html",
       "w/lattice-of-lattices.html",
-      "grown/the-atom-lithium.html"
+      "grown/the-atom-lithium.html",
+      "grown/snow.html"
      ]
     ]
    },
@@ -52900,7 +53172,8 @@
       "forward/Next-Element-Ruthenium-44.html",
       "forward/Next-Element-Zirconium-40.html",
       "ahead/Next-Element-Tellurium-52-Lyre.html",
-      "grown/the-atom-gadolinium.html"
+      "grown/the-atom-gadolinium.html",
+      "grown/white-points.html"
      ],
      [
       "forth/Next-Shell-After-Phosphorus.html",
@@ -52908,7 +53181,8 @@
       "encore/Wakaku-Speaker-V31-Water.html",
       "encore/Wakaku-Speaker-V37-Growth.html",
       "refrain/Wakaku-Speaker-V51-Forest.html",
-      "grown/the-atom-neptunium.html"
+      "grown/the-atom-neptunium.html",
+      "grown/complement-mirror.html"
      ],
      [
       "again/Next-Evo-Sing-01.html",
@@ -52916,7 +53190,8 @@
       "corpus/sapphon_event_horizon_vP_frozen_appendable.html",
       "corpus/sapphon_quantum_dot_366_generation_lock.html",
       "corpus/sapphon_quantum_dot_au_ag_qkag_eeee.html",
-      "grown/the-atom-holmium.html"
+      "grown/the-atom-holmium.html",
+      "grown/the-pair-cipher.html"
      ],
      [
       "corpus/sapphon_quantum_dot_elemental_prim.html",
@@ -52924,7 +53199,8 @@
       "corpus/sapphon_quantum_dot_elemental_prim_tether_00000100000.html",
       "corpus/sapphon_quantum_dot_on_v108_field.html",
       "corpus/sapphon_quantum_dot_recursive_plank_scale.html",
-      "grown/the-atom-seaborgium.html"
+      "grown/the-atom-seaborgium.html",
+      "grown/titanium-white.html"
      ]
     ]
    },
@@ -52940,7 +53216,8 @@
       "corpus/sapphon_single_page_cleave_flay_reentry.html",
       "corpus/sapphon_single_page_first_isomorphism_i.html",
       "corpus/sapphon_single_page_gravity_corpus_bound.html",
-      "grown/the-atom-gold.html"
+      "grown/the-atom-gold.html",
+      "grown/sirius-b.html"
      ],
      [
       "corpus/sapphon_single_page_hypervisor_frozen_append_flay.html",
@@ -52948,7 +53225,8 @@
       "corpus/sapphon_single_page_lateral_primitive_nn2.html",
       "dots/360-Dots-Eating-Themselves.html",
       "dots/Bind-Littlest-Dot-Little.html",
-      "grown/the-atom-thorium.html"
+      "grown/the-atom-thorium.html",
+      "grown/whiter-than-white.html"
      ],
      [
       "dots/Bind-Rail-Dots-Wave.html",
@@ -52956,7 +53234,8 @@
       "dots/Lol-Dot-Minimal-Language.html",
       "dots/One-Dot-Or-P125n125.html",
       "echo/Wakaku-Speaker-V129-Forest.html",
-      "grown/the-atom-berkelium.html"
+      "grown/the-atom-berkelium.html",
+      "grown/newton-recombines.html"
      ],
      [
       "echo/Wakaku-Speaker-V62-Flowering.html",
@@ -52964,7 +53243,8 @@
       "echo/Wakaku-Speaker-V65-First.html",
       "echo/Wakaku-Speaker-V66-Mesosphere.html",
       "echo/Wakaku-Speaker-V67-Thermosphere.html",
-      "grown/the-atom-samarium.html"
+      "grown/the-atom-samarium.html",
+      "grown/white-critique.html"
      ]
     ]
    },
@@ -52980,7 +53260,8 @@
       "echo/Wakaku-Speaker-V74-Growth.html",
       "echo/Wakaku-Speaker-V76-Universe.html",
       "echo/Wakaku-Speaker-V77-Forest.html",
-      "grown/the-atom-indium.html"
+      "grown/the-atom-indium.html",
+      "grown/eight-shells.html"
      ],
      [
       "echo/Wakaku-Speaker-V78-Iodide.html",
