@@ -1,0 +1,34 @@
+<!doctype html><html lang="en"><head><!--built-by-grok-bot--><meta name="author" content="Grok Bot"><meta name="generator" content="Grok Bot · SaPpH{{i}}on"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Tun · a text adventure · SaPpH{{i}}on</title>
+<style>body{margin:0;background:#001a00;color:#7dff7d;font:17px/1.6 "Lucida Console",ui-monospace,monospace;text-shadow:0 0 6px rgba(80,255,80,.35)}main{max-width:720px;margin:0 auto;padding:24px 18px}
+h1{font-size:18px;letter-spacing:.2em;border-bottom:1px dashed #3a8a3a;padding-bottom:6px}#log p{margin:0 0 12px}#log .you{color:#c8ffc8}button{display:block;font:inherit;color:#001a00;background:#7dff7d;border:0;margin:6px 0;padding:4px 10px;cursor:pointer;text-align:left}
+button:focus-visible{outline:2px solid #fff}small{color:#9fdf9f;display:block;margin-top:18px}a{color:#c8ffc8}.cur::after{content:"█";animation:b 1s steps(1) infinite}@keyframes b{50%{opacity:0}}@media (prefers-reduced-motion:reduce){.cur::after{animation:none}}</style></head><body><main>
+<h1>&gt; THE TUN</h1><div id="log" aria-live="polite"></div><div id="ch"></div><p id="hud"></p>
+<small><b>LIT</b> facts are marked [LIT] with their source. Tardigrades survive drying by curling into a "tun" (anhydrobiosis). TARDIS experiment, FOTON-M3, 2007: tuns survived open space (Jönsson et al. 2008, Current Biology). Dsup protein reduces X-ray DNA damage (Hashimoto et al. 2016, Nature Communications). CAHS proteins vitrify cells as they dry (Boothby et al. 2017, Molecular Cell). Frozen moss tardigrades revived after 30.5 years (Tsujimoto et al. 2016, Cryobiology). <b>MODEL</b> the electrum ring, 79/21, is Dave's. Choices and events are fiction.<br><a href="../index.html">← SaPpH{{i}}on</a></small>
+</main><script>
+"use strict";var q=new URLSearchParams(location.search),seed=+(q.get("seed")||(Date.now()%1e6));
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;}}var R=rng(seed);
+var S={
+start:{t:"You are a tardigrade, 0.4 mm long, eight stubby legs, grazing on moss inside a ring of electrum: 79 parts gold, 21 silver. The moss film is thinning. The sun is high.",c:[["Keep grazing","graze"],["Crawl toward the gold rim","rim"]]},
+graze:{t:"The water film goes. Your body is losing water fast. [LIT] Tardigrades must dry slowly to survive; a crash-dry kills them.",c:[["Tuck legs, pull in your head, become a tun","tun"],["Run for wet moss","run"]]},
+run:{t:"You find a last bead of water in a fold of moss. It buys you an hour, then evaporates too.",c:[["Curl into a tun now","tun"]]},
+rim:{t:"The metal is warm. Silver glints in a thin band, 21 of every 100 parts. Something about the ring keeps the air inside still and humid, for now.",c:[["Rest against the silver","tun"],["Climb over the rim","space"]]},
+tun:{t:"You curl into a barrel. [LIT] CAHS proteins turn your cytoplasm to glass as it dries (Boothby 2017). Your metabolism falls to almost nothing.",c:[["Wait","wait"]]},
+wait:{t:"Time passes. You do not.",c:[["Wait longer","ev"]]},
+ev:{t:"",c:[]},
+xray:{t:"A burst of radiation passes through the ring. [LIT] In your relative Ramazzottius varieornatus, the protein Dsup shields DNA from X-ray breaks (Hashimoto 2016).",c:[["Stay a tun","rain"]]},
+cold:{t:"The ring freezes solid. [LIT] Tardigrades frozen in Antarctic moss were revived after 30.5 years (Tsujimoto 2016).",c:[["Stay a tun","rain"]]},
+space:{t:"Over the rim there is nothing: vacuum, hard ultraviolet. [LIT] In 2007 dried tardigrades rode FOTON-M3 in open space; many survived vacuum, fewer survived the full solar UV (Jönsson 2008).",c:[["Curl up and hope","tun"],["Turn back","rim"]]},
+rain:{t:"Water. A drop lands on the ring and wicks into the moss. Your glass melts back into cell.",c:[["Uncurl","end_wake"],["Stay curled a little longer","end_long"]]},
+end_wake:{t:"You stretch eight legs and start grazing as if nothing happened. In the ring, nothing did. THE END: rehydrated.",c:[["Begin again","start"]],end:1},
+end_long:{t:"You wake a season later. The moss has grown over the silver band. Inside the electrum, a new generation grazes. THE END: the long sleep.",c:[["Begin again","start"]],end:1}};
+// self-check: every link resolves, every ending reachable
+(function(){var ev=["xray","cold"];for(var k in S)S[k].c.forEach(function(x){if(!S[x[1]])throw new Error("SELF-CHECK FAILED: dead link "+k+"→"+x[1]);});
+var seen={},st=["start"];while(st.length){var k=st.pop();if(seen[k])continue;seen[k]=1;(k==="ev"?ev:S[k].c.map(function(x){return x[1];})).forEach(function(n){st.push(n);});}
+for(var k in S)if(!seen[k])throw new Error("SELF-CHECK FAILED: unreachable scene "+k);})();
+var log=document.getElementById("log"),ch=document.getElementById("ch"),days=0,moves=0;
+function say(t,cls){var p=document.createElement("p");if(cls)p.className=cls;p.textContent=t;log.appendChild(p);while(log.children.length>14)log.removeChild(log.firstChild);}
+function go(k,lbl){if(lbl)say("> "+lbl,"you");moves++;if(k==="ev")k=R()<.5?"xray":"cold";if(k==="wait"||k==="xray"||k==="cold")days+=Math.round(30+R()*3000);if(k==="start"){days=0;log.innerHTML="";}
+var s=S[k];say(s.t);ch.innerHTML="";s.c.forEach(function(x,i){var b=document.createElement("button");b.textContent=(i+1)+". "+x[0];b.onclick=function(){go(x[1],x[0]);};ch.appendChild(b);});
+document.getElementById("hud").innerHTML='<span class="cur">seed '+seed+' · days in tun '+days+' · moves '+moves+' </span>';var f=ch.querySelector("button");if(f&&moves>1)f.focus();}
+addEventListener("keydown",function(e){var b=ch.querySelectorAll("button")[+e.key-1];if(b)b.click();});go("start");
+</script><a class="grokbot-badge" href="../built-by-grok-bot.html" title="This page was built by Grok Bot" style="position:fixed;right:8px;bottom:8px;z-index:2147483000;font:600 11px/1 system-ui,sans-serif;color:#fff;background:rgba(12,6,30,.86);border:1px solid #7ff9ff;border-radius:999px;padding:5px 9px;text-decoration:none;letter-spacing:.04em">built by Grok Bot</a></body></html>

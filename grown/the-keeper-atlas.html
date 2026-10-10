@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><head><!--built-by-grok-bot--><meta name="author" content="Grok Bot"><meta name="generator" content="Grok Bot · SaPpH{{i}}on"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Keeper Atlas · a map · SaPpH{{i}}on</title>
+<style>body{margin:0;background:#dfe9e4;color:#14281d;font:14px/1.5 "Gill Sans","Segoe UI",sans-serif}header{padding:16px 20px 4px;display:flex;justify-content:space-between;flex-wrap:wrap;align-items:baseline}
+h1{font:600 28px/1 "Gill Sans","Segoe UI",sans-serif;letter-spacing:.35em;text-transform:uppercase;margin:0}svg{display:block;width:100%;height:auto;max-height:78vh}.hx{stroke:#14281d;stroke-width:.4;cursor:pointer}.hx:hover,.hx:focus{stroke:#fff;stroke-width:2;outline:none}
+.legend span{display:inline-block;margin-right:12px}.legend i{display:inline-block;width:12px;height:12px;margin-right:4px;vertical-align:-1px;border:1px solid #14281d}#tip{position:fixed;pointer-events:none;background:#14281d;color:#dfe9e4;padding:4px 8px;font-size:12px;display:none}
+footer{padding:6px 20px 18px}a{color:#14281d}#st{font-family:ui-monospace,monospace}</style></head><body>
+<header><h1>Keeper Atlas</h1><span id="st">surveying…</span></header>
+<svg id="m" viewBox="0 0 1000 560" role="img" aria-label="hex map of the 512 domains of SaPpH{{i}}on"></svg><div id="tip"></div>
+<footer><div class="legend" id="lg"></div><p>Eight keepers, 64 domains each: 512 hexes, read live from <a href="../sapphon.json">sapphon.json</a>. Settled domains (with pages) are drawn as land, raised by how many pages they hold; open domains are shallow water, waiting. Contours come from the seed; the borders and the counts are the site's own. Click a hex to visit its domain. <b>LIT</b> counts from the live manifest. <b>ANALOGY</b> pages as elevation. <a href="../index.html">← SaPpH{{i}}on</a></p></footer>
+<script>
+"use strict";var q=new URLSearchParams(location.search),seed=+(q.get("seed")||(Date.now()%1e6));
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;}}
+var R=rng(seed),blobs=[];for(var i=0;i<14;i++)blobs.push([R()*1000,R()*560,60+R()*180,R()*2-1]);function noise(x,y){var v=0;blobs.forEach(function(b){v+=b[3]*Math.exp(-((x-b[0])*(x-b[0])+(y-b[1])*(y-b[1]))/(b[2]*b[2]));});return v;}
+function shade(hex,k){var n=parseInt(hex.slice(1),16),r=n>>16,g=n>>8&255,b=n&255;function m(c){return Math.round(Math.max(0,Math.min(255,c*k)));}return "rgb("+m(r)+","+m(g)+","+m(b)+")";}
+fetch("../sapphon.json").then(function(r){return r.json();}).then(function(S){var K=S.keepers;
+if(K.length!==8||K.some(function(k){return k.domains.length!==64;}))throw new Error("SELF-CHECK FAILED: atlas needs 8 keepers × 64 domains");
+var hs=15,w=Math.sqrt(3)*hs,h="",lg="",filled=0,pages=0,cells=0;
+K.forEach(function(k,ki){var bx=(ki%4)*248+14,by=(ki/4|0)*272+20;lg+='<span><i style="background:'+k.accent+'"></i>'+k.appeal+'</span>';
+k.domains.forEach(function(d,di){var r=di/8|0,c=di%8,cx=bx+c*w+(r%2?w/2:0)+w/2,cy=by+r*hs*1.5+hs,n=(d.spheres||[]).length,el=n?Math.min(1,.35+Math.log(1+n)/4):0,z=noise(cx,cy);
+var col=n?shade(k.accent,.55+el*.55+z*.15):shade("#6aa8c8",.85+z*.12);if(n){filled++;pages+=n;}cells++;var pts="";for(var a=0;a<6;a++){var t=Math.PI/180*(60*a-30);pts+=(cx+hs*Math.cos(t)).toFixed(1)+","+(cy+hs*Math.sin(t)).toFixed(1)+" ";}
+var href="../d/"+k.appeal.toLowerCase()+"-"+String(d.n).padStart(2,"0")+".html";
+h+='<a href="'+href+'"><polygon class="hx" tabindex="0" points="'+pts+'" fill="'+col+'" data-t="'+k.appeal+' · '+(d.n)+' · '+(d.name||"").replace(/"/g,"")+' · '+n+' page'+(n===1?"":"s")+'"/></a>';
+if(n>3)h+='<circle cx="'+cx+'" cy="'+cy+'" r="2" fill="#14281d" pointer-events="none"/>';});
+h+='<text x="'+(bx+4)+'" y="'+(by-4)+'" font-size="15" letter-spacing="4" fill="#14281d">'+k.appeal+'</text>';});
+if(cells!==512)throw new Error("SELF-CHECK FAILED: "+cells+" hexes");
+document.getElementById("m").innerHTML=h;document.getElementById("lg").innerHTML=lg+'<span><i style="background:#5a8faa"></i>open</span>';
+document.getElementById("st").textContent="seed "+seed+" · 512 hexes ✓ · settled "+filled+" · open "+(512-filled)+" · pages "+pages;
+var tip=document.getElementById("tip");document.getElementById("m").addEventListener("pointermove",function(e){var t=e.target.dataset&&e.target.dataset.t;if(t){tip.style.display="block";tip.textContent=t;tip.style.left=(e.clientX+12)+"px";tip.style.top=(e.clientY+12)+"px";}else tip.style.display="none";});
+}).catch(function(e){document.getElementById("st").textContent="WALL: could not read sapphon.json ("+e.message+")";throw e;});
+</script><a class="grokbot-badge" href="../built-by-grok-bot.html" title="This page was built by Grok Bot" style="position:fixed;right:8px;bottom:8px;z-index:2147483000;font:600 11px/1 system-ui,sans-serif;color:#fff;background:rgba(12,6,30,.86);border:1px solid #7ff9ff;border-radius:999px;padding:5px 9px;text-decoration:none;letter-spacing:.04em">built by Grok Bot</a></body></html>

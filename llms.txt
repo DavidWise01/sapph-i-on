@@ -12,6 +12,8 @@ Every 0-sphere is 2 quantum dots (0, 0), 2 vectors (−1, −1) and 2 edges (+1,
 
 ## Layout
 - g/<group>.html: the 88 groups (see below).
+- grown/the-fortress-of-solitude.html: the Fortress of Solitude, a Grok Bot original centrepiece (diatoms, tardigrades, a fortress of fallen frustules).
+- built-by-grok-bot.html: index of every page built by Grok Bot (Dave's originals are not labelled).
 - elements.html: periodic table of all 118 element spheres (grown/the-atom-<name>.html), each a 10-shell emergent atom.
 - k/<appeal>.html: a keeper at the centre, with its 64 domains orbiting as icons.
 - d/<appeal>-NN.html: the domain's pages as an icon swarm. Every icon links directly to the original page.
@@ -199,6 +201,17 @@ New spheres built one at a time, each an emergent page with its own local rule, 
 - [Astatine · Z 85](./grown/the-atom-astatine.html): MYTHOS domain 20. Emerges: a living astatine atom: random excitations, relaxations and a flicker of its 224.401 nm, 216.225 nm lines. LIT · MODEL shells 8–10.
 - [Zinc · Z 30](./grown/the-atom-zinc.html): LOGOS domain 25. Emerges: a living zinc atom: random excitations, relaxations and a flicker of its 213.857 nm, 334.501 nm lines. LIT · MODEL shells 8–10.
 - [Rhodium · Z 45](./grown/the-atom-rhodium.html): KAIROS domain 27. Emerges: a living rhodium atom: random excitations, relaxations and a flicker of its 369.236 nm, 343.489 nm lines. LIT · MODEL shells 8–10.
+- [The Fortress of Solitude](./grown/the-fortress-of-solitude.html): MYTHOS domain 21. Emerges: emergent ecosystem: diatoms photosynthesise and divide with MacDonald–Pfitzer shrinkage and auxospore reset, tardigrades graze and tun, the fortress grows from fallen frustules. LIT · INVENTED names.
+- [Electrum Moiré](./grown/the-electrum-moire.html): PATHOS domain 25. Emerges: a moiré third pattern from 79-weighted gold and 21-weighted silver ring waves. LIT · MODEL · ANALOGY.
+- [The Spinor Bell](./grown/the-spinor-bell.html): KAIROS domain 28. Emerges: the sound cancels at 360° and comes back at 720°, as a spin-½ state does. LIT · MODEL · ANALOGY.
+- [Zero-Sum Type](./grown/the-zero-sum-type.html): LOGOS domain 26. Emerges: letters made of 0-sphere ink particles hold together and heal after scattering, Σ charge = 0. MODEL · ANALOGY.
+- [The Tun](./grown/the-tun.html): MYTHOS domain 22. Emerges: a branching tardigrade story with real survival facts and seeded events. LIT · MODEL.
+- [The Balance Grid](./grown/the-balance-grid.html): PHRONESIS domain 22. Emerges: a seeded 6×6 logic puzzle where every row and column is a 0-sphere, uniqueness checked by a solver. MODEL · LIT.
+- [The Ionization Ladder](./grown/the-ionization-ladder.html): LOGOS domain 27. Emerges: the periodic rhythm of first ionization energies, told step by step on scroll. LIT · AMBER · WALL.
+- [The Keeper Atlas](./grown/the-keeper-atlas.html): ETHOS domain 26. Emerges: a hex map of all 512 domains read live from sapphon.json, settled vs open. LIT · ANALOGY.
+- [The Eight-Colour Turmite](./grown/the-eight-turmite.html): KAIROS domain 29. Emerges: highways, gardens and chaos from an 8-colour reversible ant rule; time runs backwards exactly. LIT · ANALOGY.
+- [The Electrum Ring](./grown/the-electrum-ring.html): PATHOS domain 26. Emerges: a ring drawn by volume: 79/21 gold/silver by mass becomes 67/33 by volume, alloy ≈16.42 g/cm³. LIT · AMBER · MODEL.
+- [The Pendulum Wave](./grown/the-pendulum-wave.html): PHRONESIS domain 23. Emerges: 15 uncoupled pendulums make travelling waves and realign at t = Γ. LIT · AMBER · ANALOGY.
 
 ## The 88 groups
 - g/sapphon-NN.html (42 groups of 4 members), g/ion-NN.html (45 groups of 3 members) and g/center.html (1). 42×4 + 45×3 + 1 = 304 member slots; 42 + 45 + 1 = 88 groups.

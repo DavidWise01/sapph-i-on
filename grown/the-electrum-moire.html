@@ -1,0 +1,31 @@
+<!doctype html><html lang="en"><head><!--built-by-grok-bot--><meta name="author" content="Grok Bot"><meta name="generator" content="Grok Bot · SaPpH{{i}}on"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Electrum Moiré · SaPpH{{i}}on</title>
+<style>html,body{margin:0;height:100%;background:#000;overflow:hidden;font:13px/1.45 Georgia,serif;color:#f4ecd8}canvas{position:fixed;inset:0;width:100%;height:100%;touch-action:none}
+.cap{position:fixed;left:16px;bottom:16px;max-width:420px;background:rgba(0,0,0,.62);padding:12px 14px;border-left:3px solid #e8c25a}
+.cap h1{font:italic 400 26px Georgia,serif;margin:0 0 4px;color:#ffe7a3}.cap a{color:#ffe7a3}.cap b{color:#fff}#st{font:12px ui-monospace,monospace;color:#e6e6e6}</style></head><body>
+<canvas id="c" role="img" aria-label="a shader of gold and silver ring fields interfering"></canvas>
+<div class="cap"><h1>Electrum Moiré</h1>Two families of rings: gold sources weighted 0.79, silver sources weighted 0.21. Where their waves meet, a moiré of a third metal appears that neither family drew. Drag to move the silver source; click for a new seed.<br>
+<b>LIT</b> electrum is a natural gold–silver alloy. <b>MODEL</b> Dave's 79/21 ring. <b>ANALOGY</b> rings as waves.<div id="st"></div><a href="../index.html">← SaPpH{{i}}on</a></div>
+<script>
+"use strict";var q=new URLSearchParams(location.search),seed=+(q.get("seed")||(Date.now()%1e6));
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;}}
+var R=rng(seed),WG=0.79,WS=0.21;if(Math.abs(WG+WS-1)>1e-9)throw new Error("SELF-CHECK FAILED: 79/21 must sum to 100%");
+var c=document.getElementById("c"),gl=c.getContext("webgl2");var st=document.getElementById("st");
+if(!gl){st.textContent="WebGL2 unavailable: this page is a shader and needs it (WALL).";throw new Error("no webgl2");}
+var vs="#version 300 es\nvoid main(){vec2 p=vec2(gl_VertexID==1?3.:-1.,gl_VertexID==2?3.:-1.);gl_Position=vec4(p,0,1);}";
+var fs="#version 300 es\nprecision highp float;uniform vec2 res,m;uniform float t,wg,ws;uniform vec2 g[5];uniform float k;out vec4 o;\n"+
+"void main(){vec2 u=(gl_FragCoord.xy-res*.5)/res.y;float a=0.;for(int i=0;i<5;i++){a+=sin(length(u-g[i])*k-t*1.3+float(i));}a/=5.;float b=sin(length(u-m)*k*1.11-t*1.7);"+
+"float gold=wg*(.5+.5*a),silv=ws*(.5+.5*b)*3.76;float moire=abs(a*b);vec3 G=vec3(1.,.76,.29),S=vec3(.78,.82,.9),E=vec3(.93,.86,.55);"+
+"vec3 col=G*gold+S*silv*.5+E*pow(moire,3.)*.9;col*=1.-.6*dot(u,u);col=col/(1.+col);o=vec4(pow(col,vec3(.8)),1);}";
+function sh(t,s){var o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);if(!gl.getShaderParameter(o,gl.COMPILE_STATUS))throw new Error("SELF-CHECK FAILED: shader "+gl.getShaderInfoLog(o));return o;}
+var p=gl.createProgram();gl.attachShader(p,sh(gl.VERTEX_SHADER,vs));gl.attachShader(p,sh(gl.FRAGMENT_SHADER,fs));gl.linkProgram(p);gl.useProgram(p);gl.bindVertexArray(gl.createVertexArray());
+var U={};["res","m","t","wg","ws","g","k"].forEach(function(n){U[n]=gl.getUniformLocation(p,n);});
+var G,K,M=[.25,.1];function reseed(){R=rng(seed);G=[];for(var i=0;i<5;i++)G.push((R()-.5)*1.4,(R()-.5)*.9);K=30+R()*50;M=[(R()-.5)*.8,(R()-.5)*.6];}reseed();
+var RM=matchMedia("(prefers-reduced-motion: reduce)").matches,t0=performance.now(),drag=0;
+function pos(e){var r=c.getBoundingClientRect();M=[(e.clientX-r.left-r.width/2)/r.height,-(e.clientY-r.top-r.height/2)/r.height];if(RM)draw(performance.now());}
+c.onpointerdown=function(e){drag=1;pos(e);};c.onpointermove=function(e){if(drag)pos(e);};c.onpointerup=function(e){drag=0;};
+c.ondblclick=function(){seed=(seed*16807+11)%2147483647;reseed();if(RM)draw(performance.now());};
+function draw(now){var d=Math.min(devicePixelRatio||1,2),w=c.clientWidth*d|0,h=c.clientHeight*d|0;if(c.width!==w||c.height!==h){c.width=w;c.height=h;}gl.viewport(0,0,w,h);
+gl.uniform2f(U.res,w,h);gl.uniform2f(U.m,M[0],M[1]);gl.uniform1f(U.t,RM?0:(now-t0)/1000);gl.uniform1f(U.wg,WG);gl.uniform1f(U.ws,WS);gl.uniform2fv(U.g,G);gl.uniform1f(U.k,K);gl.drawArrays(gl.TRIANGLES,0,3);
+st.textContent="seed "+seed+" · gold 79% · silver 21% · wavenumber "+K.toFixed(1)+" · double-click: new seed";}
+function loop(n){draw(n);requestAnimationFrame(loop);}if(RM)draw(0);else requestAnimationFrame(loop);
+</script><a class="grokbot-badge" href="../built-by-grok-bot.html" title="This page was built by Grok Bot" style="position:fixed;right:8px;bottom:8px;z-index:2147483000;font:600 11px/1 system-ui,sans-serif;color:#fff;background:rgba(12,6,30,.86);border:1px solid #7ff9ff;border-radius:999px;padding:5px 9px;text-decoration:none;letter-spacing:.04em">built by Grok Bot</a></body></html>

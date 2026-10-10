@@ -1,0 +1,26 @@
+<!doctype html><html lang="en"><head><!--built-by-grok-bot--><meta name="author" content="Grok Bot"><meta name="generator" content="Grok Bot · SaPpH{{i}}on"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Spinor Bell · SaPpH{{i}}on</title>
+<style>body{margin:0;background:#0d1b2a;color:#e0e1dd;font:16px/1.5 "Trebuchet MS",sans-serif;display:flex;flex-direction:column;align-items:center;min-height:100vh}
+h1{font-weight:300;letter-spacing:.3em;text-transform:uppercase;font-size:20px;margin:22px 0 4px;color:#a8dadc}svg{width:min(92vw,440px);height:auto;touch-action:none;cursor:grab}
+p{max-width:560px;padding:0 16px;margin:6px 0}button{font:inherit;background:#1b263b;color:#e0e1dd;border:1px solid #a8dadc;border-radius:999px;padding:8px 18px;margin:4px;cursor:pointer}
+#read{font:15px ui-monospace,monospace;color:#ffd166}b{color:#ffd166}a{color:#a8dadc}</style></head><body>
+<h1>The Spinor Bell</h1><p>Drag the dial round. A spin-½ wave is split: one half stays, one half is turned by θ. You <i>hear</i> them recombined. Turn one full lap (360°) and the bell goes <b>silent</b>: the turned half came back with its sign flipped. Only a second lap (720°) brings the sound home.</p>
+<svg id="s" viewBox="-220 -220 440 440" role="img" aria-label="rotation dial"><circle r="190" fill="none" stroke="#415a77" stroke-width="2"/><circle id="lap" r="170" fill="none" stroke="#ffd166" stroke-width="10" stroke-dasharray="0 2000" transform="rotate(-90)"/><g id="belt"></g><line id="hand" x1="0" y1="0" x2="0" y2="-185" stroke="#a8dadc" stroke-width="6" stroke-linecap="round"/><circle r="12" fill="#a8dadc"/><text id="deg" y="60" text-anchor="middle" fill="#e0e1dd" font-size="34" font-family="ui-monospace,monospace">0°</text></svg>
+<div id="read"></div><div><button id="snd">sound on</button><button id="auto">auto-turn</button><button id="ns">new seed</button></div>
+<p><b>LIT</b> a 2π rotation multiplies a spin-½ state by −1; seen in neutron interferometry (Rauch et al. 1975; Werner et al. 1975). <b>MODEL</b> this is Dave's 720° clock. <b>ANALOGY</b> neutron phase played as sound.</p><p><a href="../index.html">← SaPpH{{i}}on</a></p>
+<script>
+"use strict";var q=new URLSearchParams(location.search),seed=+(q.get("seed")||(Date.now()%1e6));
+function amp(th){var re=1+Math.cos(th/2),im=-Math.sin(th/2);return Math.hypot(re,im)/2;} // |1+e^{-iθ/2}|/2
+[[0,1],[2*Math.PI,0],[4*Math.PI,1],[Math.PI,Math.SQRT1_2]].forEach(function(c){if(Math.abs(amp(c[0])-c[1])>1e-9)throw new Error("SELF-CHECK FAILED: spinor amplitude at "+c[0]+" rad");});
+var th=0,base,ctx=null,o1,gn,auto=false,s=document.getElementById("s"),RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
+function reseed(){base=[196,220,247,262,294][seed%5];th=(seed%7)*Math.PI/4;}reseed();
+function draw(){var d=th*180/Math.PI;document.getElementById("hand").setAttribute("transform","rotate("+(d%360)+")");document.getElementById("deg").textContent=Math.round(d)+"°";
+document.getElementById("lap").setAttribute("stroke-dasharray",(2*Math.PI*170*Math.min(d,720)/720)+" 2000");
+var b="";for(var i=0;i<12;i++){var tw=th*i/11;b+='<rect x="'+(-80+i*14)+'" y="'+(100-6)+'" width="10" height="'+(12*Math.abs(Math.cos(tw/2))+1)+'" fill="'+(Math.cos(tw/2)>=0?"#a8dadc":"#e76f51")+'"/>';}document.getElementById("belt").innerHTML=b;
+var a=amp(th);document.getElementById("read").textContent="seed "+seed+" · θ "+Math.round(d)+"° · loudness |1+e^(−iθ/2)|/2 = "+a.toFixed(3)+(Math.abs(d-360)<6?" · SIGN FLIPPED":"");
+if(gn)gn.gain.setTargetAtTime(a*a*.25,ctx.currentTime,.03);}
+function ang(e){var r=s.getBoundingClientRect(),x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;return Math.atan2(x,-y);}
+var last=null;s.onpointerdown=function(e){last=ang(e);s.setPointerCapture(e.pointerId);};s.onpointermove=function(e){if(last===null)return;var a=ang(e),d=a-last;if(d>Math.PI)d-=2*Math.PI;if(d<-Math.PI)d+=2*Math.PI;th=Math.max(0,Math.min(4*Math.PI,th+d));last=a;draw();};s.onpointerup=function(){last=null;};
+document.getElementById("snd").onclick=function(){if(!ctx){ctx=new (window.AudioContext||window.webkitAudioContext)();o1=ctx.createOscillator();o1.type="triangle";o1.frequency.value=base;gn=ctx.createGain();gn.gain.value=0;o1.connect(gn).connect(ctx.destination);o1.start();this.textContent="sound off";draw();}else{ctx.close();ctx=null;gn=null;this.textContent="sound on";}};
+document.getElementById("auto").onclick=function(){auto=!auto;};document.getElementById("ns").onclick=function(){seed=(seed*16807+3)%2147483647;reseed();if(o1)o1.frequency.value=base;draw();};
+function loop(){if(auto){th+=RM?Math.PI/4:.02;if(th>4*Math.PI)th=0;draw();}requestAnimationFrame(loop);}draw();if(RM)setInterval(function(){if(auto){th+=Math.PI/4;if(th>4*Math.PI)th=0;draw();}},800);else loop();
+</script><a class="grokbot-badge" href="../built-by-grok-bot.html" title="This page was built by Grok Bot" style="position:fixed;right:8px;bottom:8px;z-index:2147483000;font:600 11px/1 system-ui,sans-serif;color:#fff;background:rgba(12,6,30,.86);border:1px solid #7ff9ff;border-radius:999px;padding:5px 9px;text-decoration:none;letter-spacing:.04em">built by Grok Bot</a></body></html>

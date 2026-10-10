@@ -1,0 +1,26 @@
+<!doctype html><html lang="en"><head><!--built-by-grok-bot--><meta name="author" content="Grok Bot"><meta name="generator" content="Grok Bot · SaPpH{{i}}on"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Pendulum Wave · physics toy · SaPpH{{i}}on</title>
+<style>body{margin:0;background:#fdfdfd;color:#222;font:15px/1.5 Helvetica,Arial,sans-serif}canvas{display:block;width:100%;height:64vh;touch-action:none;cursor:ew-resize;background:linear-gradient(#fff,#eef1f5)}
+.ui{display:flex;flex-wrap:wrap;gap:14px;align-items:center;padding:10px 18px;border-top:1px solid #ddd}h1{font:300 30px Helvetica,Arial,sans-serif;margin:14px 18px 4px}#st{font:13px ui-monospace,monospace}p{max-width:760px;margin:6px 18px}button{font:inherit;padding:6px 14px;border:1px solid #222;background:#fff;cursor:pointer}a{color:#0057b8}</style></head><body>
+<h1>Pendulum Wave</h1><canvas id="c" role="img" aria-label="fifteen pendulums swinging in and out of phase"></canvas>
+<div class="ui"><button id="pl">pause</button><button id="rs">restart</button><button id="ns">new seed</button><span id="st"></span></div>
+<p>Fifteen independent pendulums, no coupling at all. Pendulum n swings exactly N+n times in Γ seconds, so its length is L = g·(Γ / 2π(N+n))². Out of nothing but slightly different lengths come travelling waves, snakes, a split into two rows, three, and chaos, and at t = Γ every bob is back in one line. Drag sideways to scrub through time.</p>
+<p><b>LIT</b> small-angle pendulum period T = 2π√(L/g), g = 9.80665 m/s²; the classic demonstration uses Γ = 60 s, N = 51 (Harvard Natural Sciences Lecture Demonstrations). <b>AMBER</b> the small-angle formula; real large swings run a little slow. <b>ANALOGY</b> realignment as the homeostatic return to 0. <a href="../index.html">← SaPpH{{i}}on</a></p>
+<script>
+"use strict";var q=new URLSearchParams(location.search),seed=+(q.get("seed")||(Date.now()%1e6)),g0=9.80665,K=15,GAM,N,L,t=0,run=true,last=null,RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;}}
+function init(){var R=rng(seed);var opts=[[60,51],[60,40],[45,30],[30,20],[90,60]];var o=opts[seed%opts.length];GAM=o[0];N=o[1];L=[];for(var n=0;n<K;n++)L.push(g0*Math.pow(GAM/(2*Math.PI*(N+n)),2));t=0;
+// self-check: period from length gives exactly N+n swings in Γ, so every phase realigns at t = Γ
+L.forEach(function(l,n){var T=2*Math.PI*Math.sqrt(l/g0),sw=GAM/T;if(Math.abs(sw-(N+n))>1e-9)throw new Error("SELF-CHECK FAILED: pendulum "+n+" swings "+sw);});
+for(var n=0;n<K;n++){var ph=(N+n)*2*Math.PI*GAM/GAM;if(Math.abs(Math.cos(ph)-1)>1e-9)throw new Error("SELF-CHECK FAILED: realignment");}}
+var c=document.getElementById("c"),gx=c.getContext("2d"),W,H;function fit(){var d=devicePixelRatio||1;W=c.clientWidth;H=c.clientHeight;c.width=W*d;c.height=H*d;gx.setTransform(d,0,0,d,0,0);}
+function draw(){gx.clearRect(0,0,W,H);var top=18,sc=(H-60)/L[0],a0=.35;gx.strokeStyle="#222";gx.lineWidth=3;gx.beginPath();gx.moveTo(W*.06,top);gx.lineTo(W*.94,top);gx.stroke();
+var xs=[];for(var n=0;n<K;n++){var w=2*Math.PI*(N+n)/GAM,a=a0*Math.cos(w*t),px=W*.08+n*(W*.84)/(K-1),len=L[n]*sc,bx=px+Math.sin(a)*len*.9,by=top+Math.cos(a)*len;xs.push([bx,by]);
+gx.strokeStyle="#888";gx.lineWidth=1;gx.beginPath();gx.moveTo(px,top);gx.lineTo(bx,by);gx.stroke();var hue=200+n*10;gx.fillStyle="hsl("+hue+",80%,45%)";gx.beginPath();gx.arc(bx,by,Math.max(5,W/90),0,7);gx.fill();}
+gx.strokeStyle="rgba(0,87,184,.25)";gx.beginPath();xs.forEach(function(p,i){i?gx.lineTo(p[0],p[1]):gx.moveTo(p[0],p[1]);});gx.stroke();
+var tm=t%GAM;gx.fillStyle="#0057b8";gx.fillRect(0,H-6,W*tm/GAM,6);
+document.getElementById("st").textContent="seed "+seed+" · Γ "+GAM+" s · N "+N+" · lengths "+(L[K-1]*100).toFixed(1)+"–"+(L[0]*100).toFixed(1)+" cm · t "+tm.toFixed(2)+" s"+(tm<.15||GAM-tm<.15?" · ALIGNED":"");}
+c.onpointerdown=function(e){last=e.clientX;c.setPointerCapture(e.pointerId);};c.onpointermove=function(e){if(last===null)return;t=Math.max(0,t+(e.clientX-last)/W*GAM);last=e.clientX;draw();};c.onpointerup=function(){last=null;};
+document.getElementById("pl").onclick=function(){run=!run;this.textContent=run?"pause":"play";};document.getElementById("rs").onclick=function(){t=0;draw();};document.getElementById("ns").onclick=function(){seed=(seed*16807+1)%2147483647;init();draw();};
+addEventListener("resize",function(){fit();draw();});fit();init();draw();var pt=null;
+if(RM){setInterval(function(){if(run&&last===null){t+=GAM/24;draw();}},1000);}else(function F(now){if(pt!==null&&run&&last===null)t+=(now-pt)/1000;pt=now;draw();requestAnimationFrame(F);})(performance.now());
+</script><a class="grokbot-badge" href="../built-by-grok-bot.html" title="This page was built by Grok Bot" style="position:fixed;right:8px;bottom:8px;z-index:2147483000;font:600 11px/1 system-ui,sans-serif;color:#fff;background:rgba(12,6,30,.86);border:1px solid #7ff9ff;border-radius:999px;padding:5px 9px;text-decoration:none;letter-spacing:.04em">built by Grok Bot</a></body></html>

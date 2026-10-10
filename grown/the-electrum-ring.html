@@ -1,0 +1,32 @@
+<!doctype html><html lang="en"><head><!--built-by-grok-bot--><meta name="author" content="Grok Bot"><meta name="generator" content="Grok Bot · SaPpH{{i}}on"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Electrum Ring · 3D · SaPpH{{i}}on</title>
+<style>body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% 30%,#3b2f2a,#120d0b 70%);color:#f3e6cf;font:15px/1.55 "Optima","Candara",sans-serif;overflow-x:hidden}
+.scene{height:62vh;perspective:900px;display:flex;align-items:center;justify-content:center;touch-action:none;cursor:grab}.ring{position:relative;width:1px;height:1px;transform-style:preserve-3d}
+.seg{position:absolute;left:-14px;top:-34px;width:28px;height:68px;backface-visibility:visible;border-radius:2px}.core{position:absolute;left:-26px;top:-26px;width:52px;height:52px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#d7ffe0,#2f8f5b 60%,#0e3321);box-shadow:0 0 40px #58d68d}
+h1{font-weight:300;letter-spacing:.4em;text-transform:uppercase;text-align:center;margin:18px 0 0;font-size:22px}.panel{max-width:760px;margin:0 auto;padding:0 18px 24px}table{border-collapse:collapse;margin:8px 0;font-variant-numeric:tabular-nums}td,th{border-bottom:1px solid #6b5a4a;padding:4px 10px;text-align:right}th:first-child,td:first-child{text-align:left}
+input[type=range]{width:220px;vertical-align:middle}a{color:#f6d77a}b{color:#f6d77a}#st{font:12px ui-monospace,monospace;color:#d8cbb4}</style></head><body>
+<h1>The Electrum Ring</h1><div class="scene" id="sc" aria-label="a rotating ring of gold and silver segments around a living core" role="img"><div class="ring" id="r"></div></div>
+<div class="panel"><p>A ring around a single living cell: 79% gold and 21% silver by mass. Gold is almost twice as dense as silver, so by volume the silver claims more of the ring than its 21% suggests. The ring is drawn by <b>volume</b>: each of the 72 segments is one 72nd of the metal. Drag to turn it; slide to change the mix.</p>
+<label>gold by mass <input type="range" id="mx" min="0" max="100" value="79"> <span id="mv">79%</span></label>
+<table><tr><th></th><th>gold</th><th>silver</th></tr><tr><td>density (g/cm³) [LIT]</td><td>19.32</td><td>10.49</td></tr><tr><td>mass fraction</td><td id="mg"></td><td id="ms"></td></tr><tr><td>volume fraction</td><td id="vg"></td><td id="vs"></td></tr><tr><td>segments of 72</td><td id="sg"></td><td id="ss"></td></tr><tr><td>alloy density [AMBER]</td><td colspan="2" id="rho"></td></tr></table>
+<p id="st"></p><p><b>LIT</b> densities of pure gold and silver at room temperature (CRC Handbook). Electrum is a natural gold–silver alloy. <b>AMBER</b> the alloy density assumes ideal mixing (volumes add); real Au–Ag alloys deviate by well under 1%. <b>MODEL</b> 79/21 is Dave's ring. <a href="../index.html">← SaPpH{{i}}on</a></p></div>
+<script>
+"use strict";var q=new URLSearchParams(location.search),seed=+(q.get("seed")||(Date.now()%1e6)),RG=19.32,RS=10.49,NSEG=72;
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;}}
+function calc(m){var vg=m/RG,vs=(1-m)/RS,V=vg+vs,fg=vg/V,ng=Math.round(fg*NSEG),rho=1/V;
+if(Math.abs(fg+vs/V-1)>1e-12||rho<RS-1e-9||rho>RG+1e-9||ng<0||ng>NSEG)throw new Error("SELF-CHECK FAILED: electrum fractions");return {fg:fg,fs:1-fg,ng:ng,rho:rho};}
+var c79=calc(.79);if(Math.abs(c79.rho-16.42)>.01)throw new Error("SELF-CHECK FAILED: 79/21 density should be ≈16.42 g/cm³, got "+c79.rho);
+var R=rng(seed),ring=document.getElementById("r"),yaw=R()*360,pit=-18,wob=R()*6.28,RM=matchMedia("(prefers-reduced-motion: reduce)").matches,mass=.79,order=[];for(var i=0;i<NSEG;i++)order.push(i);
+// seed: where the silver band starts and whether silver is one band or interleaved like a natural nugget
+var start=R()*NSEG|0,inter=R()<.5;
+function build(){var k=calc(mass),rad=Math.min(innerWidth*.36,230),h='<div class="core"></div>',sil=[],ns=NSEG-k.ng;
+for(var i=0;i<NSEG;i++)sil.push(false);if(inter){for(var j=0;j<ns;j++)sil[Math.floor((start+j*NSEG/Math.max(ns,1)))%NSEG]=true;}else for(var j=0;j<ns;j++)sil[(start+j)%NSEG]=true;
+for(var i=0;i<NSEG;i++){var a=i*360/NSEG,col=sil[i]?"linear-gradient(90deg,#8d939c,#f4f6fa 50%,#9aa1aa)":"linear-gradient(90deg,#9c6b10,#ffe28a 50%,#b98316)";
+h+='<div class="seg" style="background:'+col+';transform:rotateY('+a+'deg) translateZ('+rad+'px)"></div>';}ring.innerHTML=h;
+document.getElementById("mv").textContent=Math.round(mass*100)+"%";[["mg",mass],["ms",1-mass],["vg",k.fg],["vs",k.fs]].forEach(function(x){document.getElementById(x[0]).textContent=(x[1]*100).toFixed(1)+"%";});
+document.getElementById("sg").textContent=k.ng;document.getElementById("ss").textContent=ns;document.getElementById("rho").textContent=k.rho.toFixed(2)+" g/cm³";
+document.getElementById("st").textContent="seed "+seed+" · silver "+(inter?"interleaved":"in one band")+" from segment "+start+" · checks: fractions sum 1, density between Ag and Au, 79/21 ≈ 16.42 g/cm³ ✓";}
+function pose(t){ring.style.transform="rotateX("+(pit+(RM?0:Math.sin(t/1700+wob)*4))+"deg) rotateY("+yaw+"deg)";}
+var sc=document.getElementById("sc"),last=null;sc.onpointerdown=function(e){last=[e.clientX,e.clientY];sc.setPointerCapture(e.pointerId);};sc.onpointermove=function(e){if(!last)return;yaw+=(e.clientX-last[0])*.4;pit=Math.max(-80,Math.min(80,pit-(e.clientY-last[1])*.3));last=[e.clientX,e.clientY];pose(performance.now());};sc.onpointerup=function(){last=null;};
+document.getElementById("mx").oninput=function(){mass=this.value/100;build();};addEventListener("resize",build);build();pose(0);
+if(!RM)(function L(t){if(!last)yaw+=.15;pose(t);requestAnimationFrame(L);})(0);
+</script><a class="grokbot-badge" href="../built-by-grok-bot.html" title="This page was built by Grok Bot" style="position:fixed;right:8px;bottom:8px;z-index:2147483000;font:600 11px/1 system-ui,sans-serif;color:#fff;background:rgba(12,6,30,.86);border:1px solid #7ff9ff;border-radius:999px;padding:5px 9px;text-decoration:none;letter-spacing:.04em">built by Grok Bot</a></body></html>
