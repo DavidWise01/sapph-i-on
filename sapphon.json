@@ -17051,7 +17051,8 @@
    "domain": 9,
    "url": "https://davidwise01.github.io/sapph-i-on/t/the-one-center.html",
    "proves": [
-    "250 + 751 = 1001 steps, 1000 → 0"
+    "58653 = 0 + 1 + … + 342, recomputed on load",
+    "117306 = 58653 + 343 × 171, the door’s own world"
    ]
   },
   {
@@ -17060,7 +17061,8 @@
    "domain": 10,
    "url": "https://davidwise01.github.io/sapph-i-on/t/the-shelves.html",
    "proves": [
-    "250 + 751 = 1001 steps, 1000 → 0"
+    "every shelf and file count is read from the shelf folders",
+    "each shelf is now seated in a keeper’s domain"
    ]
   },
   {
@@ -17069,7 +17071,7 @@
    "domain": 9,
    "url": "https://davidwise01.github.io/sapph-i-on/t/the-twenty-four-cats.html",
    "proves": [
-    "250 + 751 = 1001 steps, 1000 → 0"
+    "24 cats × 25 parts = 600, counted as they arrive"
    ]
   },
   {
@@ -17078,7 +17080,7 @@
    "domain": 9,
    "url": "https://davidwise01.github.io/sapph-i-on/t/the-cube-of-7.html",
    "proves": [
-    "250 + 751 = 1001 steps, 1000 → 0"
+    "corner 8 · edge 60 · face 150 · interior 125 = 343, enumerated on load"
    ]
   },
   {
@@ -17087,7 +17089,8 @@
    "domain": 8,
    "url": "https://davidwise01.github.io/sapph-i-on/t/the-strip.html",
    "proves": [
-    "250 + 751 = 1001 steps, 1000 → 0"
+    "24 reversed is 42 · 420024 reversed is 420024",
+    "offset 1 reads 402 · offset 2 reads 204"
    ]
   },
   {
@@ -17096,7 +17099,7 @@
    "domain": 8,
    "url": "https://davidwise01.github.io/sapph-i-on/t/the-kernel-stitch.html",
    "proves": [
-    "250 + 751 = 1001 steps, 1000 → 0"
+    "lcm(27, 4) = 108 · 107 − 27 + 1 = 81"
    ]
   },
   {
@@ -17105,7 +17108,7 @@
    "domain": 8,
    "url": "https://davidwise01.github.io/sapph-i-on/t/the-eight-seats.html",
    "proves": [
-    "250 + 751 = 1001 steps, 1000 → 0"
+    "8 seats × 3 = 24, counted as they orbit"
    ]
   },
   {
@@ -17114,7 +17117,7 @@
    "domain": 9,
    "url": "https://davidwise01.github.io/sapph-i-on/t/the-world-in-a-cell.html",
    "proves": [
-    "250 + 751 = 1001 steps, 1000 → 0"
+    "world(key) = 58653 + 343 × key, for each key shown"
    ]
   },
   {
@@ -17123,7 +17126,7 @@
    "domain": 8,
    "url": "https://davidwise01.github.io/sapph-i-on/t/the-keeper-distance.html",
    "proves": [
-    "250 + 751 = 1001 steps, 1000 → 0"
+    "shell counts by |x−3| + |y−3| + |z−3|, summed to 343 on load"
    ]
   },
   {

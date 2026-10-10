@@ -19,15 +19,15 @@ Every 0-sphere is 2 quantum dots (0, 0), 2 vectors (−1, −1) and 2 edges (+1,
 - Existing sphere pages stay at their original paths and are not rewritten.
 
 ## The ten tales
-- [THE ONE CENTER](./t/the-one-center.html) — ETHOS, domain 09. LIT: 250 + 751 = 1001 steps, 1000 → 0.
-- [THE SHELVES](./t/the-shelves.html) — ETHOS, domain 10. LIT: 250 + 751 = 1001 steps, 1000 → 0.
-- [THE TWENTY-FOUR CATS](./t/the-twenty-four-cats.html) — PATHOS, domain 09. LIT: 250 + 751 = 1001 steps, 1000 → 0.
-- [THE CUBE OF 7](./t/the-cube-of-7.html) — LOGOS, domain 09. LIT: 250 + 751 = 1001 steps, 1000 → 0.
-- [THE MINUS-PLUS STRIP](./t/the-strip.html) — MYTHOS, domain 08. LIT: 250 + 751 = 1001 steps, 1000 → 0.
-- [THE KERNEL STITCH](./t/the-kernel-stitch.html) — EPISTEME, domain 08. LIT: 250 + 751 = 1001 steps, 1000 → 0.
-- [THE EIGHT SEATS](./t/the-eight-seats.html) — TECHNE, domain 08. LIT: 250 + 751 = 1001 steps, 1000 → 0.
-- [THE WORLD IN A CELL](./t/the-world-in-a-cell.html) — TECHNE, domain 09. LIT: 250 + 751 = 1001 steps, 1000 → 0.
-- [THE KEEPER DISTANCE](./t/the-keeper-distance.html) — PHRONESIS, domain 08. LIT: 250 + 751 = 1001 steps, 1000 → 0.
+- [THE ONE CENTER](./t/the-one-center.html) — ETHOS, domain 09. LIT: 58653 = 0 + 1 + … + 342, recomputed on load; 117306 = 58653 + 343 × 171, the door’s own world.
+- [THE SHELVES](./t/the-shelves.html) — ETHOS, domain 10. LIT: every shelf and file count is read from the shelf folders; each shelf is now seated in a keeper’s domain.
+- [THE TWENTY-FOUR CATS](./t/the-twenty-four-cats.html) — PATHOS, domain 09. LIT: 24 cats × 25 parts = 600, counted as they arrive.
+- [THE CUBE OF 7](./t/the-cube-of-7.html) — LOGOS, domain 09. LIT: corner 8 · edge 60 · face 150 · interior 125 = 343, enumerated on load.
+- [THE MINUS-PLUS STRIP](./t/the-strip.html) — MYTHOS, domain 08. LIT: 24 reversed is 42 · 420024 reversed is 420024; offset 1 reads 402 · offset 2 reads 204.
+- [THE KERNEL STITCH](./t/the-kernel-stitch.html) — EPISTEME, domain 08. LIT: lcm(27, 4) = 108 · 107 − 27 + 1 = 81.
+- [THE EIGHT SEATS](./t/the-eight-seats.html) — TECHNE, domain 08. LIT: 8 seats × 3 = 24, counted as they orbit.
+- [THE WORLD IN A CELL](./t/the-world-in-a-cell.html) — TECHNE, domain 09. LIT: world(key) = 58653 + 343 × key, for each key shown.
+- [THE KEEPER DISTANCE](./t/the-keeper-distance.html) — PHRONESIS, domain 08. LIT: shell counts by |x−3| + |y−3| + |z−3|, summed to 343 on load.
 - [THE ATMOSPHERES](./t/the-atmospheres.html) — KAIROS, domain 08. LIT: 250 + 751 = 1001 steps, 1000 → 0.
 
 ## From the workshop
