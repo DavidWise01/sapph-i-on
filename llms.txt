@@ -11,11 +11,17 @@ Every 0-sphere is 2 quantum dots (0, 0), 2 vectors (−1, −1) and 2 edges (+1,
 - [The hallway](https://0root.ai/) · [hallway guide](https://0root.ai/llms.txt)
 
 ## Layout
+- g/<group>.html: the 88 groups (see below).
 - k/<appeal>.html: a keeper at the centre, with its 64 domains orbiting as icons.
 - d/<appeal>-NN.html: the domain's pages as an icon swarm. Every icon links directly to the original page.
 - z/<appeal>-NN.html: the 0-sphere of an open domain, an interactive simulation seeded from its own path.
 - w/<slug>.html: original pages from David's workshop, served unchanged apart from a favicon link where it was safe to add.
 - Existing sphere pages stay at their original paths.
+
+## The 88 groups
+- g/sapphon-NN.html (42 groups of 4 members), g/ion-NN.html (45 groups of 3 members) and g/center.html (1). 42×4 + 45×3 + 1 = 304 member slots; 42 + 45 + 1 = 88 groups.
+- Each member is a bundle of pages that are neighbours by palette. Each group page is an icon swarm that links directly to the original pages. In sapphon.json, "groups" lists every member, and each sphere carries its "group".
+- In the world, sapphons and ions are bonded clusters of exactly 4 and exactly 3 that emerge under the same local rules. The world checks 42×4 + 45×3 + 1 = 304 and 42 + 45 + 1 = 88 on load and throws if either fails.
 
 ## Icons
 Each sphere and workshop page appears as an icon generated from its own source: pal = its most frequent CSS colours, bg = its darkest colour, a ring per canvas, a spoke per script block, a centre dot for SVG, a wavy ring for sound, and spin if it animates. The icon links directly to the original page (spheres["h"], workshop["page"]); there is no page in between.
