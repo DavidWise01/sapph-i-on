@@ -12,6 +12,7 @@ Every 0-sphere is 2 quantum dots (0, 0), 2 vectors (−1, −1) and 2 edges (+1,
 
 ## Layout
 - g/<group>.html: the 88 groups (see below).
+- elements.html: periodic table of all 118 element spheres (grown/the-atom-<name>.html), each a 10-shell emergent atom.
 - k/<appeal>.html: a keeper at the centre, with its 64 domains orbiting as icons.
 - d/<appeal>-NN.html: the domain's pages as an icon swarm. Every icon links directly to the original page.
 - z/<appeal>-NN.html: the 0-sphere of an open domain, an interactive simulation seeded from its own path.
@@ -190,6 +191,14 @@ New spheres built one at a time, each an emergent page with its own local rule, 
 - [Molybdenum · Z 42](./grown/the-atom-molybdenum.html): KAIROS domain 25. Emerges: a living molybdenum atom: random excitations, relaxations and a flicker of its 379.825 nm, 386.41 nm lines. LIT · MODEL shells 8–10.
 - [Tellurium · Z 52](./grown/the-atom-tellurium.html): PHRONESIS domain 20. Emerges: a living tellurium atom: random excitations, relaxations and a flicker of its 214.282 nm, 208.117 nm lines. LIT · MODEL shells 8–10.
 - [Technetium · Z 43](./grown/the-atom-technetium.html): ETHOS domain 24. Emerges: a living technetium atom: random excitations, relaxations and a flicker of its 363.607 nm, 403.163 nm lines. LIT · MODEL shells 8–10.
+- [Arsenic · Z 33](./grown/the-atom-arsenic.html): LOGOS domain 24. Emerges: a living arsenic atom: random excitations, relaxations and a flicker of its 286.044 nm, 278.022 nm lines. LIT · MODEL shells 8–10.
+- [Bohrium · Z 107](./grown/the-atom-bohrium.html): KAIROS domain 26. Emerges: a living bohrium atom: random excitations, relaxations and a flicker of photons. AMBER config · WALL lines · MODEL shells 8–10.
+- [Plutonium · Z 94](./grown/the-atom-plutonium.html): PHRONESIS domain 21. Emerges: a living plutonium atom: random excitations, relaxations and a flicker of its 420.648 nm, 648.885 nm lines. LIT · MODEL shells 8–10.
+- [Carbon · Z 6](./grown/the-atom-carbon.html): ETHOS domain 25. Emerges: a living carbon atom: random excitations, relaxations and a flicker of its 247.856 nm, 940.573 nm lines. LIT · MODEL shells 8–10.
+- [Lawrencium · Z 103](./grown/the-atom-lawrencium.html): PATHOS domain 24. Emerges: a living lawrencium atom: random excitations, relaxations and a flicker of photons. AMBER config · WALL lines · MODEL shells 8–10.
+- [Astatine · Z 85](./grown/the-atom-astatine.html): MYTHOS domain 20. Emerges: a living astatine atom: random excitations, relaxations and a flicker of its 224.401 nm, 216.225 nm lines. LIT · MODEL shells 8–10.
+- [Zinc · Z 30](./grown/the-atom-zinc.html): LOGOS domain 25. Emerges: a living zinc atom: random excitations, relaxations and a flicker of its 213.857 nm, 334.501 nm lines. LIT · MODEL shells 8–10.
+- [Rhodium · Z 45](./grown/the-atom-rhodium.html): KAIROS domain 27. Emerges: a living rhodium atom: random excitations, relaxations and a flicker of its 369.236 nm, 343.489 nm lines. LIT · MODEL shells 8–10.
 
 ## The 88 groups
 - g/sapphon-NN.html (42 groups of 4 members), g/ion-NN.html (45 groups of 3 members) and g/center.html (1). 42×4 + 45×3 + 1 = 304 member slots; 42 + 45 + 1 = 88 groups.
