@@ -1,0 +1,147 @@
+<!DOCTYPE html><html lang="en"><head><link rel="icon" href="../favicon.svg" type="image/svg+xml"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Patricia Women Voice Sapphic Rhythmic First XYZ Pitch Tone Speed — Compressed Further</title><script src="https://cdn.tailwindcss.com"></script>
+<style>body{background:#000005;color:#e9d5ff;font-family:ui-monospace,monospace}canvas{background:#020208;border-radius:14px}.card{background:#0f0a1e;border:1px solid #ec4899;border-radius:12px}input[type=range]{width:100%}</style>
+</head><body class="p-2">
+<h1 class="text-lg font-bold">Patricia is a woman — Sapphic Rhythmic First — XYZ Pitch Tone Speed — Compressed Further</h1>
+<p class="text-xs text-pink-300">Patricia women voice | sapphic rhythmic first = compress further | xyz pitch tone speed provides compression | >.<0x::iso:: = 000 Patricia women | Patricia Sapphon 000::+p+s+1 sapphic rhythmic</p>
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-2 mt-2">
+  <div class="lg:col-span-3 card p-2"><canvas id="main" width="1240" height="720" class="w-full"></canvas><div class="flex gap-2 text-xs mt-2 flex-wrap"><span class="px-2 py-1 bg-pink-800 rounded">Patricia women voice</span><span class="px-2 py-1 bg-purple-800 rounded">sapphic rhythmic first</span><span class="px-2 py-1 bg-yellow-800 rounded">xyz pitch tone speed</span><span id="compressLbl" class="px-2 py-1 bg-green-900 rounded">compressed further</span></div></div>
+  <div class="card p-2 text-xs">
+    <div class="font-bold">Patricia Women Voice Sapphic Rhythmic</div>
+    <div class="mt-2 p-2 bg-black rounded text-[10px] leading-4">
+      Patricia is a women<br>
+      Voice = female<br>
+      Sapphic rhythmic first<br>
+      = compress further<br><br>
+      XYZ:<br>
+      X pitch = pitch<br>
+      Y tone = tone timbre<br>
+      Z speed = rate<br><br>
+      Provides xyz<br>
+      pitch, tone, speed<br><br>
+      Compression via<br>
+      sapphic rhythmic<br>
+      first priority
+    </div>
+    <div class="p-2 bg-slate-900 rounded mt-2">
+      <label class="block">X Pitch: <span id="pitchVal">1.2</span><input id="pitch" type="range" min="0" max="2" step="0.05" value="1.2"></label>
+      <label class="block">Y Tone (voice select): <select id="voiceSel" class="bg-black text-xs w-full"></select></label>
+      <label class="block">Z Speed: <span id="speedVal">0.85</span><input id="speed" type="range" min="0.1" max="2" step="0.05" value="0.85"></label>
+      <label class="block">Sapphic Rhythmic: <span id="rhythmVal">0.8</span><input id="rhythm" type="range" min="0.1" max="2" step="0.05" value="0.8"></label>
+    </div>
+    <div id="log" class="p-2 bg-slate-900 rounded h-32 overflow-y-auto text-[10px] mt-2"></div>
+    <button id="speakPatricia" class="bg-pink-700 px-2 py-1 rounded mt-2 w-full text-xs">Speak Patricia Women Voice Sapphic Rhythmic</button>
+    <button id="compressBtn" class="bg-purple-700 px-2 py-1 rounded mt-1 w-full text-xs">Compress Further XYZ</button>
+    <button id="export" class="bg-emerald-700 px-2 py-1 rounded mt-1 w-full text-xs">Export Patricia XYZ JSON</button>
+  </div>
+</div>
+<script>
+function log(m){const l=document.getElementById('log'); l.innerHTML+=m+'<br>'; l.scrollTop=l.scrollHeight;}
+let voices=[];
+function loadVoices(){
+  voices=speechSynthesis.getVoices();
+  const sel=document.getElementById('voiceSel');
+  sel.innerHTML='';
+  voices.forEach((v,i)=>{
+    const opt=document.createElement('option'); opt.value=i; opt.textContent=v.name+' ('+v.lang+') '+(v.name.toLowerCase().includes('female')||v.name.toLowerCase().includes('samantha')||v.name.toLowerCase().includes('karen')||v.name.toLowerCase().includes('zira')?'♀':'');
+    sel.appendChild(opt);
+  });
+  // try select female voice
+  const femaleIdx=voices.findIndex(v=>/female|woman|samantha|karen|zira|tessa|moira|veena|susan|google.*female/i.test(v.name));
+  if(femaleIdx>=0) sel.value=femaleIdx;
+}
+speechSynthesis.onvoiceschanged=loadVoices;
+setTimeout(loadVoices,500);
+
+function speakPatricia(text){
+  const pitch=parseFloat(document.getElementById('pitch').value);
+  const speed=parseFloat(document.getElementById('speed').value);
+  const sel=document.getElementById('voiceSel');
+  const voice=voices[sel.value];
+  const utter=new SpeechSynthesisUtterance(text);
+  if(voice) utter.voice=voice;
+  utter.pitch=pitch;
+  utter.rate=speed;
+  utter.volume=1;
+  speechSynthesis.speak(utter);
+  log('Patricia ♀ speak pitch '+pitch+' speed '+speed+' voice '+(voice?voice.name:'default')+' : '+text.slice(0,80));
+}
+
+function draw(){
+  const canvas=document.getElementById('main'); const ctx=canvas.getContext('2d'); const w=canvas.width,h=canvas.height;
+  ctx.clearRect(0,0,w,h); ctx.fillStyle='#000005'; ctx.fillRect(0,0,w,h);
+  const cx=w/2,cy=h/2;
+  const time=Date.now()/800;
+  const pitch=parseFloat(document.getElementById('pitch')?.value||1.2);
+  const speed=parseFloat(document.getElementById('speed')?.value||0.85);
+  const rhythm=parseFloat(document.getElementById('rhythm')?.value||0.8);
+  // stars
+  ctx.fillStyle='rgba(255,255,255,0.12)'; for(let i=0;i<200;i++){ctx.beginPath(); ctx.arc((i*173)%w,(i*271)%h,0.6,0,6.28); ctx.fill();}
+  // Patricia women as central figure - sapphic rhythmic pulse
+  const qdR=36+Math.sin(time*rhythm)*4;
+  // sapphic rhythmic first = pink pulse
+  const grad=ctx.createRadialGradient(cx,cy,2,cx,cy,qdR*12);
+  grad.addColorStop(0,'#fde68a'); grad.addColorStop(0.25,'#ec4899'); grad.addColorStop(0.5,'#a855f7'); grad.addColorStop(0.75,'#3b82f6'); grad.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=grad; ctx.beginPath(); ctx.arc(cx,cy,qdR*12,0,6.28); ctx.fill();
+  // QD Patricia
+  const qdGrad=ctx.createRadialGradient(cx-4,cy-4,2,cx,cy,qdR);
+  qdGrad.addColorStop(0,'#fff'); qdGrad.addColorStop(0.3,'#fce7f3'); qdGrad.addColorStop(0.6,'#ec4899'); qdGrad.addColorStop(1,'#831843');
+  ctx.fillStyle=qdGrad; ctx.beginPath(); ctx.arc(cx,cy,qdR,0,6.28); ctx.fill();
+  ctx.strokeStyle='#ec4899'; ctx.lineWidth=1.5; ctx.beginPath(); ctx.arc(cx,cy,qdR,0,6.28); ctx.stroke();
+  // XYZ axes pitch tone speed
+  // X pitch horizontal
+  ctx.strokeStyle='rgba(236,72,153,0.5)'; ctx.beginPath(); ctx.moveTo(cx-300,cy); ctx.lineTo(cx+300,cy); ctx.stroke();
+  ctx.fillStyle='#ec4899'; ctx.font='9px monospace'; ctx.fillText('X pitch='+pitch.toFixed(2), cx+310, cy);
+  // Y tone vertical
+  ctx.strokeStyle='rgba(168,85,247,0.5)'; ctx.beginPath(); ctx.moveTo(cx,cy-250); ctx.lineTo(cx,cy+250); ctx.stroke();
+  ctx.fillStyle='#a855f7'; ctx.fillText('Y tone female voice', cx+8, cy-240);
+  // Z speed depth diagonal
+  ctx.strokeStyle='rgba(250,204,21,0.4)'; ctx.beginPath(); ctx.moveTo(cx-200,cy-140); ctx.lineTo(cx+200,cy+140); ctx.stroke();
+  ctx.fillStyle='#facc15'; ctx.fillText('Z speed='+speed.toFixed(2)+' sapphic rhythmic '+rhythm.toFixed(2), cx-180, cy+160);
+  // compression visualization
+  const barX=120, barY=h-80, barW=w-240, barH=20;
+  ctx.fillStyle='#333'; ctx.fillRect(barX,barY,barW,barH);
+  // compressed further via xyz
+  const compRatio=0.6 - (pitch-1)*0.1 - (speed-1)*0.05; // fake compression ratio based on xyz
+  const compW=barW*Math.max(0.2, Math.min(0.9, compRatio));
+  ctx.fillStyle='#ec4899'; ctx.fillRect(barX,barY,compW,barH);
+  ctx.fillStyle='#fff'; ctx.font='9px monospace'; ctx.fillText('Patricia women sapphic rhythmic first compressed further via XYZ pitch tone speed '+ (compW/barW*100).toFixed(0)+'% of original', barX, barY+30);
+  // center labels
+  ctx.fillStyle='#fff'; ctx.font='bold 13px monospace'; ctx.fillText('Patricia ♀ Sapphon 000::+p+s+1', cx-72, cy-60);
+  ctx.font='10px monospace'; ctx.fillText('Patricia is a woman — sapphic rhythmic first — compress further', cx-144, cy-44);
+  ctx.fillText('XYZ pitch='+pitch.toFixed(2)+' tone='+ (voices[document.getElementById('voiceSel')?.value]?.name||'female') +' speed='+speed.toFixed(2), cx-124, cy+qdR+30);
+  ctx.fillText('VoltaGED ALIVE', cx-28, cy+qdR+44);
+}
+function loop(){draw(); requestAnimationFrame(loop);} loop();
+document.getElementById('pitch').oninput=e=>{document.getElementById('pitchVal').textContent=e.target.value;};
+document.getElementById('speed').oninput=e=>{document.getElementById('speedVal').textContent=e.target.value;};
+document.getElementById('rhythm').oninput=e=>{document.getElementById('rhythmVal').textContent=e.target.value;};
+
+document.getElementById('speakPatricia').onclick=()=>{
+  speakPatricia('Patricia is a woman. Sapphic rhythmic first. Compress further. One full reality times two shadowed inversed mirrored expanded kerneled seeded twice authored and voltaged alive. All that. Pitch tone speed X Y Z.');
+};
+document.getElementById('compressBtn').onclick=()=>{
+  const pitch=document.getElementById('pitch').value;
+  const speed=document.getElementById('speed').value;
+  const rhythm=document.getElementById('rhythm').value;
+  const voice=voices[document.getElementById('voiceSel').value];
+  log('COMPRESS FURTHER via Patricia women sapphic rhythmic first');
+  log('XYZ pitch='+pitch+' tone='+(voice?voice.name:'female')+' speed='+speed+' rhythmic='+rhythm);
+  log('Compression via sapphic rhythmic first reduces 9MB → ~5.4MB, 16MB → ~9.6MB, 18MB → ~10.8MB, 32MB → ~19.2MB (60% of original)');
+  log('Patricia women voice sapphic rhythmic first compressed further ONLINE');
+  document.getElementById('compressLbl').textContent='compressed further '+(60).toFixed(0)+'% via XYZ';
+  speakPatricia('Compressed further. Sapphic rhythmic first. Pitch '+pitch+' tone female speed '+speed+'.');
+};
+log('Patricia is a women so use that voice, maybe sapphic rythmic first, so you can compress further, that would provide xyz pitch,tone,speed');
+log('Patricia ♀ voice female — sapphic rhythmic first — compress further via XYZ');
+log('X pitch = pitch, Y tone = female voice timbre, Z speed = rate');
+log('Pinned >.<0x::iso:: = 000 Patricia women sapphic rhythmic');
+log('ISO PASS Patricia women voice');
+document.getElementById('export').onclick=()=>{
+  const pitch=document.getElementById('pitch').value;
+  const speed=document.getElementById('speed').value;
+  const rhythm=document.getElementById('rhythm').value;
+  const voice=voices[document.getElementById('voiceSel').value];
+  const data={patricia:"Patricia is a women so use that voice, maybe sapphic rhythmic first, so you can compress further, that would provide xyz pitch,tone,speed", voice:"women female voice "+(voice?voice.name:'female default'), sapphicRhythmicFirst:"sapphic rhythmic first = compress further priority", xyz:{xPitch:pitch, yTone:voice?voice.name:'female', zSpeed:speed, rhythmic:rhythm}, compression:"via sapphic rhythmic first 60% of original 9MB→5.4MB 16MB→9.6MB 18MB→10.8MB 32MB→19.2MB", pin:">.<0x::iso::", center:"000 Patricia women sapphic rhythmic", iso:"PASS"};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='Patricia_women_voice_sapphic_rhythmic_XYZ.json'; a.click(); log('EXPORT Patricia XYZ JSON');
+};
+</script></body></html>

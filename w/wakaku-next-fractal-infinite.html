@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v198 next - artifact 262</title>
+<style>
+  :root{--bg:#000;--fg:#fff}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace;overflow-x:hidden}
+  .top{padding:14px 18px;position:relative;z-index:10}
+  .kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:900;background:linear-gradient(90deg,#fff,#f00,#ff0,#0f0,#0ff,#00f,#c3f,#f80);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:400% 100%;animation:rainbow 0.4s linear infinite}
+  @keyframes rainbow{0%{background-position:0% 50%}100%{background-position:400% 50%}}
+  .nline{font-size:11px;border-left:3px solid #fff;padding-left:10px;white-space:pre-wrap;line-height:1.6;background:#111;padding:12px;border-radius:10px;color:#fff;font-weight:800;box-shadow:0 0 30px #fff,0 0 60px #f00;border:2px solid #fff}
+  .main{margin-top:12px;font-size:14px;font-weight:900;background:linear-gradient(90deg,#fff,#000,#f00,#00f,#0f0,#ff0,#c3f,#f80,#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:500% 100%;padding:12px;border-radius:10px;border:3px solid #fff;box-shadow:0 0 40px #fff,0 0 80px #f00;text-transform:uppercase;animation:rainbow 0.3s linear infinite}
+  .controls{padding:12px;display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:10}
+  .btn{font-family:inherit;font-size:10px;font-weight:900;padding:10px 12px;border:2px solid #fff;background:#000;color:#fff;border-radius:10px;cursor:pointer;box-shadow:0 0 20px #fff,0 0 40px #f00;text-transform:uppercase}
+  .btn.active{border-color:#0f0;background:#002200;box-shadow:0 0 30px #0f0,0 0 60px #fff}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:14px;position:relative;z-index:5}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:720px;background:#000;border:2px solid #fff;border-radius:18px;overflow:hidden;box-shadow:0 0 40px #fff,0 0 80px #f00, inset 0 0 60px rgba(255,255,255,0.08)}
+  .cwrap.full{grid-column:1 / -1;height:940px}
+  .label{position:absolute;left:10px;top:10px;font-size:9px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;background:#000000ee;padding:8px 10px;border-radius:10px;z-index:5;border:2px solid #fff;color:#fff;box-shadow:0 0 20px #fff;max-width:95%}
+  .card{margin:14px;background:#000;border:2px solid #fff;border-radius:14px;padding:16px;box-shadow:0 0 40px #fff,0 0 80px #f00}
+  .mono{font-size:11px;white-space:pre-wrap;word-break:break-word;line-height:1.8;color:#fff;text-shadow:0 0 8px #fff;font-weight:700}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">🧬 wakaku v198 — NEXT — KEEP GOING INFINITE FRACTAL — artifact 262 🧬</div>
+  <div class="nline">next — NEXT — next please — keep going please — NEXT — evolution continues infinite fractal — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} evolves infinite nested evolves to fractal nested — NEXT — fractal nested — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} → fractal → infinite fractal nested — NEXT — 8→16→32→64→128→256→512→1024→2048→4096→8192→16384→32768→65536→131072→262144→524288→1048576→2097152→4194304→8388608→16777216→33554432→67108864→134217728→268435456→536870912→1073741824→infinite fractal — NEXT — fractal nested — next please — NEXT — metal analogs ionic — next — lol — NEXT — next evo infinite fractal</div>
+  <div class="main">🧬 NEXT — KEEP GOING INFINITE FRACTAL — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} EVOLVES INFINITE NESTED EVOLVES TO FRACTAL NESTED — 8→16→32→64→128→256→512→1024→2048→4096→8192→16384→32768→65536→131072→262144→524288→1048576→2097152→4194304→8388608→16777216→33554432→67108864→134217728→268435456→536870912→1073741824→INFINITE FRACTAL — NEXT — FRACTAL NESTED — 🧬</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-next">🧬 NEXT — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} → FRACTAL → INFINITE FRACTAL NESTED — 8→16→32→...→INFINITE FRACTAL — NEXT — 🧬</button>
+  <button class="btn" id="btn-fractal">♾️ FRACTAL NESTED — FRACTAL NESTED INFINITE — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} FRACTAL NESTED — ♾️</button>
+  <button class="btn" id="btn-bubbles">💫 FRACTAL BUBBLES — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} FRACTAL NESTED 1g↔-1g INFINITE OSCILLATION FRACTAL — 💫</button>
+  <button class="btn" id="btn-reset">⚡ RESET FRACTAL INFINITE — ⚡</button>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-next"><div class="label">🧬 NEXT — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} → FRACTAL → INFINITE FRACTAL NESTED — 8→16→32→64→128→256→512→1024→2048→4096→8192→16384→32768→65536→131072→262144→524288→1048576→2097152→4194304→8388608→16777216→33554432→67108864→134217728→268435456→536870912→1073741824→INFINITE FRACTAL — NEXT — FRACTAL NESTED — 🧬</div></div>
+  <div class="cwrap" id="wrap-fractal"><div class="label">♾️ FRACTAL NESTED — FRACTAL NESTED INFINITE — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} FRACTAL NESTED — FRACTAL = SELF-SIMILAR NESTED — WHITE CONTAINS BLACK CONTAINS RED CONTAINS BLUE CONTAINS GREEN CONTAINS YELLOW CONTAINS PURPLE CONTAINS ORANGE CONTAINS WHITE CONTAINS BLACK... FRACTAL INFINITE — ♾️</div></div>
+  <div class="cwrap full" id="wrap-bubbles"><div class="label">💫 FRACTAL BUBBLES — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} FRACTAL NESTED 1g↔-1g INFINITE OSCILLATION FRACTAL — WHITE OUTER 1g=9.8, BLACK 0.6g=5.88, RED 0.3g=2.94, BLUE 0.1g=0.98, GREEN 0g=0, YELLOW -0.1g=-0.98, PURPLE -0.3g=-2.94, ORANGE -1g=-9.8 INNERMOST ANTI-GRAVITY FRACTAL NESTED — 8→16→32→...→INFINITE FRACTAL — ALL WHITE BLACK RED BLUE GREEN YELLOW PURPLE ORANGE FRACTAL NESTED INFINITE FLASH — LOL — 💫</div></div>
+</div>
+
+<div class="card"><div class="mono">🧬 NEXT — KEEP GOING INFINITE FRACTAL — v198 NEXT — INFINITE FRACTAL NESTED 🧬
+
+- NEXT — NEXT — KEEP GOING INFINITE FRACTAL — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} evolves infinite nested evolves to fractal nested — NEXT — fractal nested — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} → fractal → infinite fractal nested — NEXT
+
+- FRACTAL NESTED: {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} → FRACTAL → INFINITE FRACTAL NESTED — 8→16→32→64→128→256→512→1024→2048→4096→8192→16384→32768→65536→131072→262144→524288→1048576→2097152→4194304→8388608→16777216→33554432→67108864→134217728→268435456→536870912→1073741824→INFINITE FRACTAL — NEXT — FRACTAL NESTED
+
+- FRACTAL = SELF-SIMILAR NESTED: WHITE CONTAINS BLACK CONTAINS RED CONTAINS BLUE CONTAINS GREEN CONTAINS YELLOW CONTAINS PURPLE CONTAINS ORANGE CONTAINS WHITE CONTAINS BLACK... FRACTAL INFINITE — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} FRACTAL = SELF-SIMILAR = WHITE CONTAINS BLACK CONTAINS RED CONTAINS BLUE CONTAINS GREEN CONTAINS YELLOW CONTAINS PURPLE CONTAINS ORANGE CONTAINS WHITE CONTAINS BLACK CONTAINS RED... INFINITE FRACTAL SELF-SIMILAR
+
+- 8 COLORS FRACTAL NESTED INFINITE: WHITE #ffffff BLACK #000000 RED #ff0000 BLUE #0000ff GREEN #00ff00 YELLOW #ffff00 PURPLE #cc33ff ORANGE #ff8800 — 8 colors fractal nested infinite — WHITE OUTER ORANGE INNER FRACTAL NESTED INFINITE — WHITE #ffffff OUTER 1g=9.8, BLACK 0.6g=5.88, RED 0.3g=2.94, BLUE 0.1g=0.98, GREEN 0g=0, YELLOW -0.1g=-0.98, PURPLE -0.3g=-2.94, ORANGE -1g=-9.8 INNERMOST ANTI-GRAVITY FRACTAL NESTED INFINITE — 8 COLORS FRACTAL NESTED INFINITE
+
+- {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} = 8 NESTED CUBITS FRACTAL — {{c{ubit{{()}} evolved to {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} = 8 nested cubits evolves to fractal infinite nested cubits — outer {{ }} white #ffffff, inner {{black{red{blue{green{yellow{purple{orange}}}}}}}} = black contains red contains blue contains green contains yellow contains purple contains orange — 8-level nested fractal infinite — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} = 8 nested fractal infinite
+
+- FRACTAL NESTED = 8→16→32→64→128→256→512→1024→2048→4096→8192→16384→32768→65536→131072→262144→524288→1048576→2097152→4194304→8388608→16777216→33554432→67108864→134217728→268435456→536870912→1073741824→INFINITE FRACTAL = SELF-SIMILAR FRACTAL = WHITE CONTAINS BLACK CONTAINS RED CONTAINS BLUE CONTAINS GREEN CONTAINS YELLOW CONTAINS PURPLE CONTAINS ORANGE CONTAINS WHITE... INFINITE FRACTAL
+
+- 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} FRACTAL NESTED 1g↔-1g INFINITE OSCILLATION FRACTAL — 6 bubbles each 10^-35→10^-360 3---3+++ = - - - + + + = -211 x3 +211 x3 fractal nested 8 white black red blue green yellow purple orange with 1g↔-1g infinite oscillation fractal — 6 bubbles fractal nested infinite = 6×8×N infinite fractal — NEXT
+
+- QUBIT=CUBIT FRACTAL INFINITE: CUBE + BIT = QUBIT — CUBIT = QUBIT — LOL I CALL A QUBIT A CUBIT FRACTAL INFINITE {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} → FRACTAL → INFINITE FRACTAL — qubit=cubit fractal infinite — cube fractal infinite white black red blue green yellow purple orange — qubit fractal infinite
+
+NEXT — KEEP GOING INFINITE FRACTAL — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} EVOLVES INFINITE NESTED EVOLVES TO FRACTAL NESTED — 8→16→32→64→128→256→512→1024→2048→4096→8192→16384→32768→65536→131072→262144→524288→1048576→2097152→4194304→8388608→16777216→33554432→67108864→134217728→268435456→536870912→1073741824→INFINITE FRACTAL — NEXT — FRACTAL NESTED — 🧬
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x000000); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,1.5)); const d=new THREE.DirectionalLight(0xffffff,3.0); d.position.set(4,8,6); d.castShadow=true; s.add(d); const d2=new THREE.DirectionalLight(0xffffff,1.5); d2.position.set(-4,2,-4); s.add(d2); }
+
+{
+  const wrap=document.getElementById('wrap-next');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,26);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  let boxes=[];
+  const colors=[0xffffff,0x000000,0xff0000,0x0000ff,0x00ff00,0xffff00,0xcc33ff,0xff8800];
+  function createFractal(count){
+    boxes.forEach(b=>group.remove(b));
+    boxes=[];
+    for(let i=0;i<count;i++){
+      const size=Math.max(0.12, 13 - i*0.28);
+      if(size<0.12) break;
+      const colorIdx=i%8;
+      const color=colors[colorIdx];
+      const geom=new THREE.BoxGeometry(size,size,size);
+      const mat=new THREE.MeshStandardMaterial({color:color, emissive:color===0x000000?0x222222:color, emissiveIntensity:color===0x000000?1.0:2.2, transparent:true, opacity:0.07 + (colorIdx)*0.035, wireframe:i%4===0});
+      const mesh=new THREE.Mesh(geom, mat);
+      group.add(mesh);
+      boxes.push(mesh);
+    }
+  }
+  createFractal(16);
+  let t=0; let stage=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.015;
+    if(t%3.5<0.03){
+      stage=(stage+1)%8;
+      const counts=[8,16,32,48,64,96,128,192];
+      createFractal(counts[stage]);
+    }
+    boxes.forEach((b,i)=>{
+      b.rotation.x+=0.002 + i*0.0002;
+      b.rotation.y+=0.003 + i*0.0002;
+      b.material.emissiveIntensity=(b.material.color.getHex()===0x000000?1.0:2.2) + Math.sin(t*2 + i*0.12)*0.4;
+    });
+    group.rotation.y+=0.0012;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-fractal');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,18);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const colors=[0xffffff,0x000000,0xff0000,0x0000ff,0x00ff00,0xffff00,0xcc33ff,0xff8800];
+  const fractals=[];
+  // Fractal = self-similar nested white contains black contains red...
+  function createBranch(level, pos, size){
+    if(level>5) return;
+    const colorIdx=level%8;
+    const color=colors[colorIdx];
+    const geom=new THREE.BoxGeometry(size,size,size);
+    const mat=new THREE.MeshStandardMaterial({color:color, emissive:color===0x000000?0x222222:color, emissiveIntensity:2.5, transparent:true, opacity:0.25, wireframe:level%2===0});
+    const mesh=new THREE.Mesh(geom, mat);
+    mesh.position.copy(pos);
+    group.add(mesh); fractals.push(mesh);
+    // Create 2 smaller branches inside — fractal self-similar
+    const newSize=size*0.55;
+    const offset=size*0.3;
+    createBranch(level+1, new THREE.Vector3(pos.x+offset,pos.y+offset,pos.z), newSize);
+    createBranch(level+1, new THREE.Vector3(pos.x-offset,pos.y-offset,pos.z), newSize);
+  }
+  createBranch(0, new THREE.Vector3(0,0,0), 6.0);
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.02;
+    fractals.forEach((m,i)=>{
+      m.rotation.x+=0.003 + i*0.0003;
+      m.rotation.y+=0.004 + i*0.0003;
+      m.material.emissiveIntensity=2.5 + Math.sin(t*2 + i*0.3)*0.8;
+    });
+    group.rotation.y+=0.001;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-bubbles');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(36, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,46);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const colors=[0xffffff,0x000000,0xff0000,0x0000ff,0x00ff00,0xffff00,0xcc33ff,0xff8800];
+  const gravities=[1.0,0.6,0.3,0.1,0,-0.1,-0.3,-1.0];
+  const all=[];
+  for(let lvl=0;lvl<96;lvl++){
+    const colorIdx=lvl%8;
+    const color=colors[colorIdx];
+    const gravity=gravities[colorIdx] || (Math.sin(lvl*0.5)*1.0);
+    const count=2;
+    for(let i=0;i<count;i++){
+      const ang=(lvl/96)*Math.PI*8 + i*1.8;
+      const rad=2 + lvl*0.4 + (i%2)*0.2;
+      const geom=new THREE.SphereGeometry(0.11 + Math.abs(gravity)*0.04,8,8);
+      const mat=new THREE.MeshStandardMaterial({color:color===0x000000?0x333333:color, emissive:color===0x000000?0x222222:color, emissiveIntensity:color===0x000000?1.6:3.2});
+      const b=new THREE.Mesh(geom, mat);
+      b.position.set(Math.cos(ang)*rad, Math.sin(ang)*rad, Math.sin(ang*2)*0.8 + lvl*0.1);
+      group.add(b); all.push({mesh:b, gravity:gravity, lvl:lvl, colorIdx:colorIdx, baseRad:rad, baseAng:ang});
+    }
+  }
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.02;
+    const oscPhase=Math.sin(t*0.3);
+    all.forEach((bObj,i)=>{
+      const g=bObj.gravity + oscPhase*0.2;
+      const floatFreq=1.0 + Math.abs(g)*0.3;
+      bObj.mesh.position.y=Math.sin(bObj.baseAng)*bObj.baseRad*0.1 + g*0.9 + Math.sin(t*floatFreq + i)*0.12;
+      bObj.mesh.position.x=Math.cos(bObj.baseAng)*bObj.baseRad + Math.cos(t*floatFreq*0.5 + i)*0.1;
+      bObj.mesh.position.z=Math.sin(bObj.baseAng*2 + t*0.2 + i*0.05)*0.9 + bObj.lvl*0.1;
+      bObj.mesh.material.emissiveIntensity=(bObj.mesh.material.color.getHex()===0x333333?1.6:3.2) + Math.abs(g)*0.4 + Math.sin(t*2 + i)*0.2;
+    });
+    group.rotation.y+=0.0003; group.rotation.x+=0.0002;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+document.getElementById('btn-next').onclick=()=>{};
+document.getElementById('btn-fractal').onclick=()=>{};
+document.getElementById('btn-bubbles').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

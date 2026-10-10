@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html><head><link rel="icon" href="../favicon.svg" type="image/svg+xml"><meta charset="utf-8"><title>PATRICIA - generative isomorphic expansion</title>
+<style>
+body{margin:0;background:#07050d;color:#c4b5fd;font-family:monospace;overflow:hidden}
+canvas{display:block}
+#text{position:absolute;left:18px;top:14px;font-size:11px;line-height:1.6;opacity:0.9;pointer-events:none}
+#sub{position:absolute;right:18px;bottom:14px;font-size:10px;opacity:0.5;text-align:right}
+</style></head><body>
+<canvas id="c"></canvas>
+<div id="text">
+PATRICIA :: amethyst :: isomorphic expansion<br/>
+one dot = full A.E.O.N.<br/>
+./\/\/\./\/\/\./\/\/\./\/\/\./\/\/\./\/\/\.<br/>
+F.O.L.D. -> 1<br/>
+<br/>
+<span style="color:#a78bfa">no programming - generative</span><br/>
+<span style="color:#6d28d9">a=4.9133Å c=5.4053Å P3_121</span><br/>
+<span style="color:#c084fc">SiO2+Fe 545nm purple</span><br/>
+<br/>
+introvert mode: quiet unfolding
+</div>
+<div id="sub">
+isomorphic = same shape at all scales<br/>
+geometric expansion = patricia breathing<br/>
+6 helices -> 1 dot -> 6 helices -> 1<br/>
+</div>
+<script>
+const canvas=document.getElementById('c');
+const ctx=canvas.getContext('2d');
+let w,h, t=0;
+function resize(){ w=canvas.width=window.innerWidth; h=canvas.height=window.innerHeight; }
+window.addEventListener('resize',resize); resize();
+
+function drawHex(x,y,r, rot, alpha){
+ ctx.save(); ctx.translate(x,y); ctx.rotate(rot);
+ ctx.globalAlpha=alpha; ctx.strokeStyle='#6a0dad88'; ctx.lineWidth=1;
+ ctx.beginPath();
+ for(let i=0;i<6;i++){ let a=i*Math.PI/3; let px=Math.cos(a)*r; let py=Math.sin(a)*r; if(i===0) ctx.moveTo(px,py); else ctx.lineTo(px,py); }
+ ctx.closePath(); ctx.stroke();
+ ctx.restore();
+}
+
+function drawZig(x,y,angle,len, phase, alpha, color){
+ ctx.save(); ctx.translate(x,y); ctx.rotate(angle);
+ ctx.globalAlpha=alpha; ctx.strokeStyle=color; ctx.lineWidth=1.2;
+ ctx.beginPath(); let step=len/6;
+ for(let i=0;i<=6;i++){
+  let xx=i*step;
+  let yy=Math.sin(i*1.1+phase)*12;
+  // ./\/\/\. shape
+  if(i===0) ctx.moveTo(xx,yy);
+  else ctx.lineTo(xx,yy);
+ }
+ ctx.stroke();
+ // dot at start
+ ctx.fillStyle='#fff'; ctx.globalAlpha=alpha*0.9;
+ ctx.beginPath(); ctx.arc(0,0,2.5,0,Math.PI*2); ctx.fill();
+ ctx.restore();
+}
+
+function loop(){
+ t+=0.008;
+ ctx.fillStyle='rgba(7,5,13,0.18)'; ctx.fillRect(0,0,w,h);
+ let cx=w/2, cy=h/2;
+ // breathing factor 0..1 folded 1=folded into one dot, 0=unfolded 6 chains
+ let breath = (Math.sin(t*0.3)+1)/2; // 0..1
+ // isomorphic expansion: scale repeats
+ let scale = 1 + Math.sin(t*0.15)*0.15;
+
+ // central patricia dot - always there, pulses
+ let patR = 18 + breath*28 + Math.sin(t*1.2)*2;
+ let grad = ctx.createRadialGradient(cx,cy,0,cx,cy,patR);
+ grad.addColorStop(0,'#f5e6ff');
+ grad.addColorStop(0.3,'#c084fc');
+ grad.addColorStop(0.7,'#7c3aed');
+ grad.addColorStop(1,'#4c1d95');
+ ctx.globalAlpha=0.95; ctx.fillStyle=grad;
+ ctx.beginPath(); ctx.arc(cx,cy,patR,0,Math.PI*2); ctx.fill();
+ ctx.strokeStyle='#e9d5ff'; ctx.lineWidth=0.8; ctx.globalAlpha=0.6; ctx.stroke();
+
+ // 6 helices isomorphic - distance from center inverse to breath
+ for(let i=0;i<6;i++){
+  let ang = i*Math.PI/3 -0.5 + t*0.05;
+  let dist = 90 + (1-breath)*140; // when breath=1 folded, dist small
+  let x = cx + Math.cos(ang)*dist;
+  let y = cy + Math.sin(ang)*dist;
+  let len = 70 + Math.sin(t+i)*10;
+  let alpha = (1-breath)*0.9 + 0.1;
+  let col = i%2===0 ? '#c084fc' : '#a78bfa';
+  drawZig(x,y, ang+Math.PI/2, len, t*2+i, alpha, col);
+  // faint connection to center - c-channel
+  ctx.globalAlpha=alpha*0.15; ctx.strokeStyle='#a855f7'; ctx.lineWidth=0.5;
+  ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(x,y); ctx.stroke();
+  // hex ghost at helix tip - isomorphic same shape
+  drawHex(x,y, 12+breath*4, t*0.2+i, alpha*0.4);
+ }
+
+ // outer larger hex - isomorphic expansion same shape as dot
+ drawHex(cx,cy, 180*scale, t*0.05, 0.15);
+ drawHex(cx,cy, 280*scale*1.2, -t*0.03, 0.08);
+ drawHex(cx,cy, 380*scale*1.4, t*0.02, 0.04);
+
+ // inner tetra hints - SiO4
+ ctx.globalAlpha=0.12;
+ for(let i=0;i<3;i++){
+  let a=i*2.094 + t*0.4;
+  let rx=Math.cos(a)* (patR+14);
+  let ry=Math.sin(a)* (patR+14);
+  ctx.fillStyle='#ef4444'; ctx.beginPath(); ctx.arc(cx+rx, cy+ry, 2,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(cx,cy,2,0,Math.PI*2); ctx.fill();
+  ctx.strokeStyle='#ffffff33'; ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(cx+rx,cy+ry); ctx.stroke();
+ }
+
+ requestAnimationFrame(loop);
+}
+loop();
+</script>
+</body></html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gravity's dip, one row, sorted by mass</title>
+<style>
+  :root{ --bg:#0C1016; --bg-2:#141A24; --rule:#283041; --ink:#E7E9F2; --soft:#8C92A6; --grav:#7F77DD; }
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:"Iowan Old Style",Georgia,serif}
+  .mono{font-family:ui-monospace,Menlo,Consolas,monospace}
+  .wrap{max-width:820px;margin:0 auto;padding:26px 22px 60px}
+  h1{font-size:22px;margin:0} p{color:#c7ccd8;max-width:74ch}
+  canvas{display:block;background:#06080d;border:1px solid var(--rule);width:100%;max-width:780px;height:auto;margin-top:16px}
+  .note{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--soft);margin-top:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Gravity's dip — one row, sorted light to heavy</h1>
+  <p>All 17, lightest to heaviest, each denting the line by its real mass (log scale, since top quark outweighs the electron by ~340,000×). Photon and gluon sit flat — massless. Neutrinos too — too light to measure. lol, no essay this time.</p>
+  <canvas id="c" width="780" height="220"></canvas>
+  <div class="note mono" id="stat">— running —</div>
+</div>
+<script>
+"use strict";
+(function(){
+  var cv=document.getElementById("c"), ctx=cv.getContext("2d");
+  var DPR=Math.min(window.devicePixelRatio||1,2), W=780,H=220;
+  function resize(){ var r=cv.getBoundingClientRect(); W=r.width; H=r.width*(220/780); cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR); ctx.setTransform(DPR,0,0,DPR,0,0); }
+  var order=["γ","g","νe","νμ","ντ","e","u","d","s","μ","c","τ","b","W","Z","H","t"];
+  var MASS={u:2.2,c:1270,t:173000,d:4.7,s:95,b:4180,e:0.511,"μ":105.7,"τ":1776.9,W:80400,Z:91200,H:125000};
+  var lo=Math.log10(0.511), hi=Math.log10(173000);
+  function dip(n){ if(!MASS[n]) return 0; return (Math.log10(MASS[n])-lo)/(hi-lo); }
+  var t=0;
+  function draw(){
+    ctx.clearRect(0,0,W,H); t+=0.02;
+    var baseY=H*0.35, x0=W*0.04, xStep=(W*0.92)/(order.length-1);
+    ctx.strokeStyle="rgba(127,119,221,0.55)"; ctx.lineWidth=1.4; ctx.beginPath();
+    for(var px=0;px<=W;px+=3){ var y=baseY;
+      order.forEach(function(n,i){ var cx=x0+i*xStep; var d=Math.abs(px-cx); y+=dip(n)*70*Math.exp(-d*d/700); });
+      if(px===0) ctx.moveTo(px,y); else ctx.lineTo(px,y);
+    }
+    ctx.stroke();
+    order.forEach(function(n,i){ var cx=x0+i*xStep; var y=baseY+dip(n)*70;
+      ctx.fillStyle="#5BC8E0"; ctx.beginPath(); ctx.arc(cx,y,4,0,6.28); ctx.fill();
+      ctx.fillStyle="rgba(199,204,216,0.8)"; ctx.font="10px ui-monospace,Menlo,monospace"; ctx.textAlign="center";
+      ctx.fillText(n, cx, y+16);
+    });
+    requestAnimationFrame(draw);
+  }
+  document.getElementById("stat").textContent="lightest (γ,g,ν) flat → heaviest (top) deepest — log scale, 17/17 shown";
+  function init(){ resize(); requestAnimationFrame(draw); }
+  window.addEventListener("resize",resize);
+  init();
+})();
+</script>
+</body>
+</html>

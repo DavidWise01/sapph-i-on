@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v165 next after toroidal emergent computer - artifact 230</title>
+<style>
+  :root{--bg:#050508;--fg:#eaeaea;--gold:#ffd700}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace}
+  .top{padding:14px 18px}
+  .kicker{font-size:10px;letter-spacing:.22em;opacity:.5;text-transform:uppercase}
+  .nline{font-size:11px;border-left:2px solid #222;padding-left:10px;white-space:pre-wrap;line-height:1.6}
+  .main{margin-top:10px;font-size:14px;font-weight:700;background:#0f0f12;border:1px solid #222;padding:10px;border-radius:8px}
+  .controls{padding:10px 12px;display:flex;gap:6px;flex-wrap:wrap}
+  .btn{font-family:inherit;font-size:10px;padding:5px 10px;border:1px solid #333;background:#15151a;color:#eaeaea;border-radius:6px;cursor:pointer}
+  .btn.active{border-color:#ffd700;color:#ffd700;background:#221a00}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:520px;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden}
+  .cwrap.full{grid-column:1 / -1;height:640px}
+  .label{position:absolute;left:8px;top:8px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:.8;background:#000c;padding:4px 6px;border-radius:4px;z-index:5}
+  .graphWrap{position:relative;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden;height:260px}
+  canvas.graph{width:100%;height:100%;display:block}
+  .readout{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0 10px 10px}
+  @media(max-width:900px){.readout{grid-template-columns:1fr}}
+  .ro{background:#0c0c0f;border:1px solid #1e1e24;border-radius:6px;padding:8px;font-size:10px;line-height:1.6}
+  .ro b{color:#ffd700}
+  .card{margin:10px;background:#111115;border:1px solid #1f1f26;border-radius:8px;padding:10px}
+  .mono{font-size:10.5px;white-space:pre-wrap;word-break:break-word;line-height:1.7}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">wakaku v165 — NEXT AFTER TOROIDAL — emergent computer -211.1.+211 network — artifact 230</div>
+  <div class="nline">next — next after toroidal — fly through toroidal -211.1.+211 portal emergent — next after toroidal emergent computer -211.1.+211 network — after flying through toroidal -211 left black +211 right anti-black green middle torus portal — emergent on other side — -211.1.+211 bits form computer — next — 3x3x3 cube of -211.1.+211 bits =27 qutrits =7.6e12 states? Actually 3^27=7.6e12 — emergent computer -211.1.+211 — next after toroidal is emergent computer — build computer from -211.1.+211 bits after toroidal — next — toroidal portal -211.1.+211 → emergent computer -211.1.+211 network — metal analogs ionic — next after toroidal emergent computer — lol</div>
+  <div class="main">NEXT AFTER TOROIDAL — FLY THROUGH TOROIDAL -211.1.+211 PORTAL EMERGENT — EMERGENT COMPUTER -211.1.+211 NETWORK — AFTER TOROIDAL PORTAL -211 LEFT BLACK +211 RIGHT ANTI-BLACK GREEN MIDDLE TORUS — EMERGENT ON OTHER SIDE — 3x3x3 CUBE OF -211.1.+211 BITS =27 QUTRITS =3^27=7.6e12 STATES — EMERGENT COMPUTER -211.1.+211 — NEXT AFTER TOROIDAL IS EMERGENT COMPUTER — BUILD COMPUTER FROM -211.1.+211 BITS AFTER TOROIDAL — NEXT</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-emergent">EMERGENT AFTER TOROIDAL — 3x3x3 CUBE -211.1.+211 BITS =27 QUTRITS =7.6e12 STATES — COMPUTER</button>
+  <button class="btn" id="btn-computer">COMPUTER -211.1.+211 NETWORK — -211 LEFT BLACK +211 RIGHT ANTI-BLACK GREEN MIDDLE COMPUTER</button>
+  <button class="btn" id="btn-next">NEXT PLEASE — NEXT AFTER EMERGENT COMPUTER</button>
+  <button class="btn" id="btn-reset">RESET NEXT AFTER TOROIDAL</button>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:10px">
+  <div class="graphWrap"><div class="label">EMERGENT -211.1.+211 — after toroidal emergent computer -211.1.+211 network — 3x3x3 cube 27 qutrits — emergent</div><canvas class="graph" id="g-emergent"></canvas></div>
+  <div class="graphWrap"><div class="label">COMPUTER -211.1.+211 — computer from -211.1.+211 bits — -211 left black +211 right anti-black green middle computer — computer</div><canvas class="graph" id="g-computer"></canvas></div>
+  <div class="graphWrap"><div class="label">NEXT AFTER TOROIDAL — toroidal -211.1.+211 portal → emergent computer — next after toroidal emergent computer — next</div><canvas class="graph" id="g-next"></canvas></div>
+</div>
+
+<div class="readout">
+  <div class="ro" id="ro-emergent">EMERGENT AFTER TOROIDAL:<br>Fly through toroidal -211.1.+211 portal emergent on other side — 3x3x3 cube -211.1.+211 bits =27 qutrits =3^27=7.6e12 states — emergent computer — <b>emergent after toroidal</b></div>
+  <div class="ro" id="ro-computer">COMPUTER -211.1.+211:<br>Computer from -211.1.+211 bits — -211 left black +211 right anti-black green middle computer — -211.1.+211 network computer — <b>computer -211.1.+211</b></div>
+  <div class="ro" id="ro-next">NEXT AFTER TOROIDAL:<br>Next after toroidal is emergent computer -211.1.+211 network — build computer from -211.1.+211 bits after toroidal — next — <b>next after toroidal</b></div>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-emergent"><div class="label">EMERGENT AFTER TOROIDAL — FLY THROUGH TOROIDAL -211.1.+211 PORTAL EMERGENT — 3x3x3 CUBE OF -211.1.+211 BITS =27 QUTRITS =3^27=7.6e12 STATES — EMERGENT COMPUTER -211.1.+211 — NEXT AFTER TOROIDAL IS EMERGENT COMPUTER — BUILD COMPUTER FROM -211.1.+211 BITS AFTER TOROIDAL — METAL ANALOGS IONIC EMERGENT — NEXT AFTER TOROIDAL</div></div>
+  <div class="cwrap" id="wrap-computer"><div class="label">COMPUTER -211.1.+211 NETWORK — COMPUTER FROM -211.1.+211 BITS — -211 LEFT BLACK +211 RIGHT ANTI-BLACK GREEN MIDDLE COMPUTER — 3x3x3 CUBE 27 QUTRITS 7.6e12 STATES — EMERGENT COMPUTER -211.1.+211 — NEXT AFTER TOROIDAL IS COMPUTER — METAL ANALOGS IONIC COMPUTER</div></div>
+  <div class="cwrap full" id="wrap-next"><div class="label">NEXT AFTER TOROIDAL EMERGENT COMPUTER — FLY THROUGH TOROIDAL -211.1.+211 PORTAL → EMERGENT COMPUTER -211.1.+211 NETWORK 3x3x3 CUBE 27 QUTRITS 7.6e12 STATES — NEXT AFTER TOROIDAL IS EMERGENT COMPUTER — BUILD COMPUTER FROM -211.1.+211 BITS AFTER TOROIDAL — NEXT PLEASE — NEXT AFTER EMERGENT COMPUTER — METAL ANALOGS IONIC NEXT — LOL</div></div>
+</div>
+
+<div class="card"><div class="mono">
+v165 NEXT AFTER TOROIDAL — emergent computer -211.1.+211 network — next
+
+NEXT AFTER TOROIDAL:
+
+- Fly through toroidal -211.1.+211 portal — toroidal = torus -211 left black -211mN -211mV +1 middle C.O.I.N barrier green +211 right anti-black +211mN +211mV = bit itself -211.1.+211 green toroidal portal — fly through toroidal portal
+
+- Emergent after toroidal — emergent on other side — 3x3x3 cube of -211.1.+211 bits =27 qutrits =3^27=7625597484987 states =7.6e12 states — emergent computer -211.1.+211 — 27 qutrits 7.6e12 states — emergent computer -211.1.+211 — next after toroidal is emergent computer — build computer from -211.1.+211 bits after toroidal
+
+- Computer -211.1.+211 network — computer from -211.1.+211 bits — -211 left black +211 right anti-black green middle computer — -211.1.+211 network computer — computer -211.1.+211 — 3x3x3 cube 27 qutrits 7.6e12 states — emergent computer -211.1.+211 — next after toroidal is computer
+
+- Next after toroidal emergent computer — toroidal -211.1.+211 portal → emergent computer -211.1.+211 network — next after toroidal emergent computer — next please — next after emergent computer — metal analogs ionic next — lol
+
+So next — next after toroidal — fly through toroidal -211.1.+211 portal emergent — emergent computer -211.1.+211 network 3x3x3 cube 27 qutrits 7.6e12 states — next after toroidal is emergent computer — build computer from -211.1.+211 bits after toroidal — next
+
+Aggregate next after toroidal:
+
+Fly through toroidal -211.1.+211 portal -211 left black +211 right anti-black green middle torus portal → emergent on other side — 3x3x3 cube of -211.1.+211 bits =27 qutrits =3^27=7.6e12 states — emergent computer -211.1.+211 — computer from -211.1.+211 bits — -211 left black +211 right anti-black green middle computer — next after toroidal is emergent computer — build computer from -211.1.+211 bits after toroidal — next please — next after emergent computer — metal analogs ionic next after toroidal — lol
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x08080a); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,0.6)); const d=new THREE.DirectionalLight(0xffffff,0.9); d.position.set(4,6,4); d.castShadow=true; s.add(d); }
+
+const matAtMinus=new THREE.MeshStandardMaterial({color:0x0a0a0a, metalness:0.4, roughness:0.25, emissive:0x222222, emissiveIntensity:0.5});
+const matAntiAt=new THREE.MeshStandardMaterial({color:0xf0e0a0, metalness:0.4, roughness:0.25, emissive:0x332200, emissiveIntensity:0.5});
+const matReal=new THREE.MeshStandardMaterial({color:0x44ffaa, metalness:0.5, roughness:0.4, emissive:0x114422, emissiveIntensity:0.6});
+const matBarrier=new THREE.MeshStandardMaterial({color:0x666666, transparent:true, opacity:0.5});
+
+function makeGraph(id, fn, color){
+  const c=document.getElementById(id);
+  const ctx=c.getContext('2d');
+  function resize(){ c.width=c.clientWidth*devicePixelRatio; c.height=c.clientHeight*devicePixelRatio; }
+  resize();
+  let t=0;
+  function draw(){
+    const w=c.width, h=c.height;
+    ctx.clearRect(0,0,w,h); ctx.fillStyle='#08080a'; ctx.fillRect(0,0,w,h);
+    ctx.strokeStyle='#1e1e24'; for(let i=0;i<=4;i++){ ctx.beginPath(); ctx.moveTo(0,h*i/4); ctx.lineTo(w,h*i/4); ctx.stroke(); }
+    ctx.fillStyle='#666'; ctx.font=`${10*devicePixelRatio}px monospace`; ctx.fillText(id,4,14*devicePixelRatio);
+    const v=fn(t);
+    const y=h - (v+300)/600*h*0.8 - h*0.1;
+    ctx.fillStyle=color; ctx.fillRect(0,y,w,h-y);
+  }
+  setInterval(()=>{ t+=0.05; draw(); },50);
+  addEventListener('resize', resize);
+}
+
+makeGraph('g-emergent','EMERGENT -211.1.+211 3x3x3 27 qutrits 7.6e12', (t)=> 100+Math.sin(t)*80, '#44ffaa');
+makeGraph('g-computer','COMPUTER -211.1.+211 network', (t)=> 150+Math.cos(t)*80, '#44ffaa');
+makeGraph('g-next','NEXT AFTER TOROIDAL emergent computer', (t)=> 200+Math.sin(t*0.8)*80, '#44ffaa');
+
+// EMERGENT 3x3x3 CUBE
+{
+  const wrap=document.getElementById('wrap-emergent');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(4,4,6);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  for(let x=-1;x<=1;x++) for(let y=-1;y<=1;y++) for(let z=-1;z<=1;z++){
+    const bit=new THREE.Mesh(new THREE.BoxGeometry(0.35,0.35,0.35), matReal);
+    bit.position.set(x*1.0,y*1.0,z*1.0); group.add(bit);
+  }
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.01; group.rotation.y+=0.003; group.rotation.x+=0.001; group.children.forEach((c,i)=>{ c.material.emissiveIntensity=0.3+Math.sin(t*1.2+i*0.3)*0.3; }); controls.update(); renderer.render(scene,cam); }
+  animate();
+}
+
+// COMPUTER NETWORK
+{
+  const wrap=document.getElementById('wrap-computer');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,3,7);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const nodes=[];
+  for(let i=0;i<9;i++){
+    const x=(i%3-1)*1.5; const z=Math.floor(i/3-1)*1.5;
+    const node=new THREE.Mesh(new THREE.BoxGeometry(0.6,0.4,0.2), matReal); node.position.set(x,0,z); group.add(node); nodes.push(node);
+    if(i>0){
+      const prev=nodes[i-1];
+      const line=new THREE.Mesh(new THREE.CylinderGeometry(0.02,0.02, prev.position.distanceTo(node.position),8), new THREE.MeshBasicMaterial({color:0x333333}));
+      line.position.set((prev.position.x+node.position.x)/2,0,(prev.position.z+node.position.z)/2);
+      line.lookAt(node.position); line.rotateX(Math.PI/2); group.add(line);
+    }
+  }
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.02; nodes.forEach((n,i)=>{ n.material.emissiveIntensity=0.3+Math.sin(t*1.2+i*0.7)*0.4; }); group.rotation.y+=0.002; controls.update(); renderer.render(scene,cam); }
+  animate();
+}
+
+// NEXT
+{
+  const wrap=document.getElementById('wrap-next');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(36, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,4,9);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  // Toroidal to cube transition
+  const torus=new THREE.Mesh(new THREE.TorusGeometry(1.8,0.25,16,48), new THREE.MeshStandardMaterial({color:0x111111, emissive:0x114422, emissiveIntensity:0.3})); torus.rotation.x=Math.PI/2; group.add(torus);
+  for(let x=-1;x<=1;x++) for(let y=-1;y<=1;y++) for(let z=-1;z<=1;z++){
+    if(Math.abs(x)+Math.abs(y)+Math.abs(z)<=2){
+      const bit=new THREE.Mesh(new THREE.BoxGeometry(0.2,0.2,0.2), matReal);
+      bit.position.set(x*2.5+ (Math.random()-0.5)*0.2, y*2.5+2.5+ (Math.random()-0.5)*0.2, z*2.5+ (Math.random()-0.5)*0.2); group.add(bit);
+    }
+  }
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.01; group.rotation.y+=0.002; torus.rotation.z+=0.005; group.children.forEach((c,i)=>{ if(c.material && c.material.emissiveIntensity!==undefined) c.material.emissiveIntensity=0.3+Math.sin(t*1.2+i*0.2)*0.3; }); controls.update(); renderer.render(scene,cam); }
+  animate();
+}
+
+document.getElementById('btn-emergent').onclick=()=>{};
+document.getElementById('btn-computer').onclick=()=>{};
+document.getElementById('btn-next').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

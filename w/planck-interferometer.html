@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>two cameras + a 0.001° laser at the Planck floor</title>
+<style>
+:root{--bg:#06100E;--panel:#0B1512;--p2:#0E1a17;--rule:#173028;--ink:#E4F2EE;--dim:#7FA399;--faint:#4E6B62;
+--camA:#5DCAA5;--camB:#EF9F27;--laser:#D85A30;--floor:#6F9BE0;--foam:#B58BE0;--good:#5DCAA5;--warn:#EF9F27;--bad:#D85A30;--teal:#1D9E75;--teal-d:#0F6E56;
+--mono:'DM Mono',ui-monospace,monospace;--sans:'Archivo',system-ui,sans-serif;}
+[data-theme="light"]{--bg:#F2F7F5;--panel:#FFF;--rule:#D6E4DF;--ink:#0C1B17;--dim:#4A635C;--faint:#8AA;--p2:#EDF3F1;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px}
+.wrap{max-width:1040px;margin:0 auto;padding:22px}
+h1{font-size:18px;font-weight:700;letter-spacing:-.02em;font-family:var(--mono)}h1 span{color:var(--laser)}
+.sub{color:var(--dim);font-family:var(--mono);font-size:12px;margin-top:4px}
+.top{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}.top .sp{flex:1}
+.btn{background:transparent;border:1px solid var(--rule);color:var(--dim);border-radius:6px;padding:8px 12px;font-family:var(--mono);font-size:11px;cursor:pointer}
+.btn:hover{border-color:var(--teal-d);color:var(--ink)}.btn.on{border-color:var(--laser);color:var(--laser)}
+.main{display:grid;grid-template-columns:1.2fr 1fr;gap:18px}
+@media(max-width:840px){.main{grid-template-columns:1fr}}
+.stage{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:10px}
+canvas{display:block;width:100%}
+.side{display:flex;flex-direction:column;gap:12px}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:14px}
+.card h3{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}
+.row{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;padding:4px 0;border-bottom:1px solid var(--rule)}
+.row:last-child{border-bottom:0}.row .k{color:var(--dim)}.row .v{color:var(--ink);font-weight:500}
+.row .v.b{color:var(--bad)}.row .v.g{color:var(--good)}
+.eli{font-family:var(--mono);font-size:11px;color:var(--faint);line-height:1.7}.eli b{color:var(--dim)}
+.foot{font-family:var(--mono);font-size:10px;color:var(--faint);line-height:1.7;margin-top:16px}
+.lit{color:var(--good)}.amber{color:var(--warn)}.front{color:var(--foam)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top">
+  <div><h1>two cameras + a <span>0.001° laser</span> at the Planck floor</h1>
+    <div class="sub">interferometry — right method, right target · can\u2019t resolve below l_P, but can listen for the foam\u2019s tremble</div></div>
+  <div class="sp"></div>
+  <button class="btn" id="resolve">try to resolve a point →</button>
+  <button class="btn" id="listen">listen for the tremble</button>
+  <button class="btn" id="theme">theme</button>
+</div>
+
+<div class="main">
+  <div class="stage"><canvas id="c" height="490" role="img" aria-label="Two cameras just below the Planck floor with a laser swept at 0.001 degree steps; resolving a point fails as the beam forms a black hole, but listening detects the foam's statistical jitter"></canvas></div>
+  <div class="side">
+    <div class="card">
+      <h3>the geometry</h3>
+      <div class="row"><span class="k">camera A</span><span class="v">10⁻³⁵·⁰⁰</span></div>
+      <div class="row"><span class="k">laser+cam B</span><span class="v">10⁻³⁵·⁰¹</span></div>
+      <div class="row"><span class="k">baseline</span><span class="v b">2.3e⁻³⁷ m (71× &lt; l_P)</span></div>
+      <div class="row"><span class="k">laser step</span><span class="v">0.001° · 360,000 ticks</span></div>
+      <div class="row"><span class="k">tick lands at</span><span class="v b">~10⁻⁴⁰ m (5 orders &lt; l_P)</span></div>
+      <div class="row"><span class="k">beam photon</span><span class="v b">57,000× Planck E → BH</span></div>
+    </div>
+    <div class="card">
+      <h3>right method, real experiment</h3>
+      <div class="eli">this is the <b>Fermilab Holometer</b>: paired laser interferometers hunting Planck-scale <b>jitter</b>. it can\u2019t resolve a point (nothing can) — but the <b>correlated</b> signal of two cameras can reveal the foam\u2019s <b>wobble</b>. you get the tremble, not the picture.</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="margin-top:16px">
+  <h3>🧒 toddler corner — two microphones at the bottom of the sea</h3>
+  <div class="eli">
+    you can\u2019t take a <b>photo</b> of the very bottom of the ocean — it\u2019s too dark and too churny, and any flashbulb bright enough would <b>boil the water</b>. so pointing a super-precise <b>laser pointer</b> down there is hopeless: aim it fine enough and the light itself <b>burns a hole</b>. BUT — put <b>two microphones</b> down there instead and just <b>listen</b>. you\u2019ll never see the bottom, but if it\u2019s <b>trembling</b>, both mics hear the <b>same shiver at the same time</b>, and that match tells you the deep is <b>alive and shaking</b> — even though you never saw it. that\u2019s the trick: at the bottom of everything you can\u2019t <b>look</b>, but you can <b>listen for the shiver.</b>
+  </div>
+</div>
+<div class="foot" id="foot"></div>
+</div>
+<h1 class="sr-only">Two cameras and a 0.001 degree laser at the Planck floor: interferometry that cannot resolve below the Planck length, because the baseline is sub-Planck, the angular tick lands at ten to the minus forty meters, and the beam photon exceeds Planck energy. But like the Holometer, it can detect the foam's statistical jitter.</h1>
+<script src="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap"></script>
+<script>
+(function(){
+var t=0, mode='idle', sweep=0, bhR=0, corr=[];
+var cv=document.getElementById('c'),ctx=cv.getContext('2d');
+function size(){var d=Math.min(2,devicePixelRatio||1),r=cv.getBoundingClientRect();cv.width=r.width*d;cv.height=490*d;ctx.setTransform(d,0,0,d,0,0);return{w:r.width,h:490};}
+function draw(){
+  var g=size(),W=g.w,H=g.h;t+=0.05;ctx.clearRect(0,0,W,H);
+  var yFloor=H*0.52, xA=W*0.30, xB=W*0.30+22, yCam=90;
+  // Planck floor
+  ctx.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue('--floor');ctx.globalAlpha=.6;ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(0,yFloor);ctx.lineTo(W,yFloor);ctx.stroke();ctx.globalAlpha=1;
+  ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--floor');ctx.font="500 9px 'DM Mono',monospace";ctx.textAlign='left';
+  ctx.fillText('── PLANCK FLOOR  l_P = 10⁻³⁴·⁷⁹ ──',W*0.06,yFloor-6);
+  // foam below
+  ctx.save();ctx.beginPath();ctx.rect(0,yFloor,W,H-yFloor);ctx.clip();
+  for(var i=0;i<90;i++){var fx=(i*101)%W,fy=yFloor+18+((i*61)%(H-yFloor-18));var n=Math.sin(fx*0.08+t*1.6+i)*Math.cos(fy*0.1-t*1.2+i);
+    ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--foam');ctx.globalAlpha=0.05+0.13*Math.abs(n);
+    ctx.beginPath();ctx.arc(fx+n*5,fy+n*4,2+2*Math.abs(n),0,7);ctx.fill();ctx.globalAlpha=1;}
+  ctx.restore();
+  // cameras A and B (just above floor = "just below Planck in scale")
+  ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--camA');ctx.fillRect(xA-9,yCam-6,18,12);
+  ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--camB');ctx.fillRect(xB-9,yCam-6,18,12);
+  ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--camA');ctx.font="500 8px 'DM Mono',monospace";ctx.textAlign='center';
+  ctx.fillText('cam A 10⁻³⁵·⁰⁰',xA,yCam-12);
+  ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--camB');ctx.fillText('laser B 10⁻³⁵·⁰¹',xB+40,yCam-12);
+  // baseline bracket
+  ctx.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue('--bad');ctx.globalAlpha=.6;ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(xA,yCam+10);ctx.lineTo(xB,yCam+10);ctx.stroke();ctx.globalAlpha=1;
+  ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--bad');ctx.font="500 7px 'DM Mono',monospace";
+  ctx.fillText('baseline 2.3e⁻³⁷ (sub-Planck)',(xA+xB)/2,yCam+22);
+  // MODE: resolve -> laser fires down, focuses, becomes black hole at floor
+  if(mode==='resolve'){
+    sweep+=0.6;
+    var ang=-Math.PI/2+Math.sin(t)*0.02;
+    var tx=xB+Math.cos(ang)*0, ty=yFloor;
+    ctx.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue('--laser');ctx.lineWidth=1.5;ctx.globalAlpha=.8;
+    ctx.beginPath();ctx.moveTo(xB,yCam);ctx.lineTo(xB,yFloor);ctx.stroke();ctx.globalAlpha=1;
+    // black hole grows at the focus point
+    bhR=Math.min(80,bhR+0.8);
+    ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--bad');ctx.globalAlpha=.25;
+    ctx.beginPath();ctx.arc(xB,yFloor,bhR,0,7);ctx.fill();ctx.globalAlpha=1;
+    ctx.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue('--bad');ctx.beginPath();ctx.arc(xB,yFloor,bhR,0,7);ctx.stroke();
+    ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--bad');ctx.font="500 9px 'DM Mono',monospace";ctx.textAlign='center';
+    ctx.fillText('beam focused to 10⁻⁴⁰ → photon over Planck E → black hole',W/2,yFloor+bhR+16);
+    ctx.fillText('cannot resolve the point — the light became a hole',W/2,yFloor+bhR+30);
+  }
+  // MODE: listen -> two beams, watch correlated jitter (the tremble)
+  if(mode==='listen'){
+    var jit=Math.sin(t*3)*4+Math.sin(t*7.3)*2;
+    // both cameras see the SAME floor jitter at the same time (correlated)
+    for(var cxp of [xA,xB]){
+      ctx.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue('--foam');ctx.globalAlpha=.5;ctx.lineWidth=1;
+      ctx.beginPath();ctx.moveTo(cxp,yCam);ctx.lineTo(cxp+jit,yFloor);ctx.stroke();ctx.globalAlpha=1;
+    }
+    // floor tremble marker
+    ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--foam');
+    ctx.beginPath();ctx.arc(xA+jit,yFloor,4,0,7);ctx.fill();
+    ctx.beginPath();ctx.arc(xB+jit,yFloor,4,0,7);ctx.fill();
+    // correlation trace on the right
+    corr.push(jit);if(corr.length>140)corr.shift();
+    ctx.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue('--good');ctx.lineWidth=1.5;ctx.beginPath();
+    for(var i=0;i<corr.length;i++){var x=W*0.60+i*1.4,y=yCam+60+corr[i]*3;if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);}
+    ctx.stroke();
+    ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--good');ctx.font="500 9px 'DM Mono',monospace";ctx.textAlign='left';
+    ctx.fillText('correlated jitter — both cameras shiver together',W*0.60,yCam+40);
+    ctx.fillText('you can\u2019t SEE the floor, but you hear it TREMBLE',W*0.60,yCam+96);
+  }
+  if(mode==='idle'){
+    ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--faint');ctx.font="500 10px 'DM Mono',monospace";ctx.textAlign='center';
+    ctx.fillText('choose: resolve a point (fails), or listen for the tremble (the real readout)',W/2,yFloor+40);
+  }
+  requestAnimationFrame(draw);
+}
+document.getElementById('resolve').onclick=function(){mode='resolve';bhR=0;};
+document.getElementById('listen').onclick=function(){mode='listen';corr=[];};
+document.getElementById('theme').onclick=function(){var h=document.documentElement;h.setAttribute('data-theme',h.getAttribute('data-theme')==='dark'?'light':'dark');};
+document.getElementById('foot').innerHTML='<span class="lit">verified</span> — the geometry is real interferometry, but it can\u2019t resolve below l_P: baseline 2.3e⁻³⁷ m is 71× sub-Planck (unpositionable); the 0.001° tick lands at ~10⁻⁴⁰ m (5 orders below the floor); a photon that sharp is ~57,000× over Planck energy and collapses to a black hole. '+
+ '<span class="front">FRONTIER</span> — but the method IS a real experiment: the Fermilab Holometer used paired laser interferometers to hunt Planck-scale jitter. it can\u2019t photograph the floor — but the correlated signal of two cameras can detect whether spacetime TREMBLES. you get the foam\u2019s wobble, not its picture. <span class="amber">AMBER</span> — a positive detection was not found by the Holometer; this is an open, tested-but-unconfirmed idea.';
+draw();
+})();
+</script>
+</body></html>

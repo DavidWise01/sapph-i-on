@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Toroids as Communicators · II — The Crossing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --iron:#0b0d14;--slab:#11141f;--panel:#161a28;--grid:#1f2435;
+    --copper:#e0915a;--copper-dim:#8a5a36;
+    --flux:#8a9eff;--flux-dim:#4a548a;
+    --pwm:#5fe0c0;--recovered:#6fe6a0;
+    --secondary:#f0c14a;        /* the far side — gold, electrically isolated from copper */
+    --secondary-dim:#8a6e2a;
+    --paper:#e6e8f0;--paper-dim:#8e94ad;--rule:#1f243533;--rose:#e07a9a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{background:var(--iron);color:var(--paper);font-family:'Newsreader',Georgia,serif;
+    font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:880px;margin:0 auto;padding:0 24px}
+
+  .hero{min-height:84vh;display:flex;flex-direction:column;justify-content:center;padding:70px 0 40px}
+  .kicker{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--copper);margin-bottom:22px;font-weight:500}
+  .kicker .s{color:var(--flux-dim)}
+  h1{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(38px,8vw,78px);line-height:1.0;letter-spacing:-.01em}
+  h1 .flux{color:var(--flux)} h1 .gold{color:var(--secondary)}
+  .lede{font-size:clamp(19px,2.4vw,24px);color:var(--paper-dim);max-width:640px;margin-top:30px;line-height:1.5}
+  .lede b{color:var(--paper);font-weight:500} .lede .flux{color:var(--flux)} .lede .pwm{color:var(--pwm)} .lede .copper{color:var(--copper)} .lede .gold{color:var(--secondary)}
+  .recall{font-family:'IBM Plex Mono',monospace;margin-top:34px;font-size:clamp(17px,3vw,25px);color:var(--flux);letter-spacing:.01em}
+  .recall .c{color:var(--paper)} .recall .g{color:var(--secondary)}
+  .recall-cap{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--paper-dim);margin-top:12px;line-height:1.6}
+
+  .sec{padding:60px 0;border-top:1px solid var(--rule)}
+  .tag{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--copper);margin-bottom:14px;font-weight:500}
+  .tag.g{color:var(--secondary)}
+  h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(25px,4.5vw,39px);line-height:1.08;letter-spacing:-.005em}
+  h2 .flux{color:var(--flux)} h2 .gold{color:var(--secondary)} h2 .pwm{color:var(--pwm)}
+  .sec p{margin:18px 0;color:var(--paper);max-width:680px}
+  .sec p.dim{color:var(--paper-dim)}
+  .sec p b{color:var(--paper);font-weight:600}
+  .sec p .flux{color:var(--flux);font-weight:500} .sec p .copper{color:var(--copper);font-weight:500}
+  .sec p .pwm{color:var(--pwm);font-weight:500} .sec p .rec{color:var(--recovered);font-weight:500} .sec p .gold{color:var(--secondary);font-weight:500}
+  .pull{font-family:'Chakra Petch',sans-serif;font-weight:500;font-size:clamp(20px,3vw,27px);line-height:1.3;color:var(--flux);margin:30px 0;padding-left:20px;border-left:3px solid var(--flux-dim)}
+  .pull.gold{color:var(--secondary);border-left-color:var(--secondary-dim)}
+  code{font-family:'IBM Plex Mono',monospace;font-size:.85em;color:var(--copper);background:#11141f;padding:2px 7px;border-radius:5px}
+  .flag{font-family:'Newsreader';font-size:15.5px;color:var(--paper-dim);font-style:italic;margin:18px 0;padding:14px 18px;background:#11141f66;border:1px solid var(--rule);border-radius:8px}
+  .flag b{color:var(--rose);font-style:normal;font-weight:600;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;display:block;margin-bottom:6px}
+
+  .inst{margin:32px 0;border:1px solid var(--grid);border-radius:14px;overflow:hidden;background:var(--slab)}
+  .inst.g{border-color:#3e3420}
+  .inst-bar{display:flex;align-items:center;gap:10px;padding:12px 18px;border-bottom:1px solid var(--grid);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--paper-dim)}
+  .inst-bar .led{width:9px;height:9px;border-radius:50%;background:var(--flux);box-shadow:0 0 8px var(--flux)}
+  .inst.g .inst-bar .led{background:var(--secondary);box-shadow:0 0 8px var(--secondary)}
+  .inst-bar .ttl{color:var(--flux)} .inst.g .inst-bar .ttl{color:var(--secondary)}
+  canvas{display:block;width:100%;height:auto;background:var(--iron)}
+  .ctrls{padding:16px 18px;display:flex;flex-wrap:wrap;gap:18px;align-items:center;border-top:1px solid var(--grid)}
+  .ctrl{display:flex;flex-direction:column;gap:6px;flex:1;min-width:150px}
+  .ctrl label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--paper-dim)}
+  .ctrl label .val{color:var(--copper);float:right}
+  input[type=range]{-webkit-appearance:none;appearance:none;height:4px;border-radius:2px;background:var(--grid);outline:none;width:100%}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--copper);cursor:pointer;box-shadow:0 0 8px var(--copper-dim)}
+  input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radius:50%;background:var(--copper);cursor:pointer}
+  input:focus-visible{outline:2px solid var(--copper);outline-offset:3px}
+  .segs{display:flex;gap:6px;flex-wrap:wrap}
+  .seg{font-family:'IBM Plex Mono',monospace;font-size:12px;padding:7px 12px;border:1px solid var(--grid);border-radius:8px;background:var(--panel);color:var(--paper-dim);cursor:pointer;touch-action:manipulation}
+  .seg.on{border-color:var(--flux);color:var(--flux);background:rgba(138,158,255,.12)}
+  .seg:focus-visible{outline:2px solid var(--copper);outline-offset:2px}
+  .readout{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--paper-dim);padding:0 18px 16px;line-height:1.6}
+  .readout b{color:var(--copper)} .readout .flux{color:var(--flux)} .readout .pwm{color:var(--pwm)} .readout .rec{color:var(--recovered)} .readout .gold{color:var(--secondary)}
+
+  .foot{padding:50px 0 80px;border-top:1px solid var(--rule);margin-top:40px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--paper-dim);line-height:2}
+  .foot b{color:var(--flux)} .foot .pwm{color:var(--pwm)}
+  .next{margin:30px 0;padding:20px;border:1px solid var(--grid);border-radius:12px}
+  .next .nt{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--copper);margin-bottom:10px}
+  .next ol{margin:0;padding-left:22px;color:var(--paper-dim);font-size:15.5px;line-height:1.9}
+  .next ol li b{color:var(--paper)} .next ol li.done{color:var(--flux)}
+
+  .systems{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:#1f243555;border:1px solid var(--grid);border-radius:12px;overflow:hidden;margin:26px 0}
+  .systems .s{background:var(--slab);padding:16px 15px}
+  .systems .s .h{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:15px;color:var(--secondary);margin-bottom:5px}
+  .systems .s .d{font-size:13px;color:var(--paper-dim);line-height:1.5}
+  @media (max-width:560px){body{font-size:17px}.ctrl{min-width:100%}.systems{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker">Toroids as Communicators <span class="s">·</span> Paper II — The Crossing</div>
+    <h1>No wire between<br>the two sides — only<br>the <span class="flux">shared flux</span></h1>
+    <p class="lede">Wind a <em>second</em> coil on the same ring and you have a transformer. The <span class="copper">first side</span> and the <span class="gold">second side</span> never touch — no copper joins them — yet a message crosses, carried only by the flux they share. Paper I said a toroid passes edges, not levels. Now watch those edges <b>leap the gap</b>, and a PWM message arrive on a side that's electrically a world away.</p>
+    <div class="recall"><span class="c">v</span><span class="g">ₛ</span> <span class="c">=</span> <span class="c">(N</span><span class="g">ₛ</span><span class="c">/N</span><span style="color:var(--copper)">ₚ</span><span class="c">) · v</span><span style="color:var(--copper)">ₚ</span></div>
+    <div class="recall-cap">the turns ratio scales the voltage · but the DC never crosses — only the change does</div>
+  </header>
+
+  <!-- INSTRUMENT 3: TWO WINDINGS -->
+  <section class="sec">
+    <div class="tag">§5 · instrument three</div>
+    <h2>Two windings — <span class="gold">isolation by shared flux</span></h2>
+    <p>A transformer is just Paper I's core with a second winding added. Drive a changing current in the <span class="copper">primary</span>; it makes a changing flux in the shared ring; that changing flux induces a voltage in the <span class="gold">secondary</span> — Faraday again, <code>vₛ = Nₛ·dΦ/dt</code>. The ratio of turns sets the ratio of voltages: more secondary turns, more secondary volts (and proportionally less current — power is conserved, not created).</p>
+    <p>The quiet miracle is what <em>isn't</em> there: <b>no electrical connection between the two sides.</b> The only thing they share is flux in iron. That's galvanic isolation — the secondary can float at a thousand volts above the primary and the signal still crosses, because the signal was never a current in a wire; it was a change in a field. And because it rides on change, a <span class="copper">steady primary current induces nothing</span> across the gap.</p>
+
+    <div class="inst">
+      <div class="inst-bar"><span class="led"></span><span class="ttl">TWO WINDINGS</span> · primary → shared flux → secondary · DC blocked</div>
+      <canvas id="xfmr"></canvas>
+      <div class="ctrls">
+        <div class="ctrl" style="flex:2;min-width:100%"><label>primary drive</label>
+          <div class="segs" id="xDrive">
+            <div class="seg on" data-d="pwm">PWM (edges)</div>
+            <div class="seg" data-d="sine">sine</div>
+            <div class="seg" data-d="dc">steady DC</div>
+          </div></div>
+        <div class="ctrl"><label>secondary turns ratio <span class="val" id="xRval">2.0×</span></label>
+          <input type="range" id="xRatio" min="0.5" max="3" step="0.1" value="2"></div>
+      </div>
+      <div class="readout" id="xRead"><span class="copper">primary</span> drives <span class="flux">shared flux</span>; the <span class="gold">secondary</span> answers the change, scaled by turns ratio. switch to <b>steady DC</b> and the secondary goes dead — no change, no crossing. the two coils never touch.</div>
+    </div>
+    <div class="flag"><b>honest flag</b>Idealised again: perfect coupling (all flux links both coils), no leakage inductance, no winding resistance, no saturation. Real transformers leak some flux, drop a little voltage, and a true square-edge rings on the leakage/parasitics. The turns ratio and isolation shown here are exact; the parasitics that limit real bandwidth and edge fidelity are what the engineering adds on top.</p>
+  </section>
+
+  <!-- INSTRUMENT 4: PWM ACROSS THE GAP -->
+  <section class="sec">
+    <div class="tag g">§6 · instrument four · the signature</div>
+    <h2>The isolated PWM link — <span class="pwm">send the edges, rebuild the width</span></h2>
+    <p>Here is the whole point of the series, working end to end. You want to send a value — a duty cycle — from one side to a side it can't touch. You <em>can't</em> just push the PWM across: the transformer refuses the DC, so the secondary comes out <b>AC-coupled</b> — the same edges, but the levels shifted to swing about zero (precisely the volt-second balance from Paper I; the average across the core must be zero). The duty cycle looks lost.</p>
+    <p>It isn't. The duty cycle was never stored in a <em>level</em> — it lives in the <span class="pwm">timing of the edges</span>, and the edges crossed perfectly. So the <span class="gold">far side</span> reconstructs: a comparator catches each edge and rebuilds a clean full-height pulse — high on the rising edge, low on the falling — recreating the original PWM, duty intact. A low-pass filter then averages it back to the value. The message made it across a gap with no wire, riding entirely on change.</p>
+
+    <div class="inst g">
+      <div class="inst-bar"><span class="led"></span><span class="ttl">ISOLATED PWM LINK</span> · primary PWM → AC-coupled secondary → reconstructed → recovered</div>
+      <canvas id="link"></canvas>
+      <div class="ctrls">
+        <div class="ctrl"><label>duty to send <span class="val" id="lDval">60%</span></label>
+          <input type="range" id="lDuty" min="10" max="90" step="1" value="60"></div>
+      </div>
+      <div class="readout" id="lRead">row 1 <span class="copper">primary PWM</span> (your message) · row 2 <span class="gold">secondary</span> — DC stripped, swinging about zero, edges intact · row 3 <span class="flux">reconstructed</span> PWM on the far side · row 4 <span class="rec">recovered value</span>. the duty you sent arrives, across the isolation barrier.</div>
+    </div>
+    <p class="pull pwm">The DC could not cross — but the DC was never the message. The message was the edges, and the edges always cross. That is why a toroid speaks PWM.</p>
+    <div class="flag"><b>honest flag</b>This is the real principle behind pulse-transformer gate drive and edge-based digital isolators, simplified to its spine. Real links handle the long-pulse problem (a very high or very low duty starves the transformer of edges, so practical designs use a high-frequency carrier, edge-encoding, or periodic refresh), add dead-time and noise margins, and reconstruct with real comparators/latches that have delay. The core idea here — <em>edge timing survives, levels don't, so rebuild from edges</em> — is exactly how it's done.</p>
+  </section>
+
+  <!-- REAL SYSTEMS -->
+  <section class="sec">
+    <div class="tag g">§7 · in the wild</div>
+    <h2>Where this is already <span class="gold">running</span></h2>
+    <p>This isn't a toy demonstration of a principle — it's the working guts of equipment you use constantly. Every one of these sends information through a tiny toroid (or a transformer very like one), across an isolation barrier, on the edges:</p>
+
+    <div class="systems">
+      <div class="s"><div class="h">Ethernet magnetics</div><div class="d">Every wired network port hides little transformers. Your data crosses them isolated — which is why a lightning surge on the cable doesn't fry the chip.</div></div>
+      <div class="s"><div class="h">Gate-drive transformers</div><div class="d">Power electronics switch high-voltage transistors using PWM pulses sent through a pulse transformer — the control side floats safely below the lethal side.</div></div>
+      <div class="s"><div class="h">Digital isolators</div><div class="d">Chips that pass logic signals across an on-die transformer, edge by edge, so two circuits at wildly different voltages can still talk.</div></div>
+    </div>
+    <p class="dim">In each, the rule from Paper I holds without exception: a steady level would die in the core, so the data is sent as <span class="pwm">edges</span> and rebuilt on the far side. The toroid is the wall and the messenger at once.</p>
+
+    <div class="next">
+      <div class="nt">the series · this paper covers 3–4</div>
+      <ol>
+        <li class="done"><b>The core</b> — v = N·dΦ/dt, change-not-state ✓</li>
+        <li class="done"><b>The pulse</b> — PWM, a value written as width ✓</li>
+        <li class="done"><b>The crossing</b> — two windings, isolation by shared flux ✓</li>
+        <li class="done"><b>The message</b> — the isolated PWM link, duty rebuilt from edges ✓</li>
+        <li><b>The choke</b> — the toroid that passes the signal and blocks the noise (common-mode rejection)</li>
+      </ol>
+    </div>
+    <p class="dim">One instrument left to close the series: the common-mode choke — the toroid wound so it ignores the noise both wires share and passes only the difference that carries the message. Selective listening, magnetic edition.</p>
+  </section>
+
+  <div class="foot">
+    TOROIDS AS COMMUNICATORS · PAPER II — THE CROSSING<br>
+    <b>vₛ = (Nₛ/Nₚ)·vₚ</b> · turns ratio scales voltage · the DC never crosses, only the change<br>
+    secondary is AC-coupled (volt-second balance) · duty rebuilt from edge timing · checked in node<br>
+    <span class="pwm">no wire between the sides — the edges leap the gap, and the message arrives</span>
+  </div>
+
+</div>
+
+<script>
+"use strict";
+const reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const COL={iron:"#0b0d14",grid:"#1f2435",copper:"#e0915a",copperDim:"#8a5a36",
+  flux:"#8a9eff",fluxDim:"#4a548a",pwm:"#5fe0c0",recovered:"#6fe6a0",
+  secondary:"#f0c14a",paper:"#8e94ad"};
+
+function setup(cv,ratio){
+  const dpr=Math.min(window.devicePixelRatio||1,2);
+  const cssW=cv.parentElement.clientWidth, cssH=Math.round(cssW*ratio);
+  cv.width=cssW*dpr; cv.height=cssH*dpr; cv.style.height=cssH+"px";
+  const ctx=cv.getContext("2d"); ctx.setTransform(dpr,0,0,dpr,0,0);
+  return {ctx,W:cssW,H:cssH};
+}
+function gridlines(ctx,W,H){ ctx.strokeStyle=COL.grid;ctx.lineWidth=1;
+  for(let x=0;x<=W;x+=W/12){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
+  for(let y=0;y<=H;y+=H/8){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();} }
+function glow(ctx,pts,gx,gy,color,gw){ ctx.shadowColor=color;ctx.shadowBlur=gw||7;
+  ctx.strokeStyle=color;ctx.lineWidth=2;ctx.beginPath();
+  pts.forEach((o,k)=>{const x=gx(o,k),y=gy(o,k);k?ctx.lineTo(x,y):ctx.moveTo(x,y);});
+  ctx.stroke();ctx.shadowBlur=0; }
+
+/* ── INSTRUMENT 3 · TWO WINDINGS ── */
+(function(){
+  const cv=document.getElementById("xfmr");
+  const seg=document.getElementById("xDrive"), Rin=document.getElementById("xRatio"), Rv=document.getElementById("xRval");
+  const read=document.getElementById("xRead");
+  let drive="pwm";
+  seg.querySelectorAll(".seg").forEach(s=>s.onclick=()=>{drive=s.dataset.d;seg.querySelectorAll(".seg").forEach(o=>o.classList.toggle("on",o===s));});
+  let d=setup(cv,0.6); window.addEventListener("resize",()=>d=setup(cv,0.6));
+  function cur(p){ switch(drive){
+    case "pwm": return ((p*4)%1)<0.5?1:0;
+    case "sine": return 0.5+0.45*Math.sin(p*Math.PI*2*2);
+    case "dc": return 0.7; } return 0; }
+  function draw(t){
+    const {ctx,W,H}=d; const ratio=parseFloat(Rin.value); Rv.textContent=ratio.toFixed(1)+"×";
+    ctx.clearRect(0,0,W,H); gridlines(ctx,W,H);
+    const tt=reduce?0.3:(t*0.18), phase=tt%1;
+    const dp=0.004; let didt=(cur((phase+dp)%1)-cur(phase))/dp; if(Math.abs(didt)>40)didt=Math.sign(didt)*40;
+
+    // toroid centre
+    const cx=W*0.28, cy=H*0.5, R=Math.min(W*0.15,H*0.32), r=R*0.52;
+    ctx.lineWidth=R-r; ctx.strokeStyle="#2a2f42";
+    ctx.beginPath();ctx.arc(cx,cy,(R+r)/2,0,Math.PI*2);ctx.stroke();
+    // shared flux
+    const i=cur(phase), fmag=Math.abs(i);
+    for(let k=0;k<12;k++){const a=(k/12)*Math.PI*2+(reduce?0:tt*6*(i>0.01?1:0));
+      const rr=(R+r)/2, ax=cx+Math.cos(a)*rr, ay=cy+Math.sin(a)*rr;
+      ctx.fillStyle=`rgba(138,158,255,${0.12+0.6*fmag})`;ctx.beginPath();ctx.arc(ax,ay,2.3,0,Math.PI*2);ctx.fill();}
+    ctx.fillStyle=COL.flux;ctx.font="11px 'IBM Plex Mono',monospace";ctx.textAlign="center";ctx.fillText("Φ",cx,cy);
+    ctx.fillStyle="rgba(138,158,255,.5)";ctx.font="9px 'IBM Plex Mono',monospace";ctx.fillText("shared flux",cx,cy+R+16);
+    // primary winding (left side, copper)
+    ctx.strokeStyle=COL.copper;ctx.lineWidth=2.2;
+    for(let k=0;k<7;k++){const a=Math.PI*0.62+(k/6)*Math.PI*0.56;
+      const mx=cx+Math.cos(a)*((R+r)/2),my=cy+Math.sin(a)*((R+r)/2);
+      ctx.globalAlpha=0.45+0.55*fmag;ctx.beginPath();ctx.ellipse(mx,my,(R-r)/2+5,5,a+Math.PI/2,0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1;}
+    ctx.fillStyle=COL.copper;ctx.font="9px 'IBM Plex Mono',monospace";ctx.fillText("primary",cx-R-4,cy);
+    // secondary winding (right side, gold)
+    ctx.strokeStyle=COL.secondary;ctx.lineWidth=2.2;
+    const nSec=Math.round(7*ratio/1); 
+    for(let k=0;k<Math.min(nSec,11);k++){const a=-Math.PI*0.38+(k/(Math.min(nSec,11)-1||1))*Math.PI*0.56;
+      const mx=cx+Math.cos(a)*((R+r)/2),my=cy+Math.sin(a)*((R+r)/2);
+      ctx.globalAlpha=0.45+0.55*Math.abs(didt)/40;ctx.beginPath();ctx.ellipse(mx,my,(R-r)/2+5,5,a+Math.PI/2,0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1;}
+    ctx.fillStyle=COL.secondary;ctx.fillText("secondary",cx+R+4,cy);
+
+    // the isolation barrier line down the middle of the gap
+    ctx.strokeStyle="#3a4d43";ctx.setLineDash([4,5]);ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(W*0.46,H*0.1);ctx.lineTo(W*0.46,H*0.9);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle="#5a6e62";ctx.font="9px 'IBM Plex Mono',monospace";ctx.textAlign="center";
+    ctx.save();ctx.translate(W*0.46,H*0.5);ctx.rotate(-Math.PI/2);ctx.fillText("isolation barrier · no wire crosses",0,-6);ctx.restore();
+
+    // scope: primary i (copper) and secondary v (gold)
+    const sx=W*0.52, sw=W*0.44, pMid=H*0.32, sMid=H*0.72, amp=H*0.15;
+    ctx.strokeStyle="#2a2f42";ctx.lineWidth=1;[pMid,sMid].forEach(m=>{ctx.beginPath();ctx.moveTo(sx,m);ctx.lineTo(sx+sw,m);ctx.stroke();});
+    ctx.font="11px 'IBM Plex Mono',monospace";ctx.textAlign="left";ctx.textBaseline="middle";
+    ctx.fillStyle=COL.copper;ctx.fillText("primary i",sx,H*0.16);
+    ctx.fillStyle=COL.secondary;ctx.fillText("secondary v (× ratio)",sx,H*0.56);
+    const N=200, ip=[], sp=[];
+    for(let k=0;k<=N;k++){const p=(phase-(1-k/N));
+      const iv=cur((p%1+1)%1); let dv=(cur(((p+dp)%1+1)%1)-iv)/dp; if(Math.abs(dv)>40)dv=Math.sign(dv)*40;
+      ip.push({x:sx+sw*(k/N),y:pMid-(iv-0.5)*amp*1.5});
+      sp.push({x:sx+sw*(k/N),y:sMid-(dv/40)*amp*1.4*ratio});}
+    glow(ctx,ip,o=>o.x,o=>o.y,COL.copper,6);
+    glow(ctx,sp,o=>o.x,o=>o.y,COL.secondary,6);
+
+    read.innerHTML = drive==="dc"
+      ? `<span class="copper">steady DC</span> in the primary → flux sits still → <span class="gold">secondary is dead</span>. a held level cannot cross the barrier. only change crosses.`
+      : `<span class="copper">primary</span> change → <span class="flux">shared flux</span> → <span class="gold">secondary</span> = ${ratio.toFixed(1)}× the rate of change. the two coils share only flux — no wire crosses the <b>isolation barrier</b>.`;
+    requestAnimationFrame(draw);
+  } requestAnimationFrame(draw);
+})();
+
+/* ── INSTRUMENT 4 · ISOLATED PWM LINK ── */
+(function(){
+  const cv=document.getElementById("link");
+  const Du=document.getElementById("lDuty"), Dv=document.getElementById("lDval"), read=document.getElementById("lRead");
+  let d=setup(cv,0.72); window.addEventListener("resize",()=>d=setup(cv,0.72));
+  let recov=0.5;
+  function draw(t){
+    const {ctx,W,H}=d; const duty=parseFloat(Du.value)/100; Dv.textContent=Math.round(duty*100)+"%";
+    ctx.clearRect(0,0,W,H); gridlines(ctx,W,H);
+    const padL=92, padR=16, plotW=W-padL-padR;
+    const rows=[0.13,0.37,0.61,0.85].map(f=>H*f);
+    const rowAmp=H*0.085;
+    const labels=["primary PWM","secondary (AC)","reconstructed","recovered value"];
+    const cols=[COL.copper,COL.secondary,COL.flux,COL.recovered];
+    labels.forEach((l,k)=>{ctx.fillStyle=cols[k];ctx.font="10px 'IBM Plex Mono',monospace";ctx.textAlign="right";ctx.textBaseline="middle";
+      ctx.fillText(l,padL-8,rows[k]);
+      // zero/baseline
+      ctx.strokeStyle="#2a2f42";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(padL,rows[k]+rowAmp);ctx.lineTo(W-padR,rows[k]+rowAmp);ctx.stroke();
+    });
+    // isolation barrier between row1 and row2
+    ctx.strokeStyle="#3a4d43";ctx.setLineDash([4,5]);ctx.lineWidth=1;
+    const by=(rows[0]+rows[1])/2+rowAmp*0.3;
+    ctx.beginPath();ctx.moveTo(padL,by);ctx.lineTo(W-padR,by);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle="#5a6e62";ctx.font="9px 'IBM Plex Mono',monospace";ctx.textAlign="left";ctx.fillText("⟶ isolation barrier (toroid) ⟶",padL+4,by-5);
+
+    const scroll=reduce?0:(t*0.1)%1, N=440, nCyc=5;
+    const phaseHigh=p=>((p*nCyc)%1)<duty;
+    // edge detection for the secondary spikes / reconstruction
+    function val(k){const p=(k/N+scroll);return phaseHigh(p);}
+    // row1: primary pwm (0..1)
+    {ctx.strokeStyle=COL.copper;ctx.shadowColor=COL.copper;ctx.shadowBlur=6;ctx.lineWidth=2;ctx.beginPath();
+     for(let k=0;k<=N;k++){const x=padL+plotW*(k/N);const y=rows[0]+rowAmp-(val(k)?1:0)*rowAmp*2;k?ctx.lineTo(x,y):ctx.moveTo(x,y);}
+     ctx.stroke();ctx.shadowBlur=0;}
+    // row2: secondary = AC-coupled (high -> +(1-duty), low -> -duty), edges as spikes
+    {ctx.strokeStyle=COL.secondary;ctx.shadowColor=COL.secondary;ctx.shadowBlur=6;ctx.lineWidth=2;ctx.beginPath();
+     const hi=(1-duty), loV=-duty; // levels that make average zero
+     for(let k=0;k<=N;k++){const x=padL+plotW*(k/N);const lvl=val(k)?hi:loV;
+       const y=rows[1]+rowAmp-lvl*rowAmp*1.3;k?ctx.lineTo(x,y):ctx.moveTo(x,y);}
+     ctx.stroke();ctx.shadowBlur=0;
+     // mark the average-zero line
+     ctx.strokeStyle="#5a6e62";ctx.setLineDash([2,3]);ctx.beginPath();ctx.moveTo(padL,rows[1]+rowAmp);ctx.lineTo(W-padR,rows[1]+rowAmp);ctx.stroke();ctx.setLineDash([]);
+    }
+    // row3: reconstructed pwm (comparator on secondary > 0 ? but need edges; reconstruct same as primary)
+    {ctx.strokeStyle=COL.flux;ctx.shadowColor=COL.flux;ctx.shadowBlur=6;ctx.lineWidth=2;ctx.beginPath();
+     for(let k=0;k<=N;k++){const x=padL+plotW*(k/N);const y=rows[2]+rowAmp-(val(k)?1:0)*rowAmp*2;k?ctx.lineTo(x,y):ctx.moveTo(x,y);}
+     ctx.stroke();ctx.shadowBlur=0;}
+    // row4: recovered value (low-pass of reconstructed) = duty
+    recov += (duty-recov)*0.06;
+    {const recY=rows[3]+rowAmp-recov*rowAmp*2;
+     ctx.strokeStyle=COL.recovered;ctx.shadowColor=COL.recovered;ctx.shadowBlur=6;ctx.lineWidth=2;ctx.beginPath();
+     for(let k=0;k<=80;k++){const x=padL+plotW*(k/80);const rp=Math.sin(t*8-k*0.2)*0.03;ctx.lineTo(x,rows[3]+rowAmp-(recov+rp)*rowAmp*2);}
+     ctx.stroke();ctx.shadowBlur=0;
+     ctx.fillStyle=COL.recovered;ctx.beginPath();ctx.arc(W-padR-4,recY,4,0,Math.PI*2);ctx.fill();}
+
+    read.innerHTML=`sent <b>${Math.round(duty*100)}% duty</b> (= ${(duty*5).toFixed(2)}V). the <span class="gold">secondary</span> swings about zero (DC gone, edges intact) → <span class="flux">reconstructed</span> to full-height PWM, same width → <span class="rec">recovered ${(recov*5).toFixed(2)}V</span>. the duty crossed the barrier on its edges.`;
+    requestAnimationFrame(draw);
+  } requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

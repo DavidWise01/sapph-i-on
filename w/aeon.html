@@ -1,0 +1,60 @@
+<!DOCTYPE html><html><head><link rel="icon" href="../favicon.svg" type="image/svg+xml"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AEON x 8 - [H][HE][LI][BE][B][C][BK][WT]</title>
+<style>body{margin:0;background:#07050d;color:#c4b5fd;font-family:monospace;overflow:hidden}canvas{display:block}#text{position:absolute;left:16px;top:12px;font-size:11px;line-height:1.5;opacity:0.9}#legend{position:absolute;right:16px;top:12px;font-size:10px;text-align:right;opacity:0.7}#notes{position:absolute;left:16px;bottom:12px;font-size:10px;line-height:1.5;opacity:0.55;max-width:92vw}</style></head><body><canvas id="c"></canvas>
+<div id="text">AEON x 8 = 2^3 per px<br/>[ {H}{HE}{LI}{BE}{B}{C} ] + {BK}{WT}<br/>each dot = full A.E.O.N.<br/>isomorphic expansion<br/><br/><span style="color:#c084fc">generative - no programming</span></div>
+<div id="legend"><span style="color:#e9d5ff">H</span> hermes2 fast I/O<br/><span style="color:#f5f0ff">HE</span> loki coherence<br/><span style="color:#d8b4fe">LI</span> gaia ground<br/><span style="color:#a78bfa">BE</span> Volga hard window<br/><span style="color:#a3e635">B</span> jumpers jump bus<br/><span style="color:#f472b6">C</span> Eros allofmars<br/><span style="color:#6b6b80">BK</span> void<br/><span style="color:#9333ea">WT</span> amethyst full</div>
+<div id="notes">v0+1 (2026-09-22, appended) · true isometric: tilt 35.264&deg;, yaw turning · <span id="diag">-</span><br/>ornament: trails, breathing, wobble &middot; each dot's inner hex + centre = the cube seen down its diagonal (the whole, in every part)</div>
+<script>
+const canvas=document.getElementById('c'),ctx=canvas.getContext('2d'),diagEl=document.getElementById('diag');let w,h,t=0;
+function resize(){w=canvas.width=innerWidth;h=canvas.height=innerHeight}addEventListener('resize',resize);resize();
+const dots=[
+ {id:'H', col:'#e9d5ff',pos:[-1,-1,-1]},{id:'HE',col:'#f5f0ff',pos:[1,-1,-1]},
+ {id:'LI',col:'#d8b4fe',pos:[-1,1,-1]},{id:'BE',col:'#a78bfa',pos:[1,1,-1]},
+ {id:'B', col:'#a3e635',pos:[-1,-1,1]},{id:'C', col:'#f472b6',pos:[1,-1,1]},
+ {id:'BK',col:'#1a1a1a',pos:[-1,1,1]},{id:'WT',col:'#9333ea',pos:[1,1,1]}];
+const TILT=Math.atan(1/Math.SQRT2); // 35.264 deg: the isometric angle
+// true orthographic: yaw about vertical, then tilt. At yaw = 45deg + k*90deg the view runs down a body diagonal.
+function isoProject(px,py,pz,scale,yaw){
+ const x1=px*Math.cos(yaw)-pz*Math.sin(yaw), z1=px*Math.sin(yaw)+pz*Math.cos(yaw);
+ const y2=py*Math.cos(TILT)-z1*Math.sin(TILT);
+ return [x1*scale,-y2*scale];}
+const edges=[[0,1],[0,2],[0,4],[1,3],[1,5],[2,3],[2,6],[3,7],[4,5],[4,6],[5,7],[6,7]];
+function loop(){
+ t+=0.006;
+ ctx.fillStyle='rgba(7,5,13,0.16)';ctx.fillRect(0,0,w,h);
+ const cx=w/2,cy=h/2;
+ const base=Math.min(110,Math.min(w,h)*0.22)+Math.sin(t*0.2)*10;
+ const yaw=t*0.15, breath=(Math.sin(t*0.25)+1)/2;
+ const s=base*(0.9+breath*0.2);          // ONE scale for edges, dots and fold lines
+ const P=dots.map(d=>isoProject(...d.pos,s,yaw));
+ // which pair currently overlaps (if any)
+ let best=1e9,pair='';for(let i=0;i<8;i++)for(let j=i+1;j<8;j++){const q=Math.hypot(P[i][0]-P[j][0],P[i][1]-P[j][1]);if(q<best){best=q;pair=dots[i].id+'/'+dots[j].id}}
+ diagEl.textContent=best<s*0.08?('diagonal '+pair+' end-on: 8 -> 7 points, ring of 6 = hexagon'):'no diagonal end-on';
+ // cube edges
+ ctx.globalAlpha=0.12;ctx.strokeStyle='#6a0dad';ctx.lineWidth=0.8;
+ edges.forEach(([a,b])=>{ctx.beginPath();ctx.moveTo(cx+P[a][0],cy+P[a][1]);ctx.lineTo(cx+P[b][0],cy+P[b][1]);ctx.stroke()});
+ const WTp=P[7];
+ dots.forEach((d,i)=>{
+  const [x,y]=P[i];
+  const r=d.id==='WT'?22+breath*12:12+Math.sin(t*0.8+i)*2;
+  const g=ctx.createRadialGradient(cx+x,cy+y,0,cx+x,cy+y,r);
+  g.addColorStop(0,'#ffffff');g.addColorStop(0.2,d.col);g.addColorStop(1,'#4c1d95');
+  ctx.fillStyle=d.id==='BK'?'#111':g;ctx.globalAlpha=d.id==='WT'?0.95:0.75;
+  ctx.beginPath();ctx.arc(cx+x,cy+y,r,0,Math.PI*2);ctx.fill();
+  if(d.id==='BK'){ctx.globalAlpha=0.6;ctx.strokeStyle='#6b6b80';ctx.lineWidth=1;ctx.stroke()} // void gets a rim so it can be seen
+  // inner cube, seen down its diagonal: 6-vertex hexagon + centre (2 vertices stacked) + 3 near edges
+  const hr=r*0.6;ctx.globalAlpha=0.28;ctx.strokeStyle=d.id==='BK'?'#6b6b80':d.col;ctx.lineWidth=0.6;ctx.beginPath();
+  for(let k=0;k<6;k++){const a=k*Math.PI/3+yaw,px=Math.cos(a)*hr,py=Math.sin(a)*hr;k?ctx.lineTo(cx+x+px,cy+y+py):ctx.moveTo(cx+x+px,cy+y+py)}
+  ctx.closePath();
+  for(let k=0;k<6;k+=2){const a=k*Math.PI/3+yaw;ctx.moveTo(cx+x,cy+y);ctx.lineTo(cx+x+Math.cos(a)*hr,cy+y+Math.sin(a)*hr)}
+  ctx.stroke();ctx.fillStyle=ctx.strokeStyle;ctx.beginPath();ctx.arc(cx+x,cy+y,1.2,0,Math.PI*2);ctx.fill();
+  ctx.globalAlpha=0.85;ctx.fillStyle='#e9d5ff';ctx.font='10px monospace';ctx.fillText(d.id,cx+x+r+4,cy+y+3);
+  if(breath>0.85&&d.id!=='WT'){ // fold lines land on WT's drawn position
+   ctx.globalAlpha=(breath-0.85)*4*0.2;ctx.strokeStyle=d.col;ctx.beginPath();ctx.moveTo(cx+x,cy+y);ctx.lineTo(cx+WTp[0],cy+WTp[1]);ctx.stroke()}
+ });
+ if(breath>0.9){ctx.globalAlpha=(breath-0.9)*10*0.6;ctx.fillStyle='#c084fc';ctx.font='11px monospace';ctx.textAlign='center';
+  ctx.fillText('F.O.L.D. 8 -> 1 WT contains all',cx,cy+s*1.6+30);ctx.textAlign='left'}
+ ctx.globalAlpha=1;
+ window.__probe={yaw,s,P,WTp};
+ requestAnimationFrame(loop);}
+loop();
+</script></body></html>

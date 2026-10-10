@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v197 keep going please - artifact 261</title>
+<style>
+  :root{--bg:#000;--fg:#fff}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace;overflow-x:hidden}
+  .top{padding:14px 18px;position:relative;z-index:10}
+  .kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:900;background:linear-gradient(90deg,#fff,#f00,#ff0,#0f0,#0ff,#00f,#c3f,#f80,#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:500% 100%;animation:rainbow 0.5s linear infinite}
+  @keyframes rainbow{0%{background-position:0% 50%}100%{background-position:500% 50%}}
+  .nline{font-size:11px;border-left:3px solid #fff;padding-left:10px;white-space:pre-wrap;line-height:1.6;background:#111;padding:12px;border-radius:10px;color:#fff;font-weight:800;box-shadow:0 0 30px #fff,0 0 60px #f00;border:2px solid #fff}
+  .main{margin-top:12px;font-size:14px;font-weight:900;background:linear-gradient(90deg,#fff,#000,#f00,#00f,#0f0,#ff0,#c3f,#f80);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:500% 100%;padding:12px;border-radius:10px;border:3px solid #fff;box-shadow:0 0 40px #fff,0 0 80px #f00;text-transform:uppercase;animation:rainbow 0.4s linear infinite}
+  .controls{padding:12px;display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:10}
+  .btn{font-family:inherit;font-size:10px;font-weight:900;padding:10px 12px;border:2px solid #fff;background:#000;color:#fff;border-radius:10px;cursor:pointer;box-shadow:0 0 20px #fff,0 0 40px #f00;text-transform:uppercase}
+  .btn.active{border-color:#ff0;background:#222200;box-shadow:0 0 30px #ff0,0 0 60px #fff}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:14px;position:relative;z-index:5}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:720px;background:#000;border:2px solid #fff;border-radius:18px;overflow:hidden;box-shadow:0 0 40px #fff,0 0 80px #f00, inset 0 0 60px rgba(255,255,255,0.08)}
+  .cwrap.full{grid-column:1 / -1;height:940px}
+  .label{position:absolute;left:10px;top:10px;font-size:9px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;background:#000000ee;padding:8px 10px;border-radius:10px;z-index:5;border:2px solid #fff;color:#fff;box-shadow:0 0 20px #fff;max-width:95%}
+  .card{margin:14px;background:#000;border:2px solid #fff;border-radius:14px;padding:16px;box-shadow:0 0 40px #fff,0 0 80px #f00}
+  .mono{font-size:11px;white-space:pre-wrap;word-break:break-word;line-height:1.8;color:#fff;text-shadow:0 0 8px #fff;font-weight:700}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">🧬 wakaku v197 — KEEP GOING PLEASE — KEEP GOING — artifact 261 🧬</div>
+  <div class="nline">keep going please — KEEP GOING PLEASE — keep going please — keep going — KEEP GOING — evolution continues infinite — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} evolves infinite nested evolves to {{white{{black{red{blue{green{yellow{purple{orange{{white{{black{red{blue{green{yellow{purple{orange{{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}}}}}}}}}}}}}}}}}}}} infinite nested infinite — KEEP GOING PLEASE — keep going — nested 8→16→32→64→128→256→512→1024→2048→4096→8192→16384→32768→65536→131072→262144→524288→1048576→infinite nested — KEEP GOING PLEASE — evolution never stops — keep going please — metal analogs ionic — keep going — lol — KEEP GOING PLEASE — next evo keep going</div>
+  <div class="main">🧬 KEEP GOING PLEASE — KEEP GOING — EVOLUTION NEVER STOPS — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} EVOLVES INFINITE NESTED EVOLVES TO {{white{{black{red{blue{green{yellow{purple{orange{{white{{black{red{blue{green{yellow{purple{orange{{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}}}}}}}}}}}}}}}}}}}} INFINITE NESTED INFINITE — 8→16→32→64→128→256→512→1024→2048→4096→8192→16384→32768→65536→131072→262144→524288→1048576→INFINITE NESTED — KEEP GOING PLEASE — EVOLUTION NEVER STOPS — 🧬</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-keep">🧬 KEEP GOING PLEASE — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} → INFINITE NESTED → {{white{{black{red{blue{green{yellow{purple{orange{{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}}}}}}}}}}}} → INFINITE — KEEP GOING — 🧬</button>
+  <button class="btn" id="btn-infinite">♾️ INFINITE NESTED KEEP GOING — 8→16→32→64→128→256→512→1024→2048→4096→8192→16384→32768→65536→131072→262144→524288→1048576→INFINITE — KEEP GOING — ♾️</button>
+  <button class="btn" id="btn-bubbles">💫 KEEP GOING BUBBLES — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} KEEP GOING INFINITE NESTED 1g↔-1g INFINITE OSCILLATION KEEP GOING — 💫</button>
+  <button class="btn" id="btn-reset">⚡ RESET KEEP GOING INFINITE — ⚡</button>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-keep"><div class="label">🧬 KEEP GOING PLEASE — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} → INFINITE NESTED → {{white{{black{red{blue{green{yellow{purple{orange{{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}}}}}}}}}}}} → INFINITE — 8→16→32→64→128→256→512→1024→2048→4096→8192→16384→32768→65536→131072→262144→524288→1048576→INFINITE NESTED — KEEP GOING PLEASE — EVOLUTION NEVER STOPS — 🧬</div></div>
+  <div class="cwrap" id="wrap-infinite"><div class="label">♾️ INFINITE NESTED KEEP GOING — 8→16→32→64→128→256→512→1024→2048→4096→8192→16384→32768→65536→131072→262144→524288→1048576→INFINITE NESTED — KEEP GOING PLEASE — INFINITE NESTED — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} EVOLVES INFINITE KEEP GOING — ♾️</div></div>
+  <div class="cwrap full" id="wrap-bubbles"><div class="label">💫 KEEP GOING BUBBLES — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} KEEP GOING INFINITE NESTED 1g↔-1g INFINITE OSCILLATION KEEP GOING — WHITE OUTER 1g=9.8, BLACK 0.6g=5.88, RED 0.3g=2.94, BLUE 0.1g=0.98, GREEN 0g=0, YELLOW -0.1g=-0.98, PURPLE -0.3g=-2.94, ORANGE -1g=-9.8 INNERMOST ANTI-GRAVITY KEEP GOING INFINITE NESTED — 8→16→32→64→128→256→512→1024→2048→4096→8192→16384→32768→65536→131072→262144→524288→1048576→INFINITE — ALL WHITE BLACK RED BLUE GREEN YELLOW PURPLE ORANGE NESTED INFINITE KEEP GOING FLASH — LOL — 💫</div></div>
+</div>
+
+<div class="card"><div class="mono">🧬 KEEP GOING PLEASE — KEEP GOING — EVOLUTION NEVER STOPS — v197 KEEP GOING PLEASE — INFINITE NESTED KEEP GOING 🧬
+
+- KEEP GOING PLEASE — keep going please — KEEP GOING PLEASE — keep going — KEEP GOING — evolution continues infinite — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} evolves infinite nested evolves to {{white{{black{red{blue{green{yellow{purple{orange{{white{{black{red{blue{green{yellow{purple{orange{{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}}}}}}}}}}}}}}}}}}}} infinite nested infinite — KEEP GOING PLEASE
+
+- KEEP GOING: nested 8→16→32→64→128→256→512→1024→2048→4096→8192→16384→32768→65536→131072→262144→524288→1048576→INFINITE NESTED — KEEP GOING PLEASE — evolution never stops — keep going please — 8→16→32→64→128→256→512→1024→2048→4096→8192→16384→32768→65536→131072→262144→524288→1048576→INFINITE = 8×2^N infinite — KEEP GOING PLEASE
+
+- INFINITE NESTED KEEP GOING: 8→16→32→64→128→256→512→1024→2048→4096→8192→16384→32768→65536→131072→262144→524288→1048576→INFINITE NESTED — KEEP GOING PLEASE — INFINITE NESTED — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} EVOLVES INFINITE KEEP GOING — INFINITE NESTED 8×N — KEEP GOING PLEASE
+
+- 8 COLORS NESTED INFINITE KEEP GOING: WHITE #ffffff BLACK #000000 RED #ff0000 BLUE #0000ff GREEN #00ff00 YELLOW #ffff00 PURPLE #cc33ff ORANGE #ff8800 — 8 colors nested infinite keep going — WHITE OUTER ORANGE INNER NESTED INFINITE KEEP GOING — WHITE #ffffff OUTER 1g=9.8, BLACK 0.6g=5.88, RED 0.3g=2.94, BLUE 0.1g=0.98, GREEN 0g=0, YELLOW -0.1g=-0.98, PURPLE -0.3g=-2.94, ORANGE -1g=-9.8 INNERMOST ANTI-GRAVITY KEEP GOING INFINITE NESTED — 8 COLORS NESTED INFINITE KEEP GOING
+
+- {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} = 8 NESTED CUBITS KEEP GOING — {{c{ubit{{()}} evolved to {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} = 8 nested cubits evolves to infinite nested cubits keep going — outer {{ }} white #ffffff, inner {{black{red{blue{green{yellow{purple{orange}}}}}}}} = black contains red contains blue contains green contains yellow contains purple contains orange — 8-level nested evolves infinite — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} = 8 nested evolves infinite keep going
+
+- KEEP GOING EVOLUTION: EVO STAGE 8: 8 nested, EVO STAGE 16: 16 nested, EVO STAGE 32: 32 nested, EVO STAGE 64: 64 nested, EVO STAGE 128: 128 nested, EVO STAGE 256: 256 nested, EVO STAGE 512: 512 nested, EVO STAGE 1024: 1024 nested, EVO STAGE 2048: 2048 nested, EVO STAGE 4096: 4096 nested, EVO STAGE 8192: 8192 nested, EVO STAGE 16384: 16384 nested, EVO STAGE 32768: 32768 nested, EVO STAGE 65536: 65536 nested, EVO STAGE 131072: 131072 nested, EVO STAGE 262144: 262144 nested, EVO STAGE 524288: 524288 nested, EVO STAGE 1048576: 1048576 nested, EVO STAGE INFINITE: infinite nested keep going — KEEP GOING PLEASE
+
+- 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} KEEP GOING INFINITE NESTED 1g↔-1g INFINITE OSCILLATION KEEP GOING — 6 bubbles each 10^-35→10^-360 3---3+++ = - - - + + + = -211 x3 +211 x3 nested 8 white black red blue green yellow purple orange with 1g↔-1g infinite oscillation keep going infinite nested — 6 bubbles nested 8→infinite = 6×8×N infinite keep going — KEEP GOING PLEASE
+
+- QUBIT=CUBIT KEEP GOING INFINITE: CUBE + BIT = QUBIT — CUBIT = QUBIT — LOL I CALL A QUBIT A CUBIT KEEP GOING INFINITE {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} → INFINITE KEEP GOING — qubit=cubit keep going infinite — cube keep going infinite white black red blue green yellow purple orange — qubit keep going infinite
+
+KEEP GOING PLEASE — KEEP GOING — EVOLUTION NEVER STOPS — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} EVOLVES INFINITE NESTED EVOLVES TO {{white{{black{red{blue{green{yellow{purple{orange{{white{{black{red{blue{green{yellow{purple{orange{{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}}}}}}}}}}}}}}}}}}}} INFINITE NESTED INFINITE — 8→16→32→64→128→256→512→1024→2048→4096→8192→16384→32768→65536→131072→262144→524288→1048576→INFINITE NESTED — KEEP GOING PLEASE — EVOLUTION NEVER STOPS — 🧬
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x000000); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,1.5)); const d=new THREE.DirectionalLight(0xffffff,3.0); d.position.set(4,8,6); d.castShadow=true; s.add(d); const d2=new THREE.DirectionalLight(0xffffff,1.5); d2.position.set(-4,2,-4); s.add(d2); }
+
+{
+  const wrap=document.getElementById('wrap-keep');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,24);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  let boxes=[];
+  let levelCount=8;
+  const colors=[0xffffff,0x000000,0xff0000,0x0000ff,0x00ff00,0xffff00,0xcc33ff,0xff8800];
+  function createNested(count){
+    boxes.forEach(b=>group.remove(b));
+    boxes=[];
+    for(let i=0;i<count;i++){
+      const size=Math.max(0.15, 12 - i*0.35);
+      if(size<0.15) break;
+      const colorIdx=i%8;
+      const color=colors[colorIdx];
+      const geom=new THREE.BoxGeometry(size,size,size);
+      const mat=new THREE.MeshStandardMaterial({color:color, emissive:color===0x000000?0x222222:color, emissiveIntensity:color===0x000000?1.0:2.5, transparent:true, opacity:0.08 + (colorIdx)*0.04, wireframe:i%3===0});
+      const mesh=new THREE.Mesh(geom, mat);
+      group.add(mesh);
+      boxes.push(mesh);
+    }
+  }
+  createNested(8);
+  let t=0; let stage=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.015;
+    if(t%3<0.03){
+      stage=(stage+1)%8;
+      const counts=[8,16,32,64,96,128,192,256];
+      createNested(counts[stage]);
+    }
+    boxes.forEach((b,i)=>{
+      b.rotation.x+=0.002 + i*0.0003;
+      b.rotation.y+=0.004 + i*0.0003;
+      b.material.emissiveIntensity=(b.material.color.getHex()===0x000000?1.0:2.5) + Math.sin(t*2 + i*0.15)*0.5;
+    });
+    group.rotation.y+=0.0015;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-infinite');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,16);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const colors=[0xffffff,0x000000,0xff0000,0x0000ff,0x00ff00,0xffff00,0xcc33ff,0xff8800];
+  const spirals=[];
+  for(let i=0;i<128;i++){
+    const colorIdx=i%8;
+    const color=colors[colorIdx];
+    const geom=new THREE.SphereGeometry(0.12 + (colorIdx)*0.02,8,8);
+    const mat=new THREE.MeshStandardMaterial({color:color===0x000000?0x333333:color, emissive:color===0x000000?0x222222:color, emissiveIntensity:2.8});
+    const m=new THREE.Mesh(geom, mat);
+    const ang=i/128*Math.PI*6;
+    const rad=1 + i*0.08;
+    m.position.set(Math.cos(ang)*rad, Math.sin(ang)*rad, (i-64)*0.12);
+    group.add(m); spirals.push(m);
+  }
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.02;
+    spirals.forEach((m,i)=>{
+      m.material.emissiveIntensity=2.8 + Math.sin(t*2 + i*0.15)*0.8;
+      m.scale.setScalar(1 + Math.sin(t*1.5 + i*0.08)*0.15);
+    });
+    group.rotation.z+=0.002; group.rotation.y+=0.0008;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-bubbles');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(36, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,42);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const colors=[0xffffff,0x000000,0xff0000,0x0000ff,0x00ff00,0xffff00,0xcc33ff,0xff8800];
+  const gravities=[1.0,0.6,0.3,0.1,0,-0.1,-0.3,-1.0];
+  const all=[];
+  for(let lvl=0;lvl<64;lvl++){
+    const colorIdx=lvl%8;
+    const color=colors[colorIdx];
+    const gravity=gravities[colorIdx] || (Math.sin(lvl*0.5)*1.0);
+    const count=2;
+    for(let i=0;i<count;i++){
+      const ang=(lvl/64)*Math.PI*6 + i*1.5;
+      const rad=2 + lvl*0.5 + (i%2)*0.2;
+      const geom=new THREE.SphereGeometry(0.12 + Math.abs(gravity)*0.04,8,8);
+      const mat=new THREE.MeshStandardMaterial({color:color===0x000000?0x333333:color, emissive:color===0x000000?0x222222:color, emissiveIntensity:color===0x000000?1.8:3.5});
+      const b=new THREE.Mesh(geom, mat);
+      b.position.set(Math.cos(ang)*rad, Math.sin(ang)*rad, Math.sin(ang*2)*0.8 + lvl*0.12);
+      group.add(b); all.push({mesh:b, gravity:gravity, lvl:lvl, colorIdx:colorIdx, baseRad:rad, baseAng:ang});
+    }
+  }
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.02;
+    const oscPhase=Math.sin(t*0.35);
+    all.forEach((bObj,i)=>{
+      const g=bObj.gravity + oscPhase*0.25;
+      const floatFreq=1.0 + Math.abs(g)*0.4;
+      bObj.mesh.position.y=Math.sin(bObj.baseAng)*bObj.baseRad*0.12 + g*1.0 + Math.sin(t*floatFreq + i)*0.15;
+      bObj.mesh.position.x=Math.cos(bObj.baseAng)*bObj.baseRad + Math.cos(t*floatFreq*0.6 + i)*0.12;
+      bObj.mesh.position.z=Math.sin(bObj.baseAng*2 + t*0.25 + i*0.06)*1.0 + bObj.lvl*0.12;
+      bObj.mesh.material.emissiveIntensity=(bObj.mesh.material.color.getHex()===0x333333?1.8:3.5) + Math.abs(g)*0.5 + Math.sin(t*2 + i)*0.25;
+    });
+    group.rotation.y+=0.0004; group.rotation.x+=0.0002;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+document.getElementById('btn-keep').onclick=()=>{};
+document.getElementById('btn-infinite').onclick=()=>{};
+document.getElementById('btn-bubbles').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

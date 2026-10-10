@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'">
+<title>Tardi Inside the Black Hole v4 · zero point = −+ −+0+− +−</title>
+<style>
+
+:root{--bg:#07040d;--fg:#f1eaff;--dim:#cdbfe8;--neon:#b77dff;--neon2:#e070ff;--cyan:#6ff3ff;--edge:rgba(196,150,255,.38);
+--card:rgba(15,8,27,.88);--holo:linear-gradient(115deg,#6ff3ff 0%,#9d7bff 22%,#e070ff 44%,#f2c86b 62%,#d9d9e6 80%,#6ff3ff 100%);
+--match:#7dffa8;--myth:#ff8b9a;--unv:#ffd27a;--model:#d2abff;--wall:#ff9df0}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow:hidden}
+#scene{position:fixed;inset:0;width:100vw;height:100vh;display:block;touch-action:none;cursor:grab}
+#scene:active{cursor:grabbing}
+.glass{position:fixed;background:var(--card);border:1px solid var(--edge);border-radius:14px;
+ box-shadow:0 0 0 1px rgba(111,243,255,.10) inset,0 10px 40px rgba(0,0,0,.55),0 0 22px rgba(183,125,255,.20);
+ backdrop-filter:blur(12px) saturate(140%);-webkit-backdrop-filter:blur(12px) saturate(140%)}
+.glass::before{content:"";position:absolute;inset:-1px;border-radius:14px;padding:1px;background:var(--holo);background-size:300% 300%;
+ -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.55;pointer-events:none;animation:holo 9s linear infinite}
+@keyframes holo{to{background-position:300% 0}}
+#bar{top:10px;left:50%;transform:translateX(-50%);display:flex;gap:8px;align-items:center;padding:7px 12px;z-index:5;max-width:calc(100vw - 20px);flex-wrap:wrap;justify-content:center}
+#bar h1{margin:0 6px 0 0;font-size:15px;font-weight:700;letter-spacing:.02em;background:var(--holo);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:holo 12s linear infinite}
+button,select{font:inherit;color:var(--fg);background:rgba(40,22,70,.92);border:1px solid var(--edge);border-radius:9px;padding:4px 9px;cursor:pointer}
+button:hover,select:hover{border-color:var(--cyan)}
+button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+button[aria-pressed="true"]{background:rgba(90,40,150,.95);border-color:var(--neon2)}
+.panel{width:min(360px,calc(100vw - 20px));max-height:calc(100vh - 120px);display:flex;flex-direction:column;z-index:4}
+.panel header{display:flex;align-items:center;gap:8px;padding:8px 10px;cursor:move;border-bottom:1px solid var(--edge);user-select:none}
+.panel header h2{margin:0;font-size:14px;flex:1;color:var(--fg)}
+.panel .body{padding:10px 12px;overflow:auto}
+.panel.collapsed .body{display:none}
+#ctrl{left:10px;top:64px}
+#info{right:10px;top:64px;width:min(430px,calc(100vw - 20px))}
+label.row{display:grid;grid-template-columns:1fr auto;gap:2px 8px;margin:7px 0;font-size:13px;color:var(--fg)}
+label.row input[type=range]{grid-column:1/3;width:100%;accent-color:var(--neon)}
+.val{color:var(--cyan);font-variant-numeric:tabular-nums}
+.btns{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px}
+.tabs button{padding:3px 8px;font-size:13px}
+.chip{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;padding:1px 6px;border-radius:6px;border:1px solid currentColor;margin-right:4px;background:rgba(0,0,0,.35);vertical-align:1px}
+.MATCH{color:var(--match)}.MYTH{color:var(--myth)}.UNVERIFIED{color:var(--unv)}.MODEL,.ANALOGY{color:var(--model)}.WALL{color:var(--wall)}
+.fact{margin:7px 0;font-size:13px;color:var(--fg)}
+.src{color:var(--dim);font-size:12px}
+.src a,.fact a{color:#9ff6ff}
+table{border-collapse:collapse;width:100%;font-size:12.5px}
+td,th{border-bottom:1px solid rgba(196,150,255,.22);padding:3px 4px;text-align:left;vertical-align:top;color:var(--fg)}
+th{color:var(--dim);font-weight:600}
+.num{font-variant-numeric:tabular-nums;color:#a8f7ff}
+#status{left:10px;bottom:10px;padding:5px 10px;font-size:12px;color:var(--dim);z-index:3}
+#clock{right:10px;bottom:10px;padding:5px 10px;font-size:12px;z-index:3;color:var(--fg)}
+.hidden-panels .panel,.hidden-panels #status{display:none}
+#help{left:50%;top:50%;transform:translate(-50%,-50%);width:min(420px,92vw);padding:14px 16px;z-index:9;display:none}
+#help.open{display:block}
+kbd{background:rgba(60,35,100,.9);border:1px solid var(--edge);border-radius:4px;padding:0 4px;font-size:12px;color:var(--fg)}
+.verdict{padding:6px 8px;border-radius:9px;background:rgba(30,16,52,.92);border:1px solid var(--edge);margin:6px 0;font-size:13px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (prefers-reduced-motion:reduce){.glass::before,#bar h1{animation:none}}
+.rm .glass::before,.rm #bar h1{animation:none}
+
+#hud{left:50%;bottom:10px;transform:translateX(-50%);padding:8px 14px;z-index:4;display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:center;max-width:calc(100vw - 20px)}
+#hud .k{color:var(--dim);font-size:12px}
+#hud .v{font-size:18px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--fg)}
+#hud .cell{display:flex;flex-direction:column;align-items:center;min-width:64px}
+.sign{font-family:ui-monospace,Consolas,monospace;letter-spacing:.12em}
+#banner{left:50%;bottom:150px;transform:translateX(-50%);padding:6px 12px;z-index:3;font-size:13px;max-width:min(640px,calc(100vw - 20px));text-align:center}
+#clock{display:none}
+#banner{z-index:6;max-width:min(380px,calc(100vw - 20px))}
+.panel .body{overflow:auto}
+#hud .row2{flex-basis:100%;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;border-top:1px solid var(--edge);padding-top:6px}
+#hud .frac{font-family:ui-monospace,Consolas,monospace;font-size:14px}
+#hud{width:min(920px,calc(100vw - 20px));padding:6px 12px}#hud .row2{padding-top:4px}#hud .v{font-size:16px}#hud .k{font-size:11.5px}#hud{gap:4px 12px}
+.lad{font-family:ui-monospace,Consolas,monospace;font-size:13px;display:flex;gap:3px;flex-wrap:wrap;justify-content:center}
+.lad span{padding:0 4px;border:1px solid transparent;border-radius:5px;color:var(--dim)}
+.lad span.on{border-color:var(--cyan);color:var(--fg);background:rgba(111,243,255,.12);font-weight:700}
+.lad span.done{color:#b9a9d9}
+.sign b{color:var(--cyan);text-decoration:underline}
+.zp{font-family:ui-monospace,Consolas,monospace;letter-spacing:.06em;white-space:pre}
+.zp .m{color:#ff8ad8}.zp .p{color:var(--cyan)}.zp .h{color:#ffd27a}
+.mv{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
+.ok{color:var(--match)}.bad{color:var(--myth)}
+h3{font-size:13px;margin:10px 0 2px;color:var(--fg)}
+</style>
+</head>
+<body>
+<canvas id="scene" role="img" aria-label="View from inside a black hole: a tardigrade in a shimmering electrum shell floats at the centre of a glowing spherical horizon wall. Drag to orbit, wheel to zoom."></canvas>
+
+<div id="bar" class="glass" role="toolbar" aria-label="Scene controls">
+ <h1>Tardi inside v4 · ±ladder → zero point −+ −+0+− +− · 13.2e9 moves</h1>
+ <label class="sr" for="quality">Render quality</label>
+ <select id="quality"><option value="auto">Quality: auto</option><option value="high">high</option><option value="low">low</option><option value="2d">2D fallback</option></select>
+ <button id="motionBtn" aria-pressed="false">Motion: on</button>
+ <button id="panelsBtn" title="Hide/show panels (H)">Panels (H)</button>
+ <button id="helpBtn" title="Help (?)">?</button>
+</div>
+
+<div id="banner" class="glass" aria-live="polite"></div>
+
+<section id="ctrl" class="glass panel" aria-label="Controls">
+ <header><h2>Controls</h2><button class="collapse" aria-expanded="true" aria-controls="ctrlBody">–</button></header>
+ <div class="body" id="ctrlBody">
+  <div class="btns">
+   <button id="tunBtn" aria-pressed="false">State: active 🐾</button>
+   <button id="walkBtn" aria-pressed="false" title="Walk the homeostatic ladder (Space)">Walk the ladder ▶</button>
+   <button id="releaseBtn" aria-pressed="false" title="Compare: general relativity (G)">Compare: GR · off</button>
+   <button id="pauseBtn" aria-pressed="false">Pause</button>
+   <button id="holdBtn" title="Back to t = 0, rung 1 (0)">Back to t = 0</button>
+   <button id="resetBtn">Reset camera</button>
+  </div>
+  <h3>Moves budget <span class="chip MODEL">MODEL</span> <span class="src">N = 13,200,000,000 · each move = 1/N</span></h3>
+  <div class="mv" role="group" aria-label="Step moves">
+   <button data-step="1" title="Step 1 move (.)">+1</button><button data-step="1000">+10³</button><button data-step="1000000">+10⁶</button><button data-step="1000000000">+10⁹</button>
+   <button id="endBtn" title="Spend all moves (E)">Jump to end · t = 1</button><button id="mvResetBtn">Reset moves</button>
+  </div>
+  <div class="mv"><label class="sr" for="rate">Auto-run rate</label>
+   <select id="rate"><option value="1">1 move/s</option><option value="60">60/s</option><option value="1000">10³/s</option><option value="1000000">10⁶/s</option><option value="100000000">10⁸/s</option><option value="800000000" selected>8×10⁸/s (ladder walk)</option><option value="1000000000">10⁹/s</option><option value="13200000000">13.2×10⁹/s</option></select>
+   <button id="autoBtn" aria-pressed="false" title="Auto-run (A)">Auto-run ▶</button></div>
+  <label class="row">Black-hole mass <span class="val" id="massV"></span><input id="mass" type="range" min="0.5" max="10" step="0.01" value="1"></label>
+  <label class="row">Electrum shell thickness <span class="val" id="thickV"></span><input id="thick" type="range" min="4" max="120" step="1" value="16"></label>
+  <label class="row">Tardigrade length <span class="val" id="lenV"></span><input id="len" type="range" min="50" max="1200" step="10" value="500"></label>
+  <label class="row">GR comparison playback speed <span class="val" id="spdV"></span><input id="spd" type="range" min="0.25" max="3" step="0.05" value="1"></label>
+  <p class="src">Drag to orbit · wheel/pinch to zoom · arrow keys rotate · <kbd>T</kbd> tun · <kbd>Space</kbd> walk ladder/pause · <kbd>G</kbd> compare GR · <kbd>0</kbd> back to t = 0 · <kbd>.</kbd> +1 move · <kbd>A</kbd> auto-run · <kbd>E</kbd> spend all · <kbd>H</kbd> panels · <kbd>?</kbd> help.</p>
+ </div>
+</section>
+
+<section id="info" class="glass panel" aria-label="Information">
+ <header><h2>Field notes</h2><button class="collapse" aria-expanded="true" aria-controls="infoBody">–</button></header>
+ <div class="body" id="infoBody">
+  <div class="tabs" role="tablist">
+   <button role="tab" data-tab="model" aria-selected="true" aria-pressed="true">Dave's model</button>
+   <button role="tab" data-tab="gr" aria-selected="false" aria-pressed="false">Compare: GR</button>
+   <button role="tab" data-tab="tardi" aria-selected="false" aria-pressed="false">Tardi</button>
+   <button role="tab" data-tab="moves" aria-selected="false" aria-pressed="false">Ladder &amp; moves</button>
+   <button role="tab" data-tab="key" aria-selected="false" aria-pressed="false">Labels</button>
+  </div>
+  <div id="tab-model" role="tabpanel"></div>
+  <div id="tab-gr" role="tabpanel" hidden></div>
+  <div id="tab-tardi" role="tabpanel" hidden></div>
+  <div id="tab-moves" role="tabpanel" hidden></div>
+  <div id="tab-key" role="tabpanel" hidden></div>
+ </div>
+</section>
+
+<div id="hud" class="glass" aria-live="off" aria-label="State readout"></div>
+<div id="status" class="glass" aria-live="polite">starting…</div>
+<div id="clock"></div>
+<div id="help" class="glass" role="dialog" aria-modal="false" aria-label="Help">
+ <h2 style="margin:0 0 6px;font-size:15px">Inside the bubble</h2>
+ <p class="fact">You are inside the event horizon with tardi. In Dave's model <b>{{1 gravity{{t=0 time}}</b> everything is held at g = 1 and t = 0, so the scene is frozen and only your viewpoint moves. Dave's v2 rule: the bubble holds a budget of <b>13,200,000,000 moves</b>; each is 1/N, and t only becomes 1 when all are spent (step with the buttons, <kbd>.</kbd>, <kbd>A</kbd> auto-run, <kbd>E</kbd> jump to end). v3: the interior runs on Dave's <b>homeostatic ladder</b> ±[10, 9, 6, 5, 4, 3, 2, 1, 1, 0, 0]. Press <b>Walk the ladder</b> (<kbd>Space</kbd>) to step down to the zero point, the mirrored, breathing state −+ −+0+− +− that an outside reading calls 0; <kbd>G</kbd> toggles an optional comparison with what general relativity predicts; <kbd>0</kbd> returns to t = 0.</p>
+ <p class="fact">Drag to orbit, scroll or pinch to zoom, <kbd>T</kbd> switches active/tun, <kbd>H</kbd> hides panels, <kbd>Esc</kbd> closes this box.</p>
+ <p class="fact">Labels: <span class="chip MODEL">MODEL</span> is the default here (Dave's homeostatic interior) · <span class="chip MATCH">MATCH</span> real physics · <span class="chip MODEL">MODEL</span> Dave's framework or an approximation · <span class="chip WALL">WALL</span> impossible in GR.</p>
+ <button id="helpClose">Close</button>
+</div>
+
+<script id="data" type="application/json">{"extremes": [{"id": "X01", "category": "ionizing radiation", "claim_or_measurement": "48-h LD50 gamma rays (hydrated)", "value": "5000 Gy", "conditions": "gamma irradiation of active animals; survival scored 48 h after exposure", "species": "Milnesium tardigradum", "state": "hydrated (active)", "study": "Horikawa D.D. et al., Int. J. Radiat. Biol. 82(12):843-848", "year": "2006", "doi_or_url": "https://doi.org/10.1080/09553000600972956", "verdict": "MATCH", "notes": "Doses >1000 Gy made animals sterile (eggs laid after 2000 Gy did not hatch) - surviving is not the same as staying fertile"}, {"id": "X02", "category": "ionizing radiation", "claim_or_measurement": "48-h LD50 gamma rays (anhydrobiotic)", "value": "4400 Gy", "conditions": "gamma irradiation of desiccated tuns", "species": "Milnesium tardigradum", "state": "anhydrobiotic (tun)", "study": "Horikawa D.D. et al., Int. J. Radiat. Biol. 82(12):843-848", "year": "2006", "doi_or_url": "https://doi.org/10.1080/09553000600972956", "verdict": "MATCH", "notes": "Tuns were NOT more radiation-tolerant than hydrated animals in this study"}, {"id": "X03", "category": "ionizing radiation", "claim_or_measurement": "48-h LD50 heavy ions (hydrated)", "value": "6200 Gy", "conditions": "heavy-ion irradiation of active animals", "species": "Milnesium tardigradum", "state": "hydrated (active)", "study": "Horikawa D.D. et al., Int. J. Radiat. Biol. 82(12):843-848", "year": "2006", "doi_or_url": "https://doi.org/10.1080/09553000600972956", "verdict": "MATCH", "notes": ""}, {"id": "X04", "category": "ionizing radiation", "claim_or_measurement": "48-h LD50 heavy ions (anhydrobiotic)", "value": "5200 Gy", "conditions": "heavy-ion irradiation of desiccated tuns", "species": "Milnesium tardigradum", "state": "anhydrobiotic (tun)", "study": "Horikawa D.D. et al., Int. J. Radiat. Biol. 82(12):843-848", "year": "2006", "doi_or_url": "https://doi.org/10.1080/09553000600972956", "verdict": "MATCH", "notes": ""}, {"id": "X05", "category": "space (vacuum)", "claim_or_measurement": "Survival after exposure to open space vacuum in low Earth orbit (TARDIS experiment)", "value": "no significant survival loss vs ground controls", "conditions": "ESA BIOPAN facility on FOTON-M3 capsule, September 2007, ~10 days exposure, UV-shielded", "species": "Richtersius coronifer; Milnesium tardigradum", "state": "anhydrobiotic (tun)", "study": "Jönsson K.I., Rabbow E., Schill R.O., Harms-Ringdahl M., Rettberg P., Curr. Biol. 18(17):R729-R731", "year": "2008", "doi_or_url": "https://doi.org/10.1016/j.cub.2008.06.048", "verdict": "MATCH", "notes": "Eggs laid after the flight were viable"}, {"id": "X06", "category": "space (vacuum + UV)", "claim_or_measurement": "Survival after space vacuum plus solar UV-A/B (280-400 nm)", "value": "68% of M. tardigradum revived within 30 min but later mortality; only 1 R. coronifer revived", "conditions": "FOTON-M3 / BIOPAN, September 2007", "species": "Richtersius coronifer; Milnesium tardigradum", "state": "anhydrobiotic (tun)", "study": "Jönsson K.I. et al., Curr. Biol. 18(17):R729-R731", "year": "2008", "doi_or_url": "https://doi.org/10.1016/j.cub.2008.06.048", "verdict": "MATCH", "notes": ""}, {"id": "X07", "category": "space (vacuum + full UV)", "claim_or_measurement": "Survival after space vacuum plus full solar UV (116.5-400 nm)", "value": "0 R. coronifer survived; 3 M. tardigradum survived", "conditions": "FOTON-M3 / BIOPAN, September 2007", "species": "Richtersius coronifer; Milnesium tardigradum", "state": "anhydrobiotic (tun)", "study": "Jönsson K.I. et al., Curr. Biol. 18(17):R729-R731", "year": "2008", "doi_or_url": "https://doi.org/10.1016/j.cub.2008.06.048", "verdict": "MATCH", "notes": "Unshielded solar UV is mostly lethal - 'tardigrades survive space' is true only with qualifiers"}, {"id": "X08", "category": "static pressure", "claim_or_measurement": "Survival at high hydrostatic pressure in perfluorocarbon medium", "value": "600 MPa (~6000 atm)", "conditions": "dehydrated animals compressed in perfluorocarbon", "species": "tardigrades (terrestrial; see paper)", "state": "anhydrobiotic (tun)", "study": "Seki K. & Toyoshima M., Nature 395:853-854", "year": "1998", "doi_or_url": "https://doi.org/10.1038/27576", "verdict": "MATCH", "notes": "Hydrated animals were less tolerant"}, {"id": "X09", "category": "static pressure", "claim_or_measurement": "Survival at ultra-high hydrostatic pressure", "value": "7.5 GPa for up to ~12 h (18/20 alive after 20 min; ~100% up to 6 h; 5 alive after 12 h; all dead after 24 h)", "conditions": "pressure cell, tun state", "species": "Milnesium tardigradum", "state": "anhydrobiotic (tun)", "study": "Ono F. et al., J. Phys. Chem. Solids 69:2297-2300", "year": "2008", "doi_or_url": "https://doi.org/10.1016/j.jpcs.2008.04.019", "verdict": "MATCH", "notes": ""}, {"id": "X10", "category": "static pressure", "claim_or_measurement": "Exposure to 20 GPa", "value": "not alive after rehydration (bodies intact)", "conditions": "Kawai-type octahedral anvil press, 30 min", "species": "Milnesium tardigradum", "state": "anhydrobiotic (tun)", "study": "Ono F. et al., 'Effect of ultra-high pressure on small animals, tardigrades and Artemia' (HAL preprint/article)", "year": "n.d.", "doi_or_url": "https://hal.science/hal-03587413v1/document", "verdict": "MATCH", "notes": "Defines an upper limit: 20 GPa is lethal"}, {"id": "X11", "category": "impact shock", "claim_or_measurement": "Survival when fired into sand by two-stage light-gas gun", "value": "100% survival up to 0.728 km/s (0.86 GPa); intact animals up to 0.825 km/s (1.01 GPa); 0% at 0.901 km/s (1.14 GPa)", "conditions": "frozen animals in water-ice projectiles, impact into sand targets", "species": "Hypsibius dujardini (as stated by authors)", "state": "frozen (hibernated)", "study": "Traspas A. & Burchell M.J., Astrobiology 21(7):845-852", "year": "2021", "doi_or_url": "https://doi.org/10.1089/ast.2020.2405", "verdict": "MATCH", "notes": "Abstract says 'up to 0.9 km/s' but the results table shows 0% survival at 0.901 km/s; small sample sizes"}, {"id": "X12", "category": "high temperature", "claim_or_measurement": "24-h LT50 for active animals", "value": "37.1 °C (37.6 °C after brief acclimation)", "conditions": "24 h exposure; survival scored 48 h after", "species": "Ramazzottius varieornatus", "state": "hydrated (active)", "study": "Neves R.C. et al., Sci. Rep. 10:94", "year": "2020", "doi_or_url": "https://doi.org/10.1038/s41598-019-56965-z", "verdict": "MATCH", "notes": "Active tardigrades are heat-sensitive"}, {"id": "X13", "category": "high temperature", "claim_or_measurement": "1-h LT50 for desiccated tuns", "value": "82.7 °C", "conditions": "1 h exposure", "species": "Ramazzottius varieornatus", "state": "anhydrobiotic (tun)", "study": "Neves R.C. et al., Sci. Rep. 10:94", "year": "2020", "doi_or_url": "https://doi.org/10.1038/s41598-019-56965-z", "verdict": "MATCH", "notes": ""}, {"id": "X14", "category": "high temperature", "claim_or_measurement": "24-h LT50 for desiccated tuns", "value": "63.1 °C", "conditions": "24 h exposure", "species": "Ramazzottius varieornatus", "state": "anhydrobiotic (tun)", "study": "Neves R.C. et al., Sci. Rep. 10:94", "year": "2020", "doi_or_url": "https://doi.org/10.1038/s41598-019-56965-z", "verdict": "MATCH", "notes": ""}, {"id": "X15", "category": "high temperature", "claim_or_measurement": "'Survive 151 °C for a few minutes'", "value": "151 °C (few minutes)", "conditions": "historical experiment (Rahm 1920s) cited in reviews", "species": "unspecified historical material", "state": "anhydrobiotic", "study": "Secondary: Horikawa D.D. 'Survival of tardigrades in extreme environments: a model animal for astrobiology', in Altenbach, Bernhard & Seckbach (eds) Anoxia, Cellular Origin, Life in Extreme Habitats and Astrobiology 21:205-217", "year": "2011", "doi_or_url": "https://doi.org/10.1007/978-94-007-1896-8_12", "verdict": "UNVERIFIED", "notes": "Old single report not reproduced with modern protocols; contrast X13/X14"}, {"id": "X16", "category": "low temperature", "claim_or_measurement": "'Survive ~0.05 K (−272 °C)'", "value": "below 1/20 K for hours", "conditions": "adiabatic demagnetization in high vacuum (Becquerel, C. R. Acad. Sci. Paris 231:261-263)", "species": "historical material (dried organisms)", "state": "anhydrobiotic", "study": "Becquerel P., Comptes Rendus Acad. Sci. Paris 231(4):261-263", "year": "1950", "doi_or_url": "https://en.wikipedia.org/wiki/Environmental_tolerance_in_tardigrades", "verdict": "UNVERIFIED", "notes": "Historical single report; often repeated in popular media; no modern replication found"}, {"id": "X17", "category": "freezing (long-term)", "claim_or_measurement": "Revival and reproduction after frozen storage", "value": "30.5 years at −20 °C", "conditions": "moss sample collected in Antarctica 1983 and stored frozen; 2 adults + 1 egg recovered", "species": "Acutuncus antarcticus", "state": "frozen", "study": "Tsujimoto M., Imura S., Kanda H., Cryobiology 72(1):78-81", "year": "2016", "doi_or_url": "https://doi.org/10.1016/j.cryobiol.2015.12.003", "verdict": "MATCH", "notes": "One revived adult and the hatchling from the egg reproduced"}, {"id": "X18", "category": "desiccation (long-term)", "claim_or_measurement": "Maximum realistic anhydrobiotic survival from dried moss/herbarium samples", "value": "~ up to about a decade; eggs of Ramazzottius oberhaeuseri hatched after 9 years", "conditions": "systematic test of old dried moss samples", "species": "semi-terrestrial micrometazoans incl. tardigrades", "state": "anhydrobiotic", "study": "Guidetti R. & Jönsson K.I., J. Zool. 257:181-187", "year": "2002", "doi_or_url": "https://doi.org/10.1017/S095283690200078X", "verdict": "MATCH", "notes": ""}, {"id": "X19", "category": "desiccation (long-term)", "claim_or_measurement": "'Tardigrades revived from 120-year-old museum moss'", "value": "claimed 120 years", "conditions": "Franceschi 1948: one animal showed a brief leg movement, not a full revival", "species": "not established", "state": "anhydrobiotic", "study": "Jönsson K.I. & Bertolani R., 'Facts and fiction about long-term survival in tardigrades', J. Zool. 255:121-123", "year": "2001", "doi_or_url": "https://doi.org/10.1017/S0952836901001169", "verdict": "MYTH", "notes": "Review concluded evidence does not support century-scale cryptobiosis"}, {"id": "X20", "category": "lunar crash context", "claim_or_measurement": "Beresheet lander (Israel/SpaceIL) carried dehydrated tardigrades in the Arch Mission 'Lunar Library' and crashed on the Moon on 11 April 2019", "value": "impact speed reported variously (~500 km/h at 150 m altitude per Astronomy.com; ~0.9-1 km/s in some later articles)", "conditions": "uncontrolled crash; no liquid water on the Moon surface", "species": "unspecified (dehydrated tardigrades)", "state": "anhydrobiotic", "study": "News: Astronomy.com 'What likely happened to the tardigrades sent to the Moon in 2019'; The Guardian 6 Aug 2019", "year": "2019", "doi_or_url": "https://www.astronomy.com/space-exploration/what-happened-to-those-tardigrades-sent-to-the-moon/", "verdict": "UNVERIFIED", "notes": "No sample has been recovered; survival is unknown. Even if intact they cannot reactivate without liquid water. Compare X11 lab impact limit"}, {"id": "X21", "category": "lunar crash context", "claim_or_measurement": "'Tardigrades are alive and living on the Moon'", "value": "—", "conditions": "—", "species": "—", "state": "—", "study": "See X20 and X11", "year": "2019", "doi_or_url": "https://www.theguardian.com/science/2019/aug/06/tardigrades-may-have-survived-spacecraft-crashing-on-moon", "verdict": "MYTH", "notes": "No evidence of living or active tardigrades on the Moon; 'may have survived' became 'are living' in retelling"}, {"id": "X22", "category": "general", "claim_or_measurement": "'Tardigrades are indestructible / immortal / survive anything'", "value": "—", "conditions": "—", "species": "—", "state": "—", "study": "Counter-evidence: Neves et al. 2020 (X12); Jönsson et al. 2008 (X07); Traspas & Burchell 2021 (X11)", "year": "2020", "doi_or_url": "https://doi.org/10.1038/s41598-019-56965-z", "verdict": "MYTH", "notes": "Tolerance is mostly in the tun state and has measured limits; active animals die at modest temperatures"}, {"id": "X23", "category": "DNA protection (in vitro / cell culture)", "claim_or_measurement": "Dsup protein expressed in human HEK293 cells reduces X-ray DNA damage", "value": "~40% fewer double-strand-break markers; single-strand break tail DNA 33% -> 16% after 10 Gy", "conditions": "human cultured cells expressing Ramazzottius Dsup", "species": "Ramazzottius varieornatus (gene source)", "state": "n/a", "study": "Hashimoto T. et al., Nat. Commun. 7:12808", "year": "2016", "doi_or_url": "https://doi.org/10.1038/ncomms12808", "verdict": "MATCH", "notes": "Applies to cultured human cells; does not make people radiation-proof"}, {"id": "X24", "category": "UV", "claim_or_measurement": "Fluorescent pigment shields against germicidal UV", "value": "fluorescent Paramacrobiotus sp. tolerated germicidal UV that killed non-fluorescent tardigrades; extract protected H. exemplaris and C. elegans", "conditions": "lab UV-254 nm exposure", "species": "Paramacrobiotus sp. (India)", "state": "hydrated", "study": "Suma H.R., Prakash S., Eswarappa S.M., Biol. Lett. 16(10):20200391", "year": "2020", "doi_or_url": "https://doi.org/10.1098/rsbl.2020.0391", "verdict": "MATCH", "notes": ""}], "stats": {"species": 1550, "genera": 168, "families": 35}}</script>
+<script>
+"use strict";
+(function(){
+const DATA=JSON.parse(document.getElementById('data').textContent);
+const $=id=>document.getElementById(id);
+const params=new URLSearchParams(location.search);
+const mqReduce=window.matchMedia?matchMedia('(prefers-reduced-motion: reduce)'):{matches:false,addEventListener(){}};
+
+/* ---------- physics (SI) ---------- */
+const GMsun=1.32712440018e20,c=299792458,gStd=9.80665,RHO=1050,SIGMA_MAX=1e6;
+function base(Msun,L){const GM=GMsun*Msun,rs=2*GM/(c*c),T=GM/(c*c*c);
+ return {GM,rs,T,tauMax:Math.PI*T,rTear:Math.cbrt(2*GM*RHO*L*L/(8*SIGMA_MAX))};}
+// free fall from rest at the horizon: r=(rs/2)(1+cos eta), tau=(GM/c^3)(eta+sin eta)  (cycloid, r_max=rs)
+function etaFromTau(tau,T){const x=Math.min(Math.PI,Math.max(0,tau/T));let e=x/2;
+ for(let i=0;i<40;i++){const f=e+Math.sin(e)-x,fp=1+Math.cos(e);if(fp<1e-9)break;const ne=Math.min(Math.PI,Math.max(0,e-f/fp));if(Math.abs(ne-e)<1e-12){e=ne;break;}e=ne;}
+ return e;}
+function stateAt(Msun,L,frac){const B=base(Msun,L);const tau=frac*B.tauMax;const eta=frac>=1?Math.PI:etaFromTau(tau,B.T);
+ const r=B.rs*(1+Math.cos(eta))/2;const dgdr=r>0?2*B.GM/(r*r*r):Infinity;
+ return {...B,tau,eta,r,rOverRs:r/B.rs,da:dgdr*L,g:dgdr*L/gStd,stress:RHO*dgdr*L*L/8,torn:r<=B.rTear};}
+window.__tardiIn={base,stateAt,etaFromTau};
+
+/* ---------- moves budget: exact integer (BigInt) ---------- */
+const NMOV=13200000000n;
+const MV={used:0n,auto:false,rate:100000000,carry:0,pose:0n};
+function stepMoves(k,ctr){ctr=ctr||MV;let n=ctr.used+BigInt(k);if(n>NMOV)n=NMOV;if(n<0n)n=0n;const d=n-ctr.used;ctr.used=n;return d;}
+function gcd(a,b){while(b){[a,b]=[b,a%b];}return a;}
+function fracExact(u){const g=gcd(u,NMOV)||1n;return [u/g,NMOV/g];}
+function fracDecimal(u,places){places=places||20;if(u===NMOV)return '1.'+'0'.repeat(places);const s=(u*10n**BigInt(places))/NMOV;const rem=(u*10n**BigInt(places))%NMOV;return '0.'+s.toString().padStart(places,'0')+(rem?'…':'');}
+const grp=b=>b.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',');
+const LAD=[10,9,6,5,4,3,2,1,1,0,0];const NR=BigInt(LAD.length);const PER=NMOV/NR;
+function rungOf(u){let k=u/PER;if(k>=NR)k=NR-1n;return Number(k);}
+function zeroIdx(){return LAD.indexOf(0);}
+function thetaStr(u){const s=(u*720n*10000n)/NMOV,r=(u*720n*10000n)%NMOV;const i=s/10000n,f=(s%10000n).toString().padStart(4,'0');return i+'.'+f+(r?'…':'')+'°';}
+function quad(u){if(u>=NMOV)return 4;return Number((u*4n)/NMOV);}
+const ZPAT=[-1,1,-1,1,0,1,-1,1,-1];const ZGRP=[[0,2],[2,7],[7,9]];const ZP={psi:0,alpha:0,period:4};
+function zpSigns(){const a=Math.cos(2*Math.PI*ZP.psi);const s=a>=0?1:-1;return {a,s,live:ZPAT.map(v=>v*s)};}
+function zpPlain(arr,ascii){const ch=v=>v===0?'0':(v>0?'+':(ascii?'-':'−'));return ZGRP.map(([i,j])=>arr.slice(i,j).map(ch).join('')).join(' ');}
+function zpHTML(arr){const ch=v=>v===0?'<span class="h">0</span>':(v>0?'<span class="p">+</span>':'<span class="m">−</span>');return ZGRP.map(([i,j])=>arr.slice(i,j).map(ch).join('')).join(' ');}
+function tValue(){return MV.used===NMOV?1:0;}
+function selfCheck(){const out=[];const ok=(name,pass,detail)=>out.push({name,pass:!!pass,detail});
+ const [p,q]=fracExact(NMOV);ok('N moves × (1/N) = 1 exactly (exact rational N/N)',p===1n&&q===1n,`${p}/${q}`);
+ const c={used:0n};for(let i=0;i<13;i++)stepMoves(1000000000,c);for(let i=0;i<200;i++)stepMoves(1000000,c);
+ ok('13 × 10⁹ + 200 × 10⁶ steps land exactly on N, fraction = 1',c.used===NMOV&&fracDecimal(c.used)===('1.'+'0'.repeat(20)),grp(c.used));
+ const c2={used:NMOV-5n};stepMoves(1000000000,c2);ok('Overshoot clamps at N (no 1 + ε)',c2.used===NMOV,grp(c2.used));
+ let seed=7,sumSteps=0n;const c3={used:0n};const rnd=()=>(seed=(seed*48271)%2147483647);for(let i=0;i<2000;i++){const k=rnd()%1000003;sumSteps+=BigInt(k);stepMoves(k,c3);}
+ ok('2000 random steps: counter equals exact sum of steps',c3.used===sumSteps,grp(sumSteps));
+ const [p1,q1]=fracExact(1n);ok('One move is exactly 1/13,200,000,000',p1===1n&&q1===NMOV,`${p1}/${grp(q1)}`);
+ let f=0;const K=1000000;for(let i=0;i<K;i++)f+=1/13200000000;const exact=K/13200000000;const drift=Math.abs(f-exact)/exact;
+ ok('Float control: 10⁶ float additions of 1/N drift (why BigInt is used)',drift>0,`relative drift ${drift.toExponential(2)}`);
+ ok('N fits exactly as an integer (< 2⁵³)',Number(NMOV)<=Number.MAX_SAFE_INTEGER&&BigInt(Number(NMOV))===NMOV,'13200000000 < 9007199254740991');
+
+ ok('Ladder as given: 11 rungs [10,9,6,5,4,3,2,1,1,0,0] (8 and 7 skipped, not fixed)',LAD.length===11&&LAD.join()==='10,9,6,5,4,3,2,1,1,0,0',LAD.join(', '));
+ ok('Equal split: 11 × 1,200,000,000 = N exactly (no remainder)',NMOV%NR===0n&&PER*NR===NMOV&&PER===1200000000n,`${grp(PER)} per rung`);
+ ok('Each rung = 1/11 exactly; 11 rungs sum to 1',(()=>{const [a,b]=fracExact(PER);return a===1n&&b===11n&&PER*11n===NMOV;})(),'1/11 × 11 = 1');
+ ok('Every rung balances: (−n) + (+n) = 0',LAD.every(n=>BigInt(-n)+BigInt(n)===0n),'balance 0 on all 11 rungs');
+ ok('Rung boundaries exact: k × 1.2e9 moves → rung k+1',[0,1,5,9,10].every(k=>rungOf(PER*BigInt(k))===k)&&rungOf(PER-1n)===0&&rungOf(NMOV)===10,'');
+ ok('Zero point first reached at 10,800,000,000 moves (rung 10), held to the end',rungOf(10800000000n)===9&&LAD[rungOf(10800000000n-1n)]===1&&LAD[rungOf(NMOV)]===0,'');
+ ok('θ: 720° × used/N is exact; 1 rung = 720/11° and N moves = 720°',thetaStr(NMOV)==='720.0000°'&&thetaStr(PER)==='65.4545…°',thetaStr(PER)+' per rung');
+
+ ok('Zero-point structure as given: "-+ -+0+- +-"',zpPlain(ZPAT,true)==='-+ -+0+- +-',zpPlain(ZPAT,true));
+ ok('Mirror symmetric about the 0 hinge (reads the same reflected)',ZPAT.every((v,i)=>v===ZPAT[8-i])&&ZPAT[4]===0,'p[i] = p[8−i], centre 0');
+ ok('Observed reading is 0: Σ of the structure = 0 (yet no element but the hinge is 0)',ZPAT.reduce((a,b)=>a+b,0)===0&&ZPAT.filter(v=>v!==0).length===8,'Σ = 0, 8 nonzero signs');
+ ok('Half a breath (360°) inverts every sign (−++− → +−−+ style flip); 720° restores it',zpPlain(ZPAT.map(v=>-v),true)==='+- +-0-+ -+'&&ZPAT.map(v=>-(-v)).join()===ZPAT.join(),'+- +-0-+ -+ at 360°');
+ ok('Mean square of the structure ≠ 0 (like ⟨x⟩ = 0, ⟨x²⟩ ≠ 0)',ZPAT.reduce((a,b)=>a+b*b,0)/9>0,'⟨s²⟩ = 8/9');
+ return {pass:out.every(x=>x.pass),checks:out};}
+const SELF=selfCheck();
+
+const OSC={r:0,from:10,to:10,t0:0,level:10,walking:false};
+/* ---------- state ---------- */
+const S={massLog:1,thick:16,lenUm:500,spd:1,tun:0,tunTarget:0,released:false,paused:false,frac:0,
+ yaw:0.6,pitch:-0.72,dist:6.2,motion:!mqReduce.matches,dirty:true,quality:params.get('mode')==='2d'?'2d':'auto',scale:.75,steps:0,software:false,shimT:0};
+window.__tardiIn.state=S;window.__tardiIn.moves=MV;window.__tardiIn.N=NMOV;window.__tardiIn.stepMoves=k=>{stepMoves(k);onMoves(true);};window.__tardiIn.fracDecimal=fracDecimal;window.__tardiIn.fracExact=fracExact;window.__tardiIn.selfCheck=SELF;window.__tardiIn.LAD=LAD;window.__tardiIn.ZP=ZP;window.__tardiIn.zpSigns=zpSigns;window.__tardiIn.zpPlain=zpPlain;window.__tardiIn.rungOf=rungOf;window.__tardiIn.thetaStr=thetaStr;
+
+/* ---------- formatting ---------- */
+function expo(x){const a=Math.abs(x);if(!isFinite(x))return '∞';if(a===0)return '0';if(a>=1e-2&&a<1e3)return x.toPrecision(3);const e=Math.floor(Math.log10(a));return (x/Math.pow(10,e)).toFixed(2)+'×10<sup>'+e+'</sup>';}
+function fmtLen(x){const a=Math.abs(x);if(a>=1e9)return (x/1.495978707e11).toPrecision(3)+' AU';if(a>=1e3)return (x/1e3).toPrecision(4)+' km';if(a>=1)return x.toPrecision(3)+' m';if(a>=1e-3)return (x*1e3).toPrecision(3)+' mm';return (x*1e6).toPrecision(3)+' µm';}
+function fmtTime(s){if(s===0)return '0';if(s<1e-3)return (s*1e6).toPrecision(3)+' µs';if(s<1)return (s*1e3).toPrecision(3)+' ms';if(s<120)return s.toPrecision(3)+' s';if(s<7200)return (s/60).toPrecision(3)+' min';if(s<172800)return (s/3600).toPrecision(3)+' h';if(s<6.3e7)return (s/86400).toPrecision(3)+' days';return (s/3.156e7).toPrecision(3)+' yr';}
+const chip=l=>`<span class="chip ${l}">${l}</span>`;
+const esc=s=>String(s).replace(/[&<>"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
+const link=(u,t)=>`<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(t||u)}</a>`;
+const HAM='https://jila.colorado.edu/~ajsh/insidebh/schw.html';
+
+/* ---------- panels ---------- */
+function renderHUD(){
+ const M=Math.pow(10,S.massLog),L=S.lenUm*1e-6,st=stateAt(M,L,S.frac);
+ if(!S.released){
+  const r=rungOf(MV.used),n=LAD[r],zi=zeroIdx(),zero=n===0,q=quad(MV.used),off=OSC.level-OSC.to;
+  const sp=['−','+','+','−'].map((c,i)=>i===q?`<b>${c}</b>`:c).join('');
+  const inR=MV.used>=NMOV?PER:MV.used-PER*BigInt(r);
+  $('hud').innerHTML=`
+  <div class="cell"><span class="k">gravity</span><span class="v">g = 1</span><span class="k">normalized</span></div>
+  <div class="cell"><span class="k">time</span><span class="v">t = ${tValue()}</span><span class="k">${tValue()?'all moves spent':'held'}</span></div>
+  <div class="cell"><span class="k">θ clock (exact)</span><span class="v frac">${thetaStr(MV.used)}</span><span class="k">of 720° · photon birth +electrum</span></div>
+  <div class="cell"><span class="k">sign pattern</span><span class="v sign">${sp}</span><span class="k">${q<4?'quarter '+(q+1)+' of 4':'cycle closed'}</span></div>
+  <div class="cell"><span class="k">8φ laps</span><span class="v">0</span><span class="k">held</span></div>
+  <div class="cell">${chip('MODEL')}<span class="k">homeostatic interior</span></div>
+  <div class="row2">
+   <div class="cell"><span class="k">rung</span><span class="v">${r+1} / 11</span><span class="k">${r>=9?'void shells':'shell '+(11-r)}</span></div>
+   <div class="cell"><span class="k">value pair</span><span class="v">${n?'−'+n+' · +'+n:'±0 (observed)'}</span><span class="k">ladder ±[10,9,6,5,4,3,2,1,1,0,0]</span></div>
+   <div class="cell"><span class="k">running balance</span><span class="v ok">0</span><span class="k">${zero?'Σ(−+ −+0+− +−) = 0':'(−'+n+') + (+'+n+') = 0'}</span></div>
+   ${zero?(()=>{const Z=zpSigns();return `<div class="cell"><span class="k">zero point (observed as 0) =</span><span class="v zp">${zpHTML(Z.live)}</span><span class="k">${S.motion?'breathing '+Math.round(ZP.psi*720)+'° / 720° · persistent':'held pattern (reduced motion)'}</span></div>
+   <div class="cell"><span class="k">observed reading</span><span class="v">0</span><span class="k">what an outside reading would call it</span></div>`;})()
+   :`<div class="cell"><span class="k">zero point</span><span class="v">rung ${zi+1}</span><span class="k">settling</span></div>`}
+   <div class="lad" aria-label="ladder">${LAD.map((v,i)=>`<span class="${i===r?'on':(i<r?'done':'')}">±${v}</span>`).join('')}</div>
+  </div>
+  <div class="row2">
+   <div class="cell"><span class="k">moves used</span><span class="v">${grp(MV.used)}</span><span class="k">of 13,200,000,000</span></div>
+   <div class="cell"><span class="k">fraction of 1 (exact)</span><span class="v frac">${fracDecimal(MV.used,20)}</span><span class="k">= ${(()=>{const [a,b]=fracExact(MV.used);return grp(a)+' / '+grp(b);})()}</span></div>
+   <div class="cell"><span class="k">this rung</span><span class="v">${grp(inR)}</span><span class="k">of 1,200,000,000 (1/11)</span></div>
+   <div class="cell"><span class="k">remaining</span><span class="v">${grp(NMOV-MV.used)}</span><span class="k">${MV.auto?'auto '+Number(MV.rate).toExponential(0).replace('e+','e')+'/s':'moves'}</span></div>
+   <div class="cell"><span class="k">self-check</span><span class="v ${SELF.pass?'ok':'bad'}">${SELF.pass?'✓ exact':'✗ FAIL'}</span><span class="k">${SELF.checks.filter(c=>c.pass).length}/${SELF.checks.length} pass</span></div>
+  </div>`;
+  $('banner').innerHTML=tValue()?`${chip('MODEL')} All 13,200,000,000 moves spent: 11 rungs × 1/11 = exactly 1, so <b>t = 1</b>. Tardi holds the <b>zero point</b>: −+ −+0+− +− (an outside reading calls it 0). <b>Reset moves</b> or <kbd>0</kbd> returns to t = 0.`
+   :zero?`${chip('MODEL')} <b>Zero point = −+ −+0+− +−</b>: a mirrored sign structure around the 0 hinge, still breathing. "0" is only what an outside reading would call it (the signs sum to 0).`
+   :MV.used===0n?`${chip('MODEL')} <b>Homeostatic interior</b> (Dave's model, not GR): t = 0 at rung 1, ±10, balance 0. Press <b>Walk the ladder</b> (Space) to settle toward the zero point.`
+   :`${chip('MODEL')} Rung ${r+1}/11: −${n} and +${n} balance to 0. Glow and leg activity fall as tardi settles toward the zero point (−+ −+0+− +−).`;
+ }else{
+  const done=S.frac>=1;
+  $('hud').innerHTML=`
+  <div class="cell"><span class="k">proper time τ</span><span class="v">${fmtTime(st.tau)}</span><span class="k">of max ${fmtTime(st.tauMax)}</span></div>
+  <div class="cell"><span class="k">radius r</span><span class="v">${st.rOverRs.toFixed(3)} r<sub>s</sub></span><span class="k">${fmtLen(st.r)}</span></div>
+  <div class="cell"><span class="k">tidal stretch on tardi</span><span class="v">${expo(st.g)} g</span><span class="k">${expo(st.stress)} Pa</span></div>
+  <div class="cell"><span class="k">tardi</span><span class="v">${st.torn?'torn 🍝':'intact'}</span><span class="k">tears at ${(st.rTear/st.rs).toPrecision(3)} r<sub>s</sub></span></div>
+  <div class="cell">${chip('MATCH')}<span class="k">Compare: what GR predicts (free fall from rest at r<sub>s</sub>)</span></div>`;
+  $('banner').innerHTML=done?`${chip('WALL')} r = 0: the singularity. GR stops giving answers here. Press <b>Back to t = 0</b> (or <kbd>G</kbd>) to return to Dave's homeostatic interior.`
+   :`${chip('MATCH')} Comparison only, what GR predicts: r shrinks every instant (inside the horizon r works like time) and tardi reaches r = 0 within ${fmtTime(st.tauMax)} of proper time.`;
+ }
+ placeBanner();
+}
+function placeBanner(){const h=$('hud');if(!h||getComputedStyle(h).display==='none')return;$('banner').style.bottom=(h.offsetHeight+20)+'px';
+ const hr=h.getBoundingClientRect();document.querySelectorAll('.panel').forEach(p=>{const r=p.getBoundingClientRect();const hits=r.right>hr.left&&r.left<hr.right;p.style.maxHeight=hits?Math.max(160,hr.top-r.top-10)+'px':'';});const st=$('status');st.style.bottom='';const sr=st.getBoundingClientRect();if(sr.right>hr.left&&sr.bottom>hr.top)st.style.bottom=(h.offsetHeight+20)+'px';}
+function renderGR(){
+ const M=Math.pow(10,S.massLog),L=S.lenUm*1e-6,B=base(M,L),s10=base(10,L),sA=base(4.3e6,L);
+ $('tab-gr').innerHTML=`
+ <div class="fact">${chip('MATCH')} <b>Inside the horizon, r becomes timelike.</b> Decreasing r is the future direction, so every path, light included, reaches r = 0. You can't stand still, just as you can't stop tomorrow from coming.</div>
+ <div class="fact">${chip('MATCH')} <b>Longest proper time from horizon to singularity</b> is τ<sub>max</sub> = πGM/c³. For this mass (${expo(M)} M☉) that's <span class="num">${fmtTime(B.tauMax)}</span>; 10 M☉ gives <span class="num">${fmtTime(s10.tauMax)}</span> and Sgr A* (4.3×10⁶ M☉) <span class="num">${fmtTime(sA.tauMax)}</span>. <span class="src">Lewis &amp; Kwan 2007, PASA 24:46, ${link('https://doi.org/10.1071/AS07012','doi:10.1071/AS07012')}</span></div>
+ <div class="fact">${chip('MATCH')} <b>Horizon size</b>: r<sub>s</sub> = 2GM/c² = <span class="num">${fmtLen(B.rs)}</span>. The comparison follows free fall from rest at r<sub>s</sub>, the cycloid r = (r<sub>s</sub>/2)(1+cos η), τ = (GM/c³)(η+sin η).</div>
+ <div class="fact">${chip('MATCH')} <b>Tidal tearing</b>: the stretch across tardi is (2GM/r³)·L. A ${S.lenUm} µm tardi tears (at an assumed ${chip('MODEL')} ~1 MPa tissue strength) at r ≈ <span class="num">${fmtLen(B.rTear)}</span> = ${(B.rTear/B.rs).toPrecision(3)} r<sub>s</sub>, so <b>inside</b> the horizon for every known black hole. Big holes are gentle at the horizon; small ones are harsher.</div>
+ <div class="fact">${chip('MATCH')} <b>The real hook for "t = 0"</b>: to a distant observer, a clock falling toward the horizon ticks ever slower and its image freezes and fades there (gravitational time dilation and redshift; a static clock runs at √(1−r<sub>s</sub>/r)). Tardi's own clock never stops; she crosses in finite proper time.</div>
+ <div class="fact">${chip('MATCH')} <b>What a free-faller sees</b>: you are <i>not</i> plunged into blackness at the horizon, and you can't tell when you cross it. The shrinking bright circle of sky overhead is only seen by someone <i>hovering</i> just outside on rockets. <span class="src">A. Hamilton, "Journey into a Schwarzschild black hole", ${link(HAM,'JILA / U. Colorado')}</span></div>
+ <div class="fact">${chip('MODEL')} This tab is an optional <b>comparison</b> (toggle <kbd>G</kbd>, off by default). Dave's interior is homeostatic, not GR; this shows what GR alone would predict.</div>
+ <div class="fact">${chip('MODEL')} <b>On screen</b>: in held mode the sky is drawn as the hovering-observer bright circle overhead, the closest real picture to "held still". Release switches to an approximate free-fall view with the sky spreading above and darkness growing below. The glowing wall is the horizon drawn as a neon membrane; a real horizon has no surface. These visuals are qualitative, not ray-traced.</div>
+ <div class="fact">${chip('MODEL')} Schwarzschild (non-spinning) interior only. Spinning black holes have a different, less certain interior.</div>`;
+}
+function renderMoves(){
+ $('tab-moves').innerHTML=`
+ <h3>Homeostatic ladder ${chip('MODEL')}</h3>
+ <div class="fact">${chip('MODEL')} Dave: <i>"oh its not gr its homeostatic or -+10/9/6/5/4/3/2/1/1/0/0 or zero point"</i>. The interior steps through 11 rungs, ±[10, 9, 6, 5, 4, 3, 2, 1, 1, 0, 0], which match his 11 shells running down to the 0 void. On every rung −n and +n balance, so the running balance is always <b>0</b> (homeostasis). The last two rungs are the zero point.</div>
+ <div class="fact">${chip('MODEL')} <b>The zero point isn't 0.</b> Dave: <i>"its not 0 its just what you understand it would be -+ -+0+- +-"</i>. The real zero-point state is the mirrored sign structure <span class="zp">${zpHTML(ZPAT)}</span>: an outer pair −+, an inner −+, the <b>0 as a hinge</b> in the centre, then +− and +− mirrored. It reads the same reflected about the hinge, and its signs sum to 0. That sum is the only sense in which it is "0"; it's what an outside reading would call it.</div>
+ <div class="fact">${chip('MODEL')} <b>Persistent, not damped:</b> when the walk reaches the zero point, tardi settles into this standing pattern and it keeps breathing. Over half a breath (360°) every sign inverts, giving +− +−0−+ −+ (like his −++− → +−−+ flip), and a full 720° restores it, matching the 720° period. The hinge stays 0 throughout. Nine glow nodes in an arc over tardi show it live: cyan = +, magenta = −, gold = the 0 hinge.</div>
+ <div class="fact">${chip('MODEL')} <b>The ladder is shown exactly as given.</b> It goes 10, 9, then 6, skipping 8 and 7, and repeats 1, 1 and 0, 0. Nothing has been "fixed".</div>
+ <div class="fact">${chip('MODEL')} <b>How moves map to rungs: equal shares.</b> Each rung gets exactly 13,200,000,000 / 11 = <b>1,200,000,000 moves = 1/11</b>. That divides exactly with no remainder, so 11 × 1/11 = 1 exactly. A split proportional to the rung values (total 41) wouldn't divide evenly (13.2e9 / 41 isn't a whole number), and the 0 rungs would get no moves, so the walk could never reach the zero point. Rung k covers moves (k−1)·1.2e9 to k·1.2e9. The zero point starts at move 10,800,000,000 and holds through 13,200,000,000, when t = 1.</div>
+ <div class="fact">${chip('MODEL')} <b>θ clock and −++−:</b> θ = 720° × moves/N, computed exactly, so each rung turns 720/11 = 65.4545…°. The four 180° quarters carry the sign pattern −, +, +, − (which also sums to 0), and the current quarter is underlined in the HUD. A full 720° cycle closes exactly at t = 1.</div>
+ <div class="fact">${chip('MODEL')} <b>What you see:</b> shell glow and leg activity follow the rung value n/10, bright and busy at ±10. At the zero point they don't go dark; they breathe with the −+ −+0+− +− pattern.</div>
+ <h3>Real-physics hook: zero point</h3>
+ <div class="fact">${chip('MATCH')} <b>Quantum zero point isn't nothing.</b> A harmonic oscillator's ground state keeps fluctuating, with zero-point energy <b>E₀ = ħω/2</b>. Its average position is ⟨x⟩ = 0, but ⟨x²⟩ = ħ/(2mω) ≠ 0, so the "observed 0" is the average of something that isn't zero. This is real and measurable (for example, helium stays liquid at normal pressure down to near 0 K). It fits Dave's point that the 0 is only the reading, and the state underneath is structured.</div>
+ <div class="fact">${chip('MODEL')} The breathing −+ −+0+− +− pattern is Dave's structure drawn as an illustration, not a quantum simulation. The analogy is the same idea in both: a zero average over a nonzero, persistent underlying state.</div>
+ <h3>13.2e9 moves budget</h3>
+ <div class="fact">${chip('MODEL')} <b>"That one tardi gets 13.2 billion moves to equal 1."</b> (Dave). Inside the held bubble tardi has a budget of N = 13,200,000,000 moves. Each move is worth exactly 1/N, and all N together sum to exactly 1. The HUD keeps <b>t = 0</b> until the last move is spent; then t = 1.</div>
+ <div class="fact">${chip('MODEL')} Each step shows a micro-move: a leg stroke (8 poses per gait cycle) when she's active, a small twitch when she's a tun. With reduced motion, auto-run updates only the numbers and her pose changes only on manual steps.</div>
+ <div class="fact">${chip('MATCH')} <b>Exact arithmetic:</b> moves are counted as whole integers (JavaScript BigInt), and the fraction is shown as an exact ratio plus a 20-digit truncated decimal (… means more digits follow). One move = 1/13,200,000,000 = 0.0000000000757575… (75 repeating). Nothing is added as floating point, so the final sum is exactly 1 with no drift.</div>
+ <h3>Self-check ${SELF.pass?'<span class="ok">✓ all pass</span>':'<span class="bad">✗ failure</span>'}</h3>
+ ${SELF.checks.map(c=>`<div class="fact"><span class="${c.pass?'ok':'bad'}">${c.pass?'✓':'✗'}</span> ${esc(c.name)} <span class="src">${esc(c.detail)}</span></div>`).join('')}
+ <h3>Nearby real number (comparison only)</h3>
+ <div class="fact">${chip('MATCH')} The age of the universe is <b>13.787 ± 0.020 billion years</b> (Planck 2018 results VI, A&amp;A 641, A6 (2020), ${link('https://doi.org/10.1051/0004-6361/201833910','doi:10.1051/0004-6361/201833910')}).</div>
+ <div class="fact">${chip('MODEL')} 13.2 × 10⁹ moves is only a <i>comparison</i> to that number, not a claim that they're equal. 13.2 billion is about 4.3% below the Planck age, roughly 29 times its stated uncertainty, and moves aren't years.</div>`;}
+function renderStatic(){
+ $('tab-model').innerHTML=`
+ <div class="fact">${chip('MODEL')} <b>v3: the interior is homeostatic, not GR.</b> Dave's dynamics walk the ladder ±[10,9,6,5,4,3,2,1,1,0,0] down to the zero point, the mirrored state −+ −+0+− +− (observed as 0), with the balance always 0 (see "Ladder &amp; moves"). General relativity appears only as an optional comparison (<kbd>G</kbd>, off by default, labelled MATCH).</div>
+ <div class="fact">${chip('MODEL')} <b>{{1 gravity{{t=0 time}}</b> is Dave's framework: the black-hole interior is a bubble where gravity is normalised to <b>g = 1</b> and time is held at <b>t = 0</b>, his photon-birth moment, with the electrum wrap. The θ clock sits at 0° of its 720° cycle, the 8φ lap counter at 0, sign pattern <span class="sign">−++−</span>.</div>
+ <div class="fact">${chip('MODEL')} Tardi in her electrum shell floats at the centre of the bubble, and the event horizon is the bubble wall all around her. In held mode the whole scene is frozen; only your camera moves. Switching active/tun happens instantly because no time passes.</div>
+ <div class="fact">${chip('WALL')} <b>Versus GR, kindly:</b> Dave's interior is a homeostatic model, not GR. In GR itself nothing can stay calm at 1 g with frozen time inside a horizon; the comparison toggle shows why.</div>
+ <div class="fact">${chip('MATCH')} <b>Where it touches real physics:</b> seen from far away, time at the horizon <i>does</i> look frozen (gravitational time dilation). Dave's t = 0 bubble keeps that outside view and puts tardi inside it.</div>
+ <div class="fact">${chip('MODEL')} The electrum shimmer is thin-film interference over Au/Ag-weighted reflectance, an artistic analogy inspired by Dave's Tetragarde-Electrum notes (his model, not biology).</div>`;
+ $('tab-tardi').innerHTML=`
+ <div class="fact">${chip('MATCH')} <b>Size</b> 50 µm to 1.2 mm; 4 pairs of legs, usually with claws. <span class="src">J. Exp. Biol. 2026, ${link('https://doi.org/10.1242/jeb.253088','doi')}</span></div>
+ <div class="fact">${chip('MATCH')} <b>Tun</b>: drying makes her withdraw her legs and contract into a barrel with no measurable metabolism (anhydrobiosis). Press <kbd>T</kbd>. <span class="src">Arakawa 2022, ${link('https://doi.org/10.1146/annurev-animal-021419-083711','doi')}</span></div>
+ <div class="fact">${chip('MATCH')} <b>${DATA.stats.species.toLocaleString()}</b> species-level names in ${DATA.stats.genera} genera. <span class="src">Degma &amp; Guidetti 2026, ${link('https://doi.org/10.5281/zenodo.20746849','doi')} (A:\\tardigrade\\species.csv)</span></div>
+ ${DATA.extremes.map(r=>`<div class="fact">${chip(r.verdict)} ${esc(r.claim_or_measurement)}: <span class="num">${esc(r.value)}</span> <span class="src">${esc(r.study)} (${esc(r.year)}) ${/^https?:/.test(r.doi_or_url)?link(r.doi_or_url,'source'):''}</span></div>`).join('')}
+ <p class="src">All ${DATA.extremes.length} extreme-survival records are from A:\\tardigrade\\extremes.csv.</p>
+ <div class="fact">${chip('MODEL')} The on-screen animal is a stylised generic eutardigrade.</div>`;
+ $('tab-key').innerHTML=`
+ <div class="fact">${chip('MATCH')} Real physics, measured or computed live from GR formulas, with sources.</div>
+ <div class="fact">${chip('MODEL')} Dave's {{1 gravity{{t=0 time}} framework, artistic choices, or approximated visuals.</div>
+ <div class="fact">${chip('WALL')} Impossible in GR (a calm, timeless interior; anything at or past r = 0).</div>
+ <div class="fact">${chip('MYTH')} / ${chip('UNVERIFIED')} Used in the tardigrade extremes list.</div>
+ <p class="src">No network requests; all data is embedded. Renderer: WebGL2 with an automatic 2D fallback.</p>`;
+}
+
+/* ---------- WebGL2 ---------- */
+const VS=`#version 300 es
+in vec2 p; void main(){gl_Position=vec4(p,0.,1.);}`;
+const FS=`#version 300 es
+precision highp float;
+out vec4 o;
+uniform mat3 uB; uniform vec2 uRes; uniform vec3 uCam,uF,uR,uU; uniform vec3 uNP[9]; uniform float uNV[9]; uniform float uNA;
+uniform float uGlow,uGait,uTwitch,uTime,uTheta,uTun,uThick,uMotion,uPatch,uDark,uProg,uStretch,uWall,uRel;
+const float PI=3.14159265;
+float h13(vec3 p){p=fract(p*.1031);p+=dot(p,p.zyx+31.32);return fract((p.x+p.y)*p.z);}
+float n3(vec3 p){vec3 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
+ return mix(mix(mix(h13(i),h13(i+vec3(1,0,0)),f.x),mix(h13(i+vec3(0,1,0)),h13(i+vec3(1,1,0)),f.x),f.y),
+            mix(mix(h13(i+vec3(0,0,1)),h13(i+vec3(1,0,1)),f.x),mix(h13(i+vec3(0,1,1)),h13(i+vec3(1,1,1)),f.x),f.y),f.z);}
+vec3 stars(vec3 d){vec3 c=vec3(0);vec3 a=abs(d);vec2 fu;float face;
+ if(a.x>=a.y&&a.x>=a.z){fu=d.yz/a.x;face=d.x>0.?0.:1.;}else if(a.y>=a.z){fu=d.xz/a.y;face=d.y>0.?2.:3.;}else{fu=d.xy/a.z;face=d.z>0.?4.:5.;}
+ for(int i=0;i<2;i++){float s=i==0?60.:140.;vec2 q=fu*s;vec2 id=floor(q);vec2 f=fract(q)-.5;float h=h13(vec3(id,face*13.+float(i)*7.));
+  if(h>.965){float b=(h-.965)/.035;vec2 off=(vec2(h13(vec3(id,face+.5)),h13(vec3(id.yx,face+1.5)))-.5)*.5;vec3 tint=mix(vec3(1.,.78,.55),vec3(.62,.8,1.),h13(vec3(id,face+3.1)));
+   c+=tint*b*b*smoothstep(.16,0.,length(f-off))*(i==0?2.6:1.3);}}
+ float n=n3(d*2.3)*.6+n3(d*5.1)*.4;
+ c+=vec3(.30,.10,.48)*pow(n,3.)*.55+vec3(.04,.22,.30)*pow(n3(d*3.7+7.),4.)*.5;
+ return c;}
+vec3 bb(float T){T=clamp(T,1000.,40000.)/100.;float r=T<=66.?1.:clamp(1.2929*pow(T-60.,-.1332),0.,1.);
+ float g=T<=66.?clamp(.3901*log(T)-.6318,0.,1.):clamp(1.1299*pow(T-60.,-.0755),0.,1.);
+ float b=T>=66.?1.:(T<=19.?0.:clamp(.5432*log(T-10.)-1.1963,0.,1.));return vec3(r,g,b);}
+vec3 film(float cosT,float dnm){vec3 lam=vec3(650.,532.,450.);vec3 ph=4.*PI*1.5*dnm*cosT/lam;return .5+.5*cos(ph);}
+
+float sdEll(vec3 p,vec3 r){float k0=length(p/r);float k1=length(p/(r*r));return k0*(k0-1.)/max(k1,1e-4);}
+float sdCap(vec3 p,vec3 a,vec3 b,float r){vec3 pa=p-a,ba=b-a;float h=clamp(dot(pa,ba)/dot(ba,ba),0.,1.);return length(pa-ba*h)-r;}
+float smin(float a,float b,float k){float h=clamp(.5+.5*(b-a)/k,0.,1.);return mix(b,a,h)-k*h*(1.-h);}
+float tardi(vec3 p,out float mat){
+ float tun=uTun*(1.-uTwitch); float sx=mix(1.,.6,tun); float sy=mix(1.,1.12,tun);
+ vec3 q=vec3(p.x/sx,p.y/sy,p.z/sy);
+ float d=1e9;
+ for(int i=0;i<5;i++){float fi=float(i);float x=-.72+.36*fi;float rr=.33-.035*abs(fi-1.6);
+  d=smin(d,sdEll(q-vec3(x,0.,0.),vec3(.25,rr*.88,rr)),.085);}
+ d=smin(d,sdEll(q-vec3(.86,.03,0.),vec3(.21,.2,.21)),.08);
+ d=smin(d,sdEll(q-vec3(1.04,-.02,0.),vec3(.07,.06,.065)),.04);
+ d+=tun*.012*sin(q.x*38.)*sin(q.z*23.+q.y*17.);
+ d*=min(sx,1.);
+ float dc=1e9;
+ for(int i=0;i<4;i++){float fi=float(i);float lx=(.55-.37*fi)*sx;
+  for(int s=0;s<2;s++){float side=s==0?-1.:1.;
+   float ph=uTheta*.0174533*4.+fi*1.7+(side>0.?PI:0.);
+   float sw=.09*sin(ph)*(1.-tun)*uGait; float lift=max(0.,cos(ph))*.05*(1.-tun)*uGait;
+   vec3 a=vec3(lx,-.12,side*.2);
+   vec3 b=vec3(lx+sw+(i==3?-.2:0.),-.47+lift,side*.42);
+   b=mix(b,a+vec3(0.,-.03,side*.05),tun);
+   float lr=mix(.078,.035,tun);
+   d=smin(d,sdCap(p,a,b,lr),.05);
+   if(tun<.92){
+    vec3 c1=b+vec3(0.,-.045,0.);
+    for(int k=0;k<2;k++){float kk=float(k)*2.-1.;float fw=i==3?-1.:1.;
+     vec3 c2=c1+vec3(fw*.085,-.035,kk*.035);vec3 c3=c2+vec3(fw*.03,.035,kk*.01);
+     dc=min(dc,min(sdCap(p,c1,c2,.016),sdCap(p,c2,c3,.012))+tun*.08);}}
+ }}
+ mat=dc<d?1.:0.; return min(d,dc);}
+vec3 tnorm(vec3 p){float m;vec2 e=vec2(.0015,-.0015);
+ return normalize(e.xyy*tardi(p+e.xyy,m)+e.yyx*tardi(p+e.yyx,m)+e.yxy*tardi(p+e.yxy,m)+e.xxx*tardi(p+e.xxx,m));}
+
+vec3 skyOut(vec3 n){ // outside universe seen on the wall around +y
+ float a=acos(clamp(n.y,-1.,1.));
+ vec3 c=vec3(0.);
+ if(a<uPatch){float k=a/uPatch; float ang=atan(n.z,n.x);
+  vec3 d=vec3(sin(k*PI*.5)*cos(ang),cos(k*PI*.5),sin(k*PI*.5)*sin(ang));
+  float boost=mix(3.,1.2,uRel);
+  c=stars(d)*boost+vec3(.55,.75,1.)*mix(.55,.12,uRel)*(1.-k*k);
+  c=mix(c,c*vec3(.75,.9,1.25),.5*(1.-uRel));
+  c+=vec3(.8,.9,1.)*smoothstep(.12,0.,abs(k-1.))*.6;}
+ return c;}
+vec3 wallShade(vec3 hp,vec3 rd){
+ vec3 n=normalize(hp*uB); float lat=asin(clamp(n.y,-1.,1.)),lon=atan(n.z,n.x);
+ float gl1=smoothstep(.035,0.,abs(fract(lat*12./PI)-.5)-.47)+smoothstep(.035,0.,abs(fract(lon*12./PI)-.5)-.47);
+ float cosT=abs(dot(n,rd));
+ vec3 fl=film(cosT,320.+60.*sin(lon*3.+lat*2.+uTime*.4*uMotion));
+ vec3 col=vec3(.10,.03,.20)+vec3(.55,.25,.95)*.10*gl1+fl*vec3(.7,.55,1.)*.12;
+ col+=vec3(.43,.95,1.)*.05*gl1*(.5+.5*sin(lon*6.+uTime*uMotion));
+ col+=skyOut(n);
+ float ad=acos(clamp(-n.y,-1.,1.));
+ float dk=smoothstep(uDark,uDark*.75,ad);
+ col=mix(col,vec3(.08,0.,.02)+vec3(.45,.05,.12)*uProg*smoothstep(uDark,uDark*.4,ad)*.6,dk);
+ return col;}
+vec3 envIn(vec3 w){w=uB*w;vec3 hp=w*uWall;return wallShade(hp,w)*.9+(.5+.5*cos(6.2831*(w.y*.8+w.x*.35+vec3(0.,.33,.67))))*vec3(.9,.8,1.)*.18;}
+vec4 shadeTardi(vec3 ro,vec3 rd){
+ vec3 sc=vec3(1./sqrt(uStretch),uStretch,1./sqrt(uStretch));
+ vec3 lo=(ro*uB)/sc, ld=normalize((rd*uB)/sc);
+ float R=1.3;
+ float b=dot(lo,ld),cq=dot(lo,lo)-R*R,disc=b*b-cq; if(disc<0.)return vec4(0);
+ float t0=-b-sqrt(disc),t1=-b+sqrt(disc); if(t1<0.)return vec4(0); t0=max(t0,0.);
+ vec3 ps=lo+ld*t0; vec3 n=normalize(ps); float cosT=clamp(dot(-ld,n),0.,1.);
+ float shim=uMotion*.5*sin(uTime*1.3+ps.y*6.+ps.x*4.)+n3(ps*3.+uTime*.2*uMotion)*1.2-.6;
+ float dnm=uThick*(9.+1.6*shim);
+ vec3 F0=vec3(.98,.82,.57); vec3 fr=F0+(1.-F0)*pow(1.-cosT,5.);
+ vec3 fl=film(cosT,dnm);
+ vec3 refl=envIn(normalize(reflect(ld,n)))*fr*mix(vec3(1.),fl*1.6,.65)+vec3(.9,.75,1.)*pow(1.-cosT,3.)*.35;
+ float Tm=exp(-uThick/45.);
+ float Rw=clamp((1.-Tm)*.9+pow(1.-cosT,3.)*.7,0.,.97);
+ vec3 glow=mix(F0,vec3(.95,.95,1.),.25+.25*sin(ps.x*5.+ps.y*3.+uTime*.7*uMotion))*fl*(.2+1.1*pow(1.-cosT,2.2))*1.3*(.85+.15*shim)*(.2+1.1*uGlow);
+ vec3 col=vec3(0);float al=0.;float t=t0;float mat=0.;
+ for(int i=0;i<90;i++){vec3 pp=lo+ld*t;float d=tardi(pp,mat);if(d<.0015){
+   vec3 nn=tnorm(pp);vec3 Lup=normalize(vec3(.2,1.,.3));
+   vec3 basec=mat>.5?vec3(.3,.24,.2):mix(vec3(1.,.88,.74),vec3(.78,.58,.4),uTun);
+   float eye=0.;for(int e=0;e<2;e++){vec3 ep=vec3(.99*mix(1.,.6,uTun),.13,(e==0?-1.:1.)*.12);eye+=smoothstep(.045,.025,length(pp-ep));}
+   basec*=1.-.85*clamp(eye,0.,1.);
+   float head=max(dot(nn,-ld),0.);
+   vec3 c=basec*(vec3(.75,.85,1.)*max(0.,(dot(nn,Lup)+.4)/1.4)*.9+vec3(.95,.85,1.)*head*.55+vec3(.35,.12,.5)*max(0.,-nn.y)*.6+.14);
+   c+=basec*vec3(.9,.45,1.)*pow(1.-head,2.5)*.6;
+   if(mat>.5)c+=vec3(1.)*pow(max(0.,dot(reflect(ld,nn),Lup)),24.)*.6;
+   col=c;al=1.;break;}
+  t+=max(d*.85,.002); if(t>t1)break;}
+ vec3 inner=col*vec3(1.,.9,.68)*mix(1.,Tm,.6);
+ float through=(1.-Rw)*mix(1.,Tm,.35);
+ return vec4(refl*Rw+inner*through*al+glow*(.35+.65*(1.-Tm)),clamp(Rw+through*al+.15*(1.-Tm),0.,1.));}
+void main(){
+ vec2 uv=(gl_FragCoord.xy-.5*uRes)/uRes.y;
+ vec3 rd=normalize(uF*0.95+uR*uv.x+uU*uv.y);
+ vec3 ro=uCam;
+ float b=dot(ro,rd),cq=dot(ro,ro)-uWall*uWall;float tw=-b+sqrt(max(b*b-cq,0.));
+ vec3 col=wallShade(ro+rd*tw,rd);
+ vec4 tc=shadeTardi(ro,rd);
+ col=tc.rgb+col*(1.-tc.a);
+ if(uNA>0.001){for(int i=0;i<9;i++){vec3 v=uNP[i]-ro;float tp=dot(v,rd);if(tp<=0.)continue;float d=length(v-rd*tp);float nv=uNV[i];
+   vec3 nc=i==4?vec3(1.,.82,.42):(nv>=0.?vec3(.43,.95,1.):vec3(1.,.37,.82));float I=i==4?(.85+.15*cos(uTime*3.)):(.3+.7*abs(nv));
+   col+=uNA*I*nc*(exp(-d*d/.005)*1.6+exp(-d*d/.06)*.35);}}
+ col=col/(1.+col*.5); col=pow(col,vec3(.92));
+ vec2 q=gl_FragCoord.xy/uRes; col*=.8+.2*pow(16.*q.x*q.y*(1.-q.x)*(1.-q.y),.2);
+ o=vec4(col,1.);}`;
+
+let CAN=$('scene'),gl=null,prog=null,U={},mode='webgl2',ctx2d=null,glCreated=false;
+function initGL(){
+ try{gl=CAN.getContext('webgl2',{antialias:false,alpha:false,preserveDrawingBuffer:true});}catch(e){gl=null;}
+ if(!gl)return false; glCreated=true;
+ const sh=(t,s)=>{const x=gl.createShader(t);gl.shaderSource(x,s);gl.compileShader(x);if(!gl.getShaderParameter(x,gl.COMPILE_STATUS)){const l=gl.getShaderInfoLog(x);throw new Error(l);}return x;};
+ try{prog=gl.createProgram();gl.attachShader(prog,sh(gl.VERTEX_SHADER,VS));gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,FS));gl.linkProgram(prog);
+  if(!gl.getProgramParameter(prog,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(prog));}
+ catch(e){window.__tardiIn.glError=String(e);gl=null;return false;}
+ gl.useProgram(prog);
+ const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+ const loc=gl.getAttribLocation(prog,'p');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+ U.uNP=null;['uB','uRes','uCam','uF','uR','uU','uTime','uTheta','uTun','uThick','uMotion','uPatch','uDark','uProg','uStretch','uWall','uRel','uGait','uTwitch','uGlow','uNA'].forEach(n=>U[n]=gl.getUniformLocation(prog,n));
+ try{const ext=gl.getExtension('WEBGL_debug_renderer_info');const rn=ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER);window.__tardiIn.renderer=rn;
+  if(/swiftshader|llvmpipe|software|basic render/i.test(rn)){S.software=true;if(S.quality==='auto')S.scale=.4;}}catch(e){}
+ U.uNP=gl.getUniformLocation(prog,'uNP[0]');U.uNV=gl.getUniformLocation(prog,'uNV[0]');
+ CAN.addEventListener('webglcontextlost',e=>{e.preventDefault();switchTo2D('context lost');},false);
+ return true;}
+function switchTo2D(why){mode='2d';S.quality='2d';$('quality').value='2d';
+ if(glCreated){const nc=CAN.cloneNode(false);CAN.parentNode.replaceChild(nc,CAN);bindCanvas(nc);glCreated=false;}
+ gl=null;ctx2d=CAN.getContext('2d');window.__tardiIn.fallbackReason=why;S.dirty=true;}
+
+let BASIS=null;
+const norm=v=>{const l=Math.hypot(v[0],v[1],v[2])||1;return [v[0]/l,v[1]/l,v[2]/l];};
+const cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+const NODEP=(()=>{const y=.6,p=-.72,cp=Math.cos(p);const cam=[cp*Math.cos(y),Math.sin(p),cp*Math.sin(y)];const F=norm(cam.map(x=>-x));const Rr=norm(cross(F,[0,1,0]));const Uu=cross(Rr,F);
+ const out=new Float32Array(27);for(let k=0;k<9;k++){const a=(-100+25*k)*Math.PI/180;for(let j=0;j<3;j++)out[k*3+j]=1.7*(Math.sin(a)*Rr[j]+Math.cos(a)*Uu[j]);}return out;})();
+function nodeVals(){const a=Math.cos(2*Math.PI*ZP.psi);return ZPAT.map(v=>v*a);}
+(function(){const A=[-.413,.866,-.282];const l=Math.hypot(...A);const Y=A.map(x=>x/l);let X=[Y[1],-Y[0],0];const lx=Math.hypot(...X);X=X.map(x=>x/lx);const Z=[X[1]*Y[2]-X[2]*Y[1],X[2]*Y[0]-X[0]*Y[2],X[0]*Y[1]-X[1]*Y[0]];BASIS=new Float32Array([...X,...Y,...Z]);})();
+function camera(){const cp=Math.cos(S.pitch),sp=Math.sin(S.pitch);
+ const cam=[S.dist*cp*Math.cos(S.yaw),S.dist*sp,S.dist*cp*Math.sin(S.yaw)];const F=norm(cam.map(x=>-x));const R=norm(cross(F,[0,1,0]));return {cam,F,R,U:cross(R,F)};}
+function visuals(){ // derived visual parameters
+ const M=Math.pow(10,S.massLog),st=stateAt(M,S.lenUm*1e-6,S.frac);
+ const rel=S.released?Math.min(1,S.frac*6+0.0001):0;
+ const patch=S.released?(0.2+1.45*Math.min(1,S.frac*6)):0.2;
+ const dark=S.released?(0.55+1.0*S.frac):0.5;
+ let stretch=1; if(S.released){const lg=Math.log10(Math.max(st.stress,1e-30));stretch=1+Math.min(1,Math.max(0,(lg-3)/3))*0.9; if(st.torn)stretch=1.9+Math.min(1.1,(st.rTear-st.r)/st.rTear*1.1);}
+ return {st,rel,patch,dark,stretch};}
+function resize(){const dpr=Math.min(window.devicePixelRatio||1,1.5);const sc=mode==='2d'?dpr:S.scale*dpr;
+ const w=Math.max(64,Math.round(innerWidth*sc)),h=Math.max(64,Math.round(innerHeight*sc));if(CAN.width!==w||CAN.height!==h){CAN.width=w;CAN.height=h;S.dirty=true;}}
+function applyQuality(){const q=S.quality;
+ if(q==='2d'){if(mode!=='2d')switchTo2D('user choice');}
+ else if(mode==='2d'){const nc=CAN.cloneNode(false);CAN.parentNode.replaceChild(nc,CAN);bindCanvas(nc);ctx2d=null;if(initGL()){mode='webgl2';window.__tardiIn.fallbackReason='';}else switchTo2D('no WebGL2');}
+ if(q==='high')S.scale=1;else if(q==='low')S.scale=.5;S.dirty=true;resize();}
+function drawGL(){const C=camera(),V=visuals();
+ gl.viewport(0,0,CAN.width,CAN.height);gl.uniform2f(U.uRes,CAN.width,CAN.height);gl.uniformMatrix3fv(U.uB,false,BASIS);
+ gl.uniform3fv(U.uCam,C.cam);gl.uniform3fv(U.uF,C.F);gl.uniform3fv(U.uR,C.R);gl.uniform3fv(U.uU,C.U);
+ gl.uniform1f(U.uTime,S.shimT);gl.uniform1f(U.uTheta,Number(MV.pose%8n)*11.25);const lv=Math.abs(OSC.level)/10;gl.uniform1f(U.uGait,Math.min(1,lv));gl.uniform1f(U.uGlow,Math.min(1.2,.06+lv));gl.uniform1f(U.uTwitch,(MV.pose%2n===1n)?0.05:0);gl.uniform1f(U.uTun,S.tun);gl.uniform1f(U.uThick,S.thick);
+ gl.uniform1f(U.uMotion,(S.motion&&S.released)?1:0);gl.uniform1f(U.uPatch,V.patch);gl.uniform1f(U.uDark,V.dark);gl.uniform1f(U.uProg,S.frac);
+ gl.uniform1f(U.uStretch,V.stretch);gl.uniform1f(U.uWall,12.);gl.uniform1f(U.uRel,V.rel);gl.uniform1f(U.uNA,S.released?0:ZP.alpha);gl.uniform3fv(U.uNP,NODEP);gl.uniform1fv(U.uNV,new Float32Array(nodeVals()));gl.uniform1f(U.uTime,S.released?S.shimT:performance.now()/1000*(S.motion?1:0));
+ gl.drawArrays(gl.TRIANGLES,0,3);}
+let stars2=null;
+function draw2D(){const g=ctx2d,W=CAN.width,H=CAN.height;if(!g)return;const V=visuals();
+ g.fillStyle='#0d0418';g.fillRect(0,0,W,H);
+ const cx=W/2,cy=H/2,R=Math.min(W,H)*0.46;
+ const wall=g.createRadialGradient(cx,cy,R*0.6,cx,cy,R*1.05);wall.addColorStop(0,'rgba(30,10,55,1)');wall.addColorStop(.85,'rgba(120,60,200,.55)');wall.addColorStop(.95,'rgba(111,243,255,.6)');wall.addColorStop(1,'rgba(13,4,24,1)');
+ g.fillStyle=wall;g.beginPath();g.arc(cx,cy,R*1.05,0,Math.PI*2);g.fill();
+ const pr=R*0.95*(V.patch/1.65);const pg=g.createRadialGradient(cx,cy-R*0.62,0,cx,cy-R*0.62,Math.max(4,pr*0.6));
+ pg.addColorStop(0,'rgba(220,235,255,.95)');pg.addColorStop(.7,'rgba(120,170,255,.45)');pg.addColorStop(1,'rgba(120,170,255,0)');g.fillStyle=pg;g.beginPath();g.arc(cx,cy-R*0.62,Math.max(4,pr*0.6),0,Math.PI*2);g.fill();
+ if(!stars2){stars2=[];let s=11;const r=()=>(s=(s*16807)%2147483647)/2147483647;for(let i=0;i<120;i++)stars2.push([r(),r()]);}
+ g.fillStyle='rgba(240,245,255,.9)';for(const [a,b] of stars2){const ang=a*Math.PI*2,rr=Math.sqrt(b)*pr*0.55;g.fillRect(cx+Math.cos(ang)*rr,cy-R*0.62+Math.sin(ang)*rr,1.5,1.5);}
+ const dk=g.createLinearGradient(0,cy+R*(1.0-V.dark*0.9),0,cy+R);dk.addColorStop(0,'rgba(8,0,4,0)');dk.addColorStop(1,'rgba(8,0,4,.95)');g.fillStyle=dk;g.beginPath();g.arc(cx,cy,R*1.0,0,Math.PI*2);g.fill();
+ const ts=R*0.28*(6.2/S.dist),tun=S.tun*((MV.pose%2n===1n)?0.95:1),sx=1-0.4*tun,st=V.stretch;
+ g.save();g.translate(cx,cy);g.scale(1/Math.sqrt(st),st);
+ const sh=g.createRadialGradient(0,0,ts*.3,0,0,ts*1.35);sh.addColorStop(0,'rgba(255,230,170,.08)');sh.addColorStop(.8,'rgba(240,200,120,.2)');sh.addColorStop(1,'rgba(220,230,255,.6)');g.fillStyle=sh;g.beginPath();g.arc(0,0,ts*1.35,0,Math.PI*2);g.fill();
+ g.strokeStyle='rgba(70,50,40,.95)';g.lineCap='round';
+ for(let i=0;i<4;i++){const lx=(0.55-0.37*i)*ts*sx+Math.sin(Number(MV.pose%8n)*Math.PI/4+i*1.7)*ts*0.08*(1-tun)*Math.min(1,Math.abs(OSC.level)/10);const fy=ts*(0.47-0.4*tun);g.lineWidth=ts*0.11*(1-tun*0.6);g.beginPath();g.moveTo(lx,ts*0.1);g.lineTo(lx+(i===3?-ts*0.2:0)*(1-tun),fy);g.stroke();
+  if(tun<0.9){g.lineWidth=ts*0.03;g.beginPath();g.moveTo(lx+(i===3?-ts*0.2:0),fy);g.lineTo(lx+(i===3?-ts*0.3:ts*0.1),fy+ts*0.05);g.stroke();}}
+ const body=g.createLinearGradient(0,-ts*.4,0,ts*.4);body.addColorStop(0,'#ffe7c4');body.addColorStop(1,tun>0.5?'#9a6a44':'#d9a777');g.fillStyle=body;
+ for(let i=0;i<5;i++){g.beginPath();g.ellipse((-0.72+0.36*i)*ts*sx,0,ts*0.26*sx,ts*0.31*(1+0.1*tun),0,0,Math.PI*2);g.fill();}
+ g.beginPath();g.ellipse(0.86*ts*sx,-ts*0.02,ts*0.21,ts*0.2,0,0,Math.PI*2);g.fill();g.fillStyle='#2a1a14';g.beginPath();g.arc(0.95*ts*sx,-ts*0.1,ts*0.03,0,Math.PI*2);g.fill();
+ const ir=g.createLinearGradient(-ts,-ts,ts,ts);['#f2c86b','#d9d9e6','#6ff3ff','#e070ff','#f2c86b'].forEach((cc,i)=>ir.addColorStop(i/4,cc));
+ g.strokeStyle=ir;g.globalAlpha=Math.min(1,.3+Math.abs(OSC.level)/10);g.lineWidth=Math.max(1.5,ts*0.02*S.thick/8)*(0.6+Math.abs(OSC.level)/10);g.beginPath();g.arc(0,0,ts*1.35,0,Math.PI*2);g.stroke();g.globalAlpha=1;g.restore();
+ if(ZP.alpha>0&&!S.released){const nv=nodeVals(),rr=R*0.28*(6.2/S.dist)*1.7;for(let k=0;k<9;k++){const a=(-100+25*k)*Math.PI/180;const x=cx+Math.sin(a)*rr,y=cy-Math.cos(a)*rr;
+  const col=k===4?'255,210,110':(nv[k]>=0?'111,243,255':'255,95,210');const I=k===4?.9:.3+.7*Math.abs(nv[k]);const gr=g.createRadialGradient(x,y,0,x,y,rr*0.12);
+  gr.addColorStop(0,`rgba(${col},${(ZP.alpha*I).toFixed(3)})`);gr.addColorStop(1,`rgba(${col},0)`);g.fillStyle=gr;g.beginPath();g.arc(x,y,rr*0.12,0,Math.PI*2);g.fill();}}
+ g.fillStyle='rgba(235,225,255,.92)';g.font=`${Math.max(11,W/110)|0}px system-ui`;g.fillText('2D fallback view (simplified)',12,H-60);}
+
+/* ---------- loop ---------- */
+let last=performance.now(),frames=0,rT=[],lastInfo=0,pf=[],lastAdj=0;
+function tick(now){const dt=Math.min(.5,(now-last)/1000);last=now;
+ if(S.released&&!S.paused&&S.frac<1){S.frac=Math.min(1,S.frac+dt*S.spd/12);S.shimT+=dt;S.dirty=true;}
+ if(Math.abs(S.tun-S.tunTarget)>1e-3){const inst=!S.released||!S.motion;S.tun=inst?S.tunTarget:S.tun+Math.sign(S.tunTarget-S.tun)*Math.min(dt*1.2,Math.abs(S.tunTarget-S.tun));S.dirty=true;}
+ if(MV.auto&&!S.released&&MV.used<NMOV){MV.carry+=dt*MV.rate;const k=Math.floor(MV.carry);if(k>0){MV.carry-=k;stepMoves(k);onMoves(S.motion);}}
+ if(MV.auto&&MV.used>=NMOV){MV.auto=false;sync();}
+ {const r=rungOf(MV.used);if(r!==OSC.r){OSC.from=OSC.level;OSC.to=LAD[r];OSC.t0=now;OSC.r=r;}
+  const isZ=LAD[r]===0;const zt=isZ?1:0;if(ZP.alpha!==zt){ZP.alpha=S.motion?(zt?Math.min(1,ZP.alpha+dt/1.2):Math.max(0,ZP.alpha-dt/0.6)):zt;S.dirty=true;}
+  if(isZ){if(S.motion){ZP.psi=(ZP.psi+dt/ZP.period)%1;S.dirty=true;}else ZP.psi=0;}else ZP.psi=0;
+  const tau=(now-OSC.t0)/1000;let lv=S.motion?OSC.to+(OSC.from-OSC.to)*Math.exp(-2.2*tau)*Math.cos(7*tau):OSC.to;
+  if(Math.abs(lv-OSC.to)<1e-3)lv=OSC.to;
+  lv+=2*ZP.alpha*Math.cos(2*Math.PI*ZP.psi);
+  if(Math.abs(lv-OSC.level)>1e-4){OSC.level=lv;S.dirty=true;}}
+ resize();
+ if(S.dirty){if(mode==='webgl2'&&gl)drawGL();else draw2D();S.dirty=false;frames++;window.__tardiIn.frames=frames;rT.push(now);while(rT.length&&now-rT[0]>2000)rT.shift();
+  if(S.released&&!S.paused)perf(dt);}
+ if(now-lastInfo>200){lastInfo=now;renderHUD();status();}
+ requestAnimationFrame(tick);}
+function perf(dt){pf.push(dt);if(pf.length>10)pf.shift();if(S.quality!=='auto'||mode!=='webgl2'||pf.length<8)return;const now=performance.now();if(now-lastAdj<700)return;
+ const avg=pf.reduce((a,b)=>a+b,0)/pf.length;const cap=S.software?.5:1;
+ if(avg>1/28&&S.scale>.26){S.scale=Math.max(.25,S.scale-.1);lastAdj=now;pf=[];}else if(avg<1/55&&S.scale<cap){S.scale=Math.min(cap,S.scale+.08);lastAdj=now;pf=[];}}
+function status(){const fps=rT.length>1?(rT.length-1)/((rT[rT.length-1]-rT[0])/1000):0;
+ $('status').textContent=`${mode==='webgl2'?'WebGL2':'2D fallback'}${window.__tardiIn.fallbackReason?' ('+window.__tardiIn.fallbackReason+')':''} · ${S.released?(S.paused?'paused':(fps?fps.toFixed(0)+' fps':'…')):(MV.auto?'walking · rung '+(rungOf(MV.used)+1)+'/11':(MV.used===NMOV?'t = 1 (all moves spent)':'t = 0 held'))}${mode==='webgl2'?' · res '+Math.round(S.scale*100)+'%':''} · motion ${S.motion?'on':'reduced'}`;}
+
+/* ---------- UI ---------- */
+function sync(){const M=Math.pow(10,S.massLog);
+ $('massV').innerHTML=expo(M)+' M☉';$('thickV').textContent=S.thick+' nm (MODEL)';$('lenV').textContent=S.lenUm+' µm';$('spdV').textContent=S.spd.toFixed(2)+'×';
+ $('tunBtn').textContent=S.tunTarget>0.5?'State: tun 🛢️':'State: active 🐾';$('tunBtn').setAttribute('aria-pressed',S.tunTarget>0.5);
+ $('releaseBtn').textContent=S.released?'Compare: GR · on (MATCH)':'Compare: GR · off';$('walkBtn').textContent=(MV.auto&&MV.rate===800000000)?'Walking… ⏸':(MV.used>=NMOV?'Walk again ↺':'Walk the ladder ▶');$('walkBtn').setAttribute('aria-pressed',MV.auto&&MV.rate===800000000);$('walkBtn').disabled=S.released;$('releaseBtn').setAttribute('aria-pressed',S.released);
+ $('pauseBtn').textContent=S.paused?'Play':'Pause';$('pauseBtn').setAttribute('aria-pressed',S.paused);$('pauseBtn').disabled=!S.released;
+ $('motionBtn').textContent='Motion: '+(S.motion?'on':'reduced');$('motionBtn').setAttribute('aria-pressed',!S.motion);
+ document.documentElement.classList.toggle('rm',!S.motion);
+ $('autoBtn').textContent=MV.auto?'Auto-run ⏸':'Auto-run ▶';$('autoBtn').setAttribute('aria-pressed',MV.auto);
+ document.querySelectorAll('[data-step],#endBtn,#autoBtn').forEach(b=>b.disabled=S.released||MV.used>=NMOV);}
+function onMoves(animate){if(animate)MV.pose=MV.used;S.dirty=true;lastInfo=0;}
+let infoT=0;function changed(){S.dirty=true;sync();clearTimeout(infoT);infoT=setTimeout(()=>{renderGR();renderHUD();},60);}
+function walk(){if(S.released){S.released=false;S.frac=0;}
+ if(MV.used>=NMOV){MV.used=0n;MV.pose=0n;}
+ if(MV.auto&&MV.rate===800000000){MV.auto=false;}else{MV.rate=800000000;$('rate').value='800000000';MV.auto=true;MV.carry=0;}
+ onMoves(true);changed();}
+function release(){MV.auto=false;if(!S.released){S.released=true;S.paused=false;S.frac=0;}else if(S.frac>=1){S.frac=0;S.paused=false;}else S.paused=!S.paused;changed();}
+function hold(){MV.used=0n;MV.pose=0n;MV.auto=false;MV.carry=0;S.released=false;S.paused=false;S.frac=0;S.shimT=0;S.tun=S.tunTarget;changed();}
+[['mass','massLog'],['thick','thick'],['len','lenUm'],['spd','spd']].forEach(([id,k])=>{const el=$(id);el.value=S[k];el.addEventListener('input',()=>{S[k]=parseFloat(el.value);changed();});});
+$('tunBtn').addEventListener('click',()=>{S.tunTarget=S.tunTarget>0.5?0:1;changed();});
+$('releaseBtn').addEventListener('click',()=>{if(S.released)hold();else release();});
+$('walkBtn').addEventListener('click',walk);
+$('pauseBtn').addEventListener('click',()=>{if(S.released){S.paused=!S.paused;changed();}});
+$('holdBtn').addEventListener('click',hold);
+document.querySelectorAll('[data-step]').forEach(b=>b.addEventListener('click',()=>{if(S.released)return;stepMoves(b.dataset.step);onMoves(true);sync();}));
+$('endBtn').addEventListener('click',()=>{if(S.released)return;stepMoves(NMOV);MV.auto=false;onMoves(true);sync();});
+$('mvResetBtn').addEventListener('click',()=>{MV.used=0n;MV.pose=0n;MV.auto=false;MV.carry=0;onMoves(true);sync();});
+$('rate').addEventListener('change',e=>{MV.rate=Number(e.target.value);MV.carry=0;lastInfo=0;});
+$('autoBtn').addEventListener('click',()=>{if(S.released||MV.used>=NMOV)return;MV.auto=!MV.auto;MV.carry=0;sync();lastInfo=0;});
+$('resetBtn').addEventListener('click',()=>{Object.assign(S,{yaw:.6,pitch:-.72,dist:6.2});changed();});
+$('quality').value=S.quality;$('quality').addEventListener('change',e=>{S.quality=e.target.value;applyQuality();status();});
+$('motionBtn').addEventListener('click',()=>{S.motion=!S.motion;changed();});
+$('panelsBtn').addEventListener('click',()=>document.body.classList.toggle('hidden-panels'));
+$('helpBtn').addEventListener('click',()=>$('help').classList.toggle('open'));$('helpClose').addEventListener('click',()=>$('help').classList.remove('open'));
+mqReduce.addEventListener&&mqReduce.addEventListener('change',e=>{S.motion=!e.matches;changed();});
+document.querySelectorAll('[role=tab]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[role=tab]').forEach(x=>{const on=x===b;x.setAttribute('aria-selected',on);x.setAttribute('aria-pressed',on);$('tab-'+x.dataset.tab).hidden=!on;});}));
+document.querySelectorAll('.panel').forEach(p=>{const hd=p.querySelector('header'),btn=p.querySelector('.collapse');
+ btn.addEventListener('click',e=>{e.stopPropagation();const cl=p.classList.toggle('collapsed');btn.textContent=cl?'+':'–';btn.setAttribute('aria-expanded',!cl);});
+ let drag=null;hd.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;const r=p.getBoundingClientRect();drag={dx:e.clientX-r.left,dy:e.clientY-r.top};hd.setPointerCapture(e.pointerId);});
+ hd.addEventListener('pointermove',e=>{if(!drag)return;p.style.left=Math.max(0,Math.min(innerWidth-60,e.clientX-drag.dx))+'px';p.style.top=Math.max(0,Math.min(innerHeight-40,e.clientY-drag.dy))+'px';p.style.right='auto';});
+ hd.addEventListener('pointerup',()=>drag=null);});
+function bindCanvas(el){CAN=el;let pd=null,pts=new Map(),p0=0;
+ el.addEventListener('pointerdown',e=>{el.setPointerCapture(e.pointerId);pts.set(e.pointerId,[e.clientX,e.clientY]);pd=[e.clientX,e.clientY];if(pts.size===2){const a=[...pts.values()];p0=Math.hypot(a[0][0]-a[1][0],a[0][1]-a[1][1]);}});
+ el.addEventListener('pointermove',e=>{if(!pts.has(e.pointerId))return;pts.set(e.pointerId,[e.clientX,e.clientY]);
+  if(pts.size===2){const a=[...pts.values()];const d=Math.hypot(a[0][0]-a[1][0],a[0][1]-a[1][1]);if(p0){S.dist=Math.max(2,Math.min(10.5,S.dist*p0/d));p0=d;S.dirty=true;}return;}
+  if(!pd)return;S.yaw+=(e.clientX-pd[0])*.006;S.pitch=Math.max(-1.45,Math.min(1.45,S.pitch+(e.clientY-pd[1])*.006));pd=[e.clientX,e.clientY];S.dirty=true;});
+ const up=e=>{pts.delete(e.pointerId);if(!pts.size)pd=null;p0=0;};el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up);
+ el.addEventListener('wheel',e=>{e.preventDefault();S.dist=Math.max(2,Math.min(10.5,S.dist*Math.exp(e.deltaY*.001)));S.dirty=true;},{passive:false});}
+bindCanvas(CAN);
+addEventListener('keydown',e=>{if(e.target.matches('input,select,textarea'))return;const k=e.key;
+ if(k==='h'||k==='H')document.body.classList.toggle('hidden-panels');
+ else if(k==='t'||k==='T'){S.tunTarget=S.tunTarget>0.5?0:1;changed();}
+ else if(k===' '){e.preventDefault();walk();}
+ else if(k==='g'||k==='G'){$('releaseBtn').click();}
+ else if(k==='0'){hold();}
+ else if(k==='.'){$('ctrl').querySelector('[data-step="1"]').click();}
+ else if(k==='a'||k==='A'){$('autoBtn').click();}
+ else if(k==='e'||k==='E'){$('endBtn').click();}
+ else if(k==='r'||k==='R'){$('resetBtn').click();}
+ else if(k==='?'){$('help').classList.toggle('open');}else if(k==='Escape'){$('help').classList.remove('open');}
+ else if(k==='ArrowLeft'){S.yaw-=.08;S.dirty=true;}else if(k==='ArrowRight'){S.yaw+=.08;S.dirty=true;}
+ else if(k==='ArrowUp'){S.pitch=Math.min(1.45,S.pitch+.06);S.dirty=true;}else if(k==='ArrowDown'){S.pitch=Math.max(-1.45,S.pitch-.06);S.dirty=true;}});
+addEventListener('resize',()=>{S.dirty=true;});
+
+renderStatic();renderMoves();sync();renderGR();renderHUD();
+if(S.quality!=='2d'&&initGL())mode='webgl2';else switchTo2D(S.quality==='2d'?'user choice':'no WebGL2');
+if(params.get('quality')){S.quality=params.get('quality');$('quality').value=S.quality;applyQuality();}
+window.__tardiIn.mode=()=>mode;window.__tardiIn.osc=OSC;window.__tardiIn.walk=walk;window.__tardiIn.hudText=()=>$('hud').innerText;window.__tardiIn.release=release;window.__tardiIn.hold=hold;
+resize();status();requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>

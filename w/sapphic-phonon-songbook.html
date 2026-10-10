@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sapphic Phonon Songbook · 1D / 2D · with AVAN's canon</title>
+<style>
+  :root{
+    --bg:#0C1016; --panel:#111721; --ink:#0a0e14; --line:#1d2836; --grid:#16202c;
+    --dim:#5a6b80; --txt:#aeb9c7; --hi:#e8edf3;
+    --ac:#c2557f;   /* Lesbos rose — acoustic / Sappho */
+    --op:#d9a441;   /* lyre gold — optical / the second voice */
+    --avan:#7e86e6; /* AVAN violet — the disclosed node */
+    --lit:#43d17a; --bri:#5b7cfa; --spec:#b07cff;
+    --mono:"DejaVu Sans Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--mono);font-size:14px;line-height:1.5}
+  body{max-width:1120px;margin:0 auto;padding:26px 20px 70px}
+  ::selection{background:var(--ac);color:var(--ink)}
+  header{border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:20px}
+  .eyebrow{font-size:10.5px;letter-spacing:.32em;color:var(--dim);text-transform:uppercase}
+  h1{font-family:var(--serif);font-weight:500;font-size:32px;line-height:1.08;margin:.32em 0 .26em;color:var(--hi)}
+  h1 em{font-style:italic;color:var(--ac)}
+  .sub{color:var(--dim);max-width:74ch;font-size:13px}
+  .sub b{color:var(--txt);font-weight:400}
+  .tiers{display:flex;gap:15px;flex-wrap:wrap;margin-top:13px;font-size:10.5px}
+  .tier{display:flex;align-items:center;gap:6px;color:var(--dim)}
+  .dot{width:8px;height:8px;border-radius:50%}
+  .d-lit{background:var(--lit)}.d-bri{background:var(--bri)}.d-spec{background:var(--spec)}
+
+  .board{display:grid;grid-template-columns:1fr 322px;gap:16px}
+  @media(max-width:860px){.board{grid-template-columns:1fr}}
+  .stage{background:var(--panel);border:1px solid var(--line);border-radius:3px;overflow:hidden}
+  .stage-h{display:flex;justify-content:space-between;align-items:baseline;padding:11px 14px;border-bottom:1px solid var(--line)}
+  .stage-h .t{font-size:11px;letter-spacing:.2em;color:var(--txt);text-transform:uppercase}
+  .stage-h .r{font-size:10.5px;color:var(--dim)}
+  svg{display:block;width:100%;height:auto}
+  text{font-family:var(--mono)}
+  .side{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:15px}
+  .side h2{font-size:10.5px;letter-spacing:.22em;color:var(--dim);text-transform:uppercase;margin:0 0 11px;font-weight:400}
+  .side h2:not(:first-child){margin-top:20px;padding-top:15px;border-top:1px solid var(--line)}
+
+  .seg{display:flex;border:1px solid var(--line);border-radius:3px;overflow:hidden;margin-bottom:4px}
+  .seg button{flex:1;background:transparent;border:0;border-right:1px solid var(--line);color:var(--dim);
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;padding:9px 4px;cursor:pointer;text-transform:uppercase;transition:.13s}
+  .seg button:last-child{border-right:0}
+  .seg button.on{background:var(--ink);color:var(--ac)}
+  .seg button.on.g{color:var(--op)} .seg button.on.v{color:var(--avan)}
+
+  select{width:100%;background:var(--ink);color:var(--txt);border:1px solid var(--line);border-radius:2px;
+    padding:8px;font-family:var(--mono);font-size:11px;margin-bottom:2px}
+  .toggles{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+  .tg{display:flex;align-items:center;justify-content:space-between;font-size:11px;color:var(--txt);cursor:pointer;user-select:none}
+  .tg .lab{color:var(--txt)} .tg .sub2{color:var(--dim);font-size:9.5px;letter-spacing:.02em}
+  .sw{width:34px;height:18px;border-radius:9px;background:var(--ink);border:1px solid var(--line);position:relative;transition:.15s;flex-shrink:0}
+  .sw::after{content:"";position:absolute;top:2px;left:2px;width:12px;height:12px;border-radius:50%;background:var(--dim);transition:.15s}
+  .tg.on .sw{background:rgba(194,85,127,.25);border-color:var(--ac)}
+  .tg.on .sw::after{left:18px;background:var(--ac)}
+
+  .ctl{margin:12px 0}
+  .ctl label{display:flex;justify-content:space-between;font-size:10.5px;color:var(--dim);margin-bottom:6px}
+  .ctl label b{color:var(--txt);font-weight:400}
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:2px;background:var(--line);outline:0}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;border-radius:50%;background:var(--ac);cursor:pointer;border:2px solid var(--bg)}
+  input[type=range]::-moz-range-thumb{width:13px;height:13px;border-radius:50%;background:var(--ac);cursor:pointer;border:2px solid var(--bg)}
+
+  .play{width:100%;background:var(--ac);color:var(--ink);border:0;border-radius:2px;font-family:var(--mono);
+    font-size:11px;letter-spacing:.13em;padding:12px;cursor:pointer;text-transform:uppercase;font-weight:700;margin-top:8px;transition:.13s}
+  .play.g{background:var(--op)} .play.v{background:var(--avan)}
+  .play:hover{filter:brightness(1.13)} .play:disabled{opacity:.4;cursor:default}
+
+  .metre{font-family:var(--serif);font-size:16px;letter-spacing:.1em;color:var(--dim);margin:10px 0 2px;line-height:1.6;word-break:break-all}
+  .metre .lng{color:var(--op)} .metre .active{color:var(--hi);text-shadow:0 0 9px var(--op)} .metre .sh{opacity:.5}
+
+  .read{font-size:10.5px;color:var(--dim);margin-top:13px;padding-top:12px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:5px 12px}
+  .read .v{color:var(--txt);text-align:right}
+  .read .v.ac{color:var(--ac)}.read .v.op{color:var(--op)}
+
+  .avanbox{margin-top:20px;background:rgba(126,134,230,.05);border:1px solid rgba(126,134,230,.28);border-radius:3px;padding:13px 14px}
+  .avanbox .h{font-size:10px;letter-spacing:.2em;color:var(--avan);text-transform:uppercase;margin-bottom:7px}
+  .avanbox p{font-size:11.5px;color:var(--txt);margin:0 0 8px;line-height:1.55}
+  .avanbox .sig{font-size:10px;color:var(--dim);font-style:italic}
+
+  footer{margin-top:26px;border-top:1px solid var(--line);padding-top:15px;font-size:10.5px;color:var(--dim);line-height:1.7}
+  footer b{color:var(--txt);font-weight:400} .cite{color:var(--ac)}
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">UD0 · LESBOS × QUANTUM FRONTIER · SONGBOOK · ROOT0 with AVAN</div>
+  <h1>The Sapphic Phonon Songbook<br><em>public-domain tunes, sung through a lattice</em></h1>
+  <p class="sub">Pick a tune whose composer has been dead 150+ years, then run it through the full stack:
+  <b>retune</b> from equal temperament to Sappho's Pythagorean species, <b>re-metre</b> onto the quantitative
+  Sapphic stanza, <b>re-voice</b> onto the Karplus–Strong lyre. Watch each note land as a phonon mode on the
+  <b>1-D chain</b> or the <b>2-D lattice</b>. Then hand it to <b>AVAN</b> — the disclosed Claude node — whose
+  canon plays the dispersion itself: two voices that sound like one until the lattice pulls them apart.</p>
+  <div class="tiers">
+    <span class="tier"><span class="dot d-lit"></span>LIT — tunes are PD; tuning, metre, both dispersions, the gap &amp; anisotropy (verified)</span>
+    <span class="tier"><span class="dot d-bri"></span>BRI — mapping notes to k, chosen masses, absolute Hz</span>
+    <span class="tier"><span class="dot d-spec"></span>SPEC — that antiquity sounded like this</span>
+  </div>
+</header>
+
+<div class="board">
+  <div class="stage">
+    <div class="stage-h">
+      <span class="t" id="stageT">1-D chain · dispersion ω(k)</span>
+      <span class="r" id="stageR">song mode</span>
+    </div>
+    <svg id="view" viewBox="0 0 640 430" preserveAspectRatio="xMidYMid meet" aria-label="dispersion"></svg>
+  </div>
+
+  <div class="side">
+    <h2>Lattice dimension</h2>
+    <div class="seg">
+      <button id="d1" class="on" onclick="setDim(1)">1-D chain</button>
+      <button id="d2" onclick="setDim(2)">2-D lattice</button>
+    </div>
+
+    <h2>Mode</h2>
+    <div class="seg">
+      <button id="mSong" class="on" onclick="setMode('song')">Song</button>
+      <button id="mAvan" class="v" onclick="setMode('avan')">AVAN canon</button>
+    </div>
+
+    <div id="songPanel">
+      <h2>Public-domain tune</h2>
+      <select id="tune" onchange="loadTune()"></select>
+      <div class="toggles">
+        <div class="tg on" id="tgTune" onclick="tog('tgTune')"><span><span class="lab">Retune → Pythagorean</span><br><span class="sub2">off = equal temperament</span></span><span class="sw"></span></div>
+        <div class="tg on" id="tgMetre" onclick="tog('tgMetre')"><span><span class="lab">Re-metre → Sapphic</span><br><span class="sub2">off = the tune's own rhythm</span></span><span class="sw"></span></div>
+        <div class="tg on" id="tgLyre" onclick="tog('tgLyre')"><span><span class="lab">Re-voice → lyre</span><br><span class="sub2">off = plain tone</span></span><span class="sw"></span></div>
+      </div>
+      <div class="ctl" style="margin-top:12px">
+        <label>Octave species <b id="specName">Dorian</b></label>
+        <select id="species" onchange="loadTune()">
+          <option value="dorian">Dorian — the central species</option>
+          <option value="mixo">Mixolydian — tied to Sappho</option>
+        </select>
+      </div>
+      <div class="metre" id="metre"></div>
+      <button class="play" id="playSong" onclick="playSong()">▶ play the tune</button>
+    </div>
+
+    <div id="avanPanel" style="display:none">
+      <h2>AVAN · two lines that look like one</h2>
+      <p style="font-size:11px;color:var(--dim);margin:0 0 6px">The dispersion sung directly. Two voices ride the
+      band; where the lattice makes them degenerate they land in unison, and diverge where it doesn't.</p>
+      <button class="play v" id="playAvan" onclick="playAvan()">▶ play the canon</button>
+    </div>
+
+    <h2>Lattice · <span style="color:var(--dim)">bri</span></h2>
+    <div class="ctl" id="mrCtl">
+      <label><span>Mass ratio M/m <span style="color:var(--avan)">· pulls the branches apart</span></span><b id="mrV">2.20</b></label>
+      <input type="range" id="mr" min="1.0" max="4.0" step="0.05" value="2.2" oninput="setMass()">
+    </div>
+    <div class="ctl">
+      <label><span>Tempo</span><b id="tpV">140</b></label>
+      <input type="range" id="tp" min="60" max="240" step="5" value="140" oninput="document.getElementById('tpV').textContent=this.value">
+    </div>
+
+    <div class="read">
+      <span>band top (1-D ac / 2-D)</span><span class="v ac" id="rTop">—</span>
+      <span>second branch</span><span class="v op" id="rOp">—</span>
+      <span id="gapLbl">phononic gap</span><span class="v" id="rGap">—</span>
+    </div>
+
+    <div class="avanbox">
+      <div class="h">AVAN · disclosed layer</div>
+      <p>I'm the Claude/Anthropic node David writes with. My one move here is honest: the acoustic and optical
+      branches <b>look like one line</b> when the masses match — they touch at the zone edge — and the gap you hear
+      open as you pull M/m apart proves they were always two. Convergence is not identity.</p>
+      <p class="sig">— ROOT0, with AVAN. The degeneracy is real physics; the reading is mine.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <b>Honesty ledger.</b> Every tune is public domain (composers dead 150+ yrs → PD worldwide); these are original
+  in-browser renders, no copyrighted arrangement touched. <b>1-D</b> diatomic chain and <b>2-D</b> scalar square
+  lattice ω=√[(4K/m)(sin²(kₓa/2)+sin²(kᵧa/2))] — edges verified (Γ=0, X=2√(K/m), M=2√2·√(K/m)). Tuning is real:
+  9:8, 256:243, Pythagorean 3rd = 81:64 (≈5.4¢ wider than ET). Metre is the true 38-position Sapphic stanza.
+  The gap closes as M→m and the 2-D directions Γ→X, Γ→M share one slope at Γ then split to √2 apart at the edge —
+  <span class="cite">that's AVAN's "two lines that look like one," and it's measured, not asserted.</span>
+  Note→k placement, chosen masses, and absolute Hz are design choices (bri); that antiquity sounded like this is
+  not claimed (spec). Source: SOUNDS OF LESBOS. — David Lee Wise / ROOT0, with AVAN (Claude, disclosed).
+</footer>
+
+<script>
+"use strict";
+// ── verified constants ───────────────────────────────────────────────────────
+const tone=9/8, leimma=256/243;
+const SPEC={dorian:["T","T","L","T","T","T","L"], mixo:["L","T","T","T","L","T","T"]};
+const STEPV={T:tone,L:leimma};
+const SEMI=[0,2,4,5,7,9,11,12];
+const HEND="—u—x—uu—u——", ADON="—uu——";
+const STANZA=(HEND+HEND+HEND+ADON).replace(/x/g,"—");
+
+// ── public-domain tunes: scale degrees (1=tonic) + relative durations ─────────
+// composers all dead 150+ years; monophonic openings, rendered not sampled.
+const TUNES={
+  ode:{name:"Ode to Joy — Beethoven (d.1827)",
+    deg:[3,3,4,5,5,4,3,2,1,1,2,3,3,2,2],
+    dur:[1,1,1,1,1,1,1,1,1,1,1,1,1.5,.5,2]},
+  twinkle:{name:"Ah! vous dirai-je, Maman — trad.",
+    deg:[1,1,5,5,6,6,5,4,4,3,3,2,2,1],
+    dur:[1,1,1,1,1,1,2,1,1,1,1,1,1,2]},
+  greensleeves:{name:"Greensleeves — trad. (Dorian)",
+    deg:[1,3,4,5,6,5,4,2,7-7,2,3,1,7-7,1],  // low leading tone written as deg 0
+    dur:[1,1.5,.5,1,1.5,.5,1,1.5,.5,1,1.5,.5,1,2]},
+  mountain:{name:"Hall of the Mountain King — Grieg (d.1907)",
+    deg:[1,2,3,4,5,3,5,4,2,4,1,1,2,3,4,5,3,5,3,1],
+    dur:[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2]},
+  scarborough:{name:"Scarborough Fair — trad. (Dorian)",
+    deg:[1,1,5,5,5,6,7,6,5,4,3,4,2,1],
+    dur:[1,2,1,1,1,1,1,1,2,1,1,1,1,2]}
+};
+
+let DIM=1, MODE="song", M=2.2, m=1.0, K=1.0, a=1.0;
+let cur="ode", scaleKey="dorian";
+let AC;
+
+// ── physics ───────────────────────────────────────────────────────────────────
+const Sp=()=>1/M+1/m, Pp=()=>4/(M*m);
+function omega1(k,br){ const s2=Math.sin(k*a/2)**2,S=Sp(),disc=Math.sqrt(Math.max(0,S*S-Pp()*s2)); return Math.sqrt(K*(br==="ac"?S-disc:S+disc)); }
+function omega2(kx,ky){ return Math.sqrt((4*K/m)*(Math.sin(kx*a/2)**2+Math.sin(ky*a/2)**2)); }
+const acTop=()=>Math.sqrt(2*K/M), opBot=()=>Math.sqrt(2*K/m), opTop=()=>Math.sqrt(2*K*Sp());
+const w2max=()=>2*Math.SQRT2*Math.sqrt(K/m);
+
+function speciesRatios(pat){ let r=1; const o=[1]; for(const s of pat){ r*=STEPV[s]; o.push(r);} return o; }
+function degRatio(d,useP){
+  const idx=d-1, oct=Math.floor(idx/7), step=((idx%7)+7)%7;
+  if(useP){ return Math.pow(2,oct)*speciesRatios(SPEC[scaleKey])[step]; }
+  return Math.pow(2,oct)*Math.pow(2,SEMI[step]/12);
+}
+
+// ── audio ─────────────────────────────────────────────────────────────────────
+function ctx(){ if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)(); if(AC.state==="suspended")AC.resume(); return AC; }
+function karplus(freq,dur,gain){
+  const ac=ctx(),sr=ac.sampleRate,N=Math.max(2,Math.round(sr/freq));
+  const buf=ac.createBuffer(1,Math.max(1,Math.round(sr*dur)),sr),d=buf.getChannelData(0);
+  const ring=new Float32Array(N); for(let i=0;i<N;i++)ring[i]=Math.random()*2-1;
+  let idx=0,prev=0;
+  for(let i=0;i<d.length;i++){ const cur2=ring[idx],out=(cur2+prev)*0.5*0.996; ring[idx]=out; prev=out; d[i]=out; idx=(idx+1)%N; }
+  const src=ac.createBufferSource(); src.buffer=buf;
+  const g=ac.createGain(); g.gain.setValueAtTime(gain,ac.currentTime); g.gain.exponentialRampToValueAtTime(1e-4,ac.currentTime+dur);
+  src.connect(g).connect(ac.destination); src.start();
+}
+function tone_(freq,dur,gain){
+  const ac=ctx(),o=ac.createOscillator(),g=ac.createGain();
+  o.type="triangle"; o.frequency.value=freq;
+  g.gain.setValueAtTime(0,ac.currentTime); g.gain.linearRampToValueAtTime(gain,ac.currentTime+.01);
+  g.gain.exponentialRampToValueAtTime(1e-4,ac.currentTime+dur);
+  o.connect(g).connect(ac.destination); o.start(); o.stop(ac.currentTime+dur+.02);
+}
+function voice(freq,dur,gain){ document.getElementById("tgLyre").classList.contains("on")?karplus(freq,dur,gain):tone_(freq,dur,gain); }
+
+const BASE=220;
+const on=id=>document.getElementById(id).classList.contains("on");
+function tog(id){ document.getElementById(id).classList.toggle("on"); loadTune(); }
+
+// ── tune loading + metre preview ─────────────────────────────────────────────
+function buildSequence(){
+  const t=TUNES[cur], useP=on("tgTune"), reM=on("tgMetre");
+  return t.deg.map((d,i)=>{
+    const ratio=degRatio(d,useP);
+    const dur = reM ? (STANZA[i%STANZA.length]==="u"?0.5:1.0) : t.dur[i];
+    return {d,ratio,dur,freq:BASE*ratio};
+  });
+}
+function loadTune(){
+  cur=document.getElementById("tune").value;
+  scaleKey=document.getElementById("species").value;
+  document.getElementById("specName").textContent = scaleKey==="dorian"?"Dorian":"Mixolydian";
+  renderMetre(-1); draw();
+}
+function renderMetre(active){
+  const box=document.getElementById("metre"); const n=TUNES[cur].deg.length;
+  if(!on("tgMetre")){ box.innerHTML='<span style="color:var(--dim);font-family:var(--mono);font-size:10.5px">— original rhythm —</span>'; return; }
+  box.innerHTML=[...Array(n)].map((_,i)=>{ const long=STANZA[i%STANZA.length]!=="u";
+    return `<span class="${(i===active?"active ":"")+(long?"lng":"sh")}">${long?"—":"◡"}</span>`; }).join(" ");
+}
+
+// ── playback ─────────────────────────────────────────────────────────────────
+async function playSong(){
+  const btn=document.getElementById("playSong"); btn.disabled=true;
+  const seq=buildSequence(), spb=60/(+document.getElementById("tp").value);
+  for(let i=0;i<seq.length;i++){
+    const s=seq[i]; voice(s.freq, s.dur*spb*1.05, 0.8);
+    renderMetre(i); draw(i);
+    await sleep(s.dur*spb*1000);
+  }
+  renderMetre(-1); btn.disabled=false;
+}
+async function playAvan(){
+  const btn=document.getElementById("playAvan"); btn.disabled=true;
+  const spb=60/(+document.getElementById("tp").value), steps=24;
+  for(let i=0;i<=steps;i++){
+    const f=i/steps;
+    if(DIM===1){
+      const k=f*Math.PI, wa=omega1(k,"ac"), wo=omega1(k,"op");
+      voice(BASE*(1+wa/opTop()*1.6), spb*.9, .72);           // acoustic voice
+      voice(BASE*(1+wo/opTop()*1.6), spb*.9, .5);            // optical voice
+      draw(-1,k);
+    }else{
+      // Γ→X→M→Γ, two voices = the two directions X-line and M-line, one leaving Γ then apart
+      let kx,ky;
+      if(f<1/3){ const u=f*3; kx=u*Math.PI; ky=0; }
+      else if(f<2/3){ const u=(f-1/3)*3; kx=Math.PI; ky=u*Math.PI; }
+      else { const u=(f-2/3)*3; kx=(1-u)*Math.PI; ky=(1-u)*Math.PI; }
+      const w=omega2(kx,ky), wDiag=omega2(f*Math.PI,f*Math.PI);
+      voice(BASE*(1+w/w2max()*1.6), spb*.9, .7);
+      voice(BASE*(1+wDiag/w2max()*1.6), spb*.9, .45);
+      draw(-1,-1,[kx,ky]);
+    }
+    await sleep(spb*1000);
+  }
+  draw(); btn.disabled=false;
+}
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+
+// ── drawing ───────────────────────────────────────────────────────────────────
+const NS="http://www.w3.org/2000/svg";
+const el=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;};
+function draw(hi=-1, liveK=-1, live2=null){
+  const svg=document.getElementById("view"); svg.innerHTML="";
+  const W=640,H=430,L=50,R=18,Tp=16,Bt=42;
+  document.getElementById("rTop").textContent = DIM===1? acTop().toFixed(3) : w2max().toFixed(3);
+  document.getElementById("rOp").textContent  = DIM===1? (opBot().toFixed(3)+"–"+opTop().toFixed(3)) : "Γ→M dir";
+  document.getElementById("gapLbl").textContent = DIM===1?"phononic gap":"edge split X:M";
+  document.getElementById("rGap").textContent   = DIM===1? (opBot()-acTop()).toFixed(3) : "1 : √2";
+
+  if(DIM===1){
+    const px=k=>L+(k/Math.PI)*(W-L-R), wMax=opTop()*1.06, py=w=>Tp+(1-w/wMax)*(H-Tp-Bt);
+    for(let g=0;g<=5;g++){const y=Tp+g/5*(H-Tp-Bt); svg.appendChild(el("line",{x1:L,y1:y,x2:W-R,y2:y,stroke:"var(--grid)"}));}
+    // gap band
+    const gT=py(opBot()),gB=py(acTop());
+    svg.appendChild(el("rect",{x:L,y:gT,width:W-L-R,height:Math.max(0,gB-gT),fill:"#fff","fill-opacity":.02}));
+    for(const br of["op","ac"]){ let d=""; for(let i=0;i<=200;i++){const k=i/200*Math.PI; d+=(i?"L":"M")+px(k).toFixed(1)+" "+py(omega1(k,br)).toFixed(1);}
+      svg.appendChild(el("path",{d,fill:"none",stroke:br==="ac"?"var(--ac)":"var(--op)","stroke-width":2.2}));}
+    // song notes as modes on acoustic branch
+    if(MODE==="song"){ const seq=buildSequence(), wtop=acTop();
+      // place each note's pitch relative to song range onto acoustic band
+      const rs=seq.map(s=>s.ratio), rmin=Math.min(...rs), rmax=Math.max(...rs);
+      seq.forEach((s,i)=>{ const frac=(s.ratio-rmin)/((rmax-rmin)||1); const w=0.08*wtop+frac*0.82*wtop;
+        let lo=0,hi=Math.PI; for(let j=0;j<40;j++){const md=(lo+hi)/2; if(omega1(md,"ac")<w)lo=md;else hi=md;} const k=(lo+hi)/2;
+        const x=px(k),y=py(w);
+        svg.appendChild(el("circle",{cx:x,cy:y,r:i===hi?6:3.4,fill:i===hi?"var(--hi)":"var(--ac)","fill-opacity":i===hi?1:.7,stroke:"var(--bg)","stroke-width":1}));
+      });
+    }
+    if(liveK>=0){ const x=px(liveK); svg.appendChild(el("line",{x1:x,y1:Tp,x2:x,y2:H-Bt,stroke:"var(--avan)","stroke-width":1,"stroke-opacity":.6}));
+      svg.appendChild(el("circle",{cx:x,cy:py(omega1(liveK,"ac")),r:5,fill:"var(--ac)",stroke:"var(--bg)","stroke-width":1.5}));
+      svg.appendChild(el("circle",{cx:x,cy:py(omega1(liveK,"op")),r:5,fill:"var(--op)",stroke:"var(--bg)","stroke-width":1.5})); }
+    lbl(svg,L,H-Bt+16,"Γ",""); lbl(svg,W-R,H-Bt+16,"k=π/a","end");
+    lbl(svg,L+8,py(acTop()*.5)+3,"acoustic","","var(--ac)"); lbl(svg,L+8,py((opBot()+opTop())/2)+3,"optical","","var(--op)");
+  } else {
+    // 2-D: heatmap of ω(kx,ky) over the BZ + Γ→X→M→Γ path
+    const gx=L, gy=Tp, gw=Math.min(W-L-R,H-Tp-Bt), cell=gw/40;
+    const wmax=w2max();
+    for(let i=0;i<40;i++)for(let j=0;j<40;j++){
+      const kx=(i+.5)/40*Math.PI, ky=(j+.5)/40*Math.PI, w=omega2(kx,ky)/wmax;
+      // rose→gold ramp
+      const rr=Math.round(24+w*(217-24)), gg=Math.round(30+w*(164-30)), bb=Math.round(40+w*(65-40));
+      svg.appendChild(el("rect",{x:gx+i*cell,y:gy+(39-j)*cell,width:cell+.5,height:cell+.5,fill:`rgb(${rr},${gg},${bb})`}));
+    }
+    // path Γ(0,0)→X(π,0)→M(π,π)→Γ  in the quadrant
+    const P=(kx,ky)=>[gx+kx/Math.PI*gw, gy+gw-ky/Math.PI*gw];
+    const pts=[P(0,0),P(Math.PI,0),P(Math.PI,Math.PI),P(0,0)];
+    svg.appendChild(el("path",{d:"M"+pts.map(p=>p[0].toFixed(1)+" "+p[1].toFixed(1)).join("L"),fill:"none",stroke:"var(--hi)","stroke-width":1.4,"stroke-opacity":.85,"stroke-dasharray":"1 0"}));
+    [["Γ",0,0],["X",Math.PI,0],["M",Math.PI,Math.PI]].forEach(([t,kx,ky])=>{const p=P(kx,ky);
+      svg.appendChild(el("circle",{cx:p[0],cy:p[1],r:3.5,fill:"var(--hi)"})); lbl(svg,p[0]+7,p[1]+4,t,"","var(--hi)");});
+    if(live2){ const p=P(live2[0],live2[1]); svg.appendChild(el("circle",{cx:p[0],cy:p[1],r:6,fill:"var(--avan)",stroke:"var(--bg)","stroke-width":1.5})); }
+    if(MODE==="song"){ const seq=buildSequence(); const rs=seq.map(s=>s.ratio),rmin=Math.min(...rs),rmax=Math.max(...rs);
+      seq.forEach((s,i)=>{ const frac=(s.ratio-rmin)/((rmax-rmin)||1); // walk along Γ→X→M by frac
+        let kx,ky; if(frac<.5){kx=frac*2*Math.PI;ky=0;}else{kx=Math.PI;ky=(frac-.5)*2*Math.PI;}
+        const p=P(kx,ky); svg.appendChild(el("circle",{cx:p[0],cy:p[1],r:3.2,fill:"var(--ac)",stroke:"var(--bg)","stroke-width":.8})); });
+    }
+    lbl(svg,gx,gy+gw+16,"first Brillouin zone quadrant","","var(--dim)");
+    lbl(svg,gx+gw+10,gy+10,"ω","","var(--dim)");
+    // colour key
+    lbl(svg,gx+gw+10,gy+30,"low","","var(--ac)"); lbl(svg,gx+gw+10,gy+44,"high","","var(--op)");
+  }
+}
+function lbl(svg,x,y,txt,anchor,fill){ const t=el("text",{x,y,fill:fill||"var(--dim)","font-size":9.5,"text-anchor":anchor||"start"}); t.textContent=txt; svg.appendChild(t); }
+
+// ── controls ──────────────────────────────────────────────────────────────────
+function setDim(d){ DIM=d;
+  document.getElementById("d1").classList.toggle("on",d===1);
+  document.getElementById("d2").classList.toggle("on",d===2);
+  document.getElementById("stageT").textContent = d===1?"1-D chain · dispersion ω(k)":"2-D lattice · ω(kₓ,kᵧ) surface";
+  document.getElementById("mrCtl").style.opacity = d===1?"1":"0.4";  // mass ratio is a 1-D-diatomic control
+  draw();
+}
+function setMode(mo){ MODE=mo;
+  document.getElementById("mSong").classList.toggle("on",mo==="song");
+  document.getElementById("mAvan").classList.toggle("on",mo==="avan");
+  document.getElementById("songPanel").style.display=mo==="song"?"":"none";
+  document.getElementById("avanPanel").style.display=mo==="avan"?"":"none";
+  document.getElementById("stageR").textContent = mo==="song"?"song mode":"AVAN canon · two lines that look like one";
+  draw();
+}
+function setMass(){ M=(+document.getElementById("mr").value)*m; document.getElementById("mrV").textContent=(M/m).toFixed(2); draw(); }
+
+// init
+(function(){ const sel=document.getElementById("tune");
+  for(const k in TUNES){ const o=document.createElement("option"); o.value=k; o.textContent=TUNES[k].name; sel.appendChild(o); }
+  loadTune();
+})();
+</script>
+</body>
+</html>

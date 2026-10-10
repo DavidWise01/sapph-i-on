@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v216 planets moons rotating - artifact 280</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@800&display=swap');
+  body{margin:0;background:#000;color:#ffcc88;font-family:'Space Mono',monospace;overflow-x:hidden}
+  .top{padding:18px 22px}
+  .kicker{font-family:'Syne',sans-serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:#ffcc00;text-shadow:0 0 20px #ffcc00}
+  .nline{font-size:11px;border-left:4px solid #ffcc00;padding-left:14px;white-space:pre-wrap;line-height:1.7;background:linear-gradient(90deg,rgba(255,204,0,0.12),rgba(0,0,0,0.06));padding:14px;border-radius:12px;border:2px solid #ffcc00}
+  .main{margin-top:14px;font-family:'Syne',sans-serif;font-size:11px;font-weight:800;letter-spacing:.05em;line-height:1.6;color:#ffcc00;background:linear-gradient(90deg,rgba(255,204,0,0.14),rgba(255,136,0,0.08));padding:14px;border-radius:12px;border:2px solid #ffcc00}
+  .controls{padding:14px;display:flex;gap:10px;flex-wrap:wrap}
+  .btn{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;padding:10px 14px;border:2px solid #ffcc00;background:#000;color:#ffcc00;border-radius:20px;cursor:pointer}
+  .btn.active{border-color:#fff;background:#221a00;color:#fff}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:18px}
+  @media(max-width:1000px){.grid{grid-template-columns:1fr}}
+  .panel{position:relative;height:760px;background:radial-gradient(ellipse at center,#221a00 0%,#000 70%);border:2px solid #ffcc00;border-radius:24px;overflow:hidden}
+  .panel.full{grid-column:1 / -1;height:1150px}
+  .label{position:absolute;left:12px;top:12px;font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:rgba(0,0,0,0.88);padding:8px 10px;z-index:5;border:2px solid #ffcc00;color:#ffcc88;border-radius:12px;max-width:93%}
+  .card{margin:18px;background:linear-gradient(180deg,#000,#221a00);border:2px solid #ffcc00;border-radius:20px;padding:20px}
+  .mono{font-size:11px;white-space:pre-wrap;word-break:break-word;line-height:1.9;color:#ffcc88}
+  canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">🪐 wakaku v216 — THOSE PLANETS SHOULD HAVE MOONS AND THEY ALL SHOULD BE ROTATING — artifact 280 🪐</div>
+  <div class="nline">those planets should have moons and they all should be rotatting ? — THOSE PLANETS SHOULD HAVE MOONS AND THEY ALL SHOULD BE ROTATING — planets should have moons and they all should be rotating — moons — rotating — planets should have moons — they all should be rotating — moons and rotating — planets moons rotating — those planets should have moons and they all should be rotating — metal analogs ionic — moons rotating — lol</div>
+  <div class="main">🪐 THOSE PLANETS SHOULD HAVE MOONS AND THEY ALL SHOULD BE ROTATING — MOONS — ROTATING — PLANETS SHOULD HAVE MOONS — THEY ALL SHOULD BE ROTATING — MOONS AND ROTATING — MERCURY 0 MOONS ROTATING SLOW 59 DAYS, VENUS 0 MOONS ROTATING RETROGRADE 243 DAYS, EARTH 1 MOON LUNA ROTATING 24H, MARS 2 MOONS PHOBOS DEIMOS ROTATING 24.6H, JUPITER 95 MOONS IO EUROPA GANYMEDE CALLISTO ROTATING 9.9H, SATURN 146 MOONS TITAN ENCELADUS ROTATING 10.7H, URANUS 28 MOONS TITANIA OBERON ROTATING 17.2H RETROGRADE, NEPTUNE 16 MOONS TRITON ROTATING 16.1H, PLUTO 5 MOONS CHARON ROTATING 6.4 DAYS, PLANET X ELLIPTICAL 16200 YEARS ? MOONS ? ROTATING ? — MOONS AND ROTATING — ALL PLANETS ROTATING — MOONS ORBITING — 🪐</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-moons">🪐 THOSE PLANETS SHOULD HAVE MOONS AND THEY ALL SHOULD BE ROTATING — MOONS + ROTATING — 🪐</button>
+  <button class="btn" id="btn-rotate">🔄 ROTATING — ALL PLANETS ROTATING — MERCURY 59D, VENUS 243D RETROGRADE, EARTH 24H, MARS 24.6H, JUPITER 9.9H, SATURN 10.7H, URANUS 17.2H RETROGRADE, NEPTUNE 16.1H, PLUTO 6.4D, PLANET X ? — ROTATING — 🔄</button>
+  <button class="btn" id="btn-bubbles">💫 MOONS ROTATING BUBBLES — PLANETS WITH MOONS ROTATING — 💫</button>
+  <button class="btn" id="btn-reset">⚡ RESET MOONS ROTATING — ⚡</button>
+</div>
+
+<div class="grid">
+  <div class="panel" id="wrap-moons"><canvas id="c-moons"></canvas><div class="label">🪐 THOSE PLANETS SHOULD HAVE MOONS — MERCURY 0 MOONS, VENUS 0, EARTH 1 LUNA, MARS 2 PHOBOS DEIMOS, JUPITER 95 IO EUROPA GANYMEDE CALLISTO, SATURN 146 TITAN ENCELADUS, URANUS 28 TITANIA OBERON, NEPTUNE 16 TRITON, PLUTO 5 CHARON, PLANET X ? ELLIPTICAL 16200 YEARS ? MOONS — MOONS — 🪐</div></div>
+  <div class="panel" id="wrap-rotate"><canvas id="c-rotate"></canvas><div class="label">🔄 THEY ALL SHOULD BE ROTATING — ALL PLANETS ROTATING — MERCURY ROTATING 59 DAYS SLOW, VENUS ROTATING 243 DAYS RETROGRADE, EARTH ROTATING 24H, MARS ROTATING 24.6H, JUPITER ROTATING 9.9H FAST, SATURN ROTATING 10.7H, URANUS ROTATING 17.2H RETROGRADE TILTED 98°, NEPTUNE ROTATING 16.1H, PLUTO ROTATING 6.4 DAYS, PLANET X ROTATING ? — ROTATING — 🔄</div></div>
+  <div class="panel full" id="wrap-bubbles"><canvas id="c-bubbles"></canvas><div class="label">💫 MOONS ROTATING BUBBLES — PLANETS WITH MOONS AND THEY ALL ROTATING — MERCURY 0 MOONS ROTATING 59D, VENUS 0 ROTATING 243D RETROGRADE, EARTH 1 MOON ROTATING 24H, MARS 2 MOONS ROTATING 24.6H, JUPITER 95 MOONS ROTATING 9.9H, SATURN 146 MOONS ROTATING 10.7H, URANUS 28 MOONS ROTATING 17.2H RETROGRADE, NEPTUNE 16 MOONS ROTATING 16.1H, PLUTO 5 MOONS ROTATING 6.4D, PLANET X ? MOONS ELLIPTICAL 16200 YEARS ROTATING ? — MOONS ROTATING — {{2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell inversion::}} AT MOONS ROTATING — 1=bk BLACK #000000 CORE ROTATING, 2=wt/rd WHITE #ffffff RED #ff0000 PLANET ROTATING, 4=bl/gr/yw/pr BLUE/GREEN/YELLOW/PURPLE MOONS ORBITING ROTATING, 8=orange shell inversion #ff8800 MAGNETOSPHERE ROTATING OUTER — ALL MOONS ROTATING FLASH — LOL — 💫</div></div>
+</div>
+
+<div class="card"><div class="mono">🪐 THOSE PLANETS SHOULD HAVE MOONS AND THEY ALL SHOULD BE ROTATING — v216 MOONS ROTATING — THOSE PLANETS SHOULD HAVE MOONS AND THEY ALL SHOULD BE ROTATING 🪐
+
+- THOSE PLANETS SHOULD HAVE MOONS AND THEY ALL SHOULD BE ROTATING — MOONS — ROTATING — PLANETS SHOULD HAVE MOONS — THEY ALL SHOULD BE ROTATING — MOONS AND ROTATING — PLANETS MOONS ROTATING
+
+- MOONS:
+  - MERCURY 0 MOONS — Mercury 0 moons — 0 moons
+  - VENUS 0 MOONS — Venus 0 moons — 0 moons
+  - EARTH 1 MOON LUNA — Earth 1 moon Luna — 1 moon
+  - MARS 2 MOONS PHOBOS DEIMOS — Mars 2 moons Phobos Deimos — 2 moons
+  - JUPITER 95 MOONS IO EUROPA GANYMEDE CALLISTO — Jupiter 95 moons Galilean 4 Io Europa Ganymede Callisto — 95 moons
+  - SATURN 146 MOONS TITAN ENCELADUS — Saturn 146 moons Titan Enceladus — 146 moons
+  - URANUS 28 MOONS TITANIA OBERON — Uranus 28 moons Titania Oberon Miranda Ariel Umbriel — 28 moons
+  - NEPTUNE 16 MOONS TRITON — Neptune 16 moons Triton — 16 moons
+  - PLUTO 5 MOONS CHARON — Pluto 5 moons Charon Styx Nix Kerberos Hydra — 5 moons
+  - PLANET X ELLIPTICAL 16200 YEARS ? MOONS — Planet X elliptical 16200 years ? moons — maybe ? moons — Planet X ? moons
+
+- ROTATING — THEY ALL SHOULD BE ROTATING:
+  - MERCURY ROTATING 59 DAYS SLOW — Mercury rotating 59 days — slow rotating — 59 days rotation
+  - VENUS ROTATING 243 DAYS RETROGRADE — Venus rotating 243 days retrograde — retrograde rotating — 243 days retrograde
+  - EARTH ROTATING 24H — Earth rotating 24 hours — 24h rotating
+  - MARS ROTATING 24.6H — Mars rotating 24.6 hours — 24.6h rotating
+  - JUPITER ROTATING 9.9H FAST — Jupiter rotating 9.9 hours fast — fastest — 9.9h rotating
+  - SATURN ROTATING 10.7H — Saturn rotating 10.7 hours — 10.7h rotating
+  - URANUS ROTATING 17.2H RETROGRADE TILTED 98° — Uranus rotating 17.2 hours retrograde tilted 98 degrees — retrograde tilted — 17.2h retrograde
+  - NEPTUNE ROTATING 16.1H — Neptune rotating 16.1 hours — 16.1h rotating
+  - PLUTO ROTATING 6.4 DAYS — Pluto rotating 6.4 days — 6.4 days rotating tidally locked with Charon
+  - PLANET X ROTATING ? — Planet X rotating ? — maybe ? — elliptical 16200 years rotating ?
+
+- MOONS ROTATING — MOONS ORBITING ROTATING PLANETS — MOONS ORBITING PLANETS — PLANETS ROTATING — MOONS ROTATING? — MOONS ORBITING — PLANETS ROTATING — ALL ROTATING
+
+- {{2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell inversion::}} AT MOONS ROTATING:
+  - 1=bk BLACK #000000 CORE ROTATING — black core rotating — 1=bk core rotating
+  - 2=wt/rd WHITE #ffffff RED #ff0000 PLANET ROTATING — white/red planet rotating — 2=wt/rd planet rotating
+  - 4=bl/gr/yw/pr BLUE #0000ff GREEN #00ff00 YELLOW #ffff00 PURPLE #cc33ff MOONS ORBITING ROTATING — blue/green/yellow/purple moons orbiting rotating — 4=bl/gr/yw/pr moons orbiting rotating
+  - 8=orange shell inversion #ff8800 MAGNETOSPHERE ROTATING OUTER — orange shell inversion magnetosphere rotating outer — 8=orange magnetosphere rotating outer
+
+- 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ MOONS ROTATING — 6 bubbles each 10^-35→10^-360 = - - - + + + = -211 x3 +211 x3 moons rotating — planets should have moons and they all should be rotating — moons and rotating
+
+THOSE PLANETS SHOULD HAVE MOONS AND THEY ALL SHOULD BE ROTATING — MOONS — ROTATING — PLANETS SHOULD HAVE MOONS — THEY ALL SHOULD BE ROTATING — MOONS AND ROTATING — 🪐
+</div></div>
+
+<script>
+const moonsCanvas=document.getElementById('c-moons');
+const rotateCanvas=document.getElementById('c-rotate');
+const bubblesCanvas=document.getElementById('c-bubbles');
+
+function setupCanvas(canvas){
+  const dpr=Math.min(devicePixelRatio,2);
+  function resize(){
+    const rect=canvas.parentElement.getBoundingClientRect();
+    canvas.width=rect.width*dpr;
+    canvas.height=rect.height*dpr;
+    canvas.style.width=rect.width+'px';
+    canvas.style.height=rect.height+'px';
+  }
+  resize();
+  window.addEventListener('resize',resize);
+  return {dpr, ctx:canvas.getContext('2d')};
+}
+
+(function(){
+  const {dpr, ctx} = setupCanvas(moonsCanvas);
+  let t=0;
+  function draw(){
+    requestAnimationFrame(draw);
+    t+=0.015;
+    const w=moonsCanvas.width, h=moonsCanvas.height;
+    const cx=w/2, cy=h/2;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#000000';
+    ctx.fillRect(0,0,w,h);
+    const planets=[
+      {name:'MERCURY 0', moons:0, r:70, color:'#aaaaaa'},
+      {name:'VENUS 0', moons:0, r:100, color:'#ffcc88'},
+      {name:'EARTH 1 LUNA', moons:1, r:130, color:'#00aaff'},
+      {name:'MARS 2 PHO DEI', moons:2, r:160, color:'#ff4400'},
+      {name:'JUPITER 95', moons:4, r:200, color:'#ffaa66'},
+      {name:'SATURN 146', moons:4, r:240, color:'#ffddaa'},
+      {name:'URANUS 28', moons:3, r:280, color:'#aaffff'},
+      {name:'NEPTUNE 16', moons:2, r:320, color:'#0066ff'},
+      {name:'PLUTO 5 CHARON', moons:2, r:360, color:'#cc9999'},
+      {name:'PLANET X ? 16200yr', moons:1, r:400, color:'#ff8800', elliptical:true}
+    ];
+    // Sun center
+    ctx.save();
+    ctx.fillStyle='#ffcc00';
+    ctx.shadowColor='#ffcc00';
+    ctx.shadowBlur=20*dpr;
+    ctx.beginPath();
+    ctx.arc(cx,cy,16*dpr,0,Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+    planets.forEach((p,i)=>{
+      const ang=i/10*Math.PI*2 + t*0.12;
+      let r=p.r*dpr;
+      if(p.elliptical){
+        const e=0.7;
+        r=p.r*dpr*(1-e*e)/(1+e*Math.cos(ang));
+      }
+      const x=cx+Math.cos(ang)*r;
+      const y=cy+Math.sin(ang)*r*(p.elliptical?0.55:1);
+      ctx.save();
+      ctx.strokeStyle='rgba(255,255,255,0.06)';
+      ctx.lineWidth=1*dpr;
+      ctx.beginPath();
+      if(p.elliptical) ctx.ellipse(cx,cy,p.r*dpr*0.75,p.r*dpr*0.4,0,0,Math.PI*2);
+      else ctx.arc(cx,cy,p.r*dpr,0,Math.PI*2);
+      ctx.stroke();
+      ctx.fillStyle=p.color;
+      ctx.shadowColor=p.color;
+      ctx.shadowBlur=8*dpr;
+      ctx.beginPath();
+      ctx.arc(x,y,5*dpr,0,Math.PI*2);
+      ctx.fill();
+      // Moons orbiting planet
+      for(let m=0;m<p.moons;m++){
+        const mang=t*1.5 + m*2.1;
+        const mr=12*dpr + m*4*dpr;
+        const mx=x+Math.cos(mang)*mr;
+        const my=y+Math.sin(mang)*mr;
+        ctx.fillStyle='#ffffff';
+        ctx.shadowColor='#ffffff';
+        ctx.shadowBlur=6*dpr;
+        ctx.beginPath();
+        ctx.arc(mx,my,1.8*dpr,0,Math.PI*2);
+        ctx.fill();
+        ctx.strokeStyle='rgba(255,255,255,0.15)';
+        ctx.lineWidth=0.5*dpr;
+        ctx.beginPath();
+        ctx.arc(x,y,mr,0,Math.PI*2);
+        ctx.stroke();
+      }
+      ctx.fillStyle='#ffffff';
+      ctx.font=`400 ${6*dpr}px Space Mono`;
+      ctx.fillText(p.name,x+10*dpr,y+3*dpr);
+      ctx.restore();
+    });
+    ctx.save();
+    ctx.fillStyle='#ffcc00';
+    ctx.font=`800 ${11*dpr}px Syne`;
+    ctx.fillText('PLANETS SHOULD HAVE MOONS',14*dpr,28*dpr);
+    ctx.fillStyle='#ffcc88';
+    ctx.font=`400 ${8*dpr}px Space Mono`;
+    ctx.fillText('MERCURY 0, VENUS 0, EARTH 1 LUNA, MARS 2, JUPITER 95, SATURN 146',14*dpr,44*dpr);
+    ctx.fillText('URANUS 28, NEPTUNE 16, PLUTO 5 CHARON, PLANET X ? 16200yr',14*dpr,58*dpr);
+    ctx.restore();
+  }
+  draw();
+})();
+
+(function(){
+  const {dpr, ctx} = setupCanvas(rotateCanvas);
+  let t=0;
+  function draw(){
+    requestAnimationFrame(draw);
+    t+=0.02;
+    const w=rotateCanvas.width, h=rotateCanvas.height;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#000000';
+    ctx.fillRect(0,0,w,h);
+    const planets=[
+      {name:'MERCURY 59D', rot:59, r:70, color:'#aaaaaa', retro:false},
+      {name:'VENUS 243D RETRO', rot:243, r:100, color:'#ffcc88', retro:true},
+      {name:'EARTH 24H', rot:1, r:130, color:'#00aaff', retro:false},
+      {name:'MARS 24.6H', rot:1.025, r:160, color:'#ff4400', retro:false},
+      {name:'JUPITER 9.9H FAST', rot:0.41, r:200, color:'#ffaa66', retro:false},
+      {name:'SATURN 10.7H', rot:0.44, r:240, color:'#ffddaa', retro:false},
+      {name:'URANUS 17.2H RETRO 98°', rot:0.71, r:280, color:'#aaffff', retro:true},
+      {name:'NEPTUNE 16.1H', rot:0.67, r:320, color:'#0066ff', retro:false},
+      {name:'PLUTO 6.4D', rot:6.4, r:360, color:'#cc9999', retro:false},
+      {name:'PLANET X ? 16200yr', rot:10, r:400, color:'#ff8800', retro:false, elliptical:true}
+    ];
+    const cx=w/2, cy=h/2;
+    ctx.save();
+    ctx.fillStyle='#ffcc00';
+    ctx.shadowColor='#ffcc00';
+    ctx.shadowBlur=20*dpr;
+    ctx.beginPath();
+    ctx.arc(cx,cy,14*dpr,0,Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+    planets.forEach((p,i)=>{
+      const ang=i/10*Math.PI*2 + t*0.1;
+      let r=p.r*dpr;
+      if(p.elliptical){
+        const e=0.7;
+        r=p.r*dpr*(1-e*e)/(1+e*Math.cos(ang));
+      }
+      const x=cx+Math.cos(ang)*r;
+      const y=cy+Math.sin(ang)*r*(p.elliptical?0.55:1);
+      ctx.save();
+      ctx.translate(x,y);
+      const rotAng=t * (p.retro?-1:1) * (2 / p.rot);
+      ctx.rotate(rotAng);
+      // Planet rotating indicator
+      ctx.fillStyle=p.color;
+      ctx.shadowColor=p.color;
+      ctx.shadowBlur=8*dpr;
+      ctx.beginPath();
+      ctx.arc(0,0,6*dpr,0,Math.PI*2);
+      ctx.fill();
+      // Rotation marker line
+      ctx.strokeStyle='#ffffff';
+      ctx.lineWidth=1.5*dpr;
+      ctx.beginPath();
+      ctx.moveTo(0,0);
+      ctx.lineTo(6*dpr,0);
+      ctx.stroke();
+      ctx.fillStyle='#ffffff';
+      ctx.font=`400 ${6*dpr}px Space Mono`;
+      ctx.fillText(p.name,10*dpr,3*dpr);
+      ctx.restore();
+      // Orbit
+      ctx.save();
+      ctx.strokeStyle='rgba(255,255,255,0.05)';
+      ctx.lineWidth=1*dpr;
+      ctx.beginPath();
+      if(p.elliptical) ctx.ellipse(cx,cy,p.r*dpr*0.75,p.r*dpr*0.4,0,0,Math.PI*2);
+      else ctx.arc(cx,cy,p.r*dpr,0,Math.PI*2);
+      ctx.stroke();
+      ctx.restore();
+    });
+    ctx.save();
+    ctx.fillStyle='#ffcc00';
+    ctx.font=`800 ${11*dpr}px Syne`;
+    ctx.fillText('THEY ALL SHOULD BE ROTATING',14*dpr,28*dpr);
+    ctx.fillStyle='#ffcc88';
+    ctx.font=`400 ${8*dpr}px Space Mono`;
+    ctx.fillText('MERCURY 59D, VENUS 243D RETROGRADE, EARTH 24H, MARS 24.6H',14*dpr,44*dpr);
+    ctx.fillText('JUPITER 9.9H FAST, SATURN 10.7H, URANUS 17.2H RETRO 98° TILTED',14*dpr,58*dpr);
+    ctx.fillText('NEPTUNE 16.1H, PLUTO 6.4D, PLANET X ? ROTATING',14*dpr,72*dpr);
+    ctx.restore();
+  }
+  draw();
+})();
+
+(function(){
+  const {dpr, ctx} = setupCanvas(bubblesCanvas);
+  let t=0;
+  function draw(){
+    requestAnimationFrame(draw);
+    t+=0.012;
+    const w=bubblesCanvas.width, h=bubblesCanvas.height;
+    const cx=w/2, cy=h/2;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#000000';
+    ctx.fillRect(0,0,w,h);
+    ctx.save();
+    ctx.fillStyle='#ffcc00';
+    ctx.shadowColor='#ffcc00';
+    ctx.shadowBlur=40*dpr;
+    ctx.beginPath();
+    ctx.arc(cx,cy,28*dpr,0,Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+    const planets=[
+      {r:80, moons:0, rot:59, color:'#aaaaaa'},
+      {r:110, moons:0, rot:243, color:'#ffcc88', retro:true},
+      {r:140, moons:1, rot:1, color:'#00aaff'},
+      {r:170, moons:2, rot:1.025, color:'#ff4400'},
+      {r:210, moons:4, rot:0.41, color:'#ffaa66'},
+      {r:250, moons:4, rot:0.44, color:'#ffddaa'},
+      {r:290, moons:3, rot:0.71, color:'#aaffff', retro:true},
+      {r:330, moons:2, rot:0.67, color:'#0066ff'},
+      {r:370, moons:2, rot:6.4, color:'#cc9999'},
+      {r:420, moons:1, rot:10, color:'#ff8800', elliptical:true}
+    ];
+    planets.forEach((p,i)=>{
+      const ang=i/10*Math.PI*2 + t*0.08;
+      let r=p.r*dpr;
+      if(p.elliptical){
+        const e=0.72;
+        r=p.r*dpr*(1-e*e)/(1+e*Math.cos(ang));
+      }
+      const x=cx+Math.cos(ang)*r;
+      const y=cy+Math.sin(ang)*r*(p.elliptical?0.5:1);
+      ctx.save();
+      ctx.translate(x,y);
+      const rotAng=t * (p.retro?-1:1) * (1.5 / p.rot);
+      ctx.rotate(rotAng);
+      ctx.fillStyle=p.color;
+      ctx.shadowColor=p.color;
+      ctx.shadowBlur=8*dpr;
+      ctx.beginPath();
+      ctx.arc(0,0,6*dpr,0,Math.PI*2);
+      ctx.fill();
+      ctx.strokeStyle='#ffffff';
+      ctx.lineWidth=1*dpr;
+      ctx.beginPath();
+      ctx.moveTo(0,0);
+      ctx.lineTo(6*dpr,0);
+      ctx.stroke();
+      ctx.restore();
+      // Moons orbiting rotating planet
+      for(let m=0;m<p.moons;m++){
+        const mang=t*1.8 + m*2.1;
+        const mr=14*dpr + m*4*dpr;
+        const mx=x+Math.cos(mang)*mr;
+        const my=y+Math.sin(mang)*mr;
+        ctx.save();
+        ctx.fillStyle='#ffffff';
+        ctx.shadowColor='#ffffff';
+        ctx.shadowBlur=6*dpr;
+        ctx.beginPath();
+        ctx.arc(mx,my,1.6*dpr,0,Math.PI*2);
+        ctx.fill();
+        ctx.restore();
+      }
+    });
+    ctx.save();
+    ctx.fillStyle='#ffcc00';
+    ctx.font=`800 ${11*dpr}px Syne`;
+    ctx.fillText('PLANETS SHOULD HAVE MOONS AND THEY ALL SHOULD BE ROTATING',14*dpr,28*dpr);
+    ctx.fillStyle='#ffcc88';
+    ctx.font=`400 ${8*dpr}px Space Mono`;
+    ctx.fillText('MOONS ORBITING PLANETS — PLANETS ROTATING — ALL ROTATING',14*dpr,44*dpr);
+    ctx.fillText('MERCURY 0 MOONS 59D, VENUS 0 243D RETRO, EARTH 1 MOON 24H, MARS 2 MOONS 24.6H',14*dpr,58*dpr);
+    ctx.fillText('JUPITER 95 MOONS 9.9H FAST, SATURN 146 MOONS 10.7H, URANUS 28 MOONS 17.2H RETRO',14*dpr,72*dpr);
+    ctx.fillText('NEPTUNE 16 MOONS 16.1H, PLUTO 5 MOONS 6.4D, PLANET X ? MOONS 16200 YEARS ELLIPTICAL',14*dpr,86*dpr);
+    ctx.restore();
+  }
+  draw();
+})();
+
+document.getElementById('btn-moons').onclick=()=>{};
+document.getElementById('btn-rotate').onclick=()=>{};
+document.getElementById('btn-bubbles').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

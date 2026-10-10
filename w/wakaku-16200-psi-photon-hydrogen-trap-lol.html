@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v209 16200 psi photon hydrogen - artifact 273</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@800&display=swap');
+  :root{--bg:#01030a;--fg:#a8f0e0}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:'Space Mono',monospace;overflow-x:hidden}
+  .top{padding:18px 22px;position:relative;z-index:10}
+  .kicker{font-family:'Syne',sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:800;color:#00ffcc;text-shadow:0 0 20px #00ffcc}
+  .nline{font-size:11px;border-left:4px solid #00ffcc;padding-left:14px;white-space:pre-wrap;line-height:1.7;background:linear-gradient(90deg,rgba(0,255,204,0.08),rgba(0,170,255,0.06));padding:14px;border-radius:12px;color:#a8f0e0;box-shadow:0 0 30px rgba(0,255,204,0.12);border:2px solid #00ffcc}
+  .main{margin-top:14px;font-family:'Syne',sans-serif;font-size:12px;font-weight:800;letter-spacing:.05em;line-height:1.6;color:#00ffcc;background:linear-gradient(90deg,rgba(0,255,204,0.1),rgba(0,170,255,0.08));padding:14px;border-radius:12px;border:2px solid #00ffcc;box-shadow:0 0 40px rgba(0,255,204,0.15)}
+  .controls{padding:14px;display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:10}
+  .btn{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;padding:10px 14px;border:2px solid #00ffcc;background:#01030a;color:#00ffcc;border-radius:20px;cursor:pointer;box-shadow:0 0 20px rgba(0,255,204,0.2);text-transform:uppercase}
+  .btn.active{border-color:#fff;background:#001a22;color:#fff}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:18px}
+  @media(max-width:1000px){.grid{grid-template-columns:1fr}}
+  .panel{position:relative;height:760px;background:radial-gradient(ellipse at center,#001122 0%,#01030a 70%);border:2px solid #00ffcc;border-radius:24px;overflow:hidden;box-shadow:0 0 50px rgba(0,255,204,0.2), inset 0 0 80px rgba(0,0,0,0.9)}
+  .panel.full{grid-column:1 / -1;height:1000px}
+  .label{position:absolute;left:12px;top:12px;font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:rgba(1,3,10,0.88);padding:8px 10px;z-index:5;border:2px solid #00ffcc;color:#00ffcc;border-radius:12px;max-width:93%}
+  .card{margin:18px;background:linear-gradient(180deg,#01030a,#001122);border:2px solid #00ffcc;border-radius:20px;padding:20px;box-shadow:0 0 50px rgba(0,255,204,0.15)}
+  .mono{font-size:11px;white-space:pre-wrap;word-break:break-word;line-height:1.9;color:#a8f0e0}
+  canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">🌊 wakaku v209 — 16,200 PSI TRAP A PHOTON?? OR HYDROGEN ATOM LOL — artifact 273 🌊</div>
+  <div class="nline">so - 16,200 psi is what it takes to trap a photon ?? or hydrogen atom lol — SO 16,200 PSI IS WHAT IT TAKES TO TRAP A PHOTON ?? OR HYDROGEN ATOM LOL — 16,200 psi — 16,200 psi is what it takes to trap a photon ?? or hydrogen atom lol — 16,200 psi = 16,200 psi = 111.7 MPa = 1,102 atm = Challenger Deep pressure — does 16,200 psi trap a photon ?? or hydrogen atom lol — 16,200 psi photon trap ?? hydrogen atom trap lol — 16,200 psi = deep sea pressure — photon trap requires black hole — hydrogen atom trap requires optical/magnetic trap ultra-low pressure not high — 16,200 psi vs photon vs hydrogen — lol</div>
+  <div class="main">🌊 16,200 PSI = 111.7 MPa = 1,102 atm = CHALLENGER DEEP +1% — DOES IT TRAP A PHOTON ?? OR HYDROGEN ATOM LOL — ANSWER: NO — 16,200 PSI CRUSHES SUBMARINE BUT NOT PHOTON — PHOTON HAS NO MASS, NO CHARGE, MOVES AT c, CANNOT BE TRAPPED BY PRESSURE — TO TRAP PHOTON YOU NEED: 1) MIRROR CAVITY (optical trap) 0 psi vacuum, 2) BLACK HOLE PHOTON SPHERE 1.5 Schwarzschild radius gravity not pressure, 3) PHOTONIC CRYSTAL — PRESSURE 0 — HYDROGEN ATOM: TO TRAP HYDROGEN YOU NEED ULTRA-LOW PRESSURE UHV 10^-11 torr + MAGNETIC/OPTICAL TRAP, NOT HIGH PRESSURE — 16,200 PSI WOULD CRUSH HYDROGEN INTO METAL HYDRIDE NOT TRAP SINGLE ATOM — METALLIC HYDROGEN REQUIRES 400 GPa = 58 MILLION PSI = 3,600× CHALLENGER DEEP — 16,200 PSI IS 0.027% OF THAT — SO NO, 16,200 PSI DOES NOT TRAP PHOTON OR HYDROGEN ATOM LOL — IT TRAPS FISH AND SUBMARINES — 🌊</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-compare">🌊 16,200 PSI vs PHOTON vs HYDROGEN — 16,200 PSI = 111.7 MPa = 1,102 atm — PHOTON TRAP = BLACK HOLE 1.5 Rs OR MIRROR CAVITY 0 psi — HYDROGEN TRAP = UHV 10^-11 torr MAGNETIC TRAP — 16,200 PSI DOES NOT TRAP PHOTON OR H — 🌊</button>
+  <button class="btn" id="btn-photon">💡 PHOTON TRAP — PHOTON NO MASS NO CHARGE c — TRAP BY MIRROR CAVITY OR BLACK HOLE PHOTON SPHERE 1.5 Rs — NOT PRESSURE — 💡</button>
+  <button class="btn" id="btn-bubbles">💫 PRESSURE COMPARISON BUBBLES — 16,200 psi DEEP SEA vs 58 MILLION psi METALLIC HYDROGEN vs BLACK HOLE INFINITE — 💫</button>
+  <button class="btn" id="btn-reset">⚡ RESET — ⚡</button>
+</div>
+
+<div class="grid">
+  <div class="panel" id="wrap-compare"><canvas id="c-compare"></canvas><div class="label">🌊 16,200 PSI vs PHOTON vs HYDROGEN — 16,200 PSI = 111.7 MPa = 1,102 atm = CHALLENGER DEEP — PHOTON TRAP = MIRROR CAVITY 0 psi OR BLACK HOLE PHOTON SPHERE 1.5 Rs GRAVITY NOT PRESSURE — HYDROGEN TRAP = UHV 10^-11 torr MAGNETIC/OPTICAL TRAP NOT HIGH PRESSURE — 16,200 PSI CRUSHES SUB BUT NOT PHOTON — 16,200 PSI IS 0.027% OF METALLIC HYDROGEN 400 GPa = 58M psi — 🌊</div></div>
+  <div class="panel" id="wrap-photon"><canvas id="c-photon"></canvas><div class="label">💡 PHOTON TRAP — PHOTON NO MASS NO CHARGE MOVES AT c=299,792,458 m/s — CANNOT BE TRAPPED BY PRESSURE — TRAP BY: 1) MIRROR CAVITY REFLECTIVITY 99.9999% 0 psi VACUUM, 2) BLACK HOLE PHOTON SPHERE r=1.5 Rs =3GM/c^2 GRAVITY TRAP, 3) PHOTONIC CRYSTAL BANDGAP — PRESSURE 0 — PHOTON TRAP — 💡</div></div>
+  <div class="panel full" id="wrap-bubbles"><canvas id="c-bubbles"></canvas><div class="label">💫 PRESSURE COMPARISON — 16,200 psi DEEP SEA 111.7 MPa 1,102 atm vs METALLIC HYDROGEN 400 GPa = 58 MILLION psi = 3,600× DEEP SEA vs BLACK HOLE PHOTON TRAP INFINITE PRESSURE GRAVITY — HYDROGEN ATOM TRAP UHV 10^-11 torr = 0.0000000000147 psi — ULTRA-LOW PRESSURE NOT HIGH — 16,200 psi DOES NOT TRAP PHOTON OR H — IT TRAPS FISH — ALL PRESSURE COMPARISON FLASH — LOL — 💫</div></div>
+</div>
+
+<div class="card"><div class="mono">🌊 SO 16,200 PSI IS WHAT IT TAKES TO TRAP A PHOTON ?? OR HYDROGEN ATOM LOL — v209 ANSWER — NO LOL 🌊
+
+- 16,200 PSI = 16,200 psi = 111.7 MPa = 1,102 atm = Challenger Deep pressure +1% — 10,925m deep 16,065 psi, 16,200 psi ≈ 11,000m — deep sea pressure
+
+- DOES 16,200 PSI TRAP A PHOTON ?? NO — PHOTON:
+  - Photon has no mass (rest mass 0), no electric charge, moves at c=299,792,458 m/s in vacuum
+  - Photon cannot be trapped by pressure — pressure is force per area from matter collisions, photon doesn't collide like matter, it is light
+  - To trap photon you need:
+    1) MIRROR CAVITY: two mirrors reflectivity 99.9999% facing each other, photon bounces 100,000 times, trap time microseconds — pressure inside cavity is UHV vacuum ~10^-9 torr = 0 psi, NOT high pressure — optical trap 0 psi
+    2) BLACK HOLE PHOTON SPHERE: black hole gravity traps photon at r=1.5 Rs = 3GM/c^2 where Rs=2GM/c^2 Schwarzschild radius — photon orbits black hole — this is gravity trap not pressure trap — gravity infinite, pressure concept breaks down — photon sphere
+    3) PHOTONIC CRYSTAL: periodic dielectric structure bandgap traps photon — pressure 0 — photonic crystal
+  - 16,200 psi does NOT trap photon — photon goes through water at 16,200 psi at c/n where n=1.33 refractive index, still moves, not trapped — 16,200 psi crushes submarine but photon laughs
+
+- DOES 16,200 PSI TRAP A HYDROGEN ATOM ?? NO LOL — HYDROGEN:
+  - To trap SINGLE hydrogen atom you need ULTRA-LOW PRESSURE not high pressure — UHV ultra-high vacuum 10^-11 torr = 1.33×10^-9 Pa = 0.0000000000147 psi = 1.33×10^-14 atm — vacuum — plus magnetic trap or optical tweezer — laser cooling — single H atom trapped in vacuum — low pressure
+  - 16,200 psi HIGH pressure would CRUSH hydrogen atom into molecules H2, then into metal hydride, then into metallic hydrogen — NOT trap single atom — it would push hydrogen atoms together, not isolate one
+  - METALLIC HYDROGEN: to crush hydrogen into metallic hydrogen you need 400 GPa = 400,000 MPa = 4,000,000 bar = 3,947,000 atm = 58,000,000 psi = 58 million psi — 400 GPa — this is 3,600× Challenger Deep 16,200 psi — 16,200 psi is 0.027% of metallic hydrogen pressure — so 16,200 psi does NOT make metallic hydrogen, just makes hydrogen gas into slightly denser gas or dissolves in metal as hydride
+  - Hydrogen atom size: Bohr radius 0.529 Å = 5.29×10^-11m — to confine hydrogen wavefunction you need quantum confinement nanometers, not pressure psi — pressure psi is macroscopic
+
+- WHAT DOES 16,200 PSI TRAP ??
+  - Traps: fish, submarines, humans, air bubbles, styrofoam cups crushed to thimble size
+  - 16,200 psi crushes: submarine hull, traps: fish in hadal zone (they have special proteins), traps: water itself slightly compressed 5% volume
+  - Does NOT trap: photon (needs mirror or black hole), hydrogen single atom (needs UHV + magnetic trap)
+
+- PRESSURE COMPARISON LADDER:
+  - 0 psi vacuum UHV 10^-11 torr = hydrogen atom trap, photon mirror cavity trap
+  - 14.7 psi 1 atm sea level — human lives
+  - 16,200 psi 1,102 atm Challenger Deep — crushes sub, traps fish, does NOT trap photon or H atom lol
+  - 58,000,000 psi 400 GPa metallic hydrogen — crushes hydrogen into metal
+  - Infinite pressure / gravity black hole photon sphere — traps photon via gravity
+
+- ANSWER: so - 16,200 psi is what it takes to trap a photon ?? or hydrogen atom lol — NO LOL — 16,200 psi is what it takes to trap a FISH and CRUSH A SUBMARINE — photon trap = 0 psi vacuum mirror cavity or infinite gravity black hole — hydrogen atom trap = 10^-11 torr UHV magnetic trap ultra-low pressure — 16,200 psi is opposite — it would destroy those traps — lol
+
+SO 16,200 PSI IS WHAT IT TAKES TO TRAP A PHOTON ?? OR HYDROGEN ATOM LOL — NO — 16,200 PSI = DEEP SEA CRUSHES SUB — PHOTON TRAP = MIRROR CAVITY 0 psi OR BLACK HOLE 1.5 Rs — HYDROGEN ATOM TRAP = UHV 10^-11 torr MAGNETIC TRAP — 16,200 PSI IS 0.027% OF METALLIC HYDROGEN 58M psi — SO NO LOL — 🌊
+</div></div>
+
+<script>
+const compareCanvas=document.getElementById('c-compare');
+const photonCanvas=document.getElementById('c-photon');
+const bubblesCanvas=document.getElementById('c-bubbles');
+
+function setupCanvas(canvas){
+  const dpr=Math.min(devicePixelRatio,2);
+  function resize(){
+    const rect=canvas.parentElement.getBoundingClientRect();
+    canvas.width=rect.width*dpr;
+    canvas.height=rect.height*dpr;
+    canvas.style.width=rect.width+'px';
+    canvas.style.height=rect.height+'px';
+  }
+  resize();
+  window.addEventListener('resize',resize);
+  return {dpr, ctx:canvas.getContext('2d')};
+}
+
+(function(){
+  const {dpr, ctx} = setupCanvas(compareCanvas);
+  let t=0;
+  function draw(){
+    requestAnimationFrame(draw);
+    t+=0.012;
+    const w=compareCanvas.width, h=compareCanvas.height;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#01030a';
+    ctx.fillRect(0,0,w,h);
+    const cx=w/2, cy=h*0.5;
+    // 16,200 psi bar
+    ctx.save();
+    ctx.fillStyle='rgba(0,255,204,0.15)';
+    ctx.fillRect(40*dpr, 80*dpr, (w-80*dpr)*0.027, 40*dpr);
+    ctx.fillStyle='#00ffcc';
+    ctx.font=`700 ${10*dpr}px Space Mono`;
+    ctx.fillText('16,200 psi = 111.7 MPa = 1,102 atm = DEEP SEA',50*dpr,100*dpr);
+    ctx.fillText('0.027% of metallic hydrogen',50*dpr,116*dpr);
+    // Metallic hydrogen bar full width
+    ctx.fillStyle='rgba(255,136,0,0.15)';
+    ctx.fillRect(40*dpr, 140*dpr, w-80*dpr, 40*dpr);
+    ctx.fillStyle='#ff8800';
+    ctx.fillText('58,000,000 psi = 400 GPa = METALLIC HYDROGEN',50*dpr,160*dpr);
+    ctx.fillText('3,600× deep sea',50*dpr,176*dpr);
+    // Photon trap 0 psi
+    ctx.fillStyle='rgba(255,255,255,0.1)';
+    ctx.fillRect(40*dpr, 200*dpr, 20*dpr, 40*dpr);
+    ctx.fillStyle='#ffffff';
+    ctx.fillText('0 psi UHV 10^-11 torr = PHOTON MIRROR CAVITY TRAP + H ATOM MAGNETIC TRAP',70*dpr,220*dpr);
+    // Black hole infinite
+    ctx.fillStyle='rgba(0,0,0,0.8)';
+    ctx.fillRect(40*dpr, 260*dpr, w-80*dpr, 40*dpr);
+    ctx.strokeStyle='#ff0000';
+    ctx.lineWidth=2*dpr;
+    ctx.strokeRect(40*dpr, 260*dpr, w-80*dpr, 40*dpr);
+    ctx.fillStyle='#ff0000';
+    ctx.fillText('INFINITE GRAVITY = BLACK HOLE PHOTON SPHERE r=1.5 Rs TRAPS PHOTON',50*dpr,280*dpr);
+    ctx.restore();
+    // Comparison text
+    ctx.save();
+    ctx.fillStyle='#a8f0e0';
+    ctx.font=`400 ${9*dpr}px Space Mono`;
+    ctx.fillText('16,200 psi crushes sub, NOT photon',20*dpr,340*dpr);
+    ctx.fillText('Photon: no mass, no charge, c=299,792,458 m/s',20*dpr,356*dpr);
+    ctx.fillText('Trap photon: mirror cavity 99.9999% reflectivity 0 psi vacuum',20*dpr,372*dpr);
+    ctx.fillText('Or black hole photon sphere r=3GM/c^2 gravity',20*dpr,388*dpr);
+    ctx.fillText('Hydrogen single atom: UHV 10^-11 torr magnetic trap 0 psi',20*dpr,404*dpr);
+    ctx.fillText('16,200 psi would crush H atom into hydride, not trap',20*dpr,420*dpr);
+    ctx.fillText('Metallic H needs 58M psi 3,600× deep sea',20*dpr,436*dpr);
+    ctx.fillText('So 16,200 psi traps fish, not photon or H atom lol',20*dpr,452*dpr);
+    ctx.restore();
+  }
+  draw();
+})();
+
+(function(){
+  const {dpr, ctx} = setupCanvas(photonCanvas);
+  let t=0;
+  function draw(){
+    requestAnimationFrame(draw);
+    t+=0.016;
+    const w=photonCanvas.width, h=photonCanvas.height;
+    const cx=w/2, cy=h/2;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#01030a';
+    ctx.fillRect(0,0,w,h);
+    // Mirror cavity photon trap
+    ctx.save();
+    ctx.strokeStyle='#ffffff';
+    ctx.lineWidth=4*dpr;
+    ctx.globalAlpha=0.8;
+    ctx.beginPath();
+    ctx.moveTo(cx-200*dpr, cy-80*dpr);
+    ctx.lineTo(cx-200*dpr, cy+80*dpr);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(cx+200*dpr, cy-80*dpr);
+    ctx.lineTo(cx+200*dpr, cy+80*dpr);
+    ctx.stroke();
+    // Photon bouncing
+    const photonX=cx + Math.sin(t*8)*190*dpr;
+    const photonY=cy + Math.cos(t*5)*30*dpr;
+    ctx.fillStyle='#ffff00';
+    ctx.shadowColor='#ffff00';
+    ctx.shadowBlur=20*dpr;
+    ctx.globalAlpha=1;
+    ctx.beginPath();
+    ctx.arc(photonX,photonY,6*dpr,0,Math.PI*2);
+    ctx.fill();
+    ctx.strokeStyle='rgba(255,255,0,0.4)';
+    ctx.lineWidth=1*dpr;
+    ctx.beginPath();
+    ctx.moveTo(cx-190*dpr, photonY);
+    ctx.lineTo(cx+190*dpr, photonY);
+    ctx.stroke();
+    ctx.fillStyle='#ffffff';
+    ctx.font=`400 ${8*dpr}px Space Mono`;
+    ctx.fillText('MIRROR CAVITY 0 psi VACUUM PHOTON TRAP',cx-120*dpr,cy-100*dpr);
+    ctx.fillText('99.9999% reflectivity',cx-70*dpr,cy+110*dpr);
+    ctx.restore();
+    // Black hole photon sphere
+    ctx.save();
+    ctx.translate(cx, cy+180*dpr);
+    // Black hole
+    ctx.fillStyle='#000000';
+    ctx.shadowColor='#ff0000';
+    ctx.shadowBlur=25*dpr;
+    ctx.beginPath();
+    ctx.arc(0,0,30*dpr,0,Math.PI*2);
+    ctx.fill();
+    // Photon sphere
+    ctx.strokeStyle='#ff0000';
+    ctx.lineWidth=2*dpr;
+    ctx.globalAlpha=0.6;
+    ctx.setLineDash([4*dpr,4*dpr]);
+    ctx.beginPath();
+    ctx.arc(0,0,45*dpr,0,Math.PI*2);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    // Photon orbiting
+    const ang=t*2;
+    const px=Math.cos(ang)*45*dpr;
+    const py=Math.sin(ang)*45*dpr;
+    ctx.fillStyle='#ffff00';
+    ctx.shadowColor='#ffff00';
+    ctx.shadowBlur=15*dpr;
+    ctx.globalAlpha=1;
+    ctx.beginPath();
+    ctx.arc(px,py,5*dpr,0,Math.PI*2);
+    ctx.fill();
+    ctx.fillStyle='#ff0000';
+    ctx.font=`400 ${8*dpr}px Space Mono`;
+    ctx.fillText('BLACK HOLE PHOTON SPHERE r=1.5 Rs=3GM/c^2',-90*dpr,70*dpr);
+    ctx.fillText('GRAVITY TRAPS PHOTON NOT PRESSURE',-80*dpr,84*dpr);
+    ctx.restore();
+  }
+  draw();
+})();
+
+(function(){
+  const {dpr, ctx} = setupCanvas(bubblesCanvas);
+  let t=0;
+  function draw(){
+    requestAnimationFrame(draw);
+    t+=0.011;
+    const w=bubblesCanvas.width, h=bubblesCanvas.height;
+    ctx.clearRect(0,0,w,h);
+    const grad=ctx.createLinearGradient(0,0,0,h);
+    grad.addColorStop(0,'#001122');
+    grad.addColorStop(1,'#000000');
+    ctx.fillStyle=grad;
+    ctx.fillRect(0,0,w,h);
+    // Pressure ladder bubbles
+    const pressures=[
+      {psi:0, label:'0 psi UHV 10^-11 torr H ATOM + PHOTON MIRROR TRAP', color:'#ffffff', y:0.1, size:8},
+      {psi:14.7, label:'14.7 psi 1 atm HUMAN', color:'#aaffff', y:0.22, size:10},
+      {psi:16200, label:'16,200 psi 1,102 atm 111.7 MPa CHALLENGER DEEP TRAPS FISH NOT PHOTON', color:'#00ffcc', y:0.38, size:18, isTarget:true},
+      {psi:58000000, label:'58,000,000 psi 400 GPa METALLIC HYDROGEN 3,600× DEEP SEA', color:'#ff8800', y:0.62, size:28},
+      {psi:Infinity, label:'INFINITE GRAVITY BLACK HOLE PHOTON SPHERE TRAPS PHOTON', color:'#ff0000', y:0.85, size:36, isInfinite:true}
+    ];
+    pressures.forEach((p,i)=>{
+      const y=p.y*h;
+      const x=w*0.5 + Math.sin(t*0.6+i)*8*dpr;
+      ctx.save();
+      ctx.fillStyle=p.color;
+      ctx.shadowColor=p.color;
+      ctx.shadowBlur=p.isTarget?24*dpr:14*dpr;
+      ctx.globalAlpha=p.isTarget?0.95:0.7;
+      if(p.isInfinite){
+        ctx.fillStyle='#000000';
+        ctx.beginPath();
+        ctx.arc(x,y,p.size*dpr,0,Math.PI*2);
+        ctx.fill();
+        ctx.strokeStyle='#ff0000';
+        ctx.lineWidth=3*dpr;
+        ctx.beginPath();
+        ctx.arc(x,y,(p.size+12)*dpr,0,Math.PI*2);
+        ctx.stroke();
+        ctx.fillStyle='#ff0000';
+        ctx.font=`700 ${9*dpr}px Space Mono`;
+        ctx.fillText(p.label,x+ (p.size+20)*dpr,y+4*dpr);
+      } else {
+        ctx.beginPath();
+        ctx.arc(x,y,p.size*dpr,0,Math.PI*2);
+        ctx.fill();
+        ctx.fillStyle='#a8f0e0';
+        ctx.font=`${p.isTarget?'700':'400'} ${p.isTarget?9:8*dpr}px Space Mono`;
+        ctx.fillText(p.label,x+ (p.size+10)*dpr,y+3*dpr);
+      }
+      // Pressure bar width proportional to log psi
+      const logPsi=p.psi===0?0:Math.log10(p.psi+1);
+      const maxLog=Math.log10(58000000);
+      const barWidth=(logPsi/maxLog)*(w*0.4);
+      ctx.fillStyle=p.color;
+      ctx.globalAlpha=0.15;
+      ctx.fillRect(40*dpr, y-16*dpr, barWidth, 6*dpr);
+      ctx.restore();
+    });
+    ctx.save();
+    ctx.fillStyle='#00ffcc';
+    ctx.font=`800 ${11*dpr}px Syne`;
+    ctx.fillText('16,200 psi = DEEP SEA CRUSHES SUB, DOES NOT TRAP PHOTON OR H ATOM LOL',14*dpr,28*dpr);
+    ctx.fillStyle='#a8f0e0';
+    ctx.font=`400 ${8*dpr}px Space Mono`;
+    ctx.fillText('Photon: mirror cavity 0 psi or black hole gravity',14*dpr,44*dpr);
+    ctx.fillText('H atom: UHV 10^-11 torr magnetic trap ultra-low pressure',14*dpr,58*dpr);
+    ctx.fillText('Metallic H: 58M psi 3,600× deep sea',14*dpr,72*dpr);
+    ctx.restore();
+  }
+  draw();
+})();
+
+document.getElementById('btn-compare').onclick=()=>{};
+document.getElementById('btn-photon').onclick=()=>{};
+document.getElementById('btn-bubbles').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

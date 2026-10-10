@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Toroids as Communicators · I — The Closed Loop &amp; The Pulse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --iron:#0b0d14;            /* cold dark iron */
+    --slab:#11141f;
+    --panel:#161a28;
+    --grid:#1f2435;
+    --copper:#e0915a;          /* windings & current — warm */
+    --copper-dim:#8a5a36;
+    --flux:#8a9eff;            /* magnetic flux — blue-violet */
+    --flux-dim:#4a548a;
+    --pwm:#5fe0c0;             /* the PWM trace — teal */
+    --recovered:#6fe6a0;       /* recovered analogue — phosphor green */
+    --paper:#e6e8f0;
+    --paper-dim:#8e94ad;
+    --rule:#1f243533;
+    --rose:#e07a9a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{background:var(--iron);color:var(--paper);font-family:'Newsreader',Georgia,serif;
+    font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:880px;margin:0 auto;padding:0 24px}
+
+  .hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;padding:70px 0 40px}
+  .kicker{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--copper);margin-bottom:22px;font-weight:500}
+  .kicker .s{color:var(--flux-dim)}
+  h1{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(38px,8vw,78px);line-height:1.0;letter-spacing:-.01em}
+  h1 .flux{color:var(--flux)} h1 .pwm{color:var(--pwm)}
+  .lede{font-size:clamp(19px,2.4vw,24px);color:var(--paper-dim);max-width:630px;margin-top:30px;line-height:1.5}
+  .lede b{color:var(--paper);font-weight:500} .lede .flux{color:var(--flux)} .lede .pwm{color:var(--pwm)} .lede .copper{color:var(--copper)}
+  .eq{font-family:'IBM Plex Mono',monospace;margin-top:38px;font-size:clamp(24px,5vw,42px);color:var(--flux);letter-spacing:.01em;font-weight:500}
+  .eq .v{color:var(--copper)} .eq .phi{color:var(--flux)} .eq .c{color:var(--paper)}
+  .eq-cap{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--paper-dim);margin-top:14px;letter-spacing:.03em;line-height:1.6}
+
+  .sec{padding:60px 0;border-top:1px solid var(--rule)}
+  .tag{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--copper);margin-bottom:14px;font-weight:500}
+  .tag.p{color:var(--pwm)}
+  h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(26px,4.5vw,40px);line-height:1.08;letter-spacing:-.005em}
+  h2 .flux{color:var(--flux)} h2 .pwm{color:var(--pwm)}
+  .sec p{margin:18px 0;color:var(--paper);max-width:680px}
+  .sec p.dim{color:var(--paper-dim)}
+  .sec p b{color:var(--paper);font-weight:600}
+  .sec p .flux{color:var(--flux);font-weight:500} .sec p .copper{color:var(--copper);font-weight:500}
+  .sec p .pwm{color:var(--pwm);font-weight:500} .sec p .rec{color:var(--recovered);font-weight:500}
+  .pull{font-family:'Chakra Petch',sans-serif;font-weight:500;font-size:clamp(20px,3vw,27px);line-height:1.3;color:var(--flux);margin:30px 0;padding-left:20px;border-left:3px solid var(--flux-dim)}
+  .pull.pwm{color:var(--pwm);border-left-color:#2f7a68}
+  code{font-family:'IBM Plex Mono',monospace;font-size:.85em;color:var(--copper);background:#11141f;padding:2px 7px;border-radius:5px}
+  .flag{font-family:'Newsreader';font-size:15.5px;color:var(--paper-dim);font-style:italic;margin:18px 0;padding:14px 18px;background:#11141f66;border:1px solid var(--rule);border-radius:8px}
+  .flag b{color:var(--rose);font-style:normal;font-weight:600;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;display:block;margin-bottom:6px}
+
+  .inst{margin:32px 0;border:1px solid var(--grid);border-radius:14px;overflow:hidden;background:var(--slab)}
+  .inst.p{border-color:#234038}
+  .inst-bar{display:flex;align-items:center;gap:10px;padding:12px 18px;border-bottom:1px solid var(--grid);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--paper-dim)}
+  .inst-bar .led{width:9px;height:9px;border-radius:50%;background:var(--flux);box-shadow:0 0 8px var(--flux)}
+  .inst.p .inst-bar .led{background:var(--pwm);box-shadow:0 0 8px var(--pwm)}
+  .inst-bar .ttl{color:var(--flux)} .inst.p .inst-bar .ttl{color:var(--pwm)}
+  canvas{display:block;width:100%;height:auto;background:var(--iron)}
+  .ctrls{padding:16px 18px;display:flex;flex-wrap:wrap;gap:18px;align-items:center;border-top:1px solid var(--grid)}
+  .ctrl{display:flex;flex-direction:column;gap:6px;flex:1;min-width:150px}
+  .ctrl label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--paper-dim)}
+  .ctrl label .val{color:var(--copper);float:right}
+  input[type=range]{-webkit-appearance:none;appearance:none;height:4px;border-radius:2px;background:var(--grid);outline:none;width:100%}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--copper);cursor:pointer;box-shadow:0 0 8px var(--copper-dim)}
+  input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radius:50%;background:var(--copper);cursor:pointer}
+  input:focus-visible{outline:2px solid var(--copper);outline-offset:3px}
+  .segs{display:flex;gap:6px;flex-wrap:wrap}
+  .seg{font-family:'IBM Plex Mono',monospace;font-size:12px;padding:7px 12px;border:1px solid var(--grid);border-radius:8px;background:var(--panel);color:var(--paper-dim);cursor:pointer;touch-action:manipulation}
+  .seg.on{border-color:var(--flux);color:var(--flux);background:rgba(138,158,255,.12)}
+  .inst.p .seg.on{border-color:var(--pwm);color:var(--pwm);background:rgba(95,224,192,.12)}
+  .seg:focus-visible{outline:2px solid var(--copper);outline-offset:2px}
+  .readout{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--paper-dim);padding:0 18px 16px;line-height:1.6}
+  .readout b{color:var(--copper)} .readout .flux{color:var(--flux)} .readout .pwm{color:var(--pwm)} .readout .rec{color:var(--recovered)}
+
+  .foot{padding:50px 0 80px;border-top:1px solid var(--rule);margin-top:40px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--paper-dim);line-height:2}
+  .foot b{color:var(--flux)} .foot .pwm{color:var(--pwm)}
+  .next{margin:30px 0;padding:20px;border:1px dashed var(--flux-dim);border-radius:12px}
+  .next .nt{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--copper);margin-bottom:10px}
+  .next ol{margin:0;padding-left:22px;color:var(--paper-dim);font-size:15.5px;line-height:1.9}
+  .next ol li b{color:var(--paper)} .next ol li.done{color:var(--flux)}
+
+  @media (max-width:560px){body{font-size:17px}.ctrl{min-width:100%}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker">Toroids as Communicators <span class="s">·</span> Paper I — The Closed Loop &amp; The Pulse</div>
+    <h1>It carries only<br>the <span class="flux">change</span> — so you<br>speak in <span class="pwm">pulses</span></h1>
+    <p class="lede">A toroid is a ring of iron wrapped in <span class="copper">copper</span> — and it has one stubborn rule: it ignores anything that holds steady and passes only what <span class="flux">moves</span>. You cannot send it a level. You can only send it <b>edges</b>. Which is exactly why the language for talking through one is <span class="pwm">pulse-width modulation</span> — information written into the timing of edges.</p>
+    <div class="eq"><span class="v">v</span> <span class="c">=</span> <span class="c">N</span> · <span class="c">d</span><span class="phi">Φ</span><span class="c">/dt</span></div>
+    <div class="eq-cap">Faraday's law · voltage follows the <span style="color:var(--flux)">rate of change of flux</span>, never the flux itself<br>the magnetic twin of the capacitor's <span style="color:var(--copper)">i = C·dv/dt</span></div>
+  </header>
+
+  <section class="sec">
+    <div class="tag">§1 · the one law</div>
+    <h2>Voltage follows the <span class="flux">change in flux</span>, not the flux</h2>
+    <p>If you read the capacitor series, this will feel like looking in a mirror. There, a capacitor turned a changing <em>voltage</em> into a current: <code>i = C·dv/dt</code>. A toroid is the magnetic dual — it turns a changing <em>flux</em> into a voltage: <code>v = N·dΦ/dt</code>, Faraday's law, where <code>N</code> is the number of turns of wire and <code>Φ</code> is the magnetic flux threading the ring.</p>
+    <p>Drive a steady current through the winding and a steady flux sits in the core — unchanging, and so it induces <span class="flux">nothing</span>: a constant flux has zero rate of change, so <code>v = 0</code>. The toroid is deaf to a held level. But <em>move</em> that current — switch it, pulse it, edge it — and the flux moves with it, and a voltage appears in exact proportion to how fast it changed. <span class="copper">Faster edge, bigger voltage.</span></p>
+    <p class="pull">A toroid cannot feel a current that holds still. It only ever answers the moment the current <em>changed</em>.</p>
+    <p class="dim">That single fact decides everything downstream — including why PWM, and not a steady voltage, is how information crosses a magnetic gap. A held value would vanish in the core. An edge survives.</p>
+  </section>
+
+  <!-- INSTRUMENT 1: THE CORE -->
+  <section class="sec">
+    <div class="tag">§2 · instrument one</div>
+    <h2>The core — <span class="flux">flux in a closed loop</span></h2>
+    <p>Why a <em>ring</em>, specifically? Because a doughnut is a closed magnetic circuit: the flux runs around inside the iron and almost none escapes. That makes it efficient, quiet (little radiated interference), and — crucially for communication — a tight container that a second winding can dip into later. For now, one winding: drive the <span class="copper">current</span>, watch the <span class="flux">flux</span> circulate the loop, and watch the induced voltage light up only when the current <em>moves</em>.</p>
+
+    <div class="inst">
+      <div class="inst-bar"><span class="led"></span><span class="ttl">THE CORE</span> · drive current → flux circulates → v = N·dΦ/dt</div>
+      <canvas id="core"></canvas>
+      <div class="ctrls">
+        <div class="ctrl" style="flex:2;min-width:100%"><label>drive current</label>
+          <div class="segs" id="coreDrive">
+            <div class="seg on" data-d="pwm">PWM (edges)</div>
+            <div class="seg" data-d="ramp">slow ramp</div>
+            <div class="seg" data-d="dc">steady DC</div>
+            <div class="seg" data-d="sine">sine</div>
+          </div></div>
+        <div class="ctrl"><label>turns N <span class="val" id="cNval">12</span></label>
+          <input type="range" id="cN" min="4" max="24" step="1" value="12"></div>
+      </div>
+      <div class="readout" id="cRead"><span class="copper">copper current</span> drives <span class="flux">flux</span> around the ring · the <span class="rec">induced voltage</span> spikes on every edge and falls to zero whenever the current holds. more turns → more flux → bigger induced voltage (and the flux still stays inside the loop).</div>
+    </div>
+    <p class="dim">Switch the drive to <code>steady DC</code>: the flux sits still and the induced voltage flatlines to zero — the toroid has gone blind. Switch back to <code>PWM</code> and every edge fires a voltage spike. That contrast <em>is</em> the whole reason the rest of this series exists.</p>
+    <div class="flag"><b>honest flag</b>This is an idealised core: no winding resistance, no core loss, and — importantly — no <b>saturation</b>. Real iron can only hold so much flux; push too hard and it saturates, the inductance collapses, and the relationship goes non-linear. The flux is also drawn as perfectly confined; real toroids leak a little, and gapped cores leak by design. The ideal is the right starting point because the communication behaviour — change-not-state — is already complete without those terms.</p>
+  </section>
+
+  <!-- INSTRUMENT 2: THE PULSE -->
+  <section class="sec">
+    <div class="tag p">§3 · instrument two · the encoding</div>
+    <h2>The pulse — <span class="pwm">a value written as width</span></h2>
+    <p>Pulse-width modulation is almost insultingly simple and quietly everywhere. Take a square wave at a fixed frequency. Make it spend more of each cycle high to mean "more," less to mean "less." The fraction of each period spent high is the <b>duty cycle</b>, and the <em>average</em> of the waveform is exactly <code>D · V</code> — slide the width, slide the value. A cheap low-pass filter on the far end averages the pulses back into a smooth analogue level. That's how a digital chip "outputs" an analogue voltage, dims an LED, or sets a motor's speed — all with a pin that can only ever be fully on or fully off.</p>
+
+    <div class="inst p">
+      <div class="inst-bar"><span class="led"></span><span class="ttl">THE PULSE</span> · duty cycle → average → recovered value</div>
+      <canvas id="pulse"></canvas>
+      <div class="ctrls">
+        <div class="ctrl"><label>duty cycle <span class="val" id="pDval">50%</span></label>
+          <input type="range" id="pDuty" min="5" max="95" step="1" value="50"></div>
+        <div class="ctrl"><label>recovery smoothing <span class="val" id="pSval">1.0×</span></label>
+          <input type="range" id="pSmooth" min="0.2" max="3" step="0.05" value="1"></div>
+      </div>
+      <div class="readout" id="pRead"><span class="pwm">teal</span> = the raw PWM pulses · the dashed line is their <b>average = D·V</b> · <span class="rec">green</span> = the low-pass-recovered value chasing that average. widen the pulses → the recovered level rises. the message was in the width all along.</div>
+    </div>
+    <p class="pull pwm">The information isn't in how high the pulse goes — it's always the same height. It's in how <em>wide</em> it is. PWM hides a smooth value inside a stream of identical edges.</p>
+    <p class="dim">And identical edges are precisely what a toroid will carry. Hold that thought — it's the join.</p>
+  </section>
+
+  <!-- THE JOIN -->
+  <section class="sec">
+    <div class="tag">§4 · the join</div>
+    <h2>Edges cross. Levels <span class="flux">don't</span>.</h2>
+    <p>Put the two halves together. A toroid passes only <span class="flux">change</span> — edges, not levels (§1, §2). PWM hides its message in the <span class="pwm">timing of edges</span>, not in any level (§3). So PWM is not just <em>a</em> way to drive a toroid — it's the <b>natural</b> way, the one language whose entire content is the thing a toroid can actually carry. You could never send a steady "3.7 volts" through a transformer; the flux would simply walk until the core saturated. But you can send the <em>edges</em> that encode 3.7 volts as a 74%-wide pulse, let them cross the magnetic gap, and rebuild 3.7 volts on the far side — with no wire connecting the two sides at all.</p>
+    <p class="dim">That last part — <em>no wire connecting the two sides</em> — is where this series is headed: communication across a magnetic gap, galvanically isolated, the message riding entirely on change.</p>
+
+    <div class="next">
+      <div class="nt">the series · this paper lays the foundation (1–2)</div>
+      <ol>
+        <li class="done"><b>The core</b> — v = N·dΦ/dt, change-not-state ✓</li>
+        <li class="done"><b>The pulse</b> — PWM, a value written as width ✓</li>
+        <li><b>The crossing</b> — two windings, the edge leaps the gap, DC blocked (galvanic isolation)</li>
+        <li><b>The message</b> — a duty cycle sent across the toroid and recovered (gate drive, Ethernet magnetics, pulse transformers)</li>
+        <li><b>The choke</b> — the toroid that passes the signal and blocks the noise (common-mode rejection)</li>
+      </ol>
+    </div>
+    <p class="dim">Same pattern as before: foundation first, then stack the crossing, the message, and the choke when you're ready.</p>
+  </section>
+
+  <div class="foot">
+    TOROIDS AS COMMUNICATORS · PAPER I — THE CLOSED LOOP &amp; THE PULSE<br>
+    the one law: <b>v = N·dΦ/dt</b> · voltage follows the change in flux · the magnetic dual of i = C·dv/dt<br>
+    L ∝ N² · DC induces nothing, edges induce everything · PWM average = D·V · math pre-checked in node<br>
+    <span class="pwm">a toroid carries only the change — so the message must live in the edges</span>
+  </div>
+
+</div>
+
+<script>
+"use strict";
+const reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const COL={iron:"#0b0d14",grid:"#1f2435",copper:"#e0915a",copperDim:"#8a5a36",
+  flux:"#8a9eff",fluxDim:"#4a548a",pwm:"#5fe0c0",recovered:"#6fe6a0",paper:"#8e94ad"};
+
+function setup(cv,ratio){
+  const dpr=Math.min(window.devicePixelRatio||1,2);
+  const cssW=cv.parentElement.clientWidth, cssH=Math.round(cssW*ratio);
+  cv.width=cssW*dpr; cv.height=cssH*dpr; cv.style.height=cssH+"px";
+  const ctx=cv.getContext("2d"); ctx.setTransform(dpr,0,0,dpr,0,0);
+  return {ctx,W:cssW,H:cssH};
+}
+function gridlines(ctx,W,H){ ctx.strokeStyle=COL.grid;ctx.lineWidth=1;
+  for(let x=0;x<=W;x+=W/12){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
+  for(let y=0;y<=H;y+=H/8){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();} }
+function glow(ctx,pts,gx,gy,color,gw){ ctx.shadowColor=color;ctx.shadowBlur=gw||8;
+  ctx.strokeStyle=color;ctx.lineWidth=2;ctx.beginPath();
+  pts.forEach((o,k)=>{const x=gx(o,k),y=gy(o,k);k?ctx.lineTo(x,y):ctx.moveTo(x,y);});
+  ctx.stroke();ctx.shadowBlur=0; }
+
+/* ── INSTRUMENT 1 · THE CORE ── */
+(function(){
+  const cv=document.getElementById("core");
+  const seg=document.getElementById("coreDrive"), Nin=document.getElementById("cN"), Nv=document.getElementById("cNval");
+  const read=document.getElementById("cRead");
+  let drive="pwm";
+  seg.querySelectorAll(".seg").forEach(s=>s.onclick=()=>{drive=s.dataset.d;seg.querySelectorAll(".seg").forEach(o=>o.classList.toggle("on",o===s));});
+  let d=setup(cv,0.62); window.addEventListener("resize",()=>d=setup(cv,0.62));
+
+  // drive current i(phase) in 0..1
+  function cur(p){
+    switch(drive){
+      case "pwm":  { const seg=(p*4)%1; return seg<0.5?1:0; }
+      case "ramp": return (p%1);
+      case "dc":   return 0.7;
+      case "sine": return 0.5+0.45*Math.sin(p*Math.PI*2*2);
+    } return 0;
+  }
+  function draw(t){
+    const {ctx,W,H}=d; const N=parseInt(Nin.value); Nv.textContent=N;
+    ctx.clearRect(0,0,W,H); gridlines(ctx,W,H);
+
+    const tt=reduce?0.3:(t*0.18);
+    const phase=tt%1;
+    const i=cur(phase);
+    // numerical di/dt for induced voltage
+    const dp=0.004; let didt=(cur((phase+dp)%1)-cur(phase))/dp;
+    if(Math.abs(didt)>40) didt=Math.sign(didt)*40; // clamp visual spike
+    const vind=didt*(N/12);
+
+    // ── left: the toroid ──
+    const cx=W*0.27, cy=H*0.5, R=Math.min(W*0.16,H*0.34), r=R*0.5;
+    // core body (ring)
+    ctx.lineWidth=R-r; ctx.strokeStyle="#2a2f42";
+    ctx.beginPath(); ctx.arc(cx,cy,(R+r)/2,0,Math.PI*2); ctx.stroke();
+    // flux circulating inside the ring — brightness ∝ |i|, motion ∝ sign of flux change
+    const fluxMag=Math.abs(i);
+    const nArrows=10;
+    for(let k=0;k<nArrows;k++){
+      const a=(k/nArrows)*Math.PI*2 + (reduce?0:tt*6*(i>0.01?1:0));
+      const rr=(R+r)/2;
+      const ax=cx+Math.cos(a)*rr, ay=cy+Math.sin(a)*rr;
+      ctx.fillStyle=`rgba(138,158,255,${0.15+0.6*fluxMag})`;
+      ctx.beginPath();ctx.arc(ax,ay,2.4,0,Math.PI*2);ctx.fill();
+    }
+    // flux label
+    ctx.fillStyle=COL.flux;ctx.font="11px 'IBM Plex Mono',monospace";ctx.textAlign="center";
+    ctx.fillText("Φ",cx,cy);
+    ctx.fillStyle="rgba(138,158,255,.5)";ctx.font="9px 'IBM Plex Mono',monospace";
+    ctx.fillText("flux in the loop",cx,cy+R+18);
+
+    // winding: N copper turns around the top of the ring
+    ctx.strokeStyle=COL.copper;ctx.lineWidth=2.2;
+    const turns=Math.min(N,16);
+    for(let k=0;k<turns;k++){
+      const a=-Math.PI*0.78 + (k/(turns-1))*Math.PI*0.56;
+      const mx=cx+Math.cos(a)*((R+r)/2), my=cy+Math.sin(a)*((R+r)/2);
+      const nx=Math.cos(a), ny=Math.sin(a);
+      ctx.beginPath();
+      ctx.ellipse(mx,my,(R-r)/2+5,5,a+Math.PI/2,0,Math.PI*2);
+      ctx.globalAlpha=0.5+0.5*Math.abs(i); ctx.stroke(); ctx.globalAlpha=1;
+    }
+    // current-direction dot on the lead
+    ctx.fillStyle=COL.copper;ctx.font="9px 'IBM Plex Mono',monospace";ctx.textAlign="center";
+    ctx.fillText(N+" turns of copper",cx,cy-R-14);
+
+    // ── right: two scope traces — current in, induced v out ──
+    const sx=W*0.52, sw=W*0.44, sy=H*0.12;
+    const iMid=H*0.34, vMid=H*0.74, amp=H*0.16;
+    ctx.strokeStyle="#2a2f42";ctx.lineWidth=1;
+    [iMid,vMid].forEach(m=>{ctx.beginPath();ctx.moveTo(sx,m);ctx.lineTo(sx+sw,m);ctx.stroke();});
+    ctx.font="11px 'IBM Plex Mono',monospace";ctx.textAlign="left";ctx.textBaseline="middle";
+    ctx.fillStyle=COL.copper;ctx.fillText("current i(t)",sx,sy);
+    ctx.fillStyle=COL.recovered;ctx.fillText("induced v = N·dΦ/dt",sx,sy+H*0.30);
+    // build traces over a window
+    const Np=200, ipts=[], vpts=[];
+    for(let k=0;k<=Np;k++){
+      const p=(phase - (1-k/Np)*1.0);
+      const iv=cur((p%1+1)%1);
+      let dv=(cur(((p+dp)%1+1)%1)-iv)/dp; if(Math.abs(dv)>40)dv=Math.sign(dv)*40;
+      ipts.push({x:sx+sw*(k/Np), y:iMid-(iv-0.5)*amp*1.6});
+      vpts.push({x:sx+sw*(k/Np), y:vMid-(dv*(N/12))/40*amp*1.4});
+    }
+    glow(ctx,ipts,o=>o.x,o=>o.y,COL.copper,6);
+    glow(ctx,vpts,o=>o.x,o=>o.y,COL.recovered,6);
+
+    read.innerHTML = drive==="dc"
+      ? `<span class="copper">steady DC</span>: the flux sits still, so the <span class="rec">induced voltage is zero</span>. the toroid is blind to a held current. switch to PWM to wake it.`
+      : `<span class="copper">copper current</span> drives <span class="flux">flux</span> round the ring · the <span class="rec">induced voltage</span> answers only the <b>edges</b> (dΦ/dt). N=${N} turns → flux ∝ N. ${drive==="pwm"?"every pulse edge fires a spike.":""}`;
+    requestAnimationFrame(draw);
+  } requestAnimationFrame(draw);
+})();
+
+/* ── INSTRUMENT 2 · THE PULSE ── */
+(function(){
+  const cv=document.getElementById("pulse");
+  const Du=document.getElementById("pDuty"), Sm=document.getElementById("pSmooth");
+  const Dv=document.getElementById("pDval"), Sv=document.getElementById("pSval");
+  const read=document.getElementById("pRead");
+  let d=setup(cv,0.52); window.addEventListener("resize",()=>d=setup(cv,0.52));
+  let recov=0.5;
+  function draw(t){
+    const {ctx,W,H}=d; const duty=parseFloat(Du.value)/100, smooth=parseFloat(Sm.value);
+    Dv.textContent=Math.round(duty*100)+"%"; Sv.textContent=smooth.toFixed(1)+"×";
+    ctx.clearRect(0,0,W,H); gridlines(ctx,W,H);
+    const padL=40,padR=14,plotW=W-padL-padR;
+    const hi=H*0.22, lo=H*0.78, amp=lo-hi;
+    // axis
+    ctx.strokeStyle="#2a2f42";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(padL,lo);ctx.lineTo(W-padR,lo);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(padL,hi);ctx.lineTo(W-padR,hi);ctx.stroke();
+    ctx.fillStyle=COL.paper;ctx.font="10px 'IBM Plex Mono',monospace";ctx.textAlign="right";ctx.textBaseline="middle";
+    ctx.fillText("V",padL-6,hi); ctx.fillText("0",padL-6,lo);
+
+    const scroll=reduce?0:(t*0.12)%1, N=400, nCyc=5;
+    // pwm pulses
+    ctx.strokeStyle=COL.pwm;ctx.shadowColor=COL.pwm;ctx.shadowBlur=6;ctx.lineWidth=2;ctx.beginPath();
+    let started=false;
+    for(let k=0;k<=N;k++){
+      const p=(k/N+scroll)*nCyc; const ph=p%1;
+      const high = ph<duty;
+      const x=padL+plotW*(k/N); const y=high?hi:lo;
+      if(!started){ctx.moveTo(x,y);started=true;} else {ctx.lineTo(x,y);}
+    }
+    ctx.stroke();ctx.shadowBlur=0;
+    // average line = D*V
+    const avgY=lo-duty*amp;
+    ctx.setLineDash([5,4]);ctx.strokeStyle=COL.copper;ctx.lineWidth=1.4;
+    ctx.beginPath();ctx.moveTo(padL,avgY);ctx.lineTo(W-padR,avgY);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle=COL.copper;ctx.textAlign="left";ctx.fillText("avg = D·V",padL+6,avgY-9);
+
+    // recovered (low-pass) trace chasing the average, with smoothing-dependent ripple
+    recov += (duty - recov)*0.08*smooth;
+    const ripple = (0.5/smooth)* (Math.sin(t*9)*0.5) * 0.06;
+    const recY=lo-(recov+ripple)*amp;
+    ctx.fillStyle=COL.recovered;ctx.beginPath();ctx.arc(W-padR-4,recY,4,0,Math.PI*2);ctx.fill();
+    ctx.strokeStyle=COL.recovered;ctx.shadowColor=COL.recovered;ctx.shadowBlur=6;ctx.lineWidth=2;
+    ctx.beginPath();
+    for(let k=0;k<=60;k++){const x=padL+plotW*(k/60);
+      const rp=(0.5/smooth)*Math.sin(t*9 - k*0.3)*0.05;
+      ctx.lineTo(x, lo-(recov+rp)*amp);}
+    ctx.stroke();ctx.shadowBlur=0;
+    ctx.textAlign="right";ctx.fillStyle=COL.recovered;ctx.fillText("recovered",W-padR,recY-10);
+
+    read.innerHTML=`duty <b>${Math.round(duty*100)}%</b> → average <b>${(duty*5).toFixed(2)} V</b> (of 5V). the <span class="pwm">pulses</span> all reach the same height; only their <b>width</b> changes. the <span class="rec">recovered</span> level = the average; more smoothing → less ripple, slower response.`;
+    requestAnimationFrame(draw);
+  } requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

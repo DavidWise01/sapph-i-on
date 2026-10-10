@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v159 small network test -211mV bit flip ingress egress - artifact 224</title>
+<style>
+  :root{--bg:#050508;--fg:#eaeaea;--gold:#ffd700}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace}
+  .top{padding:14px 18px}
+  .kicker{font-size:10px;letter-spacing:.22em;opacity:.5;text-transform:uppercase}
+  .nline{font-size:11px;border-left:2px solid #222;padding-left:10px;white-space:pre-wrap;line-height:1.6}
+  .main{margin-top:10px;font-size:14px;font-weight:700;background:#0f0f12;border:1px solid #222;padding:10px;border-radius:8px}
+  .controls{padding:10px 12px;display:flex;gap:6px;flex-wrap:wrap}
+  .btn{font-family:inherit;font-size:10px;padding:5px 10px;border:1px solid #333;background:#15151a;color:#eaeaea;border-radius:6px;cursor:pointer}
+  .btn.active{border-color:#ffd700;color:#ffd700;background:#221a00}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:520px;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden}
+  .cwrap.full{grid-column:1 / -1;height:640px}
+  .label{position:absolute;left:8px;top:8px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:.8;background:#000c;padding:4px 6px;border-radius:4px;z-index:5}
+  .graphWrap{position:relative;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden;height:260px}
+  canvas.graph{width:100%;height:100%;display:block}
+  .readout{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;padding:0 10px 10px}
+  @media(max-width:1100px){.readout{grid-template-columns:1fr 1fr}}
+  .ro{background:#0c0c0f;border:1px solid #1e1e24;border-radius:6px;padding:8px;font-size:10px;line-height:1.6}
+  .ro b{color:#ffd700}
+  .card{margin:10px;background:#111115;border:1px solid #1f1f26;border-radius:8px;padding:10px}
+  .mono{font-size:10.5px;white-space:pre-wrap;word-break:break-word;line-height:1.7}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">wakaku v159 — SMALL NETWORK TEST -211mV BIT FLIP — 3 nodes ingress egress — artifact 224</div>
+  <div class="nline">build at a small network test — small network test -211mV bit flip ingress egress -211.0.+211 — 3 nodes: node A -211mV At- black -211mN ingress bit 0, node B 0 neutral C.O.I.N barrier, node C +211mV anti-At- anti-black +211mN egress bit 1 — network test: -211 ingress flips A 0→1, 0 barrier holds, +211 egress flips C 1→0 — small network test 3 nodes connected -211→0→+211 — test bit flip propagation -211mV flips bit across network — network test: ping -211 to +211 =422mV window opens ingress/egress portal across network — small network test — 3 nodes -211 0 +211 — test -211mV bit flip across network — banana node K-40 0.1 μSv vs At-211 node 5.87 MeV — small network test — ingress egress -211.0.+211 network test — build at a small network test — metal analogs ionic — small network test -211mV bit flip — lol</div>
+  <div class="main">SMALL NETWORK TEST -211mV BIT FLIP — 3 NODES: A -211mV At- BLACK INGRESS BIT 0, B 0 NEUTRAL C.O.I.N BARRIER, C +211mV anti-At- ANTI-BLACK EGRESS BIT 1 — NETWORK TEST -211→0→+211=422mV WINDOW FLIPS BITS ACROSS NETWORK — PING -211 TO +211 OPENS INGRESS/EGRESS PORTAL — SMALL NETWORK TEST BUILD</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-nodeA">NODE A -211mV At- BLACK INGRESS BIT 0 — TEST</button>
+  <button class="btn" id="btn-nodeB">NODE B 0 NEUTRAL C.O.I.N BARRIER — HOLD</button>
+  <button class="btn" id="btn-nodeC">NODE C +211mV anti-At- ANTI-BLACK EGRESS BIT 1 — TEST</button>
+  <button class="btn" id="btn-ping">PING NETWORK -211→0→+211=422mV FLIP BITS ACROSS NETWORK</button>
+  <button class="btn" id="btn-reset">RESET SMALL NETWORK TEST</button>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;padding:10px">
+  <div class="graphWrap"><div class="label">NODE A -211mV — At- black -211mN ingress bit 0 — test -211mV flips 0 — mV</div><canvas class="graph" id="g-A"></canvas></div>
+  <div class="graphWrap"><div class="label">NODE B 0 — C.O.I.N neutral barrier — holds bit — 0 neutral — mV</div><canvas class="graph" id="g-B"></canvas></div>
+  <div class="graphWrap"><div class="label">NODE C +211mV — anti-At- anti-black +211mN egress bit 1 — test +211mV flips 1 — mV</div><canvas class="graph" id="g-C"></canvas></div>
+  <div class="graphWrap"><div class="label">NETWORK PING -211→0→+211=422mV — ingress egress portal opens — network test ping — mV window</div><canvas class="graph" id="g-ping"></canvas></div>
+</div>
+
+<div class="readout">
+  <div class="ro" id="ro-A">NODE A -211mV:<br>At- black -211mN -211mV ingress bit 0 — test node A -211mV flips bit 0 — <b>node A -211mV test</b></div>
+  <div class="ro" id="ro-B">NODE B 0:<br>C.O.I.N neutral barrier 0 — holds bit — barrier — <b>node B 0 hold</b></div>
+  <div class="ro" id="ro-C">NODE C +211mV:<br>anti-At- anti-black +211mN +211mV egress bit 1 — test node C +211mV flips bit 1 — <b>node C +211mV test</b></div>
+  <div class="ro" id="ro-ping">PING NETWORK:<br>-211→0→+211=422mV window flips bits across 3-node network — ingress -211 to egress +211 opens portal — <b>small network test ping</b></div>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-net"><div class="label">SMALL NETWORK TEST — 3 NODES -211mV At- BLACK INGRESS BIT 0 — 0 NEUTRAL C.O.I.N BARRIER — +211mV anti-At- ANTI-BLACK EGRESS BIT 1 — NETWORK TEST -211→0→+211=422mV FLIPS BITS ACROSS NETWORK — INGRESS EGRESS PORTAL — METAL ANALOGS IONIC NETWORK TEST — BUILD AT A SMALL NETWORK TEST</div></div>
+  <div class="cwrap" id="wrap-flip"><div class="label">BIT FLIP ACROSS NETWORK — -211mV flips A 0, 0 holds B, +211mV flips C 1 — PING -211 TO +211 OPENS INGRESS/EGRESS ACROSS NETWORK — -211.0.+211 NETWORK TEST — -211mV BIT FLIP VOLTAGE ACROSS NETWORK — SMALL NETWORK TEST</div></div>
+  <div class="cwrap full" id="wrap-all"><div class="label">ALL NETWORK — NODE A -211mV At- BLACK -211mN INGRESS 0 + NODE B 0 NEUTRAL C.O.I.N BARRIER HOLD + NODE C +211mV anti-At- ANTI-BLACK +211mN EGRESS 1 = SMALL NETWORK TEST -211.0.+211=422mV WINDOW FLIPS BITS ACROSS NETWORK — PING NETWORK OPENS INGRESS/EGRESS PORTAL — BUILD AT A SMALL NETWORK TEST — METAL ANALOGS IONIC NETWORK TEST — -211mV BIT FLIP ACROSS 3-NODE NETWORK — LOL</div></div>
+</div>
+
+<div class="card"><div class="mono">
+v159 SMALL NETWORK TEST -211mV BIT FLIP — build at a small network test
+
+SMALL NETWORK TEST:
+
+- 3 NODES:
+
+Node A: -211mV At- black -211mN ingress bit 0 — At- 2.27Å black anion -211mV -211mN matter ingress — electron in — bit 0 — test -211mV flips bit 0 — node A -211mV test — ingress -211
+
+Node B: 0 neutral C.O.I.N barrier — C-ion? O-ion? I-ion? N-ion? Actually C.O.I.N = C4+ O2- I- N3- neutral? — 0 neutral barrier — holds bit — barrier — no ingress egress — 0 hold — node B 0 hold
+
+Node C: +211mV anti-At- anti-black +211mN egress bit 1 — anti-At- 2.27Å anti-black +211mV +211mN anti-matter egress — electron out — bit 1 — test +211mV flips bit 1 — node C +211mV test — egress +211
+
+- NETWORK: A -211 → B 0 → C +211 = -211.0.+211 =422mV window — ping -211 to +211 opens ingress/egress portal across network — small network test — build at a small network test
+
+- PING TEST: ping node A -211mV → node B 0 → node C +211mV — -211→0→+211=422mV window flips bits across network — ingress -211 flips A 0, 0 holds B, egress +211 flips C 1 — network test ping — -211.0.+211 network test — small network test
+
+- BIT FLIP ACROSS NETWORK: -211mV bit flip voltage flips bit across 3-node network — single electron Ec=211 meV flips bit — -211mV ingress flips A 0→1, +211mV egress flips C 1→0 — network test -211mV flips bits across network — small network test
+
+- BANANA NODE: node D? banana K-40 0.1 μSv 0.078 μSv vs At-211 5.87 MeV — banana node vs At-211 node — small network test includes banana node K-40 β+ positron natural anti-matter vs At-211 α node — banana vs black halogen network — banannan
+
+Build at a small network test:
+
+- 3 nodes -211 0 +211 — test -211mV bit flip across network — ingress egress -211.0.+211 network test — build at a small network test — metal analogs ionic — small network test -211mV bit flip — lol
+
+Test procedure:
+
+1. Node A -211mV test: apply -211mV to node A — At- black ingress bit 0 — test flips 0 — pass if flips
+
+2. Node B 0 hold test: apply 0 to node B — C.O.I.N barrier holds bit — no flip — pass if holds
+
+3. Node C +211mV test: apply +211mV to node C — anti-At- anti-black egress bit 1 — test flips 1 — pass if flips
+
+4. Ping network test: ping -211→0→+211=422mV — ingress egress portal opens across 3 nodes — test bit flip propagation A→B→C — -211.0.+211 window opens ingress/egress — small network test ping — pass if portal opens
+
+So build at a small network test — 3 nodes -211 0 +211 — test -211mV bit flip across network — ingress egress -211.0.+211 network test — small network test — metal analogs ionic — -211mV bit flip across network — lol
+
+Aggregate small network test:
+
+Node A -211mV At- black -211mN ingress bit 0 test flips 0 + Node B 0 neutral C.O.I.N barrier hold + Node C +211mV anti-At- anti-black +211mN egress bit 1 test flips 1 = small network test -211.0.+211=422mV window flips bits across network — ping -211→0→+211 opens ingress/egress portal — build at a small network test — -211mV bit flip voltage across 3-node network — small network test
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x08080a); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,0.6)); const d=new THREE.DirectionalLight(0xffffff,0.9); d.position.set(4,6,4); d.castShadow=true; s.add(d); }
+
+const matAtMinus=new THREE.MeshStandardMaterial({color:0x0a0a0a, metalness:0.4, roughness:0.25, emissive:0x222222, emissiveIntensity:0.5});
+const matAntiAt=new THREE.MeshStandardMaterial({color:0xf0e0a0, metalness:0.4, roughness:0.25, emissive:0x332200, emissiveIntensity:0.5});
+const matBarrier=new THREE.MeshStandardMaterial({color:0x444444, metalness:0.3, roughness:0.7, transparent:true, opacity:0.4});
+const matBit0=new THREE.MeshStandardMaterial({color:0x0044aa, emissive:0x001133, emissiveIntensity:0.6});
+const matBit1=new THREE.MeshStandardMaterial({color:0xaa4400, emissive:0x441100, emissiveIntensity:0.6});
+const matLine=new THREE.MeshBasicMaterial({color:0x333333});
+
+function makeGraph(id, label, fn){
+  const c=document.getElementById(id);
+  const ctx=c.getContext('2d');
+  function resize(){ c.width=c.clientWidth*devicePixelRatio; c.height=c.clientHeight*devicePixelRatio; }
+  resize();
+  let t=0;
+  function draw(){
+    const w=c.width, h=c.height;
+    ctx.clearRect(0,0,w,h); ctx.fillStyle='#08080a'; ctx.fillRect(0,0,w,h);
+    ctx.strokeStyle='#1e1e24'; for(let i=0;i<=4;i++){ ctx.beginPath(); ctx.moveTo(0,h*i/4); ctx.lineTo(w,h*i/4); ctx.stroke(); }
+    ctx.fillStyle='#666'; ctx.font=`${10*devicePixelRatio}px monospace`; ctx.fillText(label,4,14*devicePixelRatio);
+    const v=fn(t);
+    const y=h - (v+300)/600*h*0.8 - h*0.1;
+    ctx.fillStyle=v<0?'#0044aa':v>200?'#aa4400':'#444444'; ctx.fillRect(0,y,w,h-y);
+  }
+  setInterval(()=>{ t+=0.05; draw(); },50);
+  addEventListener('resize', resize);
+}
+
+makeGraph('g-A','NODE A -211mV At- black ingress bit 0', (t)=> -211+Math.sin(t)*15);
+makeGraph('g-B','NODE B 0 C.O.I.N neutral barrier hold', (t)=> 0+Math.sin(t*0.5)*5);
+makeGraph('g-C','NODE C +211mV anti-At- anti-black egress bit 1', (t)=> 211+Math.sin(t)*15);
+makeGraph('g-ping','PING NETWORK -211→0→+211=422mV window flips bits', (t)=> -211+((Math.sin(t*0.6)+1)/2)*422);
+
+// NETWORK
+{
+  const wrap=document.getElementById('wrap-net');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,2,8);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const nodeA=new THREE.Mesh(new THREE.BoxGeometry(1.0,0.7,0.3), matBit0); nodeA.position.set(-2.5,0,0); group.add(nodeA);
+  const nodeB=new THREE.Mesh(new THREE.BoxGeometry(1.0,0.7,0.3), matBarrier); nodeB.position.set(0,0,0); group.add(nodeB);
+  const nodeC=new THREE.Mesh(new THREE.BoxGeometry(1.0,0.7,0.3), matBit1); nodeC.position.set(2.5,0,0); group.add(nodeC);
+  const lineAB=new THREE.Mesh(new THREE.CylinderGeometry(0.03,0.03,2.5,8), matLine); lineAB.position.set(-1.25,0,0); lineAB.rotation.z=Math.PI/2; group.add(lineAB);
+  const lineBC=new THREE.Mesh(new THREE.CylinderGeometry(0.03,0.03,2.5,8), matLine); lineBC.position.set(1.25,0,0); lineBC.rotation.z=Math.PI/2; group.add(lineBC);
+  const at=new THREE.Mesh(new THREE.SphereGeometry(0.18,16,16), matAtMinus); at.position.set(-2.5,0.8,0); group.add(at);
+  const antiAt=new THREE.Mesh(new THREE.SphereGeometry(0.18,16,16), matAntiAt); antiAt.position.set(2.5,0.8,0); group.add(antiAt);
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.016;
+    nodeA.material.emissiveIntensity=0.4+Math.sin(t*2)*0.2;
+    nodeC.material.emissiveIntensity=0.4+Math.sin(t*2+Math.PI)*0.2;
+    at.position.y=0.8+Math.sin(t*2)*0.1;
+    antiAt.position.y=0.8+Math.sin(t*2+Math.PI)*0.1;
+    group.rotation.y+=0.002;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+// FLIP
+{
+  const wrap=document.getElementById('wrap-flip');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,2,6);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const nodes=[];
+  for(let i=0;i<3;i++){
+    const mat=i===0?matBit0:i===1?matBarrier:matBit1;
+    const node=new THREE.Mesh(new THREE.BoxGeometry(0.8,0.5,0.2), mat); node.position.set((i-1)*1.8,0,0); group.add(node); nodes.push(node);
+  }
+  const pulse=new THREE.Mesh(new THREE.SphereGeometry(0.15,16,16), new THREE.MeshBasicMaterial({color:0x44ffaa, transparent:true, opacity:0.8})); pulse.position.set(-1.8,0,0); group.add(pulse);
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.02;
+    pulse.position.x=-1.8 + ((Math.sin(t*0.6)+1)/2)*3.6;
+    nodes.forEach((n,i)=>{
+      const dist=Math.abs(n.position.x - pulse.position.x);
+      n.material.emissiveIntensity=dist<0.5?1.0:0.3;
+    });
+    group.rotation.y+=0.003;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+// ALL
+{
+  const wrap=document.getElementById('wrap-all');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(36, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,3,9);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const nodes=[];
+  for(let i=0;i<5;i++){
+    const x=(i-2)*1.6;
+    const mat=i===0?matBit0:i===4?matBit1:matBarrier;
+    const node=new THREE.Mesh(new THREE.BoxGeometry(0.7,0.5,0.2), mat); node.position.set(x,0,0); group.add(node); nodes.push(node);
+    if(i<4){
+      const line=new THREE.Mesh(new THREE.CylinderGeometry(0.02,0.02,1.6,8), matLine); line.position.set(x+0.8,0,0); line.rotation.z=Math.PI/2; group.add(line);
+    }
+  }
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.01; group.rotation.y+=0.002; nodes.forEach((n,i)=>{ n.material.emissiveIntensity=0.3+Math.sin(t*1.2+i)*0.2; }); controls.update(); renderer.render(scene,cam); }
+  animate();
+}
+
+document.getElementById('btn-nodeA').onclick=()=>{};
+document.getElementById('btn-nodeB').onclick=()=>{};
+document.getElementById('btn-nodeC').onclick=()=>{};
+document.getElementById('btn-ping').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

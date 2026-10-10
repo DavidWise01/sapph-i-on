@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v162 next register -211.1.+211 bits memory - artifact 227</title>
+<style>
+  :root{--bg:#050508;--fg:#eaeaea;--gold:#ffd700}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace}
+  .top{padding:14px 18px}
+  .kicker{font-size:10px;letter-spacing:.22em;opacity:.5;text-transform:uppercase}
+  .nline{font-size:11px;border-left:2px solid #222;padding-left:10px;white-space:pre-wrap;line-height:1.6}
+  .main{margin-top:10px;font-size:14px;font-weight:700;background:#0f0f12;border:1px solid #222;padding:10px;border-radius:8px}
+  .controls{padding:10px 12px;display:flex;gap:6px;flex-wrap:wrap}
+  .btn{font-family:inherit;font-size:10px;padding:5px 10px;border:1px solid #333;background:#15151a;color:#eaeaea;border-radius:6px;cursor:pointer}
+  .btn.active{border-color:#ffd700;color:#ffd700;background:#221a00}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:520px;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden}
+  .cwrap.full{grid-column:1 / -1;height:640px}
+  .label{position:absolute;left:8px;top:8px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:.8;background:#000c;padding:4px 6px;border-radius:4px;z-index:5}
+  .graphWrap{position:relative;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden;height:260px}
+  canvas.graph{width:100%;height:100%;display:block}
+  .readout{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;padding:0 10px 10px}
+  @media(max-width:1100px){.readout{grid-template-columns:1fr 1fr}}
+  .ro{background:#0c0c0f;border:1px solid #1e1e24;border-radius:6px;padding:8px;font-size:10px;line-height:1.6}
+  .ro b{color:#ffd700}
+  .card{margin:10px;background:#111115;border:1px solid #1f1f26;border-radius:8px;padding:10px}
+  .mono{font-size:10.5px;white-space:pre-wrap;word-break:break-word;line-height:1.7}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">wakaku v162 — NEXT — REGISTER FROM -211.1.+211 BITS — 3 bits =27 states — artifact 227</div>
+  <div class="nline">ok next please — next — register from -211.1.+211 bits — bit itself -211.1.+211 green ternary qutrit -211= -1, 1=0, +211=+1 — next: build register from bits — 3 bits -211.1.+211 = 3 qutrits = 3^3=27 states vs 2^3=8 binary — 3 bits -211.1.+211 array = memory — next please — build register — node A -211.1.+211 bit0, node B -211.1.+211 bit1, node C -211.1.+211 bit2 = 3-bit register -211.1.+211 — 27 states -211 -211 -211 to +211 +211 +211 — register -211.1.+211 — next step after bit itself is register memory — small network test next is register — 3 bits -211.1.+211 = 27 states = balanced ternary  -13 to +13? — At- black -211mN + anti-At- +211mN + C.O.I.N barrier = register -211.1.+211 — next please — metal analogs ionic — register -211.1.+211 bits — lol</div>
+  <div class="main">NEXT — REGISTER FROM -211.1.+211 BITS — BIT ITSELF -211.1.+211 GREEN QUTRIT -211= -1, 1=0, +211=+1 — 3 BITS -211.1.+211 = 3 QUTRITS = 3^3=27 STATES vs 2^3=8 BINARY — REGISTER ARRAY -211.1.+211 = MEMORY — NEXT AFTER BIT ITSELF IS REGISTER — BUILD REGISTER — 3 BITS -211.1.+211 = MEMORY REGISTER</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-reg">REGISTER 3 BITS -211.1.+211 =27 STATES — -211 -211 -211 to +211 +211 +211</button>
+  <button class="btn" id="btn-write">WRITE -211.1.+211 TO REGISTER — WRITE BITS -211 1 +211</button>
+  <button class="btn" id="btn-read">READ REGISTER -211.1.+211 — READ 3 BITS 27 STATES</button>
+  <button class="btn" id="btn-next">NEXT PLEASE — NEXT AFTER REGISTER IS COMPUTER</button>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;padding:10px">
+  <div class="graphWrap"><div class="label">BIT0 -211.1.+211 — -211= -1, 1=0, +211=+1 — bit0 ternary — -211 1 +211</div><canvas class="graph" id="g-b0"></canvas></div>
+  <div class="graphWrap"><div class="label">BIT1 -211.1.+211 — -211= -1, 1=0, +211=+1 — bit1 ternary — -211 1 +211</div><canvas class="graph" id="g-b1"></canvas></div>
+  <div class="graphWrap"><div class="label">BIT2 -211.1.+211 — -211= -1, 1=0, +211=+1 — bit2 ternary — -211 1 +211</div><canvas class="graph" id="g-b2"></canvas></div>
+  <div class="graphWrap"><div class="label">REGISTER 3 BITS -211.1.+211 =27 STATES — 3^3=27 vs 2^3=8 — register value -13 to +13 balanced ternary — states</div><canvas class="graph" id="g-reg"></canvas></div>
+</div>
+
+<div class="readout">
+  <div class="ro" id="ro-b0">BIT0 -211.1.+211:<br>Bit itself -211.1.+211 green qutrit -211= -1, 1=0, +211=+1 — bit0 ternary — <b>bit0 -211.1.+211</b></div>
+  <div class="ro" id="ro-b1">BIT1 -211.1.+211:<br>Bit itself -211.1.+211 green qutrit -211= -1, 1=0, +211=+1 — bit1 ternary — <b>bit1 -211.1.+211</b></div>
+  <div class="ro" id="ro-b2">BIT2 -211.1.+211:<br>Bit itself -211.1.+211 green qutrit -211= -1, 1=0, +211=+1 — bit2 ternary — <b>bit2 -211.1.+211</b></div>
+  <div class="ro" id="ro-reg">REGISTER 27 STATES:<br>3 bits -211.1.+211 =3 qutrits =3^3=27 states -13 to +13 balanced ternary vs binary 8 — <b>register 27 states</b></div>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-reg"><div class="label">REGISTER 3 BITS -211.1.+211 — BIT0 -211.1.+211 GREEN QUTRIT + BIT1 -211.1.+211 GREEN QUTRIT + BIT2 -211.1.+211 GREEN QUTRIT = REGISTER 3 BITS =27 STATES -211 -211 -211 TO +211 +211 +211 — REGISTER ARRAY -211.1.+211 = MEMORY — NEXT AFTER BIT ITSELF IS REGISTER — BUILD REGISTER — METAL ANALOGS IONIC REGISTER -211.1.+211</div></div>
+  <div class="cwrap" id="wrap-write"><div class="label">WRITE READ REGISTER -211.1.+211 — WRITE -211 LEFT At- BLACK -211mN + 1 MIDDLE C.O.I.N BARRIER + +211 RIGHT anti-At- ANTI-BLACK +211mN TO 3 BITS — READ REGISTER 3 BITS 27 STATES — WRITE -211.1.+211 TO REGISTER — NEXT PLEASE — METAL ANALOGS IONIC WRITE READ REGISTER</div></div>
+  <div class="cwrap full" id="wrap-next"><div class="label">NEXT — AFTER BIT ITSELF -211.1.+211 NEXT IS REGISTER 3 BITS -211.1.+211 =27 STATES — AFTER REGISTER NEXT IS COMPUTER LOGIC GATE -211.1.+211 — NEXT PLEASE — REGISTER FROM -211.1.+211 BITS MEMORY — 3 BITS -211.1.+211 ARRAY = MEMORY REGISTER — NEXT AFTER REGISTER IS COMPUTER -211.1.+211 — BUILD REGISTER NEXT — METAL ANALOGS IONIC NEXT REGISTER -211.1.+211 — LOL</div></div>
+</div>
+
+<div class="card"><div class="mono">
+v162 NEXT — REGISTER FROM -211.1.+211 BITS — ok next please
+
+NEXT AFTER BIT ITSELF -211.1.+211 IS REGISTER:
+
+- Bit itself -211.1.+211 green ternary qutrit -211= -1, 1=0, +211=+1 balanced ternary — bit itself contains -211 left At- black -211mN ingress 0 +1 middle C.O.I.N barrier hold 1 +211 right anti-At- anti-black +211mN egress 2 — bit itself -211.1.+211
+
+- Next: register from -211.1.+211 bits — 3 bits -211.1.+211 =3 qutrits =3^3=27 states vs binary 2^3=8 states — register array -211.1.+211 = memory — 3 bits -211.1.+211 = 27 states -211 -211 -211 to +211 +211 +211 — balanced ternary -13 to +13? Actually 3 trit balanced ternary range -13 to +13 — 27 states
+
+- Build register: node A -211.1.+211 bit0, node B -211.1.+211 bit1, node C -211.1.+211 bit2 =3-bit register -211.1.+211 — register -211.1.+211 — next please — build register — 3 bits -211.1.+211 =27 states = memory
+
+- Write: write -211.1.+211 to register — write bits -211 1 +211 to 3 bits — -211 left At- black -211mN, 1 middle C.O.I.N barrier, +211 right anti-At- anti-black +211mN to register — write -211.1.+211 to register
+
+- Read: read register -211.1.+211 — read 3 bits 27 states — -211 -211 -211 = -13, +211 +211 +211 = +13, etc — read register
+
+- Next after register is computer logic gate -211.1.+211 — computer from -211.1.+211 bits — next please — next after register is computer
+
+Metal analogs ionic next register:
+
+- Bit0 -211.1.+211: -211 left At- black -211mN +1 middle C.O.I.N barrier +211 right anti-At- anti-black +211mN = bit0 green qutrit
+
+- Bit1 -211.1.+211: same = bit1 green qutrit
+
+- Bit2 -211.1.+211: same = bit2 green qutrit
+
+- Register 3 bits -211.1.+211 = 27 states -211 -211 -211 to +211 +211 +211 = memory register — next please — build register — metal analogs ionic register -211.1.+211 bits — lol
+
+So next please — next after bit itself -211.1.+211 green qutrit is register 3 bits -211.1.+211 =27 states memory — build register — next after register is computer logic — next please
+
+Aggregate next:
+
+Bit itself -211.1.+211 green qutrit -211= -1, 1=0, +211=+1 balanced ternary — 3 bits -211.1.+211 =3 qutrits =27 states vs binary 8 — register array -211.1.+211 = memory — next after bit itself is register — build register 3 bits -211.1.+211 =27 states -211 -211 -211 to +211 +211 +211 — next please — next after register is computer logic gate -211.1.+211 — register from -211.1.+211 bits — lol
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x08080a); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,0.6)); const d=new THREE.DirectionalLight(0xffffff,0.9); d.position.set(4,6,4); d.castShadow=true; s.add(d); }
+
+const matAtMinus=new THREE.MeshStandardMaterial({color:0x0a0a0a, metalness:0.4, roughness:0.25, emissive:0x222222, emissiveIntensity:0.5});
+const matAntiAt=new THREE.MeshStandardMaterial({color:0xf0e0a0, metalness:0.4, roughness:0.25, emissive:0x332200, emissiveIntensity:0.5});
+const matBarrier=new THREE.MeshStandardMaterial({color:0x666666, metalness:0.3, roughness:0.7, transparent:true, opacity:0.5});
+const matBit=new THREE.MeshStandardMaterial({color:0x44ffaa, metalness:0.5, roughness:0.4, emissive:0x114422, emissiveIntensity:0.6});
+const matLine=new THREE.MeshBasicMaterial({color:0x333333});
+
+function makeGraph(id, fn, color){
+  const c=document.getElementById(id);
+  const ctx=c.getContext('2d');
+  function resize(){ c.width=c.clientWidth*devicePixelRatio; c.height=c.clientHeight*devicePixelRatio; }
+  resize();
+  let t=0;
+  function draw(){
+    const w=c.width, h=c.height;
+    ctx.clearRect(0,0,w,h); ctx.fillStyle='#08080a'; ctx.fillRect(0,0,w,h);
+    ctx.strokeStyle='#1e1e24'; for(let i=0;i<=4;i++){ ctx.beginPath(); ctx.moveTo(0,h*i/4); ctx.lineTo(w,h*i/4); ctx.stroke(); }
+    ctx.fillStyle='#666'; ctx.font=`${10*devicePixelRatio}px monospace`; ctx.fillText(id,4,14*devicePixelRatio);
+    const v=fn(t);
+    const y=h - (v+300)/600*h*0.8 - h*0.1;
+    ctx.fillStyle=color; ctx.fillRect(0,y,w,h-y);
+  }
+  setInterval(()=>{ t+=0.05; draw(); },50);
+  addEventListener('resize', resize);
+}
+
+makeGraph('g-b0','BIT0 -211.1.+211 -211= -1 1=0 +211=+1', (t)=> -211+((Math.floor((t*0.8)%3))*211));
+makeGraph('g-b1','BIT1 -211.1.+211', (t)=> -211+((Math.floor((t*0.8+1)%3))*211));
+makeGraph('g-b2','BIT2 -211.1.+211', (t)=> -211+((Math.floor((t*0.8+2)%3))*211));
+makeGraph('g-reg','REGISTER 27 STATES 3^3=27 -13 to +13', (t)=> -211+((t*20)%422)-211);
+
+// REGISTER
+{
+  const wrap=document.getElementById('wrap-reg');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,2,8);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  for(let i=0;i<3;i++){
+    const x=(i-1)*2.2;
+    const bitGroup=new THREE.Group(); bitGroup.position.set(x,0,0); group.add(bitGroup);
+    const left=new THREE.Mesh(new THREE.BoxGeometry(0.5,0.4,0.2), matAtMinus); left.position.set(-0.6,0,0); bitGroup.add(left);
+    const mid=new THREE.Mesh(new THREE.BoxGeometry(0.5,0.4,0.2), matBarrier); mid.position.set(0,0,0); bitGroup.add(mid);
+    const right=new THREE.Mesh(new THREE.BoxGeometry(0.5,0.4,0.2), matAntiAt); right.position.set(0.6,0,0); bitGroup.add(right);
+    const top=new THREE.Mesh(new THREE.BoxGeometry(1.8,0.15,0.15), matBit); top.position.set(0,0.5,0); bitGroup.add(top);
+  }
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.01; group.rotation.y+=0.002; group.children.forEach((bg,i)=>{ bg.children[3].material.emissiveIntensity=0.4+Math.sin(t*1.2+i)*0.3; }); controls.update(); renderer.render(scene,cam); }
+  animate();
+}
+
+// WRITE
+{
+  const wrap=document.getElementById('wrap-write');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,2,6);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const bits=[];
+  for(let i=0;i<3;i++){
+    const x=(i-1)*1.8;
+    const bit=new THREE.Mesh(new THREE.BoxGeometry(1.0,0.6,0.2), matBit); bit.position.set(x,0,0); group.add(bit); bits.push(bit);
+  }
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.02;
+    bits.forEach((b,i)=>{
+      const state=Math.floor((t*0.8+i)%3);
+      b.material.color.set(state===0?0x0044aa:state===1?0x666666:0xaa4400);
+      b.material.emissiveIntensity=0.3+Math.sin(t*2+i)*0.2;
+    });
+    group.rotation.y+=0.003;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+// ALL
+{
+  const wrap=document.getElementById('wrap-next');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(36, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,3,9);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  for(let i=0;i<3;i++){
+    for(let j=0;j<3;j++){
+      const x=(i-1)*1.8; const z=(j-1)*1.2;
+      const bit=new THREE.Mesh(new THREE.BoxGeometry(0.6,0.3,0.15), matBit); bit.position.set(x,0,z); group.add(bit);
+    }
+  }
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.01; group.rotation.y+=0.002; group.children.forEach((c,i)=>{ c.material.emissiveIntensity=0.3+Math.sin(t*1.2+i*0.3)*0.3; }); controls.update(); renderer.render(scene,cam); }
+  animate();
+}
+
+document.getElementById('btn-reg').onclick=()=>{};
+document.getElementById('btn-write').onclick=()=>{};
+document.getElementById('btn-read').onclick=()=>{};
+document.getElementById('btn-next').onclick=()=>{};
+</script>
+</body>
+</html>

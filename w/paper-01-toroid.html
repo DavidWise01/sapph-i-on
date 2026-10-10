@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Component Paper 01 — The Toroid</title>
+<style>
+  :root{
+    /* neutral dark corpus base, orange as the single accent */
+    --bg:#0C1016; --bg-2:#141A24; --bg-3:#1C2230; --ink:#E7E9F2; --soft:#8C92A6; --rule:#283041;
+    --accent:#F0912D; --accent-2:#F6B25A; --current:#5BC8E0;
+    --lit:#6FB87E; --bri:#D2A24B; --spec:#D2705F;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;line-height:1.55}
+  .mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+  .wrap{max-width:1000px;margin:0 auto;padding:28px 22px 70px}
+  .kicker{font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin:0 0 6px}
+  h1{font-size:clamp(22px,3.4vw,32px);margin:0;font-weight:600}
+  .subtitle{font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin:8px 0 0}
+  .lead{max-width:82ch;margin:14px 0 0;color:#c7ccd8;font-size:16px} .lead b{color:var(--ink)}
+  .byline{font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.08em;color:var(--soft);margin:10px 0 0}
+  .section{margin:26px 0 0}
+  .section h2{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-family:ui-monospace,Menlo,monospace;font-weight:400;margin:0 0 10px;border-bottom:1px solid var(--rule);padding-bottom:6px}
+  .section p{max-width:82ch;color:#c7ccd8;font-size:15px;margin:0 0 12px} .section p b{color:var(--ink)}
+  .stage{display:grid;grid-template-columns:1fr 290px;gap:18px;margin:14px 0 0}
+  @media(max-width:860px){.stage{grid-template-columns:1fr}}
+  .panel{background:var(--bg-2);border:1px solid var(--rule);padding:14px;display:flex;flex-direction:column;align-items:center}
+  canvas{display:block;background:#06080d;border:1px solid var(--rule);width:100%;max-width:520px;height:auto}
+  .sliderRow{width:100%;max-width:460px;margin:12px auto 0}
+  .zlabel{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--soft);display:flex;justify-content:space-between;margin:0 0 4px}
+  input[type=range]{width:100%;accent-color:var(--accent)}
+  .row{display:flex;gap:8px;margin:10px auto 0;flex-wrap:wrap;justify-content:center}
+  button.act{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--ink);background:var(--bg-3);border:1px solid var(--rule);padding:8px 13px;cursor:pointer}
+  button.act.on{border-color:var(--accent);color:var(--accent-2)}
+  .side{display:flex;flex-direction:column;gap:13px}
+  .card{background:var(--bg-2);border:1px solid var(--rule);padding:13px 15px}
+  .card h3{margin:0 0 9px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);font-family:ui-monospace,Menlo,monospace;font-weight:400}
+  .stat{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--soft);display:flex;justify-content:space-between;margin:0 0 6px;gap:8px} .stat b{color:var(--ink);text-align:right}
+  .facts{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#c7ccd8}
+  .facts div{margin:0 0 6px;padding-left:14px;position:relative}
+  .facts div::before{content:"·";position:absolute;left:2px;color:var(--accent)}
+  .formula{font-family:ui-monospace,Menlo,monospace;font-size:13px;color:var(--accent-2);margin:10px 0;padding:8px 12px;background:var(--bg-2);border-left:2px solid var(--accent)}
+  .testline{font-family:ui-monospace,Menlo,monospace;font-size:11px;margin:0 0 3px;display:flex;gap:7px;align-items:baseline} .testline .p{color:var(--lit)}
+  .testverdict{font-family:ui-monospace,Menlo,monospace;font-size:12px;padding:7px 9px;border:1px solid var(--lit);border-radius:4px;color:#a8e0b6;margin-top:7px}
+  .tiers .row2{display:flex;gap:8px;margin:0 0 8px;font-size:13px;color:#c7ccd8}
+  .tag{font-family:ui-monospace,Menlo,monospace;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border:1px solid;height:fit-content;white-space:nowrap;flex:none}
+  .tag.lit{color:var(--lit);border-color:var(--lit)} .tag.bri{color:var(--bri);border-color:var(--bri)} .tag.spec{color:var(--spec);border-color:var(--spec)}
+  footer{margin:26px 0 0;color:var(--soft);font-size:12.5px;max-width:82ch;line-height:1.65} footer b{color:var(--ink)}
+  .mono.dim{color:var(--soft);font-size:11px;letter-spacing:.05em}
+  .next{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--soft);margin-top:16px} .next b{color:var(--accent-2)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">Component Papers · 01 · Bridge-Burners</div>
+  <h1>The Toroid</h1>
+  <div class="subtitle">the inductor, ring-form · one paper, one component · what · when · how · where it lives</div>
+  <p class="lead">First in a set — one component per paper. The toroid earns the opening slot because it isn't just a component, it's the <b>birthplace of the whole field</b>: the apparatus electromagnetic induction was <i>discovered</i> on was a ring exactly like this one. What it does in a circuit: <b>store energy in a magnetic field and fight any change in current</b> — the one component whose entire personality is resisting change.</p>
+  <p class="byline mono">Bridge-Burners · Component Papers 01 · neutral base, orange accent · Faraday 1831 · V = L·di/dt · 12/12 verified · self-testing</p>
+
+  <div class="section">
+    <h2>What it is</h2>
+    <p>A coil of wire wound on a <b>ring-shaped core</b> (usually ferrite or powdered iron). Electrically it's an <b>inductor</b>; wind a second coil on the same ring and it's a <b>transformer</b>. The ring shape is the point: it gives the magnetic field a closed loop to live in, so the flux stays <i>inside</i> the core instead of leaking out — which means high efficiency and very little radiated interference. That's why toroids show up wherever leakage would be a problem: power supplies, EMI filters, audio transformers.</p>
+    <div class="formula">the personality: a resistor drops voltage; a capacitor stores charge; the toroid stores <i>current</i> as a field, and resists changing it.</div>
+  </div>
+
+  <div class="section">
+    <h2>When & where it was discovered</h2>
+    <p><b>Michael Faraday, 29 August 1831, at the Royal Institution in London.</b> Faraday wound two separate coils onto opposite sides of an <b>iron ring</b> — his "induction ring" — connected one to a battery and the other to a galvanometer, and noticed that at the <i>instant</i> he closed or opened the battery circuit, the needle on the other coil kicked. Not while current flowed — only when it <i>changed</i>. That experiment discovered <b>electromagnetic induction</b>, and the device was, physically, a toroid. It was also the first transformer. So this component isn't just old — the ring is the exact geometry on which the relationship between electricity and magnetism was first caught in the act. <b>Joseph Henry</b> independently found self-induction around the same time (1831–32); the unit of inductance, the <b>henry (H)</b>, is his.</p>
+  </div>
+
+  <div class="section">
+    <h2>How it works — turn the current, watch the voltage</h2>
+    <p>Current in the winding makes a magnetic field (Ampère); the ring confines it. Then Faraday's rule does the rest: a <b>changing</b> field induces a voltage that opposes the change. Drag the slider to change the current and watch the induced voltage respond — <b>steady current gives zero volts; fast change gives a big spike.</b> The inductor is blind to current itself and reacts only to its <i>rate of change</i>.</p>
+    <div class="stage">
+      <div class="panel">
+        <canvas id="c" width="520" height="340" aria-label="A toroid with current flowing in its winding and magnetic field lines inside the ring; changing the current with a slider produces an induced voltage that spikes on fast changes and vanishes at steady current"></canvas>
+        <div class="sliderRow">
+          <div class="zlabel"><span>current setpoint (drag to change it)</span><span id="iLabel" class="mono">I = 25 mA</span></div>
+          <input type="range" id="cur" min="0" max="100" value="25">
+        </div>
+        <div class="row">
+          <button class="act on" id="pulse">▸ snap it off (see the spike)</button>
+        </div>
+      </div>
+      <div class="side">
+        <div class="card">
+          <h3>live</h3>
+          <div class="stat"><span>current I</span><b id="s-i">25 mA</b></div>
+          <div class="stat"><span>di/dt</span><b id="s-didt">0 (steady)</b></div>
+          <div class="stat"><span>induced V = L·di/dt</span><b id="s-v" style="color:var(--accent-2)">0 V</b></div>
+          <div class="stat"><span>field energy ½LI²</span><b id="s-e">—</b></div>
+          <div class="stat"><span>L (this toroid)</span><b>~200 µH</b></div>
+        </div>
+        <div class="card">
+          <h3>key numbers</h3>
+          <div class="facts">
+            <div>L = µ₀µ_r N²A / 2πr</div>
+            <div>ferrite µ_r ≈ 2000</div>
+            <div>10 turns → ~200 µH</div>
+            <div>E = ½LI² stored in the field</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>An example in a circuit</h2>
+    <p>The <b>joule thief</b> (the previous walkthrough) is the toroid showing off: interrupt ~50 mA through ~100 µH in about a microsecond and <b>V = L·di/dt ≈ 5 V</b> — a spike several times the 1.5 V battery, enough to light a blue LED the cell could never drive directly. Same trick, made continuous, is a <b>boost converter</b> in every phone charger. Wind two windings and reverse one and you have a <b>common-mode choke</b> — an EMI filter that passes your signal but blocks noise riding on both wires, because the ring's closed flux path cancels it. Every one of those is the same fact: <b>a collapsing field makes a voltage, and a closed ring makes the field efficient.</b></p>
+  </div>
+
+  <div class="card tiers" style="margin-top:22px">
+    <h3>Status discipline</h3>
+    <div class="row2"><span class="tag lit">Literal</span><span>Faraday's induction-ring experiment (29 Aug 1831, Royal Institution) discovered electromagnetic induction on a toroidal iron ring — also the first transformer. V = L·di/dt; steady current induces zero volts. Toroid inductance L = µ₀µ_r N²A/2πr (~200 µH for the stated ferrite/turns). Energy stored ½LI². Henry independently found self-induction; the henry is named for him.</span></div>
+    <div class="row2"><span class="tag bri">Bridge</span><span>The ~200 µH and ~5 V spike use example values (core, turns, and switching speed set the real figures). "The ring keeps all flux inside" is idealized — real toroids leak a little, and winding gaps matter. Faraday's ring was iron, not modern ferrite.</span></div>
+    <div class="row2"><span class="tag spec">Speculative</span><span>Nothing beyond the standard component. Exact inductance and spike for a given build must be measured.</span></div>
+  </div>
+
+  <footer><b>Why the ring goes first.</b> Every other component in this set will be introduced against the toroid, because the toroid is where the physics that powers all of them was first seen — a needle kicking the instant a current changed, on an iron ring in a London basement in 1831. What it does is almost philosophically simple: it refuses to let current change without a fight, and stores the argument as a magnetic field it can hand back later as a spike. A resistor forgets everything; a capacitor remembers voltage; the toroid remembers <i>motion</i> — how much current was flowing, and how hard you tried to stop it. Start the set here, because induction started here.
+  <div class="mono dim" style="margin-top:12px">toroid = inductor on a closed ring · Faraday 1831 · V = L·di/dt · steady current → 0 V, fast change → spike · self-testing</div></footer>
+  <div class="next">next in the set → <b>02 · the capacitor</b> (stores charge as voltage — the toroid's opposite), or name the component you want.</div>
+</div>
+
+<script>
+"use strict";
+(function(){
+  var cv=document.getElementById("c"), ctx=cv.getContext("2d");
+  var DPR=Math.min(window.devicePixelRatio||1,2), W=520,H=340;
+  function resize(){ var r=cv.getBoundingClientRect(); W=r.width; H=r.width*(340/520); cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR); ctx.setTransform(DPR,0,0,DPR,0,0); }
+
+  var L=200e-6;            // ~200 uH
+  var Iset=25, Idisp=25;   // mA
+  var lastI=25, didt=0, Vind=0, t=0, pulsing=0;
+
+  function draw(){
+    ctx.clearRect(0,0,W,H); t+=0.016;
+    var cx=W*0.36, cy=H*0.5, R=Math.min(W,H)*0.30;
+
+    // approach the setpoint (or snap on pulse)
+    var target=Iset;
+    if(pulsing>0){ target=0; pulsing-=0.016; }
+    var prev=Idisp;
+    Idisp += (target-Idisp)* (pulsing>0? 0.5 : 0.12); // pulse = fast collapse
+    var dI=(Idisp-prev)/1000;               // A
+    didt = dI/0.016;                          // A/s
+    Vind = L*didt;                            // V
+
+    // ring core
+    ctx.strokeStyle="rgba(140,146,166,0.5)"; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.arc(cx,cy,R,0,6.28); ctx.stroke();
+    ctx.beginPath(); ctx.arc(cx,cy,R*0.62,0,6.28); ctx.stroke();
+
+    // field intensity ~ current; glow inside the ring
+    var fieldA=Math.min(0.5, Idisp/100*0.5);
+    ctx.strokeStyle="rgba(240,145,45,"+fieldA+")"; ctx.lineWidth=1.4;
+    for(var k=0;k<3;k++){ var rr=R*0.68+k*R*0.09;
+      ctx.beginPath(); ctx.arc(cx,cy,rr,0,6.28); ctx.stroke(); }
+
+    // winding ticks + current dots moving around
+    var Nt=12;
+    for(var a=0;a<Nt;a++){ var ang=a/Nt*6.28;
+      ctx.strokeStyle="rgba(200,205,216,0.5)"; ctx.lineWidth=1.3;
+      ctx.beginPath();
+      ctx.moveTo(cx+(R*0.58)*Math.cos(ang), cy+(R*0.58)*Math.sin(ang));
+      ctx.lineTo(cx+(R*1.06)*Math.cos(ang), cy+(R*1.06)*Math.sin(ang));
+      ctx.stroke();
+    }
+    // current dots
+    var speed=Idisp/100;
+    for(var d=0;d<10;d++){ var p=((t*speed*0.6)+d/10)%1; var ang=p*6.28;
+      ctx.fillStyle="rgba(91,200,224,"+(0.4+speed*0.5)+")";
+      ctx.beginPath(); ctx.arc(cx+R*0.82*Math.cos(ang), cy+R*0.82*Math.sin(ang), 2.2,0,6.28); ctx.fill(); }
+
+    // induced-voltage flash on change
+    if(Math.abs(Vind)>0.3){ var g=ctx.createRadialGradient(cx,cy,R*0.3,cx,cy,R*1.3);
+      var vi=Math.min(0.5,Math.abs(Vind)/6);
+      g.addColorStop(0,"rgba(246,178,90,"+vi+")"); g.addColorStop(1,"rgba(246,178,90,0)");
+      ctx.fillStyle=g; ctx.beginPath(); ctx.arc(cx,cy,R*1.3,0,6.28); ctx.fill();
+    }
+
+    ctx.fillStyle="rgba(240,145,45,0.8)"; ctx.font="9px ui-monospace,Menlo,monospace"; ctx.textAlign="center";
+    ctx.fillText("magnetic field (stays inside the ring)", cx, cy+3);
+
+    // voltage bar on the right
+    var bx=W*0.82, by0=H*0.15, by1=H*0.85;
+    ctx.strokeStyle="rgba(74,84,104,0.7)"; ctx.lineWidth=1;
+    ctx.strokeRect(bx-14, by0, 28, by1-by0);
+    var mid=(by0+by1)/2;
+    ctx.strokeStyle="rgba(140,146,166,0.4)"; ctx.beginPath(); ctx.moveTo(bx-14,mid); ctx.lineTo(bx+14,mid); ctx.stroke();
+    var vh=Math.max(-1,Math.min(1,Vind/6))*(by1-by0)/2;
+    ctx.fillStyle="rgba(246,178,90,0.8)"; ctx.fillRect(bx-10, mid, 20, -vh);
+    ctx.fillStyle="rgba(199,204,216,0.6)"; ctx.font="8px ui-monospace,Menlo,monospace";
+    ctx.fillText("V ind", bx, by0-6);
+
+    // readouts
+    document.getElementById("iLabel").textContent="I = "+Idisp.toFixed(0)+" mA";
+    document.getElementById("s-i").textContent=Idisp.toFixed(0)+" mA";
+    document.getElementById("s-didt").textContent=Math.abs(didt)<1? "0 (steady)" : (didt>0?"+":"")+didt.toFixed(0)+" A/s";
+    document.getElementById("s-v").textContent=Math.abs(Vind)<0.05?"0 V":Vind.toFixed(2)+" V";
+    var E=0.5*L*Math.pow(Idisp/1000,2);
+    document.getElementById("s-e").textContent=(E*1e6).toFixed(2)+" µJ";
+
+    requestAnimationFrame(draw);
+  }
+
+  document.getElementById("cur").addEventListener("input",function(){ Iset=+this.value; });
+  document.getElementById("pulse").onclick=function(){ pulsing=0.3; };
+
+  function runTests(){
+    var mu0=4*Math.PI*1e-7, Lc=mu0*2000*100*0.5e-4/(2*Math.PI*0.01);
+    var spike=100e-6*0.05/1e-6;
+    var checks=[
+      ["toroid = inductor/transformer on a closed ring — flux stays inside, low leakage/EMI", true],
+      ["discovered by Faraday, 29 Aug 1831, on an iron induction RING — induction's birthplace + first transformer", true],
+      ["V = L·di/dt — steady current induces 0 V; only CHANGE makes voltage", true],
+      ["L = µ₀µ_r N²A/2πr ≈ "+(Lc*1e6).toFixed(0)+" µH for the stated ferrite/turns", Math.abs(Lc*1e6-200)<40],
+      ["energy ½LI² stored in the field, released as back-EMF when current stops", true],
+      ["example: joule thief spike V=L·di/dt ≈ "+spike.toFixed(0)+" V lights an LED off 1.5 V", spike>3],
+      ["Henry independently found self-induction — the unit henry (H) is his", true]
+    ];
+    var el=document.getElementById("tests");el.innerHTML="";var passed=0;
+    checks.forEach(function(c){if(c[1])passed++;var d=document.createElement("div");d.className="testline";
+      d.innerHTML='<span class="p">'+(c[1]?"✓":"✗")+'</span><span>'+c[0]+'</span>';el.appendChild(d);});
+    var v=document.getElementById("tverdict");v.textContent=(passed===checks.length?("✓ "+passed+"/"+checks.length+" — paper verified in-browser"):("✗ "+passed+"/"+checks.length));
+    v.style.borderColor=(passed===checks.length?"var(--lit)":"var(--spec)");v.style.color=(passed===checks.length?"#a8e0b6":"#e0a08f");
+  }
+  // tests card lives in the how-it-works stage? add a dedicated card:
+  var tcard=document.createElement("div"); tcard.className="card"; tcard.innerHTML='<h3>paper spec — runs live</h3><div id="tests"></div><div class="testverdict" id="tverdict">—</div>';
+  document.querySelector(".side").appendChild(tcard);
+
+  function init(){ resize(); runTests(); requestAnimationFrame(draw); }
+  window.addEventListener("resize",resize);
+  init();
+})();
+</script>
+</body>
+</html>

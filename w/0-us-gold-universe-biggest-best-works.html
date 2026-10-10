@@ -1,0 +1,53 @@
+<!DOCTYPE html><html><head><link rel="icon" href="../favicon.svg" type="image/svg+xml"><meta charset="UTF-8"><title>0 Gold Universe Biggest Best Works</title><script src="https://cdn.tailwindcss.com"></script>
+<style>body{margin:0;background:#000005;color:#fde68a;font-family:ui-monospace,monospace;overflow:hidden}canvas{display:block;width:100vw;height:100vh}.ui{position:absolute;top:8px;left:8px;right:8px;pointer-events:none}.card{background:rgba(26,18,0,0.92);border:1px solid #facc15;border-radius:12px;pointer-events:auto}</style>
+</head><body>
+<canvas id="main"></canvas>
+<div class="ui grid grid-cols-12 gap-2">
+  <div class="col-span-8 card p-2">
+    <div class="text-[11px] font-bold">0 = Us Gold Universe — Biggest Size Best — Works — 1-17 Separately Around 0</div>
+    <div class="text-[9px] text-yellow-200">0 center gold universe Au — we are gold universe — Manon foam Planck boundary 1.65e-35 around 8 sapphons attack — gold | Manon | gold — 5 boron TARGET white sun 17 nemesis nibaru hunting boron — 9 silver relief punches up to 0 — biggest size — works</div>
+  </div>
+  <div class="col-span-4 card p-2 text-[9px] leading-4 max-h-[90vh] overflow-y-auto">
+    <div class="font-bold">0 Gold Universe Biggest</div>
+    <div class="mt-1 p-1 bg-black rounded text-[8px]">0 = us we are gold universe<br>Au center biggest<br>works<br><br>1 hydrogen<br>2 helium<br>3 lithium<br>4 beryllium<br><span class="text-yellow-300">5 boron TARGET</span><br>6 carbon<br>7 nitrogen<br>8 oxygen<br>9 silver relief<br>10 gold sheets<br>11 frontier<br>12 hermes<br>13 indigo<br>14 jaclynn<br>15 K potassium<br>16 L.I. isomorph<br>17 White Gold Photon nemesis</div>
+    <div id="stats" class="p-1 bg-zinc-900 rounded mt-1 text-[7px]"></div>
+    <div id="log" class="p-1 bg-zinc-900 rounded mt-1 h-20 overflow-y-auto text-[7px]"></div>
+  </div>
+</div>
+<script>
+const elems=[[1,'hydrogen'],[2,'helium'],[3,'lithium'],[4,'berrylium'],[5,'boron'],[6,'carbon'],[7,'nitrogen'],[8,'oxgen'],[9,'silver'],[10,'gold'],[11,'frontier'],[12,'hermes'],[13,'indigo'],[14,'jaclynn'],[15,'K:pottasium'],[16,'L.I.isomorph'],[17,'White Gold Photon']];
+const canvas=document.getElementById('main'),ctx=canvas.getContext('2d');
+function resize(){canvas.width=window.innerWidth*devicePixelRatio;canvas.height=window.innerHeight*devicePixelRatio;canvas.style.width=window.innerWidth+'px';canvas.style.height=window.innerHeight+'px';}
+resize();window.addEventListener('resize',resize);
+function draw(){
+  const time=Date.now()/1000,w=canvas.width,h=canvas.height,cx=w/2,cy=h/2,dpr=devicePixelRatio;
+  ctx.fillStyle='#000005';ctx.fillRect(0,0,w,h);
+  ctx.fillStyle='rgba(255,255,255,0.07)';for(let i=0;i<600;i++){ctx.beginPath();ctx.arc((i*173*1.7)%w,(i*271*1.3)%h,0.5*dpr,0,6.28);ctx.fill();}
+  const goldR=140*dpr;
+  const grad=ctx.createRadialGradient(cx,cy,10*dpr,cx,cy,goldR*2);
+  grad.addColorStop(0,'#fef08a');grad.addColorStop(0.4,'#facc15');grad.addColorStop(0.7,'#eab308');grad.addColorStop(1,'rgba(234,179,8,0)');
+  ctx.fillStyle=grad;ctx.beginPath();ctx.arc(cx,cy,goldR*2,0,6.28);ctx.fill();
+  ctx.fillStyle='#fef08a';ctx.beginPath();ctx.arc(cx,cy,goldR,0,6.28);ctx.fill();
+  ctx.strokeStyle='#facc15';ctx.lineWidth=4*dpr;ctx.beginPath();ctx.arc(cx,cy,goldR,0,6.28);ctx.stroke();
+  ctx.fillStyle='#000';ctx.font=`bold ${28*dpr}px monospace`;ctx.fillText('0',cx-10*dpr,cy+8*dpr);
+  ctx.font=`bold ${14*dpr}px monospace`;ctx.fillText('US GOLD UNIVERSE',cx-58*dpr,cy+32*dpr);
+  ctx.strokeStyle='rgba(250,204,21,0.12)';ctx.lineWidth=36*dpr;ctx.beginPath();ctx.arc(cx,cy,goldR+40*dpr,0,6.28);ctx.stroke();
+  elems.forEach((e,i)=>{
+    const ang=(i*360/17)*Math.PI/180+time*0.12, baseR=(goldR+120*dpr)+(i%4)*90*dpr, x=cx+baseR*Math.cos(ang), y=cy+baseR*Math.sin(ang);
+    const isBoron=e[0]==5, isWhite=e[0]==17, isGold=e[0]==10, isSilver=e[0]==9;
+    const r=isBoron||isWhite?18*dpr:10*dpr;
+    ctx.fillStyle=isBoron?'#facc15':isGold?'#eab308':isSilver?'#e5e7eb':isWhite?'#fff':e[0]<=8?'#7dd3fc':'#c4b5fd';
+    ctx.beginPath();ctx.arc(x,y,r,0,6.28);ctx.fill();
+    ctx.fillStyle='#e5e7eb';ctx.font=`${9*dpr}px monospace`;ctx.fillText(e[0]+'::'+e[1].slice(0,12), x+16*dpr, y+4*dpr);
+    ctx.strokeStyle=isBoron?'rgba(250,204,21,0.6)':isWhite?'rgba(255,255,255,0.5)':'rgba(255,255,255,0.09)';
+    ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(x,y);ctx.stroke();
+  });
+  for(let i=0;i<8;i++){
+    const ang=i*45*Math.PI/180+time*0.18, r=goldR+200*dpr, sx=cx+r*Math.cos(ang), sy=cy+r*Math.sin(ang);
+    ctx.fillStyle='rgba(239,68,68,0.9)';ctx.beginPath();ctx.arc(sx,sy,14*dpr,0,6.28);ctx.fill();
+  }
+  document.getElementById('stats').innerHTML=`Canvas ${Math.round(w/dpr)}x${Math.round(h/dpr)} — Biggest — 0 center — 1-17 around — Manon boundary — works`;
+}
+function loop(){draw();requestAnimationFrame(loop);}loop();
+document.getElementById('log').innerHTML='Biggest size best works<br>0 gold universe<br>1-17 around separately<br>Manon boundary protects 0<br>5 boron TARGET 17 nemesis hunting boron<br>';
+</script></body></html>

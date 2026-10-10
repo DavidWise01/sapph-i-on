@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Toroids as Communicators · III — The Choke</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --iron:#0b0d14;--slab:#11141f;--panel:#161a28;--grid:#1f2435;
+    --copper:#e0915a;--copper-dim:#8a5a36;
+    --flux:#8a9eff;--flux-dim:#4a548a;
+    --pwm:#5fe0c0;--recovered:#6fe6a0;
+    --noise:#e0566a;            /* common-mode noise — the thing rejected */
+    --noise-dim:#8a3340;
+    --paper:#e6e8f0;--paper-dim:#8e94ad;--rule:#1f243533;--rose:#e07a9a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{background:var(--iron);color:var(--paper);font-family:'Newsreader',Georgia,serif;
+    font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:880px;margin:0 auto;padding:0 24px}
+
+  .hero{min-height:84vh;display:flex;flex-direction:column;justify-content:center;padding:70px 0 40px}
+  .kicker{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--copper);margin-bottom:22px;font-weight:500}
+  .kicker .s{color:var(--flux-dim)} .kicker .f{color:var(--pwm)}
+  h1{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(38px,8vw,78px);line-height:1.0;letter-spacing:-.01em}
+  h1 .pwm{color:var(--pwm)} h1 .noise{color:var(--noise)}
+  .lede{font-size:clamp(19px,2.4vw,24px);color:var(--paper-dim);max-width:640px;margin-top:30px;line-height:1.5}
+  .lede b{color:var(--paper);font-weight:500} .lede .pwm{color:var(--pwm)} .lede .noise{color:var(--noise)} .lede .flux{color:var(--flux)}
+  .recall{font-family:'IBM Plex Mono',monospace;margin-top:34px;font-size:clamp(16px,2.7vw,23px);color:var(--flux);letter-spacing:.01em;line-height:1.6}
+  .recall .p{color:var(--pwm)} .recall .n{color:var(--noise)} .recall .c{color:var(--paper)}
+  .recall-cap{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--paper-dim);margin-top:12px;line-height:1.6}
+
+  .sec{padding:60px 0;border-top:1px solid var(--rule)}
+  .tag{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--copper);margin-bottom:14px;font-weight:500}
+  .tag.n{color:var(--noise)}
+  h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(25px,4.5vw,39px);line-height:1.08;letter-spacing:-.005em}
+  h2 .pwm{color:var(--pwm)} h2 .noise{color:var(--noise)} h2 .flux{color:var(--flux)}
+  .sec p{margin:18px 0;color:var(--paper);max-width:680px}
+  .sec p.dim{color:var(--paper-dim)}
+  .sec p b{color:var(--paper);font-weight:600}
+  .sec p .flux{color:var(--flux);font-weight:500} .sec p .copper{color:var(--copper);font-weight:500}
+  .sec p .pwm{color:var(--pwm);font-weight:500} .sec p .rec{color:var(--recovered);font-weight:500} .sec p .noise{color:var(--noise);font-weight:500}
+  .pull{font-family:'Chakra Petch',sans-serif;font-weight:500;font-size:clamp(20px,3vw,27px);line-height:1.3;color:var(--flux);margin:30px 0;padding-left:20px;border-left:3px solid var(--flux-dim)}
+  .pull.pwm{color:var(--pwm);border-left-color:#2f7a68}
+  code{font-family:'IBM Plex Mono',monospace;font-size:.85em;color:var(--copper);background:#11141f;padding:2px 7px;border-radius:5px}
+  .flag{font-family:'Newsreader';font-size:15.5px;color:var(--paper-dim);font-style:italic;margin:18px 0;padding:14px 18px;background:#11141f66;border:1px solid var(--rule);border-radius:8px}
+  .flag b{color:var(--rose);font-style:normal;font-weight:600;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;display:block;margin-bottom:6px}
+
+  .inst{margin:32px 0;border:1px solid var(--grid);border-radius:14px;overflow:hidden;background:var(--slab)}
+  .inst.n{border-color:#3e2630}
+  .inst-bar{display:flex;align-items:center;gap:10px;padding:12px 18px;border-bottom:1px solid var(--grid);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--paper-dim)}
+  .inst-bar .led{width:9px;height:9px;border-radius:50%;background:var(--flux);box-shadow:0 0 8px var(--flux)}
+  .inst.n .inst-bar .led{background:var(--noise);box-shadow:0 0 8px var(--noise)}
+  .inst-bar .ttl{color:var(--flux)} .inst.n .inst-bar .ttl{color:var(--noise)}
+  canvas{display:block;width:100%;height:auto;background:var(--iron)}
+  .ctrls{padding:16px 18px;display:flex;flex-wrap:wrap;gap:18px;align-items:center;border-top:1px solid var(--grid)}
+  .ctrl{display:flex;flex-direction:column;gap:6px;flex:1;min-width:150px}
+  .ctrl label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--paper-dim)}
+  .ctrl label .val{color:var(--copper);float:right}
+  input[type=range]{-webkit-appearance:none;appearance:none;height:4px;border-radius:2px;background:var(--grid);outline:none;width:100%}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--copper);cursor:pointer;box-shadow:0 0 8px var(--copper-dim)}
+  input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radius:50%;background:var(--copper);cursor:pointer}
+  input:focus-visible{outline:2px solid var(--copper);outline-offset:3px}
+  .segs{display:flex;gap:6px;flex-wrap:wrap}
+  .seg{font-family:'IBM Plex Mono',monospace;font-size:12px;padding:7px 12px;border:1px solid var(--grid);border-radius:8px;background:var(--panel);color:var(--paper-dim);cursor:pointer;touch-action:manipulation}
+  .seg.on{border-color:var(--flux);color:var(--flux);background:rgba(138,158,255,.12)}
+  .seg:focus-visible{outline:2px solid var(--copper);outline-offset:2px}
+  .readout{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--paper-dim);padding:0 18px 16px;line-height:1.6}
+  .readout b{color:var(--copper)} .readout .flux{color:var(--flux)} .readout .pwm{color:var(--pwm)} .readout .rec{color:var(--recovered)} .readout .noise{color:var(--noise)}
+
+  .foot{padding:50px 0 80px;border-top:1px solid var(--rule);margin-top:40px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--paper-dim);line-height:2}
+  .foot b{color:var(--flux)} .foot .pwm{color:var(--pwm)}
+
+  .journey{margin:30px 0;border:1px solid var(--grid);border-radius:12px;overflow:hidden}
+  .journey .r{display:grid;grid-template-columns:130px 1fr;border-bottom:1px solid var(--grid)}
+  .journey .r:last-child{border-bottom:none}
+  .journey .r .y{font-family:'IBM Plex Mono',monospace;font-size:12px;padding:12px 14px;border-right:1px solid var(--grid);color:var(--flux)}
+  .journey .r .y .yr{color:var(--paper-dim);font-size:10px;display:block;margin-top:2px}
+  .journey .r .d{padding:12px 16px;font-size:14.5px;color:var(--paper-dim)}
+  .journey .r .d b{color:var(--paper)}
+
+  .duals{margin:26px 0;border:1px solid var(--grid);border-radius:12px;overflow:hidden}
+  .duals .h{display:grid;grid-template-columns:1fr 1fr;background:#161a28;border-bottom:1px solid var(--grid)}
+  .duals .h div{padding:11px 14px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+  .duals .h div:first-child{color:var(--copper);border-right:1px solid var(--grid)}
+  .duals .h div:last-child{color:var(--flux)}
+  .duals .r{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--grid)}
+  .duals .r:last-child{border-bottom:none}
+  .duals .r div{padding:11px 14px;font-size:13.5px;color:var(--paper-dim);line-height:1.45}
+  .duals .r div:first-child{border-right:1px solid var(--grid)}
+  .duals .r code{font-size:11px}
+
+  @media (max-width:560px){body{font-size:17px}.ctrl{min-width:100%}.journey .r{grid-template-columns:104px 1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker">Toroids as Communicators <span class="s">·</span> <span class="f">Paper III — The Choke · finale</span></div>
+    <h1>Pass the <span class="pwm">difference</span>.<br>Strangle what<br>they <span class="noise">share</span>.</h1>
+    <p class="lede">A message rides on the <span class="pwm">difference</span> between two wires. Noise lands on <b>both at once</b>. One toroid, wound a particular way, can tell those two apart by feel alone — it lets the <span class="pwm">difference</span> sail through and chokes whatever the wires hold <span class="noise">in common</span>. No frequencies measured, no logic. Just flux that either cancels or piles up.</p>
+    <div class="recall"><span class="p">differential</span> <span class="c">→ flux cancels →</span> <span class="p">passes</span><br><span class="n">common-mode</span> <span class="c">→ flux adds →</span> <span class="n">blocked</span></div>
+    <div class="recall-cap">selective listening by <span style="color:var(--pwm)">mode</span>, not frequency — the magnetic answer to a noisy cable</div>
+  </header>
+
+  <section class="sec">
+    <div class="tag">§8 · the one idea</div>
+    <h2>Two ways for current to flow, <span class="flux">two fates in the core</span></h2>
+    <p>Run both wires of a signal pair through the <em>same</em> toroid, wound the same direction. Now there are two kinds of current that can flow, and the core treats them as opposites:</p>
+    <p>The <span class="pwm">differential</span> current is the signal — it goes <em>out</em> on one wire and <em>back</em> on the other, a complete loop. Through the core, those two flow in opposite senses, so their fluxes <b>cancel</b>. The core barely notices: low impedance, the signal passes untouched.</p>
+    <p>The <span class="noise">common-mode</span> current is the noise — picked up from the world, it pushes the <em>same</em> direction on both wires at once. Through the core, those fluxes <b>add</b>. The core slams down a large impedance and chokes it. Same toroid, same wires — opposite fate, decided entirely by whether the current is a difference or a sameness.</p>
+    <p class="pull">It never measures the noise. It just offers an easy path to the signal and a wall to anything the two wires are doing together.</p>
+  </section>
+
+  <!-- INSTRUMENT 11: THE CHOKE -->
+  <section class="sec">
+    <div class="tag">§9 · instrument eleven</div>
+    <h2>The choke — <span class="flux">flux that cancels, or piles up</span></h2>
+    <p>Watch the core decide. In <span class="pwm">differential</span> mode the two windings' fluxes oppose and the ring goes quiet — current strolls through. Flip to <span class="noise">common-mode</span> and the fluxes stack, the ring lights up, and the impedance shoots high — the current hits a wall. The toroid is doing subtraction with magnetism.</p>
+
+    <div class="inst">
+      <div class="inst-bar"><span class="led"></span><span class="ttl">THE CHOKE</span> · differential cancels · common-mode adds</div>
+      <canvas id="choke"></canvas>
+      <div class="ctrls">
+        <div class="ctrl" style="flex:2;min-width:100%"><label>current mode</label>
+          <div class="segs" id="chMode">
+            <div class="seg on" data-m="diff">differential (signal)</div>
+            <div class="seg" data-m="common">common-mode (noise)</div>
+          </div></div>
+      </div>
+      <div class="readout" id="chRead">two wires, one core. <span class="pwm">differential</span>: fluxes <b>cancel</b> → core quiet → low impedance → <span class="rec">passes</span>. <span class="noise">common-mode</span>: fluxes <b>add</b> → core saturated with flux → high impedance → <span class="noise">choked</span>.</div>
+    </div>
+  </section>
+
+  <!-- INSTRUMENT 12: THE CLEAN MESSAGE -->
+  <section class="sec">
+    <div class="tag n">§10 · instrument twelve · the payoff</div>
+    <h2>The clean message — <span class="pwm">PWM through a filthy channel</span></h2>
+    <p>Now the communication payoff, the reason any of this matters. Send a differential <span class="pwm">PWM</span> message down a pair, and let the world dump <span class="noise">noise</span> onto the cable — the way a motor, a radio, or a nearby switching supply actually would, hitting both wires equally. The choke strangles the common-mode noise current; the receiver reads the <em>difference</em> of the two wires, where the shared noise subtracts to nothing. Out the far end comes the <span class="rec">message</span>, intact, as if the channel were clean.</p>
+
+    <div class="inst n">
+      <div class="inst-bar"><span class="led"></span><span class="ttl">THE CLEAN MESSAGE</span> · differential PWM + common-mode noise → recovered</div>
+      <canvas id="clean"></canvas>
+      <div class="ctrls">
+        <div class="ctrl"><label>common-mode noise <span class="val" id="clNval">1.0×</span></label>
+          <input type="range" id="clNoise" min="0" max="2.5" step="0.05" value="1"></div>
+        <div class="ctrl"><label>choke + receiver <span class="val" id="clCval">on</span></label>
+          <input type="range" id="clChoke" min="0" max="1" step="1" value="1"></div>
+      </div>
+      <div class="readout" id="clRead">the two wires both carry the <span class="noise">noise</span> (see how they move together) but the <span class="pwm">PWM</span> rides as their difference. take the difference → noise cancels → <span class="rec">clean message</span>. turn the choke/receiver off to watch the noise swamp it.</div>
+    </div>
+    <p class="pull pwm">The message was never in either wire — it was in the gap between them. Noise can climb onto both wires, but it cannot climb into the difference. That is why two wires beat one, and why the choke is the last piece of the channel.</p>
+    <div class="flag"><b>honest flag</b>Two mechanisms are bundled here for clarity: the <em>choke</em> raises impedance to common-mode current (reducing the noise that flows and radiates), while the <em>differential receiver</em> subtracts whatever common-mode voltage remains. Real links use both, plus twisted pairs and shielding. The rejection isn't infinite — imbalance between the wires converts a little common-mode into differential (mode conversion), real chokes have a finite impedance band, and a big enough common-mode swing still overruns the receiver's range. ~60 dB is a realistic ballpark, not a guarantee.</p>
+  </section>
+
+  <!-- CLOSE -->
+  <section class="sec">
+    <div class="tag">§11 · the whole communicator</div>
+    <h2>Three papers, <span class="flux">one ring</span></h2>
+    <p>The toroid turned out to be a complete communications device, and it never did anything but respond to a change in flux. Across three papers it learned to carry, to cross, and to discriminate —</p>
+
+    <div class="journey">
+      <div class="r"><div class="y">the closed loop<span class="yr">Paper I</span></div><div class="d">it carries only <b>change</b>. <code>v = N·dΦ/dt</code>. a held level dies in the core, so the message must be edges — and PWM is the message-in-edges.</div></div>
+      <div class="r"><div class="y">the crossing<span class="yr">Paper II</span></div><div class="d">two windings, <b>no wire between them</b>. the edges leap the gap; the duty is rebuilt on a side that's electrically a world away. galvanic isolation.</div></div>
+      <div class="r"><div class="y">the choke<span class="yr">Paper III</span></div><div class="d">it tells the <b>difference</b> from the <b>sameness</b> — passes the signal, chokes the shared noise. the message survives a filthy channel.</div></div>
+    </div>
+
+    <p>Send on the edges, cross the gap isolated, reject what the wires share — that's a transmitter, an isolator, and a noise filter, all in one ring of wound iron. And like its electric twin the capacitor, it does it all with a single stubborn refusal: <span class="flux">it cannot feel what holds still.</span></p>
+
+    <p class="dim">The two series are duals — the same idea in opposite fields. Worth seeing them side by side:</p>
+    <div class="duals">
+      <div class="h"><div>Capacitor · electric</div><div>Toroid · magnetic</div></div>
+      <div class="r"><div>change in voltage → current<br><code>i = C·dv/dt</code></div><div>change in flux → voltage<br><code>v = N·dΦ/dt</code></div></div>
+      <div class="r"><div>blocks DC, passes the wiggle (coupling)</div><div>blocks DC, passes the edges (transformer)</div></div>
+      <div class="r"><div>crosses a gap: displacement current</div><div>crosses a gap: shared flux (isolation)</div></div>
+      <div class="r"><div>selective by frequency (RC filter)</div><div>selective by mode (common-mode choke)</div></div>
+    </div>
+
+    <p class="pull">Two parts, two fields, one law of communication: notice only the change, and let the change cross the space between. The capacitor watches the voltage; the toroid watches the flux. Neither can hear a thing that holds still — which is exactly what makes them listen.</p>
+
+    <p class="dim">A closing note for the archive: this magnetic series is the deliberate mirror of the capacitor series — electric and magnetic duals, the two halves of how passive parts carry a signal. Together they bracket the whole field. If it ever extends, the next ring is the <em>current transformer</em> (the toroid that reads a wire without touching it — sensing, the V·dC/dt of the magnetic world), or up into <em>real cores</em> where saturation and hysteresis finally make the ideal pay its debts.</p>
+  </section>
+
+  <div class="foot">
+    TOROIDS AS COMMUNICATORS · PAPER III — THE CHOKE · series finale<br>
+    differential flux cancels (passes) · common-mode flux adds (blocked) · ~60 dB CMRR · checked in node<br>
+    three papers: carry the change · cross the gap · reject the shared — one ring of wound iron<br>
+    <span class="pwm">the message lives in the difference; noise cannot climb into a difference</span>
+  </div>
+
+</div>
+
+<script>
+"use strict";
+const reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const COL={iron:"#0b0d14",grid:"#1f2435",copper:"#e0915a",copperDim:"#8a5a36",
+  flux:"#8a9eff",fluxDim:"#4a548a",pwm:"#5fe0c0",recovered:"#6fe6a0",
+  noise:"#e0566a",paper:"#8e94ad"};
+
+function setup(cv,ratio){
+  const dpr=Math.min(window.devicePixelRatio||1,2);
+  const cssW=cv.parentElement.clientWidth, cssH=Math.round(cssW*ratio);
+  cv.width=cssW*dpr; cv.height=cssH*dpr; cv.style.height=cssH+"px";
+  const ctx=cv.getContext("2d"); ctx.setTransform(dpr,0,0,dpr,0,0);
+  return {ctx,W:cssW,H:cssH};
+}
+function gridlines(ctx,W,H){ ctx.strokeStyle=COL.grid;ctx.lineWidth=1;
+  for(let x=0;x<=W;x+=W/12){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
+  for(let y=0;y<=H;y+=H/8){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();} }
+function glow(ctx,pts,gx,gy,color,gw){ ctx.shadowColor=color;ctx.shadowBlur=gw||7;
+  ctx.strokeStyle=color;ctx.lineWidth=2;ctx.beginPath();
+  pts.forEach((o,k)=>{const x=gx(o,k),y=gy(o,k);k?ctx.lineTo(x,y):ctx.moveTo(x,y);});
+  ctx.stroke();ctx.shadowBlur=0; }
+
+/* ── INSTRUMENT 11 · THE CHOKE ── */
+(function(){
+  const cv=document.getElementById("choke");
+  const seg=document.getElementById("chMode"), read=document.getElementById("chRead");
+  let mode="diff";
+  seg.querySelectorAll(".seg").forEach(s=>s.onclick=()=>{mode=s.dataset.m;seg.querySelectorAll(".seg").forEach(o=>o.classList.toggle("on",o===s));});
+  let d=setup(cv,0.6); window.addEventListener("resize",()=>d=setup(cv,0.6));
+  function draw(t){
+    const {ctx,W,H}=d;
+    ctx.clearRect(0,0,W,H); gridlines(ctx,W,H);
+    const tt=reduce?0.3:t;
+    const cx=W*0.30, cy=H*0.5, R=Math.min(W*0.16,H*0.34), r=R*0.5;
+    // net flux: differential -> ~0, common -> high
+    const netFlux = mode==="diff" ? 0.06 : 1.0;
+    // core
+    ctx.lineWidth=R-r; ctx.strokeStyle="#2a2f42";
+    ctx.beginPath();ctx.arc(cx,cy,(R+r)/2,0,Math.PI*2);ctx.stroke();
+    // flux dots — brightness ∝ netFlux
+    for(let k=0;k<12;k++){const a=(k/12)*Math.PI*2+(reduce?0:tt*4*netFlux);
+      const rr=(R+r)/2, ax=cx+Math.cos(a)*rr, ay=cy+Math.sin(a)*rr;
+      ctx.fillStyle=`rgba(138,158,255,${0.1+0.7*netFlux})`;ctx.beginPath();ctx.arc(ax,ay,2.4+netFlux*1.5,0,Math.PI*2);ctx.fill();}
+    ctx.fillStyle=`rgba(138,158,255,${0.3+0.6*netFlux})`;ctx.font="12px 'IBM Plex Mono',monospace";ctx.textAlign="center";ctx.textBaseline="middle";
+    ctx.fillText(mode==="diff"?"Φ ≈ 0":"Φ = 2Φ",cx,cy);
+    ctx.fillStyle="rgba(138,158,255,.5)";ctx.font="9px 'IBM Plex Mono',monospace";
+    ctx.fillText(mode==="diff"?"flux cancels":"flux adds up",cx,cy+R+16);
+
+    // two windings: wire A (top) and wire B (bottom), with current-direction arrows
+    const dir = mode==="diff" ? 1 : 1; // both wound same; current direction differs
+    // arrows on the two leads
+    function lead(yOff,label,col,arrowDir){
+      const ly=cy+yOff;
+      ctx.strokeStyle=col;ctx.lineWidth=2.4;
+      ctx.beginPath();ctx.moveTo(cx-R-W*0.12,ly);ctx.lineTo(cx-R+4,ly);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(cx+R-4,ly);ctx.lineTo(cx+R+W*0.12,ly);ctx.stroke();
+      // arrow (current direction)
+      const ax = mode==="diff" ? (yOff<0?1:-1) : 1; // diff: opposite; common: same
+      const flow=(reduce?0:(tt*2)%1);
+      for(let s=0;s<3;s++){
+        const fx=cx-R-W*0.10 + ((flow+s/3)%1)*(2*R+W*0.20);
+        ctx.fillStyle=col;ctx.beginPath();
+        ctx.moveTo(fx,ly);ctx.lineTo(fx-6*ax,ly-4);ctx.lineTo(fx-6*ax,ly+4);ctx.closePath();ctx.fill();
+      }
+      ctx.fillStyle=col;ctx.font="9px 'IBM Plex Mono',monospace";ctx.textAlign="left";ctx.fillText(label,cx-R-W*0.11,ly-9);
+    }
+    // winding turns drawn on the ring
+    ctx.strokeStyle=COL.copper;ctx.lineWidth=2;
+    for(let k=0;k<6;k++){const a=Math.PI*0.62+(k/5)*Math.PI*0.56;
+      const mx=cx+Math.cos(a)*((R+r)/2),my=cy+Math.sin(a)*((R+r)/2);
+      ctx.beginPath();ctx.ellipse(mx,my,(R-r)/2+5,5,a+Math.PI/2,0,Math.PI*2);ctx.stroke();}
+    for(let k=0;k<6;k++){const a=-Math.PI*0.38+(k/5)*Math.PI*0.56;
+      const mx=cx+Math.cos(a)*((R+r)/2),my=cy+Math.sin(a)*((R+r)/2);
+      ctx.beginPath();ctx.ellipse(mx,my,(R-r)/2+5,5,a+Math.PI/2,0,Math.PI*2);ctx.stroke();}
+    lead(-R-10,"wire A",mode==="diff"?COL.pwm:COL.noise,1);
+    lead(R+10,"wire B",mode==="diff"?COL.pwm:COL.noise,-1);
+
+    // right: impedance bar (low for diff, high for common) + pass/block verdict
+    const bx=W*0.66, bw=W*0.22, by=H*0.2, bh=H*0.56;
+    ctx.strokeStyle="#2a2f42";ctx.lineWidth=1;ctx.strokeRect(bx,by,bw,bh);
+    const z = mode==="diff"?0.08:0.92;
+    const zc = mode==="diff"?COL.recovered:COL.noise;
+    ctx.fillStyle=zc;ctx.fillRect(bx,by+bh*(1-z),bw,bh*z);
+    ctx.fillStyle=COL.paper;ctx.font="10px 'IBM Plex Mono',monospace";ctx.textAlign="center";ctx.textBaseline="alphabetic";
+    ctx.fillText("impedance",bx+bw/2,by-6);
+    ctx.fillStyle=zc;ctx.font="bold 13px 'Chakra Petch',sans-serif";
+    ctx.fillText(mode==="diff"?"LOW → PASSES":"HIGH → BLOCKED",bx+bw/2,by+bh+20);
+
+    read.innerHTML = mode==="diff"
+      ? `<span class="pwm">differential</span> (the signal): currents oppose through the core → fluxes <b>cancel</b> (Φ≈0) → low impedance → the message <span class="rec">passes</span> untouched.`
+      : `<span class="noise">common-mode</span> (the noise): currents align through the core → fluxes <b>add</b> (Φ=2Φ) → high impedance → the noise is <span class="noise">choked</span>.`;
+    requestAnimationFrame(draw);
+  } requestAnimationFrame(draw);
+})();
+
+/* ── INSTRUMENT 12 · THE CLEAN MESSAGE ── */
+(function(){
+  const cv=document.getElementById("clean");
+  const Nz=document.getElementById("clNoise"), Ck=document.getElementById("clChoke");
+  const Nv=document.getElementById("clNval"), Cv=document.getElementById("clCval");
+  const read=document.getElementById("clRead");
+  let d=setup(cv,0.66); window.addEventListener("resize",()=>d=setup(cv,0.66));
+  function draw(t){
+    const {ctx,W,H}=d; const noise=parseFloat(Nz.value), chokeOn=parseFloat(Ck.value)>0.5;
+    Nv.textContent=noise.toFixed(1)+"×"; Cv.textContent=chokeOn?"on":"off";
+    ctx.clearRect(0,0,W,H); gridlines(ctx,W,H);
+    const padL=82,padR=16,plotW=W-padL-padR;
+    const rows=[0.16,0.40,0.64,0.88].map(f=>H*f), amp=H*0.085;
+    const labels=["wire A (+sig +noise)","wire B (−sig +noise)","difference A−B","recovered value"];
+    const cols=[COL.noise,COL.noise,COL.pwm,COL.recovered];
+    labels.forEach((l,k)=>{ctx.fillStyle=cols[k];ctx.font="9.5px 'IBM Plex Mono',monospace";ctx.textAlign="right";ctx.textBaseline="middle";
+      ctx.fillText(l,padL-8,rows[k]);
+      ctx.strokeStyle="#2a2f42";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(padL,rows[k]);ctx.lineTo(W-padR,rows[k]);ctx.stroke();});
+
+    const scroll=reduce?0:(t*0.1)%1, N=420, nCyc=4, duty=0.6;
+    const sig=k=>(((k/N+scroll)*nCyc)%1)<duty ? 1 : -1;   // differential PWM (±)
+    // common-mode noise: low-freq + a little hf, same on both wires; choke reduces it
+    const nAmpEff = noise * (chokeOn?0.12:1.0);
+    const cm=k=>nAmpEff*(Math.sin((k/N+scroll)*Math.PI*2*1.3 + t*1.5)*0.7 + Math.sin((k/N)*Math.PI*2*7+t*4)*0.3);
+
+    // wire A = +sig/2 + noise ; wire B = -sig/2 + noise
+    function plotRow(idx,fn,col,gw){ctx.strokeStyle=col;ctx.shadowColor=col;ctx.shadowBlur=gw||6;ctx.lineWidth=2;ctx.beginPath();
+      for(let k=0;k<=N;k++){const x=padL+plotW*(k/N);const y=rows[idx]-fn(k)*amp;k?ctx.lineTo(x,y):ctx.moveTo(x,y);}ctx.stroke();ctx.shadowBlur=0;}
+    plotRow(0,k=> sig(k)*0.5 + cm(k), COL.noise);
+    plotRow(1,k=> -sig(k)*0.5 + cm(k), COL.noise);
+    // difference A - B = sig (noise cancels) — but if choke off, receiver still subtracts; noise is common so cancels anyway,
+    // the choke's job is reducing the COMMON-MODE CURRENT/swing; show residual when off (imbalance/mode-conversion)
+    const imbalance = chokeOn?0.0:0.18*noise; // a little leaks through as differential when unmanaged
+    plotRow(2,k=> sig(k) + imbalance*Math.sin((k/N)*Math.PI*2*7+t*4), COL.pwm);
+    // recovered low-pass of the difference -> duty
+    {const recY=rows[3]-((duty*2-1))*amp;
+     ctx.strokeStyle=COL.recovered;ctx.shadowColor=COL.recovered;ctx.shadowBlur=6;ctx.lineWidth=2;ctx.beginPath();
+     for(let k=0;k<=80;k++){const x=padL+plotW*(k/80);const rp=imbalance*0.5*Math.sin(t*5-k*0.2);ctx.lineTo(x,recY - rp*amp);}
+     ctx.stroke();ctx.shadowBlur=0;
+     ctx.fillStyle=COL.recovered;ctx.beginPath();ctx.arc(W-padR-4,recY,4,0,Math.PI*2);ctx.fill();}
+
+    read.innerHTML = chokeOn
+      ? `<span class="noise">noise</span> sits on <b>both</b> wires equally (watch A and B bob together). the <span class="pwm">difference A−B</span> cancels it → clean PWM → <span class="rec">message recovered</span>. the choke also kept the common-mode current from swamping the input.`
+      : `choke/receiver <b>off</b>: the <span class="noise">common-mode noise</span> runs wild and imbalance leaks some into the <span class="pwm">difference</span> → the <span class="rec">recovered value</span> wobbles. turn it on to clean the channel.`;
+    requestAnimationFrame(draw);
+  } requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

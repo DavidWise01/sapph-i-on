@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[[ 6 &lt;&gt; 0 &lt;&gt; 6 &lt;&gt; 0 ]]</title>
+<style>
+:root{--bg:#06100E;--panel:#0B1512;--p2:#0E1a17;--rule:#173028;--ink:#E4F2EE;--dim:#7FA399;--faint:#4E6B62;
+--box:#5DCAA5;--bound:#B58BE0;--zero:#EF9F27;--link:#6F9BE0;--good:#5DCAA5;--warn:#EF9F27;--bad:#D85A30;--teal:#1D9E75;--teal-d:#0F6E56;
+--mono:'DM Mono',ui-monospace,monospace;--sans:'Archivo',system-ui,sans-serif;}
+[data-theme="light"]{--bg:#F2F7F5;--panel:#FFF;--rule:#D6E4DF;--ink:#0C1B17;--dim:#4A635C;--faint:#8AA;--p2:#EDF3F1;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px}
+.wrap{max-width:1040px;margin:0 auto;padding:22px}
+h1{font-size:19px;font-weight:700;letter-spacing:-.02em;font-family:var(--mono)}h1 span{color:var(--link)}
+.sub{color:var(--dim);font-family:var(--mono);font-size:12px;margin-top:4px}
+.top{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}.top .sp{flex:1}
+.btn{background:transparent;border:1px solid var(--rule);color:var(--dim);border-radius:6px;padding:8px 12px;font-family:var(--mono);font-size:11px;cursor:pointer}
+.btn:hover{border-color:var(--teal-d);color:var(--ink)}.btn.good{border-color:var(--teal);color:var(--good)}
+.stage{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:10px}
+canvas{display:block;width:100%}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+@media(max-width:840px){.grid{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:14px}
+.card h3{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}
+.row{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;padding:5px 0;border-bottom:1px solid var(--rule)}
+.row:last-child{border-bottom:0}.row .k{color:var(--dim)}.row .v{color:var(--ink);font-weight:500}
+.row .v.g{color:var(--good)}.row .v.b{color:var(--bad)}.row .v.l{color:var(--link)}
+.eli{font-family:var(--mono);font-size:11px;color:var(--faint);line-height:1.7}.eli b{color:var(--dim)}
+.foot{font-family:var(--mono);font-size:10px;color:var(--faint);line-height:1.7;margin-top:16px}
+.lit{color:var(--good)}
+.big{font-family:var(--mono);font-size:14px;margin-top:4px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top">
+  <div><h1>[[ 6 <span>&lt;&gt;</span> 0 <span>&lt;&gt;</span> 6 <span>&lt;&gt;</span> 0 ]]</h1>
+    <div class="sub">a chain of closed boxes joined through boundaries — link the ends without the ends ever touching</div></div>
+  <div class="sp"></div>
+  <button class="btn good" id="swap">swap the link across →</button>
+  <button class="btn" id="break">break a boundary</button>
+  <button class="btn" id="reset">reset</button>
+  <button class="btn" id="theme">theme</button>
+</div>
+
+<div class="stage"><canvas id="c" height="340" role="img" aria-label="A chain of quantum boxes connected through boundaries, with a link swapping across the middles"></canvas></div>
+
+<div class="grid">
+  <div class="card">
+    <h3>the chain state</h3>
+    <div class="row"><span class="k">boxes in chain</span><span class="v">A · B · C (6+1 each)</span></div>
+    <div class="row"><span class="k">ends linked?</span><span class="v" id="linked">not yet</span></div>
+    <div class="row"><span class="k">end-pair purity</span><span class="v" id="pur">1.000</span></div>
+    <div class="row"><span class="k">weakest boundary</span><span class="v g" id="weak">all DOORS</span></div>
+    <div class="big" id="big" style="color:var(--dim)">press swap to link the ends</div>
+  </div>
+  <div class="card">
+    <h3>🧒 toddler corner — a bucket brigade for links</h3>
+    <div class="eli">
+      three sealed <b>boxes</b> in a row, joined by <b>boundaries</b> with little <b>0</b> handoff points between them. box A is linked to the first handoff, box C to the last. A and C are <b>far apart and never meet</b>. but if every boundary is a good <b>DOOR</b>, you can <b>pass the link down the line</b> — measure each middle 0 and the link <b>hops across</b> until A and C are joined, straight through the middle box, <b>without A and C ever touching</b>. it's a bucket brigade, but for entanglement. the catch: <b>one broken boundary</b> (a DRAIN) anywhere in the line and the bucket spills — the link <b>dies at the break</b>. <b>a chain of doors carries it; one drain cuts it.</b>
+    </div>
+  </div>
+</div>
+<div class="foot" id="foot"></div>
+</div>
+<h1 class="sr-only">A chain of quantum boxes joined through boundaries — a repeater chain doing entanglement swapping.</h1>
+<script src="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap"></script>
+<script>CHAIN={"closed_purity": 1.0, "door_return": 1.0, "drain": 0.5, "airgap_local": 0.5, "airgap_global": 1.0};</script>
+<script>
+(function(){
+var C=CHAIN;
+// chain layout: [A] <> 0 <> [B] <> 0 <> [C]. boundaries b0,b1 (between A-B, B-C via middles)
+var boundaries=[true,true];   // true=DOOR, false=DRAIN(broken)
+var swapT=-1, linked=false, brokenAt=-1;
+var cv=document.getElementById('c'),ctx=cv.getContext('2d');
+function size(){var d=Math.min(2,devicePixelRatio||1),r=cv.getBoundingClientRect();cv.width=r.width*d;cv.height=340*d;ctx.setTransform(d,0,0,d,0,0);return{w:r.width,h:340};}
+function box(x,y,r,label,col,pulse){
+  ctx.strokeStyle=col;ctx.globalAlpha=.6;ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.stroke();ctx.globalAlpha=1;
+  // 6 cardinals
+  var card=[[0,-1],[0,1],[-1,0],[1,0],[0.6,-0.6],[-0.6,0.6]];
+  card.forEach(function(c){ctx.fillStyle=col;ctx.beginPath();ctx.arc(x+c[0]*r*0.8,y+c[1]*r*0.8,2.2,0,7);ctx.fill();});
+  ctx.fillStyle=col;ctx.beginPath();ctx.arc(x,y,3+(pulse||0),0,7);ctx.fill();  // referent center
+  ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--faint');ctx.font="500 10px 'DM Mono',monospace";ctx.textAlign='center';
+  ctx.fillText(label,x,y+r+16);
+}
+function draw(){
+  var g=size(),W=g.w,H=g.h,cy=H/2;ctx.clearRect(0,0,W,H);
+  var xs=[W*0.16, W*0.5, W*0.84], R=Math.min(W*0.12,H*0.28);
+  var zeros=[(xs[0]+xs[1])/2,(xs[1]+xs[2])/2];
+  // frame -+| |+-
+  ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--faint');ctx.font="600 13px 'DM Mono',monospace";ctx.textAlign='center';
+  ctx.fillText('-+|',W*0.04,cy);ctx.fillText('|+-',W*0.96,cy);
+  // boundaries + zeros
+  zeros.forEach(function(zx,i){
+    var ok=boundaries[i];
+    var col=ok?'#5DCAA5':'#D85A30';
+    // <> boundary marks around the 0
+    ctx.strokeStyle=col;ctx.lineWidth=2;
+    if(ok){ctx.setLineDash([5,5]);}else{ctx.setLineDash([]);}
+    ctx.beginPath();ctx.moveTo(zx,cy-R*0.8);ctx.lineTo(zx,cy+R*0.8);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--zero');
+    ctx.beginPath();ctx.arc(zx,cy,7,0,7);ctx.fill();
+    ctx.fillStyle=ok?'#5DCAA5':'#D85A30';ctx.font="600 11px 'DM Mono',monospace";ctx.textAlign='center';
+    ctx.fillText('<>',zx,cy-R*0.8-6);
+    ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--zero');ctx.font="600 13px 'DM Mono',monospace";ctx.fillText('0',zx,cy+4);
+    if(!ok){ctx.fillStyle='#D85A30';ctx.font="500 8px 'DM Mono',monospace";ctx.fillText('DRAIN',zx,cy+R*0.8+14);}
+  });
+  // existing link (if swapped): draw arc from A to C over the top
+  if(linked){
+    ctx.strokeStyle='#6F9BE0';ctx.lineWidth=2.5;ctx.globalAlpha=.8;
+    ctx.beginPath();ctx.moveTo(xs[0],cy-R);ctx.quadraticCurveTo(xs[1],cy-R*2.4,xs[2],cy-R);ctx.stroke();ctx.globalAlpha=1;
+    ctx.fillStyle='#6F9BE0';ctx.font="500 9px 'DM Mono',monospace";ctx.textAlign='center';
+    ctx.fillText('A ⇄ C linked (never touched)',W/2,cy-R*1.9);
+  }
+  // boxes
+  box(xs[0],cy,R,'A',linked?'#6F9BE0':'#5DCAA5',0);
+  box(xs[1],cy,R,'B (relay)','#5DCAA5',0);
+  box(xs[2],cy,R,'C',linked?'#6F9BE0':'#5DCAA5',0);
+  // swap animation: a pulse traveling A -> across -> C
+  if(swapT>=0){
+    var t=swapT;
+    var brokenReached = (brokenAt>=0 && t> (brokenAt===0?0.33:0.66));
+    var x;
+    if(t<0.5)x=xs[0]+(xs[1]-xs[0])*(t/0.5);
+    else x=xs[1]+(xs[2]-xs[1])*((t-0.5)/0.5);
+    if(!brokenReached){
+      ctx.fillStyle='#6F9BE0';ctx.beginPath();ctx.arc(x,cy-R*0.4,6,0,7);ctx.fill();
+      ctx.strokeStyle='#6F9BE0';ctx.globalAlpha=.3;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(xs[0],cy-R*0.4);ctx.lineTo(x,cy-R*0.4);ctx.stroke();ctx.globalAlpha=1;
+    } else {
+      // died at the break
+      var bx=zeros[brokenAt];
+      ctx.fillStyle='#D85A30';ctx.globalAlpha=Math.max(0,1-(t-0.5));ctx.beginPath();ctx.arc(bx,cy-R*0.4,6,0,7);ctx.fill();ctx.globalAlpha=1;
+      ctx.fillStyle='#D85A30';ctx.font="500 9px 'DM Mono',monospace";ctx.fillText('link died here',bx,cy-R*1.3);
+    }
+  }
+  ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--faint');ctx.font="500 9px 'DM Mono',monospace";ctx.textAlign='center';
+  ctx.fillText('[[ 6 <> 0 <> 6 <> 0 ]] — boxes joined through boundaries · the link hops across the middle',W/2,H-10);
+  step();requestAnimationFrame(draw);
+}
+function step(){
+  if(swapT<0)return;
+  swapT+=0.02;
+  if(swapT>=1){
+    swapT=-1;
+    // did it survive? all boundaries must be doors
+    var ok = boundaries[0] && boundaries[1];
+    if(ok){linked=true;setState(true);}
+    else{linked=false;setState(false);}
+  }
+}
+function setState(success){
+  document.getElementById('linked').textContent = success?'YES — A ⇄ C':'NO — broke at boundary';
+  document.getElementById('linked').className='v '+(success?'g':'b');
+  document.getElementById('pur').textContent = success?'0.500':'1.000';
+  document.getElementById('pur').className='v '+(success?'l':'');
+  var w=boundaries.indexOf(false);
+  document.getElementById('weak').textContent = w<0?'all DOORS':'DRAIN at gate '+(w+1);
+  document.getElementById('weak').className='v '+(w<0?'g':'b');
+  var big=document.getElementById('big');
+  if(success){big.textContent='ends entangled through the middle — swap complete';big.style.color='var(--link)';}
+  else{big.textContent='chain broken — the link died at the drain';big.style.color='var(--bad)';}
+}
+document.getElementById('swap').onclick=function(){swapT=0;linked=false;brokenAt=boundaries.indexOf(false);};
+document.getElementById('break').onclick=function(){
+  // toggle a random boundary to drain (or fix if broken)
+  var i = boundaries[0]&&boundaries[1] ? Math.floor(Math.random()*2) : boundaries.indexOf(false);
+  boundaries[i]=!boundaries[i];linked=false;
+  var w=boundaries.indexOf(false);
+  document.getElementById('weak').textContent=w<0?'all DOORS':'DRAIN at gate '+(w+1);
+  document.getElementById('weak').className='v '+(w<0?'g':'b');
+  setState(false);document.getElementById('linked').textContent='not yet';document.getElementById('linked').className='v';
+  document.getElementById('big').textContent=w<0?'all doors — swap will carry':'a boundary is a DRAIN now';
+  document.getElementById('big').style.color=w<0?'var(--good)':'var(--bad)';
+};
+document.getElementById('reset').onclick=function(){boundaries=[true,true];linked=false;swapT=-1;
+  document.getElementById('linked').textContent='not yet';document.getElementById('linked').className='v';
+  document.getElementById('pur').textContent='1.000';document.getElementById('pur').className='v';
+  document.getElementById('weak').textContent='all DOORS';document.getElementById('weak').className='v g';
+  document.getElementById('big').textContent='press swap to link the ends';document.getElementById('big').style.color='var(--dim)';};
+document.getElementById('theme').onclick=function(){var h=document.documentElement;h.setAttribute('data-theme',h.getAttribute('data-theme')==='dark'?'light':'dark');};
+document.getElementById('foot').innerHTML='<span class="lit">verified</span> — entanglement swapping across the chain: measuring each middle 0 in the Bell basis leaves the end boxes maximally entangled (end-pair purity 0.50) for all four outcomes, though the ends never interacted. '+
+  'this is a real quantum repeater — how networks beat distance by linking boxes through a line of boundaries. the honest catch: every <> must be a DOOR; one DRAIN and the link dies at the break. a chain of doors carries it, one drain cuts it.';
+setState(false);document.getElementById('linked').textContent='not yet';document.getElementById('linked').className='v';draw();
+})();
+</script>
+</body></html>

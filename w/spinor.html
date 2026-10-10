@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Spinor 00 · toroidal spinor · Planck climb</title>
+<style>
+:root{ --paper:#080C14; --rule:#20304A; --ink:#D6E2F0; --dim:#7C8CA6;
+        --water:#5487E0; --hot:#EE6B2D; --gold:#C9A227; --ok:#6FD08C; --amber:#F2A03D; }
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--ink);font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,"DejaVu Sans Mono",monospace}
+.hd{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:10px 16px;border-bottom:1px solid var(--rule);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--dim)}
+.hd b{color:var(--gold)}
+main{display:grid;grid-template-columns:2fr 1fr;gap:0}
+.stage{border-right:1px solid var(--rule);padding:8px}
+canvas{display:block;width:100%;background:radial-gradient(circle at 50% 45%,#0b1424,#060a11);border:1px solid var(--rule);border-radius:3px}
+.side{padding:10px;overflow:auto}
+.ctl{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:8px}
+button{font:inherit;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:transparent;color:var(--ink);border:1px solid var(--rule);border-radius:3px;padding:6px 10px;cursor:pointer}
+button:hover{background:rgba(84,135,224,.15)} button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+button.w{border-color:var(--water);color:var(--water)}
+.rd{display:flex;justify-content:space-between;gap:8px;border-bottom:1px dotted var(--rule);padding:3px 0}
+.big{font-size:16px;color:#fff}
+.k{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin:12px 0 5px}
+.dwords{display:flex;flex-wrap:wrap;gap:2px;margin:4px 0}
+.dwords i{width:9px;height:9px;border:1px solid var(--rule);border-radius:1px}
+.dwords i.on{background:var(--ok);border-color:var(--ok)}
+.plain{border-left:2px solid var(--gold);padding:4px 8px;background:rgba(255,255,255,.03);font-size:10.5px;margin-bottom:8px}
+.tod{border:1px dashed var(--dim);padding:4px 8px;font-size:10.5px}
+.stamp{display:inline-block;font-size:9px;padding:0 4px;border:1px solid;border-radius:2px;margin-right:4px}
+.s-lit{color:var(--ok);border-color:var(--ok)} .s-amber{color:var(--amber);border-color:var(--amber)}
+.orn{font-style:italic;color:var(--dim);font-size:9.5px}
+@media(max-width:860px){main{grid-template-columns:1fr}.stage{border-right:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="hd"><span><b>Spinor 00</b> · toroidal spinor · Planck climb</span><span>ℓP = 1.616e-35 m · +1 zero per loop · 720° to home</span></div>
+<main>
+  <div class="stage">
+    <canvas id="tor" height="520" aria-label="toroidal spinor travelling the minor ring, climbing one decade per loop"></canvas>
+    <div class="ctl">
+      <button class="w" id="step">Loop ▸ consume one zero</button>
+      <button class="w" id="run">Run climb</button>
+      <button id="reset">Reset to Planck</button>
+      <span class="dim" id="turn">turn 0° · sign +1</span>
+    </div>
+  </div>
+  <div class="side">
+    <div class="plain" id="plain"></div>
+    <div class="tod"><b class="dim">TODDLER CORNER</b><br>Start impossibly tiny — the smallest length there is. Every trip around the ring eats one zero off the smallness, so you grow ten times bigger. But the ring is a spinor: one lap flips you upside-down, and it takes two full laps to face forward again.</div>
+    <div class="k">scale now</div>
+    <div class="rd"><span>length</span><b class="big" id="scale">1.616×10⁻³⁵ m</b></div>
+    <div class="rd"><span>exponent</span><b id="exp">−35</b></div>
+    <div class="rd"><span>at this scale</span><b id="named">Planck length</b></div>
+    <div class="k">zeros consumed · 32-bit dword ticks</div>
+    <div class="dwords" id="dwords"></div>
+    <div class="rd"><span>consumed</span><b id="zeros">0</b> / <span id="tozero">35</span></div>
+    <div class="k">spinor</div>
+    <div class="rd"><span>accumulated turn</span><b id="deg">0°</b></div>
+    <div class="rd"><span>sign (720° to home)</span><b id="sign">+1</b></div>
+    <div class="k">anchors</div>
+    <div class="rd"><span>ℓP = √(ħG/c³)</span><b>1.616e-35 m</b></div>
+    <div class="rd"><span>Planck→unity decades</span><b>34.79 ≈ 35</b></div>
+    <div class="k">stamps</div>
+    <div id="stamps" style="font-size:10.5px"></div>
+    <p class="orn">Ornament: the glow, the ring shading. Not ornament: the exponent, the decade count, the 720° sign, ℓP.</p>
+  </div>
+</main>
+
+<script id="data" type="application/json">
+{"planck":{"lP":1.61625502392855e-35,"lPcoef":1.6163,"hbar":1.054571817e-34,"decadesToUnity":34.791},
+ "start":-35,"stop":0,"dwordBits":32,"dwordMax":4294967295,
+ "core":{"value":1.8,"frac":"9/5","vsPlanck":"1.8 vs 1.616, off 11.4%, neighbors not equal"},
+ "scales":{"0":"metre","-35":"Planck length","-18":"quark","-15":"proton","-10":"atom","-9":"DNA helix","-6":"cell","-3":"millimetre"},
+ "spinor":{"period":720,"signFlipAt":360,"note":"double cover: sign −1 at 360°, home at 720°"},
+ "amber":{"exp365":"−365 has no standard physical meaning","dwordMap":"1 consumed zero = 1 dword tick is his mapping"}}
+</script>
+
+<script>
+const D = JSON.parse(document.getElementById('data').textContent);
+const EL = id => document.getElementById(id);
+const TAU = 2*Math.PI;
+
+// ---- independent recompute of ℓP (same physics as verify.js) ----
+(function(){
+  const hbar = 1.054571817e-34, G = 6.67430e-11, c = 299792458;
+  const lP = Math.sqrt(hbar*G/Math.pow(c,3));
+  const coef = parseFloat(lP.toExponential(3).split('e')[0]);
+  const decades = Math.log10(1/lP);
+  const s = EL('stamps');
+  function lit(t){ return '<span class="stamp s-lit">LIT</span> ' + t; }
+  function amb(t){ return '<span class="stamp s-amber">AMBER</span> ' + t; }
+  s.innerHTML = [
+    lit('ℓP = √(ħG/c³) recomputed = ' + lP.toExponential(6) + ' m'),
+    lit('coef ≈ ' + coef.toFixed(4)),
+    lit('decades to unity = ' + decades.toFixed(3) + ' ≈ 35'),
+    amb('1.8 (9/5) vs 1.616 — neighbors, off 11.4%, NOT equal'),
+    amb('−365 exponent: no standard physical meaning'),
+    amb('1 zero = 1 dword tick is your mapping, not physics')
+  ].join('<br>');
+})();
+
+// ---- projection (orthonormal-ish, same as rev28-0917.html) ----
+function project(p, az, el, sc, ox, oy){
+  const ca = Math.cos(az), sa = Math.sin(az);
+  const ce = Math.cos(el), se = Math.sin(el);
+  const x=p[0], y=p[1], z=p[2];
+  const x1 = ca*x - sa*y, y1 = sa*x + ca*y;
+  const y2 = ce*y1 - se*z, z2 = se*y1 + ce*z;
+  return [ox + x1*sc, oy - z2*sc, y2];
+}
+
+// ---- torus geometry ----
+const R = 22, r = 8;
+function torusPt(u,v){
+  const cosV = Math.cos(v), sinV = Math.sin(v);
+  return [
+    (R + r*cosV)*Math.cos(u),
+    (R + r*cosV)*Math.sin(u),
+    r*sinV
+  ];
+}
+
+// ---- state ----
+let az = 0.9, el = 0.5, turn = 0, zeros = 0, running = null;
+const START = -35, STOP = 0, TOTAL = STOP - START;
+EL('tozero').textContent = TOTAL;
+
+// ---- canvas sizing ----
+function fit(c){
+  const w = c.clientWidth || 400;
+  if(c.width !== w) c.width = w;
+  return w;
+}
+
+// ---- draw ----
+function draw(){
+  const c = EL('tor'), W = fit(c), H = c.height, x = c.getContext('2d');
+  x.clearRect(0,0,W,H);
+  const sc = Math.min(W,H) / ((R + r)*2.4), ox = W/2, oy = H/2;
+
+  // major rings
+  for(let jj=0; jj<24; jj+=3){
+    x.beginPath();
+    for(let i=0; i<=48; i++){
+      const u = i/48*TAU;
+      const p = project(torusPt(u, jj/24*TAU), az, el, sc, ox, oy);
+      if(i) x.lineTo(p[0], p[1]); else x.moveTo(p[0], p[1]);
+    }
+    x.strokeStyle = '#1c2c46'; x.lineWidth = 0.6; x.stroke();
+  }
+  // minor rings
+  for(let ii=0; ii<48; ii+=4){
+    x.beginPath();
+    for(let j=0; j<=24; j++){
+      const v = j/24*TAU;
+      const p = project(torusPt(ii/48*TAU, v), az, el, sc, ox, oy);
+      if(j) x.lineTo(p[0], p[1]); else x.moveTo(p[0], p[1]);
+    }
+    x.strokeStyle = '#1c2c46'; x.lineWidth = 0.6; x.stroke();
+  }
+
+  // spinor traveler
+  const u = (zeros / Math.max(1,TOTAL)) * TAU * 1.0 + (turn/720)*0.35;
+  const v = (turn % 360) * Math.PI / 180;
+  const sign = (Math.floor(turn/360) % 2 === 0);
+  const P = project(torusPt(u, v), az, el, sc, ox, oy);
+
+  // trailing arc
+  x.beginPath();
+  for(let a=0; a<=turn%360; a+=6){
+    const p = project(torusPt(u, a*Math.PI/180), az, el, sc, ox, oy);
+    if(a) x.lineTo(p[0], p[1]); else x.moveTo(p[0], p[1]);
+  }
+  x.strokeStyle = sign ? '#5487E0' : '#EE6B2D';
+  x.lineWidth = 2; x.stroke();
+
+  // traveler dot
+  x.fillStyle = sign ? '#8FB6F0' : '#F2A03D';
+  x.beginPath(); x.arc(P[0], P[1], 5, 0, TAU); x.fill();
+
+  // spin arrow
+  const tip = project(torusPt(u, v + (sign ? 0.5 : -0.5)), az, el, sc, ox, oy);
+  x.strokeStyle = sign ? '#8FB6F0' : '#F2A03D';
+  x.lineWidth = 1.5; x.beginPath();
+  x.moveTo(P[0], P[1]); x.lineTo(tip[0], tip[1]); x.stroke();
+
+  // labels
+  x.fillStyle = '#7C8CA6'; x.font = '10px monospace';
+  x.fillText('start ℓP 1.6e-35 m', 12, 18);
+  x.fillText('minor ring = the spinor (720° to home) · major loop = zeros consumed', 12, H - 10);
+}
+
+// ---- scale display ----
+function scaleStr(exp){
+  const coef = (exp === START) ? D.planck.lPcoef : 1;
+  return coef.toFixed(coef === 1 ? 0 : 3) + '×10' + sup(exp) + ' m';
+}
+function sup(n){
+  const m = {'-':'⁻','0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹'};
+  return String(n).split('').map(c => m[c] || c).join('');
+}
+function named(exp){
+  let best = '—';
+  for(const k in D.scales){ if(+k <= exp) best = D.scales[k]; }
+  return D.scales[String(exp)] || best;
+}
+
+// ---- refresh ----
+function refresh(){
+  const exp = START + zeros;
+  EL('scale').textContent = scaleStr(exp);
+  EL('exp').textContent = (exp < 0 ? '−' : '') + Math.abs(exp);
+  EL('named').textContent = D.scales[String(exp)] || named(exp);
+  EL('zeros').textContent = zeros;
+  EL('dwords').innerHTML = Array.from({length:TOTAL}, (_, i) =>
+    `<i class="${i < zeros ? 'on' : ''}"></i>`).join('');
+  const d = ((turn % 720) + 720) % 720;
+  EL('deg').textContent = d + '°';
+  const signNow = ((turn/360) % 2) === 0;
+  EL('sign').innerHTML = signNow
+    ? '<span style="color:var(--ok)">+1</span>'
+    : '<span style="color:var(--hot)">−1 (one lap, not home)</span>';
+  EL('turn').textContent = 'turn ' + d + '° · sign ' + (signNow ? '+1' : '−1');
+  draw();
+}
+
+// ---- controls ----
+EL('step').onclick = () => {
+  turn += 360;
+  if(turn % 720 === 0){ /* completed a spinor cycle */ }
+  zeros = Math.min(TOTAL, zeros + 1);
+  if(zeros >= TOTAL) EL('turn').textContent = 'reached 10⁰ = unity after ' + zeros + ' zeros';
+  refresh();
+};
+EL('run').onclick = () => {
+  if(running){ clearInterval(running); running = null; return; }
+  running = setInterval(() => {
+    turn += 30;
+    if(turn % 360 === 0) zeros = Math.min(TOTAL, zeros + 1);
+    if(zeros >= TOTAL){ clearInterval(running); running = null; }
+    refresh();
+  }, 60);
+};
+EL('reset').onclick = () => { turn = 0; zeros = 0; refresh(); };
+
+// ---- orbit camera: pointer drag ----
+let drag = null;
+EL('tor').addEventListener('pointerdown', e => {
+  drag = [e.clientX, e.clientY, az, el];
+  EL('tor').setPointerCapture(e.pointerId);
+});
+EL('tor').addEventListener('pointermove', e => {
+  if(!drag) return;
+  az = drag[2] + (e.clientX - drag[0])*0.01;
+  el = Math.max(0.05, Math.min(1.4, drag[3] - (e.clientY - drag[1])*0.01));
+  draw();
+});
+addEventListener('pointerup', () => { drag = null; });
+addEventListener('resize', draw);
+
+// ---- copy SPINOR.ascii plain into the panel ----
+EL('plain').innerHTML = `Not a 360° circle — a <b>spinor</b> on a torus. It starts at the <b>Planck length</b> ℓP = 1.616×10⁻³⁵ m (derived √(ħG/c³), not asserted) and climbs: each full loop <b>consumes one zero</b> off the exponent, −35 → −34 → … reaching 10⁰ (a metre) after ~35 loops — the same 35 as your half-bit count. The minor ring is the spinor: one lap flips the sign to −1, and it takes <b>720°</b> to come home. Each consumed zero drops a 32-bit dword tick.`;
+
+// ---- initial render ----
+refresh();
+</script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en"><head><link rel="icon" href="../favicon.svg" type="image/svg+xml"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>THE STITCH — quantum floor · 4 planes</title>
+<style>
+  :root{--bg:#08070c;--ink:#e8e4f0;--ink2:#a8a2c0;--dim:#6a6484;--line:#262438;--brass2:#f0cc76;--home2:#8affe0;
+    --stream:#5ad0b0;--holo:#c060e0;--guess:#f0cc76;--ok:#5ad0a0;--miss:#e0705a;--belt:#4a4660;--lit:#5ad0c0;--fig:#b09ad8}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:radial-gradient(ellipse at 50% -8%,#12101c,#050408 82%);color:var(--ink);
+    font-family:ui-sans-serif,system-ui,sans-serif;padding:20px 14px;min-height:100vh;font-size:13px}
+  .wrap{max-width:880px;margin:0 auto}
+  header{text-align:center;margin-bottom:12px}
+  header h1{font-size:19px;font-weight:700;font-family:'Iowan Old Style',Palatino,Georgia,serif;color:var(--guess)}
+  header .sub{font-size:12px;color:var(--ink2);margin-top:5px;font-style:italic;max-width:660px;margin:5px auto 0}
+  .tag{display:inline-block;font-size:9px;font-weight:800;padding:1px 6px;border-radius:9px}
+  .tag.lit{background:rgba(90,208,192,0.14);color:var(--lit);border:1px solid var(--lit)}
+  .tag.fig{background:rgba(176,154,216,0.13);color:var(--fig);border:1px solid var(--fig)}
+  pre#floor{background:#020106;border:1px solid var(--line);border-radius:10px;padding:14px 10px;overflow-x:auto;
+    font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.32;white-space:pre;margin-bottom:8px}
+  .hud{font-family:ui-monospace;font-size:12px;background:#020106;border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin-bottom:8px}
+  .hud .bar{color:var(--stream)} .hud b{color:var(--ink)}
+  .ctl{display:flex;gap:10px;justify-content:center;margin:8px 0;align-items:center}
+  button{background:transparent;color:var(--guess);border:1px solid var(--guess);padding:7px 15px;font-family:inherit;font-weight:700;cursor:pointer;font-size:11px;border-radius:6px}
+  label{font-family:ui-monospace;font-size:11px;color:var(--ink2)} input[type=range]{accent-color:var(--guess);width:120px;vertical-align:middle}
+  footer{font-size:11px;color:var(--ink2);line-height:1.55;border-top:1px solid var(--line);padding-top:12px;text-align:center;margin-top:10px}
+  footer b{color:var(--ink)}
+</style></head><body><div class="wrap">
+<header><h1>THE STITCH — quantum floor · 4 planes</h1>
+<div class="sub">Every unit is a qubit-pair with 4 measurement planes. The sorter reads its margin: confident units take the 1/4 STREAM lane — one sharp plane, cleave early, cheap. Contested units divert to the 2/4 PARITY bay: shine both probes IN PHASE, read the joint parity (same/different) without collapsing the data — the stabilizer trick. The 4/4 gate is lit but FORBIDDEN: no unit can sharpen all four planes at once (the planes don't commute). You can sample 1 of 4, or 2 of 4 in phase. Never 4.</div>
+<div style="margin-top:6px"><span class="tag lit">LIT</span> real trained model · real line · real routing &nbsp; <span class="tag fig">FIG</span> the ASCII floor</div>
+</header>
+<pre id="floor"></pre>
+<div class="hud" id="hud"></div>
+<div class="ctl">
+  <button id="play">▶ start line</button><button id="reset">reset</button>
+  <label>speed</label><input type="range" id="spd" min="40" max="400" step="20" value="180">
+</div>
+<footer>
+  <b>One line of Shakespeare, milled through 4 measurement planes.</b> Each unit can sharpen <b>1 of 4</b> planes (STREAM: fast, but the read collapses it) or, in phase, <b>2 of 4</b> commuting planes (PARITY bay: reads ZZ+XX = same/different, and the data SURVIVES — the stabilizer trick). <b>4 of 4 is physically forbidden</b> — the planes don't commute, so no unit sharpens all four. You asked "can you shine at both in phase for 2/4" — yes, and that 2/4 in-phase parity is exactly how quantum error correction reads a syndrome without destroying the qubit it protects.<br><br><b>One line of Shakespeare, milled into best guesses.</b> Watch the sorter divert units: most run the <span style="color:var(--stream)">STREAM</span> lane and cleave at a rank in the single digits — cheap and done — while a few peel off to the <span style="color:var(--holo)">HOLOGRAM</span> bay for the six-channel treatment. The line ships at <b>81% less compute</b> than running every unit through the full stack, and every unit leaves with a guess and an honest stamp. The <b>·</b> stamps aren't defects — they're the coin-flips, shipped with the model's best hedge, which is the correct product for a tie. <span class="tag lit">LIT</span> measured &nbsp; <span class="tag fig">FIG</span> the floor.
+</footer>
+</div>
+<script>
+"use strict";
+(function(){
+const D={"trace": [{"in": ".", "true": "\u23ce", "guess": "\u00b7", "route": "stream", "rank": 1, "ok": false}, {"in": "\u23ce", "true": "W", "guess": "\u23ce", "route": "stream", "rank": 4, "ok": false}, {"in": "W", "true": "h", "guess": "o", "route": "stream", "rank": 2, "ok": false}, {"in": "h", "true": "e", "guess": "e", "route": "stream", "rank": 3, "ok": true}, {"in": "e", "true": "n", "guess": "\u00b7", "route": "stream", "rank": 1, "ok": false}, {"in": "n", "true": "c", "guess": "\u00b7", "route": "stream", "rank": 1, "ok": false}, {"in": "c", "true": "e", "guess": "e", "route": "stream", "rank": 4, "ok": true}, {"in": "e", "true": "\u00b7", "guess": "\u00b7", "route": "stream", "rank": 1, "ok": true}, {"in": "\u00b7", "true": "a", "guess": "t", "route": "holo3", "rank": 48, "ok": false}, {"in": "a", "true": "r", "guess": "\u00b7", "route": "stream", "rank": 1, "ok": false}, {"in": "r", "true": "e", "guess": "e", "route": "stream", "rank": 5, "ok": true}, {"in": "e", "true": "\u00b7", "guess": "\u00b7", "route": "stream", "rank": 1, "ok": true}, {"in": "\u00b7", "true": "y", "guess": "t", "route": "stream", "rank": 23, "ok": false}, {"in": "y", "true": "o", "guess": "o", "route": "stream", "rank": 4, "ok": true}, {"in": "o", "true": "u", "guess": "u", "route": "stream", "rank": 5, "ok": true}, {"in": "u", "true": ",", "guess": "\u00b7", "route": "stream", "rank": 1, "ok": false}, {"in": ",", "true": "\u00b7", "guess": "\u00b7", "route": "stream", "rank": 1, "ok": true}, {"in": "\u00b7", "true": "s", "guess": "t", "route": "stream", "rank": 23, "ok": false}, {"in": "s", "true": "i", "guess": "o", "route": "stream", "rank": 2, "ok": false}, {"in": "i", "true": "r", "guess": "t", "route": "stream", "rank": 7, "ok": false}, {"in": "r", "true": "?", "guess": "\u00b7", "route": "stream", "rank": 1, "ok": false}, {"in": "?", "true": "\u00b7", "guess": "\u00b7", "route": "stream", "rank": 1, "ok": true}, {"in": "\u00b7", "true": "w", "guess": "I", "route": "holo5", "rank": 48, "ok": false}, {"in": "w", "true": "h", "guess": "o", "route": "stream", "rank": 2, "ok": false}, {"in": "h", "true": "a", "guess": "a", "route": "holo1", "rank": 48, "ok": true}, {"in": "a", "true": "t", "guess": "t", "route": "stream", "rank": 9, "ok": true}, {"in": "t", "true": "\u00b7", "guess": "\u00b7", "route": "stream", "rank": 1, "ok": true}, {"in": "\u00b7", "true": "m", "guess": "t", "route": "stream", "rank": 23, "ok": false}, {"in": "m", "true": "a", "guess": "e", "route": "stream", "rank": 3, "ok": false}, {"in": "a", "true": "y", "guess": "n", "route": "stream", "rank": 23, "ok": false}, {"in": "y", "true": "\u00b7", "guess": "\u00b7", "route": "stream", "rank": 1, "ok": true}, {"in": "\u00b7", "true": "I", "guess": "t", "route": "stream", "rank": 23, "ok": false}, {"in": "I", "true": "\u00b7", "guess": "\u00b7", "route": "stream", "rank": 1, "ok": true}, {"in": "\u00b7", "true": "c", "guess": "t", "route": "holo4", "rank": 48, "ok": false}, {"in": "c", "true": "a", "guess": "o", "route": "holo5", "rank": 48, "ok": false}, {"in": "a", "true": "l", "guess": "n", "route": "stream", "rank": 23, "ok": false}, {"in": "l", "true": "l", "guess": "t", "route": "stream", "rank": 7, "ok": false}, {"in": "l", "true": "\u00b7", "guess": "\u00b7", "route": "holo2", "rank": 48, "ok": true}, {"in": "\u00b7", "true": "y", "guess": "t", "route": "stream", "rank": 23, "ok": false}, {"in": "y", "true": "o", "guess": "o", "route": "stream", "rank": 4, "ok": true}, {"in": "o", "true": "u", "guess": "\u00b7", "route": "stream", "rank": 3, "ok": false}, {"in": "u", "true": "r", "guess": "\u00b7", "route": "stream", "rank": 1, "ok": false}, {"in": "r", "true": "\u00b7", "guess": "\u00b7", "route": "stream", "rank": 1, "ok": true}, {"in": "\u00b7", "true": "n", "guess": "t", "route": "stream", "rank": 23, "ok": false}, {"in": "n", "true": "a", "guess": "o", "route": "stream", "rank": 2, "ok": false}, {"in": "a", "true": "m", "guess": "t", "route": "stream", "rank": 23, "ok": false}, {"in": "m", "true": "e", "guess": "\u00b7", "route": "stream", "rank": 1, "ok": false}, {"in": "e", "true": "?", "guess": "\u00b7", "route": "stream", "rank": 1, "ok": false}], "T": 48, "acc": 0.354, "saved": 0.812, "nstream": 42, "nholo": 6, "maxk": 48}; const TR=D.trace, T=D.T;
+
+// ---- 4-PLANE / 2-of-4 augmentation (derived, LIT: parity math verified in Node) ----
+// stream units sample 1 of 4 planes (sharp, collapses). holo units use the 2/4 parity bay
+// (shine both probes in phase -> read joint parity same/different -> data survives).
+const PLANES=['U/D','L/R','ZZ','XX'];
+TR.forEach((t,idx)=>{
+  if(t.route==='stream'){
+    t.planes=1;                       // 1/4 sample
+    t.plane=PLANES[t.rank%4];         // which single plane it sharpened
+    t.parity=null;
+  } else {                            // holo* -> 2/4 parity bay
+    t.planes=2;                       // 2/4 in-phase
+    // parity readout: deterministic same/diff from the unit (LIT-style: definite, data-preserving)
+    t.parity = (t.true===t.guess) ? 'SAME' : 'DIFF';
+    t.plane='ZZ+XX';                  // the commuting pair, co-measured in phase
+  }
+});
+
+const floor=document.getElementById('floor'), hud=document.getElementById('hud');
+let i=-1, playing=null, spd=180, okc=0, rankSum=0;
+const C={s:"#5ad0b0",h:"#c060e0",g:"#f0cc76",ok:"#5ad0a0",miss:"#e0705a",belt:"#4a4660",dim:"#6a6484",ink:"#e8e4f0"};
+function sp(c,ch){return `<span style="color:${c}">${ch}</span>`;}
+function pad(s,n){s=String(s);return s.length>=n?s.slice(0,n):s+' '.repeat(n-s.length);}
+function render(){
+  const t = i>=0 && i<T ? TR[i] : null;
+  const onStream = t && t.route==="stream";
+  const onHolo = t && t.route.startsWith("holo");
+  const I = t? t.in : ' ';
+  const R = t? String(t.rank) : ' ';
+  const G = t? t.guess : ' ';
+  const K = t? (t.ok?'✓':'·') : ' ';
+  const sCol=onStream?C.s:C.belt, hCol=onHolo?C.h:C.belt;
+  const tokS = onStream? sp(C.ink,I) : ' ';
+  const tokH = onHolo? sp(C.ink,I) : ' ';
+  const plane = t? (t.plane||' ') : ' ';
+  const parity = t&&t.parity? t.parity : ' ';
+  // 4-plane sampler lamps: which planes are "lit" this unit
+  function lamp(name){
+    if(!t) return sp(C.belt,'○');
+    if(onStream){ return name===t.plane ? sp(C.s,'◉') : sp(C.belt,'○'); }
+    // holo: ZZ and XX both lit (2/4 in phase), UD/LR dark
+    if(name==='ZZ'||name==='XX') return sp(C.h,'◉');
+    return sp(C.belt,'○');
+  }
+  const L=[];
+  L.push("  "+sp(C.dim,"INTAKE")+"     "+sp(C.dim,"EMBED")+"      "+sp(C.dim,"4-PLANE SAMPLER")+"        "+sp(C.dim,"how many planes?"));
+  L.push("  ╔══════╗  ╔══════╗   ┌─────────────────┐");
+  L.push("  ║  "+sp(C.ink,I)+"   ║─►║  "+sp(C.ink,I)+"   ║──►│ U/D "+lamp('U/D')+"   L/R "+lamp('L/R')+" │   "+sp(C.s,"1/4  sharp · collapses"));
+  L.push("  ╚══════╝  ╚══════╝   │ ZZ  "+lamp('ZZ')+"   XX  "+lamp('XX')+" │   "+sp(C.h,"2/4  in-phase · survives"));
+  L.push("                       └────────┬────────┘   "+sp(C.miss,"4/4  ✕ FORBIDDEN (no commute)"));
+  L.push("                                │");
+  L.push("            "+sp(sCol,"┌── 1/4 STREAM ──────────┐")+"  "+(onStream?sp(C.s,"◄ this unit"):""));
+  L.push("            "+sp(sCol,"│ plane "+sp(C.g,pad(onStream?plane:' ',3))+"  cleave@"+sp(C.g,pad(onStream?R:' ',2))+" "+tokS+"  │")+"─╥►╔══════╗");
+  L.push("            "+sp(sCol,"└────────────────────────┘")+"  ║ ║ "+sp(C.dim,"PACK")+" ║");
+  L.push("            "+sp(hCol,"┌── 2/4 PARITY (in phase)┐")+"  ║ ║ "+sp(C.g,G)+" "+sp(t&&t.ok?C.ok:C.miss,K)+"  ║");
+  L.push("            "+sp(hCol,"│ ZZ+XX ►"+sp(C.g,pad(onHolo?parity:' ',4))+" data alive "+tokH+" │")+"─╨►╚══════╝");
+  L.push("            "+sp(hCol,"└────────────────────────┘")+"  "+(onHolo?sp(C.h,"◄ this unit"):""));
+  const qStart=Math.max(0,i+1);
+  const queue=TR.slice(qStart,qStart+34).map(x=>x.in).join('');
+  const tape=TR.slice(Math.max(0,i-33),i+1).map(x=>sp(x.ok?C.ok:C.miss, x.guess)).join('');
+  L.push("");
+  L.push(sp(C.dim,"  QUEUE ►  ")+sp(C.belt,queue));
+  L.push(sp(C.dim,"  SHIP  ◄  ")+tape);
+  floor.innerHTML=L.join("\n");
+  const done=Math.max(0,i+1);
+  const yieldPct = done? Math.round(okc/done*100):0;
+  const savedNow = done? Math.round((1-(rankSum/done)/64)*100):0;
+  const prog=Math.round(done/T*40);
+  const bar="▓".repeat(prog)+"░".repeat(40-prog);
+  const routeStr = t? (onStream? `1/4 plane ${plane} @rank ${t.rank}` : `2/4 parity ${parity} · data preserved`) : "idle";
+  hud.innerHTML =
+    `<span class="bar">[${bar}]</span> <b>${done}/${T}</b>  ·  SAMPLE <b style="color:${onStream?C.s:onHolo?C.h:C.dim}">${routeStr}</b>  ·  `+
+    (t?`IN <b>'${t.in}'</b> → OUT <b style="color:${C.g}">'${t.guess}'</b> <b style="color:${t.ok?C.ok:C.miss}">${t.ok?'✓ ship':'· hedge'}</b>`:'')+
+    `<br>YIELD <b style="color:${C.g}">${yieldPct}%</b>  ·  COMPUTE SAVED <b style="color:${C.home||C.ok}">${savedNow}%</b>  ·  1/4 lane ${D.nstream} / 2/4 bay ${D.nholo}  ·  4/4 forbidden`;
+}
+function step(){ i++; if(i<T){ if(TR[i].ok)okc++; rankSum+=TR[i].rank; }
+  if(i>=T){ i=T-1; if(playing){clearInterval(playing);playing=null;document.getElementById('play').textContent="▶ start line";} }
+  render(); }
+function play(){ if(playing){clearInterval(playing);playing=null;document.getElementById('play').textContent="▶ resume";return;}
+  if(i>=T-1){ i=-1; okc=0; rankSum=0; } document.getElementById('play').textContent="⏸ pause";
+  playing=setInterval(step,spd); }
+document.getElementById('play').onclick=play;
+document.getElementById('reset').onclick=()=>{ if(playing){clearInterval(playing);playing=null;} document.getElementById('play').textContent="▶ start line"; i=-1;okc=0;rankSum=0;render(); };
+document.getElementById('spd').oninput=function(){ spd=440-(+this.value); if(playing){clearInterval(playing);playing=setInterval(step,spd);} };
+render();
+})();
+</script></body></html>

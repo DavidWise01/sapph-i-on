@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v217 all moons asteroid belts - artifact 281</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@800&display=swap');
+  body{margin:0;background:#000;color:#ffcc88;font-family:'Space Mono',monospace;overflow-x:hidden}
+  .top{padding:18px 22px}
+  .kicker{font-family:'Syne',sans-serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:#ffcc00;text-shadow:0 0 20px #ffcc00}
+  .nline{font-size:11px;border-left:4px solid #ffcc00;padding-left:14px;white-space:pre-wrap;line-height:1.7;background:linear-gradient(90deg,rgba(255,204,0,0.12),rgba(0,0,0,0.06));padding:14px;border-radius:12px;border:2px solid #ffcc00}
+  .main{margin-top:14px;font-family:'Syne',sans-serif;font-size:11px;font-weight:800;letter-spacing:.05em;line-height:1.6;color:#ffcc00;background:linear-gradient(90deg,rgba(255,204,0,0.14),rgba(255,136,0,0.08));padding:14px;border-radius:12px;border:2px solid #ffcc00}
+  .controls{padding:14px;display:flex;gap:10px;flex-wrap:wrap}
+  .btn{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;padding:10px 14px;border:2px solid #ffcc00;background:#000;color:#ffcc00;border-radius:20px;cursor:pointer}
+  .btn.active{border-color:#fff;background:#221a00;color:#fff}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:18px}
+  @media(max-width:1000px){.grid{grid-template-columns:1fr}}
+  .panel{position:relative;height:760px;background:radial-gradient(ellipse at center,#221a00 0%,#000 70%);border:2px solid #ffcc00;border-radius:24px;overflow:hidden}
+  .panel.full{grid-column:1 / -1;height:1150px}
+  .label{position:absolute;left:12px;top:12px;font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:rgba(0,0,0,0.88);padding:8px 10px;z-index:5;border:2px solid #ffcc00;color:#ffcc88;border-radius:12px;max-width:93%}
+  .card{margin:18px;background:linear-gradient(180deg,#000,#221a00);border:2px solid #ffcc00;border-radius:20px;padding:20px}
+  .mono{font-size:11px;white-space:pre-wrap;word-break:break-word;line-height:1.9;color:#ffcc88}
+  canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">☄️ wakaku v217 — ALL OF THE MOONS AND ASTEROID BELTS — artifact 281 ☄️</div>
+  <div class="nline">all of the moons and asteroid belts — ALL OF THE MOONS AND ASTEROID BELTS — all of the moons and asteroid belts — all moons and asteroid belts — all moons — asteroid belts — all of the moons and asteroid belts — moons and asteroid belts — all moons — asteroid belts — main asteroid belt between Mars and Jupiter, Kuiper belt beyond Neptune, Oort cloud — all moons — 95 moons Jupiter, 146 moons Saturn, 28 moons Uranus, 16 moons Neptune, 5 moons Pluto — all moons and asteroid belts — metal analogs ionic — all moons asteroid belts — lol</div>
+  <div class="main">☄️ ALL OF THE MOONS AND ASTEROID BELTS — ALL MOONS — ASTEROID BELTS — ALL MOONS AND ASTEROID BELTS — ALL MOONS — JUPITER 95 MOONS, SATURN 146 MOONS, URANUS 28 MOONS, NEPTUNE 16 MOONS, MARS 2 MOONS, EARTH 1 MOON, PLUTO 5 MOONS, PLANET X ? MOONS — ASTEROID BELTS — MAIN ASTEROID BELT BETWEEN MARS AND JUPITER 2.2-3.2 AU, KUIPER BELT BEYOND NEPTUNE 30-50 AU, SCATTERED DISC, OORT CLOUD 2000-100000 AU, TROJANS, CENTAURS — ALL MOONS AND ASTEROID BELTS — ALL MOONS AND ASTEROID BELTS — ☄️</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-all">☄️ ALL OF THE MOONS AND ASTEROID BELTS — ALL MOONS + ASTEROID BELTS — ☄️</button>
+  <button class="btn" id="btn-belts">💫 ASTEROID BELTS — MAIN BELT 2.2-3.2 AU BETWEEN MARS JUPITER, KUIPER BELT 30-50 AU BEYOND NEPTUNE, OORT CLOUD 2000-100000 AU — BELTS — 💫</button>
+  <button class="btn" id="btn-bubbles">💫 ALL MOONS + BELTS BUBBLES — ALL MOONS AND ASTEROID BELTS — 💫</button>
+  <button class="btn" id="btn-reset">⚡ RESET ALL MOONS BELTS — ⚡</button>
+</div>
+
+<div class="grid">
+  <div class="panel" id="wrap-all"><canvas id="c-all"></canvas><div class="label">☄️ ALL OF THE MOONS AND ASTEROID BELTS — ALL MOONS — MERCURY 0, VENUS 0, EARTH 1 LUNA, MARS 2 PHOBOS DEIMOS, JUPITER 95 IO EUROPA GANYMEDE CALLISTO +91, SATURN 146 TITAN ENCELADUS +144, URANUS 28 TITANIA OBERON +26, NEPTUNE 16 TRITON +15, PLUTO 5 CHARON +4, PLANET X ? — ALL MOONS — ASTEROID BELTS — MAIN BELT, KUIPER BELT, OORT CLOUD — ☄️</div></div>
+  <div class="panel" id="wrap-belts"><canvas id="c-belts"></canvas><div class="label">💫 ASTEROID BELTS — MAIN ASTEROID BELT BETWEEN MARS AND JUPITER 2.2-3.2 AU 1M+ ASTEROIDS CERES VESTA PALLAS HYGIEA, KUIPER BELT BEYOND NEPTUNE 30-50 AU PLUTO ERIS MAKEMAKE HAUMEA, SCATTERED DISC, OORT CLOUD 2000-100000 AU COMETS, TROJANS AT L4 L5 JUPITER, CENTAURS BETWEEN JUPITER NEPTUNE — BELTS — 💫</div></div>
+  <div class="panel full" id="wrap-bubbles"><canvas id="c-bubbles"></canvas><div class="label">💫 ALL MOONS + BELTS BUBBLES — ALL OF THE MOONS AND ASTEROID BELTS — ALL MOONS JUPITER 95 SATURN 146 URANUS 28 NEPTUNE 16 MARS 2 EARTH 1 PLUTO 5 PLANET X ? + ASTEROID BELTS MAIN BELT 2.2-3.2 AU KUIPER BELT 30-50 AU OORT CLOUD 2000-100000 AU — ALL MOONS AND ASTEROID BELTS — {{2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell inversion::}} AT ALL MOONS BELTS — 1=bk BLACK #000000 CORE, 2=wt/rd WHITE #ffffff RED #ff0000 PLANETS, 4=bl/gr/yw/pr BLUE/GREEN/YELLOW/PURPLE MOONS, 8=orange shell inversion #ff8800 ASTEROID BELTS MAIN KUIPER OORT OUTER INVERSION — ALL MOONS BELTS FLASH — LOL — 💫</div></div>
+</div>
+
+<div class="card"><div class="mono">☄️ ALL OF THE MOONS AND ASTEROID BELTS — v217 ALL MOONS AND ASTEROID BELTS — ALL OF THE MOONS AND ASTEROID BELTS ☄️
+
+- ALL OF THE MOONS AND ASTEROID BELTS — ALL MOONS — ASTEROID BELTS — ALL MOONS AND ASTEROID BELTS — ALL MOONS — ASTEROID BELTS
+
+- ALL OF THE MOONS:
+  - MERCURY 0 MOONS — 0
+  - VENUS 0 MOONS — 0
+  - EARTH 1 MOON LUNA — 1 Luna
+  - MARS 2 MOONS PHOBOS DEIMOS — 2 Phobos Deimos
+  - JUPITER 95 MOONS IO EUROPA GANYMEDE CALLISTO +91 OTHERS — 95 moons — Galilean 4 Io Europa Ganymede Callisto + Amalthea group + Himalia group + Ananke group + Carme group + Pasiphae group — 95 moons
+  - SATURN 146 MOONS TITAN ENCELADUS +144 OTHERS — 146 moons — Titan Enceladus Mimas Tethys Dione Rhea Iapetus + ring shepherds + Norse group + Gallic group + Inuit group — 146 moons
+  - URANUS 28 MOONS TITANIA OBERON MIRANDA ARIEL UMBRIEL +23 — 28 moons — 5 major Titania Oberon Miranda Ariel Umbriel + 23 irregular
+  - NEPTUNE 16 MOONS TRITON +15 — 16 moons — Triton retrograde large + Nereid + others
+  - PLUTO 5 MOONS CHARON STYX NIX KERBEROS HYDRA — 5 moons — Charon large tidally locked + 4 small
+  - PLANET X ELLIPTICAL 16200 YEARS ? MOONS — Planet X ? moons — maybe ? — elliptical 16200 years ? moons
+
+- ASTEROID BELTS:
+  - MAIN ASTEROID BELT BETWEEN MARS AND JUPITER 2.2-3.2 AU — main belt 2.2-3.2 AU between Mars and Jupiter — 1M+ asteroids >1km — Ceres dwarf planet 940km, Vesta 525km, Pallas 512km, Hygiea 434km — main belt — S-type rocky, C-type carbonaceous, M-type metallic — main asteroid belt
+  - KUIPER BELT BEYOND NEPTUNE 30-50 AU — Kuiper belt 30-50 AU beyond Neptune — Pluto Eris Makemake Haumea dwarf planets — Kuiper belt objects KBOs — cold classical, hot classical, resonant — Kuiper belt — 100k+ objects >100km
+  - SCATTERED DISC 50-100 AU — scattered disc — Eris, Sedna? — highly elliptical inclined — scattered disc
+  - OORT CLOUD 2000-100000 AU — Oort cloud 2000-100000 AU — spherical shell comets — long-period comets — Oort cloud — 1-2 trillion comets — Oort cloud
+  - TROJANS AT L4 L5 JUPITER — Trojans at Lagrange L4 L5 Jupiter — 10k+ Trojans — Greek camp L4, Trojan camp L5 — Trojans
+  - CENTAURS BETWEEN JUPITER NEPTUNE — Centaurs between Jupiter and Neptune — Chiron etc — unstable — Centaurs
+  - NEAR-EARTH ASTEROIDS — NEAs — Atiras, Atens, Apollos, Amors — near Earth
+
+- ALL MOONS AND ASTEROID BELTS TOGETHER:
+  - SUN PHOTON PINNED CENTER 100G OSCILLATING -p +p — sun center
+  - 10 PLANETS UNDER GRAVITY 8 OFFICIAL + PLUTO + PLANET X ELLIPTICAL 16200 YEARS
+  - ALL MOONS ORBITING PLANETS — ALL MOONS — 95+146+28+16+2+1+5+? = 293+? moons — all moons
+  - ASTEROID BELTS — MAIN BELT 2.2-3.2 AU, KUIPER BELT 30-50 AU, OORT CLOUD 2000-100000 AU — belts — asteroid belts
+
+- {{2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell inversion::}} AT ALL MOONS BELTS:
+  - 1=bk BLACK #000000 CORE — black core — 1=bk core
+  - 2=wt/rd WHITE #ffffff RED #ff0000 PLANETS — white/red planets — 2=wt/rd planets
+  - 4=bl/gr/yw/pr BLUE #0000ff GREEN #00ff00 YELLOW #ffff00 PURPLE #cc33ff MOONS — blue/green/yellow/purple moons — 4=bl/gr/yw/pr moons all moons
+  - 8=orange shell inversion #ff8800 ASTEROID BELTS MAIN KUIPER OORT OUTER INVERSION — orange shell inversion asteroid belts main Kuiper Oort outer inversion — 8=orange asteroid belts
+
+- 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ ALL MOONS AND ASTEROID BELTS — 6 bubbles each 10^-35→10^-360 = - - - + + + = -211 x3 +211 x3 all moons and asteroid belts — all moons and asteroid belts
+
+ALL OF THE MOONS AND ASTEROID BELTS — ALL MOONS — ASTEROID BELTS — ALL MOONS AND ASTEROID BELTS — ☄️
+</div></div>
+
+<script>
+const allCanvas=document.getElementById('c-all');
+const beltsCanvas=document.getElementById('c-belts');
+const bubblesCanvas=document.getElementById('c-bubbles');
+
+function setupCanvas(canvas){
+  const dpr=Math.min(devicePixelRatio,2);
+  function resize(){
+    const rect=canvas.parentElement.getBoundingClientRect();
+    canvas.width=rect.width*dpr;
+    canvas.height=rect.height*dpr;
+    canvas.style.width=rect.width+'px';
+    canvas.style.height=rect.height+'px';
+  }
+  resize();
+  window.addEventListener('resize',resize);
+  return {dpr, ctx:canvas.getContext('2d')};
+}
+
+(function(){
+  const {dpr, ctx} = setupCanvas(allCanvas);
+  let t=0;
+  function draw(){
+    requestAnimationFrame(draw);
+    t+=0.01;
+    const w=allCanvas.width, h=allCanvas.height;
+    const cx=w/2, cy=h/2;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#000000';
+    ctx.fillRect(0,0,w,h);
+    const planets=[
+      {name:'MERCURY 0', moons:0, r:60, color:'#aaaaaa'},
+      {name:'VENUS 0', moons:0, r:85, color:'#ffcc88'},
+      {name:'EARTH 1', moons:1, r:110, color:'#00aaff'},
+      {name:'MARS 2', moons:2, r:135, color:'#ff4400'},
+      {name:'JUPITER 95', moons:12, r:175, color:'#ffaa66'},
+      {name:'SATURN 146', moons:16, r:215, color:'#ffddaa'},
+      {name:'URANUS 28', moons:6, r:255, color:'#aaffff'},
+      {name:'NEPTUNE 16', moons:4, r:295, color:'#0066ff'},
+      {name:'PLUTO 5', moons:2, r:335, color:'#cc9999'},
+      {name:'PLANET X ? 16200yr', moons:2, r:380, color:'#ff8800', elliptical:true}
+    ];
+    ctx.save();
+    ctx.fillStyle='#ffcc00';
+    ctx.shadowColor='#ffcc00';
+    ctx.shadowBlur=18*dpr;
+    ctx.beginPath();
+    ctx.arc(cx,cy,12*dpr,0,Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+    planets.forEach((p,i)=>{
+      const ang=i/10*Math.PI*2 + t*0.08;
+      let r=p.r*dpr;
+      if(p.elliptical){
+        const e=0.7;
+        r=p.r*dpr*(1-e*e)/(1+e*Math.cos(ang));
+      }
+      const x=cx+Math.cos(ang)*r;
+      const y=cy+Math.sin(ang)*r*(p.elliptical?0.5:1);
+      ctx.save();
+      ctx.strokeStyle='rgba(255,255,255,0.05)';
+      ctx.lineWidth=1*dpr;
+      ctx.beginPath();
+      if(p.elliptical) ctx.ellipse(cx,cy,p.r*dpr*0.72,p.r*dpr*0.36,0,0,Math.PI*2);
+      else ctx.arc(cx,cy,p.r*dpr,0,Math.PI*2);
+      ctx.stroke();
+      ctx.fillStyle=p.color;
+      ctx.shadowColor=p.color;
+      ctx.shadowBlur=6*dpr;
+      ctx.beginPath();
+      ctx.arc(x,y,4*dpr,0,Math.PI*2);
+      ctx.fill();
+      for(let m=0;m<p.moons;m++){
+        const mang=t*1.6 + m*1.3 + i;
+        const mr=8*dpr + (m%4)*3*dpr;
+        const mx=x+Math.cos(mang)*mr;
+        const my=y+Math.sin(mang)*mr;
+        ctx.fillStyle='#ffffff';
+        ctx.shadowColor='#ffffff';
+        ctx.shadowBlur=4*dpr;
+        ctx.globalAlpha=0.8;
+        ctx.beginPath();
+        ctx.arc(mx,my,1.2*dpr,0,Math.PI*2);
+        ctx.fill();
+        ctx.globalAlpha=1;
+      }
+      ctx.fillStyle='#ffffff';
+      ctx.font=`400 ${5*dpr}px Space Mono`;
+      ctx.fillText(p.name,x+8*dpr,y+3*dpr);
+      ctx.restore();
+    });
+    ctx.save();
+    ctx.fillStyle='#ffcc00';
+    ctx.font=`800 ${11*dpr}px Syne`;
+    ctx.fillText('ALL OF THE MOONS',14*dpr,28*dpr);
+    ctx.fillStyle='#ffcc88';
+    ctx.font=`400 ${8*dpr}px Space Mono`;
+    ctx.fillText('JUPITER 95, SATURN 146, URANUS 28, NEPTUNE 16, MARS 2, EARTH 1, PLUTO 5',14*dpr,44*dpr);
+    ctx.restore();
+  }
+  draw();
+})();
+
+(function(){
+  const {dpr, ctx} = setupCanvas(beltsCanvas);
+  let t=0;
+  function draw(){
+    requestAnimationFrame(draw);
+    t+=0.008;
+    const w=beltsCanvas.width, h=beltsCanvas.height;
+    const cx=w/2, cy=h/2;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#000000';
+    ctx.fillRect(0,0,w,h);
+    ctx.save();
+    ctx.fillStyle='#ffcc00';
+    ctx.shadowColor='#ffcc00';
+    ctx.shadowBlur=16*dpr;
+    ctx.beginPath();
+    ctx.arc(cx,cy,10*dpr,0,Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+    // Main asteroid belt 2.2-3.2 AU between Mars Jupiter
+    ctx.save();
+    ctx.strokeStyle='rgba(255,204,0,0.15)';
+    ctx.lineWidth=24*dpr;
+    ctx.globalAlpha=0.5;
+    ctx.beginPath();
+    ctx.arc(cx,cy,155*dpr,0,Math.PI*2);
+    ctx.stroke();
+    // Asteroids in main belt
+    for(let i=0;i<80;i++){
+      const ang=Math.random()*Math.PI*2 + t*0.1;
+      const r=145*dpr + Math.random()*20*dpr;
+      const x=cx+Math.cos(ang)*r;
+      const y=cy+Math.sin(ang)*r;
+      ctx.fillStyle='rgba(255,204,0,0.6)';
+      ctx.beginPath();
+      ctx.arc(x,y,1*dpr,0,Math.PI*2);
+      ctx.fill();
+    }
+    ctx.fillStyle='#ffcc00';
+    ctx.font=`400 ${7*dpr}px Space Mono`;
+    ctx.fillText('MAIN BELT 2.2-3.2 AU CERES VESTA',cx+170*dpr,cy-10*dpr);
+    ctx.restore();
+    // Kuiper belt 30-50 AU beyond Neptune
+    ctx.save();
+    ctx.strokeStyle='rgba(0,255,204,0.12)';
+    ctx.lineWidth=32*dpr;
+    ctx.globalAlpha=0.4;
+    ctx.beginPath();
+    ctx.arc(cx,cy,310*dpr,0,Math.PI*2);
+    ctx.stroke();
+    for(let i=0;i<120;i++){
+      const ang=Math.random()*Math.PI*2 + t*0.02;
+      const r=300*dpr + Math.random()*24*dpr;
+      const x=cx+Math.cos(ang)*r;
+      const y=cy+Math.sin(ang)*r;
+      ctx.fillStyle='rgba(0,255,204,0.5)';
+      ctx.beginPath();
+      ctx.arc(x,y,1.2*dpr,0,Math.PI*2);
+      ctx.fill();
+    }
+    ctx.fillStyle='#00ffcc';
+    ctx.font=`400 ${7*dpr}px Space Mono`;
+    ctx.fillText('KUIPER BELT 30-50 AU PLUTO ERIS',cx+330*dpr,cy-10*dpr);
+    ctx.restore();
+    // Oort cloud 2000-100000 AU
+    ctx.save();
+    ctx.strokeStyle='rgba(255,255,255,0.04)';
+    ctx.lineWidth=2*dpr;
+    ctx.globalAlpha=0.3;
+    ctx.beginPath();
+    ctx.arc(cx,cy,360*dpr,0,Math.PI*2);
+    ctx.stroke();
+    ctx.setLineDash([3*dpr,6*dpr]);
+    ctx.beginPath();
+    ctx.arc(cx,cy,380*dpr,0,Math.PI*2);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    for(let i=0;i<60;i++){
+      const ang=Math.random()*Math.PI*2;
+      const r=370*dpr + Math.random()*20*dpr;
+      const x=cx+Math.cos(ang)*r;
+      const y=cy+Math.sin(ang)*r;
+      ctx.fillStyle='rgba(255,255,255,0.3)';
+      ctx.beginPath();
+      ctx.arc(x,y,0.8*dpr,0,Math.PI*2);
+      ctx.fill();
+    }
+    ctx.fillStyle='#ffffff';
+    ctx.font=`400 ${7*dpr}px Space Mono`;
+    ctx.fillText('OORT CLOUD 2000-100000 AU COMETS',cx+390*dpr,cy-10*dpr);
+    ctx.restore();
+    // Planets for reference
+    const planets=[
+      {r:60,color:'#aaaaaa'},{r:85,color:'#ffcc88'},{r:110,color:'#00aaff'},{r:135,color:'#ff4400'},{r:175,color:'#ffaa66'},{r:215,color:'#ffddaa'},{r:255,color:'#aaffff'},{r:295,color:'#0066ff'}
+    ];
+    planets.forEach((p,i)=>{
+      const ang=i/8*Math.PI*2 + t*0.1;
+      const x=cx+Math.cos(ang)*p.r*dpr;
+      const y=cy+Math.sin(ang)*p.r*dpr;
+      ctx.save();
+      ctx.fillStyle=p.color;
+      ctx.beginPath();
+      ctx.arc(x,y,3*dpr,0,Math.PI*2);
+      ctx.fill();
+      ctx.restore();
+    });
+    ctx.save();
+    ctx.fillStyle='#ffcc00';
+    ctx.font=`800 ${11*dpr}px Syne`;
+    ctx.fillText('ASTEROID BELTS',14*dpr,28*dpr);
+    ctx.fillStyle='#ffcc88';
+    ctx.font=`400 ${8*dpr}px Space Mono`;
+    ctx.fillText('MAIN BELT 2.2-3.2 AU BETWEEN MARS JUPITER 1M+ ASTEROIDS',14*dpr,44*dpr);
+    ctx.fillText('KUIPER BELT 30-50 AU BEYOND NEPTUNE PLUTO ERIS MAKEMAKE',14*dpr,58*dpr);
+    ctx.fillText('OORT CLOUD 2000-100000 AU SPHERICAL COMETS',14*dpr,72*dpr);
+    ctx.restore();
+  }
+  draw();
+})();
+
+(function(){
+  const {dpr, ctx} = setupCanvas(bubblesCanvas);
+  let t=0;
+  function draw(){
+    requestAnimationFrame(draw);
+    t+=0.01;
+    const w=bubblesCanvas.width, h=bubblesCanvas.height;
+    const cx=w/2, cy=h/2;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#000000';
+    ctx.fillRect(0,0,w,h);
+    ctx.save();
+    ctx.fillStyle='#ffcc00';
+    ctx.shadowColor='#ffcc00';
+    ctx.shadowBlur=40*dpr;
+    ctx.beginPath();
+    ctx.arc(cx,cy,24*dpr,0,Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+    // Main belt
+    ctx.save();
+    ctx.strokeStyle='rgba(255,204,0,0.12)';
+    ctx.lineWidth=18*dpr;
+    ctx.beginPath();
+    ctx.arc(cx,cy,155*dpr,0,Math.PI*2);
+    ctx.stroke();
+    for(let i=0;i<60;i++){
+      const ang=Math.random()*Math.PI*2;
+      const r=150*dpr + Math.random()*14*dpr;
+      const x=cx+Math.cos(ang + t*0.05)*r;
+      const y=cy+Math.sin(ang + t*0.05)*r;
+      ctx.fillStyle='rgba(255,204,0,0.5)';
+      ctx.beginPath();
+      ctx.arc(x,y,1*dpr,0,Math.PI*2);
+      ctx.fill();
+    }
+    ctx.restore();
+    // Kuiper belt
+    ctx.save();
+    ctx.strokeStyle='rgba(0,255,204,0.1)';
+    ctx.lineWidth=22*dpr;
+    ctx.beginPath();
+    ctx.arc(cx,cy,310*dpr,0,Math.PI*2);
+    ctx.stroke();
+    for(let i=0;i<80;i++){
+      const ang=Math.random()*Math.PI*2;
+      const r=305*dpr + Math.random()*16*dpr;
+      const x=cx+Math.cos(ang + t*0.01)*r;
+      const y=cy+Math.sin(ang + t*0.01)*r;
+      ctx.fillStyle='rgba(0,255,204,0.4)';
+      ctx.beginPath();
+      ctx.arc(x,y,1*dpr,0,Math.PI*2);
+      ctx.fill();
+    }
+    ctx.restore();
+    // Planets + all moons
+    const planets=[
+      {r:60, moons:0, color:'#aaaaaa'},
+      {r:85, moons:0, color:'#ffcc88'},
+      {r:110, moons:1, color:'#00aaff'},
+      {r:135, moons:2, color:'#ff4400'},
+      {r:175, moons:12, color:'#ffaa66'},
+      {r:215, moons:16, color:'#ffddaa'},
+      {r:255, moons:6, color:'#aaffff'},
+      {r:295, moons:4, color:'#0066ff'},
+      {r:335, moons:2, color:'#cc9999'},
+      {r:380, moons:2, color:'#ff8800', elliptical:true}
+    ];
+    planets.forEach((p,i)=>{
+      const ang=i/10*Math.PI*2 + t*0.08;
+      let r=p.r*dpr;
+      if(p.elliptical){
+        const e=0.7;
+        r=p.r*dpr*(1-e*e)/(1+e*Math.cos(ang));
+      }
+      const x=cx+Math.cos(ang)*r;
+      const y=cy+Math.sin(ang)*r*(p.elliptical?0.5:1);
+      ctx.save();
+      ctx.fillStyle=p.color;
+      ctx.shadowColor=p.color;
+      ctx.shadowBlur=6*dpr;
+      ctx.beginPath();
+      ctx.arc(x,y,4*dpr,0,Math.PI*2);
+      ctx.fill();
+      for(let m=0;m<p.moons;m++){
+        const mang=t*1.8 + m*1.1 + i;
+        const mr=8*dpr + (m%5)*3*dpr;
+        const mx=x+Math.cos(mang)*mr;
+        const my=y+Math.sin(mang)*mr;
+        ctx.fillStyle='#ffffff';
+        ctx.shadowColor='#ffffff';
+        ctx.shadowBlur=4*dpr;
+        ctx.globalAlpha=0.8;
+        ctx.beginPath();
+        ctx.arc(mx,my,1*dpr,0,Math.PI*2);
+        ctx.fill();
+        ctx.globalAlpha=1;
+      }
+      ctx.restore();
+    });
+    ctx.save();
+    ctx.fillStyle='#ffcc00';
+    ctx.font=`800 ${11*dpr}px Syne`;
+    ctx.fillText('ALL OF THE MOONS AND ASTEROID BELTS',14*dpr,28*dpr);
+    ctx.fillStyle='#ffcc88';
+    ctx.font=`400 ${8*dpr}px Space Mono`;
+    ctx.fillText('ALL MOONS: JUPITER 95, SATURN 146, URANUS 28, NEPTUNE 16, MARS 2, EARTH 1, PLUTO 5, PLANET X ?',14*dpr,44*dpr);
+    ctx.fillText('MAIN BELT 2.2-3.2 AU CERES VESTA PALLAS, KUIPER BELT 30-50 AU PLUTO ERIS, OORT CLOUD 2000-100000 AU',14*dpr,58*dpr);
+    ctx.fillText('SUN PHOTON PINNED CENTER 100G OSCILLATING -p +p + S,M,W WAVE CORE + 10 PLANETS + MOONS + BELTS',14*dpr,72*dpr);
+    ctx.restore();
+  }
+  draw();
+})();
+
+document.getElementById('btn-all').onclick=()=>{};
+document.getElementById('btn-belts').onclick=()=>{};
+document.getElementById('btn-bubbles').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

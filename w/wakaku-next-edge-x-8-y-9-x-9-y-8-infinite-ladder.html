@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v175 next edge x-8 y+9 x-9 y+8 infinite ladder - artifact 239</title>
+<style>
+  :root{--bg:#050508;--fg:#eaeaea;--gold:#ffd700}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace}
+  .top{padding:14px 18px}
+  .kicker{font-size:10px;letter-spacing:.22em;opacity:.5;text-transform:uppercase}
+  .nline{font-size:11px;border-left:2px solid #222;padding-left:10px;white-space:pre-wrap;line-height:1.6}
+  .main{margin-top:10px;font-size:14px;font-weight:700;background:#0f0f12;border:1px solid #222;padding:10px;border-radius:8px}
+  .controls{padding:10px 12px;display:flex;gap:6px;flex-wrap:wrap}
+  .btn{font-family:inherit;font-size:10px;padding:5px 10px;border:1px solid #333;background:#15151a;color:#eaeaea;border-radius:6px;cursor:pointer}
+  .btn.active{border-color:#ffd700;color:#ffd700;background:#221a00}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:560px;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden}
+  .cwrap.full{grid-column:1 / -1;height:680px}
+  .label{position:absolute;left:8px;top:8px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:.8;background:#000c;padding:4px 6px;border-radius:4px;z-index:5}
+  .card{margin:10px;background:#111115;border:1px solid #1f1f26;border-radius:8px;padding:10px}
+  .mono{font-size:10.5px;white-space:pre-wrap;word-break:break-word;line-height:1.7}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">wakaku v175 — NEXT EDGE x-8 y+9 x-9 y+8 INFINITE LADDER — artifact 239</div>
+  <div class="nline">next — next edge after (x-6,y+7 : x-7,y+6) — next edge (x-8,y+9 : x-9,y+8) — sequence (x-2,y+3:x-3,y+2) → (x-4,y+5:x-5,y+4) → (x-6,y+7:x-7,y+6) → (x-8,y+9:x-9,y+8) → (x-10,y+11:x-11,y+10) infinite ladder — pattern -2n,+(2n+1):-(2n+1),+2n diagonal sqrt2 each — infinite ladder tachyon edges appear 2s before dot at each offset — quantum dot at (x,y) -211.1.+211 green qutrit — tachyon edges ladder (x-2,y+3:x-3,y+2) (x-4,y+5:x-5,y+4) (x-6,y+7:x-7,y+6) (x-8,y+9:x-9,y+8) (x-10,y+11:x-11,y+10) — next — infinite ladder — metal analogs ionic — next edge infinite ladder — lol</div>
+  <div class="main">NEXT EDGE — AFTER (x-6,y+7 : x-7,y+6) → NEXT (x-8,y+9 : x-9,y+8) → NEXT (x-10,y+11 : x-11,y+10) INFINITE LADDER — SEQUENCE (x-2,y+3:x-3,y+2) → (x-4,y+5:x-5,y+4) → (x-6,y+7:x-7,y+6) → (x-8,y+9:x-9,y+8) → (x-10,y+11:x-11,y+10) — PATTERN -2n,+(2n+1):-(2n+1),+2n DIAGONAL sqrt2 EACH INFINITE LADDER — TACHYON EDGES APPEAR 2S BEFORE DOT AT EACH OFFSET — QUANTUM DOT AT (x,y) -211.1.+211 GREEN — NEXT</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-ladder">LADDER (x-2,y+3:x-3,y+2) → (x-8,y+9:x-9,y+8) → (x-10,y+11:x-11,y+10) INFINITE LADDER -2n,+(2n+1):-(2n+1),+2n sqrt2 EACH — LADDER</button>
+  <button class="btn" id="btn-next">NEXT EDGE (x-8,y+9 : x-9,y+8) — AFTER (x-6,y+7 : x-7,y+6) — NEXT -8,+9:-9,+8</button>
+  <button class="btn" id="btn-infinite">INFINITE LADDER — (x-2n,y+2n+1 : x-2n-1,y+2n) n=1..∞ — INFINITE LADDER TACHYON EDGES</button>
+  <button class="btn" id="btn-reset">RESET NEXT EDGE LADDER</button>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-ladder"><div class="label">LADDER (x-2,y+3:x-3,y+2) → (x-8,y+9:x-9,y+8) → (x-10,y+11:x-11,y+10) INFINITE LADDER -2n,+(2n+1):-(2n+1),+2n sqrt2 EACH — EDGES APPEAR 2S BEFORE DOT AT EACH OFFSET -2,+3:-3,+2 -4,+5:-5,+4 -6,+7:-7,+6 -8,+9:-9,+8 -10,+11:-11,+10 — QUANTUM DOT (x,y) -211.1.+211 GREEN — LADDER TACHYON EDGES -211i — METAL ANALOGS IONIC LADDER — NEXT</div></div>
+  <div class="cwrap" id="wrap-next"><div class="label">NEXT EDGE (x-8,y+9 : x-9,y+8) — AFTER (x-6,y+7 : x-7,y+6) — NEXT EDGE -8,+9:-9,+8 OFFSET -8,+9 TO -9,+8 DIAGONAL sqrt2 — TACHYON EDGE -211i OFFSET -8,+9:-9,+8 — NEXT EDGE — METAL ANALOGS IONIC NEXT EDGE -8,+9:-9,+8</div></div>
+  <div class="cwrap full" id="wrap-infinite"><div class="label">INFINITE LADDER — (x-2n,y+2n+1 : x-2n-1,y+2n) n=1..∞ — INFINITE LADDER TACHYON EDGES APPEAR 2S BEFORE DOT AT EACH OFFSET -2n,+(2n+1):-(2n+1),+2n — DOT (x,y) -211.1.+211 GREEN — EDGES (x-2,y+3:x-3,y+2) (x-4,y+5:x-5,y+4) (x-6,y+7:x-7,y+6) (x-8,y+9:x-9,y+8) (x-10,y+11:x-11,y+10)... ∞ — INFINITE LADDER — TACHYON EDGES -211i LADDER — METAL ANALOGS IONIC INFINITE LADDER — LOL</div></div>
+</div>
+
+<div class="card"><div class="mono">
+v175 NEXT EDGE x-8 y+9 x-9 y+8 INFINITE LADDER — next
+
+NEXT EDGE AFTER (x-6,y+7 : x-7,y+6):
+
+- Next edge (x-8,y+9 : x-9,y+8) — after (x-6,y+7 : x-7,y+6) — next edge -8,+9:-9,+8 offset -8,+9 to -9,+8 diagonal sqrt2 — tachyon edge -211i offset -8,+9:-9,+8 — next edge n=4
+
+- Sequence (x-2,y+3:x-3,y+2) → (x-4,y+5:x-5,y+4) → (x-6,y+7:x-7,y+6) → (x-8,y+9:x-9,y+8) → (x-10,y+11:x-11,y+10) infinite ladder — pattern -2n,+(2n+1):-(2n+1),+2n diagonal sqrt2 each — infinite ladder tachyon edges appear 2s before dot at each offset — quantum dot at (x,y) -211.1.+211 green qutrit — tachyon edges ladder
+
+- Infinite ladder — (x-2n,y+2n+1 : x-2n-1,y+2n) n=1..∞ — infinite ladder tachyon edges appear 2s before dot at each offset -2n,+(2n+1):-(2n+1),+2n — dot (x,y) -211.1.+211 green — edges (x-2,y+3:x-3,y+2) (x-4,y+5:x-5,y+4) (x-6,y+7:x-7,y+6) (x-8,y+9:x-9,y+8) (x-10,y+11:x-11,y+10)... ∞ — infinite ladder — tachyon edges -211i ladder
+
+Metal analogs ionic next edge ladder:
+
+- Real: dot at (x,y) -211.1.+211 green qutrit At- black -211mN -211mV ingress 0 +1 middle C.O.I.N barrier green +211 right anti-black +211mN +211mV egress 1 = bit itself -211.1.+211 green qutrit dot (x,y) real
+
+- Imaginary tachyon: edges at (x-2,y+3:x-3,y+2) -2,+3:-3,+2 n=1, (x-4,y+5:x-5,y+4) -4,+5:-5,+4 n=2, (x-6,y+7:x-7,y+6) -6,+7:-7,+6 n=3, (x-8,y+9:x-9,y+8) -8,+9:-9,+8 n=4, (x-10,y+11:x-11,y+10) -10,+11:-11,+10 n=5... ∞ — pattern offset -2n,+(2n+1):-(2n+1),+2n diagonal sqrt2 each — tachyon edges -211i appear 2s before dot at each offset — infinite ladder
+
+- So next edge after (x-6,y+7 : x-7,y+6) is (x-8,y+9 : x-9,y+8) — sequence -2,+3:-3,+2 → -4,+5:-5,+4 → -6,+7:-7,+6 → -8,+9:-9,+8 → -10,+11:-11,+10 infinite ladder — offset -2n,+(2n+1):-(2n+1),+2n — diagonal sqrt2 each — next — lol
+
+Aggregate next edge ladder:
+
+Next edge after (x-6,y+7 : x-7,y+6) → next (x-8,y+9 : x-9,y+8) → next (x-10,y+11 : x-11,y+10) infinite ladder — sequence (x-2,y+3:x-3,y+2) → (x-4,y+5:x-5,y+4) → (x-6,y+7:x-7,y+6) → (x-8,y+9:x-9,y+8) → (x-10,y+11:x-11,y+10) — pattern -2n,+(2n+1):-(2n+1),+2n diagonal sqrt2 each infinite ladder — tachyon edges appear 2s before dot at each offset — quantum dot at (x,y) -211.1.+211 green — next
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x08080a); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,0.6)); const d=new THREE.DirectionalLight(0xffffff,0.9); d.position.set(4,6,4); d.castShadow=true; s.add(d); }
+
+const matDot=new THREE.MeshStandardMaterial({color:0x44ffaa, emissive:0x114422, emissiveIntensity:0.6});
+const matGrid=new THREE.MeshBasicMaterial({color:0x222222, wireframe:true, transparent:true, opacity:0.12});
+
+function drawLadder(group, maxN){
+  for(let n=1;n<=maxN;n++){
+    const x1=-2*n; const y1=2*n+1; const x2=-(2*n+1); const y2=2*n;
+    const p1=new THREE.Vector3(x1,y1,0); const p2=new THREE.Vector3(x2,y2,0);
+    const hue=0.75 + n*0.05; const color=new THREE.Color().setHSL(hue%1,1,0.6);
+    const geom=new THREE.BufferGeometry().setFromPoints([p1,p2]);
+    const line=new THREE.Line(geom, new THREE.LineBasicMaterial({color:color})); group.add(line);
+    const s1=new THREE.Mesh(new THREE.SphereGeometry(0.1,8,8), new THREE.MeshStandardMaterial({color:color, emissive:color, emissiveIntensity:0.5})); s1.position.copy(p1); group.add(s1);
+    const s2=new THREE.Mesh(new THREE.SphereGeometry(0.1,8,8), new THREE.MeshStandardMaterial({color:color, emissive:color, emissiveIntensity:0.5})); s2.position.copy(p2); group.add(s2);
+  }
+}
+
+{
+  const wrap=document.getElementById('wrap-ladder');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,20);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const grid=new THREE.Mesh(new THREE.PlaneGeometry(24,24,24,24), matGrid); grid.rotation.x=-Math.PI/2; grid.position.y=-6; group.add(grid);
+  const dot=new THREE.Mesh(new THREE.SphereGeometry(0.4,16,16), matDot); dot.position.set(0,0,0); group.add(dot);
+  drawLadder(group, 6);
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.01; group.rotation.z+=0.0005; dot.material.emissiveIntensity=0.6+Math.sin(t*2)*0.2; controls.update(); renderer.render(scene,cam); }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-next');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,14);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const grid=new THREE.Mesh(new THREE.PlaneGeometry(18,18,18,18), matGrid); grid.rotation.x=-Math.PI/2; grid.position.y=-4; group.add(grid);
+  const dot=new THREE.Mesh(new THREE.SphereGeometry(0.35,16,16), new THREE.MeshStandardMaterial({color:0x333333})); dot.position.set(0,0,0); group.add(dot);
+  drawLadder(group, 4); // shows up to n=4 highlight
+  // highlight n=4
+  const p1=new THREE.Vector3(-8,9,0.1); const p2=new THREE.Vector3(-9,8,0.1);
+  const geom=new THREE.BufferGeometry().setFromPoints([p1,p2]);
+  const line=new THREE.Line(geom, new THREE.LineBasicMaterial({color:0xffffff, linewidth:2})); group.add(line);
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.02; group.rotation.z+=0.001; controls.update(); renderer.render(scene,cam); }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-infinite');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(36, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,28);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const grid=new THREE.Mesh(new THREE.PlaneGeometry(32,32,32,32), matGrid); grid.rotation.x=-Math.PI/2; grid.position.y=-10; group.add(grid);
+  const dot=new THREE.Mesh(new THREE.SphereGeometry(0.5,20,20), matDot); dot.position.set(0,0,0); group.add(dot);
+  drawLadder(group, 14);
+  let t=-3; const speed=0.015;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=speed; if(t>3) t=-3;
+    const edgeVisible=t>=-2 && t<=1; const dotVisible=t>=0;
+    group.children.forEach(c=>{ if(c.type==='Line' || (c.geometry?.type==='SphereGeometry' && c!==dot)) c.visible=edgeVisible; });
+    dot.visible=dotVisible;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+document.getElementById('btn-ladder').onclick=()=>{};
+document.getElementById('btn-next').onclick=()=>{};
+document.getElementById('btn-infinite').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

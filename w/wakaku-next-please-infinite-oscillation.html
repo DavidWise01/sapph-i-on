@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v194 next please - artifact 258</title>
+<style>
+  :root{--bg:#000;--fg:#fff}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace;overflow-x:hidden}
+  .top{padding:14px 18px;position:relative;z-index:10}
+  .kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:900;background:linear-gradient(90deg,#fff,#ffd700,#0f8,#0ff,#f0f,#ff0,#f00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:400% 100%;animation:rainbow 0.4s linear infinite}
+  @keyframes rainbow{0%{background-position:0% 50%}100%{background-position:400% 50%}}
+  .nline{font-size:11px;border-left:3px solid #fff;padding-left:10px;white-space:pre-wrap;line-height:1.6;background:#111;padding:12px;border-radius:10px;color:#fff;font-weight:800;box-shadow:0 0 30px #fff,0 0 60px #ffd700;border:2px solid #fff}
+  .main{margin-top:12px;font-size:16px;font-weight:900;background:linear-gradient(90deg,#fff,#ffd700,#000,#0f8,#0ff,#f0f,#ff0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:400% 100%;padding:12px;border-radius:10px;border:3px solid #fff;box-shadow:0 0 40px #fff,0 0 80px #ffd700;text-transform:uppercase;animation:rainbow 0.3s linear infinite}
+  .controls{padding:12px;display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:10}
+  .btn{font-family:inherit;font-size:11px;font-weight:900;padding:10px 14px;border:2px solid #fff;background:#000;color:#fff;border-radius:10px;cursor:pointer;box-shadow:0 0 20px #fff,0 0 40px #ffd700;text-transform:uppercase}
+  .btn.active{border-color:#0f8;background:#002200;box-shadow:0 0 30px #0f8,0 0 60px #fff}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:14px;position:relative;z-index:5}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:720px;background:#000;border:2px solid #fff;border-radius:18px;overflow:hidden;box-shadow:0 0 40px #fff,0 0 80px #ffd700, inset 0 0 60px rgba(255,255,255,0.1)}
+  .cwrap.full{grid-column:1 / -1;height:900px}
+  .label{position:absolute;left:10px;top:10px;font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;background:#000000ee;padding:8px 12px;border-radius:10px;z-index:5;border:2px solid #fff;color:#fff;box-shadow:0 0 20px #fff}
+  .card{margin:14px;background:#000;border:2px solid #fff;border-radius:14px;padding:16px;box-shadow:0 0 40px #fff,0 0 80px #ffd700}
+  .mono{font-size:11px;white-space:pre-wrap;word-break:break-word;line-height:1.8;color:#fff;text-shadow:0 0 8px #fff;font-weight:700}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">🧬 wakaku v194 — NEXT PLEASE — NEXT EVO INFINITE OSCILLATION — artifact 258 🧬</div>
+  <div class="nline">next please — NEXT PLEASE — next evo — next please — NEXT PLEASE — next evolution infinite oscillation — 1 gravity outside and .6 gravity inside evolves to 1g→0.6g→0.3g→0.1g→0g→-0.1g→-0.3g→-0.6g→-1g→0g→1g infinite oscillation — NEXT PLEASE — gravity oscillates 1g↔-1g infinite — 6 plank bubbles each 10^-35→10^-360 3---3+++ white gold black hologen with 1g→-1g infinite oscillation — NEXT PLEASE — infinite oscillation — {{c{ubit{{()}} oscillates {{c{ubit{{c{ubit{{()}} oscillates infinite — NEXT PLEASE — metal analogs ionic — next please — lol — NEXT PLEASE — next evo infinite</div>
+  <div class="main">🧬 NEXT PLEASE — NEXT EVO INFINITE OSCILLATION — 1g→0.6g→0.3g→0.1g→0g→-0.1g→-0.3g→-0.6g→-1g→0g→1g INFINITE OSCILLATION — GRAVITY OSCILLATES 1g↔-1g INFINITE — 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ WHITE GOLD BLACK HOLOGEN WITH 1g→-1g INFINITE OSCILLATION — NEXT PLEASE — INFINITE OSCILLATION — {{c{ubit{{()}} OSCILLATES {{c{ubit{{c{ubit{{()}} OSCILLATES INFINITE — NEXT PLEASE — 🧬</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-next">🧬 NEXT PLEASE — 1g→-1g INFINITE OSCILLATION — GRAVITY OSCILLATES 1g↔-1g INFINITE — NEXT PLEASE — 🧬</button>
+  <button class="btn" id="btn-osc">🌌 OSCILLATION — 1g↔-1g INFINITE OSCILLATION — GRAVITY 1g→0g→-1g→0g→1g OSCILLATES INFINITE — OSCILLATION — 🌌</button>
+  <button class="btn" id="btn-bubbles">💫 6 BUBBLES INFINITE OSCILLATION — 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ WHITE GOLD BLACK HOLOGEN INFINITE OSCILLATION — 💫</button>
+  <button class="btn" id="btn-reset">⚡ RESET NEXT PLEASE INFINITE OSCILLATION — ⚡</button>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-next"><div class="label">🧬 NEXT PLEASE — 1g→-1g INFINITE OSCILLATION — GRAVITY OSCILLATES 1g↔-1g INFINITE — 1g→0.6g→0.3g→0.1g→0g→-0.1g→-0.3g→-0.6g→-1g→0g→1g INFINITE OSCILLATION — NEXT PLEASE — INFINITE OSCILLATION — 🧬</div></div>
+  <div class="cwrap" id="wrap-osc"><div class="label">🌌 OSCILLATION — 1g↔-1g INFINITE OSCILLATION — GRAVITY 1g→0g→-1g→0g→1g OSCILLATES INFINITE — 1g=9.8 pulls down, 0g=0 float, -1g=-9.8 pushes up anti-gravity, oscillation infinite — OSCILLATION — 🌌</div></div>
+  <div class="cwrap full" id="wrap-bubbles"><div class="label">💫 6 BUBBLES INFINITE OSCILLATION — 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ WHITE GOLD BLACK HOLOGEN WITH 1g→-1g INFINITE OSCILLATION — OUTER 1g=9.8↔-1g=-9.8 INFINITE OSCILLATION, INNER 0.6g=5.88↔-0.6g=-5.88 INFINITE OSCILLATION — 6 BUBBLES INFINITE OSCILLATION 1g↔-1g — ALL WHITE GOLD BLACK HOLOGEN FLASH INFINITE OSCILLATION — LOL — 💫</div></div>
+</div>
+
+<div class="card"><div class="mono">🧬 NEXT PLEASE — NEXT EVO INFINITE OSCILLATION — v194 NEXT PLEASE — INFINITE OSCILLATION 🧬
+
+- NEXT PLEASE — next please — NEXT EVO INFINITE OSCILLATION — 1 gravity outside and .6 gravity inside evolves to 1g→0.6g→0.3g→0.1g→0g→-0.1g→-0.3g→-0.6g→-1g→0g→1g infinite oscillation — NEXT PLEASE — gravity oscillates 1g↔-1g infinite
+
+- INFINITE OSCILLATION: 1g→0.6g→0.3g→0.1g→0g→-0.1g→-0.3g→-0.6g→-1g→0g→1g INFINITE OSCILLATION — GRAVITY OSCILLATES 1g↔-1g INFINITE — 1g=9.8 pulls down, 0g=0 float, -1g=-9.8 pushes up anti-gravity, oscillation infinite — 1g→0g→-1g→0g→1g infinite oscillation — NEXT PLEASE
+
+- OSCILLATION: 1g↔-1g INFINITE OSCILLATION — GRAVITY 1g→0g→-1g→0g→1g OSCILLATES INFINITE — 1g=9.8 pulls down, 0g=0 float, -1g=-9.8 pushes up anti-gravity, oscillation infinite — oscillation frequency 10^-35→10^-360 timed 3---3+++ = - - - + + + oscillating — oscillation 1g↔-1g infinite
+
+- 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ WHITE GOLD BLACK HOLOGEN WITH 1g→-1g INFINITE OSCILLATION — 6 bubbles each 10^-35=1e-35s timed to 10^-360=1e-360s 3---3+++ = - - - + + + = -211 x3 +211 x3 white gold black hologen with 1g→-1g infinite oscillation — outer bubbles 1g↔-1g infinite oscillation, inner bubbles 0.6g↔-0.6g infinite oscillation — 6 bubbles infinite oscillation 1g↔-1g
+
+- WHITE GOLD BLACK HOLOGEN INFINITE OSCILLATION: WHITE #ffffff = +211 anti-black +1, GOLD #ffd700 = C.O.I.N middle =1=0, BLACK #000000 = -211 black -1 — WHITE GOLD BLACK = +211.1.-211 = +1,0,-1 — hologen holographic — 1g↔-1g infinite oscillation — white gold black hologen infinite oscillation
+
+- {{c{ubit{{()}} INFINITE OSCILLATION WITH 1g↔-1g — outer {{ }} white gold black hologen 1g↔-1g infinite oscillation = 9.8↔-9.8 infinite oscillation, middle c{ubit gold hologen 0.6g↔-0.6g infinite oscillation = 5.88↔-5.88, inner {{()}} plank bubble () white gold black hologen 0g oscillation = 0 float infinite oscillation — {{c{ubit{{()}} 1g↔-1g infinite oscillation — nested cubit infinite oscillation
+
+- EVO STAGES INFINITE OSCILLATION: EVO STAGE 1: 1g outside 0.6g inside = gravity 2 layers, EVO STAGE 2: 1g→0g = gravity to float, EVO STAGE 3: 0g→-1g = float to anti-gravity, EVO STAGE 4: 1g→-1g = gravity to anti-gravity, EVO STAGE 5: 1g↔-1g infinite oscillation = gravity↔anti-gravity oscillation infinite, EVO STAGE ∞: 1g↔-1g↔1g infinite oscillation frequency 10^-35→10^-360 3---3+++ infinite oscillation — NEXT PLEASE INFINITE OSCILLATION
+
+- PRESS+GRAVITY INFINITE OSCILLATION NEXT PLEASE: UNDER PRESS 99.9 INF - + INF AND GRAVITY 99.9 INF - + INF WITH 1g↔-1g INFINITE OSCILLATION — press 99.9% infinite - + inf and gravity 99.9% infinite - + inf with 1g↔-1g infinite oscillation — press+gravity infinite oscillation next please — 1g outside 0.6g inside evolves to 1g↔-1g infinite oscillation
+
+NEXT PLEASE — NEXT EVO INFINITE OSCILLATION — 1g→0.6g→0.3g→0.1g→0g→-0.1g→-0.3g→-0.6g→-1g→0g→1g INFINITE OSCILLATION — GRAVITY OSCILLATES 1g↔-1g INFINITE — 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ WHITE GOLD BLACK HOLOGEN WITH 1g→-1g INFINITE OSCILLATION — NEXT PLEASE — INFINITE OSCILLATION — {{c{ubit{{()}} OSCILLATES {{c{ubit{{c{ubit{{()}} OSCILLATES INFINITE — NEXT PLEASE — 🧬
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x000000); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,1.5)); const d=new THREE.DirectionalLight(0xffffff,3.2); d.position.set(4,8,6); d.castShadow=true; s.add(d); const d2=new THREE.DirectionalLight(0xffd700,2.4); d2.position.set(-4,2,-4); s.add(d2); const d3=new THREE.DirectionalLight(0x00ff88,2.0); d3.position.set(0,-4,4); s.add(d3); }
+
+{
+  const wrap=document.getElementById('wrap-next');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,18);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  // Infinite oscillation 1g↔-1g
+  const gravLevels=[1.0,0.6,0.3,0.1,0,-0.1,-0.3,-0.6,-1.0];
+  let rings=[];
+  function createRings(){
+    rings.forEach(r=>group.remove(r.mesh));
+    rings=[];
+    gravLevels.forEach((g,i)=>{
+      const rad=1.2 + i*0.9;
+      const geom=new THREE.RingGeometry(rad-0.3,rad+0.3,64);
+      const isAnti=g<0;
+      const hue=isAnti?0.75:0.12 + Math.max(0,g)*0.15;
+      const mat=new THREE.MeshBasicMaterial({color:new THREE.Color().setHSL(hue,1,0.5), transparent:true, opacity:0.15 + Math.abs(g)*0.12, side:THREE.DoubleSide});
+      const mesh=new THREE.Mesh(geom, mat);
+      mesh.rotation.x=Math.PI/2;
+      group.add(mesh);
+      rings.push({mesh:mesh, gravity:g, baseRad:rad, baseG:g});
+    });
+  }
+  createRings();
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.03;
+    const oscPhase=Math.sin(t*0.8); // -1 to 1 infinite oscillation 1g↔-1g
+    rings.forEach((r,i)=>{
+      const g=r.baseG + oscPhase*0.4;
+      r.mesh.position.y=g*1.5;
+      r.mesh.rotation.z+=0.003 * (1 + Math.abs(g));
+      r.mesh.material.opacity=0.15 + Math.abs(g + oscPhase*0.3)*0.12 + Math.sin(t*2 + i)*0.04;
+      const hue=(r.baseG<0?0.75:0.12 + Math.max(0,g)*0.15 + oscPhase*0.1)%1;
+      r.mesh.material.color.setHSL(hue,1,0.5);
+    });
+    group.rotation.y+=0.0015;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-osc');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,16);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const gravLevels=[{g:1.0,color:0xffffff},{g:0.6,color:0xffd700},{g:0,color:0x888888},{g:-0.6,color:0x8800ff},{g:-1.0,color:0x0000ff}];
+  const bubbles=[];
+  gravLevels.forEach((lvl,idx)=>{
+    for(let j=0;j<2;j++){
+      const ang=idx/5*Math.PI*2 + j*0.6;
+      const rad=2 + idx*1.0;
+      const geom=new THREE.SphereGeometry(0.4 + Math.abs(lvl.g)*0.2,16,16);
+      const mat=new THREE.MeshStandardMaterial({color:lvl.color, emissive:lvl.color, emissiveIntensity:3.0 + Math.abs(lvl.g)*2.5});
+      const b=new THREE.Mesh(geom, mat);
+      b.position.set(Math.cos(ang)*rad, Math.sin(ang)*rad, lvl.g*2);
+      group.add(b); bubbles.push({mesh:b, gravity:lvl.g, baseG:lvl.g, baseRad:rad, baseAng:ang});
+    }
+  });
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.03;
+    const oscPhase=Math.sin(t*0.7);
+    bubbles.forEach((bObj,i)=>{
+      const g=bObj.baseG + oscPhase*0.5;
+      const gravPull=g*0.8;
+      bObj.mesh.position.y=Math.sin(bObj.baseAng)*bObj.baseRad*0.3 + gravPull*1.3 + Math.sin(t* (1+Math.abs(g)) + i)*0.25;
+      bObj.mesh.position.x=Math.cos(bObj.baseAng)*bObj.baseRad + Math.cos(t* (1+Math.abs(g)*0.5) + i)*0.25;
+      bObj.mesh.position.z=g*2 + Math.sin(t*1.5 + i)*0.4;
+      bObj.mesh.material.emissiveIntensity=3.0 + Math.abs(g)*2.5 + Math.sin(t*2 + i)*0.6;
+    });
+    group.rotation.y+=0.0012;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-bubbles');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(36, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,32);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const gravLevels=[1.0,0.6,0.3,0.1,0,-0.1,-0.3,-0.6,-1.0];
+  const all=[];
+  gravLevels.forEach((gLvl, lvlIdx)=>{
+    const count=5 + Math.floor(Math.abs(gLvl)*2);
+    for(let i=0;i<count;i++){
+      const ang=i/count*Math.PI*2 + lvlIdx*0.25;
+      const rad=3 + lvlIdx*2.0 + (i%2)*0.5;
+      const geom=new THREE.SphereGeometry(0.18 + Math.abs(gLvl)*0.08,12,12);
+      const type=i%3;
+      const baseColor=type===0?0xffffff:type===1?0xffd700:0x222222;
+      const isAnti=gLvl<0;
+      const mat=new THREE.MeshStandardMaterial({color:isAnti && type===2?0x4444ff:baseColor, emissive:isAnti && type===2?0x2222aa:baseColor===0x222222?0x333333:baseColor, emissiveIntensity:baseColor===0x222222?2.0:4.0 + Math.abs(gLvl)*1.2, metalness:0.7, roughness:0.3});
+      const b=new THREE.Mesh(geom, mat);
+      b.position.set(Math.cos(ang)*rad, Math.sin(ang)*rad, gLvl*2.5 + Math.sin(ang*2)*1.0);
+      group.add(b); all.push({mesh:b, gravity:gLvl, baseG:gLvl, level:lvlIdx, type:type, baseRad:rad, baseAng:ang});
+    }
+  });
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.02;
+    const oscPhase=Math.sin(t*0.6);
+    all.forEach((bObj,i)=>{
+      const g=bObj.baseG + oscPhase*0.4;
+      const gravPull=g*0.8;
+      const floatFreq=1.0 + Math.abs(g)*0.6;
+      bObj.mesh.position.y=Math.sin(bObj.baseAng)*bObj.baseRad*0.2 + gravPull*1.2 + Math.sin(t*floatFreq + i)*0.3;
+      bObj.mesh.position.x=Math.cos(bObj.baseAng)*bObj.baseRad + Math.cos(t*floatFreq*0.7 + i)*0.25;
+      bObj.mesh.position.z=g*2.5 + Math.sin(bObj.baseAng*2 + t*0.5 + i*0.1)*1.3;
+      const hologenShift=Math.sin(t*1.2 + i*0.06)*0.05 + oscPhase*0.05;
+      if(bObj.type===0){
+        const hue=(t*0.02 + i*0.01 + hologenShift + (g<0?0.7:0))%1;
+        bObj.mesh.material.color.setHSL(hue,0.15,0.9);
+        bObj.mesh.material.emissive.setHSL(hue,0.2,0.7);
+      } else if(bObj.type===1){
+        bObj.mesh.material.color.setHSL(0.12 + hologenShift + (g<0?0.5:0),1,0.55);
+        bObj.mesh.material.emissive.setHSL(0.12 + hologenShift + (g<0?0.5:0),1,0.5);
+      } else if(g<0){
+        bObj.mesh.material.color.setHSL(0.7,0.8,0.5);
+        bObj.mesh.material.emissive.setHSL(0.7,0.8,0.3);
+      }
+      bObj.mesh.material.emissiveIntensity=(bObj.type===2 && g>=0?2.0:4.0 + Math.abs(g)*1.2) + Math.sin(t*2 + i)*0.5;
+    });
+    group.rotation.y+=0.0006;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+document.getElementById('btn-next').onclick=()=>{};
+document.getElementById('btn-osc').onclick=()=>{};
+document.getElementById('btn-bubbles').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

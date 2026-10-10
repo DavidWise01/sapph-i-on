@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ELECTRON LATTICE — 3×3×3 · HIGGS + GRAVITY</title>
+<style>
+  :root{
+    --bg:#0C1016; --ink:#8fa3b8; --dim:#4a5a6a; --line:#1a2430;
+    --accent:#37d67a; --blue:#2f6fe4; --warm:#ffb26b; --cyan:#7fd4ff;
+    --lit:#37d67a; --bri:#e0b93e; --spec:#e05e5e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;background:var(--bg);overflow:hidden;
+    font-family:'SF Mono','Cascadia Code','Fira Mono',ui-monospace,monospace;color:var(--ink)}
+  #stage{position:fixed;inset:0}
+  canvas{display:block}
+  header{
+    position:fixed;top:0;left:0;right:0;padding:14px 18px;z-index:2;pointer-events:none;
+    display:flex;justify-content:space-between;align-items:baseline;
+    background:linear-gradient(180deg,rgba(12,16,22,.85),rgba(12,16,22,0));
+  }
+  header h1{font-size:12px;font-weight:500;letter-spacing:.18em}
+  header h1 b{color:var(--accent);font-weight:600}
+  header .meta{font-size:10px;letter-spacing:.12em;color:var(--dim)}
+  #hud{
+    position:fixed;left:18px;bottom:16px;z-index:2;display:flex;flex-direction:column;gap:10px;
+    background:rgba(12,16,22,.82);border:1px solid var(--line);padding:12px 14px;
+    min-width:236px;backdrop-filter:blur(4px);
+  }
+  .row{display:flex;align-items:center;gap:10px;font-size:10px;letter-spacing:.12em}
+  .row label{width:58px;color:var(--dim)}
+  .row output{width:46px;text-align:right;color:var(--accent);font-variant-numeric:tabular-nums}
+  input[type=range]{-webkit-appearance:none;appearance:none;flex:1;height:2px;background:var(--line);outline:none}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:10px;height:10px;background:var(--accent);border-radius:0;cursor:ew-resize}
+  input[type=range]::-moz-range-thumb{width:10px;height:10px;background:var(--accent);border:none;border-radius:0;cursor:ew-resize}
+  input[type=range]:focus-visible::-webkit-slider-thumb{outline:1px solid var(--ink);outline-offset:2px}
+  .toggle{display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none;font-size:10px;letter-spacing:.12em;color:var(--dim)}
+  .toggle .box{width:10px;height:10px;border:1px solid var(--dim);display:inline-block}
+  .toggle.on .box{background:var(--accent);border-color:var(--accent)}
+  .toggle.on{color:var(--ink)}
+  #physics{
+    position:fixed;right:18px;top:52px;z-index:2;font-size:9.5px;letter-spacing:.08em;
+    color:var(--dim);text-align:right;line-height:1.85;pointer-events:none;
+    background:rgba(12,16,22,.72);border:1px solid var(--line);padding:10px 12px;
+  }
+  #physics .h{color:var(--ink);letter-spacing:.16em;margin-bottom:2px}
+  #physics .v{color:var(--ink)}
+  #physics .t{display:inline-block;width:7px;height:7px;margin-left:6px;vertical-align:baseline}
+  .t.lit{background:var(--lit)} .t.bri{background:var(--bri)} .t.spec{background:var(--spec)}
+  #legend{
+    position:fixed;right:18px;bottom:16px;z-index:2;font-size:10px;letter-spacing:.12em;
+    color:var(--dim);text-align:right;line-height:1.9;pointer-events:none;
+  }
+  #legend .sw{display:inline-block;width:8px;height:8px;margin-right:6px}
+  @media (max-width:760px){ #physics{display:none} }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+
+<header>
+  <h1>ELECTRON LATTICE <b>3×3×3</b> · NUCLEUS + VALENCE RING r=0.2 PER CELL</h1>
+  <div class="meta">drag: orbit · wheel: zoom</div>
+</header>
+
+<div id="hud">
+  <div class="row">
+    <label for="gain">GAIN</label>
+    <input id="gain" type="range" min="0" max="0.45" step="0.005" value="0.25">
+    <output id="gainOut">0.250</output>
+  </div>
+  <div class="row">
+    <label for="eps">SOFTEN</label>
+    <input id="eps" type="range" min="0.10" max="0.40" step="0.01" value="0.18">
+    <output id="epsOut">0.18</output>
+  </div>
+  <div class="row">
+    <label for="orb">ORBIT</label>
+    <input id="orb" type="range" min="0" max="3.0" step="0.1" value="1.2">
+    <output id="orbOut">1.2</output>
+  </div>
+  <div class="row">
+    <label for="spd">SPIN</label>
+    <input id="spd" type="range" min="0" max="0.60" step="0.02" value="0.10">
+    <output id="spdOut">0.10</output>
+  </div>
+  <div class="toggle on" id="higgsToggle" role="switch" aria-checked="true" tabindex="0">
+    <span class="box"></span> HIGGS MODE — FIELD BREATHING
+  </div>
+</div>
+
+<div id="physics">
+  <div class="h">HIGGS SECTOR</div>
+  <div>v (VEV) = <span class="v">246.22 GeV</span><span class="t lit"></span></div>
+  <div>y_e = &radic;2&middot;m_e/v = <span class="v">2.935&times;10&#8315;&#8310;</span><span class="t lit"></span></div>
+  <div>m_e = y_e&middot;v/&radic;2 = <span class="v">0.511 MeV</span><span class="t lit"></span></div>
+  <div>m_p: ~1% Yukawa, ~99% QCD binding<span class="t bri"></span></div>
+  <div class="h" style="margin-top:8px">GRAVITY (WEAK FIELD)</div>
+  <div>r_s(p) = 2Gm_p/c&sup2; = <span class="v">2.484&times;10&#8315;&#8309;&#8308; m</span><span class="t lit"></span></div>
+  <div>&Delta;(p) = &minus;&Sigma; r&#770;/(r+&epsilon;)&sup2; &middot; GAIN<span class="t lit"></span></div>
+  <div>display gain &asymp; 10&#8309;&sup2; &times; physical<span class="t spec"></span></div>
+  <div>m_e/m_p = 5.45&times;10&#8315;&#8308; &rarr; e&#8315; wells omitted<span class="t bri"></span></div>
+</div>
+
+<div id="legend">
+  <div><span class="sw" style="background:#2f6fe4"></span>FLAT METRIC</div>
+  <div><span class="sw" style="background:#37d67a"></span>DEEP &Phi;</div>
+  <div><span class="sw" style="background:#ffb26b"></span>NUCLEUS &middot; <span class="sw" style="background:#7fd4ff"></span>e&#8315; RING r=0.2</div>
+  <div>27 CELLS &middot; FULL 1/r&sup2; SUPERPOSITION</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+  'use strict';
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x0C1016);
+  const renderer = new THREE.WebGLRenderer({antialias:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  renderer.setSize(innerWidth,innerHeight);
+  document.getElementById('stage').appendChild(renderer.domElement);
+
+  const camera = new THREE.PerspectiveCamera(42, innerWidth/innerHeight, 0.1, 100);
+  let camDist=7.6, camTheta=0.65, camPhi=1.12;
+  function placeCamera(){
+    camera.position.set(
+      camDist*Math.sin(camPhi)*Math.cos(camTheta),
+      camDist*Math.cos(camPhi),
+      camDist*Math.sin(camPhi)*Math.sin(camTheta));
+    camera.lookAt(0,0,0);
+  }
+  placeCamera();
+
+  // ---- lattice: cube [-1.5,1.5]^3, planes at ±0.5, ±1.5 → 27 unit cells ----
+  const COORDS=[-1.5,-0.5,0.5,1.5];
+  const SAMPLES=121;
+  const centers=[];
+  for(let i=-1;i<=1;i++)for(let j=-1;j<=1;j++)for(let k=-1;k<=1;k++)centers.push([i,j,k]);
+
+  const basePts=[];
+  function addLine(axis,a,b){
+    for(let s=0;s<SAMPLES;s++){
+      const t=-1.5+3*s/(SAMPLES-1);
+      if(axis===0)basePts.push(t,a,b);
+      else if(axis===1)basePts.push(a,t,b);
+      else basePts.push(a,b,t);
+    }
+  }
+  for(const a of COORDS)for(const b of COORDS){addLine(0,a,b);addLine(1,a,b);addLine(2,a,b);}
+  const N=basePts.length/3;
+  const nLines=COORDS.length*COORDS.length*3;
+
+  // ---- gravity field ----
+  // Weak-field Newtonian superposition over 27 equal point masses (nuclei).
+  // Displacement direction: -grad of softened potential Phi = Σ 1/(r+ε)
+  //   Δ(p) = GAIN · Σ [ -r̂ / (r+ε)² ] / maxV       (normalized so GAIN = max lattice displacement)
+  // Physical amplitude would be ~r_s(p)=2.48e-54 m → display gain ~1e52 (spec-tier, labeled in panel).
+  // Electron wells omitted: m_e/m_p = 5.45e-4 (bri-tier note in panel).
+  const warpV=new Float32Array(N*3);
+  const phiA=new Float32Array(N);
+  let maxV=1, maxPhi=1;
+  function rebuildField(EPS){
+    maxV=1e-9; maxPhi=1e-9;
+    for(let v=0;v<N;v++){
+      const px=basePts[v*3],py=basePts[v*3+1],pz=basePts[v*3+2];
+      let dx=0,dy=0,dz=0,phi=0;
+      for(let c=0;c<27;c++){
+        const rx=px-centers[c][0], ry=py-centers[c][1], rz=pz-centers[c][2];
+        const rr=Math.sqrt(rx*rx+ry*ry+rz*rz);
+        if(rr<1e-9)continue;
+        const f=1/((rr+EPS)*(rr+EPS));
+        dx-=rx/rr*f; dy-=ry/rr*f; dz-=rz/rr*f;
+        phi+=1/(rr+EPS);
+      }
+      warpV[v*3]=dx;warpV[v*3+1]=dy;warpV[v*3+2]=dz;
+      const m=Math.sqrt(dx*dx+dy*dy+dz*dz);
+      if(m>maxV)maxV=m;
+      phiA[v]=phi; if(phi>maxPhi)maxPhi=phi;
+    }
+  }
+
+  const segCount=nLines*(SAMPLES-1);
+  const positions=new Float32Array(segCount*2*3);
+  const colors=new Float32Array(segCount*2*3);
+  const geom=new THREE.BufferGeometry();
+  geom.setAttribute('position',new THREE.BufferAttribute(positions,3));
+  geom.setAttribute('color',new THREE.BufferAttribute(colors,3));
+  scene.add(new THREE.LineSegments(geom,new THREE.LineBasicMaterial({vertexColors:true})));
+
+  const B=[0x2f/255,0x6f/255,0xe4/255], G=[0x37/255,0xd6/255,0x7a/255];
+  const dispPos=new Float32Array(N*3), vColor=new Float32Array(N*3);
+
+  function updateGeometry(gain){
+    const s=gain/maxV;
+    // color from potential depth (physical), independent of gain wobble
+    const phiLo=0.55; // fraction of maxPhi where ramp starts
+    for(let v=0;v<N;v++){
+      dispPos[v*3]  =basePts[v*3]  +s*warpV[v*3];
+      dispPos[v*3+1]=basePts[v*3+1]+s*warpV[v*3+1];
+      dispPos[v*3+2]=basePts[v*3+2]+s*warpV[v*3+2];
+      let t=(phiA[v]/maxPhi-phiLo)/(1-phiLo);
+      if(t<0)t=0; if(t>1)t=1; t=t*t*(3-2*t);
+      vColor[v*3]  =B[0]+(G[0]-B[0])*t;
+      vColor[v*3+1]=B[1]+(G[1]-B[1])*t;
+      vColor[v*3+2]=B[2]+(G[2]-B[2])*t;
+    }
+    let w=0;
+    for(let L=0;L<nLines;L++){
+      const off=L*SAMPLES;
+      for(let s2=0;s2<SAMPLES-1;s2++){
+        const a=(off+s2)*3,b=(off+s2+1)*3;
+        positions[w]=dispPos[a];  colors[w++]=vColor[a];
+        positions[w]=dispPos[a+1];colors[w++]=vColor[a+1];
+        positions[w]=dispPos[a+2];colors[w++]=vColor[a+2];
+        positions[w]=dispPos[b];  colors[w++]=vColor[b];
+        positions[w]=dispPos[b+1];colors[w++]=vColor[b+1];
+        positions[w]=dispPos[b+2];colors[w++]=vColor[b+2];
+      }
+    }
+    geom.attributes.position.needsUpdate=true;
+    geom.attributes.color.needsUpdate=true;
+  }
+
+  // ---- atoms: nucleus + valence ring (r=0.2) + orbiting electron, per cell ----
+  function glowTexture(inner,mid){
+    const c=document.createElement('canvas');c.width=c.height=128;
+    const g=c.getContext('2d');
+    const r=g.createRadialGradient(64,64,0,64,64,64);
+    r.addColorStop(0,inner);r.addColorStop(0.3,mid);r.addColorStop(1,'rgba(0,0,0,0)');
+    g.fillStyle=r;g.fillRect(0,0,128,128);
+    return new THREE.CanvasTexture(c);
+  }
+  const nucGlow=glowTexture('rgba(255,220,180,1)','rgba(255,160,90,0.35)');
+  const eleGlow=glowTexture('rgba(220,245,255,1)','rgba(110,200,255,0.35)');
+
+  const R_RING=0.2;
+  const nucGeo=new THREE.SphereGeometry(0.05,16,12);
+  const nucMat=new THREE.MeshBasicMaterial({color:0xffb26b});
+  const eleGeo=new THREE.SphereGeometry(0.028,12,10);
+  const eleMat=new THREE.MeshBasicMaterial({color:0xcfeeff});
+
+  // ring template
+  const ringPts=[];
+  for(let s=0;s<=64;s++){const a=2*Math.PI*s/64;ringPts.push(new THREE.Vector3(R_RING*Math.cos(a),0,R_RING*Math.sin(a)));}
+  const ringGeo=new THREE.BufferGeometry().setFromPoints(ringPts);
+  const ringMat=new THREE.LineBasicMaterial({color:0x7fd4ff,transparent:true,opacity:0.28});
+
+  const atoms=[];
+  centers.forEach((c,idx)=>{
+    const grp=new THREE.Group();
+    grp.position.set(c[0],c[1],c[2]);
+    // deterministic per-cell orbital plane tilt
+    const tilt=new THREE.Euler(0.5*Math.sin(idx*2.399), 0.5*Math.cos(idx*1.618), 0);
+    const orbitFrame=new THREE.Group(); orbitFrame.setRotationFromEuler(tilt);
+    grp.add(orbitFrame);
+
+    const nuc=new THREE.Mesh(nucGeo,nucMat); grp.add(nuc);
+    const nSpr=new THREE.Sprite(new THREE.SpriteMaterial({map:nucGlow,blending:THREE.AdditiveBlending,depthWrite:false,transparent:true,opacity:0.85}));
+    nSpr.scale.set(0.30,0.30,1); grp.add(nSpr);
+
+    orbitFrame.add(new THREE.Line(ringGeo,ringMat));
+
+    const ele=new THREE.Mesh(eleGeo,eleMat); orbitFrame.add(ele);
+    const eSpr=new THREE.Sprite(new THREE.SpriteMaterial({map:eleGlow,blending:THREE.AdditiveBlending,depthWrite:false,transparent:true,opacity:0.8}));
+    eSpr.scale.set(0.16,0.16,1); orbitFrame.add(eSpr);
+
+    scene.add(grp);
+    atoms.push({ele,eSpr,nSpr,phase:idx*0.6180339887*2*Math.PI}); // golden-ratio phase spread
+  });
+
+  // ---- controls ----
+  const $=id=>document.getElementById(id);
+  const gainIn=$('gain'),epsIn=$('eps'),orbIn=$('orb'),spdIn=$('spd');
+  const gainOut=$('gainOut'),epsOut=$('epsOut'),orbOut=$('orbOut'),spdOut=$('spdOut');
+  const higgsT=$('higgsToggle');
+  let GAIN=+gainIn.value, EPS=+epsIn.value, ORB=+orbIn.value, SPIN=+spdIn.value, HIGGS=true;
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduced){HIGGS=false;SPIN=0;ORB=0;spdIn.value=0;orbIn.value=0;
+    higgsT.classList.remove('on');higgsT.setAttribute('aria-checked','false');}
+
+  gainIn.addEventListener('input',()=>{GAIN=+gainIn.value;gainOut.textContent=GAIN.toFixed(3);});
+  epsIn.addEventListener('input',()=>{EPS=+epsIn.value;epsOut.textContent=EPS.toFixed(2);rebuildField(EPS);});
+  orbIn.addEventListener('input',()=>{ORB=+orbIn.value;orbOut.textContent=ORB.toFixed(1);});
+  spdIn.addEventListener('input',()=>{SPIN=+spdIn.value;spdOut.textContent=SPIN.toFixed(2);});
+  function toggleHiggs(){HIGGS=!HIGGS;higgsT.classList.toggle('on',HIGGS);higgsT.setAttribute('aria-checked',String(HIGGS));}
+  higgsT.addEventListener('click',toggleHiggs);
+  higgsT.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();toggleHiggs();}});
+  gainOut.textContent=GAIN.toFixed(3);epsOut.textContent=EPS.toFixed(2);
+  orbOut.textContent=ORB.toFixed(1);spdOut.textContent=SPIN.toFixed(2);
+
+  let dragging=false,lastX=0,lastY=0;
+  renderer.domElement.addEventListener('pointerdown',e=>{dragging=true;lastX=e.clientX;lastY=e.clientY;});
+  addEventListener('pointerup',()=>dragging=false);
+  addEventListener('pointermove',e=>{
+    if(!dragging)return;
+    camTheta+=(e.clientX-lastX)*0.006;
+    camPhi-=(e.clientY-lastY)*0.006;
+    camPhi=Math.max(0.12,Math.min(Math.PI-0.12,camPhi));
+    lastX=e.clientX;lastY=e.clientY;placeCamera();
+  });
+  renderer.domElement.addEventListener('wheel',e=>{
+    e.preventDefault();
+    camDist=Math.max(3.2,Math.min(16,camDist*(1+e.deltaY*0.001)));
+    placeCamera();
+  },{passive:false});
+  addEventListener('resize',()=>{
+    camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();
+    renderer.setSize(innerWidth,innerHeight);
+  });
+
+  // ---- loop ----
+  rebuildField(EPS);
+  const t0=performance.now();
+  function frame(now){
+    const t=(now-t0)/1000;
+    // Higgs mode: small radial breathing of the field about its vacuum value.
+    // Illustrative (frequency not to scale; real m_H = 125.2 GeV ~ 1.9e25 Hz).
+    const gain=HIGGS? GAIN*(0.82+0.18*Math.sin(t*2.0)) : GAIN;
+    updateGeometry(gain);
+    for(const a of atoms){
+      const th=a.phase+t*ORB;
+      a.ele.position.set(R_RING*Math.cos(th),0,R_RING*Math.sin(th));
+      a.eSpr.position.copy(a.ele.position);
+      a.nSpr.material.opacity=HIGGS?0.75+0.15*Math.sin(t*2.0):0.85;
+    }
+    if(SPIN>0){camTheta+=SPIN*0.016;placeCamera();}
+    renderer.render(scene,camera);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

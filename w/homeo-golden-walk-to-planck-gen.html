@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>homeo · the golden walk to planck · gen 3</title>
+<style>
+:root{--ground:#0d0c0a;--rule:#2b2822;--ink:#ECE8DF;--dim:#958E80;--au:#D4AF37;--over:#FF8A6B;--under:#6FC3FF;--lit:#6FD08C;--amber:#F2A03D;--bad:#FF6B6B}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ground);color:var(--ink);font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.wrap{max-width:900px;margin:0 auto;padding:16px}
+.hd{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin:18px 0 8px}
+.hd:first-child{margin-top:0}
+.hd b{font-weight:400;letter-spacing:.2em;color:var(--dim);font-size:10px;text-transform:uppercase}
+.src{border:1px solid var(--rule);border-radius:3px;padding:8px 10px;font-size:11.5px;overflow-wrap:anywhere}
+.verdict{border:1px solid #4a3d1c;background:rgba(212,175,55,.05);border-radius:3px;padding:9px 11px;font-size:11.5px}
+canvas{display:block;width:100%;border:1px solid var(--rule);border-radius:3px;background:#080706}
+.sp{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;align-items:center}
+.sp span.l{color:var(--dim);font-size:10px;letter-spacing:.1em;text-transform:uppercase}
+button{font:inherit;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:transparent;color:var(--au);border:1px solid #5a4a22;padding:6px 9px;border-radius:2px;cursor:pointer}
+button.on{background:rgba(212,175,55,.15)}
+.rd{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+.rd div{border:1px solid var(--rule);border-radius:3px;padding:6px 8px;min-width:0}
+.rd i{display:block;font-style:normal;font-size:9px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+.rd span{font-size:13px;overflow-wrap:anywhere}
+.seq{margin-top:8px;font-size:11px;line-height:1.8;overflow-wrap:anywhere}
+.seq b{font-weight:400;padding:1px 4px;border-radius:2px}
+.tw{overflow-x:auto;margin-top:8px;border:1px solid var(--rule);border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:11px}
+th,td{padding:6px 8px;border-bottom:1px solid #1d1b17;text-align:left;vertical-align:top}
+th{color:var(--dim);font-weight:400;font-size:9px;letter-spacing:.1em;text-transform:uppercase}
+.s{font-size:9px;letter-spacing:.1em;white-space:nowrap}
+.lit{color:var(--lit)} .amb{color:var(--amber)} .bad{color:var(--bad)}
+#msg{margin-top:8px;font-size:11px;min-height:18px}
+.note{margin-top:10px;font-size:10.5px;color:var(--dim)} .note b{color:var(--ink);font-weight:400}
+.small{margin-top:8px;font-size:11px;border-left:2px solid var(--au);padding-left:9px}
+@media(max-width:560px){ .rd{grid-template-columns:1fr 1fr} #st tr{display:grid;grid-template-columns:1fr auto;border-bottom:1px solid #26231e} #st th{display:none} #st td{border:0} #st td:nth-child(2),#st td:nth-child(4){grid-column:1/-1;color:var(--dim)} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hd"><b>R · homeo · 1.6.5 walked to planck 0.0.0</b><b>gen 3, halfway round</b></div>
+  <div class="src">we are halfway around gen 3 lol or the 3rd black hole lol 1.6.5 homeo is 1 + 1/2 = 1.6 + 1.6/2 of total 1/0 + .6 = 16(fristgentotal)-6(secondgentotal)/total gens = new homeo or 5 so 1.6.5 you could walk that to plank 0.0.0 and that is the steps for homeo prob 13.2 billion</div>
+  <div class="verdict">your "1 + 1/2 = 1.6" is a real walk: feed the answer back in, <b>x → 1 + 1/x</b>. from 1 it goes 2, 1.5, 1.667, <b>1.6</b>, 1.625 … and settles on <b>1.618</b>, the golden ratio. it overshoots, undershoots and closes in, like a thermostat finding its set point: that's your <b>homeo</b>. walked until it's within one Planck length of 1.618, it takes <b>84 steps</b>. your <b>1/0</b> is on the road too: start at −1 and the walk goes −1 → 0 → 1/0 → 1, then home. <b>gen 3</b>: the Sun is a third-generation star, and at 4.6 of its ~10 billion years it's <b>halfway round</b>. <b>13.2 billion</b> = 13.8 − your .6: the era of the first galaxies.</div>
+
+  <div class="hd"><b>the walk · x → 1 + 1/x</b><b id="wk">–</b></div>
+  <div class="sp"><span class="l">start at</span><button data-x="1" class="on">1</button><button data-x="-1">−1 (through 1/0)</button><button data-x="100">100</button><button data-x="0.001">0.001</button><button data-x="-0.6180339887498949">−0.618 (the other fixed point)</button></div>
+  <canvas id="cv"></canvas>
+  <div class="seq" id="seq"></div>
+  <div id="msg"></div>
+  <div class="rd">
+    <div><i>set point (homeo)</i><span>1.6180339887…</span></div>
+    <div><i>steps to planck precision</i><span id="n">–</span></div>
+    <div><i>error kept each step</i><span>× 0.382, sign flips</span></div>
+    <div><i>steps are ratios of</i><span>1 1 2 3 5 8 13 21 …</span></div>
+    <div><i>(16 − 6) ÷ 2</i><span>5</span></div>
+    <div><i>13.8 − .6</i><span>13.2 billion</span></div>
+    <div><i>the Sun, into its life</i><span>4.6 / ~10 Gyr · 46%</span></div>
+    <div><i>which generation</i><span>3 · the Sun's</span></div>
+  </div>
+
+  <div class="hd"><b>three generations of stars</b><b>13.8 billion years</b></div>
+  <canvas id="gv"></canvas>
+
+  <div class="hd"><b>your line, stamped</b><b>piece by piece</b></div>
+  <div class="tw"><table id="st"></table></div>
+
+  <div class="note"><b>the walk.</b> take any number, divide 1 by it, add 1, repeat. the set point is where the answer equals the input: x = 1 + 1/x, which solves to 1.6180339887…, the golden ratio. near it the walk undershoots and overshoots by a factor of 0.382 each time: a damped swing, the shape of any good regulator. the stops from 1 are ratios of neighbouring Fibonacci numbers (2/1, 3/2, 5/3, 8/5, 13/8 …). your "1.6.5" reads right as 8 ÷ 5 = 1.6, step five. the swing shrinks 2.618× every step, so 84 steps take it from 1 to within 1.6 × 10⁻³⁵ of the set point, the Planck length: your "walk it to plank 0.0.0". the chart past 10⁻¹⁵ is drawn from the exact Fibonacci formula, since ordinary computer numbers run out of digits there. <b>almost every start comes home.</b> any positive start does. −1 passes through 0 and then 1/0 (infinity), which the next step turns back into 1. the one start that never comes home is the other fixed point, −0.618, but only if it's exact to infinite digits. nudge it by the last digit a computer holds and it drifts away, then settles at 1.618 like the rest. the chart shows that too. <b>gen 3.</b> the first stars (population III, no metals) lit a few hundred million years in. the second generation (population II) is the old halo and globular clusters, 12–13 billion years old. the Sun belongs to the third (population I), rich in metals from both earlier rounds. that's why there's gold here at all. the Sun is 4.6 billion years into a roughly 10-billion-year life: halfway round. <b>13.2 billion years ago</b> is 0.6 billion after the start, when the first galaxies were assembling. "third black hole" and (16 − 6) ÷ 2 = 5 as generation totals are yours: the arithmetic is LIT, the meaning is AMBER.</div>
+  <div class="small">small words: keep doing "one plus one-over" to a number and it always ends up at 1.618, wobbling up and down less and less, like a swing coming to rest. 84 pushes get it closer than the smallest thing that exists. our Sun is a grandchild star, made from the ashes of two older families of stars, and it's halfway through its life.</div>
+</div>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const PHI=(1+Math.sqrt(5))/2, PSI=1-PHI, LP=1.616255e-35, L10R=Math.log10(PHI*PHI);
+let x0=1;
+// walk: returns steps [{x, logerr, sign, exact:bool, note}]
+function walk(start){
+  const out=[]; let x=start, k=0, inf=false, extrap=null;
+  while(k<130){
+    let e, lg, sg, note='';
+    if(inf){ note='1/0 = ∞'; out.push({x:Infinity,lg:null,sg:0,exact:true,note}); x=1; inf=false; k++; continue; }
+    e=x-PHI; lg=Math.log10(Math.abs(e)||1e-300); sg=Math.sign(e);
+    if(Math.abs(e)<1e-14||extrap){ // exact tail: rate per step
+      if(!extrap) extrap={k,lg,sg};
+      const j=k-extrap.k; lg=extrap.lg-j*L10R; sg=extrap.sg*((j%2)?-1:1);
+      out.push({x:PHI,lg,sg,exact:false,note:''}); if(lg<Math.log10(LP)) break; k++; continue; }
+    out.push({x,lg,sg,exact:true,note:x===0?'0 → next is 1/0':''});
+    if(x===0){ inf=true; k++; continue; }
+    x=1+1/x; k++;
+  }
+  return out;
+}
+// exact count from 1 via Fibonacci: x_k = F(k+2)/F(k+1); error = φ^-(k+1)/F(k+1)
+function exactFrom1(){ let a=0,b=1,k=0; for(;k<200;k++){ const n=k+1, F=b; const lg=-n*Math.log10(PHI)-Math.log10(F); if(lg<Math.log10(LP)) return k; const t=a+b; a=b; b=t; } return -1; }
+const K1=exactFrom1();
+function fit(cv,r,mn,mx){ const w=cv.clientWidth||600, h=Math.round(Math.max(mn,Math.min(w*r,mx))), d=window.devicePixelRatio||1; cv.width=Math.round(w*d); cv.height=Math.round(h*d); cv.style.height=h+'px'; const g=cv.getContext('2d'); g.setTransform(d,0,0,d,0,0); return [g,w,h]; }
+function draw(steps){
+  const [g,W,H]=fit($('cv'),0.45,240,340), L=36, R=W-10, T=16, B=H-24, n=steps.length;
+  const X=i=>L+(R-L)*i/Math.max(n-1,1), Y=lg=>T+(B-T)*(3-lg)/(3+36);
+  g.font='9px ui-monospace,monospace'; g.fillStyle='#958E80';
+  for(let v=0;v>=-35;v-=5){ const y=Y(v); g.strokeStyle='#1d1b17'; g.beginPath(); g.moveTo(L,y); g.lineTo(R,y); g.stroke(); g.fillText('10'+(v?String(v).replace('-','⁻').replace(/\d/g,c=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[c]):'⁰'),2,y+3); }
+  const yp=Y(Math.log10(LP)); g.strokeStyle='rgba(212,175,55,.6)'; g.setLineDash([4,4]); g.beginPath(); g.moveTo(L,yp); g.lineTo(R,yp); g.stroke(); g.setLineDash([]); g.fillStyle='#D4AF37'; g.fillText('planck · 1.6×10⁻³⁵',R-120,yp-4);
+  const y15=Y(-15); g.fillStyle='#958E80'; g.fillText('below here: exact formula',L+4,y15+12);
+  steps.forEach((s,i)=>{ const x=X(i); if(s.lg===null){ g.fillStyle='#D4AF37'; g.fillText('1/0',x-8,T+10); return; }
+    g.fillStyle=s.sg>0?'#FF8A6B':s.sg<0?'#6FC3FF':'#ECE8DF'; g.globalAlpha=s.exact?1:0.6; g.beginPath(); g.arc(x,Y(s.lg),n>60?2.2:3.2,0,7); g.fill(); g.globalAlpha=1; });
+  g.fillStyle='#958E80'; g.fillText('distance from 1.618 · red = over · blue = under · step →',L,H-8);
+}
+function render(){
+  const steps=walk(x0), n=steps.length-1;
+  draw(steps);
+  const show=steps.slice(0,14).map((s,i)=>s.lg===null?'<b style="color:#D4AF37">1/0</b>':`<b style="color:${s.sg>0?'#FF8A6B':s.sg<0?'#6FC3FF':'#ECE8DF'}">${Math.abs(s.x)>1e6?s.x.toExponential(1):(+s.x.toPrecision(6))}</b>`).join(' → ');
+  $('seq').innerHTML=show+' → … → <b style="color:#D4AF37">1.6180339887…</b>';
+  $('n').innerHTML=(x0===1?`<span class="lit">${K1}</span> · exact`:`${n}`);
+  $('wk').textContent='start '+(x0===-0.6180339887498949?'−0.618':x0)+' · '+n+' steps to planck';
+  const m={'1':'from 1: the Fibonacci road. step five is 8/5 = 1.6, your 1.6.5.','-1':'from −1: −1 → 0 → 1/0 → 1, then home. your 1/0 is a waypoint, not a wall.','100':'from 100: one step lands at 1.01, then the same swing home.','0.001':'from 0.001: one step leaps to 1001, the next drops to 1.001, then home.'}[String(x0)];
+  $('msg').innerHTML=m||'<span class="amb">from −0.618: the other fixed point. exact, it would stay forever. the computer\'s last digit is the nudge: it drifts off, then comes home like the rest.</span>';
+  window.__HOMEO__={start:x0,steps:n,exactFrom1:K1,first:steps.slice(0,6).map(s=>s.lg===null?'inf':s.x)};
+}
+document.querySelectorAll('[data-x]').forEach(b=>b.onclick=()=>{ x0=+b.dataset.x; document.querySelectorAll('[data-x]').forEach(q=>q.classList.toggle('on',q===b)); render(); });
+// generations timeline
+function gens(){
+  const [g,W,H]=fit($('gv'),0.24,150,190), L=12, R=W-12, X=t=>L+(R-L)*t/13.8, y=H*0.45;
+  const band=(a,b,col,lab,row)=>{ g.fillStyle=col; g.fillRect(X(a),y-12+row*16,X(b)-X(a),10); g.fillStyle='#ECE8DF'; g.font='9.5px ui-monospace,monospace'; g.fillText(lab,X(a)+2,y-15+row*16); };
+  band(0.1,0.6,'rgba(111,195,255,.55)','gen 1 · pop III',0);
+  band(0.5,4.5,'rgba(201,160,255,.45)','gen 2 · pop II · halo, globular clusters',1);
+  band(4,13.8,'rgba(212,175,55,.45)','gen 3 · pop I · the disc',2);
+  const mk=(t,lab,col)=>{ const x=X(t); g.strokeStyle=col; g.beginPath(); g.moveTo(x,y+36); g.lineTo(x,H-26); g.stroke(); g.fillStyle=col; g.fillText(lab,Math.min(x-4,W-150),H-14); };
+  mk(0.6,'13.2 Gyr ago','#FF8A6B'); mk(9.2,'Sun born','#D4AF37'); { const x=X(13.8); g.strokeStyle='#ECE8DF'; g.beginPath(); g.moveTo(x,y+36); g.lineTo(x,H-26); g.stroke(); }
+  const xs=X(9.2), xe=X(Math.min(13.8,9.2+10*1)), xn=X(13.8); g.strokeStyle='rgba(212,175,55,.8)'; g.lineWidth=3; g.beginPath(); g.moveTo(xs,y+44); g.lineTo(xn,y+44); g.stroke(); g.lineWidth=1;
+  g.fillStyle='#958E80'; g.fillText('0',L,H-2); g.textAlign='right'; g.fillStyle='#ECE8DF'; g.fillText('today · 13.8 Gyr',R,H-2); g.textAlign='left';
+  g.fillStyle='#958E80'; g.fillText('bands are rough (AMBER): generations overlap',L,12);
+}
+const ST=[
+ ['1 + 1/2 = 1.6','1 + 1/2 is 1.5','DEAD as written','but it is step two of the walk, and the walk settles at 1.618: LIT'],
+ ['homeo = 1.6','x = 1 + 1/x solves to 1.6180339887…','LIT','a set point every positive start falls into'],
+ ['1.6.5','8 ÷ 5 = 1.6 is the walk\'s fifth stop','AMBER','my reading of your digits'],
+ ['1/0','from −1: −1 → 0 → 1/0 → 1 → home','LIT','infinity is one step on the road'],
+ ['16 − 6 over total gens = 5','(16 − 6) ÷ 2 = 5','LIT','the totals as generation counts are yours: AMBER'],
+ ['walk it to planck 0.0.0','84 steps from 1 to within 1.6×10⁻³⁵','LIT','exact, via the Fibonacci formula'],
+ ['13.2 billion','13.8 − 0.6 = 13.2','LIT','0.6 Gyr after the start: first galaxies forming (AMBER)'],
+ ['gen 3, halfway round','the Sun: third generation, 4.6 of ~10 Gyr','LIT','generation count is the standard picture, with overlaps'],
+ ['3rd black hole','no count of black holes marks the generations','AMBER','yours'],
+];
+$('st').innerHTML='<tr><th>you wrote</th><th>the numbers</th><th>stamp</th><th>note</th></tr>'+ST.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td class="s ${r[2].startsWith('LIT')?'lit':r[2].startsWith('DEAD')?'bad':'amb'}">${r[2]}</td><td>${r[3]}</td></tr>`).join('');
+addEventListener('resize',()=>{ render(); gens(); }); render(); gens();
+})();
+</script>
+</body>
+</html>

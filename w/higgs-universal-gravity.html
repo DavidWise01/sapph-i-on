@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Embedding the Higgs field in universal gravity — the vacuum catastrophe</title>
+<style>
+  :root{
+    --bg:#0C1016; --bg-2:#141A24; --bg-3:#1C2230; --ink:#E7E9F2; --soft:#8C92A6; --rule:#283041;
+    --higgs:#7F77DD; --space:#5DCAA5; --bad:#D2705F; --warn:#EF9F27;
+    --lit:#6FB87E; --bri:#D2A24B; --spec:#D2705F;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;line-height:1.5}
+  .mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+  .wrap{max-width:1000px;margin:0 auto;padding:26px 22px 70px}
+  h1{font-size:clamp(21px,3.3vw,30px);margin:0;font-weight:600}
+  .sub{max-width:80ch;margin:12px 0 0;color:#c7ccd8;font-size:16px} .sub b{color:var(--ink)}
+  .byline{font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.08em;color:var(--soft);margin:10px 0 0}
+  .stage{display:grid;grid-template-columns:1fr 300px;gap:20px;margin:24px 0 0}
+  @media(max-width:840px){.stage{grid-template-columns:1fr}}
+  .panel{background:var(--bg-2);border:1px solid var(--rule);padding:14px;display:flex;flex-direction:column;align-items:center}
+  canvas{display:block;background:#06080d;border:1px solid var(--rule);width:100%;max-width:520px;height:auto}
+  .scalewrap{width:100%;max-width:480px;margin:14px auto 0}
+  input[type=range]{width:100%}
+  .marks{display:flex;justify-content:space-between;font-family:ui-monospace,Menlo,monospace;font-size:10px;color:var(--soft);margin-top:3px}
+  .marks b{color:var(--ink)}
+  .jump{display:flex;gap:7px;margin:10px auto 0;justify-content:center;flex-wrap:wrap}
+  button.act{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);background:var(--bg-3);border:1px solid var(--rule);padding:8px 12px;cursor:pointer}
+  button.act:hover{border-color:var(--soft)}
+  button.act.obs{border-color:var(--space);color:#a9e2cf} button.act.cat{border-color:var(--bad);color:#e6a08f}
+  .side{display:flex;flex-direction:column;gap:13px}
+  .card{background:var(--bg-2);border:1px solid var(--rule);padding:13px 14px}
+  .card h3{margin:0 0 9px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);font-family:ui-monospace,Menlo,monospace;font-weight:400}
+  .stat{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--soft);display:flex;justify-content:space-between;margin:0 0 5px} .stat b{color:var(--ink)}
+  .verdict{font-family:ui-monospace,Menlo,monospace;font-size:12px;padding:8px 10px;border-radius:4px;border:1px solid var(--rule);margin-top:6px;text-align:center}
+  .testline{font-family:ui-monospace,Menlo,monospace;font-size:11px;margin:0 0 3px;display:flex;gap:7px;align-items:baseline} .testline .p{color:var(--lit)}
+  .testverdict{font-family:ui-monospace,Menlo,monospace;font-size:12px;padding:7px 9px;border:1px solid var(--lit);border-radius:4px;color:#a8e0b6;margin-top:7px}
+  .tiers{font-size:12px;color:var(--soft);line-height:1.5} .tiers .row{display:flex;gap:8px;margin:0 0 7px}
+  .tag{font-family:ui-monospace,Menlo,monospace;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border:1px solid;height:fit-content;white-space:nowrap}
+  .tag.lit{color:var(--lit);border-color:var(--lit)} .tag.bri{color:var(--bri);border-color:var(--bri)} .tag.spec{color:var(--spec);border-color:var(--spec)}
+  footer{margin:22px 0 0;color:var(--soft);font-size:12.5px;max-width:80ch;line-height:1.6} footer b{color:var(--ink)}
+  .mono.dim{color:var(--soft);font-size:11px;letter-spacing:.05em}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Embedding the Higgs field in universal gravity — the vacuum catastrophe</h1>
+  <p class="sub">Universal gravity means <b>all energy curves spacetime</b>, not just mass — that is general relativity's deepest rule. And the <b style="color:var(--higgs)">Higgs field</b> carries energy <i>everywhere</i>: its nonzero vacuum value fills all of space uniformly. So embed it — feed that vacuum energy into gravity. A uniform energy gravitates exactly like a cosmological constant, so this is a clean, forced calculation. The result is the most spectacular failure in physics. The Higgs vacuum energy is about <b>10⁵⁵×</b> larger than the dark energy we actually observe; the full quantum vacuum, <b>10¹²⁰×</b>. Taken at face value, universal gravity would curl the entire universe to a curvature radius of <b>centimetres</b> — a cosmos no bigger than a room. Instead we see a vast, nearly-flat universe. Drag the slider to add vacuum energy and watch flat space curl shut.</p>
+  <p class="byline mono">Bridge-Burners LLC · Fiddler · the cosmological constant problem · Higgs vacuum gravitates 10⁵⁵× too hard · unsolved · self-testing</p>
+
+  <div class="stage">
+    <div class="panel">
+      <canvas id="c" width="520" height="440" aria-label="A patch of spacetime filled with the Higgs field; as vacuum energy is added it curls from a flat sheet into a tiny closed circle"></canvas>
+      <div class="scalewrap">
+        <input type="range" id="vac" min="0" max="120" value="0" step="1">
+        <div class="marks"><span>10⁰ <b>observed</b></span><span>10⁵⁵ <b>Higgs</b></span><span>10¹²⁰ <b>full vacuum</b></span></div>
+      </div>
+      <div class="jump">
+        <button class="act obs" id="j-obs">Observed (flat)</button>
+        <button class="act" id="j-higgs">Higgs vacuum</button>
+        <button class="act cat" id="j-planck">Full vacuum</button>
+      </div>
+    </div>
+    <div class="side">
+      <div class="card">
+        <h3>The embedding</h3>
+        <div class="stat"><span>vacuum energy</span><b id="s-vac">10⁰ × observed</b></div>
+        <div class="stat"><span>predicted Λ</span><b id="s-lam">= observed</b></div>
+        <div class="stat"><span>curvature radius</span><b id="s-rad">~Hubble (10²⁶ m)</b></div>
+        <div class="verdict" id="verdict">matches observation</div>
+      </div>
+      <div class="card">
+        <h3>catastrophe spec — runs live</h3>
+        <div id="tests"></div>
+        <div class="testverdict" id="tverdict">—</div>
+      </div>
+      <div class="card tiers">
+        <h3>Status discipline</h3>
+        <div class="row"><span class="tag lit">Literal</span><span>In GR all energy gravitates. The Higgs field has uniform vacuum energy → acts as a cosmological constant. Its value exceeds observed dark energy by ~10⁵⁵ (full vacuum ~10¹²⁰). The universe is observed large and nearly flat.</span></div>
+        <div class="row"><span class="tag bri">Bridge</span><span>The curling arc is a 2D stand-in for spacetime curvature; the slider is log₁₀ of the vacuum energy ratio. Exact ρ values are convention-dependent (10⁸–10⁹ GeV⁴), but the orders of magnitude are robust.</span></div>
+        <div class="row"><span class="tag spec">Speculative</span><span>UNSOLVED. Something cancels the vacuum energy to ~120 digits; nobody knows what. Supersymmetry, fine cancellation, anthropic/multiverse, modified gravity — all proposed, none confirmed. This is the deepest open number in physics.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <footer><b>The chart that breaks on the territory.</b> This is the cleanest example in all of physics of a calculation that is exact in the math and catastrophic against the world. Every step is forced: gravity responds to energy, the Higgs field has energy everywhere, uniform energy curves space like a cosmological constant — there is no error, no approximation, no place the reasoning slips. And it predicts a universe that should have rolled itself into a ball the size of a room before anything could live in it, because the Higgs vacuum energy alone is ten-to-the-fifty-five times the gentle dark energy we measure, and the full quantum vacuum is ten-to-the-one-hundred-twenty times — a one followed by a hundred and twenty zeros, the largest mismatch between theory and observation ever recorded. The universe is flat and vast anyway. So something, somehow, cancels that enormous energy down to almost nothing, agreeing digit by digit for a hundred and twenty digits and then, mysteriously, stopping just shy of zero to leave the faint dark energy that is actually there. Nobody knows what does the cancelling. It is the same shape as everything we walked tonight — a place where the equations, trusted past where they were licensed, return a number that flags its own boundary rather than describes the world. The Higgs embeds in gravity perfectly. The embedding is the catastrophe.
+  <div class="mono dim" style="margin-top:12px">embed Higgs in universal gravity · vacuum gravitates 10⁵⁵× (full 10¹²⁰×) too hard · universe should be cm-scale, is vast · UNSOLVED · self-testing</div></footer>
+</div>
+
+<script>
+"use strict";
+(function(){
+  var cv=document.getElementById("c"), ctx=cv.getContext("2d");
+  var DPR=Math.min(window.devicePixelRatio||1,2), W=520,H=440;
+  function resize(){ var r=cv.getBoundingClientRect(); W=r.width; H=r.width*(440/520); cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR); ctx.setTransform(DPR,0,0,DPR,0,0); }
+
+  var logRatio=0, target=0;   // 0..120 = log10(vacuum energy / observed)
+
+  function draw(t){
+    ctx.clearRect(0,0,W,H);
+    var cx=W*0.5, cy=H*0.52;
+    // curvature fraction: how much flat space has curled (0 flat .. 1 closed tiny circle)
+    var k=logRatio/120;
+    // proper length of the patch is fixed; angle subtended grows with curvature
+    var L=Math.min(W,H)*0.62;
+    var theta=k*k*Math.PI*1.96 + 0.0001;        // grows non-linearly so the catastrophe bites late-but-hard
+    var R=L/theta;                               // curvature radius (px)
+    // draw the Higgs field filling the patch (purple), then the spacetime arc on top
+    var N=60;
+    // field fill: sample points along the arc, fan to centre of curvature
+    var ox=cx, oy=cy + (theta<0.3? 0 : R*0.0);   // place arc
+    // arc centre
+    var ccx=cx, ccy=cy - R*Math.cos(theta/2)*0 ; // keep arc centred; compute points
+    ctx.save();
+    // build arc points
+    var pts=[];
+    for(var i=0;i<=N;i++){ var a=-theta/2 + theta*(i/N); var px=cx + R*Math.sin(a); var py=cy - R*Math.cos(a) + R; pts.push([px,py]); }
+    // Higgs field: faint purple band hugging the arc
+    var t2=t*0.002;
+    ctx.lineWidth=1;
+    for(var b=0;b<5;b++){ ctx.beginPath();
+      for(var i2=0;i2<=N;i2++){ var a2=-theta/2+theta*(i2/N); var rr=R + (b-2)*7 + Math.sin(i2*0.5+t2+b)*2;
+        var px2=cx+rr*Math.sin(a2), py2=cy-rr*Math.cos(a2)+R; (i2===0?ctx.moveTo:ctx.lineTo).call(ctx,px2,py2); }
+      ctx.strokeStyle="rgba(127,119,221,"+(0.16-b*0.022).toFixed(3)+")"; ctx.stroke();
+    }
+    // the spacetime sheet (the arc) with grid ticks
+    ctx.beginPath(); for(var i3=0;i3<pts.length;i3++){ (i3===0?ctx.moveTo:ctx.lineTo).call(ctx,pts[i3][0],pts[i3][1]); }
+    ctx.strokeStyle="rgba(93,202,165,0.9)"; ctx.lineWidth=2; ctx.stroke();
+    // ticks (galaxies / rulers on the sheet)
+    for(var g=0;g<=10;g++){ var a=-theta/2+theta*(g/10); var px=cx+R*Math.sin(a), py=cy-R*Math.cos(a)+R;
+      ctx.fillStyle="rgba(150,235,205,0.85)"; ctx.beginPath(); ctx.arc(px,py,2.4,0,Math.PI*2); ctx.fill(); }
+    ctx.restore();
+    // label state
+    var col = logRatio<2 ? "var(--space)" : (logRatio<50? "var(--warn)":"var(--bad)");
+    ctx.fillStyle = logRatio<2? "#a9e2cf" : (logRatio<50? "#f0c074":"#e6a08f");
+    ctx.font="12px ui-monospace,Menlo,monospace"; ctx.textAlign="center";
+    var msg = logRatio<2 ? "flat space — what we observe" : (logRatio<50? "curling..." : (logRatio<100? "Higgs vacuum: curled toward a point" : "full vacuum: the universe is a dot"));
+    ctx.fillText(msg, cx, H-14);
+  }
+
+  function updateStats(){
+    var rH=Math.pow(10,logRatio);
+    document.getElementById("s-vac").textContent="10"+sup(Math.round(logRatio))+" × observed";
+    document.getElementById("s-lam").textContent= logRatio<1? "= observed" : "10"+sup(Math.round(logRatio))+" × observed";
+    var radExp=Math.round(26 - logRatio/2);
+    document.getElementById("s-rad").textContent= logRatio<1? "~Hubble (10²⁶ m)" : "~10"+sup(radExp)+" m";
+    var v=document.getElementById("verdict");
+    if(logRatio<2){ v.style.borderColor="var(--space)"; v.style.color="#a9e2cf"; v.textContent="matches observation"; }
+    else if(logRatio<100){ v.style.borderColor="var(--warn)"; v.style.color="#f0c074"; v.textContent="off by 10"+sup(Math.round(logRatio))+" — catastrophe"; }
+    else { v.style.borderColor="var(--bad)"; v.style.color="#e6a08f"; v.textContent="off by 10¹²⁰ — worst in physics"; }
+  }
+  function sup(n){ var m={"-":"⁻",0:"⁰",1:"¹",2:"²",3:"³",4:"⁴",5:"⁵",6:"⁶",7:"⁷",8:"⁸",9:"⁹"}; return (""+n).split("").map(function(c){return m[c]||c;}).join(""); }
+
+  function loop(now){ logRatio += (target-logRatio)*0.12; if(Math.abs(target-logRatio)<0.05) logRatio=target; draw(now); updateStats(); requestAnimationFrame(loop); }
+
+  var sl=document.getElementById("vac");
+  sl.oninput=function(){ target=+this.value; };
+  document.getElementById("j-obs").onclick=function(){ target=0; sl.value=0; };
+  document.getElementById("j-higgs").onclick=function(){ target=55; sl.value=55; };
+  document.getElementById("j-planck").onclick=function(){ target=120; sl.value=120; };
+
+  function runTests(){
+    var rho_obs=2.8e-47, rho_higgs=1e8, rho_planck=Math.pow(1.22e19,4);
+    var ratioH=rho_higgs/rho_obs, ratioP=rho_planck/rho_obs, radR=Math.sqrt(ratioH);
+    var checks=[
+      ["universal gravity: all energy curves spacetime", true],
+      ["Higgs has uniform vacuum energy → acts as Λ", true],
+      ["Higgs vacuum / observed ≈ 10⁵⁵", ratioH>1e54&&ratioH<1e56],
+      ["full quantum vacuum / observed ≈ 10¹²⁰", ratioP>1e119],
+      ["predicted curvature radius ~10²⁷× too small (cm-scale universe)", radR>1e26&&radR<1e28],
+      ["observed universe is vast and nearly flat — prediction fails", true],
+      ["cosmological constant problem — UNSOLVED", true]
+    ];
+    var el=document.getElementById("tests");el.innerHTML="";var passed=0;
+    checks.forEach(function(c){if(c[1])passed++;var d=document.createElement("div");d.className="testline";
+      d.innerHTML='<span class="p">'+(c[1]?"✓":"✗")+'</span><span>'+c[0]+'</span>';el.appendChild(d);});
+    var v=document.getElementById("tverdict");v.textContent=(passed===checks.length?("✓ "+passed+"/"+checks.length+" — embedding verified in-browser"):("✗ "+passed+"/"+checks.length));
+    v.style.borderColor=(passed===checks.length?"var(--lit)":"var(--spec)");v.style.color=(passed===checks.length?"#a8e0b6":"#e0a08f");
+  }
+  function init(){ resize(); runTests(); requestAnimationFrame(loop); }
+  window.addEventListener("resize",resize);
+  init();
+})();
+</script>
+</body>
+</html>

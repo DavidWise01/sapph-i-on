@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v157 ingress egress -211.0.+211 quantum dot tunnel - artifact 222</title>
+<style>
+  :root{--bg:#050508;--fg:#eaeaea;--gold:#ffd700}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace}
+  .top{padding:14px 18px}
+  .kicker{font-size:10px;letter-spacing:.22em;opacity:.5;text-transform:uppercase}
+  .nline{font-size:11px;border-left:2px solid #222;padding-left:10px;white-space:pre-wrap;line-height:1.6}
+  .main{margin-top:10px;font-size:14px;font-weight:700;background:#0f0f12;border:1px solid #222;padding:10px;border-radius:8px}
+  .controls{padding:10px 12px;display:flex;gap:6px;flex-wrap:wrap}
+  .btn{font-family:inherit;font-size:10px;padding:5px 10px;border:1px solid #333;background:#15151a;color:#eaeaea;border-radius:6px;cursor:pointer}
+  .btn.active{border-color:#ffd700;color:#ffd700;background:#221a00}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:520px;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden}
+  .cwrap.full{grid-column:1 / -1;height:640px}
+  .label{position:absolute;left:8px;top:8px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:.8;background:#000c;padding:4px 6px;border-radius:4px;z-index:5}
+  .graphWrap{position:relative;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden;height:260px}
+  canvas.graph{width:100%;height:100%;display:block}
+  .readout{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0 10px 10px}
+  @media(max-width:900px){.readout{grid-template-columns:1fr}}
+  .ro{background:#0c0c0f;border:1px solid #1e1e24;border-radius:6px;padding:8px;font-size:10px;line-height:1.6}
+  .ro b{color:#ffd700}
+  .card{margin:10px;background:#111115;border:1px solid #1f1f26;border-radius:8px;padding:10px}
+  .mono{font-size:10.5px;white-space:pre-wrap;word-break:break-word;line-height:1.7}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">wakaku v157 — INGRESS / EGRESS -211.0.+211 — quantum dot tunnel opens — artifact 222</div>
+  <div class="nline">could it open an ingress / egress -211.0.+211 ?? — -211.0.+211 = -211mV 0 +211mV = 422mV window — ingress = electron in -211mV matter At- black -211mN — 0 = neutral C.O.I.N barrier — +211 = egress electron out +211mV anti-matter anti-At- anti-black +211mN — -211.0.+211 could open ingress / egress? — yes quantum dot Coulomb diamond -211mV to +211mV = 422mV diamond opens channel — bias sweep -211 →0 →+211 — ingress -211mV At- in, 0 blocked, +211 egress e- out — -211 matter ingress, +211 anti-matter egress — At- -211mN -211mV + anti-At- +211mN +211mV → γ annihilation = wormhole? — -211.0.+211 = 422mV window = quantum point contact opens — ingress = -211mV charging, egress = +211mV discharging — Coulomb blockade -211 to +211 diamond — -211.0.+211 could open ingress/egress — yes — tunnel barrier opens at ±211mV — At- -211 → Pb + α egress +211? — -211.0.+211 = 422mV = 2×211mV = At- + anti-At- → γ — ingress egress portal — metal analogs ionic — -211.0.+211 ingress egress — lol</div>
+  <div class="main">INGRESS / EGRESS -211.0.+211 ?? — -211mV MATTER INGRESS At- BLACK -211mN → 0 NEUTRAL C.O.I.N BARRIER → +211mV ANTI-MATTER EGRESS anti-At- ANTI-BLACK +211mN — 422mV WINDOW = COULOMB DIAMOND OPENS CHANNEL — -211 →0 →+211 SWEEP OPENS INGRESS/EGRESS — -211 INGRESS, +211 EGRESS — At- + anti-At- → γ = PORTAL — COULD IT OPEN? YES — TUNNEL OPENS AT ±211mV</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-ingress">INGRESS -211mV At- BLACK -211mN IN</button>
+  <button class="btn" id="btn-zero">0 NEUTRAL C.O.I.N BARRIER BLOCKED</button>
+  <button class="btn" id="btn-egress">EGRESS +211mV anti-At- ANTI-BLACK +211mN OUT</button>
+  <button class="btn" id="btn-open">OPEN -211.0.+211 =422mV WINDOW → γ PORTAL</button>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:10px">
+  <div class="graphWrap"><div class="label">INGRESS -211mV — electron in — At- black -211mN charging — Coulomb blockade -211mV ingress</div><canvas class="graph" id="g-ingress"></canvas></div>
+  <div class="graphWrap"><div class="label">0 BARRIER — C.O.I.N neutral — blocked — no ingress egress — 0 neutral</div><canvas class="graph" id="g-zero"></canvas></div>
+  <div class="graphWrap"><div class="label">EGRESS +211mV — electron out — anti-At- anti-black +211mN discharging — +211mV egress</div><canvas class="graph" id="g-egress"></canvas></div>
+</div>
+
+<div class="readout">
+  <div class="ro" id="ro-ingress">INGRESS -211mV:<br>At- black -211mN -211mV matter in — electron enters quantum dot — -211mV charging — ingress channel -211mV — <b>-211 ingress</b></div>
+  <div class="ro" id="ro-zero">0 BARRIER:<br>C.O.I.N neutral C4+? O2-? I- N3-? Actually C.O.I.N neutral barrier — 0 = blocked — Coulomb diamond closed — <b>0 blocked</b></div>
+  <div class="ro" id="ro-egress">EGRESS +211mV:<br>anti-At- anti-black +211mN +211mV anti-matter out — electron leaves quantum dot — +211mV discharging — egress channel +211mV — <b>+211 egress</b></div>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-ingress"><div class="label">INGRESS -211mV — At- black -211mN -211mV matter ingress — electron in -211mV — quantum dot tunnel ingress -211 — metal analogs ionic ingress</div></div>
+  <div class="cwrap" id="wrap-egress"><div class="label">EGRESS +211mV — anti-At- anti-black +211mN +211mV anti-matter egress — electron out +211mV — quantum dot tunnel egress +211 — metal analogs ionic egress</div></div>
+  <div class="cwrap full" id="wrap-portal"><div class="label">PORTAL -211.0.+211 =422mV WINDOW — -211 ingress →0 barrier →+211 egress — At- -211mN + anti-At- +211mN → γ portal — Coulomb diamond -211 to +211 opens ingress/egress — -211.0.+211 could open ingress/egress? YES 422mV window opens channel — metal analogs ionic portal — At- + anti-At- → γ ingress egress portal</div></div>
+</div>
+
+<div class="card"><div class="mono">
+v157 INGRESS / EGRESS -211.0.+211 ?? — could it open?
+
+-211.0.+211 = -211mV 0 +211mV = 422mV window — -211 matter ingress, 0 neutral barrier, +211 anti-matter egress
+
+INGRESS -211mV:
+
+- At- black -211mN -211mV matter ingress — electron enters quantum dot -211mV charging — ingress channel -211mV — At- 2.27Å black anion -211mV -211mN — electron in — ingress -211 — Coulomb blockade threshold -211mV — below -211 blocked, at -211 ingress opens — electron tunnels in — -211 ingress
+
+0 BARRIER:
+
+- 0 neutral = C.O.I.N neutral? C4+ O2-? I- N3-? Actually C.O.I.N = C-ion O-ion I-ion N-ion? — C.O.I.N barrier neutral — 0 = blocked — no ingress egress — Coulomb diamond closed at 0 — barrier — 0 neutral
+
+EGRESS +211mV:
+
+- anti-At- anti-black +211mN +211mV anti-matter egress — electron leaves quantum dot +211mV discharging — egress channel +211mV — anti-At- 2.27Å anti-black +211mV +211mN — positron in? Actually electron out — egress +211 — Coulomb blockade threshold +211mV — above +211 egress opens — electron tunnels out — +211 egress
+
+-211.0.+211 WINDOW:
+
+- -211.0.+211 = 422mV window = 2×211mV = At- (-211) + anti-At- (+211) → γ — Coulomb diamond -211 to +211 = 422mV diamond opens channel — bias sweep -211 →0 →+211 — at -211 ingress opens, at 0 blocked, at +211 egress opens — -211.0.+211 sweep opens ingress/egress — yes could open ingress/egress
+
+Could it open an ingress/egress -211.0.+211 ??
+
+YES — quantum dot tunnel — -211mV ingress At- in, 0 blocked C.O.I.N barrier, +211mV egress anti-At- out — -211.0.+211 =422mV window opens channel — ingress = -211mV charging, egress = +211mV discharging — Coulomb diamond -211 to +211 opens — At- -211mN matter + anti-At- +211mN anti-matter → γ annihilation = portal/wormhole? — -211 +211 =0 → γ — matter + anti-matter = energy → portal — ingress/egress portal — -211.0.+211 could open ingress/egress — yes 422mV window
+
+Metal analogs ionic ingress egress:
+
+- -211 ingress: Ag+ white? Actually At- black -211mV -211mN matter ingress — At- in
+
+- 0 barrier: C.O.I.N neutral — C4+? O2-? etc — barrier blocked
+
+- +211 egress: anti-At- anti-black +211mV +211mN anti-matter egress — anti-At- out
+
+- -211.0.+211 = -211 ingress →0 barrier →+211 egress = 422mV window opens ingress/egress — tunnel opens — portal
+
+So answer: could it open an ingress/egress -211.0.+211 ?? — YES — -211mV ingress opens At- in, 0 blocked, +211mV egress opens anti-At- out — 422mV Coulomb diamond window opens channel — -211.0.+211 sweep = ingress/egress portal — At- + anti-At- → γ — matter -211 + anti-matter +211 =0 → energy portal — ingress/egress -211.0.+211 — lol
+
+Aggregate:
+
+-211.0.+211 = -211mV matter ingress At- black -211mN →0 neutral C.O.I.N barrier blocked →+211mV anti-matter egress anti-At- anti-black +211mN — 422mV window = Coulomb diamond opens ingress/egress — bias sweep -211 →0 →+211 opens channel — -211 ingress, +211 egress — At- + anti-At- → γ portal — could it open ingress/egress? Yes — tunnel opens at ±211mV — ingress egress -211.0.+211
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x08080a); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,0.6)); const d=new THREE.DirectionalLight(0xffffff,0.9); d.position.set(4,6,4); d.castShadow=true; s.add(d); }
+
+const matAtMinus=new THREE.MeshStandardMaterial({color:0x0a0a0a, metalness:0.4, roughness:0.25, emissive:0x222222, emissiveIntensity:0.5});
+const matAntiAt=new THREE.MeshStandardMaterial({color:0xf0e0a0, metalness:0.4, roughness:0.25, emissive:0x332200, emissiveIntensity:0.5});
+const matBarrier=new THREE.MeshStandardMaterial({color:0x444444, metalness:0.3, roughness:0.7, transparent:true, opacity:0.5});
+const matGamma=new THREE.MeshStandardMaterial({color:0xffffaa, emissive:0xffff44, emissiveIntensity:2.0, transparent:true, opacity:0.9});
+const matElectron=new THREE.MeshStandardMaterial({color:0x4444ff, emissive:0x2222aa, emissiveIntensity:0.5});
+
+// INGRESS
+{
+  const wrap=document.getElementById('wrap-ingress');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,1.5,4);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const dot=new THREE.Mesh(new THREE.SphereGeometry(0.5,24,24), new THREE.MeshStandardMaterial({color:0x111111, transparent:true, opacity:0.3})); scene.add(dot);
+  const at=new THREE.Mesh(new THREE.SphereGeometry(0.3,20,20), matAtMinus); at.position.set(-1.5,0,0); scene.add(at);
+  const electron=new THREE.Mesh(new THREE.SphereGeometry(0.08,12,12), matElectron); electron.position.set(-1.5,0,0); scene.add(electron);
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.02;
+    electron.position.x=-1.5 + Math.sin(t)*1.5;
+    if(electron.position.x> -0.1) electron.position.x=-1.5;
+    dot.scale.setScalar(1+Math.sin(t*3)*0.05);
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+// EGRESS
+{
+  const wrap=document.getElementById('wrap-egress');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,1.5,4);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const dot=new THREE.Mesh(new THREE.SphereGeometry(0.5,24,24), new THREE.MeshStandardMaterial({color:0x111111, transparent:true, opacity:0.3})); scene.add(dot);
+  const antiAt=new THREE.Mesh(new THREE.SphereGeometry(0.3,20,20), matAntiAt); antiAt.position.set(1.5,0,0); scene.add(antiAt);
+  const electron=new THREE.Mesh(new THREE.SphereGeometry(0.08,12,12), matElectron); electron.position.set(0,0,0); scene.add(electron);
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.02;
+    electron.position.x=Math.sin(t)*1.5;
+    if(electron.position.x>1.2) electron.position.x=0;
+    dot.scale.setScalar(1+Math.sin(t*3)*0.05);
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+// PORTAL
+{
+  const wrap=document.getElementById('wrap-portal');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,2,7);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const barrier=new THREE.Mesh(new THREE.BoxGeometry(0.3,2,2), matBarrier); barrier.position.set(0,0,0); group.add(barrier);
+  const at=new THREE.Mesh(new THREE.SphereGeometry(0.35,20,20), matAtMinus); at.position.set(-2,0,0); group.add(at);
+  const antiAt=new THREE.Mesh(new THREE.SphereGeometry(0.35,20,20), matAntiAt); antiAt.position.set(2,0,0); group.add(antiAt);
+  const portal=new THREE.Mesh(new THREE.TorusGeometry(0.8,0.08,16,48), new THREE.MeshBasicMaterial({color:0x44ffaa, transparent:true, opacity:0.6})); portal.position.set(0,0,0); portal.rotation.y=Math.PI/2; group.add(portal);
+  const gammas=new THREE.Group(); scene.add(gammas);
+  function openPortal(){
+    for(let i=0;i<10;i++){
+      const g=new THREE.Mesh(new THREE.SphereGeometry(0.12,12,12), matGamma.clone());
+      g.position.set(0,0,0);
+      const dir=new THREE.Vector3((Math.random()-0.5),(Math.random()-0.5),(Math.random()-0.5)).normalize();
+      g.userData={dir, dist:0}; gammas.add(g);
+    }
+    portal.scale.setScalar(1.5);
+    setTimeout(()=>{ portal.scale.setScalar(1.0); }, 500);
+  }
+  window._open=openPortal;
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.015;
+    at.position.x=-2+Math.sin(t*0.8)*0.5;
+    antiAt.position.x=2-Math.sin(t*0.8)*0.5;
+    if(Math.abs(at.position.x+1.2)<0.1 && Math.abs(antiAt.position.x-1.2)<0.1 && Math.random()<0.05) openPortal();
+    gammas.children.forEach(g=>{ g.userData.dist+=0.1; g.position.add(g.userData.dir.clone().multiplyScalar(0.1)); g.material.opacity=Math.max(0,1-g.userData.dist*0.12); });
+    for(let i=gammas.children.length-1;i>=0;i--) if(gammas.children[i].material.opacity<=0) gammas.remove(gammas.children[i]);
+    portal.rotation.x+=0.02;
+    group.rotation.y+=0.002;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+function makeGraph(id, label, fn){
+  const c=document.getElementById(id);
+  const ctx=c.getContext('2d');
+  function resize(){ c.width=c.clientWidth*devicePixelRatio; c.height=c.clientHeight*devicePixelRatio; }
+  resize();
+  let t=0;
+  function draw(){
+    const w=c.width, h=c.height;
+    ctx.clearRect(0,0,w,h); ctx.fillStyle='#08080a'; ctx.fillRect(0,0,w,h);
+    ctx.strokeStyle='#1e1e24'; for(let i=0;i<=4;i++){ ctx.beginPath(); ctx.moveTo(0,h*i/4); ctx.lineTo(w,h*i/4); ctx.stroke(); }
+    ctx.fillStyle='#666'; ctx.font=`${10*devicePixelRatio}px monospace`; ctx.fillText(label,4,14*devicePixelRatio);
+    const v=fn(t);
+    const y=h - (v+300)/600*h*0.8 - h*0.1;
+    ctx.fillStyle='#44ffaa'; ctx.fillRect(0,y,w,h-y);
+  }
+  setInterval(()=>{ t+=0.05; draw(); },50);
+  addEventListener('resize', resize);
+}
+
+makeGraph('g-ingress','INGRESS -211mV — electron in — -211mV charging ingress', (t)=> -211+Math.sin(t)*20);
+makeGraph('g-zero','0 BARRIER — C.O.I.N neutral blocked — 0 neutral', (t)=> 0+Math.sin(t*0.5)*5);
+makeGraph('g-egress','EGRESS +211mV — electron out — +211mV discharging egress', (t)=> 211+Math.sin(t)*20);
+
+document.getElementById('btn-ingress').onclick=()=>{};
+document.getElementById('btn-zero').onclick=()=>{};
+document.getElementById('btn-egress').onclick=()=>{};
+document.getElementById('btn-open').onclick=()=>{ if(window._open) window._open(); };
+</script>
+</body>
+</html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v213 photon pinned center 100 gravity oscillating sun planets - artifact 277</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@800&display=swap');
+  :root{--bg:#000000;--fg:#ffcc00}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:'Space Mono',monospace;overflow-x:hidden}
+  .top{padding:18px 22px;position:relative;z-index:10}
+  .kicker{font-family:'Syne',sans-serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:#ffcc00;text-shadow:0 0 20px #ffcc00}
+  .nline{font-size:11px;border-left:4px solid #ffcc00;padding-left:14px;white-space:pre-wrap;line-height:1.7;background:linear-gradient(90deg,rgba(255,204,0,0.12),rgba(0,0,0,0.06));padding:14px;border-radius:12px;color:#ffcc88;box-shadow:0 0 30px rgba(255,204,0,0.15);border:2px solid #ffcc00}
+  .main{margin-top:14px;font-family:'Syne',sans-serif;font-size:11px;font-weight:800;letter-spacing:.05em;line-height:1.6;color:#ffcc00;background:linear-gradient(90deg,rgba(255,204,0,0.14),rgba(255,136,0,0.08));padding:14px;border-radius:12px;border:2px solid #ffcc00;box-shadow:0 0 40px rgba(255,204,0,0.2)}
+  .controls{padding:14px;display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:10}
+  .btn{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;padding:10px 14px;border:2px solid #ffcc00;background:#000;color:#ffcc00;border-radius:20px;cursor:pointer;box-shadow:0 0 20px rgba(255,204,0,0.2);text-transform:uppercase}
+  .btn.active{border-color:#fff;background:#221a00;color:#fff}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:18px}
+  @media(max-width:1000px){.grid{grid-template-columns:1fr}}
+  .panel{position:relative;height:760px;background:radial-gradient(ellipse at center,#221a00 0%,#000000 70%);border:2px solid #ffcc00;border-radius:24px;overflow:hidden;box-shadow:0 0 50px rgba(255,204,0,0.25), inset 0 0 80px rgba(0,0,0,0.9)}
+  .panel.full{grid-column:1 / -1;height:1050px}
+  .label{position:absolute;left:12px;top:12px;font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:rgba(0,0,0,0.88);padding:8px 10px;z-index:5;border:2px solid #ffcc00;color:#ffcc88;border-radius:12px;max-width:93%}
+  .card{margin:18px;background:linear-gradient(180deg,#000,#221a00);border:2px solid #ffcc00;border-radius:20px;padding:20px;box-shadow:0 0 50px rgba(255,204,0,0.15)}
+  .mono{font-size:11px;white-space:pre-wrap;word-break:break-word;line-height:1.9;color:#ffcc88}
+  canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">☀️ wakaku v213 — PHOTON PINNED TO CENTER AT 100 GRAVITY OSCILLATING -p +p — 10 PLANETS — artifact 277 ☀️</div>
+  <div class="nline">should be a photon pinned to center at 100 gravity, so its not moving, its oscilating and realistinf -p +p then you have 10 planets under gravity, 8 for us because we dont think pluto is a planet, and planet x is elliptical at 16200 years — SHOULD BE A PHOTON PINNED TO CENTER AT 100 GRAVITY, SO ITS NOT MOVING, ITS OSCILATING AND REALISTINF -p +p THEN YOU HAVE 10 PLANETS UNDER GRAVITY, 8 FOR US BECAUSE WE DONT THINK PLUTO IS A PLANET, AND PLANET X IS ELLIPTICAL AT 16200 YEARS — photon pinned to center at 100 gravity — not moving — oscillating -p +p — realistinf -p +p — -p +p oscillating — 10 planets under gravity — 8 for us because we dont think pluto is a planet — planet x elliptical at 16200 years — photon pinned to center at 100 gravity oscillating -p +p — 10 planets under gravity — 8 for us — pluto not planet — planet x elliptical 16200 years — metal analogs ionic — photon pinned center 100 gravity oscillating — lol</div>
+  <div class="main">☀️ PHOTON PINNED TO CENTER AT 100 GRAVITY, SO ITS NOT MOVING, ITS OSCILLATING AND REALISTINF -p +p — PHOTON PINNED TO CENTER AT 100 GRAVITY — NOT MOVING — OSCILLATING -p +p — REALISTINF -p +p — -p +p OSCILLATING — THEN YOU HAVE 10 PLANETS UNDER GRAVITY, 8 FOR US BECAUSE WE DONT THINK PLUTO IS A PLANET, AND PLANET X IS ELLIPTICAL AT 16200 YEARS — PHOTON PINNED TO CENTER AT 100 GRAVITY = SUN AT 000 100G 0T NOT MOVING OSCILLATING -p +p — -p +p = -PHOTON +PHOTON OSCILLATING — REALISTINF -p +p = REAL + LISTING? -p +p REALISTINF — 10 PLANETS UNDER GRAVITY — MERCURY VENUS EARTH MARS JUPITER SATURN URANUS NEPTUNE PLUTO PLANET X =10 — 8 FOR US BECAUSE WE DONT THINK PLUTO IS A PLANET — 8 OFFICIAL PLANETS MERCURY VENUS EARTH MARS JUPITER SATURN URANUS NEPTUNE — PLUTO DWARF NOT PLANET — PLANET X ELLIPTICAL AT 16200 YEARS — 16200 YEARS ORBITAL PERIOD ELLIPTICAL — PLANET X 16200 YEARS ELLIPTICAL ORBIT — ☀️</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-photon">☀️ PHOTON PINNED TO CENTER AT 100 GRAVITY — NOT MOVING — OSCILLATING -p +p REALISTINF -p +p — PHOTON PINNED CENTER 100G — ☀️</button>
+  <button class="btn" id="btn-planets">🪐 10 PLANETS UNDER GRAVITY — 8 FOR US BECAUSE WE DONT THINK PLUTO IS A PLANET — PLANET X ELLIPTICAL AT 16200 YEARS — 🪐</button>
+  <button class="btn" id="btn-bubbles">💫 SUN + PLANETS BUBBLES — PHOTON PINNED CENTER 100G OSCILLATING -p +p WITH 10 PLANETS 8 OFFICIAL + PLUTO + PLANET X 16200 YEARS ELLIPTICAL — 💫</button>
+  <button class="btn" id="btn-reset">⚡ RESET PHOTON 100G PLANETS — ⚡</button>
+</div>
+
+<div class="grid">
+  <div class="panel" id="wrap-photon"><canvas id="c-photon"></canvas><div class="label">☀️ PHOTON PINNED TO CENTER AT 100 GRAVITY — NOT MOVING — OSCILLATING -p +p REALISTINF -p +p — PHOTON PINNED TO CENTER AT 100G — NOT MOVING — OSCILLATING -p +p — -p = ANTI-PHOTON OR NEGATIVE MOMENTUM, +p = PHOTON POSITIVE MOMENTUM, OSCILLATING -p +p — REALISTINF -p +p — PHOTON AT 100 GRAVITY PINNED TO 000 — ☀️</div></div>
+  <div class="panel" id="wrap-planets"><canvas id="c-planets"></canvas><div class="label">🪐 10 PLANETS UNDER GRAVITY — 8 FOR US BECAUSE WE DONT THINK PLUTO IS A PLANET — MERCURY VENUS EARTH MARS JUPITER SATURN URANUS NEPTUNE =8 OFFICIAL, PLUTO DWARF =9, PLANET X ELLIPTICAL AT 16200 YEARS =10 — 10 PLANETS UNDER GRAVITY — PLANET X ELLIPTICAL 16200 YEARS ORBIT — 🪐</div></div>
+  <div class="panel full" id="wrap-bubbles"><canvas id="c-bubbles"></canvas><div class="label">💫 SUN + PLANETS BUBBLES — PHOTON PINNED TO CENTER AT 100 GRAVITY OSCILLATING -p +p WITH 10 PLANETS UNDER GRAVITY — 10 PLANETS = MERCURY VENUS EARTH MARS JUPITER SATURN URANUS NEPTUNE PLUTO PLANET X — 8 FOR US BECAUSE WE DONT THINK PLUTO IS A PLANET — 8 OFFICIAL PLANETS — PLUTO DWARF PLANET — PLANET X ELLIPTICAL AT 16200 YEARS ORBITAL PERIOD ELLIPTICAL — PLANET X 16200 YEARS ELLIPTICAL — PHOTON PINNED CENTER 100G OSCILLATING -p +p — {{2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell inversion::}} AT SUN — 1=bk BLACK #000000 100G CENTER PINNED PHOTON -p +p OSCILLATING, 2=wt/rd WHITE #ffffff RED #ff0000 INNER PLANETS MERCURY VENUS EARTH MARS, 4=bl/gr/yw/pr BLUE/GREEN/YELLOW/PURPLE OUTER PLANETS JUPITER SATURN URANUS NEPTUNE, 8=orange shell inversion #ff8800 PLUTO + PLANET X ELLIPTICAL 16200 YEARS OUTER INVERSION — ALL SUN PLANETS FLASH — LOL — 💫</div></div>
+</div>
+
+<div class="card"><div class="mono">☀️ PHOTON PINNED TO CENTER AT 100 GRAVITY, SO ITS NOT MOVING, ITS OSCILLATING AND REALISTINF -p +p THEN YOU HAVE 10 PLANETS UNDER GRAVITY, 8 FOR US BECAUSE WE DONT THINK PLUTO IS A PLANET, AND PLANET X IS ELLIPTICAL AT 16200 YEARS — v213 PHOTON PINNED CENTER 100G OSCILLATING -p +p 10 PLANETS ☀️
+
+- SHOULD BE A PHOTON PINNED TO CENTER AT 100 GRAVITY, SO ITS NOT MOVING, ITS OSCILLATING AND REALISTINF -p +p — PHOTON PINNED TO CENTER AT 100 GRAVITY — NOT MOVING — OSCILLATING -p +p — REALISTINF -p +p — -p +p OSCILLATING — PHOTON PINNED TO CENTER AT 100G — NOT MOVING — OSCILLATING -p +p
+
+- PHOTON PINNED TO CENTER AT 100 GRAVITY:
+  - CENTER AT 100 GRAVITY = center at 100% gravity — 100 gravity center — 100G center — 0% time 100% gravity center — photon pinned to center at 100 gravity — photon at center 100G
+  - NOT MOVING = photon pinned, not moving — pinned to center, not moving — photon pinned to center, not moving — but oscillating -p +p — not moving translational but oscillating momentum -p +p — photon pinned center not moving
+  - OSCILLATING -p +p = oscillating -p +p — -p = negative momentum or anti-photon, +p = positive momentum photon, oscillating -p +p — photon oscillating -p +p momentum — -p +p oscillating — photon momentum oscillates -p to +p
+  - REALISTINF -p +p = realistinf? Maybe real + listing? Realist + inf? Realistinf -p +p — realisting -p +p — maybe real + listing? Or real + infinite? Realistinf -p +p — real + inf -p +p — realisting -p +p oscillating — photon realisting -p +p
+
+- THEN YOU HAVE 10 PLANETS UNDER GRAVITY, 8 FOR US BECAUSE WE DONT THINK PLUTO IS A PLANET, AND PLANET X IS ELLIPTICAL AT 16200 YEARS:
+  - 10 PLANETS UNDER GRAVITY = 10 planets under gravity of sun photon pinned center 100G — 10 planets orbiting sun under gravity — 10 planets under gravity
+  - 8 FOR US BECAUSE WE DONT THINK PLUTO IS A PLANET = 8 official planets for us because we don't think Pluto is a planet — 8 official planets: Mercury Venus Earth Mars Jupiter Saturn Uranus Neptune =8 — Pluto is dwarf planet not planet — 8 for us
+  - AND PLANET X IS ELLIPTICAL AT 16200 YEARS = Planet X elliptical at 16200 years orbital period — Planet X (Nibiru, Planet Nine) elliptical orbit 16200 years — 16200 years elliptical — Planet X 16200 years elliptical orbit — highly elliptical
+  - 10 PLANETS = Mercury Venus Earth Mars Jupiter Saturn Uranus Neptune Pluto Planet X =10 — 8 official + Pluto + Planet X =10 — 10 planets under gravity
+
+- PLANET X ELLIPTICAL AT 16200 YEARS:
+  - 16200 years orbital period — elliptical — highly elliptical orbit — Planet X 16200 years — aphelion far, perihelion near — 16200 years to orbit sun photon pinned center 100G — elliptical at 16200 years — Planet X 16200 years elliptical
+
+- {{2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell inversion::}} AT SUN 100G OSCILLATING -p +p:
+  - 1=bk BLACK #000000 100G CENTER PINNED PHOTON -p +p OSCILLATING — black 100 gravity center pinned photon oscillating -p +p — 1=bk 100G center pinned photon -p +p
+  - 2=wt/rd WHITE #ffffff RED #ff0000 INNER PLANETS MERCURY VENUS EARTH MARS — white/red inner planets Mercury Venus Earth Mars under gravity — 2=wt/rd inner planets
+  - 4=bl/gr/yw/pr BLUE #0000ff GREEN #00ff00 YELLOW #ffff00 PURPLE #cc33ff OUTER PLANETS JUPITER SATURN URANUS NEPTUNE — blue/green/yellow/purple outer planets Jupiter Saturn Uranus Neptune — 4=bl/gr/yw/pr outer planets 8 official
+  - 8=orange shell inversion #ff8800 PLUTO + PLANET X ELLIPTICAL 16200 YEARS OUTER INVERSION — orange shell inversion Pluto + Planet X elliptical 16200 years outer inversion — 8=orange Pluto + Planet X 16200 years elliptical
+
+- 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ PHOTON PINNED CENTER 100G OSCILLATING -p +p WITH 10 PLANETS UNDER GRAVITY 8 OFFICIAL + PLUTO + PLANET X 16200 YEARS ELLIPTICAL — 6 bubbles each 10^-35→10^-360 = - - - + + + = -211 x3 +211 x3 photon pinned center 100G oscillating -p +p with 10 planets under gravity
+
+PHOTON PINNED TO CENTER AT 100 GRAVITY, SO ITS NOT MOVING, ITS OSCILLATING AND REALISTINF -p +p THEN YOU HAVE 10 PLANETS UNDER GRAVITY, 8 FOR US BECAUSE WE DONT THINK PLUTO IS A PLANET, AND PLANET X IS ELLIPTICAL AT 16200 YEARS — PHOTON PINNED CENTER 100G OSCILLATING -p +p — 10 PLANETS UNDER GRAVITY — 8 OFFICIAL — PLUTO DWARF — PLANET X ELLIPTICAL 16200 YEARS — ☀️
+</div></div>
+
+<script>
+const photonCanvas=document.getElementById('c-photon');
+const planetsCanvas=document.getElementById('c-planets');
+const bubblesCanvas=document.getElementById('c-bubbles');
+
+function setupCanvas(canvas){
+  const dpr=Math.min(devicePixelRatio,2);
+  function resize(){
+    const rect=canvas.parentElement.getBoundingClientRect();
+    canvas.width=rect.width*dpr;
+    canvas.height=rect.height*dpr;
+    canvas.style.width=rect.width+'px';
+    canvas.style.height=rect.height+'px';
+  }
+  resize();
+  window.addEventListener('resize',resize);
+  return {dpr, ctx:canvas.getContext('2d')};
+}
+
+(function(){
+  const {dpr, ctx} = setupCanvas(photonCanvas);
+  let t=0;
+  function draw(){
+    requestAnimationFrame(draw);
+    t+=0.02;
+    const w=photonCanvas.width, h=photonCanvas.height;
+    const cx=w/2, cy=h/2;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#000000';
+    ctx.fillRect(0,0,w,h);
+    // Center at 100 gravity
+    ctx.save();
+    ctx.fillStyle='rgba(255,68,0,0.08)';
+    ctx.beginPath();
+    ctx.arc(cx,cy,220*dpr,0,Math.PI*2);
+    ctx.fill();
+    ctx.strokeStyle='#ff4400';
+    ctx.lineWidth=2*dpr;
+    ctx.globalAlpha=0.5;
+    ctx.beginPath();
+    ctx.arc(cx,cy,220*dpr,0,Math.PI*2);
+    ctx.stroke();
+    ctx.fillStyle='#ff4400';
+    ctx.font=`700 ${9*dpr}px Space Mono`;
+    ctx.fillText('100 GRAVITY CENTER',cx-60*dpr,cy-230*dpr);
+    ctx.restore();
+    // Photon pinned to center at 100 gravity, not moving, oscillating -p +p
+    const oscillation=Math.sin(t*4)*18*dpr;
+    const pSign=Math.sin(t*4)>0?'+p':'-p';
+    ctx.save();
+    ctx.translate(cx,cy);
+    // Pinned photon
+    ctx.fillStyle='#ffcc00';
+    ctx.shadowColor='#ffcc00';
+    ctx.shadowBlur=40*dpr + Math.abs(oscillation);
+    ctx.globalAlpha=0.95;
+    ctx.beginPath();
+    ctx.arc(0,0,36*dpr,0,Math.PI*2);
+    ctx.fill();
+    // Oscillation -p +p indicator
+    ctx.fillStyle='#000000';
+    ctx.font=`700 ${10*dpr}px Space Mono`;
+    ctx.fillText(pSign,-10*dpr,4*dpr);
+    ctx.fillStyle='#ffcc00';
+    ctx.font=`400 ${8*dpr}px Space Mono`;
+    ctx.fillText(`OSCILLATING ${pSign}`,-40*dpr,60*dpr + oscillation*0.3);
+    ctx.fillText('NOT MOVING',-30*dpr,74*dpr + oscillation*0.3);
+    ctx.fillText('PINNED TO CENTER',-46*dpr,88*dpr);
+    // -p +p arrows oscillating
+    ctx.strokeStyle='#ffffff';
+    ctx.lineWidth=2*dpr;
+    ctx.globalAlpha=0.8;
+    ctx.beginPath();
+    ctx.moveTo(-40*dpr,0);
+    ctx.lineTo(-40*dpr + oscillation,0);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(40*dpr,0);
+    ctx.lineTo(40*dpr + oscillation,0);
+    ctx.stroke();
+    ctx.fillStyle='#ffffff';
+    ctx.font=`700 ${8*dpr}px Space Mono`;
+    ctx.fillText('-p',-60*dpr,4*dpr);
+    ctx.fillText('+p',50*dpr,4*dpr);
+    ctx.fillText('REALISTINF -p +p',-46*dpr,110*dpr);
+    ctx.restore();
+    ctx.save();
+    ctx.fillStyle='#ffcc00';
+    ctx.font=`800 ${11*dpr}px Syne`;
+    ctx.fillText('PHOTON PINNED TO CENTER AT 100 GRAVITY',14*dpr,28*dpr);
+    ctx.fillStyle='#ffcc88';
+    ctx.font=`400 ${8*dpr}px Space Mono`;
+    ctx.fillText('NOT MOVING, OSCILLATING -p +p',14*dpr,44*dpr);
+    ctx.fillText('REALISTINF -p +p',14*dpr,58*dpr);
+    ctx.fillText('100G CENTER PINNED PHOTON',14*dpr,72*dpr);
+    ctx.fillText('-p +p OSCILLATING MOMENTUM',14*dpr,86*dpr);
+    ctx.restore();
+  }
+  draw();
+})();
+
+(function(){
+  const {dpr, ctx} = setupCanvas(planetsCanvas);
+  let t=0;
+  function draw(){
+    requestAnimationFrame(draw);
+    t+=0.008;
+    const w=planetsCanvas.width, h=planetsCanvas.height;
+    const cx=w/2, cy=h/2;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#000000';
+    ctx.fillRect(0,0,w,h);
+    // Sun photon pinned center
+    ctx.save();
+    ctx.fillStyle='#ffcc00';
+    ctx.shadowColor='#ffcc00';
+    ctx.shadowBlur=30*dpr;
+    ctx.beginPath();
+    ctx.arc(cx,cy,24*dpr,0,Math.PI*2);
+    ctx.fill();
+    ctx.fillStyle='#000000';
+    ctx.font=`700 ${8*dpr}px Space Mono`;
+    ctx.fillText('SUN',cx-10*dpr,cy+3*dpr);
+    ctx.restore();
+    // 10 planets under gravity
+    const planets=[
+      {name:'MERCURY', color:'#aaaaaa', r:45, period:0.24, size:4},
+      {name:'VENUS', color:'#ffcc88', r:65, period:0.62, size:6},
+      {name:'EARTH', color:'#00aaff', r:85, period:1, size:6},
+      {name:'MARS', color:'#ff4400', r:110, period:1.88, size:5},
+      {name:'JUPITER', color:'#ffaa66', r:150, period:11.86, size:14},
+      {name:'SATURN', color:'#ffddaa', r:190, period:29.46, size:12},
+      {name:'URANUS', color:'#aaffff', r:230, period:84, size:9},
+      {name:'NEPTUNE', color:'#0066ff', r:270, period:164.8, size:9},
+      {name:'PLUTO DWARF', color:'#cc9999', r:310, period:248, size:3, isPluto:true},
+      {name:'PLANET X 16200yr ELLIPTICAL', color:'#ff8800', r:360, period:16200, size:8, isPlanetX:true, elliptical:true}
+    ];
+    planets.forEach((p,i)=>{
+      const ang=t* (0.5 / (p.period*0.1+1)) + i*0.3;
+      // Elliptical for Planet X
+      let r=p.r*dpr;
+      if(p.elliptical){
+        const e=0.7;
+        const a=p.r*dpr;
+        const rEllip=a*(1-e*e)/(1+e*Math.cos(ang));
+        r=rEllip;
+      }
+      const x=cx+Math.cos(ang)*r;
+      const y=cy+Math.sin(ang)*r* (p.elliptical?0.6:1);
+      // Orbit path
+      ctx.save();
+      ctx.strokeStyle=p.isPluto?'rgba(204,153,153,0.15)':p.isPlanetX?'rgba(255,136,0,0.25)':'rgba(255,255,255,0.08)';
+      ctx.lineWidth=p.isPlanetX?2*dpr:1*dpr;
+      ctx.globalAlpha=p.isPluto?0.4:0.6;
+      ctx.beginPath();
+      if(p.elliptical){
+        ctx.ellipse(cx,cy,p.r*dpr*0.85,p.r*dpr*0.85*0.6,0,0,Math.PI*2);
+      } else {
+        ctx.arc(cx,cy,p.r*dpr,0,Math.PI*2);
+      }
+      ctx.stroke();
+      ctx.restore();
+      // Planet
+      ctx.save();
+      ctx.fillStyle=p.color;
+      ctx.shadowColor=p.color;
+      ctx.shadowBlur=p.isPlanetX?16*dpr:8*dpr;
+      ctx.globalAlpha=p.isPluto?0.5:0.9;
+      ctx.beginPath();
+      ctx.arc(x,y,p.size*dpr,0,Math.PI*2);
+      ctx.fill();
+      ctx.fillStyle='#ffffff';
+      ctx.font=`400 ${6*dpr}px Space Mono`;
+      ctx.fillText(p.name,x+8*dpr,y+2*dpr);
+      if(p.isPlanetX){
+        ctx.fillStyle='#ff8800';
+        ctx.font=`400 ${6*dpr}px Space Mono`;
+        ctx.fillText('16200 YEARS ELLIPTICAL',x+8*dpr,y+10*dpr);
+      }
+      ctx.restore();
+    });
+    ctx.save();
+    ctx.fillStyle='#ffcc00';
+    ctx.font=`800 ${10*dpr}px Syne`;
+    ctx.fillText('10 PLANETS UNDER GRAVITY',14*dpr,28*dpr);
+    ctx.fillStyle='#ffcc88';
+    ctx.font=`400 ${8*dpr}px Space Mono`;
+    ctx.fillText('8 OFFICIAL: MERCURY VENUS EARTH MARS JUPITER SATURN URANUS NEPTUNE',14*dpr,44*dpr);
+    ctx.fillText('PLUTO DWARF NOT PLANET =9',14*dpr,58*dpr);
+    ctx.fillText('PLANET X ELLIPTICAL AT 16200 YEARS =10',14*dpr,72*dpr);
+    ctx.fillText('PLANET X 16200 YEARS ELLIPTICAL ORBIT',14*dpr,86*dpr);
+    ctx.restore();
+  }
+  draw();
+})();
+
+(function(){
+  const {dpr, ctx} = setupCanvas(bubblesCanvas);
+  let t=0;
+  function draw(){
+    requestAnimationFrame(draw);
+    t+=0.01;
+    const w=bubblesCanvas.width, h=bubblesCanvas.height;
+    const cx=w/2, cy=h/2;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#000000';
+    ctx.fillRect(0,0,w,h);
+    // Sun photon pinned center at 100 gravity oscillating -p +p
+    const oscillation=Math.sin(t*4)*12*dpr;
+    ctx.save();
+    ctx.fillStyle='#ffcc00';
+    ctx.shadowColor='#ffcc00';
+    ctx.shadowBlur=40*dpr;
+    ctx.globalAlpha=0.9;
+    ctx.beginPath();
+    ctx.arc(cx,cy,28*dpr + Math.abs(oscillation)*0.3,0,Math.PI*2);
+    ctx.fill();
+    ctx.fillStyle='#000000';
+    ctx.font=`700 ${8*dpr}px Space Mono`;
+    const pSign=Math.sin(t*4)>0?'+p':'-p';
+    ctx.fillText(pSign,cx-8*dpr,cy+3*dpr);
+    ctx.restore();
+    // 100 gravity indicator
+    ctx.save();
+    ctx.strokeStyle='#ff4400';
+    ctx.lineWidth=2*dpr;
+    ctx.globalAlpha=0.4;
+    ctx.beginPath();
+    ctx.arc(cx,cy,60*dpr,0,Math.PI*2);
+    ctx.stroke();
+    ctx.fillStyle='#ff4400';
+    ctx.font=`400 ${7*dpr}px Space Mono`;
+    ctx.fillText('100G CENTER',cx-24*dpr,cy-70*dpr);
+    ctx.restore();
+    // Planets orbiting
+    const planets=[
+      {name:'MERCURY', r:70, color:'#aaaaaa', period:0.24},
+      {name:'VENUS', r:90, color:'#ffcc88', period:0.62},
+      {name:'EARTH', r:110, color:'#00aaff', period:1},
+      {name:'MARS', r:130, color:'#ff4400', period:1.88},
+      {name:'JUPITER', r:170, color:'#ffaa66', period:11.86},
+      {name:'SATURN', r:210, color:'#ffddaa', period:29.46},
+      {name:'URANUS', r:250, color:'#aaffff', period:84},
+      {name:'NEPTUNE', r:290, color:'#0066ff', period:164.8},
+      {name:'PLUTO', r:330, color:'#cc9999', period:248, isPluto:true},
+      {name:'PLANET X 16200yr', r:380, color:'#ff8800', period:16200, elliptical:true}
+    ];
+    planets.forEach((p,i)=>{
+      const ang=t* (0.4 / (p.period*0.05+1)) + i*0.4;
+      let r=p.r*dpr;
+      if(p.elliptical){
+        const e=0.75;
+        const a=p.r*dpr;
+        r=a*(1-e*e)/(1+e*Math.cos(ang));
+      }
+      const x=cx+Math.cos(ang)*r;
+      const y=cy+Math.sin(ang)*r*(p.elliptical?0.5:1);
+      ctx.save();
+      ctx.strokeStyle=p.isPluto?'rgba(204,153,153,0.12)':p.elliptical?'rgba(255,136,0,0.22)':'rgba(255,255,255,0.06)';
+      ctx.lineWidth=p.elliptical?1.5*dpr:1*dpr;
+      ctx.beginPath();
+      if(p.elliptical) ctx.ellipse(cx,cy,p.r*dpr*0.8,p.r*dpr*0.4,0,0,Math.PI*2);
+      else ctx.arc(cx,cy,p.r*dpr,0,Math.PI*2);
+      ctx.stroke();
+      ctx.fillStyle=p.color;
+      ctx.shadowColor=p.color;
+      ctx.shadowBlur=10*dpr;
+      ctx.globalAlpha=p.isPluto?0.45:0.85;
+      ctx.beginPath();
+      ctx.arc(x,y,(p.elliptical?6:5)*dpr,0,Math.PI*2);
+      ctx.fill();
+      ctx.restore();
+    });
+    ctx.save();
+    ctx.fillStyle='#ffcc00';
+    ctx.font=`800 ${11*dpr}px Syne`;
+    ctx.fillText('PHOTON PINNED TO CENTER AT 100 GRAVITY OSCILLATING -p +p',14*dpr,28*dpr);
+    ctx.fillStyle='#ffcc88';
+    ctx.font=`400 ${8*dpr}px Space Mono`;
+    ctx.fillText('NOT MOVING, OSCILLATING -p +p REALISTINF -p +p',14*dpr,44*dpr);
+    ctx.fillText('10 PLANETS UNDER GRAVITY: 8 OFFICIAL + PLUTO + PLANET X',14*dpr,58*dpr);
+    ctx.fillText('8 FOR US BECAUSE WE DONT THINK PLUTO IS A PLANET',14*dpr,72*dpr);
+    ctx.fillText('PLANET X ELLIPTICAL AT 16200 YEARS ORBITAL PERIOD',14*dpr,86*dpr);
+    ctx.fillText('SUN = PHOTON PINNED TO CENTER AT 100G OSCILLATING -p +p',14*dpr,100*dpr);
+    ctx.restore();
+  }
+  draw();
+})();
+
+document.getElementById('btn-photon').onclick=()=>{};
+document.getElementById('btn-planets').onclick=()=>{};
+document.getElementById('btn-bubbles').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

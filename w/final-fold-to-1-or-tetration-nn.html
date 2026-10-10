@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html><head><link rel="icon" href="../favicon.svg" type="image/svg+xml"><meta charset="utf-8"><title>Folds to 1 or {{n.n}}^{{n.n}}^3 - Final Fold</title>
+<style>
+body{margin:0;background:#050510;color:#e5e7eb;font-family:monospace;overflow:hidden}
+canvas{display:block}
+#info{position:absolute;left:10px;top:10px;font-size:11px;background:#000000cc;padding:10px;border-radius:12px;border:1px solid #ffffff15;line-height:1.5;max-width:520px}
+b{color:#fcd34d}
+</style></head><body>
+<canvas id="c"></canvas>
+<div id="info">
+<b>FOLDS TO 1 OR {{n.n}}^{{n.n}}^3 lol</b><br/>
+<br/>
+FOLD to 1: 8x8x8x8x1x8x8x8x8 = 8^8 = 16,777,216 AEONs → 1 qdot → <b>1</b><br/>
+FOLD to {{n.n}}^{{n.n}}^3: tetration power tower<br/>
+{{n.n}} = n.n = variable dot = 1% thick wafer = prim<br/>
+{{n.n}}^{{n.n}}^3 = (n.n) ^ ((n.n) ^ 3)<br/>
+If n.n = 8: 8 ^ (8^3) = 8^512 = ~10^462 — cosmic farm 10^35 scale<br/>
+If n.n = 1.01: 1.01 ^ (1.01^3) ≈ 1.01 — folds to 1<br/>
+<br/>
+So both: folds to 1 when n.n→1, explodes to 10^35+ when n.n→8<br/>
+gold(silver(rust(water(hydrogen)))) = HONC prims<br/>
+vacuum 1 ↔ gravity -1 — -void +gravity<br/>
+quantum battery wrapped like neon<br/>
+First author you — final fold
+</div>
+<script>
+const canvas=document.getElementById('c'), ctx=canvas.getContext('2d');
+let w,h,t=0;
+function resize(){ w=canvas.width=innerWidth*2; h=canvas.height=innerHeight*2; canvas.style.width=innerWidth+'px'; canvas.style.height=innerHeight+'px'; }
+addEventListener('resize',resize); resize();
+function loop(){
+ t+=0.008;
+ ctx.fillStyle='rgba(5,5,16,0.22)'; ctx.fillRect(0,0,w,h);
+ let cx=w*0.58, cy=h*0.5;
+ let breath=(Math.sin(t*0.16)+1)/2;
+ // left side: folds to 1
+ let leftX=cx-w*0.28;
+ ctx.globalAlpha=0.9; ctx.fillStyle='#a78bfa';
+ ctx.beginPath(); ctx.arc(leftX,cy, 12+breath*8,0,Math.PI*2); ctx.fill();
+ ctx.fillStyle='#e5e7eb'; ctx.font='11px monospace'; ctx.textAlign='center';
+ ctx.fillText('FOLD → 1', leftX, cy+40);
+ ctx.fillText('16,777,216 → 1 qdot', leftX, cy+54);
+ // right side: tetration {{n.n}}^{{n.n}}^3
+ let rightX=cx+w*0.22;
+ // draw power tower visually
+ for(let i=0;i<3;i++){
+   let r= (3-i)*30 + breath*10;
+   ctx.globalAlpha=0.15; ctx.strokeStyle='#fcd34d'; ctx.lineWidth=1;
+   ctx.beginPath(); ctx.arc(rightX,cy,r,0,Math.PI*2); ctx.stroke();
+ }
+ ctx.globalAlpha=0.9; ctx.fillStyle='#fcd34d';
+ ctx.beginPath(); ctx.arc(rightX,cy, 14+breath*6,0,Math.PI*2); ctx.fill();
+ ctx.fillStyle='#e5e7eb'; ctx.textAlign='center';
+ ctx.fillText('{{n.n}}^{{n.n}}^3', rightX, cy+60);
+ ctx.fillText('n.n=8 → 8^(8^3)=8^512', rightX, cy+74);
+ ctx.fillText('≈10^462 → 10^35 farm', rightX, cy+88);
+ // central connection - isomorphic
+ ctx.globalAlpha=0.12+breath*0.1; ctx.strokeStyle='#c084fc'; ctx.lineWidth=1; ctx.setLineDash([4,6]);
+ ctx.beginPath(); ctx.moveTo(leftX,cy); ctx.lineTo(rightX,cy); ctx.stroke();
+ ctx.setLineDash([]);
+ // middle - n.n variable dots
+ let nn=8; // n.n = 8
+ for(let i=0;i<nn;i++){
+   let ang=i/nn*Math.PI*2 + t*0.3;
+   let x=cx+Math.cos(ang)*80* (0.8+breath*0.3);
+   let y=cy+Math.sin(ang)*40* (0.8+breath*0.3);
+   ctx.globalAlpha=0.6; ctx.fillStyle=i%2===0?'#38bdf8':'#f472b6';
+   ctx.beginPath(); ctx.arc(x,y,2.5,0,Math.PI*2); ctx.fill();
+ }
+ ctx.textAlign='left';
+ requestAnimationFrame(loop);
+}
+loop();
+</script>
+</body></html>

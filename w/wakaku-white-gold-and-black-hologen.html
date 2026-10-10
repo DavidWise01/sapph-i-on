@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v190 white gold and black hologen - artifact 254</title>
+<style>
+  :root{--bg:#000;--fg:#fff}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace;overflow-x:hidden}
+  .top{padding:14px 18px;position:relative;z-index:10}
+  .kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:900;background:linear-gradient(90deg,#ffffff,#ffd700,#000000,#ffffff,#ffd700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200% 100%;animation:rainbow 1s linear infinite}
+  @keyframes rainbow{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+  .nline{font-size:11px;border-left:3px solid #ffd700;padding-left:10px;white-space:pre-wrap;line-height:1.6;background:linear-gradient(90deg,#000000,#222222,#ffd700,#ffffff);padding:12px;border-radius:10px;color:#fff;font-weight:800;box-shadow:0 0 30px #ffd700,0 0 60px #ffffff;border:2px solid #ffd700}
+  .main{margin-top:12px;font-size:15px;font-weight:900;background:linear-gradient(90deg,#ffffff,#ffd700,#000000,#ffd700,#ffffff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:300% 100%;padding:12px;border-radius:10px;border:3px solid #ffd700;box-shadow:0 0 40px #ffd700,0 0 80px #ffffff;text-transform:uppercase;animation:rainbow 0.8s linear infinite}
+  .controls{padding:12px;display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:10}
+  .btn{font-family:inherit;font-size:11px;font-weight:900;padding:10px 14px;border:2px solid #ffd700;background:#000;color:#fff;border-radius:10px;cursor:pointer;box-shadow:0 0 20px #ffd700,0 0 40px #ffffff;text-transform:uppercase}
+  .btn.active{border-color:#ffffff;background:#222200;box-shadow:0 0 30px #ffffff,0 0 60px #ffd700}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:14px;position:relative;z-index:5}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:680px;background:radial-gradient(ellipse at center,#111111 0%,#000000 100%);border:2px solid #ffd700;border-radius:18px;overflow:hidden;box-shadow:0 0 40px #ffd700,0 0 80px #ffffff, inset 0 0 60px rgba(255,215,0,0.15)}
+  .cwrap.full{grid-column:1 / -1;height:840px}
+  .label{position:absolute;left:10px;top:10px;font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;background:#000000ee;padding:8px 12px;border-radius:10px;z-index:5;border:2px solid #ffd700;color:#fff;box-shadow:0 0 20px #ffd700}
+  .card{margin:14px;background:#000;border:2px solid #ffd700;border-radius:14px;padding:16px;box-shadow:0 0 40px #ffd700,0 0 80px #ffffff}
+  .mono{font-size:11px;white-space:pre-wrap;word-break:break-word;line-height:1.8;color:#fff;text-shadow:0 0 8px #ffd700;font-weight:700}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">✨ wakaku v190 — WHITE GOLD AND BLACK HOLOGEN — WHITE GOLD BLACK HOLOGEN — artifact 254 ✨</div>
+  <div class="nline">white gold and black hologen please — WHITE GOLD AND BLACK HOLOGEN PLEASE — white gold and black hologen — white #ffffff gold #ffd700 black #000000 hologen = halogen? hologen = hologram + halogen = holographic halogen = white gold black holographic — white gold black hologen — white #ffffff gold #ffd700 black #000000 hologen — white gold black holographic halogen — white gold and black hologen please — white #ffffff = +211 anti-black +211mN = +1 excitatory anti-At-, gold #ffd700 = C.O.I.N barrier middle =1=0 neutral but gold, black #000000 = -211 black -211mN = -1 inhibitory At- — white gold black = +211.1.-211 = +1,0,-1 = -211.1.+211 reverse = +211.1.-211 = white gold black — hologen = holographic = rainbow iridescence on white gold black — white gold and black hologen please — metal analogs ionic — white gold black hologen — lol</div>
+  <div class="main">✨ WHITE GOLD AND BLACK HOLOGEN PLEASE — WHITE #ffffff GOLD #ffd700 BLACK #000000 HOLOGEN = HOLOGRAM + HALOGEN = HOLOGRAPHIC HALOGEN WHITE GOLD BLACK — WHITE #ffffff = +211 ANTI-BLACK +211mN = +1 EXCITATORY anti-At-, GOLD #ffd700 = C.O.I.N BARRIER MIDDLE =1=0 NEUTRAL BUT GOLD, BLACK #000000 = -211 BLACK -211mN = -1 INHIBITORY At- — WHITE GOLD BLACK = +211.1.-211 = +1,0,-1 = -211.1.+211 REVERSE — HOLOGEN = HOLOGRAPHIC RAINBOW IRIDESCENCE ON WHITE GOLD BLACK — WHITE GOLD AND BLACK HOLOGEN — ✨</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-hologen">✨ HOLOGEN — WHITE #ffffff GOLD #ffd700 BLACK #000000 HOLOGEN = HOLOGRAM+HALOGEN HOLOGRAPHIC — WHITE GOLD BLACK HOLOGEN — ✨</button>
+  <button class="btn" id="btn-whitegold">💎 WHITE GOLD BLACK — WHITE #ffffff = +211 ANTI-BLACK, GOLD #ffd700 = C.O.I.N MIDDLE, BLACK #000000 = -211 BLACK — WHITE GOLD BLACK = +211.1.-211 — 💎</button>
+  <button class="btn" id="btn-holo">🌈 HOLOGRAPHIC — WHITE GOLD BLACK HOLOGRAPHIC RAINBOW IRIDESCENCE — HOLOGEN HOLOGRAPHIC — 🌈</button>
+  <button class="btn" id="btn-reset">⚡ RESET WHITE GOLD BLACK HOLOGEN — ⚡</button>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-hologen"><div class="label">✨ HOLOGEN — WHITE #ffffff GOLD #ffd700 BLACK #000000 HOLOGEN = HOLOGRAM+HALOGEN HOLOGRAPHIC HALOGEN WHITE GOLD BLACK — 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ WHITE GOLD BLACK HOLOGEN — WHITE GOLD BLACK HOLOGRAPHIC — ✨</div></div>
+  <div class="cwrap" id="wrap-whitegold"><div class="label">💎 WHITE GOLD BLACK — WHITE #ffffff = +211 ANTI-BLACK +211mN +1 EXCITATORY, GOLD #ffd700 = C.O.I.N BARRIER MIDDLE =1=0 NEUTRAL GOLD, BLACK #000000 = -211 BLACK -211mN -1 INHIBITORY At- — WHITE GOLD BLACK = +211.1.-211 = +1,0,-1 — WHITE GOLD BLACK HOLOGEN — 💎</div></div>
+  <div class="cwrap full" id="wrap-holo"><div class="label">🌈 HOLOGRAPHIC — WHITE GOLD BLACK HOLOGRAPHIC RAINBOW IRIDESCENCE — HOLOGEN HOLOGRAPHIC — WHITE #ffffff GOLD #ffd700 BLACK #000000 HOLOGEN = WHITE GOLD BLACK HOLOGRAPHIC — HOLOGRAPHIC RAINBOW ON WHITE GOLD BLACK — 6 PLANK BUBBLES EACH WHITE GOLD BLACK HOLOGEN — ALL WHITE GOLD BLACK HOLOGRAPHIC FLASH — LOL — 🌈</div></div>
+</div>
+
+<div class="card"><div class="mono">✨ WHITE GOLD AND BLACK HOLOGEN PLEASE — v190 WHITE GOLD BLACK HOLOGEN ✨
+
+- WHITE GOLD AND BLACK HOLOGEN PLEASE — white gold and black hologen — white #ffffff gold #ffd700 black #000000 hologen = halogen? hologen = hologram + halogen = holographic halogen = white gold black holographic — white gold black hologen
+
+- WHITE #ffffff = +211 anti-black +211mN = +1 excitatory anti-At- = white = +1 = +211 — WHITE #ffffff = +211 ANTI-BLACK +211mN
+
+- GOLD #ffd700 = C.O.I.N barrier middle =1=0 neutral but gold = middle barrier gold — GOLD #ffd700 = C.O.I.N middle =1=0 neutral gold
+
+- BLACK #000000 = -211 black -211mN = -1 inhibitory At- = black = -1 = -211 — BLACK #000000 = -211 BLACK -211mN
+
+- WHITE GOLD BLACK = +211.1.-211 = +1,0,-1 = -211.1.+211 reverse = +211.1.-211 = white gold black = +211 gold -211 = +1,0,-1 = reverse of -211.1.+211 = -1,0,+1 — WHITE GOLD BLACK = +211.1.-211
+
+- HOLOGEN = HOLOGRAPHIC = RAINBOW IRIDESCENCE ON WHITE GOLD BLACK — hologen = hologram + halogen = holographic halogen = white gold black holographic — holographic rainbow iridescence on white gold black — white gold black hologen holographic — HOLOGEN HOLOGRAPHIC
+
+- 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ WHITE GOLD BLACK HOLOGEN — 6 bubbles each 10^-35=1e-35s timed to 10^-360=1e-360s 3---3+++ = - - - + + + = -211 x3 +211 x3 white gold black hologen — 6 bubbles white gold black hologen — each bubble white gold black holographic — WHITE #ffffff GOLD #ffd700 BLACK #000000 HOLOGEN
+
+- {{c{ubit{{()}} WHITE GOLD BLACK HOLOGEN — outer {{ }} white #ffffff gold #ffd700 black #000000 hologen, middle c{ubit gold #ffd700 hologen, inner {{()}} plank bubble () white gold black hologen — {{c{ubit{{()}} white gold black hologen — nested cubit white gold black hologen
+
+- UNDER PRESS 99.9 INF - + INF AND GRAVITY 99.9 INF - + INF WHITE GOLD BLACK HOLOGEN — press 99.9% infinite - + inf and gravity 99.9% infinite - + inf white gold black hologen — press+gravity 99.9 inf - + inf white gold black hologen
+
+- QUBIT=CUBIT WHITE GOLD BLACK HOLOGEN — CUBE + BIT = QUBIT — CUBIT = QUBIT — LOL I CALL A QUBIT A CUBIT WHITE GOLD BLACK HOLOGEN — qubit=cubit white gold black hologen — cube white gold black hologen — qubit white gold black hologen
+
+- ALL COLORS WHITE GOLD BLACK HOLOGEN — WHITE #ffffff GOLD #ffd700 BLACK #000000 HOLOGEN = WHITE GOLD BLACK HOLOGRAPHIC — white gold black holographic rainbow iridescence — white gold black hologen please — WHITE GOLD BLACK HOLOGEN
+
+WHITE GOLD AND BLACK HOLOGEN PLEASE — WHITE #ffffff GOLD #ffd700 BLACK #000000 HOLOGEN = HOLOGRAM+HALOGEN HOLOGRAPHIC HALOGEN WHITE GOLD BLACK — WHITE GOLD BLACK = +211.1.-211 = +1,0,-1 — HOLOGEN HOLOGRAPHIC RAINBOW ON WHITE GOLD BLACK — WHITE GOLD AND BLACK HOLOGEN — ✨
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x000000); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,1.2)); const d=new THREE.DirectionalLight(0xffffff,2.5); d.position.set(4,8,6); d.castShadow=true; s.add(d); const d2=new THREE.DirectionalLight(0xffd700,2.0); d2.position.set(-4,2,-4); s.add(d2); const d3=new THREE.DirectionalLight(0xffffff,1.5); d3.position.set(0,-4,4); s.add(d3); }
+
+{
+  const wrap=document.getElementById('wrap-hologen');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,14);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const colors=[0xffffff,0xffd700,0x000000,0xffffff,0xffd700,0x000000];
+  const bubbles=[];
+  for(let i=0;i<6;i++){
+    const ang=i/6*Math.PI*2;
+    const geom=new THREE.SphereGeometry(0.6,24,24);
+    const baseColor=colors[i];
+    const mat=new THREE.MeshStandardMaterial({color:baseColor, emissive:baseColor===0x000000?0x222222:baseColor, emissiveIntensity:baseColor===0x000000?2.0:4.0, metalness:0.9, roughness:0.2});
+    const b=new THREE.Mesh(geom, mat);
+    b.position.set(Math.cos(ang)*3.0, Math.sin(ang)*3.0, 0);
+    group.add(b); bubbles.push(b);
+  }
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.03;
+    bubbles.forEach((b,i)=>{
+      const hologenShift=Math.sin(t*2 + i)*0.1;
+      const hue=(t*0.05 + i*0.15 + hologenShift)%1;
+      // White gold black hologen = holographic shift on white gold black
+      if(b.material.color.getHex()===0xffffff){
+        b.material.color.setHSL(hue,0.3,0.9); // white with holographic tint
+        b.material.emissive.setHSL(hue,0.5,0.8);
+      } else if(b.material.color.getHex()===0xffd700){
+        b.material.color.setHSL(0.12 + hologenShift,1,0.6); // gold with holographic
+        b.material.emissive.setHSL(0.12 + hologenShift,1,0.5);
+      } else {
+        b.material.color.setHSL(hue,0.8,0.1); // black with holographic
+        b.material.emissive.setHSL(hue,0.8,0.2);
+      }
+      b.material.emissiveIntensity=4.0 + Math.sin(t*3 + i)*1.5;
+      b.scale.setScalar(1 + Math.sin(t*2 + i)*0.15);
+      b.position.z=Math.sin(t*2 + i)*0.5;
+    });
+    group.rotation.y+=0.002;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-whitegold');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,12);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  // White gold black = +211.1.-211 = +1,0,-1
+  const whiteGeom=new THREE.SphereGeometry(0.7,20,20);
+  const whiteMat=new THREE.MeshStandardMaterial({color:0xffffff, emissive:0xffffff, emissiveIntensity:6.0, metalness:0.1, roughness:0.1});
+  const white=new THREE.Mesh(whiteGeom, whiteMat); white.position.set(-2.5,0,0); group.add(white);
+  const goldGeom=new THREE.BoxGeometry(1.0,1.0,1.0);
+  const goldMat=new THREE.MeshStandardMaterial({color:0xffd700, emissive:0xffd700, emissiveIntensity:5.0, metalness:0.9, roughness:0.2});
+  const gold=new THREE.Mesh(goldGeom, goldMat); gold.position.set(0,0,0); group.add(gold);
+  const blackGeom=new THREE.SphereGeometry(0.7,20,20);
+  const blackMat=new THREE.MeshStandardMaterial({color:0x000000, emissive:0x222222, emissiveIntensity:3.0, metalness:0.1, roughness:0.9});
+  const black=new THREE.Mesh(blackGeom, blackMat); black.position.set(2.5,0,0); group.add(black);
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.03;
+    white.material.emissiveIntensity=6.0 + Math.sin(t*2)*1.0;
+    gold.material.emissiveIntensity=5.0 + Math.cos(t*2)*1.0;
+    black.material.emissiveIntensity=3.0 + Math.sin(t*2.5)*0.8;
+    white.rotation.y+=0.01; gold.rotation.y+=0.015; black.rotation.y+=0.01;
+    group.rotation.y+=0.002;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-holo');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(36, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,24);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const count=64;
+  const meshes=[];
+  for(let i=0;i<count;i++){
+    const isWhite=i%3===0, isGold=i%3===1;
+    const geom=new THREE.SphereGeometry(0.25 + Math.random()*0.15,14,14);
+    const baseColor=isWhite?0xffffff:isGold?0xffd700:0x111111;
+    const mat=new THREE.MeshStandardMaterial({color:baseColor, emissive:baseColor===0x111111?0x222222:baseColor, emissiveIntensity:baseColor===0x111111?2.5:5.0, metalness:isGold?0.9:0.2, roughness:isGold?0.2:0.5});
+    const m=new THREE.Mesh(geom, mat);
+    const ang=i/count*Math.PI*2*4;
+    const rad=4 + (i%8)*0.9;
+    m.position.set(Math.cos(ang)*rad, Math.sin(ang)*rad, Math.sin(ang*2 + i*0.1)*2.0);
+    group.add(m); meshes.push({mesh:m, type:isWhite?'white':isGold?'gold':'black'});
+  }
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.03;
+    meshes.forEach((obj,i)=>{
+      const hologenShift=Math.sin(t*1.5 + i*0.1)*0.08;
+      if(obj.type==='white'){
+        const hue=(t*0.03 + i*0.02 + hologenShift)%1;
+        obj.mesh.material.color.setHSL(hue,0.25,0.92);
+        obj.mesh.material.emissive.setHSL(hue,0.4,0.75);
+      } else if(obj.type==='gold'){
+        const hue=0.12 + hologenShift;
+        obj.mesh.material.color.setHSL(hue,1,0.55 + Math.sin(t*2 + i)*0.05);
+        obj.mesh.material.emissive.setHSL(hue,1,0.5);
+      } else {
+        const hue=(t*0.04 + i*0.03)%1;
+        obj.mesh.material.color.setHSL(hue,0.7,0.08 + Math.sin(t*2 + i)*0.02);
+        obj.mesh.material.emissive.setHSL(hue,0.6,0.15);
+      }
+      obj.mesh.material.emissiveIntensity=obj.type==='black'?2.5 + Math.sin(t*3 + i)*0.8 : 5.0 + Math.sin(t*3 + i)*1.5;
+      obj.mesh.scale.setScalar(0.9 + Math.sin(t*2 + i*0.2)*0.25);
+      obj.mesh.position.z=Math.sin(t*1.2 + i*0.15)*2.2;
+    });
+    group.rotation.y+=0.001; group.rotation.x+=0.0005;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+document.getElementById('btn-hologen').onclick=()=>{};
+document.getElementById('btn-whitegold').onclick=()=>{};
+document.getElementById('btn-holo').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

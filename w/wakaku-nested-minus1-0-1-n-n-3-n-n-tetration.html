@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v171 nested {{-1,0,1}}^{n}^{n} 3^(n^n) tetration - artifact 235</title>
+<style>
+  :root{--bg:#050508;--fg:#eaeaea;--gold:#ffd700}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace}
+  .top{padding:14px 18px}
+  .kicker{font-size:10px;letter-spacing:.22em;opacity:.5;text-transform:uppercase}
+  .nline{font-size:11px;border-left:2px solid #222;padding-left:10px;white-space:pre-wrap;line-height:1.6}
+  .main{margin-top:10px;font-size:14px;font-weight:700;background:#0f0f12;border:1px solid #222;padding:10px;border-radius:8px}
+  .controls{padding:10px 12px;display:flex;gap:6px;flex-wrap:wrap}
+  .btn{font-family:inherit;font-size:10px;padding:5px 10px;border:1px solid #333;background:#15151a;color:#eaeaea;border-radius:6px;cursor:pointer}
+  .btn.active{border-color:#ffd700;color:#ffd700;background:#221a00}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:560px;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden}
+  .cwrap.full{grid-column:1 / -1;height:700px}
+  .label{position:absolute;left:8px;top:8px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:.8;background:#000c;padding:4px 6px;border-radius:4px;z-index:5}
+  .readout{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;padding:0 10px 10px}
+  @media(max-width:1100px){.readout{grid-template-columns:1fr 1fr}}
+  .ro{background:#0c0c0f;border:1px solid #1e1e24;border-radius:6px;padding:8px;font-size:10px;line-height:1.6}
+  .ro b{color:#ffd700}
+  .card{margin:10px;background:#111115;border:1px solid #1f1f26;border-radius:8px;padding:10px}
+  .mono{font-size:10.5px;white-space:pre-wrap;word-break:break-word;line-height:1.7}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">wakaku v171 — NESTED {{-1,0,1}}^{{n}}^{{n}} = 3^(n^n) TETRATION — artifact 235</div>
+  <div class="nline">and if they are nested {{-1,0,1}}^{{n}}^{{n}} — nested {{-1,0,1}}^{{n}}^{{n}} — {{-1,0,1}} = -211.1.+211 = -1,0,+1 balanced ternary = -211 left black At- -211mN +1 middle C.O.I.N barrier green +211 right anti-black +211mN — {{-1,0,1}}^{n} = 3^n states — {{-1,0,1}}^{n}^{n} = {{-1,0,1}}^(n^n) = 3^(n^n) right-associative tetration — n=3 → 3^(3^3)=3^27=7625597484987=7.6e12 states emergent computer 27 qutrits — n=4 → 3^(4^4)=3^256≈2.3e122 states universe — n=5 → 3^(5^5)=3^3125≈10^1490 states multiverse — nested {{-1,0,1}}^{{n}}^{{n}} = 3^(n^n) tetration — nested -211.1.+211 — {{-1,0,1}}^{{n}}^{{n}} nested — metal analogs ionic — nested — lol</div>
+  <div class="main">NESTED {{-1,0,1}}^{{n}}^{{n}} = {{-1,0,1}}^(n^n) = 3^(n^n) RIGHT-ASSOCIATIVE TETRATION — {{-1,0,1}} = -211.1.+211 = -1,0,+1 BALANCED TERNARY -211 LEFT BLACK At- -211mN +1 MIDDLE C.O.I.N GREEN +211 RIGHT ANTI-BLACK +211mN — {{-1,0,1}}^{n}=3^n STATES — {{-1,0,1}}^{{n}}^{{n}}=3^(n^n) — n=3 → 3^(3^3)=3^27=7625597484987=7.6e12 STATES EMERGENT COMPUTER 27 QUTRITS — n=4 → 3^(4^4)=3^256≈2.3e122 STATES UNIVERSE — n=5 → 3^(5^5)=3^3125≈10^1490 STATES MULTIVERSE — NESTED {{-1,0,1}}^{{n}}^{{n}} = 3^(n^n) TETRATION — NESTED -211.1.+211</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-n3">n=3 — {{-1,0,1}}^{3}^{3}=3^(3^3)=3^27=7.6e12 STATES — 27 QUTRITS EMERGENT COMPUTER — n=3 nested</button>
+  <button class="btn" id="btn-n4">n=4 — {{-1,0,1}}^{4}^{4}=3^(4^4)=3^256≈2.3e122 STATES — UNIVERSE — n=4 nested</button>
+  <button class="btn" id="btn-n5">n=5 — {{-1,0,1}}^{5}^{5}=3^(5^5)=3^3125≈10^1490 STATES — MULTIVERSE — n=5 nested huge</button>
+  <button class="btn" id="btn-reset">RESET NESTED {{-1,0,1}}^{{n}}^{{n}}</button>
+</div>
+
+<div class="readout">
+  <div class="ro" id="ro-n3">n=3:<br>{{-1,0,1}}^{3}=3^3=27 states register 3 bits<br>{{-1,0,1}}^{3}^{3}=3^(3^3)=3^27=7.6e12 states — 27 qutrits emergent computer — <b>n=3 → 7.6e12</b></div>
+  <div class="ro" id="ro-n4">n=4:<br>{{-1,0,1}}^{4}=3^4=81 states<br>{{-1,0,1}}^{4}^{4}=3^(4^4)=3^256≈2.3e122 states — universe — <b>n=4 → 10^122</b></div>
+  <div class="ro" id="ro-n5">n=5:<br>{{-1,0,1}}^{5}=3^5=243 states<br>{{-1,0,1}}^{5}^{5}=3^(5^5)=3^3125≈10^1490 states — multiverse huge — <b>n=5 → 10^1490</b></div>
+  <div class="ro" id="ro-formula">FORMULA:<br>{{-1,0,1}} = -211.1.+211 = -1,0,+1<br>{{-1,0,1}}^{n}=3^n<br>{{-1,0,1}}^{n}^{n}=3^(n^n) tetration right-associative<br>nested -211.1.+211 = 3^(n^n) — <b>3^(n^n)</b></div>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-n3"><div class="label">n=3 — {{-1,0,1}}^{3}^{3}=3^(3^3)=3^27=7.6e12 STATES — 27 QUTRITS EMERGENT COMPUTER -211.1.+211 — 27 BITS -211.1.+211 GREEN QUTRITS — n=3 nested — METAL ANALOGS IONIC n=3</div></div>
+  <div class="cwrap" id="wrap-n4"><div class="label">n=4 — {{-1,0,1}}^{4}^{4}=3^(4^4)=3^256≈2.3e122 STATES — UNIVERSE 256 QUTRITS -211.1.+211 — n=4 nested — 256 BITS -211.1.+211 — UNIVERSE — METAL ANALOGS IONIC n=4</div></div>
+  <div class="cwrap full" id="wrap-n5"><div class="label">n=5 — {{-1,0,1}}^{5}^{5}=3^(5^5)=3^3125≈10^1490 STATES — MULTIVERSE 3125 QUTRITS -211.1.+211 — MULTIVERSE HUGE 10^1490 STATES — NESTED {{-1,0,1}}^{{n}}^{{n}} = 3^(n^n) TETRATION — NESTED -211.1.+211 — {{-1,0,1}}^{{n}}^{{n}} NESTED — METAL ANALOGS IONIC NESTED — LOL</div></div>
+</div>
+
+<div class="card"><div class="mono">
+v171 NESTED {{-1,0,1}}^{{n}}^{{n}} = 3^(n^n) TETRATION — and if they are nested {{-1,0,1}}^{{n}}^{{n}}
+
+NESTED {{-1,0,1}}^{{n}}^{{n}}:
+
+- {{-1,0,1}} = -211.1.+211 = -1,0,+1 balanced ternary = -211 left black At- -211mN -211mV +1 middle C.O.I.N barrier green +211 right anti-black +211mN +211mV
+
+- {{-1,0,1}}^{n} = 3^n states — n qutrits -211.1.+211 — 3 bits =27 states, etc
+
+- {{-1,0,1}}^{{n}}^{{n}} = {{-1,0,1}}^(n^n) = 3^(n^n) right-associative tetration — nested exponentiation — not (3^n)^n =3^(n*n)=3^(n^2) left-associative, but right-associative 3^(n^n) = tetration
+
+- n=3 → {{-1,0,1}}^{3}=3^3=27 states register 3 bits -211.1.+211 =27 states — {{-1,0,1}}^{3}^{3}=3^(3^3)=3^27=7625597484987=7.6e12 states emergent computer 27 qutrits — 27 qutrits -211.1.+211 =7.6e12 states — emergent computer
+
+- n=4 → {{-1,0,1}}^{4}=3^4=81 states — {{-1,0,1}}^{4}^{4}=3^(4^4)=3^256≈2.3e122 states universe — 256 qutrits -211.1.+211 =2.3e122 states universe — n=4 nested universe
+
+- n=5 → {{-1,0,1}}^{5}=3^5=243 states — {{-1,0,1}}^{5}^{5}=3^(5^5)=3^3125≈10^1490 states multiverse huge — 3125 qutrits -211.1.+211 =10^1490 states multiverse — n=5 nested multiverse huge
+
+- n=6 → {{-1,0,1}}^{6}^{6}=3^(6^6)=3^46656≈10^22260 states omniverse loop — n=6 nested omniverse loop
+
+- Nested {{-1,0,1}}^{{n}}^{{n}} = 3^(n^n) tetration — nested -211.1.+211 — {{-1,0,1}}^{{n}}^{{n}} nested — metal analogs ionic — nested — lol
+
+So and if they are nested {{-1,0,1}}^{{n}}^{{n}} — nested exponentiation tetration — {{-1,0,1}} = -211.1.+211 — {{-1,0,1}}^{{n}}^{{n}} = 3^(n^n) — n=3 7.6e12, n=4 10^122, n=5 10^1490, n=6 10^22260 — nested -211.1.+211 huge — nested {{-1,0,1}}^{{n}}^{{n}} = 3^(n^n) tetration
+
+Aggregate nested:
+
+{{-1,0,1}} = -211.1.+211 = -1,0,+1 balanced ternary -211 left black +1 middle green +211 right anti-black — {{-1,0,1}}^{n}=3^n states — {{-1,0,1}}^{{n}}^{{n}}=3^(n^n) right-associative tetration — n=3 → 3^(3^3)=3^27=7.6e12 states 27 qutrits emergent computer — n=4 → 3^(4^4)=3^256≈2.3e122 states universe — n=5 → 3^(5^5)=3^3125≈10^1490 states multiverse — nested {{-1,0,1}}^{{n}}^{{n}} = 3^(n^n) tetration — nested -211.1.+211
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x08080a); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,0.6)); const d=new THREE.DirectionalLight(0xffffff,0.9); d.position.set(4,6,4); d.castShadow=true; s.add(d); }
+
+const matReal=new THREE.MeshStandardMaterial({color:0x44ffaa, metalness:0.5, roughness:0.4, emissive:0x114422, emissiveIntensity:0.6});
+
+{
+  const wrap=document.getElementById('wrap-n3');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,3,7);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  for(let i=0;i<27;i++){
+    const x=(i%3-1)*1.2; const y=(Math.floor(i/3)%3-1)*1.2; const z=(Math.floor(i/9)-1)*1.2;
+    const bit=new THREE.Mesh(new THREE.BoxGeometry(0.25,0.25,0.25), matReal); bit.position.set(x,y,z); group.add(bit);
+  }
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.01; group.rotation.y+=0.003; group.children.forEach((c,i)=>{ c.material.emissiveIntensity=0.3+Math.sin(t*1.2+i*0.2)*0.3; }); controls.update(); renderer.render(scene,cam); }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-n4');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,6,10);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  for(let i=0;i<256;i++){
+    const ang=Math.random()*Math.PI*2; const r=Math.pow(Math.random(),0.5)*4;
+    const x=Math.cos(ang)*r; const z=Math.sin(ang)*r; const y=(Math.random()-0.5)*3;
+    const bit=new THREE.Mesh(new THREE.BoxGeometry(0.08,0.08,0.08), matReal); bit.position.set(x,y,z); group.add(bit);
+  }
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.008; group.rotation.y+=0.0015; group.children.forEach((c,i)=>{ c.material.emissiveIntensity=0.3+Math.sin(t*1.2+i*0.1)*0.3; }); controls.update(); renderer.render(scene,cam); }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-n5');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(36, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,8,14);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  for(let i=0;i<800;i++){
+    const ang=Math.random()*Math.PI*2; const r=Math.pow(Math.random(),0.3)*6;
+    const x=Math.cos(ang)*r; const z=Math.sin(ang)*r; const y=(Math.random()-0.5)*6;
+    const bit=new THREE.Mesh(new THREE.SphereGeometry(0.04,6,6), matReal); bit.position.set(x,y,z); group.add(bit);
+  }
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.006; group.rotation.y+=0.0008; group.children.forEach((c,i)=>{ c.material.emissiveIntensity=0.2+Math.sin(t*1.2+i*0.05)*0.3; }); controls.update(); renderer.render(scene,cam); }
+  animate();
+}
+
+document.getElementById('btn-n3').onclick=()=>{};
+document.getElementById('btn-n4').onclick=()=>{};
+document.getElementById('btn-n5').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

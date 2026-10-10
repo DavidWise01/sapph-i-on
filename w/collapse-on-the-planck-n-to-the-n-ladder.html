@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>collapse on the planck n^n ladder</title>
+<style>
+:root{--ground:#0b0c10;--rule:#252833;--ink:#E6E8EE;--dim:#8A90A2;--len:#6FC3FF;--time:#C9A0FF;--au:#D4AF37;--lit:#6FD08C;--amber:#F2A03D;--bad:#FF6B6B}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ground);color:var(--ink);font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.wrap{max-width:920px;margin:0 auto;padding:16px}
+.hd{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin:18px 0 8px}
+.hd:first-child{margin-top:0}
+.hd b{font-weight:400;letter-spacing:.2em;color:var(--dim);font-size:10px;text-transform:uppercase}
+.src{border:1px solid var(--rule);border-radius:3px;padding:8px 10px;font-size:13px}
+.verdict{border:1px solid #3f355a;background:rgba(201,160,255,.05);border-radius:3px;padding:9px 11px;font-size:11.5px}
+canvas{display:block;width:100%;border:1px solid var(--rule);border-radius:3px;background:#07080b;touch-action:none}
+.sp{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;align-items:center}
+button{font:inherit;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:transparent;color:var(--time);border:1px solid #4a3d66;padding:6px 9px;border-radius:2px;cursor:pointer}
+.rd{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+.rd div{border:1px solid var(--rule);border-radius:3px;padding:6px 8px;min-width:0}
+.rd i{display:block;font-style:normal;font-size:9px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+.rd span{font-size:13px;overflow-wrap:anywhere}
+.tw{overflow-x:auto;margin-top:8px;border:1px solid var(--rule);border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:11px}
+th,td{padding:5px 8px;border-bottom:1px solid #1a1c24;text-align:left;vertical-align:middle;white-space:nowrap}
+th{color:var(--dim);font-weight:400;font-size:9px;letter-spacing:.1em;text-transform:uppercase}
+.s{font-size:9px;letter-spacing:.1em}
+.lit{color:var(--lit)} .amb{color:var(--amber)} .bad{color:var(--bad)}
+#msg{margin-top:8px;font-size:11px;min-height:18px}
+.note{margin-top:10px;font-size:10.5px;color:var(--dim)} .note b{color:var(--ink);font-weight:400}
+.small{margin-top:8px;font-size:11px;border-left:2px solid var(--time);padding-left:9px}
+@media(max-width:560px){ .rd{grid-template-columns:1fr 1fr} td,th{white-space:normal;padding:5px 5px} #tb td:nth-child(4),#tb th:nth-child(4){display:none} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hd"><b>R · the collapse, at scale planck{{n}}^{{n}}</b><b>ruler: n^n planck units</b></div>
+  <div class="src">plank{{n}}^{{n}} . plank{{n}}^{{n}} / plank^{{n}}^{{n}}</div>
+  <div class="verdict">in Planck units the Planck length is <b>1</b>, so planck^(n^n) = 1^(n^n) = <b>1</b> for every n, and your ratio comes out as plain <b>n^n</b>. that makes the ruler: rung n is n^n Planck lengths (or Planck times). on it, <b>a gold nucleus sits at rung 17.01</b>. <b>a neutron star's radius sits at rung 27.1</b>. and <b>30^30 Planck times is 11.1 seconds</b>, the length of a newborn neutron star's neutrino flash. the collapse runs from rung 28.4 down to 27.1 in length, while the clock climbs from rung 28.6 to 30. the rungs are real arithmetic. how close things land is weaker than it looks, and the control below measures how weak.</div>
+
+  <div class="hd"><b>the ladder · rungs 1 → 30</b><b id="st">–</b></div>
+  <canvas id="cv"></canvas>
+  <div class="sp"><button id="go">run the collapse</button><button id="stop">stop</button></div>
+  <div id="msg"></div>
+
+  <div class="rd">
+    <div><i>planck^(n^n), in planck units</i><span>1, every n</span></div>
+    <div><i>your ratio</i><span>n^n</span></div>
+    <div><i>30^30 planck times</i><span>11.1 s</span></div>
+    <div><i>27^27 planck lengths</i><span>7.2 km</span></div>
+    <div><i>17^17 planck lengths</i><span>13.4 fm</span></div>
+    <div><i>each rung up, near 30</i><span>× ~82</span></div>
+    <div><i>chance a random size lands this close to a rung (Au nucleus)</i><span id="mc1">–</span></div>
+    <div><i>chance · 30^30 ↔ flash</i><span id="mc2">–</span></div>
+  </div>
+
+  <div class="hd"><b>every step, placed on the ruler</b><b>n where n^n = the thing in planck units</b></div>
+  <div class="tw"><table id="tb"></table></div>
+
+  <div class="note"><b>the ruler.</b> Planck units set the Planck length, time and mass to 1. then any power of the Planck length is still 1, so your fraction reduces to n^n. rung 1 is 1.6 × 10⁻³⁵ m and rung 30 is 3.3 × 10⁹ m, a few times the Sun's radius. the same rungs in Planck time run from 5.4 × 10⁻⁴⁴ s to 11.1 s. <b>the collapse on it.</b> a star's iron core, a few thousand km across, sits at rung 28.4. it falls to a neutron star, 12 km in radius, rung 27.1: just over one rung down, a factor of ~250 in size. the clock runs the other way. the fall takes ~0.02 s (rung 28.6) and the bounce comes at ~0.15 s (rung 29.0). the neutrino flash lasts ~10–12 s, which is rung 30: your third 30. the matter climbs down the density ruler: rock sits 93 powers of ten below Planck density (rung 53.9); nuclear matter sits 79 below (rung 47.4). <b>the control.</b> near rung 30 each step up multiplies by about 82, so every size or time lands somewhere between two rungs. the question is only how close. the page throws 200,000 random sizes and counts how often one lands as close to a whole rung as each match does. the gold nucleus (off by 0.012 of a rung) would happen by chance about 2–3% of the time; the flash about 5%. I tried about a dozen quantities, so one or two landing that close is expected. the ladder is LIT; the matches are AMBER.</div>
+  <div class="small">small words: make the smallest possible ruler-tick the number 1. then count up by n × n × n … (n times). tick 17 is the size of a gold atom's middle. tick 27 is the size of a neutron star. and 30 ticks of time is about 11 seconds, how long a dying star flashes. some landings are luck, and the page tests that.</div>
+</div>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const LP=1.616255e-35, TP=5.391247e-44, RHOP=5.155e96;
+const solve=Q=>{ let lo=1,hi=80; for(let i=0;i<200;i++){ const m=(lo+hi)/2; (m*Math.log(m)<Math.log(Q))?lo=m:hi=m; } return lo; };
+const sup=n=>String(n).replace('-','⁻').replace(/\d/g,c=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[c]);
+const sci=x=>{ const e=Math.floor(Math.log10(x)); return (x/10**e).toFixed(2)+'×10'+sup(e); };
+const LEN=[['nucleon',1.68e-15],['gold nucleus',14e-15],['iron atom',2.5e-10],['the corpus dot',3.34e-9],['neutron star radius',12e3],['iron core radius',3e6]];
+const TIM=[['fall at nuclear density',1.4e-4],['core fall (10¹³ kg/m³)',0.021],['bounce',0.15],['neutrino flash (1987)',12.4]];
+const DEN=[['rock',3e3],['electrons into nuclei',1e12],['neutron drip',4.3e14],['nuclear density',2.3e17]];
+const rows=[...LEN.map(([a,v])=>['length',a,v,'m',solve(v/LP)]),...TIM.map(([a,v])=>['time',a,v,'s',solve(v/TP)]),...DEN.map(([a,v])=>['density',a,v,'kg/m³',solve(RHOP/v)])];
+// control: log-uniform random sizes 1e-16..1e10 m; how often within |Δ| of an integer rung
+const solveQ=lq=>{ const t=(lq-Math.log10(LP))*Math.LN10; let lo=1,hi=80; for(let i=0;i<48;i++){ const m=(lo+hi)/2; (m*Math.log(m)<t)?lo=m:hi=m; } return lo; };
+function mc(delta){ let hit=0,N=200000,s=12345; for(let i=0;i<N;i++){ s=(s*16807)%2147483647; const lq=-16+26*(s/2147483647); const n=solveQ(lq); if(Math.abs(n-Math.round(n))<=delta) hit++; } return hit/N; }
+const dAu=Math.abs(solve(14e-15/LP)-17), dFl=Math.abs(solve(12.4/TP)-30);
+const p1=mc(dAu), p2=mc(dFl);
+$('mc1').innerHTML=`<span class="amb">${(p1*100).toFixed(1)}%</span>`; $('mc2').innerHTML=`<span class="amb">${(p2*100).toFixed(1)}%</span>`;
+$('tb').innerHTML='<tr><th>ruler</th><th>step</th><th>size</th><th>in planck units</th><th>rung n</th><th>nearest</th></tr>'+rows.map(r=>{ const q=r[0]==='length'?r[2]/LP:r[0]==='time'?r[2]/TP:RHOP/r[2], d=Math.abs(r[4]-Math.round(r[4]));
+  return `<tr><td style="color:${r[0]==='length'?'#6FC3FF':r[0]==='time'?'#C9A0FF':'#D4AF37'}">${r[0]}${r[0]==='density'?' (below planck)':''}</td><td>${r[1]}</td><td>${sci(r[2])} ${r[3]}</td><td>${sci(q)}</td><td>${r[4].toFixed(2)}</td><td>${Math.round(r[4])} ${d<0.05?'<span class="amb">· close</span>':''}</td></tr>`; }).join('');
+// ladder canvas: log10 of n^n on x, two lanes
+let phase=-1, anim=null, t0=0;
+function fit(cv){ const w=cv.clientWidth||600, h=Math.round(Math.max(260,Math.min(w*0.5,380))), d=window.devicePixelRatio||1; cv.width=Math.round(w*d); cv.height=Math.round(h*d); cv.style.height=h+'px'; const g=cv.getContext('2d'); g.setTransform(d,0,0,d,0,0); return [g,w,h]; }
+function draw(){
+  const [g,W,H]=fit($('cv')), L=16, R=W-16, N0=15.5,N1=30.6, X=n=>L+(R-L)*(n-N0)/(N1-N0), yL=H*0.3, yT=H*0.68;
+  g.font='9.5px ui-monospace,monospace';
+  for(let n=16;n<=30;n++){ const x=X(n); g.strokeStyle=n%10===0?'#3a3f50':'#1c1f29'; g.beginPath(); g.moveTo(x,yL-22); g.lineTo(x,yT+22); g.stroke();
+    if(W>500||n%2===1||n===30||n===27){ g.fillStyle=n===17||n===27||n===30?'#E6E8EE':'#8A90A2'; g.textAlign='center'; g.fillText(n,x,H-10); } }
+  g.textAlign='left'; g.fillStyle='#8A90A2'; g.fillText(W<520?'rungs 16 → 30 · 1–15 off the left':'rungs 16 → 30, evenly spaced · rungs 1–15 (planck up to 10⁻¹⁷ m) sit off the left',L,14);
+  g.strokeStyle='#6FC3FF'; g.beginPath(); g.moveTo(L,yL); g.lineTo(R,yL); g.stroke(); g.fillStyle='#6FC3FF'; g.fillText('length · n^n planck lengths',L,yL-28);
+  g.strokeStyle='#C9A0FF'; g.beginPath(); g.moveTo(L,yT); g.lineTo(R,yT); g.stroke(); g.fillStyle='#C9A0FF'; g.fillText('time · n^n planck times',L,yT-28);
+  const pin=(n,y,col,lab,up)=>{ const x=X(n); g.fillStyle=col; g.beginPath(); g.arc(x,y,4,0,7); g.fill(); g.fillStyle='#E6E8EE'; g.save(); g.translate(x,y+(up?-8:14)); g.rotate(-0.5); g.fillText(lab,0,0); g.restore(); };
+  const SL=['p/n','Au','Fe','dot','NS','core'], ST=['ρ₀','fall','bounce','flash']; const sm=W<520;
+  LEN.forEach(([a,v],i)=>pin(solve(v/LP),yL,'#6FC3FF',sm?SL[i]:a,i%2===0));
+  TIM.forEach(([a,v],i)=>pin(solve(v/TP),yT,'#C9A0FF',sm?ST[i]:a,i%2===0));
+  // collapse marker
+  if(phase>=0){ const k=Math.min(1,phase); const nL=28.397+(27.12-28.397)*k, nT=27.4+(30.025-27.4)*k;
+    g.strokeStyle='#D4AF37'; g.lineWidth=2; g.beginPath(); g.arc(X(nL),yL,9,0,7); g.stroke(); g.beginPath(); g.arc(X(nT),yT,9,0,7); g.stroke(); g.lineWidth=1;
+    const size=LP*nL**nL, time=TP*nT**nT; $('st').textContent=`size ${size>=1e3?(size/1e3).toFixed(0)+' km':size.toFixed(0)+' m'} · clock ${time<1?time.toPrecision(2):time.toFixed(1)} s`;
+    window.__LAD__={nL,nT,size,time}; }
+}
+function loop(now){ if(phase>=0&&phase<1){ phase=Math.min(1,(now-t0)/6000); if(phase>=1) $('msg').textContent='done: the core is a neutron star (rung 27.1) and the flash has run to rung 30, about 11 seconds.'; } draw(); anim=requestAnimationFrame(loop); }
+$('go').onclick=()=>{ phase=0; t0=performance.now(); $('msg').textContent='the iron core falls: rung 28.4 → 27.1 in size, while the clock climbs toward 30.'; };
+$('stop').onclick=()=>{ phase=-1; $('st').textContent='–'; $('msg').textContent=''; };
+window.__LADDER__={r30:TP*30**30,r27:LP*27**27,r17:LP*17**17,nAu:solve(14e-15/LP),nNS:solve(12e3/LP),nFlash:solve(12.4/TP),p1,p2};
+requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

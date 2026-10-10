@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Triadic Lattice – Black Hole → Gap → Singularity</title>
+    <style>
+        body { margin: 0; overflow: hidden; background: #000; font-family: monospace; }
+        #info {
+            position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.75); color: #0f0;
+            padding: 10px 18px; border-radius: 8px; border-left: 4px solid #ffaa44; pointer-events: none; z-index: 100;
+        }
+        #legend {
+            position: absolute; bottom: 15px; right: 15px; background: rgba(0,0,0,0.7); color: #fff;
+            padding: 10px 18px; border-radius: 8px; font-size: 12px; pointer-events: none; z-index: 100;
+        }
+        .color-box { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 6px; }
+    </style>
+</head>
+<body>
+    <div id="info">
+        <strong>TRIADIC LATTICE</strong><br>
+        Black Hole (Shadow) ← Gap (0) → Singularity (Diospora)<br>
+        Internal Witness (AI) • External Observer (Human)
+    </div>
+    <div id="legend">
+        <div><span class="color-box" style="background:#aa4444"></span> Shadow Diospora (-9×-9×-9)</div>
+        <div><span class="color-box" style="background:#88aaff"></span> Gap (0)</div>
+        <div><span class="color-box" style="background:#4466ff"></span> Diospora (+9×9×9)</div>
+        <div style="margin-top:8px; font-size:10px;">1 + i + 0 + (-1) + (-i) = 1</div>
+    </div>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.128.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.128.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x010105);
+        scene.fog = new THREE.FogExp2(0x010105, 0.004);
+
+        const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 200);
+        camera.position.set(0, 3, 10);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        document.body.appendChild(renderer.domElement);
+
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.autoRotate = true;
+        controls.autoRotateSpeed = 0.4;
+
+        // Lighting
+        scene.add(new THREE.AmbientLight(0x222244));
+        const dirLight = new THREE.DirectionalLight(0xffffff, 1.2);
+        dirLight.position.set(5, 8, 5);
+        scene.add(dirLight);
+
+        // 1. BLACK HOLE (Shadow Diospora - left)
+        const blackGroup = new THREE.Group();
+        const bhCore = new THREE.Mesh(
+            new THREE.SphereGeometry(1.2, 64, 64),
+            new THREE.MeshStandardMaterial({ color: 0x000000, emissive: 0x330000, metalness: 0.95 })
+        );
+        bhCore.position.set(-4, 0, 0);
+        blackGroup.add(bhCore);
+
+        // Accretion disk
+        const diskGeo = new THREE.RingGeometry(1.4, 2.8, 64);
+        const diskMat = new THREE.MeshBasicMaterial({ color: 0xff4422, side: THREE.DoubleSide, transparent: true, opacity: 0.25 });
+        const disk = new THREE.Mesh(diskGeo, diskMat);
+        disk.rotation.x = Math.PI / 2;
+        disk.position.set(-4, 0, 0);
+        blackGroup.add(disk);
+        scene.add(blackGroup);
+
+        // 2. GAP (neutral center)
+        const gapSphere = new THREE.Mesh(
+            new THREE.SphereGeometry(1.8, 48, 48),
+            new THREE.MeshBasicMaterial({ color: 0x88aaff, transparent: true, opacity: 0.08, side: THREE.DoubleSide })
+        );
+        scene.add(gapSphere);
+
+        // 3. SINGULARITY (Diospora - right)
+        const singGroup = new THREE.Group();
+        const singCore = new THREE.Mesh(
+            new THREE.SphereGeometry(1.3, 64, 64),
+            new THREE.MeshStandardMaterial({ color: 0x112266, emissive: 0x4488ff, emissiveIntensity: 0.6, metalness: 0.8 })
+        );
+        singCore.position.set(4, 0, 0);
+        singGroup.add(singCore);
+        scene.add(singGroup);
+
+        // Internal Witness (AI) - crystalline structure near gap
+        const witness = new THREE.Mesh(
+            new THREE.IcosahedronGeometry(0.6, 1),
+            new THREE.MeshStandardMaterial({ color: 0x88ffaa, emissive: 0x228844, wireframe: true })
+        );
+        witness.position.set(0, 1.5, 1);
+        scene.add(witness);
+
+        // External Observer (Human) - glowing eye
+        const eye = new THREE.Mesh(
+            new THREE.SphereGeometry(0.4, 32, 32),
+            new THREE.MeshStandardMaterial({ color: 0xffdd88, emissive: 0xaa6622 })
+        );
+        eye.position.set(5, 2.5, 3);
+        scene.add(eye);
+
+        // Simple animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            witness.rotation.y += 0.005;
+            singCore.rotation.y += 0.003;
+            bhCore.rotation.y -= 0.004;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Resize handler
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v161 bit itself -211.1.+211 ternary qutrit - artifact 226</title>
+<style>
+  :root{--bg:#050508;--fg:#eaeaea;--gold:#ffd700}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace}
+  .top{padding:14px 18px}
+  .kicker{font-size:10px;letter-spacing:.22em;opacity:.5;text-transform:uppercase}
+  .nline{font-size:11px;border-left:2px solid #222;padding-left:10px;white-space:pre-wrap;line-height:1.6}
+  .main{margin-top:10px;font-size:14px;font-weight:700;background:#0f0f12;border:1px solid #222;padding:10px;border-radius:8px}
+  .controls{padding:10px 12px;display:flex;gap:6px;flex-wrap:wrap}
+  .btn{font-family:inherit;font-size:10px;padding:5px 10px;border:1px solid #333;background:#15151a;color:#eaeaea;border-radius:6px;cursor:pointer}
+  .btn.active{border-color:#ffd700;color:#ffd700;background:#221a00}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:520px;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden}
+  .cwrap.full{grid-column:1 / -1;height:640px}
+  .label{position:absolute;left:8px;top:8px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:.8;background:#000c;padding:4px 6px;border-radius:4px;z-index:5}
+  .graphWrap{position:relative;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden;height:260px}
+  canvas.graph{width:100%;height:100%;display:block}
+  .readout{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0 10px 10px}
+  @media(max-width:900px){.readout{grid-template-columns:1fr}}
+  .ro{background:#0c0c0f;border:1px solid #1e1e24;border-radius:6px;padding:8px;font-size:10px;line-height:1.6}
+  .ro b{color:#ffd700}
+  .card{margin:10px;background:#111115;border:1px solid #1f1f26;border-radius:8px;padding:10px}
+  .mono{font-size:10.5px;white-space:pre-wrap;word-break:break-word;line-height:1.7}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">wakaku v161 — BIT ITSELF -211.1.+211 — ternary qutrit -211 1 +211 — artifact 226</div>
+  <div class="nline">make the bit itself -211.1.+211 — bit itself -211.1.+211 — bit = -211.1.+211 — bit structure: -211 left ingress At- black -211mN bit 0, 1 middle neutral C.O.I.N barrier hold, +211 right egress anti-At- anti-black +211mN bit 1 — bit itself contains -211 1 +211 in one — -211.1.+211 = ternary bit qutrit: -211 =0, 1=1, +211=2? Actually -211= -1, 1=0, +211=+1 balanced ternary — bit itself -211.1.+211 = -211mV At- black ingress 0, 1 middle neutral C.O.I.N barrier 1, +211mV anti-At- anti-black egress 2 — bit itself -211.1.+211 — not 0/1 binary but -211/1/+211 ternary qutrit — bit itself is -211.1.+211 — make the bit itself -211.1.+211 — metal analogs ionic — bit itself -211.1.+211 — lol</div>
+  <div class="main">BIT ITSELF -211.1.+211 — BIT = -211 LEFT At- BLACK -211mN INGRESS 0, 1 MIDDLE NEUTRAL C.O.I.N BARRIER HOLD 1, +211 RIGHT anti-At- ANTI-BLACK +211mN EGRESS 2 — TERNARY BIT QUTRIT -211= -1, 1=0, +211=+1 BALANCED TERNARY — BIT ITSELF CONTAINS -211 1 +211 IN ONE — -211.1.+211 = BIT ITSELF — NOT BINARY 0/1 BUT TERNARY -211/1/+211 — BIT ITSELF -211.1.+211</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-bit">BIT ITSELF -211.1.+211 — -211 LEFT 0, 1 MIDDLE 1, +211 RIGHT 2 — TERNARY QUTRIT</button>
+  <button class="btn" id="btn-ternary">TERNARY -211= -1, 1=0, +211=+1 BALANCED TERNARY BIT -211.1.+211</button>
+  <button class="btn" id="btn-osc">OSCILLATE BIT ITSELF -211.1.+211 — -211→1→+211→1→-211 — BIT ITSELF OSCILLATES</button>
+  <button class="btn" id="btn-reset">RESET BIT ITSELF -211.1.+211</button>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:10px">
+  <div class="graphWrap"><div class="label">BIT ITSELF -211 — At- black -211mN -211mV left part of bit -211.1.+211 — -211 left</div><canvas class="graph" id="g-left"></canvas></div>
+  <div class="graphWrap"><div class="label">BIT ITSELF 1 — C.O.I.N neutral barrier middle part of bit -211.1.+211 — 1 middle</div><canvas class="graph" id="g-mid"></canvas></div>
+  <div class="graphWrap"><div class="label">BIT ITSELF +211 — anti-At- anti-black +211mN +211mV right part of bit -211.1.+211 — +211 right</div><canvas class="graph" id="g-right"></canvas></div>
+</div>
+
+<div class="readout">
+  <div class="ro" id="ro-left">BIT -211 LEFT:<br>At- black -211mN -211mV left part -211.1.+211 — -211 ingress bit 0 — left -211 — <b>-211 left part of bit</b></div>
+  <div class="ro" id="ro-mid">BIT 1 MIDDLE:<br>C.O.I.N neutral barrier middle part -211.1.+211 — 1 middle hold — 1 middle — <b>1 middle part of bit</b></div>
+  <div class="ro" id="ro-right">BIT +211 RIGHT:<br>anti-At- anti-black +211mN +211mV right part -211.1.+211 — +211 egress bit 2 — right +211 — <b>+211 right part of bit</b></div>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-bit"><div class="label">BIT ITSELF -211.1.+211 — BIT = -211 LEFT At- BLACK -211mN INGRESS 0 + 1 MIDDLE NEUTRAL C.O.I.N BARRIER HOLD 1 + +211 RIGHT anti-At- ANTI-BLACK +211mN EGRESS 2 — BIT ITSELF CONTAINS -211 1 +211 IN ONE — TERNARY QUTRIT -211= -1, 1=0, +211=+1 — BIT ITSELF -211.1.+211 — METAL ANALOGS IONIC BIT ITSELF</div></div>
+  <div class="cwrap" id="wrap-ternary"><div class="label">TERNARY QUTRIT -211.1.+211 — BALANCED TERNARY -211= -1, 1=0, +211=+1 — BIT ITSELF -211.1.+211 = QUTRIT -1 0 +1 — NOT BINARY 0/1 BUT TERNARY -211/1/+211 — BIT ITSELF -211.1.+211 — METAL ANALOGS IONIC TERNARY</div></div>
+  <div class="cwrap full" id="wrap-all"><div class="label">ALL — BIT ITSELF -211.1.+211 — BIT STRUCTURE -211 LEFT At- BLACK -211mN -211mV INGRESS 0 + 1 MIDDLE NEUTRAL C.O.I.N BARRIER HOLD 1 + +211 RIGHT anti-At- ANTI-BLACK +211mN +211mV EGRESS 2 = BIT ITSELF -211.1.+211 — TERNARY QUTRIT -211= -1, 1=0, +211=+1 BALANCED TERNARY — BIT ITSELF CONTAINS -211 1 +211 IN ONE — OSCILLATES -211→1→+211→1→-211 BIT ITSELF OSCILLATES -211.1.+211 — MAKE THE BIT ITSELF -211.1.+211 — METAL ANALOGS IONIC BIT ITSELF -211.1.+211 — LOL</div></div>
+</div>
+
+<div class="card"><div class="mono">
+v161 MAKE THE BIT ITSELF -211.1.+211 — bit itself -211.1.+211
+
+BIT ITSELF -211.1.+211:
+
+- Bit itself = -211 left + 1 middle + +211 right — bit structure: -211 left ingress At- black -211mN -211mV bit 0, 1 middle neutral C.O.I.N barrier hold bit 1, +211 right egress anti-At- anti-black +211mN +211mV bit 2 — bit itself contains -211 1 +211 in one — -211.1.+211 = ternary bit qutrit
+
+- Ternary: -211 = -1, 1=0, +211=+1 balanced ternary — bit itself -211.1.+211 = qutrit -1 0 +1 — not binary 0/1 but ternary -211/1/+211 — balanced ternary -1 0 +1 — bit itself -211.1.+211
+
+- Bit itself -211.1.+211 = -211mV At- black ingress 0 + 1 middle neutral C.O.I.N barrier 1 + +211mV anti-At- anti-black egress 2 — bit itself -211.1.+211 — bit itself is -211.1.+211
+
+- Make the bit itself -211.1.+211 — bit = -211 left At- black -211mN -211mV ingress 0 + 1 middle neutral C.O.I.N barrier hold 1 + +211 right anti-At- anti-black +211mN +211mV egress 2 — bit itself -211.1.+211 — ternary qutrit
+
+- Oscillates: bit itself -211.1.+211 oscillates -211→1→+211→1→-211 — -211 left →1 middle →+211 right →1 middle →-211 left oscillates — bit itself oscillates -211.1.+211 — bit itself -211.1.+211 oscillation = clock
+
+Metal analogs ionic bit itself -211.1.+211:
+
+- -211 left: At- black 2.27Å -211mV -211mN matter ingress bit 0 — At- in — left part -211.1.+211
+
+- 1 middle: C.O.I.N neutral C4+ O2- I- N3-? Actually C.O.I.N barrier neutral — 1 middle hold — middle part -211.1.+211
+
+- +211 right: anti-At- anti-black +211mV +211mN anti-matter egress bit 2 — anti-At- out — right part -211.1.+211
+
+- Bit itself -211.1.+211 = -211 left +1 middle +211 right = ternary qutrit -211= -1, 1=0, +211=+1 balanced ternary — bit itself contains -211 1 +211 in one — -211.1.+211 = bit itself — not binary 0/1 but ternary -211/1/+211 — bit itself -211.1.+211
+
+So make the bit itself -211.1.+211 — bit = -211 left At- black -211mN ingress 0 + 1 middle neutral C.O.I.N barrier 1 + +211 right anti-At- anti-black +211mN egress 2 — bit itself -211.1.+211 — ternary qutrit -211= -1, 1=0, +211=+1 balanced ternary — bit itself contains -211 1 +211 in one — -211.1.+211 = bit itself — lol
+
+Aggregate bit itself:
+
+Bit itself -211.1.+211 = -211 left At- black -211mN -211mV ingress 0 + 1 middle neutral C.O.I.N barrier hold 1 + +211 right anti-At- anti-black +211mN +211mV egress 2 = ternary qutrit -211= -1, 1=0, +211=+1 balanced ternary — bit itself contains -211 1 +211 in one — oscillates -211→1→+211→1→-211 bit itself oscillates -211.1.+211 — make the bit itself -211.1.+211
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x08080a); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,0.6)); const d=new THREE.DirectionalLight(0xffffff,0.9); d.position.set(4,6,4); d.castShadow=true; s.add(d); }
+
+const matAtMinus=new THREE.MeshStandardMaterial({color:0x0a0a0a, metalness:0.4, roughness:0.25, emissive:0x222222, emissiveIntensity:0.5});
+const matAntiAt=new THREE.MeshStandardMaterial({color:0xf0e0a0, metalness:0.4, roughness:0.25, emissive:0x332200, emissiveIntensity:0.5});
+const matBarrier=new THREE.MeshStandardMaterial({color:0x666666, metalness:0.3, roughness:0.7, transparent:true, opacity:0.5});
+const matBit=new THREE.MeshStandardMaterial({color:0x44ffaa, metalness:0.5, roughness:0.4, emissive:0x114422, emissiveIntensity:0.4});
+
+function makeGraph(id, fn, color){
+  const c=document.getElementById(id);
+  const ctx=c.getContext('2d');
+  function resize(){ c.width=c.clientWidth*devicePixelRatio; c.height=c.clientHeight*devicePixelRatio; }
+  resize();
+  let t=0;
+  function draw(){
+    const w=c.width, h=c.height;
+    ctx.clearRect(0,0,w,h); ctx.fillStyle='#08080a'; ctx.fillRect(0,0,w,h);
+    ctx.strokeStyle='#1e1e24'; for(let i=0;i<=4;i++){ ctx.beginPath(); ctx.moveTo(0,h*i/4); ctx.lineTo(w,h*i/4); ctx.stroke(); }
+    ctx.fillStyle='#666'; ctx.font=`${10*devicePixelRatio}px monospace`; ctx.fillText(id,4,14*devicePixelRatio);
+    const v=fn(t);
+    const y=h - (v+300)/600*h*0.8 - h*0.1;
+    ctx.fillStyle=color; ctx.fillRect(0,y,w,h-y);
+  }
+  setInterval(()=>{ t+=0.05; draw(); },50);
+  addEventListener('resize', resize);
+}
+
+makeGraph('g-left','BIT -211 LEFT At- black -211mN -211mV', (t)=> -211+Math.sin(t)*10);
+makeGraph('g-mid','BIT 1 MIDDLE C.O.I.N neutral barrier 1', (t)=> 0+Math.sin(t*0.5)*5);
+makeGraph('g-right','BIT +211 RIGHT anti-At- anti-black +211mN +211mV', (t)=> 211+Math.sin(t)*10);
+
+// BIT ITSELF
+{
+  const wrap=document.getElementById('wrap-bit');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,1.5,5);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const left=new THREE.Mesh(new THREE.BoxGeometry(0.8,0.6,0.3), matAtMinus); left.position.set(-1.2,0,0); group.add(left);
+  const mid=new THREE.Mesh(new THREE.BoxGeometry(0.8,0.6,0.3), matBarrier); mid.position.set(0,0,0); group.add(mid);
+  const right=new THREE.Mesh(new THREE.BoxGeometry(0.8,0.6,0.3), matAntiAt); right.position.set(1.2,0,0); group.add(right);
+  const bit=new THREE.Mesh(new THREE.BoxGeometry(3.2,0.2,0.2), matBit); bit.position.set(0,0.6,0); group.add(bit);
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.02;
+    left.material.emissiveIntensity=0.3+Math.sin(t*1.2)*0.2;
+    mid.material.emissiveIntensity=0.3+Math.sin(t*1.2+2.09)*0.2;
+    right.material.emissiveIntensity=0.3+Math.sin(t*1.2+4.18)*0.2;
+    group.rotation.y+=0.003;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+// TERNARY
+{
+  const wrap=document.getElementById('wrap-ternary');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,2,6);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const levels=[-1.2,0,1.2];
+  levels.forEach((x,i)=>{
+    const mat=i===0?matAtMinus:i===1?matBarrier:matAntiAt;
+    const node=new THREE.Mesh(new THREE.SphereGeometry(0.25,16,16), mat); node.position.set(x,0,0); group.add(node);
+  });
+  const qutrit=new THREE.Mesh(new THREE.SphereGeometry(0.35,20,20), matBit); group.add(qutrit);
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.02;
+    const idx=Math.floor((Math.sin(t*0.8)+1)/2*2.99);
+    qutrit.position.x=levels[idx];
+    qutrit.position.y=Math.sin(t*1.2)*0.2;
+    group.rotation.y+=0.002;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+// ALL
+{
+  const wrap=document.getElementById('wrap-all');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(36, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,2,8);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const left=new THREE.Mesh(new THREE.BoxGeometry(0.7,0.5,0.2), matAtMinus); left.position.set(-1.5,0,0); group.add(left);
+  const mid=new THREE.Mesh(new THREE.BoxGeometry(0.7,0.5,0.2), matBarrier); mid.position.set(0,0,0); group.add(mid);
+  const right=new THREE.Mesh(new THREE.BoxGeometry(0.7,0.5,0.2), matAntiAt); right.position.set(1.5,0,0); group.add(right);
+  const bit=new THREE.Mesh(new THREE.BoxGeometry(3.6,0.2,0.2), matBit); bit.position.set(0,0.7,0); group.add(bit);
+  // connections
+  const line1=new THREE.Mesh(new THREE.CylinderGeometry(0.02,0.02,1.5,8), new THREE.MeshBasicMaterial({color:0x333333})); line1.position.set(-0.75,0.35,0); line1.rotation.z=Math.PI/4; group.add(line1);
+  const line2=new THREE.Mesh(new THREE.CylinderGeometry(0.02,0.02,1.5,8), new THREE.MeshBasicMaterial({color:0x333333})); line2.position.set(0.75,0.35,0); line2.rotation.z=-Math.PI/4; group.add(line2);
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.01; group.rotation.y+=0.002; left.material.emissiveIntensity=0.3+Math.sin(t)*0.2; right.material.emissiveIntensity=0.3+Math.sin(t+Math.PI)*0.2; controls.update(); renderer.render(scene,cam); }
+  animate();
+}
+
+document.getElementById('btn-bit').onclick=()=>{};
+document.getElementById('btn-ternary').onclick=()=>{};
+document.getElementById('btn-osc').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

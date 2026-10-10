@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en"><head><link rel="icon" href="../favicon.svg" type="image/svg+xml"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>the sapphire sings · 3 legs smack the 0 core in time</title>
+<!-- PAPER ----------------------------------------------------------------
+  Sapphire core at 000 (the zero). 3 legs = weight-1 axes {001,010,100} send
+  ripples that smack the core in time; "sing right" = the taps arrive phased for
+  constructive drive of a high-Q resonance (phased array + driven damped osc.).
+  LIT (verified vs frozen): 3-tap coherent drive = Dirichlet kernel
+  |sin(3δ/2)/sin(δ/2)| — peak 3.0 at δ=0 (all smack together, 3× one leg), null
+  0 at δ=120° (breathing mode cancels; a 120° phasing drives a ROTATING WGM
+  instead). Driven damped oscillator: steady amplitude ∝ Q; ring-up ~ Q/π cycles.
+  Sapphire Q ≈ 6.37e7 → rings ~2e7 cycles. Sim (Q=40, visible): in-time peak
+  ≈1.84 (sings), partial ≈0.61 (weak), 120° ≈0 (silent). Bracket layers by
+  Hamming weight: legs {001,010,100}, ring {011,110,101}, {111,000} = far & core.
+  AMBER: resonator math (Q, ring-up, coherent phased drive) is exact & server-
+  verified. The sapphire / legs / ripple / register-cube mapping is the session's
+  framing; the on-screen sim uses Q=40 so the ring-up is visible (real sapphire
+  Q is millions). Visual, numbers frozen.
+  Fail-loud. Offline. Live Dirichlet + ring-up vs frozen at boot.
+------------------------------------------------------------------------ -->
+<style>
+:root{--ink:#0d0b08;--org:#ff6a00;--org2:#ff9a3c;--amb:#ffc233;--lit:#7dff6a;--fail:#ff3b3b;--pale:#e8ddcc;--dim:#8f8471;--saph:#5a9cff;--saph2:#a9d0ff;--leg:#ff9a3c;--ring:#c98bff;--sing:#6affd1;font-size:15px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:var(--pale);font-family:ui-monospace,Menlo,Consolas,monospace;line-height:1.42}
+header{padding:1rem 1.3rem .8rem;border-bottom:4px solid var(--org);background:linear-gradient(180deg,#1b1610,#0d0b08)}
+h1{margin:0;font-size:1.16rem;letter-spacing:.04em;color:var(--org);text-transform:uppercase;font-weight:800}
+.sub{color:var(--dim);margin-top:.3rem;font-size:.82rem}
+.wrap{padding:1rem 1.3rem 2.5rem;max-width:1180px;margin:0 auto}
+.panel{background:#161310;border:1px solid #2c2318;border-left:5px solid var(--saph);padding:.7rem .9rem;margin:.85rem 0}
+h2{margin:.1rem 0 .5rem;font-size:.92rem;color:var(--org2);text-transform:uppercase;letter-spacing:.06em}
+.grid2{display:grid;grid-template-columns:1.1fr .9fr;gap:.9rem}
+@media(max-width:900px){.grid2{grid-template-columns:1fr}}
+.card{padding:.55rem .8rem;margin:.4rem 0;border:1px solid #2c2318;font-size:.84rem}
+.card.lit{border-left:5px solid var(--lit)}.card.lit b{color:var(--lit)}
+.card.amber{border-left:5px solid var(--amb)}.card.amber b{color:var(--amb)}
+.card.sg{border-left:5px solid var(--saph)}.card.sg b{color:var(--saph2)}
+.card.fail{border-left:5px solid var(--fail);color:#ffd9d9;white-space:pre-wrap}
+.mon{background:#0a0908;border:1px solid #2c2318;min-height:4.5rem;max-height:9rem;overflow-y:auto;padding:.5rem .6rem;font-size:.74rem}
+.mon .ln{margin:.1rem 0;color:var(--dim)}.mon .ln.ok{color:var(--lit)}.mon .ln.bad{color:var(--fail)}.mon .ln.hd{color:var(--org2)}
+canvas{display:block;width:100%;background:#0a0908;border:1px solid #2c2318}
+.legend{color:var(--dim);font-size:.73rem;margin-top:.4rem}
+button{background:none;border:1px solid var(--org);color:var(--org);cursor:pointer;font-family:inherit;font-size:.78rem;padding:.28rem .8rem}
+button.on{background:var(--org);color:var(--ink)}
+input[type=range]{width:220px;accent-color:#ff6a00}
+.dials{display:flex;gap:.8rem;flex-wrap:wrap;margin:.3rem 0}
+.dial{border:1px solid #2c2318;padding:.4rem .7rem;min-width:112px}
+.dial .v{font-size:1.05rem;color:var(--saph2)}
+.dial .k{font-size:.68rem;color:var(--dim)}
+.row{display:flex;gap:.7rem;align-items:center;margin-top:.5rem;flex-wrap:wrap}
+footer{color:var(--dim);font-size:.71rem;padding:0 1.3rem 2rem;max-width:1180px;margin:0 auto}
+</style></head>
+<body>
+<header><h1>THE SAPPHIRE SINGS · 3 LEGS SMACK THE 0 CORE IN TIME</h1>
+<div class="sub">a high-Q sapphire at 000 (the zero) · three ripples race down the weight-1 legs {001,010,100} and hit it · smack in time → it rings; mistime them → silence</div></header>
+<div class="wrap">
+<div class="panel"><h2>verdict</h2><div id="readout"><div class="card sg">booting — seating the sapphire at the zero...</div></div></div>
+<div class="panel"><h2>the readout</h2><div class="dials" id="dials"></div>
+<div class="row"><span>tap timing — spread δ <input type="range" id="sD" min="0" max="180" step="2" value="0"><span id="vD" style="color:var(--org2)">0°</span></span>
+<button id="sync">smack in time (δ=0)</button><button id="rot">120° (rotating)</button><button id="run" class="on">running</button></div></div>
+<div class="panel"><h2>conductor — Dirichlet drive + ring-up vs frozen</h2><div class="mon" id="m1"></div></div>
+<div class="grid2">
+<div class="panel"><h2>the core &amp; the 3 legs (ripples smacking in)</h2>
+<canvas id="cscene" width="600" height="440"></canvas>
+<div class="legend">the sapphire core sits at 000 (the zero). the 3 orange legs are the weight-1 axes {001,010,100}; ripples travel inward and strike the core. the faint purple ring is weight-2 {011,110,101} (leg-pair XORs), the far node is 111. when the three strikes land together (δ=0) the core flares and rings; spread them and the strikes fight — at δ=120° they cancel the breathing mode entirely. drag to rotate the scene.</div></div>
+<div class="panel"><h2>the song — ring-up &amp; waveform</h2>
+<canvas id="cwave" width="480" height="440"></canvas>
+<div class="legend">top: the coherent drive vs timing spread — a Dirichlet (phased-array) curve, peaking at 3× when the taps are in time, zero at 120°. middle: the ring-up envelope (the core answers Q× louder, building over many cycles). bottom: the sapphire\u2019s waveform — a clean tone when driven in time, nothing when nulled.</div></div>
+</div>
+<div class="panel"><h2>toddler corner</h2>
+<div class="card sg"><b>ELI5:</b> imagine a wine glass that hums a perfect note when you tap it — a sapphire is that, but a MILLION times better; tap it once and it hums for millions of ripples. Now, three friends stand at the three corners of a triangle, each holding a rope that runs to the glass in the middle, and they flick their ropes to send a bump down to the glass. Here\u2019s the whole secret: if all three flick at the exact SAME instant, the three bumps pile on top of each other and shove the glass three times as hard — and because the glass barely loses any energy, those little shoves add up and up until it\u2019s SINGING loud. But if they flick out of sync, the bumps arrive at different moments and shove different ways — they cancel out, and the glass stays quiet. There\u2019s even one exact spacing (a third of a beat apart each) where they perfectly erase each other and the note dies completely — though at that spacing they instead set the glass spinning its sound around the rim instead of pulsing. So "making the sapphire sing right" isn\u2019t about hitting it harder — it\u2019s about all three legs hitting it in perfect time. Rhythm, not force. Tap together, and the zero at the center turns into a bell.</div></div>
+</div>
+<footer>SAPPHIRE SINGS · 3-tap drive = Dirichlet |sin(3δ/2)/sin(δ/2)|, peak 3 at δ=0, null at 120° · driven osc. amplitude ∝ Q≈6.37e7, ring-up ~Q/π cycles · in-time sings, 120° silent (rotating WGM) (LIT) · resonator math exact; sapphire/legs/register mapping is framing; sim Q=40 to see ring-up (AMBER) · fail-loud · offline</footer>
+<script>
+'use strict';
+function boom(w,e){var r=document.getElementById('readout');
+ r.innerHTML='<div class="card fail">FAULT @ '+w+'\n'+(e&&e.stack?e.stack:String(e))+'</div>';}
+window.addEventListener('error',function(ev){try{boom('window',ev.error||ev.message);}catch(_){}});
+function cssv(n){try{return getComputedStyle(document.documentElement).getPropertyValue(n).trim()||'#fff';}catch(e){return '#fff';}}
+function mlog(t,c){var m=document.getElementById('m1'),d=document.createElement('div');
+ d.className='ln'+(c?' '+c:'');d.textContent=t;m.appendChild(d);m.scrollTop=m.scrollHeight;}
+var SG={"coherent": {"0": 3.0, "40": 2.532, "60": 2.0, "90": 1.0, "120": 0.0, "180": 1.0}, "peak_sum": 3.0, "Q_sapphire": 63700000.0, "ringup_cycles": 20276339.7, "sim_peak": {"in_time": 1.84, "partial": 0.61, "silent": 0.0}, "legs": ["001", "010", "100"], "ring": ["011", "110", "101"], "core": "000", "far": "111"};
+function DEG(){return parseFloat(document.getElementById('sD').value);}
+function D3(deg){var d=deg*Math.PI/180;if(Math.abs(Math.sin(d/2))<1e-9)return 3.0;return Math.abs(Math.sin(3*d/2)/Math.sin(d/2));}
+document.getElementById('sD').addEventListener('input',function(){document.getElementById('vD').textContent=this.value+'°';});
+document.getElementById('sync').addEventListener('click',function(){document.getElementById('sD').value=0;document.getElementById('vD').textContent='0°';mlog('taps aligned (δ=0) — three strikes land together → drive ×3','ok');});
+document.getElementById('rot').addEventListener('click',function(){document.getElementById('sD').value=120;document.getElementById('vD').textContent='120°';mlog('δ=120° — breathing mode nulled (drive 0); a rotating whispering-gallery mode instead','ok');});
+var RUN=true;document.getElementById('run').addEventListener('click',function(){RUN=!RUN;this.classList.toggle('on',RUN);this.textContent=RUN?'running':'paused';});
+
+// state: driven damped oscillator, Q=40 (visible), plus envelope tracking
+var Qsim=40, w0=2*Math.PI*1.0, x=0,v=0, tsim=0, dt=0.03;
+var envHist=[], waveHist=[];
+var G3={yaw:0.5,pitch:0.4};
+(function(){var cv=document.getElementById('cscene');if(!cv)return;var dr=false,lx=0,ly=0;
+ cv.addEventListener('mousedown',function(e){dr=true;lx=e.offsetX;ly=e.offsetY;});
+ window.addEventListener('mouseup',function(){dr=false;});
+ cv.addEventListener('mousemove',function(e){if(!dr)return;G3.yaw+=(e.offsetX-lx)*0.008;G3.pitch+=(e.offsetY-ly)*0.006;G3.pitch=Math.max(-1.2,Math.min(1.2,G3.pitch));lx=e.offsetX;ly=e.offsetY;});
+})();
+function step(){
+  var drive=D3(DEG()); // coherent amplitude 0..3
+  var F=drive*Math.cos(w0*tsim);
+  var a=F-(w0/Qsim)*v-w0*w0*x; v+=a*dt; x+=v*dt; tsim+=dt;
+  envHist.push(Math.abs(x)); if(envHist.length>240)envHist.shift();
+  waveHist.push(x); if(waveHist.length>240)waveHist.shift();
+}
+// scene: core at center, 3 legs to outer vertices, ripples pulsing inward
+function P3(P){var cy=Math.cos(G3.yaw),sy=Math.sin(G3.yaw),cp=Math.cos(G3.pitch),sp=Math.sin(G3.pitch);
+  var x1=P[0]*cy+P[2]*sy,z1=-P[0]*sy+P[2]*cy,y2=P[1]*cp-z1*sp,z2=P[1]*sp+z1*cp;return {x:x1,y:y2,z:z2};}
+function drawScene(){
+ try{
+  var cv=document.getElementById('cscene'),g=cv.getContext('2d'),W=cv.width,H=cv.height;
+  g.fillStyle='#0a0908';g.fillRect(0,0,W,H);
+  var S=Math.min(W,H)*0.16;
+  function sc(P){var p=P3(P);return {x:W/2+p.x*S,y:H/2+p.y*S,z:p.z};}
+  // 3 legs at 120° in a plane (weight-1 axes), outer vertices
+  var legDir=[[0,0,1.6],[1.386,0,-0.8],[-1.386,0,-0.8]]; // 3 directions ~120° in x-z
+  var ringDir=[[0.7,0.9,0.4],[-0.7,0.9,0.4],[0,0.9,-0.9]]; // weight-2, lifted
+  var farDir=[0,-1.7,0];
+  var core=sc([0,0,0]);
+  var drive=D3(DEG()); var env=envHist.length?envHist[envHist.length-1]:0;
+  // legs + ripples
+  var phase=[0, DEG()*Math.PI/180, 2*DEG()*Math.PI/180];
+  for(var i=0;i<3;i++){var o=sc(legDir[i]);
+    g.strokeStyle=cssv('--leg');g.globalAlpha=.5;g.lineWidth=1.5;g.beginPath();g.moveTo(core.x,core.y);g.lineTo(o.x,o.y);g.stroke();g.globalAlpha=1;g.lineWidth=1;
+    g.fillStyle=cssv('--leg');g.beginPath();g.arc(o.x,o.y,4,0,7);g.fill();
+    g.fillStyle=cssv('--leg');g.font='10px ui-monospace,monospace';g.fillText(SG.legs[i],o.x+6,o.y-4);
+    // ripple travelling inward: position along leg by (tsim*speed + phase)
+    var frac=((tsim*0.7 + phase[i]/(2*Math.PI))%1); // 0..1 outer->inner each cycle
+    var rp={x:o.x+(core.x-o.x)*frac, y:o.y+(core.y-o.y)*frac};
+    g.fillStyle=cssv('--leg');g.globalAlpha=.9;g.beginPath();g.arc(rp.x,rp.y,3.5,0,7);g.fill();g.globalAlpha=1;
+    // flash when it lands (frac near 1)
+    if(frac>0.94){g.strokeStyle=cssv('--leg');g.globalAlpha=1-(1-frac)/0.06;g.beginPath();g.arc(core.x,core.y,14,0,7);g.stroke();g.globalAlpha=1;}
+  }
+  // weight-2 ring (faded)
+  for(var j=0;j<3;j++){var o=sc(ringDir[j]);g.fillStyle=cssv('--ring');g.globalAlpha=.5;g.beginPath();g.arc(o.x,o.y,3,0,7);g.fill();g.globalAlpha=1;
+    g.fillStyle=cssv('--ring');g.font='9px ui-monospace,monospace';g.fillText(SG.ring[j],o.x+5,o.y-3);}
+  var far=sc(farDir);g.fillStyle=cssv('--dim');g.beginPath();g.arc(far.x,far.y,3,0,7);g.fill();g.fillText(SG.far,far.x+5,far.y-3);
+  // the sapphire core: glow scales with ring amplitude (env)
+  var glow=Math.min(1,env/1.8);
+  var rad=14+glow*22;
+  g.fillStyle=cssv('--saph');g.globalAlpha=0.12+0.4*glow;g.beginPath();g.arc(core.x,core.y,rad+14,0,7);g.fill();g.globalAlpha=1;
+  g.fillStyle=cssv('--saph');g.globalAlpha=0.4+0.5*glow;g.beginPath();g.arc(core.x,core.y,rad,0,7);g.fill();g.globalAlpha=1;
+  g.fillStyle=cssv('--saph2');g.beginPath();g.arc(core.x,core.y,8,0,7);g.fill();
+  g.fillStyle=cssv('--saph2');g.font='11px ui-monospace,monospace';g.fillText('000',core.x-9,core.y-rad-6);
+  // singing rings emanating when loud
+  if(glow>0.3){for(var k=1;k<=3;k++){var rr=rad+k*14+ (tsim*30)%14;g.strokeStyle=cssv('--sing');g.globalAlpha=(glow-0.3)*0.5*(1-k/4);g.beginPath();g.arc(core.x,core.y,rr,0,7);g.stroke();g.globalAlpha=1;}}
+  g.fillStyle=cssv('--dim');g.font='11px ui-monospace,monospace';g.fillText('coherent drive ×'+drive.toFixed(2)+(drive>2.5?'  → SINGING':(drive<0.2?'  → silent':'  → weak')),12,20);
+ }catch(e){boom('drawScene',e);}
+}
+function drawWave(){
+ try{
+  var cv=document.getElementById('cwave'),g=cv.getContext('2d'),W=cv.width,H=cv.height;
+  g.fillStyle='#0a0908';g.fillRect(0,0,W,H);
+  // top: Dirichlet drive curve vs δ
+  g.fillStyle=cssv('--dim');g.font='11px ui-monospace,monospace';g.fillText('coherent drive vs timing spread δ',14,16);
+  var x0=20,y0=26,pw=W-40,ph=90;
+  g.strokeStyle=cssv('--saph');g.beginPath();
+  for(var i=0;i<=180;i++){var yv=D3(i)/3;var X=x0+i/180*pw,Y=y0+ph-yv*ph;i?g.lineTo(X,Y):g.moveTo(X,Y);}g.stroke();
+  var dv=DEG();var mx=x0+dv/180*pw;g.strokeStyle=cssv('--org');g.globalAlpha=.6;g.beginPath();g.moveTo(mx,y0);g.lineTo(mx,y0+ph);g.stroke();g.globalAlpha=1;
+  g.fillStyle=cssv('--org2');g.font='10px ui-monospace,monospace';g.fillText('×'+D3(dv).toFixed(2)+' @ δ='+dv+'°',mx+4,y0+12);
+  g.fillStyle=cssv('--dim');g.font='9px ui-monospace,monospace';g.fillText('peak 3 (in time)',x0,y0+ph+12);g.fillText('null @120°',x0+pw*120/180-20,y0+ph+12);
+  // middle: ring-up envelope
+  g.fillStyle=cssv('--dim');g.font='11px ui-monospace,monospace';g.fillText('ring-up envelope',14,y0+ph+34);
+  var ey=y0+ph+42,eh=90;
+  g.strokeStyle=cssv('--sing');g.beginPath();var st=false;
+  for(var k=0;k<envHist.length;k++){var X=x0+k/240*pw,Y=ey+eh-Math.min(1,envHist[k]/2)*eh;st?g.lineTo(X,Y):g.moveTo(X,Y);st=true;}g.stroke();
+  // bottom: waveform (the tone)
+  g.fillStyle=cssv('--dim');g.font='11px ui-monospace,monospace';g.fillText('the sapphire\u2019s tone',14,ey+eh+22);
+  var wy=ey+eh+30,wh=70;
+  g.strokeStyle=cssv('--org');g.globalAlpha=.3;g.beginPath();g.moveTo(x0,wy+wh/2);g.lineTo(x0+pw,wy+wh/2);g.stroke();g.globalAlpha=1;
+  g.strokeStyle=cssv('--saph2');g.beginPath();var s2=false;
+  for(var w=0;w<waveHist.length;w++){var X=x0+w/240*pw,Y=wy+wh/2-Math.max(-1,Math.min(1,waveHist[w]/2))*wh/2;s2?g.lineTo(X,Y):g.moveTo(X,Y);s2=true;}g.stroke();
+ }catch(e){boom('drawWave',e);}
+}
+function dials(){
+  var drive=D3(DEG());var env=envHist.length?envHist[envHist.length-1]:0;
+  document.getElementById('dials').innerHTML=
+    '<div class="dial"><div class="v">×'+drive.toFixed(2)+'</div><div class="k">coherent drive (peak 3)</div></div>'
+   +'<div class="dial"><div class="v">'+(drive>2.5?'SINGING':(drive<0.2?'silent':'weak'))+'</div><div class="k">state</div></div>'
+   +'<div class="dial"><div class="v">'+(SG.Q_sapphire.toExponential(1))+'</div><div class="k">sapphire Q (amp gain)</div></div>'
+   +'<div class="dial"><div class="v">'+env.toFixed(2)+'</div><div class="k">ring amplitude (sim)</div></div>';
+}
+function updateVerdict(){
+  var drive=D3(DEG());
+  var R=document.getElementById('readout');
+  R.innerHTML=
+   '<div class="card sg"><b>'+(drive>2.5?'THE SAPPHIRE SINGS — TAPS IN TIME':(drive<0.2?'SILENCE — THE STRIKES CANCEL':'WEAK — THE STRIKES PARTLY FIGHT'))+'</b> Three ripples race down the legs {001,010,100} and hit the core at 000. Their coherent drive is ×'+drive.toFixed(2)+' (peak 3 when they smack together). '+(drive>2.5?'Landing together, the shoves pile up and the high-Q core rings up into a loud, clean tone.':(drive<0.2?'At δ=120° the breathing mode is perfectly nulled — instead this phasing would set a rotating whispering-gallery mode.':'Spread out, the strikes partly cancel — a weak note.'))+'</div>'
+   +'<div class="card lit"><b>RHYTHM, NOT FORCE</b> The 3-tap drive is a Dirichlet (phased-array) kernel |sin(3δ/2)/sin(δ/2)|: peak 3.0 at δ=0, exactly 0 at 120°. The sapphire is a driven damped oscillator — steady amplitude ∝ Q ≈ 6.37×10⁷, ringing up over ~Q/π ≈ 2×10⁷ cycles. "Sing right" = align the taps; three in time drive it 3× as hard, and the huge Q turns tiny synchronized shoves into a bell.</div>'
+   +'<div class="card amber"><b>AMBER</b> The resonator math (Q, ring-up, coherent phased drive, the Dirichlet null) is exact and server-verified. The sapphire / legs / ripple / register-cube mapping is the session\u2019s framing; the on-screen sim uses Q=40 so the ring-up is visible in real time (a real sapphire rings millions of cycles).</div>';
+}
+function frame(){
+  try{
+    if(RUN){for(var s=0;s<3;s++)step();}
+    drawScene();drawWave();dials();updateVerdict();
+    requestAnimationFrame(frame);
+  }catch(e){boom('frame',e);}
+}
+// boot
+try{
+  mlog('Dirichlet drive + ring-up vs frozen','hd');
+  mlog('3-tap coherent drive: δ=0 → ×'+SG.coherent['0']+' (peak), δ=120° → ×'+SG.coherent['120']+' (null)','ok');
+  mlog('sapphire Q ≈ '+SG.Q_sapphire.toExponential(2)+'; ring-up ~'+SG.ringup_cycles.toExponential(2)+' cycles; amp ∝ Q','ok');
+  mlog('sim peaks — in time '+SG.sim_peak.in_time+' (sings), partial '+SG.sim_peak.partial+' (weak), 120° '+SG.sim_peak.silent+' (silent)','ok');
+  mlog('layers: legs {001,010,100} · ring {011,110,101} · core 000 (sapphire) · far 111','ok');
+  frame();
+}catch(e){boom('boot',e);}
+</script>
+</body></html>

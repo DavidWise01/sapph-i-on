@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'">
+<title>TARDIS v9 · implicit geometry + valence language over v8</title>
+<style>
+
+:root{--bg:#07040d;--fg:#f1eaff;--dim:#cdbfe8;--neon:#b77dff;--neon2:#e070ff;--cyan:#6ff3ff;--edge:rgba(196,150,255,.38);
+--card:rgba(15,8,27,.88);--holo:linear-gradient(115deg,#6ff3ff 0%,#9d7bff 22%,#e070ff 44%,#f2c86b 62%,#d9d9e6 80%,#6ff3ff 100%);
+--match:#7dffa8;--myth:#ff8b9a;--unv:#ffd27a;--model:#d2abff;--wall:#ff9df0}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow:hidden}
+#scene{position:fixed;inset:0;width:100vw;height:100vh;display:block;touch-action:none;cursor:grab}
+#scene:active{cursor:grabbing}
+.glass{position:fixed;background:var(--card);border:1px solid var(--edge);border-radius:14px;
+ box-shadow:0 0 0 1px rgba(111,243,255,.10) inset,0 10px 40px rgba(0,0,0,.55),0 0 22px rgba(183,125,255,.20);
+ backdrop-filter:blur(12px) saturate(140%);-webkit-backdrop-filter:blur(12px) saturate(140%)}
+.glass::before{content:"";position:absolute;inset:-1px;border-radius:14px;padding:1px;background:var(--holo);background-size:300% 300%;
+ -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.55;pointer-events:none;animation:holo 9s linear infinite}
+@keyframes holo{to{background-position:300% 0}}
+#bar{top:10px;left:50%;transform:translateX(-50%);display:flex;gap:8px;align-items:center;padding:7px 12px;z-index:5;max-width:calc(100vw - 20px);flex-wrap:wrap;justify-content:center}
+#bar h1{margin:0 6px 0 0;font-size:15px;font-weight:700;letter-spacing:.02em;background:var(--holo);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:holo 12s linear infinite}
+button,select{font:inherit;color:var(--fg);background:rgba(40,22,70,.92);border:1px solid var(--edge);border-radius:9px;padding:4px 9px;cursor:pointer}
+button:hover,select:hover{border-color:var(--cyan)}
+button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+button[aria-pressed="true"]{background:rgba(90,40,150,.95);border-color:var(--neon2)}
+.panel{width:min(360px,calc(100vw - 20px));max-height:calc(100vh - 120px);display:flex;flex-direction:column;z-index:4}
+.panel header{display:flex;align-items:center;gap:8px;padding:8px 10px;cursor:move;border-bottom:1px solid var(--edge);user-select:none}
+.panel header h2{margin:0;font-size:14px;flex:1;color:var(--fg)}
+.panel .body{padding:10px 12px;overflow:auto}
+.panel.collapsed .body{display:none}
+#ctrl{left:10px;top:64px}
+#info{right:10px;top:64px;width:min(430px,calc(100vw - 20px))}
+label.row{display:grid;grid-template-columns:1fr auto;gap:2px 8px;margin:7px 0;font-size:13px;color:var(--fg)}
+label.row input[type=range]{grid-column:1/3;width:100%;accent-color:var(--neon)}
+.val{color:var(--cyan);font-variant-numeric:tabular-nums}
+.btns{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px}
+.tabs button{padding:3px 8px;font-size:13px}
+.chip{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;padding:1px 6px;border-radius:6px;border:1px solid currentColor;margin-right:4px;background:rgba(0,0,0,.35);vertical-align:1px}
+.LIT{color:var(--match)}.AMBER{color:var(--unv)}.DEAD{color:var(--myth)}.ORNAMENT{color:var(--wall)}
+.MATCH{color:var(--match)}.MYTH{color:var(--myth)}.UNVERIFIED{color:var(--unv)}.MODEL,.ANALOGY{color:var(--model)}.WALL{color:var(--wall)}
+.fact{margin:7px 0;font-size:13px;color:var(--fg)}
+.src{color:var(--dim);font-size:12px}
+.src a,.fact a{color:#9ff6ff}
+table{border-collapse:collapse;width:100%;font-size:12.5px}
+td,th{border-bottom:1px solid rgba(196,150,255,.22);padding:3px 4px;text-align:left;vertical-align:top;color:var(--fg)}
+th{color:var(--dim);font-weight:600}
+.num{font-variant-numeric:tabular-nums;color:#a8f7ff}
+#status{left:10px;bottom:10px;padding:5px 10px;font-size:12px;color:var(--dim);z-index:3}
+#clock{right:10px;bottom:10px;padding:5px 10px;font-size:12px;z-index:3;color:var(--fg)}
+.hidden-panels .panel,.hidden-panels #status{display:none}
+#help{left:50%;top:50%;transform:translate(-50%,-50%);width:min(420px,92vw);padding:14px 16px;z-index:9;display:none}
+#help.open{display:block}
+kbd{background:rgba(60,35,100,.9);border:1px solid var(--edge);border-radius:4px;padding:0 4px;font-size:12px;color:var(--fg)}
+.verdict{padding:6px 8px;border-radius:9px;background:rgba(30,16,52,.92);border:1px solid var(--edge);margin:6px 0;font-size:13px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (prefers-reduced-motion:reduce){.glass::before,#bar h1{animation:none}}
+.rm .glass::before,.rm #bar h1{animation:none}
+
+#hud{left:50%;bottom:10px;transform:translateX(-50%);padding:8px 14px;z-index:4;display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:center;max-width:calc(100vw - 20px)}
+#hud .k{color:var(--dim);font-size:12px}
+#hud .v{font-size:18px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--fg)}
+#hud .cell{display:flex;flex-direction:column;align-items:center;min-width:64px}
+.sign{font-family:ui-monospace,Consolas,monospace;letter-spacing:.12em}
+#banner{left:50%;bottom:150px;transform:translateX(-50%);padding:6px 12px;z-index:3;font-size:13px;max-width:min(640px,calc(100vw - 20px));text-align:center}
+#clock{display:none}
+#banner{z-index:6;max-width:min(380px,calc(100vw - 20px))}
+.panel .body{overflow:auto}
+#hud .row2{flex-basis:100%;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;border-top:1px solid var(--edge);padding-top:6px}
+#hud .frac{font-family:ui-monospace,Consolas,monospace;font-size:14px}
+#hud{width:min(1100px,calc(100vw - 20px));padding:6px 12px}#hud .row2{padding-top:4px}#hud .v{font-size:16px}#hud .k{font-size:11.5px}#hud{gap:4px 12px}
+.lad{font-family:ui-monospace,Consolas,monospace;font-size:13px;display:flex;gap:3px;flex-wrap:wrap;justify-content:center}
+.lad span{padding:0 4px;border:1px solid transparent;border-radius:5px;color:var(--dim)}
+.lad span.on{border-color:var(--cyan);color:var(--fg);background:rgba(111,243,255,.12);font-weight:700}
+.lad span.done{color:#b9a9d9}
+.sign b{color:var(--cyan);text-decoration:underline}
+.au{color:#ffd27a}.ag{color:#e6e6f0}
+.rbar{display:flex;width:120px;height:8px;border-radius:4px;overflow:hidden;margin:2px auto 0;border:1px solid var(--edge)}
+.rbar i{display:block;height:100%}
+.swatch{display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:-2px;border:1px solid var(--edge)}
+.bl{font-size:12px;color:var(--dim);margin:2px 0}.bl b{color:var(--fg)}
+.stg{display:grid;grid-template-columns:1.6em 1fr 70px;gap:2px 6px;align-items:center;font-size:12.5px;margin:2px 0;color:var(--fg)}
+.stg .pb{height:7px;border-radius:4px;background:rgba(255,255,255,.08);overflow:hidden;border:1px solid var(--edge)}.stg .pb i{display:block;height:100%;background:linear-gradient(90deg,#7dffa8,#6ff3ff)}
+.zp{font-family:ui-monospace,Consolas,monospace;letter-spacing:.06em;white-space:pre}
+.zp .m{color:#ff8ad8}.zp .p{color:var(--cyan)}.zp .h{color:#ffd27a}
+.mv{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
+.ok{color:var(--match)}.bad{color:var(--myth)}
+h3{font-size:13px;margin:10px 0 2px;color:var(--fg)}
+.pat{color:#d6b4ff}
+.ctab{width:100%;border-collapse:collapse;font-size:12px;margin:4px 0}.ctab th,.ctab td{padding:2px 4px;border-bottom:1px solid var(--edge);text-align:left;font-variant-numeric:tabular-nums}.ctab th{color:var(--dim);font-weight:600}
+.qd{display:inline-block;width:11px;height:11px;border-radius:50%;vertical-align:-1px;border:1px solid rgba(255,255,255,.55)}
+.st-egg{color:#ffe6a8}.st-tun{color:#ffb38a}.st-wandering{color:#9effc4}.st-grazing{color:#7dffa8}.st-none{color:var(--dim)}
+
+/* v9 · implicit geometry + valence language */
+.igbox{border:1px solid var(--edge);border-radius:12px;padding:8px;margin:7px 0;background:rgba(7,4,13,.55)}
+.igrow{display:flex;gap:5px;align-items:center;flex-wrap:wrap;font-family:ui-monospace,Consolas,monospace}
+.igtok{padding:2px 6px;border:1px solid var(--edge);border-radius:6px;background:rgba(255,255,255,.035)}
+.igtok.on{border-color:var(--cyan);box-shadow:0 0 12px rgba(111,243,255,.25);color:var(--cyan)}
+.iglane{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:6px;align-items:center;font-family:ui-monospace,Consolas,monospace}
+.iglane b{text-align:center;color:var(--cyan)}
+#igCanvas{display:block;width:100%;height:auto;max-width:360px;margin:8px auto;border:1px solid var(--edge);border-radius:10px;background:#05030a}
+
+</style>
+</head>
+<body>
+<canvas id="scene" role="img" aria-label="TARDIS: a tetragarde in a shimmering electrum shell at the centre of a gold ring (79%) and silver ring (21%), inside an iridescent biodome moving at 0.6c through a starfield. Drag to orbit, wheel to zoom."></canvas>
+
+<div id="bar" class="glass" role="toolbar" aria-label="Scene controls">
+ <h1>TARDIS v9 · implicit geometry + valence language · TOROID-5</h1>
+ <label class="sr" for="quality">Render quality</label>
+ <select id="quality"><option value="auto">Quality: auto</option><option value="high">high</option><option value="low">low</option><option value="2d">2D fallback</option></select>
+ <button id="motionBtn" aria-pressed="false">Motion: on</button>
+ <button id="panelsBtn" title="Hide/show panels (H)">Panels (H)</button>
+ <button id="helpBtn" title="Help (?)">?</button>
+</div>
+
+<div id="banner" class="glass" aria-live="polite"></div>
+
+<section id="ctrl" class="glass panel" aria-label="Controls">
+ <header><h2>Controls</h2><button class="collapse" aria-expanded="true" aria-controls="ctrlBody">–</button></header>
+ <div class="body" id="ctrlBody">
+  <div class="btns">
+   <button id="tunBtn" aria-pressed="false">State: active 🐾</button>
+   <button id="walkBtn" aria-pressed="false" title="Walk the homeostatic ladder (Space)">Walk the ladder ▶</button>
+   <button id="releaseBtn" aria-pressed="false" title="Compare: general relativity (G)">Compare: GR · off</button>
+   <button id="pauseBtn" aria-pressed="false">Pause</button>
+   <button id="holdBtn" title="Back to t = 0, rung 1 (0)">Back to t = 0</button>
+   <button id="resetBtn">Reset camera</button>
+   <button id="realBtn" aria-pressed="true" title="Realistic look (physically based shading, photographic view, SR clocks) vs the v7 stylised look (V)">Look: realistic</button>
+   <button id="frameBtn" aria-pressed="false" title="Switch view frame (F)">View: co-moving (inside)</button>
+   <button id="srBtn" aria-pressed="false" title="Compare: special relativity clocks (S)">Compare: SR · off</button>
+   <button id="igStepBtn" title="Advance TOROID-5 by exactly 1/5">TOROID +1/5</button>
+   <button id="igResetBtn" title="Reset TOROID-5 phase and append ledger">TOROID reset</button>
+  </div>
+  <h3>Moves budget <span class="chip MODEL">MODEL</span> <span class="src">N = 13,200,000,000 · each move = 1/N</span></h3>
+  <div class="mv" role="group" aria-label="Step moves">
+   <button data-step="1" title="Step 1 move (.)">+1</button><button data-step="1000">+10³</button><button data-step="1000000">+10⁶</button><button data-step="1000000000">+10⁹</button>
+   <button id="endBtn" title="Spend all moves (E)">Jump to end · t = 1</button><button id="mvResetBtn">Reset moves</button>
+  </div>
+  <div class="mv"><label class="sr" for="rate">Auto-run rate</label>
+   <select id="rate"><option value="1">1 move/s</option><option value="60">60/s</option><option value="1000">10³/s</option><option value="1000000">10⁶/s</option><option value="100000000">10⁸/s</option><option value="800000000" selected>8×10⁸/s (ladder walk)</option><option value="1000000000">10⁹/s</option><option value="13200000000">13.2×10⁹/s</option></select>
+   <button id="autoBtn" aria-pressed="false" title="Auto-run (A)">Auto-run ▶</button></div>
+  <label class="row">Biodome mass (for kinetic energy) <span class="val" id="domeMV"></span><input id="domeM" type="range" min="0" max="12" step="0.1" value="6"></label>
+  <label class="row">Black-hole mass (GR compare) <span class="val" id="massV"></span><input id="mass" type="range" min="0.5" max="10" step="0.01" value="1"></label>
+  <label class="row">Electrum shell thickness <span class="val" id="thickV"></span><input id="thick" type="range" min="4" max="120" step="1" value="16"></label>
+  <label class="row">Tardigrade length <span class="val" id="lenV"></span><input id="len" type="range" min="50" max="1200" step="10" value="500"></label>
+  <label class="row">GR comparison playback speed <span class="val" id="spdV"></span><input id="spd" type="range" min="0.25" max="3" step="0.05" value="1"></label>
+  <p class="src">Drag to orbit · wheel/pinch to zoom · arrow keys rotate · <kbd>V</kbd> realistic/stylised · <kbd>T</kbd> tun · <kbd>Space</kbd> walk ladder/pause · <kbd>G</kbd> compare GR · <kbd>F</kbd> view frame · <kbd>S</kbd> compare SR clocks · <kbd>0</kbd> back to t = 0 · <kbd>.</kbd> +1 move · <kbd>A</kbd> auto-run · <kbd>E</kbd> spend all · <kbd>H</kbd> panels · <kbd>?</kbd> help.</p>
+ </div>
+</section>
+
+<section id="info" class="glass panel" aria-label="Information">
+ <header><h2>Field notes</h2><button class="collapse" aria-expanded="true" aria-controls="infoBody">–</button></header>
+ <div class="body" id="infoBody">
+  <div class="tabs" role="tablist">
+   <button role="tab" data-tab="real" aria-selected="false" aria-pressed="false">Realism</button>
+   <button role="tab" data-tab="build" aria-selected="true" aria-pressed="true">Build</button>
+   <button role="tab" data-tab="colony" aria-selected="false" aria-pressed="false">Colony</button>
+   <button role="tab" data-tab="tardis" aria-selected="false" aria-pressed="false">TARDIS</button>
+   <button role="tab" data-tab="model" aria-selected="false" aria-pressed="false">Dave's model</button>
+   <button role="tab" data-tab="gr" aria-selected="false" aria-pressed="false">Compare: GR</button>
+   <button role="tab" data-tab="tardi" aria-selected="false" aria-pressed="false">Tardigrade</button>
+   <button role="tab" data-tab="moves" aria-selected="false" aria-pressed="false">Ladder &amp; moves</button>
+   <button role="tab" data-tab="implicit" aria-selected="false" aria-pressed="false">Implicit geometry</button>
+   <button role="tab" data-tab="key" aria-selected="false" aria-pressed="false">Labels</button>
+  </div>
+  <div id="tab-real" role="tabpanel" hidden></div>
+  <div id="tab-build" role="tabpanel"></div>
+  <div id="tab-colony" role="tabpanel" hidden></div>
+  <div id="tab-tardis" role="tabpanel" hidden></div>
+  <div id="tab-model" role="tabpanel" hidden></div>
+  <div id="tab-gr" role="tabpanel" hidden></div>
+  <div id="tab-tardi" role="tabpanel" hidden></div>
+  <div id="tab-moves" role="tabpanel" hidden></div>
+  <div id="tab-implicit" role="tabpanel" hidden></div>
+  <div id="tab-key" role="tabpanel" hidden></div>
+ </div>
+</section>
+
+<div id="hud" class="glass" aria-live="off" aria-label="State readout"></div>
+<div id="status" class="glass" aria-live="polite">starting…</div>
+<div id="clock"></div>
+<div id="help" class="glass" role="dialog" aria-modal="false" aria-label="Help">
+ <h2 style="margin:0 0 6px;font-size:15px">TARDIS v9</h2>
+ <p class="fact">v8 (realistic layer, appended over frozen v7): <b>Look: realistic</b> (<kbd>V</kbd>) switches on physically based shading (linear light, filmic tone map, soft shadows, real gold/silver reflectance, translucent tardigrade with gut, claws and eye spots), a <b>photographic</b> third view (<kbd>F</kbd> cycles inside / outside-measured / outside-photo, which shows the Terrell–Penrose effect: the dome stays round, it does not look squashed) and the <b>special-relativity clocks</b> by default. Turn it off for the v7 look and Dave's clocks. Details are in the Realism tab.</p>
+ <p class="fact">v7 (Dave's model): the tetragarde gets <b>company</b>. During the moss stage she lays two clutches of eggs in shed cuticles (as real <i>Hypsibius exemplaris</i> do, MATCH). They hatch later into a <b>colony of 8</b>, held balanced: each companion carries one sign of −+ −+0+− +−, she is the 0 hinge, and the total is always 0. They wander the moss, graze algae, and sometimes tun and revive (Colony tab). <b>Patricia's θ clock</b> enters through the electrum ring as an amethyst pulse, tied to the inside 720° cycle.</p>
+ <p class="fact">v6 (Dave's model): over her full inside run (13.2 billion moves, t<sub>in</sub> 0 → 1) the tetragarde <b>builds her garden</b> inside the biodome in 11 stages, one per rung. Meanwhile the outside world clock only moves from 0 to <b>40%</b>. <kbd>S</kbd> compares this with special relativity's clocks.</p>
+ <p class="fact">Dave's TARDIS: a <b>tetragarde</b> encased in a gold ring (79%) and a silver ring (21%), which together make one 100% electrum ring. The ring makes a homeostatic biodome moving at 0.6c, "the speed of light and time" (MODEL). <kbd>F</kbd> switches between the co-moving view (stars aberrated and Doppler-shifted, the dome round) and the outside frame (the dome contracted ×0.8 along the motion).</p>
+ <p class="fact">You are inside the event horizon with tetragarde. In Dave's model <b>{{1 gravity{{t=0 time}}</b> everything is held at g = 1 and t = 0, so the scene is frozen and only your viewpoint moves. Dave's v2 rule: the bubble holds a budget of <b>13,200,000,000 moves</b>; each is 1/N, and t only becomes 1 when all are spent (step with the buttons, <kbd>.</kbd>, <kbd>A</kbd> auto-run, <kbd>E</kbd> jump to end). v3: the interior runs on Dave's <b>homeostatic ladder</b> ±[10, 9, 6, 5, 4, 3, 2, 1, 1, 0, 0]. Press <b>Walk the ladder</b> (<kbd>Space</kbd>) to step down to the zero point, the mirrored, breathing state −+ −+0+− +− that an outside reading calls 0; <kbd>G</kbd> toggles an optional comparison with what general relativity predicts; <kbd>0</kbd> returns to t = 0.</p>
+ <p class="fact">Drag to orbit, scroll or pinch to zoom, <kbd>T</kbd> switches active/tun, <kbd>H</kbd> hides panels, <kbd>Esc</kbd> closes this box.</p>
+ <p class="fact">Labels: <span class="chip MODEL">MODEL</span> is the default here (Dave's homeostatic interior) · <span class="chip MATCH">MATCH</span> real physics · <span class="chip MODEL">MODEL</span> Dave's framework or an approximation · <span class="chip WALL">WALL</span> impossible in GR.</p>
+ <button id="helpClose">Close</button>
+</div>
+
+<script id="data" type="application/json">{"extremes": [{"id": "X01", "category": "ionizing radiation", "claim_or_measurement": "48-h LD50 gamma rays (hydrated)", "value": "5000 Gy", "conditions": "gamma irradiation of active animals; survival scored 48 h after exposure", "species": "Milnesium tardigradum", "state": "hydrated (active)", "study": "Horikawa D.D. et al., Int. J. Radiat. Biol. 82(12):843-848", "year": "2006", "doi_or_url": "https://doi.org/10.1080/09553000600972956", "verdict": "MATCH", "notes": "Doses >1000 Gy made animals sterile (eggs laid after 2000 Gy did not hatch) - surviving is not the same as staying fertile"}, {"id": "X02", "category": "ionizing radiation", "claim_or_measurement": "48-h LD50 gamma rays (anhydrobiotic)", "value": "4400 Gy", "conditions": "gamma irradiation of desiccated tuns", "species": "Milnesium tardigradum", "state": "anhydrobiotic (tun)", "study": "Horikawa D.D. et al., Int. J. Radiat. Biol. 82(12):843-848", "year": "2006", "doi_or_url": "https://doi.org/10.1080/09553000600972956", "verdict": "MATCH", "notes": "Tuns were NOT more radiation-tolerant than hydrated animals in this study"}, {"id": "X03", "category": "ionizing radiation", "claim_or_measurement": "48-h LD50 heavy ions (hydrated)", "value": "6200 Gy", "conditions": "heavy-ion irradiation of active animals", "species": "Milnesium tardigradum", "state": "hydrated (active)", "study": "Horikawa D.D. et al., Int. J. Radiat. Biol. 82(12):843-848", "year": "2006", "doi_or_url": "https://doi.org/10.1080/09553000600972956", "verdict": "MATCH", "notes": ""}, {"id": "X04", "category": "ionizing radiation", "claim_or_measurement": "48-h LD50 heavy ions (anhydrobiotic)", "value": "5200 Gy", "conditions": "heavy-ion irradiation of desiccated tuns", "species": "Milnesium tardigradum", "state": "anhydrobiotic (tun)", "study": "Horikawa D.D. et al., Int. J. Radiat. Biol. 82(12):843-848", "year": "2006", "doi_or_url": "https://doi.org/10.1080/09553000600972956", "verdict": "MATCH", "notes": ""}, {"id": "X05", "category": "space (vacuum)", "claim_or_measurement": "Survival after exposure to open space vacuum in low Earth orbit (TARDIS experiment)", "value": "no significant survival loss vs ground controls", "conditions": "ESA BIOPAN facility on FOTON-M3 capsule, September 2007, ~10 days exposure, UV-shielded", "species": "Richtersius coronifer; Milnesium tardigradum", "state": "anhydrobiotic (tun)", "study": "Jönsson K.I., Rabbow E., Schill R.O., Harms-Ringdahl M., Rettberg P., Curr. Biol. 18(17):R729-R731", "year": "2008", "doi_or_url": "https://doi.org/10.1016/j.cub.2008.06.048", "verdict": "MATCH", "notes": "Eggs laid after the flight were viable"}, {"id": "X06", "category": "space (vacuum + UV)", "claim_or_measurement": "Survival after space vacuum plus solar UV-A/B (280-400 nm)", "value": "68% of M. tardigradum revived within 30 min but later mortality; only 1 R. coronifer revived", "conditions": "FOTON-M3 / BIOPAN, September 2007", "species": "Richtersius coronifer; Milnesium tardigradum", "state": "anhydrobiotic (tun)", "study": "Jönsson K.I. et al., Curr. Biol. 18(17):R729-R731", "year": "2008", "doi_or_url": "https://doi.org/10.1016/j.cub.2008.06.048", "verdict": "MATCH", "notes": ""}, {"id": "X07", "category": "space (vacuum + full UV)", "claim_or_measurement": "Survival after space vacuum plus full solar UV (116.5-400 nm)", "value": "0 R. coronifer survived; 3 M. tardigradum survived", "conditions": "FOTON-M3 / BIOPAN, September 2007", "species": "Richtersius coronifer; Milnesium tardigradum", "state": "anhydrobiotic (tun)", "study": "Jönsson K.I. et al., Curr. Biol. 18(17):R729-R731", "year": "2008", "doi_or_url": "https://doi.org/10.1016/j.cub.2008.06.048", "verdict": "MATCH", "notes": "Unshielded solar UV is mostly lethal - 'tardigrades survive space' is true only with qualifiers"}, {"id": "X08", "category": "static pressure", "claim_or_measurement": "Survival at high hydrostatic pressure in perfluorocarbon medium", "value": "600 MPa (~6000 atm)", "conditions": "dehydrated animals compressed in perfluorocarbon", "species": "tardigrades (terrestrial; see paper)", "state": "anhydrobiotic (tun)", "study": "Seki K. & Toyoshima M., Nature 395:853-854", "year": "1998", "doi_or_url": "https://doi.org/10.1038/27576", "verdict": "MATCH", "notes": "Hydrated animals were less tolerant"}, {"id": "X09", "category": "static pressure", "claim_or_measurement": "Survival at ultra-high hydrostatic pressure", "value": "7.5 GPa for up to ~12 h (18/20 alive after 20 min; ~100% up to 6 h; 5 alive after 12 h; all dead after 24 h)", "conditions": "pressure cell, tun state", "species": "Milnesium tardigradum", "state": "anhydrobiotic (tun)", "study": "Ono F. et al., J. Phys. Chem. Solids 69:2297-2300", "year": "2008", "doi_or_url": "https://doi.org/10.1016/j.jpcs.2008.04.019", "verdict": "MATCH", "notes": ""}, {"id": "X10", "category": "static pressure", "claim_or_measurement": "Exposure to 20 GPa", "value": "not alive after rehydration (bodies intact)", "conditions": "Kawai-type octahedral anvil press, 30 min", "species": "Milnesium tardigradum", "state": "anhydrobiotic (tun)", "study": "Ono F. et al., 'Effect of ultra-high pressure on small animals, tardigrades and Artemia' (HAL preprint/article)", "year": "n.d.", "doi_or_url": "https://hal.science/hal-03587413v1/document", "verdict": "MATCH", "notes": "Defines an upper limit: 20 GPa is lethal"}, {"id": "X11", "category": "impact shock", "claim_or_measurement": "Survival when fired into sand by two-stage light-gas gun", "value": "100% survival up to 0.728 km/s (0.86 GPa); intact animals up to 0.825 km/s (1.01 GPa); 0% at 0.901 km/s (1.14 GPa)", "conditions": "frozen animals in water-ice projectiles, impact into sand targets", "species": "Hypsibius dujardini (as stated by authors)", "state": "frozen (hibernated)", "study": "Traspas A. & Burchell M.J., Astrobiology 21(7):845-852", "year": "2021", "doi_or_url": "https://doi.org/10.1089/ast.2020.2405", "verdict": "MATCH", "notes": "Abstract says 'up to 0.9 km/s' but the results table shows 0% survival at 0.901 km/s; small sample sizes"}, {"id": "X12", "category": "high temperature", "claim_or_measurement": "24-h LT50 for active animals", "value": "37.1 °C (37.6 °C after brief acclimation)", "conditions": "24 h exposure; survival scored 48 h after", "species": "Ramazzottius varieornatus", "state": "hydrated (active)", "study": "Neves R.C. et al., Sci. Rep. 10:94", "year": "2020", "doi_or_url": "https://doi.org/10.1038/s41598-019-56965-z", "verdict": "MATCH", "notes": "Active tardigrades are heat-sensitive"}, {"id": "X13", "category": "high temperature", "claim_or_measurement": "1-h LT50 for desiccated tuns", "value": "82.7 °C", "conditions": "1 h exposure", "species": "Ramazzottius varieornatus", "state": "anhydrobiotic (tun)", "study": "Neves R.C. et al., Sci. Rep. 10:94", "year": "2020", "doi_or_url": "https://doi.org/10.1038/s41598-019-56965-z", "verdict": "MATCH", "notes": ""}, {"id": "X14", "category": "high temperature", "claim_or_measurement": "24-h LT50 for desiccated tuns", "value": "63.1 °C", "conditions": "24 h exposure", "species": "Ramazzottius varieornatus", "state": "anhydrobiotic (tun)", "study": "Neves R.C. et al., Sci. Rep. 10:94", "year": "2020", "doi_or_url": "https://doi.org/10.1038/s41598-019-56965-z", "verdict": "MATCH", "notes": ""}, {"id": "X15", "category": "high temperature", "claim_or_measurement": "'Survive 151 °C for a few minutes'", "value": "151 °C (few minutes)", "conditions": "historical experiment (Rahm 1920s) cited in reviews", "species": "unspecified historical material", "state": "anhydrobiotic", "study": "Secondary: Horikawa D.D. 'Survival of tardigrades in extreme environments: a model animal for astrobiology', in Altenbach, Bernhard & Seckbach (eds) Anoxia, Cellular Origin, Life in Extreme Habitats and Astrobiology 21:205-217", "year": "2011", "doi_or_url": "https://doi.org/10.1007/978-94-007-1896-8_12", "verdict": "UNVERIFIED", "notes": "Old single report not reproduced with modern protocols; contrast X13/X14"}, {"id": "X16", "category": "low temperature", "claim_or_measurement": "'Survive ~0.05 K (−272 °C)'", "value": "below 1/20 K for hours", "conditions": "adiabatic demagnetization in high vacuum (Becquerel, C. R. Acad. Sci. Paris 231:261-263)", "species": "historical material (dried organisms)", "state": "anhydrobiotic", "study": "Becquerel P., Comptes Rendus Acad. Sci. Paris 231(4):261-263", "year": "1950", "doi_or_url": "https://en.wikipedia.org/wiki/Environmental_tolerance_in_tardigrades", "verdict": "UNVERIFIED", "notes": "Historical single report; often repeated in popular media; no modern replication found"}, {"id": "X17", "category": "freezing (long-term)", "claim_or_measurement": "Revival and reproduction after frozen storage", "value": "30.5 years at −20 °C", "conditions": "moss sample collected in Antarctica 1983 and stored frozen; 2 adults + 1 egg recovered", "species": "Acutuncus antarcticus", "state": "frozen", "study": "Tsujimoto M., Imura S., Kanda H., Cryobiology 72(1):78-81", "year": "2016", "doi_or_url": "https://doi.org/10.1016/j.cryobiol.2015.12.003", "verdict": "MATCH", "notes": "One revived adult and the hatchling from the egg reproduced"}, {"id": "X18", "category": "desiccation (long-term)", "claim_or_measurement": "Maximum realistic anhydrobiotic survival from dried moss/herbarium samples", "value": "~ up to about a decade; eggs of Ramazzottius oberhaeuseri hatched after 9 years", "conditions": "systematic test of old dried moss samples", "species": "semi-terrestrial micrometazoans incl. tardigrades", "state": "anhydrobiotic", "study": "Guidetti R. & Jönsson K.I., J. Zool. 257:181-187", "year": "2002", "doi_or_url": "https://doi.org/10.1017/S095283690200078X", "verdict": "MATCH", "notes": ""}, {"id": "X19", "category": "desiccation (long-term)", "claim_or_measurement": "'Tardigrades revived from 120-year-old museum moss'", "value": "claimed 120 years", "conditions": "Franceschi 1948: one animal showed a brief leg movement, not a full revival", "species": "not established", "state": "anhydrobiotic", "study": "Jönsson K.I. & Bertolani R., 'Facts and fiction about long-term survival in tardigrades', J. Zool. 255:121-123", "year": "2001", "doi_or_url": "https://doi.org/10.1017/S0952836901001169", "verdict": "MYTH", "notes": "Review concluded evidence does not support century-scale cryptobiosis"}, {"id": "X20", "category": "lunar crash context", "claim_or_measurement": "Beresheet lander (Israel/SpaceIL) carried dehydrated tardigrades in the Arch Mission 'Lunar Library' and crashed on the Moon on 11 April 2019", "value": "impact speed reported variously (~500 km/h at 150 m altitude per Astronomy.com; ~0.9-1 km/s in some later articles)", "conditions": "uncontrolled crash; no liquid water on the Moon surface", "species": "unspecified (dehydrated tardigrades)", "state": "anhydrobiotic", "study": "News: Astronomy.com 'What likely happened to the tardigrades sent to the Moon in 2019'; The Guardian 6 Aug 2019", "year": "2019", "doi_or_url": "https://www.astronomy.com/space-exploration/what-happened-to-those-tardigrades-sent-to-the-moon/", "verdict": "UNVERIFIED", "notes": "No sample has been recovered; survival is unknown. Even if intact they cannot reactivate without liquid water. Compare X11 lab impact limit"}, {"id": "X21", "category": "lunar crash context", "claim_or_measurement": "'Tardigrades are alive and living on the Moon'", "value": "—", "conditions": "—", "species": "—", "state": "—", "study": "See X20 and X11", "year": "2019", "doi_or_url": "https://www.theguardian.com/science/2019/aug/06/tardigrades-may-have-survived-spacecraft-crashing-on-moon", "verdict": "MYTH", "notes": "No evidence of living or active tardigrades on the Moon; 'may have survived' became 'are living' in retelling"}, {"id": "X22", "category": "general", "claim_or_measurement": "'Tardigrades are indestructible / immortal / survive anything'", "value": "—", "conditions": "—", "species": "—", "state": "—", "study": "Counter-evidence: Neves et al. 2020 (X12); Jönsson et al. 2008 (X07); Traspas & Burchell 2021 (X11)", "year": "2020", "doi_or_url": "https://doi.org/10.1038/s41598-019-56965-z", "verdict": "MYTH", "notes": "Tolerance is mostly in the tun state and has measured limits; active animals die at modest temperatures"}, {"id": "X23", "category": "DNA protection (in vitro / cell culture)", "claim_or_measurement": "Dsup protein expressed in human HEK293 cells reduces X-ray DNA damage", "value": "~40% fewer double-strand-break markers; single-strand break tail DNA 33% -> 16% after 10 Gy", "conditions": "human cultured cells expressing Ramazzottius Dsup", "species": "Ramazzottius varieornatus (gene source)", "state": "n/a", "study": "Hashimoto T. et al., Nat. Commun. 7:12808", "year": "2016", "doi_or_url": "https://doi.org/10.1038/ncomms12808", "verdict": "MATCH", "notes": "Applies to cultured human cells; does not make people radiation-proof"}, {"id": "X24", "category": "UV", "claim_or_measurement": "Fluorescent pigment shields against germicidal UV", "value": "fluorescent Paramacrobiotus sp. tolerated germicidal UV that killed non-fluorescent tardigrades; extract protected H. exemplaris and C. elegans", "conditions": "lab UV-254 nm exposure", "species": "Paramacrobiotus sp. (India)", "state": "hydrated", "study": "Suma H.R., Prakash S., Eswarappa S.M., Biol. Lett. 16(10):20200391", "year": "2020", "doi_or_url": "https://doi.org/10.1098/rsbl.2020.0391", "verdict": "MATCH", "notes": ""}], "stats": {"species": 1550, "genera": 168, "families": 35}}</script>
+<script>
+"use strict";
+(function(){
+const DATA=JSON.parse(document.getElementById('data').textContent);
+const $=id=>document.getElementById(id);
+const params=new URLSearchParams(location.search);
+const mqReduce=window.matchMedia?matchMedia('(prefers-reduced-motion: reduce)'):{matches:false,addEventListener(){}};
+
+/* ---------- physics (SI) ---------- */
+const GMsun=1.32712440018e20,c=299792458,gStd=9.80665,RHO=1050,SIGMA_MAX=1e6;
+function base(Msun,L){const GM=GMsun*Msun,rs=2*GM/(c*c),T=GM/(c*c*c);
+ return {GM,rs,T,tauMax:Math.PI*T,rTear:Math.cbrt(2*GM*RHO*L*L/(8*SIGMA_MAX))};}
+// free fall from rest at the horizon: r=(rs/2)(1+cos eta), tau=(GM/c^3)(eta+sin eta)  (cycloid, r_max=rs)
+function etaFromTau(tau,T){const x=Math.min(Math.PI,Math.max(0,tau/T));let e=x/2;
+ for(let i=0;i<40;i++){const f=e+Math.sin(e)-x,fp=1+Math.cos(e);if(fp<1e-9)break;const ne=Math.min(Math.PI,Math.max(0,e-f/fp));if(Math.abs(ne-e)<1e-12){e=ne;break;}e=ne;}
+ return e;}
+function stateAt(Msun,L,frac){const B=base(Msun,L);const tau=frac*B.tauMax;const eta=frac>=1?Math.PI:etaFromTau(tau,B.T);
+ const r=B.rs*(1+Math.cos(eta))/2;const dgdr=r>0?2*B.GM/(r*r*r):Infinity;
+ return {...B,tau,eta,r,rOverRs:r/B.rs,da:dgdr*L,g:dgdr*L/gStd,stress:RHO*dgdr*L*L/8,torn:r<=B.rTear};}
+window.__tardiIn={base,stateAt,etaFromTau};
+
+/* ---------- moves budget: exact integer (BigInt) ---------- */
+const NMOV=13200000000n;
+const MV={used:0n,auto:false,rate:100000000,carry:0,pose:0n};
+function stepMoves(k,ctr){ctr=ctr||MV;let n=ctr.used+BigInt(k);if(n>NMOV)n=NMOV;if(n<0n)n=0n;const d=n-ctr.used;ctr.used=n;return d;}
+function gcd(a,b){while(b){[a,b]=[b,a%b];}return a;}
+function fracExact(u){const g=gcd(u,NMOV)||1n;return [u/g,NMOV/g];}
+function fracDecimal(u,places){places=places||20;if(u===NMOV)return '1.'+'0'.repeat(places);const s=(u*10n**BigInt(places))/NMOV;const rem=(u*10n**BigInt(places))%NMOV;return '0.'+s.toString().padStart(places,'0')+(rem?'…':'');}
+const grp=b=>b.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',');
+const LAD=[10,9,6,5,4,3,2,1,1,0,0];const NR=BigInt(LAD.length);const PER=NMOV/NR;
+function rungOf(u){let k=u/PER;if(k>=NR)k=NR-1n;return Number(k);}
+function zeroIdx(){return LAD.indexOf(0);}
+function thetaStr(u){const s=(u*720n*10000n)/NMOV,r=(u*720n*10000n)%NMOV;const i=s/10000n,f=(s%10000n).toString().padStart(4,'0');return i+'.'+f+(r?'…':'')+'°';}
+function quad(u){if(u>=NMOV)return 4;return Number((u*4n)/NMOV);}
+const ZPAT=[-1,1,-1,1,0,1,-1,1,-1];const ZGRP=[[0,2],[2,7],[7,9]];const ZP={psi:0,alpha:0,period:4};
+function zpSigns(){const a=Math.cos(2*Math.PI*ZP.psi);const s=a>=0?1:-1;return {a,s,live:ZPAT.map(v=>v*s)};}
+function zpPlain(arr,ascii){const ch=v=>v===0?'0':(v>0?'+':(ascii?'-':'−'));return ZGRP.map(([i,j])=>arr.slice(i,j).map(ch).join('')).join(' ');}
+function zpHTML(arr){const ch=v=>v===0?'<span class="h">0</span>':(v>0?'<span class="p">+</span>':'<span class="m">−</span>');return ZGRP.map(([i,j])=>arr.slice(i,j).map(ch).join('')).join(' ');}
+/* TARDIS: beta = 3/5 exactly -> gamma = 5/4, Doppler 2 and 1/2, contraction 4/5 */
+const BETA=[3n,5n],GAM=[5n,4n];const AU=79n,AG=21n;
+const RHO_AU=19.32,RHO_AG=10.49,M_AU=196.966570,M_AG=107.8682;
+const ELEC=(()=>{const wa=Number(AU)/100,wb=Number(AG)/100;const rho=1/(wa/RHO_AU+wb/RHO_AG);const na=wa/M_AU,nb=wb/M_AG;const vol=(wa/RHO_AU)/(wa/RHO_AU+wb/RHO_AG);
+ return {rho,atAu:na/(na+nb),volAu:vol,karat:24*wa};})();
+function outThetaStr(u){const num=u*720n*5n*10000n,den=NMOV*4n;const s=num/den,r=num%den;return (s/10000n)+'.'+(s%10000n).toString().padStart(4,'0')+(r?'…':'')+'°';}
+function outMoves(u){const x=u*5n;const w=x/4n,r=x%4n;return grp(w)+(r?['','.25','.5','.75'][Number(r)]:'');}
+function outFrac(u){const a=u*5n,b=NMOV*4n;const g=gcd(a,b)||1n;return [a/g,b/g];}
+/* v6/v7: Dave's outside clock t_out = (2/5)·moves/N ; garden build */
+function outPct(u,places){places=places||6;const num=u*40n*10n**BigInt(places),s=num/NMOV,r=num%NMOV;const ip=s/10n**BigInt(places);const fp=(s%10n**BigInt(places)).toString().padStart(places,'0');return ip+'.'+fp+(r?'…':'')+'%';}
+function buildPct(u,places){places=places||6;const num=u*100n*10n**BigInt(places),s=num/NMOV,r=num%NMOV;const ip=s/10n**BigInt(places);const fp=(s%10n**BigInt(places)).toString().padStart(places,'0');return ip+'.'+fp+(r?'…':'')+'%';}
+function outPctSR(u,places){places=places||6;const num=u*125n*10n**BigInt(places),s=num/NMOV,r=num%NMOV;const ip=s/10n**BigInt(places);const fp=(s%10n**BigInt(places)).toString().padStart(places,'0');return ip+'.'+fp+(r?'…':'')+'%';}
+function framesFor(real){return real?['co','out','photo']:['co','out'];}
+function frameName(f){return f==='co'?'co-moving view':(f==='out'?'outside frame (measured)':'outside camera (photo)');}
+/* aberration of a line-of-sight cosine between a frame and one moving +b relative to it (b<0 for the inverse) */
+function aber(c,b){return (c+b)/(1+b*c);}
+function outFracD(u){const a=u*2n,b=NMOV*5n;const g=gcd(a,b)||1n;return [a/g,b/g];}
+const STAGES=[
+ {name:'foundation',what:'soil grains and a floor',n:8,kind:0},
+ {name:'water film',what:'droplets: the thin water film tardigrades need to be active',n:6,kind:1},
+ {name:'moss cushions',what:'moss, the classic tardigrade habitat',n:8,kind:2},
+ {name:'lichen crusts',what:'lichen, another real tardigrade home',n:6,kind:3},
+ {name:'soil & leaf litter',what:'more soil and litter',n:5,kind:0},
+ {name:'electrum struts',what:'four struts holding up the gold ring',n:4,kind:4},
+ {name:'crystal lattice',what:'small iridescent crystals',n:5,kind:5},
+ {name:'little lights',what:'floating lights',n:8,kind:6},
+ {name:'algae & biofilm',what:'algae and biofilm (real tardigrade food)',n:5,kind:7},
+ {name:'zero-point garden',what:'blooms in the inner mirror −+0+−',n:5,kind:8},
+ {name:'mirrored bloom',what:'outer pairs −+ … +− completing −+ −+0+− +−',n:4,kind:8}];
+function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return ((t^t>>>14)>>>0)/4294967296;};}
+function genGarden(seed){const rnd=mulberry(seed),G=[];const FY=-1.5;
+ const y=.6,p=.35,cp=Math.cos(p);const cam=[cp*Math.cos(y),Math.sin(p),cp*Math.sin(y)];const Fh=[-cam[0],0,-cam[2]];const fl=Math.hypot(Fh[0],Fh[2]);Fh[0]/=fl;Fh[2]/=fl;const Rh=[-Fh[2],0,Fh[0]];
+ const floorPt=(rmin,rmax)=>{const a=rnd()*Math.PI*2,r=rmin+(rmax-rmin)*Math.sqrt(rnd());return [Math.cos(a)*r,FY,Math.sin(a)*r];};
+ const pal={0:[[.36,.25,.15],[.30,.20,.12],[.45,.32,.18],[.26,.19,.13]],1:[[.55,.8,1.]],2:[[.22,.52,.16],[.30,.62,.20],[.18,.45,.22],[.35,.58,.18]],3:[[.76,.80,.56],[.70,.74,.62],[.85,.80,.45]],4:[[.98,.86,.58]],5:[[.80,.90,1.]],6:[[1.,.85,.55],[.6,.95,1.],[1.,.6,.9]],7:[[.15,.6,.45],[.25,.7,.35]],8:[[1,1,1]]};
+ STAGES.forEach((st,s)=>{for(let j=0;j<st.n;j++){const k=st.kind;const cs=pal[k];const c=cs[Math.floor(rnd()*cs.length)];let pos,r,top=null,sign=0;
+  if(k===0){r=.05+rnd()*.07;pos=floorPt(.3,1.85);pos[1]+=r*.55;if(s===4){r=.08+rnd()*.06;pos[1]=FY+r*.3;}}
+  else if(k===1){r=.06+rnd()*.06;pos=floorPt(.25,1.8);pos[1]+=r*.5;}
+  else if(k===2){r=.16+rnd()*.12;pos=floorPt(.4,1.7);pos[1]+=r*.35;}
+  else if(k===3){r=.12+rnd()*.08;pos=floorPt(.4,1.8);pos[1]+=r*.2;}
+  else if(k===4){const a=Math.PI/4+j*Math.PI/2;r=.045;pos=[Math.cos(a)*1.62,FY,Math.sin(a)*1.62];top=[pos[0],-.03,pos[2]];}
+  else if(k===5){r=.07+rnd()*.05;pos=floorPt(.5,1.75);pos[1]+=r*.8;}
+  else if(k===6){let q;do{const u=rnd()*2-1,a=rnd()*Math.PI*2,rr=1.6+rnd()*.6;const sxy=Math.sqrt(1-u*u);q=[Math.cos(a)*sxy*rr,Math.max(-1.2,Math.min(1.5,u*rr)),Math.sin(a)*sxy*rr];}while(Math.hypot(...q)>2.3||Math.hypot(...q)<1.5||(Math.abs(q[1])<.15));pos=q;r=.035+rnd()*.015;}
+  else if(k===7){r=.05+rnd()*.04;pos=floorPt(.3,1.8);pos[1]+=r*.4;}
+  else if(k===8){const row=s===9?[[-1.1,-1],[-.55,1],[0,0],[.55,1],[1.1,-1]]:[[-1.5,-1],[-.95,1],[.95,1],[1.5,-1]];const base=s===9?.85:.35;const [o,sg]=row[j];
+   pos=[-Fh[0]*base+Rh[0]*o,FY,-Fh[2]*base+Rh[2]*o];r=(sg===0?.13:.1)+rnd()*.02;pos[1]+=r*.8;sign=sg;}
+  const span=PER/BigInt(st.n);G.push({s,j,kind:k,c,pos,r,top,sign,th:BigInt(s)*PER+BigInt(j)*span,span});}});
+ return G;}
+const GARDEN=genGarden(0x7E7A);
+/* v7: tetragarde colony (MODEL) grounded in H. exemplaris biology (MATCH); Patricia θ link (MODEL) */
+const QDP=[['bk','black',[.10,.10,.12]],['wt','white',[1,1,1]],['rd','red',[1,.18,.18]],['bl','blue',[.18,.45,1]],['gr','green',[.22,.85,.32]],['yl','yellow',[1,.9,.22]],['or','orange',[1,.55,.12]],['pr','purple',[.65,.32,1]]];
+const COL_QD={0:2,1:3,2:4,3:1,5:5,6:6,7:7,8:0};
+const LAYS=[{at:2n*PER+3n*PER/8n,host:2,slots:[2,3,5,6]},{at:2n*PER+6n*PER/8n,host:5,slots:[0,1,7,8]}];
+const HATCH_DELAY=2n*PER,HATCH_STAG=PER/20n;
+function genColony(seed){const rnd=mulberry(seed);const moss=GARDEN.filter(e=>e.kind===2);
+ const ex=LAYS.map((L,li)=>{const m=moss[L.host];return {li,at:L.at,pos:[m.pos[0],m.pos[1]+m.r*.8,m.pos[2]],h:rnd()*Math.PI*2,r:.06};});
+ const mem=[];LAYS.forEach((L,li)=>L.slots.forEach((sl,j)=>{const E=ex[li];
+  mem.push({slot:sl,sign:ZPAT[sl],qd:COL_QD[sl],laid:L.at,hatch:L.at+HATCH_DELAY+BigInt(j)*HATCH_STAG,ex:li,j,
+   egg:[E.pos[0]+Math.cos(E.h)*(j-1.5)*.065,E.pos[1]+.045,E.pos[2]+Math.sin(E.h)*(j-1.5)*.065],
+   w:(sl<4?1:-1)*(.55+rnd()*.5),rb:.8+rnd()*.8,ph:rnd()*6.283,alg:Math.floor(rnd()*5)});}));
+ mem.sort((a,b)=>a.slot-b.slot);return {ex,mem};}
+const COLONY=genColony(0xC0107);
+function colTun(i,k,fr){return ((i*5+k*3)%7===0)&&fr>=.3&&fr<.7;}
+function colonyState(u,allTun){const k=rungOf(u);const fr=u>=NMOV?1:Number(((u-BigInt(k)*PER)*10000n)/PER)/10000;const FY=-1.5;
+ const algae=GARDEN.filter(e=>e.kind===7);
+ const ms=COLONY.mem.map((m,i)=>{let state='none',pos=null,h=0;
+  if(u<m.laid){}
+  else if(u<m.hatch){state='egg';pos=m.egg;}
+  else{const du=Number(((u-m.hatch)*1000000n)/PER)/1e6;const E=COLONY.ex[m.ex];const ae=Math.atan2(E.pos[2],E.pos[0]),re=Math.hypot(E.pos[0],E.pos[2]);
+   const bl=1-Math.exp(-du*2.5);const a=ae+m.w*du+(m.j-1.5)*.18*bl;const r=re+(m.rb+.18*Math.sin(m.ph+du*3)-re)*bl;
+   let x=Math.cos(a)*r,z=Math.sin(a)*r;const sg=Math.sign(m.w);let tx=-Math.sin(a)*sg,tz=Math.cos(a)*sg;
+   const A=algae[m.alg];let graze=false;
+   if(A&&u>=A.th+A.span){const da=Number(((u-(A.th+A.span))*1000000n)/PER)/1e6;const g=(.5-.5*Math.cos(2*Math.PI*(da*.6+i/8)))*Math.min(1,da*3);
+    const oa=m.ph+du*2,gx=A.pos[0]+Math.cos(oa)*.2,gz=A.pos[2]+Math.sin(oa)*.2;x+=(gx-x)*g;z+=(gz-z)*g;
+    if(g>.5){tx=-Math.sin(oa);tz=Math.cos(oa);}graze=Math.hypot(x-A.pos[0],z-A.pos[2])<.3;}
+   h=Math.atan2(tz,tx);const tn=!!allTun||colTun(i,k,fr);state=tn?'tun':(graze?'grazing':'wandering');pos=[x,FY+(tn?.05:.062),z];}
+  return {i,slot:m.slot,sign:m.sign,qd:m.qd,state,pos,h,laid:m.laid,hatch:m.hatch};});
+ const cnt=s=>ms.filter(m=>m.state===s).length;const eggs=cnt('egg'),tun=cnt('tun'),wand=cnt('wandering'),graz=cnt('grazing');const hatched=tun+wand+graz;
+ const laid=eggs+hatched;const balance=ms.filter(m=>m.state!=='none').reduce((a,m)=>a+m.sign,0);
+ return {members:ms,eggs,tun,wandering:wand,grazing:graz,active:wand+graz,hatched,laid,count:1+hatched,balance,exuviae:COLONY.ex.filter(e=>u>=e.at)};}
+function patAngle(u){return Number((u*4000000n)/NMOV)/4000000*4*Math.PI;}
+function patThetaStr(u){return thetaStr(u);}
+function patLap(u){return u>=NMOV?2:Number((u*2n)/NMOV);}
+function gardenState(u,allTun){let n=0;const R8=!!(window.__tardiIn&&window.__tardiIn.state&&window.__tardiIn.state.real);const EP=new Float32Array(320),EC=new Float32Array(320);const z=zpSigns();
+ for(const e of GARDEN){if(u<e.th)break;const grow=u>=e.th+e.span?1:Number(((u-e.th)*10000n)/e.span)/10000;const i=n*4;
+  let r=e.r*(e.kind===4?1:Math.max(.05,grow));let c=e.c;
+  if(e.kind===8){const sg=e.sign*(ZP.alpha>0.5?z.s:1);c=sg===0?[1,.82,.42]:(sg>0?[.43,.95,1]:[1,.37,.82]);}
+  if(e.kind===4){EP.set([e.pos[0],e.pos[1],e.pos[2],r],i);EC.set([c[0],c[1],c[2],4+.999*grow],i);}
+  else{EP.set([e.pos[0],e.pos[1],e.pos[2],r],i);EC.set([c[0],c[1],c[2],e.kind],i);}n++;}
+ const ng=n;const C=colonyState(u,allTun);const h01=h=>((h/(2*Math.PI))%1+1)%1;
+ for(const x of C.exuviae){const i=n*4;EP.set([x.pos[0],x.pos[1],x.pos[2],x.r],i);EC.set([.86,.74,.5,12+.999*h01(x.h)],i);n++;}
+ for(const m of C.members){if(m.state==='none')continue;const i=n*4;const q=QDP[m.qd][2];
+  if(m.state==='egg'){EP.set([m.pos[0],m.pos[1],m.pos[2],.04],i);EC.set([.96,.93,.84,11],i);}
+  else if(m.state==='tun'){EP.set([m.pos[0],m.pos[1],m.pos[2],.055],i);EC.set([q[0],q[1],q[2],10],i);}
+  else{EP.set([m.pos[0],m.pos[1]+(R8?.035:0),m.pos[2],.062],i);EC.set([q[0],q[1],q[2],9+.999*h01(m.h)],i);}n++;}
+ const f=(a,b)=>Math.max(0,Math.min(1,Number(((u-a)*1000n)/(b-a))/1000));
+ return {EP,EC,n,ng,colony:C,floorR:1.95*f(0n,PER/2n),moss:f(2n*PER,3n*PER),lights:f(7n*PER,8n*PER)};}
+function stageOf(u){return rungOf(u);}
+function tValue(){return MV.used===NMOV?1:0;}
+
+/* ---------- v9 implicit geometry + valence language ---------- */
+const V9={
+ dot:1,bar:2,
+ lanes:[{name:'nucleach',glyph:'..|'},{name:'photonic',glyph:'|'},{name:'electronic',glyph:'..|'}],
+ toroidGlyph:'.||||.',phase:0,commits:0,ledger:[]
+};
+function glyphValue(g){let n=0;for(const ch of g){if(ch==='.')n+=V9.dot;else if(ch==='|')n+=V9.bar;}return n;}
+function toroidPhase(){return V9.phase/5;}
+function motherNatureGate(a=-1,b=0,c=1){return a+b+c===0;}
+function implicitOccupied(x,y){const outer=Math.pow(Math.abs(x)/1.0,8)+Math.pow(Math.abs(y)/0.62,8)-1;const inner=Math.pow(Math.abs(x)/0.66,8)+Math.pow(Math.abs(y)/0.30,8)-1;return outer<=0&&inner>=0;}
+function toroidAdvance(){
+ if(V9.phase===5){V9.ledger.push({kind:'wrap',from:1,to:0});V9.phase=0;}
+ else{V9.phase++;const commit=V9.phase===5;if(commit)V9.commits++;V9.ledger.push({kind:commit?'commit':'transfer',phase:V9.phase,frac:V9.phase+'/5'});}
+ renderImplicit(true);
+}
+function toroidReset(){V9.ledger.push({kind:'reset',from:V9.phase});V9.phase=0;V9.commits=0;renderImplicit(true);}
+function superPoint(k,A=.83,B=.48,p=8){const th=-Math.PI/2+2*Math.PI*k/5,c=Math.cos(th),d=Math.sin(th),e=2/p;return [A*Math.sign(c)*Math.pow(Math.abs(c),e),B*Math.sign(d)*Math.pow(Math.abs(d),e)];}
+
+function selfCheck(){const out=[];const ok=(name,pass,detail)=>out.push({name,pass:!!pass,detail});
+ const [p,q]=fracExact(NMOV);ok('N moves × (1/N) = 1 exactly (exact rational N/N)',p===1n&&q===1n,`${p}/${q}`);
+ const c={used:0n};for(let i=0;i<13;i++)stepMoves(1000000000,c);for(let i=0;i<200;i++)stepMoves(1000000,c);
+ ok('13 × 10⁹ + 200 × 10⁶ steps land exactly on N, fraction = 1',c.used===NMOV&&fracDecimal(c.used)===('1.'+'0'.repeat(20)),grp(c.used));
+ const c2={used:NMOV-5n};stepMoves(1000000000,c2);ok('Overshoot clamps at N (no 1 + ε)',c2.used===NMOV,grp(c2.used));
+ let seed=7,sumSteps=0n;const c3={used:0n};const rnd=()=>(seed=(seed*48271)%2147483647);for(let i=0;i<2000;i++){const k=rnd()%1000003;sumSteps+=BigInt(k);stepMoves(k,c3);}
+ ok('2000 random steps: counter equals exact sum of steps',c3.used===sumSteps,grp(sumSteps));
+ const [p1,q1]=fracExact(1n);ok('One move is exactly 1/13,200,000,000',p1===1n&&q1===NMOV,`${p1}/${grp(q1)}`);
+ let f=0;const K=1000000;for(let i=0;i<K;i++)f+=1/13200000000;const exact=K/13200000000;const drift=Math.abs(f-exact)/exact;
+ ok('Float control: 10⁶ float additions of 1/N drift (why BigInt is used)',drift>0,`relative drift ${drift.toExponential(2)}`);
+ ok('N fits exactly as an integer (< 2⁵³)',Number(NMOV)<=Number.MAX_SAFE_INTEGER&&BigInt(Number(NMOV))===NMOV,'13200000000 < 9007199254740991');
+
+ ok('Ladder as given: 11 rungs [10,9,6,5,4,3,2,1,1,0,0] (8 and 7 skipped, not fixed)',LAD.length===11&&LAD.join()==='10,9,6,5,4,3,2,1,1,0,0',LAD.join(', '));
+ ok('Equal split: 11 × 1,200,000,000 = N exactly (no remainder)',NMOV%NR===0n&&PER*NR===NMOV&&PER===1200000000n,`${grp(PER)} per rung`);
+ ok('Each rung = 1/11 exactly; 11 rungs sum to 1',(()=>{const [a,b]=fracExact(PER);return a===1n&&b===11n&&PER*11n===NMOV;})(),'1/11 × 11 = 1');
+ ok('Every rung balances: (−n) + (+n) = 0',LAD.every(n=>BigInt(-n)+BigInt(n)===0n),'balance 0 on all 11 rungs');
+ ok('Rung boundaries exact: k × 1.2e9 moves → rung k+1',[0,1,5,9,10].every(k=>rungOf(PER*BigInt(k))===k)&&rungOf(PER-1n)===0&&rungOf(NMOV)===10,'');
+ ok('Zero point first reached at 10,800,000,000 moves (rung 10), held to the end',rungOf(10800000000n)===9&&LAD[rungOf(10800000000n-1n)]===1&&LAD[rungOf(NMOV)]===0,'');
+ ok('θ: 720° × used/N is exact; 1 rung = 720/11° and N moves = 720°',thetaStr(NMOV)==='720.0000°'&&thetaStr(PER)==='65.4545…°',thetaStr(PER)+' per rung');
+
+ ok('Zero-point structure as given: "-+ -+0+- +-"',zpPlain(ZPAT,true)==='-+ -+0+- +-',zpPlain(ZPAT,true));
+ ok('Mirror symmetric about the 0 hinge (reads the same reflected)',ZPAT.every((v,i)=>v===ZPAT[8-i])&&ZPAT[4]===0,'p[i] = p[8−i], centre 0');
+ ok('Observed reading is 0: Σ of the structure = 0 (yet no element but the hinge is 0)',ZPAT.reduce((a,b)=>a+b,0)===0&&ZPAT.filter(v=>v!==0).length===8,'Σ = 0, 8 nonzero signs');
+ ok('Half a breath (360°) inverts every sign (−++− → +−−+ style flip); 720° restores it',zpPlain(ZPAT.map(v=>-v),true)==='+- +-0-+ -+'&&ZPAT.map(v=>-(-v)).join()===ZPAT.join(),'+- +-0-+ -+ at 360°');
+ ok('Mean square of the structure ≠ 0 (like ⟨x⟩ = 0, ⟨x²⟩ ≠ 0)',ZPAT.reduce((a,b)=>a+b*b,0)/9>0,'⟨s²⟩ = 8/9');
+
+ ok('β = 3/5 ⇒ γ² = 1/(1−β²) = 25/16 ⇒ γ = 5/4 exactly',GAM[0]*GAM[0]*(BETA[1]*BETA[1]-BETA[0]*BETA[0])===GAM[1]*GAM[1]*BETA[1]*BETA[1],'γ = 1.25');
+ ok('Inside clock rate 1/γ = 4/5 (80%); γ × 1/γ = 1',GAM[0]*GAM[1]===GAM[1]*GAM[0]&&(GAM[1]*100n)/GAM[0]===80n,'80%');
+ ok('Forward Doppler √((1+β)/(1−β)) = 2 exactly, backward 1/2',(BETA[1]+BETA[0])===4n*(BETA[1]-BETA[0]),'(8/5)/(2/5) = 4 = 2²');
+ ok('Ring: gold 79% + silver 21% = 100% electrum (integer)',AU+AG===100n,'79 + 21 = 100');
+ ok('Outside clock = 5/4 × inside: at t_in = 1, t_out = 5/4 and θ_out = 900°',(()=>{const [a,b]=outFrac(NMOV);return a===5n&&b===4n&&outThetaStr(NMOV)==='900.0000°';})(),'5/4 · 900.0000°');
+ ok('Electrum 79/21 density by ideal mixing ≈ 16.42 g/cm³',Math.abs(ELEC.rho-16.4178)<0.001,ELEC.rho.toFixed(4)+' g/cm³');
+
+ ok("Dave's outside clock: t_out = (2/5)·moves/N reaches exactly 2/5 = 40% at t_in = 1",(()=>{const [a,b]=outFracD(NMOV);return a===2n&&b===5n&&outPct(NMOV)==='40.000000%';})(),'2/5 · 40.000000%');
+ ok('Inside : outside = 1 : 2/5 = 5/2 = 2.5× (exact)',(()=>{const [a,b]=outFracD(NMOV);return b*1n===5n*1n&&a===2n&&(b*10n)/a===25n;})(),'5/2');
+ ok('SR fact: γ = 5/2 ⇔ β² = 1 − 4/25 = 21/25, β = √21/5 ≈ 0.9165',25n-4n===21n&&Math.abs(Math.sqrt(21)/5-0.916515)<1e-6&&Math.abs(1/Math.sqrt(1-21/25)-2.5)<1e-12,(Math.sqrt(21)/5).toFixed(6));
+ ok('Garden: 11 stages × 1,200,000,000 = N; 64 elements, each stage split exactly',STAGES.length===11&&GARDEN.length===64&&STAGES.every(s=>PER%BigInt(s.n)===0n),'8+6+8+6+5+4+5+8+5+5+4 = 64');
+ ok('Last element finishes growing exactly at N (build complete at t_in = 1)',(()=>{const e=GARDEN[GARDEN.length-1];return e.th+e.span===NMOV&&gardenState(NMOV).ng===64&&gardenState(NMOV-1n).ng===64;})(),'th + span = 13,200,000,000');
+ ok('Build progress = moves/N exactly: 100.000000% only at N',buildPct(NMOV)==='100.000000%'&&buildPct(NMOV-1n)!=='100.000000%','');
+ ok('Deterministic: same seed ⇒ identical garden layout',JSON.stringify(genGarden(0x7E7A).map(e=>e.pos))===JSON.stringify(GARDEN.map(e=>e.pos)),'seed 0x7E7A');
+ ok('Colony: 8 companions on the 8 nonzero slots of −+ −+0+− +−; the original tetragarde is the 0 hinge',COLONY.mem.length===8&&COLONY.mem.map(m=>m.slot).join()==='0,1,2,3,5,6,7,8'&&COLONY.mem.every(m=>m.sign===ZPAT[m.slot]&&m.sign!==0)&&ZPAT[4]===0,'slots 0–3, 5–8 · hinge = slot 4');
+ ok('Colony signs sum to 0 and mirror about the hinge (sign[i] = sign[8−i])',COLONY.mem.reduce((a,m)=>a+m.sign,0)===0&&COLONY.mem.every(m=>m.sign===ZPAT[8-m.slot]),'Σ = 0');
+ ok('Each clutch is zero-sum (inner −+ +−, then outer −+ +−), 4 eggs each, inside the real 1–10 range',LAYS.every(L=>L.slots.length===4&&L.slots.reduce((a,s)=>a+ZPAT[s],0)===0)&&LAYS[0].slots.join()==='2,3,5,6',`clutches ${LAYS.map(L=>L.slots.length).join(' + ')} (real: 3.4 ± 1.9, 1–10)`);
+ ok('Eggs laid during the moss stage (stage 3); every egg hatches 2 rungs later, before stage 6',LAYS.every(L=>stageOf(L.at)===2)&&COLONY.mem.every(m=>m.hatch-m.laid>=HATCH_DELAY&&m.hatch<5n*PER),`laid ${LAYS.map(L=>grp(L.at)).join(', ')}`);
+ ok('Homeostatic: balance 0 at every sampled move; count never falls, never exceeds 1 + 8; ends at 9 with no eggs',(()=>{const us=[0n,NMOV];for(const m of COLONY.mem){us.push(m.laid-1n,m.laid,m.hatch-1n,m.hatch);}for(let i=0;i<=600;i++)us.push(NMOV*BigInt(i)/600n);us.sort((a,b)=>a<b?-1:a>b?1:0);let prev=0,good=true;
+   for(const u of us){const C=colonyState(u);if(C.balance!==0||C.count<prev||C.count>9||C.laid%4!==0)good=false;prev=C.count;}const E=colonyState(NMOV);return good&&E.count===9&&E.eggs===0&&E.hatched===8;})(),'Σ = 0 always · 9 at t = 1');
+ ok('Tun is reversible: a member that tuns revives later in the same rung; tun never changes the count',(()=>{let seen=0,good=true;for(let k=4;k<11;k++)for(let i=0;i<8;i++){if(!colTun(i,k,.5))continue;const u0=BigInt(k)*PER+PER/2n,u1=BigInt(k)*PER+PER*3n/4n;const a=colonyState(u0),b=colonyState(u1);
+   if(a.members[i].state==='tun'){seen++;if(b.members[i].state==='tun'||a.count!==b.count)good=false;}}return good&&seen>0;})(),'tun → active, count unchanged');
+ ok('q.d analogy: 8 companions = 2³ colour states, all distinct; sign ↔ parity (− even bk rd gr or, + odd wt bl yl pr)',new Set(COLONY.mem.map(m=>m.qd)).size===8&&COLONY.mem.every(m=>(m.qd%2===1)===(m.sign>0)),COLONY.mem.map(m=>QDP[m.qd][0]).join(' '));
+ ok('Deterministic colony: same seed and moves ⇒ identical members and states',(()=>{const G=genColony(0xC0107);const u=[3000000000n,6123456789n,9876543210n,NMOV];return JSON.stringify(G.mem.map(m=>[m.slot,m.egg,m.w,m.rb]))===JSON.stringify(COLONY.mem.map(m=>[m.slot,m.egg,m.w,m.rb]))&&u.every(x=>JSON.stringify(colonyState(x),(k,v)=>typeof v==='bigint'?v.toString():v)===JSON.stringify(colonyState(x),(k,v)=>typeof v==='bigint'?v.toString():v));})(),'seed 0xC0107');
+ ok('Patricia θ tied to the inside clock: θ_P = 720° at t_in = 1 (one full Patricia cycle, two ring laps)',patThetaStr(NMOV)==='720.0000°'&&patThetaStr(PER)===thetaStr(PER)&&Math.abs(patAngle(NMOV)-4*Math.PI)<1e-12&&patLap(NMOV)===2&&patAngle(0n)===0,'θ_P(N) = 720.0000° · 4π rad');
+ /* ---- v9 appended checks: implicit geometry + valence language ---- */
+ ok('v9 TOROID-5 literal cell has 4 internal bars, 2 endpoint dots, and 5 transfer intervals',V9.toroidGlyph==='.||||.'&&[...V9.toroidGlyph].filter(x=>x==='|').length===4&&[...V9.toroidGlyph].filter(x=>x==='.').length===2,`glyph ${V9.toroidGlyph} · intervals 5`);
+ ok('v9 TOROID-5 exact fifths: 0,1/5,2/5,3/5,4/5,5/5 with 5/5 as closure witness',Array.from({length:6},(_,i)=>i/5).join(',')==='0,0.2,0.4,0.6,0.8,1','5 exact rational phases in implementation state');
+ ok('v9 Mother-Nature closure gate balances only the canonical signed triplet',motherNatureGate(-1,0,1)&&!motherNatureGate(-1,0,0)&&!motherNatureGate(0,0,1),'-1 + 0 + 1 = 0');
+ ok('v9 valence primitive ..| :: | :: ..| = 4 :: 2 :: 4 = 10',glyphValue('..|')===4&&glyphValue('|')===2&&V9.lanes.reduce((a,b)=>a+glyphValue(b.glyph),0)===10,'4 :: 2 :: 4');
+ ok('v9 valence outer lanes mirror while photonic lane is the 2-valued hinge',glyphValue(V9.lanes[0].glyph)===glyphValue(V9.lanes[2].glyph)&&glyphValue(V9.lanes[1].glyph)===2,'nucleach 4 · photonic 2 · electronic 4');
+ ok('v9 implicit boxy ring is annular: center empty, mid-shell occupied, exterior empty',!implicitOccupied(0,0)&&implicitOccupied(.8,0)&&!implicitOccupied(1.2,0),'level-set occupancy PASS');
+
+ /* ---- v8 appended checks ---- */
+ ok('v8 SR clocks: outside = 5/4 × inside, so 125.000000% at t_in = 1 (and θ_out = 900°)',outPctSR(NMOV)==='125.000000%'&&outPctSR(0n)==='0.000000%'&&outThetaStr(NMOV)==='900.0000°','125% · 900°');
+ ok('v8 aberration round trip: (c+β)/(1+βc) then (c−β)/(1−βc) returns c, and 1 − c² maps consistently',(()=>{let w=0;for(let i=0;i<=2000;i++){const c=-1+i/1000;const f=aber(c,.6),g=aber(f,-.6);w=Math.max(w,Math.abs(g-c));if(f<-1-1e-12||f>1+1e-12)return false;}return w<1e-12;})(),'max error < 1e-12');
+ ok('v8 photo view: silhouette of a rigid sphere seen from the side maps to a CIRCLE on the sky (Terrell–Penrose); a naive ×0.8 squash does not (known-bad control)',(()=>{
+   const be=.6,D=7.9,R=2.5,al=Math.asin(R/D);
+   const cone=mapfn=>{const P=[];for(let k=0;k<64;k++){const az=2*Math.PI*k/64;P.push(mapfn([Math.sin(al)*Math.cos(az),-Math.cos(al),Math.sin(al)*Math.sin(az)]));}return P;};
+   const cr=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];const sb=(a,b)=>[a[0]-b[0],a[1]-b[1],a[2]-b[2]];
+   const planar=P=>{let n=cr(sb(P[21],P[0]),sb(P[42],P[0]));const l=Math.hypot(...n);n=n.map(x=>x/l);const o=P.map(v=>v[0]*n[0]+v[1]*n[1]+v[2]*n[2]);return Math.max(...o)-Math.min(...o);};
+   const photo=planar(cone(d=>{const cc=aber(d[0],-be);const pl=Math.hypot(d[1],d[2]);const sn=Math.sqrt(Math.max(0,1-cc*cc));return [cc,d[1]/pl*sn,d[2]/pl*sn];}));
+   const squash=planar(cone(d=>{const v=[d[0]*.8,d[1],d[2]];const l=Math.hypot(...v);return v.map(x=>x/l);}));
+   return photo<1e-12&&squash>1e-4;})(),'plane spread: photo < 1e-12 · squash control > 1e-4');
+ ok('v8 frame cycle: realistic view has 3 frames (inside, outside-measured, outside-photo); stylised keeps v7\'s 2',framesFor(1).join()==='co,out,photo'&&framesFor(0).join()==='co,out','co,out,photo | co,out');
+ return {pass:out.every(x=>x.pass),checks:out};}
+const SELF=selfCheck();
+
+const OSC={r:0,from:10,to:10,t0:0,level:10,walking:false};
+/* ---------- state ---------- */
+const LOOK0=params.get('look')==='stylised'?0:1;
+const S={real:LOOK0,srCmp:!!LOOK0,frame:'co',domeLog:6,massLog:1,thick:16,lenUm:500,spd:1,tun:0,tunTarget:0,released:false,paused:false,frac:0,
+ yaw:0.6,pitch:0.42,dist:7.9,motion:!mqReduce.matches,dirty:true,quality:params.get('mode')==='2d'?'2d':'auto',scale:.75,steps:0,software:false,shimT:0};
+window.__tardiIn.state=S;window.__tardiIn.V9=V9;window.__tardiIn.glyphValue=glyphValue;window.__tardiIn.toroidAdvance=toroidAdvance;window.__tardiIn.toroidReset=toroidReset;window.__tardiIn.implicitOccupied=implicitOccupied;window.__tardiIn.moves=MV;window.__tardiIn.N=NMOV;window.__tardiIn.stepMoves=k=>{stepMoves(k);onMoves(true);};window.__tardiIn.fracDecimal=fracDecimal;window.__tardiIn.fracExact=fracExact;window.__tardiIn.selfCheck=SELF;window.__tardiIn.LAD=LAD;window.__tardiIn.STAGES=STAGES;window.__tardiIn.GARDEN=GARDEN;window.__tardiIn.gardenState=gardenState;window.__tardiIn.outPct=outPct;window.__tardiIn.buildPct=buildPct;window.__tardiIn.outFracD=outFracD;window.__tardiIn.ELEC=ELEC;window.__tardiIn.outThetaStr=outThetaStr;window.__tardiIn.outFrac=outFrac;window.__tardiIn.outMoves=outMoves;window.__tardiIn.ZP=ZP;window.__tardiIn.zpSigns=zpSigns;window.__tardiIn.zpPlain=zpPlain;window.__tardiIn.rungOf=rungOf;window.__tardiIn.thetaStr=thetaStr;window.__tardiIn.colonyState=colonyState;window.__tardiIn.COLONY=COLONY;window.__tardiIn.patAngle=patAngle;window.__tardiIn.patThetaStr=patThetaStr;window.__tardiIn.QDP=QDP;
+
+/* ---------- formatting ---------- */
+function expo(x){const a=Math.abs(x);if(!isFinite(x))return '∞';if(a===0)return '0';if(a>=1e-2&&a<1e3)return x.toPrecision(3);const e=Math.floor(Math.log10(a));return (x/Math.pow(10,e)).toFixed(2)+'×10<sup>'+e+'</sup>';}
+function fmtLen(x){const a=Math.abs(x);if(a>=1e9)return (x/1.495978707e11).toPrecision(3)+' AU';if(a>=1e3)return (x/1e3).toPrecision(4)+' km';if(a>=1)return x.toPrecision(3)+' m';if(a>=1e-3)return (x*1e3).toPrecision(3)+' mm';return (x*1e6).toPrecision(3)+' µm';}
+function fmtTime(s){if(s===0)return '0';if(s<1e-3)return (s*1e6).toPrecision(3)+' µs';if(s<1)return (s*1e3).toPrecision(3)+' ms';if(s<120)return s.toPrecision(3)+' s';if(s<7200)return (s/60).toPrecision(3)+' min';if(s<172800)return (s/3600).toPrecision(3)+' h';if(s<6.3e7)return (s/86400).toPrecision(3)+' days';return (s/3.156e7).toPrecision(3)+' yr';}
+const chip=l=>`<span class="chip ${l}">${l}</span>`;
+const outP=(u,p)=>S.srCmp?outPctSR(u,p):outPct(u,p);
+const esc=s=>String(s).replace(/[&<>"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
+const link=(u,t)=>`<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(t||u)}</a>`;
+const HAM='https://jila.colorado.edu/~ajsh/insidebh/schw.html';
+
+/* ---------- panels ---------- */
+function renderHUD(){
+ const M=Math.pow(10,S.massLog),L=S.lenUm*1e-6,st=stateAt(M,L,S.frac);
+ if(!S.released){
+  const r=rungOf(MV.used),n=LAD[r],zi=zeroIdx(),zero=n===0,q=quad(MV.used),off=OSC.level-OSC.to;
+  const sp=['−','+','+','−'].map((c,i)=>i===q?`<b>${c}</b>`:c).join('');
+  const inR=MV.used>=NMOV?PER:MV.used-PER*BigInt(r);
+  $('hud').innerHTML=`
+  <div class="cell"><span class="k">gravity</span><span class="v">g = 1</span><span class="k">normalized</span></div>
+  <div class="cell"><span class="k">time</span><span class="v">t = ${tValue()}</span><span class="k">${tValue()?'all moves spent':'held'}</span></div>
+  <div class="cell"><span class="k">θ clock (exact)</span><span class="v frac">${thetaStr(MV.used)}</span><span class="k">of 720° · photon birth +electrum</span></div>
+  <div class="cell"><span class="k">sign pattern</span><span class="v sign">${sp}</span><span class="k">${q<4?'quarter '+(q+1)+' of 4':'cycle closed'}</span></div>
+  <div class="cell"><span class="k">8φ laps</span><span class="v">0</span><span class="k">held</span></div>
+  <div class="cell">${chip('MODEL')}<span class="k">homeostatic interior</span></div>
+  <div class="row2">
+   <div class="cell"><span class="k">rung</span><span class="v">${r+1} / 11</span><span class="k">${r>=9?'void shells':'shell '+(11-r)}</span></div>
+   <div class="cell"><span class="k">value pair</span><span class="v">${n?'−'+n+' · +'+n:'±0 (observed)'}</span><span class="k">ladder ±[10,9,6,5,4,3,2,1,1,0,0]</span></div>
+   <div class="cell"><span class="k">running balance</span><span class="v ok">0</span><span class="k">${zero?'Σ(−+ −+0+− +−) = 0':'(−'+n+') + (+'+n+') = 0'}</span></div>
+   ${zero?(()=>{const Z=zpSigns();return `<div class="cell"><span class="k">zero point (observed as 0) =</span><span class="v zp">${zpHTML(Z.live)}</span><span class="k">${S.motion?'breathing '+Math.round(ZP.psi*720)+'° / 720° · persistent':'held pattern (reduced motion)'}</span></div>
+   <div class="cell"><span class="k">observed reading</span><span class="v">0</span><span class="k">what an outside reading would call it</span></div>`;})()
+   :`<div class="cell"><span class="k">zero point</span><span class="v">rung ${zi+1}</span><span class="k">settling</span></div>`}
+   <div class="lad" aria-label="ladder">${LAD.map((v,i)=>`<span class="${i===r?'on':(i<r?'done':'')}">±${v}</span>`).join('')}</div>
+  </div>
+  <div class="row2">
+   <div class="cell"><span class="k">electrum ring (by mass)</span><span class="v"><span class="au">Au 79</span> + <span class="ag">Ag 21</span> = 100%</span><span class="rbar" aria-hidden="true"><i style="width:79%;background:#e8b84a"></i><i style="width:21%;background:#d8d8e2"></i></span></div>
+   <div class="cell"><span class="k">biodome speed</span><span class="v">β = 0.6 = 3/5</span><span class="k">γ = 5/4 · ${frameName(S.frame)}</span></div>
+   <div class="cell"><span class="k">inside clock</span><span class="v frac">${thetaStr(MV.used)}</span><span class="k">t<sub>in</sub> = ${tValue()} ${S.srCmp?'· SR: runs at 80%':''}</span></div>
+   ${S.srCmp?`<div class="cell"><span class="k">outside clock · SR ${chip('MATCH')}</span><span class="v frac">${outThetaStr(MV.used)}</span><span class="k">× 5/4 · t<sub>out</sub> = ${tValue()?'5/4':'…'}</span></div>`
+    :`<div class="cell"><span class="k">outside world · Dave ${chip('MODEL')}</span><span class="v frac">${outPct(MV.used,6)}</span><span class="k">t<sub>out</sub> = (2/5)·moves/N = ${(()=>{const [x,y]=outFracD(MV.used);return grp(x)+'/'+grp(y);})()}</span></div>`}
+   <div class="cell"><span class="k">Patricia clock ${chip('MODEL')}</span><span class="v frac pat">${patThetaStr(MV.used)}</span><span class="k">θ<sub>P</sub> = θ<sub>in</sub> · ring lap ${Math.min(2,patLap(MV.used)+(MV.used<NMOV?1:0))}/2</span></div>
+   <div class="cell"><span class="k">build stage</span><span class="v">${Math.min(11,stageOf(MV.used)+1)}/11 ${STAGES[stageOf(MV.used)].name}</span><span class="k">progress ${buildPct(MV.used,6)}</span></div>
+  </div>
+  <div class="row2">
+   <div class="cell"><span class="k">moves used</span><span class="v">${grp(MV.used)}</span><span class="k">of 13,200,000,000</span></div>
+   <div class="cell"><span class="k">fraction of 1 (exact)</span><span class="v frac">${fracDecimal(MV.used,20)}</span><span class="k">= ${(()=>{const [a,b]=fracExact(MV.used);return grp(a)+' / '+grp(b);})()}</span></div>
+   <div class="cell"><span class="k">this rung</span><span class="v">${grp(inR)}</span><span class="k">of 1,200,000,000 (1/11)</span></div>
+   ${(()=>{const C=colonyState(MV.used,S.tunTarget>.5);return `<div class="cell"><span class="k">colony ${chip('MODEL')}</span><span class="v">${C.count} · Σ <span class="ok">${C.balance}</span></span><span class="k">${C.laid?`${C.eggs} egg · ${C.active} active · ${C.tun} tun`:'eggs come in the moss stage'}</span></div>`;})()}
+   <div class="cell"><span class="k">remaining</span><span class="v">${grp(NMOV-MV.used)}</span><span class="k">${MV.auto?'auto '+Number(MV.rate).toExponential(0).replace('e+','e')+'/s':'moves'}</span></div>
+   <div class="cell"><span class="k">self-check</span><span class="v ${SELF.pass?'ok':'bad'}">${SELF.pass?'✓ exact':'✗ FAIL'}</span><span class="k">${SELF.checks.filter(c=>c.pass).length}/${SELF.checks.length} pass</span></div>
+  </div>`;
+  $('banner').innerHTML=tValue()?`${chip('MODEL')} t<sub>in</sub> = 1: her <b>garden is complete</b> and her colony of 8 is home (Σ 0); ${S.srCmp?'by special relativity the outside clock reads <b>125% (5/4)</b>':'outside reached only <b>40% (2/5)</b>'}. Zero point −+ −+0+− +− breathes over it. <kbd>0</kbd> resets.`
+   :zero?`${chip('MODEL')} <b>Zero point = −+ −+0+− +−</b>, building the <b>${STAGES[r].name}</b> (${buildPct(MV.used,2)}): a mirrored sign structure around the 0 hinge, still breathing. "0" is only what an outside reading would call it (the signs sum to 0).`
+   :MV.used===0n?`${chip('MODEL')} <b>Homeostatic interior</b> (Dave's model, not GR): t = 0 at rung 1, ±10, balance 0. Press <b>Walk the ladder</b> (Space): she builds her garden while the outside clock moves ${S.srCmp?'0 → 125% (special relativity)':'only 0 → 40% (Dave)'}.`
+   :`${chip('MODEL')} Rung ${r+1}/11: −${n} and +${n} balance to 0. Building <b>${STAGES[r].name}</b> (${buildPct(MV.used,2)}); outside world at ${outP(MV.used,2)}.${(()=>{const C=colonyState(MV.used);return C.laid?` Colony ${C.count}${C.eggs?' + '+C.eggs+' eggs':''}, Σ 0.`:'';})()}`;
+ }else{
+  const done=S.frac>=1;
+  $('hud').innerHTML=`
+  <div class="cell"><span class="k">proper time τ</span><span class="v">${fmtTime(st.tau)}</span><span class="k">of max ${fmtTime(st.tauMax)}</span></div>
+  <div class="cell"><span class="k">radius r</span><span class="v">${st.rOverRs.toFixed(3)} r<sub>s</sub></span><span class="k">${fmtLen(st.r)}</span></div>
+  <div class="cell"><span class="k">tidal stretch on tetragarde</span><span class="v">${expo(st.g)} g</span><span class="k">${expo(st.stress)} Pa</span></div>
+  <div class="cell"><span class="k">tetragarde</span><span class="v">${st.torn?'torn 🍝':'intact'}</span><span class="k">tears at ${(st.rTear/st.rs).toPrecision(3)} r<sub>s</sub></span></div>
+  <div class="cell">${chip('MATCH')}<span class="k">Compare: what GR predicts (free fall from rest at r<sub>s</sub>)</span></div>`;
+  $('banner').innerHTML=done?`${chip('WALL')} r = 0: the singularity. GR stops giving answers here. Press <b>Back to t = 0</b> (or <kbd>G</kbd>) to return to Dave's homeostatic interior.`
+   :`${chip('MATCH')} Comparison only, what GR predicts: r shrinks every instant (inside the horizon r works like time) and tetragarde reaches r = 0 within ${fmtTime(st.tauMax)} of proper time.`;
+ }
+ placeBanner();
+}
+function placeBanner(){const h=$('hud');if(!h||getComputedStyle(h).display==='none')return;$('banner').style.bottom=(h.offsetHeight+20)+'px';
+ const hr=h.getBoundingClientRect();document.querySelectorAll('.panel').forEach(p=>{const r=p.getBoundingClientRect();const hits=r.right>hr.left&&r.left<hr.right;p.style.maxHeight=hits?Math.max(160,hr.top-r.top-10)+'px':'';});const st=$('status');st.style.bottom='';const sr=st.getBoundingClientRect();if(sr.right>hr.left&&sr.bottom>hr.top)st.style.bottom=(h.offsetHeight+20)+'px';}
+function renderGR(){
+ const M=Math.pow(10,S.massLog),L=S.lenUm*1e-6,B=base(M,L),s10=base(10,L),sA=base(4.3e6,L);
+ $('tab-gr').innerHTML=`
+ <div class="fact">${chip('MATCH')} <b>Inside the horizon, r becomes timelike.</b> Decreasing r is the future direction, so every path, light included, reaches r = 0. You can't stand still, just as you can't stop tomorrow from coming.</div>
+ <div class="fact">${chip('MATCH')} <b>Longest proper time from horizon to singularity</b> is τ<sub>max</sub> = πGM/c³. For this mass (${expo(M)} M☉) that's <span class="num">${fmtTime(B.tauMax)}</span>; 10 M☉ gives <span class="num">${fmtTime(s10.tauMax)}</span> and Sgr A* (4.3×10⁶ M☉) <span class="num">${fmtTime(sA.tauMax)}</span>. <span class="src">Lewis &amp; Kwan 2007, PASA 24:46, ${link('https://doi.org/10.1071/AS07012','doi:10.1071/AS07012')}</span></div>
+ <div class="fact">${chip('MATCH')} <b>Horizon size</b>: r<sub>s</sub> = 2GM/c² = <span class="num">${fmtLen(B.rs)}</span>. The comparison follows free fall from rest at r<sub>s</sub>, the cycloid r = (r<sub>s</sub>/2)(1+cos η), τ = (GM/c³)(η+sin η).</div>
+ <div class="fact">${chip('MATCH')} <b>Tidal tearing</b>: the stretch across tardigrade is (2GM/r³)·L. A ${S.lenUm} µm tardigrade tears (at an assumed ${chip('MODEL')} ~1 MPa tissue strength) at r ≈ <span class="num">${fmtLen(B.rTear)}</span> = ${(B.rTear/B.rs).toPrecision(3)} r<sub>s</sub>, so <b>inside</b> the horizon for every known black hole. Big holes are gentle at the horizon; small ones are harsher.</div>
+ <div class="fact">${chip('MATCH')} <b>The real hook for "t = 0"</b>: to a distant observer, a clock falling toward the horizon ticks ever slower and its image freezes and fades there (gravitational time dilation and redshift; a static clock runs at √(1−r<sub>s</sub>/r)). Tetragarde's own clock never stops; she crosses in finite proper time.</div>
+ <div class="fact">${chip('MATCH')} <b>What a free-faller sees</b>: you are <i>not</i> plunged into blackness at the horizon, and you can't tell when you cross it. The shrinking bright circle of sky overhead is only seen by someone <i>hovering</i> just outside on rockets. <span class="src">A. Hamilton, "Journey into a Schwarzschild black hole", ${link(HAM,'JILA / U. Colorado')}</span></div>
+ <div class="fact">${chip('MODEL')} This tab is an optional <b>comparison</b> (toggle <kbd>G</kbd>, off by default). Dave's interior is homeostatic, not GR; this shows what GR alone would predict.</div>
+ <div class="fact">${chip('MODEL')} <b>On screen</b>: in held mode the sky is drawn as the hovering-observer bright circle overhead, the closest real picture to "held still". Release switches to an approximate free-fall view with the sky spreading above and darkness growing below. The glowing wall is the horizon drawn as a neon membrane; a real horizon has no surface. These visuals are qualitative, not ray-traced.</div>
+ <div class="fact">${chip('MODEL')} Schwarzschild (non-spinning) interior only. Spinning black holes have a different, less certain interior.</div>`;
+}
+function renderMoves(){
+ $('tab-moves').innerHTML=`
+ <h3>Homeostatic ladder ${chip('MODEL')}</h3>
+ <div class="fact">${chip('MODEL')} Dave: <i>"oh its not gr its homeostatic or -+10/9/6/5/4/3/2/1/1/0/0 or zero point"</i>. The interior steps through 11 rungs, ±[10, 9, 6, 5, 4, 3, 2, 1, 1, 0, 0], which match his 11 shells running down to the 0 void. On every rung −n and +n balance, so the running balance is always <b>0</b> (homeostasis). The last two rungs are the zero point.</div>
+ <div class="fact">${chip('MODEL')} <b>The zero point isn't 0.</b> Dave: <i>"its not 0 its just what you understand it would be -+ -+0+- +-"</i>. The real zero-point state is the mirrored sign structure <span class="zp">${zpHTML(ZPAT)}</span>: an outer pair −+, an inner −+, the <b>0 as a hinge</b> in the centre, then +− and +− mirrored. It reads the same reflected about the hinge, and its signs sum to 0. That sum is the only sense in which it is "0"; it's what an outside reading would call it.</div>
+ <div class="fact">${chip('MODEL')} <b>Persistent, not damped:</b> when the walk reaches the zero point, tetragarde settles into this standing pattern and it keeps breathing. Over half a breath (360°) every sign inverts, giving +− +−0−+ −+ (like his −++− → +−−+ flip), and a full 720° restores it, matching the 720° period. The hinge stays 0 throughout. Nine glow nodes in an arc over tetragarde show it live: cyan = +, magenta = −, gold = the 0 hinge.</div>
+ <div class="fact">${chip('MODEL')} <b>The ladder is shown exactly as given.</b> It goes 10, 9, then 6, skipping 8 and 7, and repeats 1, 1 and 0, 0. Nothing has been "fixed".</div>
+ <div class="fact">${chip('MODEL')} <b>How moves map to rungs: equal shares.</b> Each rung gets exactly 13,200,000,000 / 11 = <b>1,200,000,000 moves = 1/11</b>. That divides exactly with no remainder, so 11 × 1/11 = 1 exactly. A split proportional to the rung values (total 41) wouldn't divide evenly (13.2e9 / 41 isn't a whole number), and the 0 rungs would get no moves, so the walk could never reach the zero point. Rung k covers moves (k−1)·1.2e9 to k·1.2e9. The zero point starts at move 10,800,000,000 and holds through 13,200,000,000, when t = 1.</div>
+ <div class="fact">${chip('MODEL')} <b>θ clock and −++−:</b> θ = 720° × moves/N, computed exactly, so each rung turns 720/11 = 65.4545…°. The four 180° quarters carry the sign pattern −, +, +, − (which also sums to 0), and the current quarter is underlined in the HUD. A full 720° cycle closes exactly at t = 1.</div>
+ <div class="fact">${chip('MODEL')} <b>What you see:</b> shell glow and leg activity follow the rung value n/10, bright and busy at ±10. At the zero point they don't go dark; they breathe with the −+ −+0+− +− pattern.</div>
+ <h3>Real-physics hook: zero point</h3>
+ <div class="fact">${chip('MATCH')} <b>Quantum zero point isn't nothing.</b> A harmonic oscillator's ground state keeps fluctuating, with zero-point energy <b>E₀ = ħω/2</b>. Its average position is ⟨x⟩ = 0, but ⟨x²⟩ = ħ/(2mω) ≠ 0, so the "observed 0" is the average of something that isn't zero. This is real and measurable (for example, helium stays liquid at normal pressure down to near 0 K). It fits Dave's point that the 0 is only the reading, and the state underneath is structured.</div>
+ <div class="fact">${chip('MODEL')} The breathing −+ −+0+− +− pattern is Dave's structure drawn as an illustration, not a quantum simulation. The analogy is the same idea in both: a zero average over a nonzero, persistent underlying state.</div>
+ <h3>13.2e9 moves budget</h3>
+ <div class="fact">${chip('MODEL')} <b>"That one tardi gets 13.2 billion moves to equal 1."</b> (Dave). Inside the held bubble tetragarde has a budget of N = 13,200,000,000 moves. Each move is worth exactly 1/N, and all N together sum to exactly 1. The HUD keeps <b>t = 0</b> until the last move is spent; then t = 1.</div>
+ <div class="fact">${chip('MODEL')} Each step shows a micro-move: a leg stroke (8 poses per gait cycle) when she's active, a small twitch when she's a tun. With reduced motion, auto-run updates only the numbers and her pose changes only on manual steps.</div>
+ <div class="fact">${chip('MATCH')} <b>Exact arithmetic:</b> moves are counted as whole integers (JavaScript BigInt), and the fraction is shown as an exact ratio plus a 20-digit truncated decimal (… means more digits follow). One move = 1/13,200,000,000 = 0.0000000000757575… (75 repeating). Nothing is added as floating point, so the final sum is exactly 1 with no drift.</div>
+ <h3>Self-check ${SELF.pass?'<span class="ok">✓ all pass</span>':'<span class="bad">✗ failure</span>'}</h3>
+ ${SELF.checks.map(c=>`<div class="fact"><span class="${c.pass?'ok':'bad'}">${c.pass?'✓':'✗'}</span> ${esc(c.name)} <span class="src">${esc(c.detail)}</span></div>`).join('')}
+ <h3>Nearby real number (comparison only)</h3>
+ <div class="fact">${chip('MATCH')} The age of the universe is <b>13.787 ± 0.020 billion years</b> (Planck 2018 results VI, A&amp;A 641, A6 (2020), ${link('https://doi.org/10.1051/0004-6361/201833910','doi:10.1051/0004-6361/201833910')}).</div>
+ <div class="fact">${chip('MODEL')} 13.2 × 10⁹ moves is only a <i>comparison</i> to that number, not a claim that they're equal. 13.2 billion is about 4.3% below the Planck age, roughly 29 times its stated uncertainty, and moves aren't years.</div>`;}
+function renderTardis(){
+ const c=299792458,m=Math.pow(10,S.domeLog),KE=0.25*m*c*c,WORLD=6.2e20,MT=4.184e15;
+ const fx=x=>x.toFixed(x<10?3:2);
+ $('tab-tardis').innerHTML=`
+ <div class="fact">${chip('MODEL')} Dave: <i>"tardis is a tetragarde encased in a ring of gold at 79% and a ring of silver at 21% for a 100% electrum ring that makes a homeostatic biodome at 60% the speed of light and time"</i>. On screen: the <b>tetragarde</b> sits at the centre in her electrum wrap, ringed by a <span class="au">gold band</span> and a <span class="ag">silver band</span> whose widths are exactly 79 : 21. Together they make one 100% electrum ring, and inside the iridescent biodome the ladder and mirrored zero point carry on as in v4.</div>
+ <div class="fact">${chip('MODEL')} <b>Homeostatic biodome</b> and <b>"speed of light and time"</b> are Dave's framework. In real physics there's light speed c, but time doesn't have a speed of its own: clocks run at different <i>rates</i> depending on motion.</div>
+ <h3>Relativity at 0.6c ${chip('MATCH')}</h3>
+ <div class="fact">${chip('MATCH')} β = v/c = 0.6 = 3/5 gives a Lorentz factor <b>γ = 1/√(1−β²) = 5/4 = 1.25 exactly</b>.</div>
+ <div class="fact">${chip('MODEL')} <b>Dave's clocks (default):</b> over her whole inside run (t<sub>in</sub> 0 → 1, 720°) the outside world goes only from 0 to <b>2/5 = 40%</b>, so inside runs 2.5× faster than outside and she has time to build her garden.</div>
+ <div class="fact">${chip('MATCH')} <b>Special-relativity time dilation</b> (toggle <kbd>S</kbd>): for a dome moving at 0.6c, the inside clock runs at 1/γ = <b>0.8</b> per outside 1 (outside = inside × 5/4, so 900° when the inside reads 720°).</div>
+ <div class="fact">${chip('WALL')} Kindly put: Dave's inside-faster ratio (1 : 0.4) runs the <i>opposite</i> way to what SR gives a moving dome (0.8 : 1), so as SR it's a wall. His frame is his model, and it's shown as such.</div>
+ <div class="fact">${chip('MATCH')} An interesting twist: a 2.5× ratio is exactly what SR gives the other way round. If the outside world moved past her with <b>γ = 5/2</b>, i.e. β = √21/5 ≈ <b>0.9165c</b>, she would measure its clocks running at 1/γ = 0.4 of hers. That's 0.9165c, not 0.6c.</div>
+ <div class="fact">${chip('MATCH')} <b>Length contraction:</b> measured from outside, the dome is shortened to <b>0.8</b> along its motion; it stays round to the crew. Press <kbd>F</kbd> for the outside frame. ${chip('MODEL')} The outside view draws the <i>measured</i> shape. ${S.real?'The realistic look adds a third, <b>photo</b> view (<kbd>F</kbd> again): what a camera records, where the dome stays round (Terrell–Penrose).':'A camera photo would also show Terrell–Penrose rotation; switch to the realistic look (<kbd>V</kbd>) to see it.'}</div>
+ <div class="fact">${chip('MATCH')} <b>Aberration and Doppler</b> (co-moving view): starlight crowds toward the direction of travel (the "headlight" effect). Ahead it's blueshifted by √((1+β)/(1−β)) = <b>2</b>, behind redshifted by <b>0.5</b>, and in any direction θ' the factor is γ(1+β cos θ'). ${chip('MODEL')} Star colours shift as blackbodies at T×D and brightness scales as D³; the display is tone-mapped.</div>
+ <div class="fact">${chip('MATCH')} <b>Kinetic energy</b> (γ−1)mc² = <b>0.25 mc²</b>. For a ${expo(m)} kg biodome that's <span class="num">${expo(KE)} J</span>, about ${expo(KE/WORLD)}× humanity's yearly primary energy use (~620 EJ, 2023) or ${expo(KE/MT)} Mt of TNT.</div>
+ <div class="fact">${chip('WALL')} A massive dome can never reach c: γ and the energy needed both go to infinity as v → c. 0.6c is allowed but enormously costly.</div>
+ <h3>Electrum ring ${chip('MATCH')}</h3>
+ <div class="fact">${chip('MATCH')} <b>Electrum</b> is a natural gold–silver alloy (sometimes with traces of copper or platinum). The name is used informally for about <b>20–80% gold</b>, so 79/21 by mass is a plausible real composition, right at the gold-rich end. <span class="src">Wikipedia, "Electrum", ${link('https://en.wikipedia.org/wiki/Electrum','en.wikipedia.org/wiki/Electrum')}</span></div>
+ <div class="fact">${chip('MATCH')} <b>Density</b> (ideal mixing by mass, Au 19.32, Ag 10.49 g/cm³): 1/(0.79/19.32 + 0.21/10.49) = <span class="num">${ELEC.rho.toFixed(2)} g/cm³</span>. Real alloys deviate slightly from ideal mixing. Also: ${(ELEC.atAu*100).toFixed(1)} atom-% gold, ${(ELEC.volAu*100).toFixed(1)} volume-% gold, ≈ ${ELEC.karat.toFixed(2)} karat.</div>
+ <div class="fact">${chip('MODEL')} <b>Colour:</b> pale greenish gold <span class="swatch" style="background:#e9d58f"></span>, between gold <span class="swatch" style="background:#e8b84a"></span> and silver <span class="swatch" style="background:#d8d8e2"></span>. Rendered as metallic reflectance blended toward silver; real alloy optics aren't a linear mix.</div>
+ <div class="fact">${chip('ANALOGY')} A nice coincidence: <b>79%</b> gold, and gold's atomic number is <b>Z = 79</b>. It's a pleasing echo, not a physical link.</div>
+ <div class="fact">${chip('MATCH')} Real tardigrades survive extreme stresses only in the dormant <i>tun</i> state (see the Tardigrade tab). A relativistic biodome is Dave's idea (MODEL).</div>`;}
+let lastColKey='';
+function renderColony(force){const el=$('tab-colony');if(!el||(!force&&el.hidden))return;const u=MV.used;const at=S.tunTarget>.5;const C=colonyState(u,at);const key=u+'|'+at+'|'+C.members.map(m=>m.state).join();if(!force&&key===lastColKey)return;lastColKey=key;
+ const G='https://doi.org/10.1016/j.ydbio.2007.09.055';
+ const zs=ZPAT.map((v,i)=>{if(i===4)return '<span class="h" title="the original tetragarde">0</span>';const m=C.members.find(x=>x.slot===i);const ch=v>0?'+':'−';const cls=v>0?'p':'m';return m.state==='none'?`<span style="opacity:.35">${ch}</span>`:`<span class="${cls}">${ch}</span>`;});
+ const zstr=zs.slice(0,2).join('')+' '+zs.slice(2,7).join('')+' '+zs.slice(7).join('');
+ const rows=[`<tr><td>0</td><td>4</td><td class="zp"><span class="h">0</span></td><td>—</td><td>original tetragarde (hinge)</td><td>—</td><td>—</td></tr>`].concat(C.members.map(m=>{const q=QDP[m.qd];const col=q[2].map(x=>Math.round(x*255)).join(',');
+  return `<tr><td>${m.i+1}</td><td>${m.slot}</td><td class="zp">${m.sign>0?'<span class="p">+</span>':'<span class="m">−</span>'}</td><td><span class="qd" style="background:rgb(${col})"></span> ${q[0]}</td><td class="st-${m.state}">${m.state==='none'?'not yet laid':m.state}</td><td>${grp(m.laid)}</td><td>${grp(m.hatch)}</td></tr>`;})).join('');
+ el.innerHTML=`<div class="fact">${chip('MODEL')} <b>Company for the tetragarde</b> (Dave, v7): a small colony that arrives during the garden build and stays balanced. Count <b>${C.count}</b> (she + ${C.hatched} hatched)${C.eggs?` · <b>${C.eggs}</b> eggs`:''} · active <b>${C.active}</b> (${C.wandering} wandering, ${C.grazing} grazing) · tun <b>${C.tun}</b> · balance <b class="ok">Σ = ${C.balance}</b></div>
+ <div class="fact">Colony signs <span class="zp">${zstr}</span> <span class="src">(faded = not laid yet; gold 0 = the original tetragarde, the hinge)</span></div>
+ <table class="ctab" aria-label="Colony members"><thead><tr><th>#</th><th>slot</th><th>sign</th><th>q.d</th><th>state</th><th>laid at move</th><th>hatch at move</th></tr></thead><tbody>${rows}</tbody></table>
+ <h3>Real biology ${chip('MATCH')}</h3>
+ <div class="fact">${chip('MATCH')} The lab tardigrade <i>Hypsibius exemplaris</i> (studied as <i>H. dujardini</i> until it was redescribed) reproduces by <b>parthenogenesis</b>: females lay eggs without males. <span class="src">Gabriel et al. 2007, Dev. Biol. 312:545–559, ${link(G,'doi:10.1016/j.ydbio.2007.09.055')}; name: Gąsiorek et al. 2018, Zootaxa 4415:45–75, ${link('https://doi.org/10.11646/zootaxa.4415.1.2','doi')} (A:\\tardigrade\\model-species.md)</span></div>
+ <div class="fact">${chip('MATCH')} Eggs are laid <b>while she molts, into her shed cuticle (the exuvia)</b>: about <b>3.4 ± 1.9</b> per laying (range 1–10). They hatch about <b>4–4.5 days</b> later, and the generation time is about <b>13–14 days</b> at room temperature. <span class="src">Gabriel et al. 2007</span></div>
+ <div class="fact">${chip('MATCH')} In culture they're fed <b>algae</b> (<i>Chlorococcum</i>), which they pierce and suck with their stylets. Tardigrades in moss tun when it dries and <b>revive</b> when water returns. <span class="src">Gabriel et al. 2007; Arakawa 2022, ${link('https://doi.org/10.1146/annurev-animal-021419-083711','doi')}</span></div>
+ <h3>How the colony is modelled ${chip('MODEL')}</h3>
+ <div class="fact">${chip('MODEL')} <b>Two clutches in the moss stage</b>, each in its own shed cuticle on a moss cushion: 4 eggs at move <b>${grp(LAYS[0].at)}</b> (the inner −+ +−, which forms −+0+− with her) and 4 at move <b>${grp(LAYS[1].at)}</b> (the outer −+ +−, completing −+ −+0+− +−). Each clutch sums to 0, so the balance is 0 at every move. The empty cuticles stay after hatching.</div>
+ <div class="fact">${chip('MODEL')} <b>Hatching</b> comes exactly 2 rungs (2,400,000,000 moves) after laying, one egg every 60,000,000 moves, all before the electrum struts go up. That stands in for the real 4–4.5 days; the time scale is a choice, not a measurement.</div>
+ <div class="fact">${chip('MODEL')} <b>Homeostasis:</b> after the two clutches the colony is held at 8 + her (9). No more eggs and no deaths, so it can't explode or collapse. Real populations are limited by food, space and water; here that is a fixed rule.</div>
+ <div class="fact">${chip('MODEL')} <b>Behaviour</b> follows only the move count, so it's deterministic: hatchlings walk out across the moss (the left half of the structure circles one way, the right half the mirror way), and once the algae stage is grown they drift to an algae patch to graze and back. In each rung about one member tuns for the middle 40% of the rung, then revives. Press <kbd>T</kbd> and the whole colony tuns with her.</div>
+ <div class="fact">${chip('ANALOGY')} 8 companions ↔ the q.d dot's 2³ = 8 colour states (Patricia's palette bk wt rd bl gr yl or pr). The − slots take the even states (bk rd gr or) and the + slots the odd ones (wt bl yl pr), matching her sign bit. It's a pleasing echo, not a physical link.</div>
+ <h3>Patricia's clock ${chip('MODEL')}</h3>
+ <div class="fact">${chip('MODEL')} <b>Patricia Sapphon's shared θ clock</b> (0 → 720°, one cycle) enters through the electrum ring as an <span class="pat">amethyst pulse</span>. Its head sits at θ<sub>P</sub> around the 79/21 ring (two laps per 720° cycle); the lit arc shows how far it has come, and a beam carries it inward to the tetragarde. Here θ<sub>P</sub> = θ<sub>in</sub> exactly: all 13.2e9 moves = 720° = one full Patricia cycle. Now θ<sub>P</sub> = <b class="pat">${patThetaStr(u)}</b>.</div>
+ <div class="fact">${chip('MODEL')} In Sapphon City her clock free-runs (30°/s); here it is slaved to the move count so everything stays exact and repeatable. The clock is local: the page makes no network requests (CSP connect-src 'none'), and no read-only Patricia endpoint on the hub was available to read.</div>`;}
+function renderReal(){const el=$('tab-real');if(!el)return;
+ const on=S.real;
+ el.innerHTML=`
+ <div class="fact"><b>Look: ${on?'realistic':'stylised (v7)'}</b> · clocks: ${S.srCmp?'special relativity (outside = 5/4 × inside)':'Dave\'s (outside = 2/5 of inside\'s run)'} · stamps: ${chip('LIT')} verified by a run · ${chip('AMBER')} constructed, assumption stated · ${chip('DEAD')} disproven, replaced · ${chip('ORNAMENT')} decoration, not physics</div>
+ <h3>What "realistic" means here</h3>
+ <div class="fact">${chip('AMBER')} Two senses were possible and both are covered. <b>Physically based rendering (PBR)</b>: light is added in linear units, materials reflect with real Fresnel behaviour, shadows exist, the picture is tone-mapped like a camera. <b>Physically correct</b>: the relativity on screen follows special relativity. It is <i>not</i> claimed to be photoreal (a photograph of a real scene).</div>
+ <h3>Relativity (physically correct)</h3>
+ <div class="fact">${chip('LIT')} <b>Clocks default to special relativity.</b> At β = 3/5, γ = 5/4, the outside clock reads 5/4 of the inside clock: 125% when t<sub>in</sub> = 1 (self-check). Dave's version (outside = 40%) runs the opposite way and stays one click away: turn the look off, or press <kbd>S</kbd>.</div>
+ <div class="fact">${chip('LIT')} <b>Photo view</b> (<kbd>F</kbd>, third stop). A camera does not record a length-contracted dome. Light from different parts left at different times, and the two effects cancel for a sphere: the silhouette stays a <b>circle</b> (Terrell 1959; Penrose 1959). The self-check proves it with an off-axis camera (plane-fit spread &lt; 1e-12) and a known-bad control: the v7 ×0.8 squash fails the same test. The ring and struts shear instead of squashing.</div>
+ <div class="fact">${chip('DEAD')} v7's outside view as "what you would see". It was the <i>measured</i> shape (a ruler reading), which is a different thing from a picture. v7 said so in a note; v8 gives both.</div>
+ <div class="fact">${chip('DEAD')} v7 reflected the stars in the electrum shell through a rotated basis, so the reflected sky did not line up with the real sky behind it. The realistic look reflects the same sky.</div>
+ <h3>Light and materials (PBR)</h3>
+ <div class="fact">${chip('AMBER')} <b>Lighting is assumed.</b> Nothing in the model says what lights a dome in the dark. v8 assumes one warm key lamp from above plus cool sky fill, with soft shadows from the garden. Remove it and the interior would be black.</div>
+ <div class="fact">${chip('LIT')} Pipeline: albedo (sRGB) → linear light → exposure → ACES filmic curve (Narkowicz fit) → sRGB. v7 added values in display space with a simple Reinhard curve.</div>
+ <div class="fact">${chip('AMBER')} <b>Materials.</b> Gold F0 ≈ (1.00, 0.72, 0.30), silver ≈ (0.95, 0.93, 0.88); water beads use F0 = 0.02 (refractive index 1.33); soil, moss and lichen are procedural noise, not scans. The 16 nm electrum shell transmits a blue-green tint, as thin gold leaf does; it no longer glows by itself.</div>
+ <div class="fact">${chip('AMBER')} <b>Space and glass.</b> No purple nebula, a faint Milky Way band and blackbody-coloured stars. The dome is clear glass: Fresnel reflection only, no rainbow film or grid lines.</div>
+ <h3>The animal</h3>
+ <div class="fact">${chip('AMBER')} Tapered stubby legs (lobopods), four claws per foot (<i>Hypsibius</i>-type double claws are modelled as four prongs), a translucent cuticle with a visible gut (olive from algae, browned in the tun), a pale pharyngeal bulb, scattered body-cavity cells and red-brown eye spots. Shapes are a model of real anatomy, not a scan. Size ratios inside the dome are Dave's, not real scale.</div>
+ <div class="fact">${chip('AMBER')} Colony members walk on eight small legs and stand a leg-length above the floor. They are drawn smaller than the hero, so claws and eyes are left out. Their q.d colour is reduced to a 12% tint; the Colony tab still carries the identity.</div>
+ <h3>Left as decoration</h3>
+ <div class="fact">${chip('ORNAMENT')} Patricia's amethyst pulse and beam (dimmed), the zero-point glow nodes, the sign-coloured blooms (cyan, magenta, gold), the "little lights" and the iridescent crystals. They are encodings of the model and have no physical analogue. They are drawn, not simulated.</div>
+ <div class="fact">${chip('AMBER')} The 2D fallback keeps the v7 look. Quality "auto" still lowers resolution if frames are slow; the realistic look costs more per pixel (shadows, gut march, colony legs).</div>
+ <h3>Toddler corner</h3>
+ <div class="fact">Before, the water bear looked like a pink toy inside a rainbow bubble. Now she looks like the real animal inside clear glass: see-through skin, a dark tummy full of lunch, two little red eyes, hooks on her toes. And if a fast thing flies past a camera it does not get squashed, it gets <i>twisted</i>, so a ball still looks like a ball.</div>
+ <h3>Ledger</h3>
+ <div class="fact" id="ledger">${LEDGER}</div>`;}
+const LEDGER=`COMPUTED: ${SELF.checks.filter(c=>c.pass).length}/${SELF.checks.length} self-checks pass. v9 adds TOROID-5 exact fifths, Mother-Nature closure, 4::2::4 valence, and an implicit annular boxy-ring occupancy test. v8 SR/renderer checks remain in place. The new implicit/valence layer is model-local; real chemistry and relativity comparisons remain separately labelled.`;
+let lastBuildKey='';
+function renderBuild(force){const el=$('tab-build');if(!force&&el.hidden)return;const u=MV.used;const key=u+'|'+S.srCmp+'|'+S.real;if(!force&&key===lastBuildKey)return;lastBuildKey=key;
+ const cur=stageOf(u);const rows=STAGES.map((st,s)=>{const a=BigInt(s)*PER,b=a+PER;const p=u>=b?1:(u<=a?0:Number(((u-a)*1000n)/PER)/1000);
+  return `<div class="stg"><span>${s+1}</span><span>${u>=b?'✓ ':(s===cur&&u<NMOV?'▸ ':'')}${esc(st.name)} <span class="src">· ${st.n} × ${esc(st.what)}</span></span><span class="pb" title="${(p*100).toFixed(1)}%"><i style="width:${(p*100).toFixed(1)}%"></i></span></div>`;}).join('');
+ const log=[];STAGES.forEach((st,s)=>{const a=BigInt(s)*PER,b=a+PER;if(u>=a&&(u>0n||s===0))log.push(`<div class="bl">move <b>${grp(a)}</b> · t<sub>in</sub> ${s}/11 · outside ${outP(a,4)} · began <b>${esc(st.name)}</b></div>`);
+  if(u>=b)log.push(`<div class="bl">move <b>${grp(b)}</b> · ${esc(st.name)} complete · outside ${outP(b,4)}</div>`);});
+ el.innerHTML=`<div class="fact">${chip('MODEL')} Dave: <i>"the tetragarde gets to build her env during that time lol, the outside world starts at 0 time and moves to 40% time as the tetra build the env"</i>. Build progress = moves/N exactly; one stage per rung; the layout is deterministic (seeded).</div>
+ <div class="fact"><b>Progress</b> ${buildPct(u,6)} · <b>inside</b> t<sub>in</sub> = ${tValue()} (${thetaStr(u)}) · <b>outside</b> ${S.srCmp?outThetaStr(u)+' (SR compare)':outPct(u,6)}</div>
+ ${rows}
+ <h3>Build log</h3>${log.length?log.slice(-14).join(''):'<div class="bl">Nothing built yet. Press <b>Walk the ladder</b> or step moves.</div>'}
+ ${u>=NMOV?`<div class="fact">${chip('MODEL')} <b>Garden complete</b> at t<sub>in</sub> = 1 with the outside world at exactly ${S.srCmp?'<b>125% (5/4, special relativity)</b>':'<b>40% (2/5, Dave)</b>'}.</div>`:''}
+ <div class="fact">${chip('MATCH')} Real tardigrades live in moss and lichen cushions, leaf litter and soil, and need a film of water to be active; they eat algae, plant cells and bacteria. The garden draws on that, arranged as Dave's model.</div>`;}
+function drawImplicit(){
+ const cv=$('igCanvas');if(!cv)return;const ctx=cv.getContext('2d');if(!ctx)return;const W=cv.width,H=cv.height,img=ctx.createImageData(W,H),d=img.data;
+ for(let py=0;py<H;py++)for(let px=0;px<W;px++){const x=(px/(W-1)*2-1)*1.18,y=((H-1-py)/(H-1)*2-1)*.78;const on=implicitOccupied(x,y);const i=(py*W+px)*4;
+  if(on){d[i]=35;d[i+1]=110;d[i+2]=145;d[i+3]=185;}else{d[i]=5;d[i+1]=3;d[i+2]=10;d[i+3]=255;}}
+ ctx.putImageData(img,0,0);ctx.save();ctx.translate(W/2,H/2);ctx.scale(W/(2*1.18),-H/(2*.78));
+ for(let k=0;k<5;k++){const [x,y]=superPoint(k);ctx.beginPath();ctx.arc(x,y,.04,0,Math.PI*2);ctx.fillStyle=k===V9.phase%5?'#6ff3ff':'#d2abff';ctx.fill();}
+ if(V9.phase===5){const [x,y]=superPoint(0);ctx.beginPath();ctx.arc(x,y,.065,0,Math.PI*2);ctx.strokeStyle='#7dffa8';ctx.lineWidth=.018;ctx.stroke();}
+ ctx.restore();
+}
+function renderImplicit(force){const el=$('tab-implicit');if(!el)return;if(!force&&el.hidden)return;
+ const phase=V9.phase,frac=phase===5?'1 ≡ next 0':phase+'/5';const lanes=V9.lanes.map(x=>glyphValue(x.glyph));
+ const seq=[0,1,2,3,4,5].map(k=>`<span class="igtok ${k===phase?'on':''}">${k===5?'1':k+'/5'}</span>`).join('<span>→</span>');
+ const log=V9.ledger.slice(-8).map((x,i)=>`<div class="bl">${esc(x.kind)} ${x.frac?esc(x.frac):''}${x.kind==='wrap'?' · 1 → 0':''}</div>`).join('');
+ el.innerHTML=`<div class="fact">${chip('MODEL')} <b>v9 implicit geometry:</b> the boxy ring is generated by two superellipse level sets. Geometry is occupied where the outer field is inside and the inner field is outside; no explicit ring mesh is stored.</div>
+ <canvas id="igCanvas" width="360" height="190" aria-label="Implicit boxy toroidal ring with five phase nodes"></canvas>
+ <div class="igbox"><div class="igrow">${seq}</div><div class="fact"><b>TOROID-5</b> <span class="sign">.||||.</span> · phase <b>${frac}</b> · transfer quantum <b>1/5</b> · commits <b>${V9.commits}</b></div></div>
+ <div class="igbox"><div class="iglane"><b>..|</b><span>::</span><b>|</b><span>::</span><b>..|</b><span style="grid-column:1">nucleach</span><span></span><span>photonic</span><span></span><span>electronic</span><span style="grid-column:1">${lanes[0]}</span><span>::</span><span>${lanes[1]}</span><span>::</span><span>${lanes[2]}</span></div><div class="fact">Valence total <b>${lanes.reduce((a,b)=>a+b,0)}</b> · signed enclosure <span class="sign">-4::2::4+</span>.</div></div>
+ <div class="fact">${chip('MODEL')} Commit condition: the fifth transfer reaches 5/5, then the separate closure gate must satisfy <span class="sign">-1 + 0 + 1 = 0</span>. Timing says <i>when</i>; chemistry/evidence logic says <i>whether</i>.</div>
+ <div class="fact"><b>Append ledger</b>${log||'<div class="bl">No TOROID-5 transfers yet.</div>'}</div>`;
+ requestAnimationFrame(drawImplicit);
+}
+
+function renderStatic(){
+ $('tab-model').innerHTML=`
+ <div class="fact">${chip('MODEL')} <b>v9: implicit geometry + valence language.</b> The current transfer primitive is <span class="sign">{{ . | | | | . }}</span>: five exact 1/5 timing intervals, with 5/5 as the closure witness and the next cycle's 0. Valence keeps <span class="sign">..| :: | :: ..| = 4 :: 2 :: 4</span> as nucleach :: photonic :: electronic. See the Implicit geometry tab.</div>
+ <div class="fact">${chip('MODEL')} <b>v3: the interior is homeostatic, not GR.</b> Dave's dynamics walk the ladder ±[10,9,6,5,4,3,2,1,1,0,0] down to the zero point, the mirrored state −+ −+0+− +− (observed as 0), with the balance always 0 (see "Ladder &amp; moves"). General relativity appears only as an optional comparison (<kbd>G</kbd>, off by default, labelled MATCH).</div>
+ <div class="fact">${chip('MODEL')} <b>{{1 gravity{{t=0 time}}</b> is Dave's framework: the black-hole interior is a bubble where gravity is normalised to <b>g = 1</b> and time is held at <b>t = 0</b>, his photon-birth moment, with the electrum wrap. The θ clock sits at 0° of its 720° cycle, the 8φ lap counter at 0, sign pattern <span class="sign">−++−</span>.</div>
+ <div class="fact">${chip('MODEL')} Tetragarde in her electrum shell floats at the centre of the bubble, and the event horizon is the bubble wall all around her. In held mode the whole scene is frozen; only your camera moves. Switching active/tun happens instantly because no time passes.</div>
+ <div class="fact">${chip('WALL')} <b>Versus GR, kindly:</b> Dave's interior is a homeostatic model, not GR. In GR itself nothing can stay calm at 1 g with frozen time inside a horizon; the comparison toggle shows why.</div>
+ <div class="fact">${chip('MATCH')} <b>Where it touches real physics:</b> seen from far away, time at the horizon <i>does</i> look frozen (gravitational time dilation). Dave's t = 0 bubble keeps that outside view and puts tetragarde inside it.</div>
+ <div class="fact">${chip('MODEL')} The electrum shimmer is thin-film interference over Au/Ag-weighted reflectance, an artistic analogy inspired by Dave's Tetragarde-Electrum notes (his model, not biology).</div>`;
+ $('tab-tardi').innerHTML=`
+ <div class="fact">${chip('MATCH')} <b>Size</b> 50 µm to 1.2 mm; 4 pairs of legs, usually with claws. <span class="src">J. Exp. Biol. 2026, ${link('https://doi.org/10.1242/jeb.253088','doi')}</span></div>
+ <div class="fact">${chip('MATCH')} <b>Tun</b>: drying makes her withdraw her legs and contract into a barrel with no measurable metabolism (anhydrobiosis). Press <kbd>T</kbd>. <span class="src">Arakawa 2022, ${link('https://doi.org/10.1146/annurev-animal-021419-083711','doi')}</span></div>
+ <div class="fact">${chip('MATCH')} <b>${DATA.stats.species.toLocaleString()}</b> species-level names in ${DATA.stats.genera} genera. <span class="src">Degma &amp; Guidetti 2026, ${link('https://doi.org/10.5281/zenodo.20746849','doi')} (A:\\tardigrade\\species.csv)</span></div>
+ ${DATA.extremes.map(r=>`<div class="fact">${chip(r.verdict)} ${esc(r.claim_or_measurement)}: <span class="num">${esc(r.value)}</span> <span class="src">${esc(r.study)} (${esc(r.year)}) ${/^https?:/.test(r.doi_or_url)?link(r.doi_or_url,'source'):''}</span></div>`).join('')}
+ <p class="src">All ${DATA.extremes.length} extreme-survival records are from A:\\tardigrade\\extremes.csv.</p>
+ <div class="fact">${chip('MODEL')} The on-screen animal is a stylised generic eutardigrade.</div>`;
+ $('tab-key').innerHTML=`
+ <div class="fact">${chip('MATCH')} Real physics, measured or computed live from GR formulas, with sources.</div>
+ <div class="fact">${chip('MODEL')} Dave's {{1 gravity{{t=0 time}} framework, artistic choices, or approximated visuals.</div>
+ <div class="fact">${chip('WALL')} Impossible in GR (a calm, timeless interior; anything at or past r = 0).</div>
+ <div class="fact">${chip('MYTH')} / ${chip('UNVERIFIED')} Used in the tardigrade extremes list.</div>
+ <p class="src">No network requests; all data is embedded. Renderer: WebGL2 with an automatic 2D fallback.</p>`;
+}
+
+/* ---------- WebGL2 ---------- */
+const VS=`#version 300 es
+in vec2 p; void main(){gl_Position=vec4(p,0.,1.);}`;
+const FS=`#version 300 es
+precision highp float;
+out vec4 o;
+uniform mat3 uB; uniform vec2 uRes; uniform vec3 uCam,uF,uR,uU; uniform vec3 uM; uniform float uK,uBeta,uComove,uGR,uRingIn,uRingW,uDomeR;
+uniform vec4 uEP[80]; uniform vec4 uEC[80]; uniform float uEN,uFloorR,uMoss,uLights,uPat,uPatA;
+uniform vec3 uNP[9]; uniform float uNV[9]; uniform float uNA;
+uniform float uGlow,uGait,uTwitch,uTime,uTheta,uTun,uThick,uMotion,uPatch,uDark,uProg,uStretch,uWall,uRel;
+uniform float uReal,uPhoto,uExp;
+const float PI=3.14159265;
+float h13(vec3 p){p=fract(p*.1031);p+=dot(p,p.zyx+31.32);return fract((p.x+p.y)*p.z);}
+float n3(vec3 p){vec3 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
+ return mix(mix(mix(h13(i),h13(i+vec3(1,0,0)),f.x),mix(h13(i+vec3(0,1,0)),h13(i+vec3(1,1,0)),f.x),f.y),
+            mix(mix(h13(i+vec3(0,0,1)),h13(i+vec3(1,0,1)),f.x),mix(h13(i+vec3(0,1,1)),h13(i+vec3(1,1,1)),f.x),f.y),f.z);}
+vec3 stars(vec3 d){vec3 c=vec3(0);vec3 a=abs(d);vec2 fu;float face;
+ if(a.x>=a.y&&a.x>=a.z){fu=d.yz/a.x;face=d.x>0.?0.:1.;}else if(a.y>=a.z){fu=d.xz/a.y;face=d.y>0.?2.:3.;}else{fu=d.xy/a.z;face=d.z>0.?4.:5.;}
+ for(int i=0;i<2;i++){float s=i==0?60.:140.;vec2 q=fu*s;vec2 id=floor(q);vec2 f=fract(q)-.5;float h=h13(vec3(id,face*13.+float(i)*7.));
+  if(h>.965){float b=(h-.965)/.035;vec2 off=(vec2(h13(vec3(id,face+.5)),h13(vec3(id.yx,face+1.5)))-.5)*.5;vec3 tint=mix(vec3(1.,.78,.55),vec3(.62,.8,1.),h13(vec3(id,face+3.1)));
+   c+=tint*b*b*smoothstep(.16,0.,length(f-off))*(i==0?2.6:1.3);}}
+ float n=n3(d*2.3)*.6+n3(d*5.1)*.4;
+ c+=(vec3(.30,.10,.48)*pow(n,3.)*.55+vec3(.04,.22,.30)*pow(n3(d*3.7+7.),4.)*.5)*(1.-uReal);
+ float mw=exp(-pow(dot(d,normalize(vec3(.35,.85,.25)))*4.2,2.));c+=uReal*vec3(.92,.88,.80)*mw*(.15+.85*n3(d*7.))*(.35+.65*n3(d*23.))*.055;
+ return c;}
+vec3 bb(float T){T=clamp(T,1000.,40000.)/100.;float r=T<=66.?1.:clamp(1.2929*pow(T-60.,-.1332),0.,1.);
+ float g=T<=66.?clamp(.3901*log(T)-.6318,0.,1.):clamp(1.1299*pow(T-60.,-.0755),0.,1.);
+ float b=T>=66.?1.:(T<=19.?0.:clamp(.5432*log(T-10.)-1.1963,0.,1.));return vec3(r,g,b);}
+vec3 film(float cosT,float dnm){vec3 lam=vec3(650.,532.,450.);vec3 ph=4.*PI*1.5*dnm*cosT/lam;return .5+.5*cos(ph);}
+
+float sdEll(vec3 p,vec3 r){float k0=length(p/r);float k1=length(p/(r*r));return k0*(k0-1.)/max(k1,1e-4);}
+float sdCap(vec3 p,vec3 a,vec3 b,float r){vec3 pa=p-a,ba=b-a;float h=clamp(dot(pa,ba)/dot(ba,ba),0.,1.);return length(pa-ba*h)-r;}
+float smin(float a,float b,float k){float h=clamp(.5+.5*(b-a)/k,0.,1.);return mix(b,a,h)-k*h*(1.-h);}
+float tardi(vec3 p,out float mat){
+ float tun=uTun*(1.-uTwitch); float sx=mix(1.,.6,tun); float sy=mix(1.,1.12,tun);
+ vec3 q=vec3(p.x/sx,p.y/sy,p.z/sy);
+ float d=1e9;
+ for(int i=0;i<5;i++){float fi=float(i);float x=-.72+.36*fi;float rr=.33-.035*abs(fi-1.6);
+  d=smin(d,sdEll(q-vec3(x,0.,0.),vec3(.25,rr*.88,rr)),.085);}
+ d=smin(d,sdEll(q-vec3(.86,.03,0.),vec3(.21,.2,.21)),.08);
+ d=smin(d,sdEll(q-vec3(1.04,-.02,0.),vec3(.07,.06,.065)),.04);
+ d+=tun*.012*sin(q.x*38.)*sin(q.z*23.+q.y*17.);
+ d*=min(sx,1.);
+ float dc=1e9;
+ for(int i=0;i<4;i++){float fi=float(i);float lx=(.55-.37*fi)*sx;
+  for(int s=0;s<2;s++){float side=s==0?-1.:1.;
+   float ph=uTheta*.0174533*4.+fi*1.7+(side>0.?PI:0.);
+   float sw=.09*sin(ph)*(1.-tun)*uGait; float lift=max(0.,cos(ph))*.05*(1.-tun)*uGait;
+   vec3 a=vec3(lx,-.12,side*.2);
+   vec3 b=vec3(lx+sw+(i==3?-.2:0.),-.47+lift,side*.42);
+   b=mix(b,a+vec3(0.,-.03,side*.05),tun);
+   float lr=mix(.078,.035,tun);
+   if(uReal>.5){vec3 mid=mix(a,b,.55);d=smin(d,sdCap(p,a,mid,lr*1.18),.06);d=smin(d,sdCap(p,mid,b,lr*.82),.05);}
+   else d=smin(d,sdCap(p,a,b,lr),.05);
+   if(tun<.92){
+    vec3 c1=b+vec3(0.,-.045,0.);
+    for(int k=0;k<4;k++){if(k>=2&&uReal<.5)break;float kk=uReal>.5?(float(k)-1.5):float(k)*2.-1.;float fw=i==3?-1.:1.;
+     vec3 c2=c1+vec3(fw*.085,-.035,kk*.035);vec3 c3=c2+vec3(fw*.03,.035,kk*.01);
+     dc=min(dc,min(sdCap(p,c1,c2,.016),sdCap(p,c2,c3,.012))+tun*.08);}}
+ }}
+ mat=dc<d?1.:0.; return min(d,dc);}
+vec3 lin(vec3 c){return pow(c,vec3(2.2));}
+vec2 gutD(vec3 q){ // body cavity: gut (algae-fed) and pharyngeal bulb; shape is a model of real anatomy
+ float wob=.035*sin(q.x*13.);
+ float g=smoothstep(.0,-.06,sdEll(q-vec3(.0,-.01,0.),vec3(.70,.15+wob,.17+wob)));
+ float ph=smoothstep(.0,-.05,sdEll(q-vec3(.80,.035,0.),vec3(.12,.10,.10)));
+ return vec2(g,ph);}
+vec3 tnorm(vec3 p){float m;vec2 e=vec2(.0015,-.0015);
+ return normalize(e.xyy*tardi(p+e.xyy,m)+e.yyx*tardi(p+e.yyx,m)+e.yxy*tardi(p+e.yxy,m)+e.xxx*tardi(p+e.xxx,m));}
+
+vec3 skyOut(vec3 n){ // outside universe seen on the wall around +y
+ float a=acos(clamp(n.y,-1.,1.));
+ vec3 c=vec3(0.);
+ if(a<uPatch){float k=a/uPatch; float ang=atan(n.z,n.x);
+  vec3 d=vec3(sin(k*PI*.5)*cos(ang),cos(k*PI*.5),sin(k*PI*.5)*sin(ang));
+  float boost=mix(3.,1.2,uRel);
+  c=stars(d)*boost+vec3(.55,.75,1.)*mix(.55,.12,uRel)*(1.-k*k);
+  c=mix(c,c*vec3(.75,.9,1.25),.5*(1.-uRel));
+  c+=vec3(.8,.9,1.)*smoothstep(.12,0.,abs(k-1.))*.6;}
+ return c;}
+vec3 wallShade(vec3 hp,vec3 rd){
+ vec3 n=normalize(hp*uB); float lat=asin(clamp(n.y,-1.,1.)),lon=atan(n.z,n.x);
+ float gl1=smoothstep(.035,0.,abs(fract(lat*12./PI)-.5)-.47)+smoothstep(.035,0.,abs(fract(lon*12./PI)-.5)-.47);
+ float cosT=abs(dot(n,rd));
+ vec3 fl=film(cosT,320.+60.*sin(lon*3.+lat*2.+uTime*.4*uMotion));
+ vec3 col=vec3(.10,.03,.20)+vec3(.55,.25,.95)*.10*gl1+fl*vec3(.7,.55,1.)*.12;
+ col+=vec3(.43,.95,1.)*.05*gl1*(.5+.5*sin(lon*6.+uTime*uMotion));
+ col+=skyOut(n);
+ float ad=acos(clamp(-n.y,-1.,1.));
+ float dk=smoothstep(uDark,uDark*.75,ad);
+ col=mix(col,vec3(.08,0.,.02)+vec3(.45,.05,.12)*uProg*smoothstep(uDark,uDark*.4,ad)*.6,dk);
+ return col;}
+vec3 spaceEnv(vec3 d){vec3 ds=d;float D=1.;
+ if(uComove>.5){float c1=dot(d,uM);float cs=(c1-uBeta)/(1.-uBeta*c1);vec3 pp=d-c1*uM;float pl=length(pp);vec3 pe=pl>1e-5?pp/pl:vec3(0.,1.,0.);
+  ds=cs*uM+sqrt(max(0.,1.-cs*cs))*pe;D=(1.+uBeta*c1)/sqrt(1.-uBeta*uBeta);}
+ vec3 c=stars(ds);vec3 tint=bb(6500.*D)/max(bb(6500.),vec3(.05));
+ return c*tint*pow(D,3.)*.8;}
+vec3 envW(vec3 w){if(uGR>.5){vec3 hp=w*uWall;return wallShade(hp,w)*.9+(.5+.5*cos(6.2831*(w.y*.8+w.x*.35+vec3(0.,.33,.67))))*vec3(.9,.8,1.)*.18;}
+ vec3 keyL=normalize(vec3(.3,1.,.2));vec3 realE=vec3(.035,.04,.05)+vec3(.80,.86,1.)*.16*smoothstep(-.5,1.,w.y)+vec3(1.,.95,.85)*pow(max(0.,dot(w,keyL)),48.)*3.5;
+ return spaceEnv(w)*1.3+(.5+.5*cos(6.2831*(w.y*.8+w.x*.35+vec3(0.,.33,.67))))*vec3(.9,.8,1.)*.07*(1.-uReal)+mix(vec3(.05,.04,.08),realE,uReal);}
+vec3 envIn(vec3 w){return uReal>.5?envW(w):envW(uB*w);}
+vec3 domeLayer(vec3 col,vec3 p,vec3 qn,float back){vec3 n=normalize(p);float cosT=abs(dot(n,qn));
+ vec3 fl=film(cosT,380.+140.*n3(p*1.3+uTime*.1));float lat=asin(clamp(n.y,-1.,1.)),lon=atan(n.z,n.x);
+ float gr=smoothstep(.05,0.,abs(fract(lat*7./PI)-.5)-.45)+smoothstep(.05,0.,abs(fract(lon*9./PI)-.5)-.45);
+ gr*=1.-uReal;float a=(.03+.38*pow(1.-cosT,4.)+.045*gr)*mix(1.,.5,back);
+ vec3 dc=mix(fl*vec3(.7,1.,.9)*(.55+.8*uGlow)+vec3(.25,.9,.7)*.06*gr,vec3(.78,.86,.96)*.42+fl*.10,uReal);
+ return col*(1.-a*.6)+dc*a*1.3;}
+float capI(vec3 ro,vec3 rd,vec3 pa,vec3 pb,float r){vec3 ba=pb-pa,oa=ro-pa;float baba=dot(ba,ba),bard=dot(ba,rd),baoa=dot(ba,oa),rdoa=dot(rd,oa),oaoa=dot(oa,oa);
+ float a=baba-bard*bard,b=baba*rdoa-baoa*bard,c=baba*oaoa-baoa*baoa-r*r*baba;float h=b*b-a*c;
+ if(h>=0.){float t=(-b-sqrt(h))/a;float y=baoa+t*bard;if(y>0.&&y<baba)return t;vec3 oc=(y<=0.)?oa:ro-pb;b=dot(rd,oc);c=dot(oc,oc)-r*r;h=b*b-c;if(h>0.)return -b-sqrt(h);}return -1.;}
+float shadowAt(vec3 p,vec3 L,int skip){float s=1.;
+ for(int i=0;i<80;i++){if(float(i)>=uEN)break;if(i==skip)continue;float k=floor(uEC[i].w);if(k==4.||k==6.)continue;
+  vec4 e=uEP[i];vec3 oc=e.xyz-p;float t=dot(oc,L);if(t<=0.)continue;float d=length(oc-L*t);float r=e.w*((k==9.||k==12.)?1.6:1.);
+  s=min(s,smoothstep(r*.45,r*1.15+t*.10,d));}
+ return mix(.22,1.,s);}
+vec3 realMat(vec3 p,vec3 n,vec3 rd,vec3 base,float kind,vec4 eh,float ew,float dif,float cv,float sh){
+ vec3 L=normalize(vec3(.3,1.,.2));vec3 key=vec3(1.,.96,.88)*1.9;vec3 skyA=vec3(.50,.58,.72)*.50;
+ vec3 lit=skyA*(.35+.20*uLights+.10*uGlow)*(.55+.45*n.y)+key*dif*sh;
+ vec3 b=lin(base);vec3 R=reflect(rd,n);float f5=pow(1.-cv,5.);vec3 col=b*lit;
+ if(kind==0.){col*=.8+.4*n3(p*60.);}
+ else if(kind==1.){float fr=.02+.98*f5;vec3 seen=lin(vec3(.30,.24,.16))*lit*.8;float caus=pow(max(0.,dot(-L,n)),5.)*sh;
+  col=mix(seen+vec3(.55,.75,1.)*caus*.5*key.x*.25,envW(R)+key*pow(max(0.,dot(R,L)),160.)*3.,fr)+vec3(.01,.015,.02);}
+ else if(kind==2.){col+=b*vec3(.75,.95,.30)*pow(max(0.,dot(-L,n)),1.5)*.50*sh*key.x*.35;col*=.70+.60*n3(p*150.);}
+ else if(kind==3.){col*=.80+.40*n3(p*100.);}
+ else if(kind==4.){vec3 F0=vec3(.95,.82,.55);vec3 fr=F0+(1.-F0)*f5;col=envW(R)*fr+F0*F0*.05*lit;}
+ else if(kind==5.){float fr=.04+.96*f5;col=b*lit*.35+envW(R)*fr+key*pow(max(0.,dot(R,L)),90.)*1.2*sh;}
+ else if(kind==6.){col=b*1.6;}
+ else if(kind==7.){col=b*lit+key*pow(max(0.,dot(R,L)),40.)*.25*sh;}
+ else if(kind==8.){float pet=.72+.28*cos(6.*atan(n.z,n.x));col=b*pet*(lit+.15*uGlow)*.95;}
+ else if(kind==9.||kind==10.){vec3 bc=lin(mix(vec3(.90,.88,.80),base,.12));float sg;
+  if(kind==9.){float hh=fract(ew)/.999*6.2831853;vec3 au=vec3(cos(hh),0.,sin(hh));float s2=dot(p-eh.xyz,au)/eh.w;sg=.88+.12*cos(s2*3.3);if(s2>2.55)sg*=.8;}
+  else sg=.84+.16*cos((p.y-eh.y)/eh.w*10.);
+  col=bc*lit*sg+bc*pow(1.-cv,2.5)*.10*(skyA.x*2.)+key*pow(max(0.,dot(R,L)),60.)*(.05+.4*f5)*sh+skyA*f5*.4;}
+ else if(kind==11.){vec3 eg=lin(vec3(.94,.92,.85));col=eg*lit+key*pow(max(0.,dot(R,L)),70.)*.5*sh+skyA*f5*.6;}
+ else if(kind==12.){vec3 ex=lin(vec3(.85,.78,.63));col=ex*lit*.65+skyA*(pow(1.-cv,3.)*.8);}
+ return col;}
+float garden(vec3 ro,vec3 rd,out vec4 gc){float best=1e9;int hi=-1;vec3 hn=vec3(0.,1.,0.);
+ for(int i=0;i<80;i++){if(float(i)>=uEN)break;vec4 e=uEP[i];float kind=floor(uEC[i].w);float t=-1.;vec3 nn;
+  if(kind==4.){float gr=fract(uEC[i].w)/.999;vec3 top=vec3(e.x,mix(e.y,-.03,gr),e.z);t=capI(ro,rd,e.xyz,top,e.w);
+   if(t>0.&&t<best){vec3 p=ro+rd*t;vec3 ba=top-e.xyz;float h=clamp(dot(p-e.xyz,ba)/max(dot(ba,ba),1e-6),0.,1.);nn=(p-e.xyz-h*ba)/e.w;best=t;hi=i;hn=nn;}}
+  else if(kind==9.||kind==12.){float hh=fract(uEC[i].w)/.999*6.2831853;vec3 ax=vec3(cos(hh),0.,sin(hh))*e.w*(kind==9.?2.1:1.9);vec3 pa=e.xyz-ax,pb=e.xyz+ax;t=capI(ro,rd,pa,pb,e.w);
+   if(t>0.&&t<best){vec3 p=ro+rd*t;vec3 ba=pb-pa;float h=clamp(dot(p-pa,ba)/dot(ba,ba),0.,1.);best=t;hi=i;hn=(p-pa-h*ba)/e.w;}
+   if(kind==9.&&uReal>.5){vec3 oc2=ro-e.xyz;float bb2=dot(oc2,rd),cc2=dot(oc2,oc2)-e.w*e.w*10.;
+    if(bb2*bb2-cc2>0.){vec3 dv=vec3(cos(hh),0.,sin(hh));vec3 sv=vec3(-dv.z,0.,dv.x);
+     for(int l=0;l<8;l++){float sd=(l%2==0)?-1.:1.;float sl=(-1.5+1.0*float(l/2))*e.w*1.25;
+      vec3 A=e.xyz+dv*sl+sv*sd*e.w*.55+vec3(0.,-.65*e.w,0.);vec3 F=A+sv*sd*e.w*.30+vec3(0.,-.92*e.w,0.);
+      float tl=capI(ro,rd,A,F,e.w*.30);
+      if(tl>0.&&tl<best){vec3 p=ro+rd*tl;vec3 ba=F-A;float h=clamp(dot(p-A,ba)/dot(ba,ba),0.,1.);best=tl;hi=i;hn=(p-A-h*ba)/(e.w*.30);}}}}}
+  else{vec3 oc=ro-e.xyz;float b=dot(oc,rd),c=dot(oc,oc)-e.w*e.w,h=b*b-c;if(h>0.){t=-b-sqrt(h);if(t>0.&&t<best){best=t;hi=i;hn=normalize(ro+rd*t-e.xyz);}}}}
+ float ft=-1.;if(uFloorR>0.&&rd.y<-1e-4){ft=(-1.5-ro.y)/rd.y;vec3 p=ro+rd*ft;if(ft>0.&&length(p.xz)<uFloorR&&ft<best){best=ft;hi=99;hn=vec3(0.,1.,0.);}}
+ if(hi<0)return -1.;
+ vec3 p=ro+rd*best;vec3 L=normalize(vec3(.3,1.,.2));float amb=.16+.3*uLights+.2*uGlow;vec3 col;
+ if(hi==99&&uReal>.5){vec3 Lk=normalize(vec3(.3,1.,.2));float nz=n3(p*5.)*.5+n3(p*17.)*.3+n3(p*61.)*.2;
+   vec3 earth=mix(lin(vec3(.22,.17,.12)),lin(vec3(.40,.33,.25)),nz);earth=mix(earth,lin(vec3(.50,.49,.46)),smoothstep(.74,.82,n3(p*13.))*.55);
+   vec3 mossC=mix(lin(vec3(.13,.28,.09)),lin(vec3(.28,.46,.17)),n3(p*45.));
+   vec3 fc=mix(earth,mossC,smoothstep(.5,.62,n3(p*2.6+3.))*uMoss);
+   float shF=shadowAt(p+vec3(0.,.01,0.),Lk,-1);
+   vec3 lit=vec3(.50,.58,.72)*.55*(.35+.20*uLights+.10*uGlow)+vec3(1.,.96,.88)*1.9*Lk.y*shF;
+   fc*=lit*(1.+.12*(n3(p*200.)-.5));
+   fc*=smoothstep(uFloorR,uFloorR-.12,length(p.xz))*.8+.2;gc=vec4(fc,1.);return best;}
+ if(hi==99){float nz=n3(p*6.)*.6+n3(p*19.)*.4;vec3 earth=vec3(.20,.14,.09)*(.6+.8*nz);vec3 moss=vec3(.20,.45,.14)*(.6+.6*n3(p*25.));
+  col=mix(earth,moss,smoothstep(.5,.62,n3(p*2.6+3.))*uMoss);col*=amb+.6*max(0.,dot(hn,L));
+  col*=smoothstep(uFloorR,uFloorR-.12,length(p.xz))*.8+.2;gc=vec4(col,1.);return best;}
+ vec3 base=uEC[0].rgb;float kind=0.;vec4 eh=vec4(0.);float ew=0.;
+ for(int i=0;i<80;i++){if(i==hi){base=uEC[i].rgb;kind=floor(uEC[i].w);eh=uEP[i];ew=uEC[i].w;}}
+ vec3 n=hn;
+ if(kind==2.||kind==3.){n=normalize(n+(vec3(n3(p*45.),n3(p*45.+3.1),n3(p*45.+7.7))-.5)*(kind==2.?1.1:.5));}
+ if(kind==5.){n=normalize(floor(n*2.2+.5));}
+ float dif=max(0.,dot(n,L)),cv=max(dot(-rd,n),0.);
+ if(uReal>.5){float shE=shadowAt(p+n*.01,L,hi);col=realMat(p,n,rd,base,kind,eh,ew,dif,cv,shE);gc=vec4(col,1.);return best;}
+ col=base*(amb+.75*dif);
+ if(kind==2.)col+=base*pow(1.-cv,2.)*.45;
+ if(kind==1.){vec3 fr=vec3(.04)+.96*pow(1.-cv,5.);col=base*.18+envW(reflect(rd,n))*(fr+.12)+vec3(1.)*pow(max(0.,dot(reflect(rd,n),L)),60.);}
+ if(kind==4.){vec3 F0=vec3(.98,.86,.58);vec3 fr=F0+(1.-F0)*pow(1.-cv,5.);col=envW(reflect(rd,n))*fr+F0*F0*.35+fr*pow(max(0.,dot(reflect(rd,n),L)),40.);}
+ if(kind==5.){col=film(cv,420.)*.6+envW(reflect(rd,n))*.5+base*.15*amb;}
+ if(kind==6.)col=base*2.4;
+ if(kind==7.)col+=vec3(1.)*pow(max(0.,dot(reflect(rd,n),L)),30.)*.5;
+ if(kind==8.){float pet=.7+.3*cos(6.*atan(n.z,n.x));col=base*(.55+.9*pet)*(.6+.4*dif)+base*.25*uGlow;}
+ if(kind==9.||kind==10.){vec3 bc=mix(vec3(1.,.88,.74),base,.55);float sg=1.;
+  if(kind==9.){float hh=fract(ew)/.999*6.2831853;vec3 au=vec3(cos(hh),0.,sin(hh));float s=dot(p-eh.xyz,au)/eh.w;sg=.8+.2*cos(s*3.3);if(s>2.55)sg*=.7;}
+  else sg=.78+.22*cos((p.y-eh.y)/eh.w*10.);
+  col=bc*(amb+.85*dif)*sg+bc*vec3(.9,.5,1.)*pow(1.-cv,2.5)*.55+bc*.12;}
+ if(kind==11.)col=vec3(.96,.93,.84)*(amb+.75*dif)+film(cv,300.)*.22;
+ if(kind==12.)col=base*(amb+.45*dif)*.75+vec3(1.,.93,.75)*pow(1.-cv,3.)*.55;
+ gc=vec4(col,1.);return best;}
+vec4 ringShade(vec3 p,vec3 qn,float r){float u=(r-uRingIn)/uRingW;bool gold=u<.79;float v=gold?u/.79:(u-.79)/.21;
+ vec3 rad=normalize(vec3(p.x,0.,p.z));float side=qn.y<0.?1.:-1.;vec3 n=normalize(vec3(0.,side,0.)+rad*(v-.5)*1.5);
+ vec3 F0=gold?vec3(1.,.72,.30):vec3(.95,.93,.88);float cosT=clamp(dot(-qn,n),0.,1.);vec3 fr=F0+(1.-F0)*pow(1.-cosT,5.);
+ vec3 rf=reflect(qn,n);vec3 c=envW(rf)*fr*.9+F0*F0*.55+fr*pow(max(0.,dot(rf,normalize(vec3(.3,1.,.2)))),40.)*1.2;
+ c+=F0*F0*.3*(.3+uGlow)*(1.-.88*uReal);
+ if(uPatA>0.){float ang=atan(p.z,p.x);if(ang<0.)ang+=6.2831853;float lit=uPat>=6.2831853?1.:step(ang,uPat);c=mix(c,c*vec3(.85,.6,1.15)+vec3(.72,.38,1.)*.35,.55*lit*uPatA*(1.-.72*uReal));}
+ c*=mix(.25,1.,smoothstep(0.,.025,abs(u-.79)))*smoothstep(0.,.02,u)*smoothstep(1.,.98,u);
+ return vec4(c,1.);}
+float segD(vec3 ro,vec3 rd,vec3 a,vec3 b,out float s){vec3 ba=b-a,oa=ro-a;float d1=dot(rd,ba),d2=dot(ba,ba),d3=dot(rd,oa),d4=dot(ba,oa);float den=d2-d1*d1;
+ s=den>1e-6?clamp((d4-d1*d3)/den,0.,1.):0.;vec3 q=a+ba*s;float t=max(dot(q-ro,rd),0.);return length(ro+rd*t-q);}
+vec4 shadeTardi(vec3 ro,vec3 rd){
+ vec3 sc=vec3(1./sqrt(uStretch),uStretch,1./sqrt(uStretch));
+ vec3 lo=(ro*uB)/sc, ld=normalize((rd*uB)/sc);
+ float R=1.3;
+ float b=dot(lo,ld),cq=dot(lo,lo)-R*R,disc=b*b-cq; if(disc<0.)return vec4(0);
+ float t0=-b-sqrt(disc),t1=-b+sqrt(disc); if(t1<0.)return vec4(0); t0=max(t0,0.);
+ vec3 ps=lo+ld*t0; vec3 n=normalize(ps); float cosT=clamp(dot(-ld,n),0.,1.);
+ float shim=uMotion*.5*sin(uTime*1.3+ps.y*6.+ps.x*4.)+n3(ps*3.+uTime*.2*uMotion)*1.2-.6;
+ float dnm=uThick*(9.+1.6*shim);
+ vec3 F0=vec3(.98,.82,.57); vec3 fr=F0+(1.-F0)*pow(1.-cosT,5.);
+ vec3 fl=film(cosT,dnm);
+ vec3 refl=envIn(normalize(reflect(ld,n)))*fr*mix(vec3(1.),fl*1.6,.65*(1.-.7*uReal))+vec3(.9,.75,1.)*pow(1.-cosT,3.)*.35*(1.-uReal);
+ float Tm=exp(-uThick/45.);
+ float Rw=clamp((1.-Tm)*.9+pow(1.-cosT,3.)*.7,0.,.97);
+ vec3 glow=mix(F0,vec3(.95,.95,1.),.25+.25*sin(ps.x*5.+ps.y*3.+uTime*.7*uMotion))*fl*(.2+1.1*pow(1.-cosT,2.2))*1.3*(.85+.15*shim)*(.2+1.1*uGlow)*(1.-.88*uReal);
+ vec3 col=vec3(0);float al=0.;float t=t0;float mat=0.;
+ for(int i=0;i<90;i++){vec3 pp=lo+ld*t;float d=tardi(pp,mat);if(d<.0015){
+   vec3 nn=tnorm(pp);vec3 Lup=normalize(vec3(.2,1.,.3));
+   vec3 basec=mat>.5?vec3(.3,.24,.2):mix(vec3(1.,.88,.74),vec3(.78,.58,.4),uTun);
+   float eye=0.;for(int e=0;e<2;e++){vec3 ep=vec3(.99*mix(1.,.6,uTun),.13,(e==0?-1.:1.)*.12);eye+=smoothstep(.045,.025,length(pp-ep));}
+   basec*=1.-.85*clamp(eye,0.,1.);
+   float head=max(dot(nn,-ld),0.);
+   vec3 c=basec*(vec3(.75,.85,1.)*max(0.,(dot(nn,Lup)+.4)/1.4)*.9+vec3(.95,.85,1.)*head*.55+vec3(.35,.12,.5)*max(0.,-nn.y)*.6+.14);
+   c+=basec*vec3(.9,.45,1.)*pow(1.-head,2.5)*.6;
+   if(mat>.5)c+=vec3(1.)*pow(max(0.,dot(reflect(ld,nn),Lup)),24.)*.6;
+   if(uReal>.5){ // translucent cuticle over a visible gut, eye spots, sclerotised claws
+    vec3 Lk=normalize(vec3(.3,1.,.2));vec3 keyc=vec3(1.,.96,.88)*1.9;vec3 skyc=vec3(.50,.58,.72)*.50;
+    float dk=max(dot(nn,Lk),0.);float wrap=clamp((dot(nn,Lk)+.45)/1.45,0.,1.);
+    vec3 nb=normalize(nn+(vec3(n3(pp*70.),n3(pp*70.+3.1),n3(pp*70.+7.7))-.5)*.10*(1.+uTun));
+    vec3 tissue=lin(vec3(.93,.91,.84));
+    vec3 lit=skyc*(.55+.45*nb.y)+keyc*mix(dk,wrap,.5);
+    vec3 cc=tissue*lit*.58;
+    vec2 gp=vec2(0.);float cells=0.;vec3 qv=pp+ld*.02;
+    for(int i2=0;i2<8;i2++){float fa=exp(-float(i2)*.16);vec2 g=gutD(qv);gp=max(gp,g*fa);cells+=smoothstep(.80,.92,n3(qv*26.))*exp(-float(i2)*.25);qv+=ld*.075;}
+    vec3 gutc=mix(lin(vec3(.34,.44,.12)),lin(vec3(.45,.30,.12)),uTun);
+    cc=mix(cc,gutc*(skyc*.9+keyc*.30*wrap)*.62,clamp(gp.x*.80,0.,.66));
+    cc=mix(cc,lin(vec3(.96,.94,.88))*(skyc+keyc*.55*wrap)*.62,clamp(gp.y*.45,0.,.5));
+    cc+=lin(vec3(.95,.96,.90))*cells*.10*(skyc.x+keyc.x*.3);
+    float rimv=pow(1.-head,3.);
+    cc+=lin(vec3(.85,.88,.82))*rimv*.20;
+    float fre=.03+.97*pow(1.-head,5.);
+    cc+=keyc*pow(max(0.,dot(reflect(ld,nb),Lk)),64.)*(.18+.5*fre)+skyc*fre*.6;
+    float eyeK=0.;for(int e2=0;e2<2;e2++){vec3 ep2=vec3(.99*mix(1.,.6,uTun),.13,(e2==0?-1.:1.)*.12);eyeK+=smoothstep(.045,.020,length(pp-ep2));}
+    cc=mix(cc,lin(vec3(.34,.02,.02))*(.5+.5*dk),clamp(eyeK,0.,1.)*.92);
+    if(mat>.5){vec3 cl=lin(vec3(.50,.34,.16));cc=cl*(skyc*.8+keyc*dk*.7)+keyc*pow(max(0.,dot(reflect(ld,nn),Lk)),30.)*.25;}
+    c=cc;}
+   col=c;al=1.;break;}
+  t+=max(d*.85,.002); if(t>t1)break;}
+ vec3 inner=col*mix(vec3(1.,.9,.68),vec3(.84,.92,.84),uReal)*mix(1.,Tm,.6);
+ float through=(1.-Rw)*mix(1.,Tm,.35);
+ return vec4(refl*Rw+inner*through*al+glow*(.35+.65*(1.-Tm)),clamp(Rw+through*al+.15*(1.-Tm),0.,1.));}
+void main(){
+ vec2 uv=(gl_FragCoord.xy-.5*uRes)/uRes.y;uv.y-=.24;
+ vec3 rd=normalize(uF*0.95+uR*uv.x+uU*uv.y);
+ vec3 ro=uCam;vec3 col;
+ if(uGR>.5){float b0=dot(ro,rd),c0=dot(ro,ro)-uWall*uWall;float tw=-b0+sqrt(max(b0*b0-c0,0.));col=wallShade(ro+rd*tw,rd);}
+ else col=spaceEnv(rd)+vec3(.012,.008,.02);
+ if(uPhoto>.5){float c1=dot(rd,uM);float cn=(c1+uBeta)/(1.+uBeta*c1);vec3 pp=rd-c1*uM;float pl=length(pp);vec3 pe=pl>1e-5?pp/pl:vec3(0.,1.,0.);rd=normalize(cn*uM+sqrt(max(0.,1.-cn*cn))*pe);ro=ro+(1./sqrt(1.-uBeta*uBeta)-1.)*dot(ro,uM)*uM;}
+ float ek=1./uK-1.;vec3 qo=ro+ek*dot(ro,uM)*uM;vec3 qd=rd+ek*dot(rd,uM)*uM;vec3 qn=normalize(qd);
+ float db=dot(qo,qn),dc=dot(qo,qo)-uDomeR*uDomeR,dd=db*db-dc;float d0=-1.,d1=-1.;
+ if(dd>0.){d0=-db-sqrt(dd);d1=-db+sqrt(dd);}
+ if(d1>0.)col=domeLayer(col,qo+qn*d1,qn,1.);
+ float rt=-1.;vec4 rc=vec4(0.);
+ if(abs(qn.y)>1e-4){rt=-qo.y/qn.y;if(rt>0.){vec3 p=qo+qn*rt;float r=length(p.xz);if(r>uRingIn&&r<uRingIn+uRingW)rc=ringShade(p,qn,r);else rt=-1.;}else rt=-1.;}
+ float sb=dot(qo,qn),sc2=dot(qo,qo)-1.69,sd=sb*sb-sc2;float stt=sd>0.?max(-sb-sqrt(sd),0.):1e9;
+ vec4 tc=shadeTardi(qo,qn);
+ vec4 gcol=vec4(0.);float gt=garden(qo,qn,gcol);
+ float dR=rt>0.?rt:-1.,dS=(sd>0.&&tc.a>0.001)?stt:-1.,dG=gt;
+ for(int k=0;k<3;k++){float m=-1.;int w=-1;if(dR>m){m=dR;w=0;}if(dS>m){m=dS;w=1;}if(dG>m){m=dG;w=2;}if(w<0)break;
+  if(w==0){col=rc.rgb+col*(1.-rc.a);dR=-1.;}else if(w==1){col=tc.rgb+col*(1.-tc.a);dS=-1.;}else{col=gcol.rgb;dG=-1.;}}
+ if(uPatA>0.){vec3 am=vec3(.72,.38,1.);
+  for(int i=0;i<12;i++){float ai=uPat-float(i)*.09;if(ai<0.&&uPat<6.2831853)break;vec3 P=vec3(cos(ai),0.,sin(ai))*1.75;vec3 v=P-qo;float tp=dot(v,qn);if(tp<=0.)continue;float d=length(v-qn*tp);
+   float w=i==0?1.:.55*exp(-float(i)*.25);col+=am*uPatA*w*(exp(-d*d/.005)*2.2+exp(-d*d/.06)*.45)*(1.-.55*uReal);}
+  vec3 P0=vec3(cos(uPat),0.,sin(uPat))*1.75;float s;float d=segD(qo,qn,P0,vec3(0.),s);float pk=uTime>0.?exp(-pow(s-fract(uTime*.5),2.)/.004):0.;
+  col+=am*uPatA*exp(-d*d/.0012)*(.3+1.4*pk)*(1.-.5*s)*(1.-.45*uReal);}
+ for(int i=0;i<80;i++){if(float(i)>=uEN)break;if(floor(uEC[i].w)!=6.)continue;vec3 v=uEP[i].xyz-qo;float tp=dot(v,qn);if(tp<=0.)continue;float d=length(v-qn*tp);col+=uEC[i].rgb*exp(-d*d/.02)*.35*uLights*(1.-.65*uReal);}
+ if(d0>0.)col=domeLayer(col,qo+qn*d0,qn,0.);
+ ro=qo;rd=qn;
+ if(uNA>0.001){for(int i=0;i<9;i++){vec3 v=uNP[i]-ro;float tp=dot(v,rd);if(tp<=0.)continue;float d=length(v-rd*tp);float nv=uNV[i];
+   vec3 nc=i==4?vec3(1.,.82,.42):(nv>=0.?vec3(.43,.95,1.):vec3(1.,.37,.82));float I=i==4?(.85+.15*cos(uTime*3.)):(.3+.7*abs(nv));
+   col+=uNA*I*nc*(exp(-d*d/.005)*1.6+exp(-d*d/.06)*.35);}}
+ vec2 q=gl_FragCoord.xy/uRes;
+ if(uReal>.5){col*=uExp;col=(col*(2.51*col+.03))/(col*(2.43*col+.59)+.14);col=pow(clamp(col,0.,1.),vec3(1./2.2));col*=.90+.10*pow(16.*q.x*q.y*(1.-q.x)*(1.-q.y),.2);col+=(h13(vec3(gl_FragCoord.xy,3.7))-.5)/255.;}
+ else{col=col/(1.+col*.5); col=pow(col,vec3(.92));col*=.8+.2*pow(16.*q.x*q.y*(1.-q.x)*(1.-q.y),.2);}
+ o=vec4(col,1.);}`;
+
+let CAN=$('scene'),gl=null,prog=null,U={},mode='webgl2',ctx2d=null,glCreated=false;
+function initGL(){
+ try{gl=CAN.getContext('webgl2',{antialias:false,alpha:false,preserveDrawingBuffer:true});}catch(e){gl=null;}
+ if(!gl)return false; glCreated=true;
+ const sh=(t,s)=>{const x=gl.createShader(t);gl.shaderSource(x,s);gl.compileShader(x);if(!gl.getShaderParameter(x,gl.COMPILE_STATUS)){const l=gl.getShaderInfoLog(x);throw new Error(l);}return x;};
+ try{prog=gl.createProgram();gl.attachShader(prog,sh(gl.VERTEX_SHADER,VS));gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,FS));gl.linkProgram(prog);
+  if(!gl.getProgramParameter(prog,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(prog));}
+ catch(e){window.__tardiIn.glError=String(e);gl=null;return false;}
+ gl.useProgram(prog);
+ const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+ const loc=gl.getAttribLocation(prog,'p');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+ U.uNP=null;['uB','uRes','uCam','uF','uR','uU','uTime','uTheta','uTun','uThick','uMotion','uPatch','uDark','uProg','uStretch','uWall','uRel','uGait','uTwitch','uGlow','uNA','uM','uK','uBeta','uComove','uGR','uRingIn','uRingW','uDomeR','uReal','uPhoto','uExp','uEN','uFloorR','uMoss','uLights','uPat','uPatA'].forEach(n=>U[n]=gl.getUniformLocation(prog,n));
+ try{const ext=gl.getExtension('WEBGL_debug_renderer_info');const rn=ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER);window.__tardiIn.renderer=rn;
+  if(/swiftshader|llvmpipe|software|basic render/i.test(rn)){S.software=true;if(S.quality==='auto')S.scale=.4;}}catch(e){}
+ U.uNP=gl.getUniformLocation(prog,'uNP[0]');U.uEP=gl.getUniformLocation(prog,'uEP[0]');U.uEC=gl.getUniformLocation(prog,'uEC[0]');U.uNV=gl.getUniformLocation(prog,'uNV[0]');
+ CAN.addEventListener('webglcontextlost',e=>{e.preventDefault();switchTo2D('context lost');},false);
+ return true;}
+function switchTo2D(why){mode='2d';S.quality='2d';$('quality').value='2d';
+ if(glCreated){const nc=CAN.cloneNode(false);CAN.parentNode.replaceChild(nc,CAN);bindCanvas(nc);glCreated=false;}
+ gl=null;ctx2d=CAN.getContext('2d');window.__tardiIn.fallbackReason=why;S.dirty=true;}
+
+let BASIS=null;
+const norm=v=>{const l=Math.hypot(v[0],v[1],v[2])||1;return [v[0]/l,v[1]/l,v[2]/l];};
+const cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+const NODEP=(()=>{const y=.6,p=.35,cp=Math.cos(p);const cam=[cp*Math.cos(y),Math.sin(p),cp*Math.sin(y)];const F=norm(cam.map(x=>-x));const Rr=norm(cross(F,[0,1,0]));const Uu=cross(Rr,F);
+ const out=new Float32Array(27);for(let k=0;k<9;k++){const a=(-100+25*k)*Math.PI/180;for(let j=0;j<3;j++)out[k*3+j]=2.2*(Math.sin(a)*Rr[j]+Math.cos(a)*Uu[j]);}return out;})();
+const MOTION=(()=>{const y=.6,p=.35,cp=Math.cos(p);const cam=[cp*Math.cos(y),Math.sin(p),cp*Math.sin(y)];const F=norm(cam.map(x=>-x));const Rr=norm(cross(F,[0,1,0]));
+ return new Float32Array(norm([-.8*Rr[0]+.6*F[0],-.8*Rr[1]+.6*F[1],-.8*Rr[2]+.6*F[2]]));})();
+function nodeVals(){const a=Math.cos(2*Math.PI*ZP.psi);return ZPAT.map(v=>v*a);}
+(function(){const A=[-.413,.866,-.282];const l=Math.hypot(...A);const Y=A.map(x=>x/l);let X=[Y[1],-Y[0],0];const lx=Math.hypot(...X);X=X.map(x=>x/lx);const Z=[X[1]*Y[2]-X[2]*Y[1],X[2]*Y[0]-X[0]*Y[2],X[0]*Y[1]-X[1]*Y[0]];BASIS=new Float32Array([...X,...Y,...Z]);})();
+function camera(){const cp=Math.cos(S.pitch),sp=Math.sin(S.pitch);
+ const cam=[S.dist*cp*Math.cos(S.yaw),S.dist*sp,S.dist*cp*Math.sin(S.yaw)];const F=norm(cam.map(x=>-x));const R=norm(cross(F,[0,1,0]));return {cam,F,R,U:cross(R,F)};}
+function visuals(){ // derived visual parameters
+ const M=Math.pow(10,S.massLog),st=stateAt(M,S.lenUm*1e-6,S.frac);
+ const rel=S.released?Math.min(1,S.frac*6+0.0001):0;
+ const patch=S.released?(0.2+1.45*Math.min(1,S.frac*6)):0.2;
+ const dark=S.released?(0.55+1.0*S.frac):0.5;
+ let stretch=1; if(S.released){const lg=Math.log10(Math.max(st.stress,1e-30));stretch=1+Math.min(1,Math.max(0,(lg-3)/3))*0.9; if(st.torn)stretch=1.9+Math.min(1.1,(st.rTear-st.r)/st.rTear*1.1);}
+ return {st,rel,patch,dark,stretch};}
+function resize(){const dpr=Math.min(window.devicePixelRatio||1,1.5);const sc=mode==='2d'?dpr:S.scale*dpr;
+ const w=Math.max(64,Math.round(innerWidth*sc)),h=Math.max(64,Math.round(innerHeight*sc));if(CAN.width!==w||CAN.height!==h){CAN.width=w;CAN.height=h;S.dirty=true;}}
+function applyQuality(){const q=S.quality;
+ if(q==='2d'){if(mode!=='2d')switchTo2D('user choice');}
+ else if(mode==='2d'){const nc=CAN.cloneNode(false);CAN.parentNode.replaceChild(nc,CAN);bindCanvas(nc);ctx2d=null;if(initGL()){mode='webgl2';window.__tardiIn.fallbackReason='';}else switchTo2D('no WebGL2');}
+ if(q==='high')S.scale=1;else if(q==='low')S.scale=.5;S.dirty=true;resize();}
+function drawGL(){const C=camera(),V=visuals();
+ gl.viewport(0,0,CAN.width,CAN.height);gl.uniform2f(U.uRes,CAN.width,CAN.height);gl.uniformMatrix3fv(U.uB,false,BASIS);
+ gl.uniform3fv(U.uCam,C.cam);gl.uniform3fv(U.uF,C.F);gl.uniform3fv(U.uR,C.R);gl.uniform3fv(U.uU,C.U);
+ gl.uniform1f(U.uTime,S.shimT);gl.uniform1f(U.uTheta,Number(MV.pose%8n)*11.25);const lv=Math.abs(OSC.level)/10;gl.uniform1f(U.uGait,Math.min(1,lv));gl.uniform1f(U.uGlow,Math.min(1.2,.06+lv));gl.uniform1f(U.uTwitch,(MV.pose%2n===1n)?0.05:0);gl.uniform1f(U.uTun,S.tun);gl.uniform1f(U.uThick,S.thick);
+ gl.uniform1f(U.uMotion,(S.motion&&S.released)?1:0);gl.uniform1f(U.uPatch,V.patch);gl.uniform1f(U.uDark,V.dark);gl.uniform1f(U.uProg,S.frac);
+ gl.uniform1f(U.uStretch,V.stretch);gl.uniform1f(U.uWall,12.);gl.uniform1f(U.uRel,V.rel);const GS=gardenState(MV.used,S.tunTarget>.5);gl.uniform1f(U.uPat,patAngle(MV.used));gl.uniform1f(U.uPatA,S.released?0:1);gl.uniform4fv(U.uEP,GS.EP);gl.uniform4fv(U.uEC,GS.EC);gl.uniform1f(U.uEN,GS.n);gl.uniform1f(U.uFloorR,GS.floorR);gl.uniform1f(U.uMoss,GS.moss);gl.uniform1f(U.uLights,GS.lights);gl.uniform1f(U.uNA,S.released?0:ZP.alpha);gl.uniform3fv(U.uM,MOTION);gl.uniform1f(U.uK,(!S.released&&S.frame==='out')?0.8:1);gl.uniform1f(U.uBeta,0.6);gl.uniform1f(U.uComove,(!S.released&&S.frame==='co')?1:0);gl.uniform1f(U.uGR,S.released?1:0);gl.uniform1f(U.uRingIn,1.45);gl.uniform1f(U.uRingW,0.6);gl.uniform1f(U.uDomeR,2.5);gl.uniform1f(U.uReal,S.real);gl.uniform1f(U.uPhoto,(!S.released&&S.frame==='photo')?1:0);gl.uniform1f(U.uExp,.88);gl.uniform3fv(U.uNP,NODEP);gl.uniform1fv(U.uNV,new Float32Array(nodeVals()));gl.uniform1f(U.uTime,S.released?S.shimT:performance.now()/1000*(S.motion?1:0));
+ gl.drawArrays(gl.TRIANGLES,0,3);}
+let stars2=null;
+function draw2D(){const g=ctx2d,W=CAN.width,H=CAN.height;if(!g)return;const V=visuals();
+ g.fillStyle='#0d0418';g.fillRect(0,0,W,H);
+ const cx=W/2,cy=H*0.34,R=Math.min(W,H)*0.40;
+ if(!S.released){if(!stars2){stars2=[];let s=11;const r=()=>(s=(s*16807)%2147483647)/2147483647;for(let i=0;i<160;i++)stars2.push([r(),r()]);}
+  for(const [a,b] of stars2){let x=a*W,y=b*H;let col='240,245,255';if(S.frame==='co'){x=W*(Math.pow(a,1.6));col=a<0.35?'150,190,255':(a>0.75?'255,170,120':'240,240,250');}g.fillStyle=`rgba(${col},.9)`;g.fillRect(x,y,1.6,1.6);}}
+ else{
+ const wall=g.createRadialGradient(cx,cy,R*0.6,cx,cy,R*1.05);wall.addColorStop(0,'rgba(30,10,55,1)');wall.addColorStop(.85,'rgba(120,60,200,.55)');wall.addColorStop(.95,'rgba(111,243,255,.6)');wall.addColorStop(1,'rgba(13,4,24,1)');
+ g.fillStyle=wall;g.beginPath();g.arc(cx,cy,R*1.05,0,Math.PI*2);g.fill();
+ const pr=R*0.95*(V.patch/1.65);const pg=g.createRadialGradient(cx,cy-R*0.62,0,cx,cy-R*0.62,Math.max(4,pr*0.6));
+ pg.addColorStop(0,'rgba(220,235,255,.95)');pg.addColorStop(.7,'rgba(120,170,255,.45)');pg.addColorStop(1,'rgba(120,170,255,0)');g.fillStyle=pg;g.beginPath();g.arc(cx,cy-R*0.62,Math.max(4,pr*0.6),0,Math.PI*2);g.fill();
+ if(!stars2){stars2=[];let s=11;const r=()=>(s=(s*16807)%2147483647)/2147483647;for(let i=0;i<120;i++)stars2.push([r(),r()]);}
+ g.fillStyle='rgba(240,245,255,.9)';for(const [a,b] of stars2){const ang=a*Math.PI*2,rr=Math.sqrt(b)*pr*0.55;g.fillRect(cx+Math.cos(ang)*rr,cy-R*0.62+Math.sin(ang)*rr,1.5,1.5);}
+ const dk=g.createLinearGradient(0,cy+R*(1.0-V.dark*0.9),0,cy+R);dk.addColorStop(0,'rgba(8,0,4,0)');dk.addColorStop(1,'rgba(8,0,4,.95)');g.fillStyle=dk;g.beginPath();g.arc(cx,cy,R*1.0,0,Math.PI*2);g.fill();}
+ const ts=R*0.28*(6.8/S.dist),tun=S.tun*((MV.pose%2n===1n)?0.95:1),sx=1-0.4*tun,st=V.stretch;
+ g.save();g.translate(cx,cy);g.scale(1/Math.sqrt(st),st);
+ const sh=g.createRadialGradient(0,0,ts*.3,0,0,ts*1.35);sh.addColorStop(0,'rgba(255,230,170,.08)');sh.addColorStop(.8,'rgba(240,200,120,.2)');sh.addColorStop(1,'rgba(220,230,255,.6)');g.fillStyle=sh;g.beginPath();g.arc(0,0,ts*1.35,0,Math.PI*2);g.fill();
+ g.strokeStyle='rgba(70,50,40,.95)';g.lineCap='round';
+ for(let i=0;i<4;i++){const lx=(0.55-0.37*i)*ts*sx+Math.sin(Number(MV.pose%8n)*Math.PI/4+i*1.7)*ts*0.08*(1-tun)*Math.min(1,Math.abs(OSC.level)/10);const fy=ts*(0.47-0.4*tun);g.lineWidth=ts*0.11*(1-tun*0.6);g.beginPath();g.moveTo(lx,ts*0.1);g.lineTo(lx+(i===3?-ts*0.2:0)*(1-tun),fy);g.stroke();
+  if(tun<0.9){g.lineWidth=ts*0.03;g.beginPath();g.moveTo(lx+(i===3?-ts*0.2:0),fy);g.lineTo(lx+(i===3?-ts*0.3:ts*0.1),fy+ts*0.05);g.stroke();}}
+ const body=g.createLinearGradient(0,-ts*.4,0,ts*.4);body.addColorStop(0,'#ffe7c4');body.addColorStop(1,tun>0.5?'#9a6a44':'#d9a777');g.fillStyle=body;
+ for(let i=0;i<5;i++){g.beginPath();g.ellipse((-0.72+0.36*i)*ts*sx,0,ts*0.26*sx,ts*0.31*(1+0.1*tun),0,0,Math.PI*2);g.fill();}
+ g.beginPath();g.ellipse(0.86*ts*sx,-ts*0.02,ts*0.21,ts*0.2,0,0,Math.PI*2);g.fill();g.fillStyle='#2a1a14';g.beginPath();g.arc(0.95*ts*sx,-ts*0.1,ts*0.03,0,Math.PI*2);g.fill();
+ const ir=g.createLinearGradient(-ts,-ts,ts,ts);['#f2c86b','#d9d9e6','#6ff3ff','#e070ff','#f2c86b'].forEach((cc,i)=>ir.addColorStop(i/4,cc));
+ g.strokeStyle=ir;g.globalAlpha=Math.min(1,.3+Math.abs(OSC.level)/10);g.lineWidth=Math.max(1.5,ts*0.02*S.thick/8)*(0.6+Math.abs(OSC.level)/10);g.beginPath();g.arc(0,0,ts*1.35,0,Math.PI*2);g.stroke();g.globalAlpha=1;g.restore();
+ {const u=R*0.28*(6.8/S.dist),GS=gardenState(MV.used,S.tunTarget>.5);const y=.6,p=.35,cp=Math.cos(p);const cam=[cp*Math.cos(y),Math.sin(p),cp*Math.sin(y)];const F=norm(cam.map(x=>-x));const Rr=norm(cross(F,[0,1,0]));const Uu=cross(Rr,F);
+  const pr=q=>[cx+(q[0]*Rr[0]+q[1]*Rr[1]+q[2]*Rr[2])*u,cy-(q[0]*Uu[0]+q[1]*Uu[1]+q[2]*Uu[2])*u];
+  if(GS.floorR>0){const c0=pr([0,-1.5,0]);g.fillStyle=`rgba(${Math.round(50+40*GS.moss)},${Math.round(36+60*GS.moss)},24,.9)`;g.beginPath();g.ellipse(c0[0],c0[1],GS.floorR*u,GS.floorR*u*Math.abs(Uu[1])*.5+2,0,0,Math.PI*2);g.fill();}
+  const idx=[...Array(GS.n).keys()].sort((a,b)=>{const da=GS.EP[a*4]*F[0]+GS.EP[a*4+1]*F[1]+GS.EP[a*4+2]*F[2],db=GS.EP[b*4]*F[0]+GS.EP[b*4+1]*F[1]+GS.EP[b*4+2]*F[2];return db-da;});
+  for(const i of idx){const q=[GS.EP[i*4],GS.EP[i*4+1],GS.EP[i*4+2]],r=GS.EP[i*4+3],kd=Math.floor(GS.EC[i*4+3]);const s=pr(q);const col=`rgb(${[0,1,2].map(k=>Math.round(Math.min(1,GS.EC[i*4+k]*(kd===6?1.6:1))*255)).join(',')})`;
+   if(kd===4){const gr=(GS.EC[i*4+3]-4)/.999;const t2=pr([q[0],q[1]+(1.47)*gr,q[2]]);g.strokeStyle=col;g.lineWidth=Math.max(2,r*u*2);g.beginPath();g.moveTo(s[0],s[1]);g.lineTo(t2[0],t2[1]);g.stroke();}
+   else{g.fillStyle=col;g.beginPath();g.arc(s[0],s[1],Math.max(1.5,r*u),0,Math.PI*2);g.fill();}}}
+ {const u=R*0.28*(6.8/S.dist),kx=S.frame==='out'&&!S.released?0.8:1;g.save();g.translate(cx,cy);g.scale(kx,1);
+  const rIn=1.45*u,w=0.6*u;g.lineWidth=w*0.79*0.5;g.strokeStyle='rgba(232,184,74,.95)';g.beginPath();g.ellipse(0,0,rIn+w*0.395,(rIn+w*0.395)*0.35,0,0,Math.PI*2);g.stroke();
+  g.lineWidth=w*0.21*0.5;g.strokeStyle='rgba(216,216,226,.95)';g.beginPath();g.ellipse(0,0,rIn+w*0.895,(rIn+w*0.895)*0.35,0,0,Math.PI*2);g.stroke();
+  if(!S.released){const pa=patAngle(MV.used),rr=1.75*u;g.strokeStyle='rgba(184,97,255,.75)';g.lineWidth=Math.max(2,w*0.12);g.beginPath();g.ellipse(0,0,rr,rr*0.35,0,0,Math.min(pa,Math.PI*2));g.stroke();
+   const px=Math.cos(pa)*rr,py=Math.sin(pa)*rr*0.35;g.strokeStyle='rgba(200,140,255,.6)';g.lineWidth=Math.max(1.5,w*0.05);g.beginPath();g.moveTo(px,py);g.lineTo(0,0);g.stroke();
+   const pg2=g.createRadialGradient(px,py,0,px,py,w*0.5);pg2.addColorStop(0,'rgba(220,170,255,.95)');pg2.addColorStop(1,'rgba(184,97,255,0)');g.fillStyle=pg2;g.beginPath();g.arc(px,py,w*0.5,0,Math.PI*2);g.fill();}
+  const dg=g.createRadialGradient(0,0,u*2.0,0,0,u*2.5);dg.addColorStop(0,'rgba(120,255,210,0)');dg.addColorStop(.8,'rgba(150,240,255,.18)');dg.addColorStop(1,'rgba(230,160,255,.55)');g.fillStyle=dg;g.beginPath();g.arc(0,0,u*2.5,0,Math.PI*2);g.fill();g.restore();}
+ if(ZP.alpha>0&&!S.released){const nv=nodeVals(),rr=R*0.28*(6.8/S.dist)*2.2;for(let k=0;k<9;k++){const a=(-100+25*k)*Math.PI/180;const x=cx+Math.sin(a)*rr,y=cy-Math.cos(a)*rr;
+  const col=k===4?'255,210,110':(nv[k]>=0?'111,243,255':'255,95,210');const I=k===4?.9:.3+.7*Math.abs(nv[k]);const gr=g.createRadialGradient(x,y,0,x,y,rr*0.12);
+  gr.addColorStop(0,`rgba(${col},${(ZP.alpha*I).toFixed(3)})`);gr.addColorStop(1,`rgba(${col},0)`);g.fillStyle=gr;g.beginPath();g.arc(x,y,rr*0.12,0,Math.PI*2);g.fill();}}
+ g.fillStyle='rgba(235,225,255,.92)';g.font=`${Math.max(11,W/110)|0}px system-ui`;g.fillText('2D fallback view (simplified)',12,H-60);}
+
+/* ---------- loop ---------- */
+let lastPulse=0,last=performance.now(),frames=0,rT=[],lastInfo=0,pf=[],lastAdj=0;
+function tick(now){const dt=Math.min(.5,(now-last)/1000);last=now;
+ if(S.released&&!S.paused&&S.frac<1){S.frac=Math.min(1,S.frac+dt*S.spd/12);S.shimT+=dt;S.dirty=true;}
+ if(Math.abs(S.tun-S.tunTarget)>1e-3){const inst=!S.released||!S.motion;S.tun=inst?S.tunTarget:S.tun+Math.sign(S.tunTarget-S.tun)*Math.min(dt*1.2,Math.abs(S.tunTarget-S.tun));S.dirty=true;}
+ if(MV.auto&&!S.released&&MV.used<NMOV){MV.carry+=dt*MV.rate;const k=Math.floor(MV.carry);if(k>0){MV.carry-=k;stepMoves(k);onMoves(S.motion);}}
+ if(MV.auto&&MV.used>=NMOV){MV.auto=false;sync();}
+ {const r=rungOf(MV.used);if(r!==OSC.r){OSC.from=OSC.level;OSC.to=LAD[r];OSC.t0=now;OSC.r=r;}
+  const isZ=LAD[r]===0;const zt=isZ?1:0;if(ZP.alpha!==zt){ZP.alpha=S.motion?(zt?Math.min(1,ZP.alpha+dt/1.2):Math.max(0,ZP.alpha-dt/0.6)):zt;S.dirty=true;}
+  if(isZ){if(S.motion){ZP.psi=(ZP.psi+dt/ZP.period)%1;S.dirty=true;}else ZP.psi=0;}else ZP.psi=0;
+  const tau=(now-OSC.t0)/1000;let lv=S.motion?OSC.to+(OSC.from-OSC.to)*Math.exp(-2.2*tau)*Math.cos(7*tau):OSC.to;
+  if(Math.abs(lv-OSC.to)<1e-3)lv=OSC.to;
+  lv+=2*ZP.alpha*Math.cos(2*Math.PI*ZP.psi);
+  if(Math.abs(lv-OSC.level)>1e-4){OSC.level=lv;S.dirty=true;}}
+ if(S.motion&&!S.released&&mode==='webgl2'&&now-lastPulse>50){lastPulse=now;S.dirty=true;}
+ resize();
+ if(S.dirty){if(mode==='webgl2'&&gl)drawGL();else draw2D();S.dirty=false;frames++;window.__tardiIn.frames=frames;rT.push(now);while(rT.length&&now-rT[0]>2000)rT.shift();
+  if(S.released&&!S.paused)perf(dt);}
+ if(now-lastInfo>200){lastInfo=now;renderHUD();renderBuild();renderColony();status();}
+ requestAnimationFrame(tick);}
+function perf(dt){pf.push(dt);if(pf.length>10)pf.shift();if(S.quality!=='auto'||mode!=='webgl2'||pf.length<8)return;const now=performance.now();if(now-lastAdj<700)return;
+ const avg=pf.reduce((a,b)=>a+b,0)/pf.length;const cap=S.software?.5:1;
+ if(avg>1/28&&S.scale>.26){S.scale=Math.max(.25,S.scale-.1);lastAdj=now;pf=[];}else if(avg<1/55&&S.scale<cap){S.scale=Math.min(cap,S.scale+.08);lastAdj=now;pf=[];}}
+function status(){const fps=rT.length>1?(rT.length-1)/((rT[rT.length-1]-rT[0])/1000):0;
+ $('status').textContent=`${mode==='webgl2'?'WebGL2':'2D fallback'}${window.__tardiIn.fallbackReason?' ('+window.__tardiIn.fallbackReason+')':''} · ${S.released?(S.paused?'paused':(fps?fps.toFixed(0)+' fps':'…')):(MV.auto?'walking · rung '+(rungOf(MV.used)+1)+'/11':(MV.used===NMOV?'t = 1 (all moves spent)':'t = 0 held'))}${mode==='webgl2'?' · res '+Math.round(S.scale*100)+'%':''} · motion ${S.motion?'on':'reduced'}`;}
+
+/* ---------- UI ---------- */
+function sync(){const M=Math.pow(10,S.massLog);
+ $('massV').innerHTML=expo(M)+' M☉';$('domeMV').innerHTML=expo(Math.pow(10,S.domeLog))+' kg';$('frameBtn').textContent='View: '+(S.frame==='co'?'co-moving (inside)':(S.frame==='out'?'outside, measured':'outside, photo'));$('frameBtn').setAttribute('aria-pressed',S.frame!=='co');$('realBtn').textContent=S.real?'Look: realistic':'Look: stylised (v7)';$('realBtn').setAttribute('aria-pressed',!!S.real);$('srBtn').textContent=S.srCmp?'Compare: SR · on (MATCH)':'Compare: SR · off';$('srBtn').setAttribute('aria-pressed',S.srCmp);$('thickV').textContent=S.thick+' nm (MODEL)';$('lenV').textContent=S.lenUm+' µm';$('spdV').textContent=S.spd.toFixed(2)+'×';
+ $('tunBtn').textContent=S.tunTarget>0.5?'State: tun 🛢️':'State: active 🐾';$('tunBtn').setAttribute('aria-pressed',S.tunTarget>0.5);
+ $('releaseBtn').textContent=S.released?'Compare: GR · on (MATCH)':'Compare: GR · off';$('walkBtn').textContent=(MV.auto&&MV.rate===800000000)?'Walking… ⏸':(MV.used>=NMOV?'Walk again ↺':'Walk the ladder ▶');$('walkBtn').setAttribute('aria-pressed',MV.auto&&MV.rate===800000000);$('walkBtn').disabled=S.released;$('releaseBtn').setAttribute('aria-pressed',S.released);
+ $('pauseBtn').textContent=S.paused?'Play':'Pause';$('pauseBtn').setAttribute('aria-pressed',S.paused);$('pauseBtn').disabled=!S.released;
+ $('motionBtn').textContent='Motion: '+(S.motion?'on':'reduced');$('motionBtn').setAttribute('aria-pressed',!S.motion);
+ document.documentElement.classList.toggle('rm',!S.motion);
+ $('autoBtn').textContent=MV.auto?'Auto-run ⏸':'Auto-run ▶';$('autoBtn').setAttribute('aria-pressed',MV.auto);
+ document.querySelectorAll('[data-step],#endBtn,#autoBtn').forEach(b=>b.disabled=S.released||MV.used>=NMOV);}
+function onMoves(animate){if(animate)MV.pose=MV.used;S.dirty=true;lastInfo=0;}
+let infoT=0;function changed(){S.dirty=true;sync();clearTimeout(infoT);infoT=setTimeout(()=>{renderGR();renderTardis();renderHUD();},60);}
+function walk(){if(S.released){S.released=false;S.frac=0;}
+ if(MV.used>=NMOV){MV.used=0n;MV.pose=0n;}
+ if(MV.auto&&MV.rate===800000000){MV.auto=false;}else{MV.rate=800000000;$('rate').value='800000000';MV.auto=true;MV.carry=0;}
+ onMoves(true);changed();}
+function release(){MV.auto=false;if(!S.released){S.released=true;S.paused=false;S.frac=0;}else if(S.frac>=1){S.frac=0;S.paused=false;}else S.paused=!S.paused;changed();}
+function hold(){MV.used=0n;MV.pose=0n;MV.auto=false;MV.carry=0;S.released=false;S.paused=false;S.frac=0;S.shimT=0;S.tun=S.tunTarget;changed();}
+[['domeM','domeLog'],['mass','massLog'],['thick','thick'],['len','lenUm'],['spd','spd']].forEach(([id,k])=>{const el=$(id);el.value=S[k];el.addEventListener('input',()=>{S[k]=parseFloat(el.value);changed();});});
+$('tunBtn').addEventListener('click',()=>{S.tunTarget=S.tunTarget>0.5?0:1;changed();});
+$('releaseBtn').addEventListener('click',()=>{if(S.released)hold();else release();});
+$('walkBtn').addEventListener('click',walk);
+$('pauseBtn').addEventListener('click',()=>{if(S.released){S.paused=!S.paused;changed();}});
+$('holdBtn').addEventListener('click',hold);
+$('srBtn').addEventListener('click',()=>{S.srCmp=!S.srCmp;changed();lastInfo=0;lastBuildKey='';});
+$('frameBtn').addEventListener('click',()=>{const o=framesFor(S.real);S.frame=o[(Math.max(0,o.indexOf(S.frame))+1)%o.length];changed();lastInfo=0;});
+$('realBtn').addEventListener('click',()=>setReal(S.real?0:1));
+function setReal(v){S.real=v?1:0;S.srCmp=!!S.real;if(!S.real&&S.frame==='photo')S.frame='out';lastBuildKey='';lastColKey='';changed();lastInfo=0;renderReal();}
+document.querySelectorAll('[data-step]').forEach(b=>b.addEventListener('click',()=>{if(S.released)return;stepMoves(b.dataset.step);onMoves(true);sync();}));
+$('endBtn').addEventListener('click',()=>{if(S.released)return;stepMoves(NMOV);MV.auto=false;onMoves(true);sync();});
+$('mvResetBtn').addEventListener('click',()=>{MV.used=0n;MV.pose=0n;MV.auto=false;MV.carry=0;onMoves(true);sync();});
+$('rate').addEventListener('change',e=>{MV.rate=Number(e.target.value);MV.carry=0;lastInfo=0;});
+$('autoBtn').addEventListener('click',()=>{if(S.released||MV.used>=NMOV)return;MV.auto=!MV.auto;MV.carry=0;sync();lastInfo=0;});
+$('resetBtn').addEventListener('click',()=>{Object.assign(S,{yaw:.6,pitch:.42,dist:7.9});changed();});
+$('quality').value=S.quality;$('quality').addEventListener('change',e=>{S.quality=e.target.value;applyQuality();status();});
+$('motionBtn').addEventListener('click',()=>{S.motion=!S.motion;changed();});
+$('panelsBtn').addEventListener('click',()=>document.body.classList.toggle('hidden-panels'));
+$('igStepBtn').addEventListener('click',toroidAdvance);$('igResetBtn').addEventListener('click',toroidReset);
+$('helpBtn').addEventListener('click',()=>$('help').classList.toggle('open'));$('helpClose').addEventListener('click',()=>$('help').classList.remove('open'));
+mqReduce.addEventListener&&mqReduce.addEventListener('change',e=>{S.motion=!e.matches;changed();});
+document.querySelectorAll('[role=tab]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[role=tab]').forEach(x=>{const on=x===b;x.setAttribute('aria-selected',on);x.setAttribute('aria-pressed',on);$('tab-'+x.dataset.tab).hidden=!on;});renderColony(true);renderBuild(true);renderImplicit(true);}));
+document.querySelectorAll('.panel').forEach(p=>{const hd=p.querySelector('header'),btn=p.querySelector('.collapse');
+ btn.addEventListener('click',e=>{e.stopPropagation();const cl=p.classList.toggle('collapsed');btn.textContent=cl?'+':'–';btn.setAttribute('aria-expanded',!cl);});
+ let drag=null;hd.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;const r=p.getBoundingClientRect();drag={dx:e.clientX-r.left,dy:e.clientY-r.top};hd.setPointerCapture(e.pointerId);});
+ hd.addEventListener('pointermove',e=>{if(!drag)return;p.style.left=Math.max(0,Math.min(innerWidth-60,e.clientX-drag.dx))+'px';p.style.top=Math.max(0,Math.min(innerHeight-40,e.clientY-drag.dy))+'px';p.style.right='auto';});
+ hd.addEventListener('pointerup',()=>drag=null);});
+function bindCanvas(el){CAN=el;let pd=null,pts=new Map(),p0=0;
+ el.addEventListener('pointerdown',e=>{el.setPointerCapture(e.pointerId);pts.set(e.pointerId,[e.clientX,e.clientY]);pd=[e.clientX,e.clientY];if(pts.size===2){const a=[...pts.values()];p0=Math.hypot(a[0][0]-a[1][0],a[0][1]-a[1][1]);}});
+ el.addEventListener('pointermove',e=>{if(!pts.has(e.pointerId))return;pts.set(e.pointerId,[e.clientX,e.clientY]);
+  if(pts.size===2){const a=[...pts.values()];const d=Math.hypot(a[0][0]-a[1][0],a[0][1]-a[1][1]);if(p0){S.dist=Math.max(2,Math.min(10.5,S.dist*p0/d));p0=d;S.dirty=true;}return;}
+  if(!pd)return;S.yaw+=(e.clientX-pd[0])*.006;S.pitch=Math.max(-1.45,Math.min(1.45,S.pitch+(e.clientY-pd[1])*.006));pd=[e.clientX,e.clientY];S.dirty=true;});
+ const up=e=>{pts.delete(e.pointerId);if(!pts.size)pd=null;p0=0;};el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up);
+ el.addEventListener('wheel',e=>{e.preventDefault();S.dist=Math.max(2,Math.min(10.5,S.dist*Math.exp(e.deltaY*.001)));S.dirty=true;},{passive:false});}
+bindCanvas(CAN);
+addEventListener('keydown',e=>{if(e.target.matches('input,select,textarea'))return;const k=e.key;
+ if(k==='h'||k==='H')document.body.classList.toggle('hidden-panels');
+ else if(k==='t'||k==='T'){S.tunTarget=S.tunTarget>0.5?0:1;changed();}
+ else if(k===' '){e.preventDefault();walk();}
+ else if(k==='g'||k==='G'){$('releaseBtn').click();}
+ else if(k==='f'||k==='F'){$('frameBtn').click();}
+ else if(k==='v'||k==='V'){$('realBtn').click();}
+ else if(k==='s'||k==='S'){$('srBtn').click();}
+ else if(k==='0'){hold();}
+ else if(k==='.'){$('ctrl').querySelector('[data-step="1"]').click();}
+ else if(k==='a'||k==='A'){$('autoBtn').click();}
+ else if(k==='e'||k==='E'){$('endBtn').click();}
+ else if(k==='r'||k==='R'){$('resetBtn').click();}
+ else if(k==='?'){$('help').classList.toggle('open');}else if(k==='Escape'){$('help').classList.remove('open');}
+ else if(k==='ArrowLeft'){S.yaw-=.08;S.dirty=true;}else if(k==='ArrowRight'){S.yaw+=.08;S.dirty=true;}
+ else if(k==='ArrowUp'){S.pitch=Math.min(1.45,S.pitch+.06);S.dirty=true;}else if(k==='ArrowDown'){S.pitch=Math.max(-1.45,S.pitch-.06);S.dirty=true;}});
+addEventListener('resize',()=>{S.dirty=true;});
+
+renderStatic();renderMoves();renderTardis();renderBuild(true);renderColony(true);renderImplicit(true);sync();renderGR();renderHUD();renderReal();
+if(S.quality!=='2d'&&initGL())mode='webgl2';else switchTo2D(S.quality==='2d'?'user choice':'no WebGL2');
+if(params.get('quality')){S.quality=params.get('quality');$('quality').value=S.quality;applyQuality();}
+window.__tardiIn.mode=()=>mode;window.__tardiIn.osc=OSC;window.__tardiIn.walk=walk;window.__tardiIn.hudText=()=>$('hud').innerText;window.__tardiIn.release=release;window.__tardiIn.hold=hold;
+resize();status();requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>

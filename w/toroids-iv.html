@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Toroids as Communicators · IV — The Reader</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --iron:#0b0d14;--slab:#11141f;--panel:#161a28;--grid:#1f2435;
+    --copper:#e0915a;--copper-dim:#8a5a36;
+    --flux:#8a9eff;--flux-dim:#4a548a;
+    --pwm:#5fe0c0;--recovered:#6fe6a0;
+    --read:#9be86f;             /* the sensed reading — luminous lime */
+    --read-dim:#5a8a3a;
+    --paper:#e6e8f0;--paper-dim:#8e94ad;--rule:#1f243533;--rose:#e07a9a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{background:var(--iron);color:var(--paper);font-family:'Newsreader',Georgia,serif;
+    font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:880px;margin:0 auto;padding:0 24px}
+
+  .hero{min-height:84vh;display:flex;flex-direction:column;justify-content:center;padding:70px 0 40px}
+  .kicker{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--copper);margin-bottom:22px;font-weight:500}
+  .kicker .s{color:var(--flux-dim)} .kicker .f{color:var(--read)}
+  h1{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(38px,8vw,78px);line-height:1.0;letter-spacing:-.01em}
+  h1 .read{color:var(--read)} h1 .copper{color:var(--copper)}
+  .lede{font-size:clamp(19px,2.4vw,24px);color:var(--paper-dim);max-width:640px;margin-top:30px;line-height:1.5}
+  .lede b{color:var(--paper);font-weight:500} .lede .read{color:var(--read)} .lede .copper{color:var(--copper)} .lede .flux{color:var(--flux)} .lede .pwm{color:var(--pwm)}
+  .recall{font-family:'IBM Plex Mono',monospace;margin-top:34px;font-size:clamp(17px,3vw,24px);color:var(--flux);letter-spacing:.01em}
+  .recall .c{color:var(--paper)} .recall .r{color:var(--read)}
+  .recall-cap{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--paper-dim);margin-top:12px;line-height:1.6}
+
+  .sec{padding:60px 0;border-top:1px solid var(--rule)}
+  .tag{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--copper);margin-bottom:14px;font-weight:500}
+  .tag.r{color:var(--read)}
+  h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(25px,4.5vw,39px);line-height:1.08;letter-spacing:-.005em}
+  h2 .read{color:var(--read)} h2 .flux{color:var(--flux)} h2 .pwm{color:var(--pwm)}
+  .sec p{margin:18px 0;color:var(--paper);max-width:680px}
+  .sec p.dim{color:var(--paper-dim)}
+  .sec p b{color:var(--paper);font-weight:600}
+  .sec p .flux{color:var(--flux);font-weight:500} .sec p .copper{color:var(--copper);font-weight:500}
+  .sec p .pwm{color:var(--pwm);font-weight:500} .sec p .read{color:var(--read);font-weight:500} .sec p .rec{color:var(--recovered);font-weight:500}
+  .pull{font-family:'Chakra Petch',sans-serif;font-weight:500;font-size:clamp(20px,3vw,27px);line-height:1.3;color:var(--flux);margin:30px 0;padding-left:20px;border-left:3px solid var(--flux-dim)}
+  .pull.read{color:var(--read);border-left-color:var(--read-dim)}
+  code{font-family:'IBM Plex Mono',monospace;font-size:.85em;color:var(--copper);background:#11141f;padding:2px 7px;border-radius:5px}
+  .flag{font-family:'Newsreader';font-size:15.5px;color:var(--paper-dim);font-style:italic;margin:18px 0;padding:14px 18px;background:#11141f66;border:1px solid var(--rule);border-radius:8px}
+  .flag b{color:var(--rose);font-style:normal;font-weight:600;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;display:block;margin-bottom:6px}
+
+  .inst{margin:32px 0;border:1px solid var(--grid);border-radius:14px;overflow:hidden;background:var(--slab)}
+  .inst.r{border-color:#2e3e22}
+  .inst-bar{display:flex;align-items:center;gap:10px;padding:12px 18px;border-bottom:1px solid var(--grid);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--paper-dim)}
+  .inst-bar .led{width:9px;height:9px;border-radius:50%;background:var(--read);box-shadow:0 0 8px var(--read)}
+  .inst-bar .ttl{color:var(--read)}
+  canvas{display:block;width:100%;height:auto;background:var(--iron)}
+  .ctrls{padding:16px 18px;display:flex;flex-wrap:wrap;gap:18px;align-items:center;border-top:1px solid var(--grid)}
+  .ctrl{display:flex;flex-direction:column;gap:6px;flex:1;min-width:150px}
+  .ctrl label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--paper-dim)}
+  .ctrl label .val{color:var(--copper);float:right}
+  input[type=range]{-webkit-appearance:none;appearance:none;height:4px;border-radius:2px;background:var(--grid);outline:none;width:100%}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--read);cursor:pointer;box-shadow:0 0 8px var(--read-dim)}
+  input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radius:50%;background:var(--read);cursor:pointer}
+  input:focus-visible{outline:2px solid var(--read);outline-offset:3px}
+  .segs{display:flex;gap:6px;flex-wrap:wrap}
+  .seg{font-family:'IBM Plex Mono',monospace;font-size:12px;padding:7px 12px;border:1px solid var(--grid);border-radius:8px;background:var(--panel);color:var(--paper-dim);cursor:pointer;touch-action:manipulation}
+  .seg.on{border-color:var(--read);color:var(--read);background:rgba(155,232,111,.12)}
+  .seg:focus-visible{outline:2px solid var(--read);outline-offset:2px}
+  .readout{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--paper-dim);padding:0 18px 16px;line-height:1.6}
+  .readout b{color:var(--copper)} .readout .flux{color:var(--flux)} .readout .pwm{color:var(--pwm)} .readout .rec{color:var(--recovered)} .readout .read{color:var(--read)}
+
+  .foot{padding:50px 0 80px;border-top:1px solid var(--rule);margin-top:40px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--paper-dim);line-height:2}
+  .foot b{color:var(--flux)} .foot .read{color:var(--read)}
+
+  .journey{margin:30px 0;border:1px solid var(--grid);border-radius:12px;overflow:hidden}
+  .journey .r{display:grid;grid-template-columns:130px 1fr;border-bottom:1px solid var(--grid)}
+  .journey .r:last-child{border-bottom:none}
+  .journey .r .y{font-family:'IBM Plex Mono',monospace;font-size:12px;padding:12px 14px;border-right:1px solid var(--grid);color:var(--flux)}
+  .journey .r .y .yr{color:var(--paper-dim);font-size:10px;display:block;margin-top:2px}
+  .journey .r .d{padding:12px 16px;font-size:14.5px;color:var(--paper-dim)}
+  .journey .r .d b{color:var(--paper)}
+  @media (max-width:560px){body{font-size:17px}.ctrl{min-width:100%}.journey .r{grid-template-columns:104px 1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker">Toroids as Communicators <span class="s">·</span> <span class="f">Paper IV — The Reader · bonus</span></div>
+    <h1>It reads a wire<br>it never <span class="read">touches</span></h1>
+    <p class="lede">Slip a toroid around a wire — don't connect to it, just let the wire pass through the hole — and the ring will tell you the <span class="copper">current</span> flowing inside, scaled down to something small and safe. No contact, fully isolated, by the same shared flux as every paper before. The transformer where the <b>primary isn't yours to drive</b> — it belongs to the world, and you're <span class="read">eavesdropping</span> through the field.</p>
+    <div class="recall"><span class="c">I</span><span class="r">ₛ</span> <span class="c">=</span> <span class="c">I</span><span style="color:var(--copper)">ₚ</span> <span class="c">·</span> <span class="c">N</span><span style="color:var(--copper)">ₚ</span><span class="c">/N</span><span class="r">ₛ</span></div>
+    <div class="recall-cap">the current transformer · a big current becomes a small readable copy — and still, only the change is heard</div>
+  </header>
+
+  <section class="sec">
+    <div class="tag r">§12 · the eavesdrop</div>
+    <h2>The primary belongs to <span class="read">someone else</span></h2>
+    <p>In Paper II you drove the primary yourself and read your message on the secondary. Flip the roles: now the primary is a wire carrying a current you didn't make and can't touch — a motor lead, a power rail, a switching node sitting at a lethal voltage. Pass it once through a toroid and that single wire <em>is</em> a one-turn primary. Its changing current makes flux in the ring; your secondary winding reads that flux and hands you a faithful, shrunk-down copy of the current — <code>Iₛ = Iₚ · Nₚ/Nₛ</code>. A 20-amp wire through a 1000-turn ring reads out as 20 milliamps. A small <b>burden resistor</b> turns that into a clean voltage you can measure.</p>
+    <p>And the old rule still rules everything: it answers only the <span class="flux">change</span>. A steady DC current makes a steady flux and the reading falls to zero — a plain current transformer is <b>blind to DC</b>, and hears only currents that move. The same deafness to stillness that made it a communicator makes it a sensor.</p>
+    <p class="pull read">It doesn't tap the wire. It listens to the field the wire can't help making — and the field only speaks when the current changes.</p>
+  </section>
+
+  <!-- INSTRUMENT 13: THE CLAMP -->
+  <section class="sec">
+    <div class="tag r">§13 · instrument thirteen</div>
+    <h2>The clamp — <span class="read">a current, read without contact</span></h2>
+    <p>Watch the read happen. The <span class="copper">copper wire</span> runs through the ring carrying its current; the <span class="flux">flux</span> circles the core; the <span class="read">secondary</span> hands back a scaled copy. Change the wire's current and the reading tracks it. Add more secondary turns and the reading shrinks (you're dividing harder). Switch the wire to steady DC and the reading dies — there's nothing changing to hear.</p>
+
+    <div class="inst r">
+      <div class="inst-bar"><span class="led"></span><span class="ttl">THE CLAMP</span> · wire through the ring → flux → scaled secondary reading</div>
+      <canvas id="clamp"></canvas>
+      <div class="ctrls">
+        <div class="ctrl" style="flex:2;min-width:100%"><label>current in the wire</label>
+          <div class="segs" id="clMode">
+            <div class="seg on" data-m="ac">AC current</div>
+            <div class="seg" data-m="pwm">PWM pulses</div>
+            <div class="seg" data-m="dc">steady DC</div>
+          </div></div>
+        <div class="ctrl"><label>secondary turns Nₛ <span class="val" id="clNval">100</span></label>
+          <input type="range" id="clN" min="20" max="400" step="10" value="100"></div>
+      </div>
+      <div class="readout" id="clRead"><span class="copper">wire current</span> → <span class="flux">flux</span> → <span class="read">secondary reads Iₚ/Nₛ</span>. more turns → smaller, safer reading. steady DC → the reading vanishes (nothing changing to sense).</div>
+    </div>
+    <div class="flag"><b>honest flag</b>Idealised CT: perfect coupling, no core loss, infinite magnetizing inductance. Real current transformers droop at low frequency (the magnetizing current steals some signal), have a usable frequency band, and saturate at high current — and critically, you must <b>never open-circuit the secondary</b> of a loaded CT, because the burden is what limits the secondary voltage; remove it and the voltage can spike dangerously. And again: this reads AC only. Measuring DC current needs a Hall-effect sensor or a fluxgate — a different instrument with a different operating principle.</p>
+  </section>
+
+  <!-- INSTRUMENT 14: SENSING THE PWM SWITCH -->
+  <section class="sec">
+    <div class="tag r">§14 · instrument fourteen · the PWM payoff</div>
+    <h2>Reading the switch — <span class="pwm">current-mode control</span></h2>
+    <p>Here is where the reader earns its place in this series. A switching power supply runs on <span class="pwm">PWM</span>: a transistor chops the current into pulses, and the controller needs to know <em>how much current</em> is flowing in each pulse — to regulate, and to slam off instantly if it spikes too high. But the switch sits at a high, fast-moving voltage. So a tiny current transformer clamps the switch current and reports each pulse to the controller, <span class="read">isolated</span>, across the magnetic gap. The controller watches the current rise inside every PWM cycle and acts on it — <b>cycle-by-cycle current-mode control</b>. The toroid is the sense organ of the switch.</p>
+
+    <div class="inst r">
+      <div class="inst-bar"><span class="led"></span><span class="ttl">SENSE THE SWITCH</span> · PWM switch current → CT → controller trips on overcurrent</div>
+      <canvas id="switch"></canvas>
+      <div class="ctrls">
+        <div class="ctrl"><label>load / current ramp <span class="val" id="swLval">1.0×</span></label>
+          <input type="range" id="swLoad" min="0.4" max="2.2" step="0.05" value="1"></div>
+        <div class="ctrl"><label>trip threshold <span class="val" id="swTval">75%</span></label>
+          <input type="range" id="swTrip" min="40" max="95" step="1" value="75"></div>
+      </div>
+      <div class="readout" id="swRead">each <span class="pwm">PWM pulse</span> the switch current ramps up; the <span class="read">CT reports it</span> to the controller. when the sensed current crosses the <b>trip threshold</b>, the controller ends the pulse early — protecting the switch, cycle by cycle, without ever touching the hot node.</div>
+    </div>
+    <p class="pull read">The switch can't be touched, so the toroid reads it from across the gap — and the reading arrives fast enough to end the very pulse that's running. Sensing and protection, carried on nothing but change in flux.</p>
+  </section>
+
+  <!-- CLOSE -->
+  <section class="sec">
+    <div class="tag">§15 · the four-ring arc</div>
+    <h2>Carry, cross, reject, <span class="read">read</span></h2>
+    <p>With the reader, the toroid completes the same four roles its electric twin found — and the symmetry between the two series is now exact. One ring of wound iron became a transmitter, an isolator, a noise filter, and a sensor, and it did all four with one refusal: it cannot feel what holds still.</p>
+
+    <div class="journey">
+      <div class="r"><div class="y">the closed loop<span class="yr">Paper I</span></div><div class="d"><b>carry</b> — v = N·dΦ/dt; a level dies in the core, so the message is edges (PWM).</div></div>
+      <div class="r"><div class="y">the crossing<span class="yr">Paper II</span></div><div class="d"><b>cross</b> — two windings, no wire between; the edges leap an isolated gap.</div></div>
+      <div class="r"><div class="y">the choke<span class="yr">Paper III</span></div><div class="d"><b>reject</b> — pass the difference, choke what the wires share.</div></div>
+      <div class="r"><div class="y">the reader<span class="yr">Paper IV</span></div><div class="d"><b>read</b> — clamp a wire and hear its current without touching it; sense the PWM switch across the gap.</div></div>
+    </div>
+
+    <p>And it maps, role for role, onto the capacitor: the cap stored and differentiated (I), coupled and filtered and crossed a gap (II), held and stored and sensed the world (III). The reader is the magnetic answer to the capacitor's <em>sensor</em> — where the cap let the world write the field as <code>V·dC/dt</code>, the toroid lets a wire write the flux, and reads it back without contact. Two parts, two fields, four jobs each, one law.</p>
+
+    <p class="pull">The capacitor watches a voltage; the toroid watches a flux. Neither can hear a thing that holds still — and that single deafness is the whole of how a passive part learns to carry, to cross, to reject, and to read.</p>
+
+    <p class="dim">That closes both rings of the work — the electric series and its magnetic dual. If it ever goes further, the honest next steps are the same for both: leave the ideal behind and let the <em>real</em> part pay its debts — core saturation and hysteresis for the toroid, dielectric absorption and ESR for the cap — the place where the clean law meets the imperfect material, and the engineering really begins.</p>
+  </section>
+
+  <div class="foot">
+    TOROIDS AS COMMUNICATORS · PAPER IV — THE READER · bonus<br>
+    <b>Iₛ = Iₚ·Nₚ/Nₛ</b> · V_out = Iₚ·R/Nₛ · reads AC only (DC needs Hall/fluxgate) · checked in node<br>
+    four rings: carry · cross · reject · read — one law, one refusal to feel what holds still<br>
+    <span class="read">it listens to the field a wire can't help making — and the field only speaks when the current changes</span>
+  </div>
+
+</div>
+
+<script>
+"use strict";
+const reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const COL={iron:"#0b0d14",grid:"#1f2435",copper:"#e0915a",copperDim:"#8a5a36",
+  flux:"#8a9eff",fluxDim:"#4a548a",pwm:"#5fe0c0",recovered:"#6fe6a0",
+  read:"#9be86f",paper:"#8e94ad",rose:"#e0566a"};
+
+function setup(cv,ratio){
+  const dpr=Math.min(window.devicePixelRatio||1,2);
+  const cssW=cv.parentElement.clientWidth, cssH=Math.round(cssW*ratio);
+  cv.width=cssW*dpr; cv.height=cssH*dpr; cv.style.height=cssH+"px";
+  const ctx=cv.getContext("2d"); ctx.setTransform(dpr,0,0,dpr,0,0);
+  return {ctx,W:cssW,H:cssH};
+}
+function gridlines(ctx,W,H){ ctx.strokeStyle=COL.grid;ctx.lineWidth=1;
+  for(let x=0;x<=W;x+=W/12){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
+  for(let y=0;y<=H;y+=H/8){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();} }
+function glow(ctx,pts,gx,gy,color,gw){ ctx.shadowColor=color;ctx.shadowBlur=gw||7;
+  ctx.strokeStyle=color;ctx.lineWidth=2;ctx.beginPath();
+  pts.forEach((o,k)=>{const x=gx(o,k),y=gy(o,k);k?ctx.lineTo(x,y):ctx.moveTo(x,y);});
+  ctx.stroke();ctx.shadowBlur=0; }
+
+/* ── INSTRUMENT 13 · THE CLAMP ── */
+(function(){
+  const cv=document.getElementById("clamp");
+  const seg=document.getElementById("clMode"), Nin=document.getElementById("clN"), Nv=document.getElementById("clNval");
+  const read=document.getElementById("clRead");
+  let mode="ac";
+  seg.querySelectorAll(".seg").forEach(s=>s.onclick=()=>{mode=s.dataset.m;seg.querySelectorAll(".seg").forEach(o=>o.classList.toggle("on",o===s));});
+  let d=setup(cv,0.6); window.addEventListener("resize",()=>d=setup(cv,0.6));
+  function cur(p){ switch(mode){
+    case "ac": return Math.sin(p*Math.PI*2*2);
+    case "pwm": return ((p*4)%1)<0.5?1:0;
+    case "dc": return 0.7; } return 0; }
+  function draw(t){
+    const {ctx,W,H}=d; const Ns=parseInt(Nin.value); Nv.textContent=Ns;
+    ctx.clearRect(0,0,W,H); gridlines(ctx,W,H);
+    const tt=reduce?0.3:(t*0.18), phase=tt%1;
+    const i=cur(phase);
+    const dp=0.004; let didt=(cur((phase+dp)%1)-cur(phase))/dp; if(Math.abs(didt)>40)didt=Math.sign(didt)*40;
+    const readVal = (didt/40) / (Ns/100);  // secondary ∝ dΦ/dt / Ns
+
+    // toroid clamped around a vertical wire
+    const cx=W*0.28, cy=H*0.5, R=Math.min(W*0.15,H*0.32), r=R*0.5;
+    // the wire passing vertically THROUGH the hole
+    ctx.strokeStyle=COL.copper;ctx.lineWidth=8;ctx.lineCap="round";
+    ctx.beginPath();ctx.moveTo(cx,H*0.06);ctx.lineTo(cx,H*0.94);ctx.stroke();ctx.lineCap="butt";
+    // current flowing in the wire (moving dashes), brightness ∝ |i|
+    const imag=Math.abs(i);
+    ctx.strokeStyle=`rgba(224,145,90,${0.4+0.5*imag})`;ctx.lineWidth=3;
+    ctx.setLineDash([6,10]);ctx.lineDashOffset = reduce?0:(-tt*60*Math.sign(i||1));
+    ctx.beginPath();ctx.moveTo(cx,H*0.06);ctx.lineTo(cx,H*0.94);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle=COL.copper;ctx.font="9px 'IBM Plex Mono',monospace";ctx.textAlign="left";ctx.fillText("wire (1-turn primary)",cx+12,H*0.12);
+
+    // core ring around the wire
+    ctx.lineWidth=R-r; ctx.strokeStyle="#2a2f42";
+    ctx.beginPath();ctx.arc(cx,cy,(R+r)/2,0,Math.PI*2);ctx.stroke();
+    // flux
+    const fmag=Math.abs(i);
+    for(let k=0;k<12;k++){const a=(k/12)*Math.PI*2+(reduce?0:tt*5*(Math.abs(i)>0.01?1:0));
+      const rr=(R+r)/2, ax=cx+Math.cos(a)*rr, ay=cy+Math.sin(a)*rr;
+      ctx.fillStyle=`rgba(138,158,255,${0.12+0.6*fmag})`;ctx.beginPath();ctx.arc(ax,ay,2.3,0,Math.PI*2);ctx.fill();}
+    ctx.fillStyle=COL.flux;ctx.font="11px 'IBM Plex Mono',monospace";ctx.textAlign="center";ctx.fillText("Φ",cx+R*0.7,cy);
+    // secondary winding (read coil)
+    ctx.strokeStyle=COL.read;ctx.lineWidth=2;
+    for(let k=0;k<7;k++){const a=-Math.PI*0.42+(k/6)*Math.PI*0.84;
+      const mx=cx+Math.cos(a)*((R+r)/2),my=cy+Math.sin(a)*((R+r)/2);
+      ctx.globalAlpha=0.4+0.6*Math.abs(readVal);ctx.beginPath();ctx.ellipse(mx,my,(R-r)/2+5,5,a+Math.PI/2,0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1;}
+    ctx.fillStyle=COL.read;ctx.font="9px 'IBM Plex Mono',monospace";ctx.textAlign="left";ctx.fillText("secondary + burden R",cx+R*0.7,cy+R+10);
+
+    // scope: wire current (copper) and reading (lime)
+    const sx=W*0.54, sw=W*0.42, pMid=H*0.32, sMid=H*0.72, amp=H*0.15;
+    ctx.strokeStyle="#2a2f42";ctx.lineWidth=1;[pMid,sMid].forEach(m=>{ctx.beginPath();ctx.moveTo(sx,m);ctx.lineTo(sx+sw,m);ctx.stroke();});
+    ctx.font="11px 'IBM Plex Mono',monospace";ctx.textAlign="left";ctx.textBaseline="middle";
+    ctx.fillStyle=COL.copper;ctx.fillText("wire current",sx,H*0.16);
+    ctx.fillStyle=COL.read;ctx.fillText("secondary reading",sx,H*0.56);
+    const N=200, ip=[], rp=[];
+    for(let k=0;k<=N;k++){const p=(phase-(1-k/N));
+      const iv=cur((p%1+1)%1); let dv=(cur(((p+dp)%1+1)%1)-iv)/dp; if(Math.abs(dv)>40)dv=Math.sign(dv)*40;
+      ip.push({x:sx+sw*(k/N),y:pMid-(iv- (mode==="pwm"?0.5:0))*amp*1.4});
+      rp.push({x:sx+sw*(k/N),y:sMid-((dv/40)/(Ns/100))*amp*1.4});}
+    glow(ctx,ip,o=>o.x,o=>o.y,COL.copper,6);
+    glow(ctx,rp,o=>o.x,o=>o.y,COL.read,6);
+
+    read.innerHTML = mode==="dc"
+      ? `<span class="copper">steady DC</span> in the wire → flux holds still → <span class="read">reading is zero</span>. a current transformer is blind to DC; it hears only changing current.`
+      : `<span class="copper">wire current</span> → <span class="flux">flux</span> → <span class="read">secondary reads Iₚ/Nₛ</span> (Nₛ=${Ns}). more turns → smaller, safer reading. no contact with the wire.`;
+    requestAnimationFrame(draw);
+  } requestAnimationFrame(draw);
+})();
+
+/* ── INSTRUMENT 14 · SENSE THE SWITCH ── */
+(function(){
+  const cv=document.getElementById("switch");
+  const Lo=document.getElementById("swLoad"), Tr=document.getElementById("swTrip");
+  const Lv=document.getElementById("swLval"), Tv=document.getElementById("swTval");
+  const read=document.getElementById("swRead");
+  let d=setup(cv,0.56); window.addEventListener("resize",()=>d=setup(cv,0.56));
+  function draw(t){
+    const {ctx,W,H}=d; const load=parseFloat(Lo.value), trip=parseFloat(Tr.value)/100;
+    Lv.textContent=load.toFixed(1)+"×"; Tv.textContent=Math.round(trip*100)+"%";
+    ctx.clearRect(0,0,W,H); gridlines(ctx,W,H);
+    const padL=44,padR=14,plotW=W-padL-padR;
+    const base=H*0.82, top=H*0.14, full=base-top;
+    // trip line
+    const tripY=base-trip*full;
+    ctx.setLineDash([5,4]);ctx.strokeStyle=COL.rose;ctx.lineWidth=1.4;
+    ctx.beginPath();ctx.moveTo(padL,tripY);ctx.lineTo(W-padR,tripY);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle=COL.rose;ctx.font="10px 'IBM Plex Mono',monospace";ctx.textAlign="left";ctx.textBaseline="middle";
+    ctx.fillText("trip threshold",padL+4,tripY-9);
+    ctx.fillStyle=COL.paper;ctx.fillText("switch current (read by the CT) — ramps each PWM cycle",padL,top-2);
+
+    // each PWM cycle: current ramps from 0; if it hits trip, pulse ends early (current-mode control)
+    const scroll=reduce?0:(t*0.10)%1, N=440, nCyc=4;
+    const pts=[]; let tripped=false;
+    for(let k=0;k<=N;k++){
+      const p=(k/N+scroll)*nCyc; const ph=p%1;
+      // ramp rate ∝ load; ramp during first part of cycle then switch off (current falls)
+      let cur;
+      const ramp = ph*load*1.1;
+      if(ramp>=trip){ cur = trip; tripped=true; }      // tripped: clamped, switch off early
+      else if(ph<0.7) cur = ramp;                       // ramping up while switch on
+      else cur = Math.max(0, trip>ramp? ramp:0)* (1-(ph-0.7)/0.3); // simplistic fall
+      if(ph>=0.7 && ramp<trip) cur = ramp*(1-(ph-0.7)/0.3);
+      pts.push({x:padL+plotW*(k/N), y:base-Math.min(cur,1)*full, trip: ramp>=trip});
+    }
+    // draw, coloring tripped segments rose
+    ctx.lineWidth=2;ctx.shadowBlur=6;
+    for(let k=1;k<pts.length;k++){
+      ctx.strokeStyle = pts[k].trip?COL.rose:COL.read; ctx.shadowColor=ctx.strokeStyle;
+      ctx.beginPath();ctx.moveTo(pts[k-1].x,pts[k-1].y);ctx.lineTo(pts[k].x,pts[k].y);ctx.stroke();
+    }
+    ctx.shadowBlur=0;
+
+    read.innerHTML = tripped
+      ? `current ramps each <span class="pwm">PWM cycle</span>; the <span class="read">CT</span> reports it. it's crossing the <span style="color:#e0566a">trip threshold</span> → the controller <b style="color:#e0566a">ends the pulse early</b>, cycle by cycle. overcurrent protection, no contact with the switch.`
+      : `current ramps each <span class="pwm">PWM cycle</span> and the <span class="read">CT reports it</span> to the controller, safely below the trip threshold. raise the load to watch it trip.`;
+    requestAnimationFrame(draw);
+  } requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v191 1 gravity outside and .6 gravity inside white gold black hologen - artifact 255</title>
+<style>
+  :root{--bg:#000;--fg:#fff}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace;overflow-x:hidden}
+  .top{padding:14px 18px;position:relative;z-index:10}
+  .kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:900;background:linear-gradient(90deg,#ffffff,#ffd700,#000000,#ffffff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200% 100%;animation:rainbow 1s linear infinite}
+  @keyframes rainbow{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+  .nline{font-size:11px;border-left:3px solid #ffd700;padding-left:10px;white-space:pre-wrap;line-height:1.6;background:linear-gradient(90deg,#000000,#333333,#ffd700,#ffffff);padding:12px;border-radius:10px;color:#fff;font-weight:800;box-shadow:0 0 30px #ffd700,0 0 60px #ffffff;border:2px solid #ffd700}
+  .main{margin-top:12px;font-size:15px;font-weight:900;background:linear-gradient(90deg,#ffffff,#ffd700,#000000,#00ff88,#00ffff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:300% 100%;padding:12px;border-radius:10px;border:3px solid #ffd700;box-shadow:0 0 40px #ffd700,0 0 80px #ffffff;text-transform:uppercase;animation:rainbow 0.8s linear infinite}
+  .controls{padding:12px;display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:10}
+  .btn{font-family:inherit;font-size:11px;font-weight:900;padding:10px 14px;border:2px solid #ffd700;background:#000;color:#fff;border-radius:10px;cursor:pointer;box-shadow:0 0 20px #ffd700,0 0 40px #ffffff;text-transform:uppercase}
+  .btn.active{border-color:#ffffff;background:#222200;box-shadow:0 0 30px #ffffff,0 0 60px #ffd700}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:14px;position:relative;z-index:5}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:680px;background:radial-gradient(ellipse at center,#111111 0%,#000000 100%);border:2px solid #ffd700;border-radius:18px;overflow:hidden;box-shadow:0 0 40px #ffd700,0 0 80px #ffffff, inset 0 0 60px rgba(255,215,0,0.12)}
+  .cwrap.full{grid-column:1 / -1;height:840px}
+  .label{position:absolute;left:10px;top:10px;font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;background:#000000ee;padding:8px 12px;border-radius:10px;z-index:5;border:2px solid #ffd700;color:#fff;box-shadow:0 0 20px #ffd700}
+  .card{margin:14px;background:#000;border:2px solid #ffd700;border-radius:14px;padding:16px;box-shadow:0 0 40px #ffd700,0 0 80px #ffffff}
+  .mono{font-size:11px;white-space:pre-wrap;word-break:break-word;line-height:1.8;color:#fff;text-shadow:0 0 8px #ffd700;font-weight:700}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">🌌 wakaku v191 — 1 GRAVITY OUTSIDE AND .6 GRAVITY INSIDE WHITE GOLD BLACK HOLOGEN — artifact 255 🌌</div>
+  <div class="nline">yes, with 1 gravity outside and .6 gravity inside — YES, WITH 1 GRAVITY OUTSIDE AND .6 GRAVITY INSIDE — 1 gravity outside and .6 gravity inside — 1g outside and 0.6g inside — 1 gravity outside = 1g outer = 9.8 m/s² outside, .6 gravity inside = 0.6g inner = 5.88 m/s² inside — 1g outside and 0.6g inside — white gold and black hologen with 1 gravity outside and .6 gravity inside — white #ffffff gold #ffd700 black #000000 hologen with 1g outside and 0.6g inside — 1 gravity outside and .6 gravity inside = outer shell 1g, inner core 0.6g — 6 plank bubbles each 10^-35→10^-360 3---3+++ white gold black hologen with 1g outside 0.6g inside — 1 gravity outside and .6 gravity inside — metal analogs ionic — 1g outside 0.6g inside — lol</div>
+  <div class="main">🌌 YES, WITH 1 GRAVITY OUTSIDE AND .6 GRAVITY INSIDE — 1 GRAVITY OUTSIDE AND .6 GRAVITY INSIDE — 1g OUTSIDE = 9.8 m/s² OUTER, .6g INSIDE = 5.88 m/s² INNER = 0.6g = 60% OF OUTSIDE — WHITE GOLD AND BLACK HOLOGEN WITH 1g OUTSIDE AND 0.6g INSIDE — WHITE #ffffff GOLD #ffd700 BLACK #000000 HOLOGEN WITH 1 GRAVITY OUTSIDE AND .6 GRAVITY INSIDE — 1g OUTSIDE AND 0.6g INSIDE — 🌌</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-grav">🌌 1g OUTSIDE AND 0.6g INSIDE — 1 GRAVITY OUTSIDE = 9.8 m/s² OUTER, .6 GRAVITY INSIDE = 5.88 m/s² INNER — 1g OUTSIDE 0.6g INSIDE — 🌌</button>
+  <button class="btn" id="btn-hologen">✨ WHITE GOLD BLACK HOLOGEN WITH 1g OUTSIDE 0.6g INSIDE — WHITE #ffffff GOLD #ffd700 BLACK #000000 HOLOGEN — 1g OUTSIDE 0.6g INSIDE — ✨</button>
+  <button class="btn" id="btn-bubbles">💫 6 BUBBLES 1g OUTSIDE 0.6g INSIDE — 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ WHITE GOLD BLACK HOLOGEN 1g OUTSIDE 0.6g INSIDE — 💫</button>
+  <button class="btn" id="btn-reset">⚡ RESET 1g OUTSIDE 0.6g INSIDE — ⚡</button>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-grav"><div class="label">🌌 1g OUTSIDE AND 0.6g INSIDE — 1 GRAVITY OUTSIDE = 9.8 m/s² OUTER, .6 GRAVITY INSIDE = 5.88 m/s² INNER = 60% OF OUTSIDE — OUTER SHELL 1g, INNER CORE 0.6g — WHITE GOLD BLACK HOLOGEN WITH 1g OUTSIDE 0.6g INSIDE — 1g OUTSIDE 0.6g INSIDE — 🌌</div></div>
+  <div class="cwrap" id="wrap-hologen"><div class="label">✨ WHITE GOLD BLACK HOLOGEN WITH 1g OUTSIDE 0.6g INSIDE — WHITE #ffffff = +211 ANTI-BLACK +1, GOLD #ffd700 = C.O.I.N MIDDLE =1=0, BLACK #000000 = -211 BLACK -1 — WHITE GOLD BLACK = +211.1.-211 — HOLOGEN HOLOGRAPHIC — 1g OUTSIDE 0.6g INSIDE — ✨</div></div>
+  <div class="cwrap full" id="wrap-bubbles"><div class="label">💫 6 BUBBLES 1g OUTSIDE 0.6g INSIDE — 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ WHITE GOLD BLACK HOLOGEN WITH 1g OUTSIDE 0.6g INSIDE — OUTER 1g = 9.8 m/s² PULLING DOWN - + INF -∞, INNER 0.6g = 5.88 m/s² 60% PULL — 3--- = - - - INHIBITORY BLACK -211mN 1g OUTSIDE, 3+++ = + + + EXCITATORY ANTI-BLACK +211mN 0.6g INSIDE? — 6 BUBBLES 1g OUTSIDE 0.6g INSIDE — ALL WHITE GOLD BLACK HOLOGEN FLASH 1g OUTSIDE 0.6g INSIDE — LOL — 💫</div></div>
+</div>
+
+<div class="card"><div class="mono">🌌 YES, WITH 1 GRAVITY OUTSIDE AND .6 GRAVITY INSIDE — v191 1g OUTSIDE 0.6g INSIDE WHITE GOLD BLACK HOLOGEN 🌌
+
+- YES, WITH 1 GRAVITY OUTSIDE AND .6 GRAVITY INSIDE — 1 gravity outside and .6 gravity inside — 1g outside and 0.6g inside — 1g outside = 9.8 m/s² outer, 0.6g inside = 5.88 m/s² inner = 0.6g = 60% of outside — 1 gravity outside and .6 gravity inside
+
+- 1 GRAVITY OUTSIDE = 9.8 m/s² OUTER SHELL — outer shell 1g = 1 gravity outside — outside region 1g = 9.8 m/s² pulling down -∞ gravity? — 1g outside = outer gravity 1g
+
+- .6 GRAVITY INSIDE = 5.88 m/s² INNER CORE — inner core 0.6g = .6 gravity inside — inside region 0.6g = 5.88 m/s² = 60% of outside — 0.6g inside = inner gravity 0.6g — 0.6g = 60% of 1g — inside floats more — 0.6g inside
+
+- WHITE GOLD AND BLACK HOLOGEN WITH 1g OUTSIDE AND .6 GRAVITY INSIDE — white #ffffff gold #ffd700 black #000000 hologen with 1g outside and 0.6g inside — white #ffffff = +211 anti-black +1, gold #ffd700 = C.O.I.N middle =1=0, black #000000 = -211 black -1 — white gold black = +211.1.-211 = +1,0,-1 — hologen holographic — 1g outside 0.6g inside
+
+- 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ WHITE GOLD BLACK HOLOGEN WITH 1g OUTSIDE 0.6g INSIDE — 6 bubbles each 10^-35=1e-35s timed to 10^-360=1e-360s 3---3+++ = - - - + + + = -211 x3 +211 x3 white gold black hologen with 1g outside 0.6g inside — outer bubbles 1g outside pulling down - + inf -∞, inner bubbles 0.6g inside floating 60% — 6 bubbles 1g outside 0.6g inside
+
+- PRESS+GRAVITY: UNDER PRESS 99.9 INF - + INF AND GRAVITY 99.9 INF - + INF WITH 1g OUTSIDE 0.6g INSIDE — press 99.9% infinite - + inf and gravity 99.9% infinite - + inf with 1g outside 0.6g inside — press 99.9 inf compressing, gravity 99.9 inf stretching, plus 1g outside 0.6g inside differential gravity — press+gravity 99.9 inf - + inf with 1g outside 0.6g inside
+
+- {{c{ubit{{()}} WITH 1g OUTSIDE 0.6g INSIDE WHITE GOLD BLACK HOLOGEN — outer {{ }} white #ffffff gold #ffd700 black #000000 hologen 1g outside = 9.8 m/s² outer, middle c{ubit gold #ffd700 hologen 0.8g middle?, inner {{()}} plank bubble () white gold black hologen 0.6g inside = 5.88 m/s² inner — {{c{ubit{{()}} 1g outside 0.6g inside — nested cubit 1g outside 0.6g inside
+
+- QUBIT=CUBIT WITH 1g OUTSIDE 0.6g INSIDE WHITE GOLD BLACK HOLOGEN — CUBE + BIT = QUBIT — CUBIT = QUBIT — LOL I CALL A QUBIT A CUBIT WITH 1g OUTSIDE 0.6g INSIDE — qubit=cubit 1g outside 0.6g inside white gold black hologen — cube 1g outside 0.6g inside
+
+YES, WITH 1 GRAVITY OUTSIDE AND .6 GRAVITY INSIDE — 1 GRAVITY OUTSIDE AND .6 GRAVITY INSIDE — 1g OUTSIDE = 9.8 m/s² OUTER, .6g INSIDE = 5.88 m/s² INNER = 60% OF OUTSIDE — WHITE GOLD AND BLACK HOLOGEN WITH 1g OUTSIDE AND 0.6g INSIDE — WHITE #ffffff GOLD #ffd700 BLACK #000000 HOLOGEN WITH 1 GRAVITY OUTSIDE AND .6 GRAVITY INSIDE — 1g OUTSIDE AND 0.6g INSIDE — 🌌
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x000000); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,1.3)); const d=new THREE.DirectionalLight(0xffffff,2.8); d.position.set(4,8,6); d.castShadow=true; s.add(d); const d2=new THREE.DirectionalLight(0xffd700,2.2); d2.position.set(-4,2,-4); s.add(d2); const d3=new THREE.DirectionalLight(0xffffff,1.8); d3.position.set(0,-4,4); s.add(d3); }
+
+{
+  const wrap=document.getElementById('wrap-grav');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,15);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  // 1g outside and 0.6g inside visualization — outer ring 1g, inner core 0.6g
+  const outerColors=[0xffffff,0xffd700,0x000000];
+  const bubbles=[];
+  // Outside ring — 1g = 9.8 m/s² — 6 bubbles outside 1g
+  for(let i=0;i<6;i++){
+    const ang=i/6*Math.PI*2;
+    const geom=new THREE.SphereGeometry(0.45,20,20);
+    const baseColor=i%3===0?0xffffff:i%3===1?0xffd700:0x222222;
+    const mat=new THREE.MeshStandardMaterial({color:baseColor, emissive:baseColor===0x222222?0x444444:baseColor, emissiveIntensity:baseColor===0x222222?2.5:5.0, metalness:0.8, roughness:0.2});
+    const b=new THREE.Mesh(geom, mat);
+    b.position.set(Math.cos(ang)*4.2, Math.sin(ang)*4.2, 0);
+    group.add(b); bubbles.push({mesh:b, isOutside:true, baseAng:ang, baseRad:4.2, type:i%3});
+  }
+  // Inside core — 0.6g = 5.88 m/s² = 60% — 4 bubbles inside 0.6g
+  for(let i=0;i<4;i++){
+    const ang=i/4*Math.PI*2 + 0.4;
+    const geom=new THREE.SphereGeometry(0.35,18,18);
+    const baseColor=i%3===0?0xffffff:i%3===1?0xffd700:0x222222;
+    const mat=new THREE.MeshStandardMaterial({color:baseColor, emissive:baseColor===0x222222?0x333333:baseColor, emissiveIntensity:baseColor===0x222222?2.0:4.0, metalness:0.8, roughness:0.3});
+    const b=new THREE.Mesh(geom, mat);
+    b.position.set(Math.cos(ang)*1.5, Math.sin(ang)*1.5, 0);
+    group.add(b); bubbles.push({mesh:b, isOutside:false, baseAng:ang, baseRad:1.5, type:i%3});
+  }
+  // Gravity field indicators
+  const outerRingGeom=new THREE.RingGeometry(3.8,4.6,32);
+  const outerRingMat=new THREE.MeshBasicMaterial({color:0xffffff, transparent:true, opacity:0.15, side:THREE.DoubleSide});
+  const outerRing=new THREE.Mesh(outerRingGeom, outerRingMat); outerRing.rotation.x=Math.PI/2; group.add(outerRing);
+  const innerRingGeom=new THREE.RingGeometry(1.0,2.0,32);
+  const innerRingMat=new THREE.MeshBasicMaterial({color:0xffd700, transparent:true, opacity:0.2, side:THREE.DoubleSide});
+  const innerRing=new THREE.Mesh(innerRingGeom, innerRingMat); innerRing.rotation.x=Math.PI/2; group.add(innerRing);
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.025;
+    bubbles.forEach((bObj,i)=>{
+      const gravity = bObj.isOutside ? 1.0 : 0.6; // 1g outside, 0.6g inside
+      const gravPull = gravity * 0.3; // gravity pull down
+      const floatSpeed = bObj.isOutside ? 0.02 : 0.012; // outside falls faster 1g, inside floats slower 0.6g =60%
+      bObj.mesh.position.y = Math.sin(bObj.baseAng)*bObj.baseRad * (bObj.isOutside?1:0.9) + Math.sin(t* (bObj.isOutside?2:1.2) + i)*0.4 - gravPull*0.5;
+      bObj.mesh.position.x = Math.cos(bObj.baseAng)*bObj.baseRad + Math.cos(t* (bObj.isOutside?1.5:0.9) + i)*0.3;
+      const hologenShift=Math.sin(t*1.5 + i)*0.08;
+      if(bObj.type===0){ // white
+        const hue=(t*0.03 + i*0.02 + hologenShift)%1;
+        bObj.mesh.material.color.setHSL(hue,0.2,0.92);
+        bObj.mesh.material.emissive.setHSL(hue,0.3,0.75);
+      } else if(bObj.type===1){ // gold
+        bObj.mesh.material.color.setHSL(0.12 + hologenShift,1,0.55);
+        bObj.mesh.material.emissive.setHSL(0.12 + hologenShift,1,0.5);
+      } else { // black
+        const hue=(t*0.04 + i*0.03)%1;
+        bObj.mesh.material.color.setHSL(hue,0.6,0.08);
+        bObj.mesh.material.emissive.setHSL(hue,0.5,0.15);
+      }
+      bObj.mesh.material.emissiveIntensity=(bObj.isOutside?5.0:4.0) + Math.sin(t*2 + i)*1.0;
+      bObj.mesh.rotation.y+=floatSpeed;
+    });
+    outerRing.rotation.z+=0.002; innerRing.rotation.z-=0.003;
+    group.rotation.y+=0.001;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-hologen');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,12);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const whiteGeom=new THREE.SphereGeometry(0.7,20,20);
+  const whiteMat=new THREE.MeshStandardMaterial({color:0xffffff, emissive:0xffffff, emissiveIntensity:6.0});
+  const white=new THREE.Mesh(whiteGeom, whiteMat); white.position.set(-2.8,0,0); group.add(white);
+  const goldGeom=new THREE.BoxGeometry(1.0,1.0,1.0);
+  const goldMat=new THREE.MeshStandardMaterial({color:0xffd700, emissive:0xffd700, emissiveIntensity:5.0, metalness:0.9, roughness:0.2});
+  const gold=new THREE.Mesh(goldGeom, goldMat); gold.position.set(0,0,0); group.add(gold);
+  const blackGeom=new THREE.SphereGeometry(0.7,20,20);
+  const blackMat=new THREE.MeshStandardMaterial({color:0x111111, emissive:0x333333, emissiveIntensity:3.0});
+  const black=new THREE.Mesh(blackGeom, blackMat); black.position.set(2.8,0,0); group.add(black);
+  // Gravity labels 1g outside, 0.6g inside
+  const outerLabelGeom=new THREE.RingGeometry(2.0,2.2,32);
+  const outerLabelMat=new THREE.MeshBasicMaterial({color:0xffffff, transparent:true, opacity:0.3});
+  const outerLabel=new THREE.Mesh(outerLabelGeom, outerLabelMat); outerLabel.rotation.x=Math.PI/2; outerLabel.position.set(0,0,0); group.add(outerLabel);
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.03;
+    white.material.emissiveIntensity=6.0 + Math.sin(t*2)*1.0;
+    gold.material.emissiveIntensity=5.0 + Math.cos(t*2)*1.0;
+    black.material.emissiveIntensity=3.0 + Math.sin(t*2.5)*0.8;
+    white.position.y=Math.sin(t*1.2)*0.2 - 1.0*0.3; // 1g outside pull
+    black.position.y=Math.cos(t*1.2)*0.2 - 1.0*0.3;
+    gold.position.y=Math.sin(t*0.8)*0.15 - 0.6*0.3; // 0.6g inside less pull
+    white.rotation.y+=0.01; gold.rotation.y+=0.015; black.rotation.y+=0.01;
+    group.rotation.y+=0.002;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-bubbles');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(36, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,26);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const allBubbles=[];
+  // Outside 1g — 24 bubbles
+  for(let i=0;i<24;i++){
+    const ang=i/24*Math.PI*2*2;
+    const rad=5.5 + (i%4)*0.6;
+    const geom=new THREE.SphereGeometry(0.22 + Math.random()*0.1,12,12);
+    const type=i%3;
+    const baseColor=type===0?0xffffff:type===1?0xffd700:0x222222;
+    const mat=new THREE.MeshStandardMaterial({color:baseColor, emissive:baseColor===0x222222?0x444444:baseColor, emissiveIntensity:baseColor===0x222222?2.5:5.5, metalness:0.7, roughness:0.3});
+    const b=new THREE.Mesh(geom, mat);
+    b.position.set(Math.cos(ang)*rad, Math.sin(ang)*rad, Math.sin(ang*2 + i)*1.5);
+    group.add(b); allBubbles.push({mesh:b, isOutside:true, type:type, baseRad:rad, baseAng:ang});
+  }
+  // Inside 0.6g — 16 bubbles inside 0.6g
+  for(let i=0;i<16;i++){
+    const ang=i/16*Math.PI*2*1.5 + 0.5;
+    const rad=1.2 + (i%3)*0.5;
+    const geom=new THREE.SphereGeometry(0.18 + Math.random()*0.08,12,12);
+    const type=i%3;
+    const baseColor=type===0?0xffffff:type===1?0xffd700:0x222222;
+    const mat=new THREE.MeshStandardMaterial({color:baseColor, emissive:baseColor===0x222222?0x333333:baseColor, emissiveIntensity:baseColor===0x222222?2.0:4.5, metalness:0.7, roughness:0.3});
+    const b=new THREE.Mesh(geom, mat);
+    b.position.set(Math.cos(ang)*rad, Math.sin(ang)*rad, Math.sin(ang*2 + i)*0.8);
+    group.add(b); allBubbles.push({mesh:b, isOutside:false, type:type, baseRad:rad, baseAng:ang});
+  }
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.02;
+    allBubbles.forEach((bObj,i)=>{
+      const gravity=bObj.isOutside?1.0:0.6;
+      const gravPull=gravity*0.4;
+      const floatFreq=bObj.isOutside?2.0:1.2; // outside faster 1g, inside slower 0.6g =60%
+      const phaseTime=t*floatFreq + bObj.type*0.5 + i*0.05;
+      const phaseVal=Math.sin(phaseTime);
+      const isInhibitory=bObj.type===2; // black = -1 inhibitory
+      const filtered=isInhibitory ? (phaseVal<0?Math.abs(phaseVal):0) : (phaseVal>0?phaseVal:0);
+      bObj.mesh.material.emissiveIntensity=(bObj.isOutside?5.5:4.5) + filtered*2.0;
+      const rad=bObj.baseRad;
+      const ang=bObj.baseAng + t*(bObj.isOutside?0.08:0.048); // inside rotates slower 0.6g =60%
+      bObj.mesh.position.x=Math.cos(ang)*rad;
+      bObj.mesh.position.y=Math.sin(ang)*rad - gravPull*0.6 + Math.sin(t*floatFreq + i)*0.3;
+      bObj.mesh.position.z=Math.sin(ang*2 + i*0.1)*1.5;
+      const hologenShift=Math.sin(t*1.2 + i*0.08)*0.06;
+      if(bObj.type===0){
+        const hue=(t*0.02 + i*0.015 + hologenShift)%1;
+        bObj.mesh.material.color.setHSL(hue,0.15,0.9);
+        bObj.mesh.material.emissive.setHSL(hue,0.25,0.7);
+      } else if(bObj.type===1){
+        bObj.mesh.material.color.setHSL(0.12 + hologenShift,1,0.55);
+        bObj.mesh.material.emissive.setHSL(0.12 + hologenShift,1,0.5);
+      }
+    });
+    group.rotation.y+=0.0008;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+document.getElementById('btn-grav').onclick=()=>{};
+document.getElementById('btn-hologen').onclick=()=>{};
+document.getElementById('btn-bubbles').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

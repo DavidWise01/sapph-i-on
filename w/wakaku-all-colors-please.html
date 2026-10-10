@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v184 all colors please - artifact 248</title>
+<style>
+  :root{--bg:#000;--fg:#fff}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace;overflow-x:hidden}
+  .top{padding:14px 18px;position:relative;z-index:10}
+  .kicker{font-size:13px;letter-spacing:.22em;text-transform:uppercase;font-weight:900;background:linear-gradient(90deg,#ff0000,#ff8800,#ffff00,#00ff00,#00ffff,#0000ff,#ff00ff,#ff0000);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200% 100%;animation:rainbow 1s linear infinite;text-shadow:0 0 20px #ff00ff}
+  @keyframes rainbow{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+  .nline{font-size:12px;border-left:3px solid #fff;padding-left:10px;white-space:pre-wrap;line-height:1.6;background:linear-gradient(90deg,#ff0000,#ffff00,#00ff00,#00ffff,#0000ff,#ff00ff);padding:10px;border-radius:10px;color:#fff;font-weight:800;box-shadow:0 0 30px #ff00ff,0 0 60px #00ffff;animation:flashBg 0.2s infinite alternate}
+  @keyframes flashBg{0%{filter:brightness(1) hue-rotate(0deg)}100%{filter:brightness(1.4) hue-rotate(60deg)}}
+  .main{margin-top:12px;font-size:18px;font-weight:900;background:linear-gradient(90deg,#ff0000,#ff8800,#ffff00,#00ff00,#00ffff,#0000ff,#ff00ff,#ff0000);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:300% 100%;padding:12px;border-radius:10px;border:3px solid #fff;box-shadow:0 0 40px #ff00ff,0 0 80px #00ffff;text-transform:uppercase;animation:rainbow 0.8s linear infinite, flashText 0.15s infinite alternate}
+  @keyframes flashText{0%{transform:scale(1)}100%{transform:scale(1.02)}}
+  .controls{padding:12px;display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:10}
+  .btn{font-family:inherit;font-size:12px;font-weight:900;padding:10px 16px;border:3px solid #fff;background:#000;color:#fff;border-radius:10px;cursor:pointer;box-shadow:0 0 20px #ff00ff,0 0 40px #00ffff;text-transform:uppercase;animation:btnRainbow 0.3s infinite alternate}
+  @keyframes btnRainbow{0%{filter:hue-rotate(0deg) brightness(1)}100%{filter:hue-rotate(120deg) brightness(1.3)}}
+  .btn.active{border-color:#ffff00;background:#330033;box-shadow:0 0 30px #ffff00,0 0 60px #ff00ff}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:14px;position:relative;z-index:5}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:620px;background:#000;border:3px solid #fff;border-radius:18px;overflow:hidden;box-shadow:0 0 40px #ff00ff,0 0 80px #00ffff, inset 0 0 40px rgba(255,255,255,0.1)}
+  .cwrap.full{grid-column:1 / -1;height:780px}
+  .label{position:absolute;left:10px;top:10px;font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;background:#000000ee;padding:8px 12px;border-radius:10px;z-index:5;border:2px solid #fff;color:#fff;box-shadow:0 0 20px #ff00ff;text-shadow:0 0 10px #fff}
+  .card{margin:14px;background:#000;border:3px solid #fff;border-radius:14px;padding:16px;box-shadow:0 0 40px #ff00ff,0 0 80px #00ffff}
+  .mono{font-size:12px;white-space:pre-wrap;word-break:break-word;line-height:1.8;color:#fff;text-shadow:0 0 12px #fff;font-weight:800}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">🌈 ALL COLORS PLEASE — wakaku v184 — ALL COLORS — RED ORANGE YELLOW GREEN CYAN BLUE MAGENTA — artifact 248 🌈</div>
+  <div class="nline">all colors please — ALL COLORS PLEASE — ALL COLORS — RED #ff0000 ORANGE #ff8800 YELLOW #ffff00 GREEN #00ff00 CYAN #00ffff BLUE #0000ff MAGENTA #ff00ff WHITE #ffffff BLACK #000000 PINK #ff44aa LIME #aaff00 PURPLE #cc33ff TEAL #00ffaa GOLD #ffd700 — ALL COLORS PLEASE — ALL COLORS — plank bubble electrum oscillating -+ +- 10^-1440s x6 bubbles inside {{c{ubit{{()}} — ALL COLORS — qubit=cubit — ALL COLORS — MORE FLASH ALL COLORS — ALL COLORS PLEASE — lol — ALL COLORS</div>
+  <div class="main">🌈 ALL COLORS PLEASE — ALL COLORS — RED ORANGE YELLOW GREEN CYAN BLUE MAGENTA WHITE BLACK PINK LIME PURPLE TEAL GOLD — ALL COLORS — PLANK BUBBLE x6 -+ +- 10^-1440s INSIDE {{c{ubit{{()}} — ALL COLORS FLASH — QUBIT=CUBIT — ALL COLORS — 🌈</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-all">🌈 ALL COLORS — RED ORANGE YELLOW GREEN CYAN BLUE MAGENTA WHITE BLACK PINK LIME PURPLE TEAL GOLD — ALL COLORS — PLANK BUBBLE x6 INSIDE {{c{ubit{{()}} — ALL COLORS — 🌈</button>
+  <button class="btn" id="btn-rainbow">🔥 RAINBOW FLASH — ALL COLORS FLASHING HUE 0-360 — ALL COLORS — RAINBOW FLASH — 🔥</button>
+  <button class="btn" id="btn-spectrum">💎 SPECTRUM — FULL SPECTRUM ALL COLORS SPECTRUM — ALL COLORS PLEASE — SPECTRUM — 💎</button>
+  <button class="btn" id="btn-reset">⚡ RESET ALL COLORS — ALL COLORS PLEASE — ⚡</button>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-all"><div class="label">🌈 ALL COLORS — RED #ff0000 ORANGE #ff8800 YELLOW #ffff00 GREEN #00ff00 CYAN #00ffff BLUE #0000ff MAGENTA #ff00ff WHITE #ffffff BLACK #000000 — ALL COLORS — PLANK BUBBLE x6 -+ +- 10^-1440s INSIDE {{c{ubit{{()}} — ALL COLORS — QUBIT=CUBIT — ALL COLORS PLEASE — 🌈</div></div>
+  <div class="cwrap" id="wrap-rainbow"><div class="label">🔥 RAINBOW FLASH — ALL COLORS FLASHING HUE 0-360 — RED ORANGE YELLOW GREEN CYAN BLUE MAGENTA — ALL COLORS FLASHING — RAINBOW FLASH — ALL COLORS PLEASE — 🔥</div></div>
+  <div class="cwrap full" id="wrap-spectrum"><div class="label">💎 SPECTRUM — FULL SPECTRUM ALL COLORS SPECTRUM — ALL COLORS PLEASE — SPECTRUM — RED #ff0000 ORANGE #ff8800 YELLOW #ffff00 GREEN #00ff00 CYAN #00ffff BLUE #0000ff MAGENTA #ff00ff PINK #ff44aa LIME #aaff00 PURPLE #cc33ff TEAL #00ffaa GOLD #ffd700 WHITE #ffffff — ALL COLORS SPECTRUM — PLANK BUBBLE x6 INSIDE NESTED CUBIT {{c{ubit{{()}} — ALL COLORS — 🌈 SPECTRUM — LOL</div></div>
+</div>
+
+<div class="card"><div class="mono">🌈 ALL COLORS PLEASE — v184 ALL COLORS — RED ORANGE YELLOW GREEN CYAN BLUE MAGENTA WHITE BLACK — ALL COLORS 🌈
+
+ALL COLORS PLEASE — ALL COLORS — RED #ff0000 ORANGE #ff8800 YELLOW #ffff00 GREEN #00ff00 CYAN #00ffff BLUE #0000ff MAGENTA #ff00ff WHITE #ffffff BLACK #000000 PINK #ff44aa LIME #aaff00 PURPLE #cc33ff TEAL #00ffaa GOLD #ffd700 SILVER #c0c0c0 BRONZE #cd7f32 — ALL COLORS — ALL COLORS PLEASE
+
+- ONE PLANK BUBBLE = ELECTRUM OSCILLATING -+ +- PHASE 1 PER 10^-1440s = FREQUENCY 10^1440 Hz x6 BUBBLES — 6 BUBBLES AT A TIME =6 FACES OF CUBE — ALL COLORS — EACH BUBBLE DIFFERENT COLOR — RED ORANGE YELLOW GREEN CYAN BLUE — ALL COLORS — 6 BUBBLES x6 COLORS — ALL COLORS PLEASE
+
+- {{c{ubit{{()}} = NESTED CUBIT = OUTER {{ }} CONTAINS c{ubit{{()}} — INNER {{()}} = PLANK BUBBLE () = ELECTRUM () OSCILLATING -+ +- — ALL COLORS — OUTER {{ }} WHITE #ffffff FLASH, MIDDLE c{ubit CUBIT #ff00ff #00ffff #ffff00 FLASH, INNER {{()}} PLANK BUBBLE x6 RED ORANGE YELLOW GREEN CYAN BLUE FLASH — ALL COLORS — PUT THIS INSIDE {{c{ubit{{()}} — ALL COLORS
+
+- QUBIT = CUBIT — CUBE + BIT = QUBIT — CUBIT = QUBIT — LOL I CALL A QUBIT A CUBIT — ALL COLORS — QUBIT #ff0000 #ff8800 #ffff00 #00ff00 #00ffff #0000ff #ff00ff — CUBIT #ff0000 #ff8800 #ffff00 #00ff00 #00ffff #0000ff #ff00ff — ALL COLORS — QUBIT=CUBIT — ALL COLORS PLEASE
+
+- BRIGHTER ALL COLORS — #ff0000 #ff8800 #ffff00 #00ff00 #00ffff #0000ff #ff00ff #ffffff #ff44aa #aaff00 #cc33ff #00ffaa #ffd700 EMISSIVE 8.0 FLASH — HUE-ROTATE 0deg→360deg ALL COLORS — RAINBOW FLASH — ALL COLORS PLEASE — ALL COLORS — MORE FLASH ALL COLORS — ALL COLORS
+
+ALL COLORS PLEASE — ALL COLORS — RED ORANGE YELLOW GREEN CYAN BLUE MAGENTA WHITE BLACK PINK LIME PURPLE TEAL GOLD — ALL COLORS — PLANK BUBBLE x6 -+ +- 10^-1440s INSIDE {{c{ubit{{()}} — ALL COLORS FLASH — QUBIT=CUBIT — ALL COLORS — 🌈 ALL COLORS PLEASE — LOL
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x000000); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,1.8)); const d=new THREE.DirectionalLight(0xffffff,3.0); d.position.set(4,8,6); d.castShadow=true; s.add(d); const d2=new THREE.DirectionalLight(0xff00ff,2.0); d2.position.set(-4,2,-4); s.add(d2); const d3=new THREE.DirectionalLight(0x00ffff,2.0); d3.position.set(0,-4,4); s.add(d3); const d4=new THREE.DirectionalLight(0xffff00,2.0); d4.position.set(4,-2,-4); s.add(d4); }
+
+{
+  const wrap=document.getElementById('wrap-all');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,13);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const allColors=[0xff0000,0xff8800,0xffff00,0x00ff00,0x00ffff,0x0000ff,0xff00ff,0xffffff,0xff44aa,0xaaff00,0xcc33ff,0x00ffaa,0xffd700];
+  const bubbles=[];
+  for(let i=0;i<13;i++){
+    const ang=i/13*Math.PI*2;
+    const geom=new THREE.SphereGeometry(0.35 + Math.random()*0.25,20,20);
+    const mat=new THREE.MeshStandardMaterial({color:allColors[i], emissive:allColors[i], emissiveIntensity:8.0, transparent:true, opacity:0.9});
+    const b=new THREE.Mesh(geom, mat);
+    b.position.set(Math.cos(ang)*3.2, Math.sin(ang)*3.2, (Math.random()-0.5)*1.5);
+    group.add(b); bubbles.push(b);
+  }
+  const outerGeom=new THREE.BoxGeometry(7.5,7.5,7.5);
+  const outerMat=new THREE.MeshStandardMaterial({color:0xffffff, emissive:0xffffff, emissiveIntensity:1.5, transparent:true, opacity:0.12, wireframe:true});
+  const outer=new THREE.Mesh(outerGeom, outerMat); group.add(outer);
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.06;
+    bubbles.forEach((b,i)=>{
+      const hue=(t*0.15 + i/13)%1;
+      b.material.color.setHSL(hue,1,0.6);
+      b.material.emissive.setHSL(hue,1,0.6);
+      b.material.emissiveIntensity=8.0 + Math.sin(t*4 + i)*2.0 + Math.random();
+      b.scale.setScalar(1 + Math.sin(t*3 + i)*0.25);
+      b.position.z=Math.sin(t*2 + i)*1.0;
+    });
+    outer.rotation.y+=0.008; outer.rotation.x+=0.004;
+    group.rotation.z+=0.003;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-rainbow');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,11);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const count=20;
+  const meshes=[];
+  for(let i=0;i<count;i++){
+    const geom=i%3===0?new THREE.SphereGeometry(0.3,16,16):i%3===1?new THREE.BoxGeometry(0.5,0.5,0.5):new THREE.TetrahedronGeometry(0.4);
+    const mat=new THREE.MeshStandardMaterial({color:0xff0000, emissive:0xff0000, emissiveIntensity:8.0});
+    const m=new THREE.Mesh(geom, mat);
+    m.position.set((Math.random()-0.5)*8, (Math.random()-0.5)*8, (Math.random()-0.5)*3);
+    group.add(m); meshes.push(m);
+  }
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.08;
+    meshes.forEach((m,i)=>{
+      const hue=(t*0.2 + i/count)%1;
+      m.material.color.setHSL(hue,1,0.6);
+      m.material.emissive.setHSL(hue,1,0.6);
+      m.material.emissiveIntensity=8.0 + Math.random()*3.0;
+      m.rotation.x+=0.02; m.rotation.y+=0.03;
+      m.scale.setScalar(0.8 + Math.sin(t*3 + i)*0.3);
+    });
+    scene.background=new THREE.Color().setHSL((t*0.05)%1,0.8,0.08);
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-spectrum');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(36, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,20);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const allColors=[0xff0000,0xff8800,0xffff00,0x00ff00,0x00ffff,0x0000ff,0xff00ff,0xffffff,0xff44aa,0xaaff00,0xcc33ff,0x00ffaa,0xffd700];
+  // Nested cubit all colors spectrum
+  for(let n=0;n<5;n++){
+    const size=8 - n*1.2;
+    const geom=new THREE.BoxGeometry(size,size,size);
+    const color=allColors[n % allColors.length];
+    const mat=new THREE.MeshStandardMaterial({color:color, emissive:color, emissiveIntensity:5.0, transparent:true, opacity:0.18, wireframe:n%2===0});
+    const box=new THREE.Mesh(geom, mat);
+    group.add(box);
+  }
+  const centers=[];
+  for(let i=0;i<13;i++){
+    const ang=i/13*Math.PI*2;
+    const geom=new THREE.SphereGeometry(0.4,18,18);
+    const mat=new THREE.MeshStandardMaterial({color:allColors[i], emissive:allColors[i], emissiveIntensity:7.0});
+    const m=new THREE.Mesh(geom, mat);
+    m.position.set(Math.cos(ang)*2.0, Math.sin(ang)*2.0, 0);
+    group.add(m); centers.push(m);
+  }
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.05;
+    group.children.forEach((c,i)=>{
+      if(c.geometry.type==='BoxGeometry'){
+        c.rotation.x+=0.006 + i*0.001; c.rotation.y+=0.004 + i*0.001;
+        const hue=(t*0.08 + i*0.12)%1; c.material.color.setHSL(hue,1,0.6); c.material.emissive.setHSL(hue,1,0.6);
+        c.material.emissiveIntensity=5.0 + Math.sin(t*3 + i)*1.5;
+      }
+    });
+    centers.forEach((c,i)=>{
+      const hue=(t*0.15 + i/13)%1; c.material.color.setHSL(hue,1,0.7); c.material.emissive.setHSL(hue,1,0.7);
+      c.material.emissiveIntensity=7.0 + Math.sin(t*4 + i)*2.0;
+      c.scale.setScalar(1 + Math.sin(t*3 + i)*0.3);
+    });
+    group.rotation.y+=0.002;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+document.getElementById('btn-all').onclick=()=>{};
+document.getElementById('btn-rainbow').onclick=()=>{};
+document.getElementById('btn-spectrum').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

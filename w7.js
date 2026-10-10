@@ -141,6 +141,7 @@ var SCENES={
   synth(g,W*.1+M*.05,H*.2,Math.max(1.6,M*.009),k.accent,k.style,t,n===6);
  }
 };
+if(D.type==="world"){var lit=0;D.keepers.forEach(function(k){if(k.domains.length!==64)throw new Error("64 domains");k.domains.forEach(function(d){if(d.lit)lit++;});});if(D.keepers.length!==8||lit!==D.counts.domains_populated||D.counts.zero_spheres!==D.counts.spheres+512-lit)throw new Error("world counts failed");}
 if(!SCENES[D.type]) throw new Error("unknown scene");
 if(reduce){ frame(END); } else { loop(); }
 })();

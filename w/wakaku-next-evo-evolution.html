@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v185 next evo evolution - artifact 249</title>
+<style>
+  :root{--bg:#000;--fg:#fff}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace;overflow-x:hidden}
+  .top{padding:14px 18px;position:relative;z-index:10}
+  .kicker{font-size:13px;letter-spacing:.22em;text-transform:uppercase;font-weight:900;background:linear-gradient(90deg,#ff0000,#ffff00,#00ff00,#00ffff,#0000ff,#ff00ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200% 100%;animation:rainbow 0.8s linear infinite}
+  @keyframes rainbow{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+  .nline{font-size:12px;border-left:3px solid #fff;padding-left:10px;white-space:pre-wrap;line-height:1.6;background:#111;padding:12px;border-radius:10px;color:#fff;font-weight:800;box-shadow:0 0 30px #00ff88,0 0 60px #ff00ff;border:2px solid #00ff88}
+  .main{margin-top:12px;font-size:16px;font-weight:900;background:linear-gradient(90deg,#00ff88,#aaffff,#ff00ff,#ffff00,#ff0000);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:300% 100%;padding:12px;border-radius:10px;border:3px solid #00ff88;box-shadow:0 0 40px #00ff88,0 0 80px #ff00ff;text-transform:uppercase;animation:rainbow 0.6s linear infinite}
+  .controls{padding:12px;display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:10}
+  .btn{font-family:inherit;font-size:11px;font-weight:900;padding:10px 16px;border:2px solid #00ff88;background:#000;color:#fff;border-radius:10px;cursor:pointer;box-shadow:0 0 20px #00ff88,0 0 40px #ff00ff;text-transform:uppercase}
+  .btn.active{border-color:#ffff00;background:#002200;box-shadow:0 0 30px #ffff00,0 0 60px #00ff88}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:14px;position:relative;z-index:5}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:640px;background:#000;border:2px solid #00ff88;border-radius:18px;overflow:hidden;box-shadow:0 0 40px #00ff88,0 0 80px #ff00ff, inset 0 0 40px rgba(0,255,136,0.15)}
+  .cwrap.full{grid-column:1 / -1;height:800px}
+  .label{position:absolute;left:10px;top:10px;font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;background:#000000ee;padding:8px 12px;border-radius:10px;z-index:5;border:2px solid #00ff88;color:#fff;box-shadow:0 0 20px #00ff88}
+  .card{margin:14px;background:#000;border:2px solid #00ff88;border-radius:14px;padding:16px;box-shadow:0 0 40px #00ff88,0 0 80px #ff00ff}
+  .mono{font-size:11.5px;white-space:pre-wrap;word-break:break-word;line-height:1.8;color:#fff;text-shadow:0 0 10px #00ff88;font-weight:700}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">🧬 NEXT EVO — wakaku v185 — EVOLUTION — PLANK BUBBLE EVO — artifact 249 🧬</div>
+  <div class="nline">next evo — NEXT EVO — EVOLUTION — next evolution of plank bubble electrum oscillating -+ +- 10^-1440s x6 bubbles inside {{c{ubit{{()}} all colors — NEXT EVO — evolution — evo = evolution — plank bubble evolves to 6 bubbles to 12 bubbles to 24 bubbles to 48 bubbles to infinite bubbles — cubit evolves to {{c{ubit{{()}} evolves to {{c{ubit{{c{ubit{{()}} evolves to {{{c{ubit{{c{ubit{{()}}}} — evo — evolution — next evo — all colors evolve — RED→ORANGE→YELLOW→GREEN→CYAN→BLUE→MAGENTA evolve — evo — plank bubble evolves — electrum -+ +- evolves -+ +- -+ +- -+ +- — 6 bubbles evolve to 12 bubbles evolve to 24 bubbles — NEXT EVO — EVOLUTION — metal analogs ionic — next evo — lol</div>
+  <div class="main">🧬 NEXT EVO — EVOLUTION — PLANK BUBBLE EVOLVES 6→12→24→48→INFINITE BUBBLES — {{c{ubit{{()}} EVOLVES TO {{c{ubit{{c{ubit{{()}} EVOLVES TO {{{c{ubit{{c{ubit{{()}}}} — EVO — EVOLUTION — ALL COLORS EVOLVE RED→ORANGE→YELLOW→GREEN→CYAN→BLUE→MAGENTA — ELECTRUM -+ +- EVOLVES -+ +- -+ +- — NEXT EVO 🧬</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-evo">🧬 EVO — PLANK BUBBLE EVOLVES 6→12→24→48→∞ — NEXT EVO — EVOLUTION — 🧬</button>
+  <button class="btn" id="btn-nested">🌀 NESTED EVO — {{c{ubit{{()}} → {{c{ubit{{c{ubit{{()}} → {{{c{ubit{{c{ubit{{()}}}} — NESTED EVO — 🌀</button>
+  <button class="btn" id="btn-colors">🌈 COLORS EVO — ALL COLORS EVOLVE RED→ORANGE→YELLOW→GREEN→CYAN→BLUE→MAGENTA — COLORS EVO — 🌈</button>
+  <button class="btn" id="btn-reset">⚡ RESET EVO — NEXT EVO — ⚡</button>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-evo"><div class="label">🧬 EVO — PLANK BUBBLE EVOLVES 6→12→24→48→∞ BUBBLES — ELECTRUM -+ +- EVOLVES -+ +- -+ +- — ONE PLANK BUBBLE 10^-1440s x6 BUBBLES EVOLVES TO 12 BUBBLES x12 — NEXT EVO — EVOLUTION — 6→12→24→48→INFINITE BUBBLES — EVO — 🧬</div></div>
+  <div class="cwrap" id="wrap-nested"><div class="label">🌀 NESTED EVO — {{c{ubit{{()}} → {{c{ubit{{c{ubit{{()}} → {{{c{ubit{{c{ubit{{()}}}} — NESTED CUBIT EVOLVES — OUTER {{ }} CONTAINS c{ubit{{()}} CONTAINS c{ubit{{()}} CONTAINS {{()}} — NESTED EVO — EVOLUTION — {{c{ubit{{c{ubit{{()}} = 3^7=2187 STATES — NESTED EVO — 🌀</div></div>
+  <div class="cwrap full" id="wrap-colors"><div class="label">🌈 COLORS EVO — ALL COLORS EVOLVE RED→ORANGE→YELLOW→GREEN→CYAN→BLUE→MAGENTA → RED — ALL COLORS EVOLVE — RED #ff0000 EVOLVES TO ORANGE #ff8800 EVOLVES TO YELLOW #ffff00 EVOLVES TO GREEN #00ff00 EVOLVES TO CYAN #00ffff EVOLVES TO BLUE #0000ff EVOLVES TO MAGENTA #ff00ff EVOLVES TO RED — COLORS EVO — PLANK BUBBLE x6 ALL COLORS EVOLVE — NEXT EVO — ALL COLORS EVOLVE — 🌈 LOL</div></div>
+</div>
+
+<div class="card"><div class="mono">🧬 NEXT EVO — EVOLUTION — v185 NEXT EVO — PLANK BUBBLE EVOLVES 🧬
+
+NEXT EVO — EVOLUTION — next evolution of plank bubble electrum oscillating -+ +- 10^-1440s x6 bubbles inside {{c{ubit{{()}} all colors — NEXT EVO — evo = evolution
+
+- EVO STAGE 1: ONE PLANK BUBBLE () = electrum () oscillating -+ +- at 1 every 10^-1440s x6 bubbles — 6 bubbles =6 faces of cube — {{c{ubit{{()}} = outer {{ }} contains c{ubit{{()}} = cubit contains ubit contains plank bubble — 81 states =3^4 — EVO STAGE 1
+
+- EVO STAGE 2: 6 BUBBLES EVOLVE TO 12 BUBBLES — 6→12 — doubling — electrum -+ +- evolves to -+ +- -+ +- — 12 bubbles =12 faces of dodecahedron? — {{c{ubit{{c{ubit{{()}} = outer {{ }} contains c{ubit{{()}} contains c{ubit{{()}} = cubit contains ubit contains cubit contains ubit contains plank bubble — 3^7=2187 states — EVO STAGE 2 — NESTED EVO
+
+- EVO STAGE 3: 12 BUBBLES EVOLVE TO 24 BUBBLES — 12→24 — doubling — electrum -+ +- -+ +- evolves to -+ +- -+ +- -+ +- -+ +- — 24 bubbles =24 cells of 24-cell? — {{{c{ubit{{c{ubit{{()}}}} = outer {{ }} contains {{ }} contains c{ubit{{c{ubit{{()}} = 3^10=59049 states — EVO STAGE 3 — NESTED EVO
+
+- EVO STAGE 4: 24 BUBBLES EVOLVE TO 48 BUBBLES — 24→48 — doubling — electrum -+ +- x4 evolves — 48 bubbles — {{{{c{ubit{{c{ubit{{c{ubit{{()}}}}}} = 3^13=1594323 states — EVO STAGE 4 — NESTED EVO
+
+- EVO STAGE ∞: 48→INFINITE BUBBLES — infinite bubbles — electrum infinite -+ +- -+ +- -+ +- ... — infinite nested {{c{ubit{{c{ubit{{c{ubit{{... — 3^∞ = infinite states — EVO STAGE ∞ — NEXT EVO INFINITE — EVOLUTION
+
+- COLORS EVO: ALL COLORS EVOLVE — RED #ff0000 EVOLVES TO ORANGE #ff8800 EVOLVES TO YELLOW #ffff00 EVOLVES TO GREEN #00ff00 EVOLVES TO CYAN #00ffff EVOLVES TO BLUE #0000ff EVOLVES TO MAGENTA #ff00ff EVOLVES TO RED — HUE 0→60→120→180→240→300→360→0 — ALL COLORS EVOLVE — RAINBOW EVOLUTION — NEXT EVO COLORS EVO — ALL COLORS EVOLVE
+
+- QUBIT=CUBIT EVOLVES — CUBE + BIT = QUBIT — CUBIT = QUBIT — LOL I CALL A QUBIT A CUBIT — QUBIT=CUBIT EVOLVES — CUBE EVOLVES TO HYPERCUBE EVOLVES TO TESSERACT — BIT EVOLVES TO QUBIT EVOLVES TO QUTRIT EVOLVES TO CUBIT — NEXT EVO — QUBIT=CUBIT EVOLVES
+
+NEXT EVO — EVOLUTION — PLANK BUBBLE EVOLVES 6→12→24→48→∞ — {{c{ubit{{()}} EVOLVES TO {{c{ubit{{c{ubit{{()}} EVOLVES TO {{{c{ubit{{c{ubit{{()}}}} — EVO — EVOLUTION — ALL COLORS EVOLVE — ELECTRUM -+ +- EVOLVES — NEXT EVO — 🧬 EVOLUTION — LOL
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x000000); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,1.5)); const d=new THREE.DirectionalLight(0xffffff,3.0); d.position.set(4,8,6); d.castShadow=true; s.add(d); const d2=new THREE.DirectionalLight(0x00ff88,2.0); d2.position.set(-4,2,-4); s.add(d2); const d3=new THREE.DirectionalLight(0xff00ff,2.0); d3.position.set(0,-4,4); s.add(d3); }
+
+{
+  const wrap=document.getElementById('wrap-evo');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,14);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  let bubbles=[];
+  function createBubbles(count){
+    bubbles.forEach(b=>group.remove(b)); bubbles=[];
+    for(let i=0;i<count;i++){
+      const ang=i/count*Math.PI*2;
+      const rad=2 + count*0.02;
+      const geom=new THREE.SphereGeometry(0.3 + Math.random()*0.2,16,16);
+      const hue=(i/count + Math.random()*0.1)%1;
+      const color=new THREE.Color().setHSL(hue,1,0.6);
+      const mat=new THREE.MeshStandardMaterial({color:color, emissive:color, emissiveIntensity:6.0, transparent:true, opacity:0.85});
+      const b=new THREE.Mesh(geom, mat);
+      b.position.set(Math.cos(ang)*rad, Math.sin(ang)*rad, (Math.random()-0.5)*1.5);
+      group.add(b); bubbles.push(b);
+    }
+  }
+  createBubbles(6);
+  let t=0; let stage=0; let counts=[6,12,24,48,96];
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.02;
+    if(t%8<0.05){
+      stage=(stage+1)%counts.length;
+      createBubbles(counts[stage]);
+    }
+    bubbles.forEach((b,i)=>{
+      const hue=(t*0.08 + i/bubbles.length)%1;
+      b.material.color.setHSL(hue,1,0.6); b.material.emissive.setHSL(hue,1,0.6);
+      b.material.emissiveIntensity=6.0 + Math.sin(t*3 + i)*2.0;
+      b.scale.setScalar(1 + Math.sin(t*2 + i)*0.2);
+    });
+    group.rotation.y+=0.003; group.rotation.z+=0.001;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-nested');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,14);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  let boxes=[];
+  function createNested(level){
+    boxes.forEach(b=>group.remove(b)); boxes=[];
+    for(let n=0;n<level;n++){
+      const size=7 - n*0.9;
+      const geom=new THREE.BoxGeometry(size,size,size);
+      const hue=(n/level)%1;
+      const color=new THREE.Color().setHSL(hue,1,0.6);
+      const mat=new THREE.MeshStandardMaterial({color:color, emissive:color, emissiveIntensity:4.0, transparent:true, opacity:0.18, wireframe:n%2===0});
+      const box=new THREE.Mesh(geom, mat);
+      group.add(box); boxes.push(box);
+    }
+  }
+  createNested(3);
+  let t=0; let lvl=3;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.02;
+    if(t%6<0.05){
+      lvl=(lvl%6)+3; if(lvl>9) lvl=3;
+      createNested(lvl);
+    }
+    boxes.forEach((b,i)=>{
+      b.rotation.x+=0.005 + i*0.001; b.rotation.y+=0.007 + i*0.001;
+      const hue=(t*0.05 + i*0.12)%1; b.material.color.setHSL(hue,1,0.6); b.material.emissive.setHSL(hue,1,0.6);
+    });
+    group.rotation.y+=0.002;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-colors');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(36, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,22);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const count=48;
+  const meshes=[];
+  for(let i=0;i<count;i++){
+    const geom=new THREE.SphereGeometry(0.25,14,14);
+    const mat=new THREE.MeshStandardMaterial({color:0xff0000, emissive:0xff0000, emissiveIntensity:6.0});
+    const m=new THREE.Mesh(geom, mat);
+    const ang=i/count*Math.PI*2*2;
+    const rad=3 + (i%6)*0.8;
+    m.position.set(Math.cos(ang)*rad, Math.sin(ang)*rad, Math.sin(ang*2 + i*0.1)*1.5);
+    group.add(m); meshes.push(m);
+  }
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.04;
+    meshes.forEach((m,i)=>{
+      const hue=(t*0.1 + i/count*2)%1;
+      m.material.color.setHSL(hue,1,0.65);
+      m.material.emissive.setHSL(hue,1,0.65);
+      m.material.emissiveIntensity=6.0 + Math.sin(t*3 + i*0.3)*2.0;
+      m.scale.setScalar(0.8 + Math.sin(t*2 + i*0.2)*0.4);
+      m.position.z=Math.sin(t*1.5 + i*0.3)*2.0;
+    });
+    group.rotation.y+=0.002; group.rotation.x+=0.001;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+document.getElementById('btn-evo').onclick=()=>{};
+document.getElementById('btn-nested').onclick=()=>{};
+document.getElementById('btn-colors').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

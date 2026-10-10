@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="utf-8">
+<title>(h(o(e))) Hydrogen 1 Oxygen 1 Electrum 1 — Block 338 — Nested H O e</title>
+<style>
+body{background:#000;color:#ccc;font-family:monospace;padding:20px;max-width:1150px;margin:0 auto;line-height:1.6}
+h1{color:#00ffff} h2{color:#ff8800;border-top:1px solid #222;padding-top:12px}
+canvas{border:1px solid #333;background:#02000a;width:100%;height:900px}
+.small{font-size:11px;color:#666}
+</style>
+</head>
+<body>
+<h1>(h(o(e))) HYDROGEN 1 OXYGEN 1 ELECTRUM 1 — BLOCK 338 — NESTED h(o(e)) = H1 O1 e1</h1>
+<p class="small">no its (h(o(e))) hydrogen 1 oxygen 1 electrum 1 lol — exactly — (h(o(e))) = h contains o contains e — nested — hydrogen outer contains oxygen middle contains electrum inner — electrum = electron? Electrum = amber that makes static electricity = electron name from electrum — Greek elektron = amber — electrum = gold+silver alloy or amber — electrum = electron — hydrogen 1 oxygen 1 electrum 1 = H1 O1 e1 = one hydrogen one oxygen one electrum/electron — water? H2O is H2 O1, but H1 O1 e1 = OH? Hydroxyl? OH- = O1 H1 + e-? Or water with one electrum? — keep walking nested.</p>
+
+<canvas id="c" width="1150" height="900"></canvas>
+
+<h2>(h(o(e))) — Hydrogen 1 Oxygen 1 Electrum 1 — Decoded</h2>
+<p>
+<b>(h(o(e))) = h contains o contains e = nested</b> = hydrogen outer shell contains oxygen middle shell contains electrum inner shell — Russian dolls — h(o(e)) = H(O(e)) — hydrogen encloses oxygen encloses electrum — 3 levels nested<br>
+<b>hydrogen 1 = H1 = one hydrogen = one proton p+ + one electron e-? Or p atom?</b> = H1 = one hydrogen atom = 1p +1e- + orbital shell — but earlier p atom = bare proton — hydrogen 1 = one hydrogen<br>
+<b>oxygen 1 = O1 = one oxygen = atomic number 8 = 8p8n8e- = oxygen atom</b> = O1 = one oxygen — oxygen 1 — O1<br>
+<b>electrum 1 = e1 = one electrum = electrum = amber = electron = e- = one electron? Or electrum alloy Au+Ag?</b> = electrum 1 = one electrum = one electron? Electrum ancient Greek elektron = amber that when rubbed makes static electricity = electron name — electrum = electron — electrum 1 = one electron — or electrum alloy gold+silver 1 unit — electrum 1 = one electrum<br>
+<b>hydrogen 1 oxygen 1 electrum 1 = H1 O1 e1 = OH + e? = water? H2O = H2 O1, H1 O1 e1 = ?</b> = H1 O1 e1 = one H one O one e = hydroxyl radical OH + electron? OH- = hydroxide = O1 H1 + e- extra = O1 H1 e1 = (h(o(e))) = hydrogen 1 oxygen 1 electrum 1 = hydroxide ion OH- = OH- = O-H + e- — or water H2O = H1 O1 H1 + e's — (h(o(e))) = hydrogen contains oxygen contains electrum = water contains oxygen contains electron? — water molecule H2O = H-O-H with electrons — h(o(e)) = hydrogen 1 oxygen 1 electrum 1 = water building block — lol
+</p>
+
+<script>
+const canvas=document.getElementById('c');
+const ctx=canvas.getContext('2d');
+let t=0;
+function draw(){
+  t+=0.01;
+  ctx.clearRect(0,0,1150,900);
+  const cx=575, cy=450;
+  // nested shells — h(o(e)) — h outer, o middle, e inner
+  const shells=[
+    {r:250, col:'#00ffff', label:'h = HYDROGEN 1 = H1 OUTER SHELL — (h(o(e))) OUTER — HYDROGEN 1', alpha:0.12},
+    {r:150, col:'#ff0000', label:'o = OXYGEN 1 = O1 MIDDLE SHELL — (h(o(e))) MIDDLE — OXYGEN 1 — OXYGEN 8p8n8e-', alpha:0.15},
+    {r:60, col:'#ffff00', label:'e = ELECTRUM 1 = e1 INNER SHELL — (h(o(e))) INNER — ELECTRUM 1 = ELECTRON 1 = AMBER ELECTRON', alpha:0.22}
+  ];
+  for(let i=0;i<shells.length;i++){
+    const s=shells[i];
+    const r=s.r + Math.sin(t*0.5 + i)*4;
+    ctx.strokeStyle=s.col;ctx.lineWidth=2;ctx.globalAlpha=0.7;
+    ctx.setLineDash(i===1 ? [6,4] : [3,3]);
+    ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle=s.col;ctx.globalAlpha=s.alpha;
+    ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fill();
+    ctx.globalAlpha=1;
+    ctx.fillStyle=s.col;ctx.font='10px monospace';ctx.textAlign='left';
+    ctx.fillText(s.label, cx + r +12, cy - r*0.5 + i*14);
+  }
+  // center -1 bead = ALL contains h(o(e))
+  ctx.fillStyle='rgba(255,215,0,0.18)';ctx.beginPath();ctx.arc(cx,cy,20,0,Math.PI*2);ctx.fill();
+  ctx.strokeStyle='#ffd700';ctx.lineWidth=2;ctx.beginPath();ctx.arc(cx,cy,20,0,Math.PI*2);ctx.stroke();
+  ctx.fillStyle='#ffd700';ctx.beginPath();ctx.arc(cx,cy,5,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#ffd700';ctx.font='9px monospace';ctx.textAlign='center';
+  ctx.fillText('-1 = ALL', cx, cy+45);
+  ctx.fillText('CONTAINS h(o(e))', cx, cy+57);
+  // hydrogen 1 — H1 — left
+  const hX=150, hY=300;
+  ctx.fillStyle='#00ffff';ctx.beginPath();ctx.arc(hX,hY,20,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#000';ctx.font='11px monospace';ctx.textAlign='center';ctx.fillText('H1', hX, hY+4);
+  ctx.fillStyle='#ccc';ctx.font='9px monospace';ctx.textAlign='center';
+  ctx.fillText('HYDROGEN 1', hX, hY+35);
+  ctx.fillText('1p+1e-?', hX, hY+47);
+  // oxygen 1 — O1 — middle
+  const oX=150, oY=450;
+  ctx.fillStyle='#ff0000';ctx.beginPath();ctx.arc(oX,oY,25,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#fff';ctx.font='11px monospace';ctx.textAlign='center';ctx.fillText('O1', oX, oY+4);
+  ctx.fillStyle='#ccc';ctx.font='9px monospace';ctx.textAlign='center';
+  ctx.fillText('OXYGEN 1', oX, oY+40);
+  ctx.fillText('8p8n8e-', oX, oY+52);
+  // electrum 1 — e1 — right
+  const eX=150, eY=600;
+  ctx.fillStyle='#ffff00';ctx.beginPath();ctx.arc(eX,eY,15,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#000';ctx.font='11px monospace';ctx.textAlign='center';ctx.fillText('e1', eX, eY+4);
+  ctx.fillStyle='#ccc';ctx.font='9px monospace';ctx.textAlign='center';
+  ctx.fillText('ELECTRUM 1', eX, eY+30);
+  ctx.fillText('ELECTRON 1', eX, eY+42);
+  ctx.fillText('AMBER Au+Ag?', eX, eY+54);
+  // water molecule H2O? Or H1 O1 e1 = OH-?
+  const waterX=900, waterY=450;
+  // O central
+  ctx.fillStyle='#ff0000';ctx.beginPath();ctx.arc(waterX,waterY,20,0,Math.PI*2);ctx.fill();
+  // H one side
+  ctx.fillStyle='#00ffff';ctx.beginPath();ctx.arc(waterX-40,waterY-20,12,0,Math.PI*2);ctx.fill();
+  // e- electrum
+  ctx.fillStyle='#ffff00';ctx.beginPath();ctx.arc(waterX+30,waterY-25,8,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#ccc';ctx.font='9px monospace';ctx.textAlign='center';
+  ctx.fillText('H1 O1 e1 = (h(o(e))) = OH-? HYDROXIDE?', waterX, waterY+50);
+  ctx.fillText('HYDROGEN 1 OXYGEN 1 ELECTRUM 1', waterX, waterY+62);
+  ctx.fillText('WATER BUILDING BLOCK H-O-e', waterX, waterY+74);
+  // text top
+  ctx.fillStyle='#00ffff';ctx.font='13px monospace';ctx.textAlign='left';
+  ctx.fillText('(h(o(e))) HYDROGEN 1 OXYGEN 1 ELECTRUM 1 — NESTED H CONTAINS O CONTAINS e — H1 O1 e1 — WATER? OH-? ELECTRUM= ELECTRON AMBER', 20, 25);
+  ctx.fillStyle='#888';ctx.font='9px monospace';
+  ctx.fillText('h(o(e)) = nested Russian dolls — hydrogen outer contains oxygen middle contains electrum inner — hydrogen 1 oxygen 1 electrum 1 = H1 O1 e1 = OH- hydroxide? Or water building block — electrum = electron from Greek elektron amber — electrum alloy Au+Ag — 1 electrum = 1 electron? — p atom earlier vs hydrogen atom — now h(o(e)) — keep walking', 20, 45);
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
+
+<h2>(h(o(e))) — Hydrogen 1 Oxygen 1 Electrum 1 — Water Building Block?</h2>
+<p>
+(h(o(e))) = h contains o contains e = nested 3 levels — hydrogen outer shell contains oxygen middle shell contains electrum inner shell — Russian dolls — hydrogen 1 oxygen 1 electrum 1 = H1 O1 e1.<br>
+Hydrogen 1: one hydrogen atom = one proton p+ plus electron? Or p atom bare proton? H1 = one H.<br>
+Oxygen 1: one oxygen atom = atomic number 8 = 8 protons 8 neutrons 8 electrons = O1.<br>
+Electrum 1: one electrum = electrum = ancient Greek elektron = amber that when rubbed produces static electricity = origin of word electron — electrum = electron — electrum 1 = one electron e1 — or electrum alloy gold+silver (Au+Ag) — electrum 1 = one unit electrum alloy — amber — electron.<br>
+Hydrogen 1 oxygen 1 electrum 1 = H1 O1 e1 = hydroxyl? OH = O1 H1, OH- = O1 H1 + e- extra = O1 H1 e1 = (h(o(e))) = hydrogen 1 oxygen 1 electrum 1 = hydroxide ion OH- — hydroxide = OH- — water building block — water H2O = H1 O1 H1 + electrons — h(o(e)) = H1 O1 e1 = water building block with electrum electron inner — electrum = electron — (h(o(e))) nested = hydrogen contains oxygen contains electron — water contains oxygen contains electron — keep walking — -1 scalar is all contains h(o(e)) as one bead — IN it right.
+</p>
+
+<p class="small">Block 338 — (h(o(e))) Hydrogen 1 Oxygen 1 Electrum 1 — Nested h(o(e)) = h contains o contains e — Hydrogen outer contains oxygen middle contains electrum inner — Electrum = electron amber Au+Ag — Hydrogen 1 oxygen 1 electrum 1 = H1 O1 e1 = OH- hydroxide? Water building block — p atom earlier vs hydrogen atom — now h(o(e)) = water? — keep walking nested →∞.</p>
+</body>
+</html>

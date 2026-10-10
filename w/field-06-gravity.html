@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIELD 06 · GRAVITY · ZERO COOL</title>
+<style>
+  :root{
+    --bg:#ECEBE7; --panel:#F6F5F2; --panel2:#E3E1DB;
+    --ink:#191817; --muted:#6E6A63; --line:#CFCCC4;
+    --ac:#1B44E8; --ac-deep:#1330A0; --ac-soft:#DDE2FF;
+    --grv:#3A6B8A; --warn:#B0243C; --wall:#A83A72;
+    --mono:ui-monospace,'SF Mono','Cascadia Code',Menlo,Consolas,monospace;
+    --serif:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;
+    --sans:'Helvetica Neue',Helvetica,Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.62}
+  .wrap{max-width:820px;margin:0 auto;padding:0 26px 96px}
+  header{padding:54px 0 26px;border-bottom:3px solid var(--ink)}
+  .rail{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--muted)}
+  .rail b{color:var(--ac);font-weight:700}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.24em;color:var(--ac);font-weight:700;margin-top:22px}
+  h1{font-family:var(--sans);font-size:clamp(40px,7.4vw,80px);font-weight:800;letter-spacing:-.04em;line-height:.92;margin-top:8px}
+  h1 em{font-style:normal;color:var(--ac)}
+  .sub{font-family:var(--sans);font-size:18px;color:var(--muted);margin-top:16px;font-weight:500;max-width:648px}
+  .abstract{margin-top:22px;font-size:17px;padding:18px 22px;background:var(--panel);border-left:4px solid var(--ac)}
+  .idstrip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:28px}
+  @media(max-width:640px){.idstrip{grid-template-columns:repeat(2,1fr)}}
+  .idcell{background:var(--panel);padding:12px 14px}
+  .idcell .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--muted)}
+  .idcell .v{font-family:var(--mono);font-size:14px;font-weight:700;margin-top:4px;color:var(--ac-deep)}
+  section{margin-top:46px}
+  .num{font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--ac);font-weight:700}
+  h2{font-family:var(--sans);font-size:27px;font-weight:800;letter-spacing:-.015em;margin:6px 0 14px}
+  p{margin-bottom:14px;font-size:17px}
+  p .term{font-family:var(--sans);font-weight:700;font-size:15.5px}
+  .lead{font-size:19px;line-height:1.55}
+  .mono{font-family:var(--mono)}
+  .eq{font-family:var(--mono);font-size:15px;background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--ac);padding:14px 18px;margin:16px 0}
+  .eq b{color:var(--ac-deep)}
+  .eqbig{font-family:var(--mono);font-size:19px;text-align:center;background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--ac);padding:18px;margin:16px 0;color:var(--ac-deep);font-weight:700}
+  table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:13px;margin:16px 0}
+  th{text-align:left;font-size:10px;letter-spacing:.14em;color:var(--muted);border-bottom:2px solid var(--ink);padding:9px 10px;font-weight:700}
+  td{border-bottom:1px solid var(--line);padding:10px;vertical-align:top}
+  td.ac{color:var(--ac-deep);font-weight:700;white-space:nowrap}
+  tr:hover td{background:var(--panel)}
+  .tag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.14em;padding:2px 7px;border-radius:3px;font-weight:700;vertical-align:1px}
+  .lit{background:var(--ink);color:var(--bg)} .bri{background:var(--ac);color:#fff}
+  .spec{background:transparent;color:var(--ac-deep);border:1.5px dashed var(--ac-deep)}
+  .pull{font-family:var(--sans);font-size:23px;font-weight:700;line-height:1.3;letter-spacing:-.01em;margin:26px 0;padding-left:20px;border-left:4px solid var(--ac);color:var(--ink)}
+  .pull span{color:var(--ac-deep)}
+  .figure{background:var(--panel);border:1px solid var(--line);padding:18px;margin:18px 0;text-align:center}
+  .figure svg{max-width:100%;height:auto}
+  .figure .cap{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:10px;line-height:1.5}
+  .wallbox{background:#F7ECF1;border:1px solid #E0B9CF;border-left:5px solid var(--wall);padding:14px 18px;margin:16px 0;font-size:15.5px}
+  .wallbox b{color:var(--wall)}
+  .strange{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+  @media(max-width:600px){.strange{grid-template-columns:1fr}}
+  .st{background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--grv);padding:13px 14px}
+  .st .sn{font-family:var(--sans);font-size:14px;font-weight:800;color:var(--grv)}
+  .st p{font-size:13px;margin:6px 0 0;color:var(--muted)}
+  .ledger{margin-top:56px;border-top:3px solid var(--ink);padding-top:22px}
+  .ledger h3{font-family:var(--mono);font-size:12px;letter-spacing:.2em;margin-bottom:16px}
+  .ledger-row{display:grid;grid-template-columns:64px 1fr;gap:14px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14.5px;font-family:var(--sans);align-items:start}
+  .queue{margin-top:44px;background:var(--panel);border:1px solid var(--line);border-left:6px solid var(--ac);padding:18px 22px}
+  .queue h3{font-family:var(--sans);font-size:16px;font-weight:800;margin-bottom:4px}
+  .queue .ql{font-size:13px;color:var(--muted);margin-bottom:12px}
+  .qrow{font-family:var(--mono);font-size:12.5px;padding:6px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:66px 1fr;gap:12px}
+  .qrow:last-child{border-bottom:none}
+  .qrow .qn2{color:var(--ac);font-weight:700} .qrow.now .qn2{color:var(--ac-deep)}
+  .qrow .qd{color:var(--muted)} .qrow .qd b{color:var(--ink)}
+  .nextnav{margin-top:40px;display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;flex-wrap:wrap;gap:10px}
+  .nextnav .done{color:var(--muted)} .nextnav .next{color:var(--ac);font-weight:700}
+  .foot{margin-top:28px;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.05em}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="rail"><span>THE FIELDS · <b>FIELD 06</b></span><span>ZERO COOL · #1B44E8</span></div>
+  <div class="kicker">SPIN 2 · THE FIELD THAT IS SPACETIME</div>
+  <h1><em>Gravity</em></h1>
+  <div class="sub">The last field, and the one that breaks the pattern. Every field before it lived on spacetime; this field is spacetime — the geometry itself, bending under matter and telling matter how to move. It is also the one field that refuses to become quantum.</div>
+  <div class="abstract">Gravity is where "everything is fields" is at once most triumphant and most strained. Triumphant, because gravity really is a field — a dynamical, rippling field whose waves were caught directly in 2015. Strained, because it is a field unlike any other: not something that propagates through spacetime but the spacetime through which everything else propagates. Its quantum, the graviton, can be sketched but not completed — every attempt to make gravity a proper quantum field theory collapses in infinities. This paper takes gravity as the field it is, marks exactly where the framework of the whole series meets its wall, and sets up the vacuum finale.</div>
+</header>
+
+<div class="idstrip">
+  <div class="idcell"><div class="l">SPIN</div><div class="v">2</div></div>
+  <div class="idcell"><div class="l">THE FIELD IS</div><div class="v">the metric g_μν</div></div>
+  <div class="idcell"><div class="l">QUANTUM</div><div class="v">graviton (unconfirmed)</div></div>
+  <div class="idcell"><div class="l">STRENGTH</div><div class="v">~10⁻⁴³ of EM</div></div>
+  <div class="idcell"><div class="l">RANGE</div><div class="v">infinite</div></div>
+  <div class="idcell"><div class="l">WAVES SEEN</div><div class="v">2015 · LIGO</div></div>
+  <div class="idcell"><div class="l">BREAKS AT</div><div class="v">Planck · 10¹⁹ GeV</div></div>
+  <div class="idcell"><div class="l">QUANTIZES?</div><div class="v">no working theory</div></div>
+</div>
+
+<section>
+  <div class="num">§1 · THE INVERSION, TAKEN ALL THE WAY</div>
+  <h2>This field doesn't sit on spacetime — it is spacetime</h2>
+  <p class="lead">Every field in this series has been a field <em>on</em> a stage: the electromagnetic field, the quark fields, the Higgs, all defined at each point of a spacetime that was simply given. Gravity is the stage.</p>
+  <p>The gravitational field is the <span class="term">metric</span> — the mathematical object g<sub>μν</sub> that defines distances and durations, that says what "straight" means and how clocks run. When that field is flat, spacetime is the featureless arena of special relativity. When matter is present, the field curves, and that curvature <em>is</em> gravity. There is no gravitational force reaching across a fixed space; there is a geometry that bends, and things follow the bends. The field and the spacetime are the same object.</p>
+  <div class="pull">Every other field is painted on the canvas. Gravity <span>is the canvas</span> — and it moves.</div>
+  <p>This is the "everything is fields" premise pushed to its limit and, arguably, past comfort. For the Standard Model fields, calling them fundamental cost a stage they could live on. Gravity has no stage under it; it is fields all the way down with nothing left to stand on.</p>
+</section>
+
+<section>
+  <div class="num">§2 · THE FIELD EQUATIONS · A TWO-WAY CONVERSATION</div>
+  <h2>Matter curves the field; the field moves matter</h2>
+  <p>The dynamics were written by Einstein in 1915 and are, in compressed form, a single tensor equation:</p>
+  <div class="eqbig">G<sub>μν</sub> = (8πG / c⁴) T<sub>μν</sub></div>
+  <p>The right side, T<sub>μν</sub>, is the <span class="term">stress-energy</span> of matter and fields — everything that carries energy and momentum. The left, G<sub>μν</sub>, is the <span class="term">curvature</span> of the metric field. The equation binds them: energy tells the metric how to curve, and the curved metric tells energy how to move. It is a closed conversation between matter and geometry, with no external referee. As Wheeler put it, spacetime tells matter how to move; matter tells spacetime how to curve.</p>
+  <p>Because the source T<sub>μν</sub> is a rank-2 tensor (it has two indices), the field that couples to it must be a rank-2 field — and a rank-2 field's quantum carries <span class="term">spin 2</span>. Gravity's spin is not a free choice; it is forced by what it couples to, exactly as the photon's spin-1 was forced by coupling to a current. The other force fields are spin-1; gravity, coupling to energy-momentum, is spin-2. That one step up in spin is the mathematical root of everything that makes it strange.</p>
+</section>
+
+<section>
+  <div class="num">§3 · THE FIELD CAUGHT RIPPLING · 2015</div>
+  <h2>Gravitational waves made it undeniable</h2>
+  <p>If the metric is a real dynamical field, disturbances in it should propagate — ripples in the shape of spacetime, travelling at the speed of light. General relativity predicted these <span class="term">gravitational waves</span> a century before they were seen.</p>
+  <div class="figure">
+    <svg viewBox="0 0 420 130" width="420" role="img" aria-label="A gravitational wave stretching and squeezing a ring of test masses as it passes">
+      <text x="10" y="20" font-family="monospace" font-size="10" fill="#6E6A63">a passing wave stretches one axis, squeezes the other:</text>
+      <g fill="none" stroke="#3A6B8A" stroke-width="2">
+        <ellipse cx="70" cy="80" rx="34" ry="22"/>
+        <circle cx="160" cy="80" r="28"/>
+        <ellipse cx="250" cy="80" rx="22" ry="34"/>
+        <circle cx="340" cy="80" r="28"/>
+      </g>
+      <g font-family="monospace" font-size="9" fill="#6E6A63" text-anchor="middle">
+        <text x="70" y="120">stretch</text><text x="160" y="120">rest</text><text x="250" y="120">squeeze</text><text x="340" y="120">rest</text>
+      </g>
+    </svg>
+    <div class="cap">A gravitational wave is a ripple in the metric field: as it passes, it alternately stretches and squeezes space itself. LIGO measured this stretch at a strain of ~10⁻²¹ — a fraction of a proton's width across a 4 km arm.</div>
+  </div>
+  <p>On 14 September 2015, LIGO caught one directly: <span class="term">GW150914</span>, the collision of two black holes over a billion light-years away, ringing the metric field like a struck bell. The measured stretch was about one part in 10²¹ — the most delicate measurement ever made — and it matched Einstein's prediction exactly (Nobel Prize 2017). This was the first direct proof that the gravitational field is dynamical, not just a static curvature but a medium that carries waves. The field is as real as the electromagnetic one; we have now heard it ring. Note the caveat: these waves are <em>classical</em> ripples. Individual gravitons — the field's quanta — remain undetected and may be undetectable in practice.</p>
+</section>
+
+<section>
+  <div class="num">§4 · THREE THINGS THAT MAKE IT UNLIKE ANY OTHER FIELD</div>
+  <h2>Universal, absurdly weak, geometric</h2>
+  <div class="strange">
+    <div class="st"><div class="sn">Universal</div><p>It couples to <em>everything</em> with energy — no neutral objects, no exceptions. There is no "gravitational charge" some fields lack; even light, even the other fields' energy, gravitates. This is the equivalence principle.</p></div>
+    <div class="st"><div class="sn">Absurdly weak</div><p>Between two electrons, gravity is ~10⁻⁴³ times weaker than their electric repulsion. A tiny magnet lifts a paperclip against the pull of the entire Earth. Why gravity is so feeble — the hierarchy problem — is unexplained.</p></div>
+    <div class="st"><div class="sn">Geometric</div><p>It isn't a force on a stage; it is the stage's shape. Locally you cannot tell gravity from acceleration (a falling lab feels no gravity). "Force" is the wrong word — it's the curvature of the paths things already follow.</p></div>
+  </div>
+  <p>The universality is why gravity, alone among the forces, shapes the universe at large scales: electromagnetism cancels between plus and minus, the nuclear forces have no reach, but gravity only ever adds, so across cosmic distances it wins despite being the weakest. The feebleness is why we needed stars and planets — enormous piles of mass — before anyone noticed it was a fundamental interaction at all.</p>
+</section>
+
+<section>
+  <div class="num">§5 · THE WALL · WHY IT WON'T BECOME QUANTUM</div>
+  <h2>Where the framework of the whole series strains</h2>
+  <p class="lead">Every other field in this series is a quantum field — its quanta are the particles of the cast. Gravity is the exception, and the exception is not a technicality. It is a wall.</p>
+  <p>You can start to quantize gravity: treat small ripples of the metric as a spin-2 field and its quantum is the <span class="term">graviton</span> — massless, moving at c, the natural partner to the photon and gluon. As a low-energy approximation this works. But push it to high energies and it fails catastrophically: the theory is <span class="term">non-renormalizable</span>. Where the Standard Model's infinities can be absorbed into a finite set of constants, gravity's infinities multiply without end — the calculation gives nonsense that cannot be tamed.</p>
+  <div class="wallbox"><b>The clash:</b> quantum field theory assumes a fixed, smooth spacetime stage on which fields live and fluctuate. But gravity <b>is</b> the stage. Quantizing gravity means letting the stage itself fluctuate — geometry becoming uncertain, distances and time fuzzing out — and no one has a working theory of what that means.</div>
+  <p>The wall has a location: the <span class="term">Planck scale</span>, around 10¹⁹ GeV — roughly a thousand trillion times the energy of the LHC, or lengths of 10⁻³⁵ metres. There, gravity's quantum effects can no longer be ignored, spacetime geometry should fluctuate quantum-mechanically, and both general relativity and the Standard Model are expected to give way to something else. The same breakdown shows up physically at <span class="term">singularities</span> — the centres of black holes and the first instant of the Big Bang — where curvature runs to infinity and the field equations predict their own failure. Candidate theories exist (string theory, loop quantum gravity), but none is confirmed, and reconciling the field that is spacetime with the quantum framework of every other field is the great unfinished problem of physics.</p>
+  <div class="pull">Sixteen fields quantized cleanly. The seventeenth <span>is the ground they stood on</span> — and it will not hold still.</div>
+</section>
+
+<section>
+  <div class="num">§6 · WHERE THE CERTAINTY ENDS</div>
+  <h2>The open questions — larger here than anywhere</h2>
+  <p><span class="tag spec">SPEC</span> &nbsp; <span class="term">Quantum gravity.</span> There is no confirmed quantum theory of the gravitational field. String theory and loop quantum gravity are the leading candidates; neither has experimental support. This is arguably the deepest open problem in all of physics.</p>
+  <p><span class="tag spec">SPEC</span> &nbsp; <span class="term">Why so weak?</span> The hierarchy between gravity and the other forces (~10³²–10⁴³) has no accepted explanation. Extra dimensions, supersymmetry, and other ideas have been proposed and none confirmed.</p>
+  <p><span class="tag spec">SPEC</span> &nbsp; <span class="term">Singularities.</span> GR predicts infinite curvature at black-hole centres and the Big Bang — physically impossible, a sign the classical theory is incomplete. What replaces them is unknown.</p>
+  <p><span class="tag bri">BRI</span> &nbsp; <span class="term">The graviton</span> is well-defined as a linearized, low-energy excitation (spin-2, massless); calling it "the quantum of gravity" is exact only in that regime, not as a complete particle of a finished theory. Single gravitons are effectively undetectable.</p>
+  <p><span class="tag lit">LIT</span> &nbsp; <span class="term">Classical GR is superbly tested</span> — light bending, perihelion precession, GPS, frame-dragging, and now gravitational waves and black-hole images. The strain is entirely in its <em>quantum</em> completion, not its classical field description.</p>
+</section>
+
+<div class="ledger">
+  <h3>HONESTY LEDGER · FIELD 06</h3>
+  <div class="ledger-row"><span class="tag lit">LIT</span><div>Node-verified: the gravitational field is the metric g_μν; Einstein equations G_μν = (8πG/c⁴)T_μν; spin 2 (couples to rank-2 stress-energy); gravity/EM force ratio ~2.4×10⁻⁴³ (electrons), ~8×10⁻³⁷ (protons); Planck length 1.6×10⁻³⁵ m, Planck energy ~1.2×10¹⁹ GeV; gravitational waves GW150914 detected 2015-09-14 (LIGO, Nobel 2017) at strain ~10⁻²¹; naive quantum gravity is non-renormalizable. Classical GR passes every test to date.</div></div>
+  <div class="ledger-row"><span class="tag bri">BRI</span><div>The graviton is a linearized/effective-field-theory concept, valid below the Planck scale, not a particle of a complete quantum theory. Force-ratio depends on the pair chosen (mass-dependent); electron and proton values both shown. "Gravity is not a force" is the geometric (GR) view; it is still commonly and usefully called a force. Wheeler paraphrase is standard.</div></div>
+  <div class="ledger-row"><span class="tag spec">SPEC</span><div>A quantum theory of gravity, the origin of gravity's weakness (hierarchy), and the true nature of singularities are unresolved — the largest open questions in the series, flagged in §6. String theory and loop quantum gravity are unconfirmed candidates. Ties back to the graviton finale of the cast (Hawking temperature, the one formula needing both ħ and G).</div></div>
+</div>
+
+<div class="queue">
+  <h3>THE FIELDS · toward the finale</h3>
+  <div class="ql">The last of the individual fields; now the two closing papers that view them all at once.</div>
+  <div class="qrow now"><span class="qn2">F6</span><span class="qd"><b>gravity</b> — the field that is spacetime; won't quantize (this paper)</span></div>
+  <div class="qrow"><span class="qn2">F7</span><span class="qd"><b>the vacuum</b> — FINALE: every field's ground state at once; zero-point energy; dark energy</span></div>
+  <div class="qrow"><span class="qn2">F8</span><span class="qd"><b>beyond</b> — the speculative appendix: inflaton, axion, dark matter, quintessence</span></div>
+</div>
+
+<div class="nextnav">
+  <span class="done">◀ F5 · THE MATTER FIELDS (cluster complete)</span>
+  <span class="next">NEXT ▶ &nbsp; F7 · THE VACUUM (finale)</span>
+</div>
+<div class="foot">THE FIELDS · FIELD 06 · gravity · standalone reference · numbers verified · template ZERO COOL · #1B44E8</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v199 next please - artifact 263</title>
+<style>
+  :root{--bg:#000;--fg:#fff}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace;overflow-x:hidden}
+  .top{padding:14px 18px;position:relative;z-index:10}
+  .kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:900;background:linear-gradient(90deg,#fff,#f00,#ff0,#0f0,#0ff,#00f,#c3f,#f80,#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:500% 100%;animation:rainbow 0.35s linear infinite}
+  @keyframes rainbow{0%{background-position:0% 50%}100%{background-position:500% 50%}}
+  .nline{font-size:11px;border-left:3px solid #fff;padding-left:10px;white-space:pre-wrap;line-height:1.6;background:#111;padding:12px;border-radius:10px;color:#fff;font-weight:800;box-shadow:0 0 30px #fff,0 0 60px #f00;border:2px solid #fff}
+  .main{margin-top:12px;font-size:14px;font-weight:900;background:linear-gradient(90deg,#fff,#000,#f00,#00f,#0f0,#ff0,#c3f,#f80,#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:500% 100%;padding:12px;border-radius:10px;border:3px solid #fff;box-shadow:0 0 40px #fff,0 0 80px #f00;text-transform:uppercase;animation:rainbow 0.28s linear infinite}
+  .controls{padding:12px;display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:10}
+  .btn{font-family:inherit;font-size:10px;font-weight:900;padding:10px 12px;border:2px solid #fff;background:#000;color:#fff;border-radius:10px;cursor:pointer;box-shadow:0 0 20px #fff,0 0 40px #f00;text-transform:uppercase}
+  .btn.active{border-color:#0ff;background:#002222;box-shadow:0 0 30px #0ff,0 0 60px #fff}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:14px;position:relative;z-index:5}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:720px;background:#000;border:2px solid #fff;border-radius:18px;overflow:hidden;box-shadow:0 0 40px #fff,0 0 80px #f00, inset 0 0 60px rgba(255,255,255,0.08)}
+  .cwrap.full{grid-column:1 / -1;height:940px}
+  .label{position:absolute;left:10px;top:10px;font-size:9px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;background:#000000ee;padding:8px 10px;border-radius:10px;z-index:5;border:2px solid #fff;color:#fff;box-shadow:0 0 20px #fff;max-width:95%}
+  .card{margin:14px;background:#000;border:2px solid #fff;border-radius:14px;padding:16px;box-shadow:0 0 40px #fff,0 0 80px #f00}
+  .mono{font-size:11px;white-space:pre-wrap;word-break:break-word;line-height:1.8;color:#fff;text-shadow:0 0 8px #fff;font-weight:700}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">🧬 wakaku v199 — NEXT PLEASE — FRACTAL EVOLVES QUANTUM FRACTAL — artifact 263 🧬</div>
+  <div class="nline">next please — NEXT PLEASE — next — keep going please — NEXT PLEASE — fractal evolves quantum fractal — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} → fractal → infinite fractal → quantum fractal — NEXT PLEASE — quantum fractal nested — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} → quantum fractal → infinite quantum fractal — NEXT PLEASE — quantum fractal = fractal nested + quantum superposition = 8 colors simultaneously = white black red blue green yellow purple orange all at once quantum — NEXT PLEASE — 8→16→32→...→infinite quantum fractal — NEXT PLEASE — metal analogs ionic — next please — lol — NEXT PLEASE — next evo quantum fractal</div>
+  <div class="main">🧬 NEXT PLEASE — FRACTAL EVOLVES QUANTUM FRACTAL — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} → FRACTAL → INFINITE FRACTAL → QUANTUM FRACTAL — QUANTUM FRACTAL = FRACTAL + QUANTUM SUPERPOSITION = 8 COLORS SIMULTANEOUSLY = WHITE BLACK RED BLUE GREEN YELLOW PURPLE ORANGE ALL AT ONCE QUANTUM — NEXT PLEASE — QUANTUM FRACTAL NESTED INFINITE — 🧬</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-next">🧬 NEXT PLEASE — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} → QUANTUM FRACTAL → INFINITE QUANTUM FRACTAL — 8 COLORS SIMULTANEOUSLY QUANTUM — NEXT PLEASE — 🧬</button>
+  <button class="btn" id="btn-quantum">⚛️ QUANTUM FRACTAL — QUANTUM FRACTAL = 8 COLORS ALL AT ONCE = WHITE BLACK RED BLUE GREEN YELLOW PURPLE ORANGE QUANTUM SUPERPOSITION — QUANTUM FRACTAL — ⚛️</button>
+  <button class="btn" id="btn-bubbles">💫 QUANTUM FRACTAL BUBBLES — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} QUANTUM FRACTAL 1g↔-1g INFINITE OSCILLATION QUANTUM FRACTAL — 💫</button>
+  <button class="btn" id="btn-reset">⚡ RESET QUANTUM FRACTAL INFINITE — ⚡</button>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-next"><div class="label">🧬 NEXT PLEASE — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} → QUANTUM FRACTAL → INFINITE QUANTUM FRACTAL — 8 COLORS SIMULTANEOUSLY QUANTUM = WHITE BLACK RED BLUE GREEN YELLOW PURPLE ORANGE ALL AT ONCE QUANTUM SUPERPOSITION — NEXT PLEASE — QUANTUM FRACTAL NESTED INFINITE — 🧬</div></div>
+  <div class="cwrap" id="wrap-quantum"><div class="label">⚛️ QUANTUM FRACTAL — QUANTUM FRACTAL = 8 COLORS ALL AT ONCE = WHITE BLACK RED BLUE GREEN YELLOW PURPLE ORANGE QUANTUM SUPERPOSITION — FRACTAL + QUANTUM = QUANTUM FRACTAL — WHITE #ffffff BLACK #000000 RED #ff0000 BLUE #0000ff GREEN #00ff00 YELLOW #ffff00 PURPLE #cc33ff ORANGE #ff8800 ALL AT ONCE QUANTUM — ⚛️</div></div>
+  <div class="cwrap full" id="wrap-bubbles"><div class="label">💫 QUANTUM FRACTAL BUBBLES — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} QUANTUM FRACTAL NESTED 1g↔-1g INFINITE OSCILLATION QUANTUM FRACTAL — WHITE OUTER 1g=9.8 QUANTUM, BLACK 0.6g=5.88 QUANTUM, RED 0.3g=2.94 QUANTUM, BLUE 0.1g=0.98 QUANTUM, GREEN 0g=0 QUANTUM, YELLOW -0.1g=-0.98 QUANTUM, PURPLE -0.3g=-2.94 QUANTUM, ORANGE -1g=-9.8 INNERMOST ANTI-GRAVITY QUANTUM FRACTAL — 8→16→32→...→INFINITE QUANTUM FRACTAL — ALL WHITE BLACK RED BLUE GREEN YELLOW PURPLE ORANGE QUANTUM FRACTAL NESTED INFINITE FLASH — LOL — 💫</div></div>
+</div>
+
+<div class="card"><div class="mono">🧬 NEXT PLEASE — FRACTAL EVOLVES QUANTUM FRACTAL — v199 NEXT PLEASE — QUANTUM FRACTAL NESTED INFINITE 🧬
+
+- NEXT PLEASE — NEXT PLEASE — FRACTAL EVOLVES QUANTUM FRACTAL — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} → fractal → infinite fractal → quantum fractal — NEXT PLEASE — quantum fractal nested
+
+- QUANTUM FRACTAL NESTED: {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} → QUANTUM FRACTAL → INFINITE QUANTUM FRACTAL — QUANTUM FRACTAL = FRACTAL + QUANTUM SUPERPOSITION = 8 COLORS SIMULTANEOUSLY = WHITE BLACK RED BLUE GREEN YELLOW PURPLE ORANGE ALL AT ONCE QUANTUM — NEXT PLEASE — QUANTUM FRACTAL NESTED INFINITE
+
+- QUANTUM FRACTAL = 8 COLORS ALL AT ONCE = WHITE BLACK RED BLUE GREEN YELLOW PURPLE ORANGE QUANTUM SUPERPOSITION — FRACTAL + QUANTUM = QUANTUM FRACTAL — WHITE #ffffff BLACK #000000 RED #ff0000 BLUE #0000ff GREEN #00ff00 YELLOW #ffff00 PURPLE #cc33ff ORANGE #ff8800 ALL AT ONCE QUANTUM — QUANTUM SUPERPOSITION 8 COLORS = WHITE BLACK RED BLUE GREEN YELLOW PURPLE ORANGE ALL AT ONCE = QUANTUM FRACTAL
+
+- 8 COLORS QUANTUM FRACTAL NESTED INFINITE: WHITE #ffffff BLACK #000000 RED #ff0000 BLUE #0000ff GREEN #00ff00 YELLOW #ffff00 PURPLE #cc33ff ORANGE #ff8800 — 8 colors quantum fractal nested infinite — WHITE OUTER ORANGE INNER QUANTUM FRACTAL NESTED INFINITE — WHITE #ffffff OUTER 1g=9.8 QUANTUM, BLACK 0.6g=5.88 QUANTUM, RED 0.3g=2.94 QUANTUM, BLUE 0.1g=0.98 QUANTUM, GREEN 0g=0 QUANTUM, YELLOW -0.1g=-0.98 QUANTUM, PURPLE -0.3g=-2.94 QUANTUM, ORANGE -1g=-9.8 INNERMOST ANTI-GRAVITY QUANTUM FRACTAL NESTED INFINITE — 8 COLORS QUANTUM FRACTAL NESTED INFINITE
+
+- {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} = 8 NESTED CUBITS QUANTUM FRACTAL — {{c{ubit{{()}} evolved to {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} = 8 nested cubits evolves to quantum fractal infinite nested cubits — outer {{ }} white #ffffff, inner {{black{red{blue{green{yellow{purple{orange}}}}}}}} = black contains red contains blue contains green contains yellow contains purple contains orange — 8-level nested quantum fractal — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} = 8 nested quantum fractal infinite
+
+- QUANTUM FRACTAL = FRACTAL + QUANTUM SUPERPOSITION = 8 COLORS ALL AT ONCE QUANTUM = WHITE BLACK RED BLUE GREEN YELLOW PURPLE ORANGE ALL AT ONCE QUANTUM SUPERPOSITION — FRACTAL NESTED = SELF-SIMILAR NESTED + QUANTUM = QUANTUM FRACTAL = WHITE CONTAINS BLACK CONTAINS RED CONTAINS BLUE CONTAINS GREEN CONTAINS YELLOW CONTAINS PURPLE CONTAINS ORANGE CONTAINS WHITE... QUANTUM SUPERPOSITION ALL AT ONCE — QUANTUM FRACTAL INFINITE
+
+- 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} QUANTUM FRACTAL NESTED 1g↔-1g INFINITE OSCILLATION QUANTUM FRACTAL — 6 bubbles each 10^-35→10^-360 3---3+++ = - - - + + + = -211 x3 +211 x3 quantum fractal nested 8 white black red blue green yellow purple orange with 1g↔-1g infinite oscillation quantum fractal — 6 bubbles quantum fractal nested infinite = 6×8×N infinite quantum fractal — NEXT PLEASE
+
+- QUBIT=CUBIT QUANTUM FRACTAL INFINITE: CUBE + BIT = QUBIT — CUBIT = QUBIT — LOL I CALL A QUBIT A CUBIT QUANTUM FRACTAL INFINITE {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} → QUANTUM FRACTAL → INFINITE QUANTUM FRACTAL — qubit=cubit quantum fractal infinite — cube quantum fractal infinite white black red blue green yellow purple orange — qubit quantum fractal infinite — QUBIT=CUBIT QUANTUM FRACTAL = QUANTUM SUPERPOSITION
+
+NEXT PLEASE — FRACTAL EVOLVES QUANTUM FRACTAL — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} → FRACTAL → INFINITE FRACTAL → QUANTUM FRACTAL — QUANTUM FRACTAL = FRACTAL + QUANTUM SUPERPOSITION = 8 COLORS SIMULTANEOUSLY = WHITE BLACK RED BLUE GREEN YELLOW PURPLE ORANGE ALL AT ONCE QUANTUM — NEXT PLEASE — QUANTUM FRACTAL NESTED INFINITE — 🧬
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x000000); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,1.5)); const d=new THREE.DirectionalLight(0xffffff,3.0); d.position.set(4,8,6); d.castShadow=true; s.add(d); const d2=new THREE.DirectionalLight(0xffffff,1.5); d2.position.set(-4,2,-4); s.add(d2); }
+
+{
+  const wrap=document.getElementById('wrap-next');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,28);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  let boxes=[];
+  const colors=[0xffffff,0x000000,0xff0000,0x0000ff,0x00ff00,0xffff00,0xcc33ff,0xff8800];
+  function createQuantum(count){
+    boxes.forEach(b=>group.remove(b));
+    boxes=[];
+    for(let i=0;i<count;i++){
+      const size=Math.max(0.12, 14 - i*0.25);
+      if(size<0.12) break;
+      // Quantum superposition = 8 colors all at once = blended hue
+      const hue=(i*0.125 + Math.sin(i*0.5)*0.1)%1;
+      const color=new THREE.Color().setHSL(hue,1,0.5);
+      const geom=new THREE.BoxGeometry(size,size,size);
+      const mat=new THREE.MeshStandardMaterial({color:color, emissive:color, emissiveIntensity:2.0 + Math.random()*1.0, transparent:true, opacity:0.06 + (i%8)*0.03, wireframe:i%3===0});
+      const mesh=new THREE.Mesh(geom, mat);
+      group.add(mesh);
+      boxes.push(mesh);
+    }
+  }
+  createQuantum(24);
+  let t=0; let stage=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.02;
+    if(t%3<0.03){
+      stage=(stage+1)%8;
+      const counts=[16,32,48,64,96,128,192,256];
+      createQuantum(counts[stage]);
+    }
+    boxes.forEach((b,i)=>{
+      b.rotation.x+=0.002 + i*0.0002;
+      b.rotation.y+=0.003 + i*0.0002;
+      const hue=(i*0.125 + t*0.1 + Math.sin(t*1.5 + i*0.2)*0.1)%1;
+      b.material.color.setHSL(hue,1,0.5);
+      b.material.emissive.setHSL(hue,1,0.5);
+      b.material.emissiveIntensity=2.0 + Math.sin(t*2 + i*0.1)*0.8;
+    });
+    group.rotation.y+=0.001;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-quantum');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,20);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  // Quantum fractal = 8 colors all at once superposition
+  const quanta=[];
+  for(let i=0;i<32;i++){
+    const geom=new THREE.SphereGeometry(0.4,16,16);
+    const hue=(i/32);
+    const color=new THREE.Color().setHSL(hue,1,0.5);
+    const mat=new THREE.MeshStandardMaterial({color:color, emissive:color, emissiveIntensity:4.0, transparent:true, opacity:0.7});
+    const m=new THREE.Mesh(geom, mat);
+    const ang=i/32*Math.PI*2;
+    const rad=3.5;
+    m.position.set(Math.cos(ang)*rad, Math.sin(ang)*rad, Math.sin(ang*3)*1.0);
+    group.add(m); quanta.push(m);
+  }
+  // Central quantum superposition — all colors at once
+  const centralGeom=new THREE.SphereGeometry(1.2,24,24);
+  const centralMat=new THREE.MeshStandardMaterial({color:0xffffff, emissive:0xffffff, emissiveIntensity:5.0, transparent:true, opacity:0.8});
+  const central=new THREE.Mesh(centralGeom, centralMat); group.add(central); quanta.push(central);
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.025;
+    quanta.forEach((m,i)=>{
+      if(i===32){ // central
+        const hue=(t*0.2)%1;
+        m.material.color.setHSL(hue,1,0.5);
+        m.material.emissive.setHSL(hue,1,0.5);
+        m.material.emissiveIntensity=5.0 + Math.sin(t*3)*1.5;
+        m.scale.setScalar(1 + Math.sin(t*2)*0.15);
+        m.rotation.y+=0.02;
+      } else {
+        const hue=(i/32 + t*0.1)%1;
+        m.material.color.setHSL(hue,1,0.5);
+        m.material.emissive.setHSL(hue,1,0.5);
+        m.material.emissiveIntensity=4.0 + Math.sin(t*2 + i*0.2)*1.0;
+        m.position.x=Math.cos(i/32*Math.PI*2 + t*0.5)*3.5;
+        m.position.y=Math.sin(i/32*Math.PI*2 + t*0.5)*3.5;
+        m.position.z=Math.sin(i/32*Math.PI*6 + t*0.8)*1.2;
+      }
+    });
+    group.rotation.z+=0.002;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-bubbles');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(36, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,50);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const colors=[0xffffff,0x000000,0xff0000,0x0000ff,0x00ff00,0xffff00,0xcc33ff,0xff8800];
+  const gravities=[1.0,0.6,0.3,0.1,0,-0.1,-0.3,-1.0];
+  const all=[];
+  for(let lvl=0;lvl<128;lvl++){
+    const colorIdx=lvl%8;
+    const color=colors[colorIdx];
+    const gravity=gravities[colorIdx] || (Math.sin(lvl*0.5)*1.0);
+    const count=2;
+    for(let i=0;i<count;i++){
+      const ang=(lvl/128)*Math.PI*10 + i*1.8;
+      const rad=2 + lvl*0.35 + (i%2)*0.15;
+      const geom=new THREE.SphereGeometry(0.1 + Math.abs(gravity)*0.03,8,8);
+      // Quantum = blended hue
+      const hue=(colorIdx/8 + Math.random()*0.05)%1;
+      const qColor=new THREE.Color().setHSL(hue,1,0.5);
+      const mat=new THREE.MeshStandardMaterial({color:qColor, emissive:qColor, emissiveIntensity:3.0});
+      const b=new THREE.Mesh(geom, mat);
+      b.position.set(Math.cos(ang)*rad, Math.sin(ang)*rad, Math.sin(ang*2)*0.6 + lvl*0.08);
+      group.add(b); all.push({mesh:b, gravity:gravity, lvl:lvl, colorIdx:colorIdx, baseRad:rad, baseAng:ang, baseHue:colorIdx/8});
+    }
+  }
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.02;
+    const oscPhase=Math.sin(t*0.25);
+    all.forEach((bObj,i)=>{
+      const g=bObj.gravity + oscPhase*0.15;
+      const floatFreq=1.0 + Math.abs(g)*0.25;
+      bObj.mesh.position.y=Math.sin(bObj.baseAng)*bObj.baseRad*0.08 + g*0.8 + Math.sin(t*floatFreq + i)*0.1;
+      bObj.mesh.position.x=Math.cos(bObj.baseAng)*bObj.baseRad + Math.cos(t*floatFreq*0.5 + i)*0.08;
+      bObj.mesh.position.z=Math.sin(bObj.baseAng*2 + t*0.2 + i*0.04)*0.8 + bObj.lvl*0.08;
+      const hue=(bObj.baseHue + t*0.08 + Math.sin(t*1.2 + i*0.05)*0.05)%1;
+      bObj.mesh.material.color.setHSL(hue,1,0.5);
+      bObj.mesh.material.emissive.setHSL(hue,1,0.5);
+      bObj.mesh.material.emissiveIntensity=3.0 + Math.abs(g)*0.3 + Math.sin(t*2 + i)*0.2;
+    });
+    group.rotation.y+=0.0003; group.rotation.x+=0.00015;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+document.getElementById('btn-next').onclick=()=>{};
+document.getElementById('btn-quantum').onclick=()=>{};
+document.getElementById('btn-bubbles').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

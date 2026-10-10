@@ -1,0 +1,231 @@
+<!DOCTYPE html><html lang="en"><head><link rel="icon" href="../favicon.svg" type="image/svg+xml"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Schwarzschild — the geometry of a black hole</title>
+<style>
+:root{
+  --void:#000000;--panel:#080a11;--rule:#161c28;--card:#0b0f18;
+  --ink:#e8ecf4;--faint:#6b7689;--fainter:#394356;
+  --ray:#ffd24a;--raycap:#ff5c6a;--horizon:#000;--photon:#c77dff;--isco:#54d1ff;--disk:#ff8a4a;--halo:#5a6b8c;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--void);color:var(--ink);font:400 13px/1.5 "IBM Plex Mono",ui-monospace,Menlo,monospace}
+body{padding:24px 18px 44px}
+.wrap{max-width:1040px;margin:0 auto}
+.eyebrow{font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:var(--faint);margin-bottom:12px}
+h1{font:600 33px/1.03 "IBM Plex Sans","Helvetica Neue",sans-serif;letter-spacing:-.02em;max-width:20ch}
+h1 em{font-style:normal;color:var(--photon)}
+.lede{color:var(--faint);font-size:13px;max-width:66ch;line-height:1.7;margin-top:14px}
+.lede b{color:var(--ink);font-weight:400}
+.rig{display:grid;grid-template-columns:1fr 296px;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:12px;overflow:hidden;margin:24px 0 8px}
+@media(max-width:840px){.rig{grid-template-columns:1fr}}
+.stage{background:#000;padding:8px;position:relative}
+canvas{width:100%;display:block;border-radius:8px}
+.side{background:var(--panel);display:flex;flex-direction:column}
+.blk{padding:14px 15px;border-bottom:1px solid var(--rule)}
+.blk:last-child{border-bottom:none}
+.blk h2{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:12px}
+.el{margin:11px 0}
+.el .top{display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px}
+.el .top b{font-weight:600}
+.el .top .v{color:var(--faint);font-variant-numeric:tabular-nums}
+.el input{width:100%;height:4px;-webkit-appearance:none;appearance:none;background:var(--rule);border-radius:2px;outline:none}
+.el input::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--photon);cursor:pointer;border:2px solid var(--panel)}
+.btns{display:flex;gap:7px;flex-wrap:wrap}
+button{font:inherit;font-size:11px;color:var(--ink);background:var(--card);border:1px solid var(--rule);border-radius:7px;padding:9px 10px;cursor:pointer;flex:1}
+button:hover{border-color:var(--photon);color:var(--photon)}
+button.on{border-color:var(--photon);color:var(--photon)}
+.geo{font-size:11px;color:var(--faint);line-height:1.95}
+.geo .r{display:flex;justify-content:space-between}
+.geo .r b{color:var(--ink);font-weight:400;font-variant-numeric:tabular-nums}
+.geo .r.h b{color:#c9d2e0} .geo .r.p b{color:var(--photon)} .geo .r.i b{color:var(--isco)}
+.clock{text-align:center;padding:4px 0}
+.clock .big{font:600 26px "IBM Plex Mono",monospace;font-variant-numeric:tabular-nums}
+.clock .lbl{font-size:10px;color:var(--fainter);margin-top:2px}
+.clockbar{height:7px;background:#0a0d15;border-radius:4px;overflow:hidden;margin-top:8px}
+.clockbar i{display:block;height:100%;background:linear-gradient(90deg,var(--raycap),var(--ray));transition:width .1s}
+.legend{font-size:10px;color:var(--faint);line-height:1.85}
+.legend .k{display:flex;align-items:center;gap:7px}
+.sw{width:12px;height:3px;border-radius:2px;display:inline-block;flex-shrink:0}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex-shrink:0}
+.foot{color:var(--fainter);font-size:11px;line-height:1.75;margin-top:22px;max-width:86ch}
+.foot b{color:var(--faint);font-weight:400}.foot .p{color:var(--photon)}.foot .i{color:var(--isco)}.foot .y{color:var(--ray)}
+</style></head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">schwarzschild geometry · real general relativity · verified, not faked</div>
+  <h1>Where light itself <em>runs out of road</em>.</h1>
+  <p class="lede">A black hole isn't a cosmic vacuum cleaner — it's a place where spacetime curves so steeply that straight lines bend into spirals and, past a certain edge, <b>every path leads inward</b>. Fire beams of light past this one and watch them follow real curved-spacetime geodesics: distant rays barely bend, closer ones swing hard, and any ray that crosses the critical line <b>can never leave</b>. The rings mark the true geometry — the event horizon, the photon sphere where light can orbit, the last stable orbit for matter — and the clock shows time itself freezing as it falls in.</p>
+
+  <div class="rig">
+    <div class="stage">
+      <canvas id="cv" width="700" height="560"></canvas>
+    </div>
+    <div class="side">
+      <div class="blk">
+        <h2>Fire light</h2>
+        <div class="btns"><button id="fire" class="on">▶ sweep a beam</button><button id="clear">clear</button></div>
+        <div class="el"><div class="top"><b>beam spread</b><span class="v" id="vspread">15 rays</span></div><input type="range" id="spread" min="5" max="40" value="15"></div>
+      </div>
+      <div class="blk">
+        <h2>The geometry</h2>
+        <div class="geo">
+          <div class="r h"><span>event horizon (Rs)</span><b>r = 1.0 Rs</b></div>
+          <div class="r p"><span>photon sphere</span><b>1.5 Rs</b></div>
+          <div class="r i"><span>ISCO (last orbit)</span><b>3.0 Rs</b></div>
+          <div class="r"><span>capture threshold</span><b>2.60 Rs</b></div>
+        </div>
+      </div>
+      <div class="blk">
+        <h2>Infalling clock</h2>
+        <div class="clock">
+          <div class="big" id="clockRate">100%</div>
+          <div class="lbl" id="clockPos">far from the hole</div>
+        </div>
+        <div class="clockbar"><i id="clockFill" style="width:100%"></i></div>
+        <div class="el" style="margin-top:12px"><div class="top"><b>drop clock at</b><span class="v" id="vdrop">5.0 Rs</span></div><input type="range" id="drop" min="101" max="800" value="500"></div>
+      </div>
+      <div class="blk">
+        <h2>Legend</h2>
+        <div class="legend">
+          <div class="k"><span class="dot" style="background:#000;border:1px solid #333"></span>event horizon — nothing escapes</div>
+          <div class="k"><span class="dot" style="background:transparent;border:1px solid #c77dff"></span>photon sphere — light orbits</div>
+          <div class="k"><span class="dot" style="background:transparent;border:1px solid #54d1ff"></span>ISCO — last stable matter orbit</div>
+          <div class="k"><span class="sw" style="background:#ffd24a"></span>ray escapes</div>
+          <div class="k"><span class="sw" style="background:#ff5c6a"></span>ray captured</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot"><b>Everything here is exact, not artistic.</b> The <p>event horizon</p> sits at the Schwarzschild radius Rs = 2GM/c² — for our Sun that's 2.95 km, for Earth about 9 millimetres; squeeze any mass inside its Rs and it becomes a black hole. Just outside, at 1.5 Rs, is the <p>photon sphere</p>, where gravity is exactly strong enough that light can circle in an orbit — a ray aimed just right will loop the hole several times before flying off, which is why beams near that radius fan out so wildly. The <i>ISCO</i> at 3 Rs is the innermost stable circular orbit: matter can orbit outside it but must plunge in once it drifts inside, which is why accretion disks have a sharp inner edge. The capture threshold at 2.598 Rs (exactly 3√3⁄2) is the impact parameter below which a light ray is doomed — and every <y>ray</y> you fire is integrated through the real geodesic equation d²u/dφ² + u = 3M·u², the same maths used to render the Event Horizon Telescope's images. The clock is the strangest part: time runs at √(1 − Rs/r) of the far-away rate, so a clock lowered toward the horizon visibly slows, and at the horizon itself appears — to us, safely distant — to stop forever. Not a metaphor. The geometry simply runs out of future.</p>
+</div>
+
+<script>
+(function(){
+var $=function(id){return document.getElementById(id);};
+var cv=$('cv'), g=cv.getContext('2d');
+var DPR=Math.min(devicePixelRatio||1,2);
+function fit(){var w=cv.clientWidth;cv.width=w*DPR;cv.height=w*560/700*DPR;g.setTransform(DPR,0,0,DPR,0,0);W=w;H=w*560/700;}
+var W=700,H=560;
+
+var Rs=1.0;                 // horizon radius in "Rs units"
+var PXPERRS;                // pixels per Rs, set in draw
+function cx(){return W*0.62;} function cy(){return H*0.5;}
+
+// trace a photon geodesic. start at far left moving right, impact parameter b (vertical offset).
+// orbit eqn in u=1/r: u'' + u = 3*(Rs/2)*u^2  ... integrate in phi, convert to xy.
+function traceRay(yImpact){
+  // convert to polar around BH center; start far to the left
+  var startX=-W/PXPERRS*0.7; // far left in Rs units
+  var x=startX, y=yImpact;
+  var r=Math.sqrt(x*x+y*y);
+  var phi=Math.atan2(y,x);
+  var u=1/r;
+  // initial du/dphi: moving in +x direction. dr/dt and r*dphi/dt...
+  // approximate: incoming horizontal ray. du/dphi = -(dr/dphi)/r^2
+  // for a straight line y=b: r^2=x^2+b^2, dr/dphi computed numerically via small step
+  var dx=0.001; var r2=Math.sqrt((x+dx)*(x+dx)+y*y); var phi2=Math.atan2(y,x+dx);
+  var dudphi=( (1/r2)-(1/r) )/((phi2-phi)||1e-9);
+  var pts=[[x,y]], captured=false, dphi=(phi2-phi)>0?0.01:-0.01;
+  if(Math.abs(phi2-phi)<1e-9)dphi=0.01;
+  for(var s=0;s<4000;s++){
+    var d2u=3*(Rs/2)*u*u - u;
+    dudphi+=d2u*dphi;
+    u+=dudphi*dphi;
+    phi+=dphi;
+    if(u>=1/Rs){captured=true; // reached horizon
+      var rr=Rs; pts.push([rr*Math.cos(phi),rr*Math.sin(phi)]); break;}
+    if(u<=1e-4){ // escaped far away
+      var rr2=1/u; pts.push([rr2*Math.cos(phi),rr2*Math.sin(phi)]); break;}
+    var rr3=1/u; pts.push([rr3*Math.cos(phi),rr3*Math.sin(phi)]);
+  }
+  return {pts:pts,captured:captured};
+}
+
+var rays=[]; // {pts,captured,progress}
+var firing=false, fireIdx=0, spread=15;
+
+function toScreen(p){return [cx()+p[0]*PXPERRS, cy()+p[1]*PXPERRS];}
+
+function drawScene(){
+  g.clearRect(0,0,W,H);
+  g.fillStyle='#000';g.fillRect(0,0,W,H);
+  PXPERRS = Math.min(W,H)/9; // fit ~9 Rs across
+  var CX=cx(),CY=cy();
+  // faint starfield
+  g.fillStyle='rgba(120,140,180,0.5)';
+  for(var i=0;i<120;i++){var sx=(i*137.5)%W, sy=(i*89.3)%H;g.fillRect(sx,sy,1,1);}
+  // accretion disk glow (thin ring outside ISCO)
+  var grd=g.createRadialGradient(CX,CY,3*PXPERRS,CX,CY,5*PXPERRS);
+  grd.addColorStop(0,'rgba(255,138,74,0.22)');grd.addColorStop(1,'rgba(255,138,74,0)');
+  g.fillStyle=grd;g.beginPath();g.arc(CX,CY,5*PXPERRS,0,6.28);g.fill();
+  // ISCO ring (3 Rs)
+  g.strokeStyle='rgba(84,209,255,0.5)';g.lineWidth=1;g.setLineDash([4,4]);
+  g.beginPath();g.arc(CX,CY,3*PXPERRS,0,6.28);g.stroke();g.setLineDash([]);
+  // photon sphere (1.5 Rs)
+  g.strokeStyle='rgba(199,125,255,0.7)';g.lineWidth=1;g.setLineDash([2,3]);
+  g.beginPath();g.arc(CX,CY,1.5*PXPERRS,0,6.28);g.stroke();g.setLineDash([]);
+  // capture threshold (2.598) faint
+  g.strokeStyle='rgba(255,92,106,0.2)';g.lineWidth=1;
+  g.beginPath();g.arc(CX,CY,2.598*PXPERRS,0,6.28);g.stroke();
+  // event horizon: black disk with subtle photon-ring glow
+  var ring=g.createRadialGradient(CX,CY,Rs*PXPERRS*0.9,CX,CY,Rs*PXPERRS*1.25);
+  ring.addColorStop(0,'rgba(255,180,120,0)');ring.addColorStop(0.6,'rgba(255,200,150,0.5)');ring.addColorStop(1,'rgba(255,200,150,0)');
+  g.fillStyle=ring;g.beginPath();g.arc(CX,CY,Rs*PXPERRS*1.25,0,6.28);g.fill();
+  g.fillStyle='#000';g.beginPath();g.arc(CX,CY,Rs*PXPERRS,0,6.28);g.fill();
+  g.strokeStyle='rgba(120,130,150,0.4)';g.lineWidth=1;g.beginPath();g.arc(CX,CY,Rs*PXPERRS,0,6.28);g.stroke();
+  // labels
+  g.fillStyle='rgba(160,170,190,0.6)';g.font='9px monospace';g.textAlign='center';
+  g.fillText('event horizon',CX,CY+Rs*PXPERRS+0);
+  g.textAlign='left';
+
+  // rays
+  rays.forEach(function(ray){
+    var n=Math.floor(ray.pts.length*ray.progress);
+    g.strokeStyle=ray.captured?'rgba(255,92,106,0.85)':'rgba(255,210,74,0.8)';
+    g.lineWidth=1.4;g.beginPath();
+    for(var k=0;k<n;k++){var sp=toScreen(ray.pts[k]);if(k===0)g.moveTo(sp[0],sp[1]);else g.lineTo(sp[0],sp[1]);}
+    g.stroke();
+    // head
+    if(n>0&&n<ray.pts.length){var hp=toScreen(ray.pts[n-1]);g.fillStyle=ray.captured?'#ff5c6a':'#ffd24a';g.beginPath();g.arc(hp[0],hp[1],2,0,6.28);g.fill();}
+  });
+}
+
+function fireBeam(){
+  rays=[];spread=+$('spread').value;
+  // fan of impact parameters, both sides
+  for(var k=0;k<spread;k++){
+    var b=(k/(spread-1)-0.5)*8; // -4 Rs .. +4 Rs
+    var r=traceRay(b);
+    rays.push({pts:r.pts,captured:r.captured,progress:0});
+  }
+  firing=true;
+}
+
+// gravitational time dilation clock
+function updateClock(){
+  var rDrop=+$('drop').value/100; // in Rs
+  $('vdrop').textContent=rDrop.toFixed(1)+' Rs';
+  var td = rDrop>1 ? Math.sqrt(1-Rs/rDrop) : 0;
+  $('clockRate').textContent=(td*100).toFixed(1)+'%';
+  $('clockFill').style.width=(td*100)+'%';
+  var pos = rDrop>6?'far from the hole':rDrop>3?'outside the ISCO':rDrop>1.5?'inside the photon sphere':rDrop>1.05?'skimming the horizon':'at the edge of forever';
+  $('clockPos').textContent=pos;
+  $('clockRate').style.color = td>0.7?'#8affc8':td>0.3?'#ffd24a':'#ff5c6a';
+}
+
+function loop(){
+  if(firing){var allDone=true;rays.forEach(function(ray){if(ray.progress<1){ray.progress=Math.min(1,ray.progress+0.015);allDone=false;}});if(allDone)firing=false;}
+  drawScene();requestAnimationFrame(loop);
+}
+
+$('fire').onclick=fireBeam;
+$('clear').onclick=function(){rays=[];};
+$('spread').addEventListener('input',function(){$('vspread').textContent=this.value+' rays';});
+$('drop').addEventListener('input',updateClock);
+
+window.addEventListener('resize',function(){fit();});
+fit();updateClock();fireBeam();loop();
+})();
+</script>
+</body></html>

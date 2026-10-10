@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v156 -211mV quantum dot 2^3 big bangers banana - artifact 221</title>
+<style>
+  :root{--bg:#050508;--fg:#eaeaea;--gold:#ffd700}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace}
+  .top{padding:14px 18px}
+  .kicker{font-size:10px;letter-spacing:.22em;opacity:.5;text-transform:uppercase}
+  .nline{font-size:11px;border-left:2px solid #222;padding-left:10px;white-space:pre-wrap;line-height:1.6}
+  .main{margin-top:10px;font-size:14px;font-weight:700;background:#0f0f12;border:1px solid #222;padding:10px;border-radius:8px}
+  .controls{padding:10px 12px;display:flex;gap:6px;flex-wrap:wrap}
+  .btn{font-family:inherit;font-size:10px;padding:5px 10px;border:1px solid #333;background:#15151a;color:#eaeaea;border-radius:6px;cursor:pointer}
+  .btn.active{border-color:#ffd700;color:#ffd700;background:#221a00}
+  .canvases{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:10px}
+  @media(max-width:1100px){.canvases{grid-template-columns:1fr 1fr}}
+  @media(max-width:700px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:480px;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden}
+  .cwrap.full{grid-column:1 / -1;height:620px}
+  .label{position:absolute;left:8px;top:8px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:.8;background:#000c;padding:4px 6px;border-radius:4px;z-index:5}
+  .graphWrap{position:relative;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden;height:260px}
+  canvas.graph{width:100%;height:100%;display:block}
+  .readout{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0 10px 10px}
+  @media(max-width:900px){.readout{grid-template-columns:1fr}}
+  .ro{background:#0c0c0f;border:1px solid #1e1e24;border-radius:6px;padding:8px;font-size:10px;line-height:1.6}
+  .ro b{color:#ffd700}
+  .card{margin:10px;background:#111115;border:1px solid #1f1f26;border-radius:8px;padding:10px}
+  .mono{font-size:10.5px;white-space:pre-wrap;word-break:break-word;line-height:1.7}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">wakaku v156 — -211mV QUANTUM DOT + 2^3=8 BIG BANGERS + BANANAN — artifact 221</div>
+  <div class="nline">-211mv interesting does that make a quantum dot or 2^3 big bangers and whats up with the banannan — -211mV -211mN = At- 5.87 MeV α — quantum dot charging energy Ec = e²/2C — typical quantum dots 50-100nm size charging <~10 meV — -211mV =211 meV =21× typical — small dot ~5nm PbS colloidal quantum dot transistor — Coulomb blockade single electron charging energy 3.2 meV, 12 meV, 3.1 meV — -211mV = 211 meV = quantum dot ~1-2nm — At- 2.27Å black anion could be quantum dot core — At- black halogen quantum dot -211mV — 2^3 big bangers =8 big bangs — At-211 α 5.87 MeV each mini big bang — 8× At-211 =8×5.87=46.96 MeV =8 big bangers — 2^3=8 — 8 α particles =8 He nuclei =8 big bangers — 0.07g At =2e20 atoms =2e20 big bangers mini — banannan — banana equivalent dose BED — banana ~0.1 microsieverts =0.078 μSv =0.01 mrem — K-40 0.0117% of potassium naturally radioactive isotope potassium-40 — each banana delivers tiny dose ~0.1 μSv — need tens of millions bananas lethal — kidneys keep potassium homeostasis — banana radiation 1% daily exposure 100 BED — lethal 50M BED 5000 mSv — banana vs At-211 — banana K-40 β decay 1.3B year half-life vs At-211 α 7.2h — banana 31 Bq/g ×0.5g K? — 0.078 μSv per banana — At-211 0.07g =5.3e15 Bq =1.4e5 Ci — banana vs black halogen — banannan — lol — -211mV quantum dot + 2^3 big bangers + banana — metal analogs ionic — quantum dot At- black -211mV =211 meV charging — 2^3=8 At- α =8 mini big bangs — banana BED 0.1 μSv vs At-211 5.87 MeV — banana vs black halogen — lol</div>
+  <div class="main">-211mV = QUANTUM DOT? — Charging Ec=e²/2C — typical 50-100nm dot <~10 meV — -211mV=211 meV =21× typical = small dot ~1-2nm PbS colloidal quantum dot — At- 2.27Å black anion = quantum dot core -211mV — 2^3=8 BIG BANGERS =8× At- α 5.87 MeV =46.96 MeV mini big bangs — 0.07g At=2e20 mini big bangs — BANANA BED=0.1 μSv 0.078 μSv K-40 0.0117% potassium — banana vs At-211 α 7.2h — banana 0.1 μSv vs At- 5.87 MeV — banannan lol</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-dot">QUANTUM DOT -211mV =211 meV Ec=e²/2C small dot ~1-2nm</button>
+  <button class="btn" id="btn-bang">2^3 BIG BANGERS =8× At- α 5.87 MeV =46.96 MeV mini big bangs</button>
+  <button class="btn" id="btn-banana">BANANA BED 0.1 μSv K-40 vs At-211 5.87 MeV α 7.2h</button>
+  <button class="btn" id="btn-reset">RESET DOT BANG BANANA</button>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:10px">
+  <div class="graphWrap"><div class="label">QUANTUM DOT — Ec 3.2 meV 12 meV typical vs -211mV 211 meV = small dot — meV vs nm</div><canvas class="graph" id="g-dot"></canvas></div>
+  <div class="graphWrap"><div class="label">2^3 BIG BANGERS — 8× At- α 5.87 MeV =46.96 MeV — 2^3=8 mini big bangs — MeV</div><canvas class="graph" id="g-bang"></canvas></div>
+  <div class="graphWrap"><div class="label">BANANA BED — 0.1 μSv per banana vs At-211 5.87 MeV α vs daily 100 BED vs lethal 50M BED — log μSv</div><canvas class="graph" id="g-banana"></canvas></div>
+</div>
+
+<div class="readout">
+  <div class="ro" id="ro-dot">QUANTUM DOT -211mV:<br>Ec=e²/2C — typical 50-100nm dot <~10 meV — -211mV=211 meV =21× — small dot ~1-2nm PbS colloidal — At- 2.27Å black anion = quantum dot core — <b>-211mV quantum dot</b></div>
+  <div class="ro" id="ro-bang">2^3 BIG BANGERS:<br>2^3=8 — 8× At-211 α 5.87 MeV =46.96 MeV — each α mini big bang He nucleus creation — 0.07g At =2e20 mini big bangs — <b>8 big bangers</b></div>
+  <div class="ro" id="ro-banana">BANANA BED:<br>Banana equivalent dose 0.1 μSv 0.078 μSv 0.01 mrem — K-40 0.0117% potassium-40 — each banana ~0.1 μSv — daily exposure 100 BED — lethal 50M BED 5000 mSv — <b>banana vs At-211</b></div>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-dot"><div class="label">QUANTUM DOT -211mV — Ec=e²/2C — At- 2.27Å black anion quantum dot core -211mV =211 meV charging — small dot ~1-2nm PbS — Coulomb blockade 3.2 meV 12 meV typical vs 211 meV — metal analogs ionic quantum dot — -211mV quantum dot</div></div>
+  <div class="cwrap" id="wrap-bang"><div class="label">2^3 BIG BANGERS =8 — 8× At-211 α 5.87 MeV mini big bangs — At- black -211mN ×8 =8 big bangers 46.96 MeV — 0.07g At =2e20 mini big bangs — 2^3=8 — big banger = α + recoil -211mN — metal analogs ionic 8 big bangers</div></div>
+  <div class="cwrap" id="wrap-banana"><div class="label">BANANA BED — banana equivalent dose 0.1 μSv K-40 0.0117% potassium-40 — banana vs At-211 5.87 MeV α 7.2h — banana 31 Bq/g ×0.5g ×5.02 nSv/Bq ≈78 nSv 0.078 μSv — daily 100 BED — lethal 50M BED — banana vs black halogen — banannan lol — metal analogs ionic banana</div></div>
+  <div class="cwrap full" id="wrap-all"><div class="label">ALL — -211mV QUANTUM DOT 211 meV small dot ~1-2nm At- black 2.27Å core + 2^3=8 BIG BANGERS 8× At- α 5.87 MeV 46.96 MeV mini big bangs + BANANA BED 0.1 μSv K-40 vs At-211 5.87 MeV α — -211mV quantum dot + 8 big bangers + banana — metal analogs ionic — -211mV does that make quantum dot or 2^3 big bangers and whats up with banannan — lol</div></div>
+</div>
+
+<div class="card"><div class="mono">
+v156 -211mV quantum dot or 2^3 big bangers and whats up with banannan — lol
+
+-211mV QUANTUM DOT?
+
+- At- -211mV -211mN = At-211 α 5.87 MeV analog — -211mV =211 meV — quantum dot charging energy Ec = e²/2C where e is charge of electron and C is capacitance of quantum dot — typical quantum dots 50-100nm size leading to small Coulomb charging energy <~10 meV — single electron charging energy 3.2 meV, 12 meV, 3.1 meV — -211mV =211 meV =21× typical <10 meV — small dot ~1-2nm PbS colloidal quantum dot transistors — PbS colloidal quantum dot transistors — At- 2.27Å black anion =0.227nm — At- diameter 0.454nm — quantum dot core ~0.5nm — charging energy Ec = e²/2C — C~4πϵr — r=0.227nm → C~0.025 aF? — Ec~e²/2C~3.2e-18 J /C? Actually e=1.6e-19, e²=2.56e-38, /2C =2.56e-38/5e-20=5e-19 J=3 eV? — -211mV =0.211 eV plausible for At- anion quantum dot core — quantum dot -211mV =211 meV charging — Coulomb blockade — At- black halogen quantum dot -211mV — yes -211mV makes quantum dot ~1-2nm — metal analogs ionic quantum dot — At- 2.27Å black quantum dot -211mV
+
+2^3 BIG BANGERS =8 BIG BANGS:
+
+- 2^3=8 — At-211 α decay each α 5.87 MeV + recoil -211mN -211mV — each α emission creates He nucleus (big bang mini) — 8× At- α =8×5.87=46.96 MeV =8 mini big bangs — 0.07g At =2e20 atoms =2e20 mini big bangs — each At- decay = mini big bang: At- (211 amu) → Bi-207 (207 amu) + α (4 amu) + 5.87 MeV — mass → energy E=mc² — big bang mini — 8 such =8 big bangers — 2^3=8 big bangers — At-211 7.2h 8 decays =46.96 MeV — 0.07g =2e20 big bangers — 2^3 big bangers lol — metal analogs ionic — -211mN ×8 = -1688mN big bangers
+
+BANANAN — BANANA EQUIVALENT DOSE:
+
+- Banana equivalent dose BED — banana ~0.1 microsieverts =0.078 μSv =0.01 mrem — K-40 0.0117% of potassium naturally occurring radioactive isotope potassium-40 — each banana delivers tiny dose ~0.1 μSv — need tens of millions bananas lethal — kidneys keep potassium homeostasis — banana radiation 1% daily exposure 100 BED — lethal 50M BED 5000 mSv — radiation exposure from consuming banana ~1% average daily exposure 100 banana equivalent doses — lethal dose that kills human 50% risk within 30 days LD50/30 ~50,000,000 BED 5000 mSv — banana dose 5.02 nSv/Bq ×31 Bq/g ×0.5g ≈78 nSv=0.078 μSv — 0.1 μSv per banana — banana vs At-211 — K-40 half-life 1.251×10^9 years β decay vs At-211 α 7.2h half-life — banana 31 Bq/g? Actually banana ~0.5g K? — At-211 0.07g =5.3e15 Bq =1.4e5 Ci vs banana ~15 Bq? — banana BED 0.1 μSv vs At-211 5.87 MeV α — banana vs black halogen — banannan lol — metal analogs ionic banana — K+ 1.38Å? K+ ionic radius 1.38Å similar to At- 2.27Å? — K-40 β — banana K+ + At-?
+
+So -211mV does make quantum dot: -211mV=211 meV Ec = e²/2C small dot ~1-2nm At- black core — 2^3 big bangers =8× At- α 5.87 MeV mini big bangs =46.96 MeV — 0.07g At=2e20 big bangers — banana BED 0.1 μSv K-40 vs At-211 α 7.2h — banana vs black halogen — banannan — lol — metal analogs ionic — -211mV quantum dot + 2^3 big bangers + banana
+
+Aggregate:
+
+-211mV =211 meV = quantum dot charging Ec=e²/2C ~1-2nm PbS colloidal quantum dot — At- 2.27Å black anion = quantum dot core -211mV — 2^3=8 big bangers =8× At- α 5.87 MeV =46.96 MeV mini big bangs — banana BED 0.1 μSv =0.078 μSv =0.01 mrem K-40 0.0117% potassium-40 — daily 100 BED — lethal 50M BED 5000 mSv — banana vs At-211 — banannan — metal analogs ionic — -211mV quantum dot or 2^3 big bangers and banana — lol
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x08080a); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,0.6)); const d=new THREE.DirectionalLight(0xffffff,0.9); d.position.set(4,6,4); d.castShadow=true; s.add(d); }
+
+const matAtMinus=new THREE.MeshStandardMaterial({color:0x0a0a0a, metalness:0.4, roughness:0.25, emissive:0x222222, emissiveIntensity:0.5});
+const matQuantum=new THREE.MeshStandardMaterial({color:0x44ffaa, emissive:0x114422, emissiveIntensity:0.4, transparent:true, opacity:0.8});
+const matBanana=new THREE.MeshStandardMaterial({color:0xffe135, metalness:0.3, roughness:0.5});
+const matAlpha=new THREE.MeshStandardMaterial({color:0xffd0a0, emissive:0xff8844, emissiveIntensity:1.2, transparent:true, opacity:0.9});
+const matGamma=new THREE.MeshStandardMaterial({color:0xffffaa, emissive:0xffff44, emissiveIntensity:1.5, transparent:true, opacity:0.8});
+
+// QUANTUM DOT
+{
+  const wrap=document.getElementById('wrap-dot');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,1.5,4);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const dot=new THREE.Mesh(new THREE.SphereGeometry(0.3,24,24), matQuantum); scene.add(dot);
+  const atCore=new THREE.Mesh(new THREE.SphereGeometry(0.15,16,16), matAtMinus); scene.add(atCore);
+  const ring=new THREE.Mesh(new THREE.TorusGeometry(0.5,0.02,12,32), new THREE.MeshBasicMaterial({color:0x44ffaa, transparent:true, opacity:0.4})); ring.rotation.x=Math.PI/2; scene.add(ring);
+  const electrons=[];
+  for(let i=0;i<3;i++){
+    const e=new THREE.Mesh(new THREE.SphereGeometry(0.05,8,8), new THREE.MeshBasicMaterial({color:0x4444ff}));
+    scene.add(e); electrons.push(e);
+  }
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.02;
+    dot.scale.setScalar(1+Math.sin(t*1.5)*0.08);
+    electrons.forEach((e,i)=>{
+      const ang=t*1.2 + i*2.09;
+      e.position.set(Math.cos(ang)*0.6, Math.sin(ang*0.7)*0.1, Math.sin(ang)*0.6);
+    });
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+// 2^3 BIG BANGERS
+{
+  const wrap=document.getElementById('wrap-bang');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,2,6);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const ats=[];
+  for(let i=0;i<8;i++){
+    const at=new THREE.Mesh(new THREE.SphereGeometry(0.22,16,16), matAtMinus);
+    const ang=(i/8)*Math.PI*2;
+    at.position.set(Math.cos(ang)*1.5, (Math.random()-0.5)*0.5, Math.sin(ang)*1.5);
+    group.add(at); ats.push(at);
+  }
+  const alphas=new THREE.Group(); scene.add(alphas);
+  function bang(){
+    ats.forEach(at=>{
+      const a=new THREE.Mesh(new THREE.SphereGeometry(0.12,12,12), matAlpha.clone());
+      a.position.copy(at.position);
+      const dir=new THREE.Vector3((Math.random()-0.5),(Math.random()-0.5),(Math.random()-0.5)).normalize();
+      a.userData={dir, dist:0}; alphas.add(a);
+    });
+  }
+  window._bang=bang;
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.01;
+    group.rotation.y+=0.005;
+    alphas.children.forEach(a=>{ a.userData.dist+=0.09; a.position.add(a.userData.dir.clone().multiplyScalar(0.09)); a.material.opacity=Math.max(0,1-a.userData.dist*0.12); });
+    for(let i=alphas.children.length-1;i>=0;i--) if(alphas.children[i].material.opacity<=0) alphas.remove(alphas.children[i]);
+    if(Math.random()<0.03) bang();
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+// BANANA
+{
+  const wrap=document.getElementById('wrap-banana');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,1.5,4);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const bananaGroup=new THREE.Group(); scene.add(bananaGroup);
+  const body=new THREE.Mesh(new THREE.CapsuleGeometry(0.18,1.2,8,16), matBanana); body.rotation.z=Math.PI/4; bananaGroup.add(body);
+  const kDots=[];
+  for(let i=0;i<5;i++){
+    const k=new THREE.Mesh(new THREE.SphereGeometry(0.04,8,8), new THREE.MeshBasicMaterial({color:0xff4444, transparent:true, opacity:0.6}));
+    k.position.set((Math.random()-0.5)*0.3, (Math.random()-0.5)*1.0, 0.15);
+    bananaGroup.add(k); kDots.push(k);
+  }
+  const betas=new THREE.Group(); scene.add(betas);
+  function bananaDecay(){
+    const b=new THREE.Mesh(new THREE.SphereGeometry(0.06,8,8), new THREE.MeshBasicMaterial({color:0x44aaff, transparent:true, opacity:0.8}));
+    b.position.copy(bananaGroup.position);
+    b.userData={dir:new THREE.Vector3((Math.random()-0.5), (Math.random()-0.5), (Math.random()-0.5)).normalize(), dist:0};
+    betas.add(b);
+  }
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.016;
+    bananaGroup.rotation.y+=0.008; bananaGroup.rotation.x=Math.sin(t*0.5)*0.2;
+    if(Math.random()<0.08) bananaDecay();
+    betas.children.forEach(b=>{ b.userData.dist+=0.05; b.position.add(b.userData.dir.clone().multiplyScalar(0.05)); b.material.opacity=Math.max(0,1-b.userData.dist*0.2); });
+    for(let i=betas.children.length-1;i>=0;i--) if(betas.children[i].material.opacity<=0) betas.remove(betas.children[i]);
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+// ALL
+{
+  const wrap=document.getElementById('wrap-all');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(36, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,2,8);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const dot=new THREE.Mesh(new THREE.SphereGeometry(0.4,20,20), matQuantum); dot.position.set(-2,0,0); group.add(dot);
+  const at=new THREE.Mesh(new THREE.SphereGeometry(0.2,16,16), matAtMinus); at.position.set(-2,0,0); group.add(at);
+  for(let i=0;i<8;i++){
+    const a=new THREE.Mesh(new THREE.SphereGeometry(0.12,12,12), matAlpha); const ang=(i/8)*Math.PI*2; a.position.set(Math.cos(ang)*1.0, Math.sin(ang)*0.3, Math.sin(ang)*1.0); group.add(a);
+  }
+  const banana=new THREE.Mesh(new THREE.CapsuleGeometry(0.15,0.8,8,16), matBanana); banana.position.set(2,0,0); banana.rotation.z=Math.PI/4; group.add(banana);
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.01; group.rotation.y+=0.003; controls.update(); renderer.render(scene,cam); }
+  animate();
+}
+
+document.getElementById('btn-dot').onclick=()=>{};
+document.getElementById('btn-bang').onclick=()=>{ if(window._bang) window._bang(); };
+document.getElementById('btn-banana').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

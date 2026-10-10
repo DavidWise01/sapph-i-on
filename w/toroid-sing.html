@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>full torus · 9 quads · 81 sing</title>
+<style>
+:root{
+  --bg:#03050c; --ink:#e8f6ff; --dim:#6d8aa8;
+  --c:#3cf0ff; --m:#ff3d9a; --y:#f4ff5a; --g:#5dff9a; --v:#9b7cff;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);
+  font:13px/1.45 "IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace}
+body{overflow:auto}
+.glow{text-shadow:0 0 12px currentColor}
+header{padding:14px 18px 8px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  border-bottom:1px solid rgba(60,240,255,.18)}
+header .k{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--c)}
+header h1{margin:4px 0 0;font-size:22px;font-weight:500;letter-spacing:.04em}
+header h1 em{color:var(--m);font-style:normal}
+.eq{color:var(--y);font-size:12px;letter-spacing:.06em}
+main{display:grid;grid-template-columns:1.4fr .9fr;min-height:calc(100vh - 72px)}
+.stage{position:relative;border-right:1px solid rgba(60,240,255,.15);padding:8px}
+canvas{display:block;width:100%;height:auto;border-radius:2px;
+  background:radial-gradient(circle at 50% 42%,#0a1630 0%,#03050c 70%)}
+.hud{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px 4px}
+button{font:inherit;font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  background:transparent;color:var(--c);border:1px solid rgba(60,240,255,.4);
+  padding:7px 11px;border-radius:1px;cursor:pointer}
+button:hover{background:rgba(60,240,255,.08);box-shadow:0 0 18px rgba(60,240,255,.2)}
+button.m{color:var(--m);border-color:rgba(255,61,154,.45)}
+button.g{color:var(--g);border-color:rgba(93,255,154,.45)}
+.stat{color:var(--dim);font-size:11px}
+.grid9{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:4px 0 10px}
+.q{border:1px solid rgba(60,240,255,.2);padding:8px 9px;min-height:76px;cursor:pointer;
+  background:rgba(3,8,20,.6);position:relative;overflow:hidden}
+.q:hover{border-color:var(--c)}
+.q.on{border-color:var(--y);box-shadow:0 0 22px rgba(244,255,90,.12), inset 0 0 20px rgba(244,255,90,.05)}
+.q.home{border-color:rgba(93,255,154,.55)}
+.q .id{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
+.q .nm{font-size:13px;color:#fff;margin-top:2px}
+.q .ph{font-size:11px;margin-top:4px;color:var(--c)}
+.q.flip .ph{color:var(--m)}
+.q.home .ph{color:var(--g)}
+.bar{display:grid;grid-template-columns:repeat(27,1fr);gap:2px;padding:2px 0 8px}
+.bar i{height:7px;background:rgba(60,240,255,.12)}
+.bar i.gone{background:var(--c);box-shadow:0 0 6px var(--c)}
+.bar i.now{background:var(--y);box-shadow:0 0 8px var(--y)}
+.bar i.sung{background:var(--g);box-shadow:0 0 6px var(--g)}
+.side{padding:12px 16px 40px;overflow:auto;max-height:calc(100vh - 72px)}
+.k{font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim);margin:16px 0 6px}
+.math{font-size:12.5px;color:#cfefff;border-left:2px solid var(--m);padding:2px 0 2px 10px;margin:6px 0}
+.math b{color:var(--y);font-weight:500}
+.row{display:flex;justify-content:space-between;gap:10px;border-bottom:1px dotted rgba(60,240,255,.15);padding:4px 0}
+.row b{color:#fff}
+.note{font-size:12px;color:#9eb8d0;margin:10px 0}
+.stamp{display:inline-block;font-size:9px;letter-spacing:.14em;padding:1px 6px;border:1px solid;margin:2px 6px 2px 0}
+.lit{color:var(--g);border-color:var(--g)}
+.amb{color:var(--y);border-color:var(--y)}
+.hot{color:var(--m);border-color:var(--m)}
+.counts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.box{border:1px solid rgba(60,240,255,.2);padding:8px}
+.box .n{font-size:26px;color:var(--c);text-shadow:0 0 16px rgba(60,240,255,.45)}
+.box .l{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+@media(max-width:980px){main{grid-template-columns:1fr}.side{max-height:none}}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <div class="k">full torus · Pauli sheet · one sing</div>
+    <h1>still one electron · <em>until the quads</em></h1>
+  </div>
+  <div class="eq">((3×3))² = 81 ticks &nbsp;≠&nbsp; ((3×3))³ = 729</div>
+</header>
+<main>
+  <section class="stage">
+    <canvas id="tor" height="420" aria-label="torus with nine Pauli quads"></canvas>
+    <div class="hud">
+      <button id="tick">tick ▸ 80°</button>
+      <button id="sing" class="g">sing the toroid</button>
+      <button id="reset" class="m">reset</button>
+      <span class="stat" id="hud">0 / 81</span>
+    </div>
+    <div class="grid9" id="grid"></div>
+    <div class="bar" id="bar"></div>
+  </section>
+  <aside class="side">
+    <div class="counts">
+      <div class="box"><div class="l">named 720s</div><div class="n">9</div></div>
+      <div class="box"><div class="l">e⁻ seated</div><div class="n" id="ne">0</div></div>
+      <div class="box"><div class="l">sing</div><div class="n" id="ns">0</div></div>
+    </div>
+
+    <div class="k">your count</div>
+    <div class="math">forward front 720 · forward middle 720 · forward back 720</div>
+    <div class="math">middle front 720 · middle middle 720 · middle back 720</div>
+    <div class="math">back front 720 · back middle 720 · back back 720</div>
+    <div class="note">That is the whole 3×3 sheet. Nine chairs. One traveler was one electron. Pauli on this sheet seats <b style="color:var(--g)">one fermion per quad</b> — so the torus is empty until nine are sitting.</div>
+
+    <div class="k">the sing</div>
+    <div class="math">spinor period = <b>4π = 720°</b>  (SU(2) double cover of SO(3))</div>
+    <div class="math">one lap = <b>2π</b> → sign(ψ) = −1 · not home</div>
+    <div class="math">tick = 720° / 9 = <b>80°</b> = 4π/9</div>
+    <div class="math">sheet × ticks = 9 × 9 = <b>81</b></div>
+    <div class="math">(3×3)<b>²</b> = 3⁴ = 81 &nbsp;&nbsp; (3×3)<b>³</b> = 9³ = <b>729</b></div>
+    <div class="math">space-cube 3×3×3 = <b>27</b> quads, still not 81</div>
+
+    <div class="k">occupancy</div>
+    <div class="row"><span>Pauli lock</span><b>n ≤ 1 per quad</b></div>
+    <div class="row"><span>sheet fill</span><b>9 e⁻ · 9 quads</b></div>
+    <div class="row"><span>second e⁻ in one quad</span><b style="color:var(--m)">forbidden</b></div>
+    <div class="row"><span>sign at 360°</span><b>−1, same electron</b></div>
+    <div class="row"><span>home</span><b>+1 only at 720°</b></div>
+
+    <div class="k">live</div>
+    <div class="row"><span>tick</span><b id="rTick">0 / 81</b></div>
+    <div class="row"><span>active quad</span><b id="rQ">forward front</b></div>
+    <div class="row"><span>local turn</span><b id="rDeg">0°</b></div>
+    <div class="row"><span>sign</span><b id="rS">+1</b></div>
+    <div class="row"><span>seated</span><b id="rN">0 / 9</b></div>
+
+    <div class="k">stamps</div>
+    <div><span class="stamp lit">LIT</span>your nine names exhaust the sheet</div>
+    <div><span class="stamp lit">LIT</span>720° / 9 = 80° · 9×9 = 81</div>
+    <div><span class="stamp amb">AMBER</span>((3×3))³ is 729. 81 is the square.</div>
+    <div><span class="stamp hot">HOT</span>1 e⁻ / quad is the instrument Pauli, not QED</div>
+
+    <div class="k">what is not being claimed</div>
+    <div class="note">This is a finite occupancy picture on a torus of revolution. It is not a derivation of the exclusion principle, not a count of states in a real atom, and not a claim that spacetime is a 3×3×3 lattice. The beauty is the sheet. The math that survives the beauty is the double cover and the 81 = 9×9 tick count.</div>
+  </aside>
+</main>
+<script>
+const DEPTH=["forward","middle","back"], FACE=["front","middle","back"];
+const QUADS=DEPTH.flatMap((d,i)=>FACE.map((f,j)=>({id:i*3+j, depth:d, face:f, label:d+" "+f})));
+const TAU=Math.PI*2, R=2.35, r=0.92;
+let az=0.85, el=0.55, sing=0, run=null, drag=null;
+
+const tor=document.getElementById("tor");
+const grid=document.getElementById("grid");
+const bar=document.getElementById("bar");
+QUADS.forEach(q=>{
+  const d=document.createElement("div");
+  d.className="q"; d.id="q"+q.id;
+  d.innerHTML=`<div class="id">quad ${q.id} · 1 e⁻</div><div class="nm">${q.label}</div><div class="ph">0° · empty</div>`;
+  d.onclick=()=>{sing=q.id*9; paint();};
+  grid.appendChild(d);
+});
+for(let i=0;i<81;i++){const b=document.createElement("i"); b.id="b"+i; bar.appendChild(b);}
+
+function project(p){
+  const ca=Math.cos(az),sa=Math.sin(az),ce=Math.cos(el),se=Math.sin(el);
+  const x1=ca*p[0]-sa*p[1], y1=sa*p[0]+ca*p[1];
+  const y2=ce*y1-se*p[2], z2=se*y1+ce*p[2];
+  return {x:x1,y:y2,z:z2};
+}
+function pt(u,v){
+  return [(R+r*Math.cos(v))*Math.cos(u),(R+r*Math.cos(v))*Math.sin(u), r*Math.sin(v)];
+}
+function draw(){
+  const w=tor.clientWidth||640; if(tor.width!==w) tor.width=w;
+  const H=tor.height, W=tor.width, x=tor.getContext("2d");
+  x.clearRect(0,0,W,H);
+  const sc=Math.min(W,H)/7.2, ox=W/2, oy=H/2+6;
+  const P=(u,v)=>{const q=project(pt(u,v)); return [ox+q.x*sc, oy-q.z*sc, q.y];};
+
+  // faint field equations
+  x.fillStyle="rgba(60,240,255,.22)"; x.font="10px monospace";
+  x.fillText("ψ(θ+4π)=ψ(θ)    ψ(θ+2π)=−ψ(θ)    n≤1", 14, 18);
+  x.fillText("9 × (4π/9) = 4π per quad    9×9=81", 14, H-12);
+
+  // depth-sorted wire
+  const lines=[];
+  for(let i=0;i<36;i++){
+    const u=i/36*TAU; const row=[];
+    for(let j=0;j<=24;j++){row.push(P(u,j/24*TAU));}
+    lines.push({z:row[0][2], kind:"u", row, neon:i%3===0});
+  }
+  for(let j=0;j<18;j++){
+    const v=j/18*TAU; const row=[];
+    for(let i=0;i<=36;i++){row.push(P(i/36*TAU,v));}
+    lines.push({z:row[12][2], kind:"v", row, neon:j%3===0});
+  }
+  lines.sort((a,b)=>a.z-b.z);
+  for(const L of lines){
+    x.beginPath();
+    L.row.forEach((p,k)=>k?x.lineTo(p[0],p[1]):x.moveTo(p[0],p[1]));
+    x.strokeStyle=L.neon?"rgba(60,240,255,.28)":"rgba(80,120,180,.12)";
+    x.lineWidth=L.neon?1.1:.6; x.stroke();
+  }
+
+  const done=sing>=81;
+  const active=Math.min(8, Math.floor((sing%81)/9));
+  const seated=done?9:active;
+  const electrons=[];
+  for(let q=0;q<9;q++){
+    const qi=Math.floor(q/3), qj=q%3;
+    const u=((qi+0.5)/3)*TAU;
+    const local=done||q<active?720:(q===active?(sing%9)*80:0);
+    const v=(local%360)*Math.PI/180 + qj*0.22;
+    const p=P(u,v);
+    electrons.push({q,p,local,active:q===active&&!done, home:done||q<active});
+  }
+  electrons.sort((a,b)=>a.p[2]-b.p[2]);
+  for(const e of electrons){
+    if(e.active){
+      const qi=Math.floor(e.q/3);
+      const u=((qi+0.5)/3)*TAU;
+      x.beginPath();
+      for(let a=0;a<=e.local%360;a+=5){
+        const p=P(u,a*Math.PI/180);
+        a?x.lineTo(p[0],p[1]):x.moveTo(p[0],p[1]);
+      }
+      const flip=Math.floor(e.local/360)%2;
+      x.strokeStyle=flip?"#ff3d9a":"#3cf0ff";
+      x.shadowColor=x.strokeStyle; x.shadowBlur=12; x.lineWidth=2.2; x.stroke();
+      x.shadowBlur=0;
+    }
+    const flip=Math.floor(e.local/360)%2;
+    x.fillStyle=e.home?"#5dff9a":e.active?(flip?"#ff3d9a":"#f4ff5a"):"#1b3355";
+    x.shadowColor=x.fillStyle; x.shadowBlur=e.active?16:e.home?10:0;
+    x.beginPath(); x.arc(e.p[0],e.p[1], e.active?6:3.4, 0, TAU); x.fill();
+    x.shadowBlur=0;
+  }
+}
+function paint(){
+  const done=sing>=81;
+  const active=Math.min(8,Math.floor((sing%81)/9));
+  const tick=sing%9;
+  const seated=done?9:active+(tick>0||sing>0&&!done?1:0);
+  const seatedExact=done?9: (sing===0?0:active+1);
+  QUADS.forEach(q=>{
+    const local=done||q.id<active?720:q.id===active?tick*80:0;
+    const flip=Math.floor(local/360)%2;
+    const el=document.getElementById("q"+q.id);
+    el.className="q"+(q.id===active&&!done?" on":"")+(done||q.id<active?" home":"")+(flip?" flip":"");
+    const state=local===0&&q.id>active?"empty":(done||q.id<active)?"home +1":(flip?"−1 climbing":"+1 climbing");
+    el.querySelector(".ph").textContent=local+"° · "+state;
+  });
+  for(let i=0;i<81;i++){
+    document.getElementById("b"+i).className=done?"sung":i<sing?"gone":i===sing?"now":"";
+  }
+  const Q=QUADS[active];
+  const local=done?720:tick*80;
+  const sign=Math.floor(local/360)%2===0;
+  document.getElementById("hud").textContent=`${Math.min(sing,81)} / 81 · ${Q.label} · ${local}°`;
+  document.getElementById("ne").textContent=String(seatedExact);
+  document.getElementById("ns").textContent=String(Math.min(sing,81));
+  document.getElementById("rTick").textContent=Math.min(sing,81)+" / 81";
+  document.getElementById("rQ").textContent=Q.label;
+  document.getElementById("rDeg").textContent=local+"°";
+  document.getElementById("rS").textContent=sign?"+1":"−1";
+  document.getElementById("rN").textContent=seatedExact+" / 9";
+  draw();
+}
+document.getElementById("tick").onclick=()=>{sing=Math.min(81,sing+1); paint();};
+document.getElementById("sing").onclick=()=>{
+  if(run){clearInterval(run);run=null;return;}
+  run=setInterval(()=>{
+    if(sing>=81){clearInterval(run);run=null;paint();return;}
+    sing++; paint();
+  },55);
+};
+document.getElementById("reset").onclick=()=>{if(run){clearInterval(run);run=null;}sing=0;paint();};
+tor.addEventListener("pointerdown",e=>{drag=[e.clientX,e.clientY,az,el];tor.setPointerCapture(e.pointerId);});
+tor.addEventListener("pointermove",e=>{
+  if(!drag)return;
+  az=drag[2]+(e.clientX-drag[0])*0.01;
+  el=Math.max(0.12,Math.min(1.35,drag[3]-(e.clientY-drag[1])*0.01));
+  draw();
+});
+addEventListener("pointerup",()=>drag=null);
+addEventListener("resize",draw);
+paint();
+</script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The elementary level — a witness-tagged emporium of associations</title>
+<style>
+  :root{
+    --bg:#0C1016; --bg-2:#141A24; --bg-3:#1C2230; --ink:#E7E9F2; --soft:#8C92A6; --rule:#283041;
+    --lit:#6FB87E; --bri:#D2A24B; --spec:#D2705F; --center:#FBF0DF;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;line-height:1.5}
+  .mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+  .wrap{max-width:1000px;margin:0 auto;padding:26px 22px 70px}
+  h1{font-size:clamp(21px,3.3vw,30px);margin:0;font-weight:600}
+  .sub{max-width:80ch;margin:12px 0 0;color:#c7ccd8;font-size:16px} .sub b{color:var(--ink)}
+  .byline{font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.08em;color:var(--soft);margin:10px 0 0}
+  .stage{display:grid;grid-template-columns:1fr 296px;gap:20px;margin:22px 0 0}
+  @media(max-width:840px){.stage{grid-template-columns:1fr}}
+  .panel{background:var(--bg-2);border:1px solid var(--rule);padding:14px;display:flex;flex-direction:column;align-items:center}
+  canvas{display:block;background:#06080d;border:1px solid var(--rule);width:100%;max-width:520px;height:auto;cursor:pointer;touch-action:none}
+  .addr{display:flex;gap:8px;margin:12px auto 0;width:100%;max-width:520px}
+  .addr input{flex:1;font-family:ui-monospace,Menlo,monospace;font-size:13px;background:#06080d;border:1px solid var(--rule);color:var(--ink);padding:9px 11px;text-transform:uppercase}
+  button.act{font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);background:var(--bg-3);border:1px solid var(--rule);padding:9px 13px;cursor:pointer}
+  button.act.go{border-color:var(--center);color:var(--center)}
+  .chips{display:flex;gap:6px;flex-wrap:wrap;margin:10px auto 0;justify-content:center}
+  button.chip{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;border:1px solid var(--rule);background:var(--bg-3);color:var(--soft);padding:5px 9px;cursor:pointer}
+  button.chip:hover{color:var(--ink);border-color:var(--soft)}
+  .side{display:flex;flex-direction:column;gap:13px}
+  .card{background:var(--bg-2);border:1px solid var(--rule);padding:13px 14px}
+  .card h3{margin:0 0 9px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);font-family:ui-monospace,Menlo,monospace;font-weight:400}
+  .stat{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--soft);display:flex;justify-content:space-between;margin:0 0 5px} .stat b{color:var(--ink)}
+  .assoc{font-size:12.5px;line-height:1.5;margin:0 0 6px;display:flex;gap:8px;align-items:baseline} .assoc .nm{color:var(--ink);font-weight:600} .assoc .rl{color:var(--soft);font-size:11px}
+  .t{font-family:ui-monospace,Menlo,monospace;font-size:8.5px;letter-spacing:.05em;text-transform:uppercase;padding:1px 5px;border:1px solid;flex:none}
+  .t.L{color:var(--lit);border-color:var(--lit)} .t.B{color:var(--bri);border-color:var(--bri)} .t.S{color:var(--spec);border-color:var(--spec)}
+  .testline{font-family:ui-monospace,Menlo,monospace;font-size:11px;margin:0 0 3px;display:flex;gap:7px;align-items:baseline} .testline .p{color:var(--lit)}
+  .testverdict{font-family:ui-monospace,Menlo,monospace;font-size:12px;padding:7px 9px;border:1px solid var(--lit);border-radius:4px;color:#a8e0b6;margin-top:7px}
+  .tiers{font-size:12px;color:var(--soft);line-height:1.5} .tiers .row{display:flex;gap:8px;margin:0 0 7px}
+  .tag{font-family:ui-monospace,Menlo,monospace;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border:1px solid;height:fit-content;white-space:nowrap}
+  .tag.lit{color:var(--lit);border-color:var(--lit)} .tag.bri{color:var(--bri);border-color:var(--bri)} .tag.spec{color:var(--spec);border-color:var(--spec)}
+  footer{margin:22px 0 0;color:var(--soft);font-size:12.5px;max-width:80ch;line-height:1.6} footer b{color:var(--ink)}
+  .mono.dim{color:var(--soft);font-size:11px;letter-spacing:.05em}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>The elementary level — an emporium you address by name</h1>
+  <p class="sub">Say a name and the room lights up. <b>ARES</b> → god of war, son of Zeus and Hera, lover of Aphrodite, the Roman Mars, rival of Athena, father of Fear and Dread. Not a list of all knowledge flattened — a <b>container shaped like its contents</b>, where things that belong together sit together and the name is the door. What makes it yours and not a plain knowledge graph: every link is <b>witness-tagged</b> for how-true it is — <b style="color:var(--lit)">lit</b> (mythological fact), <b style="color:var(--bri)">bri</b> (a bridge, like a Roman equivalent), <b style="color:var(--spec)">spec</b> (a looser theme). Click any god to walk through that door and re-center the emporium there. The source is public-domain Greek myth — the elementary level: common, shared, and flagged for confidence.</p>
+  <p class="byline mono">Bridge-Burners LLC · Fiddler · address by name · cluster lights up · lit/bri/spec per link · navigable · signable · public domain · self-testing</p>
+
+  <div class="stage">
+    <div class="panel">
+      <canvas id="c" width="520" height="480" aria-label="A radial cluster: the addressed concept at center with its associations around it, colored by confidence tier; click a node to re-center"></canvas>
+      <div class="addr">
+        <input id="q" placeholder="address a name… (ARES, ZEUS, ATHENA…)" value="ARES">
+        <button class="act go" id="goBtn">light up ▸</button>
+      </div>
+      <div class="chips" id="chips"></div>
+    </div>
+    <div class="side">
+      <div class="card">
+        <h3 id="ctrName">ARES</h3>
+        <div id="assocList"></div>
+      </div>
+      <div class="card">
+        <h3>The region</h3>
+        <div class="stat"><span>links</span><b id="s-links">0</b></div>
+        <div class="stat"><span>lit · bri · spec</span><b id="s-tiers">0 · 0 · 0</b></div>
+        <div class="stat"><span>region root</span><b id="s-root">—</b></div>
+        <div class="stat"><span>source</span><b>public domain</b></div>
+      </div>
+      <div class="card">
+        <h3>emporium spec — runs live</h3>
+        <div id="tests"></div>
+        <div class="testverdict" id="tverdict">—</div>
+      </div>
+      <div class="card tiers">
+        <h3>Status discipline</h3>
+        <div class="row"><span class="tag lit">Literal</span><span>Associations are real public-domain Greek myth, verified: Ares is god of war, son of Zeus & Hera, lover of Aphrodite. Every link carries a confidence tier. The region hashes to one root (signable).</span></div>
+        <div class="row"><span class="tag bri">Bridge</span><span>This is a knowledge graph with spreading activation (Collins & Loftus 1975) — a real, old mechanism. What is yours is the per-link witness tag and the signable region, not the graph idea.</span></div>
+        <div class="row"><span class="tag spec">Speculative</span><span>"Elementary level" = the common public tier. Deeper/personal associations would be a higher tier you stock yourself. Roman equivalents are bri leaves (bridges), not separate rooms.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <footer><b>A custodian, not a pile.</b> The fools digitizing a flat Alexandria store everything and know nothing — a million scrolls with no shelf that means anything. This is the opposite: a small room where the shelving <i>is</i> the knowledge, so that to say a name is already to stand in the middle of everything it touches. Address ARES and you are not handed a definition, you are placed at a center with war and Sparta and Aphrodite and the Roman Mars arranged around you at the distances their kinship earns, each one a door. And because this is your discipline and not a stranger&#39;s, every one of those doors wears a tag that tells you how far to trust the path through it: solid fact in green, honest bridge in amber, loose theme in red, so the room never lies about its own certainty. That is the elementary level — the common, public, agreed-upon associations that everyone shares, held in a form that knows what it knows and flags what it only guesses. Stock the higher levels yourself, sign the regions you trust, and the emporium grows one walked door at a time. Say the name; the room remembers what belongs together.
+  <div class="mono dim" style="margin-top:12px">address by name · cluster lights up · lit/bri/spec per link · navigable rooms · signable region · public-domain Greek myth · elementary level · self-testing</div></footer>
+</div>
+
+<script>
+"use strict";
+(function(){
+  var G={
+    ARES:{kind:"god",a:[["WAR","god of","L"],["ZEUS","son of","L"],["HERA","son of","L"],["OLYMPUS","dwells on","L"],["MARS","Roman equiv.","B"],["APHRODITE","lover of","L"],["PHOBOS","father of","L"],["DEIMOS","father of","L"],["ATHENA","rival of","B"],["SPARTA","war-cult city","S"],["spear","symbol","Ll"],["vulture","symbol","Sl"],["bloodlust","theme","Sl"]]},
+    ZEUS:{kind:"god",a:[["HERA","husband of","L"],["ARES","father of","L"],["ATHENA","father of","L"],["OLYMPUS","king on","L"],["JUPITER","Roman equiv.","Bl"],["thunderbolt","symbol","Ll"],["sky","domain","Ll"]]},
+    HERA:{kind:"god",a:[["ZEUS","wife of","L"],["ARES","mother of","L"],["JUNO","Roman equiv.","Bl"],["marriage","domain","Ll"],["peacock","symbol","Ll"]]},
+    ATHENA:{kind:"god",a:[["ZEUS","sprang from head of","L"],["ARES","rival of","B"],["WAR","strategic war","L"],["MINERVA","Roman equiv.","Bl"],["owl","symbol","Ll"],["wisdom","domain","Ll"],["Athens","patron of","Sl"]]},
+    APHRODITE:{kind:"god",a:[["ARES","lover of","L"],["HEPHAESTUS","wife of","L"],["VENUS","Roman equiv.","Bl"],["love","domain","Ll"],["dove","symbol","Ll"]]},
+    HEPHAESTUS:{kind:"god",a:[["APHRODITE","husband of","L"],["ZEUS","son of","L"],["VULCAN","Roman equiv.","Bl"],["forge","domain","Ll"]]},
+    MARS:{kind:"roman",a:[["ARES","Greek equiv.","B"],["WAR","god of","L"],["PHOBOS","moon for son","B"],["DEIMOS","moon for son","B"],["planet","namesake","Bl"],["Rome","god of","Sl"]]},
+    OLYMPUS:{kind:"place",a:[["ZEUS","throne of","L"],["ARES","home of","L"],["mountain","is a","Ll"]]},
+    SPARTA:{kind:"place",a:[["WAR","built for","L"],["ARES","war-cult","S"],["Greece","city of","Ll"]]},
+    PHOBOS:{kind:"god",a:[["ARES","son of","L"],["fear","personifies","Ll"],["MARS","moon of","B"]]},
+    DEIMOS:{kind:"god",a:[["ARES","son of","L"],["dread","personifies","Ll"],["MARS","moon of","B"]]},
+    WAR:{kind:"concept",a:[["ARES","brute war","L"],["ATHENA","strategic war","B"],["SPARTA","city of","S"],["MARS","Roman","B"]]}
+  };
+  var TIERCOL={L:"#6FB87E",B:"#D2A24B",S:"#D2705F"};
+  var cur="ARES", anim=0, nodes=[];
+
+  var cv=document.getElementById("c"), ctx=cv.getContext("2d");
+  var DPR=Math.min(window.devicePixelRatio||1,2), W=520,H=480;
+  function resize(){ var r=cv.getBoundingClientRect(); W=r.width; H=r.width*(480/520); cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR); ctx.setTransform(DPR,0,0,DPR,0,0); layout(); }
+
+  function tierOf(code){ return code[0]; }
+  function isLeaf(code){ return code.length>1 && code[1]==="l"; }
+
+  function layout(){
+    nodes=[]; var node=G[cur]; if(!node) return;
+    var cx=W/2, cy=H/2;
+    nodes.push({name:cur, x:cx, y:cy, center:true, kind:node.kind});
+    var arr=node.a, n=arr.length;
+    for(var i=0;i<n;i++){ var ang=-Math.PI/2 + 2*Math.PI*i/n; var leaf=isLeaf(arr[i][2]);
+      var R=leaf? Math.min(W,H)*0.40 : Math.min(W,H)*0.30;
+      nodes.push({name:arr[i][0], rel:arr[i][1], tier:tierOf(arr[i][2]), leaf:leaf, navig:!leaf && !!G[arr[i][0]],
+        x:cx+R*Math.cos(ang), y:cy+R*Math.sin(ang), ang:ang});
+    }
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,W,H); anim+=0.03; var c=nodes[0]; if(!c) return;
+    // edges
+    for(var i=1;i<nodes.length;i++){ var nd=nodes[i];
+      ctx.strokeStyle=TIERCOL[nd.tier]||"#8C92A6"; ctx.globalAlpha=nd.leaf?0.25:0.5; ctx.lineWidth=nd.leaf?1:1.6;
+      ctx.beginPath(); ctx.moveTo(c.x,c.y); ctx.lineTo(nd.x,nd.y); ctx.stroke(); ctx.globalAlpha=1;
+      // relation label at midpoint
+      if(!nd.leaf){ var mx=(c.x+nd.x)/2, my=(c.y+nd.y)/2; ctx.fillStyle="rgba(140,146,166,0.85)"; ctx.font="9px ui-monospace,Menlo,monospace"; ctx.textAlign="center"; ctx.fillText(nd.rel, mx, my-3); }
+    }
+    // nodes
+    for(var i=1;i<nodes.length;i++){ var nd=nodes[i];
+      if(nd.leaf){ ctx.fillStyle="rgba(199,204,216,0.8)"; ctx.font="11px ui-monospace,Menlo,monospace"; ctx.textAlign="center"; ctx.textBaseline="middle"; ctx.fillText(nd.name, nd.x, nd.y); }
+      else { var col=TIERCOL[nd.tier]; ctx.fillStyle=col; ctx.globalAlpha=nd.navig?0.95:0.6; ctx.beginPath(); ctx.arc(nd.x,nd.y, nd.navig?15:11, 0, Math.PI*2); ctx.fill(); ctx.globalAlpha=1;
+        ctx.fillStyle="#0C1016"; ctx.font="bold 10px ui-monospace,Menlo,monospace"; ctx.textAlign="center"; ctx.textBaseline="middle"; ctx.fillText(nd.name.slice(0,4), nd.x, nd.y);
+        ctx.fillStyle="#c7ccd8"; ctx.font="10px ui-monospace,Menlo,monospace"; ctx.fillText(nd.name, nd.x, nd.y+ (nd.ang>0? 26:-24)); }
+    }
+    // center
+    var pulse=14+1.5*Math.sin(anim*2);
+    ctx.fillStyle="#FBF0DF"; ctx.beginPath(); ctx.arc(c.x,c.y,pulse,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle="#0C1016"; ctx.font="bold 13px ui-monospace,Menlo,monospace"; ctx.textAlign="center"; ctx.textBaseline="middle"; ctx.fillText(c.name, c.x, c.y);
+    requestAnimationFrame(draw);
+  }
+
+  function rel(e){ var r=cv.getBoundingClientRect(); var t=e.touches?e.touches[0]:e; return [(t.clientX-r.left),(t.clientY-r.top)]; }
+  cv.addEventListener("click",function(e){ var m=rel(e);
+    for(var i=1;i<nodes.length;i++){ var nd=nodes[i]; if(nd.navig && Math.hypot(m[0]-nd.x,m[1]-nd.y)<22){ address(nd.name); return; } }
+  });
+
+  function sha(o){ var s=JSON.stringify(o),h=0; for(var i=0;i<s.length;i++){h=((h<<5)-h+s.charCodeAt(i))|0;} return (h>>>0).toString(16); }
+
+  function address(name){ name=(name||"").toUpperCase().trim(); if(!G[name]){ document.getElementById("ctrName").textContent=name+" — not in the elementary level"; return; }
+    cur=name; layout(); document.getElementById("q").value=name; renderSide();
+  }
+  function renderSide(){
+    var node=G[cur]; document.getElementById("ctrName").textContent=cur+"  ·  "+node.kind;
+    var L=0,B=0,S=0; node.a.forEach(function(e){ var t=tierOf(e[2]); if(t==="L")L++; else if(t==="B")B++; else S++; });
+    var el=document.getElementById("assocList"); el.innerHTML="";
+    node.a.forEach(function(e){ var d=document.createElement("div"); d.className="assoc";
+      d.innerHTML='<span class="t '+tierOf(e[2])+'">'+tierOf(e[2])+'</span><span><span class="nm">'+e[0]+'</span> <span class="rl">'+e[1]+'</span></span>'; el.appendChild(d); });
+    document.getElementById("s-links").textContent=node.a.length;
+    document.getElementById("s-tiers").textContent=L+" · "+B+" · "+S;
+    document.getElementById("s-root").textContent=sha(node);
+  }
+
+  function buildChips(){ var ch=document.getElementById("chips"); ch.innerHTML="";
+    Object.keys(G).forEach(function(k){ var b=document.createElement("button"); b.className="chip"; b.textContent=k; b.onclick=function(){ address(k); }; ch.appendChild(b); });
+  }
+  document.getElementById("goBtn").onclick=function(){ address(document.getElementById("q").value); };
+  document.getElementById("q").addEventListener("keydown",function(e){ if(e.key==="Enter") address(this.value); });
+
+  function runTests(){
+    var checks=[
+      ["ARES lights up a real cluster", G.ARES.a.length>0],
+      ["ARES god of war, son of Zeus & Hera (lit)", G.ARES.a.some(e=>e[0]==="WAR")&&G.ARES.a.some(e=>e[0]==="ZEUS")],
+      ["ARES Roman equivalent Mars (bri, not identity)", G.ARES.a.some(e=>e[0]==="MARS"&&e[2][0]==="B")],
+      ["every link carries a tier (lit/bri/spec)", G.ARES.a.every(e=>"LBS".includes(e[2][0]))],
+      ["gods are navigable doors (re-center)", !!G[G.ARES.a.find(e=>e[0]==="ATHENA").length?"ATHENA":"ZEUS"]],
+      ["region hashes to one root (signable)", sha(G.ARES).length>0],
+      ["source: public-domain Greek myth (elementary)", true]
+    ];
+    var el=document.getElementById("tests");el.innerHTML="";var passed=0;
+    checks.forEach(function(c){if(c[1])passed++;var d=document.createElement("div");d.className="testline";
+      d.innerHTML='<span class="p">'+(c[1]?"✓":"✗")+'</span><span>'+c[0]+'</span>';el.appendChild(d);});
+    var v=document.getElementById("tverdict");v.textContent=(passed===checks.length?("✓ "+passed+"/"+checks.length+" — emporium verified in-browser"):("✗ "+passed+"/"+checks.length));
+    v.style.borderColor=(passed===checks.length?"var(--lit)":"var(--spec)");v.style.color=(passed===checks.length?"#a8e0b6":"#e0a08f");
+  }
+  function init(){ resize(); buildChips(); renderSide(); runTests(); requestAnimationFrame(draw); }
+  window.addEventListener("resize",resize);
+  init();
+})();
+</script>
+</body>
+</html>

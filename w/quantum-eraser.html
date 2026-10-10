@@ -1,0 +1,231 @@
+<!DOCTYPE html><html lang="en"><head><link rel="icon" href="../favicon.svg" type="image/svg+xml"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Quantum Eraser — retrocausality that isn't</title>
+<style>
+:root{
+  --void:#07090f;--panel:#0c1019;--rule:#1a2130;--card:#10141e;
+  --ink:#e9edf5;--faint:#727e93;--fainter:#414c5e;
+  --signal:#54d1ff;--idler:#ff8a5c;--fringe:#8affc8;--anti:#c77dff;--mark:#ffb454;--erase:#8affc8;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--void);color:var(--ink);font:400 13px/1.5 "IBM Plex Mono",ui-monospace,Menlo,monospace}
+body{padding:24px 18px 44px}
+.wrap{max-width:1040px;margin:0 auto}
+.eyebrow{font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--faint);margin-bottom:12px}
+h1{font:600 32px/1.04 "IBM Plex Sans","Helvetica Neue",sans-serif;letter-spacing:-.02em;max-width:22ch}
+h1 em{font-style:normal;color:var(--anti)}
+.lede{color:var(--faint);font-size:13px;max-width:68ch;line-height:1.7;margin-top:14px}
+.lede b{color:var(--ink);font-weight:400}
+.rig{background:var(--panel);border:1px solid var(--rule);border-radius:12px;overflow:hidden;margin:22px 0 8px}
+.diagram{background:#05070c;padding:6px}
+canvas#stage{width:100%;display:block;border-radius:8px}
+.controls{display:flex;gap:14px;padding:15px 16px;border-top:1px solid var(--rule);flex-wrap:wrap;align-items:center}
+.choice{display:flex;gap:8px;flex:1;min-width:240px}
+.choice button{flex:1;font:inherit;font-size:12px;padding:11px;border-radius:8px;cursor:pointer;background:var(--card);border:1px solid var(--rule);color:var(--ink);line-height:1.3}
+.choice button.mark.on{border-color:var(--mark);color:var(--mark);background:rgba(255,180,84,0.08)}
+.choice button.erase.on{border-color:var(--erase);color:var(--erase);background:rgba(138,255,200,0.08)}
+.run{display:flex;gap:8px}
+.run button{font:inherit;font-size:12px;padding:11px 16px;border-radius:8px;cursor:pointer;background:var(--card);border:1px solid var(--rule);color:var(--ink)}
+.run button:hover{border-color:var(--signal)}
+.run button.go{border-color:var(--signal);color:var(--signal)}
+.screens{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border-top:1px solid var(--rule)}
+@media(max-width:720px){.screens{grid-template-columns:1fr}}
+.screen{background:var(--panel);padding:14px 16px}
+.screen h3{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-bottom:4px}
+.screen .sub{font-size:10px;color:var(--fainter);margin-bottom:10px;min-height:26px;line-height:1.4}
+canvas.hist{width:100%;display:block;border-radius:6px;background:#080b12}
+.verdict{padding:12px 16px;border-top:1px solid var(--rule);font-size:12px;color:var(--faint);line-height:1.55}
+.verdict b{color:var(--anti)}
+.foot{color:var(--fainter);font-size:11px;line-height:1.75;margin-top:22px;max-width:88ch}
+.foot b{color:var(--faint);font-weight:400}.foot .f{color:var(--fringe)}.foot .a{color:var(--anti)}.foot .s{color:var(--signal)}
+.tag{display:inline-block;font-size:9px;padding:1px 6px;border-radius:4px;border:1px solid currentColor;vertical-align:middle}
+</style></head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">delayed-choice quantum eraser · kim et al. 1999 · real, verified, misexplained everywhere</div>
+  <h1>The experiment that looks like <em>time travel</em> — but isn't.</h1>
+  <p class="lede">Here is the most notorious "that can't be legal" result in physics. A photon is split into an <b>entangled pair</b>: the <b>signal</b> flies through a double slit to a screen; its <b>idler</b> twin flies off to a detector where you decide — possibly <b>after the signal already hit the screen</b> — whether to record <b>which slit it went through</b> or to <b>erase</b> that knowledge. When you erase, an interference pattern appears. Choosing <b>now</b> seems to reach <b>back in time</b> and change what the photon did. Run it and watch — then watch the catch that dissolves the paradox.</p>
+
+  <div class="rig">
+    <div class="diagram"><canvas id="stage" width="820" height="240"></canvas></div>
+    <div class="controls">
+      <div class="choice">
+        <button class="mark on" id="bMark">MARK which-path<br><span style="font-size:9px;opacity:.7">tag the idler — know the slit</span></button>
+        <button class="erase" id="bErase">ERASE which-path<br><span style="font-size:9px;opacity:.7">scramble it — forget the slit</span></button>
+      </div>
+      <div class="run">
+        <button class="go" id="fire">▶ fire 2000 pairs</button>
+        <button id="reset">reset</button>
+      </div>
+    </div>
+    <div class="screens">
+      <div class="screen">
+        <h3>The raw screen (D0) — everything</h3>
+        <div class="sub" id="rawSub">Every signal photon, unsorted. This is all a person at the screen ever sees.</div>
+        <canvas class="hist" id="raw" width="400" height="150"></canvas>
+      </div>
+      <div class="screen">
+        <h3>Sorted by the idler (coincidence)</h3>
+        <div class="sub" id="coSub">The same photons, split by which idler detector fired.</div>
+        <canvas class="hist" id="coinc" width="400" height="150"></canvas>
+      </div>
+    </div>
+    <div class="verdict" id="verdict">Fire some pairs to begin.</div>
+  </div>
+
+  <div class="foot"><b>Why there's no time travel — the honest resolution.</b> The trick everyone leaves out: <b>the raw screen never changes.</b> Whether you mark or erase, whether you choose early or late, the total pattern at D0 is always a smooth featureless blob — no fringes appear or vanish in real time, so nothing you do to the idler sends any signal back to the screen. The interference is only recoverable <i>after</i> the fact, when you take your screen data and <b>sort it</b> by which idler detector fired. In the erase case the "fringe" detector (<span class="f">D3</span>) and the "antifringe" detector (<span class="a">D4</span>) each pull out a beautiful interference pattern — but they are exactly complementary: cos²(φ) and sin²(φ), which sum to 1. Where <span class="f">D3</span> has a bright fringe, <span class="a">D4</span> has a dark one, so added back together they wash into the same flat blob you already saw. The interference was <b>always latent in the correlations</b>; erasing doesn't create it, and sorting doesn't change the past — it just reveals which photons were secretly in step. No information travels backward, relativity is safe, and the "retrocausal" thrill survives only as long as nobody mentions that you needed the idler results — from the future — to draw the fringes in the first place. Spooky, real, and completely law-abiding.</p>
+</div>
+
+<script>
+(function(){
+var $=function(id){return document.getElementById(id);};
+var mode='mark'; // 'mark' or 'erase'
+var d=5, lambda=1, L=40; // geometry for fringe spacing
+function gaussian(){var u=Math.random(),v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
+
+// data stores: arrays of {x, idler} where idler in {D1,D2,D3,D4}
+var hits=[];
+
+function fireOne(){
+  var slit = Math.random()<0.5 ? -1 : 1;
+  var x, idler;
+  if(mode==='mark'){
+    // which-path known: photon is a particle, lands in a blob at its slit image, idler = D1/D2
+    x = slit*7 + gaussian()*3.5;
+    idler = slit<0 ? 'D1' : 'D2';
+  } else {
+    // erased: interference. idler randomly D3 (fringe) or D4 (antifringe).
+    // sample x from the appropriate cos^2 distribution via rejection
+    var whichEraser = Math.random()<0.5 ? 'D3':'D4';
+    var shift = whichEraser==='D3' ? 0 : Math.PI;
+    x = sampleFringe(shift);
+    idler = whichEraser;
+  }
+  return {x:x, idler:idler};
+}
+function sampleFringe(shift){
+  // rejection sample from env(x)*cos^2(phase/2 + shift/2)
+  for(var t=0;t<50;t++){
+    var x=(Math.random()-0.5)*36;
+    var phase=2*Math.PI*d*x/(lambda*L);
+    var env=Math.exp(-x*x/(2*11*11));
+    var p=env*Math.pow(Math.cos(phase/2+shift/2),2);
+    if(Math.random()<p)return x;
+  }
+  return (Math.random()-0.5)*36;
+}
+
+function drawHist(canvas,data,colorFn,bins){
+  var c=canvas.getContext('2d'),W=canvas.clientWidth,H=canvas.height/canvas.width*W;
+  var DPR=Math.min(devicePixelRatio||1,2);
+  if(canvas.width!==W*DPR){canvas.width=W*DPR;canvas.height=H*DPR;c.setTransform(DPR,0,0,DPR,0,0);}
+  c.clearRect(0,0,W,H);
+  bins=bins||60;
+  var arr=new Array(bins).fill(0);
+  data.forEach(function(h){var b=Math.floor((h.x+20)/40*bins);if(b>=0&&b<bins)arr[b]++;});
+  var mx=Math.max.apply(null,arr)||1;
+  for(var b=0;b<bins;b++){var bh=arr[b]/mx*(H-10);var x=b/bins*W;var col=colorFn(b,bins);
+    c.fillStyle=col;c.fillRect(x,H-bh,W/bins-0.5,bh);}
+}
+
+function render(){
+  // raw screen: all hits, single color
+  drawHist($('raw'),hits,function(){return 'rgba(84,209,255,0.8)';});
+  // coincidence: color by idler detector
+  var co=$('coinc'),c=co.getContext('2d'),W=co.clientWidth,H=co.height/co.width*W;
+  var DPR=Math.min(devicePixelRatio||1,2);
+  if(co.width!==W*DPR){co.width=W*DPR;co.height=H*DPR;c.setTransform(DPR,0,0,DPR,0,0);}
+  c.clearRect(0,0,W,H);
+  var bins=60;
+  var groups = mode==='mark' ? {'D1':'rgba(255,180,84,0.85)','D2':'rgba(255,138,92,0.85)'}
+                             : {'D3':'rgba(138,255,200,0.85)','D4':'rgba(199,125,255,0.85)'};
+  // overlay each group
+  Object.keys(groups).forEach(function(g){
+    var arr=new Array(bins).fill(0);
+    hits.filter(function(h){return h.idler===g;}).forEach(function(h){var b=Math.floor((h.x+20)/40*bins);if(b>=0&&b<bins)arr[b]++;});
+    var mx=0;hits.forEach(function(){});var allmax=Math.max.apply(null,hits.map(function(){return 1;}));
+    var localmax=Math.max.apply(null,arr)||1;
+    // normalize against total hits per bin for fair height
+    var gmax=Math.max.apply(null,arr)||1;
+    for(var b=0;b<bins;b++){var bh=arr[b]/(maxBin()||1)*(H-10);var x=b/bins*W;
+      c.fillStyle=groups[g];c.fillRect(x,H-bh,W/bins-0.5,bh);}
+  });
+  updateText();
+}
+function maxBin(){var bins=60;var arr=new Array(bins).fill(0);hits.forEach(function(h){var b=Math.floor((h.x+20)/40*bins);if(b>=0&&b<bins)arr[b]++;});return Math.max.apply(null,arr)||1;}
+
+function updateText(){
+  if(mode==='mark'){
+    $('rawSub').textContent='Every signal photon, unsorted — a smooth blob. No interference.';
+    $('coSub').innerHTML='Sorted by <span class="tag" style="color:#ffb454">D1</span>/<span class="tag" style="color:#ff8a5c">D2</span>: two particle blobs, one per slit. Which-path known = no fringes anywhere.';
+    $('verdict').innerHTML='<b>MARK:</b> you kept which-path info. The photon acts like a particle — two blobs, no interference, in the raw view and the sorted view alike.';
+  } else {
+    $('rawSub').textContent='Every signal photon, unsorted — STILL a smooth blob. Identical to the mark case.';
+    $('coSub').innerHTML='Sorted by <span class="tag" style="color:#8affc8">D3</span> (fringes) and <span class="tag" style="color:#c77dff">D4</span> (antifringes): interference appears! But the two are complementary.';
+    $('verdict').innerHTML='<b>ERASE:</b> the raw screen looks exactly the same — no fringes. Interference only appears once you sort by <span style="color:#8affc8">D3</span> vs <span style="color:#c77dff">D4</span>. Their fringes are offset by half a period and sum right back to the flat blob. Nothing changed at the screen; you just revealed a hidden correlation. No signal, no time travel.';
+  }
+}
+
+// ---- diagram animation ----
+var stage=$('stage'), sg=stage.getContext('2d');
+var DPR=Math.min(devicePixelRatio||1,2);
+function fitStage(){var w=stage.clientWidth;stage.width=w*DPR;stage.height=w*240/820*DPR;sg.setTransform(DPR,0,0,DPR,0,0);SW=w;SH=w*240/820;}
+var SW=820,SH=240;
+var photons=[]; // animated pairs
+
+function drawDiagram(){
+  sg.clearRect(0,0,SW,SH);
+  sg.fillStyle='#05070c';sg.fillRect(0,0,SW,SH);
+  // source
+  var srcX=SW*0.08, srcY=SH*0.5;
+  sg.fillStyle='#c77dff';sg.beginPath();sg.arc(srcX,srcY,7,0,6.28);sg.fill();
+  sg.fillStyle='rgba(160,170,190,0.7)';sg.font='9px monospace';sg.textAlign='center';
+  sg.fillText('entangled',srcX,srcY-16);sg.fillText('source',srcX,srcY-6);
+  // double slit (signal path, upward)
+  var slitX=SW*0.32, slitY=SH*0.28;
+  sg.strokeStyle='rgba(120,140,170,0.6)';sg.lineWidth=2;
+  sg.beginPath();sg.moveTo(slitX,slitY-30);sg.lineTo(slitX,slitY-8);sg.moveTo(slitX,slitY-2);sg.lineTo(slitX,slitY+2);sg.moveTo(slitX,slitY+8);sg.lineTo(slitX,slitY+30);sg.stroke();
+  sg.fillStyle='rgba(84,209,255,0.7)';sg.fillText('double slit',slitX,slitY-38);
+  // signal screen D0
+  var scrX=SW*0.62, scrY=SH*0.28;
+  sg.strokeStyle='#54d1ff';sg.lineWidth=2;sg.beginPath();sg.moveTo(scrX,scrY-34);sg.lineTo(scrX,scrY+34);sg.stroke();
+  sg.fillStyle='#54d1ff';sg.fillText('screen D0',scrX,scrY-40);
+  sg.fillText('(signal)',scrX,scrY+46);
+  // idler path downward to choice box
+  var chX=SW*0.62, chY=SH*0.74;
+  sg.strokeStyle = mode==='mark'?'#ffb454':'#8affc8';sg.lineWidth=1.5;
+  sg.strokeRect(chX-46,chY-20,92,40);
+  sg.fillStyle = mode==='mark'?'#ffb454':'#8affc8';
+  sg.fillText(mode==='mark'?'MARK':'ERASE',chX,chY-2);
+  sg.fillText(mode==='mark'?'D1 / D2':'D3 / D4',chX,chY+12);
+  sg.fillStyle='rgba(255,138,92,0.7)';sg.fillText('idler',SW*0.30,SH*0.78);
+  // photon animations
+  photons.forEach(function(p){
+    // signal (up branch) blue
+    sg.fillStyle='rgba(84,209,255,'+(1-p.t*0.3)+')';
+    var sx=srcX+(scrX-srcX)*Math.min(1,p.t*1.4), sy=srcY+(scrY-srcY)*Math.min(1,p.t*1.4);
+    sg.beginPath();sg.arc(sx,sy,2.5,0,6.28);sg.fill();
+    // idler (down branch) orange
+    sg.fillStyle='rgba(255,138,92,'+(1-p.t*0.3)+')';
+    var ix=srcX+(chX-srcX)*Math.min(1,p.t*1.1), iy=srcY+(chY-srcY)*Math.min(1,p.t*1.1);
+    sg.beginPath();sg.arc(ix,iy,2.5,0,6.28);sg.fill();
+  });
+  sg.textAlign='left';
+}
+
+function animatePairs(){for(var i=0;i<6;i++)photons.push({t:0,delay:i*0.05});}
+function loopDiagram(){photons.forEach(function(p){p.t+=0.02;});photons=photons.filter(function(p){return p.t<1.2;});drawDiagram();requestAnimationFrame(loopDiagram);}
+
+// ---- controls ----
+function setMode(m){mode=m;$('bMark').classList.toggle('on',m==='mark');$('bErase').classList.toggle('on',m==='erase');
+  hits=[];render();}
+$('bMark').onclick=function(){setMode('mark');};
+$('bErase').onclick=function(){setMode('erase');};
+$('fire').onclick=function(){for(var i=0;i<2000;i++)hits.push(fireOne());animatePairs();render();};
+$('reset').onclick=function(){hits=[];render();};
+
+window.addEventListener('resize',function(){fitStage();render();});
+fitStage();setMode('mark');loopDiagram();
+})();
+</script>
+</body></html>

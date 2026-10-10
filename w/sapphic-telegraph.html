@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Sapphic Telegraph — mirror</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600&family=Spectral:ital,wght@0,300;0,400;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--sea:#170d20;--line:rgba(154,152,166,.16);--lead:#9a98a6;--lead-dim:#5b5868;
+    --parch:#e9e2d2;--parch-dim:#b9b2a3;--gold:#d9a441;--gold-dim:#a87f33;--verd:#73b3a3;--murex:#9a3d68;}
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;background:var(--sea);color:var(--parch);font-family:"Spectral",Georgia,serif;line-height:1.55;
+    -webkit-font-smoothing:antialiased;background-image:radial-gradient(1000px 520px at 82% -10%,rgba(154,61,104,.16),transparent 60%),
+      radial-gradient(820px 640px at 5% 112%,rgba(115,179,163,.10),transparent 55%);display:flex;justify-content:center}
+  .card{max-width:620px;width:100%;padding:32px 24px 50px}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-dim)}
+  h1{font-family:"Cormorant Garamond",serif;font-weight:300;font-size:clamp(36px,9.5vw,56px);margin:6px 0 0;line-height:.98;letter-spacing:-.5px}
+  .sub{font-style:italic;font-weight:300;color:var(--parch-dim);font-size:15.5px;margin:14px 0 0;max-width:52ch}
+  .sub b{color:var(--verd);font-style:normal;font-weight:400}
+  .lamp-row{display:flex;align-items:center;gap:18px;margin:24px 0 4px}
+  .lamp{width:62px;height:62px;border-radius:50%;flex:0 0 62px;background:radial-gradient(circle at 38% 34%,#2a1d38,#140b1c);
+    border:1px solid var(--lead-dim);transition:box-shadow .04s,background .04s}
+  .lampcap{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--lead-dim);letter-spacing:.08em;line-height:1.6}
+  h2{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-dim);
+    margin:28px 0 10px;font-weight:500;border-top:1px solid var(--line);padding-top:18px}
+  label{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--lead-dim);letter-spacing:.08em}
+  input[type=text],textarea,select{width:100%;background:rgba(0,0,0,.22);border:1px solid var(--line);border-radius:5px;
+    color:var(--parch);font-family:"Spectral",serif;font-size:16px;padding:11px 13px;margin-top:5px}
+  select{font-family:"IBM Plex Mono",monospace;font-size:13px}
+  input:focus,textarea:focus,select:focus{outline:none;border-color:rgba(217,164,65,.5)}
+  .pattern{font-family:"IBM Plex Mono",monospace;font-size:17px;letter-spacing:1px;color:var(--gold);
+    background:rgba(217,164,65,.05);border:1px solid rgba(217,164,65,.16);border-radius:5px;padding:10px 13px;margin-top:10px;
+    min-height:42px;word-break:break-word;line-height:1.7}
+  .pattern .sep{color:var(--lead-dim)} .pattern .axis{color:var(--murex)}
+  .stream{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;min-height:34px;align-items:center}
+  .tok{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:500;padding:3px 9px;border-radius:4px;
+    border:1px solid currentColor;opacity:.4;transition:opacity .08s,transform .08s}
+  .tok.lit{opacity:1;transform:translateY(-3px)}
+  .axis{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--murex);padding:0 4px;letter-spacing:.1em;display:flex;align-items:center}
+  .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center}
+  button{cursor:pointer;background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(0,0,0,.18));border:1px solid var(--line);
+    border-radius:5px;color:var(--parch);font-family:"IBM Plex Mono",monospace;font-size:12.5px;letter-spacing:.05em;padding:11px 16px;transition:.15s}
+  button:hover{border-color:rgba(217,164,65,.5);background:rgba(217,164,65,.06)} button:active{transform:translateY(1px)}
+  button.primary{border-color:rgba(217,164,65,.5);color:var(--gold)} button:disabled{opacity:.4;pointer-events:none}
+  .ctl{display:flex;align-items:center;gap:7px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--lead-dim)}
+  .ctl.chk{cursor:pointer;color:var(--parch-dim)} .ctl select{width:auto;margin:0;padding:6px 8px}
+  .ctl input[type=range]{accent-color:var(--gold);width:84px} .speedwrap{margin-left:auto}
+  .hint{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--verd);margin-top:8px;min-height:16px;letter-spacing:.04em;opacity:.85}
+  .key{user-select:none;-webkit-user-select:none;touch-action:none;width:100%;padding:24px;text-align:center;border-radius:7px;margin-top:8px;
+    background:linear-gradient(180deg,#2a1838,#1c1029);border:1px solid var(--lead-dim);font-family:"Cormorant Garamond",serif;font-size:22px;color:var(--parch-dim);transition:.06s}
+  .key.down{background:linear-gradient(180deg,#3a2350,#241433);border-color:var(--gold);color:var(--gold);transform:translateY(1px)}
+  .keyout{font-family:"IBM Plex Mono",monospace;font-size:16px;color:var(--gold);margin-top:8px;min-height:24px;letter-spacing:1px}
+  .keytext{font-family:"Cormorant Garamond",serif;font-size:22px;color:var(--parch);margin-top:4px;min-height:28px}
+  .decoded{font-family:"Cormorant Garamond",serif;font-size:22px;color:var(--verd);margin-top:10px;min-height:30px}
+  details{margin-top:24px;border-top:1px solid var(--line);padding-top:14px}
+  summary{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-dim);cursor:pointer}
+  .legend{margin-top:14px;font-family:"IBM Plex Mono",monospace;font-size:12px;line-height:2;color:var(--parch-dim)}
+  .swatch{display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:5px;vertical-align:baseline}
+  .chart{display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:5px 12px;margin-top:12px}
+  .chart div{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--parch-dim)} .chart b{color:var(--gold);width:14px;display:inline-block}
+  .note{margin-top:22px;border-top:1px solid var(--line);padding-top:15px;font-family:"IBM Plex Mono",monospace;font-size:11px;line-height:1.85;color:var(--lead-dim)}
+  .note b{color:var(--gold-dim);font-weight:500}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="eyebrow">a purple-paper instrument · the mirror</div>
+  <h1>The Sapphic Telegraph</h1>
+  <p class="sub">The musical channel, folded. <b>Palindrome</b> and <b>mirror</b> reflect the melody; <b>signal</b> reflects the whole transmission — every dot, dash and gap reversed, so it plays bit-for-bit identically backwards. <i>Ma fin est mon commencement.</i></p>
+
+  <div class="lamp-row">
+    <div class="lamp" id="lamp"></div>
+    <div class="lampcap">colour = pitch · brightness = octave<br>the ◊ marks the fold.<br>watch it turn back.</div>
+  </div>
+
+  <h2>① Compose</h2>
+  <input type="text" id="msg" value="midday flat citizen" autocomplete="off">
+  <div class="row" style="margin-top:8px">
+    <label class="ctl chk"><input type="checkbox" id="palin"> ✶ palindromise words</label>
+    <span class="ctl">via
+      <select id="strat">
+        <option value="average" selected>average — letter midpoint</option>
+        <option value="mirror">mirror — fold the front</option>
+        <option value="synonym">synonym → palindrome</option>
+      </select></span>
+  </div>
+  <div class="hint" id="sentas"></div>
+  <div class="pattern" id="pattern"></div>
+  <div class="stream" id="cstream"></div>
+  <div class="hint" id="hint"></div>
+  <div class="row">
+    <span class="ctl">fold
+      <select id="sym">
+        <option value="none">straight</option>
+        <option value="pal">palindrome — note mirror</option>
+        <option value="inv">inversion — pitch mirror</option>
+        <option value="mir">mirror — retrograde + inverse</option>
+        <option value="sig" selected>signal — true palindrome (every pluck)</option>
+      </select></span>
+    <label class="ctl chk"><input type="checkbox" id="music" checked> 🎵 melodic</label>
+    <span class="ctl">mode
+      <select id="mode">
+        <option value="MIXO" selected>Mixolydian</option>
+        <option value="PHRYG">Phrygian</option>
+        <option value="DORIAN">Dorian</option>
+      </select></span>
+  </div>
+  <div class="row">
+    <button class="primary" id="send">▶ transmit</button>
+    <button id="stop" disabled>■ stop</button>
+    <span class="ctl speedwrap">fast<input type="range" id="speed" min="32" max="130" value="62">slow</span>
+  </div>
+
+  <h2>② The key — send by hand</h2>
+  <label>press &amp; hold · short = ‿ · long = – · pause to end a letter, longer for a word</label>
+  <div class="key" id="key">⌯ press &amp; hold ⌯</div>
+  <div class="keyout" id="keyout"></div>
+  <div class="keytext" id="keytext"></div>
+  <div class="row"><button id="keyclear">clear</button></div>
+
+  <h2>③ Receive — decode – ‿ back to words</h2>
+  <textarea id="decin" rows="2">– ‿ ‿ / – ‿ ‿ / ‿</textarea>
+  <div class="row"><button id="decbtn">decode →</button></div>
+  <div class="decoded" id="decout"></div>
+
+  <details>
+    <summary>the colour language · the alphabet · the folds</summary>
+    <div class="legend" id="legend"></div>
+    <div class="chart" id="chart"></div>
+  </details>
+
+  <div class="note">
+    <b>the folds.</b> <b>palindrome / mirror</b> reflect the <i>note sequence</i> (each letter still plays its Morse forward). <b>signal</b> reflects the <i>whole event list</i> — symbols and gaps reverse too — so a letter like A (‿–) returns as –‿. because a pluck's attack can't be reversed, signal mode uses a <b>symmetric swell voice</b>; that's the only way it plays truly identically backwards.
+    <br><b>honest frame.</b> rhythm is real decodable Morse; the symmetry is on the signal/melody, not the text. <b>palindromise</b> makes the words read both ways, but you pick your loss: <b>synonym</b> keeps meaning only where a palindrome synonym happens to exist (rare — a few dozen words); <b>average</b> and <b>mirror</b> always succeed but trade sense for symmetry (CAT becomes KAK). symmetry or meaning, almost never both. the crab canon is genuinely old (Machaut, 14th c.); this just gives the metre's two-symbol logic a place to fold.
+  </div>
+</div>
+
+<script>
+(function(){
+  const M={A:".-",B:"-...",C:"-.-.",D:"-..",E:".",F:"..-.",G:"--.",H:"....",I:"..",J:".---",K:"-.-",L:".-..",M:"--",N:"-.",O:"---",P:".--.",Q:"--.-",R:".-.",S:"...",T:"-",U:"..-",V:"...-",W:".--",X:"-..-",Y:"-.--",Z:"--..","0":"-----","1":".----","2":"..---","3":"...--","4":"....-","5":".....","6":"-....","7":"--...","8":"---..","9":"----."};
+  const REV={};for(const k in M)REV[M[k]]=k;
+  const norm=s=>s.replace(/‿/g,".").replace(/[–—-]/g,"-");
+  const glyph=s=>s.replace(/\./g,"‿").replace(/-/g,"–");
+
+  const TONIC=174.61,T=9/8,S=256/243;
+  function steps(a){const r=[1];let c=1;for(const x of a){c*=x;r.push(c);}return r;}
+  const MODES={MIXO:steps([S,T,T,S,T,T,T]),PHRYG:steps([T,S,T,T,T,S,T]),DORIAN:steps([S,T,T,T,S,T,T])};
+  const HUE=[0,30,52,128,186,220,280],LTR=['r','o','y','g','c','b','v'];
+  function noteFromIndex(idx,mode){const deg=((idx%7)+7)%7,oct=Math.floor(idx/7);
+    return {idx,deg,oct,freq:TONIC*MODES[mode][deg]*Math.pow(2,oct),hue:HUE[deg],
+      light:Math.max(22,Math.min(88,46+oct*11)),token:LTR[deg]+(oct!==0?(oct>0?oct:'_'+(-oct)):'')};}
+  function letterEntry(ch,mode){const i=ch.charCodeAt(0)-65;if(i<0||i>25)return null;
+    const n=noteFromIndex(i,mode);n.ch=ch;n.code=M[ch];return n;}
+  const colOf=e=>e?`hsl(${e.hue} 72% ${e.light}%)`:'#9a98a6';
+
+  // ---- palindromise stage: synonym (meaning) / mirror / average (symmetry) ----
+  const LEX={flat:'level',even:'level',flush:'level',plane:'level',level:'level',
+    citizen:'civic',public:'civic',civil:'civic',community:'civic',civic:'civic',
+    car:'racecar',auto:'racecar',vehicle:'racecar',race:'racecar',
+    midday:'noon',midnight:'noon',noon:'noon',
+    mother:'madam',lady:'madam',madam:'madam',
+    act:'deed',feat:'deed',action:'deed',deed:'deed',
+    rotate:'rotor',spin:'rotor',turn:'rotor',rotor:'rotor',
+    boat:'kayak',canoe:'kayak',kayak:'kayak',
+    belief:'tenet',creed:'tenet',principle:'tenet',doctrine:'tenet',tenet:'tenet',
+    worship:'deified',adore:'deified',revere:'deified',exalt:'deified',
+    look:'eye',glance:'eye',see:'eye',watch:'eye',eye:'eye',
+    cite:'refer',mention:'refer',point:'refer',refer:'refer',
+    repeat:'redder',mom:'mom',dad:'dad',pop:'pop',sis:'sis',wow:'wow',shine:'sees'};
+  const isPal=s=>{s=s.toLowerCase();return s===[...s].reverse().join('');};
+  const avgL=(a,b)=>String.fromCharCode(Math.round((a.charCodeAt(0)+b.charCodeAt(0))/2));
+  function palAverage(w){w=w.toUpperCase().split('');for(let i=0,j=w.length-1;i<j;i++,j--){if(w[i]!==w[j]){const m=avgL(w[i],w[j]);w[i]=m;w[j]=m;}}return w.join('');}
+  function palMirror(w){w=w.toUpperCase().split('');const n=w.length;for(let i=Math.ceil(n/2);i<n;i++)w[i]=w[n-1-i];return w.join('');}
+  function palindromise(text,strat){return text.toUpperCase().trim().split(/\s+/).map(w=>{
+    if(strat==='synonym'){if(isPal(w))return w;const k=w.toLowerCase();if(LEX[k])return LEX[k].toUpperCase();return palMirror(w);}
+    if(strat==='mirror')return palMirror(w);
+    return palAverage(w);}).join(' ');}
+  function sourceText(){return palinEl.checked?palindromise(msg.value,stratEl.value):msg.value;}
+
+  function baseEntries(text,mode){const out=[];text.toUpperCase().trim().split(/\s+/).forEach((w,wi)=>{
+    if(wi)out.push({space:true});for(const ch of w){const e=letterEntry(ch,mode);if(e)out.push(e);}});return out;}
+  function invert(arr,axis,mode){return arr.map(e=>{if(e.space)return e;const n=noteFromIndex(2*axis-e.idx,mode);n.ch=e.ch;n.code=e.code;return n;});}
+
+  // letter-level folds
+  function buildSeq(text,mode,sym){const arr=baseEntries(text,mode);const first=arr.find(e=>!e.space);const axis=first?first.idx:0;
+    const rev=a=>a.slice().reverse();
+    if(sym==='pal')return{seq:arr.concat(rev(arr)),mid:arr.length};
+    if(sym==='inv')return{seq:invert(arr,axis,mode),mid:-1};
+    if(sym==='mir')return{seq:arr.concat(rev(invert(arr,axis,mode))),mid:arr.length};
+    return{seq:arr,mid:-1};}
+
+  // signal-level true palindrome: flatten to events, reverse the whole list
+  function buildSignal(text,mode,musical){
+    const arr=baseEntries(text,mode);
+    const letters=arr.filter(e=>!e.space);const N=letters.length;
+    const fwd=[];let li=0;
+    arr.forEach(e=>{
+      if(e.space){fwd.push({rest:true,dur:4});return;}
+      const f=musical?e.freq:196, col=colOf(e);
+      [...e.code].forEach((sym,si)=>{
+        fwd.push({note:true,freq:f,col,dur:(sym==='.'?1:2),glyph:sym==='.'?'‿':'–',disp:li});
+        if(si<e.code.length-1)fwd.push({rest:true,dur:1});
+      });
+      fwd.push({rest:true,dur:3});li++;
+    });
+    const rev=fwd.slice().reverse().map(ev=> ev.rest?{rest:true,dur:ev.dur}:{...ev,disp:2*N-1-ev.disp});
+    const events=fwd.concat(rev);
+    // colour tokens: forward letters, ◊, reversed letters
+    let toks='';
+    for(let i=0;i<N;i++){const e=letters[i];toks+=`<span class="tok" data-i="${i}" style="color:${colOf(e)}">${e.token}</span>`;}
+    toks+=`<span class="axis">◊</span>`;
+    for(let j=0;j<N;j++){const e=letters[N-1-j];toks+=`<span class="tok" data-i="${N+j}" style="color:${colOf(e)}">${e.token}</span>`;}
+    return {events,toks,mid:fwd.length};
+  }
+
+  // ---- audio ----
+  let ctx=null,master=null,keyOsc=null,keyGain=null;
+  function init(){if(ctx)return;ctx=new (window.AudioContext||window.webkitAudioContext)();
+    master=ctx.createGain();master.gain.value=0.8;master.connect(ctx.destination);
+    keyOsc=ctx.createOscillator();keyOsc.type="triangle";keyOsc.frequency.value=246.94;
+    keyGain=ctx.createGain();keyGain.gain.value=0;keyOsc.connect(keyGain).connect(master);keyOsc.start();}
+  function resume(){if(ctx&&ctx.state==="suspended")ctx.resume();}
+  function pluck(freq,t,dur,gain){gain=gain||0.6;const rate=ctx.sampleRate;
+    const N=Math.max(2,Math.round(rate/freq)),len=Math.max(N+4,Math.floor(rate*dur));
+    const buf=ctx.createBuffer(1,len,rate),d=buf.getChannelData(0);
+    for(let i=0;i<N;i++)d[i]=Math.random()*2-1;
+    for(let i=N;i<len;i++)d[i]=0.9965*0.5*(d[i-N]+d[i-N+1]);
+    const src=ctx.createBufferSource();src.buffer=buf;const g=ctx.createGain();
+    g.gain.setValueAtTime(gain,t);g.gain.exponentialRampToValueAtTime(0.0006,t+dur);
+    src.connect(g).connect(master);src.start(t);src.stop(t+dur+0.02);}
+  function swell(freq,t,dur,gain){gain=gain||0.4; // time-symmetric -> truly reversible
+    const osc=ctx.createOscillator();osc.type='triangle';osc.frequency.setValueAtTime(freq,t);
+    const g=ctx.createGain();g.gain.setValueAtTime(0.0001,t);
+    g.gain.linearRampToValueAtTime(gain,t+dur*0.5);
+    g.gain.linearRampToValueAtTime(0.0001,t+dur);
+    osc.connect(g).connect(master);osc.start(t);osc.stop(t+dur+0.03);}
+  const lamp=document.getElementById('lamp');
+  function lampSet(c){lamp.style.background=`radial-gradient(circle at 38% 34%, ${c}, #140b1c)`;lamp.style.boxShadow=`0 0 26px 6px ${c}99`;lamp.style.borderColor=c;}
+  function lampOff(){lamp.style.background='radial-gradient(circle at 38% 34%,#2a1d38,#140b1c)';lamp.style.boxShadow='none';lamp.style.borderColor='var(--lead-dim)';}
+
+  const msg=document.getElementById('msg'),patEl=document.getElementById('pattern'),cstream=document.getElementById('cstream'),
+        modeEl=document.getElementById('mode'),symEl=document.getElementById('sym'),musicEl=document.getElementById('music'),hintEl=document.getElementById('hint'),
+        palinEl=document.getElementById('palin'),stratEl=document.getElementById('strat'),sentasEl=document.getElementById('sentas');
+  function litTok(idx){cstream.querySelectorAll('.tok').forEach(t=>t.classList.toggle('lit',+t.dataset.i===idx));}
+
+  function preview(){
+    const sym=symEl.value, mode=modeEl.value, src=sourceText();
+    sentasEl.textContent = palinEl.checked ? '→ sent as:  '+src : '';
+    if(sym==='sig'){
+      const {events,toks,mid}=buildSignal(src,mode,musicEl.checked);
+      let pat='';events.forEach((e,i)=>{ if(i===mid)pat+=`<span class="axis"> ◊ </span>`;
+        if(e.note)pat+=e.glyph; else pat+=`<span class="sep"> </span>`;});
+      patEl.innerHTML=pat||'&nbsp;';cstream.innerHTML=toks;
+      hintEl.textContent='signal fold · symmetric swell voice · the whole transmission reads the same backwards';
+      return;
+    }
+    const {seq,mid}=buildSeq(src,mode,sym);let pat='',toks='',li=0;
+    seq.forEach((e,i)=>{ if(mid===i){pat+=`<span class="axis"> ◊ </span>`;toks+=`<span class="axis">◊</span>`;}
+      if(e.space){pat+=`<span class="sep"> / </span>`;return;}
+      pat+=glyph(e.code)+`<span class="sep"> </span>`;
+      toks+=`<span class="tok" data-i="${li}" style="color:${colOf(e)}">${e.token}</span>`;li++;});
+    patEl.innerHTML=pat||'&nbsp;';cstream.innerHTML=toks;
+    hintEl.textContent = sym==='none'?'' : (sym==='inv'?'pitch reflected around the first note — the axis':'note sequence reflected at the ◊');
+  }
+  [msg,modeEl,symEl,musicEl,palinEl,stratEl].forEach(el=>el.addEventListener('input',preview));
+  symEl.addEventListener('change',preview);
+
+  // ---- transmit ----
+  let timers=[];const sendBtn=document.getElementById('send'),stopBtn=document.getElementById('stop');
+  function clearTimers(){timers.forEach(clearTimeout);timers=[];}
+  function transmit(){
+    init();resume();clearTimers();preview();
+    const sym=symEl.value,mode=modeEl.value,u=(+document.getElementById('speed').value)/1000,t0=ctx.currentTime+0.06;
+    sendBtn.disabled=true;stopBtn.disabled=false;let off=0;
+    if(sym==='sig'){
+      const {events}=buildSignal(sourceText(),mode,musicEl.checked);const su=u*1.35;
+      events.forEach(e=>{ if(e.rest){off+=e.dur*su;return;}
+        const dur=e.dur*su; swell(e.freq,t0+off,dur,0.42);
+        const st=off*1000,col=e.col,d=e.disp;
+        timers.push(setTimeout(()=>{lampSet(col);litTok(d);},st));
+        timers.push(setTimeout(lampOff,(off+e.dur*su)*1000));
+        off+=e.dur*su;});
+      timers.push(setTimeout(()=>{end();litTok(-1);},(off+0.2)*1000));
+      return;
+    }
+    const {seq}=buildSeq(sourceText(),mode,sym);let li=0;const musical=musicEl.checked;
+    seq.forEach(e=>{ if(e.space){off+=4*u;return;}
+      const freq=musical?e.freq:196,col=colOf(e),myTok=li,st=off*1000;
+      timers.push(setTimeout(()=>{lampSet(col);litTok(myTok);},st));
+      for(const sym2 of e.code){const dur=(sym2==='.'?1:2)*u;pluck(freq,t0+off,dur*1.9,0.6);off+=dur+u;}
+      timers.push(setTimeout(lampOff,off*1000));off+=2*u;li++;});
+    timers.push(setTimeout(()=>{end();litTok(-1);},(off+0.2)*1000));
+  }
+  function end(){clearTimers();lampOff();sendBtn.disabled=false;stopBtn.disabled=true;}
+  sendBtn.addEventListener('click',transmit);stopBtn.addEventListener('click',end);
+
+  // ---- hand key ----
+  const keyEl=document.getElementById('key'),keyout=document.getElementById('keyout'),keytext=document.getElementById('keytext');
+  let pressT=0,symbols="",flushTimer=null,decodedKey="";const DOT_MAX=200,LETTER_GAP=620,WORD_GAP=1500;
+  function kd(e){e.preventDefault();init();resume();if(pressT)return;pressT=performance.now();keyEl.classList.add('down');lampSet('var(--gold)');
+    if(flushTimer){clearTimeout(flushTimer);flushTimer=null;}keyGain.gain.cancelScheduledValues(ctx.currentTime);keyGain.gain.setTargetAtTime(0.16,ctx.currentTime,0.005);}
+  function ku(e){if(e)e.preventDefault();if(!pressT)return;const dur=performance.now()-pressT;pressT=0;keyEl.classList.remove('down');lampOff();
+    keyGain.gain.setTargetAtTime(0,ctx.currentTime,0.02);symbols+=(dur<DOT_MAX?".":"-");keyout.textContent=glyph(symbols);flushTimer=setTimeout(flushLetter,LETTER_GAP);}
+  function flushLetter(){if(symbols){const c=REV[symbols]||"□";decodedKey+=c;symbols="";keyout.textContent="";
+    const e=letterEntry(decodedKey.slice(-1),modeEl.value);if(e){init();resume();pluck(e.freq,ctx.currentTime+0.005,1.2,0.6);}}
+    keytext.textContent=decodedKey;flushTimer=setTimeout(()=>{if(decodedKey&&decodedKey.slice(-1)!==" "){decodedKey+=" ";keytext.textContent=decodedKey;}},WORD_GAP-LETTER_GAP);}
+  keyEl.addEventListener('mousedown',kd);window.addEventListener('mouseup',ku);
+  keyEl.addEventListener('touchstart',kd,{passive:false});keyEl.addEventListener('touchend',ku,{passive:false});
+  document.getElementById('keyclear').addEventListener('click',()=>{symbols="";decodedKey="";keyout.textContent="";keytext.textContent="";if(flushTimer){clearTimeout(flushTimer);flushTimer=null;}});
+
+  // ---- decode ----
+  document.getElementById('decbtn').addEventListener('click',()=>{const v=norm(document.getElementById('decin').value).trim();
+    document.getElementById('decout').textContent=v.split("/").map(w=>w.trim().split(/\s+/).map(c=>REV[c]||"").join("")).join(" ").trim()||"—";});
+
+  // ---- legend + chart ----
+  document.getElementById('legend').innerHTML="degree → hue → token:<br>"+LTR.map((l,i)=>{const c=`hsl(${HUE[i]} 72% 52%)`;
+    return `<span class="swatch" style="background:${c}"></span><b style="color:${c}">${l}</b> = deg ${i+1}`;}).join("&nbsp;&nbsp;")
+    +"<br><span style='color:var(--lead-dim)'>octave adds the number: r · r1 · r2 · (down: r_1). ◊ = the fold.</span>";
+  document.getElementById('chart').innerHTML=Object.keys(M).map(k=>`<div><b>${k}</b> ${glyph(M[k])}</div>`).join("");
+
+  preview();
+})();
+</script>
+</body>
+</html>

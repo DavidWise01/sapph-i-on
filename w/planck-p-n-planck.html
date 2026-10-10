@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>planck‹p{{n}}›planck</title>
+<style>
+:root{--ground:#121316;--rule:#2A2C31;--ink:#E7E7EA;--dim:#8F929B;--na:#EE6B2D;--cl:#5487E0;--au:#E8C15A;--n:#F4F4F4;--hot:#C8F7C5}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ground);color:var(--ink);font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.wrap{max-width:820px;margin:0 auto;padding:16px}
+.hd{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.hd b{font-weight:400;letter-spacing:.2em;color:var(--dim);font-size:10px;text-transform:uppercase}
+canvas{display:block;width:100%;touch-action:none;border:1px solid var(--rule);border-radius:3px}
+.ctl{display:grid;grid-template-columns:auto 1fr auto;gap:6px 10px;align-items:center;margin-top:10px}
+input[type=range]{width:100%;accent-color:var(--hot)}
+.val{font-size:11px;min-width:92px;text-align:right}
+.jump{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+button{font:inherit;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;background:transparent;color:var(--hot);border:1px solid #34503a;padding:5px 7px;border-radius:2px;cursor:pointer}
+button:hover{background:rgba(200,247,197,.08)}
+.rd{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+@media(max-width:560px){.rd{grid-template-columns:1fr 1fr}}
+.rd div{border:1px solid var(--rule);border-radius:3px;padding:6px 8px}
+.rd i{display:block;font-style:normal;font-size:9px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+.rd span{font-size:13.5px}
+#here{margin-top:10px;font-size:11px;color:var(--hot);min-height:34px}
+.note{margin-top:10px;font-size:10.5px;color:var(--dim)} .note b{color:var(--ink);font-weight:400}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hd"><b>planck ‹p{{n}}› planck · the stack, real, from 1 ℓP up</b><b id="nlab">n = 10²⁵</b></div>
+  <canvas id="v"></canvas>
+  <div class="ctl"><label for="s">log₁₀ n</label><input type="range" id="s" min="0" max="33.2" step="0.005" value="26.6"><span class="val" id="sv">26.60</span></div>
+  <div class="jump" id="jump"></div>
+  <div id="here"></div>
+  <div class="rd">
+    <div><i>view width = n ℓP</i><span id="w">–</span></div>
+    <div><i>energy to see this size</i><span id="e">–</span></div>
+    <div><i>light crosses it in</i><span id="t">–</span></div>
+    <div><i>gravity vs electric, 2 protons</i><span>8×10⁻³⁷</span></div>
+  </div>
+  <div class="rd">
+    <div><i>each sheet (real)</i><span>256 Na⁺ · 256 Cl⁻</span></div>
+    <div><i>gold core (real)</i><span>512 atoms, 1 layer</span></div>
+    <div><i>0.01 eV neutron wavelength</i><span>2.860 Å</span></div>
+    <div><i>gold atom spacing</i><span>2.884 Å</span></div>
+    <div><i>neutron caught by 1 gold layer</i><span>1.9×10⁻⁷</span></div>
+    <div><i>its catch size (radius)</i><span>70.7 fm</span></div>
+    <div><i>gold nucleus (radius)</i><span>7.0 fm</span></div>
+    <div><i>Planck energy</i><span>1.22×10²⁸ eV</span></div>
+  </div>
+  <div class="note">the stack as small and as real as it goes. <b>n</b> is how many Planck lengths wide the view is: n = 1 is 1.616 × 10⁻³⁵ m, n = 6.2 × 10³² is a centimetre. a −+−+ sheet of 512 charges, each +1 or −1, is in real matter a sheet of <b>rock salt</b>: 256 sodium ions and 256 chloride ions, 2.82 Å apart, 16 × 32 = 4.5 × 9.0 nm. the gold core with the sheets' 512 is <b>one layer of 512 gold atoms</b>, 2.884 Å apart: 2.3% off the salt, close enough to sit on it. the layer gap (2.9 Å) is my choice. at the scaler's 0.01 eV a neutron is a wave 2.860 Å long, <b>0.8% off the gold spacing</b>: it doesn't hit the core, it diffracts off it (first order at 46° from the salt's 3.99 Å surface cell; D₂ at 21°, the water ion at 9.5°). its chance of being caught by one gold layer is 1.9 × 10⁻⁷, though the gold nucleus looks ten times wider to it (70.7 fm) than it is (7.0 fm). below about 10⁻¹⁹ m nothing has been measured; from there down to 1 ℓP (16 powers of ten) the page draws nothing it can't back. gravity, weaker than the electric force by 10³⁶ between two protons, only catches up near 10¹⁸ GeV, within a factor of ten of the Planck energy.</div>
+</div>
+<script>
+(function(){
+'use strict';
+const LP=1.616255e-35, TP=5.391247e-44, HBARC=1.97327e-7 /* eV·m */, A=1e-10, FM=1e-15;
+const $=id=>document.getElementById(id);
+const sup=n=>String(n).replace('-','⁻').replace(/\d/g,c=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[c]);
+const sci=(x,u='')=>{ const e=Math.floor(Math.log10(x)); return (x/10**e).toFixed(2)+'×10'+sup(e)+u; };
+// the scene, in metres, side view: x across, z up. centre = the middle gold nucleus
+const GAP=2.9*A, AU=2.884*A, NACL=2.82*A;
+const atoms=[];
+for(let j=0;j<32;j++) atoms.push({x:(j-16)*AU,z:0,r:1.44*A,k:'Au',nr:1.2*FM*Math.cbrt(197)});
+for(const zz of [GAP,-GAP]) for(let i=0;i<32;i++){ const na=(i+(zz>0?0:1))%2===0; atoms.push({x:(i-16)*NACL,z:zz,r:(na?1.02:1.81)*A,k:na?'Na':'Cl',nr:1.2*FM*Math.cbrt(na?23:35)}); }
+// nucleons inside the middle gold nucleus: 197 packed at random in a 7 fm ball, seeded (their places are illustrative)
+const nuc=[]; { let s=7; const r=()=>{ s=(s*1103515245+12345)>>>0; return s/4294967296; }; const R=1.2*FM*Math.cbrt(197);
+  while(nuc.length<197){ const x=(r()*2-1)*R, z=(r()*2-1)*R; if(x*x+z*z<R*R*0.92) nuc.push({x,z,p:nuc.length<79}); } nuc[0]={x:0,z:0,p:true}; }
+const MARKS=[['1 ℓP',0.3],['untested edge',16.09],['a nucleon',19.9],['gold nucleus',20.95],['neutron catch size',21.9],['one gold atom',24.8],['atoms',25.75],['the stack',26.95],['1 cm',32.79]];
+$('jump').innerHTML=MARKS.map(([t,v])=>`<button data-v="${v}">${t}</button>`).join('');
+$('jump').querySelectorAll('button').forEach(b=>b.onclick=()=>{ $('s').value=b.dataset.v; draw(); });
+function fit(cv){ const w=cv.clientWidth||600, h=Math.round(Math.min(w*0.62,440)), d=window.devicePixelRatio||1; cv.width=Math.round(w*d); cv.height=Math.round(h*d); cv.style.height=h+'px'; const g=cv.getContext('2d'); g.setTransform(d,0,0,d,0,0); return [g,w,h]; }
+function draw(){
+  const s=+$('s').value, n=10**s, V=n*LP, [g,W,H]=fit($('v')), k=W/V, cx=W/2, cz=H/2;
+  const P=(x,z)=>[cx+x*k, cz-z*k];
+  g.fillStyle='#0d0e10'; g.fillRect(0,0,W,H); let here=[];
+  // 1 · the untested zone
+  if(V<3e-19){ g.fillStyle='#17181c'; g.fillRect(0,0,W,H); g.strokeStyle='#23252a'; for(let x=-H;x<W;x+=12){ g.beginPath(); g.moveTo(x,0); g.lineTo(x+H,H); g.stroke(); }
+    here.push('below ~10⁻¹⁹ m: no measured structure. nothing is drawn here that can be backed.'); }
+  // 2 · the Planck square
+  if(s<3){ const L=LP*k; g.strokeStyle='#C8F7C5'; g.lineWidth=1.5; g.strokeRect(cx-L/2,cz-L/2,L,L); g.fillStyle='#C8F7C5'; g.font='11px ui-monospace,monospace'; g.fillText('1 ℓP = 1.616×10⁻³⁵ m',cx-L/2,cz-L/2-6);
+    here.push('one Planck length: where gravity would be as strong as everything else. untested by 16 powers of ten.'); }
+  // 3 · the incoming neutron as a plane wave (λ = 2.860 Å), drawn from the top down to the top sheet
+  const lamN=2.860*A; if(lamN*k>5&&lamN*k<W){ g.strokeStyle='rgba(244,244,244,.28)'; g.lineWidth=1; for(let z=GAP+2.2*A; z<V; z+=lamN){ const y=cz-z*k; if(y<0) break; g.beginPath(); g.moveTo(0,y); g.lineTo(W,y); g.stroke(); }
+    here.push('the 0.01 eV neutron is a wave (lines above the stack), 2.860 Å apart: nearly the gold spacing, 2.884 Å.'); }
+  // 4 · atoms (electron clouds) and their nuclei
+  for(const a of atoms){ const [x,y]=P(a.x,a.z), r=a.r*k; if(x+r<-5||x-r>W+5) continue;
+    if(r>0.6&&r<W*3){ g.fillStyle=a.k==='Au'?'rgba(232,193,90,.85)':a.k==='Na'?'rgba(238,107,45,.8)':'rgba(84,135,224,.8)'; g.beginPath(); g.arc(x,y,Math.max(r,0.8),0,7); g.fill(); }
+    const nr=a.nr*k; if(nr>0.4&&r<W*400){ g.fillStyle='#fff'; g.beginPath(); g.arc(x,y,Math.max(nr,0.6),0,7); g.fill(); } }
+  const rAt=1.44*A*k, nuPx=6.98*FM*k; if(rAt>0.6&&rAt<W*3) here.push(`gold ${rAt<4?'atoms':'atom'} (yellow), sodium (orange), chloride (blue). each is mostly empty: its nucleus is 20,000 to 46,000 times narrower${nuPx<1?', too small to show at this zoom':' (the white dot)'}.`);
+  // 5 · the neutron's catch size around the middle gold nucleus
+  const rc=70.67*FM*k; if(rc>3&&rc<W*5){ g.strokeStyle='#C8F7C5'; g.setLineDash([4,4]); g.beginPath(); g.arc(cx,cz,rc,0,7); g.stroke(); g.setLineDash([]); g.fillStyle='#C8F7C5'; g.font='10px ui-monospace,monospace'; g.fillText('how wide gold looks to a 0.01 eV neutron: 70.7 fm',Math.max(4,cx-rc),Math.max(12,cz-rc-5));
+    here.push('the dashed ring is the gold nucleus as a slow neutron sees it: ten times wider than the nucleus itself.'); }
+  // 6 · nucleons in the middle gold nucleus
+  const rn=0.84*FM*k; if(rn>0.8&&rn<W*4){ for(const q of nuc){ const [x,y]=P(q.x,q.z); g.fillStyle=q.p?'rgba(238,107,45,.85)':'rgba(220,220,225,.8)'; g.beginPath(); g.arc(x,y,rn,0,7); g.fill(); }
+    here.push('197 nucleons: 79 protons (orange), 118 neutrons (grey). their places here are illustrative, not computed; they have no fixed places.'); }
+  if(rn>W*0.2&&rn<=W*30) here.push('one nucleon, 0.84 fm across: three quarks and the glue between them. the smallest thing on this page that has been measured to have a size.');
+  if(rn>W*30&&V>=3e-19) here.push('inside one nucleon: quarks and gluons, no fixed shapes to draw.');
+  // 7 · the stack as a speck
+  const st=32*NACL*k; if(st<6){ g.fillStyle='#E8C15A'; g.fillRect(cx-Math.max(1,st/2),cz-1,Math.max(2,st),2); if(s>28) here.push(`the whole stack, 9.0 nm long, is ${sci(V/(9.024e-9))} times smaller than this view.`); }
+  // scale bar
+  const bar=10**Math.floor(Math.log10(V/4)), bp=bar*k; g.fillStyle='#8F929B'; g.fillRect(12,H-14,bp,2); g.font='10px ui-monospace,monospace';
+  g.fillText(bar>=1e-2?sci(bar,' m'):bar>=A?(bar/A).toPrecision(2)+' Å':bar>=FM?(bar/FM).toPrecision(2)+' fm':sci(bar,' m'),12,H-18);
+  g.fillText('side view · x across · up is toward the incoming wind',W-248,H-6);
+  $('sv').textContent=s.toFixed(2); $('nlab').textContent='n = 10'+sup(Math.round(s)); $('w').textContent=sci(V,' m'); $('e').textContent=sci(HBARC/V,' eV'); $('t').textContent=sci(n,' tP');
+  $('here').textContent=here.join(' ');
+  window.__PL__={s,V,here};
+}
+$('s').addEventListener('input',draw); addEventListener('resize',draw); draw();
+})();
+</script>
+</body>
+</html>

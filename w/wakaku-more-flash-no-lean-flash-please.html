@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v183 more flash no lean flash please - artifact 247</title>
+<style>
+  :root{--bg:#000000;--fg:#ffffff}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace;overflow-x:hidden}
+  .top{padding:14px 18px;position:relative;z-index:10}
+  .kicker{font-size:12px;letter-spacing:.22em;opacity:1;text-transform:uppercase;color:#ff00ff;text-shadow:0 0 10px #ff00ff,0 0 20px #ff00ff}
+  .nline{font-size:12px;border-left:3px solid #ff00ff;padding-left:10px;white-space:pre-wrap;line-height:1.6;background:#111;padding:10px;border-radius:8px;box-shadow:0 0 20px #ff00ff}
+  .main{margin-top:10px;font-size:16px;font-weight:900;background:linear-gradient(90deg,#ff00ff,#00ffff,#ffff00,#ff00ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;padding:10px;border-radius:8px;border:2px solid #ff00ff;box-shadow:0 0 30px #ff00ff,0 0 60px #00ffff;text-transform:uppercase;animation:flashText 0.15s infinite alternate}
+  @keyframes flashText{0%{filter:hue-rotate(0deg) brightness(1)}100%{filter:hue-rotate(180deg) brightness(1.5)}}
+  .controls{padding:10px 12px;display:flex;gap:8px;flex-wrap:wrap;position:relative;z-index:10}
+  .btn{font-family:inherit;font-size:12px;font-weight:900;padding:8px 14px;border:2px solid #ff00ff;background:#000;color:#fff;border-radius:8px;cursor:pointer;box-shadow:0 0 15px #ff00ff,0 0 30px #00ffff;text-transform:uppercase;animation:flashBtn 0.2s infinite alternate}
+  .btn.active{border-color:#ffff00;color:#ffff00;background:#220022;box-shadow:0 0 20px #ffff00,0 0 40px #ff00ff}
+  @keyframes flashBtn{0%{transform:scale(1) hue-rotate(0deg)}100%{transform:scale(1.05) hue-rotate(90deg)}}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px;position:relative;z-index:5}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:600px;background:#000;border:2px solid #ff00ff;border-radius:16px;overflow:hidden;box-shadow:0 0 30px #ff00ff,0 0 60px #00ffff, inset 0 0 30px rgba(255,0,255,0.2)}
+  .cwrap.full{grid-column:1 / -1;height:750px}
+  .label{position:absolute;left:8px;top:8px;font-size:10px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;opacity:1;background:#000000ee;padding:6px 10px;border-radius:8px;z-index:5;border:2px solid #ff00ff;color:#fff;box-shadow:0 0 15px #ff00ff;text-shadow:0 0 10px #ff00ff}
+  .card{margin:12px;background:#000;border:2px solid #ff00ff;border-radius:12px;padding:14px;box-shadow:0 0 30px #ff00ff,0 0 60px #00ffff}
+  .mono{font-size:12px;white-space:pre-wrap;word-break:break-word;line-height:1.7;color:#fff;text-shadow:0 0 10px #ff00ff;font-weight:700}
+  .flash-overlay{position:fixed;inset:0;pointer-events:none;z-index:1;opacity:0.08;background:repeating-linear-gradient(0deg, transparent, transparent 2px, #ff00ff 2px, #ff00ff 4px);animation:flashOverlay 0.05s infinite}
+  @keyframes flashOverlay{0%{opacity:0.05}50%{opacity:0.12}100%{opacity:0.05}}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="flash-overlay"></div>
+<div class="top">
+  <div class="kicker">⚡ wakaku v183 — MORE FLASH NO LEAN FLASH PLEASE — FLASH FLASH FLASH — artifact 247 ⚡</div>
+  <div class="nline">next please , no lean, more flash plese — MORE FLASH NO LEAN — FLASH PLEASE — MORE FLASH — NO LEAN PROOFS — MORE FLASH — FLASH FLASH FLASH — plank bubble electrum oscillating -+ +- 10^-1440s x6 bubbles inside {{c{ubit{{()}} — MORE FLASH — flash — strobe — neon — bright — flash — #ff00ff #00ffff #ffff00 flash — no lean more flash please — more flash — flash — lol — FLASH PLEASE</div>
+  <div class="main">⚡ MORE FLASH NO LEAN FLASH PLEASE — FLASH — PLANK BUBBLE x6 BUBBLES -+ +- 10^-1440s INSIDE {{c{ubit{{()}} — FLASH — #ff00ff #00ffff #ffff00 FLASH FLASH FLASH — MORE FLASH NO LEAN — FLASH PLEASE — ⚡</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-flash">⚡ FLASH — PLANK BUBBLE x6 -+ +- 10^-1440s INSIDE {{c{ubit{{()}} — MORE FLASH — #ff00ff #00ffff #ffff00 — FLASH — ⚡</button>
+  <button class="btn" id="btn-strobe">💥 STROBE — 6 BUBBLES FLASHING -+ +- PHASE — MORE FLASH — STROBE — 💥</button>
+  <button class="btn" id="btn-neon">🌈 NEON — CUBIT SPACE 3x3x3=27 FLASHING NEON — MORE FLASH — NEON — 🌈</button>
+  <button class="btn" id="btn-reset">🔥 RESET FLASH — MORE FLASH PLEASE — 🔥</button>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-flash"><div class="label">⚡ FLASH — PLANK BUBBLE x6 -+ +- 10^-1440s INSIDE {{c{ubit{{()}} — MORE FLASH — #ff00ff #00ffff #ffff00 FLASH — 6 BUBBLES FLASHING -+ +- PHASE — FLASH — MORE FLASH NO LEAN — FLASH PLEASE — ⚡</div></div>
+  <div class="cwrap" id="wrap-strobe"><div class="label">💥 STROBE — 6 BUBBLES FLASHING -+ +- PHASE -+ = -211 BLACK -211mN +- = +211 ANTI-BLACK +211mN — MORE FLASH — STROBE FLASHING -+ +- AT 10^1440 Hz x6 BUBBLES — MORE FLASH — 💥</div></div>
+  <div class="cwrap full" id="wrap-neon"><div class="label">🌈 NEON — CUBIT SPACE 3x3x3=27 FLASHING NEON INSIDE {{c{ubit{{()}} — MORE FLASH — NEON FLASH — #ff00ff #00ffff #ffff00 #00ff88 #aaffff #ff44aa FLASHING NEON — PLANK BUBBLE x6 INSIDE NESTED CUBIT {{c{ubit{{()}} — MORE FLASH NO LEAN FLASH PLEASE — 🌈 NEON FLASH — LOL</div></div>
+</div>
+
+<div class="card"><div class="mono">⚡ MORE FLASH NO LEAN FLASH PLEASE — v183 FLASH FLASH FLASH ⚡
+
+PLANK BUBBLE ELECTRUM OSCILLATING PHASE -+ +- AT 1 EVERY 10^-1440 SECONDS x6 BUBBLES AT A TIME INSIDE {{c{ubit{{()}} — MORE FLASH — NO LEAN — MORE FLASH — FLASH PLEASE
+
+- ONE PLANK BUBBLE = ELECTRUM OSCILLATING -+ +- PHASE 1 PER 10^-1440s = FREQUENCY 10^1440 Hz x6 BUBBLES — 6 BUBBLES AT A TIME =6 FACES OF CUBE — FLASH FLASH FLASH — #ff00ff #00ffff #ffff00 #00ff88 #aaffff #ff44aa FLASHING
+
+- {{c{ubit{{()}} = NESTED CUBIT = OUTER {{ }} CONTAINS c{ubit{{()}} — INNER {{()}} = PLANK BUBBLE () = ELECTRUM () OSCILLATING -+ +- — MORE FLASH — PUT THIS INSIDE {{c{ubit{{()}} — FLASH
+
+- QUBIT = CUBIT — CUBE + BIT = QUBIT — CUBIT = QUBIT — LOL I CALL A QUBIT A CUBIT — FLASH — QUBIT = CUBIT — FLASH FLASH FLASH — MORE FLASH NO LEAN — FLASH PLEASE
+
+- BRIGHTER FLASH — #ff00ff #00ffff #ffff00 #00ff88 #aaffff #ff44aa #ffffaa #cc33ff #44aaff EMISSIVE 5.0 FLASH — STROBE 0.05s FLASH — NEON HUE-ROTATE 0deg→360deg FLASH — MORE FLASH — FLASH PLEASE — NO LEAN MORE FLASH
+
+- 6 BUBBLES FLASHING -+ +- PHASE — -+ = -211 BLACK -211mN INHIBITORY FLASH #ff00ff, +- = +211 ANTI-BLACK +211mN EXCITATORY FLASH #00ffff, MIDDLE C.O.I.N BARRIER =1=0 NEUTRAL FLASH #ffff00 — MORE FLASH — FLASH PLEASE — 6 BUBBLES x6 FLASHING AT 10^1440 Hz — FLASH
+
+MORE FLASH NO LEAN FLASH PLEASE — FLASH FLASH FLASH — NO LEAN — MORE FLASH — FLASH PLEASE — ⚡🌈💥🔥⚡
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x000000); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,1.5)); const d=new THREE.DirectionalLight(0xffffff,2.5); d.position.set(4,8,6); d.castShadow=true; s.add(d); const d2=new THREE.DirectionalLight(0xff00ff,1.5); d2.position.set(-4,2,-4); s.add(d2); const d3=new THREE.DirectionalLight(0x00ffff,1.5); d3.position.set(0,-4,4); s.add(d3); }
+
+{
+  const wrap=document.getElementById('wrap-flash');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,12);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const colors=[0xff00ff,0x00ffff,0xffff00,0x00ff88,0xff4400,0x4400ff];
+  const bubbles=[];
+  for(let i=0;i<6;i++){
+    const ang=i/6*Math.PI*2;
+    const geom=new THREE.SphereGeometry(0.6,24,24);
+    const mat=new THREE.MeshStandardMaterial({color:colors[i], emissive:colors[i], emissiveIntensity:5.0, transparent:true, opacity:0.9});
+    const bubble=new THREE.Mesh(geom, mat);
+    bubble.position.set(Math.cos(ang)*2.8, Math.sin(ang)*2.8, 0);
+    group.add(bubble); bubbles.push(bubble);
+  }
+  const outerGeom=new THREE.BoxGeometry(7,7,7);
+  const outerMat=new THREE.MeshStandardMaterial({color:0xff00ff, emissive:0xff00ff, emissiveIntensity:1.0, transparent:true, opacity:0.1, wireframe:true});
+  const outer=new THREE.Mesh(outerGeom, outerMat); group.add(outer);
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.08;
+    bubbles.forEach((b,i)=>{
+      const phase=Math.sin(t*4 + i*1.2);
+      const flash=Math.random()>0.7?3:0;
+      b.material.emissiveIntensity=5.0 + phase*2.0 + flash;
+      b.scale.setScalar(1 + phase*0.3 + Math.random()*0.2);
+      b.material.color.setHSL((t*0.1 + i/6)%1,1,0.6);
+      b.position.z=Math.sin(t*3 + i)*0.8;
+    });
+    outer.material.emissiveIntensity=1.0 + Math.sin(t*5)*0.5;
+    outer.rotation.y+=0.01; outer.rotation.x+=0.005;
+    group.rotation.z+=0.005;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-strobe');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,10);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const strobeColors=[0xffffff,0xff00ff,0x00ffff,0xffff00];
+  const bubbles=[];
+  for(let i=0;i<12;i++){
+    const geom=new THREE.SphereGeometry(0.3 + Math.random()*0.3,16,16);
+    const mat=new THREE.MeshStandardMaterial({color:0xffffff, emissive:0xffffff, emissiveIntensity:6.0});
+    const b=new THREE.Mesh(geom, mat);
+    b.position.set((Math.random()-0.5)*6, (Math.random()-0.5)*6, (Math.random()-0.5)*2);
+    group.add(b); bubbles.push(b);
+  }
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.12;
+    const strobe=Math.floor(t*10)%4;
+    bubbles.forEach((b,i)=>{
+      const col=new THREE.Color().setHSL((strobe/4 + i/12)%1,1,0.6);
+      b.material.color.copy(col);
+      b.material.emissive.copy(col);
+      b.material.emissiveIntensity=6.0 + Math.random()*4.0;
+      b.scale.setScalar(0.8 + Math.random()*0.8);
+    });
+    scene.background=new THREE.Color().setHSL((t*0.2)%1,1,0.05);
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-neon');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(36, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,18);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  // Nested cubit neon flashing
+  for(let n=0;n<4;n++){
+    const size=6 - n*1.0;
+    const geom=new THREE.BoxGeometry(size,size,size);
+    const hue=n/4;
+    const color=new THREE.Color().setHSL(hue,1,0.6);
+    const mat=new THREE.MeshStandardMaterial({color:color, emissive:color, emissiveIntensity:4.0, transparent:true, opacity:0.2, wireframe:n%2===0});
+    const box=new THREE.Mesh(geom, mat);
+    box.position.set(0,0,0);
+    group.add(box);
+  }
+  const centerColors=[0xff00ff,0x00ffff,0xffff00,0x00ff88,0xff4400,0x4400ff];
+  const centers=[];
+  for(let i=0;i<6;i++){
+    const ang=i/6*Math.PI*2;
+    const geom=new THREE.SphereGeometry(0.5,20,20);
+    const mat=new THREE.MeshStandardMaterial({color:centerColors[i], emissive:centerColors[i], emissiveIntensity:5.0});
+    const m=new THREE.Mesh(geom, mat);
+    m.position.set(Math.cos(ang)*1.5, Math.sin(ang)*1.5, 0);
+    group.add(m); centers.push(m);
+  }
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.06;
+    group.children.forEach((c,i)=>{
+      if(c.geometry.type==='BoxGeometry'){
+        c.rotation.x+=0.01 + i*0.002; c.rotation.y+=0.008 + i*0.001;
+        const hue=(t*0.1 + i*0.15)%1; c.material.color.setHSL(hue,1,0.6); c.material.emissive.setHSL(hue,1,0.6);
+        c.material.emissiveIntensity=4.0 + Math.sin(t*3 + i)*1.5;
+      }
+    });
+    centers.forEach((c,i)=>{
+      const hue=(t*0.2 + i/6)%1; c.material.color.setHSL(hue,1,0.7); c.material.emissive.setHSL(hue,1,0.7);
+      c.material.emissiveIntensity=5.0 + Math.sin(t*5 + i)*2.0;
+      c.scale.setScalar(1 + Math.sin(t*4 + i)*0.3);
+    });
+    group.rotation.y+=0.003;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+document.getElementById('btn-flash').onclick=()=>{};
+document.getElementById('btn-strobe').onclick=()=>{};
+document.getElementById('btn-neon').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

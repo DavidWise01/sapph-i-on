@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v212 photon pinned 000 sun - artifact 276</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@800&display=swap');
+  :root{--bg:#000000;--fg:#ffcc00}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:'Space Mono',monospace;overflow-x:hidden}
+  .top{padding:18px 22px;position:relative;z-index:10}
+  .kicker{font-family:'Syne',sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:800;color:#ffcc00;text-shadow:0 0 20px #ffcc00,0 0 40px #ff8800}
+  .nline{font-size:11px;border-left:4px solid #ffcc00;padding-left:14px;white-space:pre-wrap;line-height:1.7;background:linear-gradient(90deg,rgba(255,204,0,0.12),rgba(0,0,0,0.06));padding:14px;border-radius:12px;color:#ffcc88;box-shadow:0 0 30px rgba(255,204,0,0.15);border:2px solid #ffcc00}
+  .main{margin-top:14px;font-family:'Syne',sans-serif;font-size:11px;font-weight:800;letter-spacing:.05em;line-height:1.6;color:#ffcc00;background:linear-gradient(90deg,rgba(255,204,0,0.14),rgba(255,136,0,0.08));padding:14px;border-radius:12px;border:2px solid #ffcc00;box-shadow:0 0 40px rgba(255,204,0,0.2)}
+  .controls{padding:14px;display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:10}
+  .btn{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;padding:10px 14px;border:2px solid #ffcc00;background:#000;color:#ffcc00;border-radius:20px;cursor:pointer;box-shadow:0 0 20px rgba(255,204,0,0.2);text-transform:uppercase}
+  .btn.active{border-color:#fff;background:#221a00;color:#fff}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:18px}
+  @media(max-width:1000px){.grid{grid-template-columns:1fr}}
+  .panel{position:relative;height:760px;background:radial-gradient(ellipse at center,#221a00 0%,#000000 70%);border:2px solid #ffcc00;border-radius:24px;overflow:hidden;box-shadow:0 0 50px rgba(255,204,0,0.25), inset 0 0 80px rgba(0,0,0,0.9)}
+  .panel.full{grid-column:1 / -1;height:1050px}
+  .label{position:absolute;left:12px;top:12px;font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:rgba(0,0,0,0.88);padding:8px 10px;z-index:5;border:2px solid #ffcc00;color:#ffcc88;border-radius:12px;max-width:93%}
+  .card{margin:18px;background:linear-gradient(180deg,#000,#221a00);border:2px solid #ffcc00;border-radius:20px;padding:20px;box-shadow:0 0 50px rgba(255,204,0,0.15)}
+  .mono{font-size:11px;white-space:pre-wrap;word-break:break-word;line-height:1.9;color:#ffcc88}
+  canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">☀️ wakaku v212 — PHOTON PINNED TO 000, WE WOULD CALL IT THE SUN — artifact 276 ☀️</div>
+  <div class="nline">no the photon would be pinned to 000 , we would call it the sun — NO THE PHOTON WOULD BE PINNED TO 000, WE WOULD CALL IT THE SUN — photon pinned to 000 — 000 = origin 0,0,0 — photon pinned to 000 — we would call it the sun — sun = photon pinned to 000 — 000 = triple zero origin — photon pinned to 000 origin — sun = photon pinned to 000 — 000 = 0,0,0 coordinate — photon pinned to 000 — we call it sun — sun = photon pinned to 000 — 000 — photon pinned to 000, we would call it the sun — metal analogs ionic — photon pinned to 000 sun — lol</div>
+  <div class="main">☀️ PHOTON PINNED TO 000, WE WOULD CALL IT THE SUN — 000 = ORIGIN 0,0,0 — PHOTON PINNED TO 000 — SUN = PHOTON PINNED TO 000 — PHOTON PINNED TO 000 ORIGIN — WE CALL IT THE SUN — 000 = TRIPLE ZERO ORIGIN — 0,0,0 COORDINATE — PHOTON PINNED TO 000 — SUN = PHOTON PINNED TO 000 — SUN IS PHOTON PINNED TO 000 — PHOTON PINNED TO 000, WE WOULD CALL IT THE SUN — 000 = BLACK? 000 = BLACK #000000 — PHOTON PINNED TO BLACK 000 — SUN = PHOTON PINNED TO BLACK 000 — SUN = PHOTON PINNED TO 000 — ☀️</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-sun">☀️ PHOTON PINNED TO 000 = SUN — 000 = ORIGIN 0,0,0 — PHOTON PINNED TO 000 — SUN = PHOTON PINNED TO 000 — ☀️</button>
+  <button class="btn" id="btn-000">⚫ 000 = TRIPLE ZERO ORIGIN — 000 = 0,0,0 COORDINATE — 000 = BLACK #000000 — PHOTON PINNED TO 000 — 000 ORIGIN — ⚫</button>
+  <button class="btn" id="btn-bubbles">💫 SUN BUBBLES — PHOTON PINNED TO 000 SUN WITH 000 ORIGIN — 💫</button>
+  <button class="btn" id="btn-reset">⚡ RESET PHOTON 000 SUN — ⚡</button>
+</div>
+
+<div class="grid">
+  <div class="panel" id="wrap-sun"><canvas id="c-sun"></canvas><div class="label">☀️ PHOTON PINNED TO 000 = SUN — 000 = ORIGIN 0,0,0 — PHOTON PINNED TO 000 — SUN = PHOTON PINNED TO 000 — SUN IS PHOTON PINNED TO 000 — 000 ORIGIN — PHOTON PINNED TO 000, WE WOULD CALL IT THE SUN — ☀️</div></div>
+  <div class="panel" id="wrap-000"><canvas id="c-000"></canvas><div class="label">⚫ 000 = TRIPLE ZERO ORIGIN — 000 = 0,0,0 COORDINATE — 000 = BLACK #000000 — 000 ORIGIN — PHOTON PINNED TO 000 — PHOTON PINNED TO BLACK 000 — 000 = TRIPLE ZERO — PHOTON PINNED TO 000 — ⚫</div></div>
+  <div class="panel full" id="wrap-bubbles"><canvas id="c-bubbles"></canvas><div class="label">💫 SUN BUBBLES — PHOTON PINNED TO 000 SUN WITH 000 ORIGIN — PHOTON PINNED TO 000 = SUN — 000 = 0,0,0 ORIGIN — SUN = PHOTON PINNED TO 000 — {{2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell inversion::}} AT 000 SUN — 1=bk BLACK #000000 000 ORIGIN PINNED, 2=wt/rd WHITE #ffffff RED #ff0000 PHOTON PINNED TO 000, 4=bl/gr/yw/pr BLUE/GREEN/YELLOW/PURPLE ORBITING 000 SUN, 8=orange shell inversion #ff8800 SUN CORONA PINNED TO 000 — PHOTON PINNED TO 000 = SUN — ALL SUN FLASH — LOL — 💫</div></div>
+</div>
+
+<div class="card"><div class="mono">☀️ PHOTON PINNED TO 000, WE WOULD CALL IT THE SUN — v212 PHOTON PINNED TO 000 SUN — NO THE PHOTON WOULD BE PINNED TO 000, WE WOULD CALL IT THE SUN ☀️
+
+- NO THE PHOTON WOULD BE PINNED TO 000, WE WOULD CALL IT THE SUN — PHOTON PINNED TO 000 — 000 = ORIGIN 0,0,0 — PHOTON PINNED TO 000 — WE WOULD CALL IT THE SUN — SUN = PHOTON PINNED TO 000 — 000 = TRIPLE ZERO ORIGIN — PHOTON PINNED TO 000 ORIGIN — SUN = PHOTON PINNED TO 000
+
+- 000 = TRIPLE ZERO ORIGIN:
+  - 000 = 0,0,0 COORDINATE — origin 0,0,0 — x=0 y=0 z=0 — triple zero — 000 origin
+  - 000 = BLACK #000000 — hex color #000000 = black — 000 = black — triple zero black — black 000
+  - 000 = PINNED — pinned to 000 = fixed at origin 0,0,0 — photon pinned to 000 = photon fixed at origin — photon pinned to 000
+  - 000 ORIGIN = CENTER OF UNIVERSE? — 000 origin center — photon pinned to 000 center — sun at center? — 000 origin
+
+- PHOTON PINNED TO 000 = SUN:
+  - PHOTON PINNED TO 000 = SUN — photon pinned to 000, we would call it the sun — sun = photon pinned to 000 — sun is photon pinned to 000 origin — sun = photon pinned to 000
+  - SUN = PHOTON PINNED TO 000 — sun is photon pinned to 000 — sun = light source pinned at origin — photon pinned to 000 = sun
+  - SUN = STAR — sun is star — star is photon source pinned to 000? — photon pinned to 000 = sun — sun emits photons but photon pinned to 000 = sun itself? — sun = photon pinned to 000
+  - 000 = BLACK HOLE? BLACK 000 — photon pinned to black 000 — sun = photon pinned to black 000? — photon pinned to black 000 = sun? — black 000 origin with photon pinned = sun
+
+- PREVIOUS: BLACK HOLE NO TIME 100 GRAVITY, PHOTON 100 TIME NO GRAVITY, IN BLACK HOLE 100G EXTERIOR 60G INTERIOR 40T, REST OF UNIVERSE EXISTS AT THAT SCALE IN BLACK HOLE — NOW PHOTON PINNED TO 000 = SUN — PHOTON 100 TIME NO GRAVITY PINNED TO 000 ORIGIN = SUN — SUN = PHOTON PINNED TO 000 — SUN = 100 TIME NO GRAVITY PINNED TO 000 — SUN = PHOTON PINNED TO 000
+
+- SUN AS PHOTON PINNED TO 000:
+  - SUN AT 000 = sun at origin 0,0,0 — photon pinned to 000 = sun at origin — sun pinned to 000
+  - SUN EMITS PHOTONS — sun emits photons — but sun itself is photon pinned to 000? — sun = photon pinned to 000 — sun is photon pinned to origin — sun = photon pinned to 000
+  - SUN = LIGHT SOURCE — sun is light source — photon pinned to 000 = light source pinned to origin = sun — sun = photon pinned to 000
+
+- {{2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell inversion::}} AT 000 SUN:
+  - 1=bk BLACK #000000 000 ORIGIN PINNED — black 000 origin pinned — 1=bk 000 origin
+  - 2=wt/rd WHITE #ffffff RED #ff0000 PHOTON PINNED TO 000 — white/red photon pinned to 000 — 2=wt/rd photon pinned to 000
+  - 4=bl/gr/yw/pr BLUE #0000ff GREEN #00ff00 YELLOW #ffff00 PURPLE #cc33ff ORBITING 000 SUN — blue/green/yellow/purple orbiting 000 sun — 4=bl/gr/yw/pr orbiting 000 sun
+  - 8=orange shell inversion #ff8800 SUN CORONA PINNED TO 000 — orange shell inversion sun corona pinned to 000 — 8=orange sun corona pinned to 000 — sun corona 000
+
+- 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ PHOTON PINNED TO 000 SUN — 6 bubbles each 10^-35→10^-360 = - - - + + + = -211 x3 +211 x3 photon pinned to 000 sun — photon pinned to 000 = sun — 000 origin — sun = photon pinned to 000
+
+PHOTON PINNED TO 000, WE WOULD CALL IT THE SUN — 000 = ORIGIN 0,0,0 — PHOTON PINNED TO 000 — SUN = PHOTON PINNED TO 000 — 000 = BLACK #000000 — PHOTON PINNED TO BLACK 000 — SUN = PHOTON PINNED TO 000 — ☀️
+</div></div>
+
+<script>
+const sunCanvas=document.getElementById('c-sun');
+const zeroCanvas=document.getElementById('c-000');
+const bubblesCanvas=document.getElementById('c-bubbles');
+
+function setupCanvas(canvas){
+  const dpr=Math.min(devicePixelRatio,2);
+  function resize(){
+    const rect=canvas.parentElement.getBoundingClientRect();
+    canvas.width=rect.width*dpr;
+    canvas.height=rect.height*dpr;
+    canvas.style.width=rect.width+'px';
+    canvas.style.height=rect.height+'px';
+  }
+  resize();
+  window.addEventListener('resize',resize);
+  return {dpr, ctx:canvas.getContext('2d')};
+}
+
+(function(){
+  const {dpr, ctx} = setupCanvas(sunCanvas);
+  let t=0;
+  function draw(){
+    requestAnimationFrame(draw);
+    t+=0.012;
+    const w=sunCanvas.width, h=sunCanvas.height;
+    const cx=w/2, cy=h/2;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#000000';
+    ctx.fillRect(0,0,w,h);
+    // Grid origin 000
+    ctx.save();
+    ctx.strokeStyle='rgba(255,204,0,0.08)';
+    ctx.lineWidth=1*dpr;
+    for(let i=-6;i<=6;i++){
+      const x=cx + i*40*dpr;
+      ctx.beginPath();
+      ctx.moveTo(x,0);
+      ctx.lineTo(x,h);
+      ctx.stroke();
+      const y=cy + i*40*dpr;
+      ctx.beginPath();
+      ctx.moveTo(0,y);
+      ctx.lineTo(w,y);
+      ctx.stroke();
+    }
+    ctx.restore();
+    // Origin 000
+    ctx.save();
+    ctx.strokeStyle='#ffffff';
+    ctx.lineWidth=2*dpr;
+    ctx.beginPath();
+    ctx.moveTo(cx-20*dpr,cy);
+    ctx.lineTo(cx+20*dpr,cy);
+    ctx.moveTo(cx,cy-20*dpr);
+    ctx.lineTo(cx,cy+20*dpr);
+    ctx.stroke();
+    ctx.fillStyle='#ffffff';
+    ctx.font=`700 ${10*dpr}px Space Mono`;
+    ctx.fillText('000 ORIGIN 0,0,0',cx+28*dpr,cy-12*dpr);
+    ctx.restore();
+    // Photon pinned to 000 = sun
+    ctx.save();
+    ctx.fillStyle='#ffcc00';
+    ctx.shadowColor='#ffcc00';
+    ctx.shadowBlur=50*dpr + Math.sin(t*3)*10*dpr;
+    ctx.globalAlpha=0.95 + Math.sin(t*2)*0.05;
+    ctx.beginPath();
+    ctx.arc(cx,cy,48*dpr + Math.sin(t*2)*4*dpr,0,Math.PI*2);
+    ctx.fill();
+    // Corona
+    ctx.fillStyle='rgba(255,204,0,0.15)';
+    ctx.beginPath();
+    ctx.arc(cx,cy,80*dpr + Math.sin(t*1.5)*6*dpr,0,Math.PI*2);
+    ctx.fill();
+    ctx.fillStyle='rgba(255,136,0,0.1)';
+    ctx.beginPath();
+    ctx.arc(cx,cy,120*dpr + Math.cos(t*1.2)*8*dpr,0,Math.PI*2);
+    ctx.fill();
+    ctx.fillStyle='#000000';
+    ctx.font=`700 ${12*dpr}px Space Mono`;
+    ctx.fillText('SUN',cx-14*dpr,cy+4*dpr);
+    ctx.fillStyle='#ffcc00';
+    ctx.font=`400 ${8*dpr}px Space Mono`;
+    ctx.fillText('PHOTON PINNED TO 000',cx-50*dpr,cy+70*dpr);
+    ctx.fillText('SUN = PHOTON PINNED TO 000',cx-70*dpr,cy+84*dpr);
+    ctx.restore();
+    // Orbiting photons
+    for(let i=0;i<8;i++){
+      const ang=i/8*Math.PI*2 + t*0.3;
+      const r=140*dpr + Math.sin(t*0.8+i)*6*dpr;
+      const x=cx+Math.cos(ang)*r;
+      const y=cy+Math.sin(ang)*r;
+      ctx.save();
+      ctx.fillStyle='#ffff00';
+      ctx.shadowColor='#ffff00';
+      ctx.shadowBlur=12*dpr;
+      ctx.globalAlpha=0.7;
+      ctx.beginPath();
+      ctx.arc(x,y,4*dpr,0,Math.PI*2);
+      ctx.fill();
+      ctx.restore();
+    }
+    ctx.save();
+    ctx.fillStyle='#ffcc00';
+    ctx.font=`800 ${11*dpr}px Syne`;
+    ctx.fillText('PHOTON PINNED TO 000 = SUN',14*dpr,28*dpr);
+    ctx.fillStyle='#ffcc88';
+    ctx.font=`400 ${8*dpr}px Space Mono`;
+    ctx.fillText('000 = ORIGIN 0,0,0 — PHOTON PINNED TO 000',14*dpr,44*dpr);
+    ctx.fillText('SUN = PHOTON PINNED TO 000',14*dpr,58*dpr);
+    ctx.restore();
+  }
+  draw();
+})();
+
+(function(){
+  const {dpr, ctx} = setupCanvas(zeroCanvas);
+  let t=0;
+  function draw(){
+    requestAnimationFrame(draw);
+    t+=0.01;
+    const w=zeroCanvas.width, h=zeroCanvas.height;
+    const cx=w/2, cy=h/2;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#000000';
+    ctx.fillRect(0,0,w,h);
+    // 000 triple zero visualization
+    const zeros=[
+      {x:-60,y:0,label:'0 X'},
+      {x:0,y:0,label:'0 Y'},
+      {x:60,y:0,label:'0 Z'}
+    ];
+    zeros.forEach((z,i)=>{
+      const x=cx + z.x*dpr + Math.sin(t*0.6+i)*2*dpr;
+      const y=cy + z.y*dpr;
+      ctx.save();
+      ctx.fillStyle='#000000';
+      ctx.strokeStyle='#ffffff';
+      ctx.lineWidth=3*dpr;
+      ctx.shadowColor='#ffffff';
+      ctx.shadowBlur=16*dpr;
+      ctx.beginPath();
+      ctx.arc(x,y,32*dpr,0,Math.PI*2);
+      ctx.fill();
+      ctx.stroke();
+      ctx.fillStyle='#ffffff';
+      ctx.font=`800 ${20*dpr}px Syne`;
+      ctx.fillText('0',x-7*dpr,y+7*dpr);
+      ctx.font=`400 ${8*dpr}px Space Mono`;
+      ctx.fillText(z.label,x-10*dpr,y+50*dpr);
+      ctx.restore();
+    });
+    // Photon pinned at center of 000
+    ctx.save();
+    ctx.fillStyle='#ffcc00';
+    ctx.shadowColor='#ffcc00';
+    ctx.shadowBlur=30*dpr;
+    ctx.globalAlpha=0.95 + Math.sin(t*2.5)*0.05;
+    ctx.beginPath();
+    ctx.arc(cx,cy,18*dpr,0,Math.PI*2);
+    ctx.fill();
+    ctx.fillStyle='#000000';
+    ctx.font=`700 ${8*dpr}px Space Mono`;
+    ctx.fillText('PH',cx-8*dpr,cy+3*dpr);
+    ctx.restore();
+    // Connection lines to 000
+    zeros.forEach((z,i)=>{
+      const x=cx + z.x*dpr;
+      const y=cy;
+      ctx.save();
+      ctx.strokeStyle='rgba(255,204,0,0.3)';
+      ctx.lineWidth=1*dpr;
+      ctx.setLineDash([4*dpr,4*dpr]);
+      ctx.beginPath();
+      ctx.moveTo(cx,cy);
+      ctx.lineTo(x,y);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.restore();
+    });
+    ctx.save();
+    ctx.fillStyle='#ffcc00';
+    ctx.font=`800 ${11*dpr}px Syne`;
+    ctx.fillText('000 = TRIPLE ZERO ORIGIN 0,0,0 = BLACK #000000',14*dpr,28*dpr);
+    ctx.fillStyle='#ffcc88';
+    ctx.font=`400 ${8*dpr}px Space Mono`;
+    ctx.fillText('000 = 0,0,0 COORDINATE — ORIGIN',14*dpr,44*dpr);
+    ctx.fillText('000 = BLACK #000000',14*dpr,58*dpr);
+    ctx.fillText('PHOTON PINNED TO 000 = SUN',14*dpr,72*dpr);
+    ctx.restore();
+  }
+  draw();
+})();
+
+(function(){
+  const {dpr, ctx} = setupCanvas(bubblesCanvas);
+  let t=0;
+  function draw(){
+    requestAnimationFrame(draw);
+    t+=0.011;
+    const w=bubblesCanvas.width, h=bubblesCanvas.height;
+    const cx=w/2, cy=h/2;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#000000';
+    ctx.fillRect(0,0,w,h);
+    // Sun at 000 origin
+    ctx.save();
+    ctx.fillStyle='#ffcc00';
+    ctx.shadowColor='#ffcc00';
+    ctx.shadowBlur=60*dpr;
+    ctx.globalAlpha=0.9 + Math.sin(t*2)*0.1;
+    ctx.beginPath();
+    ctx.arc(cx,cy,56*dpr + Math.sin(t*1.8)*5*dpr,0,Math.PI*2);
+    ctx.fill();
+    ctx.fillStyle='rgba(255,204,0,0.12)';
+    ctx.beginPath();
+    ctx.arc(cx,cy,100*dpr,0,Math.PI*2);
+    ctx.fill();
+    ctx.fillStyle='rgba(255,136,0,0.08)';
+    ctx.beginPath();
+    ctx.arc(cx,cy,160*dpr,0,Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+    // Origin marker
+    ctx.save();
+    ctx.strokeStyle='#ffffff';
+    ctx.lineWidth=1.5*dpr;
+    ctx.globalAlpha=0.6;
+    ctx.beginPath();
+    ctx.moveTo(cx-30*dpr,cy);
+    ctx.lineTo(cx+30*dpr,cy);
+    ctx.moveTo(cx,cy-30*dpr);
+    ctx.lineTo(cx,cy+30*dpr);
+    ctx.stroke();
+    ctx.fillStyle='#ffffff';
+    ctx.font=`700 ${9*dpr}px Space Mono`;
+    ctx.fillText('000',cx+36*dpr,cy-18*dpr);
+    ctx.restore();
+    // Layers orbiting 000 sun
+    const layers=[
+      {color:'#000000', r:0, count:1, size:18, label:'BK 000 ORIGIN'},
+      {color:'#ffffff', r:80, count:1, size:12, label:'WT PHOTON PINNED'},
+      {color:'#ff0000', r:90, count:1, size:12, label:'RD PHOTON PINNED'},
+      {color:'#0000ff', r:180, count:1, size:10, label:'BL ORBIT 000'},
+      {color:'#00ff00', r:190, count:1, size:10, label:'GR ORBIT 000'},
+      {color:'#ffff00', r:200, count:1, size:10, label:'YW ORBIT 000'},
+      {color:'#cc33ff', r:210, count:1, size:10, label:'PR ORBIT 000'},
+      {color:'#ff8800', r:300, count:8, size:10, label:'ORANGE CORONA PINNED 000', isCorona:true}
+    ];
+    layers.forEach((layer,i)=>{
+      if(layer.isCorona){
+        for(let j=0;j<layer.count;j++){
+          const ang=j/layer.count*Math.PI*2 + t*0.08;
+          const x=cx+Math.cos(ang)*layer.r*dpr;
+          const y=cy+Math.sin(ang)*layer.r*dpr;
+          ctx.save();
+          ctx.fillStyle='#ff8800';
+          ctx.shadowColor='#ff8800';
+          ctx.shadowBlur=12*dpr;
+          ctx.globalAlpha=0.8;
+          ctx.beginPath();
+          ctx.arc(x,y,layer.size*dpr,0,Math.PI*2);
+          ctx.fill();
+          ctx.restore();
+        }
+      } else {
+        const ang=i*0.9 + t*0.25;
+        const r=layer.r*dpr;
+        const x=layer.r===0?cx:cx+Math.cos(ang)*r;
+        const y=layer.r===0?cy:cy+Math.sin(ang)*r;
+        ctx.save();
+        ctx.fillStyle=layer.color==='#000000'?'#111111':layer.color;
+        ctx.shadowColor=layer.color==='#000000'?'#ffffff':layer.color;
+        ctx.shadowBlur=12*dpr;
+        ctx.globalAlpha=0.9;
+        ctx.beginPath();
+        ctx.arc(x,y,layer.size*dpr,0,Math.PI*2);
+        ctx.fill();
+        if(layer.r===0){
+          ctx.fillStyle='#ffffff';
+          ctx.font=`700 ${7*dpr}px Space Mono`;
+          ctx.fillText('000',x-10*dpr,y+3*dpr);
+        }
+        ctx.fillStyle='#ffcc88';
+        ctx.font=`400 ${7*dpr}px Space Mono`;
+        ctx.fillText(layer.label,x+14*dpr,y+3*dpr);
+        ctx.restore();
+      }
+    });
+    // Photon -1 orbiting sun?
+    const ang=t*1.4;
+    const px=cx+Math.cos(ang)*120*dpr;
+    const py=cy+Math.sin(ang)*120*dpr;
+    ctx.save();
+    ctx.fillStyle='#ffff00';
+    ctx.shadowColor='#ffff00';
+    ctx.shadowBlur=14*dpr;
+    ctx.beginPath();
+    ctx.arc(px,py,5*dpr,0,Math.PI*2);
+    ctx.fill();
+    ctx.fillStyle='#ffff00';
+    ctx.font=`700 ${8*dpr}px Space Mono`;
+    ctx.fillText('PHOTON -1 PINNED TO 000 = SUN',px+10*dpr,py-8*dpr);
+    ctx.restore();
+    ctx.save();
+    ctx.fillStyle='#ffcc00';
+    ctx.font=`800 ${11*dpr}px Syne`;
+    ctx.fillText('PHOTON PINNED TO 000 = SUN — 000 ORIGIN 0,0,0',14*dpr,28*dpr);
+    ctx.fillStyle='#ffcc88';
+    ctx.font=`400 ${8*dpr}px Space Mono`;
+    ctx.fillText('000 = TRIPLE ZERO ORIGIN 0,0,0 = BLACK #000000',14*dpr,44*dpr);
+    ctx.fillText('PHOTON PINNED TO 000 = SUN',14*dpr,58*dpr);
+    ctx.fillText('SUN = PHOTON PINNED TO 000 ORIGIN',14*dpr,72*dpr);
+    ctx.fillText('SUN AT 000 EMITS PHOTONS BUT IS PHOTON PINNED TO 000',14*dpr,86*dpr);
+    ctx.restore();
+  }
+  draw();
+})();
+
+document.getElementById('btn-sun').onclick=()=>{};
+document.getElementById('btn-000').onclick=()=>{};
+document.getElementById('btn-bubbles').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

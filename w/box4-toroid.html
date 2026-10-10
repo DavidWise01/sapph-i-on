@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en"><head><link rel="icon" href="../favicon.svg" type="image/svg+xml"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>box 4 · toroid 3 · fib bulbs</title>
+<style>
+:root{--void:#04030a;--ink:#d6e2f5;--dim:#5a6a88;--cy:#22e0ff;--gd:#ffd24a;--mg:#ff5bd0;--lit:#6fffa0;--amber:#ffb43b;--box:#ff8a3b}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--void);color:var(--ink);font:11px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;overflow:hidden}
+#c{position:fixed;inset:0;width:100vw;height:100vh}
+.chrome{position:fixed;left:14px;top:12px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);pointer-events:none}
+.chrome b{color:var(--gd)}
+#panel{position:fixed;right:14px;top:40px;width:262px;font-size:10.5px;background:rgba(6,8,16,.6);border:1px solid #1a2438;border-radius:5px;padding:10px;backdrop-filter:blur(3px)}
+#panel h3{margin:0 0 6px;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
+.rd{display:flex;justify-content:space-between;gap:8px;border-bottom:1px dotted #1a2438;padding:2px 0}
+.rd b{color:#fff}
+#julia{position:fixed;right:14px;bottom:44px;width:170px;height:170px;border:1px solid #26406a;border-radius:5px;background:#000}
+#jl{position:fixed;right:14px;bottom:26px;width:170px;font-size:9px;color:var(--dim);text-align:center}
+#stamps{position:fixed;left:14px;bottom:24px;width:520px;font-size:9.5px}
+.stamp{display:inline-block;font-size:9px;padding:0 4px;border:1px solid;border-radius:2px}
+.s-lit{color:var(--lit);border-color:var(--lit)} .s-amber{color:var(--amber);border-color:var(--amber)}
+.orn{position:fixed;left:14px;bottom:8px;font-size:8.5px;color:#33405a;font-style:italic}
+.ctl{position:fixed;left:14px;top:40px;display:flex;gap:6px}
+.ctl button{font:inherit;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:rgba(8,10,20,.6);color:var(--gd);border:1px solid #3a3320;border-radius:3px;padding:6px 10px;cursor:pointer}
+</style></head>
+<body>
+<canvas id="c"></canvas>
+<div class="chrome"><b>box 4 · toroid 3</b> · integers walk the curve · fibonacci bulbs · title withheld</div>
+<div class="ctl"><button id="walk">walk fib</button><button id="grid">box grid</button></div>
+<div id="panel"><h3>box(4) meets law(3)</h3>
+ <div class="rd"><span>box 4</span><b>discrete · digital · bits</b></div>
+ <div class="rd"><span>toroid 3</span><b>continuous · analog</b></div>
+ <div class="rd"><span>gcd(3,4)</span><b>1 · they nest</b></div>
+ <div class="rd"><span>3+4</span><b>7 palms</b></div>
+ <div class="rd"><span>the wall</span><b>π transcendental — can't square it</b></div>
+ <h3 style="margin-top:10px">fibonacci bulbs (period = q)</h3>
+ <div id="bulbs"></div>
+ <div class="rd"><span>angles → </span><b>1/φ² ≈ 0.382</b></div>
+ <div class="rd"><span>hover c</span><b id="hc">—</b></div>
+</div>
+<canvas id="julia" width="170" height="170"></canvas>
+<div id="jl">each c → its Julia set</div>
+<div id="stamps"></div>
+<div class="orn">ornament: neon tint, glow · not ornament: the escape-time set, the bulb periods (2,3,5,8,13,21), 1/φ², π-transcendence</div>
+<script id="data" type="application/json">{"chain":[[1,2],[1,3],[2,5],[3,8],[5,13],[8,21],[13,34],[21,55]],"periods":[2,3,5,8,13,21,34,55],"phi2":0.38196601125010515,"pts":[[2,-0.75,0],[3,-0.125,0.6495],[5,-0.4818,0.5317],[8,-0.3536,0.6036],[13,-0.4044,0.5797],[21,-0.3852,0.5894]]}</script>
+<script>
+const D=JSON.parse(document.getElementById('data').textContent);
+const cv=document.getElementById('c'),x=cv.getContext('2d'),EL=id=>document.getElementById(id);
+let W,H,DPR;function size(){DPR=Math.min(2,devicePixelRatio||1);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*DPR;cv.height=H*DPR;x.setTransform(DPR,0,0,DPR,0,0);render();}
+addEventListener('resize',size);
+const VIEW={xmin:-2.35,xmax:0.95,ymin:-1.2,ymax:1.2};
+let showGrid=false,walkI=-1,walkT=null;
+function escape(cx,cy,m){let zx=0,zy=0,i=0;while(zx*zx+zy*zy<=4&&i<m){const t=zx*zx-zy*zy+cx;zy=2*zx*zy+cy;zx=t;i++;}return i;}
+function hsl(h,s,l){s/=100;l/=100;const a=s*Math.min(l,1-l),f=n=>{const k=(n+h/30)%12;return l-a*Math.max(-1,Math.min(k-3,9-k,1));};return[Math.round(255*f(0)),Math.round(255*f(8)),Math.round(255*f(4))];}
+function toPx(re,im){return[(re-VIEW.xmin)/(VIEW.xmax-VIEW.xmin)*W,(im-VIEW.ymin)/(VIEW.ymax-VIEW.ymin)*H];}
+function render(){if(!W)return;const max=200;const img=x.createImageData(W,H),d=img.data;
+ for(let py=0;py<H;py++){const cy=VIEW.ymin+py/H*(VIEW.ymax-VIEW.ymin);for(let px=0;px<W;px++){const cx=VIEW.xmin+px/W*(VIEW.xmax-VIEW.xmin);
+  const n=escape(cx,cy,max),o=(py*W+px)*4;
+  if(n>=max){d[o]=14;d[o+1]=10;d[o+2]=26;d[o+3]=255;}else{const t=n/max,[r,g,b]=hsl((205+t*380)%360,90,18+t*55);d[o]=r;d[o+1]=g;d[o+2]=b;d[o+3]=255;}}}
+ x.putImageData(img,0,0);
+ // box(4) grid overlay: the digital lattice that can only tile the curve
+ if(showGrid){x.strokeStyle='rgba(255,138,59,0.18)';x.lineWidth=0.5;const step=0.25;
+  for(let gx=Math.ceil(VIEW.xmin/step)*step;gx<VIEW.xmax;gx+=step){const p=toPx(gx,0);x.beginPath();x.moveTo(p[0],0);x.lineTo(p[0],H);x.stroke();}
+  for(let gy=Math.ceil(VIEW.ymin/step)*step;gy<VIEW.ymax;gy+=step){const p=toPx(0,gy);x.beginPath();x.moveTo(0,p[1]);x.lineTo(W,p[1]);x.stroke();}}
+ // cardioid (toroid 3, the continuous curve)
+ x.strokeStyle='rgba(255,210,74,0.6)';x.lineWidth=1.5;x.beginPath();
+ for(let k=0;k<=360;k++){const th=k*Math.PI/180,re=Math.cos(th)/2-Math.cos(2*th)/4,im=Math.sin(th)/2-Math.sin(2*th)/4,p=toPx(re,im);k?x.lineTo(p[0],p[1]):x.moveTo(p[0],p[1]);}x.stroke();
+ // fibonacci bulbs at their cardioid attachment points
+ D.pts.forEach((pt,i)=>{const [q,re,im]=pt;const p=toPx(re,im);const hot=(i<=walkI);
+  x.beginPath();x.arc(p[0],p[1],hot?7:4,0,7);x.fillStyle=hot?'#22e0ff':'#ffd24a';x.shadowColor=x.fillStyle;x.shadowBlur=hot?16:6;x.fill();x.shadowBlur=0;
+  x.fillStyle='#d6e2f5';x.font='10px monospace';x.fillText('p'+q,p[0]+6,p[1]-4);});
+ // golden point 1/φ² angle on cardioid
+ const gth=2*Math.PI*D.phi2, gp=toPx(Math.cos(gth)/2-Math.cos(2*gth)/4,Math.sin(gth)/2-Math.sin(2*gth)/4);
+ x.strokeStyle='#6fffa0';x.beginPath();x.arc(gp[0],gp[1],9,0,7);x.stroke();x.fillStyle='#6fffa0';x.font='10px monospace';x.fillText('1/φ²',gp[0]+8,gp[1]+4);
+ x.fillStyle='#ffd24a';x.font='11px monospace';const bl=toPx(-0.35,0.02);x.fillText('toroid 3 · the cardioid',bl[0],bl[1]);
+}
+function julia(cx,cy){const jc=document.getElementById('julia'),jx=jc.getContext('2d'),S=170,m=110;const img=jx.createImageData(S,S),d=img.data;
+ for(let py=0;py<S;py++)for(let px=0;px<S;px++){let zx=px/S*3-1.5,zy=py/S*3-1.5,i=0;while(zx*zx+zy*zy<=4&&i<m){const t=zx*zx-zy*zy+cx;zy=2*zx*zy+cy;zx=t;i++;}const o=(py*S+px)*4;if(i>=m){d[o]=12;d[o+1]=8;d[o+2]=22;}else{const t=i/m,[r,g,b]=hsl((205+t*320)%360,90,20+t*55);d[o]=r;d[o+1]=g;d[o+2]=b;}d[o+3]=255;}jx.putImageData(img,0,0);}
+julia(D.pts[2][1],D.pts[2][2]);
+EL('bulbs').innerHTML=D.pts.map(pt=>`<div class="rd"><span>bulb ${D.pts.indexOf(pt)+1}</span><b>period ${pt[0]}</b></div>`).join('');
+cv.addEventListener('pointermove',e=>{const cx=VIEW.xmin+e.clientX/W*(VIEW.xmax-VIEW.xmin),cy=VIEW.ymin+e.clientY/H*(VIEW.ymax-VIEW.ymin);EL('hc').textContent=cx.toFixed(3)+(cy>=0?'+':'')+cy.toFixed(3)+'i';julia(cx,cy);EL('jl').textContent='J('+cx.toFixed(2)+','+cy.toFixed(2)+')';});
+EL('grid').onclick=()=>{showGrid=!showGrid;render();};
+EL('walk').onclick=()=>{if(walkT){clearInterval(walkT);walkT=null;}walkI=-1;walkT=setInterval(()=>{walkI++;if(walkI>=D.pts.length){clearInterval(walkT);walkT=null;}render();},700);};
+EL('stamps').innerHTML=[
+ ['lit','real escape-time Mandelbrot (per-pixel)'],
+ ['lit','bulb periods 2·3·5·8·13·21 = Fibonacci (Farey mediants of 1/2,1/3)'],
+ ['lit','angles 1/2 1/3 2/5 3/8 5/13 8/21 → 1/φ² ≈ 0.382 (golden point)'],
+ ['lit','each bulb sprouts its own mini-mandel; set is quasi-self-similar'],
+ ['lit','π transcendental (Lindemann 1882): box(4) can only tile toroid(3)'],
+ ['amber','"juliet" → Julia set · 24,27 are your 15°/lattice threads, not Fib']
+].map(([s,t])=>`<span class="stamp s-${s}">${s.toUpperCase()}</span> ${t}`).join('<br>');
+size();
+</script></body></html>

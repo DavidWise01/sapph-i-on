@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v208 reverse black orange plank - artifact 272</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@800&display=swap');
+  :root{--bg:#000000;--fg:#a8f0e0}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:'Space Mono',monospace;overflow-x:hidden}
+  .top{padding:18px 22px;position:relative;z-index:10;background:linear-gradient(180deg,rgba(0,0,0,0.96),rgba(0,0,0,0.4))}
+  .kicker{font-family:'Syne',sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:800;color:#ff8800;text-shadow:0 0 20px #ff8800,0 0 40px #fff}
+  .nline{font-size:11px;border-left:4px solid #ff8800;padding-left:14px;white-space:pre-wrap;line-height:1.7;background:linear-gradient(90deg,rgba(255,136,0,0.12),rgba(0,0,0,0.06));padding:14px;border-radius:12px;color:#fff;box-shadow:0 0 30px rgba(255,136,0,0.15);border:2px solid #ff8800}
+  .main{margin-top:14px;font-family:'Syne',sans-serif;font-size:12px;font-weight:800;letter-spacing:.05em;line-height:1.6;color:#ff8800;text-shadow:0 0 20px #fff;background:linear-gradient(90deg,rgba(255,136,0,0.12),rgba(255,255,255,0.06));padding:14px;border-radius:12px;border:2px solid #ff8800;box-shadow:0 0 40px rgba(255,136,0,0.2)}
+  .controls{padding:14px;display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:10}
+  .btn{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;padding:10px 14px;border:2px solid #ff8800;background:#000;color:#ff8800;border-radius:20px;cursor:pointer;box-shadow:0 0 20px rgba(255,136,0,0.2);text-transform:uppercase;letter-spacing:.08em}
+  .btn.active{border-color:#fff;background:#221100;color:#fff;box-shadow:0 0 30px #ff8800}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:18px;position:relative;z-index:5}
+  @media(max-width:1000px){.grid{grid-template-columns:1fr}}
+  .panel{position:relative;height:760px;background:radial-gradient(ellipse at center,#111 0%,#000 70%);border:2px solid #ff8800;border-radius:24px;overflow:hidden;box-shadow:0 0 50px rgba(255,136,0,0.2),0 0 100px rgba(255,255,255,0.1), inset 0 0 80px rgba(0,0,0,0.9)}
+  .panel.full{grid-column:1 / -1;height:1000px}
+  .label{position:absolute;left:12px;top:12px;font-family:'Space Mono',monospace;font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:rgba(0,0,0,0.88);padding:8px 10px;z-index:5;border:2px solid #ff8800;color:#fff;box-shadow:0 0 20px rgba(255,136,0,0.3);border-radius:12px;max-width:93%}
+  .card{margin:18px;background:linear-gradient(180deg,#000,#111);border:2px solid #ff8800;border-radius:20px;padding:20px;box-shadow:0 0 50px rgba(255,136,0,0.15)}
+  .mono{font-family:'Space Mono',monospace;font-size:11px;white-space:pre-wrap;word-break:break-word;line-height:1.9;color:#fff;text-shadow:0 0 8px rgba(255,136,0,0.3)}
+  canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">🔄 wakaku v208 — REVERSE {{black(orange)}} — PLANK, ORANGE, THEN BLACK — artifact 272 🔄</div>
+  <div class="nline">so plank , orange, then black ?? so in reverse {{black(orange)}}?? — SO PLANK, ORANGE, THEN BLACK ?? SO IN REVERSE {{black(orange)}}?? — plank, orange, then black — plank 10^-35, orange shell, then black — reverse — previously {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} orange outer inversion, now reverse black outer orange inner {{black(orange)}} — {{black(orange)}} = black containing orange — reverse — plank 10^-35, orange shell, then black — so plank inside orange inside black {{black{orange{plank}}}} — plank 10^-35 → 10^-360, orange shell reserved for inversion, then black — reverse — {{black(orange)}} — plank, orange, then black — reverse nesting — {{black(orange)}} = black outer containing orange inner — plank, orange, then black ?? — so in reverse {{black(orange)}}?? — metal analogs ionic — reverse — lol</div>
+  <div class="main">🔄 SO PLANK, ORANGE, THEN BLACK ?? SO IN REVERSE {{black(orange)}}?? — PLANK 10^-35, ORANGE SHELL, THEN BLACK — REVERSE — PREVIOUSLY {{orange(black)}} = ORANGE OUTER CONTAINING BLACK INNER ORANGE SHELL RESERVED FOR INVERSION, NOW REVERSE {{black(orange)}} = BLACK OUTER CONTAINING ORANGE INNER — {{black{orange{plank}}}} = BLACK OUTER CONTAINING ORANGE MIDDLE CONTAINING PLANK INNER 10^-35→10^-360 — PLANK 1.616×10^-35m PLANK LENGTH, ORANGE SHELL 10^-something, THEN BLACK NUCLEUS — REVERSE NESTING — PLANK, ORANGE, THEN BLACK — {{black(orange)}} — 🔄</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-reverse">🔄 REVERSE {{black(orange)}} — BLACK OUTER CONTAINING ORANGE INNER — PLANK 10^-35, ORANGE, THEN BLACK — {{black{orange{plank}}}} — REVERSE — 🔄</button>
+  <button class="btn" id="btn-plank">✨ PLANK 10^-35 — PLANK LENGTH 1.616×10^-35m — PLANK BUBBLE 10^-35→10^-360 — PLANK, ORANGE, THEN BLACK — ✨</button>
+  <button class="btn" id="btn-bubbles">💫 REVERSE BUBBLES — {{black(orange)}} WITH PLANK, ORANGE, BLACK REVERSE NESTING — 💫</button>
+  <button class="btn" id="btn-reset">⚡ RESET REVERSE BLACK ORANGE — ⚡</button>
+</div>
+
+<div class="grid">
+  <div class="panel" id="wrap-reverse"><canvas id="c-reverse"></canvas><div class="label">🔄 REVERSE {{black(orange)}} — BLACK OUTER CONTAINING ORANGE INNER — PREVIOUSLY {{orange(black)}} ORANGE OUTER BLACK INNER, NOW REVERSE {{black(orange)}} BLACK OUTER ORANGE INNER — PLANK, ORANGE, THEN BLACK — {{black{orange{plank}}}} = BLACK OUTER CONTAINING ORANGE MIDDLE CONTAINING PLANK INNER 10^-35 — REVERSE NESTING — 🔄</div></div>
+  <div class="panel" id="wrap-plank"><canvas id="c-plank"></canvas><div class="label">✨ PLANK 10^-35 — PLANK LENGTH 1.616×10^-35m — PLANK SCALE 10^-35→10^-360 — PLANK BUBBLE — PLANK, ORANGE, THEN BLACK — PLANK 10^-35 INNERMOST, ORANGE SHELL MIDDLE, BLACK OUTER — {{black{orange{plank}}}} — PLANK 10^-35 — ✨</div></div>
+  <div class="panel full" id="wrap-bubbles"><canvas id="c-bubbles"></canvas><div class="label">💫 REVERSE BUBBLES — {{black(orange)}} WITH PLANK, ORANGE, BLACK REVERSE NESTING — PLANK 10^-35→10^-360 6 BUBBLES EACH 3---3+++ -211 x3 +211 x3, ORANGE SHELL #ff8800 MIDDLE, BLACK #000000 OUTER — REVERSE {{black{orange{plank}}}} = BLACK OUTER CONTAINING ORANGE MIDDLE CONTAINING PLANK INNER — PREVIOUSLY ORANGE OUTER BLACK INNER {{orange(black)}} NOW REVERSE BLACK OUTER ORANGE INNER {{black(orange)}} — PLANK, ORANGE, THEN BLACK — ALL REVERSE FLASH — LOL — 💫</div></div>
+</div>
+
+<div class="card"><div class="mono">🔄 SO PLANK, ORANGE, THEN BLACK ?? SO IN REVERSE {{black(orange)}}?? — v208 REVERSE — PLANK, ORANGE, THEN BLACK 🔄
+
+- SO PLANK, ORANGE, THEN BLACK ?? SO IN REVERSE {{black(orange)}}?? — PLANK, ORANGE, THEN BLACK — PLANK 10^-35, ORANGE SHELL, THEN BLACK — REVERSE — PREVIOUSLY {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} ORANGE OUTER INVERSION, NOW REVERSE BLACK OUTER ORANGE INNER {{black(orange)}} — {{black(orange)}} = BLACK CONTAINING ORANGE — REVERSE — PLANK, ORANGE, THEN BLACK
+
+- PREVIOUS NESTING: {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} = WHITE OUTER CONTAINING BLACK CONTAINING RED CONTAINING BLUE CONTAINING GREEN CONTAINING YELLOW CONTAINING PURPLE CONTAINING ORANGE INNERMOST — ORANGE SHELL RESERVED FOR INVERSION OUTER? Actually orange innermost previously — orange shell reserved for inversion = orange innermost anti-gravity -1g
+
+- REVERSE NESTING {{black(orange)}}: BLACK OUTER CONTAINING ORANGE INNER — {{black(orange)}} = BLACK OUTER CONTAINING ORANGE INNER — REVERSE — BLACK #000000 OUTER, ORANGE #ff8800 INNER — REVERSE — {{black(orange)}} — BLACK CONTAINING ORANGE — REVERSE
+
+- PLANK, ORANGE, THEN BLACK: PLANK 10^-35 INNERMOST, ORANGE SHELL MIDDLE, BLACK OUTER — {{black{orange{plank}}}} = BLACK OUTER CONTAINING ORANGE MIDDLE CONTAINING PLANK INNER — PLANK 1.616×10^-35m PLANK LENGTH — PLANK SCALE 10^-35→10^-360 — PLANK BUBBLE — PLANK, ORANGE, THEN BLACK — {{black{orange{plank}}}} — PLANK 10^-35 → 10^-360 3---3+++ -211 x3 +211 x3 — PLANK INNERMOST
+
+- PLANK LENGTH: 1.616255×10^-35m — Planck length — smallest meaningful length — quantum gravity — 10^-35m → 10^-360 is beyond Planck — 10^-35→10^-360 3---3+++ = - - - + + + = -211 x3 +211 x3 — Planck bubble — Planck, orange, then black
+
+- ORDER:
+  - FORWARD PREVIOUS: WHITE #ffffff OUTER 1g=9.8, BLACK #000000 0.6g, RED #ff0000 0.3g, BLUE #0000ff 0.1g, GREEN #00ff00 0g, YELLOW #ffff00 -0.1g, PURPLE #cc33ff -0.3g, ORANGE #ff8800 INNERMOST -1g=-9.8 ANTI-GRAVITY — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} — WHITE OUTER ORANGE INNER — FORWARD
+  - REVERSE NOW: BLACK #000000 OUTER 1g=9.8, ORANGE #ff8800 INNER -1g=-9.8, PLANK 10^-35 INNERMOST 0g? — {{black(orange)}} — BLACK OUTER ORANGE INNER — REVERSE — {{black{orange{plank}}}} — BLACK OUTER ORANGE MIDDLE PLANK INNER — REVERSE — PLANK, ORANGE, THEN BLACK
+
+- {{black(orange)}} vs {{orange(black)}}:
+  - {{orange(black)}} = ORANGE OUTER CONTAINING BLACK INNER — ORANGE SHELL RESERVED FOR INVERSION OUTER — ORANGE #ff8800 OUTER -1g ANTI-GRAVITY CONTAINING BLACK #000000 INNER 0.6g — ORANGE OUTER BLACK INNER
+  - {{black(orange)}} = BLACK OUTER CONTAINING ORANGE INNER — BLACK OUTER CONTAINING ORANGE INNER — BLACK #000000 OUTER 0.6g? Actually black outer now 1g, orange inner -1g — BLACK OUTER ORANGE INNER — REVERSE — {{black(orange)}} — REVERSE
+
+- 2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell reserved for inversion:: REVERSE: {{2^3:: 8 4 2 1 :: orange shell :: bl/gr/yw/pr/ :: wt/rd :: bk ::}}? Actually reverse would be orange shell inner? But user says plank, orange, then black — so plank innermost, orange middle, black outer — {{black{orange{plank}}}} — PLANK 10^-35, ORANGE, THEN BLACK
+
+- 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ REVERSE {{black(orange)}} WITH PLANK, ORANGE, BLACK — 6 bubbles each 10^-35→10^-360 = - - - + + + = -211 x3 +211 x3 — REVERSE NESTING BLACK OUTER ORANGE INNER PLANK INNERMOST — PLANK, ORANGE, THEN BLACK — REVERSE
+
+SO PLANK, ORANGE, THEN BLACK ?? SO IN REVERSE {{black(orange)}}?? — PLANK 10^-35, ORANGE SHELL, THEN BLACK — REVERSE — PREVIOUSLY {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} ORANGE INNERMOST, NOW REVERSE {{black(orange)}} BLACK OUTER ORANGE INNER — {{black{orange{plank}}}} = BLACK OUTER CONTAINING ORANGE MIDDLE CONTAINING PLANK INNER — PLANK, ORANGE, THEN BLACK — REVERSE — 🔄
+</div></div>
+
+<script>
+const reverseCanvas=document.getElementById('c-reverse');
+const plankCanvas=document.getElementById('c-plank');
+const bubblesCanvas=document.getElementById('c-bubbles');
+
+function setupCanvas(canvas){
+  const dpr=Math.min(devicePixelRatio,2);
+  function resize(){
+    const rect=canvas.parentElement.getBoundingClientRect();
+    canvas.width=rect.width*dpr;
+    canvas.height=rect.height*dpr;
+    canvas.style.width=rect.width+'px';
+    canvas.style.height=rect.height+'px';
+  }
+  resize();
+  window.addEventListener('resize',resize);
+  return {dpr, ctx:canvas.getContext('2d')};
+}
+
+(function(){
+  const {dpr, ctx} = setupCanvas(reverseCanvas);
+  let t=0;
+  function draw(){
+    requestAnimationFrame(draw);
+    t+=0.012;
+    const w=reverseCanvas.width, h=reverseCanvas.height;
+    const cx=w/2, cy=h/2;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#000000';
+    ctx.fillRect(0,0,w,h);
+    const inversion=Math.sin(t*0.4);
+    // Reverse nesting: black outer containing orange inner containing plank
+    // Black outer shell
+    ctx.save();
+    ctx.strokeStyle='#000000';
+    ctx.lineWidth=8*dpr;
+    ctx.globalAlpha=0.9;
+    ctx.shadowColor='#ffffff';
+    ctx.shadowBlur=20*dpr;
+    ctx.beginPath();
+    ctx.arc(cx,cy,320*dpr + Math.sin(t*0.6)*8*dpr,0,Math.PI*2);
+    ctx.stroke();
+    ctx.fillStyle='rgba(0,0,0,0.15)';
+    ctx.fill();
+    // Black outer label
+    ctx.fillStyle='#ffffff';
+    ctx.font=`700 ${10*dpr}px Space Mono`;
+    ctx.fillText('BLACK OUTER {{black(orange)}}',cx-80*dpr,cy-330*dpr);
+    ctx.restore();
+    // Orange middle shell inside black
+    ctx.save();
+    ctx.strokeStyle='#ff8800';
+    ctx.lineWidth=6*dpr;
+    ctx.globalAlpha=0.85 + Math.abs(inversion)*0.1;
+    ctx.shadowColor='#ff8800';
+    ctx.shadowBlur=24*dpr;
+    ctx.beginPath();
+    ctx.arc(cx,cy,180*dpr + Math.cos(t*0.5)*6*dpr,0,Math.PI*2);
+    ctx.stroke();
+    ctx.fillStyle='rgba(255,136,0,0.08)';
+    ctx.fill();
+    ctx.fillStyle='#ff8800';
+    ctx.font=`700 ${9*dpr}px Space Mono`;
+    ctx.fillText('ORANGE MIDDLE {{orange(plank)}}',cx-70*dpr,cy-190*dpr);
+    ctx.restore();
+    // Plank inner 10^-35
+    ctx.save();
+    ctx.fillStyle='#00ffcc';
+    ctx.globalAlpha=0.95 + Math.sin(t*3)*0.05;
+    ctx.shadowColor='#00ffcc';
+    ctx.shadowBlur=30*dpr;
+    ctx.beginPath();
+    ctx.arc(cx,cy,22*dpr + Math.sin(t*2)*3*dpr,0,Math.PI*2);
+    ctx.fill();
+    ctx.fillStyle='#ffffff';
+    ctx.font=`700 ${8*dpr}px Space Mono`;
+    ctx.fillText('PLANK 10^-35',cx-30*dpr,cy+6*dpr);
+    ctx.fillStyle='#00ffcc';
+    ctx.font=`400 ${7*dpr}px Space Mono`;
+    ctx.fillText('1.616×10^-35m',cx-28*dpr,cy+18*dpr);
+    ctx.restore();
+    // Comparison forward vs reverse
+    ctx.save();
+    ctx.fillStyle='rgba(255,255,255,0.9)';
+    ctx.font=`400 ${8*dpr}px Space Mono`;
+    ctx.fillText('FORWARD: {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} WHITE OUTER ORANGE INNER',14*dpr,h-50*dpr);
+    ctx.fillText('REVERSE: {{black{orange{plank}}}} BLACK OUTER ORANGE MIDDLE PLANK INNER',14*dpr,h-34*dpr);
+    ctx.fillText('PLANK, ORANGE, THEN BLACK = {{black{orange{plank}}}}',14*dpr,h-18*dpr);
+    ctx.restore();
+  }
+  draw();
+})();
+
+(function(){
+  const {dpr, ctx} = setupCanvas(plankCanvas);
+  let t=0;
+  function draw(){
+    requestAnimationFrame(draw);
+    t+=0.014;
+    const w=plankCanvas.width, h=plankCanvas.height;
+    const cx=w/2, cy=h/2;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#000000';
+    ctx.fillRect(0,0,w,h);
+    // Plank scale visualization 10^-35 → 10^-360
+    const scales=[
+      {exp:-35,label:'10^-35 PLANK LENGTH 1.616×10^-35m',color:'#00ffcc',r:280},
+      {exp:-60,label:'10^-60',color:'#00aaff',r:230},
+      {exp:-120,label:'10^-120',color:'#cc33ff',r:180},
+      {exp:-180,label:'10^-180',color:'#ff00ff',r:130},
+      {exp:-240,label:'10^-240',color:'#ff8800',r:80},
+      {exp:-360,label:'10^-360 PLANK BUBBLE INNERMOST',color:'#ffffff',r:25}
+    ];
+    scales.forEach((s,i)=>{
+      const r=s.r*dpr + Math.sin(t*0.5+i*0.4)*3*dpr;
+      ctx.save();
+      ctx.strokeStyle=s.color;
+      ctx.lineWidth=1.5*dpr;
+      ctx.globalAlpha=0.6 + Math.sin(t*1.2+i)*0.2;
+      ctx.shadowColor=s.color;
+      ctx.shadowBlur=12*dpr;
+      ctx.beginPath();
+      ctx.arc(cx,cy,r,0,Math.PI*2);
+      ctx.stroke();
+      ctx.fillStyle=s.color;
+      ctx.font=`400 ${7*dpr}px Space Mono`;
+      ctx.fillText(s.label,cx+r+6*dpr,cy+Math.sin(i)*4*dpr);
+      ctx.restore();
+    });
+    // Central plank
+    ctx.save();
+    ctx.fillStyle='#ffffff';
+    ctx.shadowColor='#00ffcc';
+    ctx.shadowBlur=30*dpr;
+    ctx.globalAlpha=0.95 + Math.sin(t*3)*0.05;
+    ctx.beginPath();
+    ctx.arc(cx,cy,8*dpr,0,Math.PI*2);
+    ctx.fill();
+    ctx.fillStyle='#00ffcc';
+    ctx.font=`700 ${9*dpr}px Space Mono`;
+    ctx.fillText('PLANK',cx-16*dpr,cy-14*dpr);
+    ctx.restore();
+    // Labels
+    ctx.save();
+    ctx.fillStyle='#ff8800';
+    ctx.font=`800 ${10*dpr}px Syne`;
+    ctx.fillText('PLANK 10^-35 → 10^-360 3---3+++',14*dpr,28*dpr);
+    ctx.fillStyle='#a8f0e0';
+    ctx.font=`400 ${8*dpr}px Space Mono`;
+    ctx.fillText('3---3+++ = - - - + + + = -211 x3 +211 x3',14*dpr,44*dpr);
+    ctx.fillText('PLANK, ORANGE, THEN BLACK = {{black{orange{plank}}}}',14*dpr,60*dpr);
+    ctx.fillText('1.616255×10^-35m Planck length',14*dpr,76*dpr);
+    ctx.restore();
+  }
+  draw();
+})();
+
+(function(){
+  const {dpr, ctx} = setupCanvas(bubblesCanvas);
+  let t=0;
+  function draw(){
+    requestAnimationFrame(draw);
+    t+=0.011;
+    const w=bubblesCanvas.width, h=bubblesCanvas.height;
+    const cx=w/2, cy=h/2;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#000000';
+    ctx.fillRect(0,0,w,h);
+    const inversion=Math.sin(t*0.35);
+    // Black outer, orange middle, plank inner bubbles
+    const layers=[
+      {color:'#000000', inv:'#ffffff', r:340, count:8, size:16, label:'BLACK OUTER 8', gravity:1.0},
+      {color:'#ff8800', inv:'#ffffff', r:190, count:6, size:14, label:'ORANGE MIDDLE 6', gravity:0.0},
+      {color:'#00ffcc', inv:'#ffffff', r:30, count:1, size:22, label:'PLANK INNER 10^-35', gravity:-1.0, isPlank:true}
+    ];
+    layers.forEach(layer=>{
+      for(let i=0;i<layer.count;i++){
+        const ang=i/layer.count*Math.PI*2 + t*0.18 + (layer.isPlank?0:layer.r*0.01);
+        const grav=layer.gravity + inversion*0.2;
+        const r=layer.r*dpr + grav*10*dpr + Math.sin(t*0.9+i)*4*dpr;
+        const x=cx+Math.cos(ang)*r;
+        const y=cy+Math.sin(ang)*r + Math.sin(t*0.7+i)*3*dpr;
+        ctx.save();
+        const col=inversion>0.6?layer.inv:layer.color;
+        ctx.fillStyle=col==='#000000'?'#111111':col;
+        ctx.shadowColor=col==='#000000'?'#ffffff':col;
+        ctx.shadowBlur=16*dpr;
+        ctx.globalAlpha=0.9;
+        ctx.beginPath();
+        if(layer.isPlank){
+          ctx.arc(x,y,layer.size*dpr + Math.sin(t*2)*2*dpr,0,Math.PI*2);
+        } else {
+          ctx.ellipse(x,y,layer.size*dpr*1.1,layer.size*dpr*0.8,ang,0,Math.PI*2);
+        }
+        ctx.fill();
+        if(layer.isPlank){
+          ctx.fillStyle='#00ffcc';
+          ctx.globalAlpha=0.5;
+          ctx.beginPath();
+          ctx.arc(x-3*dpr,y-2*dpr,5*dpr,0,Math.PI*2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+      // Shell
+      if(!layers[0].isPlank){
+        ctx.save();
+        ctx.strokeStyle=layer.color==='#000000'?'#333333':layer.color;
+        ctx.lineWidth=1.5*dpr;
+        ctx.globalAlpha=0.25 + Math.abs(inversion)*0.15;
+        ctx.beginPath();
+        ctx.arc(cx,cy,layer.r*dpr,0,Math.PI*2);
+        ctx.stroke();
+        ctx.restore();
+      }
+    });
+    ctx.save();
+    ctx.fillStyle='#ff8800';
+    ctx.font=`800 ${11*dpr}px Syne`;
+    ctx.fillText('REVERSE {{black(orange)}} = BLACK OUTER CONTAINING ORANGE INNER',14*dpr,28*dpr);
+    ctx.fillText('{{black{orange{plank}}}} = BLACK OUTER ORANGE MIDDLE PLANK INNER 10^-35',14*dpr,44*dpr);
+    ctx.fillStyle='#a8f0e0';
+    ctx.font=`400 ${8*dpr}px Space Mono`;
+    ctx.fillText('FORWARD: {{white{{black{...orange}}}} WHITE OUTER ORANGE INNER',14*dpr,60*dpr);
+    ctx.fillText('REVERSE: {{black{orange{plank}}}} BLACK OUTER ORANGE MIDDLE PLANK INNER',14*dpr,74*dpr);
+    ctx.fillText('PLANK, ORANGE, THEN BLACK = REVERSE NESTING',14*dpr,88*dpr);
+    ctx.restore();
+  }
+  draw();
+})();
+
+document.getElementById('btn-reverse').onclick=()=>{};
+document.getElementById('btn-plank').onclick=()=>{};
+document.getElementById('btn-bubbles').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

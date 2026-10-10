@@ -1,0 +1,224 @@
+<!DOCTYPE html><html lang="en"><head><link rel="icon" href="../favicon.svg" type="image/svg+xml"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Quantum Jumps — a single atom blinking</title>
+<style>
+:root{
+  --void:#07080d;--panel:#0c0e16;--rule:#191f2c;--card:#10131c;
+  --ink:#e9ecf4;--faint:#717c90;--fainter:#3e4759;
+  --bright:#ffe14a;--brightglow:#ffd24a;--dark:#2a3140;--shelf:#c77dff;--ground:#54d1ff;--excited:#ff8a5c;--photon:#ffd24a;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--void);color:var(--ink);font:400 13px/1.5 "IBM Plex Mono",ui-monospace,Menlo,monospace}
+body{padding:24px 18px 44px}
+.wrap{max-width:1020px;margin:0 auto}
+.eyebrow{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--faint);margin-bottom:12px}
+h1{font:600 31px/1.04 "IBM Plex Sans","Helvetica Neue",sans-serif;letter-spacing:-.02em;max-width:22ch}
+h1 em{font-style:normal;color:var(--bright)}
+.lede{color:var(--faint);font-size:13px;max-width:70ch;line-height:1.7;margin-top:14px}
+.lede b{color:var(--ink);font-weight:400}
+.rig{display:grid;grid-template-columns:1fr 288px;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:12px;overflow:hidden;margin:22px 0 8px}
+@media(max-width:840px){.rig{grid-template-columns:1fr}}
+.stage{background:#05060b;padding:12px;display:flex;flex-direction:column;gap:10px}
+.atomrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:520px){.atomrow{grid-template-columns:1fr}}
+canvas{width:100%;display:block;border-radius:8px;background:#070911}
+.side{background:var(--panel);display:flex;flex-direction:column}
+.blk{padding:14px 15px;border-bottom:1px solid var(--rule)}
+.blk:last-child{border-bottom:none}
+.blk h2{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}
+.btns{display:flex;gap:8px}
+button{font:inherit;font-size:11.5px;color:var(--ink);background:var(--card);border:1px solid var(--rule);border-radius:7px;padding:9px 12px;cursor:pointer;flex:1}
+button:hover{border-color:var(--bright);color:var(--bright)}
+button.go{border-color:var(--bright);color:var(--bright)}
+.state{text-align:center;padding:6px 0}
+.state .big{font:600 22px "IBM Plex Sans",sans-serif}
+.state .big.bright{color:var(--bright)} .state .big.dark{color:var(--faint)}
+.state .lbl{font-size:10px;color:var(--fainter);margin-top:2px}
+.stat{font-size:11.5px;color:var(--faint);line-height:1.95}
+.stat .r{display:flex;justify-content:space-between}
+.stat .r b{color:var(--ink);font-weight:400;font-variant-numeric:tabular-nums}
+.stat .r.j b{color:var(--shelf)}
+.el{margin:10px 0}
+.el .top{display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px}
+.el .top .v{color:var(--faint)}
+.el input{width:100%;height:4px;-webkit-appearance:none;appearance:none;background:var(--rule);border-radius:2px;outline:none}
+.el input::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--shelf);cursor:pointer;border:2px solid var(--panel)}
+.foot{color:var(--fainter);font-size:11px;line-height:1.75;margin-top:22px;max-width:88ch}
+.foot b{color:var(--faint);font-weight:400}.foot .s{color:var(--shelf)}.foot .y{color:var(--bright)}
+</style></head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">quantum jumps · electron shelving · dehmelt 1975 · seen 1986 · real</div>
+  <h1>Watch a <em>single atom</em> blink on and off.</h1>
+  <p class="lede">Here is one of the strangest sights in physics, and it's real: a single trapped atom, lit by a laser, scatters so many photons it glows steadily — <b>millions per second</b>, bright enough to see. But every so often its one electron <b>jumps</b> to a special "shelf" level where it can't scatter at all, and the atom <b>goes completely black</b> — for a fraction of a second, sometimes longer — then jumps back and snaps bright again. Each blink edge is a single quantum jump of a single electron, amplified into a flood of light your eye can follow. Turn it on and watch.</p>
+
+  <div class="rig">
+    <div class="stage">
+      <div class="atomrow">
+        <canvas id="atom" width="340" height="260"></canvas>
+        <canvas id="levels" width="340" height="260"></canvas>
+      </div>
+      <canvas id="trace" width="700" height="130"></canvas>
+    </div>
+    <div class="side">
+      <div class="blk">
+        <h2>The atom</h2>
+        <div class="btns"><button class="go" id="run">▶ trap & illuminate</button></div>
+        <div class="state" style="margin-top:8px"><div class="big dark" id="stateBig">—</div><div class="lbl" id="stateLbl">press to start</div></div>
+      </div>
+      <div class="blk">
+        <h2>Tally</h2>
+        <div class="stat">
+          <div class="r j"><span>quantum jumps</span><b id="jumps">0</b></div>
+          <div class="r"><span>time bright</span><b id="tBright">0%</b></div>
+          <div class="r"><span>time dark (shelved)</span><b id="tDark">0%</b></div>
+          <div class="r"><span>photons seen</span><b id="photons">0</b></div>
+        </div>
+      </div>
+      <div class="blk">
+        <h2>Shelf lifetime</h2>
+        <div class="el"><div class="top"><span>how sticky the shelf is</span><span class="v" id="vShelf">medium</span></div><input type="range" id="shelf" min="1" max="100" value="40"></div>
+        <div style="font-size:10.5px;color:var(--fainter);line-height:1.5">Longer lifetime → longer dark periods. Each jump on and off is random and memoryless.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot"><b>How one electron becomes visible.</b> The atom has three levels that matter: a <span style="color:#54d1ff">ground</span> state, a fast <span style="color:#ff8a5c">bright</span> state, and a metastable <s>shelf</s>. A strong laser drives the ground↔bright transition so hard that the electron cycles up and down <y>tens of millions of times a second</y>, spraying out a photon each time — that steady glow is what you see. But a second, much weaker transition occasionally kicks the electron onto the <s>shelf</s>, a state with no fast way down. While it sits there — for milliseconds, even seconds — the bright cycle has no electron to run, so <b>not a single photon is scattered</b>: the atom is utterly dark. Then, at a random moment, the electron drops off the shelf, the cycle restarts, and the glow returns. The profound part is what the blinking proves: energy levels really are <b>discrete</b>, and transitions between them really are <b>abrupt jumps</b>, not smooth slides — the atom is either cycling or shelved, never halfway, so the light is either fully on or fully off. Niels Bohr argued about whether "quantum jumps" were even real; Schrödinger hated them. Then in 1986 three labs trapped single ions and simply <b>watched them blink</b>, settling an 60-year argument by eye. It's the same superposition-and-measurement machinery from the rest of this thread — but here the measurement is the stream of photons itself, continuously asking the atom "are you bright?", and the answer telegraphs one electron's quantum jumps straight to your retina.</p>
+</div>
+
+<script>
+(function(){
+var $=function(id){return document.getElementById(id);};
+function ctx(id){var c=$(id);return {c:c,g:c.getContext('2d')};}
+var A=ctx('atom'), Lv=ctx('levels'), Tr=ctx('trace');
+var DPR=Math.min(devicePixelRatio||1,2);
+function fit(){[['atom',A,260,340],['levels',Lv,260,340],['trace',Tr,130,700]].forEach(function(o){
+  var el=$(o[0]);var w=el.clientWidth;el.width=w*DPR;el.height=w*o[2]/o[3]*DPR;o[1].g.setTransform(DPR,0,0,DPR,0,0);el._w=w;el._h=w*o[2]/o[3];});}
+
+// rates
+var Gamma=2e7;          // bright scatter rate
+var R_shelve=18;        // onto shelf per sec
+var R_deshelve=25;      // off shelf per sec (inverse lifetime)
+var running=false, state='bright', t=0;
+var jumps=0, brightT=0, darkT=0, photons=0;
+var trace=[]; // history of state (1 bright, 0 dark)
+var electronPos='ground'; // 'ground','excited','shelf'
+var photonSparks=[];
+
+function reset(){running=false;state='bright';t=0;jumps=0;brightT=0;darkT=0;photons=0;trace=[];electronPos='ground';photonSparks=[];
+  $('stateBig').textContent='—';$('stateBig').className='big dark';$('stateLbl').textContent='press to start';updateStats();drawAtom();drawLevels();drawTrace();}
+
+var lastT=0;
+function tick(now){
+  if(!lastT)lastT=now;var real=(now-lastT)/1000;lastT=now;
+  if(running){
+    var dt=Math.min(0.05,real)*4; // sim speed multiplier
+    t+=dt;
+    if(state==='bright'){
+      brightT+=dt; photons+=Gamma*dt;
+      // rapid g<->e cycling visual
+      electronPos = (Math.floor(t*30)%2===0)?'ground':'excited';
+      // emit photon sparks
+      if(Math.random()<0.6)photonSparks.push({x:0.5,y:0.5,a:Math.random()*6.28,life:1});
+      if(Math.random()<R_shelve*dt){state='dark';jumps++;electronPos='shelf';}
+    } else {
+      darkT+=dt; electronPos='shelf';
+      if(Math.random()<R_deshelve*dt){state='bright';jumps++;}
+    }
+    trace.push(state==='bright'?1:0); if(trace.length>300)trace.shift();
+    photonSparks.forEach(function(p){p.life-=0.08;});
+    photonSparks=photonSparks.filter(function(p){return p.life>0;});
+    $('stateBig').textContent=state==='bright'?'BRIGHT':'DARK';
+    $('stateBig').className='big '+(state==='bright'?'bright':'dark');
+    $('stateLbl').textContent=state==='bright'?'cycling — scattering photons':'shelved — electron parked, no light';
+    updateStats();
+  }
+  drawAtom();drawLevels();drawTrace();requestAnimationFrame(tick);
+}
+
+function updateStats(){
+  $('jumps').textContent=jumps;
+  var tot=brightT+darkT||1;
+  $('tBright').textContent=(brightT/tot*100).toFixed(0)+'%';
+  $('tDark').textContent=(darkT/tot*100).toFixed(0)+'%';
+  $('photons').textContent=photons>1e6?(photons/1e6).toFixed(1)+'M':Math.round(photons);
+}
+
+function drawAtom(){
+  var W=A.c._w,H=A.c._h,g=A.g;g.clearRect(0,0,W,H);g.fillStyle='#070911';g.fillRect(0,0,W,H);
+  var cx=W*0.5,cy=H*0.5;
+  var bright = running && state==='bright';
+  // glow halo
+  if(bright){var glow=g.createRadialGradient(cx,cy,4,cx,cy,W*0.42);
+    glow.addColorStop(0,'rgba(255,225,74,0.9)');glow.addColorStop(0.3,'rgba(255,210,74,0.4)');glow.addColorStop(1,'rgba(255,210,74,0)');
+    g.fillStyle=glow;g.beginPath();g.arc(cx,cy,W*0.42,0,6.28);g.fill();}
+  // photon sparks flying out
+  if(bright)photonSparks.forEach(function(p){var d=(1-p.life)*W*0.4;var px=cx+Math.cos(p.a)*d,py=cy+Math.sin(p.a)*d;
+    g.fillStyle='rgba(255,225,120,'+p.life+')';g.beginPath();g.arc(px,py,2,0,6.28);g.fill();});
+  // the atom core
+  g.fillStyle=bright?'#fff6d0':'#28303e';g.beginPath();g.arc(cx,cy,10,0,6.28);g.fill();
+  if(bright){g.strokeStyle='rgba(255,255,255,0.6)';g.lineWidth=1;g.beginPath();g.arc(cx,cy,14,0,6.28);g.stroke();}
+  // label
+  g.fillStyle=bright?'rgba(90,70,20,0.9)':'rgba(120,130,150,0.5)';g.font='9px monospace';g.textAlign='center';
+  g.fillText(running?(bright?'glowing':'dark'):'trapped ion',cx,cy+H*0.4);
+  g.textAlign='left';
+}
+
+function drawLevels(){
+  var W=Lv.c._w,H=Lv.c._h,g=Lv.g;g.clearRect(0,0,W,H);g.fillStyle='#070911';g.fillRect(0,0,W,H);
+  g.fillStyle='rgba(113,124,144,0.7)';g.font='9px monospace';g.textAlign='left';g.fillText('energy levels',10,14);
+  // level positions
+  var gY=H*0.82, eY=H*0.22, sY=H*0.5;
+  var gX0=W*0.15,gX1=W*0.5, eX0=W*0.15,eX1=W*0.5, sX0=W*0.62,sX1=W*0.92;
+  // ground
+  drawLevel(g,gX0,gX1,gY,'#54d1ff','|g⟩ ground');
+  drawLevel(g,eX0,eX1,eY,'#ff8a5c','|e⟩ bright');
+  drawLevel(g,sX0,sX1,sY,'#c77dff','|s⟩ shelf (metastable)');
+  // strong transition arrow g<->e
+  g.strokeStyle='rgba(255,138,92,0.5)';g.lineWidth=2;
+  arrowLine(g,(gX0+gX1)/2,gY,(eX0+eX1)/2,eY);
+  g.fillStyle='rgba(255,138,92,0.6)';g.font='8px monospace';g.fillText('strong',(gX0+gX1)/2-40,(gY+eY)/2);
+  // weak transition g<->s
+  g.strokeStyle='rgba(199,125,255,0.4)';g.setLineDash([3,3]);
+  arrowLine(g,gX1,gY,sX0,sY);g.setLineDash([]);
+  g.fillStyle='rgba(199,125,255,0.6)';g.fillText('weak',(gX1+sX0)/2-8,(gY+sY)/2+16);
+  // the electron
+  var ex,ey;
+  if(electronPos==='ground'){ex=(gX0+gX1)/2;ey=gY;}
+  else if(electronPos==='excited'){ex=(eX0+eX1)/2;ey=eY;}
+  else{ex=(sX0+sX1)/2;ey=sY;}
+  var lit = running && state==='bright';
+  g.fillStyle=electronPos==='shelf'?'#c77dff':(lit?'#ffe14a':'#54d1ff');
+  g.shadowColor=g.fillStyle;g.shadowBlur=8;g.beginPath();g.arc(ex,ey-6,5,0,6.28);g.fill();g.shadowBlur=0;
+  g.textAlign='left';
+}
+function drawLevel(g,x0,x1,y,col,lbl){g.strokeStyle=col;g.lineWidth=2.5;g.beginPath();g.moveTo(x0,y);g.lineTo(x1,y);g.stroke();
+  g.fillStyle=col;g.font='9px monospace';g.fillText(lbl,x0,y+16);}
+function arrowLine(g,x0,y0,x1,y1){g.beginPath();g.moveTo(x0,y0);g.lineTo(x1,y1);g.stroke();}
+
+function drawTrace(){
+  var W=Tr.c._w,H=Tr.c._h,g=Tr.g;g.clearRect(0,0,W,H);g.fillStyle='#070911';g.fillRect(0,0,W,H);
+  g.fillStyle='rgba(113,124,144,0.6)';g.font='9px monospace';g.textAlign='left';g.fillText('fluorescence over time (telegraph signal)',10,14);
+  var midBright=H*0.32, midDark=H*0.78;
+  g.fillStyle='rgba(255,225,74,0.4)';g.fillText('bright',W-46,midBright+3);
+  g.fillStyle='rgba(113,124,144,0.5)';g.fillText('dark',W-40,midDark+3);
+  if(trace.length<2)return;
+  g.strokeStyle='#ffe14a';g.lineWidth=2;g.beginPath();
+  for(var i=0;i<trace.length;i++){var x=i/300*W;var y=trace[i]?midBright:midDark;
+    if(i===0)g.moveTo(x,y);else{g.lineTo(x,trace[i-1]?midBright:midDark);g.lineTo(x,y);}}
+  g.stroke();
+  // fill under bright
+  g.fillStyle='rgba(255,225,74,0.08)';
+  for(i=0;i<trace.length;i++){if(trace[i]){var x=i/300*W;g.fillRect(x,midBright,W/300+0.5,H-midBright-6);}}
+}
+
+$('run').onclick=function(){if(!running&&t===0){running=true;$('stateLbl').textContent='running';}else{running=!running;}
+  this.textContent=running?'❚❚ pause':'▶ resume';};
+$('shelf').addEventListener('input',function(){var v=+this.value;R_deshelve=40/(v/20+0.3);
+  $('vShelf').textContent=v<30?'brief':v<70?'medium':'sticky';});
+
+window.addEventListener('resize',function(){fit();drawAtom();drawLevels();drawTrace();});
+fit();reset();requestAnimationFrame(tick);
+})();
+</script>
+</body></html>

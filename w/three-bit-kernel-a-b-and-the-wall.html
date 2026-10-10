@@ -1,0 +1,358 @@
+<!DOCTYPE html><html lang="en"><head><link rel="icon" href="../favicon.svg" type="image/svg+xml"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THREE BITS — A KERNEL, FROM THE FIRST WORD</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--gr:#080a0c;--ink:#dfe6ea;--dim:#7f909a;--faint:#4f5d66;--line:#1a2429;
+ --a:#ffb347;--b:#5fb0ff;--c:#ff4d5e;--pc:#7ee787;--mem:#b57cff;--ok:#7ee787;--bad:#ff6b6b;
+ --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--disp:"Iowan Old Style",Palatino,Georgia,serif}
+body{background:var(--gr);color:var(--ink);font:12.5px/1.6 var(--mono);padding:0 0 12vh;
+ background-image:radial-gradient(1100px 760px at 10% 0%,rgba(181,124,255,.07),transparent 62%),
+ radial-gradient(1000px 700px at 92% 100%,rgba(255,179,71,.06),transparent 62%);background-attachment:fixed}
+.wrap{max-width:1160px;margin:0 auto;padding:0 5vw}
+header{padding:11vh 0 5vh}
+h1{font:400 clamp(26px,4.6vw,52px)/1.05 var(--disp);letter-spacing:-.02em}
+.kick{font-size:10px;letter-spacing:.3em;color:var(--dim);text-transform:uppercase;margin-bottom:18px}
+.lede{font:400 clamp(15px,1.7vw,19px)/1.62 var(--disp);max-width:66ch;color:#cdd8de;margin-top:22px}
+.lede b{color:#fff;font-weight:600}
+h2{font:400 clamp(19px,2.7vw,30px)/1.14 var(--disp);margin:0 0 4px}
+section{padding:5vh 0 2vh;border-top:1px solid var(--line);margin-top:5vh}
+.sub{font-size:10px;letter-spacing:.22em;color:var(--faint);text-transform:uppercase;margin-bottom:20px}
+p.body{max-width:78ch;color:var(--dim);margin-bottom:13px}
+p.body b{color:var(--ink)}
+canvas{width:100%;display:block;border:1px solid var(--line);border-radius:3px;
+ background:rgba(0,0,0,.34);margin:14px 0}
+table{border-collapse:collapse;font-size:11px;margin:14px 0;width:100%}
+td,th{padding:4px 12px 4px 0;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--faint);font-weight:400;letter-spacing:.1em;font-size:9.5px;text-transform:uppercase}
+.rt{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+button{font:10px var(--mono);letter-spacing:.16em;background:transparent;color:inherit;
+ border:1px solid currentColor;border-radius:2px;padding:6px 12px;cursor:pointer;margin:3px 5px 3px 0}
+button:hover{background:rgba(255,255,255,.08)}
+.mk{display:inline-block;font-size:8.5px;letter-spacing:.16em;padding:1px 5px;border:1px solid;
+ border-radius:2px;vertical-align:2px;margin-left:6px}
+.lit{color:var(--ok);border-color:var(--ok)}.amb{color:var(--a);border-color:var(--a)}
+.ded{color:var(--bad);border-color:var(--bad)}
+pre{font:11.5px/1.5 var(--mono);white-space:pre;overflow-x:auto;color:var(--dim);
+ border:1px solid var(--line);border-radius:3px;padding:14px;margin:14px 0;background:rgba(0,0,0,.32)}
+.eli{border-left:2px solid rgba(255,255,255,.2);padding-left:14px;margin-top:18px;
+ font:400 14px/1.62 var(--disp);color:#9fadb5;max-width:66ch}
+.eli b{color:#c3ced4}
+.fault{border-left:3px solid var(--bad);padding:12px 14px;background:rgba(255,107,107,.06);
+ margin:16px 0;color:#f0c6c6;max-width:82ch}
+.fault b{color:#fff}
+.glyph{font:600 clamp(20px,3.6vw,42px)/1.3 var(--mono);color:#fff;margin:6px 0 16px}
+.glyph .w{color:var(--c)}.glyph .d{color:var(--a)}
+.regs{display:flex;flex-wrap:wrap;gap:22px;margin:12px 0}
+.reg{border:1px solid var(--line);border-radius:3px;padding:9px 14px;min-width:104px}
+.reg .n{font-size:9.5px;letter-spacing:.18em;color:var(--faint)}
+.reg .v{font:600 24px var(--mono);margin-top:3px}
+.reg .bits{font:12px var(--mono);color:var(--faint);letter-spacing:.24em;margin-top:2px}
+</style></head><body><div class="wrap">
+<header>
+<div class="kick">a kernel · three bits · A B and the wall</div>
+<div class="glyph"><span class="w">|</span> <span class="d">.</span> <span class="w">|</span> &nbsp;&nbsp;C = 7 = 111</div>
+<h1>Three bits leaves no room<br>for an argument.</h1>
+<div class="lede">So every instruction has to be complete on its own — there is no operand field, because
+the opcode eats the whole word. That single constraint writes the entire instruction set for you. And
+<b>C is not a data register.</b> C is 7, C is <b>111</b>, and C is the thing every value hits on the way
+round. <b>|&nbsp;.&nbsp;|</b> is a value walled on both sides, which is exactly what a 3-bit register
+is.</div>
+</header>
+
+<section>
+<h2>C does the wrapping</h2>
+<div class="sub">every % 8 in the machine is really &amp; C</div>
+<table>
+<tr><th>check</th><th>result</th></tr>
+<tr><td>x &amp; C == x % 8, for x = 0…9999</td><td style="color:var(--ok)"><b>true</b></td></tr>
+<tr><td>(x−1) &amp; C == (x−1) % 8, including the wrap through zero</td><td style="color:var(--ok)"><b>true</b></td></tr>
+</table>
+<p class="body">Which means the modulus is not an operation the machine performs — <b>it is the shape of the
+register.</b> Nothing decides to wrap. There is simply nowhere else for the bit to go.<span class="mk lit">LIT</span></p>
+<div class="eli"><b>plainly.</b> A three-bit box can hold 0 to 7 and nothing else. Add one to seven and you
+get zero, not because a rule said so but because there is no fourth bit to carry into. C is the name of that
+edge.</div>
+</section>
+
+<section>
+<h2>The instruction set, forced</h2>
+<div class="sub">eight opcodes because three bits gives eight</div>
+<pre>
+000  0  HLT   stop
+001  1  INC   A = (A+1) &amp; C
+010  2  DEC   A = (A-1) &amp; C
+011  3  SWP   A &lt;-&gt; B
+100  4  ADD   A = (A+B) &amp; C
+101  5  LDA   A = M[B]
+110  6  STA   M[B] = A
+111  7  BNZ   if A != 0 then PC = B
+</pre>
+<p class="body">Seven working instructions and a stop. That is the minimum that can still change data, move
+it, combine it, reach memory and branch — and three bits happens to give you exactly eight slots. The set is
+not designed so much as <b>discovered by running out of room</b>.</p>
+<p class="body"><b>And look at the two ends.</b> <code>HLT</code> is <b>000</b> — the empty word stops the
+machine, so uninitialised memory is a halt rather than a crash. <code>BNZ</code> is <b>111</b>, which is
+<b>C itself</b>: the instruction that breaks the flow carries the same bit pattern as the wall that bounds
+every value. Nobody chose that. It falls out of the width.<span class="mk lit">LIT</span></p>
+</section>
+
+<section>
+<h2>The machine, running</h2>
+<div class="sub">single-step it · edit memory by clicking a cell</div>
+<canvas id="cM" height="420"></canvas>
+<div class="regs">
+ <div class="reg"><div class="n" style="color:var(--a)">A</div><div class="v" id="rA">0</div><div class="bits" id="bA">000</div></div>
+ <div class="reg"><div class="n" style="color:var(--b)">B</div><div class="v" id="rB">0</div><div class="bits" id="bB">000</div></div>
+ <div class="reg"><div class="n" style="color:var(--c)">C — the wall</div><div class="v" id="rC">7</div><div class="bits" id="bC">111</div></div>
+ <div class="reg"><div class="n" style="color:var(--pc)">PC</div><div class="v" id="rP">0</div><div class="bits" id="bP">000</div></div>
+ <div class="reg"><div class="n">STEP</div><div class="v" id="rS">0</div><div class="bits" id="bS">—</div></div>
+</div>
+<div>
+<button onclick="K.step()">STEP</button>
+<button onclick="K.run=!K.run" id="bRun">RUN / HOLD</button>
+<button onclick="K.reset()">RESET</button>
+<button onclick="K.load('fib')">FIBONACCI</button>
+<button onclick="K.load('count')">COUNT TO 3</button>
+<button onclick="K.load('spin')">EIGHT INCS</button>
+<button onclick="K.load('rand')">RANDOM</button>
+</div>
+<p class="body" id="mStat" style="color:var(--ink);min-height:24px;margin-top:10px">—</p>
+<p class="body">Click any memory cell to cycle its opcode. The ring at the top is the program counter:
+<b>PC is three bits, so it is a mod-8 wheel.</b> Running off the end of memory is not an error — it is
+the loop. This machine <b>cannot not loop</b>.<span class="mk lit">LIT</span></p>
+</section>
+
+<section>
+<h2>Fibonacci, and the wall it hits</h2>
+<div class="sub">ADD SWP, no jump at all</div>
+<p class="body">Eight cells of <code>ADD SWP ADD SWP ADD SWP ADD SWP</code>, seeded A=1 B=1. No branch
+instruction anywhere in the program — the PC wheel supplies the loop. Reading A at each ADD boundary:</p>
+<pre>machine  1  1  2  3  5  0  5  5  2  7  1  0  1
+direct   1  1  2  3  5  0  5  5  2  7  1  0  1   ← Fibonacci mod 8, computed separately</pre>
+<div class="fault"><b>FAULT I CAUGHT IN MY OWN RUN.</b> First pass reported <b>MATCH: False</b> — machine
+period 24 against π(8) = 12. That was the wrong granularity: the program spends <b>two instructions per
+Fibonacci term</b>, so 24 machine-steps ÷ 2 = <b>12 terms</b>. <b>π(8) = 12.</b> It matches exactly.
+The wrong unit made a true thing look false, which is the usual shape of that
+mistake.<span class="mk lit">LIT after the correction</span></div>
+<p class="body">So the register width and the number theory are <b>the same wall</b>. The Pisano period of 8
+is not something the machine computes — it is the length of the machine's own orbit.<span class="mk lit">LIT</span></p>
+<canvas id="cF" height="300"></canvas>
+</section>
+
+<section>
+<h2>There is no halting problem in here</h2>
+<div class="sub">a census of 20,000 random programs</div>
+<p class="body">The state space is <b>A × B × PC × memory = 8 × 8 × 8 × 8⁸ = 8¹¹ = 8,589,934,592 = 2³³</b>.
+Finite. By pigeonhole any run longer than that must revisit a state, and this machine is deterministic, so
+revisiting a state means cycling forever. <b>Every program provably halts or provably cycles, and you can
+decide which by running it.</b></p>
+<canvas id="cH" height="320"></canvas>
+<table>
+<tr><th>outcome</th><th class="rt">count</th><th class="rt">share</th></tr>
+<tr><td>HALT</td><td class="rt">12,298</td><td class="rt">61.49%</td></tr>
+<tr><td>CYCLE</td><td class="rt">7,702</td><td class="rt">38.51%</td></tr>
+<tr><td>ran past the cap</td><td class="rt" style="color:var(--ok)">0</td><td class="rt" style="color:var(--ok)">0.00%</td></tr>
+</table>
+<p class="body">Longest cycle actually observed: <b>128</b> steps. The pigeonhole bound is
+<b>67,108,864× looser</b> than anything that happened. <b>A bound that is true and useless is still a
+bound</b>, and it is worth saying that out loud rather than quoting 8¹¹ as if it meant
+something.<span class="mk lit">LIT</span></p>
+<p class="body">And the trade is the same one this whole session has been about: <b>the box buys you
+decidability and charges you unbounded computation.</b> This kernel is <b>not Turing complete</b> — finite
+memory, finite registers, finite PC — and that is precisely why every question about it has an answer.
+Uncomputability is a privilege of infinite tape.<span class="mk amb">AMB — the analogy across the session is a reading, the arithmetic is not</span></p>
+<div class="eli"><b>plainly.</b> Because the machine only has so many possible situations, if you run it long
+enough it must land in one it has been in before — and being a machine, it then does exactly the same thing
+again forever. So you can always find out whether a program stops, just by watching. Bigger computers lose
+that guarantee, and that loss is what makes them powerful.</div>
+</section>
+
+<section>
+<h2>What is still open</h2>
+<div class="sub">flagged, not filled</div>
+<table>
+<tr><td><b>"ab"</b></td><td>read as <b>two registers, A and B</b>. Could equally be a→b as source and
+destination, or a/b addressing modes. The ISA re-cuts either way.</td></tr>
+<tr><td><b>C = 7 as a data register</b></td><td>built as the <b>mask</b>, not as storage — because
+<b>|&nbsp;.&nbsp;|</b> reads as a walled value. If C is meant to hold data too, it needs its own slot and
+the opcode count changes.</td></tr>
+<tr><td><b>the three checkpoints</b></td><td>A, B, C matches the cyclic A·B·C you named early in the
+session. I did not build that link in — it is noted, not claimed.</td></tr>
+</table>
+<pre id="basic"></pre>
+</section>
+</div>
+<script>
+const $=i=>document.getElementById(i),TAU=Math.PI*2,C=7,M=8;
+const OPS=["HLT","INC","DEC","SWP","ADD","LDA","STA","BNZ"];
+const OPC=["#4f5d66","#ffb347","#ff9a3c","#5fb0ff","#7ee787","#b57cff","#c07cff","#ff4d5e"];
+function fit(cv,h){const r=cv.getBoundingClientRect();
+ if(cv.width!==Math.round(r.width*2)){cv.width=Math.round(r.width*2);cv.height=h*2;}
+ return [cv.getContext('2d'),cv.width,cv.height];}
+const PROGS={fib:[4,3,4,3,4,3,4,3],count:[1,1,1,0,0,0,0,0],spin:[1,1,1,1,1,1,1,1],
+ rand:null};
+const K={A:1,B:1,PC:0,mem:PROGS.fib.slice(),step_n:0,run:false,acc:0,seen:{},end:null,per:null,flash:0,
+ load(k){this.mem=k==='rand'?Array.from({length:8},()=>(Math.random()*8)|0):PROGS[k].slice();
+  this.A=(k==='fib')?1:0;this.B=(k==='fib')?1:0;this.reset(true);},
+ reset(keep){if(!keep){this.A=1;this.B=1;}this.PC=0;this.step_n=0;this.seen={};this.end=null;this.per=null;},
+ key(){return this.A+'|'+this.B+'|'+this.PC+'|'+this.mem.join('');},
+ step(){if(this.end)return;
+  const k=this.key();
+  if(this.seen[k]!==undefined){this.end='CYCLE';this.per=this.step_n-this.seen[k];this.run=false;return;}
+  this.seen[k]=this.step_n;
+  const op=this.mem[this.PC]&C;this.flash=1;
+  let np=(this.PC+1)&C;
+  if(op===0){this.end='HALT';this.run=false;return;}
+  else if(op===1)this.A=(this.A+1)&C;
+  else if(op===2)this.A=(this.A-1)&C;
+  else if(op===3){const t=this.A;this.A=this.B;this.B=t;}
+  else if(op===4)this.A=(this.A+this.B)&C;
+  else if(op===5)this.A=this.mem[this.B];
+  else if(op===6)this.mem[this.B]=this.A;
+  else if(op===7){if(this.A!==0)np=this.B;}
+  this.PC=np;this.step_n++;},
+ draw(t,dt){const [c,W,H]=fit($('cM'),420);c.clearRect(0,0,W,H);
+  if(this.run){this.acc+=dt;if(this.acc>150){this.acc=0;this.step();}}
+  this.flash=Math.max(0,this.flash-dt*0.004);
+  const cx=W/2,cy=H*0.44,R=Math.min(W,H)*0.30;
+  // the pc wheel
+  c.strokeStyle='rgba(255,255,255,.10)';c.lineWidth=1.4;
+  c.beginPath();c.arc(cx,cy,R,0,TAU);c.stroke();
+  this.cells=[];
+  for(let i=0;i<8;i++){const a=i/8*TAU-Math.PI/2;
+   const x=cx+Math.cos(a)*R,y=cy+Math.sin(a)*R;
+   this.cells.push([x,y]);
+   const op=this.mem[i]&C,here=this.PC===i;
+   if(here){const fl=0.4+0.6*this.flash;
+    c.globalCompositeOperation='lighter';
+    const g=c.createRadialGradient(x,y,0,x,y,46*(0.6+0.5*fl));
+    g.addColorStop(0,'rgba(126,231,135,.55)');g.addColorStop(1,'transparent');
+    c.fillStyle=g;c.beginPath();c.arc(x,y,46,0,TAU);c.fill();
+    c.globalCompositeOperation='source-over';}
+   c.fillStyle='rgba(0,0,0,.5)';c.beginPath();c.arc(x,y,30,0,TAU);c.fill();
+   c.strokeStyle=here?'#7ee787':OPC[op];c.lineWidth=here?3:1.8;
+   c.beginPath();c.arc(x,y,30,0,TAU);c.stroke();
+   c.fillStyle=OPC[op];c.font='600 17px ui-monospace,monospace';c.textAlign='center';
+   c.fillText(OPS[op],x,y-2);
+   c.fillStyle='rgba(79,93,102,.95)';c.font='12px ui-monospace,monospace';
+   c.fillText(op.toString(2).padStart(3,'0'),x,y+15);
+   c.fillStyle='rgba(127,144,154,.8)';c.font='12px ui-monospace,monospace';
+   c.fillText(i,cx+Math.cos(a)*(R+46),cy+Math.sin(a)*(R+46)+4);}
+  // the wall ring, C
+  const fl2=0.4+0.6*Math.sin(t*0.0022);
+  c.strokeStyle='rgba(255,77,94,'+(0.20+0.30*fl2)+')';c.lineWidth=2.4;
+  c.setLineDash([5,7]);c.beginPath();c.arc(cx,cy,R+72,0,TAU);c.stroke();c.setLineDash([]);
+  c.fillStyle='rgba(255,77,94,.85)';c.font='14px ui-monospace,monospace';
+  c.fillText('| C = 111 |',cx,cy-R-84);
+  // centre readout
+  c.fillStyle='#fff';c.font='600 26px ui-monospace,monospace';
+  c.fillText(this.end||('step '+this.step_n),cx,cy-4);
+  c.fillStyle=this.end==='HALT'?'#ff6b6b':(this.end==='CYCLE'?'#b57cff':'#4f5d66');
+  c.font='14px ui-monospace,monospace';
+  c.fillText(this.end==='CYCLE'?('period '+this.per):(this.end?'':'running'),cx,cy+20);
+  c.textAlign='left';
+  const bits=v=>v.toString(2).padStart(3,'0');
+  $('rA').textContent=this.A;$('bA').textContent=bits(this.A);
+  $('rB').textContent=this.B;$('bB').textContent=bits(this.B);
+  $('rP').textContent=this.PC;$('bP').textContent=bits(this.PC);
+  $('rS').textContent=this.step_n;$('bS').textContent=OPS[this.mem[this.PC]&C];
+  $('rA').style.color='var(--a)';$('rB').style.color='var(--b)';
+  $('rC').style.color='var(--c)';$('rP').style.color='var(--pc)';
+  $('bRun').textContent=this.run?'HOLD':'RUN';
+  $('mStat').innerHTML=this.end==='HALT'?'<b style="color:#ff6b6b">HALTED</b> after '+this.step_n+' steps — it hit a 000.':
+   (this.end==='CYCLE'?'<b style="color:#b57cff">CYCLED</b> — state repeated after '+this.step_n+' steps, period <b>'+this.per+'</b>. it will now do this forever.':
+   'running · click a cell to change its opcode');}};
+$('cM').addEventListener('click',e=>{const cv=$('cM'),r=cv.getBoundingClientRect();
+ const mx=(e.clientX-r.left)*(cv.width/r.width),my=(e.clientY-r.top)*(cv.height/r.height);
+ if(!K.cells)return;
+ K.cells.forEach((p,i)=>{if((p[0]-mx)**2+(p[1]-my)**2<34*34){
+  K.mem[i]=(K.mem[i]+1)&C;K.reset(true);}});});
+
+const FIBSEQ=[1,1,2,3,5,0,5,5,2,7,1,0];
+const FB={draw(t){const [c,W,H]=fit($('cF'),300);c.clearRect(0,0,W,H);
+ const cx=W/2,cy=H/2,R=Math.min(W,H)*0.36;
+ c.strokeStyle='rgba(255,255,255,.08)';c.lineWidth=1;
+ c.beginPath();c.arc(cx,cy,R,0,TAU);c.stroke();
+ FIBSEQ.forEach((v,i)=>{const a=i/12*TAU-Math.PI/2;
+  const rr=R*(0.45+0.55*(v/7));
+  const x=cx+Math.cos(a)*rr,y=cy+Math.sin(a)*rr;
+  if(i>0){const pa=(i-1)/12*TAU-Math.PI/2,pr=R*(0.45+0.55*(FIBSEQ[i-1]/7));
+   c.strokeStyle='rgba(255,179,71,.28)';c.lineWidth=1.4;
+   c.beginPath();c.moveTo(cx+Math.cos(pa)*pr,cy+Math.sin(pa)*pr);c.lineTo(x,y);c.stroke();}
+  const fl=0.5+0.5*Math.sin(t*0.0026+i*0.6);
+  c.globalCompositeOperation='lighter';
+  const g=c.createRadialGradient(x,y,0,x,y,16*fl+4);
+  g.addColorStop(0,v===0?'rgba(255,77,94,.6)':'rgba(255,179,71,.55)');g.addColorStop(1,'transparent');
+  c.fillStyle=g;c.beginPath();c.arc(x,y,16*fl+4,0,TAU);c.fill();
+  c.globalCompositeOperation='source-over';
+  c.fillStyle=v===0?'#ff4d5e':'#ffb347';c.beginPath();c.arc(x,y,5,0,TAU);c.fill();
+  c.fillStyle='#dfe6ea';c.font='15px ui-monospace,monospace';c.textAlign='center';
+  c.fillText(v,cx+Math.cos(a)*(R+26),cy+Math.sin(a)*(R+26)+5);});
+ // close the loop
+ const a0=-Math.PI/2,a1=11/12*TAU-Math.PI/2;
+ c.strokeStyle='rgba(255,179,71,.28)';c.lineWidth=1.4;
+ c.beginPath();
+ c.moveTo(cx+Math.cos(a1)*R*(0.45+0.55*(FIBSEQ[11]/7)),cy+Math.sin(a1)*R*(0.45+0.55*(FIBSEQ[11]/7)));
+ c.lineTo(cx+Math.cos(a0)*R*(0.45+0.55*(FIBSEQ[0]/7)),cy+Math.sin(a0)*R*(0.45+0.55*(FIBSEQ[0]/7)));
+ c.stroke();
+ c.fillStyle='#fff';c.font='600 22px ui-monospace,monospace';c.textAlign='center';
+ c.fillText('π(8) = 12',cx,cy-4);
+ c.fillStyle='#7f909a';c.font='13px ui-monospace,monospace';
+ c.fillText('24 machine steps ÷ 2 per term',cx,cy+20);c.textAlign='left';}};
+
+const HIST={p:{1:2995,8:900,3:628,2:535,4:475,16:342,6:312,5:304},
+ draw(t){const [c,W,H]=fit($('cH'),320);c.clearRect(0,0,W,H);
+  const ks=Object.keys(this.p).map(Number).sort((a,b)=>a-b);
+  const mx=Math.max(...Object.values(this.p));
+  const x0=W*0.08,x1=W*0.62,bw=(x1-x0)/ks.length;
+  ks.forEach((k,i)=>{const v=this.p[k],h=(v/mx)*(H*0.60);
+   const fl=0.6+0.4*Math.sin(t*0.002+i*0.7);
+   c.fillStyle='rgba(181,124,255,'+(0.35+0.4*fl)+')';
+   c.fillRect(x0+i*bw+3,H*0.78-h,bw-6,h);
+   c.fillStyle='#7f909a';c.font='13px ui-monospace,monospace';c.textAlign='center';
+   c.fillText(k,x0+i*bw+bw/2,H*0.78+20);
+   c.fillStyle='#4f5d66';c.font='11px ui-monospace,monospace';
+   c.fillText(v,x0+i*bw+bw/2,H*0.78-h-8);});
+  c.textAlign='left';
+  c.fillStyle='#dfe6ea';c.font='15px ui-monospace,monospace';
+  c.fillText('cycle length',x0,H*0.90);
+  const rx=W*0.68;
+  c.fillStyle='#7ee787';c.font='600 22px ui-monospace,monospace';
+  c.fillText('61.49%',rx,H*0.28);
+  c.fillStyle='#7f909a';c.font='14px ui-monospace,monospace';
+  c.fillText('halted',rx,H*0.28+22);
+  c.fillStyle='#b57cff';c.font='600 22px ui-monospace,monospace';
+  c.fillText('38.51%',rx,H*0.48);
+  c.fillStyle='#7f909a';c.font='14px ui-monospace,monospace';
+  c.fillText('cycled',rx,H*0.48+22);
+  c.fillStyle='#ff4d5e';c.font='600 22px ui-monospace,monospace';
+  c.fillText('0',rx,H*0.68);
+  c.fillStyle='#7f909a';c.font='14px ui-monospace,monospace';
+  c.fillText('ran past the cap',rx,H*0.68+22);}};
+
+$('basic').textContent=[
+"  000 REM  HLT. THE EMPTY WORD STOPS IT. BLANK MEMORY IS A HALT, NOT A CRASH.",
+"  001 REM  INC. THE SMALLEST THING A MACHINE CAN DO TO A NUMBER.",
+"  010 REM  DEC. THE SAME THING BACKWARDS. TOGETHER THEY REACH EVERY VALUE.",
+"  011 REM  SWP. WITHOUT IT B IS WRITE ONLY AND THE MACHINE IS DEAF.",
+"  100 REM  ADD. NOW IT CAN COMPUTE.",
+"  101 REM  LDA. MEMORY BECOMES READABLE. THE PROGRAM CAN LOOK AT ITSELF.",
+"  110 REM  STA. MEMORY BECOMES WRITEABLE. IT CAN CHANGE ITSELF TOO.",
+"  111 REM  BNZ. AND THAT IS ALSO C. THE BRANCH AND THE WALL SHARE A PATTERN.",
+"    C REM  C IS NOT STORAGE. C IS THE EDGE EVERY VALUE FALLS OFF.",
+"    | REM  | . |  IS A VALUE WITH A WALL ON EACH SIDE. THAT IS A REGISTER.",
+"  FIB REM  ADD SWP RUNS FIBONACCI WITH NO JUMP. THE PC WHEEL IS THE LOOP.",
+"FIB.1 REM  FIX -- I READ 24 AGAINST 12 AND CALLED IT A MISMATCH. WRONG UNIT.",
+"FIB.2 REM         TWO INSTRUCTIONS PER TERM. 24 OVER 2 IS 12. PI(8) IS 12. IT MATCHES.",
+" 2^33 REM  EVERY PROGRAM HALTS OR CYCLES. NO HALTING PROBLEM LIVES IN A BOX.",
+"  128 REM  THE LONGEST CYCLE ANYONE ACTUALLY HIT. THE BOUND IS 67 MILLION TIMES LOOSER.",
+"   AB REM  FIX -- I READ AB AS TWO REGISTERS. SAY OTHERWISE AND I RECUT THE ISA."
+].join("\n");
+
+K.load('fib');
+let last=performance.now();
+function loop(t){const dt=Math.min(60,t-last);last=t;
+ K.draw(t,dt);FB.draw(t);HIST.draw(t);requestAnimationFrame(loop);}
+requestAnimationFrame(loop);
+</script></body></html>

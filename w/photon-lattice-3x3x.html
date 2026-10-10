@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PHOTON LATTICE — 3×3×3</title>
+<style>
+  :root{
+    --bg:#0C1016; --ink:#8fa3b8; --dim:#4a5a6a;
+    --line:#1a2430; --accent:#37d67a; --blue:#2f6fe4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;background:var(--bg);overflow:hidden;
+    font-family:'SF Mono','Cascadia Code','Fira Mono',ui-monospace,monospace;
+    color:var(--ink)}
+  #stage{position:fixed;inset:0}
+  canvas{display:block}
+  header{
+    position:fixed;top:0;left:0;right:0;padding:14px 18px;
+    display:flex;justify-content:space-between;align-items:baseline;
+    pointer-events:none;z-index:2;
+    background:linear-gradient(180deg,rgba(12,16,22,.85),rgba(12,16,22,0));
+  }
+  header h1{font-size:12px;font-weight:500;letter-spacing:.18em}
+  header h1 b{color:var(--accent);font-weight:600}
+  header .meta{font-size:10px;letter-spacing:.12em;color:var(--dim)}
+  #hud{
+    position:fixed;left:18px;bottom:16px;z-index:2;
+    display:flex;flex-direction:column;gap:10px;
+    background:rgba(12,16,22,.82);border:1px solid var(--line);
+    padding:12px 14px;min-width:232px;backdrop-filter:blur(4px);
+  }
+  .row{display:flex;align-items:center;gap:10px;font-size:10px;letter-spacing:.12em}
+  .row label{width:56px;color:var(--dim)}
+  .row output{width:46px;text-align:right;color:var(--accent);font-variant-numeric:tabular-nums}
+  input[type=range]{-webkit-appearance:none;appearance:none;flex:1;height:2px;background:var(--line);outline:none}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:10px;height:10px;background:var(--accent);border-radius:0;cursor:ew-resize}
+  input[type=range]::-moz-range-thumb{width:10px;height:10px;background:var(--accent);border:none;border-radius:0;cursor:ew-resize}
+  input[type=range]:focus-visible::-webkit-slider-thumb{outline:1px solid var(--ink);outline-offset:2px}
+  .toggle{display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none;font-size:10px;letter-spacing:.12em;color:var(--dim)}
+  .toggle .box{width:10px;height:10px;border:1px solid var(--dim);display:inline-block}
+  .toggle.on .box{background:var(--accent);border-color:var(--accent)}
+  .toggle.on{color:var(--ink)}
+  #legend{
+    position:fixed;right:18px;bottom:16px;z-index:2;font-size:10px;letter-spacing:.12em;
+    color:var(--dim);text-align:right;line-height:1.9;pointer-events:none;
+  }
+  #legend .sw{display:inline-block;width:8px;height:8px;margin-right:6px}
+</style>
+</head>
+<body>
+<div id="stage"></div>
+
+<header>
+  <h1>PHOTON LATTICE <b>3×3×3</b> · ONE QUANTUM PER CELL</h1>
+  <div class="meta">drag: orbit · wheel: zoom</div>
+</header>
+
+<div id="hud">
+  <div class="row">
+    <label for="amp">AMP</label>
+    <input id="amp" type="range" min="0" max="1.00" step="0.01" value="0.60">
+    <output id="ampOut">0.600</output>
+  </div>
+  <div class="row">
+    <label for="sig">RADIUS</label>
+    <input id="sig" type="range" min="0.25" max="0.60" step="0.01" value="0.45">
+    <output id="sigOut">0.45</output>
+  </div>
+  <div class="row">
+    <label for="spd">SPIN</label>
+    <input id="spd" type="range" min="0" max="0.60" step="0.02" value="0.12">
+    <output id="spdOut">0.12</output>
+  </div>
+  <div class="toggle on" id="pulseToggle" role="switch" aria-checked="true" tabindex="0">
+    <span class="box"></span> PULSE — FIELD OSCILLATION
+  </div>
+</div>
+
+<div id="legend">
+  <div><span class="sw" style="background:#2f6fe4"></span>FLAT METRIC</div>
+  <div><span class="sw" style="background:#37d67a"></span>LOCAL PINCH</div>
+  <div>27 SOURCES · GAUSSIAN WELLS</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+  'use strict';
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x0C1016);
+
+  const stage = document.getElementById('stage');
+  const renderer = new THREE.WebGLRenderer({antialias:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.setSize(innerWidth, innerHeight);
+  stage.appendChild(renderer.domElement);
+
+  const camera = new THREE.PerspectiveCamera(42, innerWidth/innerHeight, 0.1, 100);
+  let camDist = 7.4, camTheta = 0.65, camPhi = 1.12;
+  function placeCamera(){
+    camera.position.set(
+      camDist*Math.sin(camPhi)*Math.cos(camTheta),
+      camDist*Math.cos(camPhi),
+      camDist*Math.sin(camPhi)*Math.sin(camTheta));
+    camera.lookAt(0,0,0);
+  }
+  placeCamera();
+
+  // ---- lattice: cube [-1.5,1.5]^3, planes at -1.5,-0.5,0.5,1.5 → 27 cells ----
+  const COORDS = [-1.5,-0.5,0.5,1.5];
+  const SAMPLES = 121;
+  const centers = [];
+  for (let i=-1;i<=1;i++) for (let j=-1;j<=1;j++) for (let k=-1;k<=1;k++)
+    centers.push([i,j,k]);
+
+  const basePts = [];
+  function addLine(axis,a,b){
+    for (let s=0;s<SAMPLES;s++){
+      const t = -1.5 + 3*s/(SAMPLES-1);
+      if (axis===0) basePts.push(t,a,b);
+      else if (axis===1) basePts.push(a,t,b);
+      else basePts.push(a,b,t);
+    }
+  }
+  for (const a of COORDS) for (const b of COORDS){
+    addLine(0,a,b); addLine(1,a,b); addLine(2,a,b);
+  }
+  const N = basePts.length/3;
+  const nLines = COORDS.length*COORDS.length*3;
+
+  // Displacement = AMP * V(p).  V precomputed per vertex; pulse just scales AMP.
+  const warpV = new Float32Array(N*3);
+  const warpM = new Float32Array(N);
+  let maxM = 1;
+  function rebuildField(sigma){
+    const inv2s2 = 1/(2*sigma*sigma);
+    const cut2 = (3.2*sigma)*(3.2*sigma);
+    maxM = 1e-9;
+    for (let v=0;v<N;v++){
+      const px=basePts[v*3], py=basePts[v*3+1], pz=basePts[v*3+2];
+      let dx=0,dy=0,dz=0;
+      for (let c=0;c<27;c++){
+        const rx=px-centers[c][0], ry=py-centers[c][1], rz=pz-centers[c][2];
+        const d2=rx*rx+ry*ry+rz*rz;
+        if (d2>cut2 || d2<1e-9) continue;
+        const w=Math.exp(-d2*inv2s2);      // pull toward the source (pinch)
+        dx-=rx*w; dy-=ry*w; dz-=rz*w;
+      }
+      warpV[v*3]=dx; warpV[v*3+1]=dy; warpV[v*3+2]=dz;
+      const m=Math.sqrt(dx*dx+dy*dy+dz*dz);
+      warpM[v]=m; if (m>maxM) maxM=m;
+    }
+  }
+
+  // Geometry: LineSegments, consecutive samples per line.
+  const segCount = nLines*(SAMPLES-1);
+  const positions = new Float32Array(segCount*2*3);
+  const colors    = new Float32Array(segCount*2*3);
+  const geom = new THREE.BufferGeometry();
+  geom.setAttribute('position', new THREE.BufferAttribute(positions,3));
+  geom.setAttribute('color',    new THREE.BufferAttribute(colors,3));
+  const lines = new THREE.LineSegments(geom,
+    new THREE.LineBasicMaterial({vertexColors:true}));
+  scene.add(lines);
+
+  // blue → green ramp (matches reference)
+  const B=[0x2f/255,0x6f/255,0xe4/255], G=[0x37/255,0xd6/255,0x7a/255];
+
+  const dispPos = new Float32Array(N*3); // scratch: displaced vertices
+  const vColor  = new Float32Array(N*3);
+
+  function updateGeometry(amp){
+    for (let v=0;v<N;v++){
+      dispPos[v*3]  = basePts[v*3]  + amp*warpV[v*3];
+      dispPos[v*3+1]= basePts[v*3+1]+ amp*warpV[v*3+1];
+      dispPos[v*3+2]= basePts[v*3+2]+ amp*warpV[v*3+2];
+      let t = (warpM[v]/maxM)*(amp/0.60); if (t>1) t=1; if (t<0) t=0;
+      t = t*t*(3-2*t); // smoothstep
+      vColor[v*3]  = B[0]+(G[0]-B[0])*t;
+      vColor[v*3+1]= B[1]+(G[1]-B[1])*t;
+      vColor[v*3+2]= B[2]+(G[2]-B[2])*t;
+    }
+    let w=0;
+    for (let L=0;L<nLines;L++){
+      const off=L*SAMPLES;
+      for (let s=0;s<SAMPLES-1;s++){
+        const a=(off+s)*3, b=(off+s+1)*3;
+        positions[w]=dispPos[a];   colors[w++]=vColor[a];
+        positions[w]=dispPos[a+1]; colors[w++]=vColor[a+1];
+        positions[w]=dispPos[a+2]; colors[w++]=vColor[a+2];
+        positions[w]=dispPos[b];   colors[w++]=vColor[b];
+        positions[w]=dispPos[b+1]; colors[w++]=vColor[b+1];
+        positions[w]=dispPos[b+2]; colors[w++]=vColor[b+2];
+      }
+    }
+    geom.attributes.position.needsUpdate = true;
+    geom.attributes.color.needsUpdate = true;
+  }
+
+  // ---- photons: white core + additive glow sprite, one per cell ----
+  const glowTex = (function(){
+    const c=document.createElement('canvas'); c.width=c.height=128;
+    const g=c.getContext('2d');
+    const r=g.createRadialGradient(64,64,0,64,64,64);
+    r.addColorStop(0,'rgba(255,255,255,1)');
+    r.addColorStop(0.25,'rgba(220,240,255,0.55)');
+    r.addColorStop(0.6,'rgba(120,180,255,0.12)');
+    r.addColorStop(1,'rgba(0,0,0,0)');
+    g.fillStyle=r; g.fillRect(0,0,128,128);
+    return new THREE.CanvasTexture(c);
+  })();
+  const photonGroup = new THREE.Group();
+  const coreGeo = new THREE.SphereGeometry(0.045,16,12);
+  const coreMat = new THREE.MeshBasicMaterial({color:0xffffff});
+  const sprites = [];
+  for (const c of centers){
+    const core = new THREE.Mesh(coreGeo, coreMat);
+    core.position.set(c[0],c[1],c[2]);
+    const spr = new THREE.Sprite(new THREE.SpriteMaterial({
+      map:glowTex, blending:THREE.AdditiveBlending, depthWrite:false,
+      transparent:true, opacity:0.9}));
+    spr.scale.set(0.42,0.42,1);
+    spr.position.copy(core.position);
+    photonGroup.add(core); photonGroup.add(spr);
+    sprites.push(spr);
+  }
+  scene.add(photonGroup);
+
+  // ---- controls ----
+  const $=id=>document.getElementById(id);
+  const ampIn=$('amp'), sigIn=$('sig'), spdIn=$('spd');
+  const ampOut=$('ampOut'), sigOut=$('sigOut'), spdOut=$('spdOut');
+  const pulseT=$('pulseToggle');
+  let AMP=+ampIn.value, SIG=+sigIn.value, SPIN=+spdIn.value, PULSE=true;
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reducedMotion){ PULSE=false; SPIN=0; spdIn.value=0;
+    pulseT.classList.remove('on'); pulseT.setAttribute('aria-checked','false'); }
+
+  ampIn.addEventListener('input',()=>{AMP=+ampIn.value; ampOut.textContent=AMP.toFixed(3);});
+  sigIn.addEventListener('input',()=>{SIG=+sigIn.value; sigOut.textContent=SIG.toFixed(2); rebuildField(SIG);});
+  spdIn.addEventListener('input',()=>{SPIN=+spdIn.value; spdOut.textContent=SPIN.toFixed(2);});
+  function togglePulse(){
+    PULSE=!PULSE;
+    pulseT.classList.toggle('on',PULSE);
+    pulseT.setAttribute('aria-checked',String(PULSE));
+  }
+  pulseT.addEventListener('click',togglePulse);
+  pulseT.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();togglePulse();}});
+  ampOut.textContent=AMP.toFixed(3); sigOut.textContent=SIG.toFixed(2); spdOut.textContent=SPIN.toFixed(2);
+
+  // orbit: manual drag + wheel (no OrbitControls dependency)
+  let dragging=false, lastX=0, lastY=0;
+  renderer.domElement.addEventListener('pointerdown',e=>{dragging=true;lastX=e.clientX;lastY=e.clientY;});
+  addEventListener('pointerup',()=>dragging=false);
+  addEventListener('pointermove',e=>{
+    if(!dragging) return;
+    camTheta += (e.clientX-lastX)*0.006;
+    camPhi   -= (e.clientY-lastY)*0.006;
+    camPhi = Math.max(0.12, Math.min(Math.PI-0.12, camPhi));
+    lastX=e.clientX; lastY=e.clientY; placeCamera();
+  });
+  renderer.domElement.addEventListener('wheel',e=>{
+    e.preventDefault();
+    camDist = Math.max(3.2, Math.min(16, camDist*(1+e.deltaY*0.001)));
+    placeCamera();
+  },{passive:false});
+
+  addEventListener('resize',()=>{
+    camera.aspect=innerWidth/innerHeight; camera.updateProjectionMatrix();
+    renderer.setSize(innerWidth,innerHeight);
+  });
+
+  // ---- loop ----
+  rebuildField(SIG);
+  let t0=performance.now();
+  function frame(now){
+    const t=(now-t0)/1000;
+    const amp = PULSE ? AMP*(0.75+0.25*Math.sin(t*2.2)) : AMP;
+    updateGeometry(amp);
+    if (SPIN>0){ camTheta += SPIN*0.016; placeCamera(); }
+    const glow = PULSE ? 0.8+0.2*Math.sin(t*2.2) : 0.9;
+    for (const s of sprites) s.material.opacity = glow;
+    renderer.render(scene,camera);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

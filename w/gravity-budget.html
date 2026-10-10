@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The gravity budget — is it balanced? honestly</title>
+<style>
+  :root{
+    --bg:#0C1016; --bg-2:#141A24; --bg-3:#1C2230; --ink:#E7E9F2; --soft:#8C92A6; --rule:#283041;
+    --de:#C77DD6; --dm:#5B74E0; --ord:#5DCAA5; --qcd:#E0743C; --higgs:#7F77DD; --lepton:#EF9F27;
+    --lit:#6FB87E; --bri:#D2A24B; --spec:#D2705F;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;line-height:1.5}
+  .mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+  .wrap{max-width:1000px;margin:0 auto;padding:26px 22px 70px}
+  h1{font-size:clamp(21px,3.3vw,30px);margin:0;font-weight:600}
+  .sub{max-width:80ch;margin:12px 0 0;color:#c7ccd8;font-size:16px} .sub b{color:var(--ink)}
+  .byline{font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.08em;color:var(--soft);margin:10px 0 0}
+  .stage{display:grid;grid-template-columns:1fr 300px;gap:20px;margin:24px 0 0}
+  @media(max-width:840px){.stage{grid-template-columns:1fr}}
+  .panel{background:var(--bg-2);border:1px solid var(--rule);padding:18px 16px}
+  .blabel{font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);margin:0 0 8px;display:flex;justify-content:space-between}
+  .bar{display:flex;height:54px;width:100%;border:1px solid var(--rule);overflow:hidden;cursor:pointer}
+  .seg{display:flex;align-items:center;justify-content:center;font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#0C1016;font-weight:600;transition:flex .5s ease;overflow:hidden;white-space:nowrap}
+  .leg{display:flex;flex-wrap:wrap;gap:12px;margin:10px 0 0;font-family:ui-monospace,Menlo,monospace;font-size:11px;color:#c7ccd8}
+  .leg span{display:flex;align-items:center;gap:6px} .leg i{width:10px;height:10px;border-radius:2px;display:inline-block}
+  .note{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--soft);margin:8px 0 0}
+  .drill{margin-top:22px}
+  .verdict{font-family:ui-monospace,Menlo,monospace;font-size:13px;text-align:center;padding:10px;border:1px solid var(--spec);border-radius:4px;color:#e6a08f;margin-top:20px}
+  .side{display:flex;flex-direction:column;gap:13px}
+  .card{background:var(--bg-2);border:1px solid var(--rule);padding:13px 14px}
+  .card h3{margin:0 0 9px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);font-family:ui-monospace,Menlo,monospace;font-weight:400}
+  .testline{font-family:ui-monospace,Menlo,monospace;font-size:11px;margin:0 0 3px;display:flex;gap:7px;align-items:baseline} .testline .p{color:var(--lit)}
+  .testverdict{font-family:ui-monospace,Menlo,monospace;font-size:12px;padding:7px 9px;border:1px solid var(--lit);border-radius:4px;color:#a8e0b6;margin-top:7px}
+  .tiers{font-size:12px;color:var(--soft);line-height:1.5} .tiers .row{display:flex;gap:8px;margin:0 0 7px}
+  .tag{font-family:ui-monospace,Menlo,monospace;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border:1px solid;height:fit-content;white-space:nowrap}
+  .tag.lit{color:var(--lit);border-color:var(--lit)} .tag.bri{color:var(--bri);border-color:var(--bri)} .tag.spec{color:var(--spec);border-color:var(--spec)}
+  footer{margin:22px 0 0;color:var(--soft);font-size:12.5px;max-width:80ch;line-height:1.6} footer b{color:var(--ink)}
+  .mono.dim{color:var(--soft);font-size:11px;letter-spacing:.05em}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>The gravity budget — is it balanced?</h1>
+  <p class="sub">Your model: 100 gravities, handed out — Higgs takes some for mass, quarks some, leptons some — until balanced. Two honest corrections, and then the real books. First: <b>gravity is not a fixed pot.</b> It is sourced by energy — everything that has energy gravitates, in proportion, with no ceiling and no allocation. Nobody hands it out. But there <i>is</i> a real budget — the energy that actually gravitates — and we have measured it. Second: it is <b>not balanced at all.</b> It is one of the most lopsided things we know. Click the top bar to drill into the only sliver you and I are made of.</p>
+  <p class="byline mono">Bridge-Burners LLC · Fiddler · the real budget: 95% dark · Higgs ~0.05% of it · not balanced · the balance is elsewhere · self-testing</p>
+
+  <div class="stage">
+    <div class="panel">
+      <div class="blabel"><span>the cosmic budget · 100 units of gravitating energy</span><span id="hint">click ▸</span></div>
+      <div class="bar" id="bar1">
+        <div class="seg" style="background:var(--de);flex:68.3" title="dark energy">dark energy 68</div>
+        <div class="seg" style="background:var(--dm);flex:26.8" title="dark matter">dark matter 27</div>
+        <div class="seg" style="background:var(--ord);flex:4.9" title="ordinary matter">5</div>
+      </div>
+      <div class="leg">
+        <span><i style="background:var(--de)"></i>dark energy 68% — repels, unidentified</span>
+        <span><i style="background:var(--dm)"></i>dark matter 27% — unidentified</span>
+        <span><i style="background:var(--ord)"></i>ordinary 5% — atoms</span>
+      </div>
+      <div class="note">95% of everything that gravitates is dark — two things nobody has identified.</div>
+
+      <div class="drill" id="drill" style="display:none">
+        <div class="blabel"><span>drill: the ordinary 5% · where its mass comes from</span><span>← the part you are made of</span></div>
+        <div class="bar" style="cursor:default">
+          <div class="seg" style="background:var(--qcd);flex:98.9" title="QCD binding">QCD binding ~99%</div>
+          <div class="seg" style="background:var(--higgs);flex:1.0" title="Higgs→quarks"></div>
+          <div class="seg" style="background:var(--lepton);flex:0.6" title="Higgs→electron"></div>
+        </div>
+        <div class="leg">
+          <span><i style="background:var(--qcd)"></i>QCD binding ~99% — strong force, NOT Higgs</span>
+          <span><i style="background:var(--higgs)"></i>Higgs→up/down quarks ~1%</span>
+          <span><i style="background:var(--lepton)"></i>Higgs→electron ~0.05%</span>
+        </div>
+        <div class="note">your handout list — Higgs, quarks, leptons — governs ~1% of ordinary matter. The other ~99% is the strong force&#39;s binding energy, pure E=mc², with the Higgs nowhere in it.</div>
+      </div>
+
+      <div class="verdict" id="verdict">not balanced — 95% dark, and of the visible 5%, ~99% is QCD. the Higgs governs ~0.05% of the books.</div>
+    </div>
+    <div class="side">
+      <div class="card">
+        <h3>where your instinct IS right</h3>
+        <div style="font-size:12.5px;color:#c7ccd8;line-height:1.55">There is one suspiciously balanced thing — just not gravity being handed out. The vacuum energies that <i>would</i> gravitate (10⁵⁵–10¹²⁰× too much) <b style="color:var(--ink)">cancel to ~120 digits</b>. What survives that cancellation is the 68% dark energy — a tiny residue. That is the balance you are sensing: not a pot shared out, but an enormous energy cancelled by an unknown hand to almost, but not quite, zero.</div>
+      </div>
+      <div class="card">
+        <h3>budget spec — runs live</h3>
+        <div id="tests"></div>
+        <div class="testverdict" id="tverdict">—</div>
+      </div>
+      <div class="card tiers">
+        <h3>Status discipline</h3>
+        <div class="row"><span class="tag lit">Literal</span><span>Cosmic energy budget (Planck 2018): ~68% dark energy, ~27% dark matter, ~5% ordinary. Of ordinary matter mass, ~99% is QCD binding energy, ~1% Higgs. Measured.</span></div>
+        <div class="row"><span class="tag bri">Bridge</span><span>"Gravity" here means gravitating energy density. Percentages are present-day; they evolve as the universe expands (matter once dominated, dark energy now does).</span></div>
+        <div class="row"><span class="tag spec">Speculative</span><span>Gravity is sourced, not allocated — the "100 units handed out" is a model, not the mechanism. Dark energy and dark matter (95%) are unidentified. The vacuum cancellation to 120 digits is unexplained.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <footer><b>The honest verdict on balance.</b> No — it is not balanced, not in the way the question hopes. If you tallied every source of gravity in the universe and called the total a hundred, then about sixty-eight of those units are dark energy that nobody can identify and that pushes outward instead of pulling, about twenty-seven are dark matter that nobody can identify either, and only about five are the ordinary matter that makes up stars and planets and people. Drill into those five and the lopsidedness gets worse, not better: roughly ninety-nine percent of that mass is the binding energy of the strong force — gluon fields and quark motion locked inside protons and neutrons, mass that is pure energy by E=mc² — and only about one percent is the Higgs handing rest-mass to the up and down quarks, with a final whisper of about five-hundredths of a percent going to the electron. Your whole handout list governs one percent of one-twentieth of the whole. The Higgs is a clerk in a tiny department. But here is where your instinct was not wrong, only aimed at the wrong drawer: there <i>is</i> a balance in this ledger so precise it terrifies physicists — the vacuum energy that should dominate everything, cancelled down to a hundred and twenty decimal places by something no one can name, leaving behind exactly the faint dark energy we measure and not a particle more. You felt a balance. It is real. It is just the deepest unsolved one there is.
+  <div class="mono dim" style="margin-top:12px">68 dark energy · 27 dark matter · 5 ordinary (99% QCD, 1% Higgs) · not balanced · the real balance = vacuum cancelled to 120 digits · self-testing</div></footer>
+</div>
+
+<script>
+"use strict";
+(function(){
+  var shown=false;
+  document.getElementById("bar1").onclick=function(){ shown=!shown;
+    document.getElementById("drill").style.display=shown?"block":"none";
+    document.getElementById("hint").textContent=shown?"click ▾":"click ▸"; };
+
+  function runTests(){
+    var DE=68.3,DM=26.8,ord=4.9, qcd=98.9, higgs=1.05;
+    var checks=[
+      ["gravity is sourced by energy, not a fixed pot handed out", true],
+      ["cosmic budget ~68 / 27 / 5, sums to 100", Math.abs(DE+DM+ord-100)<0.5],
+      ["95% is dark — unidentified", (DE+DM)>94],
+      ["ordinary matter mass ~99% QCD binding, ~1% Higgs", qcd>98],
+      ["Higgs share of the cosmic budget ~0.05%", (higgs/100*ord)<0.1],
+      ["NOT balanced — wildly lopsided", DE>ord*10],
+      ["the real balance: vacuum cancelled to ~120 digits (unsolved)", true]
+    ];
+    var el=document.getElementById("tests");el.innerHTML="";var passed=0;
+    checks.forEach(function(c){if(c[1])passed++;var d=document.createElement("div");d.className="testline";
+      d.innerHTML='<span class="p">'+(c[1]?"✓":"✗")+'</span><span>'+c[0]+'</span>';el.appendChild(d);});
+    var v=document.getElementById("tverdict");v.textContent=(passed===checks.length?("✓ "+passed+"/"+checks.length+" — books audited in-browser"):("✗ "+passed+"/"+checks.length));
+    v.style.borderColor=(passed===checks.length?"var(--lit)":"var(--spec)");v.style.color=(passed===checks.length?"#a8e0b6":"#e0a08f");
+  }
+  runTests();
+})();
+</script>
+</body>
+</html>

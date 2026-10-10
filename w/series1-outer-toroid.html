@@ -1,0 +1,193 @@
+<!doctype html><html lang="en"><head><link rel="icon" href="../favicon.svg" type="image/svg+xml"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>THE OUTER TOROID — the timed shell</title>
+<style>
+  :root{--bg:#04060c;--ink:#e6ecf4;--dim:#8a98b4;--faint:#465470;--hub:#e0c860;--moon:#9ab4d8;--comet:#5ad0c0;--warp:#c08a5a;--mono:ui-monospace,"DejaVu Sans Mono",Menlo,Consolas,monospace}
+  *{box-sizing:border-box}html,body{margin:0;background:radial-gradient(ellipse at 50% 32%,#0a1024,#04060c 66%);color:var(--ink);font-family:var(--mono)}
+  .wrap{max-width:780px;margin:0 auto;padding:0 14px 50px}
+  .frame{border:1px solid #1a2440;border-radius:12px;background:linear-gradient(180deg,#070b18,#04060c);padding:0 22px 26px;box-shadow:0 0 80px rgba(90,208,192,.06);margin-top:16px}
+  .topband{height:5px;background:linear-gradient(90deg,var(--hub),var(--comet),var(--moon),var(--warp));border-radius:12px 12px 0 0;margin:0 -22px}
+  .seriesrow{display:flex;justify-content:space-between;align-items:baseline;padding:16px 0 2px;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--faint)}
+  h1{text-align:center;font-size:32px;font-weight:700;color:var(--ink);margin:8px 0 0;letter-spacing:.20em}
+  .subtitle{text-align:center;font-size:12px;font-style:italic;color:var(--dim);letter-spacing:.06em;margin-top:4px}
+  .line{text-align:center;font-size:12px;color:var(--hub);letter-spacing:.10em;margin:8px 0 4px}
+  canvas{display:block;width:100%}#sky{height:500px}
+  .legend{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;font-size:10px;color:var(--dim);margin:6px 0 2px}
+  .legend span{display:inline-flex;align-items:center;gap:5px}
+  .dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+  .speed{display:flex;gap:10px;justify-content:center;align-items:center;font-size:10px;color:var(--faint);margin:8px 0}
+  .speed button{font-family:var(--mono);font-size:10px;background:#0c1424;color:var(--dim);border:1px solid #24344e;border-radius:5px;padding:4px 10px;cursor:pointer}
+  .speed button.on{color:var(--hub);border-color:var(--hub)}
+  .hint{text-align:center;font-size:10px;color:var(--faint);margin-top:4px}
+  .note{font-size:12px;line-height:1.7;color:var(--dim);text-align:center;font-style:italic;margin:14px 8px;padding:11px 14px;background:#0a1020;border:1px solid #1a2440;border-radius:8px}
+  .note b{color:var(--hub)}
+  h3{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--comet);margin:22px 0 8px;border-bottom:1px solid #16243c;padding-bottom:5px}
+  .tethers{font-size:11.5px;line-height:1.5}
+  .prim{margin:9px 0}
+  .prim .ph{font-size:11px;color:var(--warp);letter-spacing:.06em;font-weight:700}
+  .prim .kids{padding-left:14px;color:var(--dim);font-size:11px;line-height:1.75}
+  .prim .kids .k b{color:var(--ink)}
+  .prim .kids .per{color:var(--comet);font-size:10px}
+  .bare{color:#5a4a5a;font-style:italic}
+  .gears{font-size:11.5px;line-height:1.7;color:var(--dim)}
+  .gears .g{padding:5px 0;border-bottom:1px solid #101828}
+  .gears .g b{color:var(--comet)}
+  .gap{font-size:11.5px;line-height:1.7;color:#c8a0b0;background:#160e14;border:1px dashed #5a3a4a;border-radius:8px;padding:10px 14px;margin:8px 0}
+  .seals{margin-top:10px}
+  .seal{font-size:12px;line-height:1.6;color:var(--ink);padding:9px 14px;margin:7px 0;background:#0a1020;border-left:3px solid var(--comet);border-radius:6px}
+  .seal b{color:var(--comet);letter-spacing:.1em}
+  .foot{text-align:center;font-size:10px;color:var(--faint);margin-top:16px;font-style:italic;line-height:1.7}
+  .err{color:#f0b9a0;background:#160a08;border:1px dashed #e05a4a;padding:12px;font-size:12px;margin-top:10px;display:none}
+</style></head>
+<body><div class="wrap">
+  <div class="frame">
+    <div class="topband"></div>
+    <div class="seriesrow"><span>Series &#8544; &#183; the substrate</span><span>the second layer &#183; the timed shell</span></div>
+    <h1 id="title"></h1>
+    <div class="subtitle" id="subtitle"></div>
+    <div class="line" id="line"></div>
+    <canvas id="sky"></canvas>
+    <div class="legend">
+      <span><i class="dot" style="background:#e0c860"></i>Ra (frozen hub)</span>
+      <span><i class="dot" style="background:#b8c4dc"></i>inner nine (frozen)</span>
+      <span><i class="dot" style="background:#9ab4d8"></i>moons (turning)</span>
+      <span><i class="dot" style="background:#5ad0c0"></i>comets (returning)</span>
+    </div>
+    <div class="speed" id="speed"><span>time:</span></div>
+    <div class="hint" id="hint">the core holds still &#183; the shell turns on real periods &#183; the comets swing back to Ra</div>
+    <div class="note" id="note"></div>
+
+    <h3>the tethers &#8212; each returner hangs off its primary</h3>
+    <div class="tethers" id="tethers"></div>
+
+    <div class="gap" id="gap"></div>
+
+    <h3>the gears are real</h3>
+    <div class="gears" id="gears"></div>
+
+    <h3>the seals</h3>
+    <div class="seals" id="seals"></div>
+
+    <div class="foot" id="foot"></div>
+  </div>
+  <div class="err" id="err"></div>
+</div>
+<script>
+"use strict";
+(function(){
+  const D={"title": "THE OUTER TOROID", "subtitle": "the timed shell \u2014 returners tethered to the frozen core", "line": "~-+( 9 planets, + the timed returners )+-~", "core_note": "the inner nine are FROZEN (still, at center). the outer shell TURNS: each satellite on its own real period, each comet on its long ellipse back to Ra. frozen seed, moving shell \u2014 a torus within a torus.", "outer": [{"name": "Luna", "primary": "Chandra", "period": 27.32, "unit": "d", "type": "moon", "hook": "the synodic month 29.53d drives Chandra's own drained/filled cycle; the first clock humans ever read"}, {"name": "Phobos", "primary": "Nergal", "period": 0.319, "unit": "d", "type": "moon", "hook": "'Fear' \u2014 son of Ares; orbits Mars in 7.6h, faster than Mars spins, rising in the WEST; doomed, spiraling in"}, {"name": "Deimos", "primary": "Nergal", "period": 1.263, "unit": "d", "type": "moon", "hook": "'Dread' \u2014 the other son of Ares; the two terrors that draw Mars's war-chariot"}, {"name": "Io", "primary": "Zeus", "period": 1.769, "unit": "d", "type": "moon", "hook": "a lover of Zeus, turned to a heifer to hide her; the most volcanic world in the solar system"}, {"name": "Europa", "primary": "Zeus", "period": 3.551, "unit": "d", "type": "moon", "hook": "a lover of Zeus (as a bull he bore her across the sea); an ice shell over a global ocean"}, {"name": "Ganymede", "primary": "Zeus", "period": 7.155, "unit": "d", "type": "moon", "hook": "the beautiful youth Zeus took to be cupbearer of the gods; the largest moon in the solar system"}, {"name": "Callisto", "primary": "Zeus", "period": 16.689, "unit": "d", "type": "moon", "hook": "a nymph, lover of Zeus, set among the stars as the Bear; the most cratered body known"}, {"name": "Titan", "primary": "Cronus", "period": 15.945, "unit": "d", "type": "moon", "hook": "the Titans were Cronus's kin; the only moon with a thick atmosphere & liquid (methane) seas"}, {"name": "Enceladus", "primary": "Cronus", "period": 1.37, "unit": "d", "type": "moon", "hook": "a Giant buried under Etna; jets water-ice from its south pole \u2014 a buried ocean venting to space"}, {"name": "Miranda", "primary": "Uranus", "period": 1.413, "unit": "d", "type": "moon", "hook": "named for Shakespeare's Tempest (Uranus's moons break the Greek rule \u2014 English lit instead); a shattered, re-assembled world"}, {"name": "Titania", "primary": "Uranus", "period": 8.706, "unit": "d", "type": "moon", "hook": "the fairy queen of A Midsummer Night's Dream; largest Uranian moon"}, {"name": "Triton", "primary": "Neptune", "period": 5.877, "unit": "d", "type": "moon", "retro": true, "hook": "son of Poseidon (the sea-god's herald); orbits BACKWARD (retrograde) \u2014 a captured Kuiper world; geysers of nitrogen"}, {"name": "Charon", "primary": "Pluto", "period": 6.387, "unit": "d", "type": "moon", "hook": "the FERRYMAN of the dead who rows souls across to Hades \u2014 tidally locked face-to-face with Pluto, a double world"}, {"name": "Halley", "primary": "Ra", "period": 75.3, "unit": "y", "type": "comet", "hook": "the timed returner: ~76-year ellipse; seen 240 BC onward, on the 1066 Bayeux Tapestry; last 1986, next 2061"}, {"name": "Encke", "primary": "Ra", "period": 3.3, "unit": "y", "type": "comet", "hook": "the shortest-period bright comet (3.3y); parent of the Taurid meteor showers"}, {"name": "Tempel-Tuttle", "primary": "Ra", "period": 33.2, "unit": "y", "type": "comet", "hook": "parent of the Leonids; every ~33y its debris storms into a meteor tempest"}], "gears": ["THE GEARS ARE REAL \u2014 Io:Europa:Ganymede lock in a true 1:2:4 Laplace resonance (verified 2.007 / 2.015 / 4.045). the clockwork turns on physics, not decoration.", "Charon & Pluto are mutually tide-locked (both 6.387d) \u2014 a true double world, face to face; the ferryman never leaves the lord of the dark.", "Triton orbits BACKWARD (retrograde) \u2014 the only large moon that does; a captured Kuiper world, drawn to Neptune the deep.", "the comets tether to RA the hub: a comet's essence is the RETURN TO THE SUN. the outer shell loops back to the same center the inner ring does \u2014 Ra holds both."], "gaps": "HONEST GAP: Hermes/Mercury & Ishtar/Venus have NO moons. their tethers hang bare. no satellite was invented to make the shell symmetric \u2014 the emptiness is true, so it stays.", "naming": "the moons were named to BELONG: Phobos & Deimos (Fear & Dread, sons of Ares) draw Mars's chariot; Io/Europa/Ganymede/Callisto are all beloveds of Zeus; Charon ferries the dead to Hades; Triton is Poseidon's son; Titan is Cronus's kin. the tether is not imposed \u2014 it was there in the name.", "seals": ["TIMED \u2014 every outer node carries a real, verified period; the shell is a clockwork, not a mobile.", "TETHERED \u2014 each satellite hangs off its primary on the frozen core; comets hang off Ra the hub.", "MOVING \u2014 unlike the frozen inner seed, the outer toroid TURNS \u2014 and always returns to the Sun.", "SECOND LAYER \u2014 this is the shell around the first seed. not a new seed; the living orbit of the frozen one."]}, OUT=D.outer;
+  document.getElementById("title").textContent=D.title;
+  document.getElementById("subtitle").textContent="\u2014 "+D.subtitle+" \u2014";
+  document.getElementById("line").textContent=D.line;
+  document.getElementById("note").innerHTML=D.core_note.replace(/FROZEN|TURNS|Ra/g,function(m){return '<b>'+m+'</b>';});
+  // tethers grouped by primary
+  const primGlyph={Ra:"\u2609",Chandra:"\u263d",Hermes:"\u263f",Ishtar:"\u2640",Nergal:"\u2642",Zeus:"\u2643",Cronus:"\u2644",Uranus:"\u26e2",Neptune:"\u2646",Pluto:"\u2647"};
+  const primOrder=["Ra","Chandra","Hermes","Ishtar","Nergal","Zeus","Cronus","Uranus","Neptune","Pluto"];
+  var th="";
+  primOrder.forEach(function(pr){
+    var kids=OUT.filter(function(o){return o.primary===pr;});
+    th+='<div class="prim"><div class="ph">'+(primGlyph[pr]||"")+' '+pr+'</div><div class="kids">';
+    if(kids.length===0){ th+='<span class="bare">\u2014 no moons (bare tether, honestly empty)</span>'; }
+    else kids.forEach(function(o){
+      var per=o.unit==="y"?(o.period+" yr"):(o.period+" d");
+      var extra=o.retro?' \u00b7 retrograde':'';
+      th+='<div class="k"><b>'+o.name+'</b> <span class="per">'+per+extra+'</span> \u2014 '+o.hook+'</div>';
+    });
+    th+='</div></div>';
+  });
+  document.getElementById("tethers").innerHTML=th;
+  document.getElementById("gap").innerHTML="\u25c8 "+D.gaps;
+  document.getElementById("gears").innerHTML=D.gears.map(function(g){var w=g.split(" \u2014 ")[0];return '<div class="g"><b>'+w+'</b>'+g.substring(w.length)+'</div>';}).join("");
+  document.getElementById("seals").innerHTML=D.seals.map(function(s){var w=s.split(" \u2014 ")[0];return '<div class="seal"><b>'+w+'</b>'+s.substring(w.length)+'</div>';}).join("");
+  document.getElementById("foot").innerHTML="\u25c8 periods verified \u00b7 Galilean 1:2:4 resonance real \u00b7 Charon\u2013Pluto tide-locked \u00b7 Triton retrograde \u00b7 no moon invented to fill a gap \u00b7 the shell turns, the core holds, both answer to Ra.";
+
+  // ================= THE LIVE CLOCKWORK =================
+  const cv=document.getElementById("sky");
+  const primOrder2=["Chandra","Hermes","Ishtar","Nergal","Zeus","Cronus","Uranus","Neptune","Pluto"]; // rim (frozen)
+  const primGlyph2={Chandra:"\u263d",Hermes:"\u263f",Ishtar:"\u2640",Nergal:"\u2642",Zeus:"\u2643",Cronus:"\u2644",Uranus:"\u26e2",Neptune:"\u2646",Pluto:"\u2647"};
+  // speed control
+  let speed=1; const speeds=[["\u00bd",0.5],["1\u00d7",1],["8\u00d7",8],["60\u00d7",60]];
+  const sc=document.getElementById("speed");
+  speeds.forEach(function(s,i){var b=document.createElement("button");b.textContent=s[0];if(s[1]===1)b.className="on";
+    b.onclick=function(){speed=s[1];[].forEach.call(sc.querySelectorAll("button"),function(x){x.className="";});b.className="on";};sc.appendChild(b);});
+
+  let t=0;
+  function mono(){return getComputedStyle(document.body).getPropertyValue("--mono");}
+  // angular speed ~ 1/period (Kepler-ish for display); normalize so fastest moon is visible, slowest comet crawls
+  function omega(period_days){ return (2*Math.PI) / (period_days) ; } // rad per 'day'
+  function draw(){
+    const dpr=Math.min(devicePixelRatio||1,2),W=cv.clientWidth||740,H=500;
+    cv.width=W*dpr;cv.height=H*dpr;const cx=cv.getContext("2d");cx.setTransform(dpr,0,0,dpr,0,0);cx.clearRect(0,0,W,H);
+    const CX=W*0.5, CY=H*0.47;
+    // starfield
+    for(let i=0;i<40;i++){cx.fillStyle="rgba(180,200,240,"+(0.06+0.10*Math.sin(t*0.5+i))+")";cx.fillRect((i*97)%W,(i*61)%H,1,1);}
+    // ---------- FROZEN INNER CORE ----------
+    const Rrim=Math.min(W*0.19,96);
+    // faint frozen ring
+    cx.strokeStyle="rgba(120,150,200,.16)";cx.lineWidth=1;cx.beginPath();cx.arc(CX,CY,Rrim,0,7);cx.stroke();
+    // hub Ra
+    var hg=cx.createRadialGradient(CX,CY,1,CX,CY,22);hg.addColorStop(0,"#fff6d8");hg.addColorStop(.4,"#e0c860");hg.addColorStop(1,"rgba(224,200,96,0)");
+    cx.fillStyle=hg;cx.beginPath();cx.arc(CX,CY,22,0,7);cx.fill();
+    cx.fillStyle="#fff6d8";cx.beginPath();cx.arc(CX,CY,7,0,7);cx.fill();
+    cx.fillStyle="#e0c860";cx.font="bold 8px "+mono();cx.textAlign="center";cx.fillText("\u2609",CX,CY+2.5);
+    // rim node positions (frozen, fixed angles)
+    var rimPos={};
+    for(var i=0;i<primOrder2.length;i++){
+      var a=-Math.PI/2 + i*(2*Math.PI/9);
+      var px=CX+Math.cos(a)*Rrim, py=CY+Math.sin(a)*Rrim;
+      rimPos[primOrder2[i]]=[px,py];
+      cx.fillStyle="#b8c4dc";cx.beginPath();cx.arc(px,py,5,0,7);cx.fill();
+      cx.fillStyle="#0a0e1a";cx.font="7px "+mono();cx.fillText(primGlyph2[primOrder2[i]],px,py+2.5);
+    }
+    // ---------- MOVING OUTER SHELL: moons orbit their primaries ----------
+    // scale: choose a per-primary local orbit radius; angular rate ~ omega(period)*a display factor
+    var moonR = 15; // base local radius; multiple moons get concentric radii
+    var byPrim={};
+    OUT.forEach(function(o){ if(o.type==="moon"){ (byPrim[o.primary]=byPrim[o.primary]||[]).push(o); } });
+    Object.keys(byPrim).forEach(function(pr){
+      var center=rimPos[pr]; if(!center) return;
+      var kids=byPrim[pr];
+      kids.forEach(function(o,k){
+        var lr = moonR + k*7;   // concentric local orbits
+        var dir = o.retro? -1 : 1;
+        // display rate: faster moons (smaller period) sweep faster. scale to keep on-screen sane.
+        var rate = dir * (6.0 / o.period); // arbitrary but proportional & real-ratio-preserving
+        var ang = t*rate*speed*0.25;
+        // faint local orbit ring
+        cx.strokeStyle="rgba(154,180,216,.12)";cx.beginPath();cx.arc(center[0],center[1],lr,0,7);cx.stroke();
+        var mx=center[0]+Math.cos(ang)*lr, my=center[1]+Math.sin(ang)*lr;
+        cx.fillStyle=o.retro?"#c89ad8":"#9ab4d8";cx.beginPath();cx.arc(mx,my,2.4,0,7);cx.fill();
+      });
+      // label the primary's moon-count
+      cx.fillStyle="rgba(154,180,216,.5)";cx.font="7px "+mono();cx.textAlign="center";
+    });
+    // ---------- COMETS: long ellipses returning to Ra (the hub) ----------
+    OUT.filter(function(o){return o.type==="comet";}).forEach(function(o,ci){
+      // elliptical orbit around CX,CY (Ra). semi-major scaled by log(period) so Halley is biggest.
+      var py_years = o.period; // in years
+      var aMaj = Math.min(W*0.44, 60 + Math.log(py_years+1)*60);
+      var bMin = aMaj*0.42;
+      var tilt = ci*0.7;
+      // period in 'years'; comet mean anomaly advances slowly (long period => slow)
+      var M = (t*speed*0.06 / py_years) + ci*2.1;
+      // parametric ellipse (Ra at one focus approximated at center for display)
+      var ex = Math.cos(M)*aMaj, ey=Math.sin(M)*bMin;
+      var cxp = CX + ex*Math.cos(tilt) - ey*Math.sin(tilt);
+      var cyp = CY + ex*Math.sin(tilt) + ey*Math.cos(tilt);
+      // draw the orbit path
+      cx.strokeStyle="rgba(90,208,192,.18)";cx.lineWidth=1;cx.beginPath();
+      for(var s=0;s<=64;s++){var mm=s/64*2*Math.PI;var xx=Math.cos(mm)*aMaj,yy=Math.sin(mm)*bMin;
+        var X=CX+xx*Math.cos(tilt)-yy*Math.sin(tilt), Y=CY+xx*Math.sin(tilt)+yy*Math.cos(tilt);s?cx.lineTo(X,Y):cx.moveTo(X,Y);}cx.stroke();
+      // comet + tail (tail points away from Ra)
+      var dx=cxp-CX, dy=cyp-CY, dn=Math.hypot(dx,dy)||1;
+      cx.strokeStyle="rgba(90,208,192,.5)";cx.lineWidth=1.5;cx.beginPath();cx.moveTo(cxp,cyp);cx.lineTo(cxp+dx/dn*16,cyp+dy/dn*16);cx.stroke();
+      cx.fillStyle="#7ae0d0";cx.beginPath();cx.arc(cxp,cyp,2.6,0,7);cx.fill();
+      cx.fillStyle="rgba(122,224,208,.7)";cx.font="7px "+mono();cx.textAlign="center";cx.fillText(o.name,cxp,cyp-6);
+    });
+    // captions
+    cx.fillStyle="rgba(224,200,96,.7)";cx.font="8px "+mono();cx.textAlign="center";cx.fillText("frozen core",CX,CY+Rrim+16);
+    cx.fillStyle="rgba(90,208,192,.6)";cx.fillText("comets return to Ra \u00b7 tails point away from the Sun",CX,H-12);
+  }
+  function frame(){try{draw();}catch(e){document.getElementById("err").style.display="block";document.getElementById("err").textContent="clockwork fault: "+(e&&e.message);return;}t+=0.1;requestAnimationFrame(frame);}
+  requestAnimationFrame(frame);
+})();
+</script></body></html>

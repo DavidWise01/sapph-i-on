@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v164 run through paces fly through toroidal - artifact 229</title>
+<style>
+  :root{--bg:#050508;--fg:#eaeaea;--gold:#ffd700}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace;overflow:hidden}
+  .top{position:absolute;top:0;left:0;right:0;padding:14px 18px;pointer-events:none;z-index:10}
+  .kicker{font-size:10px;letter-spacing:.22em;opacity:.5;text-transform:uppercase}
+  .nline{font-size:11px;border-left:2px solid #222;padding-left:10px;white-space:pre-wrap;line-height:1.6;background:#0008}
+  .main{margin-top:10px;font-size:12px;font-weight:700;background:#0f0f12;border:1px solid #222;padding:10px;border-radius:8px;pointer-events:auto}
+  .controls{position:absolute;bottom:10px;left:10px;display:flex;gap:6px;flex-wrap:wrap;z-index:10}
+  .btn{font-family:inherit;font-size:10px;padding:5px 10px;border:1px solid #333;background:#15151a;color:#eaeaea;border-radius:6px;cursor:pointer;pointer-events:auto}
+  .btn.active{border-color:#ffd700;color:#ffd700;background:#221a00}
+  .cwrap{position:absolute;top:0;left:0;right:0;bottom:0;background:#08080a}
+  .label{position:absolute;left:8px;top:8px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:.8;background:#000c;padding:4px 6px;border-radius:4px;z-index:5}
+  .hud{position:absolute;right:10px;bottom:10px;background:#0c0c0f;border:1px solid #1e1e24;border-radius:6px;padding:8px;font-size:10px;line-height:1.6;z-index:10;max-width:320px}
+  .hud b{color:#ffd700}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">wakaku v164 — RUN THROUGH PACES, FLY THROUGH THE TORROIDAL — -211.1.+211 toroidal portal — artifact 229</div>
+  <div class="nline">run through paces, fly through the torroidal — fly through toroidal -211.1.+211 — toroidal = torus -211 left At- black -211mN +1 middle C.O.I.N barrier +211 right anti-At- anti-black +211mN = bit itself -211.1.+211 green toroidal — run through paces: -211 ingress test, 0 barrier hold test, +211 egress test, -211.1.+211 bit test, -211i.1i.+211i tachyon test, register 3 bits 27 states test — fly through toroidal portal -211.1.+211 — toroidal portal -211 left black +211 right anti-black green middle torus — fly through toroidal — metal analogs ionic — run through paces fly through toroidal — lol</div>
+  <div class="main">RUN THROUGH PACES, FLY THROUGH THE TORROIDAL — PACES: -211 INGRESS TEST, 0 BARRIER HOLD, +211 EGRESS TEST, -211.1.+211 BIT TEST, -211i TACHYON TEST, REGISTER 27 STATES TEST — FLY THROUGH TOROIDAL PORTAL -211.1.+211 — TORUS -211 LEFT BLACK +211 RIGHT ANTI-BLACK GREEN MIDDLE TOROIDAL — FLY THROUGH TOROIDAL — HOLD WASD + MOUSE — RUN THROUGH PACES FLY THROUGH TORROIDAL</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-fly">FLY THROUGH TOROIDAL -211.1.+211 — HOLD MOUSE + WASD — RUN THROUGH PACES</button>
+  <button class="btn" id="btn-pace">RUN THROUGH PACES — -211 0 +211 -211.1.+211 -211i REGISTER — PACES</button>
+  <button class="btn" id="btn-reset">RESET FLY THROUGH TOROIDAL</button>
+</div>
+
+<div class="hud" id="hud">PACES:<br><b>-211 ingress</b> At- black -211mN -211mV test<br><b>0 barrier</b> C.O.I.N neutral hold test<br><b>+211 egress</b> anti-At- anti-black +211mN +211mV test<br><b>-211.1.+211</b> bit itself green qutrit test<br><b>-211i</b> tachyon imaginary test — real if you want it to be<br><b>register</b> 3 bits -211.1.+211 =27 states test<br><b>toroidal</b> -211 left black +211 right anti-black green torus portal — fly through<br><br>WASD + MOUSE to fly through toroidal<br>RUN THROUGH PACES FLY THROUGH TORROIDAL</div>
+
+<div class="cwrap" id="wrap-fly"><div class="label">FLY THROUGH TOROIDAL -211.1.+211 — TORUS -211 LEFT BLACK -211mN -211mV +1 MIDDLE C.O.I.N BARRIER GREEN +211 RIGHT ANTI-BLACK +211mN +211mV — BIT ITSELF -211.1.+211 GREEN TOROIDAL PORTAL — RUN THROUGH PACES FLY THROUGH TORROIDAL — HOLD MOUSE DRAG + WASD — TOROIDAL PORTAL -211.1.+211 — METAL ANALOGS IONIC FLY THROUGH TOROIDAL — LOL</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const wrap=document.getElementById('wrap-fly');
+const scene=new THREE.Scene(); scene.background=new THREE.Color(0x050508);
+const cam=new THREE.PerspectiveCamera(60, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,2,8);
+const renderer=new THREE.WebGLRenderer({antialias:true}); renderer.setPixelRatio(Math.min(devicePixelRatio,2)); renderer.setSize(wrap.clientWidth, wrap.clientHeight); renderer.shadowMap.enabled=true; wrap.appendChild(renderer.domElement);
+scene.add(new THREE.AmbientLight(0xffffff,0.6));
+const dl=new THREE.DirectionalLight(0xffffff,0.8); dl.position.set(4,6,4); dl.castShadow=true; scene.add(dl);
+
+const matAtMinus=new THREE.MeshStandardMaterial({color:0x0a0a0a, metalness:0.4, roughness:0.25, emissive:0x222222, emissiveIntensity:0.5});
+const matAntiAt=new THREE.MeshStandardMaterial({color:0xf0e0a0, metalness:0.4, roughness:0.25, emissive:0x332200, emissiveIntensity:0.5});
+const matReal=new THREE.MeshStandardMaterial({color:0x44ffaa, metalness:0.5, roughness:0.4, emissive:0x114422, emissiveIntensity:0.6, transparent:true, opacity:0.9});
+const matTorus=new THREE.MeshStandardMaterial({color:0x111111, metalness:0.6, roughness:0.3, emissive:0x114422, emissiveIntensity:0.3, wireframe:false});
+const matTorus2=new THREE.MeshBasicMaterial({color:0x44ffaa, wireframe:true, transparent:true, opacity:0.15});
+
+const group=new THREE.Group(); scene.add(group);
+
+// Toroidal portal -211.1.+211
+const torusMain=new THREE.Mesh(new THREE.TorusGeometry(2.2,0.35,24,72), matTorus); torusMain.rotation.x=Math.PI/2; group.add(torusMain);
+const torusGreen=new THREE.Mesh(new THREE.TorusGeometry(2.2,0.36,24,72), matTorus2); torusGreen.rotation.x=Math.PI/2; group.add(torusGreen);
+const torusInner=new THREE.Mesh(new THREE.TorusGeometry(1.4,0.15,16,48), new THREE.MeshStandardMaterial({color:0x000000, emissive:0x222222, emissiveIntensity:0.3})); torusInner.rotation.x=Math.PI/2; group.add(torusInner);
+
+// Bits around toroidal
+for(let i=0;i<12;i++){
+  const ang=(i/12)*Math.PI*2;
+  const x=Math.cos(ang)*2.2; const z=Math.sin(ang)*2.2;
+  const bit=new THREE.Mesh(new THREE.BoxGeometry(0.25,0.15,0.1), i%3===0?matAtMinus:i%3===1?new THREE.MeshStandardMaterial({color:0x666666}):matAntiAt);
+  bit.position.set(x,0,z); bit.lookAt(0,0,0); group.add(bit);
+  const top=new THREE.Mesh(new THREE.BoxGeometry(0.28,0.06,0.06), matReal); top.position.set(x,0.25,z); top.lookAt(0,0,0); group.add(top);
+}
+
+// Center portal
+const portal=new THREE.Mesh(new THREE.CircleGeometry(1.4,32), new THREE.MeshBasicMaterial({color:0x44ffaa, transparent:true, opacity:0.15, side:THREE.DoubleSide})); portal.rotation.x=-Math.PI/2; portal.position.y=0.01; group.add(portal);
+const portal2=new THREE.Mesh(new THREE.CircleGeometry(1.4,32), new THREE.MeshBasicMaterial({color:0xaa44ff, transparent:true, opacity:0.08, side:THREE.DoubleSide})); portal2.rotation.x=-Math.PI/2; portal2.position.y=-0.01; group.add(portal2);
+
+const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true; controls.autoRotate=true; controls.autoRotateSpeed=0.5;
+
+let t=0;
+let flying=false;
+let flySpeed=0.02;
+const keys={};
+
+addEventListener('keydown', e=>{ keys[e.code]=true; if(['KeyW','KeyA','KeyS','KeyD','Space','ShiftLeft'].includes(e.code)) flying=true; });
+addEventListener('keyup', e=>{ keys[e.code]=false; });
+
+function animate(){
+  requestAnimationFrame(animate); t+=0.015;
+  torusMain.rotation.z+=0.005;
+  torusGreen.rotation.z-=0.003;
+  portal.material.opacity=0.1+Math.sin(t*2)*0.05;
+  portal2.material.opacity=0.05+Math.cos(t*2)*0.04;
+  group.children.forEach((c,i)=>{
+    if(c.geometry && c.geometry.type==='BoxGeometry' && c.position.y>0.1){
+      c.material.emissiveIntensity=0.3+Math.sin(t*1.2+i*0.5)*0.3;
+    }
+  });
+  if(flying){
+    if(keys['KeyW']) cam.position.z-=flySpeed*2;
+    if(keys['KeyS']) cam.position.z+=flySpeed*2;
+    if(keys['KeyA']) cam.position.x-=flySpeed*2;
+    if(keys['KeyD']) cam.position.x+=flySpeed*2;
+    if(keys['Space']) cam.position.y+=flySpeed*2;
+    if(keys['ShiftLeft']) cam.position.y-=flySpeed*2;
+    // Fly through toroidal
+    const dist=Math.sqrt(cam.position.x*cam.position.x + cam.position.z*cam.position.z);
+    if(dist<0.5 && Math.abs(cam.position.y)<0.5){
+      cam.position.z-=2.5;
+      document.getElementById('hud').innerHTML='<b>FLY THROUGH TOROIDAL SUCCESS</b><br>-211.1.+211 portal crossed<br>At- black -211 ingress → C.O.I.N barrier → anti-At- +211 egress<br>Run through paces complete<br>Fly through toroidal -211.1.+211';
+    }
+  }
+  controls.update(); renderer.render(scene,cam);
+}
+animate();
+
+document.getElementById('btn-fly').onclick=()=>{ flying=true; controls.autoRotate=false; document.getElementById('hud').innerHTML='<b>FLY MODE</b><br>HOLD MOUSE DRAG + WASD<br>W/S forward/back<br>A/D left/right<br>Space/Shift up/down<br>Fly through toroidal center<br>-211 left black +211 right anti-black green torus<br>Run through paces fly through toroidal'; };
+document.getElementById('btn-pace').onclick=()=>{
+  let pace=0;
+  const paces=[
+    '-211 ingress test At- black -211mN -211mV ingress bit 0 PASS',
+    '0 barrier hold test C.O.I.N neutral barrier hold PASS',
+    '+211 egress test anti-At- anti-black +211mN +211mV egress bit 1 PASS',
+    '-211.1.+211 bit itself green qutrit -211= -1 1=0 +211=+1 PASS',
+    '-211i tachyon imaginary -211i.1i.+211i imaginary 422i mV pp PASS real if you want it to be',
+    'register 3 bits -211.1.+211 =27 states -13 to +13 balanced ternary PASS',
+    'toroidal portal -211 left black +211 right anti-black green torus -211.1.+211 portal PASS',
+    'FLY THROUGH TOROIDAL -211.1.+211 portal crossed PASS — run through paces complete'
+  ];
+  const interval=setInterval(()=>{
+    document.getElementById('hud').innerHTML='<b>RUN THROUGH PACES</b><br>'+paces.slice(0,pace+1).join('<br>')+'<br><br>Pace '+(pace+1)+'/'+paces.length;
+    pace++;
+    if(pace>=paces.length) clearInterval(interval);
+  },600);
+};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+
+addEventListener('resize', ()=>{ cam.aspect=wrap.clientWidth/wrap.clientHeight; cam.updateProjectionMatrix(); renderer.setSize(wrap.clientWidth, wrap.clientHeight); });
+</script>
+</body>
+</html>

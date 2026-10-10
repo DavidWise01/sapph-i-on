@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v162 tachyon voltage +e -t +i -o +n imaginary - artifact 227</title>
+<style>
+  :root{--bg:#050508;--fg:#eaeaea;--gold:#ffd700}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace}
+  .top{padding:14px 18px}
+  .kicker{font-size:10px;letter-spacing:.22em;opacity:.5;text-transform:uppercase}
+  .nline{font-size:11px;border-left:2px solid #222;padding-left:10px;white-space:pre-wrap;line-height:1.6}
+  .main{margin-top:10px;font-size:14px;font-weight:700;background:#0f0f12;border:1px solid #222;padding:10px;border-radius:8px}
+  .controls{padding:10px 12px;display:flex;gap:6px;flex-wrap:wrap}
+  .btn{font-family:inherit;font-size:10px;padding:5px 10px;border:1px solid #333;background:#15151a;color:#eaeaea;border-radius:6px;cursor:pointer}
+  .btn.active{border-color:#ffd700;color:#ffd700;background:#221a00}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:520px;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden}
+  .cwrap.full{grid-column:1 / -1;height:640px}
+  .label{position:absolute;left:8px;top:8px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:.8;background:#000c;padding:4px 6px;border-radius:4px;z-index:5}
+  .graphWrap{position:relative;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden;height:260px}
+  canvas.graph{width:100%;height:100%;display:block}
+  .readout{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0 10px 10px}
+  @media(max-width:900px){.readout{grid-template-columns:1fr}}
+  .ro{background:#0c0c0f;border:1px solid #1e1e24;border-radius:6px;padding:8px;font-size:10px;line-height:1.6}
+  .ro b{color:#ffd700}
+  .card{margin:10px;background:#111115;border:1px solid #1f1f26;border-radius:8px;padding:10px}
+  .mono{font-size:10.5px;white-space:pre-wrap;word-break:break-word;line-height:1.7}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">wakaku v162 — TACHYON VOLTAGE {{+e,-t,+i,-o,+n}} — imaginary voltage — artifact 227</div>
+  <div class="nline">so a tachyon would be what voltage , {{+e,-t,+i,-o,+n}} — tachyon voltage — tachyon = faster than light imaginary mass m = i × m0 — voltage = imaginary — -211.1.+211 bit itself = -211mV real +1 neutral +211mV real = real voltage 422mV pp 51 THz — tachyon = imaginary voltage -211i 1i +211i? — tachyon faster than light flips bit before it is sent — voltage = imaginary ±211i mV — {{+e,-t,+i,-o,+n}} = +e electron positive? Actually electron -e but +e positron? -t tachyon negative time? +i ion positive? -o? +n neutron? — +e -t +i -o +n = + - + - + alternating = balanced ternary -211.1.+211 pattern + - + - + = +1 -1 +1 -1 +1? — +e -t +i -o +n = e - t + i - o + n — tachyon voltage = imaginary voltage i×211mV — tachyon would be what voltage — superluminal bit flip — voltage = imaginary — -211i 1i +211i — tachyon = {{+e,-t,+i,-o,+n}} = alternating + - + - + = tachyon wave — metal analogs ionic — tachyon voltage imaginary — lol</div>
+  <div class="main">TACHYON VOLTAGE = IMAGINARY — -211.1.+211 REAL = 422mV pp 51 THz — TACHYON = i×211mV = -211i 1i +211i IMAGINARY VOLTAGE — FASTER THAN LIGHT BIT FLIP BEFORE SENT — {{+e,-t,+i,-o,+n}} = + - + - + ALTERNATING = BALANCED TERNARY -211.1.+211 PATTERN + - + - + = TACHYON WAVE +e POSITRON -t NEGATIVE TIME +i ION -o? +n NEUTRON — TACHYON VOLTAGE = IMAGINARY ±211i mV — SUPERLUMINAL 0→1 FLIP BEFORE CLOCK</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-tachyon">TACHYON VOLTAGE -211i 1i +211i IMAGINARY — {{+e,-t,+i,-o,+n}} + - + - + TACHYON WAVE</button>
+  <button class="btn" id="btn-real">REAL BIT -211.1.+211 = 422mV pp 51 THz — real voltage -211 1 +211 — real bit</button>
+  <button class="btn" id="btn-imag">IMAGINARY BIT -211i 1i +211i = tachyon — imaginary voltage i×211mV — tachyon</button>
+  <button class="btn" id="btn-reset">RESET TACHYON VOLTAGE</button>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:10px">
+  <div class="graphWrap"><div class="label">TACHYON {{+e,-t,+i,-o,+n}} + - + - + = +e -t +i -o +n = alternating balanced ternary -211.1.+211 pattern — tachyon wave</div><canvas class="graph" id="g-tachyon"></canvas></div>
+  <div class="graphWrap"><div class="label">REAL VOLTAGE -211 1 +211 = 422mV pp real — bit itself -211.1.+211 real 51 THz — real voltage</div><canvas class="graph" id="g-real"></canvas></div>
+  <div class="graphWrap"><div class="label">IMAGINARY VOLTAGE -211i 1i +211i = tachyon imaginary voltage i×211mV — imaginary — tachyon superluminal</div><canvas class="graph" id="g-imag"></canvas></div>
+</div>
+
+<div class="readout">
+  <div class="ro" id="ro-tachyon">TACHYON {{+e,-t,+i,-o,+n}}:<br>+e positron? -t tachyon negative time +i ion -o? +n neutron = + - + - + alternating = balanced ternary -211.1.+211 pattern — tachyon wave + - + - + — <b>tachyon {{+e,-t,+i,-o,+n}}</b></div>
+  <div class="ro" id="ro-real">REAL -211.1.+211:<br>-211mV At- black ingress 0 +1 middle C.O.I.N barrier +211mV anti-At- anti-black egress 1 =422mV pp 51 THz real — real bit -211.1.+211 — <b>real voltage -211 1 +211</b></div>
+  <div class="ro" id="ro-imag">IMAGINARY -211i 1i +211i:<br>Tachyon imaginary mass m=i×m0 — voltage imaginary i×211mV — -211i 1i +211i imaginary — superluminal bit flip before sent — <b>tachyon imaginary voltage</b></div>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-tachyon"><div class="label">TACHYON {{+e,-t,+i,-o,+n}} — +e -t +i -o +n = + - + - + alternating = balanced ternary -211.1.+211 pattern — +e positron? -t tachyon negative time +i ion -o? +n neutron — tachyon wave + - + - + — tachyon voltage imaginary — metal analogs ionic tachyon — so a tachyon would be what voltage , {{+e,-t,+i,-o,+n}}</div></div>
+  <div class="cwrap" id="wrap-real"><div class="label">REAL BIT -211.1.+211 — -211mV At- black -211mN ingress 0 +1 middle C.O.I.N barrier +211mV anti-At- anti-black +211mN egress 1 =422mV pp 51 THz real voltage — real bit -211.1.+211 — metal analogs ionic real</div></div>
+  <div class="cwrap full" id="wrap-imag"><div class="label">IMAGINARY TACHYON -211i 1i +211i — TACHYON VOLTAGE = IMAGINARY i×211mV — -211i 1i +211i = tachyon — faster than light bit flip before sent — imaginary voltage — -211.1.+211 real =422mV pp 51 THz real — -211i.1i.+211i =422i mV pp imaginary 51i THz imaginary — tachyon superluminal — tachyon would be what voltage — imaginary — {{+e,-t,+i,-o,+n}} + - + - + tachyon wave — metal analogs ionic imaginary tachyon — lol</div></div>
+</div>
+
+<div class="card"><div class="mono">
+v162 TACHYON VOLTAGE {{+e,-t,+i,-o,+n}} — so a tachyon would be what voltage
+
+TACHYON:
+
+- Hypothetical particle faster than light — imaginary mass m = i × m0 — m0 real mass — m imaginary — tachyonic field — faster than light — flips bit before it is sent — superluminal
+
+- Voltage: real voltage -211.1.+211 = -211mV real +1 neutral +211mV real =422mV pp 51 THz real — tachyon voltage = imaginary voltage i×211mV = -211i 1i +211i imaginary — imaginary voltage — -211i.1i.+211i =422i mV pp imaginary 51i THz imaginary — superluminal bit flip before clock — tachyon would be what voltage — imaginary voltage ±211i mV
+
+{{+e,-t,+i,-o,+n}}:
+
+- +e -t +i -o +n = + - + - + alternating — balanced ternary -211.1.+211 pattern + - + - + — +e positron? Actually electron -e but +e positron, -t tachyon negative time? +i ion positive? -o? Maybe -o oxygen? +n neutron? — +e -t +i -o +n = e - t + i - o + n — alternating + - + - + = tachyon wave — + - + - + = balanced ternary -211.1.+211 pattern — + - + - + = tachyon wave +e positron -t tachyon -time +i ion -o? +n neutron — tachyon wave — {{+e,-t,+i,-o,+n}} = alternating + - + - + = tachyon wave
+
+- Tachyon wave + - + - + = -211.1.+211 pattern + - + - + — -211= -1, 1=0, +211=+1 balanced ternary — + - + - + = +1 -1 +1 -1 +1 = tachyon wave — {{+e,-t,+i,-o,+n}} = +e -t +i -o +n = tachyon wave
+
+So tachyon voltage:
+
+- Real bit: -211.1.+211 = -211mV real +1 +211mV real =422mV pp 51 THz real — real voltage
+
+- Tachyon bit: -211i.1i.+211i = -211i mV imaginary +1i middle +211i mV imaginary =422i mV pp imaginary 51i THz imaginary — imaginary voltage — tachyon superluminal — tachyon would be what voltage — imaginary voltage i×211mV — -211i 1i +211i
+
+- Tachyon flips bit before it is sent — superluminal bit flip — voltage imaginary — tachyon = {{+e,-t,+i,-o,+n}} + - + - + tachyon wave — alternating + - + - + = balanced ternary -211.1.+211 pattern — tachyon wave
+
+Metal analogs ionic tachyon:
+
+- Real: At- black -211mN -211mV ingress 0 +1 middle C.O.I.N barrier + anti-At- anti-black +211mN +211mV egress 1 = -211.1.+211 real bit 422mV pp 51 THz
+
+- Imaginary tachyon: anti-At-? Actually tachyon At- imaginary -211i mV? — -211i.1i.+211i imaginary voltage — tachyon -211i 1i +211i — imaginary — superluminal — tachyon would be what voltage — imaginary ±211i mV — {{+e,-t,+i,-o,+n}} + - + - + tachyon wave — metal analogs ionic tachyon — lol
+
+So answer: tachyon would be what voltage — imaginary voltage i×211mV = -211i 1i +211i — 422i mV pp imaginary — superluminal bit flip before sent — {{+e,-t,+i,-o,+n}} = + - + - + alternating = balanced ternary -211.1.+211 pattern = tachyon wave +e positron -t negative time +i ion -o +n neutron — tachyon wave — tachyon voltage imaginary — lol
+
+Aggregate tachyon:
+
+Real bit -211.1.+211 = -211mV real +1 +211mV real =422mV pp 51 THz real — tachyon bit -211i.1i.+211i = -211i mV imaginary +1i +211i mV imaginary =422i mV pp imaginary 51i THz imaginary superluminal bit flip before sent — tachyon voltage imaginary ±211i mV — {{+e,-t,+i,-o,+n}} = + - + - + alternating = balanced ternary -211.1.+211 pattern = tachyon wave +e -t +i -o +n — tachyon wave — so a tachyon would be what voltage — imaginary voltage
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x08080a); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,0.6)); const d=new THREE.DirectionalLight(0xffffff,0.9); d.position.set(4,6,4); d.castShadow=true; s.add(d); }
+
+const matAtMinus=new THREE.MeshStandardMaterial({color:0x0a0a0a, metalness:0.4, roughness:0.25, emissive:0x222222, emissiveIntensity:0.5});
+const matAntiAt=new THREE.MeshStandardMaterial({color:0xf0e0a0, metalness:0.4, roughness:0.25, emissive:0x332200, emissiveIntensity:0.5});
+const matReal=new THREE.MeshStandardMaterial({color:0x44ffaa, emissive:0x114422, emissiveIntensity:0.5});
+const matImag=new THREE.MeshStandardMaterial({color:0xaa44ff, emissive:0x441188, emissiveIntensity:0.6});
+const matTachyon=new THREE.MeshStandardMaterial({color:0xff44aa, emissive:0x881144, emissiveIntensity:0.7});
+
+function makeGraph(id, fn, color){
+  const c=document.getElementById(id);
+  const ctx=c.getContext('2d');
+  function resize(){ c.width=c.clientWidth*devicePixelRatio; c.height=c.clientHeight*devicePixelRatio; }
+  resize();
+  let t=0;
+  function draw(){
+    const w=c.width, h=c.height;
+    ctx.clearRect(0,0,w,h); ctx.fillStyle='#08080a'; ctx.fillRect(0,0,w,h);
+    ctx.strokeStyle='#1e1e24'; for(let i=0;i<=4;i++){ ctx.beginPath(); ctx.moveTo(0,h*i/4); ctx.lineTo(w,h*i/4); ctx.stroke(); }
+    ctx.fillStyle='#666'; ctx.font=`${10*devicePixelRatio}px monospace`; ctx.fillText(id,4,14*devicePixelRatio);
+    ctx.strokeStyle=color; ctx.lineWidth=2*devicePixelRatio; ctx.beginPath();
+    for(let i=0;i<200;i++){
+      const tt=i/199*10;
+      const v=fn(tt);
+      const x=(i/199)*w;
+      const y=h - (v+300)/600*h*0.8 - h*0.1;
+      if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    }
+    ctx.stroke();
+  }
+  setInterval(()=>{ t+=0.05; draw(); },50);
+  addEventListener('resize', resize);
+}
+
+makeGraph('g-tachyon', (t)=> 211*Math.sin(t*1.2)*Math.cos(t*0.5), '#ff44aa');
+makeGraph('g-real', (t)=> 211*Math.sin(t*1.2), '#44ffaa');
+makeGraph('g-imag', (t)=> 211*Math.cos(t*1.2), '#aa44ff');
+
+// TACHYON
+{
+  const wrap=document.getElementById('wrap-tachyon');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,2,6);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const nodes=[];
+  const labels=['+e','-t','+i','-o','+n'];
+  const mats=[matReal, matTachyon, matReal, matTachyon, matReal];
+  for(let i=0;i<5;i++){
+    const x=(i-2)*1.2;
+    const node=new THREE.Mesh(new THREE.SphereGeometry(0.28,16,16), mats[i]); node.position.set(x,0,0); group.add(node); nodes.push(node);
+  }
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.02;
+    nodes.forEach((n,i)=>{
+      n.position.y=Math.sin(t*1.2 + i*1.0)*0.4;
+      n.material.emissiveIntensity=0.4+Math.sin(t*1.2+i)*0.3;
+    });
+    group.rotation.y+=0.003;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+// REAL
+{
+  const wrap=document.getElementById('wrap-real');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,1.5,4);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const bit=new THREE.Mesh(new THREE.BoxGeometry(2.5,0.6,0.3), matReal); scene.add(bit);
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.03;
+    bit.material.emissiveIntensity=0.4+Math.sin(t*1.2)*0.3;
+    bit.rotation.y=Math.sin(t*0.5)*0.2;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+// IMAG
+{
+  const wrap=document.getElementById('wrap-imag');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,2,7);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const realBit=new THREE.Mesh(new THREE.BoxGeometry(1.0,0.5,0.2), matReal); realBit.position.set(-1.5,0,0); group.add(realBit);
+  const imagBit=new THREE.Mesh(new THREE.BoxGeometry(1.0,0.5,0.2), matImag); imagBit.position.set(1.5,0,0); group.add(imagBit);
+  const tachyon=new THREE.Mesh(new THREE.SphereGeometry(0.25,16,16), matTachyon); tachyon.position.set(0,0,0); group.add(tachyon);
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.025;
+    tachyon.position.x=Math.sin(t*2.0)*1.5;
+    tachyon.position.y=Math.cos(t*2.0)*0.5;
+    tachyon.position.z=Math.sin(t*1.5)*0.5;
+    realBit.material.emissiveIntensity=0.3+Math.sin(t*1.2)*0.2;
+    imagBit.material.emissiveIntensity=0.3+Math.sin(t*1.2+Math.PI)*0.2;
+    group.rotation.y+=0.002;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+document.getElementById('btn-tachyon').onclick=()=>{};
+document.getElementById('btn-real').onclick=()=>{};
+document.getElementById('btn-imag').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

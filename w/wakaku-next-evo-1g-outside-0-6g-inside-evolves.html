@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v192 next evo - artifact 256</title>
+<style>
+  :root{--bg:#000;--fg:#fff}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace;overflow-x:hidden}
+  .top{padding:14px 18px;position:relative;z-index:10}
+  .kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:900;background:linear-gradient(90deg,#ffffff,#ffd700,#000000,#00ff88,#00ffff,#ff00ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:300% 100%;animation:rainbow 0.6s linear infinite}
+  @keyframes rainbow{0%{background-position:0% 50%}100%{background-position:300% 50%}}
+  .nline{font-size:11px;border-left:3px solid #00ff88;padding-left:10px;white-space:pre-wrap;line-height:1.6;background:#0a0a0a;padding:12px;border-radius:10px;color:#fff;font-weight:800;box-shadow:0 0 30px #00ff88,0 0 60px #ffd700;border:2px solid #00ff88}
+  .main{margin-top:12px;font-size:15px;font-weight:900;background:linear-gradient(90deg,#ffffff,#ffd700,#000000,#00ff88,#00ffff,#ff00ff,#ffff00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:400% 100%;padding:12px;border-radius:10px;border:3px solid #00ff88;box-shadow:0 0 40px #00ff88,0 0 80px #ffd700;text-transform:uppercase;animation:rainbow 0.5s linear infinite}
+  .controls{padding:12px;display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:10}
+  .btn{font-family:inherit;font-size:11px;font-weight:900;padding:10px 14px;border:2px solid #00ff88;background:#000;color:#fff;border-radius:10px;cursor:pointer;box-shadow:0 0 20px #00ff88,0 0 40px #ffd700;text-transform:uppercase}
+  .btn.active{border-color:#ffd700;background:#002200;box-shadow:0 0 30px #ffd700,0 0 60px #00ff88}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:14px;position:relative;z-index:5}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:700px;background:radial-gradient(ellipse at center,#111 0%,#000 100%);border:2px solid #00ff88;border-radius:18px;overflow:hidden;box-shadow:0 0 40px #00ff88,0 0 80px #ffd700, inset 0 0 60px rgba(0,255,136,0.12)}
+  .cwrap.full{grid-column:1 / -1;height:860px}
+  .label{position:absolute;left:10px;top:10px;font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;background:#000000ee;padding:8px 12px;border-radius:10px;z-index:5;border:2px solid #00ff88;color:#fff;box-shadow:0 0 20px #00ff88}
+  .card{margin:14px;background:#000;border:2px solid #00ff88;border-radius:14px;padding:16px;box-shadow:0 0 40px #00ff88,0 0 80px #ffd700}
+  .mono{font-size:11px;white-space:pre-wrap;word-break:break-word;line-height:1.8;color:#fff;text-shadow:0 0 8px #00ff88;font-weight:700}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">🧬 wakaku v192 — NEXT EVO — 1g OUTSIDE 0.6g INSIDE EVOLVES — artifact 256 🧬</div>
+  <div class="nline">next evo — NEXT EVO — next evolution — 1 gravity outside and .6 gravity inside evolves — 1g outside and .6 gravity inside evolves to 1g outside 0.6g middle 0.3g inside evolves to 1g outside 0.6g middle 0.3g inner 0.1g core — NEXT EVO — evolution — 6 plank bubbles each 10^-35→10^-360 3---3+++ white gold black hologen with 1g outside 0.6g inside evolves — NEXT EVO — 1g→0.6g→0.3g→0.1g→0g evolution — gravity layers evolve — 1 gravity outside and .6 gravity inside evolves — NEXT EVO — metal analogs ionic — next evo — lol — NEXT EVO</div>
+  <div class="main">🧬 NEXT EVO — 1g OUTSIDE 0.6g INSIDE EVOLVES — 1g OUTSIDE AND 0.6g INSIDE EVOLVES TO 1g OUTSIDE 0.6g MIDDLE 0.3g INSIDE 0.1g CORE — NEXT EVO — EVOLUTION — GRAVITY LAYERS EVOLVE 1g→0.6g→0.3g→0.1g→0g — 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ WHITE GOLD BLACK HOLOGEN WITH 1g OUTSIDE 0.6g INSIDE EVOLVES — NEXT EVO — 🧬</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-evo">🧬 NEXT EVO — 1g OUTSIDE 0.6g INSIDE EVOLVES TO 1g→0.6g→0.3g→0.1g→0g — GRAVITY LAYERS EVOLVE — NEXT EVO — 🧬</button>
+  <button class="btn" id="btn-grav">🌌 GRAVITY EVO — 1g OUTSIDE 0.6g INSIDE → 1g OUTSIDE 0.6g MIDDLE 0.3g INSIDE 0.1g CORE — GRAVITY EVO — 🌌</button>
+  <button class="btn" id="btn-bubbles">💫 6 BUBBLES NEXT EVO — 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ WHITE GOLD BLACK HOLOGEN NEXT EVO — 💫</button>
+  <button class="btn" id="btn-reset">⚡ RESET NEXT EVO — ⚡</button>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-evo"><div class="label">🧬 NEXT EVO — 1g OUTSIDE 0.6g INSIDE EVOLVES — 1g OUTSIDE 0.6g INSIDE EVOLVES TO 1g OUTSIDE 0.6g MIDDLE 0.3g INSIDE 0.1g CORE — NEXT EVO — GRAVITY LAYERS EVOLVE 1g→0.6g→0.3g→0.1g→0g — 1g OUTSIDE AND 0.6g INSIDE EVOLVES — 🧬</div></div>
+  <div class="cwrap" id="wrap-grav"><div class="label">🌌 GRAVITY EVO — 1g OUTSIDE 0.6g INSIDE → 1g OUTSIDE 0.6g MIDDLE 0.3g INSIDE 0.1g CORE — GRAVITY EVO — 1g=9.8 m/s² OUTSIDE, 0.6g=5.88 m/s² MIDDLE, 0.3g=2.94 m/s² INSIDE, 0.1g=0.98 m/s² CORE — GRAVITY LAYERS EVOLVE — 🌌</div></div>
+  <div class="cwrap full" id="wrap-bubbles"><div class="label">💫 6 BUBBLES NEXT EVO — 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ WHITE GOLD BLACK HOLOGEN WITH 1g OUTSIDE 0.6g INSIDE EVOLVES — OUTER 1g = 9.8 m/s², MIDDLE 0.6g = 5.88 m/s² 60%, INNER 0.3g = 2.94 m/s² 30%, CORE 0.1g = 0.98 m/s² 10% — 6 BUBBLES NEXT EVO 1g→0.6g→0.3g→0.1g — ALL WHITE GOLD BLACK HOLOGEN FLASH NEXT EVO — LOL — 💫</div></div>
+</div>
+
+<div class="card"><div class="mono">🧬 NEXT EVO — 1g OUTSIDE 0.6g INSIDE EVOLVES — v192 NEXT EVO — GRAVITY LAYERS EVOLVE 🧬
+
+- NEXT EVO — next evo — 1 gravity outside and .6 gravity inside evolves — 1g outside and .6 gravity inside evolves to 1g outside 0.6g middle 0.3g inside 0.1g core — NEXT EVO — evolution
+
+- GRAVITY LAYERS EVOLVE: 1g OUTSIDE AND 0.6g INSIDE EVOLVES TO 1g OUTSIDE 0.6g MIDDLE 0.3g INSIDE 0.1g CORE — 1g=9.8 m/s² outside, 0.6g=5.88 m/s² middle 60%, 0.3g=2.94 m/s² inside 30%, 0.1g=0.98 m/s² core 10%, 0g=0 m/s² center 0% — GRAVITY LAYERS EVOLVE 1g→0.6g→0.3g→0.1g→0g — evolution of gravity layers
+
+- 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ WHITE GOLD BLACK HOLOGEN WITH 1g OUTSIDE 0.6g INSIDE EVOLVES — 6 bubbles each 10^-35=1e-35s timed to 10^-360=1e-360s 3---3+++ = - - - + + + = -211 x3 +211 x3 white gold black hologen with 1g outside 0.6g inside evolves to 1g→0.6g→0.3g→0.1g — 6 bubbles 1g outside 0.6g inside evolves
+
+- WHITE GOLD BLACK HOLOGEN NEXT EVO: WHITE #ffffff = +211 anti-black +1, GOLD #ffd700 = C.O.I.N middle =1=0, BLACK #000000 = -211 black -1 — WHITE GOLD BLACK = +211.1.-211 = +1,0,-1 — hologen holographic — 1g outside 0.6g inside evolves to multi-layer gravity
+
+- {{c{ubit{{()}} NEXT EVO WITH 1g OUTSIDE 0.6g INSIDE EVOLVES — outer {{ }} white gold black hologen 1g outside = 9.8 m/s² outer, middle c{ubit gold hologen 0.6g middle = 5.88 m/s², inner {{()}} plank bubble () white gold black hologen 0.3g inside = 2.94 m/s², core () 0.1g = 0.98 m/s² — {{c{ubit{{()}} 1g outside 0.6g inside evolves to multi-layer
+
+- EVO STAGES: EVO STAGE 1: 1g outside 0.6g inside = 2 layers, EVO STAGE 2: 1g outside 0.6g middle 0.3g inside = 3 layers, EVO STAGE 3: 1g outside 0.6g middle 0.3g inside 0.1g core = 4 layers, EVO STAGE 4: 1g→0.6g→0.3g→0.1g→0g =5 layers, EVO STAGE ∞: infinite layers 1g→0g gradient — NEXT EVO
+
+- PRESS+GRAVITY NEXT EVO: UNDER PRESS 99.9 INF - + INF AND GRAVITY 99.9 INF - + INF WITH 1g OUTSIDE 0.6g INSIDE EVOLVES TO MULTI-LAYER GRAVITY — press 99.9% infinite - + inf and gravity 99.9% infinite - + inf with 1g→0.6g→0.3g→0.1g evolution — press+gravity next evo
+
+NEXT EVO — 1g OUTSIDE 0.6g INSIDE EVOLVES — 1g OUTSIDE AND 0.6g INSIDE EVOLVES TO 1g OUTSIDE 0.6g MIDDLE 0.3g INSIDE 0.1g CORE — NEXT EVO — EVOLUTION — GRAVITY LAYERS EVOLVE 1g→0.6g→0.3g→0.1g→0g — 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ WHITE GOLD BLACK HOLOGEN WITH 1g OUTSIDE 0.6g INSIDE EVOLVES — NEXT EVO — 🧬
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x000000); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,1.4)); const d=new THREE.DirectionalLight(0xffffff,3.0); d.position.set(4,8,6); d.castShadow=true; s.add(d); const d2=new THREE.DirectionalLight(0xffd700,2.3); d2.position.set(-4,2,-4); s.add(d2); const d3=new THREE.DirectionalLight(0x00ff88,1.8); d3.position.set(0,-4,4); s.add(d3); }
+
+{
+  const wrap=document.getElementById('wrap-evo');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,16);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  let layers=[];
+  function createLayers(count){
+    layers.forEach(l=>group.remove(l.mesh));
+    layers=[];
+    for(let i=0;i<count;i++){
+      const rad=1.5 + i*1.2;
+      const geom=new THREE.RingGeometry(rad-0.3,rad+0.3,48);
+      const gravity=1.0 - i*0.25; // 1g, 0.75g, 0.5g, 0.25g etc evolving to 1g,0.6g,0.3g,0.1g
+      const gravActual=[1.0,0.6,0.3,0.1,0.05,0][i] || Math.max(0,1.0 - i*0.25);
+      const hue=0.12 + gravActual*0.15;
+      const mat=new THREE.MeshBasicMaterial({color:new THREE.Color().setHSL(hue,1,0.5), transparent:true, opacity:0.2 + gravActual*0.15, side:THREE.DoubleSide});
+      const mesh=new THREE.Mesh(geom, mat);
+      mesh.rotation.x=Math.PI/2;
+      group.add(mesh);
+      layers.push({mesh:mesh, gravity:gravActual, baseRad:rad});
+    }
+  }
+  createLayers(2);
+  let t=0; let stage=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.02;
+    if(t%6<0.03){
+      stage=(stage+1)%5;
+      createLayers(2+stage);
+    }
+    layers.forEach((l,i)=>{
+      l.mesh.rotation.z+=0.002 * (1 - l.gravity*0.5);
+      l.mesh.material.opacity=0.15 + l.gravity*0.2 + Math.sin(t*2 + i)*0.05;
+    });
+    group.rotation.y+=0.001;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-grav');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,14);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const gravLevels=[{g:1.0,label:'1g=9.8',color:0xffffff},{g:0.6,label:'0.6g=5.88',color:0xffd700},{g:0.3,label:'0.3g=2.94',color:0xff8800},{g:0.1,label:'0.1g=0.98',color:0x000000}];
+  const bubbles=[];
+  gravLevels.forEach((lvl,idx)=>{
+    for(let j=0;j<3;j++){
+      const ang=(idx/4)*Math.PI*2 + j*0.4;
+      const rad=1.5 + idx*1.4;
+      const geom=new THREE.SphereGeometry(0.3 + lvl.g*0.2,16,16);
+      const mat=new THREE.MeshStandardMaterial({color:lvl.color===0x000000?0x333333:lvl.color, emissive:lvl.color===0x000000?0x222222:lvl.color, emissiveIntensity:3.0 + lvl.g*2.0});
+      const b=new THREE.Mesh(geom, mat);
+      b.position.set(Math.cos(ang)*rad, Math.sin(ang)*rad, 0);
+      group.add(b); bubbles.push({mesh:b, gravity:lvl.g, baseRad:rad, baseAng:ang});
+    }
+  });
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.025;
+    bubbles.forEach((bObj,i)=>{
+      const gravPull=bObj.gravity*0.4;
+      bObj.mesh.position.y=Math.sin(bObj.baseAng)*bObj.baseRad - gravPull*0.5 + Math.sin(t* (1+bObj.gravity) + i)*0.2;
+      bObj.mesh.position.x=Math.cos(bObj.baseAng)*bObj.baseRad + Math.cos(t* (1+bObj.gravity*0.5) + i)*0.2;
+      bObj.mesh.material.emissiveIntensity=3.0 + bObj.gravity*2.0 + Math.sin(t*2 + i)*0.5;
+    });
+    group.rotation.y+=0.0015;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-bubbles');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(36, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,28);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const gravLevels=[1.0,0.6,0.3,0.1];
+  const all=[];
+  gravLevels.forEach((gLvl, lvlIdx)=>{
+    const count=6 + lvlIdx*2;
+    for(let i=0;i<count;i++){
+      const ang=i/count*Math.PI*2 + lvlIdx*0.3;
+      const rad=2 + lvlIdx*2.2 + (i%3)*0.5;
+      const geom=new THREE.SphereGeometry(0.18 + gLvl*0.1,12,12);
+      const type=i%3;
+      const baseColor=type===0?0xffffff:type===1?0xffd700:0x222222;
+      const mat=new THREE.MeshStandardMaterial({color:baseColor, emissive:baseColor===0x222222?0x444444:baseColor, emissiveIntensity:baseColor===0x222222?2.0:4.0 + gLvl*1.0, metalness:0.7, roughness:0.3});
+      const b=new THREE.Mesh(geom, mat);
+      b.position.set(Math.cos(ang)*rad, Math.sin(ang)*rad, Math.sin(ang*2)*1.2);
+      group.add(b); all.push({mesh:b, gravity:gLvl, level:lvlIdx, type:type, baseRad:rad, baseAng:ang});
+    }
+  });
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.02;
+    all.forEach((bObj,i)=>{
+      const gravPull=bObj.gravity*0.5;
+      const floatFreq=1.0 + bObj.gravity*0.8;
+      bObj.mesh.position.y=Math.sin(bObj.baseAng)*bObj.baseRad - gravPull*0.4 + Math.sin(t*floatFreq + i)*0.25;
+      bObj.mesh.position.x=Math.cos(bObj.baseAng)*bObj.baseRad + Math.cos(t*floatFreq*0.7 + i)*0.2;
+      bObj.mesh.position.z=Math.sin(bObj.baseAng*2 + t*0.5 + i*0.1)*1.5;
+      const hologenShift=Math.sin(t*1.2 + i*0.06)*0.05;
+      if(bObj.type===0){
+        const hue=(t*0.02 + i*0.01 + hologenShift)%1;
+        bObj.mesh.material.color.setHSL(hue,0.15,0.9);
+        bObj.mesh.material.emissive.setHSL(hue,0.2,0.7);
+      } else if(bObj.type===1){
+        bObj.mesh.material.color.setHSL(0.12 + hologenShift,1,0.55);
+        bObj.mesh.material.emissive.setHSL(0.12 + hologenShift,1,0.5);
+      }
+      bObj.mesh.material.emissiveIntensity=(bObj.type===2?2.0:4.0 + bObj.gravity*1.0) + Math.sin(t*2 + i)*0.5;
+    });
+    group.rotation.y+=0.0006;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+document.getElementById('btn-evo').onclick=()=>{};
+document.getElementById('btn-grav').onclick=()=>{};
+document.getElementById('btn-bubbles').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

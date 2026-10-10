@@ -1,0 +1,171 @@
+<!DOCTYPE html><html lang="en"><head><link rel="icon" href="../favicon.svg" type="image/svg+xml"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Memristor Crossbar — when memory and math are the same act</title>
+<style>
+:root{
+  --void:#07090e;--panel:#0c0f17;--rule:#1a212f;--card:#10141d;
+  --ink:#e9edf5;--faint:#727e93;--fainter:#404a5c;
+  --volt:#54d1ff;--current:#ffb454;--mem-lo:#1e2a3a;--mem-hi:#c77dff;--sum:#5fe0a0;--wire:#2a3340;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--void);color:var(--ink);font:400 13px/1.5 "IBM Plex Mono",ui-monospace,Menlo,monospace}
+body{padding:24px 18px 44px}
+.wrap{max-width:1020px;margin:0 auto}
+.eyebrow{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--faint);margin-bottom:12px}
+h1{font:600 30px/1.05 "IBM Plex Sans","Helvetica Neue",sans-serif;letter-spacing:-.02em;max-width:24ch}
+h1 em{font-style:normal;color:var(--mem-hi)}
+.lede{color:var(--faint);font-size:13px;max-width:70ch;line-height:1.7;margin-top:14px}
+.lede b{color:var(--ink);font-weight:400}
+.rig{display:grid;grid-template-columns:1fr 272px;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:12px;overflow:hidden;margin:22px 0 8px}
+@media(max-width:840px){.rig{grid-template-columns:1fr}}
+.stage{background:#05070c;padding:14px;display:flex;align-items:center;justify-content:center}
+canvas{width:100%;display:block;border-radius:8px;background:#05070c}
+.side{background:var(--panel);display:flex;flex-direction:column}
+.blk{padding:14px 15px;border-bottom:1px solid var(--rule)}
+.blk:last-child{border-bottom:none}
+.blk h2{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}
+.hint{font-size:10.5px;color:var(--fainter);line-height:1.5}
+.mode{display:flex;gap:7px}
+.mode button{flex:1;font:inherit;font-size:11px;padding:9px;border-radius:7px;cursor:pointer;background:var(--card);border:1px solid var(--rule);color:var(--faint)}
+.mode button.on{border-color:var(--mem-hi);color:var(--mem-hi)}
+.cmp{font-size:11px;color:var(--faint);line-height:1.9}
+.cmp .r{display:flex;justify-content:space-between}
+.cmp .r b{color:var(--ink);font-weight:400;font-variant-numeric:tabular-nums}
+.cmp .r.x b{color:var(--current)}
+.foot{color:var(--fainter);font-size:11px;line-height:1.75;margin-top:22px;max-width:88ch}
+.foot b{color:var(--faint);font-weight:400}.foot .v{color:var(--volt)}.foot .i{color:var(--current)}.foot .m{color:var(--mem-hi)}
+</style></head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">memristor crossbar · analog in-memory computing · the wall your whole thread hit</div>
+  <h1>What if memory and math were the <em>same act?</em></h1>
+  <p class="lede">Your thread just split silicon into gates that compute and loops that remember — and every normal computer keeps them apart, shuttling data back and forth between them (the bottleneck that eats most of the energy). A <b>memristor</b> breaks that wall. It's a resistor whose resistance you can set and that <b>stays set</b> — a stored number you can feel as conductance. Wire a grid of them and something wild happens: put voltages in on the rows, and the current that flows out each column <b>is</b> a matrix-vector multiply — the core operation of every neural network — computed in one physical step by Ohm's law, no clock, no instructions. The memory <b>is</b> the calculator.</p>
+
+  <div class="rig">
+    <div class="stage"><canvas id="cv" width="560" height="460"></canvas></div>
+    <div class="side">
+      <div class="blk">
+        <h2>Mode</h2>
+        <div class="mode"><button class="on" id="m-run">apply voltages</button><button id="m-edit">set weights</button></div>
+        <div class="hint" id="hint" style="margin-top:8px">Click a row's voltage dot to change the input. Watch the column currents.</div>
+      </div>
+      <div class="blk">
+        <h2>The computation</h2>
+        <div class="cmp" id="cmp"></div>
+      </div>
+      <div class="blk">
+        <h2>Crossbar vs CPU</h2>
+        <div class="cmp">
+          <div class="r"><span>crossbar steps</span><b style="color:var(--sum)">1 (physics)</b></div>
+          <div class="r x"><span>CPU multiply-adds</span><b id="cpuOps">—</b></div>
+        </div>
+        <div class="hint" style="margin-top:8px">Scale to 1024×1024 and the CPU needs a million steps; the crossbar still needs one.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot"><b>Computing with Ohm's law instead of instructions.</b> Every crosspoint in the grid is a <m>memristor</m> holding a conductance G — a weight, stored physically as how easily it passes current. Drive the rows with input <v>voltages</v> and two schoolbook laws do the rest: Ohm says each device passes current I = V·G, and Kirchhoff says the currents flowing onto each column wire simply <b>add up</b>. So the current at the bottom of column j is Σ Vᵢ·Gᵢⱼ — a dot product — and all the columns together are a full matrix-vector multiply, the heart of every neural-network layer, happening in a <i>single</i> physical step no matter how big the grid. That's the thing a CPU spends millions of clocked multiply-add instructions on, and here it's just <i>current settling</i>. Two consequences fall out. First, there's no von Neumann shuttle — the weights never move to a processor because the weights <b>are</b> the processor; memory and math are the same act, which is why this can be orders of magnitude more energy-efficient for AI. Second, the devices <b>learn</b>: nudge a conductance and you've adjusted a synapse, so training is just teaching the grid to conduct differently. It's a strange, beautiful inversion of everything you built up this session — the switch that obeys, the gate that decides, the loop that remembers — all collapsed into one component that <b>stores by resisting and computes by conducting</b>. The wall between memory and processing, which the whole history of computers was built around, turns out to be optional.</p>
+</div>
+
+<script>
+(function(){
+var $=function(id){return document.getElementById(id);};
+var cv=$('cv'), g=cv.getContext('2d');
+var DPR=Math.min(devicePixelRatio||1,2);
+function fit(){var w=cv.clientWidth;cv.width=w*DPR;cv.height=w*460/560*DPR;g.setTransform(DPR,0,0,DPR,0,0);W=w;H=w*460/560;}
+var W=560,H=460;
+
+var ROWS=4, COLS=3;
+// conductances (stored weights), 0..1
+var G=[[0.2,0.8,0.1],[0.5,0.3,0.9],[0.7,0.1,0.4],[0.9,0.6,0.2]];
+var V=[1.0,0.5,0.2,0.8]; // input voltages 0..1
+var mode='run';
+
+function currents(){var I=new Array(COLS).fill(0);for(var j=0;j<COLS;j++)for(var i=0;i<ROWS;i++)I[j]+=V[i]*G[i][j];return I;}
+
+// layout
+function rowY(i){return H*0.18 + i*(H*0.62/(ROWS-1));}
+function colX(j){return W*0.34 + j*(W*0.44/(COLS-1));}
+var vDotX=W*0.12, iLampY=H*0.9;
+
+function draw(){
+  g.clearRect(0,0,W,H);g.fillStyle='#05070c';g.fillRect(0,0,W,H);
+  var I=currents();
+  var maxI=Math.max.apply(null,I.concat([1]));
+  // row wires (horizontal) carrying voltage
+  for(var i=0;i<ROWS;i++){var y=rowY(i);
+    var lit=V[i]>0.05;
+    g.strokeStyle=lit?'rgba(84,209,255,'+(0.35+V[i]*0.55)+')':'rgba(42,51,64,0.8)';g.lineWidth=lit?1.5+V[i]*2:1.2;
+    g.beginPath();g.moveTo(vDotX+12,y);g.lineTo(colX(COLS-1)+10,y);g.stroke();
+    // voltage input dot
+    g.fillStyle=lit?'#54d1ff':'#28303e';g.beginPath();g.arc(vDotX,y,12,0,6.28);g.fill();
+    g.fillStyle=lit?'#06121a':'#5a6572';g.font='600 11px monospace';g.textAlign='center';g.fillText(V[i].toFixed(1),vDotX,y+4);
+    g.fillStyle='rgba(120,130,150,0.7)';g.font='9px monospace';g.fillText('V'+(i+1),vDotX,y-18);
+  }
+  // column wires (vertical) collecting current
+  for(var j=0;j<COLS;j++){var x=colX(j);
+    var frac=I[j]/maxI;
+    g.strokeStyle='rgba(255,180,84,'+(0.2+frac*0.6)+')';g.lineWidth=1.2+frac*3;
+    g.beginPath();g.moveTo(x,rowY(0)-14);g.lineTo(x,iLampY-14);g.stroke();
+  }
+  // memristors at crosspoints
+  for(i=0;i<ROWS;i++)for(j=0;j<COLS;j++){var x=colX(j),y=rowY(i);
+    var gc=G[i][j];
+    // device: color by conductance (dark=low, purple=high)
+    var r=Math.round(30+gc*170), b=Math.round(58+gc*197);
+    g.fillStyle='rgb('+r+','+Math.round(42+gc*40)+','+b+')';
+    g.strokeStyle=mode==='edit'?'rgba(199,125,255,0.8)':'rgba(120,130,150,0.3)';g.lineWidth=mode==='edit'?1.5:1;
+    g.beginPath();g.roundRect?g.roundRect(x-13,y-9,26,18,4):g.rect(x-13,y-9,26,18);g.fill();g.stroke();
+    // conductance value
+    g.fillStyle=gc>0.5?'#0a0813':'rgba(200,210,230,0.85)';g.font='9px monospace';g.textAlign='center';g.fillText(gc.toFixed(1),x,y+3);
+    // current flowing through this device (dot animation feel via size)
+    var cur=V[i]*gc;
+    if(cur>0.05){g.fillStyle='rgba(255,180,84,'+Math.min(0.9,cur)+')';g.beginPath();g.arc(x,y+13,1.5+cur*2,0,6.28);g.fill();}
+  }
+  // column current lamps (the ANSWER)
+  for(j=0;j<COLS;j++){var x=colX(j);var frac=I[j]/maxI;
+    g.fillStyle='rgb('+Math.round(40+frac*215)+','+Math.round(30+frac*150)+',74)';
+    if(frac>0.1){g.shadowColor='#ffb454';g.shadowBlur=6+frac*14;}
+    g.beginPath();g.arc(x,iLampY,14,0,6.28);g.fill();g.shadowBlur=0;
+    g.fillStyle='#0a0d13';g.font='600 11px monospace';g.textAlign='center';g.fillText(I[j].toFixed(2),x,iLampY+4);
+    g.fillStyle='rgba(255,180,84,0.8)';g.font='9px monospace';g.fillText('I'+(j+1),x,iLampY+28);
+  }
+  // labels
+  g.fillStyle='rgba(84,209,255,0.7)';g.font='10px monospace';g.textAlign='left';
+  g.fillText('inputs (voltage)',10,H*0.1);
+  g.fillStyle='rgba(199,125,255,0.7)';g.textAlign='center';g.fillText('stored weights (conductance)',W*0.56,H*0.1);
+  g.fillStyle='rgba(255,180,84,0.8)';g.fillText('outputs = column currents (the matrix product)',W*0.55,iLampY+44);
+  g.textAlign='left';
+}
+
+function updatePanel(){
+  var I=currents();
+  var html='';
+  for(var j=0;j<COLS;j++){
+    var terms=[];for(var i=0;i<ROWS;i++)terms.push(V[i].toFixed(1)+'×'+G[i][j].toFixed(1));
+    html+='<div class="r"><span>I'+(j+1)+' = '+terms.join('+')+'</span><b style="color:var(--current)">'+I[j].toFixed(2)+'</b></div>';
+  }
+  $('cmp').innerHTML=html;
+  $('cpuOps').textContent=(ROWS*COLS)+' (this grid)';
+}
+
+// interaction
+cv.addEventListener('click',function(e){
+  var rect=cv.getBoundingClientRect();var mx=(e.clientX-rect.left),my=(e.clientY-rect.top);
+  if(mode==='run'){
+    // click a voltage dot to cycle its value
+    for(var i=0;i<ROWS;i++){var y=rowY(i);if(Math.abs(mx-vDotX)<18&&Math.abs(my-y)<18){V[i]=Math.round(((V[i]+0.3)%1.2)*10)/10;draw();updatePanel();return;}}
+  } else {
+    // click a memristor to raise its conductance (cycle)
+    for(i=0;i<ROWS;i++)for(var j=0;j<COLS;j++){var x=colX(j),yy=rowY(i);if(Math.abs(mx-x)<16&&Math.abs(my-yy)<14){G[i][j]=Math.round(((G[i][j]+0.2)%1.05)*10)/10;if(G[i][j]<0.1)G[i][j]=0.1;draw();updatePanel();return;}}
+  }
+});
+$('m-run').onclick=function(){mode='run';this.classList.add('on');$('m-edit').classList.remove('on');$('hint').textContent='Click a row\u2019s voltage dot to change the input. Watch the column currents update instantly.';draw();};
+$('m-edit').onclick=function(){mode='edit';this.classList.add('on');$('m-run').classList.remove('on');$('hint').textContent='Click a memristor to raise its stored conductance (the weight). This is "training" the grid.';draw();};
+
+window.addEventListener('resize',function(){fit();draw();});
+if(!g.roundRect){g.roundRect=function(x,y,w,h,r){this.beginPath();this.moveTo(x+r,y);this.arcTo(x+w,y,x+w,y+h,r);this.arcTo(x+w,y+h,x,y+h,r);this.arcTo(x,y+h,x,y,r);this.arcTo(x,y,x+w,y,r);this.closePath();return this;};}
+fit();draw();updatePanel();
+})();
+</script>
+</body></html>

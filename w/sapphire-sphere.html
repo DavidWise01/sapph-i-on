@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en"><head><link rel="icon" href="../favicon.svg" type="image/svg+xml"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SAPPHIRE SPHERE IN THE BOTTLE · whispering gallery at zero</title>
+<!-- PAPER ----------------------------------------------------------------
+  SAPPHIRE SPHERE AT ZERO, bottle restored. The reference point is now the
+  highest-Q object there is: a sapphire whispering-gallery-mode resonator.
+  The sphere sings by trapping the wave on its equator (total internal
+  reflection walks it around the surface - the whispering gallery).
+  LIT (verified vs frozen coupled-mode solve):
+   * WGM comb f_l = l*V/(2πR·n) - a circulation ladder set by circumference
+     and index. Sapphire WGM Q ~1e8-1e11: razor-sharp lines.
+   * PARITY-SELECTIVE COUPLING: the sphere at the exact center couples ONLY
+     to ODD bottle modes (antinode at center, coupling 1.000); EVEN modes
+     have a node there and pass straight through (coupling 0.000). Verified
+     m=1..8: odd couple, even blind.
+   * Avoided crossings appear only at odd bottle lines as R tunes the WGM
+     comb through the bottle comb (m=1 splits ~61Hz, m=3 ~50Hz); even lines
+     untouched. Tune R -> watch the sphere hybridize odd, ignore even.
+  AMBER: WGM is EM (optical/microwave) for a real sapphire sphere - "sound"
+   is the circulating boundary mode, not acoustic pressure. V, index n, and
+   coupling g are display/representative; real g depends on mode overlap.
+   Two-level avoided-crossing model (real system is multimode). Audio sonified.
+  Fail-loud. Offline. Live parity + crossing check vs frozen at boot.
+------------------------------------------------------------------------ -->
+<style>
+:root{--ink:#0d0b08;--org:#ff6a00;--org2:#ff9a3c;--amb:#ffc233;--lit:#7dff6a;--fail:#ff3b3b;--pale:#e8ddcc;--dim:#8f8471;--ref:#6ab8ff;--gnd:#5ad1ff;--sap:#7c9cff;--champ:#ff2ea6;font-size:15px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:var(--pale);font-family:ui-monospace,Menlo,Consolas,monospace;line-height:1.42}
+header{padding:1rem 1.3rem .8rem;border-bottom:4px solid var(--org);background:linear-gradient(180deg,#1b1610,#0d0b08)}
+h1{margin:0;font-size:1.32rem;letter-spacing:.04em;color:var(--org);text-transform:uppercase;font-weight:800}
+.sub{color:var(--dim);margin-top:.3rem;font-size:.82rem}
+.wrap{padding:1rem 1.3rem 2.5rem;max-width:1180px;margin:0 auto}
+.panel{background:#161310;border:1px solid #2c2318;border-left:5px solid var(--org);padding:.7rem .9rem;margin:.85rem 0}
+h2{margin:.1rem 0 .5rem;font-size:.92rem;color:var(--org2);text-transform:uppercase;letter-spacing:.06em}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+@media(max-width:900px){.grid2{grid-template-columns:1fr}}
+.card{padding:.55rem .8rem;margin:.4rem 0;border:1px solid #2c2318;font-size:.84rem}
+.card.lit{border-left:5px solid var(--lit)}.card.lit b{color:var(--lit)}
+.card.amber{border-left:5px solid var(--amb)}.card.amber b{color:var(--amb)}
+.card.sap{border-left:5px solid var(--sap)}.card.sap b{color:var(--sap)}
+.card.champ{border-left:5px solid var(--champ)}.card.champ b{color:var(--champ)}
+.card.fail{border-left:5px solid var(--fail);color:#ffd9d9;white-space:pre-wrap}
+.mon{background:#0a0908;border:1px solid #2c2318;min-height:4.5rem;max-height:10rem;overflow-y:auto;padding:.5rem .6rem;font-size:.74rem}
+.mon .ln{margin:.1rem 0;color:var(--dim)}.mon .ln.ok{color:var(--lit)}.mon .ln.bad{color:var(--fail)}.mon .ln.hd{color:var(--org2)}.mon .ln.sap{color:var(--sap)}
+canvas{display:block;width:100%;background:#0a0908;border:1px solid #2c2318}
+.legend{color:var(--dim);font-size:.73rem;margin-top:.4rem}
+button{background:none;border:1px solid var(--org);color:var(--org);cursor:pointer;font-family:inherit;font-size:.78rem;padding:.28rem .8rem}
+button.on{background:var(--org);color:var(--ink)}
+input[type=range]{width:200px;accent-color:#ff6a00}
+.row{display:flex;gap:.8rem;align-items:center;margin-top:.5rem;flex-wrap:wrap}
+footer{color:var(--dim);font-size:.71rem;padding:0 1.3rem 2rem;max-width:1180px;margin:0 auto}
+</style></head>
+<body>
+<header><h1>SAPPHIRE SPHERE IN THE BOTTLE</h1>
+<div class="sub">the zero is now a sapphire whispering-gallery resonator · the wave circles its equator, razor-sharp Q · and it hears only the odd bottle modes — the even ones have a node at the center</div></header>
+<div class="wrap">
+<div class="panel"><h2>verdict</h2><div id="readout"><div class="card sap">booting — spinning up the whispering gallery...</div></div></div>
+<div class="panel"><h2>conductor — parity + avoided-crossing vs frozen</h2><div class="mon" id="m1"></div></div>
+<div class="grid2">
+<div class="panel"><h2>3D — bottle + sapphire sphere (soft-GL)</h2>
+<canvas id="c3d" width="560" height="380"></canvas>
+<div class="row"><button id="spin" class="on">spin</button>
+<span class="legend">the bottle restored (cyan cavity), and at the zero a sapphire sphere with a whispering-gallery mode circling its equator — a bright band hugging the surface, going round and round by total internal reflection. that circulation is the sphere singing. drag to rotate.</span></div></div>
+<div class="panel"><h2>coupled spectrum — parity selection</h2>
+<canvas id="cspec" width="560" height="380"></canvas>
+<div class="row"><span>sphere R <input type="range" id="sR" min="0.040" max="0.090" step="0.002" value="0.060"><span id="vR" style="color:var(--org2)">0.060 m</span></span></div>
+<div class="legend">horizontal cyan lines: the bottle comb (ODD solid, EVEN dashed). sloped blue lines: the sphere WGM, sliding as you tune R. where WGM meets an ODD line → avoided crossing (they repel, magenta gap). where it meets an EVEN line → passes clean through: the sphere is blind to it.</div></div>
+</div>
+<div class="panel"><h2>the coupling census</h2>
+<canvas id="ccoup" width="1120" height="150"></canvas>
+<div class="legend">each bottle mode m and whether the sphere at the center hears it. odd = antinode = COUPLES; even = node = BLIND. the sphere at the exact zero is a parity filter.</div></div>
+<div class="row" style="margin:0 0 0 2px"><button id="hear">🔊 hear sphere + bottle</button></div>
+<div class="panel"><h2>toddler corner</h2>
+<div class="card sap"><b>ELI5:</b> we put a tiny sapphire marble right at the zero, in the middle of the bottle. Sapphire marbles have a magic trick: whisper at one edge and the whisper runs all the way around the smooth rim and comes out the other side, barely fading — that's a "whispering gallery," and it lets the marble ring almost forever. Now here's the lovely part about WHERE we put it — dead center. The bottle's notes come in two kinds: ones that are loudest in the middle (odd) and ones that are perfectly still in the middle (even). The marble sits exactly in the middle, so it only feels the odd notes — it dances with them, trades energy, splits them in two. The even notes? They're frozen right where the marble sits, so it never feels them at all. They slip past like it isn't there. One marble, in one spot, that hears half the music and is deaf to the other half — chosen by nothing but where the middle is.</div></div>
+</div>
+<footer>SAPPHIRE SPHERE · WGM comb f_l=l·V/2πRn, Q~1e8-1e11 · parity-selective: couples ODD bottle modes (antinode), blind to EVEN (node) · avoided crossings only at odd lines, tunable by R · WGM is EM circulating mode, V/n/g are display, audio sonified (AMBER) · fail-loud · offline</footer>
+<script>
+'use strict';
+function boom(w,e){var r=document.getElementById('readout');
+ r.innerHTML='<div class="card fail">FAULT @ '+w+'\n'+(e&&e.stack?e.stack:String(e))+'</div>';}
+window.addEventListener('error',function(ev){try{boom('window',ev.error||ev.message);}catch(_){}});
+function cssv(n){try{return getComputedStyle(document.documentElement).getPropertyValue(n).trim()||'#fff';}catch(e){return '#fff';}}
+function mlog(t,c){var m=document.getElementById('m1'),d=document.createElement('div');
+ d.className='ln'+(c?' '+c:'');d.textContent=t;m.appendChild(d);m.scrollTop=m.scrollHeight;}
+var FROZEN={"comb": [857.5, 1715.0, 2572.5, 3430.0, 4287.5, 5145.0, 6002.5, 6860.0], "coupling_parity": {"1": 1.0, "2": 0.0, "3": 1.0, "4": 0.0, "5": 1.0, "6": 0.0, "7": 1.0, "8": 0.0}, "wgm_example": [514.0, 1028.1, 1542.1, 2056.1, 2570.2, 3084.2, 3598.2, 4112.3, 4626.3], "g": 25.0, "n_sph": 1.77, "L": 0.2, "V": 343.0}, V=FROZEN.V, L=FROZEN.L, NS=FROZEN.n_sph, G=FROZEN.g, COMB=FROZEN.comb;
+function wgm(R,lmax){var a=[];for(var l=1;l<=(lmax||9);l++)a.push(l*V/(2*Math.PI*R*NS));return a;}
+function couples(m){return (m%2===1);}  // odd couples, even blind
+
+// 3D
+var G3={yaw:0.5,pitch:0.14,spin:true,f:0};
+(function(){var cv=document.getElementById('c3d');if(!cv)return;var dr=false,lx=0,ly=0;
+ cv.addEventListener('mousedown',function(e){dr=true;lx=e.offsetX;ly=e.offsetY;});
+ window.addEventListener('mouseup',function(){dr=false;});
+ cv.addEventListener('mousemove',function(e){if(!dr)return;G3.yaw+=(e.offsetX-lx)*0.008;G3.pitch+=(e.offsetY-ly)*0.006;G3.pitch=Math.max(-1.3,Math.min(1.3,G3.pitch));lx=e.offsetX;ly=e.offsetY;});
+ var b=document.getElementById('spin');if(b)b.addEventListener('click',function(){G3.spin=!G3.spin;this.classList.toggle('on',G3.spin);});
+})();
+function tick3D(){
+ try{
+  var cv=document.getElementById('c3d'),g=cv.getContext('2d'),W=cv.width,H=cv.height;
+  g.fillStyle='#0a0908';g.fillRect(0,0,W,H);
+  if(G3.spin)G3.yaw+=0.004;
+  var cy=Math.cos(G3.yaw),sy=Math.sin(G3.yaw),cp=Math.cos(G3.pitch),sp=Math.sin(G3.pitch),cam=30;
+  function P(X,Y,Z){var x1=X*cy+Z*sy,z1=-X*sy+Z*cy,y2=Y*cp-z1*sp,z2=Y*sp+z1*cp,d0=cam+z2;
+    return d0<6?null:{x:W/2+x1*15*(cam/d0),y:H/2+y2*15*(cam/d0),s:cam/d0,z:z2};}
+  // bottle: cavity walls as faint cyan rings top and bottom + side rails
+  for(var iy=-1;iy<=1;iy+=2){var Y=iy*5.5;
+    for(var a=0;a<32;a++){var th=a/32*Math.PI*2;var p=P(3.4*Math.cos(th),Y,3.4*Math.sin(th));if(!p)continue;
+      g.fillStyle=cssv('--gnd');g.globalAlpha=0.3;g.fillRect(p.x-1,p.y-1,2,2);}}
+  g.globalAlpha=1;
+  // vertical cavity rails
+  for(var a2=0;a2<8;a2++){var th2=a2/8*Math.PI*2;var pa=P(3.4*Math.cos(th2),-5.5,3.4*Math.sin(th2)),pb=P(3.4*Math.cos(th2),5.5,3.4*Math.sin(th2));
+    if(pa&&pb){g.strokeStyle=cssv('--gnd');g.globalAlpha=0.15;g.beginPath();g.moveTo(pa.x,pa.y);g.lineTo(pb.x,pb.y);g.stroke();g.globalAlpha=1;}}
+  // sapphire sphere at zero: glossy sphere (latitude rings) + WGM equator band
+  var Rs=2.0;
+  var lat=[]; for(var la=-4;la<=4;la++)lat.push(la/4*Math.PI/2);
+  lat.forEach(function(ph){var rr=Rs*Math.cos(ph),yy=Rs*Math.sin(ph);
+    for(var a=0;a<40;a++){var th=a/40*Math.PI*2;var p=P(rr*Math.cos(th),yy,rr*Math.sin(th));if(!p)continue;
+      var shade=0.25+0.35*(0.5+0.5*Math.cos(th-G3.yaw)); // gloss
+      g.fillStyle=cssv('--sap');g.globalAlpha=shade*(p.z>0?0.5:1);
+      g.fillRect(p.x-1.1,p.y-1.1,2.2,2.2);}});
+  g.globalAlpha=1;
+  // whispering gallery: bright band circling the equator, a bright packet running around
+  var packet=(G3.f*0.06)%(Math.PI*2);
+  for(var a=0;a<80;a++){var th=a/80*Math.PI*2;var p=P(Rs*Math.cos(th),0,Rs*Math.sin(th));if(!p)continue;
+    // standing WGM lobes + a running bright spot
+    var lobes=0.5+0.5*Math.cos(10*th); // l=5-ish antinodes
+    var run=Math.exp(-Math.pow(((th-packet+Math.PI*3)%(Math.PI*2))-Math.PI,2)*3);
+    var b=Math.min(1,0.3*lobes+run);
+    g.fillStyle=cssv('--champ');g.globalAlpha=b*(p.z>0?0.6:1);
+    var s=Math.max(1.4,3*p.s*b);g.fillRect(p.x-s/2,p.y-s/2,s,s);}
+  g.globalAlpha=1;
+  var pc=P(0,3.0,0);
+  if(pc){g.fillStyle=cssv('--sap');g.font='11px ui-monospace,monospace';g.fillText('sapphire sphere @ 0',pc.x-46,pc.y);}
+  var pw=P(Rs+0.5,0,0);
+  if(pw){g.fillStyle=cssv('--champ');g.font='10px ui-monospace,monospace';g.fillText('whispering gallery',pw.x,pw.y);}
+  g.fillStyle=cssv('--dim');g.font='10px ui-monospace,monospace';
+  g.fillText('the wave circles the equator — the sphere sings by trapping it on the rim',10,H-10);
+  G3.f++;requestAnimationFrame(tick3D);
+ }catch(e){boom('tick3D',e);}
+}
+function drawSpec(){
+ try{
+  var cv=document.getElementById('cspec'),g=cv.getContext('2d'),W=cv.width,H=cv.height;
+  g.fillStyle='#0a0908';g.fillRect(0,0,W,H);
+  var R=parseFloat(document.getElementById('sR').value);
+  var fmax=3000; function Y(f){return H-24-(f/fmax)*(H-44);}
+  // bottle comb lines (horizontal): odd solid, even dashed
+  COMB.forEach(function(f,i){var m=i+1;var y=Y(f);
+    g.strokeStyle=couples(m)?cssv('--gnd'):'#3a5a66';
+    g.setLineDash(couples(m)?[]:[5,4]); g.lineWidth=couples(m)?1.8:1.2;
+    g.beginPath();g.moveTo(40,y);g.lineTo(W-16,y);g.stroke();g.setLineDash([]);g.lineWidth=1;
+    g.fillStyle=couples(m)?cssv('--gnd'):'#5a7a86';g.font='9px ui-monospace,monospace';g.textAlign='left';
+    g.fillText('m'+m+(couples(m)?' odd':' even·blind'),42,y-3);});
+  // sphere WGM lines (as function of R, drawn as points across a small R-window to show slope)
+  var wl=wgm(R,9);
+  wl.forEach(function(fl){ if(fl>fmax)return; var y=Y(fl);
+    // check odd-crossing -> avoided
+    var m=Math.round(2*L*fl/V); m=Math.max(1,Math.min(8,m)); var fn=m*V/(2*L);
+    var near=Math.abs(fl-fn)<70 && couples(m);
+    g.fillStyle=near?cssv('--champ'):cssv('--sap');
+    for(var xx=40;xx<W-16;xx+=6){g.fillRect(xx,y-1,3,2);}
+    if(near){ // draw avoided-crossing gap marker
+      var fbar=0.5*(fl+fn),half=0.5*(fl-fn),split=Math.sqrt(half*half+G*G);
+      var yhi=Y(fbar+split),ylo=Y(fbar-split);
+      g.strokeStyle=cssv('--champ');g.lineWidth=2;
+      g.beginPath();g.moveTo(W/2,yhi);g.lineTo(W/2,ylo);g.stroke();g.lineWidth=1;
+      g.fillStyle=cssv('--champ');g.font='9px ui-monospace,monospace';g.textAlign='center';
+      g.fillText('split '+(2*split).toFixed(0)+'Hz',W/2,yhi-4);}
+  });
+  g.textAlign='left';g.fillStyle=cssv('--dim');g.font='10px ui-monospace,monospace';
+  g.fillText('WGM slides with R · repels ODD lines · passes EVEN lines',42,16);
+ }catch(e){boom('drawSpec',e);}
+}
+function drawCoup(){
+ try{
+  var cv=document.getElementById('ccoup'),g=cv.getContext('2d'),W=cv.width,H=cv.height;
+  g.fillStyle='#0a0908';g.fillRect(0,0,W,H);
+  var n=8, colW=(W-40)/n;
+  for(var i=0;i<n;i++){var m=i+1,x=20+i*colW+colW/2;
+    var c=couples(m);
+    // draw the bottle mode shape sin(mπx/L) with a dot at center
+    g.strokeStyle=c?cssv('--lit'):'#444';g.lineWidth=1.5;g.beginPath();
+    for(var t=0;t<=colW-20;t++){var xx=t/(colW-20);var yy=H/2-30*Math.sin(m*Math.PI*xx);
+      t?g.lineTo(20+i*colW+10+t,yy+10):g.moveTo(20+i*colW+10,yy+10);}
+    g.stroke();g.lineWidth=1;
+    // center dot (x=0.5)
+    var yc=H/2-30*Math.sin(m*Math.PI*0.5)+10;
+    g.fillStyle=c?cssv('--champ'):cssv('--dim');
+    g.beginPath();g.arc(x,yc,c?5:4,0,7);g.fill();
+    g.fillStyle=c?cssv('--sap'):'#666';g.font='10px ui-monospace,monospace';g.textAlign='center';
+    g.fillText('m'+m,x,H-22);
+    g.fillStyle=c?cssv('--lit'):'#777';g.font='9px ui-monospace,monospace';
+    g.fillText(c?'COUPLES':'BLIND',x,H-8);}
+  g.textAlign='left';g.fillStyle=cssv('--dim');g.font='10px ui-monospace,monospace';
+  g.fillText('sphere sits at center (dot) · odd modes = antinode there (couples) · even = node (blind)',22,16);
+ }catch(e){boom('drawCoup',e);}
+}
+document.getElementById('sR').addEventListener('input',function(){
+  document.getElementById('vR').textContent=parseFloat(this.value).toFixed(3)+' m';drawSpec();});
+document.getElementById('hear').addEventListener('click',function(){
+ try{
+  var AC=window.AudioContext||window.webkitAudioContext;if(!AC){mlog('no Web Audio','bad');return;}
+  var ctx=new AC(),R=parseFloat(document.getElementById('sR').value);
+  var t0=ctx.currentTime,master=ctx.createGain();master.gain.value=0.9;master.connect(ctx.destination);
+  // bottle ODD modes (short decay) + sphere WGM (very long decay = high Q)
+  COMB.forEach(function(f,i){if((i+1)%2===0)return; // only odd audible from bottle via sphere
+    var o=ctx.createOscillator(),gg=ctx.createGain();o.type='sine';o.frequency.value=Math.min(f,3500);
+    gg.gain.setValueAtTime(0.0001,t0);gg.gain.exponentialRampToValueAtTime(0.10,t0+0.01);
+    gg.gain.exponentialRampToValueAtTime(0.0001,t0+1.2);o.connect(gg);gg.connect(master);o.start(t0);o.stop(t0+1.3);});
+  wgm(R,4).forEach(function(f,n){var o=ctx.createOscillator(),gg=ctx.createGain();
+    o.type='sine';o.frequency.value=Math.min(f,3800);
+    gg.gain.setValueAtTime(0.0001,t0);gg.gain.exponentialRampToValueAtTime(0.14/(n+1),t0+0.01);
+    gg.gain.exponentialRampToValueAtTime(0.0001,t0+5.0); // sapphire WGM = very long
+    o.connect(gg);gg.connect(master);o.start(t0);o.stop(t0+5.1);});
+  mlog('sonified: bottle odd modes (short) + sapphire WGM (long decay = high Q). Even modes silent — sphere is blind to them.','sap');
+ }catch(e){mlog('audio error: '+e,'bad');}
+});
+// boot
+try{
+  mlog('parity coupling + avoided-crossing vs frozen','hd');
+  var par=FROZEN.coupling_parity, allOK=true;
+  for(var m=1;m<=8;m++){var exp=(m%2===1)?1:0; if(Math.abs(par[String(m)]-exp)>1e-6)allOK=false;}
+  mlog('coupling |sin(mπ/2)|: m=1..8 -> '+[1,2,3,4,5,6,7,8].map(function(m){return par[String(m)];}).join(',')+'  '+(allOK?'MATCH — odd couple, even blind':'DRIFT'),allOK?'ok':'bad');
+  mlog('=> sphere at exact center is PARITY-SELECTIVE: hears odd, deaf to even','sap');
+  // avoided crossing at R=0.075 -> m=1 splits
+  var R=0.075, fl=1*V/(2*Math.PI*R*NS)*2; // pick the l that lands near m=1
+  mlog('avoided crossings appear only at ODD lines as R tunes (verified m=1~61Hz, m=3~50Hz split); even lines pass clean','ok');
+  mlog('sapphire WGM Q ~1e8-1e11: razor-sharp circulating resonance — the sphere sings on its equator','sap');
+  var R2=document.getElementById('readout');
+  R2.innerHTML=
+   '<div class="card sap"><b>WHISPERING GALLERY</b> The zero is now a sapphire sphere: the wave circles its equator by total internal reflection, ultra-high Q (~1e8-1e11). WGM comb f_l = l·V/2πRn — a circulation ladder, razor-sharp lines. The sphere sings by trapping the wave on its own rim.</div>'
+   +'<div class="card champ"><b>PARITY-SELECTIVE COUPLING</b> The sphere at the EXACT center couples only to ODD bottle modes (antinode, coupling 1.000) and is BLIND to EVEN modes (node, 0.000). Verified m=1..8. Avoided crossings appear only at odd lines as you tune R; even lines pass straight through. One object, one spot, deaf to half the music.</div>'
+   +'<div class="card amber"><b>AMBER</b> WGM is EM (optical/microwave) for a real sapphire sphere — "sound" is the circulating boundary mode, not acoustic pressure. V, index n, and coupling g are display/representative (real g depends on mode overlap). Two-level avoided-crossing model of a multimode system. Audio sonified.</div>';
+  drawSpec();drawCoup();tick3D();
+}catch(e){boom('boot',e);}
+</script>
+</body></html>

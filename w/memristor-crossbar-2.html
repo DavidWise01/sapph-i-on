@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Crossbar — where the dot product becomes a current</title>
+<style>
+  :root{
+    --bg:#0a0710; --panel:#140d20; --panel2:#1b1230; --edge:#2e2148;
+    --ink:#ece3f7; --dim:#9a86bd; --faint:#6b5a8c;
+    --violet:#a78bfa; --violet2:#c4b5fd; --glow:#7c3aed;
+    --pos:#a78bfa; --neg:#fb7185; --fire:#34d399; --warn:#fbbf24; --amber:#f59e0b;
+    --mono:'SFMono-Regular',ui-monospace,'Cascadia Code',Menlo,Consolas,monospace;
+    --serif:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:var(--serif);line-height:1.55;
+    background-image:radial-gradient(1200px 600px at 72% -10%,#1a1030 0%,transparent 60%),
+      radial-gradient(900px 520px at 0% 100%,#150b28 0%,transparent 55%);}
+  .wrap{max-width:1060px;margin:0 auto;padding:42px 26px 90px}
+  header{border-bottom:1px solid var(--edge);padding-bottom:22px;margin-bottom:30px}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--violet);opacity:.9}
+  h1{font-size:33px;line-height:1.13;margin:.32em 0 .18em;font-weight:600;letter-spacing:.2px}
+  h1 em{color:var(--violet2);font-style:italic}
+  .sub{color:var(--dim);font-size:15.5px;max-width:76ch}
+  .lin{font-family:var(--mono);font-size:11.5px;color:var(--faint);margin-top:14px;letter-spacing:.02em}
+  .lin b{color:var(--violet);font-weight:500}
+  section{margin:40px 0}
+  h2{font-size:13px;font-family:var(--mono);letter-spacing:.22em;text-transform:uppercase;
+    color:var(--violet2);border-left:2px solid var(--glow);padding-left:11px;margin:0 0 6px}
+  .lede{color:var(--dim);font-size:15px;margin:0 0 18px;max-width:80ch}
+  .lede b{color:var(--violet2);font-weight:400}
+  .panel{background:linear-gradient(180deg,var(--panel),#100a1b);border:1px solid var(--edge);
+    border-radius:14px;padding:20px;box-shadow:0 1px 0 #2e2148 inset,0 24px 60px -40px #000}
+  .controls{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin-bottom:16px}
+  button{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--ink);
+    background:#241738;border:1px solid var(--edge);border-radius:8px;padding:8px 13px;cursor:pointer;transition:.15s}
+  button:hover{background:#2e1f48;border-color:var(--violet)}
+  button.on{background:var(--glow);border-color:var(--violet2);color:#fff;box-shadow:0 0 16px -4px var(--glow)}
+  label.sl{font-family:var(--mono);font-size:11px;color:var(--dim);display:flex;align-items:center;gap:8px}
+  input[type=range]{accent-color:var(--violet);width:130px}
+  .mono{font-family:var(--mono)}
+  canvas{display:block;border-radius:10px;background:#0c0717;border:1px solid var(--edge);max-width:100%}
+  .cap{font-family:var(--mono);font-size:11px;color:var(--faint);margin-top:7px}
+  .stat .v{font-family:var(--mono);font-size:24px;font-weight:600;letter-spacing:.5px}
+  .stat .k{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+  .row{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start}
+  .eqbig{font-family:var(--mono);font-size:18px;color:var(--violet2);background:#0e0a18;border:1px solid var(--edge);
+    border-radius:10px;padding:14px 16px;display:inline-block;margin:4px 0}
+  .eqbig .n{color:var(--ink)} .eqbig .op{color:var(--faint)}
+  .note{color:var(--dim);font-size:13.5px;border-left:2px solid var(--edge);padding-left:13px;margin:16px 0 0}
+  .note b{color:var(--violet2);font-weight:400}
+  code{font-family:var(--mono);font-size:.92em;color:var(--violet2);background:#170f28;padding:1px 5px;border-radius:5px}
+  /* recognizer layout */
+  .recog{display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:start}
+  @media(max-width:860px){.recog{grid-template-columns:1fr}}
+  .pad{display:grid;grid-template-columns:repeat(5,30px);grid-template-rows:repeat(5,30px);gap:4px}
+  .pad div{border-radius:5px;border:1px solid var(--edge);cursor:pointer;transition:.08s;background:#170f28}
+  .pad div.on{background:var(--fire);border-color:#14593f;box-shadow:0 0 8px -2px var(--fire)}
+  .scorebars{display:flex;flex-direction:column;gap:11px;min-width:220px}
+  .sb{display:flex;align-items:center;gap:10px}
+  .sb .glyph{display:grid;grid-template-columns:repeat(5,5px);grid-template-rows:repeat(5,5px);gap:1px;flex:none}
+  .sb .glyph i{border-radius:1px}
+  .sb .bar{flex:1;height:22px;background:#1c1330;border:1px solid var(--edge);border-radius:6px;position:relative;overflow:hidden}
+  .sb .fill{position:absolute;left:50%;top:0;bottom:0;background:linear-gradient(90deg,var(--glow),var(--violet2));transition:width .12s,left .12s}
+  .sb .val{font-family:var(--mono);font-size:13px;width:54px;text-align:right;color:var(--dim)}
+  .sb.win .bar{border-color:var(--fire);box-shadow:0 0 12px -3px var(--fire)}
+  .sb.win .val{color:var(--fire)}
+  .sb .name{font-family:var(--mono);font-size:13px;width:18px;color:var(--violet2)}
+  .ebits{display:flex;gap:20px;align-items:baseline;margin-top:6px;flex-wrap:wrap}
+  /* energy bar */
+  .energy{display:flex;height:42px;border-radius:9px;overflow:hidden;border:1px solid var(--edge);font-family:var(--mono);font-size:11px}
+  .energy span{display:flex;align-items:center;justify-content:center;color:#0a0710;font-weight:700;text-align:center;padding:0 4px}
+  .three{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:6px}
+  @media(max-width:680px){.three{grid-template-columns:1fr}}
+  .scale{background:var(--panel2);border:1px solid var(--edge);border-radius:12px;padding:16px}
+  .scale .n{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--violet);text-transform:uppercase}
+  .scale h4{margin:6px 0 6px;font-size:16px;font-weight:600}
+  .scale p{margin:0;color:var(--dim);font-size:13px}
+  .gatewrap{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:4px}
+  @media(max-width:680px){.gatewrap{grid-template-columns:1fr}}
+  .gate{background:#130c1f;border:1px solid var(--edge);border-radius:11px;padding:15px}
+  .gate h4{font-family:var(--mono);font-size:12px;letter-spacing:.06em;margin:0 0 7px;color:var(--warn)}
+  .gate p{margin:0;color:var(--dim);font-size:13px}
+  footer{margin-top:46px;border-top:1px solid var(--edge);padding-top:18px;color:var(--faint);
+    font-family:var(--mono);font-size:11px;line-height:1.7}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">Purple Paper · side-sheet · learning machines · II</div>
+  <h1>The Crossbar — where the dot product becomes a <em>current</em></h1>
+  <div class="sub">Set a weight as a physical conductance. Drive the input in as a voltage. Ohm's law does the
+    multiply; Kirchhoff's law does the sum — on a bare wire, for free. The atom from the last paper stops
+    being <em>computed</em> and becomes a measured quantity. Below it runs live, then we walk straight into the
+    gates that keep it honest.</div>
+  <div class="lin"><b>Chua 1971</b> postulates the memristor &nbsp;→&nbsp; <b>HP 2008</b> builds one &nbsp;→&nbsp;
+    conductance = weight, voltage = input, <b>I = V·G</b> = a multiply by physics &nbsp;→&nbsp; a grid of them = one
+    matrix-vector multiply in a single analog step.</div>
+</header>
+
+<!-- ============ I · ONE MEMRISTOR ============ -->
+<section>
+  <h2>I · One device — the multiply, by Ohm's law</h2>
+  <p class="lede">A memristor is a resistor that <em>remembers</em>: you set its conductance <b>G</b> and it stays.
+    Drive a voltage <b>V</b> across it and the current that flows is <code>I = V·G</code> — input times weight,
+    happening in the material, instantly, with no multiplier circuit anywhere. Drag both and watch the product.</p>
+
+  <div class="panel">
+    <div class="row">
+      <div>
+        <canvas id="m1" width="360" height="220"></canvas>
+        <div class="cap">one memristor — voltage in on the left rail, current out on the right; line brightness ∝ current</div>
+      </div>
+      <div style="min-width:230px">
+        <label class="sl" style="margin-bottom:12px">V (input)&nbsp; <input type="range" id="m1v" min="-100" max="100" value="80"><span class="mono" id="m1vl" style="color:var(--ink)">+0.80</span></label>
+        <label class="sl" style="margin-bottom:18px">G (weight)&nbsp; <input type="range" id="m1g" min="0" max="100" value="65"><span class="mono" id="m1gl" style="color:var(--violet2)">0.65</span></label>
+        <div class="eqbig">I = V <span class="op">·</span> G = <span class="n" id="m1v2">+0.80</span> <span class="op">·</span> <span class="n" id="m1g2">0.65</span> = <span style="color:var(--fire)" id="m1i">+0.52</span></div>
+        <div class="note" style="margin-top:14px">Negative V just reverses the current. A real device also can't make G negative —
+          conductance is a physical quantity, always ≥ 0. Hold that thought; it's the reason signed weights need a trick in Module III.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ II · ONE COLUMN ============ -->
+<section>
+  <h2>II · One column — the sum, by Kirchhoff's law</h2>
+  <p class="lede">Now wire several memristors to one shared output wire. Each pushes its own current
+    <code>Vᵢ·Gᵢ</code> onto the rail, and Kirchhoff's current law says currents on a shared node simply
+    <em>add</em>. The wire carries <code>Σ Vᵢ·Gᵢ</code> — <b>that is the dot product</b>, performed by physics, as a
+    single measurable current. Drag the inputs; the rail sums them.</p>
+
+  <div class="panel">
+    <div class="row">
+      <div>
+        <canvas id="m2" width="430" height="300"></canvas>
+        <div class="cap">four memristors feeding one rail — each contributes Vᵢ·Gᵢ, the rail carries the sum at the bottom</div>
+      </div>
+      <div style="min-width:230px" id="m2ctrls"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ III · THE CROSSBAR ============ -->
+<section>
+  <h2>III · The crossbar — a whole layer in one step</h2>
+  <p class="lede">Lay the devices in a grid. Input voltages enter along the rows; every column sums its own dot
+    product onto its bit-line. One set of inputs, and <b>all columns answer at once</b> — that's a full
+    matrix-vector multiply, an entire layer of perceptrons, computed <em>in</em> memory where the weights physically
+    sit. Below: a 25→4 crossbar storing four bipolar templates. Draw a pattern; the columns score it; the
+    brightest column is the recognized shape.</p>
+
+  <div class="panel">
+    <div class="controls">
+      <span class="mono" style="font-size:12px;color:var(--dim)">draw on the pad →</span>
+      <button id="cxClear">clear</button>
+      <button id="cxO">load ◻</button>
+      <button id="cxX">load ✕</button>
+      <button id="cxNoisy">flip 5 pixels</button>
+      <label class="sl">device noise σ&nbsp; <input type="range" id="cxNoise" min="0" max="40" value="0"><span class="mono" id="cxNoiseL" style="color:var(--warn)">0%</span></label>
+    </div>
+
+    <div class="recog">
+      <div>
+        <div class="cap" style="margin:0 0 8px">input pad · 5×5 → 25 voltages</div>
+        <div class="pad" id="cxPad"></div>
+        <div class="cap" style="margin-top:10px;max-width:150px">click a cell to toggle it
+          <span style="color:var(--fire)">on (+1)</span> / off (−1)</div>
+      </div>
+
+      <div>
+        <canvas id="cx" width="430" height="470"></canvas>
+        <div class="cap">25 word-lines (rows) × 4 bit-lines (columns). violet crosspoint = stored +1, rose = stored −1.
+          a crosspoint lights when input and weight agree; current flows down each column.</div>
+      </div>
+
+      <div>
+        <div class="cap" style="margin:0 0 10px">column currents = match scores</div>
+        <div class="scorebars" id="cxBars"></div>
+        <div class="ebits">
+          <div class="stat"><div class="v" id="cxWin" style="color:var(--fire)">◻</div><div class="k">recognized</div></div>
+          <div class="stat"><div class="v" id="cxBits" style="color:var(--violet2)">∞</div><div class="k">effective bits</div></div>
+        </div>
+        <div class="note" id="cxNote">With clean inputs the four templates sit far apart, so even heavy device
+          noise rarely flips the winner — that robustness is exactly <b>why</b> analog crossbars target inference.
+          Flip a few pixels to shrink the margin, then raise σ, and watch the scores wobble until the wrong
+          column wins.</div>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:18px"><b>The signed-weight trick.</b> A conductance can't be negative, but a
+      weight can. So each weight is stored as <em>two</em> devices, <code>G⁺</code> and <code>G⁻</code>, and the column
+      reads the difference: <code>w = G⁺ − G⁻</code>. Wire two physical rails, subtract their currents, and you've
+      recovered the full signed range — at the cost of doubling your device count. (Verified: the differential pair
+      reproduces the signed dot product to exactly zero error.)</div>
+  </div>
+</section>
+
+<!-- ============ IV · THE GATES ============ -->
+<section>
+  <h2>IV · The gates — why it isn't a free lunch</h2>
+  <p class="lede">The physics is real and the efficiency pitch is real — but it's a <em>trade</em>, not a miracle.
+    Four things keep it honest, and the numbers below are the ones that came out of the bench-check.</p>
+
+  <div class="panel">
+    <div style="margin-bottom:8px"><span class="mono" style="font-size:12px;color:var(--dim)">where the energy actually goes (illustrative budget for an analog MVM tile)</span></div>
+    <div class="energy">
+      <span style="background:var(--violet2);flex:8" title="the analog MAC">MAC&nbsp;~8%</span>
+      <span style="background:#5b4a86;color:var(--ink);flex:14" title="digital-to-analog">DAC&nbsp;~14%</span>
+      <span style="background:var(--amber);flex:62" title="analog-to-digital — the tax">ADC&nbsp;~62%</span>
+      <span style="background:#3a2c5c;color:var(--ink);flex:16" title="digital periphery">periphery&nbsp;~16%</span>
+    </div>
+    <div class="cap" style="margin-top:9px">the dot product is nearly free; reading the analog answer back out (ADC) eats most of the win.
+      this is the field's standing embarrassment, not a detail.</div>
+
+    <div class="gatewrap" style="margin-top:18px">
+      <div class="gate">
+        <h4>① analog noise sets the ceiling</h4>
+        <p>Conductance has device-to-device spread and cycle-to-cycle drift. Your weight isn't <code>0.4417</code>,
+          it's <code>0.44 ± a smudge</code>. Measured: ~2% per-device variation already caps you near <b>4.6 effective
+          bits</b>; 5% → ~3.3 bits; 10% → ~2.3 bits. There is no float32 here.</p>
+      </div>
+      <div class="gate">
+        <h4>② the ADC tax</h4>
+        <p>Inputs arrive digital, the answer comes out as an analog current, so every column needs an ADC — and
+          ADCs are large and power-hungry enough to <b>eat most of the theoretical efficiency win</b> (the bar
+          above). The MAC being free doesn't help if reading it isn't.</p>
+      </div>
+      <div class="gate">
+        <h4>③ writing is slow &amp; wears out</h4>
+        <p>Setting a conductance precisely is slow, imprecise, and degrades the device over many writes. Great for
+          <b>fixed inference weights</b> you write once; painful for <b>training</b>, which demands constant precise
+          updates. This is why crossbars do forward passes, not backprop.</p>
+      </div>
+      <div class="gate">
+        <h4>④ sign costs you double</h4>
+        <p>Conductance is positive-only, so every signed weight is a <code>G⁺ − G⁻</code> pair — <b>two devices per
+          weight</b>. The math is exact (Module III), but your array is twice the size it looks.</p>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:16px"><b>The honest one-liner.</b> You trade digital precision and flexibility
+      for analog speed and energy, and you only come out ahead on noise-tolerant, fixed-weight, inference-heavy
+      work. The argmax of a well-separated classifier survives all of this (still ~96% correct at σ=50% in the
+      bench-check); a task that needs the actual <em>value</em> to many bits does not.</div>
+  </div>
+</section>
+
+<!-- ============ V · WHERE IT LIVES ============ -->
+<section>
+  <h2>V · The prize, and where it doesn't belong</h2>
+  <p class="lede">The reason any of this is worth the trouble is the <b>memory wall</b>. In a GPU running an LLM the
+    dot products are cheap; what costs the energy and the time is hauling billions of weights out of memory to the
+    compute units, every step. The crossbar computes <em>at</em> the weights — they never move — which is the whole
+    pitch: potentially orders-of-magnitude better inference efficiency, for the right workload.</p>
+
+  <div class="three">
+    <div class="scale">
+      <div class="n">the bottleneck</div>
+      <h4>von Neumann's wall</h4>
+      <p>Weights live in memory; compute lives elsewhere; the wire between them is the cost. Most of an LLM's
+        inference energy is data movement, not arithmetic.</p>
+    </div>
+    <div class="scale">
+      <div class="n">the move</div>
+      <h4>compute-in-memory</h4>
+      <p>The crossbar collapses memory and compute into one device. The weights don't travel to the math —
+        the math happens where the weights already are.</p>
+    </div>
+    <div class="scale">
+      <div class="n">the limit</div>
+      <h4>not for branches</h4>
+      <p>A branch predictor needs a deterministic digital bit in ~0.25 ns. An analog MVM plus ADC at that timescale
+        is a non-starter — same timescale wall that killed "is it networked." Crossbars are for big fixed weight
+        matrices, not one-bit guesses.</p>
+    </div>
+  </div>
+
+  <div class="note" style="margin-top:20px;font-size:14px"><b style="color:var(--violet2)">The curse, nearly broken.</b>
+    The memristor is genuinely recent — 1971 in theory, 2008 in silicon — one of the rare pieces in this whole chain
+    that isn't two centuries old. But it doesn't quite let you go: using networks of tunable conductances to compute
+    weighted sums is exactly what mid-century analog computers did with resistor banks. New device (~50 years), old
+    idea (~70+). You half-escaped this time. lol.</div>
+</section>
+
+<footer>
+  THE CROSSBAR · purple paper side-sheet II · companion to "The Perceptron in Silicon"<br>
+  math verified in Node before build · crossbar = dot product to 0 error · differential pair G⁺−G⁻ = signed weight exactly · noise→bits: 2%→4.6b, 5%→3.3b, 10%→2.3b · argmax robust to σ=50% (~96%)<br>
+  Chua 1971 · Strukov/Williams (HP) 2008 · in-memory computing / analog MVM
+</footer>
+
+</div>
+
+<script>
+"use strict";
+function rng(seed){ let s=seed>>>0; return ()=>{ s=(Math.imul(s,1103515245)+12345)&0x7fffffff; return s/0x7fffffff; }; }
+function gauss(r){ let u=0,v=0; while(!u)u=r(); while(!v)v=r(); return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v); }
+// Fixed LOGICAL dimensions per canvas. The on-screen size is pinned in CSS (style.width/height),
+// the backing buffer is logical*dpr. Drawing math uses the logical w/h. Nothing reads the rendered
+// size, so there is no feedback loop and the canvas can never run away on HiDPI / scaled displays.
+const DIMS={ m1:[360,220], m2:[430,300], cx:[430,470] };
+function fit(cv){
+  const [W,H]=DIMS[cv.id]||[cv.width,cv.height];
+  const dpr=window.devicePixelRatio||1;
+  const needW=Math.round(W*dpr);
+  if(cv.width!==needW){ cv.width=needW; cv.height=Math.round(H*dpr); cv.style.width=W+'px'; cv.style.height=H+'px'; }
+  const g=cv.getContext('2d'); g.setTransform(dpr,0,0,dpr,0,0); return {g,w:W,h:H}; }
+let CLOCK=0;
+
+// ===================================================================
+// I — one memristor : I = V*G
+// ===================================================================
+(function(){
+  const cv=document.getElementById('m1');
+  let V=0.8, G=0.65;
+  function draw(){
+    const {g,w,h}=fit(cv); g.clearRect(0,0,w,h);
+    const I=V*G, mag=Math.min(1,Math.abs(I));
+    const midY=h/2, lx=40, rx=w-40, dev=w/2;
+    // input rail (left) colored by V sign
+    g.lineWidth=3; g.strokeStyle=V>=0?'#34d399':'#fb7185'; g.globalAlpha=.4+.6*Math.min(1,Math.abs(V));
+    g.beginPath(); g.moveTo(lx,midY); g.lineTo(dev-26,midY); g.stroke(); g.globalAlpha=1;
+    // device body (a memristor: rect with internal hatching)
+    g.fillStyle='#1b1230'; g.strokeStyle='#a78bfa'; g.lineWidth=2;
+    g.beginPath(); g.roundRect(dev-26,midY-26,52,52,8); g.fill(); g.stroke();
+    // conductance shown as fill level / hatch density
+    g.strokeStyle='#a78bfa'; g.globalAlpha=.35+.65*G; g.lineWidth=2;
+    for(let i=0;i<5;i++){ const yy=midY-20+i*10; g.beginPath(); g.moveTo(dev-20,yy); g.lineTo(dev+20,yy); g.stroke(); }
+    g.globalAlpha=1;
+    g.fillStyle='#c4b5fd'; g.font='10px ui-monospace,monospace'; g.textAlign='center';
+    g.fillText('G='+G.toFixed(2), dev, midY+44);
+    // output rail (right) carries current — animated flow, brightness ∝ |I|
+    g.lineWidth=3; g.strokeStyle=I>=0?'#34d399':'#fb7185'; g.globalAlpha=.25+.75*mag;
+    g.setLineDash([7,7]); g.lineDashOffset=-(CLOCK*0.06)*(I>=0?1:-1);
+    g.beginPath(); g.moveTo(dev+26,midY); g.lineTo(rx,midY); g.stroke(); g.setLineDash([]); g.globalAlpha=1;
+    // current readout arrow head
+    g.fillStyle=I>=0?'#34d399':'#fb7185';
+    g.beginPath(); const ax=rx; g.moveTo(ax,midY); g.lineTo(ax-9,midY-5); g.lineTo(ax-9,midY+5); g.closePath(); g.fill();
+    g.fillStyle='#9a86bd'; g.textAlign='left'; g.fillText('V', lx-2, midY-12);
+    g.fillText('I = '+(I>=0?'+':'')+I.toFixed(2), rx-70, midY-12);
+  }
+  function upd(){
+    V=(+document.getElementById('m1v').value)/100; G=(+document.getElementById('m1g').value)/100;
+    document.getElementById('m1vl').textContent=(V>=0?'+':'')+V.toFixed(2);
+    document.getElementById('m1gl').textContent=G.toFixed(2);
+    const I=V*G;
+    document.getElementById('m1v2').textContent=(V>=0?'+':'')+V.toFixed(2);
+    document.getElementById('m1g2').textContent=G.toFixed(2);
+    document.getElementById('m1i').textContent=(I>=0?'+':'')+I.toFixed(2);
+  }
+  document.getElementById('m1v').oninput=upd; document.getElementById('m1g').oninput=upd;
+  upd(); window.__m1draw=draw;
+})();
+
+// ===================================================================
+// II — one column : Kirchhoff sum = dot product
+// ===================================================================
+(function(){
+  const cv=document.getElementById('m2');
+  const N=4; let Vv=[0.9,-0.6,0.7,0.3], Gg=[0.8,0.5,0.9,0.4];
+  // build controls
+  const host=document.getElementById('m2ctrls'); let html='';
+  for(let i=0;i<N;i++){
+    html+=`<div style="margin-bottom:12px;border-bottom:1px solid var(--edge);padding-bottom:10px">
+      <div class="mono" style="font-size:11px;color:var(--violet2);margin-bottom:5px">device ${i} &nbsp;·&nbsp; V·G = <span id="m2p${i}">—</span></div>
+      <label class="sl">V&nbsp;<input type="range" id="m2v${i}" min="-100" max="100" value="${Math.round(Vv[i]*100)}"></label>
+      <label class="sl" style="margin-top:4px">G&nbsp;<input type="range" id="m2g${i}" min="0" max="100" value="${Math.round(Gg[i]*100)}"></label>
+    </div>`;
+  }
+  html+=`<div class="eqbig" style="font-size:15px">Σ Vᵢ·Gᵢ = <span style="color:var(--fire)" id="m2sum">+0.00</span></div>`;
+  host.innerHTML=html;
+  function upd(){ for(let i=0;i<N;i++){ Vv[i]=(+document.getElementById('m2v'+i).value)/100; Gg[i]=(+document.getElementById('m2g'+i).value)/100;
+    document.getElementById('m2p'+i).textContent=(Vv[i]*Gg[i]>=0?'+':'')+(Vv[i]*Gg[i]).toFixed(2); }
+    const s=Vv.reduce((a,_,i)=>a+Vv[i]*Gg[i],0); document.getElementById('m2sum').textContent=(s>=0?'+':'')+s.toFixed(2); }
+  for(let i=0;i<N;i++){ document.getElementById('m2v'+i).oninput=upd; document.getElementById('m2g'+i).oninput=upd; }
+  upd();
+  function draw(){
+    const {g,w,h}=fit(cv); g.clearRect(0,0,w,h);
+    const railX=w-70, topY=30, rowGap=(h-110)/(N-1);
+    const sum=Vv.reduce((a,_,i)=>a+Vv[i]*Gg[i],0);
+    // vertical rail
+    g.strokeStyle='#2e2148'; g.lineWidth=2; g.beginPath(); g.moveTo(railX,topY-10); g.lineTo(railX,h-60); g.stroke();
+    for(let i=0;i<N;i++){
+      const y=topY+i*rowGap, contrib=Vv[i]*Gg[i];
+      // word line
+      g.lineWidth=2.5; g.strokeStyle=Vv[i]>=0?'#34d399':'#fb7185'; g.globalAlpha=.35+.6*Math.min(1,Math.abs(Vv[i]));
+      g.beginPath(); g.moveTo(28,y); g.lineTo(railX-24,y); g.stroke(); g.globalAlpha=1;
+      g.fillStyle='#9a86bd'; g.font='10px ui-monospace,monospace'; g.textAlign='left'; g.fillText('V'+i, 6, y+3);
+      // device
+      g.fillStyle='#1b1230'; g.strokeStyle='#a78bfa'; g.lineWidth=1.6;
+      g.beginPath(); g.roundRect(railX-24,y-12,24,24,6); g.fill(); g.stroke();
+      g.strokeStyle='#a78bfa'; g.globalAlpha=.3+.7*Gg[i]; for(let k=0;k<3;k++){ const yy=y-7+k*7; g.beginPath(); g.moveTo(railX-20,yy); g.lineTo(railX-4,yy); g.stroke(); } g.globalAlpha=1;
+      // contribution flowing onto rail (animated, down toward sum)
+      const m=Math.min(1,Math.abs(contrib));
+      g.strokeStyle=contrib>=0?'#34d399':'#fb7185'; g.lineWidth=2.5; g.globalAlpha=.25+.75*m;
+      g.setLineDash([6,6]); g.lineDashOffset=-(CLOCK*0.05);
+      g.beginPath(); g.moveTo(railX,y); g.lineTo(railX,h-60); g.stroke(); g.setLineDash([]); g.globalAlpha=1;
+    }
+    // sum node
+    g.fillStyle='#0e0a18'; g.strokeStyle='#34d399'; g.lineWidth=2;
+    g.beginPath(); g.roundRect(railX-70,h-54,140,34,8); g.fill(); g.stroke();
+    g.fillStyle='#34d399'; g.font='13px ui-monospace,monospace'; g.textAlign='center';
+    g.fillText('Σ = '+(sum>=0?'+':'')+sum.toFixed(2), railX, h-32);
+  }
+  window.__m2draw=draw;
+})();
+
+// ===================================================================
+// III — the crossbar recognizer
+// ===================================================================
+const CX=(function(){
+  const TPL={
+    'I':["..#..","..#..","..#..","..#..","..#.."],
+    'O':["#####","#...#","#...#","#...#","#####"],
+    'X':["#...#",".#.#.","..#..",".#.#.","#...#"],
+    'P':["####.","#...#","####.","#....","#...."]
+  };
+  const NAMES=Object.keys(TPL);
+  const sym={'I':'I','O':'◻','X':'✕','P':'P'};
+  function vec(rows){ const v=[]; for(const r of rows) for(const c of r) v.push(c==='#'?1:-1); return v; }
+  const W=NAMES.map(n=>vec(TPL[n]));   // 4 weight vectors length 25
+  const Nin=25;
+  let input=vec(TPL['O']);             // default pattern
+  let noiseSigma=0;
+  let rnd=rng(0xC0FFEE);
+
+  // differential-pair conductances with optional noise; recompute each render for live wobble
+  function scores(){
+    return W.map(w=>{
+      let s=0;
+      for(let i=0;i<Nin;i++){
+        let gp=w[i]>0?1:0, gm=w[i]<0?1:0;
+        if(noiseSigma>0){ gp=Math.max(0,gp+gauss(rnd)*noiseSigma); gm=Math.max(0,gm+gauss(rnd)*noiseSigma); }
+        s+=input[i]*(gp-gm);
+      }
+      return s;
+    });
+  }
+  function effBits(){ if(noiseSigma<=0) return '∞'; const b=Math.max(0,Math.log2(1/(2.05*noiseSigma))); return b.toFixed(1); }
+
+  // ---- pad ----
+  const pad=document.getElementById('cxPad');
+  const cells=[];
+  for(let i=0;i<25;i++){ const d=document.createElement('div'); d.onclick=()=>{ input[i]*=-1; sync(); };
+    pad.appendChild(d); cells.push(d); }
+  function syncPad(){ for(let i=0;i<25;i++) cells[i].classList.toggle('on',input[i]>0); }
+
+  // ---- score bars ----
+  const barsHost=document.getElementById('cxBars');
+  const barEls=NAMES.map((n,c)=>{
+    const wrap=document.createElement('div'); wrap.className='sb';
+    let glyph='<div class="glyph">';
+    W[c].forEach(v=>glyph+=`<i style="background:${v>0?'var(--pos)':'#241738'}"></i>`);
+    glyph+='</div>';
+    wrap.innerHTML=`<span class="name">${sym[n]}</span>${glyph}<div class="bar"><div class="fill"></div></div><span class="val">0</span>`;
+    barsHost.appendChild(wrap);
+    return {wrap, fill:wrap.querySelector('.fill'), val:wrap.querySelector('.val')};
+  });
+
+  function sync(){
+    syncPad();
+    const sc=scores(); const maxAbs=25;
+    let best=-1e9,bi=0; sc.forEach((v,c)=>{ if(v>best){best=v;bi=c;} });
+    sc.forEach((v,c)=>{
+      const frac=v/maxAbs; // -1..1
+      const fill=barEls[c].fill;
+      if(frac>=0){ fill.style.left='50%'; fill.style.width=(frac*50)+'%'; }
+      else { fill.style.left=(50+frac*50)+'%'; fill.style.width=(-frac*50)+'%'; }
+      barEls[c].val.textContent=(v>=0?'+':'')+v.toFixed(noiseSigma>0?1:0);
+      barEls[c].wrap.classList.toggle('win',c===bi);
+    });
+    document.getElementById('cxWin').textContent=sym[NAMES[bi]];
+    document.getElementById('cxBits').textContent=effBits();
+  }
+
+  // ---- crossbar canvas ----
+  const cv=document.getElementById('cx');
+  function draw(){
+    const {g,w,h}=fit(cv); g.clearRect(0,0,w,h);
+    const lx=34, rx=w-14, topY=18, botY=h-54;
+    const cols=4, colX=[]; for(let c=0;c<cols;c++) colX.push(lx+40+ (c+0.5)*((rx-lx-50)/cols));
+    const rowY=i=> topY + i*((botY-topY)/(Nin-1));
+    const sc=scores();
+    // bit lines (vertical) — brightness by |score|
+    for(let c=0;c<cols;c++){
+      const m=Math.min(1,Math.abs(sc[c])/25);
+      g.strokeStyle=sc[c]>=0?'#a78bfa':'#fb7185'; g.lineWidth=2; g.globalAlpha=.18+.7*m;
+      g.setLineDash([6,6]); g.lineDashOffset=-(CLOCK*0.05);
+      g.beginPath(); g.moveTo(colX[c],topY-8); g.lineTo(colX[c],botY+6); g.stroke();
+      g.setLineDash([]); g.globalAlpha=1;
+      g.fillStyle='#c4b5fd'; g.font='11px ui-monospace,monospace'; g.textAlign='center';
+      g.fillText(['I','◻','✕','P'][c], colX[c], botY+22);
+    }
+    // word lines + crosspoints
+    for(let i=0;i<Nin;i++){
+      const y=rowY(i), on=input[i]>0;
+      g.strokeStyle=on?'#34d399':'#3a2c5c'; g.lineWidth=on?1.6:1; g.globalAlpha=on?.55:.4;
+      g.beginPath(); g.moveTo(lx,y); g.lineTo(rx-6,y); g.stroke(); g.globalAlpha=1;
+      for(let c=0;c<cols;c++){
+        const wgt=W[c][i]; const agree=input[i]*wgt>0;
+        const x=colX[c];
+        // stored weight: violet (+1) / rose (-1) dot
+        g.fillStyle=wgt>0?'#a78bfa':'#fb7185'; g.globalAlpha=agree?1:0.32;
+        g.beginPath(); g.arc(x,y,agree?4.2:3,0,7); g.fill(); g.globalAlpha=1;
+        if(agree){ g.strokeStyle='#34d399'; g.lineWidth=1.4; g.globalAlpha=.8;
+          g.beginPath(); g.arc(x,y,6.5,0,7); g.stroke(); g.globalAlpha=1; }
+      }
+    }
+    g.fillStyle='#6b5a8c'; g.font='9px ui-monospace,monospace'; g.textAlign='left';
+    g.fillText('25 word-lines', 4, topY+4); g.fillText('inputs →', 4, (topY+botY)/2);
+  }
+
+  // ---- controls ----
+  document.getElementById('cxClear').onclick=()=>{ input=new Array(25).fill(-1); sync(); };
+  document.getElementById('cxO').onclick=()=>{ input=vec(TPL['O']); sync(); };
+  document.getElementById('cxX').onclick=()=>{ input=vec(TPL['X']); sync(); };
+  document.getElementById('cxNoisy').onclick=()=>{ const idx=[...Array(25).keys()];
+    for(let k=0;k<5;k++){ const p=idx.splice(Math.floor(rnd()*idx.length),1)[0]; input[p]*=-1; } sync(); };
+  document.getElementById('cxNoise').oninput=function(){ noiseSigma=(+this.value)/100;
+    document.getElementById('cxNoiseL').textContent=this.value+'%'; sync(); };
+
+  sync();
+  return {draw, live:()=>{ if(noiseSigma>0) sync(); }};
+})();
+
+// ===================================================================
+// shared animation clock
+// ===================================================================
+(function loop(){
+  CLOCK++;
+  if(window.__m1draw) window.__m1draw();
+  if(window.__m2draw) window.__m2draw();
+  CX.draw();
+  if(CLOCK%6===0) CX.live();   // re-sample noise a few times/sec for live wobble
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

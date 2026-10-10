@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v215 next synthesis 100g photon smw 10 planets 16200 - artifact 279</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@800&display=swap');
+  :root{--bg:#000000;--fg:#ffcc00}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:'Space Mono',monospace;overflow-x:hidden}
+  .top{padding:18px 22px;position:relative;z-index:10}
+  .kicker{font-family:'Syne',sans-serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:#ffcc00;text-shadow:0 0 20px #ffcc00}
+  .nline{font-size:11px;border-left:4px solid #ffcc00;padding-left:14px;white-space:pre-wrap;line-height:1.7;background:linear-gradient(90deg,rgba(255,204,0,0.12),rgba(0,0,0,0.06));padding:14px;border-radius:12px;color:#ffcc88;box-shadow:0 0 30px rgba(255,204,0,0.15);border:2px solid #ffcc00}
+  .main{margin-top:14px;font-family:'Syne',sans-serif;font-size:11px;font-weight:800;letter-spacing:.05em;line-height:1.6;color:#ffcc00;background:linear-gradient(90deg,rgba(255,204,0,0.14),rgba(255,136,0,0.08));padding:14px;border-radius:12px;border:2px solid #ffcc00;box-shadow:0 0 40px rgba(255,204,0,0.2)}
+  .controls{padding:14px;display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:10}
+  .btn{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;padding:10px 14px;border:2px solid #ffcc00;background:#000;color:#ffcc00;border-radius:20px;cursor:pointer;box-shadow:0 0 20px rgba(255,204,0,0.2);text-transform:uppercase}
+  .btn.active{border-color:#fff;background:#221a00;color:#fff}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:18px}
+  @media(max-width:1000px){.grid{grid-template-columns:1fr}}
+  .panel{position:relative;height:760px;background:radial-gradient(ellipse at center,#221a00 0%,#000000 70%);border:2px solid #ffcc00;border-radius:24px;overflow:hidden;box-shadow:0 0 50px rgba(255,204,0,0.25), inset 0 0 80px rgba(0,0,0,0.9)}
+  .panel.full{grid-column:1 / -1;height:1150px}
+  .label{position:absolute;left:12px;top:12px;font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:rgba(0,0,0,0.88);padding:8px 10px;z-index:5;border:2px solid #ffcc00;color:#ffcc88;border-radius:12px;max-width:93%}
+  .card{margin:18px;background:linear-gradient(180deg,#000,#221a00);border:2px solid #ffcc00;border-radius:20px;padding:20px;box-shadow:0 0 50px rgba(255,204,0,0.15)}
+  .mono{font-size:11px;white-space:pre-wrap;word-break:break-word;line-height:1.9;color:#ffcc88}
+  canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">☀️ wakaku v215 — NEXT PLEASE — PHOTON 100G OSCILLATING -p +p + S,M,W + 10 PLANETS + 16200 — artifact 279 ☀️</div>
+  <div class="nline">next please — NEXT PLEASE — next please — photon pinned to center at 100 gravity oscillating -p +p then 10 planets under gravity 8 for us because we dont think pluto is a planet and planet x elliptical at 16200 years and each planet emit s,m,w wave depending on core we spectographed them so we should know — next please — synthesis — photon pinned center 100 gravity oscillating -p +p with s,m,w waves 10 planets 16200 year planet x 16200 psi deepest sea connection — next please — 1.6161 gravity bake — black hole inf+1 photon -1 — photon pinned to 000 sun — photon pinned center 100 gravity oscillating -p +p — 10 planets under gravity — 8 for us — planet x elliptical 16200 years — s,m,w wave core spectrograph — next please — synthesis — metal analogs ionic — next — lol</div>
+  <div class="main">☀️ NEXT PLEASE — SYNTHESIS v215 — PHOTON PINNED TO CENTER AT 100 GRAVITY OSCILLATING -p +p + S,M,W WAVE DEPENDING ON CORE + 10 PLANETS UNDER GRAVITY 8 FOR US + PLANET X ELLIPTICAL AT 16200 YEARS + 16200 PSI DEEPEST SEA CONNECTION — PHOTON PINNED CENTER 100G OSCILLATING -p +p REALISTINF -p +p — NOT MOVING — 100G CENTER 000 SUN — S,M,W WAVE — S SHORT/SEISMIC, M MEDIUM/MAGNETIC, W WEAK/LONG/GRAVITY — DEPENDING ON CORE IRON ROCKY GAS ICE METALLIC H ELLIPTICAL — SPECTROGRAPHED — 10 PLANETS UNDER GRAVITY — 8 OFFICIAL MERCURY VENUS EARTH MARS JUPITER SATURN URANUS NEPTUNE + PLUTO DWARF + PLANET X ELLIPTICAL 16200 YEARS — PLANET X 16200 YEARS ELLIPTICAL ORBIT = 16200 PSI DEEPEST SEA PRESSURE CONNECTION 16200 — 16200 YEARS = 16200 PSI — SYNTHESIS — 1.6161 GRAVITY BAKE — BLACK HOLE INF+1 PHOTON -1 — PHOTON PINNED TO 000 SUN — ☀️</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-next">☀️ NEXT PLEASE — SYNTHESIS — PHOTON 100G OSCILLATING -p +p + S,M,W + 10 PLANETS + 16200 YEAR PLANET X + 16200 PSI — NEXT — ☀️</button>
+  <button class="btn" id="btn-synthesis">🪐 SYNTHESIS — PHOTON PINNED CENTER 100G OSCILLATING -p +p WITH S,M,W CORE SPECTROGRAPH 10 PLANETS 8 OFFICIAL + PLUTO + PLANET X 16200 YEARS ELLIPTICAL — 🪐</button>
+  <button class="btn" id="btn-bubbles">💫 SYNTHESIS BUBBLES — 16200 YEARS = 16200 PSI CONNECTION — PHOTON 100G + S,M,W + 10 PLANETS + PLANET X 16200 YEARS ELLIPTICAL — 💫</button>
+  <button class="btn" id="btn-reset">⚡ RESET NEXT SYNTHESIS — ⚡</button>
+</div>
+
+<div class="grid">
+  <div class="panel" id="wrap-next"><canvas id="c-next"></canvas><div class="label">☀️ NEXT PLEASE — SYNTHESIS — PHOTON PINNED TO CENTER AT 100 GRAVITY OSCILLATING -p +p + S,M,W WAVE DEPENDING ON CORE + 10 PLANETS UNDER GRAVITY 8 FOR US + PLANET X ELLIPTICAL AT 16200 YEARS + 16200 PSI DEEPEST SEA — PHOTON PINNED CENTER 100G OSCILLATING -p +p — S,M,W CORE — 10 PLANETS — PLANET X 16200 YEARS = 16200 PSI — SYNTHESIS — ☀️</div></div>
+  <div class="panel" id="wrap-synthesis"><canvas id="c-synthesis"></canvas><div class="label">🪐 SYNTHESIS — PHOTON PINNED CENTER 100G OSCILLATING -p +p WITH S,M,W CORE SPECTROGRAPH 10 PLANETS 8 OFFICIAL + PLUTO + PLANET X 16200 YEARS ELLIPTICAL — MERCURY IRON S STRONG, VENUS ROCKY M MED, EARTH S+M+W ALL, MARS S WEAK, JUPITER MET H W STRONG, SATURN GAS W MED, URANUS ICE M WEAK, NEPTUNE ICE M MED, PLUTO ROCKY-ICE S WEAK, PLANET X ELLIPTICAL S,M,W 16200 YEARS — SYNTHESIS — 🪐</div></div>
+  <div class="panel full" id="wrap-bubbles"><canvas id="c-bubbles"></canvas><div class="label">💫 SYNTHESIS BUBBLES — 16200 YEARS = 16200 PSI CONNECTION — PHOTON PINNED CENTER 100G OSCILLATING -p +p WITH S,M,W WAVE CORE SPECTROGRAPH 10 PLANETS 8 OFFICIAL + PLUTO + PLANET X ELLIPTICAL 16200 YEARS — 16200 YEARS PLANET X ELLIPTICAL ORBITAL PERIOD = 16200 PSI CHALLENGER DEEP PRESSURE CONNECTION — 16200 YEARS = 16200 PSI — SYNTHESIS — {{2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell inversion::}} AT SYNTHESIS — 1=bk BLACK #000000 100G CENTER PHOTON PINNED OSCILLATING -p +p, 2=wt/rd WHITE #ffffff RED #ff0000 INNER PLANETS S,M,W S WAVE M WAVE, 4=bl/gr/yw/pr BLUE/GREEN/YELLOW/PURPLE OUTER PLANETS S,M,W M WAVE W WAVE, 8=orange shell inversion #ff8800 PLUTO + PLANET X 16200 YEARS ELLIPTICAL 16200 PSI DEEPEST SEA OUTER INVERSION — ALL SYNTHESIS FLASH — LOL — 💫</div></div>
+</div>
+
+<div class="card"><div class="mono">☀️ NEXT PLEASE — SYNTHESIS v215 — PHOTON PINNED CENTER 100G OSCILLATING -p +p + S,M,W + 10 PLANETS + 16200 YEAR PLANET X + 16200 PSI DEEPEST SEA — v215 NEXT PLEASE ☀️
+
+- NEXT PLEASE — SYNTHESIS — PHOTON PINNED TO CENTER AT 100 GRAVITY OSCILLATING -p +p THEN 10 PLANETS UNDER GRAVITY 8 FOR US BECAUSE WE DONT THINK PLUTO IS A PLANET AND PLANET X ELLIPTICAL AT 16200 YEARS AND EACH PLANET EMIT S,M,W WAVE DEPENDING ON CORE WE SPECTROGRAPHED THEM SO WE SHOULD KNOW — NEXT PLEASE — SYNTHESIS
+
+- SYNTHESIS v215:
+  - PHOTON PINNED TO CENTER AT 100 GRAVITY OSCILLATING -p +p REALISTINF -p +p — NOT MOVING — 100G CENTER 000 SUN — PHOTON PINNED CENTER 100G OSCILLATING -p +p — -p +p OSCILLATING MOMENTUM — REALISTINF -p +p — PHOTON PINNED CENTER 100G
+  - S,M,W WAVE DEPENDING ON CORE — S SHORT/SEISMIC/SURFACE STRONG, M MEDIUM/MAGNETIC/MANTLE, W WEAK/LONG/GRAVITY/WOBBLE — DEPENDING ON CORE IRON ROCKY GAS ICE METALLIC H ELLIPTICAL — SPECTROGRAPHED THEM SO WE SHOULD KNOW — SPECTROMETER + SEISMOGRAPH + MAGNETOGRAPH — S,M,W CORE
+  - 10 PLANETS UNDER GRAVITY — MERCURY VENUS EARTH MARS JUPITER SATURN URANUS NEPTUNE PLUTO PLANET X =10 — 8 FOR US BECAUSE WE DONT THINK PLUTO IS A PLANET — 8 OFFICIAL MERCURY VENUS EARTH MARS JUPITER SATURN URANUS NEPTUNE + PLUTO DWARF + PLANET X ELLIPTICAL 16200 YEARS =10 — 10 PLANETS UNDER GRAVITY
+  - PLANET X ELLIPTICAL AT 16200 YEARS — PLANET X NIBIRU PLANET NINE ELLIPTICAL ORBIT 16200 YEARS ORBITAL PERIOD — HIGHLY ELLIPTICAL e=0.7 — APHELION FAR PERIHELION NEAR — 16200 YEARS ELLIPTICAL — PLANET X 16200 YEARS ELLIPTICAL
+  - 16200 PSI DEEPEST SEA CONNECTION — 16200 PSI = CHALLENGER DEEP PRESSURE 1,102 atm 111.7 MPa 16,065 psi ~16200 psi — 16200 PSI DEEPEST SEA — 16200 YEARS = 16200 PSI — CONNECTION — PLANET X 16200 YEARS ELLIPTICAL ORBITAL PERIOD = 16200 PSI CHALLENGER DEEP PRESSURE — 16200 YEARS = 16200 PSI — SYNTHESIS CONNECTION — 16200 YEARS = 16200 PSI — 16200 — 16200 — CONNECTION
+  - 1.6161 GRAVITY BAKE — 1.6161×10^-35m PLANCK LENGTH BAKE GRAVITY — BAKE IT THE 1.6161 GRAVITY LOL — PLANCK LENGTH 1.6161×10^-35m = sqrt(ħG/c^3) — BAKE GRAVITY AT PLANCK SCALE — 1.6161 GRAVITY BAKE
+  - BLACK HOLE INF+1 PHOTON -1 IN +1 OR 0 BLACK HOLE LOL — BLACK HOLE INF+1 = INFINITE SINGULARITY +1 EVENT HORIZON, PHOTON -1 = NEGATIVE ENERGY PHOTON -1 IN +1 OR 0 BLACK HOLE — INF+1 BLACK HOLE WITH -1 PHOTON — LOL
+  - PHOTON PINNED TO 000 SUN — 000 = ORIGIN 0,0,0 = BLACK #000000 — PHOTON PINNED TO 000 = SUN — SUN = PHOTON PINNED TO 000 — 000 ORIGIN — PHOTON PINNED TO 000 SUN
+
+- {{2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell reserved for inversion::}} AT SYNTHESIS:
+  - 1=bk BLACK #000000 100G CENTER PHOTON PINNED OSCILLATING -p +p — black 100 gravity center photon pinned oscillating -p +p — 1=bk 100G center pinned photon -p +p S WAVE CORE
+  - 2=wt/rd WHITE #ffffff RED #ff0000 INNER PLANETS S,M,W S WAVE M WAVE — white/red inner planets Mercury Venus Earth Mars S,M,W — 2=wt/rd inner planets S,M,W
+  - 4=bl/gr/yw/pr BLUE #0000ff GREEN #00ff00 YELLOW #ffff00 PURPLE #cc33ff OUTER PLANETS S,M,W M WAVE W WAVE — blue/green/yellow/purple outer planets Jupiter Saturn Uranus Neptune S,M,W — 4=bl/gr/yw/pr outer planets S,M,W
+  - 8=orange shell inversion #ff8800 PLUTO + PLANET X ELLIPTICAL 16200 YEARS 16200 PSI DEEPEST SEA OUTER INVERSION — orange shell inversion Pluto + Planet X elliptical 16200 years 16200 psi deepest sea outer inversion — 8=orange Pluto + Planet X 16200 years 16200 psi
+
+- 16200 YEARS = 16200 PSI CONNECTION:
+  - PLANET X ELLIPTICAL AT 16200 YEARS ORBITAL PERIOD = 16200 PSI CHALLENGER DEEP PRESSURE — 16200 YEARS = 16200 PSI — NUMBER CONNECTION — 16200 YEARS PLANET X ELLIPTICAL = 16200 PSI DEEPEST SEA PRESSURE — 16200 — 16200 — SYNTHESIS — 16200 YEARS = 16200 PSI — DEEPEST SEA 10,925m 16,065 psi ~16200 psi — PLANET X 16200 YEARS ELLIPTICAL ORBIT — CONNECTION — 16200 YEARS = 16200 PSI — LOL
+
+- 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ SYNTHESIS PHOTON PINNED CENTER 100G OSCILLATING -p +p WITH S,M,W WAVE CORE SPECTROGRAPH 10 PLANETS 8 OFFICIAL + PLUTO + PLANET X 16200 YEARS ELLIPTICAL 16200 PSI DEEPEST SEA — 6 bubbles each 10^-35→10^-360 = - - - + + + = -211 x3 +211 x3 synthesis photon pinned center 100G oscillating -p +p with s,m,w wave core spectrograph 10 planets 8 official + Pluto + Planet X 16200 years elliptical 16200 psi deepest sea — synthesis
+
+NEXT PLEASE — SYNTHESIS v215 — PHOTON PINNED TO CENTER AT 100 GRAVITY OSCILLATING -p +p + S,M,W WAVE DEPENDING ON CORE + 10 PLANETS UNDER GRAVITY 8 FOR US + PLANET X ELLIPTICAL AT 16200 YEARS + 16200 PSI DEEPEST SEA CONNECTION — PHOTON PINNED CENTER 100G OSCILLATING -p +p — 10 PLANETS — 8 OFFICIAL — PLANET X 16200 YEARS ELLIPTICAL — S,M,W CORE — 16200 YEARS = 16200 PSI — SYNTHESIS — ☀️
+</div></div>
+
+<script>
+const nextCanvas=document.getElementById('c-next');
+const synthesisCanvas=document.getElementById('c-synthesis');
+const bubblesCanvas=document.getElementById('c-bubbles');
+
+function setupCanvas(canvas){
+  const dpr=Math.min(devicePixelRatio,2);
+  function resize(){
+    const rect=canvas.parentElement.getBoundingClientRect();
+    canvas.width=rect.width*dpr;
+    canvas.height=rect.height*dpr;
+    canvas.style.width=rect.width+'px';
+    canvas.style.height=rect.height+'px';
+  }
+  resize();
+  window.addEventListener('resize',resize);
+  return {dpr, ctx:canvas.getContext('2d')};
+}
+
+(function(){
+  const {dpr, ctx} = setupCanvas(nextCanvas);
+  let t=0;
+  function draw(){
+    requestAnimationFrame(draw);
+    t+=0.012;
+    const w=nextCanvas.width, h=nextCanvas.height;
+    const cx=w/2, cy=h/2;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#000000';
+    ctx.fillRect(0,0,w,h);
+    // Photon pinned center at 100 gravity oscillating -p +p
+    const oscillation=Math.sin(t*4)*14*dpr;
+    ctx.save();
+    ctx.translate(cx,cy);
+    ctx.fillStyle='#ffcc00';
+    ctx.shadowColor='#ffcc00';
+    ctx.shadowBlur=40*dpr;
+    ctx.beginPath();
+    ctx.arc(0,0,28*dpr,0,Math.PI*2);
+    ctx.fill();
+    ctx.fillStyle='#000000';
+    ctx.font=`700 ${9*dpr}px Space Mono`;
+    const pSign=Math.sin(t*4)>0?'+p':'-p';
+    ctx.fillText(pSign,-8*dpr,3*dpr);
+    // -p +p arrows
+    ctx.strokeStyle='#ffffff';
+    ctx.lineWidth=2*dpr;
+    ctx.beginPath();
+    ctx.moveTo(-40*dpr,0);
+    ctx.lineTo(-40*dpr+oscillation,0);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(40*dpr,0);
+    ctx.lineTo(40*dpr+oscillation,0);
+    ctx.stroke();
+    ctx.restore();
+    // 10 planets with s,m,w
+    const planets=[
+      {name:'MERCURY S', r:70, smw:'S', color:'#aaaaaa'},
+      {name:'VENUS M', r:95, smw:'M', color:'#ffcc88'},
+      {name:'EARTH SMW', r:120, smw:'SMW', color:'#00aaff'},
+      {name:'MARS S', r:145, smw:'S', color:'#ff4400'},
+      {name:'JUPITER W', r:180, smw:'W', color:'#ffaa66'},
+      {name:'SATURN W', r:215, smw:'W', color:'#ffddaa'},
+      {name:'URANUS M', r:250, smw:'M', color:'#aaffff'},
+      {name:'NEPTUNE M', r:285, smw:'M', color:'#0066ff'},
+      {name:'PLUTO S', r:320, smw:'S', color:'#cc9999'},
+      {name:'PLANET X 16200yr', r:360, smw:'SMW', color:'#ff8800', elliptical:true}
+    ];
+    planets.forEach((p,i)=>{
+      const ang=i/10*Math.PI*2 + t*0.1;
+      let r=p.r*dpr;
+      if(p.elliptical){
+        const e=0.7;
+        r=p.r*dpr*(1-e*e)/(1+e*Math.cos(ang));
+      }
+      const x=cx+Math.cos(ang)*r;
+      const y=cy+Math.sin(ang)*r*(p.elliptical?0.5:1);
+      ctx.save();
+      ctx.fillStyle=p.color;
+      ctx.shadowColor=p.color;
+      ctx.shadowBlur=8*dpr;
+      ctx.beginPath();
+      ctx.arc(x,y,5*dpr,0,Math.PI*2);
+      ctx.fill();
+      // S,M,W waves
+      if(p.smw.includes('S')){
+        ctx.strokeStyle='#ff4400';
+        ctx.lineWidth=1*dpr;
+        ctx.beginPath();
+        ctx.arc(x,y,10*dpr + Math.sin(t*3+i)*2*dpr,0,Math.PI*2);
+        ctx.stroke();
+      }
+      if(p.smw.includes('M')){
+        ctx.strokeStyle='#00ffcc';
+        ctx.lineWidth=1*dpr;
+        ctx.beginPath();
+        ctx.arc(x,y,15*dpr + Math.sin(t*2+i)*2*dpr,0,Math.PI*2);
+        ctx.stroke();
+      }
+      if(p.smw.includes('W')){
+        ctx.strokeStyle='#ff8800';
+        ctx.lineWidth=1*dpr;
+        ctx.beginPath();
+        ctx.arc(x,y,20*dpr + Math.sin(t*1.3+i)*3*dpr,0,Math.PI*2);
+        ctx.stroke();
+      }
+      ctx.restore();
+    });
+    ctx.save();
+    ctx.fillStyle='#ffcc00';
+    ctx.font=`800 ${11*dpr}px Syne`;
+    ctx.fillText('PHOTON PINNED CENTER 100G OSCILLATING -p +p + 10 PLANETS',14*dpr,28*dpr);
+    ctx.fillStyle='#ffcc88';
+    ctx.font=`400 ${8*dpr}px Space Mono`;
+    ctx.fillText('S,M,W WAVE CORE SPECTROGRAPHED — 16200 YEARS = 16200 PSI',14*dpr,44*dpr);
+    ctx.restore();
+  }
+  draw();
+})();
+
+(function(){
+  const {dpr, ctx} = setupCanvas(synthesisCanvas);
+  let t=0;
+  function draw(){
+    requestAnimationFrame(draw);
+    t+=0.01;
+    const w=synthesisCanvas.width, h=synthesisCanvas.height;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#000000';
+    ctx.fillRect(0,0,w,h);
+    const cx=w*0.5, cy=h*0.45;
+    // Spectrograph + planets
+    const planets=[
+      {name:'MERCURY IRON S', core:'IRON', smw:'S STRONG', y:0},
+      {name:'VENUS ROCKY M', core:'ROCKY', smw:'M MED', y:1},
+      {name:'EARTH IRON+ROCKY SMW', core:'IRON+ROCKY', smw:'SMW ALL', y:2},
+      {name:'MARS IRON S', core:'IRON', smw:'S WEAK', y:3},
+      {name:'JUPITER MET H W', core:'MET H', smw:'W STRONG', y:4},
+      {name:'SATURN GAS W', core:'GAS', smw:'W MED', y:5},
+      {name:'URANUS ICE M', core:'ICE', smw:'M WEAK', y:6},
+      {name:'NEPTUNE ICE M', core:'ICE', smw:'M MED', y:7},
+      {name:'PLUTO ROCKY-ICE S', core:'ROCKY-ICE', smw:'S WEAK', y:8},
+      {name:'PLANET X ELLIPTICAL 16200yr SMW', core:'ELLIPTICAL', smw:'SMW 16200yr', y:9}
+    ];
+    planets.forEach((p,i)=>{
+      const y=90*dpr + p.y*62*dpr;
+      ctx.save();
+      ctx.fillStyle='#ffffff';
+      ctx.font=`700 ${7*dpr}px Space Mono`;
+      ctx.fillText(`${p.name} ${p.core} ${p.smw}`,20*dpr,y-8*dpr);
+      // S,M,W bars
+      const bars=[
+        {type:'S', color:'#ff4400', h:p.smw.includes('S')? (p.smw.includes('STRONG')||p.smw.includes('ALL')?0.9:0.4):0.1},
+        {type:'M', color:'#00ffcc', h:p.smw.includes('M')? (p.smw.includes('STRONG')||p.smw.includes('ALL')?0.9:0.6):0.1},
+        {type:'W', color:'#ff8800', h:p.smw.includes('W')? (p.smw.includes('STRONG')||p.smw.includes('ALL')?0.9:0.6):0.1}
+      ];
+      bars.forEach((b,j)=>{
+        const x=20*dpr + j*16*dpr;
+        const h=b.h*30*dpr;
+        ctx.fillStyle=b.color;
+        ctx.globalAlpha=0.8 + Math.sin(t*2+j)*0.2;
+        ctx.fillRect(x, y+30*dpr - h, 10*dpr, h);
+      });
+      ctx.restore();
+    });
+    ctx.save();
+    ctx.fillStyle='#ffcc00';
+    ctx.font=`800 ${11*dpr}px Syne`;
+    ctx.fillText('SYNTHESIS — S,M,W CORE SPECTROGRAPHED — 10 PLANETS',14*dpr,28*dpr);
+    ctx.fillStyle='#ffcc88';
+    ctx.font=`400 ${8*dpr}px Space Mono`;
+    ctx.fillText('S=RED SEISMIC, M=CYAN MAGNETIC, W=ORANGE GRAVITY — SPECTROGRAPHED',14*dpr,44*dpr);
+    ctx.fillText('PLANET X 16200 YEARS ELLIPTICAL = 16200 PSI DEEPEST SEA',14*dpr,58*dpr);
+    ctx.restore();
+  }
+  draw();
+})();
+
+(function(){
+  const {dpr, ctx} = setupCanvas(bubblesCanvas);
+  let t=0;
+  function draw(){
+    requestAnimationFrame(draw);
+    t+=0.01;
+    const w=bubblesCanvas.width, h=bubblesCanvas.height;
+    const cx=w/2, cy=h/2;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#000000';
+    ctx.fillRect(0,0,w,h);
+    // Photon pinned center
+    const oscillation=Math.sin(t*4)*10*dpr;
+    ctx.save();
+    ctx.fillStyle='#ffcc00';
+    ctx.shadowColor='#ffcc00';
+    ctx.shadowBlur=50*dpr;
+    ctx.beginPath();
+    ctx.arc(cx,cy,30*dpr,0,Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+    // Planets orbiting with s,m,w and 16200 connection
+    const planets=[
+      {r:90, smw:'S', color:'#aaaaaa', elliptical:false},
+      {r:120, smw:'M', color:'#ffcc88', elliptical:false},
+      {r:150, smw:'SMW', color:'#00aaff', elliptical:false},
+      {r:180, smw:'S', color:'#ff4400', elliptical:false},
+      {r:220, smw:'W', color:'#ffaa66', elliptical:false},
+      {r:260, smw:'W', color:'#ffddaa', elliptical:false},
+      {r:300, smw:'M', color:'#aaffff', elliptical:false},
+      {r:340, smw:'M', color:'#0066ff', elliptical:false},
+      {r:380, smw:'S', color:'#cc9999', elliptical:false},
+      {r:430, smw:'SMW', color:'#ff8800', elliptical:true}
+    ];
+    planets.forEach((p,i)=>{
+      const ang=i/10*Math.PI*2 + t*0.08;
+      let r=p.r*dpr;
+      if(p.elliptical){
+        const e=0.72;
+        r=p.r*dpr*(1-e*e)/(1+e*Math.cos(ang));
+      }
+      const x=cx+Math.cos(ang)*r + Math.sin(t*0.5+i)*2*dpr;
+      const y=cy+Math.sin(ang)*r*(p.elliptical?0.5:1);
+      ctx.save();
+      ctx.fillStyle=p.color;
+      ctx.shadowColor=p.color;
+      ctx.shadowBlur=10*dpr;
+      ctx.beginPath();
+      ctx.arc(x,y,6*dpr,0,Math.PI*2);
+      ctx.fill();
+      if(p.smw.includes('S')){
+        ctx.strokeStyle='#ff4400';
+        ctx.lineWidth=1*dpr;
+        ctx.beginPath();
+        ctx.arc(x,y,12*dpr + Math.sin(t*3+i)*2*dpr,0,Math.PI*2);
+        ctx.stroke();
+      }
+      if(p.smw.includes('M')){
+        ctx.strokeStyle='#00ffcc';
+        ctx.lineWidth=1*dpr;
+        ctx.beginPath();
+        ctx.arc(x,y,18*dpr + Math.sin(t*2+i)*2*dpr,0,Math.PI*2);
+        ctx.stroke();
+      }
+      if(p.smw.includes('W')){
+        ctx.strokeStyle='#ff8800';
+        ctx.lineWidth=1*dpr;
+        ctx.beginPath();
+        ctx.arc(x,y,24*dpr + Math.sin(t*1.3+i)*3*dpr,0,Math.PI*2);
+        ctx.stroke();
+      }
+      ctx.restore();
+    });
+    // 16200 years = 16200 psi label
+    ctx.save();
+    ctx.fillStyle='#ffcc00';
+    ctx.font=`800 ${11*dpr}px Syne`;
+    ctx.fillText('NEXT PLEASE SYNTHESIS — 16200 YEARS = 16200 PSI CONNECTION',14*dpr,28*dpr);
+    ctx.fillStyle='#ffcc88';
+    ctx.font=`400 ${8*dpr}px Space Mono`;
+    ctx.fillText('PHOTON PINNED CENTER 100G OSCILLATING -p +p REALISTINF -p +p',14*dpr,44*dpr);
+    ctx.fillText('10 PLANETS UNDER GRAVITY 8 OFFICIAL + PLUTO + PLANET X 16200 YEARS ELLIPTICAL',14*dpr,58*dpr);
+    ctx.fillText('EACH PLANET EMIT S,M,W WAVE DEPENDING ON CORE SPECTROGRAPHED',14*dpr,72*dpr);
+    ctx.fillText('16200 YEARS PLANET X ELLIPTICAL = 16200 PSI DEEPEST SEA 111.7 MPa',14*dpr,86*dpr);
+    ctx.fillText('S=SHORT/SEISMIC, M=MEDIUM/MAGNETIC, W=WEAK/LONG/GRAVITY',14*dpr,100*dpr);
+    ctx.restore();
+  }
+  draw();
+})();
+
+document.getElementById('btn-next').onclick=()=>{};
+document.getElementById('btn-synthesis').onclick=()=>{};
+document.getElementById('btn-bubbles').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

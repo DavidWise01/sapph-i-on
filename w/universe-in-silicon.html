@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE UNIVERSE IN SILICON — Season Two</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root{
+  --bg:#10151A; --panel:#141B22; --lattice:#1C242C; --line:#26303A;
+  --paper:#E9E4DA; --dim:#8B939C;
+  --si:#56C8F0; --cosmos:#F0A056;
+  --green:#58C08A; --amber:#E0B050; --red:#E06868;
+  --disp:'Archivo',sans-serif; --serif:'Source Serif 4',Georgia,serif; --mono:'IBM Plex Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--paper);font-family:var(--serif);font-size:17px;line-height:1.65}
+
+.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero svg{position:absolute;inset:0;width:100%;height:100%}
+.hero-inner{position:relative;z-index:2;max-width:1060px;margin:0 auto;padding:0 32px;width:100%}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--dim);text-transform:uppercase}
+.hero h1{font-family:var(--disp);font-weight:900;font-stretch:118%;font-size:clamp(44px,9vw,124px);line-height:.94;letter-spacing:-.015em;margin:18px 0 22px}
+.hero h1 .s{color:var(--si)}.hero h1 .c{color:var(--cosmos)}
+.hero p.dek{font-size:clamp(18px,2.2vw,23px);max-width:660px;font-weight:300}
+.hero p.dek em{color:var(--cosmos);font-style:italic}
+.credits{margin-top:34px;font-family:var(--mono);font-size:12px;color:var(--dim);display:flex;gap:28px;flex-wrap:wrap}
+.credits b{color:var(--paper);font-weight:500}
+
+.tier{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:2px;border:1px solid}
+.tier::before{content:'';width:7px;height:7px;border-radius:50%;background:currentColor}
+.tier.g{color:var(--green);border-color:color-mix(in srgb,var(--green) 40%,transparent)}
+.tier.a{color:var(--amber);border-color:color-mix(in srgb,var(--amber) 40%,transparent)}
+.tier.r{color:var(--red);border-color:color-mix(in srgb,var(--red) 40%,transparent)}
+
+.ep{border-bottom:1px solid var(--line);padding:84px 0}
+.wrap{max-width:1060px;margin:0 auto;padding:0 32px}
+.ep-head{display:flex;align-items:baseline;gap:22px;margin-bottom:8px;flex-wrap:wrap}
+.ep-mark{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:13px;letter-spacing:.2em;color:var(--dim)}
+.xlate{width:34px;height:14px;flex:none}
+.ep h2{font-family:var(--disp);font-weight:800;font-stretch:110%;font-size:clamp(30px,4.6vw,52px);letter-spacing:-.01em;margin:6px 0 4px}
+.stamp{font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:26px}
+
+/* the dictionary split — signature of season two */
+.entry{display:grid;grid-template-columns:1fr 44px 1fr;gap:0;background:var(--panel);border:1px solid var(--line);border-radius:3px;margin:0 0 26px;overflow:hidden}
+.entry .cell{padding:18px 20px}
+.entry .cell h5{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}
+.entry .cell.si h5{color:var(--si)}.entry .cell.co h5{color:var(--cosmos)}
+.entry .cell p{font-size:15px;color:var(--paper);margin:0;line-height:1.55}
+.entry .mid{display:flex;align-items:center;justify-content:center;color:var(--dim);border-left:1px dashed var(--line);border-right:1px dashed var(--line);font-family:var(--mono);font-size:16px}
+@media(max-width:700px){.entry{grid-template-columns:1fr}.entry .mid{border:none;border-top:1px dashed var(--line);border-bottom:1px dashed var(--line);padding:6px 0}}
+
+.cols{display:grid;grid-template-columns:1.5fr 1fr;gap:44px;align-items:start}
+@media(max-width:820px){.cols{grid-template-columns:1fr}}
+.ep p{margin-bottom:18px}
+.ep p.dim{color:var(--dim);font-size:15px}
+.side{background:var(--panel);border:1px solid var(--line);padding:22px 22px 18px;border-radius:3px}
+.side h4{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-bottom:14px}
+.datum{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:13px;padding:7px 0;border-bottom:1px dashed var(--line)}
+.datum:last-child{border-bottom:none}
+.datum b{font-weight:500;color:var(--paper)}.datum span{color:var(--dim)}
+code,.k{font-family:var(--mono);font-size:.92em;color:var(--si)}
+
+/* E09 slider */
+.sc-calc{margin-top:22px;background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:20px}
+.sc-calc label{font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:10px}
+input[type=range]{width:100%;accent-color:var(--si)}
+input[type=range]:focus-visible{outline:2px solid var(--si);outline-offset:3px}
+.sc-read{display:flex;gap:14px;flex-wrap:wrap;margin-top:14px}
+.ro{background:var(--bg);border:1px solid var(--line);padding:12px 16px;border-radius:3px;flex:1;min-width:140px}
+.ro .v{font-family:var(--disp);font-weight:800;font-size:26px}
+.ro.warm .v{color:var(--cosmos)}.ro.cool .v{color:var(--si)}
+.ro .l{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;margin-top:4px}
+
+/* graveyard ledger */
+.grave{border:1px solid var(--line);border-radius:3px;background:var(--panel);margin-bottom:14px;padding:18px 20px}
+.grave .gh{display:flex;justify-content:space-between;gap:14px;align-items:baseline;flex-wrap:wrap;margin-bottom:6px}
+.grave .gh b{font-family:var(--disp);font-weight:800;font-size:19px;letter-spacing:-.01em}
+.grave .gh span{font-family:var(--mono);font-size:12px;color:var(--dim)}
+.grave p{font-size:15px;color:var(--paper);margin:0}
+.grave p em{color:var(--red);font-style:normal;font-family:var(--mono);font-size:13px}
+
+.finale h2{font-family:var(--disp);font-weight:900;font-stretch:118%;font-size:clamp(34px,6vw,72px);line-height:1;letter-spacing:-.015em;margin-bottom:26px}
+.finale h2 span{color:var(--cosmos)}
+footer{border-top:1px solid var(--line);padding:28px 0 40px;font-family:var(--mono);font-size:12px;color:var(--dim);line-height:1.8}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <svg viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g id="latSide"></g>
+    <g id="starSide"></g>
+    <line x1="600" y1="0" x2="600" y2="700" stroke="#26303A" stroke-width="1" stroke-dasharray="4 8"/>
+    <text x="600" y="360" text-anchor="middle" font-family="IBM Plex Mono" font-size="30" fill="#8B939C">&#8596;</text>
+  </svg>
+  <div class="hero-inner">
+    <div class="eyebrow">Season two · a translation dictionary in six entries</div>
+    <h1>THE UNIVERSE<br>IN <span class="s">SILI</span><span class="c">CON</span></h1>
+    <p class="dek">Every entry maps one thing in the crystal to one thing in the cosmos. The mathematics translates cleanly — until the final page, where one word has <em>no translation at all</em>.</p>
+    <div class="credits">
+      <div>LINEAGE <b>DIRAC · ANDERSON · VOLOVIK</b></div>
+      <div>FORMAT <b>SILICON &#8596; COSMOS</b></div>
+      <div>NUMBERS <b>VERIFIED, TIERS MARKED</b></div>
+    </div>
+  </div>
+</header>
+
+<!-- E07 -->
+<section class="ep" id="e07">
+  <div class="wrap">
+    <div class="ep-head">
+      <div class="ep-mark"><svg class="xlate" viewBox="0 0 34 14"><circle cx="5" cy="7" r="3.4" fill="#56C8F0"/><path d="M11 7h12" stroke="#8B939C" stroke-width="1.2"/><path d="M20 4l3 3-3 3" fill="none" stroke="#8B939C" stroke-width="1.2"/><circle cx="29" cy="7" r="3.4" fill="#F0A056"/></svg>EPISODE 07</div>
+      <span class="tier g">green · same mathematics</span>
+    </div>
+    <h2>The Ground State</h2>
+    <div class="stamp">What "empty" means, twice</div>
+    <div class="entry">
+      <div class="cell si"><h5>Silicon</h5><p>Filled valence band, nothing excited. The crystal at rest. Every "particle" that will ever appear is an excitation above this state.</p></div>
+      <div class="mid">&#8596;</div>
+      <div class="cell co"><h5>Cosmos</h5><p>The quantum vacuum. Lowest-energy state of the fields. Every Standard Model particle is an excitation above this state.</p></div>
+    </div>
+    <div class="cols">
+      <div>
+        <p>Season one ended on a suspicion: the exciton might not be a counterfeit particle, but an honest particle of a different vacuum. Season two takes the suspicion seriously and builds the dictionary. First entry, the easiest: both worlds define "nothing" the same way — not as absence, but as the <em>lowest rung</em>. Everything else is bookkeeping above it.</p>
+        <p class="dim">This entry is green because it isn't an analogy at all. Effective field theory treats both identically; the vacuum is a ground state by definition on both sides of the arrow.</p>
+      </div>
+      <aside class="side">
+        <h4>Entry data</h4>
+        <div class="datum"><span>Silicon ground state</span><b>full valence band</b></div>
+        <div class="datum"><span>Cosmic ground state</span><b>QFT vacuum</b></div>
+        <div class="datum"><span>Particles are</span><b>excitations, both sides</b></div>
+        <div class="datum"><span>Translation loss</span><b>none</b></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- E08 -->
+<section class="ep" id="e08">
+  <div class="wrap">
+    <div class="ep-head">
+      <div class="ep-mark"><svg class="xlate" viewBox="0 0 34 14"><circle cx="5" cy="7" r="3.4" fill="#56C8F0"/><path d="M11 7h12" stroke="#8B939C" stroke-width="1.2"/><path d="M20 4l3 3-3 3" fill="none" stroke="#8B939C" stroke-width="1.2"/><circle cx="29" cy="7" r="3.4" fill="#F0A056"/></svg>EPISODE 08</div>
+      <span class="tier g">green · shared ancestry, not analogy</span>
+    </div>
+    <h2>The Antiparticle Ledger</h2>
+    <div class="stamp">1930 — Dirac invents the hole before the crystal does</div>
+    <div class="entry">
+      <div class="cell si"><h5>Silicon</h5><p>The hole: an unoccupied state in a filled band. Positive charge, effective mass, drifts backward in a field.</p></div>
+      <div class="mid">&#8596;</div>
+      <div class="cell co"><h5>Cosmos</h5><p>The positron: originally "an unoccupied state in the sea of filled negative-energy levels." Dirac, 1930.</p></div>
+    </div>
+    <div class="entry">
+      <div class="cell si"><h5>Silicon</h5><p>The exciton: electron bound to hole, drifting as one neutral object, annihilating into a photon.</p></div>
+      <div class="mid">&#8596;</div>
+      <div class="cell co"><h5>Cosmos</h5><p>Positronium: electron bound to positron, unstable, ends in light. Same Bohr math, different vacuum.</p></div>
+    </div>
+    <div class="cols">
+      <div>
+        <p>This is the entry where the dictionary stops being a metaphor and becomes genealogy. Antimatter was <em>invented</em> as hole theory. Condensed matter kept the sea and the picture; particle physics quietly dropped the sea and kept the particle. Season one's protagonist, the exciton, is positronium's twin raised in a different household.</p>
+        <p class="dim">One asymmetry survives translation: positronium annihilates into pure radiation and the constituents cease to exist. The exciton's recombination refills a band state — the crystal's sea is real and observable, Dirac's was scaffolding.</p>
+      </div>
+      <aside class="side">
+        <h4>Entry data</h4>
+        <div class="datum"><span>Hole theory</span><b>Dirac 1930</b></div>
+        <div class="datum"><span>Positron found</span><b>Anderson 1932</b></div>
+        <div class="datum"><span>Exciton named</span><b>Frenkel 1931</b></div>
+        <div class="datum"><span>Positronium lifetime</span><b>0.125 ns (para)</b></div>
+        <div class="datum"><span>GaAs exciton lifetime</span><b>~1 ns</b></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- E09 -->
+<section class="ep" id="e09">
+  <div class="wrap">
+    <div class="ep-head">
+      <div class="ep-mark"><svg class="xlate" viewBox="0 0 34 14"><circle cx="5" cy="7" r="3.4" fill="#56C8F0"/><path d="M11 7h12" stroke="#8B939C" stroke-width="1.2"/><path d="M20 4l3 3-3 3" fill="none" stroke="#8B939C" stroke-width="1.2"/><circle cx="29" cy="7" r="3.4" fill="#F0A056"/></svg>EPISODE 09</div>
+      <span class="tier g">green · Anderson had it in 1962</span>
+    </div>
+    <h2>The Cosmic Superconductor</h2>
+    <div class="stamp">How a photon gains weight — twice</div>
+    <div class="entry">
+      <div class="cell si"><h5>Silicon (well — niobium)</h5><p>Inside a superconductor the photon acquires mass from the condensate. Fields are expelled past the London depth λ_L. The Meissner effect <b>is</b> a massive gauge boson.</p></div>
+      <div class="mid">&#8596;</div>
+      <div class="cell co"><h5>Cosmos</h5><p>The W and Z acquire mass from the Higgs condensate filling all space. The weak force is short-ranged for exactly the reason magnetic fields die inside niobium.</p></div>
+    </div>
+    <div class="cols">
+      <div>
+        <p>The Anderson–Higgs mechanism was discovered in a superconductor first. Anderson published the mass-generation argument in 1962; the particle-physics papers arrived in 1964. On this entry the universe is, with a straight face, a superconductor — and the W and Z are its heavy photons.</p>
+        <p>The photon's borrowed mass is measurable and computable: <code>m_γc² = ħc / λ_L</code>. Drag the penetration depth and watch the photon gain and lose weight.</p>
+        <div class="sc-calc">
+          <label>London penetration depth λ_L — <span id="lamLabel">40</span> nm</label>
+          <input type="range" id="lam" min="10" max="250" value="40" step="1" aria-label="London penetration depth in nanometers">
+          <div class="sc-read">
+            <div class="ro warm"><div class="v" id="mg">—</div><div class="l">photon mass-energy inside</div></div>
+            <div class="ro cool"><div class="v" id="matName">Nb-ish</div><div class="l">nearest real material</div></div>
+          </div>
+        </div>
+      </div>
+      <aside class="side">
+        <h4>Entry data</h4>
+        <div class="datum"><span>Anderson mechanism</span><b>1962</b></div>
+        <div class="datum"><span>Higgs et al.</span><b>1964</b></div>
+        <div class="datum"><span>Al: λ_L ≈ 16 nm</span><b>m_γc² ≈ 12.3 eV</b></div>
+        <div class="datum"><span>Nb: λ_L ≈ 40 nm</span><b>m_γc² ≈ 4.9 eV</b></div>
+        <div class="datum"><span>Cuprate: λ_L ≈ 200 nm</span><b>m_γc² ≈ 1.0 eV</b></div>
+        <div class="datum"><span>Z boson (cosmos side)</span><b>91.2 GeV</b></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- E10 -->
+<section class="ep" id="e10">
+  <div class="wrap">
+    <div class="ep-head">
+      <div class="ep-mark"><svg class="xlate" viewBox="0 0 34 14"><circle cx="5" cy="7" r="3.4" fill="#56C8F0"/><path d="M11 7h12" stroke="#8B939C" stroke-width="1.2"/><path d="M20 4l3 3-3 3" fill="none" stroke="#8B939C" stroke-width="1.2"/><circle cx="29" cy="7" r="3.4" fill="#F0A056"/></svg>EPISODE 10</div>
+      <span class="tier a">amber · exact at low energy, breaks at the cutoff</span>
+    </div>
+    <h2>The Borrowed Light Cone</h2>
+    <div class="stamp">Graphene, where c is negotiable</div>
+    <div class="entry">
+      <div class="cell si"><h5>Silicon (well — carbon)</h5><p>Near graphene's Dirac points, electrons obey the massless Dirac equation with v_F ≈ c/300 in the role of light speed. Emergent Lorentz invariance, complete with a cone.</p></div>
+      <div class="mid">&#8596;</div>
+      <div class="cell co"><h5>Cosmos</h5><p>Relativity: one invariant speed, a light-cone causal structure, Dirac fermions. The things we take as bedrock.</p></div>
+    </div>
+    <div class="cols">
+      <div>
+        <p>Nobody installed relativity in graphene. It <em>emerged</em> — the honeycomb lattice's band structure conspires, near two special points, to reproduce the massless Dirac equation with its own private light speed. Electrons there don't know about the lattice any more than we know about whatever underlies spacetime.</p>
+        <p>Amber, and the amber is the interesting part: the symmetry is exact only at low energy. Push toward the cutoff and the lattice shows through — the cone warps, invariance dies. If our Lorentz invariance is likewise emergent, this predicts what its violation would look like near the Planck scale. So far, searches for that violation have found nothing: either the cutoff is farther than we can see, or the bedrock is real bedrock.</p>
+      </div>
+      <aside class="side">
+        <h4>Entry data</h4>
+        <div class="datum"><span>v_F (graphene)</span><b>1×10⁶ m/s = c/300</b></div>
+        <div class="datum"><span>Valid regime</span><b>near Dirac points</b></div>
+        <div class="datum"><span>Breaks at</span><b>lattice cutoff</b></div>
+        <div class="datum"><span>Si lattice / Planck ℓ</span><b>10²⁵·⁵ apart</b></div>
+        <div class="datum"><span>Lorentz violation seen?</span><b style="color:var(--amber)">none to date</b></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- E11 -->
+<section class="ep" id="e11">
+  <div class="wrap">
+    <div class="ep-head">
+      <div class="ep-mark"><svg class="xlate" viewBox="0 0 34 14"><circle cx="5" cy="7" r="3.4" fill="#56C8F0"/><path d="M11 7h12" stroke="#8B939C" stroke-width="1.2"/><path d="M20 4l3 3-3 3" fill="none" stroke="#8B939C" stroke-width="1.2"/><circle cx="29" cy="7" r="3.4" fill="#F0A056"/></svg>EPISODE 11</div>
+      <span class="tier r">red · kinematics without the dynamics</span>
+    </div>
+    <h2>The Sound of a Horizon</h2>
+    <div class="stamp">A black hole made of cold atoms, temperature: one nanokelvin</div>
+    <div class="entry">
+      <div class="cell si"><h5>Silicon (well — a BEC)</h5><p>Flow a condensate faster than its own sound speed: phonons inside can't escape upstream. A sonic horizon, emitting a thermal whisper of phonon pairs at ~nK.</p></div>
+      <div class="mid">&#8596;</div>
+      <div class="cell co"><h5>Cosmos</h5><p>An event horizon emitting Hawking radiation — entangled pairs split at the boundary, one falls, one escapes.</p></div>
+    </div>
+    <div class="cols">
+      <div>
+        <p>Unruh noticed in 1981 that sound in a moving fluid obeys the same wave equation as light near a black hole. Decades later, Steinhauer's group built the flowing condensate and reported the spontaneous, entangled phonon emission — the analog Hawking effect, in a lab, at roughly a nanokelvin.</p>
+        <p>Red chip, deliberately. The experiment is real and beautiful, but it imports the horizon by hand — the flow profile is imposed, not gravitating. It shares Hawking's <em>kinematics</em> (fields on a horizon) while having none of Einstein's <em>dynamics</em>. It tests the robustness of Hawking's derivation, which is genuinely valuable; it does not test gravity. Anyone selling it as more is over-claiming, and this series doesn't.</p>
+      </div>
+      <aside class="side">
+        <h4>Entry data</h4>
+        <div class="datum"><span>Proposed</span><b>Unruh 1981</b></div>
+        <div class="datum"><span>BEC sound speed</span><b>~mm/s</b></div>
+        <div class="datum"><span>Analog Hawking temp</span><b>~1 nK</b></div>
+        <div class="datum"><span>Horizon origin</span><b>imposed, not gravitating</b></div>
+        <div class="datum"><span>Tests Einstein eqs?</span><b style="color:var(--red)">no</b></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- E12 -->
+<section class="ep" id="e12" style="border-bottom:none">
+  <div class="wrap">
+    <div class="ep-head">
+      <div class="ep-mark"><svg class="xlate" viewBox="0 0 34 14"><circle cx="5" cy="7" r="3.4" fill="#56C8F0"/><path d="M11 7h12" stroke="#8B939C" stroke-width="1.2"/><path d="M20 4l3 3-3 3" fill="none" stroke="#8B939C" stroke-width="1.2"/><circle cx="29" cy="7" r="3.4" fill="none" stroke="#E06868" stroke-width="1.4" stroke-dasharray="2.5 2.5"/></svg>EPISODE 12 · FINALE</div>
+      <span class="tier r">red · the untranslated word</span>
+    </div>
+    <div class="finale">
+      <h2>THE UNMAPPED<br><span>CURVATURE</span></h2>
+      <div class="cols">
+        <div>
+          <p>Ground states translate. Antiparticles translate. Mass generation, light cones, even horizons translate. One word has no silicon-side entry: <em>gravity itself</em>. Nobody has made a lattice whose collective modes obey Einstein's equations. The graveyard of attempts is the most instructive page in the dictionary.</p>
+
+          <div class="grave"><div class="gh"><b>Sakharov — induced gravity</b><span>1967</span></div>
+          <p>Don't put gravity in; integrate out matter fluctuations and the Einstein–Hilbert action falls out, the way elasticity falls out of atoms. Mechanism beautiful. <em>Fails on the numbers: the cosmological constant comes out wrong by ~10¹²⁰.</em></p></div>
+
+          <div class="grave"><div class="gh"><b>Volovik — helium-3</b><span>1990s→</span></div>
+          <p>A real fluid with emergent Weyl fermions, gauge fields, and an effective metric. Everything emerges except the one thing needed. <em>The metric obeys hydrodynamics, not Einstein. Names the problem; doesn't solve it.</em></p></div>
+
+          <div class="grave"><div class="gh"><b>Jacobson — thermodynamic gravity</b><span>1995</span></div>
+          <p>Assume entropy ∝ horizon area and δQ = TdS locally; Einstein's equations drop out as an equation of state — like the ideal gas law from molecular chaos. <em>A consistency argument, not a construction. Says gravity is thermodynamic; silent on the molecules.</em></p></div>
+
+          <div class="grave"><div class="gh"><b>Verlinde — entropic gravity</b><span>2010, 2016</span></div>
+          <p>Gravity as an entropic force of hidden information; the 2016 version tried to eat dark matter and made testable predictions. <em>Credit for falsifiability; lensing and dwarf-galaxy data have mostly not cooperated.</em></p></div>
+
+          <div class="grave"><div class="gh"><b>AdS/CFT — it from qubit</b><span>1997→</span></div>
+          <p>Bulk geometry reconstructed from boundary entanglement; cut the entanglement and space literally disconnects. The closest thing to the missing entry. <em>Rigorous only in anti-de Sitter. We live in de Sitter. The solved case is the one we're not in.</em></p></div>
+
+          <div class="grave"><div class="gh"><b>The doorman — Weinberg–Witten</b><span>1980</span></div>
+          <p>A theorem: no massless spin-2 particle composite from a theory with a Lorentz-covariant stress tensor. Every emergent-gravity proposal must show its dodge at the door. <em>AdS/CFT's dodge: the graviton lives in a different spacetime than its constituents. The honest ones wear the dodge openly.</em></p></div>
+
+          <p style="margin-top:26px">The scorecard: thermodynamics says gravity <em>smells</em> emergent, explicit media deliver everything but the dynamics, the entanglement program delivers the dynamics in the wrong universe, and a theorem checks IDs at the door. Spin-1 is easy to fake. Spin-2 is provably hard. The wafer's curvature stays unmapped — and that gap, not any entry above it, is the finding.</p>
+        </div>
+        <aside class="side">
+          <h4>Closing ledger</h4>
+          <div class="datum"><span>Entries translated</span><b>5 of 6</b></div>
+          <div class="datum"><span>Emergent gauge fields</span><b style="color:var(--green)">routine</b></div>
+          <div class="datum"><span>Emergent gravitons</span><b style="color:var(--red)">blocked</b></div>
+          <div class="datum"><span>Obstruction</span><b>Weinberg–Witten 1980</b></div>
+          <div class="datum"><span>Best live program</span><b>entanglement / AdS-CFT</b></div>
+          <div class="datum"><span>Status</span><b style="color:var(--red)">open</b></div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    THE UNIVERSE IN SILICON · season two, episodes 07–12 · companion to THE EXCITON · verified this session: v_F = c/300, m_γc² = ħc/λ_L (Al 12.3 eV · Nb 4.9 eV · cuprate 1.0 eV), Si lattice / Planck length = 10²⁵·⁵, BEC analog-Hawking regime ~1 nK · tier chips mark epistemic status per entry: green = same mathematics, amber = exact in a limit, red = rhyme or open problem.
+  </div>
+</footer>
+
+<script>
+// hero: lattice left, starfield right — the two sides of the dictionary
+(function(){
+  var lat=document.getElementById('latSide'),s='';
+  for(var y=40;y<700;y+=56){for(var x=30;x<580;x+=56){
+    s+='<circle cx="'+x+'" cy="'+y+'" r="2" fill="#1C242C"/>';}}
+  lat.innerHTML=s;
+  var star=document.getElementById('starSide'),t='';
+  var rnd=function(seed){return function(){seed=(seed*9301+49297)%233280;return seed/233280;}}(42);
+  for(var i=0;i<90;i++){
+    var x=620+rnd()*560,y=20+rnd()*660,r=(rnd()*1.6+0.5).toFixed(2),o=(rnd()*0.5+0.15).toFixed(2);
+    t+='<circle cx="'+x.toFixed(0)+'" cy="'+y.toFixed(0)+'" r="'+r+'" fill="#F0A056" opacity="'+o+'"/>';}
+  star.innerHTML=t;
+})();
+
+// E09 photon-mass slider: m c^2 = hbar c / lambda  (in eV)
+(function(){
+  var HBARC_eVnm=197.3269804; // hbar*c in eV·nm
+  var lam=document.getElementById('lam');
+  function mat(nm){
+    if(nm<25)return 'Al-ish';
+    if(nm<90)return 'Nb-ish';
+    if(nm<160)return 'NbTi-ish';
+    return 'cuprate-ish';
+  }
+  function upd(){
+    var nm=+lam.value;
+    document.getElementById('lamLabel').textContent=nm;
+    document.getElementById('mg').textContent=(HBARC_eVnm/nm).toFixed(2)+' eV';
+    document.getElementById('matName').textContent=mat(nm);
+  }
+  lam.addEventListener('input',upd);upd();
+})();
+</script>
+</body>
+</html>

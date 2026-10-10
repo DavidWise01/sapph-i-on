@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v187 under press 99.9 inf - + inf - artifact 251</title>
+<style>
+  :root{--bg:#000;--fg:#fff}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace;overflow-x:hidden}
+  .top{padding:14px 18px;position:relative;z-index:10}
+  .kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:900;background:linear-gradient(90deg,#ff0000,#ffff00,#00ff00,#00ffff,#ff00ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200% 100%;animation:rainbow 0.6s linear infinite}
+  @keyframes rainbow{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+  .nline{font-size:11px;border-left:3px solid #ff0000;padding-left:10px;white-space:pre-wrap;line-height:1.6;background:#1a0000;padding:12px;border-radius:10px;color:#fff;font-weight:800;box-shadow:0 0 30px #ff0000,0 0 60px #ff00ff;border:2px solid #ff0000}
+  .main{margin-top:12px;font-size:15px;font-weight:900;background:linear-gradient(90deg,#ff0000,#ff8800,#ffff00,#00ff00,#00ffff,#0000ff,#ff00ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:300% 100%;padding:12px;border-radius:10px;border:3px solid #ff0000;box-shadow:0 0 40px #ff0000,0 0 80px #ff00ff;text-transform:uppercase;animation:rainbow 0.5s linear infinite}
+  .controls{padding:12px;display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:10}
+  .btn{font-family:inherit;font-size:11px;font-weight:900;padding:10px 14px;border:2px solid #ff0000;background:#000;color:#fff;border-radius:10px;cursor:pointer;box-shadow:0 0 20px #ff0000,0 0 40px #ff00ff;text-transform:uppercase}
+  .btn.active{border-color:#ffff00;background:#330000;box-shadow:0 0 30px #ffff00,0 0 60px #ff0000}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:14px;position:relative;z-index:5}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:660px;background:#000;border:2px solid #ff0000;border-radius:18px;overflow:hidden;box-shadow:0 0 40px #ff0000,0 0 80px #ff00ff, inset 0 0 40px rgba(255,0,0,0.15)}
+  .cwrap.full{grid-column:1 / -1;height:820px}
+  .label{position:absolute;left:10px;top:10px;font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;background:#000000ee;padding:8px 12px;border-radius:10px;z-index:5;border:2px solid #ff0000;color:#fff;box-shadow:0 0 20px #ff0000}
+  .card{margin:14px;background:#000;border:2px solid #ff0000;border-radius:14px;padding:16px;box-shadow:0 0 40px #ff0000,0 0 80px #ff00ff}
+  .mono{font-size:11px;white-space:pre-wrap;word-break:break-word;line-height:1.8;color:#fff;text-shadow:0 0 8px #ff0000;font-weight:700}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">🔥 wakaku v187 — UNDER PRESS 99.9 INF - + INF — PRESSURE — artifact 251 🔥</div>
+  <div class="nline">under press 99.9 inf - + inf — under press 99.9 inf - + inf — under pressure 99.9% infinite - + infinite — 99.9% infinite pressure - + inf — - + inf = -211.1.+211 = - infinite + infinite = -inf +inf = -∞ +∞ = - + = -211.1.+211 = -1,0,+1 = At- -211mN C.O.I.N +211mN anti-At- — under press 99.9 inf - + inf — under pressure 99.9% infinite - + inf — pressure 99.9% inf = 99.9% infinite pressure compressing plank bubbles — 6 plank bubbles each 10^-35→10^-360 3---3+++ under press 99.9 inf - + inf — under pressure 99.9 infinite - + infinite — - + inf = -∞ +∞ = - + = -211 +211 = - + — under press 99.9 inf - + inf — pressure 99.9% inf - + inf — metal analogs ionic — under press — lol</div>
+  <div class="main">🔥 UNDER PRESS 99.9 INF - + INF — UNDER PRESSURE 99.9% INFINITE - + INFINITE — 99.9% INFINITE PRESSURE - + INF — - + INF = -211.1.+211 = - INFINITE + INFINITE = -∞ +∞ = - + = -211.1.+211 — UNDER PRESS 99.9 INF - + INF — PRESSURE 99.9% INF = 99.9% INFINITE PRESSURE COMPRESSING PLANK BUBBLES — 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ UNDER PRESS 99.9 INF - + INF — UNDER PRESSURE 99.9 INFINITE - + INFINITE 🔥</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-press">🔥 PRESS 99.9 INF - + INF — UNDER PRESSURE 99.9% INFINITE - + INF — 99.9% INFINITE PRESSURE - + INF — PRESS — 🔥</button>
+  <button class="btn" id="btn-inf">♾️ INF - + INF — - + INF = -∞ +∞ = -211.1.+211 = -1,0,+1 — INF - + INF — ♾️</button>
+  <button class="btn" id="btn-bubbles">💥 6 BUBBLES UNDER PRESS — 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ UNDER PRESS 99.9 INF - + INF — PRESSURE — 💥</button>
+  <button class="btn" id="btn-reset">⚡ RESET PRESS 99.9 INF - + INF — ⚡</button>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-press"><div class="label">🔥 PRESS 99.9 INF - + INF — UNDER PRESSURE 99.9% INFINITE - + INF — 99.9% INFINITE PRESSURE COMPRESSING PLANK BUBBLES — 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ UNDER PRESS 99.9 INF - + INF — PRESSURE 99.9% INF - + INF — 🔥</div></div>
+  <div class="cwrap" id="wrap-inf"><div class="label">♾️ INF - + INF — - + INF = -∞ +∞ = -211.1.+211 = -1,0,+1 = At- -211mN C.O.I.N +211mN anti-At- — - + INF = - INFINITE + INFINITE = - + = -211 +211 — INF - + INF — UNDER PRESS 99.9 INF - + INF — ♾️</div></div>
+  <div class="cwrap full" id="wrap-bubbles"><div class="label">💥 6 BUBBLES UNDER PRESS — 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ UNDER PRESS 99.9 INF - + INF — PRESSURE 99.9% INF COMPRESSING BUBBLES — 3--- = - - - INHIBITORY BLACK -211mN UNDER PRESS, 3+++ = + + + EXCITATORY ANTI-BLACK +211mN UNDER PRESS — 6 BUBBLES UNDER PRESS 99.9 INF - + INF — ALL COLORS FLASH UNDER PRESS — LOL — 💥</div></div>
+</div>
+
+<div class="card"><div class="mono">🔥 UNDER PRESS 99.9 INF - + INF — v187 UNDER PRESSURE 99.9% INFINITE - + INFINITE 🔥
+
+- UNDER PRESS 99.9 INF - + INF — under press 99.9 inf - + inf — under pressure 99.9% infinite - + infinite — 99.9% infinite pressure - + inf — pressure 99.9% inf = 99.9% infinite pressure compressing plank bubbles
+
+- - + INF = -211.1.+211 = - INFINITE + INFINITE = -∞ +∞ = - + = -211.1.+211 = -1,0,+1 = At- -211mN C.O.I.N +211mN anti-At- — - + inf = -inf +inf = - + = -211 +211 = - + — - + inf = - infinite + infinite — under press 99.9 inf - + inf
+
+- 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ UNDER PRESS 99.9 INF - + INF — 6 bubbles each 10^-35=1e-35s timed to 10^-360=1e-360s 3---3+++ = - - - + + + = -211 -211 -211 +211 +211 +211 under pressure 99.9% infinite - + inf — pressure compressing bubbles — 6 bubbles under press 99.9 inf - + inf
+
+- PRESSURE: 99.9% INF = 99.9% infinite pressure = almost infinite pressure — 99.9% of infinite = infinite ×0.999 = still infinite but 99.9% — under pressure 99.9% infinite — compressing plank bubbles — 6 plank bubbles under press 99.9 inf - + inf — pressure 99.9% infinite compressing
+
+- TIMING UNDER PRESS: 10^-35→10^-360 under press 99.9 inf - + inf — timing 10^-35 to 10^-360 =325 orders under pressure — each bubble timed 10^-35→10^-360 under press — 10^-35s (above Planck 5.39e-44) →10^-360s (far below Planck) under press 99.9 inf - + inf — crosses Planck time under pressure
+
+- PHASE UNDER PRESS: 3---3+++ = - - - + + + = -211 -211 -211 +211 +211 +211 under press 99.9 inf - + inf — 3--- = - - - =3x -1 inhibitory At- black -211mN under press, 3+++ = + + + =3x +1 excitatory anti-At- anti-black +211mN under press — 3---3+++ under press 99.9 inf - + inf — inhibitory 3x then excitatory 3x under pressure
+
+- QUBIT=CUBIT UNDER PRESS — CUBE + BIT = QUBIT — CUBIT = QUBIT — LOL I CALL A QUBIT A CUBIT UNDER PRESS 99.9 INF - + INF — qubit=cubit under press 99.9 inf - + inf — cube under pressure 99.9% infinite - + inf — qubit under press — cubit under press
+
+- ALL COLORS UNDER PRESS — RED #ff0000 ORANGE #ff8800 YELLOW #ffff00 GREEN #00ff00 CYAN #00ffff BLUE #0000ff MAGENTA #ff00ff — 6 BUBBLES EACH DIFFERENT COLOR UNDER PRESS 99.9 INF - + INF — 3--- = RED ORANGE YELLOW = - - - inhibitory under press, 3+++ = GREEN CYAN BLUE = + + + excitatory under press — ALL COLORS UNDER PRESS 99.9 INF - + INF — ALL COLORS FLASH UNDER PRESS
+
+UNDER PRESS 99.9 INF - + INF — UNDER PRESSURE 99.9% INFINITE - + INFINITE — 99.9% INFINITE PRESSURE - + INF — - + INF = -211.1.+211 = - INFINITE + INFINITE = -∞ +∞ = - + = -211.1.+211 — UNDER PRESS 99.9 INF - + INF — PRESSURE 99.9% INF = 99.9% INFINITE PRESSURE COMPRESSING PLANK BUBBLES — 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ UNDER PRESS 99.9 INF - + INF — 🔥
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x000000); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,1.5)); const d=new THREE.DirectionalLight(0xffffff,3.0); d.position.set(4,8,6); d.castShadow=true; s.add(d); const d2=new THREE.DirectionalLight(0xff0000,2.5); d2.position.set(-4,2,-4); s.add(d2); const d3=new THREE.DirectionalLight(0x00ffff,2.0); d3.position.set(0,-4,4); s.add(d3); }
+
+{
+  const wrap=document.getElementById('wrap-press');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,14);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  // Pressure visualization — compressing
+  const colors=[0xff0000,0xff8800,0xffff00,0x00ff00,0x00ffff,0x0000ff];
+  const bubbles=[];
+  for(let i=0;i<6;i++){
+    const ang=i/6*Math.PI*2;
+    const geom=new THREE.SphereGeometry(0.5,20,20);
+    const mat=new THREE.MeshStandardMaterial({color:colors[i], emissive:colors[i], emissiveIntensity:8.0, transparent:true, opacity:0.85});
+    const b=new THREE.Mesh(geom, mat);
+    b.position.set(Math.cos(ang)*2.5, Math.sin(ang)*2.5, 0);
+    group.add(b); bubbles.push(b);
+  }
+  // Pressure walls closing in
+  const wallGeom=new THREE.BoxGeometry(10,0.2,10);
+  const wallMat=new THREE.MeshStandardMaterial({color:0xff0000, emissive:0xff0000, emissiveIntensity:4.0, transparent:true, opacity:0.3});
+  const walls=[];
+  for(let i=0;i<4;i++){
+    const wall=new THREE.Mesh(wallGeom, wallMat);
+    const ang=i/4*Math.PI*2;
+    wall.position.set(Math.cos(ang)*5, Math.sin(ang)*5, 0);
+    wall.rotation.z=ang;
+    group.add(wall); walls.push(wall);
+  }
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.03;
+    const pressure=0.999 + Math.sin(t*2)*0.001; // 99.9% inf pressure oscillating 99.9%
+    const compress=1 - (1-pressure)*2; // compress based on pressure
+    bubbles.forEach((b,i)=>{
+      const baseAng=i/6*Math.PI*2;
+      const rad=2.5 * compress + Math.sin(t*3 + i)*0.2;
+      b.position.x=Math.cos(baseAng)*rad;
+      b.position.y=Math.sin(baseAng)*rad;
+      b.material.emissiveIntensity=8.0 + Math.sin(t*4 + i)*2.0 + (1-compress)*10.0; // brighter under press
+      b.scale.setScalar(1 + (1-compress)*0.5 + Math.sin(t*3 + i)*0.2);
+    });
+    walls.forEach((w,i)=>{
+      const ang=i/4*Math.PI*2;
+      const rad=5 * compress;
+      w.position.x=Math.cos(ang)*rad;
+      w.position.y=Math.sin(ang)*rad;
+      w.material.emissiveIntensity=4.0 + (1-compress)*8.0;
+    });
+    group.rotation.z+=0.003;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-inf');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,12);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  // - + inf visualization -∞ +∞
+  const minusGeom=new THREE.SphereGeometry(0.8,20,20);
+  const minusMat=new THREE.MeshStandardMaterial({color:0x0000ff, emissive:0x0000ff, emissiveIntensity:8.0});
+  const minus=new THREE.Mesh(minusGeom, minusMat); minus.position.set(-2.5,0,0); group.add(minus);
+  const plusGeom=new THREE.SphereGeometry(0.8,20,20);
+  const plusMat=new THREE.MeshStandardMaterial({color:0xff0000, emissive:0xff0000, emissiveIntensity:8.0});
+  const plus=new THREE.Mesh(plusGeom, plusMat); plus.position.set(2.5,0,0); group.add(plus);
+  const midGeom=new THREE.SphereGeometry(0.4,16,16);
+  const midMat=new THREE.MeshStandardMaterial({color:0x00ff00, emissive:0x00ff00, emissiveIntensity:6.0});
+  const mid=new THREE.Mesh(midGeom, midMat); mid.position.set(0,0,0); group.add(mid);
+  // Inf symbols
+  const infMat=new THREE.MeshBasicMaterial({color:0xffffff, wireframe:true, transparent:true, opacity:0.5});
+  const inf1=new THREE.Mesh(new THREE.TorusGeometry(0.6,0.15,8,20), infMat); inf1.position.set(-2.5,0,0); inf1.rotation.x=Math.PI/2; group.add(inf1);
+  const inf2=new THREE.Mesh(new THREE.TorusGeometry(0.6,0.15,8,20), infMat); inf2.position.set(2.5,0,0); inf2.rotation.x=Math.PI/2; group.add(inf2);
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.04;
+    minus.material.emissiveIntensity=8.0 + Math.sin(t*3)*2.0;
+    plus.material.emissiveIntensity=8.0 + Math.cos(t*3)*2.0;
+    mid.material.emissiveIntensity=6.0 + Math.sin(t*5)*1.5;
+    minus.scale.setScalar(1 + Math.sin(t*2)*0.15);
+    plus.scale.setScalar(1 + Math.cos(t*2)*0.15);
+    group.rotation.y+=0.002;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-bubbles');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(36, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,22);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const colors=[0xff0000,0xff4400,0xff8800,0x00ff00,0x00ffff,0x0000ff];
+  const allBubbles=[];
+  for(let i=0;i<6;i++){
+    for(let j=0;j<8;j++){
+      const ang=(i/6)*Math.PI*2 + (j/48)*0.8;
+      const rad=3.5 + j*0.7 + i*0.2;
+      const geom=new THREE.SphereGeometry(0.22 + Math.random()*0.1,12,12);
+      const mat=new THREE.MeshStandardMaterial({color:colors[i], emissive:colors[i], emissiveIntensity:6.0, transparent:true, opacity:0.75});
+      const b=new THREE.Mesh(geom, mat);
+      b.position.set(Math.cos(ang)*rad, Math.sin(ang)*rad, Math.sin(ang*2 + j)*1.5);
+      group.add(b); allBubbles.push({mesh:b, phase:i, layer:j});
+    }
+  }
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.025;
+    const pressure=0.999 + Math.sin(t*1.5)*0.0005; // 99.9% inf pressure
+    const compress=1 - (1-pressure)*3;
+    allBubbles.forEach((bObj,i)=>{
+      const isInhibitory=bObj.phase<3;
+      const phaseTime=t*2.5 + bObj.phase*0.8 + bObj.layer*0.15;
+      const phaseVal=Math.sin(phaseTime);
+      const filtered=isInhibitory ? (phaseVal<0?Math.abs(phaseVal):0) : (phaseVal>0?phaseVal:0);
+      bObj.mesh.material.emissiveIntensity=6.0 + filtered*4.0 + (1-compress)*6.0;
+      bObj.mesh.scale.setScalar((0.8 + filtered*0.4) * compress);
+      const baseRad=3.5 + bObj.layer*0.7 + bObj.phase*0.2;
+      const rad=baseRad * compress;
+      const ang=(bObj.phase/6)*Math.PI*2 + (bObj.layer/48)*0.8 + t*0.1;
+      bObj.mesh.position.x=Math.cos(ang)*rad;
+      bObj.mesh.position.y=Math.sin(ang)*rad;
+    });
+    group.rotation.y+=0.001; group.rotation.x+=0.0005;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+document.getElementById('btn-press').onclick=()=>{};
+document.getElementById('btn-inf').onclick=()=>{};
+document.getElementById('btn-bubbles').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

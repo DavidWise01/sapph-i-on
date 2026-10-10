@@ -1,0 +1,128 @@
+<!DOCTYPE html><html lang="en"><head><link rel="icon" href="../favicon.svg" type="image/svg+xml"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE QUANTUM DOT · width of choices</title>
+<style>
+:root{--bg:#0A1C1A;--s1:#0D2220;--s2:#0F2826;--s3:#132E2B;
+--border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.14);
+--text:#E8F0EF;--text2:#7AA8A5;--text3:#2A5450;--seam:#FFFFFF;
+--lime:#39FF14;--cyan:#00FFFF;--red:#FF2244;--amber:#FFAA00;--pink:#FF00AA;
+--mono:ui-monospace,"Cascadia Code","SF Mono",Menlo,Consolas,monospace;--sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.45;position:relative}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:80px 80px}
+header{padding:16px 22px 12px;border-bottom:1px solid var(--border2);position:relative;z-index:1}
+h1{font-size:17px;font-family:var(--mono);letter-spacing:1px;font-weight:600}
+h1 .a{color:var(--amber)} h1 .c{color:var(--cyan)}
+.seam{height:2px;background:var(--seam);width:100%;margin-top:10px;opacity:.9}
+.sub{color:var(--text2);font-size:11.5px;margin-top:8px;font-family:var(--mono)}
+.wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:16px 22px 48px;display:grid;gap:16px}
+.verdict{font-family:var(--mono);font-size:13px;color:var(--text);background:var(--s1);border:1px solid var(--border);border-left:3px solid var(--amber);border-radius:4px;padding:11px 14px}
+.verdict b{color:var(--cyan)} .verdict .g{color:var(--lime)} .verdict .r{color:var(--red)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:860px){.grid2{grid-template-columns:1fr}}
+.viz{background:var(--s1);border:1px solid var(--border);border-radius:6px;padding:12px;position:relative}
+.sec-h{font-family:var(--mono);font-size:10.5px;letter-spacing:1.5px;color:var(--text3);text-transform:uppercase;margin-bottom:8px}
+canvas{width:100%;display:block;background:#08201d;border:1px solid var(--border);border-radius:4px}
+.badge{position:absolute;top:16px;right:18px;font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:1px;border:1px solid var(--border);padding:2px 6px;border-radius:3px}
+.hint{position:absolute;bottom:20px;right:20px;font-family:var(--mono);font-size:9px;color:var(--text3)}
+.tot{background:var(--s2);border:1px solid var(--border);border-left:3px solid var(--lime);border-radius:6px;padding:13px 16px}
+.tot h3{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:var(--lime);text-transform:uppercase;margin-bottom:8px}
+.tot p{font-size:13px;color:var(--text);margin:5px 0} .tot b{color:var(--amber)}
+.fb{display:none;position:absolute;inset:12px;align-items:center;justify-content:center;background:rgba(255,34,68,.12);border:1px solid var(--red);color:var(--red);font-family:var(--mono);font-size:11px;text-align:center;padding:12px}
+</style></head><body>
+<header><h1><span class="a">THE QUANTUM DOT</span> <span class="c">// width of choices, then collapse</span></h1>
+<div class="sub">dumb linear algebra · width sets an exponential menu · readout picks one dish, the rest lost</div>
+<div class="seam"></div></header>
+<div class="wrap">
+ <div class="verdict" id="verdict"></div>
+ <div class="grid2">
+  <div class="viz"><div class="sec-h">2D · the menu (choices vs width) + the collapse</div>
+    <canvas id="cv2" width="520" height="360"></canvas><div class="badge">CANVAS 2D</div>
+    <div class="fb" id="fb2">2D UNAVAILABLE</div></div>
+  <div class="viz"><div class="sec-h">3D · the cube of choices — dot snaps to a corner</div>
+    <canvas id="cv3" width="520" height="360"></canvas><div class="badge">SOFT-GL · NO LIB</div>
+    <div class="hint">DRAG TO ROTATE</div><div class="fb" id="fb3">RENDER FAILED</div></div>
+ </div>
+ <div class="tot"><h3>🧸 toddler corner · Bit, page 8</h3>
+   <p>Bit's toy is really a <b>panel of light switches</b>. Each switch is a dimension — on or off. With just <b>8 switches</b> he can make <b class="g" style="color:var(--lime)">2⁸ = 256</b> different patterns. Drill to more switches and the patterns explode.</p>
+   <p>A "quantum dot" is one blurry half-flipped pattern — a bit of this toy, a bit of that. When Bit <b>reads</b> it, it <b>snaps</b> to the single nearest clean pattern (one toy). The other 255 just... vanish. <b>Lost.</b></p>
+   <p>Switches and snapping. That's all it is — dumb light switches making a giant menu, and a read that picks exactly one.</p>
+ </div>
+</div>
+<script>
+"use strict";
+window.addEventListener('error',function(e){var f=document.getElementById('fb3');if(f)f.style.display='flex';});
+const D={"pack": [{"d": 2, "choices": 2, "capped": false, "binary": 4}, {"d": 3, "choices": 3, "capped": false, "binary": 8}, {"d": 4, "choices": 5, "capped": false, "binary": 16}, {"d": 5, "choices": 8, "capped": false, "binary": 32}, {"d": 6, "choices": 8, "capped": false, "binary": 64}, {"d": 8, "choices": 14, "capped": false, "binary": 256}], "collapse": [{"choice": 7, "p": 0.608}, {"choice": 88, "p": 0.167}, {"choice": 69, "p": 0.015}, {"choice": 44, "p": 0.014}, {"choice": 68, "p": 0.013}, {"choice": 77, "p": 0.012}], "mix": [7, 88, 201]};
+function cv(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim();}
+
+(function(){const d8=D.pack.find(p=>p.d===8);
+ document.getElementById('verdict').innerHTML='<b>width = the size of the menu.</b> demand strict separation and width d gives only ~d choices ('+d8.choices+' at d=8). tolerate overlap — which softmax does — and you get the <b class="g">exponential</b> menu: <b>2^d</b> corners (2⁸ = <b>256</b>, your number). that gap between ~d and 2^d IS superposition. then the <b>quantum dot</b> (a blur of several choices) hits the readout and <span class="r">collapses</span> to the argmax — one pick, the rest lost. it is all dot-products and a softmax: dumb linear algebra, exponential payoff, one clean answer out.';})();
+
+/* 2D: menu curves (log y) + collapse bars */
+(function draw2D(){try{
+ const x=document.getElementById('cv2').getContext('2d'),W=520,H=360, P=D.pack;
+ // top: choices vs width
+ const pad=44,rp=16,tp=26,by=200;
+ const ds=P.map(p=>p.d), maxd=Math.max(...ds);
+ const ymax=Math.log2(Math.max(...P.map(p=>p.binary))), ymin=0;
+ const X=d=>pad+(W-pad-rp)*(d-2)/(maxd-2), Y=lv=>tp+(by-tp)*(ymax-lv)/(ymax-ymin);
+ x.strokeStyle=cv('--border2');x.strokeRect(pad,tp,W-pad-rp,by-tp);
+ // 2^d exponential
+ x.strokeStyle=cv('--lime');x.lineWidth=2.2;x.beginPath();P.forEach((p,i)=>{const px=X(p.d),py=Y(Math.log2(p.binary));i?x.lineTo(px,py):x.moveTo(px,py);});x.stroke();
+ P.forEach(p=>{x.fillStyle=cv('--lime');x.beginPath();x.arc(X(p.d),Y(Math.log2(p.binary)),3,0,7);x.fill();});
+ // strict near-orthogonal
+ x.strokeStyle=cv('--amber');x.lineWidth=2;x.beginPath();P.forEach((p,i)=>{const px=X(p.d),py=Y(Math.log2(Math.max(1,p.choices)));i?x.lineTo(px,py):x.moveTo(px,py);});x.stroke();
+ P.forEach(p=>{x.fillStyle=cv('--amber');x.beginPath();x.arc(X(p.d),Y(Math.log2(Math.max(1,p.choices))),3,0,7);x.fill();});
+ // labels
+ x.fillStyle=cv('--lime');x.font='9px '+cv('--mono');x.textAlign='left';x.fillText('2^d corners (exponential)',pad+6,tp+14);
+ x.fillStyle=cv('--amber');x.fillText('strict near-orthogonal (~d)',pad+6,tp+28);
+ x.fillStyle=cv('--text3');x.textAlign='center';P.forEach(p=>x.fillText('d'+p.d,X(p.d),by+13));
+ x.fillStyle=cv('--cyan');x.textAlign='left';x.font='9px '+cv('--mono');x.fillText('at d=8:  256  vs  '+P.find(p=>p.d===8).choices,X(8)-70,Y(Math.log2(256))-6);
+ // bottom: collapse bars
+ const cy0=236,cy1=336,bl=D.collapse;
+ x.fillStyle=cv('--text3');x.font='9px '+cv('--mono');x.textAlign='left';x.fillText('quantum dot (blur of 3) → softmax → collapses to ONE',pad,cy0-4);
+ const bw=54, gap=14, x0=pad+10, mx=Math.max(...bl.map(e=>e.p));
+ bl.forEach((e,i)=>{const cx=x0+i*(bw+gap); const h=(cy1-cy0)*e.p/mx;
+   x.fillStyle= i===0?cv('--cyan'):cv('--text3');x.globalAlpha=i===0?1:.6;x.fillRect(cx,cy1-h,bw,h);x.globalAlpha=1;
+   x.fillStyle=i===0?cv('--cyan'):cv('--text2');x.font='9px '+cv('--mono');x.textAlign='center';x.fillText(e.p,cx+bw/2,cy1-h-4);
+   x.fillStyle=cv('--text3');x.fillText('c'+e.choice,cx+bw/2,cy1+12);});
+ x.fillStyle=cv('--cyan');x.textAlign='left';x.font='9px '+cv('--mono');x.fillText('◄ winner',x0+bw+4,cy0+16);
+}catch(e){document.getElementById('fb2').style.display='flex';}})();
+
+/* 3D: cube of choices (d=3, 8 corners=2^3), dot snaps to nearest corner */
+const SGL={ax:-0.5,ay:0.6,drag:false,lx:0,ly:0,
+ proj(p,W,H){const cy=Math.cos(this.ay),sy=Math.sin(this.ay),cx=Math.cos(this.ax),sx=Math.sin(this.ax);
+   let X=p.x*cy-p.z*sy,Z=p.x*sy+p.z*cy,Y=p.y*cx-Z*sx;Z=p.y*sx+Z*cx;
+   const f=300/(Z+520);return{X:W/2+X*f,Y:H/2-Y*f,Z,f};}};
+let phase=0;
+function draw3D(){
+ const c=document.getElementById('cv3').getContext('2d'),W=520,H=360; c.clearRect(0,0,W,H);
+ try{
+  const R=95, corners=[];
+  for(let i=0;i<8;i++){const bx=(i&1)?1:-1, by=(i&2)?1:-1, bz=(i&4)?1:-1; corners.push({x:bx*R,y:by*R,z:bz*R,bits:((i&1)?'1':'0')+((i&2)?'1':'0')+((i&4)?'1':'0')});}
+  const P=corners.map(c2=>({c2,p:SGL.proj(c2,W,H)}));
+  // edges
+  c.strokeStyle=cv('--border2');c.lineWidth=1;
+  for(let i=0;i<8;i++)for(let j=i+1;j<8;j++){let diff=0;for(let b=0;b<3;b++)if(((i>>b)&1)!==((j>>b)&1))diff++; if(diff===1){c.beginPath();c.moveTo(P[i].p.X,P[i].p.Y);c.lineTo(P[j].p.X,P[j].p.Y);c.stroke();}}
+  // the quantum dot: oscillates, then snaps to nearest corner
+  phase+=0.012; const t=(Math.sin(phase)*0.5+0.5); // 0..1
+  const target=corners[3];
+  const dot={x:target.x*t + (1-t)*20*Math.cos(phase*3), y:target.y*t+(1-t)*20*Math.sin(phase*2), z:target.z*t};
+  const dp=SGL.proj(dot,W,H);
+  // corners
+  P.forEach((o,i)=>{const snap=(i===3 && t>0.85);
+    c.fillStyle=snap?cv('--cyan'):cv('--lime');c.globalAlpha=snap?1:.8;c.beginPath();c.arc(o.p.X,o.p.Y,snap?6*o.p.f:4*o.p.f,0,7);c.fill();c.globalAlpha=1;
+    c.fillStyle=cv('--text3');c.font='8px '+cv('--mono');c.textAlign='center';c.fillText(o.c2.bits,o.p.X,o.p.Y-8);});
+  // the dot
+  c.fillStyle=cv('--amber');c.beginPath();c.arc(dp.X,dp.Y,5,0,7);c.fill();
+  c.globalAlpha=.3;c.beginPath();c.arc(dp.X,dp.Y,10,0,7);c.fill();c.globalAlpha=1;
+  c.fillStyle=cv('--amber');c.font='9px '+cv('--mono');c.textAlign='left';c.fillText(t>0.85?'▶ collapsed to 011':'quantum dot (blurred)',dp.X+10,dp.Y);
+  c.fillStyle=cv('--text3');c.font='9px '+cv('--mono');c.textAlign='left';c.fillText('3 switches → 2³ = 8 corners. drill to 8 switches → 256.',12,H-12);
+ }catch(e){document.getElementById('fb3').style.display='flex';}
+}
+(function(){const cvs=document.getElementById('cv3');
+ cvs.addEventListener('mousedown',e=>{SGL.drag=true;SGL.lx=e.offsetX;SGL.ly=e.offsetY;});
+ window.addEventListener('mouseup',()=>SGL.drag=false);
+ window.addEventListener('mousemove',e=>{if(!SGL.drag)return;SGL.ay+=(e.offsetX-SGL.lx)*.01;SGL.ax+=(e.offsetY-SGL.ly)*.01;SGL.lx=e.offsetX;SGL.ly=e.offsetY;draw3D();});
+ (function loop(){if(!SGL.drag)SGL.ay+=0.006;draw3D();requestAnimationFrame(loop);})();
+})();
+</script></body></html>

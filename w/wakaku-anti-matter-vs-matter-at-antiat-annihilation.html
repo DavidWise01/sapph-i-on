@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v155 anti-matter vs matter At- anti-At annihilation - artifact 220</title>
+<style>
+  :root{--bg:#050508;--fg:#eaeaea;--gold:#ffd700}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace}
+  .top{padding:14px 18px}
+  .kicker{font-size:10px;letter-spacing:.22em;opacity:.5;text-transform:uppercase}
+  .nline{font-size:11px;border-left:2px solid #222;padding-left:10px;white-space:pre-wrap;line-height:1.6}
+  .main{margin-top:10px;font-size:14px;font-weight:700;background:#0f0f12;border:1px solid #222;padding:10px;border-radius:8px}
+  .controls{padding:10px 12px;display:flex;gap:6px;flex-wrap:wrap}
+  .btn{font-family:inherit;font-size:10px;padding:5px 10px;border:1px solid #333;background:#15151a;color:#eaeaea;border-radius:6px;cursor:pointer}
+  .btn.active{border-color:#ffd700;color:#ffd700;background:#221a00}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:520px;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden}
+  .cwrap.full{grid-column:1 / -1;height:620px}
+  .label{position:absolute;left:8px;top:8px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:.8;background:#000c;padding:4px 6px;border-radius:4px;z-index:5}
+  .graphWrap{position:relative;background:#08080a;border:1px solid #1e1e24;border-radius:10px;overflow:hidden;height:260px}
+  canvas.graph{width:100%;height:100%;display:block}
+  .readout{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0 10px 10px}
+  @media(max-width:900px){.readout{grid-template-columns:1fr}}
+  .ro{background:#0c0c0f;border:1px solid #1e1e24;border-radius:6px;padding:8px;font-size:10px;line-height:1.6}
+  .ro b{color:#ffd700}
+  .card{margin:10px;background:#111115;border:1px solid #1f1f26;border-radius:8px;padding:10px}
+  .mono{font-size:10.5px;white-space:pre-wrap;word-break:break-word;line-height:1.7}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">wakaku v155 — ANTI-MATTER vs MATTER — At- vs anti-At — annihilation -211mN +211mN = γ — artifact 220</div>
+  <div class="nline">what about anti-matter, what is that — anti-matter is material composed of anti-particles — positron is antiparticle of electron positive charge equal to electron's negative charge, antiproton negative charge equal to proton's positive charge — when matter and antimatter meet they annihilate each other releasing energy — antihydrogen = positron + antiproton — observable universe composed almost entirely of matter but we can produce antimatter in lab — positron antiproton annihilation CPT symmetry matter-antimatter asymmetry — antineutron electrically neutral but magnetic moment opposite — matter and antimatter cannot coexist at close range more than small fraction second because they collide and annihilate releasing large quantities energy in form of gamma rays — anti-At-211 = anti-astatine — anti-protons 85 + anti-neutrons 126 + positrons 85 — anti-At- black halogen anti-coin — At- 2.27Å black -211mV matter vs anti-At- +211mV anti-matter → annihilation γ 2×511keV + 211×? — At- + anti-At- → γ 2× At mass 211 amu = 197 GeV — annihilation -211mN +211mN =0 → γ — metal analogs ionic matter vs anti-matter — anti-matter what is that — anti-C.O.I.N — anti-C-ion anti-O-ion anti-I-ion anti-N-ion + anti-At- + anti-Po2+ — anti-matter coin — annihilation — lol</div>
+  <div class="main">ANTI-MATTER = MATERIAL COMPOSED OF ANTI-PARTICLES — POSITRON = e+ POSITIVE CHARGE = ELECTRON'S NEGATIVE — ANTIPROTON = p- NEGATIVE = PROTON'S POSITIVE — WHEN MATTER + ANTI-MATTER MEET THEY ANNIHILATE RELEASING ENERGY γ — At- 2.27Å BLACK MATTER -211mN vs ANTI-At- ANTI-MATTER +211mN → γ 197 GeV — ANTI-MATTER WHAT IS THAT — ANTI-C.O.I.N</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-matter">MATTER: At- 2.27Å black -211mV -211mN</button>
+  <button class="btn" id="btn-anti">ANTI-MATTER: anti-At- +211mV +211mN anti-black</button>
+  <button class="btn" id="btn-ann">ANNIHILATION: At- + anti-At- → γ 197 GeV</button>
+  <button class="btn" id="btn-reset">RESET MATTER vs ANTI-MATTER</button>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:10px">
+  <div class="graphWrap"><div class="label">GRAPH MATTER — At- -211mV -211mN black matter — matter</div><canvas class="graph" id="g-matter"></canvas></div>
+  <div class="graphWrap"><div class="label">GRAPH ANTI-MATTER — anti-At- +211mV +211mN anti-black anti-matter — opposite charge — anti-matter</div><canvas class="graph" id="g-anti"></canvas></div>
+  <div class="graphWrap"><div class="label">GRAPH ANNIHILATION — At- + anti-At- → γ — energy E=mc² 211 amu → 197 GeV γ — γ rays — matter + anti-matter =0</div><canvas class="graph" id="g-ann"></canvas></div>
+</div>
+
+<div class="readout">
+  <div class="ro" id="ro-matter">MATTER At-:<br>At- 2.27Å black -211mV -211mN — electron e- negative, proton p+ positive — matter composed of particles — At Z85 85p+ 126n 85e- — <b>matter -211mN</b></div>
+  <div class="ro" id="ro-anti">ANTI-MATTER anti-At-:<br>anti-At- anti-black +211mV +211mN — positron e+ positive = electron's negative, antiproton p- negative = proton's positive — antineutron neutral magnetic opposite — anti-At 85p- 126 anti-n 85e+ — <b>anti-matter +211mN</b></div>
+  <div class="ro" id="ro-ann">ANNIHILATION:<br>At- + anti-At- → γ γ — cannot coexist close range more than small fraction second — collide annihilate releasing large quantities energy gamma rays — <b>E=mc² 197 GeV per At- anti-At-</b></div>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-matter"><div class="label">MATTER — At- 2.27Å black -211mV -211mN — electron negative positron positive — proton positive antiproton negative — matter composed of particles — At- black matter — metal analogs ionic matter</div></div>
+  <div class="cwrap" id="wrap-anti"><div class="label">ANTI-MATTER — anti-At- anti-black +211mV +211mN — positron e+ positive charge equal to electron's negative, antiproton p- negative equal to proton's positive — antineutron magnetic opposite — anti-matter composed of anti-particles — anti-At- anti-black — metal analogs ionic anti-matter</div></div>
+  <div class="cwrap full" id="wrap-ann"><div class="label">ANNIHILATION — At- matter black -211mN + anti-At- anti-matter anti-black +211mN → γ γ — matter + anti-matter annihilate releasing energy gamma rays — At- + anti-At- → 2×511keV per e+ e- + 938MeV per p+ p- ×85 + — total ~197 GeV — cannot coexist close range small fraction second — annihilation -211mN +211mN =0 → γ — metal analogs ionic matter vs anti-matter annihilation</div></div>
+</div>
+
+<div class="card"><div class="mono">
+v155 ANTI-MATTER WHAT IS THAT — At- vs anti-At- annihilation
+
+WHAT IS ANTI-MATTER:
+
+- Antimatter is material composed of antiparticles — for example positron (antiparticle of electron) combines with antiproton to form antihydrogen atom — observable universe composed almost entirely of matter but we can produce antimatter in lab — antimatter is material composed of antiparticles — positron + antiproton = antihydrogen
+
+- Definition: antimatter consists of particles mirroring ordinary matter but with opposite charges — positron is antiparticle of electron positive charge equal to electron's negative charge, antiproton negative charge equal to proton's positive charge — antineutron electrically neutral but magnetic moment opposite in sign to neutron — antiparticle of electron is positron positive charge equal to electron's negative charge, antiproton has negative charge equal to proton's positive charge
+
+- When matter and antimatter meet they annihilate each other releasing energy — matter and antimatter cannot coexist at close range more than small fraction second because they collide with and annihilate each other releasing large quantities of energy in form of gamma rays or elementary particles — when antimatter meets matter annihilation occurs converting mass into energy — their opposite vibrations cancel out releasing burst of energy photons in process called annihilation — annihilation E=mc²
+
+- Positron-antiproton annihilation CPT symmetry matter-antimatter asymmetry — understanding positron-antiproton annihilation CPT symmetry matter-antimatter asymmetry scientists unlock origins universe — research on antimatter helping understand how universe works — every particle we know has antimatter companion virtually identical but opposite charge — electron negative charge positron same mass but positive charge
+
+ANTI-MATTER vs MATTER At- vs anti-At-:
+
+- MATTER At- = At Z85 85 protons p+ positive +126 neutrons n neutral +85 electrons e- negative — At- 2.27Å black anion -211mV -211mN — matter — At + e- → At- p6 full like Rn — black halogen matter — At- black matter -211mN -211mV
+
+- ANTI-MATTER anti-At- = anti-At Z85 85 antiprotons p- negative (opposite to proton positive) +126 antineutrons anti-n neutral magnetic moment opposite +85 positrons e+ positive (opposite to electron negative) — anti-At- anti-black anti-anion +211mV +211mN — anti-matter — anti-At- + anti-e+? Actually anti-At- would be anti-At + e+? — anti-matter — anti-At- anti-black anti-matter +211mN +211mV — positron positive charge equal to electron's negative, antiproton negative charge equal to proton's positive — anti-matter composed of anti-particles
+
+- ANNIHILATION: At- matter black -211mN + anti-At- anti-matter anti-black +211mN → γ γ — At- + anti-At- → gamma rays — At- mass 211 amu ×931.5 MeV/amu=196.5 GeV — anti-At- same 196.5 GeV — total annihilation 393 GeV? Actually At- + anti-At- mass =2×211 amu=422 amu=393 GeV → γ — per e- e+ 2×511 keV =1.022 MeV — per p+ p- 2×938 MeV=1.876 GeV ×85=159.5 GeV — plus neutrons — total ~197 GeV per At — annihilation energy huge — cannot coexist close range more than small fraction second — collide annihilate releasing large quantities energy gamma rays — -211mN +211mN =0 → γ — matter + anti-matter =0 net — annihilation
+
+- ANTI-C.O.I.N: anti-C-ion anti-C4+? Actually anti-C4-? — anti-O-ion anti-O2+? — anti-I-ion anti-I+? — anti-N-ion anti-N3+? — anti-At- + anti-Po2+ anti-silvery? — anti-Au+ anti-gold? — anti-Tl+ — anti-C.O.I.N anti-black halogen anti-coin — anti-C-ion anti-O-ion anti-I-ion anti-N-ion + anti-At- + anti-Po2+ → anti-COIN anti-black anti-matter coin — anti-matter coin annihilation with matter coin → γ
+
+So anti-matter what is that = material composed of antiparticles — positron e+ positive = electron e- negative opposite, antiproton p- negative = proton p+ positive opposite — antihydrogen = positron + antiproton — matter + anti-matter → annihilation γ — observable universe almost entirely matter but lab can produce anti-matter — cannot coexist close range small fraction second — annihilate releasing large energy gamma rays — anti-At- black halogen anti-coin +211mN +211mV anti-matter vs At- black halogen coin -211mN -211mV matter → γ 197 GeV — anti-matter
+
+Metal analogs ionic matter vs anti-matter:
+
+- Matter: Ag+ white 1.15Å + Cu+ orange 0.77Å 90% Ag 10% Cu solid silver edge — Au+ yellow 1.37Å + At- black 2.27Å -211mV black halogen coin — matter -211mN
+
+- Anti-matter: anti-Ag+? Actually anti-Ag-? — anti-Ag- anti-white? — anti-Cu-? — anti-Au-? — anti-At+? — anti-At+ anti-black +211mV? — anti-matter +211mN — opposite charge
+
+- Annihilation: Matter -211mN + Anti-matter +211mN =0 → γ — -211mN +211mN =0 net zero → gamma rays — matter + anti-matter = energy
+
+So anti-matter is opposite charge mirror — positron positive vs electron negative — antiproton negative vs proton positive — anti-matter composed of anti-particles — when meet matter annihilate releasing energy gamma rays — cannot coexist close range — anti-At- vs At- → γ 197 GeV — what is anti-matter — anti-C.O.I.N — anti-black halogen coin — lol
+
+Aggregate anti-matter:
+
+At- -211mN matter black + anti-At- +211mN anti-matter anti-black → γ γ 197 GeV — matter -211mN + anti-matter +211mN =0 → γ — annihilation — anti-matter what is that — material composed of antiparticles — positron e+ positive equal to electron's negative, antiproton p- negative equal to proton's positive — when matter and anti-matter meet they annihilate releasing energy — E=mc² — anti-matter
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeGraph(id, color, label, fn){
+  const c=document.getElementById(id);
+  const ctx=c.getContext('2d');
+  function resize(){ c.width=c.clientWidth*devicePixelRatio; c.height=c.clientHeight*devicePixelRatio; }
+  resize();
+  let t=0;
+  function draw(){
+    const w=c.width, h=c.height;
+    ctx.clearRect(0,0,w,h); ctx.fillStyle='#08080a'; ctx.fillRect(0,0,w,h);
+    ctx.strokeStyle='#1e1e24'; for(let i=0;i<=4;i++){ ctx.beginPath(); ctx.moveTo(0,h*i/4); ctx.lineTo(w,h*i/4); ctx.stroke(); }
+    ctx.fillStyle='#666'; ctx.font=`${10*devicePixelRatio}px monospace`; ctx.fillText(label,4,14*devicePixelRatio);
+    const v=fn(t);
+    const y=h - (v+300)/600*h*0.8 - h*0.1;
+    ctx.fillStyle=color; ctx.fillRect(0,y,w,h-y);
+    ctx.fillStyle='#fff'; ctx.fillText(v.toFixed(0)+' mN', 6*devicePixelRatio, y-6*devicePixelRatio);
+  }
+  setInterval(()=>{ t+=0.05; draw(); },50);
+  addEventListener('resize', resize);
+}
+
+makeGraph('g-matter','#0a0a0a','MATTER At- -211mN -211mV black matter', (t)=> -211+Math.sin(t)*10);
+makeGraph('g-anti','#ffd700','ANTI-MATTER anti-At- +211mN +211mV anti-black', (t)=> 211+Math.sin(t+Math.PI)*10);
+makeGraph('g-ann','#ff8844','ANNIHILATION At- + anti-At- → γ 197 GeV', (t)=> Math.abs(Math.sin(t*2))*300);
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x08080a); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,0.6)); const d=new THREE.DirectionalLight(0xffffff,0.9); d.position.set(4,6,4); d.castShadow=true; s.add(d); }
+
+const matAtMinus=new THREE.MeshStandardMaterial({color:0x0a0a0a, metalness:0.4, roughness:0.25, emissive:0x222222, emissiveIntensity:0.5});
+const matAntiAt=new THREE.MeshStandardMaterial({color:0xf0e0a0, metalness:0.4, roughness:0.25, emissive:0x332200, emissiveIntensity:0.5});
+const matAlpha=new THREE.MeshStandardMaterial({color:0xffd0a0, emissive:0xff8844, emissiveIntensity:1.2, transparent:true, opacity:0.9});
+const matGamma=new THREE.MeshStandardMaterial({color:0xffffaa, emissive:0xffff44, emissiveIntensity:2.0, transparent:true, opacity:0.9});
+
+// MATTER
+{
+  const wrap=document.getElementById('wrap-matter');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,1.5,3.5);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const at=new THREE.Mesh(new THREE.SphereGeometry(0.7,28,28), matAtMinus); scene.add(at);
+  const eMinus=new THREE.Mesh(new THREE.SphereGeometry(0.12,12,12), new THREE.MeshBasicMaterial({color:0x4444ff})); eMinus.position.set(1.2,0,0); scene.add(eMinus);
+  const pPlus=new THREE.Mesh(new THREE.SphereGeometry(0.18,12,12), new THREE.MeshBasicMaterial({color:0xff4444})); pPlus.position.set(-1.2,0,0); scene.add(pPlus);
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.016; at.rotation.y+=0.008; eMinus.position.x=1.2+Math.sin(t*2)*0.1; pPlus.position.x=-1.2+Math.sin(t*2+Math.PI)*0.1; controls.update(); renderer.render(scene,cam); }
+  animate();
+}
+
+// ANTI-MATTER
+{
+  const wrap=document.getElementById('wrap-anti');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,1.5,3.5);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const antiAt=new THREE.Mesh(new THREE.SphereGeometry(0.7,28,28), matAntiAt); scene.add(antiAt);
+  const ePlus=new THREE.Mesh(new THREE.SphereGeometry(0.12,12,12), new THREE.MeshBasicMaterial({color:0xffaa44})); ePlus.position.set(1.2,0,0); scene.add(ePlus);
+  const pMinus=new THREE.Mesh(new THREE.SphereGeometry(0.18,12,12), new THREE.MeshBasicMaterial({color:0x4444aa})); pMinus.position.set(-1.2,0,0); scene.add(pMinus);
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.016; antiAt.rotation.y-=0.008; ePlus.position.x=1.2+Math.sin(t*2)*0.1; pMinus.position.x=-1.2+Math.sin(t*2+Math.PI)*0.1; controls.update(); renderer.render(scene,cam); }
+  animate();
+}
+
+// ANNIHILATION
+{
+  const wrap=document.getElementById('wrap-ann');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,2,6);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new (await import('three/addons/controls/OrbitControls.js')).OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const at=new THREE.Mesh(new THREE.SphereGeometry(0.5,24,24), matAtMinus); at.position.set(-1.5,0,0); group.add(at);
+  const antiAt=new THREE.Mesh(new THREE.SphereGeometry(0.5,24,24), matAntiAt); antiAt.position.set(1.5,0,0); group.add(antiAt);
+  const gammas=new THREE.Group(); scene.add(gammas);
+  function annihilate(){
+    for(let i=0;i<8;i++){
+      const g=new THREE.Mesh(new THREE.SphereGeometry(0.12,10,10), matGamma.clone());
+      g.position.set(0,0,0);
+      const dir=new THREE.Vector3((Math.random()-0.5),(Math.random()-0.5),(Math.random()-0.5)).normalize();
+      g.userData={dir, dist:0}; gammas.add(g);
+    }
+    at.visible=false; antiAt.visible=false;
+    setTimeout(()=>{ at.visible=true; antiAt.visible=true; }, 1200);
+  }
+  window._ann=annihilate;
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate); t+=0.012;
+    group.rotation.y+=0.002;
+    if(!at.visible){
+      // bring together
+    } else {
+      at.position.x=-1.5+Math.sin(t*0.5)*0.2;
+      antiAt.position.x=1.5-Math.sin(t*0.5)*0.2;
+      if(Math.abs(at.position.x+1.5)<0.05 && Math.random()<0.02) annihilate();
+    }
+    gammas.children.forEach(g=>{ g.userData.dist+=0.12; g.position.add(g.userData.dir.clone().multiplyScalar(0.12)); g.material.opacity=Math.max(0,1-g.userData.dist*0.12); });
+    for(let i=gammas.children.length-1;i>=0;i--) if(gammas.children[i].material.opacity<=0) gammas.remove(gammas.children[i]);
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+document.getElementById('btn-matter').onclick=()=>{};
+document.getElementById('btn-anti').onclick=()=>{};
+document.getElementById('btn-ann').onclick=()=>{ if(window._ann) window._ann(); };
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

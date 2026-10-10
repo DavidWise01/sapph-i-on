@@ -15,6 +15,7 @@ Every 0-sphere is 2 quantum dots (0, 0), 2 vectors (−1, −1) and 2 edges (+1,
 - d/<appeal>-NN.html — the 512 domains (NN = 01–64).
 - z/<appeal>-NN.html — the 0-sphere page of each open domain.
 - t/<slug>.html — the ten tales, retold from the old 7^3 door.
+- x/<slug>.html and w/<slug>.html — workshop technical cards and their original pages.
 - Existing sphere pages stay at their original paths and are not rewritten.
 
 ## The ten tales
@@ -28,6 +29,10 @@ Every 0-sphere is 2 quantum dots (0, 0), 2 vectors (−1, −1) and 2 edges (+1,
 - [THE WORLD IN A CELL](./t/the-world-in-a-cell.html) — TECHNE, domain 09. LIT: 250 + 751 = 1001 steps, 1000 → 0.
 - [THE KEEPER DISTANCE](./t/the-keeper-distance.html) — PHRONESIS, domain 08. LIT: 250 + 751 = 1001 steps, 1000 → 0.
 - [THE ATMOSPHERES](./t/the-atmospheres.html) — KAIROS, domain 08. LIT: 250 + 751 = 1001 steps, 1000 → 0.
+
+## From the workshop
+- x/<slug>.html: a technical card for each of 343 pages from David's workshop. Each card has an icon (x/<slug>.svg), a summary, constants, external requests, a sha256 seal that is re-checked on load, and an "open the page" link.
+- w/<slug>.html: the original page, served unchanged apart from one favicon link where it was safe to add. sapphon.json "workshop" lists each card with both hashes.
 
 ## Evidence
 LIT counts are recomputed on load and throw if they fail. Names, voices and stories are AMBER: they are assigned voices, not observations. The birth seal b7350267c9df90491f3a2c45297e9a0f756c65d2c23a323f6f68abc3426d33fe covers name|slug|blurb and is never rewritten.

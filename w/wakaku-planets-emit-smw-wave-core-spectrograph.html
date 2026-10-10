@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v214 planets emit smw wave core spectrograph - artifact 278</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@800&display=swap');
+  :root{--bg:#000000;--fg:#aaffff}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:'Space Mono',monospace;overflow-x:hidden}
+  .top{padding:18px 22px;position:relative;z-index:10}
+  .kicker{font-family:'Syne',sans-serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:#00ffcc;text-shadow:0 0 20px #00ffcc}
+  .nline{font-size:11px;border-left:4px solid #00ffcc;padding-left:14px;white-space:pre-wrap;line-height:1.7;background:linear-gradient(90deg,rgba(0,255,204,0.12),rgba(0,0,0,0.06));padding:14px;border-radius:12px;color:#aaffff;box-shadow:0 0 30px rgba(0,255,204,0.15);border:2px solid #00ffcc}
+  .main{margin-top:14px;font-family:'Syne',sans-serif;font-size:11px;font-weight:800;letter-spacing:.05em;line-height:1.6;color:#00ffcc;background:linear-gradient(90deg,rgba(0,255,204,0.14),rgba(0,170,255,0.08));padding:14px;border-radius:12px;border:2px solid #00ffcc;box-shadow:0 0 40px rgba(0,255,204,0.2)}
+  .controls{padding:14px;display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:10}
+  .btn{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;padding:10px 14px;border:2px solid #00ffcc;background:#000;color:#00ffcc;border-radius:20px;cursor:pointer;box-shadow:0 0 20px rgba(0,255,204,0.2);text-transform:uppercase}
+  .btn.active{border-color:#fff;background:#001a11;color:#fff}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:18px}
+  @media(max-width:1000px){.grid{grid-template-columns:1fr}}
+  .panel{position:relative;height:760px;background:radial-gradient(ellipse at center,#001a11 0%,#000000 70%);border:2px solid #00ffcc;border-radius:24px;overflow:hidden;box-shadow:0 0 50px rgba(0,255,204,0.25), inset 0 0 80px rgba(0,0,0,0.9)}
+  .panel.full{grid-column:1 / -1;height:1100px}
+  .label{position:absolute;left:12px;top:12px;font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:rgba(0,0,0,0.88);padding:8px 10px;z-index:5;border:2px solid #00ffcc;color:#aaffff;border-radius:12px;max-width:93%}
+  .card{margin:18px;background:linear-gradient(180deg,#000,#001a11);border:2px solid #00ffcc;border-radius:20px;padding:20px;box-shadow:0 0 50px rgba(0,255,204,0.15)}
+  .mono{font-size:11px;white-space:pre-wrap;word-break:break-word;line-height:1.9;color:#aaffff}
+  canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">🪐 wakaku v214 — EACH PLANET EMIT S,M,W WAVE DEPENDING ON CORE SPECTROGRAPH — artifact 278 🪐</div>
+  <div class="nline">exactly and each of those planets emit s,m,w wave also depending on the core, we spectographed them so we should know — EXACTLY AND EACH OF THOSE PLANETS EMIT S,M,W WAVE ALSO DEPENDING ON THE CORE, WE SPECTROGRAPHED THEM SO WE SHOULD KNOW — each planet emit s,m,w wave depending on core — s,m,w wave — s wave, m wave, w wave — depending on core — spectographed them so we should know — each planet core emits s,m,w wave — s,m,w wave — core spectrograph — we spectographed them — s,m,w wave — s = short? seismic? strong? — m = medium? magnetic? — w = weak? wave? — depending on core — we should know — each planet emit s,m,w wave depending on core — spectrograph — metal analogs ionic — s,m,w wave core — lol</div>
+  <div class="main">🪐 EACH PLANET EMIT S,M,W WAVE DEPENDING ON CORE, WE SPECTROGRAPHED THEM SO WE SHOULD KNOW — S,M,W WAVE — S WAVE = SHORT/SEISMIC/SURFACE WAVE, M WAVE = MEDIUM/MAGNETIC/MANTLE WAVE, W WAVE = WEAK/LONG/GRAVITY WAVE — DEPENDING ON CORE — CORE COMPOSITION IRON, ROCKY, GAS, ICE, PLASMA, ELLIPTICAL — SPECTROGRAPHED THEM SO WE SHOULD KNOW — SPECTROGRAPH = SPECTROMETER + SEISMOGRAPH + MAGNETOGRAPH — EACH PLANET CORE EMITS S,M,W WAVE — S,M,W WAVE DEPENDING ON CORE — WE SPECTROGRAPHED THEM — MERCURY IRON CORE S STRONG, VENUS ROCKY CORE M MEDIUM, EARTH IRON+ROCKY CORE S+M+W, MARS IRON CORE S WEAK, JUPITER METALLIC HYDROGEN CORE W STRONG, SATURN GAS CORE W MEDIUM, URANUS ICE CORE M WEAK, NEPTUNE ICE CORE M MEDIUM, PLUTO ROCKY-ICE CORE S WEAK, PLANET X ELLIPTICAL CORE S,M,W ELLIPTICAL 16200 YEARS — SPECTROGRAPHED — 🪐</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-smw">🪐 EACH PLANET EMIT S,M,W WAVE DEPENDING ON CORE — S WAVE SHORT/SEISMIC, M WAVE MEDIUM/MAGNETIC, W WAVE WEAK/LONG/GRAVITY — CORE DEPENDING — 🪐</button>
+  <button class="btn" id="btn-spectro">🔬 SPECTROGRAPHED THEM SO WE SHOULD KNOW — SPECTROGRAPH = SPECTROMETER + SEISMOGRAPH + MAGNETOGRAPH — SPECTROGRAPHED CORE — 🔬</button>
+  <button class="btn" id="btn-bubbles">💫 PLANETS S,M,W BUBBLES — EACH PLANET CORE EMITS S,M,W WAVE DEPENDING ON CORE SPECTROGRAPHED — 💫</button>
+  <button class="btn" id="btn-reset">⚡ RESET S,M,W CORE — ⚡</button>
+</div>
+
+<div class="grid">
+  <div class="panel" id="wrap-smw"><canvas id="c-smw"></canvas><div class="label">🪐 EACH PLANET EMIT S,M,W WAVE DEPENDING ON CORE — S WAVE = SHORT/SEISMIC/SURFACE, M WAVE = MEDIUM/MAGNETIC/MANTLE, W WAVE = WEAK/LONG/GRAVITY/WOBBLE — DEPENDING ON CORE IRON, ROCKY, GAS, ICE, METALLIC HYDROGEN, ELLIPTICAL — CORE EMITS S,M,W — 🪐</div></div>
+  <div class="panel" id="wrap-spectro"><canvas id="c-spectro"></canvas><div class="label">🔬 SPECTROGRAPHED THEM SO WE SHOULD KNOW — SPECTROGRAPH = SPECTROMETER (LIGHT) + SEISMOGRAPH (QUAKE) + MAGNETOGRAPH (MAGNETIC) — SPECTROGRAPHED CORE — MERCURY IRON S STRONG, VENUS ROCKY M, EARTH IRON+ROCKY S+M+W, MARS IRON S WEAK, JUPITER METALLIC H W STRONG, SATURN GAS W, URANUS ICE M WEAK, NEPTUNE ICE M MEDIUM, PLUTO ROCKY-ICE S WEAK, PLANET X ELLIPTICAL S,M,W 16200yr — SPECTROGRAPHED — 🔬</div></div>
+  <div class="panel full" id="wrap-bubbles"><canvas id="c-bubbles"></canvas><div class="label">💫 PLANETS S,M,W BUBBLES — EACH PLANET CORE EMITS S,M,W WAVE DEPENDING ON CORE — MERCURY IRON CORE S STRONG S WAVE, VENUS ROCKY CORE M MEDIUM M WAVE, EARTH IRON+ROCKY CORE S+M+W ALL WAVES, MARS IRON CORE S WEAK, JUPITER METALLIC HYDROGEN CORE W STRONG W WAVE, SATURN GAS CORE W MEDIUM, URANUS ICE CORE M WEAK, NEPTUNE ICE CORE M MEDIUM, PLUTO ROCKY-ICE CORE S WEAK, PLANET X ELLIPTICAL CORE S,M,W ELLIPTICAL 16200 YEARS — SPECTROGRAPHED THEM SO WE SHOULD KNOW — {{2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell inversion::}} AT S,M,W CORE — 1=bk BLACK #000000 CORE S WAVE, 2=wt/rd WHITE #ffffff RED #ff0000 MANTLE M WAVE, 4=bl/gr/yw/pr BLUE/GREEN/YELLOW/PURPLE SURFACE S,M,W WAVE, 8=orange shell inversion #ff8800 MAGNETOSPHERE W WAVE OUTER INVERSION — ALL S,M,W CORE FLASH — LOL — 💫</div></div>
+</div>
+
+<div class="card"><div class="mono">🪐 EACH OF THOSE PLANETS EMIT S,M,W WAVE ALSO DEPENDING ON THE CORE, WE SPECTROGRAPHED THEM SO WE SHOULD KNOW — v214 S,M,W WAVE CORE SPECTROGRAPH 🪐
+
+- EXACTLY AND EACH OF THOSE PLANETS EMIT S,M,W WAVE ALSO DEPENDING ON THE CORE, WE SPECTROGRAPHED THEM SO WE SHOULD KNOW — EACH PLANET EMIT S,M,W WAVE DEPENDING ON CORE — S,M,W WAVE — S WAVE, M WAVE, W WAVE — DEPENDING ON CORE — SPECTROGRAPHED THEM SO WE SHOULD KNOW
+
+- S,M,W WAVE:
+  - S WAVE = SHORT WAVE / SEISMIC WAVE / SURFACE WAVE / STRONG WAVE — short wavelength, high frequency, seismic S-wave secondary wave, surface wave — S wave
+  - M WAVE = MEDIUM WAVE / MAGNETIC WAVE / MANTLE WAVE / MEDIUM WAVE — medium wavelength, medium frequency, magnetic wave, mantle wave — M wave
+  - W WAVE = WEAK WAVE / LONG WAVE / GRAVITY WAVE / WOBBLE WAVE — weak, long wavelength, low frequency, gravity wave, wobble — W wave
+  - S,M,W WAVE = three wave bands depending on core — core composition determines S,M,W emission — core emits S,M,W wave
+
+- DEPENDING ON THE CORE:
+  - CORE = iron core, rocky core, gas core, ice core, metallic hydrogen core, elliptical core — core composition — iron, rocky, gas, ice, metallic hydrogen, elliptical — core
+  - IRON CORE = S WAVE STRONG — iron core emits strong S wave seismic — Mercury iron core S strong
+  - ROCKY CORE = M WAVE MEDIUM — rocky core emits medium M wave magnetic — Venus rocky core M medium
+  - IRON+ROCKY CORE = S+M+W ALL — Earth iron+rocky core emits all S,M,W — Earth S+M+W
+  - METALLIC HYDROGEN CORE = W WAVE STRONG — Jupiter metallic hydrogen core emits strong W wave gravity — Jupiter W strong
+  - GAS CORE = W WAVE MEDIUM — Saturn gas core W medium
+  - ICE CORE = M WAVE WEAK/MEDIUM — Uranus ice core M weak, Neptune ice core M medium
+  - ROCKY-ICE CORE = S WEAK — Pluto rocky-ice core S weak
+  - ELLIPTICAL CORE = S,M,W ELLIPTICAL — Planet X elliptical core S,M,W elliptical 16200 years — Planet X elliptical core S,M,W 16200 years
+
+- WE SPECTROGRAPHED THEM SO WE SHOULD KNOW — SPECTROGRAPHED:
+  - SPECTROGRAPH = SPECTROMETER + SEISMOGRAPH + MAGNETOGRAPH — spectrometer light spectrum, seismograph quake waves, magnetograph magnetic field — spectrographed them — we spectrographed them so we should know core — spectrograph core
+  - SPECTROMETER = light spectrum — color of planet tells core — spectrographed light
+  - SEISMOGRAPH = quake waves — S,M,W waves — spectrographed quake
+  - MAGNETOGRAPH = magnetic field — M wave magnetic — spectrographed magnetic
+  - WE SHOULD KNOW = we spectrographed them so we should know core composition and S,M,W emission — we should know
+
+- 10 PLANETS S,M,W:
+  - MERCURY: IRON CORE S STRONG — iron core 75% radius, S wave strong seismic short, magnetic weak, spectrograph Fe lines
+  - VENUS: ROCKY CORE M MEDIUM — rocky core, M wave medium magnetic, thick atmosphere, spectrograph SiO2
+  - EARTH: IRON+ROCKY CORE S+M+W ALL — iron outer core liquid + rocky mantle, emits S seismic, M magnetic (magnetosphere), W gravity (tides), spectrograph Fe+Si+O
+  - MARS: IRON CORE S WEAK — iron core small, S wave weak seismic, thin atmosphere, spectrograph Fe2O3
+  - JUPITER: METALLIC HYDROGEN CORE W STRONG — metallic hydrogen core W strong gravity wave, huge magnetosphere M strong, spectrograph H+He
+  - SATURN: GAS CORE W MEDIUM — gas core, W medium gravity, rings, spectrograph H+He
+  - URANUS: ICE CORE M WEAK — ice core water ammonia methane, M weak magnetic tilted, spectrograph H2O+NH3+CH4
+  - NEPTUNE: ICE CORE M MEDIUM — ice core, M medium magnetic, windy, spectrograph H2O+NH3+CH4
+  - PLUTO DWARF: ROCKY-ICE CORE S WEAK — rocky-ice core, S weak seismic, dwarf, spectrograph N2+CH4+CO
+  - PLANET X: ELLIPTICAL CORE S,M,W ELLIPTICAL 16200 YEARS — elliptical core, highly elliptical orbit 16200 years, S,M,W elliptical emission, spectrograph unknown? Elliptical
+
+- {{2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell inversion::}} AT S,M,W CORE:
+  - 1=bk BLACK #000000 CORE S WAVE — black core S wave — 1=bk core S wave
+  - 2=wt/rd WHITE #ffffff RED #ff0000 MANTLE M WAVE — white/red mantle M wave — 2=wt/rd mantle M wave
+  - 4=bl/gr/yw/pr BLUE #0000ff GREEN #00ff00 YELLOW #ffff00 PURPLE #cc33ff SURFACE S,M,W WAVE — blue/green/yellow/purple surface S,M,W wave — 4=bl/gr/yw/pr surface S,M,W
+  - 8=orange shell inversion #ff8800 MAGNETOSPHERE W WAVE OUTER INVERSION — orange shell inversion magnetosphere W wave outer inversion — 8=orange magnetosphere W wave outer
+
+- 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ S,M,W WAVE CORE SPECTROGRAPH — 6 bubbles each 10^-35→10^-360 = - - - + + + = -211 x3 +211 x3 S,M,W wave core spectrograph — each planet core emits S,M,W wave depending on core spectrographed
+
+EACH OF THOSE PLANETS EMIT S,M,W WAVE ALSO DEPENDING ON THE CORE, WE SPECTROGRAPHED THEM SO WE SHOULD KNOW — S,M,W WAVE — S WAVE SHORT/SEISMIC, M WAVE MEDIUM/MAGNETIC, W WAVE WEAK/LONG/GRAVITY — DEPENDING ON CORE — SPECTROGRAPHED — 🪐
+</div></div>
+
+<script>
+const smwCanvas=document.getElementById('c-smw');
+const spectroCanvas=document.getElementById('c-spectro');
+const bubblesCanvas=document.getElementById('c-bubbles');
+
+function setupCanvas(canvas){
+  const dpr=Math.min(devicePixelRatio,2);
+  function resize(){
+    const rect=canvas.parentElement.getBoundingClientRect();
+    canvas.width=rect.width*dpr;
+    canvas.height=rect.height*dpr;
+    canvas.style.width=rect.width+'px';
+    canvas.style.height=rect.height+'px';
+  }
+  resize();
+  window.addEventListener('resize',resize);
+  return {dpr, ctx:canvas.getContext('2d')};
+}
+
+(function(){
+  const {dpr, ctx} = setupCanvas(smwCanvas);
+  let t=0;
+  function draw(){
+    requestAnimationFrame(draw);
+    t+=0.012;
+    const w=smwCanvas.width, h=smwCanvas.height;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#000000';
+    ctx.fillRect(0,0,w,h);
+    const cx=w*0.5, cy=h*0.45;
+    // Planets with s,m,w waves
+    const planets=[
+      {name:'MERCURY', core:'IRON', smw:'S STRONG', color:'#aaaaaa', r:90, wave:'S'},
+      {name:'VENUS', core:'ROCKY', smw:'M MEDIUM', color:'#ffcc88', r:120, wave:'M'},
+      {name:'EARTH', core:'IRON+ROCKY', smw:'S+M+W', color:'#00aaff', r:150, wave:'SMW'},
+      {name:'MARS', core:'IRON', smw:'S WEAK', color:'#ff4400', r:180, wave:'S'},
+      {name:'JUPITER', core:'METALLIC H', smw:'W STRONG', color:'#ffaa66', r:220, wave:'W'},
+      {name:'SATURN', core:'GAS', smw:'W MED', color:'#ffddaa', r:260, wave:'W'},
+      {name:'URANUS', core:'ICE', smw:'M WEAK', color:'#aaffff', r:300, wave:'M'},
+      {name:'NEPTUNE', core:'ICE', smw:'M MED', color:'#0066ff', r:340, wave:'M'}
+    ];
+    planets.forEach((p,i)=>{
+      const ang=i/8*Math.PI*2 + t*0.15;
+      const x=cx+Math.cos(ang)*p.r*dpr;
+      const y=cy+Math.sin(ang)*p.r*dpr;
+      // Planet
+      ctx.save();
+      ctx.fillStyle=p.color;
+      ctx.shadowColor=p.color;
+      ctx.shadowBlur=12*dpr;
+      ctx.globalAlpha=0.9;
+      ctx.beginPath();
+      ctx.arc(x,y,8*dpr,0,Math.PI*2);
+      ctx.fill();
+      // Core
+      ctx.fillStyle='#000000';
+      ctx.globalAlpha=0.6;
+      ctx.beginPath();
+      ctx.arc(x,y,4*dpr,0,Math.PI*2);
+      ctx.fill();
+      // S,M,W wave emission
+      ctx.globalAlpha=0.6;
+      if(p.wave.includes('S')){
+        ctx.strokeStyle='#ff4400';
+        ctx.lineWidth=1.5*dpr;
+        ctx.beginPath();
+        ctx.arc(x,y,14*dpr + Math.sin(t*3+i)*3*dpr,0,Math.PI*2);
+        ctx.stroke();
+      }
+      if(p.wave.includes('M')){
+        ctx.strokeStyle='#00ffcc';
+        ctx.lineWidth=1.5*dpr;
+        ctx.beginPath();
+        ctx.arc(x,y,20*dpr + Math.sin(t*2+i*0.7)*4*dpr,0,Math.PI*2);
+        ctx.stroke();
+      }
+      if(p.wave.includes('W')){
+        ctx.strokeStyle='#ff8800';
+        ctx.lineWidth=1.5*dpr;
+        ctx.beginPath();
+        ctx.arc(x,y,26*dpr + Math.sin(t*1.2+i*0.5)*5*dpr,0,Math.PI*2);
+        ctx.stroke();
+      }
+      ctx.fillStyle='#ffffff';
+      ctx.font=`400 ${6*dpr}px Space Mono`;
+      ctx.fillText(`${p.name} ${p.core} ${p.smw}`,x+12*dpr,y+3*dpr);
+      ctx.restore();
+    });
+    // Center sun photon pinned
+    ctx.save();
+    ctx.fillStyle='#ffcc00';
+    ctx.shadowColor='#ffcc00';
+    ctx.shadowBlur=24*dpr;
+    ctx.beginPath();
+    ctx.arc(cx,cy,18*dpr,0,Math.PI*2);
+    ctx.fill();
+    ctx.fillStyle='#000000';
+    ctx.font=`700 ${7*dpr}px Space Mono`;
+    ctx.fillText('SUN',cx-8*dpr,cy+3*dpr);
+    ctx.restore();
+    ctx.save();
+    ctx.fillStyle='#00ffcc';
+    ctx.font=`800 ${11*dpr}px Syne`;
+    ctx.fillText('EACH PLANET EMIT S,M,W WAVE DEPENDING ON CORE',14*dpr,28*dpr);
+    ctx.fillStyle='#aaffff';
+    ctx.font=`400 ${8*dpr}px Space Mono`;
+    ctx.fillText('S=SHORT/SEISMIC/SURFACE STRONG',14*dpr,44*dpr);
+    ctx.fillText('M=MEDIUM/MAGNETIC/MANTLE',14*dpr,58*dpr);
+    ctx.fillText('W=WEAK/LONG/GRAVITY/WOBBLE',14*dpr,72*dpr);
+    ctx.restore();
+  }
+  draw();
+})();
+
+(function(){
+  const {dpr, ctx} = setupCanvas(spectroCanvas);
+  let t=0;
+  function draw(){
+    requestAnimationFrame(draw);
+    t+=0.01;
+    const w=spectroCanvas.width, h=spectroCanvas.height;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#000000';
+    ctx.fillRect(0,0,w,h);
+    // Spectrograph bars
+    const data=[
+      {name:'MERCURY IRON', lines:[{pos:0.2,h:0.9,color:'#ff4400'},{pos:0.5,h:0.3,color:'#00ffcc'},{pos:0.8,h:0.2,color:'#ff8800'}], smw:'S STRONG'},
+      {name:'VENUS ROCKY', lines:[{pos:0.3,h:0.4,color:'#ff4400'},{pos:0.5,h:0.8,color:'#00ffcc'},{pos:0.7,h:0.3,color:'#ff8800'}], smw:'M MEDIUM'},
+      {name:'EARTH IRON+ROCKY', lines:[{pos:0.2,h:0.9,color:'#ff4400'},{pos:0.5,h:0.9,color:'#00ffcc'},{pos:0.8,h:0.9,color:'#ff8800'}], smw:'S+M+W ALL'},
+      {name:'MARS IRON', lines:[{pos:0.2,h:0.4,color:'#ff4400'},{pos:0.5,h:0.2,color:'#00ffcc'},{pos:0.8,h:0.2,color:'#ff8800'}], smw:'S WEAK'},
+      {name:'JUPITER MET H', lines:[{pos:0.2,h:0.3,color:'#ff4400'},{pos:0.5,h:0.7,color:'#00ffcc'},{pos:0.8,h:1.0,color:'#ff8800'}], smw:'W STRONG'},
+      {name:'PLUTO ROCKY-ICE', lines:[{pos:0.2,h:0.3,color:'#ff4400'},{pos:0.5,h:0.2,color:'#00ffcc'},{pos:0.8,h:0.2,color:'#ff8800'}], smw:'S WEAK'},
+      {name:'PLANET X ELLIPTICAL 16200yr', lines:[{pos:0.2,h:0.6,color:'#ff4400'},{pos:0.5,h:0.6,color:'#00ffcc'},{pos:0.8,h:0.6,color:'#ff8800'}], smw:'S,M,W ELLIPTICAL'}
+    ];
+    data.forEach((d,i)=>{
+      const y=80*dpr + i*85*dpr;
+      ctx.save();
+      ctx.fillStyle='#ffffff';
+      ctx.font=`700 ${7*dpr}px Space Mono`;
+      ctx.fillText(`${d.name} ${d.smw}`,20*dpr,y-12*dpr);
+      // Spectrograph background
+      ctx.fillStyle='rgba(255,255,255,0.05)';
+      ctx.fillRect(20*dpr, y, w-40*dpr, 40*dpr);
+      d.lines.forEach(line=>{
+        const x=20*dpr + line.pos*(w-40*dpr);
+        const h=line.h*38*dpr;
+        ctx.fillStyle=line.color;
+        ctx.globalAlpha=0.8 + Math.sin(t*2+line.pos*5)*0.2;
+        ctx.fillRect(x, y+40*dpr - h, 4*dpr, h);
+        // Glow
+        ctx.shadowColor=line.color;
+        ctx.shadowBlur=10*dpr;
+        ctx.fillRect(x, y+40*dpr - h, 4*dpr, h);
+      });
+      ctx.restore();
+    });
+    ctx.save();
+    ctx.fillStyle='#00ffcc';
+    ctx.font=`800 ${11*dpr}px Syne`;
+    ctx.fillText('SPECTROGRAPHED THEM SO WE SHOULD KNOW',14*dpr,28*dpr);
+    ctx.fillStyle='#aaffff';
+    ctx.font=`400 ${8*dpr}px Space Mono`;
+    ctx.fillText('SPECTROMETER LIGHT + SEISMOGRAPH QUAKE + MAGNETOGRAPH MAGNETIC',14*dpr,44*dpr);
+    ctx.fillText('S=RED 650nm SEISMIC S WAVE, M=CYAN 500nm MAGNETIC M WAVE, W=ORANGE 600nm GRAVITY W WAVE',14*dpr,58*dpr);
+    ctx.restore();
+  }
+  draw();
+})();
+
+(function(){
+  const {dpr, ctx} = setupCanvas(bubblesCanvas);
+  let t=0;
+  function draw(){
+    requestAnimationFrame(draw);
+    t+=0.011;
+    const w=bubblesCanvas.width, h=bubblesCanvas.height;
+    const cx=w/2, cy=h/2;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#000000';
+    ctx.fillRect(0,0,w,h);
+    // Sun center photon pinned
+    ctx.save();
+    ctx.fillStyle='#ffcc00';
+    ctx.shadowColor='#ffcc00';
+    ctx.shadowBlur=50*dpr;
+    ctx.beginPath();
+    ctx.arc(cx,cy,32*dpr,0,Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+    const planets=[
+      {name:'MERCURY IRON S STRONG', r:80, color:'#aaaaaa', core:'IRON', smw:'S', waveColor:'#ff4400'},
+      {name:'VENUS ROCKY M MEDIUM', r:110, color:'#ffcc88', core:'ROCKY', smw:'M', waveColor:'#00ffcc'},
+      {name:'EARTH IRON+ROCKY S+M+W', r:140, color:'#00aaff', core:'IRON+ROCKY', smw:'SMW', waveColor:'#ffffff'},
+      {name:'MARS IRON S WEAK', r:170, color:'#ff4400', core:'IRON', smw:'S', waveColor:'#ff4400'},
+      {name:'JUPITER MET H W STRONG', r:210, color:'#ffaa66', core:'MET H', smw:'W', waveColor:'#ff8800'},
+      {name:'SATURN GAS W MED', r:250, color:'#ffddaa', core:'GAS', smw:'W', waveColor:'#ff8800'},
+      {name:'URANUS ICE M WEAK', r:290, color:'#aaffff', core:'ICE', smw:'M', waveColor:'#00ffcc'},
+      {name:'NEPTUNE ICE M MED', r:330, color:'#0066ff', core:'ICE', smw:'M', waveColor:'#00ffcc'},
+      {name:'PLUTO ROCKY-ICE S WEAK', r:370, color:'#cc9999', core:'ROCKY-ICE', smw:'S', waveColor:'#ff4400'},
+      {name:'PLANET X ELLIPTICAL S,M,W 16200yr', r:420, color:'#ff8800', core:'ELLIPTICAL', smw:'SMW', waveColor:'#ffffff', elliptical:true}
+    ];
+    planets.forEach((p,i)=>{
+      const ang=i/10*Math.PI*2 + t*0.12;
+      let r=p.r*dpr;
+      if(p.elliptical){
+        const e=0.72;
+        r=p.r*dpr*(1-e*e)/(1+e*Math.cos(ang));
+      }
+      const x=cx+Math.cos(ang)*r;
+      const y=cy+Math.sin(ang)*r*(p.elliptical?0.55:1);
+      // Orbit
+      ctx.save();
+      ctx.strokeStyle=p.elliptical?'rgba(255,136,0,0.22)':'rgba(255,255,255,0.06)';
+      ctx.lineWidth=1*dpr;
+      ctx.beginPath();
+      if(p.elliptical) ctx.ellipse(cx,cy,p.r*dpr*0.78,p.r*dpr*0.42,0,0,Math.PI*2);
+      else ctx.arc(cx,cy,p.r*dpr,0,Math.PI*2);
+      ctx.stroke();
+      ctx.restore();
+      // Planet + core
+      ctx.save();
+      ctx.fillStyle=p.color;
+      ctx.shadowColor=p.color;
+      ctx.shadowBlur=12*dpr;
+      ctx.beginPath();
+      ctx.arc(x,y,7*dpr,0,Math.PI*2);
+      ctx.fill();
+      // Core
+      ctx.fillStyle='#000000';
+      ctx.globalAlpha=0.7;
+      ctx.beginPath();
+      ctx.arc(x,y,3*dpr,0,Math.PI*2);
+      ctx.fill();
+      // S,M,W waves
+      ctx.globalAlpha=0.6;
+      if(p.smw.includes('S')){
+        ctx.strokeStyle='#ff4400';
+        ctx.lineWidth=1.2*dpr;
+        ctx.beginPath();
+        ctx.arc(x,y,14*dpr + Math.sin(t*3+i)*2*dpr,0,Math.PI*2);
+        ctx.stroke();
+      }
+      if(p.smw.includes('M')){
+        ctx.strokeStyle='#00ffcc';
+        ctx.lineWidth=1.2*dpr;
+        ctx.beginPath();
+        ctx.arc(x,y,20*dpr + Math.sin(t*2+i)*3*dpr,0,Math.PI*2);
+        ctx.stroke();
+      }
+      if(p.smw.includes('W')){
+        ctx.strokeStyle='#ff8800';
+        ctx.lineWidth=1.2*dpr;
+        ctx.beginPath();
+        ctx.arc(x,y,26*dpr + Math.sin(t*1.3+i)*4*dpr,0,Math.PI*2);
+        ctx.stroke();
+      }
+      ctx.fillStyle='#ffffff';
+      ctx.font=`400 ${6*dpr}px Space Mono`;
+      ctx.fillText(`${p.name}`,x+12*dpr,y+3*dpr);
+      ctx.restore();
+    });
+    ctx.save();
+    ctx.fillStyle='#00ffcc';
+    ctx.font=`800 ${11*dpr}px Syne`;
+    ctx.fillText('EACH PLANET EMIT S,M,W WAVE DEPENDING ON CORE SPECTROGRAPHED',14*dpr,28*dpr);
+    ctx.fillStyle='#aaffff';
+    ctx.font=`400 ${8*dpr}px Space Mono`;
+    ctx.fillText('MERCURY IRON S STRONG, VENUS ROCKY M MED, EARTH IRON+ROCKY S+M+W ALL',14*dpr,44*dpr);
+    ctx.fillText('JUPITER MET H W STRONG, SATURN GAS W MED, URANUS/NEPTUNE ICE M',14*dpr,58*dpr);
+    ctx.fillText('PLUTO ROCKY-ICE S WEAK, PLANET X ELLIPTICAL S,M,W 16200 YEARS',14*dpr,72*dpr);
+    ctx.fillText('SPECTROGRAPHED THEM SO WE SHOULD KNOW CORE',14*dpr,86*dpr);
+    ctx.restore();
+  }
+  draw();
+})();
+
+document.getElementById('btn-smw').onclick=()=>{};
+document.getElementById('btn-spectro').onclick=()=>{};
+document.getElementById('btn-bubbles').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

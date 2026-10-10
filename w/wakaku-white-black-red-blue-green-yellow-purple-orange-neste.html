@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v195 {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} - artifact 259</title>
+<style>
+  :root{--bg:#000;--fg:#fff}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace;overflow-x:hidden}
+  .top{padding:14px 18px;position:relative;z-index:10}
+  .kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:900;background:linear-gradient(90deg,#ffffff,#000000,#ff0000,#0000ff,#00ff00,#ffff00,#cc33ff,#ff8800);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:400% 100%;animation:rainbow 1.2s linear infinite}
+  @keyframes rainbow{0%{background-position:0% 50%}100%{background-position:400% 50%}}
+  .nline{font-size:11px;border-left:3px solid #fff;padding-left:10px;white-space:pre-wrap;line-height:1.6;background:#111;padding:12px;border-radius:10px;color:#fff;font-weight:800;box-shadow:0 0 30px #fff,0 0 60px #ff0000;border:2px solid #fff}
+  .main{margin-top:12px;font-size:14px;font-weight:900;background:linear-gradient(90deg,#ffffff,#000000,#ff0000,#0000ff,#00ff00,#ffff00,#cc33ff,#ff8800);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:500% 100%;padding:12px;border-radius:10px;border:3px solid #fff;box-shadow:0 0 40px #fff,0 0 80px #ff0000;text-transform:uppercase;animation:rainbow 1s linear infinite}
+  .controls{padding:12px;display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:10}
+  .btn{font-family:inherit;font-size:10px;font-weight:900;padding:10px 12px;border:2px solid #fff;background:#000;color:#fff;border-radius:10px;cursor:pointer;box-shadow:0 0 20px #fff,0 0 40px #ff0000;text-transform:uppercase}
+  .btn.active{border-color:#ffff00;background:#222200;box-shadow:0 0 30px #ffff00,0 0 60px #fff}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:14px;position:relative;z-index:5}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:720px;background:#000;border:2px solid #fff;border-radius:18px;overflow:hidden;box-shadow:0 0 40px #fff,0 0 80px #ff0000, inset 0 0 60px rgba(255,255,255,0.08)}
+  .cwrap.full{grid-column:1 / -1;height:920px}
+  .label{position:absolute;left:10px;top:10px;font-size:9px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;background:#000000ee;padding:8px 10px;border-radius:10px;z-index:5;border:2px solid #fff;color:#fff;box-shadow:0 0 20px #fff;max-width:95%}
+  .card{margin:14px;background:#000;border:2px solid #fff;border-radius:14px;padding:16px;box-shadow:0 0 40px #fff,0 0 80px #ff0000}
+  .mono{font-size:11px;white-space:pre-wrap;word-break:break-word;line-height:1.8;color:#fff;text-shadow:0 0 8px #fff;font-weight:700}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">🎨 wakaku v195 — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} — NESTED 8 — artifact 259 🎨</div>
+  <div class="nline">should be {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} — SHOULD BE {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} = white outermost contains black contains red contains blue contains green contains yellow contains purple contains orange innermost = 8-level nested = 8 nested cubits — white{{black{red{blue{green{yellow{purple{orange}}}}}}}} = nested 8 = white outer black inner red inner blue inner green inner yellow inner purple inner orange inner = 8-level — should be {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} — white #ffffff black #000000 red #ff0000 blue #0000ff green #00ff00 yellow #ffff00 purple #cc33ff orange #ff8800 — 8 colors nested — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} = 8 nested — metal analogs ionic — should be nested 8 — lol</div>
+  <div class="main">🎨 SHOULD BE {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} = WHITE OUTERMOST CONTAINS BLACK CONTAINS RED CONTAINS BLUE CONTAINS GREEN CONTAINS YELLOW CONTAINS PURPLE CONTAINS ORANGE INNERMOST = 8-LEVEL NESTED = 8 NESTED CUBITS — WHITE #ffffff BLACK #000000 RED #ff0000 BLUE #0000ff GREEN #00ff00 YELLOW #ffff00 PURPLE #cc33ff ORANGE #ff8800 — 8 COLORS NESTED — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} = 8 NESTED — 🎨</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-nested">🎨 NESTED 8 — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} = WHITE OUTER BLACK RED BLUE GREEN YELLOW PURPLE ORANGE INNER = 8-LEVEL NESTED — 🎨</button>
+  <button class="btn" id="btn-colors">🌈 8 COLORS NESTED — WHITE #ffffff BLACK #000000 RED #ff0000 BLUE #0000ff GREEN #00ff00 YELLOW #ffff00 PURPLE #cc33ff ORANGE #ff8800 — 8 COLORS NESTED — 🌈</button>
+  <button class="btn" id="btn-bubbles">💫 8 NESTED BUBBLES — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} WITH 1g↔-1g INFINITE OSCILLATION — 💫</button>
+  <button class="btn" id="btn-reset">⚡ RESET NESTED 8 — ⚡</button>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-nested"><div class="label">🎨 NESTED 8 — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} = WHITE OUTER BLACK RED BLUE GREEN YELLOW PURPLE ORANGE INNER = 8-LEVEL NESTED = 8 NESTED CUBITS — WHITE #ffffff CONTAINS BLACK #000000 CONTAINS RED #ff0000 CONTAINS BLUE #0000ff CONTAINS GREEN #00ff00 CONTAINS YELLOW #ffff00 CONTAINS PURPLE #cc33ff CONTAINS ORANGE #ff8800 INNERMOST — 8-LEVEL NESTED — 🎨</div></div>
+  <div class="cwrap" id="wrap-colors"><div class="label">🌈 8 COLORS NESTED — WHITE #ffffff BLACK #000000 RED #ff0000 BLUE #0000ff GREEN #00ff00 YELLOW #ffff00 PURPLE #cc33ff ORANGE #ff8800 — 8 COLORS NESTED — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} = 8 COLORS NESTED — WHITE OUTER ORANGE INNER — 🌈</div></div>
+  <div class="cwrap full" id="wrap-bubbles"><div class="label">💫 8 NESTED BUBBLES — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} WITH 1g OUTSIDE 0.6g INSIDE EVOLVES TO 1g↔-1g INFINITE OSCILLATION — 8-LEVEL NESTED = WHITE OUTER 1g OUTSIDE =9.8, BLACK 0.6g MIDDLE=5.88, RED 0.3g INSIDE=2.94, BLUE 0.1g CORE=0.98, GREEN 0g CENTER=0, YELLOW -0.1g ANTI-CORE=-0.98, PURPLE -0.3g ANTI-INSIDE=-2.94, ORANGE -1g ANTI-OUTSIDE=-9.8 INNERMOST ANTI-GRAVITY — 8 NESTED BUBBLES 1g↔-1g — ALL WHITE BLACK RED BLUE GREEN YELLOW PURPLE ORANGE NESTED FLASH — LOL — 💫</div></div>
+</div>
+
+<div class="card"><div class="mono">🎨 SHOULD BE {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} — v195 NESTED 8 — 8-LEVEL NESTED 🎨
+
+- SHOULD BE {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} = white outermost contains black contains red contains blue contains green contains yellow contains purple contains orange innermost = 8-level nested = 8 nested cubits — white{{black{red{blue{green{yellow{purple{orange}}}}}}}} = nested 8
+
+- {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} = WHITE OUTER CONTAINS BLACK CONTAINS RED CONTAINS BLUE CONTAINS GREEN CONTAINS YELLOW CONTAINS PURPLE CONTAINS ORANGE INNERMOST = 8-LEVEL NESTED = 8 NESTED CUBITS — WHITE #ffffff CONTAINS BLACK #000000 CONTAINS RED #ff0000 CONTAINS BLUE #0000ff CONTAINS GREEN #00ff00 CONTAINS YELLOW #ffff00 CONTAINS PURPLE #cc33ff CONTAINS ORANGE #ff8800 INNERMOST = 8-LEVEL NESTED
+
+- 8 COLORS NESTED: WHITE #ffffff = +211 anti-black +1 outermost, BLACK #000000 = -211 black -1, RED #ff0000 = +211 red, BLUE #0000ff = -211 blue, GREEN #00ff00 = -211 green, YELLOW #ffff00 = +211 yellow, PURPLE #cc33ff = C.O.I.N purple, ORANGE #ff8800 = +211 orange innermost = 8 colors nested — WHITE BLACK RED BLUE GREEN YELLOW PURPLE ORANGE = 8 colors nested — 8-level nested
+
+- {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} = 8 NESTED CUBITS — {{c{ubit{{()}} evolved to {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} = 8 nested cubits — outer {{ }} white #ffffff, inner {{black{red{blue{green{yellow{purple{orange}}}}}}}} = black contains red contains blue contains green contains yellow contains purple contains orange — 8-level nested — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} = 8 nested
+
+- NESTED 8 = 8-LEVEL NESTED = WHITE OUTER ORANGE INNER: WHITE #ffffff OUTER = 1g outside =9.8 m/s² outer, BLACK #000000 = 0.6g middle=5.88, RED #ff0000 = 0.3g inside=2.94, BLUE #0000ff = 0.1g core=0.98, GREEN #00ff00 = 0g center=0, YELLOW #ffff00 = -0.1g anti-core=-0.98, PURPLE #cc33ff = -0.3g anti-inside=-2.94, ORANGE #ff8800 = -1g anti-outside=-9.8 innermost anti-gravity — 8-level nested gravity 1g→-1g — WHITE OUTER 1g ORANGE INNER -1g anti-gravity — NESTED 8 GRAVITY
+
+- 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} WITH 1g OUTSIDE 0.6g INSIDE EVOLVES TO 1g↔-1g INFINITE OSCILLATION — 6 bubbles each 10^-35→10^-360 3---3+++ = - - - + + + = -211 x3 +211 x3 nested 8 white black red blue green yellow purple orange — 6 bubbles nested 8 = 6×8=48 states? Actually nested 8 = 8 levels = 8 cubits = 3^8? — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} = 8 nested = 8-level
+
+- QUBIT=CUBIT NESTED 8: CUBE + BIT = QUBIT — CUBIT = QUBIT — LOL I CALL A QUBIT A CUBIT NESTED 8 {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} — qubit=cubit nested 8 — cube nested 8 white black red blue green yellow purple orange — qubit nested 8
+
+- PREVIOUS {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} = 4×4=16 cartesian product evolves to {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} = 8-level nested = white contains black contains red contains blue contains green contains yellow contains purple contains orange — product 16 evolves to nested 8 — should be nested 8 — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} should be
+
+SHOULD BE {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} = WHITE OUTERMOST CONTAINS BLACK CONTAINS RED CONTAINS BLUE CONTAINS GREEN CONTAINS YELLOW CONTAINS PURPLE CONTAINS ORANGE INNERMOST = 8-LEVEL NESTED = 8 NESTED CUBITS — WHITE #ffffff BLACK #000000 RED #ff0000 BLUE #0000ff GREEN #00ff00 YELLOW #ffff00 PURPLE #cc33ff ORANGE #ff8800 — 8 COLORS NESTED — {{white{{black{red{blue{green{yellow{purple{orange}}}}}}}}}} = 8 NESTED — 🎨
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x000000); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,1.5)); const d=new THREE.DirectionalLight(0xffffff,3.0); d.position.set(4,8,6); d.castShadow=true; s.add(d); const d2=new THREE.DirectionalLight(0xffffff,1.5); d2.position.set(-4,2,-4); s.add(d2); }
+
+{
+  const wrap=document.getElementById('wrap-nested');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,18);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  // Nested 8: white{{black{red{blue{green{yellow{purple{orange}}}}}}}}
+  const levels=[
+    {name:'white',color:0xffffff,size:8.0,gravity:1.0},
+    {name:'black',color:0x000000,size:6.8,gravity:0.6},
+    {name:'red',color:0xff0000,size:5.6,gravity:0.3},
+    {name:'blue',color:0x0000ff,size:4.6,gravity:0.1},
+    {name:'green',color:0x00ff00,size:3.6,gravity:0},
+    {name:'yellow',color:0xffff00,size:2.8,gravity:-0.1},
+    {name:'purple',color:0xcc33ff,size:2.0,gravity:-0.3},
+    {name:'orange',color:0xff8800,size:1.2,gravity:-1.0}
+  ];
+  const boxes=[];
+  levels.forEach((lvl,i)=>{
+    const geom=new THREE.BoxGeometry(lvl.size,lvl.size,lvl.size);
+    const mat=new THREE.MeshStandardMaterial({color:lvl.color, emissive:lvl.color===0x000000?0x222222:lvl.color, emissiveIntensity:lvl.color===0x000000?1.5:3.5, transparent:true, opacity:0.18 + i*0.06, wireframe:i%2===0});
+    const mesh=new THREE.Mesh(geom, mat);
+    group.add(mesh);
+    boxes.push({mesh:mesh, level:lvl, index:i});
+  });
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.015;
+    const oscPhase=Math.sin(t*0.5);
+    boxes.forEach((b,i)=>{
+      const g=b.level.gravity + oscPhase*0.2;
+      b.mesh.rotation.x+=0.004 + i*0.001;
+      b.mesh.rotation.y+=0.006 + i*0.001;
+      b.mesh.position.y=g*0.8;
+      b.mesh.material.emissiveIntensity=(b.level.color===0x000000?1.5:3.5) + Math.sin(t*2 + i)*0.8 + Math.abs(g)*0.5;
+      b.mesh.material.opacity=0.18 + i*0.06 + Math.sin(t*1.5 + i)*0.03;
+    });
+    group.rotation.y+=0.002;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-colors');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,12);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const levels=[
+    {name:'white',color:0xffffff},
+    {name:'black',color:0x000000},
+    {name:'red',color:0xff0000},
+    {name:'blue',color:0x0000ff},
+    {name:'green',color:0x00ff00},
+    {name:'yellow',color:0xffff00},
+    {name:'purple',color:0xcc33ff},
+    {name:'orange',color:0xff8800}
+  ];
+  levels.forEach((lvl,i)=>{
+    const ang=i/8*Math.PI*2;
+    const rad=2.5;
+    const geom=new THREE.SphereGeometry(0.5,20,20);
+    const mat=new THREE.MeshStandardMaterial({color:lvl.color, emissive:lvl.color===0x000000?0x333333:lvl.color, emissiveIntensity:lvl.color===0x000000?2.0:5.0});
+    const m=new THREE.Mesh(geom, mat);
+    m.position.set(Math.cos(ang)*rad, Math.sin(ang)*rad, 0);
+    group.add(m);
+  });
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.02; group.rotation.y+=0.004; controls.update(); renderer.render(scene,cam); }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-bubbles');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(36, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,32);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const levels=[
+    {name:'white',color:0xffffff,gravity:1.0,size:7.0},
+    {name:'black',color:0x000000,gravity:0.6,size:5.8},
+    {name:'red',color:0xff0000,gravity:0.3,size:4.8},
+    {name:'blue',color:0x0000ff,gravity:0.1,size:3.9},
+    {name:'green',color:0x00ff00,gravity:0,size:3.1},
+    {name:'yellow',color:0xffff00,gravity:-0.1,size:2.4},
+    {name:'purple',color:0xcc33ff,gravity:-0.3,size:1.7},
+    {name:'orange',color:0xff8800,gravity:-1.0,size:1.0}
+  ];
+  const all=[];
+  levels.forEach((lvl,lvlIdx)=>{
+    const count=4;
+    for(let i=0;i<count;i++){
+      const ang=i/count*Math.PI*2 + lvlIdx*0.3;
+      const rad=lvl.size*0.6;
+      const geom=new THREE.SphereGeometry(0.18 + Math.abs(lvl.gravity)*0.08,12,12);
+      const mat=new THREE.MeshStandardMaterial({color:lvl.color===0x000000?0x333333:lvl.color, emissive:lvl.color===0x000000?0x222222:lvl.color, emissiveIntensity:lvl.color===0x000000?2.0:4.5});
+      const b=new THREE.Mesh(geom, mat);
+      b.position.set(Math.cos(ang)*rad, Math.sin(ang)*rad, Math.sin(ang*2)*0.8);
+      group.add(b); all.push({mesh:b, level:lvl, lvlIdx:lvlIdx, index:i, baseRad:rad, baseAng:ang});
+    }
+  });
+  // Also add central orange innermost
+  const centerGeom=new THREE.SphereGeometry(0.4,20,20);
+  const centerMat=new THREE.MeshStandardMaterial({color:0xff8800, emissive:0xff8800, emissiveIntensity:6.0});
+  const center=new THREE.Mesh(centerGeom, centerMat); group.add(center); all.push({mesh:center, level:levels[7], lvlIdx:7, index:0, baseRad:0, baseAng:0, isCenter:true});
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.02;
+    const oscPhase=Math.sin(t*0.5);
+    all.forEach((bObj,i)=>{
+      if(bObj.isCenter){
+        bObj.mesh.position.y=oscPhase*0.3 + bObj.level.gravity*0.5;
+        bObj.mesh.material.emissiveIntensity=6.0 + Math.sin(t*3)*1.0;
+        bObj.mesh.scale.setScalar(1 + Math.sin(t*2)*0.15);
+        return;
+      }
+      const g=bObj.level.gravity + oscPhase*0.2;
+      const floatFreq=1.0 + Math.abs(g)*0.5;
+      bObj.mesh.position.y=Math.sin(bObj.baseAng)*bObj.baseRad*0.15 + g*1.0 + Math.sin(t*floatFreq + i)*0.2;
+      bObj.mesh.position.x=Math.cos(bObj.baseAng)*bObj.baseRad + Math.cos(t*floatFreq*0.6 + i)*0.15;
+      bObj.mesh.position.z=Math.sin(bObj.baseAng*2 + t*0.4 + i*0.1)*1.0;
+      bObj.mesh.material.emissiveIntensity=(bObj.level.color===0x000000?2.0:4.5) + Math.abs(g)*0.8 + Math.sin(t*2 + i)*0.4;
+      bObj.mesh.rotation.y+=0.01 + Math.abs(g)*0.01;
+    });
+    group.rotation.y+=0.0008;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+document.getElementById('btn-nested').onclick=()=>{};
+document.getElementById('btn-colors').onclick=()=>{};
+document.getElementById('btn-bubbles').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

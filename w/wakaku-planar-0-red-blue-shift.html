@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v218 planar 0 red blue shift - artifact 282</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@800&display=swap');
+  body{margin:0;background:#000;color:#ffcc88;font-family:'Space Mono',monospace;overflow-x:hidden}
+  .top{padding:18px 22px}
+  .kicker{font-family:'Syne',sans-serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:#ff0000;text-shadow:0 0 20px #ff0000,0 0 40px #0000ff}
+  .nline{font-size:11px;border-left:4px solid #ff0000;padding-left:14px;white-space:pre-wrap;line-height:1.7;background:linear-gradient(90deg,rgba(255,0,0,0.12),rgba(0,0,255,0.12));padding:14px;border-radius:12px;border:2px solid #ff0000}
+  .main{margin-top:14px;font-family:'Syne',sans-serif;font-size:11px;font-weight:800;letter-spacing:.05em;line-height:1.6;color:#ff0000;background:linear-gradient(90deg,rgba(255,0,0,0.14),rgba(0,0,255,0.14));padding:14px;border-radius:12px;border:2px solid #ff0000}
+  .controls{padding:14px;display:flex;gap:10px;flex-wrap:wrap}
+  .btn{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;padding:10px 14px;border:2px solid #ff0000;background:#000;color:#ff0000;border-radius:20px;cursor:pointer}
+  .btn.active{border-color:#fff;background:#220000;color:#fff}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:18px}
+  @media(max-width:1000px){.grid{grid-template-columns:1fr}}
+  .panel{position:relative;height:760px;background:radial-gradient(ellipse at center,#110000 0%,#000011 70%);border:2px solid #ff0000;border-radius:24px;overflow:hidden}
+  .panel.full{grid-column:1 / -1;height:1150px}
+  .label{position:absolute;left:12px;top:12px;font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:rgba(0,0,0,0.88);padding:8px 10px;z-index:5;border:2px solid #ff0000;color:#ffcc88;border-radius:12px;max-width:93%}
+  .card{margin:18px;background:linear-gradient(180deg,#000,#110000);border:2px solid #ff0000;border-radius:20px;padding:20px}
+  .mono{font-size:11px;white-space:pre-wrap;word-break:break-word;line-height:1.9;color:#ffcc88}
+  canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">🔴🔵 wakaku v218 — IF YOU MAKE IT PLANAR 0 AND ADD RED/BLUE SHIFT — artifact 282 🔵🔴</div>
+  <div class="nline">if you make it planar 0 and add red/blue shift — IF YOU MAKE IT PLANAR 0 AND ADD RED/BLUE SHIFT — planar 0 and add red/blue shift — planar 0 — planar 0 = flat plane 0 degrees inclination — planar 0 — add red/blue shift — red/blue shift — red shift blue shift — Doppler red/blue shift — red shift receding, blue shift approaching — planar 0 and red/blue shift — make it planar 0 and add red/blue shift — planar 0 disk 0 degrees — red/blue shift Doppler — metal analogs ionic — planar 0 red/blue shift — lol</div>
+  <div class="main">🔴🔵 PLANAR 0 AND ADD RED/BLUE SHIFT — PLANAR 0 = FLAT PLANE 0 DEGREES INCLINATION — PLANAR 0 = ALL PLANETS IN PLANE 0 DEGREES — PLANAR 0 DISK — ADD RED/BLUE SHIFT — RED SHIFT = RECEDING λ LONGER RED, BLUE SHIFT = APPROACHING λ SHORTER BLUE — DOPPLER RED/BLUE SHIFT — PLANAR 0 DISK WITH RED/BLUE SHIFT — PHOTON PINNED CENTER 100G OSCILLATING -p +p WITH RED/BLUE SHIFT — PLANETS IN PLANAR 0 WITH RED/BLUE SHIFT — S,M,W WAVE WITH RED/BLUE SHIFT — 10 PLANETS UNDER GRAVITY 8 OFFICIAL + PLUTO + PLANET X 16200 YEARS ELLIPTICAL WITH RED/BLUE SHIFT — ALL MOONS AND ASTEROID BELTS PLANAR 0 WITH RED/BLUE SHIFT — PLANAR 0 AND RED/BLUE SHIFT — 🔴🔵</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-planar">📐 PLANAR 0 — FLAT PLANE 0 DEGREES INCLINATION — ALL PLANETS IN PLANE 0 — PLANAR 0 DISK — 📐</button>
+  <button class="btn" id="btn-shift">🔴🔵 RED/BLUE SHIFT — RED SHIFT RECEDING λ LONGER, BLUE SHIFT APPROACHING λ SHORTER — DOPPLER — 🔵🔴</button>
+  <button class="btn" id="btn-bubbles">💫 PLANAR 0 RED/BLUE SHIFT BUBBLES — PLANAR 0 DISK WITH RED/BLUE SHIFT — 💫</button>
+  <button class="btn" id="btn-reset">⚡ RESET PLANAR 0 SHIFT — ⚡</button>
+</div>
+
+<div class="grid">
+  <div class="panel" id="wrap-planar"><canvas id="c-planar"></canvas><div class="label">📐 PLANAR 0 — FLAT PLANE 0 DEGREES INCLINATION — ALL PLANETS IN PLANE 0 DEGREES — PLANAR 0 DISK — ECLIPTIC PLANE 0 — PLANAR 0 = 0° INCLINATION — ALL PLANETS PLANAR 0 — SUN PHOTON PINNED CENTER 100G AT 000 PLANAR 0 — 10 PLANETS UNDER GRAVITY PLANAR 0 — ALL MOONS AND ASTEROID BELTS PLANAR 0 — PLANAR 0 — 📐</div></div>
+  <div class="panel" id="wrap-shift"><canvas id="c-shift"></canvas><div class="label">🔴🔵 RED/BLUE SHIFT — RED SHIFT = RECEDING λ LONGER RED DOPPLER z>0, BLUE SHIFT = APPROACHING λ SHORTER BLUE DOPPLER z<0 — DOPPLER RED/BLUE SHIFT — PHOTON PINNED CENTER 100G OSCILLATING -p +p RED/BLUE SHIFT — PLANETS RED/BLUE SHIFT DEPENDING ON DIRECTION — RECEDING RED SHIFT, APPROACHING BLUE SHIFT — RED/BLUE SHIFT — 🔵🔴</div></div>
+  <div class="panel full" id="wrap-bubbles"><canvas id="c-bubbles"></canvas><div class="label">💫 PLANAR 0 RED/BLUE SHIFT BUBBLES — PLANAR 0 DISK 0 DEGREES WITH RED/BLUE SHIFT DOPPLER — PLANAR 0 = FLAT PLANE 0° INCLINATION — RED/BLUE SHIFT = DOPPLER SHIFT RED RECEDING BLUE APPROACHING — PHOTON PINNED CENTER 100G OSCILLATING -p +p PLANAR 0 WITH RED/BLUE SHIFT — 10 PLANETS PLANAR 0 WITH RED/BLUE SHIFT — ALL MOONS AND ASTEROID BELTS PLANAR 0 WITH RED/BLUE SHIFT — S,M,W WAVE WITH RED/BLUE SHIFT — PLANET X ELLIPTICAL 16200 YEARS PLANAR 0 WITH RED/BLUE SHIFT — 16200 YEARS = 16200 PSI — {{2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell inversion::}} AT PLANAR 0 RED/BLUE SHIFT — 1=bk BLACK #000000 PLANAR 0 CORE RED/BLUE SHIFT, 2=wt/rd WHITE #ffffff RED #ff0000 PLANAR 0 INNER PLANETS RED SHIFT RECEDING, 4=bl/gr/yw/pr BLUE #0000ff GREEN #00ff00 YELLOW #ffff00 PURPLE #cc33ff PLANAR 0 OUTER PLANETS BLUE SHIFT APPROACHING, 8=orange shell inversion #ff8800 PLANAR 0 BELTS RED/BLUE SHIFT OUTER INVERSION — ALL PLANAR 0 RED/BLUE SHIFT FLASH — LOL — 💫</div></div>
+</div>
+
+<div class="card"><div class="mono">🔴🔵 IF YOU MAKE IT PLANAR 0 AND ADD RED/BLUE SHIFT — v218 PLANAR 0 RED/BLUE SHIFT — PLANAR 0 AND RED/BLUE SHIFT 🔵🔴
+
+- IF YOU MAKE IT PLANAR 0 AND ADD RED/BLUE SHIFT — PLANAR 0 AND ADD RED/BLUE SHIFT — PLANAR 0 — RED/BLUE SHIFT — PLANAR 0 AND RED/BLUE SHIFT
+
+- PLANAR 0:
+  - PLANAR 0 = FLAT PLANE 0 DEGREES INCLINATION — planar 0 = flat plane 0° inclination — all planets in plane 0 degrees — planar 0 disk — ecliptic plane 0 — planar 0
+  - PLANAR 0 = ECLIPTIC PLANE 0 — ecliptic plane 0° — all planets in ecliptic plane 0° — planar 0 — flat disk 0°
+  - PLANAR 0 = 0° INCLINATION — inclination 0° — planar 0 — all planets planar 0 — Sun photon pinned center 100G at 000 planar 0 — 10 planets under gravity planar 0 — all moons and asteroid belts planar 0 — planar 0 disk — planar 0
+
+- ADD RED/BLUE SHIFT:
+  - RED/BLUE SHIFT = DOPPLER RED SHIFT BLUE SHIFT — red shift blue shift — Doppler shift — red shift receding λ longer red, blue shift approaching λ shorter blue — red/blue shift
+  - RED SHIFT = RECEDING λ LONGER RED — red shift = receding, wavelength longer, red, z>0 — Doppler red shift — receding red shift — λ longer red
+  - BLUE SHIFT = APPROACHING λ SHORTER BLUE — blue shift = approaching, wavelength shorter, blue, z<0 — Doppler blue shift — approaching blue shift — λ shorter blue
+  - RED/BLUE SHIFT = DOPPLER SHIFT — Doppler effect — red/blue shift — photon pinned center 100G oscillating -p +p with red/blue shift — planets red/blue shift depending on direction — receding red shift, approaching blue shift — red/blue shift
+
+- PLANAR 0 AND RED/BLUE SHIFT TOGETHER:
+  - PLANAR 0 DISK WITH RED/BLUE SHIFT — planar 0 flat disk 0° with red/blue shift Doppler — planar 0 and red/blue shift — all planets in plane 0° with red/blue shift — receding side red shift, approaching side blue shift — planar 0 red/blue shift
+  - PHOTON PINNED CENTER 100G OSCILLATING -p +p PLANAR 0 WITH RED/BLUE SHIFT — photon pinned center 100G oscillating -p +p planar 0 with red/blue shift — sun photon pinned center planar 0 with red/blue shift
+  - 10 PLANETS PLANAR 0 WITH RED/BLUE SHIFT — 10 planets under gravity planar 0 with red/blue shift — 8 official + Pluto + Planet X 16200 years elliptical planar 0 with red/blue shift — all moons and asteroid belts planar 0 with red/blue shift — planar 0 red/blue shift
+
+- DOPPLER FORMULA:
+  - z = (λ_observed - λ_emitted) / λ_emitted — redshift z>0 red, blueshift z<0 blue — z = Δλ/λ — Doppler — red/blue shift — planar 0 red/blue shift
+
+- {{2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell inversion::}} AT PLANAR 0 RED/BLUE SHIFT:
+  - 1=bk BLACK #000000 PLANAR 0 CORE RED/BLUE SHIFT — black planar 0 core red/blue shift — 1=bk planar 0 core red/blue shift
+  - 2=wt/rd WHITE #ffffff RED #ff0000 PLANAR 0 INNER PLANETS RED SHIFT RECEDING — white/red planar 0 inner planets red shift receding — 2=wt/rd planar 0 inner planets red shift
+  - 4=bl/gr/yw/pr BLUE #0000ff GREEN #00ff00 YELLOW #ffff00 PURPLE #cc33ff PLANAR 0 OUTER PLANETS BLUE SHIFT APPROACHING — blue/green/yellow/purple planar 0 outer planets blue shift approaching — 4=bl/gr/yw/pr planar 0 outer planets blue shift
+  - 8=orange shell inversion #ff8800 PLANAR 0 BELTS RED/BLUE SHIFT OUTER INVERSION — orange shell inversion planar 0 belts red/blue shift outer inversion — 8=orange planar 0 belts red/blue shift outer
+
+- 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ PLANAR 0 RED/BLUE SHIFT — 6 bubbles each 10^-35→10^-360 = - - - + + + = -211 x3 +211 x3 planar 0 red/blue shift — planar 0 and red/blue shift — planar 0 disk 0° with red/blue shift Doppler
+
+IF YOU MAKE IT PLANAR 0 AND ADD RED/BLUE SHIFT — PLANAR 0 = FLAT PLANE 0 DEGREES — RED/BLUE SHIFT = DOPPLER RED RECEDING BLUE APPROACHING — PLANAR 0 DISK WITH RED/BLUE SHIFT — 🔴🔵
+</div></div>
+
+<script>
+const planarCanvas=document.getElementById('c-planar');
+const shiftCanvas=document.getElementById('c-shift');
+const bubblesCanvas=document.getElementById('c-bubbles');
+
+function setupCanvas(canvas){
+  const dpr=Math.min(devicePixelRatio,2);
+  function resize(){
+    const rect=canvas.parentElement.getBoundingClientRect();
+    canvas.width=rect.width*dpr;
+    canvas.height=rect.height*dpr;
+    canvas.style.width=rect.width+'px';
+    canvas.style.height=rect.height+'px';
+  }
+  resize();
+  window.addEventListener('resize',resize);
+  return {dpr, ctx:canvas.getContext('2d')};
+}
+
+(function(){
+  const {dpr, ctx} = setupCanvas(planarCanvas);
+  let t=0;
+  function draw(){
+    requestAnimationFrame(draw);
+    t+=0.01;
+    const w=planarCanvas.width, h=planarCanvas.height;
+    const cx=w/2, cy=h/2;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#000000';
+    ctx.fillRect(0,0,w,h);
+    // Planar 0 disk
+    ctx.save();
+    ctx.strokeStyle='rgba(255,255,255,0.12)';
+    ctx.lineWidth=1*dpr;
+    ctx.beginPath();
+    ctx.ellipse(cx,cy,360*dpr,40*dpr,0,0,Math.PI*2);
+    ctx.stroke();
+    ctx.fillStyle='rgba(255,255,255,0.03)';
+    ctx.fill();
+    ctx.fillStyle='#ffffff';
+    ctx.font=`400 ${8*dpr}px Space Mono`;
+    ctx.fillText('PLANAR 0 DISK 0° INCLINATION',cx-80*dpr,cy-50*dpr);
+    ctx.restore();
+    // Sun photon pinned center
+    ctx.save();
+    ctx.fillStyle='#ffcc00';
+    ctx.shadowColor='#ffcc00';
+    ctx.shadowBlur=20*dpr;
+    ctx.beginPath();
+    ctx.arc(cx,cy,14*dpr,0,Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+    // Planets all in planar 0
+    const planets=[
+      {r:70,color:'#aaaaaa'},{r:95,color:'#ffcc88'},{r:120,color:'#00aaff'},{r:145,color:'#ff4400'},{r:180,color:'#ffaa66'},{r:215,color:'#ffddaa'},{r:250,color:'#aaffff'},{r:285,color:'#0066ff'},{r:320,color:'#cc9999'},{r:360,color:'#ff8800',elliptical:true}
+    ];
+    planets.forEach((p,i)=>{
+      const ang=i/10*Math.PI*2 + t*0.08;
+      let r=p.r*dpr;
+      if(p.elliptical){
+        const e=0.7;
+        r=p.r*dpr*(1-e*e)/(1+e*Math.cos(ang));
+      }
+      const x=cx+Math.cos(ang)*r;
+      const y=cy+Math.sin(ang)*r*0.15; // Planar 0 = very flat y
+      ctx.save();
+      ctx.fillStyle=p.color;
+      ctx.shadowColor=p.color;
+      ctx.shadowBlur=6*dpr;
+      ctx.beginPath();
+      ctx.arc(x,y,4*dpr,0,Math.PI*2);
+      ctx.fill();
+      ctx.restore();
+    });
+    // Main belt planar 0
+    ctx.save();
+    ctx.strokeStyle='rgba(255,204,0,0.15)';
+    ctx.lineWidth=12*dpr;
+    ctx.beginPath();
+    ctx.ellipse(cx,cy,160*dpr,160*dpr*0.15,0,0,Math.PI*2);
+    ctx.stroke();
+    ctx.restore();
+    // Kuiper belt planar 0
+    ctx.save();
+    ctx.strokeStyle='rgba(0,255,204,0.1)';
+    ctx.lineWidth=16*dpr;
+    ctx.beginPath();
+    ctx.ellipse(cx,cy,310*dpr,310*dpr*0.15,0,0,Math.PI*2);
+    ctx.stroke();
+    ctx.restore();
+    ctx.save();
+    ctx.fillStyle='#ffffff';
+    ctx.font=`800 ${11*dpr}px Syne`;
+    ctx.fillText('PLANAR 0 — FLAT PLANE 0° INCLINATION',14*dpr,28*dpr);
+    ctx.fillStyle='#ffcc88';
+    ctx.font=`400 ${8*dpr}px Space Mono`;
+    ctx.fillText('ALL PLANETS IN PLANE 0° — ECLIPTIC PLANE 0 — PLANAR 0 DISK',14*dpr,44*dpr);
+    ctx.restore();
+  }
+  draw();
+})();
+
+(function(){
+  const {dpr, ctx} = setupCanvas(shiftCanvas);
+  let t=0;
+  function draw(){
+    requestAnimationFrame(draw);
+    t+=0.012;
+    const w=shiftCanvas.width, h=shiftCanvas.height;
+    const cx=w/2, cy=h/2;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#000000';
+    ctx.fillRect(0,0,w,h);
+    ctx.save();
+    ctx.fillStyle='#ffcc00';
+    ctx.shadowColor='#ffcc00';
+    ctx.shadowBlur=20*dpr;
+    ctx.beginPath();
+    ctx.arc(cx,cy,14*dpr,0,Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+    // Red/blue shift visualization
+    const planets=[
+      {r:70,color:'#aaaaaa'},{r:95,color:'#ffcc88'},{r:120,color:'#00aaff'},{r:145,color:'#ff4400'},{r:180,color:'#ffaa66'},{r:215,color:'#ffddaa'},{r:250,color:'#aaffff'},{r:285,color:'#0066ff'},{r:320,color:'#cc9999'},{r:360,color:'#ff8800',elliptical:true}
+    ];
+    planets.forEach((p,i)=>{
+      const ang=i/10*Math.PI*2 + t*0.12;
+      let r=p.r*dpr;
+      if(p.elliptical){
+        const e=0.7;
+        r=p.r*dpr*(1-e*e)/(1+e*Math.cos(ang));
+      }
+      const x=cx+Math.cos(ang)*r;
+      const y=cy+Math.sin(ang)*r*0.15;
+      // Determine red/blue shift based on velocity direction (sin ang)
+      const vel=Math.sin(ang + Math.PI/2); // derivative of cos
+      const isRed=vel>0; // receding red shift
+      ctx.save();
+      ctx.fillStyle=isRed?'#ff0000':'#0000ff';
+      ctx.shadowColor=isRed?'#ff0000':'#0000ff';
+      ctx.shadowBlur=10*dpr;
+      ctx.globalAlpha=0.6 + Math.abs(vel)*0.4;
+      ctx.beginPath();
+      ctx.arc(x,y,5*dpr,0,Math.PI*2);
+      ctx.fill();
+      // Shift trail
+      ctx.strokeStyle=isRed?'rgba(255,0,0,0.3)':'rgba(0,0,255,0.3)';
+      ctx.lineWidth=1*dpr;
+      ctx.beginPath();
+      ctx.moveTo(x,y);
+      ctx.lineTo(x+vel*20*dpr,y);
+      ctx.stroke();
+      ctx.restore();
+    });
+    // Legend
+    ctx.save();
+    ctx.fillStyle='#ff0000';
+    ctx.font=`700 ${9*dpr}px Space Mono`;
+    ctx.fillText('RED SHIFT RECEDING λ LONGER z>0',20*dpr,80*dpr);
+    ctx.fillStyle='#0000ff';
+    ctx.fillText('BLUE SHIFT APPROACHING λ SHORTER z<0',20*dpr,96*dpr);
+    ctx.fillStyle='#ffffff';
+    ctx.font=`400 ${8*dpr}px Space Mono`;
+    ctx.fillText('DOPPLER RED/BLUE SHIFT — z = Δλ/λ',20*dpr,112*dpr);
+    ctx.restore();
+    ctx.save();
+    ctx.fillStyle='#ff0000';
+    ctx.font=`800 ${11*dpr}px Syne`;
+    ctx.fillText('RED/BLUE SHIFT — DOPPLER',14*dpr,28*dpr);
+    ctx.fillStyle='#ffcc88';
+    ctx.font=`400 ${8*dpr}px Space Mono`;
+    ctx.fillText('RED SHIFT RECEDING λ LONGER RED, BLUE SHIFT APPROACHING λ SHORTER BLUE',14*dpr,44*dpr);
+    ctx.restore();
+  }
+  draw();
+})();
+
+(function(){
+  const {dpr, ctx} = setupCanvas(bubblesCanvas);
+  let t=0;
+  function draw(){
+    requestAnimationFrame(draw);
+    t+=0.01;
+    const w=bubblesCanvas.width, h=bubblesCanvas.height;
+    const cx=w/2, cy=h/2;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#000000';
+    ctx.fillRect(0,0,w,h);
+    // Planar 0 disk
+    ctx.save();
+    ctx.strokeStyle='rgba(255,255,255,0.08)';
+    ctx.lineWidth=1*dpr;
+    ctx.beginPath();
+    ctx.ellipse(cx,cy,380*dpr,380*dpr*0.12,0,0,Math.PI*2);
+    ctx.stroke();
+    ctx.restore();
+    // Sun photon pinned center oscillating -p +p with red/blue shift
+    const oscillation=Math.sin(t*4)*8*dpr;
+    ctx.save();
+    ctx.fillStyle='#ffcc00';
+    ctx.shadowColor='#ffcc00';
+    ctx.shadowBlur=40*dpr;
+    ctx.beginPath();
+    ctx.arc(cx,cy,26*dpr,0,Math.PI*2);
+    ctx.fill();
+    // Oscillation -p +p red/blue
+    ctx.fillStyle=Math.sin(t*4)>0?'#ff0000':'#0000ff';
+    ctx.font=`700 ${8*dpr}px Space Mono`;
+    ctx.fillText(Math.sin(t*4)>0?'+p RED': '-p BLUE',cx-16*dpr,cy+4*dpr);
+    ctx.restore();
+    // Planets planar 0 with red/blue shift
+    const planets=[
+      {r:70, color:'#aaaaaa'},{r:95, color:'#ffcc88'},{r:120, color:'#00aaff'},{r:145, color:'#ff4400'},{r:180, color:'#ffaa66'},{r:215, color:'#ffddaa'},{r:250, color:'#aaffff'},{r:285, color:'#0066ff'},{r:320, color:'#cc9999'},{r:360, color:'#ff8800', elliptical:true}
+    ];
+    planets.forEach((p,i)=>{
+      const ang=i/10*Math.PI*2 + t*0.06;
+      let r=p.r*dpr;
+      if(p.elliptical){
+        const e=0.72;
+        r=p.r*dpr*(1-e*e)/(1+e*Math.cos(ang));
+      }
+      const x=cx+Math.cos(ang)*r;
+      const y=cy+Math.sin(ang)*r*0.12;
+      const vel=Math.sin(ang+Math.PI/2);
+      const isRed=vel>0;
+      ctx.save();
+      ctx.fillStyle=isRed?'#ff0000':'#0000ff';
+      ctx.shadowColor=isRed?'#ff0000':'#0000ff';
+      ctx.shadowBlur=8*dpr;
+      ctx.globalAlpha=0.7 + Math.abs(vel)*0.3;
+      ctx.beginPath();
+      ctx.arc(x,y,5*dpr,0,Math.PI*2);
+      ctx.fill();
+      // Moons
+      for(let m=0;m<(i<4?1:3);m++){
+        const mang=t*1.5+m;
+        const mx=x+Math.cos(mang)*8*dpr;
+        const my=y+Math.sin(mang)*8*dpr*0.3;
+        ctx.fillStyle='#ffffff';
+        ctx.globalAlpha=0.6;
+        ctx.beginPath();
+        ctx.arc(mx,my,1*dpr,0,Math.PI*2);
+        ctx.fill();
+      }
+      ctx.restore();
+    });
+    // Belts planar 0 with red/blue shift
+    ctx.save();
+    ctx.strokeStyle='rgba(255,0,0,0.1)';
+    ctx.lineWidth=10*dpr;
+    ctx.beginPath();
+    ctx.ellipse(cx,cy,160*dpr,160*dpr*0.12,0,0,Math.PI*2);
+    ctx.stroke();
+    ctx.strokeStyle='rgba(0,0,255,0.08)';
+    ctx.lineWidth=14*dpr;
+    ctx.beginPath();
+    ctx.ellipse(cx,cy,310*dpr,310*dpr*0.12,0,0,Math.PI*2);
+    ctx.stroke();
+    ctx.restore();
+    ctx.save();
+    ctx.fillStyle='#ff0000';
+    ctx.font=`800 ${11*dpr}px Syne`;
+    ctx.fillText('PLANAR 0 AND RED/BLUE SHIFT — PLANAR 0 DISK 0° + DOPPLER',14*dpr,28*dpr);
+    ctx.fillStyle='#ffcc88';
+    ctx.font=`400 ${8*dpr}px Space Mono`;
+    ctx.fillText('PLANAR 0 = FLAT PLANE 0° INCLINATION — ALL PLANETS IN PLANE 0°',14*dpr,44*dpr);
+    ctx.fillText('RED SHIFT RECEDING λ LONGER RED z>0, BLUE SHIFT APPROACHING λ SHORTER BLUE z<0',14*dpr,58*dpr);
+    ctx.fillText('PHOTON PINNED CENTER 100G OSCILLATING -p +p RED/BLUE SHIFT — PLANETS RED/BLUE SHIFT',14*dpr,72*dpr);
+    ctx.fillText('10 PLANETS PLANAR 0 RED/BLUE SHIFT + ALL MOONS + BELTS PLANAR 0 RED/BLUE SHIFT',14*dpr,86*dpr);
+    ctx.restore();
+  }
+  draw();
+})();
+
+document.getElementById('btn-planar').onclick=()=>{};
+document.getElementById('btn-shift').onclick=()=>{};
+document.getElementById('btn-bubbles').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

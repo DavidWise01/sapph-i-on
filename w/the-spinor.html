@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en"><head><link rel="icon" href="../favicon.svg" type="image/svg+xml"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>the spinor · wrapped around the sapphire core — 720° to come home</title>
+<!-- PAPER ----------------------------------------------------------------
+  Install a spinor around the sapphire core: the qubit is spin-½. A rotation acts
+  on the spinor as R(θ,n)=e^{−i(θ/2) n·σ} — the HALF-angle — so 360° gives −1 (the
+  spinor sign flip) and only 720° brings it home. A ribbon (belt) from the core to
+  the fixed world shows it: one full twist at 360° is stuck; the double twist at
+  720° slides off (the belt/plate trick).
+  LIT (verified vs frozen): R(2π)=−I and R(4π)=+I for EVERY axis (checked). The
+  Bloch vector returns at 360°; the spinor returns at 720°. SU(2) double-covers
+  SO(3); π₁(SO(3))=Z₂ — a 360° loop is topologically nontrivial (the −1), a 720°
+  loop is trivial.
+  AMBER: the spinor algebra, the ±I at 2π/4π, and the double-cover / π₁=Z₂ facts
+  are exact & server-verified. The ribbon/belt is the standard faithful analogy for
+  orientation-entanglement; the sapphire-core framing is the session's.
+  Fail-loud. Offline. Live R(2π)=−I / returns / cover vs frozen at boot.
+------------------------------------------------------------------------ -->
+<style>
+:root{--ink:#0d0b08;--org:#ff6a00;--org2:#ff9a3c;--amb:#ffc233;--lit:#7dff6a;--fail:#ff3b3b;--pale:#e8ddcc;--dim:#8f8471;--saph:#5a9cff;--saph2:#cfe6ff;--bloch:#ff9a3c;--band:#c98bff;--bandb:#5a3f8a;--home:#6affd1;--flip:#ff6a6a;--grid:#1c2530;font-size:15px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:var(--pale);font-family:ui-monospace,Menlo,Consolas,monospace;line-height:1.42}
+header{padding:1rem 1.3rem .8rem;border-bottom:4px solid var(--org);background:linear-gradient(180deg,#1b1610,#0d0b08)}
+h1{margin:0;font-size:1.06rem;letter-spacing:.04em;color:var(--org);text-transform:uppercase;font-weight:800}
+.sub{color:var(--dim);margin-top:.3rem;font-size:.82rem}
+.wrap{padding:1rem 1.3rem 2.5rem;max-width:1180px;margin:0 auto}
+.panel{background:#161310;border:1px solid #2c2318;border-left:5px solid var(--band);padding:.7rem .9rem;margin:.85rem 0}
+h2{margin:.1rem 0 .5rem;font-size:.92rem;color:var(--org2);text-transform:uppercase;letter-spacing:.06em}
+.grid2{display:grid;grid-template-columns:1.2fr .8fr;gap:.9rem}
+@media(max-width:900px){.grid2{grid-template-columns:1fr}}
+.card{padding:.55rem .8rem;margin:.4rem 0;border:1px solid #2c2318;font-size:.84rem}
+.card.lit{border-left:5px solid var(--lit)}.card.lit b{color:var(--lit)}
+.card.amber{border-left:5px solid var(--amb)}.card.amber b{color:var(--amb)}
+.card.sp{border-left:5px solid var(--band)}.card.sp b{color:var(--band)}
+.card.fail{border-left:5px solid var(--fail);color:#ffd9d9;white-space:pre-wrap}
+.mon{background:#0a0908;border:1px solid #2c2318;min-height:4.5rem;max-height:9rem;overflow-y:auto;padding:.5rem .6rem;font-size:.74rem}
+.mon .ln{margin:.1rem 0;color:var(--dim)}.mon .ln.ok{color:var(--lit)}.mon .ln.bad{color:var(--fail)}.mon .ln.hd{color:var(--org2)}
+canvas{display:block;width:100%;background:radial-gradient(circle at 50% 44%,#0e1116,#0a0908);border:1px solid #2c2318}
+.legend{color:var(--dim);font-size:.73rem;margin-top:.4rem}
+button{background:none;border:1px solid var(--org);color:var(--org);cursor:pointer;font-family:inherit;font-size:.76rem;padding:.28rem .7rem}
+button.on{background:var(--org);color:var(--ink)}
+input[type=range]{width:280px;accent-color:#ff6a00}
+.dials{display:flex;gap:.7rem;flex-wrap:wrap;margin:.3rem 0}
+.dial{border:1px solid #2c2318;padding:.4rem .7rem;min-width:104px}
+.dial .v{font-size:1.0rem;color:var(--band)}
+.dial .k{font-size:.66rem;color:var(--dim)}
+.row{display:flex;gap:.6rem;align-items:center;margin-top:.5rem;flex-wrap:wrap}
+footer{color:var(--dim);font-size:.71rem;padding:0 1.3rem 2rem;max-width:1180px;margin:0 auto}
+</style></head>
+<body>
+<header><h1>THE SPINOR · WRAPPED AROUND THE SAPPHIRE CORE</h1>
+<div class="sub">the qubit is spin-½ — a spinor · turn it 360° and it comes back as MINUS itself; only 720° brings it home · the ribbon to the world feels the −1 a bare number can\u2019t show</div></header>
+<div class="wrap">
+<div class="panel"><h2>verdict</h2><div id="readout"><div class="card sp">booting — tying the ribbon to the world...</div></div></div>
+<div class="panel"><h2>the readout</h2><div class="dials" id="dials"></div>
+<div class="row"><span>rotate the core θ <input type="range" id="sT" min="0" max="720" step="2" value="0"><span id="vT" style="color:var(--org2)">0°</span></span>
+<button id="spin">auto-turn</button><button id="j360">360°</button><button id="j720">720°</button></div></div>
+<div class="panel"><h2>conductor — R(2π)=−I / returns / cover vs frozen</h2><div class="mon" id="m1"></div></div>
+<div class="grid2">
+<div class="panel"><h2>the core, its Bloch vector, and the twisting ribbon</h2>
+<canvas id="cball" width="600" height="500"></canvas>
+<div class="legend">the sapphire core is the spinor. the orange arrow is its Bloch vector (the observable spin direction) — it precesses and returns after 360°. the purple ribbon ties the core to the fixed outer ring (the world): as you turn the core it twists. at 360° one full twist — stuck. at 720° two twists — which slide off (the belt trick). the ribbon shows the hidden −1. drag to rotate the view.</div></div>
+<div class="panel"><h2>the spinor sign — the hidden −1</h2>
+<canvas id="cphase" width="480" height="500"></canvas>
+<div class="legend">top: the spinor phase clock — R(θ) turns by the HALF-angle θ/2, so at θ=360° it points the opposite way (−1) and only at 720° is it back. middle: the sign of the state (cos(θ/2)): +1 → 0 → −1 (at 360°) → 0 → +1 (at 720°). bottom: the two returns — Bloch vector home every 360°, spinor home only every 720°.</div></div>
+</div>
+<div class="panel"><h2>toddler corner</h2>
+<div class="card sp"><b>ELI5:</b> hold a dinner plate flat on your palm and keep it flat while you spin it around. After one full turn (360°) your arm is all twisted up — you can\u2019t undo the twist without letting go. But keep going the SAME way for one more full turn (720° total), sweeping your hand up over your shoulder, and — magic — your arm comes untwisted, no cheating. Your arm just proved something deep: in the world of turning, ONE full spin is not "back to start," but TWO full spins is. Tiny particles like electrons live by exactly this rule — spin one is called a "spinor." Our sapphire is one. Turn it once around and it secretly flips to its own negative (like a photo turned into its shadow); turn it twice and it\u2019s truly itself again. We tied a ribbon from the gem to the wall so you can SEE the twist that a plain number would hide: one twist is stuck, two twists slip free. That hidden flip — the minus sign after one turn — is the whole secret of what a spinor is, now wrapped around the core.</div></div>
+</div>
+<footer>THE SPINOR · R(θ,n)=e^{−i(θ/2)n·σ} (half-angle) · R(360°)=−I (sign flip), R(720°)=+I (home), every axis · Bloch vector returns 360°, spinor 720° · SU(2) double-covers SO(3), π₁=Z₂; belt trick (LIT) · algebra/cover exact; ribbon is the standard analogy; core framing is the session\u2019s (AMBER) · fail-loud · offline</footer>
+<script>
+'use strict';
+function boom(w,e){var r=document.getElementById('readout');
+ r.innerHTML='<div class="card fail">FAULT @ '+w+'\n'+(e&&e.stack?e.stack:String(e))+'</div>';}
+window.addEventListener('error',function(ev){try{boom('window',ev.error||ev.message);}catch(_){}});
+function cssv(n){try{return getComputedStyle(document.documentElement).getPropertyValue(n).trim()||'#fff';}catch(e){return '#fff';}}
+function mlog(t,c){var m=document.getElementById('m1'),d=document.createElement('div');
+ d.className='ln'+(c?' '+c:'');d.textContent=t;m.appendChild(d);m.scrollTop=m.scrollHeight;}
+var SP={"law": "R(theta,n)=exp(-i (theta/2) n\u00b7sigma), half-angle", "at_360": "-Identity \u2192 spinor sign flip (\u22121)", "at_720": "+Identity \u2192 home", "bloch_return": 360, "spinor_return": 720, "cover": "SU(2) double-covers SO(3)", "pi1": "\u03c0\u2081(SO(3))=Z\u2082", "belt": "1 twist stuck (360\u00b0), 2 twists removable (720\u00b0)"};
+var T=0, RUN=false;
+var G={yaw:0.5,pitch:0.42};
+function TH(){return parseFloat(document.getElementById('sT').value);}
+function setTH(v){document.getElementById('sT').value=v;document.getElementById('vT').textContent=v+'°';}
+document.getElementById('sT').addEventListener('input',function(){document.getElementById('vT').textContent=this.value+'°';});
+document.getElementById('spin').addEventListener('click',function(){RUN=!RUN;this.classList.toggle('on',RUN);});
+document.getElementById('j360').addEventListener('click',function(){RUN=false;document.getElementById('spin').classList.remove('on');setTH(360);mlog('θ=360° — Bloch vector home, but spinor = −spinor (flipped). ribbon: one twist, stuck.','ok');});
+document.getElementById('j720').addEventListener('click',function(){RUN=false;document.getElementById('spin').classList.remove('on');setTH(720);mlog('θ=720° — spinor home (R=+I). ribbon: two twists, slide off (belt trick).','ok');});
+(function(){var cv=document.getElementById('cball');if(!cv)return;var dr=false,lx=0,ly=0;
+ cv.addEventListener('mousedown',function(e){dr=true;lx=e.offsetX;ly=e.offsetY;});
+ window.addEventListener('mouseup',function(){dr=false;});
+ cv.addEventListener('mousemove',function(e){if(!dr)return;G.yaw+=(e.offsetX-lx)*0.008;G.pitch+=(e.offsetY-ly)*0.006;G.pitch=Math.max(-1.35,Math.min(1.35,G.pitch));lx=e.offsetX;ly=e.offsetY;});
+})();
+function rot(p){var cy=Math.cos(G.yaw),sy=Math.sin(G.yaw),cp=Math.cos(G.pitch),sp=Math.sin(G.pitch);
+  var x1=p[0]*cy+p[2]*sy,z1=-p[0]*sy+p[2]*cy,y2=p[1]*cp-z1*sp,z2=p[1]*sp+z1*cp;return [x1,y2,z2];}
+function drawBall(){
+ try{
+  var cv=document.getElementById('cball'),g=cv.getContext('2d'),W=cv.width,H=cv.height;
+  g.clearRect(0,0,W,H);
+  var cx=W/2,cy=H/2,S=Math.min(W,H)*0.32;
+  if(RUN){var v=Math.min(720,TH()+2);setTH(v);if(v>=720){/*stay*/}}
+  var thDeg=TH(), th=thDeg*Math.PI/180;
+  function pr(p){var r=rot(p);return {x:cx+r[0]*S,y:cy-r[1]*S,z:r[2]};}
+  var cc=pr([0,0,0]);
+  // fixed outer ring (the world) in the x-y plane
+  g.strokeStyle=cssv('--grid');g.globalAlpha=.6;g.lineWidth=2;g.beginPath();var st=false;
+  for(var a=0;a<=360;a+=6){var p=pr([1.15*Math.cos(a*Math.PI/180),1.15*Math.sin(a*Math.PI/180),0]);st?g.lineTo(p.x,p.y):g.moveTo(p.x,p.y);st=true;}g.stroke();g.globalAlpha=1;g.lineWidth=1;
+  // the twisting ribbon: along +x from core to ring; width-vector twists by θ (inner end) → 0 (outer)
+  // s=0 at core, s=1 at ring. twist(s) = θ*(1−s). width vector rotates about the x (radial) axis.
+  var N=40, wdt=0.14, r0=0.16, r1=1.15;
+  var edgesA=[],edgesB=[],faces=[];
+  for(var i=0;i<=N;i++){var s=i/N; var r=r0+(r1-r0)*s; var tw=th*(1-s);
+    var wy=Math.cos(tw), wz=Math.sin(tw); // width dir in y-z, rotated by twist
+    var cA=[r, wdt*wy, wdt*wz], cB=[r,-wdt*wy,-wdt*wz];
+    var pA=pr(cA),pB=pr(cB); edgesA.push(pA);edgesB.push(pB);
+    if(i>0)faces.push({i:i,z:(pA.z+pB.z)/2});}
+  // draw ribbon faces (quad strip), shade front/back by twist so you SEE it turn
+  for(var i=1;i<=N;i++){var a0=edgesA[i-1],a1=edgesA[i],b1=edgesB[i],b0=edgesB[i-1];
+    var s=i/N; var tw=th*(1-s); var facing=Math.cos(tw); // >0 front, <0 back
+    var col=facing>=0?cssv('--band'):cssv('--bandb');
+    g.fillStyle=col;g.globalAlpha=0.55;g.beginPath();g.moveTo(a0.x,a0.y);g.lineTo(a1.x,a1.y);g.lineTo(b1.x,b1.y);g.lineTo(b0.x,b0.y);g.closePath();g.fill();g.globalAlpha=1;}
+  // ribbon edges
+  g.strokeStyle=cssv('--band');g.globalAlpha=.8;g.beginPath();for(var i=0;i<=N;i++){i?g.lineTo(edgesA[i].x,edgesA[i].y):g.moveTo(edgesA[0].x,edgesA[0].y);}g.stroke();
+  g.beginPath();for(var i=0;i<=N;i++){i?g.lineTo(edgesB[i].x,edgesB[i].y):g.moveTo(edgesB[0].x,edgesB[0].y);}g.stroke();g.globalAlpha=1;
+  // Bloch vector: R(θ,ŷ)|↑> → (sinθ,0,cosθ)
+  var bloch=[Math.sin(th),0,Math.cos(th)]; var bt=pr(bloch);
+  g.strokeStyle=cssv('--bloch');g.lineWidth=3;g.beginPath();g.moveTo(cc.x,cc.y);g.lineTo(bt.x,bt.y);g.stroke();g.lineWidth=1;
+  g.fillStyle=cssv('--bloch');g.beginPath();g.arc(bt.x,bt.y,5,0,7);g.fill();
+  g.fillStyle=cssv('--bloch');g.font='10px ui-monospace,monospace';g.fillText('Bloch',bt.x+7,bt.y-4);
+  // sapphire core (the spinor)
+  var sign=Math.cos(th/2);
+  var pulse=0.5+0.5*Math.abs(Math.sin(T*0.9));
+  var coreCol=sign>=0?'--saph':'--flip';
+  g.fillStyle=cssv(coreCol);g.globalAlpha=0.10+0.16*pulse;g.beginPath();g.arc(cc.x,cc.y,26,0,7);g.fill();g.globalAlpha=1;
+  g.fillStyle=cssv(coreCol);g.globalAlpha=0.22+0.2*pulse;g.beginPath();g.arc(cc.x,cc.y,12,0,7);g.fill();g.globalAlpha=1;
+  g.fillStyle=cssv('--saph2');g.globalAlpha=.9;g.beginPath();g.arc(cc.x,cc.y,5,0,7);g.fill();g.globalAlpha=1;
+  g.fillStyle=cssv('--dim');g.font='11px ui-monospace,monospace';
+  g.fillText('θ = '+thDeg+'°  ·  twists in ribbon: '+(thDeg/360).toFixed(2),12,20);
+  g.fillStyle=cssv(sign>=0?'--home':'--flip');g.font='11px ui-monospace,monospace';
+  g.fillText(Math.abs(thDeg%720)<1?'spinor: HOME (+)':(Math.abs(thDeg%720-360)<1?'spinor: FLIPPED (−1)':'spinor sign: '+(sign>=0?'+':'−')),12,H-10);
+ }catch(e){boom('drawBall',e);}
+}
+function drawPhase(){
+ try{
+  var cv=document.getElementById('cphase'),g=cv.getContext('2d'),W=cv.width,H=cv.height;
+  g.fillStyle='#0a0908';g.fillRect(0,0,W,H);
+  var thDeg=TH(), th=thDeg*Math.PI/180;
+  // phase clock (half-angle)
+  var cx=W/2,cy=110,R=70;
+  g.strokeStyle='#2c2318';g.beginPath();g.arc(cx,cy,R,0,7);g.stroke();
+  g.fillStyle=cssv('--dim');g.font='10px ui-monospace,monospace';g.textAlign='center';
+  g.fillText('spinor phase e^{−iθ/2}',cx,cy-R-8);g.textAlign='left';
+  var half=-th/2; var px=cx+Math.cos(half)*R, py=cy-Math.sin(half)*R;
+  var sign=Math.cos(th/2);
+  g.strokeStyle=cssv(sign>=0?'--home':'--flip');g.lineWidth=3;g.beginPath();g.moveTo(cx,cy);g.lineTo(px,py);g.stroke();g.lineWidth=1;
+  g.fillStyle=cssv(sign>=0?'--home':'--flip');g.beginPath();g.arc(px,py,5,0,7);g.fill();
+  // reference + at right
+  g.fillStyle=cssv('--dim');g.beginPath();g.arc(cx+R,cy,3,0,7);g.fill();g.fillText('+',cx+R+6,cy+4);
+  // sign strip
+  var sy0=cy+R+34;
+  g.fillStyle=cssv('--dim');g.font='11px ui-monospace,monospace';g.fillText('sign of the state — cos(θ/2)',16,sy0-8);
+  var sx=20,sw=W-40,sh=60;
+  g.strokeStyle='#241d13';g.beginPath();g.moveTo(sx,sy0+sh/2);g.lineTo(sx+sw,sy0+sh/2);g.stroke();
+  g.strokeStyle=cssv('--band');g.beginPath();
+  for(var d=0;d<=720;d+=4){var x=sx+d/720*sw;var yv=Math.cos(d*Math.PI/360)*sh*0.42;var Y=sy0+sh/2-yv;d?g.lineTo(x,Y):g.moveTo(x,Y);}g.stroke();
+  var mx=sx+thDeg/720*sw;g.strokeStyle=cssv('--org');g.globalAlpha=.6;g.beginPath();g.moveTo(mx,sy0);g.lineTo(mx,sy0+sh);g.stroke();g.globalAlpha=1;
+  // mark 360 and 720
+  [[360,'360° → −1'],[720,'720° → +1']].forEach(function(mk){var x=sx+mk[0]/720*sw;g.strokeStyle=cssv(mk[0]===360?'--flip':'--home');g.globalAlpha=.5;g.setLineDash([3,3]);g.beginPath();g.moveTo(x,sy0);g.lineTo(x,sy0+sh);g.stroke();g.setLineDash([]);g.globalAlpha=1;g.fillStyle=cssv(mk[0]===360?'--flip':'--home');g.font='9px ui-monospace,monospace';g.fillText(mk[1],x-24,sy0-2);});
+  // two returns
+  var ry0=sy0+sh+40;
+  g.fillStyle=cssv('--dim');g.font='11px ui-monospace,monospace';g.fillText('the two returns',16,ry0-10);
+  g.fillStyle=cssv('--bloch');g.fillText('Bloch vector: home every 360°  →  '+(Math.abs(thDeg%360)<1?'HOME':'('+(thDeg%360).toFixed(0)+'° along)'),20,ry0+12);
+  g.fillStyle=cssv('--band');g.fillText('spinor: home only every 720°  →  '+(Math.abs(thDeg%720)<1?'HOME':(Math.abs(thDeg%720-360)<1?'FLIPPED (−1)':'('+(thDeg%720).toFixed(0)+'° along)')),20,ry0+30);
+  // little ticks
+  g.strokeStyle=cssv('--bloch');g.beginPath();for(var d=0;d<=720;d+=360){var x=20+d/720*(W-40);g.moveTo(x,ry0+42);g.lineTo(x,ry0+50);}g.stroke();
+  g.strokeStyle=cssv('--band');g.beginPath();for(var d=0;d<=720;d+=720){var x=20+d/720*(W-40);g.moveTo(x,ry0+54);g.lineTo(x,ry0+62);}g.stroke();
+  g.fillStyle=cssv('--dim');g.font='9px ui-monospace,monospace';g.fillText('0°',18,ry0+74);g.fillText('360°',20+(W-40)/2-10,ry0+74);g.fillText('720°',W-44,ry0+74);
+ }catch(e){boom('drawPhase',e);}
+}
+function dials(){
+  var thDeg=TH();var sign=Math.cos(thDeg*Math.PI/360);
+  document.getElementById('dials').innerHTML=
+    '<div class="dial"><div class="v">720°</div><div class="k">to come home</div></div>'
+   +'<div class="dial"><div class="v">'+(sign>=0?'+':'−')+'</div><div class="k">spinor sign</div></div>'
+   +'<div class="dial"><div class="v">'+(thDeg/360).toFixed(2)+'</div><div class="k">ribbon twists</div></div>'
+   +'<div class="dial"><div class="v" style="font-size:.82rem">'+(Math.abs(thDeg%720)<1?'HOME':(Math.abs(thDeg%720-360)<1?'−1':'…'))+'</div><div class="k">state</div></div>';
+}
+function updateVerdict(){
+  var thDeg=TH();var R=document.getElementById('readout');
+  R.innerHTML=
+   '<div class="card sp"><b>THE SPINOR — 720° TO COME HOME</b> The sapphire core is the qubit\u2019s spinor. Rotations act by the half-angle, R(θ)=e^{−i(θ/2)n·σ}: turn it 360° and the Bloch vector is back but the spinor is −itself; turn it 720° and it\u2019s truly home. The ribbon to the fixed world carries the proof — one full twist (360°) is stuck; two twists (720°) slide off.</div>'
+   +'<div class="card lit"><b>R(360°)=−I, R(720°)=+I — FOR EVERY AXIS</b> Server-checked. The Bloch VECTOR (observable direction) returns every 360°; the SPINOR (the state, with phase) returns only every 720°, picking up −1 at 360°. This is SU(2) double-covering SO(3), and π₁(SO(3))=Z₂: a 360° loop in rotation-space is topologically nontrivial (the −1), a 720° loop is trivial.</div>'
+   +'<div class="card amber"><b>AMBER</b> The spinor algebra, the ±I at 2π/4π, and the double-cover / π₁=Z₂ facts are exact and server-verified. The twisting ribbon is the standard faithful analogy for orientation-entanglement (the belt/plate trick); the sapphire-core framing is the session\u2019s.</div>';
+}
+function frame(){ try{ drawBall();drawPhase();dials();updateVerdict();T+=0.02; requestAnimationFrame(frame);}catch(e){boom('frame',e);} }
+try{
+  mlog('R(2π)=−I / returns / cover vs frozen','hd');
+  mlog(SP.law,'ok');
+  mlog('R(360°) = '+SP.at_360+' ; R(720°) = '+SP.at_720+' (every axis)','ok');
+  mlog('Bloch vector returns at '+SP.bloch_return+'°; spinor returns at '+SP.spinor_return+'°','ok');
+  mlog(SP.cover+' ; '+SP.pi1+' ; belt: '+SP.belt,'ok');
+  frame();
+}catch(e){boom('boot',e);}
+</script>
+</body></html>

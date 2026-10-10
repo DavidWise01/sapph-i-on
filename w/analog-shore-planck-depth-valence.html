@@ -1,0 +1,126 @@
+<!DOCTYPE html><html lang="en"><head><link rel="icon" href="../favicon.svg" type="image/svg+xml"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>v0+2 — PLANCK DEPTH AS A VALENCE AXIS</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--gr:#0f1512;--ink:#d5e0d6;--dim:#7d918a;--line:#243029;
+--earth:#c9a35c;--wood:#57d99a;--fire:#ff7a34;--fire2:#ffbe3d;--water:#5fb0ff;--fluo:#8dff1e;
+--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+body{background:var(--gr);color:var(--ink);font:12px/1.55 var(--mono);padding:16px 14px 50px;
+background-image:radial-gradient(1100px 700px at 8% -10%,#16241d,transparent 60%);background-attachment:fixed}
+.wrap{max-width:1020px;margin:0 auto}
+h1{font-size:13px;letter-spacing:.26em;color:#fff}
+.sub{color:var(--dim);letter-spacing:.06em;margin:4px 0 14px}
+.ap{border:1px dashed var(--fire2);border-radius:5px;padding:7px 10px;color:var(--fire2);
+font-size:10.5px;letter-spacing:.1em;margin-bottom:16px}
+h2{font-size:11px;letter-spacing:.2em;color:var(--earth);margin:20px 0 7px;font-weight:700;
+border-bottom:1px solid var(--line);padding-bottom:5px}
+.st{display:inline-block;padding:0 5px;border:1px solid;border-radius:3px;font-size:9px;letter-spacing:.12em}
+.LIT{color:#57d99a;border-color:#57d99a}.AMB{color:#ffbe3d;border-color:#ffbe3d}
+.DED{color:#ff5a5a;border-color:#ff5a5a}.RET{color:#ff7a34;border-color:#ff7a34}
+table{width:100%;border-collapse:collapse;font-size:10.5px;margin-top:6px}
+td,th{padding:2px 6px;border-bottom:1px solid rgba(36,48,41,.9);text-align:left;white-space:nowrap}
+th{color:var(--dim);font-weight:400}.num{text-align:right;font-variant-numeric:tabular-nums}
+.kv{color:var(--dim)}.kv b{color:#fff}
+.retract{border-left:3px solid #ff7a34;padding:8px 10px;background:rgba(255,122,52,.06);margin-top:8px}
+.eli{border-left:3px solid var(--water);padding-left:10px;color:#bcd9f5;margin-top:12px}
+canvas{width:100%;display:block;border:1px solid var(--line);border-radius:4px;background:#0a100d;margin:8px 0}
+</style></head><body><div class="wrap">
+
+<h1>PLANCK DEPTH AS A VALENCE AXIS</h1>
+<div class="sub">SERPENTINE continues</div>
+<div class="ap"><b>v0+2 &middot; 2026-09-09</b> &mdash; APPENDED. v0 and v0+1 are frozen and unedited.
+this block RETRACTS one flag from v0+1 and adds one measurement neither of them had.</div>
+
+<h2>1 &nbsp; THE FLAG I GOT WRONG</h2>
+<div class="retract"><span class="st RET">RETRACTED</span>
+v0+1 flagged &ldquo;5%&rdquo; as a unit confusion &mdash; treating it as a &plusmn;5% tolerance on
+&#8467;<sub>P</sub> and calling the 0.05 exponent span a different quantity.<br><br>
+<b>It was not a tolerance. It was the coordinate.</b> The notation reads
+<b>1.6 &times; 10<sup>&minus;34</sup>, depth .78 &rarr; .83</b> &mdash; mantissa fixed at the Planck value,
+and the <i>fractional part of the exponent used as a depth axis</i>. The &ldquo;5%&rdquo; is the width of that
+axis: 0.05 of a decade. Correcting a deliberate coordinate as a unit error is the error.</div>
+
+<h2>2 &nbsp; THE MEASUREMENT THAT MAKES THE COORDINATE WORK <span class="st LIT">LIT</span></h2>
+<div class="kv">If depth is log-scale, then one <b>atomic number</b> step spans
+<b>d(log&#8321;&#8320;Z)/dZ = 1/(Z&middot;ln10)</b> of a decade. That width shrinks as Z climbs, so there is
+exactly one place on the whole periodic table where a <b>0.05-wide depth window is one element wide</b>:</div>
+<table><tr><th class="num">Z</th><th>elem</th><th class="num">one step, in decades</th><th></th></tr>
+<tr><td class="num">6</td><td>C</td><td class="num">0.07238</td><td></td></tr>
+<tr><td class="num">7</td><td>N</td><td class="num">0.06204</td><td></td></tr>
+<tr><td class="num">8</td><td>O</td><td class="num">0.05429</td><td></td></tr>
+<tr><td class="num" style="color:var(--fluo)">9</td><td style="color:var(--fluo)"><b>F</b></td>
+<td class="num" style="color:var(--fluo)"><b>0.04825</b></td><td style="color:var(--fluo)">&larr; nearest to 0.05 of any Z</td></tr>
+<tr><td class="num">10</td><td>Ne</td><td class="num">0.04343</td><td></td></tr>
+<tr><td class="num">11</td><td>Na</td><td class="num">0.03948</td><td></td></tr></table>
+<div class="kv" style="margin-top:7px">Solved exactly: a 0.05-decade window equals one element step at
+<b>Z = 8.6859</b>. The integers bracketing it are <b>8 (O)</b> and <b>9 (F)</b>.
+The step itself: log&#8321;&#8320;(10/9) = <b>0.04576</b>, log&#8321;&#8320;(9/8) = <b>0.05115</b>.<br><br>
+<b>A 0.05 depth slice is one valence step wide only at fluorine.</b> Anywhere else on the table it is
+either wider than an element or narrower than one. The coordinate is not arbitrary and it lands where he
+said it lands.</div>
+
+<h2>3 &nbsp; THE BREAK AT .83 &mdash; MEASURED, AND ONE HONEST CORRECTION</h2>
+<canvas id="cEA" height="200"></canvas>
+<div class="kv">Electron affinity, kJ/mol, Z = 1..20. The cliff at F &rarr; Ne is the shape he named.</div>
+<table><tr><th>step</th><th class="num">EA before</th><th class="num">EA after</th><th class="num">drop</th><th>rank</th></tr>
+<tr><td>Cl(17) &rarr; Ar(18)</td><td class="num">349</td><td class="num">&minus;96</td><td class="num">&minus;445</td><td><span class="st AMB">1st</span></td></tr>
+<tr><td style="color:var(--fluo)"><b>F(9) &rarr; Ne(10)</b></td><td class="num">328</td><td class="num">&minus;116</td>
+<td class="num" style="color:var(--fluo)"><b>&minus;444</b></td><td><span class="st LIT">2nd &mdash; 1 kJ behind</span></td></tr>
+<tr><td>C(6) &rarr; N(7)</td><td class="num">122</td><td class="num">&minus;7</td><td class="num">&minus;129</td><td>3rd</td></tr></table>
+<div class="kv" style="margin-top:7px">
+<b>CORRECTION, and it does not break his point:</b> F&rarr;Ne is not the single largest drop &mdash;
+Cl&rarr;Ar beats it by <b>1 kJ/mol</b>, a dead heat. But both are the <i>same</i> break: halogen &rarr;
+noble gas, the octet closing. <b>F&rarr;Ne is the FIRST instance of it</b>, and it is the only one that
+sits at a Z where the depth window is one element wide. The second correction: <b>chlorine, not fluorine,
+has the higher electron affinity</b> (349 vs 328). Fluorine holds the electronegativity maximum (3.98);
+chlorine holds the affinity maximum. Two different crowns, routinely conflated.</div>
+
+<h2>4 &nbsp; WHERE &#8467;<sub>P</sub> SITS ON HIS AXIS</h2>
+<div class="kv">log&#8321;&#8320;(&#8467;<sub>P</sub>) = &minus;34.<b>791490</b>. On a .78 &rarr; .83 depth axis,
+&#8467;<sub>P</sub> sits at <b>.7915</b> &mdash; <b>23.0%</b> in from the .78 edge. Not centred, and not
+meant to be: the axis runs from &#8467;<sub>P</sub> <i>downward into</i> the break at .83.</div>
+<div class="kv" style="margin-top:6px">So the reading is: <b>start at the Planck length, walk 0.04 of a
+decade deeper, and the shell closes.</b> Past .83 the cell has a full octet &mdash; it will not bond, it
+cannot be corrected, and there is nothing left to do with it but absorb it. <span class="st AMB">AMB</span>
+&mdash; the mapping from depth to valence is <b>his construction</b>; the arithmetic inside it is measured,
+the identification of one with the other is not.</div>
+
+<div class="eli"><b>toddler corner.</b> Fluorine is the greediest atom there is &mdash; it will grab an
+electron off almost anything. Neon is right next door and wants nothing at all, because its shell just
+filled. One step, and the greediest thing becomes the most indifferent thing. That one step is the widest
+single change in the whole neighbourhood, and it happens to be exactly as wide as the slice he drew.</div>
+
+<h2>5 &nbsp; STILL OPEN</h2>
+<div class="kv">&bull;&nbsp;whether &ldquo;planck depth&rdquo; means the exponent axis literally, or something
+that only <i>indexes</i> like one.<br>
+&bull;&nbsp;the cheat <b>sqrt4^{5.5}^5^{3.3}^3</b> &mdash; still unread.<br>
+&bull;&nbsp;what <b>cradling</b> cradles.<br>
+&bull;&nbsp;&ldquo;with a mother&rdquo; &mdash; from two turns back. still blank.</div>
+
+<script>
+const EA=[73,-48,60,-50,27,122,-7,141,328,-116,53,-40,42,134,72,200,349,-96,48,-2];
+const S="H He Li Be B C N O F Ne Na Mg Al Si P S Cl Ar K Ca".split(" ");
+const cv=document.getElementById('cEA'),c=cv.getContext('2d');
+function draw(t){const r=cv.getBoundingClientRect();if(cv.width!==r.width*2){cv.width=r.width*2;cv.height=400;}
+ const W=cv.width,H=cv.height;c.clearRect(0,0,W,H);
+ const lo=-140,hi=380,Y=v=>H-24-((v-lo)/(hi-lo))*(H-60),X=i=>28+(i/(EA.length-1))*(W-56);
+ c.strokeStyle='rgba(125,145,138,.35)';c.lineWidth=1;c.beginPath();c.moveTo(0,Y(0));c.lineTo(W,Y(0));c.stroke();
+ c.fillStyle='rgba(125,145,138,.8)';c.font='15px ui-monospace,monospace';c.fillText('0',6,Y(0)-5);
+ // the F->Ne cliff, highlighted; the pulse is ORNAMENT
+ const fl=0.55+0.45*Math.sin(t*0.0022);
+ c.strokeStyle='rgba(141,255,30,'+(0.35+0.5*fl)+')';c.lineWidth=3;
+ c.beginPath();c.moveTo(X(8),Y(EA[8]));c.lineTo(X(9),Y(EA[9]));c.stroke();
+ c.beginPath();c.moveTo(X(0),Y(EA[0]));
+ EA.forEach((v,i)=>c.lineTo(X(i),Y(v)));
+ c.strokeStyle='#cbd8dd';c.lineWidth=2.2;c.stroke();
+ EA.forEach((v,i)=>{const hot=(i===8||i===9);
+  c.fillStyle=hot?'#8dff1e':'rgba(203,216,221,.85)';
+  c.beginPath();c.arc(X(i),Y(v),hot?6:3.4,0,7);c.fill();
+  c.fillStyle=hot?'#8dff1e':'rgba(125,145,138,.75)';c.font=(hot?'bold ':'')+'15px ui-monospace,monospace';
+  c.fillText(S[i],X(i)-6,Y(v)-13);});
+ c.fillStyle='rgba(141,255,30,.9)';c.font='15px ui-monospace,monospace';
+ c.fillText('-444 kJ/mol  the octet closes',X(9)+10,Y(-116)+6);
+}
+(function loop(t){draw(t);requestAnimationFrame(loop);})(0);
+</script></div></body></html>

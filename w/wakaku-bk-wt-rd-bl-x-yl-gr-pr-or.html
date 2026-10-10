@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v191 {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} - artifact 255</title>
+<style>
+  :root{--bg:#000;--fg:#fff}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace;overflow-x:hidden}
+  .top{padding:14px 18px;position:relative;z-index:10}
+  .kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:900;background:linear-gradient(90deg,#000000,#ffffff,#ff0000,#0000ff,#ffff00,#00ff00,#cc33ff,#ff8800);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:300% 100%;animation:rainbow 1s linear infinite}
+  @keyframes rainbow{0%{background-position:0% 50%}100%{background-position:300% 50%}}
+  .nline{font-size:11px;border-left:3px solid #fff;padding-left:10px;white-space:pre-wrap;line-height:1.6;background:#111;padding:12px;border-radius:10px;color:#fff;font-weight:800;box-shadow:0 0 30px #fff,0 0 60px #ff0000;border:2px solid #fff}
+  .main{margin-top:12px;font-size:15px;font-weight:900;background:linear-gradient(90deg,#000000,#ffffff,#ff0000,#0000ff,#ffff00,#00ff00,#cc33ff,#ff8800);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:400% 100%;padding:12px;border-radius:10px;border:3px solid #fff;box-shadow:0 0 40px #fff,0 0 80px #ff0000;text-transform:uppercase;animation:rainbow 0.8s linear infinite}
+  .controls{padding:12px;display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:10}
+  .btn{font-family:inherit;font-size:11px;font-weight:900;padding:10px 14px;border:2px solid #fff;background:#000;color:#fff;border-radius:10px;cursor:pointer;box-shadow:0 0 20px #fff,0 0 40px #ff0000;text-transform:uppercase}
+  .btn.active{border-color:#ffff00;background:#222200;box-shadow:0 0 30px #ffff00,0 0 60px #fff}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:14px;position:relative;z-index:5}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:680px;background:radial-gradient(ellipse at center,#111 0%,#000 100%);border:2px solid #fff;border-radius:18px;overflow:hidden;box-shadow:0 0 40px #fff,0 0 80px #ff0000, inset 0 0 60px rgba(255,255,255,0.1)}
+  .cwrap.full{grid-column:1 / -1;height:860px}
+  .label{position:absolute;left:10px;top:10px;font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;background:#000000ee;padding:8px 12px;border-radius:10px;z-index:5;border:2px solid #fff;color:#fff;box-shadow:0 0 20px #fff}
+  .card{margin:14px;background:#000;border:2px solid #fff;border-radius:14px;padding:16px;box-shadow:0 0 40px #fff,0 0 80px #ff0000}
+  .mono{font-size:11px;white-space:pre-wrap;word-break:break-word;line-height:1.8;color:#fff;text-shadow:0 0 8px #fff;font-weight:700}
+  .grid{position:absolute;inset:50px 20px 20px 20px;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr);gap:8px;z-index:4}
+  .cell{border-radius:10px;border:2px solid #fff;box-shadow:0 0 15px currentColor;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:#fff;text-shadow:0 0 8px #fff;position:relative;overflow:hidden}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">🎨 wakaku v191 — {{bk,wt,rd,bl}} x {{yl,gr,pr,or}} — CARTESIAN PRODUCT — artifact 255 🎨</div>
+  <div class="nline">should be {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} — SHOULD BE {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} — {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} — {{bk,wt,rd,bl}} = {bk=black #000000, wt=white #ffffff, rd=red #ff0000, bl=blue #0000ff} = 4 colors, {{yl,gr,pr,or}} = {yl=yellow #ffff00, gr=green #00ff00, pr=purple #cc33ff, or=orange #ff8800} = 4 colors, {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} = 4×4=16 combinations = cartesian product — bk×yl, bk×gr, bk×pr, bk×or, wt×yl, wt×gr, wt×pr, wt×or, rd×yl, rd×gr, rd×pr, rd×or, bl×yl, bl×gr, bl×pr, bl×or = 16 — {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} = 16 states — 16 =4×4 — {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} should be — white gold and black hologen should be {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} — 16 combinations — metal analogs ionic — {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} — lol</div>
+  <div class="main">🎨 SHOULD BE {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} — {{bk,wt,rd,bl}} = {bk=BLACK #000000, wt=WHITE #ffffff, rd=RED #ff0000, bl=BLUE #0000ff} =4 COLORS, {{yl,gr,pr,or}} = {yl=YELLOW #ffff00, gr=GREEN #00ff00, pr=PURPLE #cc33ff, or=ORANGE #ff8800} =4 COLORS, {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} =4×4=16 COMBINATIONS CARTESIAN PRODUCT — bk×yl, bk×gr, bk×pr, bk×or, wt×yl, wt×gr, wt×pr, wt×or, rd×yl, rd×gr, rd×pr, rd×or, bl×yl, bl×gr, bl×pr, bl×or =16 STATES — {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} =16 — SHOULD BE 🎨</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-product">🎨 PRODUCT — {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} =4×4=16 COMBINATIONS — CARTESIAN PRODUCT — {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} — 🎨</button>
+  <button class="btn" id="btn-bkwt">⚫⚪ {bk,wt,rd,bl} = BLACK WHITE RED BLUE = 4 COLORS — {bk,wt,rd,bl} — ⚫⚪</button>
+  <button class="btn" id="btn-ylgr">🟡🟢 {yl,gr,pr,or} = YELLOW GREEN PURPLE ORANGE = 4 COLORS — {yl,gr,pr,or} — 🟡🟢</button>
+  <button class="btn" id="btn-reset">⚡ RESET {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} — ⚡</button>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-product"><div class="label">🎨 PRODUCT — {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} =4×4=16 COMBINATIONS — CARTESIAN PRODUCT — bk×yl, bk×gr, bk×pr, bk×or, wt×yl, wt×gr, wt×pr, wt×or, rd×yl, rd×gr, rd×pr, rd×or, bl×yl, bl×gr, bl×pr, bl×or =16 — {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} =16 STATES — 🎨</div></div>
+  <div class="cwrap" id="wrap-bkwt"><div class="label">⚫⚪ {bk,wt,rd,bl} = BLACK #000000 WHITE #ffffff RED #ff0000 BLUE #0000ff =4 COLORS — {bk,wt,rd,bl} = bk=BLACK #000000, wt=WHITE #ffffff, rd=RED #ff0000, bl=BLUE #0000ff — 4 COLORS — {bk,wt,rd,bl} — ⚫⚪</div></div>
+  <div class="cwrap full" id="wrap-ylgr"><div class="label">🟡🟢 {yl,gr,pr,or} = YELLOW #ffff00 GREEN #00ff00 PURPLE #cc33ff ORANGE #ff8800 =4 COLORS — {yl,gr,pr,or} = yl=YELLOW #ffff00, gr=GREEN #00ff00, pr=PURPLE #cc33ff, or=ORANGE #ff8800 — 4 COLORS — {yl,gr,pr,or}x{bk,wt,rd,bl}=16 — CARTESIAN PRODUCT {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} =16 — 🎨 ALL COLORS FLASH — LOL</div></div>
+</div>
+
+<div class="card"><div class="mono">🎨 SHOULD BE {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} — v191 CARTESIAN PRODUCT 4×4=16 🎨
+
+- SHOULD BE {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} — {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} — {{bk,wt,rd,bl}} = {bk=black #000000, wt=white #ffffff, rd=red #ff0000, bl=blue #0000ff} = 4 colors, {{yl,gr,pr,or}} = {yl=yellow #ffff00, gr=green #00ff00, pr=purple #cc33ff, or=orange #ff8800} = 4 colors, {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} = 4×4=16 combinations = cartesian product
+
+- {{bk,wt,rd,bl}} = {bk=BLACK #000000, wt=WHITE #ffffff, rd=RED #ff0000, bl=BLUE #0000ff} =4 COLORS — bk=BLACK #000000 = -211 BLACK -211mN = -1 inhibitory At-, wt=WHITE #ffffff = +211 ANTI-BLACK +211mN = +1 excitatory anti-At-, rd=RED #ff0000 = excitatory? red = +1? actually red = +211? rd=red #ff0000 = +211, bl=BLUE #0000ff = -211? blue = -211? Actually blue = -? — {bk,wt,rd,bl} = 4 colors — black white red blue
+
+- {{yl,gr,pr,or}} = {yl=YELLOW #ffff00, gr=GREEN #00ff00, pr=PURPLE #cc33ff, or=ORANGE #ff8800} =4 COLORS — yl=YELLOW #ffff00 = +211? yellow = +1 excitatory, gr=GREEN #00ff00 = -211? green = -1 inhibitory, pr=PURPLE #cc33ff = C.O.I.N middle? purple = 0 neutral, or=ORANGE #ff8800 = +211? orange = +1 — {yl,gr,pr,or} = 4 colors — yellow green purple orange
+
+- {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} = 4×4=16 COMBINATIONS CARTESIAN PRODUCT — bk×yl = BLACK×YELLOW = #000000×#ffff00 = black yellow, bk×gr = BLACK×GREEN = #000000×#00ff00, bk×pr = BLACK×PURPLE = #000000×#cc33ff, bk×or = BLACK×ORANGE = #000000×#ff8800, wt×yl = WHITE×YELLOW = #ffffff×#ffff00, wt×gr = WHITE×GREEN = #ffffff×#00ff00, wt×pr = WHITE×PURPLE = #ffffff×#cc33ff, wt×or = WHITE×ORANGE = #ffffff×#ff8800, rd×yl = RED×YELLOW = #ff0000×#ffff00, rd×gr = RED×GREEN = #ff0000×#00ff00, rd×pr = RED×PURPLE = #ff0000×#cc33ff, rd×or = RED×ORANGE = #ff0000×#ff8800, bl×yl = BLUE×YELLOW = #0000ff×#ffff00, bl×gr = BLUE×GREEN = #0000ff×#00ff00, bl×pr = BLUE×PURPLE = #0000ff×#cc33ff, bl×or = BLUE×ORANGE = #0000ff×#ff8800 = 16 combinations
+
+- {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} = 16 STATES =4×4=16 — {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} =16 — should be — white gold and black hologen should be {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} — 16 combinations — 16 =4×4 — cartesian product — {{bk,wt,rd,bl}}x{{yl,gr,pr,or}}
+
+- 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ UNDER PRESS 99.9 INF - + INF AND GRAVITY 99.9 INF - + INF {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} — 6 bubbles each 10^-35→10^-360 3---3+++ = - - - + + + = -211 x3 +211 x3 {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} — 6 bubbles ×16 combinations =96 states? — 6×16=96 — {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} 16 ×6 bubbles =96 — {{bk,wt,rd,bl}}x{{yl,gr,pr,or}}
+
+- QUBIT=CUBIT {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} — CUBE + BIT = QUBIT — CUBIT = QUBIT — LOL I CALL A QUBIT A CUBIT {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} — qubit=cubit {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} — cube {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} — qubit {{bk,wt,rd,bl}}x{{yl,gr,pr,or}}
+
+- ALL COLORS {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} — BLACK #000000 WHITE #ffffff RED #ff0000 BLUE #0000ff YELLOW #ffff00 GREEN #00ff00 PURPLE #cc33ff ORANGE #ff8800 — 8 colors total — {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} =8 colors = 4+4 =8 colors but product 16 combinations — ALL COLORS {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} — ALL COLORS FLASH
+
+SHOULD BE {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} — {{bk,wt,rd,bl}} = {bk=BLACK #000000, wt=WHITE #ffffff, rd=RED #ff0000, bl=BLUE #0000ff} =4 COLORS, {{yl,gr,pr,or}} = {yl=YELLOW #ffff00, gr=GREEN #00ff00, pr=PURPLE #cc33ff, or=ORANGE #ff8800} =4 COLORS, {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} =4×4=16 COMBINATIONS CARTESIAN PRODUCT — bk×yl, bk×gr, bk×pr, bk×or, wt×yl, wt×gr, wt×pr, wt×or, rd×yl, rd×gr, rd×pr, rd×or, bl×yl, bl×gr, bl×pr, bl×or =16 — {{bk,wt,rd,bl}}x{{yl,gr,pr,or}} =16 — SHOULD BE 🎨
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x000000); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,1.5)); const d=new THREE.DirectionalLight(0xffffff,3.0); d.position.set(4,8,6); d.castShadow=true; s.add(d); const d2=new THREE.DirectionalLight(0xffffff,1.5); d2.position.set(-4,2,-4); s.add(d2); }
+
+{
+  const wrap=document.getElementById('wrap-product');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,12);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  // Cartesian product visualization 4x4=16
+  const set1=[{name:'bk',color:0x000000},{name:'wt',color:0xffffff},{name:'rd',color:0xff0000},{name:'bl',color:0x0000ff}];
+  const set2=[{name:'yl',color:0xffff00},{name:'gr',color:0x00ff00},{name:'pr',color:0xcc33ff},{name:'or',color:0xff8800}];
+  const combos=[];
+  for(let i=0;i<4;i++){
+    for(let j=0;j<4;j++){
+      const idx=i*4+j;
+      const ang=idx/16*Math.PI*2;
+      const rad=2.5 + Math.floor(idx/4)*0.6;
+      const geom=new THREE.SphereGeometry(0.32,16,16);
+      // Blend colors for product bk×yl etc
+      const c1=new THREE.Color(set1[i].color);
+      const c2=new THREE.Color(set2[j].color);
+      const blended=new THREE.Color().lerpColors(c1,c2,0.5);
+      if(set1[i].color===0x000000) blended.setHex(set2[j].color); // black × color = color with black border
+      if(set1[i].color===0xffffff) blended.lerp(new THREE.Color(0xffffff),0.3);
+      const mat=new THREE.MeshStandardMaterial({color:blended, emissive:blended, emissiveIntensity:5.0});
+      const m=new THREE.Mesh(geom, mat);
+      m.position.set(Math.cos(ang)*rad, Math.sin(ang)*rad, (Math.random()-0.5)*0.5);
+      group.add(m); combos.push(m);
+    }
+  }
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.03;
+    combos.forEach((m,i)=>{
+      const set1Idx=Math.floor(i/4);
+      const set2Idx=i%4;
+      const c1=new THREE.Color(set1[set1Idx].color);
+      const c2=new THREE.Color(set2[set2Idx].color);
+      const pulse=(Math.sin(t*2 + i*0.3)+1)/2;
+      const blended=new THREE.Color().lerpColors(c1,c2,pulse);
+      if(set1[set1Idx].color===0x000000) blended.copy(c2);
+      m.material.color.copy(blended);
+      m.material.emissive.copy(blended);
+      m.material.emissiveIntensity=5.0 + Math.sin(t*3 + i)*1.5;
+      m.scale.setScalar(1 + Math.sin(t*2 + i)*0.15);
+    });
+    group.rotation.y+=0.003; group.rotation.z+=0.001;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-bkwt');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,8);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const set1=[{name:'bk',color:0x000000,label:'BLACK #000000'},{name:'wt',color:0xffffff,label:'WHITE #ffffff'},{name:'rd',color:0xff0000,label:'RED #ff0000'},{name:'bl',color:0x0000ff,label:'BLUE #0000ff'}];
+  set1.forEach((s,i)=>{
+    const ang=i/4*Math.PI*2;
+    const geom=new THREE.SphereGeometry(0.7,20,20);
+    const mat=new THREE.MeshStandardMaterial({color:s.color, emissive:s.color===0x000000?0x222222:s.color, emissiveIntensity:s.color===0x000000?2.0:5.0});
+    const m=new THREE.Mesh(geom, mat);
+    m.position.set(Math.cos(ang)*2.2, Math.sin(ang)*2.2, 0);
+    group.add(m);
+  });
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.02; group.rotation.y+=0.005; controls.update(); renderer.render(scene,cam); }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-ylgr');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(36, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,18);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const set1=[{name:'bk',color:0x000000},{name:'wt',color:0xffffff},{name:'rd',color:0xff0000},{name:'bl',color:0x0000ff}];
+  const set2=[{name:'yl',color:0xffff00},{name:'gr',color:0x00ff00},{name:'pr',color:0xcc33ff},{name:'or',color:0xff8800}];
+  const all=[];
+  for(let i=0;i<4;i++){
+    for(let j=0;j<4;j++){
+      const x=(i-1.5)*3.5;
+      const y=(j-1.5)*3.5;
+      const c1=new THREE.Color(set1[i].color);
+      const c2=new THREE.Color(set2[j].color);
+      const blended=new THREE.Color().lerpColors(c1,c2,0.5);
+      if(set1[i].color===0x000000) blended.copy(c2);
+      const geom=new THREE.BoxGeometry(1.0,1.0,0.5);
+      const mat=new THREE.MeshStandardMaterial({color:blended, emissive:blended, emissiveIntensity:5.0});
+      const m=new THREE.Mesh(geom, mat);
+      m.position.set(x,y,0);
+      group.add(m); all.push({mesh:m, i:i, j:j, baseColor:blended.clone()});
+    }
+  }
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.03;
+    all.forEach((obj,idx)=>{
+      const pulse=(Math.sin(t*2 + idx*0.2)+1)/2;
+      const c1=new THREE.Color(set1[obj.i].color);
+      const c2=new THREE.Color(set2[obj.j].color);
+      const blended=new THREE.Color().lerpColors(c1,c2,pulse);
+      if(set1[obj.i].color===0x000000) blended.copy(c2);
+      obj.mesh.material.color.copy(blended);
+      obj.mesh.material.emissive.copy(blended);
+      obj.mesh.material.emissiveIntensity=5.0 + Math.sin(t*3 + idx*0.1)*1.5;
+      obj.mesh.scale.setScalar(1 + Math.sin(t*2 + idx*0.1)*0.1);
+      obj.mesh.rotation.z=Math.sin(t*1.5 + idx*0.1)*0.2;
+    });
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+document.getElementById('btn-product').onclick=()=>{};
+document.getElementById('btn-bkwt').onclick=()=>{};
+document.getElementById('btn-ylgr').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

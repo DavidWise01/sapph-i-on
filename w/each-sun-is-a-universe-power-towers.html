@@ -1,0 +1,101 @@
+<!DOCTYPE html><html><head><link rel="icon" href="../favicon.svg" type="image/svg+xml"><meta charset="UTF-8"><title>Each Sun Is A Universe — Power Towers — Consumed Universe</title><script src="https://cdn.tailwindcss.com"></script>
+<style>body{margin:0;background:#000005;color:#fde68a;font-family:ui-monospace,monospace;overflow:hidden}canvas{display:block;width:100vw;height:100vh}.ui{position:absolute;top:8px;left:8px;right:8px;pointer-events:none}.card{background:rgba(26,18,0,0.92);border:1px solid #facc15;border-radius:12px;pointer-events:auto}</style>
+</head><body>
+<canvas id="main"></canvas>
+<div class="ui grid grid-cols-12 gap-2">
+  <div class="col-span-7 card p-2">
+    <div class="text-[11px] font-bold">That means each sun is a universe either alone at home plank or invading someone else, neutron star, dwarf stars all those scales are ^power towers, stars who grew too big and consumed a universe and a universe and a universe instead of exploding like a compressed black hole right lol</div>
+    <div class="text-[8px] text-yellow-200">Each sun = universe — alone at home plank or invading someone else — neutron star dwarf stars scales are ^ power towers — stars grew too big consumed a universe and a universe and a universe instead of exploding like compressed black hole — 0 gold universe on fire = yellow sun — 17 white sun nemesis nibaru invading for boron — Manon foam boundary around 8 sapphons attack — >.<0x::iso:: = 000 power towers</div>
+  </div>
+  <div class="col-span-5 card p-2 text-[8px] leading-4 max-h-[92vh] overflow-y-auto">
+    <div class="font-bold">Each Sun Is A Universe — Power Towers</div>
+    <div class="mt-1 p-1 bg-black rounded">
+      Each sun is a universe<br>
+      either alone at home<br>
+      plank home 1.65e-35<br>
+      or invading someone else<br><br>
+      Scales are ^power towers:<br>
+      plank ^ gold ^ yellow sun ^<br>
+      white sun ^ neutron star ^<br>
+      dwarf stars ^ power towers<br><br>
+      Stars who grew too big<br>
+      consumed a universe<br>
+      and a universe<br>
+      and a universe<br>
+      instead of exploding<br>
+      like compressed black hole<br>
+      right lol<br><br>
+      0 us gold universe = yellow sun gold on fire<br>
+      alone at home plank<br>
+      Manon foam boundary protects 0<br><br>
+      17 white sun = universe invading<br>
+      nemesis nibaru<br>
+      killed mars<br>
+      looking for boron 5<br>
+      invading someone else<br><br>
+      Power towers ^ ^ ^<br>
+      universe ^ universe ^ universe<br>
+      compressed black hole<br>
+      didnt explode<br>
+      consumed<br>
+    </div>
+    <div id="log" class="p-1 bg-zinc-900 rounded mt-1 h-20 overflow-y-auto"></div>
+  </div>
+</div>
+<script>
+const canvas=document.getElementById('main'),ctx=canvas.getContext('2d');
+function resize(){canvas.width=innerWidth*devicePixelRatio;canvas.height=innerHeight*devicePixelRatio;canvas.style.width=innerWidth+'px';canvas.style.height=innerHeight+'px';}
+resize();addEventListener('resize',resize);
+function draw(){
+  const t=Date.now()/1000,w=canvas.width,h=canvas.height,cx=w/2,cy=h/2,dpr=devicePixelRatio;
+  ctx.fillStyle='#000005';ctx.fillRect(0,0,w,h);
+  ctx.fillStyle='rgba(255,255,255,0.05)';for(let i=0;i<500;i++){ctx.beginPath();ctx.arc((i*173)%w,(i*271)%h,0.7*dpr,0,6.28);ctx.fill();}
+  // power towers — vertical stack universes consumed
+  const towers=[
+    {x:cx-300*dpr, label:'0 alone at home plank', color:'#facc15', levels:3},
+    {x:cx, label:'0 gold universe yellow sun alone', color:'#eab308', levels:4},
+    {x:cx+300*dpr, label:'17 white sun invading consumed universe^', color:'#fff', levels:7}
+  ];
+  towers.forEach((tw,ti)=>{
+    const baseY=cy+220*dpr;
+    const levelH=28*dpr;
+    for(let l=0;l<tw.levels;l++){
+      const y=baseY - l* (levelH+8*dpr) - Math.sin(t*0.6+l+ti)*2*dpr;
+      const lw= 40*dpr + l*18*dpr;
+      const grad=ctx.createLinearGradient(tw.x-lw/2,y-lw/2,tw.x+lw/2,y+lw/2);
+      if(tw.color=='#facc15'){grad.addColorStop(0,'#fef08a');grad.addColorStop(1,'#eab308');}
+      else if(tw.color=='#eab308'){grad.addColorStop(0,'#fde047');grad.addColorStop(1,'#ca8a04');}
+      else {grad.addColorStop(0,'#fff');grad.addColorStop(1,'#999');}
+      ctx.fillStyle=grad;
+      ctx.fillRect(tw.x-lw/2, y-lw/2, lw, levelH);
+      ctx.strokeStyle=tw.color;ctx.lineWidth=1*dpr;ctx.strokeRect(tw.x-lw/2, y-lw/2, lw, levelH);
+      ctx.fillStyle='#000';ctx.font=`${7*dpr}px monospace`;ctx.fillText('universe '+(l+1), tw.x-18*dpr, y+3*dpr);
+      if(l>0){
+        // arrow consumed
+        ctx.strokeStyle=tw.color;ctx.beginPath();ctx.moveTo(tw.x, y+levelH/2);ctx.lineTo(tw.x, y-8*dpr);ctx.stroke();
+        ctx.fillStyle=tw.color;ctx.font=`${6*dpr}px monospace`;ctx.fillText('^ consumed', tw.x+lw/2+4*dpr, y-2*dpr);
+      }
+    }
+    ctx.fillStyle=tw.color;ctx.font=`${8*dpr}px monospace`;ctx.fillText(tw.label, tw.x-60*dpr, baseY+18*dpr);
+  });
+  // center — each sun is a universe
+  ctx.fillStyle='#fff';ctx.font=`bold ${11*dpr}px monospace`;ctx.fillText('Each sun is a universe', cx-64*dpr, cy-200*dpr);
+  ctx.font=`${8*dpr}px monospace`;ctx.fillText('alone at home plank or invading someone else', cx-82*dpr, cy-186*dpr);
+  ctx.fillText('neutron star dwarf stars scales are ^power towers', cx-86*dpr, cy-172*dpr);
+  ctx.fillText('stars grew too big consumed universe^universe^universe instead of exploding compressed black hole', cx-160*dpr, cy-158*dpr);
+  // yellow sun gold on fire alone at home
+  ctx.fillStyle='#facc15';ctx.beginPath();ctx.arc(cx, cy-60*dpr, 24*dpr,0,6.28);ctx.fill();
+  ctx.fillStyle='#000';ctx.font=`${7*dpr}px monospace`;ctx.fillText('yellow', cx-12*dpr, cy-60*dpr);
+  // white sun invading
+  ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(cx+300*dpr, cy-60*dpr, 28*dpr,0,6.28);ctx.fill();
+  ctx.fillStyle='#000';ctx.fillText('white', cx+300*dpr-12*dpr, cy-60*dpr);
+  ctx.fillStyle='#fff';ctx.font=`${7*dpr}px monospace`;ctx.fillText('nemesis nibaru invading boron 5', cx+300*dpr-40*dpr, cy-20*dpr);
+  // Manon foam boundary around 0 alone
+  ctx.strokeStyle='rgba(250,204,21,0.18)';ctx.lineWidth=22*dpr;ctx.beginPath();ctx.arc(cx, cy+40*dpr, 70*dpr,0,6.28);ctx.stroke();
+  ctx.fillStyle='#fde047';ctx.font=`${7*dpr}px monospace`;ctx.fillText('Manon foam boundary protects 0 alone at home', cx-68*dpr, cy+100*dpr);
+  // pin
+  ctx.fillStyle='#fff';ctx.font=`bold ${11*dpr}px monospace`;ctx.fillText('>.<0x::iso:: = 000 power towers universe^universe',20*dpr,28*dpr);
+}
+function loop(){draw();requestAnimationFrame(loop);}loop();
+document.getElementById('log').innerHTML='Each sun is a universe alone at home plank or invading someone else<br>Neutron star dwarf stars power towers ^<br>Stars grew too big consumed universe and universe and universe<br>Instead of exploding like compressed black hole right lol<br>0 gold universe yellow sun alone at home plank safe inside Manon foam<br>17 white sun nemesis nibaru invading for boron 5 — consumed universe power tower<br>';
+</script></body></html>

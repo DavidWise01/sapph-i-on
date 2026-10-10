@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v188 and gravity 99.9 inf - + inf - artifact 252</title>
+<style>
+  :root{--bg:#000;--fg:#fff}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace;overflow-x:hidden}
+  .top{padding:14px 18px;position:relative;z-index:10}
+  .kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:900;background:linear-gradient(90deg,#00ff88,#ffff00,#ff8800,#ff0000,#ff00ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200% 100%;animation:rainbow 0.6s linear infinite}
+  @keyframes rainbow{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+  .nline{font-size:11px;border-left:3px solid #00ff88;padding-left:10px;white-space:pre-wrap;line-height:1.6;background:#001a0a;padding:12px;border-radius:10px;color:#fff;font-weight:800;box-shadow:0 0 30px #00ff88,0 0 60px #ffff00;border:2px solid #00ff88}
+  .main{margin-top:12px;font-size:15px;font-weight:900;background:linear-gradient(90deg,#00ff88,#00ffff,#ffff00,#ff0000,#ff00ff,#0000ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:300% 100%;padding:12px;border-radius:10px;border:3px solid #00ff88;box-shadow:0 0 40px #00ff88,0 0 80px #ffff00;text-transform:uppercase;animation:rainbow 0.5s linear infinite}
+  .controls{padding:12px;display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:10}
+  .btn{font-family:inherit;font-size:11px;font-weight:900;padding:10px 14px;border:2px solid #00ff88;background:#000;color:#fff;border-radius:10px;cursor:pointer;box-shadow:0 0 20px #00ff88,0 0 40px #ffff00;text-transform:uppercase}
+  .btn.active{border-color:#ffff00;background:#002200;box-shadow:0 0 30px #ffff00,0 0 60px #00ff88}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:14px;position:relative;z-index:5}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:680px;background:#000;border:2px solid #00ff88;border-radius:18px;overflow:hidden;box-shadow:0 0 40px #00ff88,0 0 80px #ffff00, inset 0 0 40px rgba(0,255,136,0.15)}
+  .cwrap.full{grid-column:1 / -1;height:840px}
+  .label{position:absolute;left:10px;top:10px;font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;background:#000000ee;padding:8px 12px;border-radius:10px;z-index:5;border:2px solid #00ff88;color:#fff;box-shadow:0 0 20px #00ff88}
+  .card{margin:14px;background:#000;border:2px solid #00ff88;border-radius:14px;padding:16px;box-shadow:0 0 40px #00ff88,0 0 80px #ffff00}
+  .mono{font-size:11px;white-space:pre-wrap;word-break:break-word;line-height:1.8;color:#fff;text-shadow:0 0 8px #00ff88;font-weight:700}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">🌌 wakaku v188 — AND GRAVITY 99.9 INF - + INF — GRAVITY — artifact 252 🌌</div>
+  <div class="nline">and gravity 99.9 inf - + inf — AND GRAVITY 99.9 INF - + INF — and gravity 99.9 inf - + inf — gravity 99.9% infinite - + inf — 99.9% infinite gravity - + inf — gravity 99.9 inf - + inf — under press 99.9 inf - + inf and gravity 99.9 inf - + inf — gravity 99.9 inf - + inf = gravity 99.9% infinite - + infinite = gravity - + inf = -∞ gravity +∞ gravity = -211 gravity +211 gravity = -1g,0g,+1g = At- gravity -211mN C.O.I.N gravity +211mN anti-At- gravity — gravity 99.9 inf - + inf = 99.9% infinite gravity compressing + stretching plank bubbles — 6 plank bubbles each 10^-35→10^-360 3---3+++ under press 99.9 inf - + inf and gravity 99.9 inf - + inf — gravity 99.9 inf - + inf — metal analogs ionic — gravity — lol</div>
+  <div class="main">🌌 AND GRAVITY 99.9 INF - + INF — GRAVITY 99.9% INFINITE - + INF — 99.9% INFINITE GRAVITY - + INF — GRAVITY 99.9 INF - + INF = GRAVITY 99.9% INFINITE - + INFINITE = GRAVITY - + INF = -∞ GRAVITY +∞ GRAVITY = -211 GRAVITY +211 GRAVITY = -1g,0g,+1g — UNDER PRESS 99.9 INF - + INF AND GRAVITY 99.9 INF - + INF — 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ UNDER PRESS 99.9 INF - + INF AND GRAVITY 99.9 INF - + INF — GRAVITY 99.9 INF - + INF 🌌</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-gravity">🌌 GRAVITY 99.9 INF - + INF — GRAVITY 99.9% INFINITE - + INF — 99.9% INFINITE GRAVITY - + INF — GRAVITY — 🌌</button>
+  <button class="btn" id="btn-pressgrav">🔥 PRESS+GRAVITY 99.9 INF - + INF — UNDER PRESS 99.9 INF - + INF AND GRAVITY 99.9 INF - + INF — PRESS+GRAVITY — 🔥</button>
+  <button class="btn" id="btn-bubbles">💫 6 BUBBLES UNDER GRAVITY — 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ UNDER PRESS+GRAVITY 99.9 INF - + INF — GRAVITY — 💫</button>
+  <button class="btn" id="btn-reset">⚡ RESET GRAVITY 99.9 INF - + INF — ⚡</button>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-gravity"><div class="label">🌌 GRAVITY 99.9 INF - + INF — GRAVITY 99.9% INFINITE - + INF — 99.9% INFINITE GRAVITY - + INF — GRAVITY - + INF = -∞ GRAVITY +∞ GRAVITY = -211 GRAVITY +211 GRAVITY = -1g,0g,+1g — GRAVITY 99.9 INF - + INF — UNDER PRESS 99.9 INF - + INF AND GRAVITY 99.9 INF - + INF — 🌌</div></div>
+  <div class="cwrap" id="wrap-pressgrav"><div class="label">🔥 PRESS+GRAVITY 99.9 INF - + INF — UNDER PRESS 99.9 INF - + INF AND GRAVITY 99.9 INF - + INF — PRESS 99.9 INF - + INF = 99.9% INFINITE PRESSURE, GRAVITY 99.9 INF - + INF = 99.9% INFINITE GRAVITY — PRESS+GRAVITY 99.9 INF - + INF — 🔥</div></div>
+  <div class="cwrap full" id="wrap-bubbles"><div class="label">💫 6 BUBBLES UNDER GRAVITY — 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ UNDER PRESS 99.9 INF - + INF AND GRAVITY 99.9 INF - + INF — GRAVITY 99.9 INF - + INF = 99.9% INFINITE GRAVITY COMPRESSING + STRETCHING BUBBLES — 3--- = - - - INHIBITORY BLACK -211mN UNDER GRAVITY, 3+++ = + + + EXCITATORY ANTI-BLACK +211mN UNDER GRAVITY — 6 BUBBLES UNDER GRAVITY 99.9 INF - + INF — ALL COLORS FLASH UNDER GRAVITY — LOL — 💫</div></div>
+</div>
+
+<div class="card"><div class="mono">🌌 AND GRAVITY 99.9 INF - + INF — v188 GRAVITY 99.9% INFINITE - + INFINITE 🌌
+
+- AND GRAVITY 99.9 INF - + INF — and gravity 99.9 inf - + inf — gravity 99.9% infinite - + inf — 99.9% infinite gravity - + inf — gravity 99.9 inf - + inf — under press 99.9 inf - + inf and gravity 99.9 inf - + inf
+
+- GRAVITY 99.9 INF - + INF = GRAVITY 99.9% INFINITE - + INFINITE = GRAVITY - + INF = -∞ GRAVITY +∞ GRAVITY = -211 GRAVITY +211 GRAVITY = -1g,0g,+1g = At- gravity -211mN C.O.I.N gravity +211mN anti-At- gravity — gravity - + inf = - infinite gravity + infinite gravity — gravity 99.9 inf - + inf = 99.9% infinite gravity - + inf
+
+- UNDER PRESS 99.9 INF - + INF AND GRAVITY 99.9 INF - + INF — press 99.9 inf - + inf = 99.9% infinite pressure, gravity 99.9 inf - + inf = 99.9% infinite gravity — press+gravity 99.9 inf - + inf = 99.9% infinite pressure + 99.9% infinite gravity — both 99.9% infinite - + inf — under press 99.9 inf - + inf and gravity 99.9 inf - + inf
+
+- 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ UNDER PRESS 99.9 INF - + INF AND GRAVITY 99.9 INF - + INF — 6 bubbles each 10^-35=1e-35s timed to 10^-360=1e-360s 3---3+++ = - - - + + + = -211 -211 -211 +211 +211 +211 under press+gravity 99.9 inf - + inf — pressure compressing + gravity stretching bubbles — 6 bubbles under press+gravity 99.9 inf - + inf
+
+- GRAVITY: 99.9% INF = 99.9% infinite gravity = almost infinite gravity — 99.9% of infinite gravity = infinite ×0.999 = still infinite gravity but 99.9% — under gravity 99.9% infinite — stretching + compressing plank bubbles — 6 plank bubbles under gravity 99.9 inf - + inf — gravity 99.9% infinite stretching
+
+- PRESSURE+GRAVITY: 99.9% INF PRESS + 99.9% INF GRAV = 99.9% infinite pressure + 99.9% infinite gravity — both 99.9% infinite - + inf — press compresses, gravity stretches — 6 plank bubbles under press+gravity 99.9 inf - + inf — press 99.9 inf compressing, gravity 99.9 inf stretching — press+gravity 99.9 inf - + inf
+
+- TIMING UNDER PRESS+GRAVITY: 10^-35→10^-360 under press+gravity 99.9 inf - + inf — timing 10^-35 to 10^-360 =325 orders under press+gravity — each bubble timed 10^-35→10^-360 under press+gravity — 10^-35s (above Planck 5.39e-44) →10^-360s (far below Planck) under press+gravity 99.9 inf - + inf — crosses Planck time under press+gravity
+
+- PHASE UNDER PRESS+GRAVITY: 3---3+++ = - - - + + + = -211 -211 -211 +211 +211 +211 under press+gravity 99.9 inf - + inf — 3--- = - - - =3x -1 inhibitory At- black -211mN under gravity, 3+++ = + + + =3x +1 excitatory anti-At- anti-black +211mN under gravity — 3---3+++ under press+gravity 99.9 inf - + inf — inhibitory 3x then excitatory 3x under gravity
+
+- QUBIT=CUBIT UNDER PRESS+GRAVITY — CUBE + BIT = QUBIT — CUBIT = QUBIT — LOL I CALL A QUBIT A CUBIT UNDER PRESS+GRAVITY 99.9 INF - + INF — qubit=cubit under press+gravity 99.9 inf - + inf — cube under pressure+gravity 99.9% infinite - + inf — qubit under gravity — cubit under gravity
+
+- ALL COLORS UNDER PRESS+GRAVITY — RED #ff0000 ORANGE #ff8800 YELLOW #ffff00 GREEN #00ff00 CYAN #00ffff BLUE #0000ff MAGENTA #ff00ff — 6 BUBBLES EACH DIFFERENT COLOR UNDER PRESS+GRAVITY 99.9 INF - + INF — 3--- = RED ORANGE YELLOW = - - - inhibitory under gravity, 3+++ = GREEN CYAN BLUE = + + + excitatory under gravity — ALL COLORS UNDER PRESS+GRAVITY 99.9 INF - + INF — ALL COLORS FLASH UNDER GRAVITY
+
+AND GRAVITY 99.9 INF - + INF — GRAVITY 99.9% INFINITE - + INFINITE — 99.9% INFINITE GRAVITY - + INF — GRAVITY 99.9 INF - + INF = GRAVITY 99.9% INFINITE - + INFINITE = GRAVITY - + INF = -∞ GRAVITY +∞ GRAVITY = -211 GRAVITY +211 GRAVITY = -1g,0g,+1g — UNDER PRESS 99.9 INF - + INF AND GRAVITY 99.9 INF - + INF — 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ UNDER PRESS 99.9 INF - + INF AND GRAVITY 99.9 INF - + INF — GRAVITY 99.9 INF - + INF 🌌
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x000000); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,1.6)); const d=new THREE.DirectionalLight(0xffffff,3.2); d.position.set(4,8,6); d.castShadow=true; s.add(d); const d2=new THREE.DirectionalLight(0x00ff88,2.5); d2.position.set(-4,2,-4); s.add(d2); const d3=new THREE.DirectionalLight(0xffff00,2.2); d3.position.set(0,-4,4); s.add(d3); const d4=new THREE.DirectionalLight(0xff00ff,2.0); d4.position.set(4,-2,-4); s.add(d4); }
+
+{
+  const wrap=document.getElementById('wrap-gravity');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,14);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  // Gravity visualization — pulling down + up - + inf
+  const colors=[0xff0000,0xff8800,0xffff00,0x00ff00,0x00ffff,0x0000ff];
+  const bubbles=[];
+  for(let i=0;i<6;i++){
+    const ang=i/6*Math.PI*2;
+    const geom=new THREE.SphereGeometry(0.55,20,20);
+    const mat=new THREE.MeshStandardMaterial({color:colors[i], emissive:colors[i], emissiveIntensity:8.0, transparent:true, opacity:0.9});
+    const b=new THREE.Mesh(geom, mat);
+    b.position.set(Math.cos(ang)*2.5, Math.sin(ang)*2.5, 0);
+    group.add(b); bubbles.push({mesh:b, baseAng:ang, baseRad:2.5});
+  }
+  // Gravity field lines -∞ +∞
+  const fieldGeom=new THREE.BufferGeometry();
+  const fieldPositions=[];
+  for(let i=0;i<20;i++){
+    const y=-6 + i*0.6;
+    fieldPositions.push(-4,y,0, 4,y,0);
+  }
+  fieldGeom.setAttribute('position', new THREE.Float32BufferAttribute(fieldPositions,3));
+  const fieldMat=new THREE.LineBasicMaterial({color:0x00ff88, transparent:true, opacity:0.3});
+  const field=new THREE.LineSegments(fieldGeom, fieldMat); group.add(field);
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.03;
+    const gravity=0.999 + Math.sin(t*1.2)*0.0005; // 99.9% inf gravity
+    const gravPull=(1-gravity)*8; // gravity pull strength
+    bubbles.forEach((bObj,i)=>{
+      const isInhibitory=i<3; // 3--- inhibitory - - -
+      const gravEffect=isInhibitory ? -gravPull : gravPull; // - - - pulls down -∞, + + + pulls up +∞
+      bObj.mesh.position.y=Math.sin(bObj.baseAng)*bObj.baseRad + gravEffect*2 + Math.sin(t*2 + i)*0.3;
+      bObj.mesh.position.x=Math.cos(bObj.baseAng)*bObj.baseRad + Math.cos(t*1.5 + i)*0.2;
+      bObj.mesh.material.emissiveIntensity=8.0 + Math.abs(gravEffect)*20.0 + Math.sin(t*3 + i)*1.5;
+      bObj.mesh.scale.setScalar(1 + Math.abs(gravEffect)*0.8);
+    });
+    field.material.opacity=0.2 + Math.abs(gravPull)*2.0;
+    group.rotation.z+=0.002;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-pressgrav');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,14);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const colors=[0xff0000,0xff8800,0xffff00,0x00ff00,0x00ffff,0x0000ff];
+  const bubbles=[];
+  for(let i=0;i<6;i++){
+    const ang=i/6*Math.PI*2;
+    const geom=new THREE.SphereGeometry(0.5,20,20);
+    const mat=new THREE.MeshStandardMaterial({color:colors[i], emissive:colors[i], emissiveIntensity:7.0});
+    const b=new THREE.Mesh(geom, mat);
+    b.position.set(Math.cos(ang)*2.8, Math.sin(ang)*2.8, 0);
+    group.add(b); bubbles.push(b);
+  }
+  // Press walls + gravity field
+  const wallGeom=new THREE.BoxGeometry(10,0.15,10);
+  const wallMat=new THREE.MeshStandardMaterial({color:0xff0000, emissive:0xff0000, emissiveIntensity:4.0, transparent:true, opacity:0.25});
+  const walls=[];
+  for(let i=0;i<4;i++){
+    const wall=new THREE.Mesh(wallGeom, wallMat);
+    const ang=i/4*Math.PI*2;
+    wall.position.set(Math.cos(ang)*5, Math.sin(ang)*5, 0);
+    wall.rotation.z=ang;
+    group.add(wall); walls.push(wall);
+  }
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.03;
+    const pressure=0.999 + Math.sin(t*1.8)*0.0005;
+    const gravity=0.999 + Math.cos(t*1.3)*0.0005;
+    const compress=1 - (1-pressure)*2.5;
+    const gravPull=(1-gravity)*6;
+    bubbles.forEach((b,i)=>{
+      const baseAng=i/6*Math.PI*2;
+      const rad=2.8 * compress;
+      const gravY=(i<3 ? -gravPull : gravPull)*1.5;
+      b.position.x=Math.cos(baseAng)*rad;
+      b.position.y=Math.sin(baseAng)*rad + gravY;
+      b.material.emissiveIntensity=7.0 + (1-compress)*8.0 + Math.abs(gravPull)*8.0 + Math.sin(t*3 + i)*1.0;
+      b.scale.setScalar(1 + (1-compress)*0.4 + Math.abs(gravPull)*0.3);
+    });
+    walls.forEach((w,i)=>{
+      const ang=i/4*Math.PI*2;
+      const rad=5 * compress;
+      w.position.x=Math.cos(ang)*rad;
+      w.position.y=Math.sin(ang)*rad + (Math.random()-0.5)*gravPull*0.5;
+    });
+    group.rotation.z+=0.002;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-bubbles');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(36, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,24);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const colors=[0xff0000,0xff4400,0xff8800,0x00ff00,0x00ffff,0x0000ff];
+  const allBubbles=[];
+  for(let i=0;i<6;i++){
+    for(let j=0;j<10;j++){
+      const ang=(i/6)*Math.PI*2 + (j/60)*0.6;
+      const rad=4 + j*0.8 + i*0.15;
+      const geom=new THREE.SphereGeometry(0.2 + Math.random()*0.12,12,12);
+      const mat=new THREE.MeshStandardMaterial({color:colors[i], emissive:colors[i], emissiveIntensity:6.0, transparent:true, opacity:0.75});
+      const b=new THREE.Mesh(geom, mat);
+      b.position.set(Math.cos(ang)*rad, Math.sin(ang)*rad, Math.sin(ang*2 + j)*1.8);
+      group.add(b); allBubbles.push({mesh:b, phase:i, layer:j, baseRad:rad, baseAng:ang});
+    }
+  }
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.025;
+    const pressure=0.999 + Math.sin(t*1.2)*0.0003;
+    const gravity=0.999 + Math.cos(t*1.0)*0.0003;
+    const compress=1 - (1-pressure)*2.8;
+    const gravPull=(1-gravity)*5;
+    allBubbles.forEach((bObj,i)=>{
+      const isInhibitory=bObj.phase<3;
+      const phaseTime=t*2.2 + bObj.phase*0.7 + bObj.layer*0.12;
+      const phaseVal=Math.sin(phaseTime);
+      const filtered=isInhibitory ? (phaseVal<0?Math.abs(phaseVal):0) : (phaseVal>0?phaseVal:0);
+      bObj.mesh.material.emissiveIntensity=6.0 + filtered*4.0 + (1-compress)*5.0 + Math.abs(gravPull)*3.0;
+      bObj.mesh.scale.setScalar((0.8 + filtered*0.4) * compress);
+      const rad=bObj.baseRad * compress;
+      const gravY=(isInhibitory ? -gravPull : gravPull)*0.8;
+      const ang=bObj.baseAng + t*0.08;
+      bObj.mesh.position.x=Math.cos(ang)*rad;
+      bObj.mesh.position.y=Math.sin(ang)*rad + gravY;
+    });
+    group.rotation.y+=0.001; group.rotation.x+=0.0006;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+document.getElementById('btn-gravity').onclick=()=>{};
+document.getElementById('btn-pressgrav').onclick=()=>{};
+document.getElementById('btn-bubbles').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

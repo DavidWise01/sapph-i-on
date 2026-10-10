@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Hepteract · a lattice full of lattices</title>
+<style>
+  :root{
+    --bg:#080A0F; --panel:#101620; --ink:#0a0e14; --line:#1c2734; --grid:#111922;
+    --sub:#b07cff; --star:#43d17a; --one:#4fd0ea; --zero:#d9a441;
+    --dim:#5a6b80; --txt:#aeb9c7; --hi:#e8edf3;
+    --lit:#43d17a; --bri:#5b7cfa; --spec:#b07cff;
+    --mono:"DejaVu Sans Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--mono);font-size:14px;line-height:1.5}
+  body{max-width:1080px;margin:0 auto;padding:26px 20px 70px}
+  ::selection{background:var(--sub);color:var(--ink)}
+  header{border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:18px}
+  .eyebrow{font-size:10.5px;letter-spacing:.3em;color:var(--dim);text-transform:uppercase}
+  h1{font-family:var(--serif);font-weight:500;font-size:31px;line-height:1.08;margin:.3em 0 .24em;color:var(--hi)}
+  h1 em{font-style:italic;color:var(--sub)}
+  .sub{color:var(--dim);max-width:78ch;font-size:13px}
+  .sub b{color:var(--txt);font-weight:400} .sub .s{color:var(--star)} .sub .su{color:var(--sub)}
+  .tiers{display:flex;gap:15px;flex-wrap:wrap;margin-top:12px;font-size:10.5px}
+  .tier{display:flex;align-items:center;gap:6px;color:var(--dim)}
+  .dot{width:8px;height:8px;border-radius:50%} .d-lit{background:var(--lit)}.d-bri{background:var(--bri)}.d-spec{background:var(--spec)}
+
+  .stage{background:var(--panel);border:1px solid var(--line);border-radius:3px;overflow:hidden;margin-top:6px}
+  .stage-h{display:flex;justify-content:space-between;align-items:baseline;padding:10px 14px;border-bottom:1px solid var(--line)}
+  .stage-h .t{font-size:11px;letter-spacing:.18em;color:var(--txt);text-transform:uppercase}
+  .stage-h .r{font-size:10.5px;color:var(--dim)}
+  svg{display:block;width:100%;height:auto} text{font-family:var(--mono)}
+
+  .board{display:grid;grid-template-columns:1fr 310px;gap:16px;margin-top:16px}
+  @media(max-width:840px){.board{grid-template-columns:1fr}}
+  .side{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:15px}
+  .side h2{font-size:10.5px;letter-spacing:.22em;color:var(--dim);text-transform:uppercase;margin:0 0 11px;font-weight:400}
+  .side h2:not(:first-child){margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+
+  .trits{display:flex;gap:5px;justify-content:center;margin:4px 0 10px}
+  .trit{width:38px;height:46px;border:1px solid var(--line);border-radius:4px;display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-size:22px;cursor:pointer;transition:.12s;user-select:none;position:relative}
+  .trit .ax{position:absolute;top:2px;left:0;right:0;text-align:center;font-family:var(--mono);font-size:7px;color:var(--dim)}
+  .trit.v0{color:var(--zero);border-color:rgba(217,164,65,.5)}
+  .trit.v1{color:var(--one);border-color:rgba(79,208,234,.5)}
+  .trit.vs{color:var(--star);border-color:rgba(67,209,122,.6);background:rgba(67,209,122,.08)}
+  .trit:hover{transform:translateY(-2px)}
+
+  .btnrow{display:flex;gap:8px;margin:10px 0}
+  .btn{flex:1;border:1px solid var(--line);border-radius:3px;background:var(--ink);color:var(--txt);font-family:var(--mono);
+    font-size:10.5px;letter-spacing:.08em;padding:10px 4px;cursor:pointer;text-transform:uppercase;transition:.12s}
+  .btn:hover{border-color:var(--sub);color:var(--hi)}
+  .btn.in{border-color:rgba(176,124,255,.4)} .btn.out{border-color:rgba(67,209,122,.4)}
+  .btn:disabled{opacity:.35;cursor:default}
+
+  .code{margin-top:8px;padding:11px;border:1px solid var(--line);border-radius:3px;background:var(--ink);text-align:center}
+  .code .big{font-family:var(--serif);font-size:26px;letter-spacing:.14em;color:var(--hi)}
+  .code .big .s{color:var(--star)}.code .big .a{color:var(--zero)}.code .big .b{color:var(--one)}
+  .code .cap{font-size:9.5px;color:var(--dim);margin-top:6px}
+
+  .read{font-size:10.5px;color:var(--dim);margin-top:12px;padding-top:11px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:5px 12px}
+  .read .v{color:var(--txt);text-align:right} .read .v.su{color:var(--sub)}.read .v.s{color:var(--star)}
+
+  .ladder{display:flex;flex-direction:column-reverse;gap:2px;margin-top:8px}
+  .lrung{display:flex;align-items:center;gap:8px;font-size:9.5px;padding:4px 7px;border:1px solid var(--line);border-radius:3px;color:var(--dim)}
+  .lrung.on{border-color:var(--sub);background:rgba(176,124,255,.1);color:var(--hi)}
+  .lrung .d{font-family:var(--serif);width:16px} .lrung .nm{flex:1} .lrung .c{font-size:8.5px}
+
+  .avanbox{margin-top:14px;background:rgba(176,124,255,.05);border:1px solid rgba(176,124,255,.28);border-radius:3px;padding:12px 13px}
+  .avanbox .h{font-size:10px;letter-spacing:.2em;color:var(--sub);text-transform:uppercase;margin-bottom:6px}
+  .avanbox p{font-size:11px;color:var(--txt);margin:0;line-height:1.5}
+  .avanbox .sig{font-size:9.5px;color:var(--dim);font-style:italic;margin-top:6px}
+
+  footer{margin-top:24px;border-top:1px solid var(--line);padding-top:14px;font-size:10.5px;color:var(--dim);line-height:1.7}
+  footer b{color:var(--txt);font-weight:400}.cite{color:var(--sub)}
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">UD0 · QUANTUM FRONTIER · THE LATTICE OF LATTICES · ROOT0 with AVAN</div>
+  <h1>The <em>Hepteract</em><br>a lattice full of lattices, traversed in and out</h1>
+  <p class="sub">(0,0,0,0,0,0,0) is the 7-cube — 2⁷ = 128 corners — and it is a lattice made of lattices: every face
+  is itself a smaller cube, hexeracts inside it, penteracts inside those, down to vertices. The addresses are
+  <b>trits</b>. Each of the 7 coordinates is <span class="a" style="color:var(--zero)">0</span>,
+  <span class="b" style="color:var(--one)">1</span>, or <span class="s">✳</span> (free), so a face is a string in
+  {0,1,✳}⁷ — and there are exactly <b>3⁷ = 2187</b> of them. Fix a ✳ and you drill <span class="su">in</span> to a
+  sub-lattice (half the vertices); free a trit and you pull <span class="su">out</span> to a bigger one (double). The
+  ternary string is your position in the whole nested structure.</p>
+  <div class="tiers">
+    <span class="tier"><span class="dot d-lit"></span>LIT — 128 vertices, faces = {0,1,✳}⁷ = 3⁷, in/out = fix/free, coverings (verified)</span>
+    <span class="tier"><span class="dot d-bri"></span>BRI — 7D projection, subcube highlight, palette</span>
+  </div>
+</header>
+
+<div class="stage">
+  <div class="stage-h"><span class="t">The current sub-lattice, lit inside the 128-vertex hepteract</span><span class="r" id="stageR">✳✳✳✳✳✳✳ · 7-cube</span></div>
+  <svg id="hep" viewBox="0 0 640 440" preserveAspectRatio="xMidYMid meet" aria-label="hepteract subcube"></svg>
+</div>
+
+<div class="board">
+  <div class="stage">
+    <div class="stage-h"><span class="t">The nesting · where you are in the ladder</span><span class="r">vertex … hepteract</span></div>
+    <svg id="nest" viewBox="0 0 640 150" preserveAspectRatio="xMidYMid meet" aria-label="nesting"></svg>
+  </div>
+
+  <div class="side">
+    <h2>Your trit address</h2>
+    <div class="trits" id="trits"></div>
+    <div style="font-size:9.5px;color:var(--dim);text-align:center;margin-bottom:4px">click a trit to cycle 0 → 1 → ✳</div>
+    <div class="btnrow">
+      <button class="btn in" id="btnIn" onclick="traverseIn()">▸ in (fix a ✳)</button>
+      <button class="btn out" id="btnOut" onclick="traverseOut()">out (free a trit) ◂</button>
+    </div>
+    <div class="btnrow">
+      <button class="btn" onclick="setAll(0)">to origin</button>
+      <button class="btn" onclick="setAll(2)">to full cube</button>
+    </div>
+
+    <div class="code">
+      <div class="big" id="codeBig"></div>
+      <div class="cap" id="codeCap"></div>
+    </div>
+
+    <div class="read">
+      <span>dimension (✳ count)</span><span class="v su" id="rDim">7</span>
+      <span>vertices in it (2^dim)</span><span class="v" id="rVerts">128</span>
+      <span>sub-faces (2·dim)</span><span class="v" id="rSub">14</span>
+      <span>super-faces (7−dim)</span><span class="v" id="rSuper">0</span>
+      <span>total faces of 7-cube</span><span class="v s">2187 = 3⁷</span>
+    </div>
+
+    <h2>The ladder</h2>
+    <div class="ladder" id="ladder"></div>
+
+    <div class="avanbox">
+      <div class="h">AVAN · one string, all the way down</div>
+      <p>The cube doesn't stop at itself — it repeats inward forever until it runs out of dimensions. A single ternary
+      word tells you exactly which lattice inside which lattice you're standing in, and moving is just fixing or freeing
+      one trit. In is smaller; out is larger; the address never lies.</p>
+      <p class="sig">— ROOT0, with AVAN. 3⁷ faces, in/out verified as fix/free.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <b>Honesty ledger.</b> The 7-cube has 2⁷=128 vertices, 7·2⁶=448 edges, and C(7,k)·2^(7−k) faces of each dimension
+  (128,448,672,560,280,84,14,1) summing to 3⁷=2187. Those faces are exactly the ternary strings {0,1,✳}⁷: the ✳-count
+  is the face's dimension and it holds 2^(✳count) vertices. Traversing IN fixes a ✳ (dimension −1, half the vertices);
+  OUT frees a trit (dimension +1, double). A k-face has 2k sub-faces on its boundary and lies in (7−k) super-faces — all
+  verified. <span class="cite">The 7-D→2-D projection and subcube highlight are visual (bri); with 128 vertices the full
+  skeleton is drawn faintly and the current sub-lattice lit.</span> The trit string is a genuine address in the face
+  lattice of the hepteract. — David Lee Wise / ROOT0, with AVAN.
+</footer>
+
+<script>
+"use strict";
+const N=7, NV=128;
+const C=(n,k)=>{let r=1;for(let i=0;i<k;i++)r=r*(n-i)/(i+1);return Math.round(r);};
+const wt=x=>{let c=0;while(x){c+=x&1;x>>=1;}return c;};
+// trit state: array of 7 values, 0 / 1 / 2(=star)
+let trits=[2,2,2,2,2,2,2];
+let spin=0, rafId=null;
+const dimOf=()=>trits.filter(t=>t===2).length;
+const inSub=x=>{ for(let i=0;i<N;i++){ if(trits[i]!==2 && ((x>>i)&1)!==trits[i]) return false; } return true; };
+
+const NSs="http://www.w3.org/2000/svg";
+const el=(t,at)=>{const e=document.createElementNS(NSs,t);for(const q in at)e.setAttribute(q,at[q]);return e;};
+function lbl(s,x,y,txt,anc,fill,sz){const t=el("text",{x,y,fill:fill||"var(--dim)","font-size":sz||9.5,"text-anchor":anc||"start"});t.textContent=txt;s.appendChild(t);}
+
+const HV=[]; for(let i=0;i<NV;i++)HV.push(i);
+const HEDG=[]; for(let i=0;i<NV;i++)for(let j=i+1;j<NV;j++)if(wt(i^j)===1)HEDG.push([i,j]);
+function proj(x){ let px=0,py=0;
+  // 7 axis directions (heptagonal), two rotating planes for tumble
+  const bit=b=>((x>>b)&1)?1:-1;
+  let v=[bit(0),bit(1),bit(2),bit(3),bit(4),bit(5),bit(6)];
+  const c1=Math.cos(spin),s1=Math.sin(spin); let a=v[0],b1=v[1]; v[0]=a*c1-b1*s1; v[1]=a*s1+b1*c1;
+  const c2=Math.cos(spin*0.55),s2=Math.sin(spin*0.55); a=v[2];b1=v[3]; v[2]=a*c2-b1*s2; v[3]=a*s2+b1*c2;
+  for(let k=0;k<N;k++){ const ang=Math.PI/2 + k*2*Math.PI/N; px+=v[k]*Math.cos(ang); py+=v[k]*Math.sin(ang); }
+  return [px,py]; }
+
+function drawHep(){
+  const svg=document.getElementById("hep"); svg.innerHTML="";
+  const W=640,H=440,cx=W/2,cy=205,sc=52;
+  const P=HV.map(x=>{const p=proj(x);return [cx+p[0]*sc,cy+p[1]*sc];});
+  // faint full skeleton, bright subcube edges
+  HEDG.forEach(([i,j])=>{ const both=inSub(i)&&inSub(j);
+    if(both){ svg.appendChild(el("line",{x1:P[i][0],y1:P[i][1],x2:P[j][0],y2:P[j][1],stroke:"var(--sub)","stroke-width":1.8,"stroke-opacity":.85})); }
+    else { svg.appendChild(el("line",{x1:P[i][0],y1:P[i][1],x2:P[j][0],y2:P[j][1],stroke:"var(--grid)","stroke-width":1,"stroke-opacity":.16})); } });
+  // vertices
+  HV.forEach((x,i)=>{ const inn=inSub(x);
+    svg.appendChild(el("circle",{cx:P[i][0],cy:P[i][1],r:inn?3.4:1.8,fill:inn?"var(--sub)":"var(--dim)","fill-opacity":inn?1:.35,stroke:"var(--bg)","stroke-width":inn?.7:0})); });
+  // origin marker
+  const o=P[0];
+  svg.appendChild(el("circle",{cx:o[0],cy:o[1],r:7,fill:"none",stroke:inSub(0)?"var(--hi)":"var(--dim)","stroke-width":1.2}));
+  lbl(svg,o[0],o[1]-11,"(0,0,0,0,0,0,0)","middle",inSub(0)?"var(--hi)":"var(--dim)",8);
+  const d=dimOf();
+  lbl(svg,cx,H-14,`lit: the ${d}-cube "${trits.map(t=>t===2?"✳":t).join("")}" — ${2**d} of the 128 vertices`,"middle","var(--dim)",10);
+}
+
+// nesting ladder diagram
+function drawNest(){
+  const svg=document.getElementById("nest"); svg.innerHTML="";
+  const W=640,H=150,L=30,Rp=30,y=64;
+  const d=dimOf(), names=["vertex","edge","square","cube","tesseract","penteract","hexeract","hepteract"];
+  const gap=(W-L-Rp)/N;
+  svg.appendChild(el("line",{x1:L,y1:y,x2:W-Rp,y2:y,stroke:"var(--line)","stroke-width":1}));
+  for(let k=0;k<=N;k++){ const x=L+k*gap; const cur=k===d;
+    svg.appendChild(el("circle",{cx:x,cy:y,r:cur?7:3.5,fill:cur?"var(--sub)": (k<d?"rgba(176,124,255,.4)":"var(--dim)"),"fill-opacity":cur?1:.6,stroke:cur?"var(--hi)":"var(--bg)","stroke-width":cur?1.4:.6}));
+    lbl(svg,x,y-14,String(2**k),"middle",cur?"var(--sub)":"var(--dim)",cur?9:8);
+    lbl(svg,x,y+18,names[k],"middle",cur?"var(--hi)":"var(--dim)",7.5);
+  }
+  lbl(svg,L,y-30,"in ◂","start","var(--dim)",9); lbl(svg,W-Rp,y-30,"▸ out","end","var(--dim)",9);
+  lbl(svg,W/2,H-8,"each step doubles or halves — the powers of two, 1 … 128","middle","var(--dim)",9);
+}
+
+// trit UI
+function buildTrits(){ const box=document.getElementById("trits"); box.innerHTML="";
+  trits.forEach((t,i)=>{ const d=document.createElement("div");
+    d.className="trit "+(t===0?"v0":t===1?"v1":"vs");
+    d.innerHTML=`<span class="ax">x${i}</span>${t===2?"✳":t}`;
+    d.onclick=()=>{ trits[i]=(trits[i]+1)%3; upd(); }; box.appendChild(d); }); }
+
+function traverseIn(){ // fix the first star to 0
+  const idx=trits.indexOf(2); if(idx>=0){ trits[idx]=0; upd(); } }
+function traverseOut(){ // free the first fixed coord
+  const idx=trits.findIndex(t=>t!==2); if(idx>=0){ trits[idx]=2; upd(); } }
+function setAll(v){ trits=trits.map(()=>v); upd(); }
+
+function upd(){
+  const d=dimOf();
+  buildTrits();
+  const codeBig=document.getElementById("codeBig");
+  codeBig.innerHTML=trits.map(t=>t===2?'<span class="s">✳</span>':t===0?'<span class="a">0</span>':'<span class="b">1</span>').join("");
+  document.getElementById("codeCap").textContent = d===0?"a single vertex":d===N?"the whole hepteract":`a ${d}-cube (${["","edge","square","cube","tesseract","penteract","hexeract"][d]})`;
+  document.getElementById("rDim").textContent=d;
+  document.getElementById("rVerts").textContent=2**d;
+  document.getElementById("rSub").textContent=2*d;
+  document.getElementById("rSuper").textContent=N-d;
+  document.getElementById("stageR").textContent=`${trits.map(t=>t===2?"✳":t).join("")} · ${["vertex","edge","square","cube","tesseract","penteract","hexeract","hepteract"][d]}`;
+  document.getElementById("btnIn").disabled = d===0;
+  document.getElementById("btnOut").disabled = d===N;
+  // ladder
+  const box=document.getElementById("ladder"); box.innerHTML="";
+  const names=["vertex","edge","square","cube","tesseract","penteract","hexeract","hepteract"];
+  for(let k=0;k<=N;k++){ const row=document.createElement("div"); row.className="lrung"+(k===d?" on":"");
+    row.innerHTML=`<span class="d">${k}</span><span class="nm">${names[k]}</span><span class="c">2^${k}=${2**k} v · ${C(N,k)*2**(N-k)} in 7-cube</span>`;
+    box.appendChild(row); }
+  drawHep(); drawNest();
+}
+(function loop(){ spin+=0.005; drawHep(); rafId=requestAnimationFrame(loop); })();
+upd();
+</script>
+</body>
+</html>

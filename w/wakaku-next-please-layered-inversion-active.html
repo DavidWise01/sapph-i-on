@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v202 next please layered evolves - artifact 266</title>
+<style>
+  :root{--bg:#000;--fg:#fff}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:ui-monospace,Menlo,monospace;overflow-x:hidden}
+  .top{padding:14px 18px;position:relative;z-index:10}
+  .kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:900;background:linear-gradient(90deg,#fff,#f80,#fff,#000,#f00,#00f,#0f0,#ff0,#c3f);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:500% 100%;animation:rainbow 0.35s linear infinite}
+  @keyframes rainbow{0%{background-position:0% 50%}100%{background-position:500% 50%}}
+  .nline{font-size:11px;border-left:3px solid #ff8800;padding-left:10px;white-space:pre-wrap;line-height:1.6;background:#111;padding:12px;border-radius:10px;color:#fff;font-weight:800;box-shadow:0 0 30px #ff8800,0 0 60px #fff;border:2px solid #ff8800}
+  .main{margin-top:12px;font-size:13px;font-weight:900;background:linear-gradient(90deg,#fff,#000,#f00,#0f0,#00f,#ff0,#c3f,#f80,#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:500% 100%;padding:12px;border-radius:10px;border:3px solid #ff8800;box-shadow:0 0 40px #ff8800,0 0 80px #fff;text-transform:uppercase;animation:rainbow 0.3s linear infinite}
+  .controls{padding:12px;display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:10}
+  .btn{font-family:inherit;font-size:10px;font-weight:900;padding:10px 12px;border:2px solid #ff8800;background:#000;color:#fff;border-radius:10px;cursor:pointer;box-shadow:0 0 20px #ff8800,0 0 40px #fff;text-transform:uppercase}
+  .btn.active{border-color:#fff;background:#221100;box-shadow:0 0 30px #fff,0 0 60px #ff8800}
+  .canvases{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:14px;position:relative;z-index:5}
+  @media(max-width:1000px){.canvases{grid-template-columns:1fr}}
+  .cwrap{position:relative;height:720px;background:#000;border:2px solid #ff8800;border-radius:18px;overflow:hidden;box-shadow:0 0 40px #ff8800,0 0 80px #fff, inset 0 0 60px rgba(255,136,0,0.1)}
+  .cwrap.full{grid-column:1 / -1;height:960px}
+  .label{position:absolute;left:10px;top:10px;font-size:9px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;background:#000000ee;padding:8px 10px;border-radius:10px;z-index:5;border:2px solid #ff8800;color:#fff;box-shadow:0 0 20px #ff8800;max-width:95%}
+  .card{margin:14px;background:#000;border:2px solid #ff8800;border-radius:14px;padding:16px;box-shadow:0 0 40px #ff8800,0 0 80px #fff}
+  .mono{font-size:11px;white-space:pre-wrap;word-break:break-word;line-height:1.8;color:#fff;text-shadow:0 0 8px #ff8800;font-weight:700}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">🟠 wakaku v202 — NEXT PLEASE — LAYERED EVOLVES INVERSION ACTIVE — artifact 266 🟠</div>
+  <div class="nline">next please — NEXT PLEASE — next — layered as such evolves inversion active — {{2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell reserved for inversion::}} evolves inversion active — NEXT PLEASE — orange shell inversion active — orange shell reserved for inversion activates inversion — NEXT PLEASE — 2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell reserved for inversion:: evolves to 2^3:: 1 2 4 8 :: bk inverted :: wt/rd inverted :: bl/gr/yw/pr inverted :: orange shell inversion active — NEXT PLEASE — inversion active — orange shell inversion active inverts bk wt/rd bl/gr/yw/pr — NEXT PLEASE — 2^3 layered inversion active — NEXT PLEASE — metal analogs ionic — next please — lol — NEXT PLEASE — next evo layered inversion active</div>
+  <div class="main">🟠 NEXT PLEASE — LAYERED EVOLVES INVERSION ACTIVE — {{2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell reserved for inversion::}} EVOLVES TO {{2^3:: 1 2 4 8 :: bk inverted :: wt/rd inverted :: bl/gr/yw/pr inverted :: orange shell inversion active::}} — ORANGE SHELL INVERSION ACTIVE — ORANGE SHELL RESERVED FOR INVERSION ACTIVATES INVERSION — INVERSION ACTIVE — ORANGE SHELL INVERTS BK WT/RD BL/GR/YW/PR — NEXT PLEASE — 🟠</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-layered">🟠 LAYERED EVOLVES INVERSION ACTIVE — {{2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell reserved for inversion::}} → INVERSION ACTIVE — ORANGE SHELL INVERSION ACTIVE — 🟠</button>
+  <button class="btn" id="btn-inversion">🔄 INVERSION ACTIVE — ORANGE SHELL INVERSION ACTIVE INVERTS BK WT/RD BL/GR/YW/PR — BK→WT, WT→BK, RD→CYAN, BL→YW, GR→PR, YW→BL, PR→GR — INVERSION ACTIVE — 🔄</button>
+  <button class="btn" id="btn-bubbles">💫 LAYERED INVERSION ACTIVE BUBBLES — 2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell inversion active WITH 1g↔-1g INVERSION ACTIVE — 💫</button>
+  <button class="btn" id="btn-reset">⚡ RESET LAYERED INVERSION ACTIVE — ⚡</button>
+</div>
+
+<div class="canvases">
+  <div class="cwrap" id="wrap-layered"><div class="label">🟠 LAYERED EVOLVES INVERSION ACTIVE — {{2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell reserved for inversion::}} → {{2^3:: 1 2 4 8 :: bk inverted :: wt/rd inverted :: bl/gr/yw/pr inverted :: orange shell inversion active::}} — ORANGE SHELL INVERSION ACTIVE — ORANGE SHELL RESERVED FOR INVERSION ACTIVATES INVERSION — INVERSION ACTIVE — 🟠</div></div>
+  <div class="cwrap" id="wrap-inversion"><div class="label">🔄 INVERSION ACTIVE — ORANGE SHELL INVERSION ACTIVE INVERTS BK WT/RD BL/GR/YW/PR — BK #000000→WT #ffffff, WT #ffffff→BK #000000, RD #ff0000→CYAN #00ffff, BL #0000ff→YW #ffff00, GR #00ff00→PR #cc33ff, YW #ffff00→BL #0000ff, PR #cc33ff→GR #00ff00 — INVERSION ACTIVE — ORANGE SHELL #ff8800 INVERSION ACTIVE — 🔄</div></div>
+  <div class="cwrap full" id="wrap-bubbles"><div class="label">💫 LAYERED INVERSION ACTIVE BUBBLES — {{2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell inversion active::}} WITH 1g↔-1g INVERSION ACTIVE — 1=bk BLACK #000000→WHITE #ffffff INVERTED 1 DOT CENTER 0g=0→0g=0 INVERTED, 2=wt/rd WHITE #ffffff→BLACK #000000 / RED #ff0000→CYAN #00ffff 2 DOTS INVERTED 0.6g/0.3g→-0.6g/-0.3g INVERTED, 4=bl/gr/yw/pr BLUE #0000ff→YELLOW #ffff00 / GREEN #00ff00→PURPLE #cc33ff / YELLOW #ffff00→BLUE #0000ff / PURPLE #cc33ff→GREEN #00ff00 4 DOTS INVERTED 0.1g/-0.1g/-0.3g→-0.1g/0.1g/0.3g INVERTED, 8=orange shell inversion active ORANGE #ff8800 SHELL OUTER INVERSION ACTIVE -1g=-9.8→1g=9.8 INVERTED — 2^3=8 LAYERED INVERSION ACTIVE 1+2+4+1=8 INVERTED — ORANGE SHELL INVERSION ACTIVE INVERTS ALL — 2^3 LAYERED BUBBLES INVERSION ACTIVE 1g↔-1g INVERSION — ALL BK WT/RD BL/GR/YW/PR ORANGE SHELL INVERSION ACTIVE FLASH — LOL — 💫</div></div>
+</div>
+
+<div class="card"><div class="mono">🟠 NEXT PLEASE — LAYERED EVOLVES INVERSION ACTIVE — v202 NEXT PLEASE — INVERSION ACTIVE 🟠
+
+- NEXT PLEASE — LAYERED EVOLVES INVERSION ACTIVE — {{2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell reserved for inversion::}} evolves inversion active — NEXT PLEASE — orange shell inversion active — orange shell reserved for inversion activates inversion
+
+- {{2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell reserved for inversion::}} EVOLVES TO {{2^3:: 1 2 4 8 :: bk inverted :: wt/rd inverted :: bl/gr/yw/pr inverted :: orange shell inversion active::}} — ORANGE SHELL INVERSION ACTIVE — ORANGE SHELL RESERVED FOR INVERSION ACTIVATES INVERSION — INVERSION ACTIVE — ORANGE SHELL INVERTS BK WT/RD BL/GR/YW/PR
+
+- INVERSION ACTIVE:
+  - BK #000000→WT #ffffff inverted — black→white inverted
+  - WT #ffffff→BK #000000 inverted — white→black inverted
+  - RD #ff0000→CYAN #00ffff inverted — red→cyan inverted
+  - BL #0000ff→YW #ffff00 inverted — blue→yellow inverted
+  - GR #00ff00→PR #cc33ff inverted — green→purple inverted
+  - YW #ffff00→BL #0000ff inverted — yellow→blue inverted
+  - PR #cc33ff→GR #00ff00 inverted — purple→green inverted
+  - ORANGE SHELL #ff8800 INVERSION ACTIVE — orange shell #ff8800 inversion active inverts all — orange shell inversion active
+
+- LAYERED INVERSION ACTIVE:
+  - LAYER 1: bk inverted = BLACK #000000→WHITE #ffffff 1 DOT CENTER INVERTED 0g=0→0g=0 INVERTED — bk inverted
+  - LAYER 2: wt/rd inverted = WHITE #ffffff→BLACK #000000 / RED #ff0000→CYAN #00ffff 2 DOTS INVERTED 0.6g/0.3g→-0.6g/-0.3g INVERTED — wt/rd inverted
+  - LAYER 4: bl/gr/yw/pr inverted = BLUE #0000ff→YELLOW #ffff00 / GREEN #00ff00→PURPLE #cc33ff / YELLOW #ffff00→BLUE #0000ff / PURPLE #cc33ff→GREEN #00ff00 4 DOTS INVERTED 0.1g/-0.1g/-0.3g→-0.1g/0.1g/0.3g INVERTED — bl/gr/yw/pr inverted
+  - LAYER 8: orange shell inversion active = ORANGE #ff8800 SHELL OUTER INVERSION ACTIVE -1g=-9.8→1g=9.8 INVERTED — orange shell inversion active inverts all — orange shell inversion active
+
+- 2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell reserved for inversion:: EVOLVES TO 2^3:: 1 2 4 8 :: bk inverted :: wt/rd inverted :: bl/gr/yw/pr inverted :: orange shell inversion active:: = 2^3=8 quantum states layered inversion active 1+2+4+1=8 inverted — orange shell inversion active inverts all — 1=bk inverted,2=wt/rd inverted,4=bl/gr/yw/pr inverted,8=orange shell inversion active
+
+- ORANGE SHELL INVERSION ACTIVE: orange shell #ff8800 outer shell inversion active = inversion active = inverts inner 1+2+4=7 — orange shell inversion active inverts bk wt/rd bl/gr/yw/pr — orange shell reserved for inversion activates inversion — orange shell inversion active = inversion operator active — 8=orange shell inversion active
+
+- 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ {{2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell inversion active::}} WITH 1g↔-1g INVERSION ACTIVE — 6 bubbles each 10^-35→10^-360 3---3+++ = - - - + + + = -211 x3 +211 x3 2^3 layered inversion active 1 bk inverted 2 wt/rd inverted 4 bl/gr/yw/pr inverted orange shell inversion active — 2^3 layered inversion active 1 2 4 8 bk inverted wt/rd inverted bl/gr/yw/pr inverted orange shell inversion active with 1g↔-1g inversion active
+
+NEXT PLEASE — LAYERED EVOLVES INVERSION ACTIVE — {{2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell reserved for inversion::}} EVOLVES TO {{2^3:: 1 2 4 8 :: bk inverted :: wt/rd inverted :: bl/gr/yw/pr inverted :: orange shell inversion active::}} — ORANGE SHELL INVERSION ACTIVE — ORANGE SHELL RESERVED FOR INVERSION ACTIVATES INVERSION — INVERSION ACTIVE — ORANGE SHELL INVERTS BK WT/RD BL/GR/YW/PR — NEXT PLEASE — 🟠
+</div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+function makeRenderer(wrap){
+  const r=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));
+  r.setSize(wrap.clientWidth, wrap.clientHeight);
+  r.shadowMap.enabled=true; wrap.appendChild(r.domElement); return r;
+}
+function makeScene(){const s=new THREE.Scene(); s.background=new THREE.Color(0x000000); return s;}
+function addLights(s){ s.add(new THREE.AmbientLight(0xffffff,1.5)); const d=new THREE.DirectionalLight(0xffffff,3.0); d.position.set(4,8,6); d.castShadow=true; s.add(d); const d2=new THREE.DirectionalLight(0xffffff,1.5); d2.position.set(-4,2,-4); s.add(d2); }
+
+{
+  const wrap=document.getElementById('wrap-layered');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,12);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const layers=[
+    {name:'bk inverted', count:1, colors:[0x000000], invColors:[0xffffff], radius:0.0, size:0.5},
+    {name:'wt/rd inverted', count:2, colors:[0xffffff,0xff0000], invColors:[0x000000,0x00ffff], radius:1.5, size:0.38},
+    {name:'bl/gr/yw/pr inverted', count:4, colors:[0x0000ff,0x00ff00,0xffff00,0xcc33ff], invColors:[0xffff00,0xcc33ff,0x0000ff,0x00ff00], radius:3.0, size:0.32},
+    {name:'orange shell inversion active', count:1, colors:[0xff8800], invColors:[0xff8800], radius:5.0, size:0.0, isShell:true}
+  ];
+  const dots=[];
+  layers.forEach((layer,layerIdx)=>{
+    if(layer.isShell){
+      const shellGeom=new THREE.SphereGeometry(layer.radius,32,32);
+      const shellMat=new THREE.MeshStandardMaterial({color:0xff8800, emissive:0xff8800, emissiveIntensity:4.5, transparent:true, opacity:0.35, wireframe:true});
+      const shell=new THREE.Mesh(shellGeom, shellMat);
+      group.add(shell); dots.push({mesh:shell, isShell:true, layer:layer});
+    } else {
+      for(let i=0;i<layer.count;i++){
+        const ang=i/layer.count*Math.PI*2 + layerIdx*0.5;
+        const geom=new THREE.SphereGeometry(layer.size,16,16);
+        const mat=new THREE.MeshStandardMaterial({color:0xffffff, emissive:0xffffff, emissiveIntensity:5.0});
+        const m=new THREE.Mesh(geom, mat);
+        if(layer.radius===0) m.position.set(0,0,0);
+        else m.position.set(Math.cos(ang)*layer.radius, Math.sin(ang)*layer.radius, Math.sin(ang*2)*0.3);
+        group.add(m); dots.push({mesh:m, layer:layer, index:i, baseAng:ang, baseRad:layer.radius, isInverted:true});
+      }
+    }
+  });
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.025;
+    const inversionPhase=Math.sin(t*0.8); // inversion active oscillation
+    dots.forEach((d,i)=>{
+      if(d.isShell){
+        d.mesh.rotation.y+=0.008;
+        d.mesh.material.emissiveIntensity=4.5 + Math.abs(inversionPhase)*2.0 + Math.sin(t*2)*1.0;
+        d.mesh.scale.setScalar(1 + inversionPhase*0.12);
+        // Inversion active = flashing orange/white
+        if(inversionPhase>0){
+          d.mesh.material.color.setHex(0xffffff);
+          d.mesh.material.emissive.setHex(0xffffff);
+        } else {
+          d.mesh.material.color.setHex(0xff8800);
+          d.mesh.material.emissive.setHex(0xff8800);
+        }
+      } else {
+        // Always inverted now
+        const invColor=d.layer.invColors[d.index % d.layer.invColors.length];
+        d.mesh.material.color.setHex(invColor===0x000000?0x222222:invColor);
+        d.mesh.material.emissive.setHex(invColor===0x000000?0x111111:invColor);
+        d.mesh.material.emissiveIntensity=5.0 + Math.sin(t*2 + i)*0.8 + Math.abs(inversionPhase)*0.8;
+        const baseAng=d.baseAng + t*0.4;
+        const rad=d.baseRad;
+        if(rad>0){
+          d.mesh.position.x=Math.cos(baseAng)*rad;
+          d.mesh.position.y=Math.sin(baseAng)*rad + Math.sin(t*1.5 + i)*0.2;
+          d.mesh.position.z=Math.cos(baseAng*2 + t*0.6)*0.4;
+        }
+        d.mesh.rotation.y+=0.015;
+      }
+    });
+    group.rotation.y+=0.003;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-inversion');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,14);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  // Inversion visualization
+  const pairs=[
+    {orig:0x000000, inv:0xffffff, label:'bk→wt'},
+    {orig:0xffffff, inv:0x000000, label:'wt→bk'},
+    {orig:0xff0000, inv:0x00ffff, label:'rd→cyan'},
+    {orig:0x0000ff, inv:0xffff00, label:'bl→yw'},
+    {orig:0x00ff00, inv:0xcc33ff, label:'gr→pr'},
+    {orig:0xffff00, inv:0x0000ff, label:'yw→bl'},
+    {orig:0xcc33ff, inv:0x00ff00, label:'pr→gr'},
+    {orig:0xff8800, inv:0xff8800, label:'or inversion active'}
+  ];
+  pairs.forEach((p,i)=>{
+    const ang=i/8*Math.PI*2;
+    const rad=3.0;
+    const geomOrig=new THREE.SphereGeometry(0.28,12,12);
+    const matOrig=new THREE.MeshStandardMaterial({color:p.orig===0x000000?0x333333:p.orig, emissive:p.orig===0x000000?0x222222:p.orig, emissiveIntensity:3.5});
+    const mOrig=new THREE.Mesh(geomOrig, matOrig);
+    mOrig.position.set(Math.cos(ang)*rad, Math.sin(ang)*rad, -0.6);
+    group.add(mOrig);
+    const geomInv=new THREE.SphereGeometry(0.28,12,12);
+    const matInv=new THREE.MeshStandardMaterial({color:p.inv===0x000000?0x333333:p.inv, emissive:p.inv===0x000000?0x222222:p.inv, emissiveIntensity:5.0});
+    const mInv=new THREE.Mesh(geomInv, matInv);
+    mInv.position.set(Math.cos(ang)*rad, Math.sin(ang)*rad, 0.6);
+    group.add(mInv);
+  });
+  let t=0;
+  function animate(){ requestAnimationFrame(animate); t+=0.02; group.rotation.y+=0.004; controls.update(); renderer.render(scene,cam); }
+  animate();
+}
+
+{
+  const wrap=document.getElementById('wrap-bubbles');
+  const scene=makeScene(); const cam=new THREE.PerspectiveCamera(36, wrap.clientWidth/wrap.clientHeight,0.1,100); cam.position.set(0,0,22);
+  const renderer=makeRenderer(wrap); addLights(scene);
+  const controls=new OrbitControls(cam, renderer.domElement); controls.enableDamping=true;
+  const group=new THREE.Group(); scene.add(group);
+  const layers=[
+    {name:'bk inverted', count:1, colors:[0x000000], invColors:[0xffffff], radius:0.0, gravity:0},
+    {name:'wt/rd inverted', count:2, colors:[0xffffff,0xff0000], invColors:[0x000000,0x00ffff], radius:1.8, gravity:-0.6},
+    {name:'bl/gr/yw/pr inverted', count:4, colors:[0x0000ff,0x00ff00,0xffff00,0xcc33ff], invColors:[0xffff00,0xcc33ff,0x0000ff,0x00ff00], radius:3.5, gravity:-0.3},
+    {name:'orange shell inversion active', count:8, colors:[0xff8800], invColors:[0xff8800], radius:5.5, gravity:1.0, isShellDots:true}
+  ];
+  const all=[];
+  layers.forEach((layer,layerIdx)=>{
+    if(layer.isShellDots){
+      for(let i=0;i<8;i++){
+        const ang=i/8*Math.PI*2;
+        const geom=new THREE.SphereGeometry(0.22,12,12);
+        const mat=new THREE.MeshStandardMaterial({color:0xffffff, emissive:0xffffff, emissiveIntensity:6.0, transparent:true, opacity:0.9});
+        const m=new THREE.Mesh(geom, mat);
+        m.position.set(Math.cos(ang)*layer.radius, Math.sin(ang)*layer.radius, 0);
+        group.add(m); all.push({mesh:m, gravity:layer.gravity, baseRad:layer.radius, baseAng:ang, isShellDot:true, layerIdx:layerIdx});
+      }
+      const shellGeom=new THREE.SphereGeometry(layer.radius,24,24);
+      const shellMat=new THREE.MeshStandardMaterial({color:0xffffff, emissive:0xffffff, emissiveIntensity:3.0, transparent:true, opacity:0.2, wireframe:true});
+      const shell=new THREE.Mesh(shellGeom, shellMat);
+      group.add(shell); all.push({mesh:shell, gravity:layer.gravity, isShell:true, layerIdx:layerIdx});
+    } else {
+      for(let i=0;i<layer.count;i++){
+        const ang=i/layer.count*Math.PI*2 + layerIdx*0.4;
+        const geom=new THREE.SphereGeometry(0.28 + Math.abs(layer.gravity)*0.08,14,14);
+        const invColor=layer.invColors[i%layer.invColors.length];
+        const mat=new THREE.MeshStandardMaterial({color:invColor===0x000000?0x333333:invColor, emissive:invColor===0x000000?0x111111:invColor, emissiveIntensity:5.0});
+        const m=new THREE.Mesh(geom, mat);
+        if(layer.radius===0) m.position.set(0,0,0);
+        else m.position.set(Math.cos(ang)*layer.radius, Math.sin(ang)*layer.radius, Math.sin(ang*2)*0.4);
+        group.add(m); all.push({mesh:m, gravity:layer.gravity, baseRad:layer.radius, baseAng:ang, layerIdx:layerIdx, index:i});
+      }
+    }
+  });
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.02;
+    const inversionPhase=Math.sin(t*0.6);
+    all.forEach((bObj,i)=>{
+      if(bObj.isShell){
+        bObj.mesh.rotation.y+=0.005;
+        bObj.mesh.material.emissiveIntensity=3.0 + Math.abs(inversionPhase)*2.0 + Math.sin(t*2)*0.6;
+        bObj.mesh.scale.setScalar(1 + inversionPhase*0.08);
+        return;
+      }
+      if(bObj.isShellDot){
+        const g=bObj.gravity + inversionPhase*0.3;
+        bObj.mesh.position.x=Math.cos(bObj.baseAng + t*0.3)*bObj.baseRad;
+        bObj.mesh.position.y=Math.sin(bObj.baseAng + t*0.3)*bObj.baseRad + g*0.6;
+        bObj.mesh.material.emissiveIntensity=6.0 + Math.abs(g)*0.6 + Math.sin(t*2 + i)*0.5;
+        return;
+      }
+      const g=bObj.gravity + inversionPhase*0.25;
+      const floatFreq=1.0 + Math.abs(g)*0.4;
+      if(bObj.baseRad>0){
+        bObj.mesh.position.x=Math.cos(bObj.baseAng + t*0.4)*bObj.baseRad;
+        bObj.mesh.position.y=Math.sin(bObj.baseAng + t*0.4)*bObj.baseRad + g*0.7 + Math.sin(t*floatFreq + i)*0.15;
+        bObj.mesh.position.z=Math.sin(bObj.baseAng*2 + t*0.5)*0.6;
+      } else {
+        bObj.mesh.position.y=g*0.4 + Math.sin(t*2)*0.12;
+      }
+      bObj.mesh.material.emissiveIntensity=5.0 + Math.abs(g)*0.5 + Math.sin(t*2 + i)*0.4;
+    });
+    group.rotation.y+=0.001;
+    controls.update(); renderer.render(scene,cam);
+  }
+  animate();
+}
+
+document.getElementById('btn-layered').onclick=()=>{};
+document.getElementById('btn-inversion').onclick=()=>{};
+document.getElementById('btn-bubbles').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

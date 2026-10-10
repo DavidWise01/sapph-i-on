@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wakaku v205 rose window evolves fractal - artifact 269</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@900&family=EB+Garamond:ital,wght@0,400;1,400&display=swap');
+  :root{--bg:#040100;--fg:#f5e6c8}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:'EB Garamond',serif;overflow-x:hidden}
+  .top{padding:18px 22px;position:relative;z-index:10;background:linear-gradient(180deg,rgba(4,1,0,0.96),rgba(4,1,0,0.5))}
+  .kicker{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:900;color:#ffd700;text-shadow:0 0 20px #ff8800,0 0 40px #ffd700}
+  .nline{font-size:12px;border-left:4px solid #ffd700;padding-left:14px;white-space:pre-wrap;line-height:1.7;background:linear-gradient(90deg,rgba(255,215,0,0.09),rgba(255,136,0,0.06));padding:14px;border-radius:2px;color:#f5e6c8;font-style:italic;box-shadow:0 0 30px rgba(255,215,0,0.15);border:2px solid #ffd700}
+  .main{margin-top:14px;font-family:'Cinzel',serif;font-size:13px;font-weight:900;letter-spacing:.08em;line-height:1.6;color:#ffd700;text-shadow:0 0 20px #ff8800;background:linear-gradient(90deg,rgba(255,215,0,0.12),rgba(255,136,0,0.08));padding:14px;border-radius:2px;border:3px solid #ffd700;box-shadow:0 0 40px rgba(255,215,0,0.2)}
+  .controls{padding:14px;display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:10}
+  .btn{font-family:'Cinzel',serif;font-size:10px;font-weight:900;padding:10px 14px;border:2px solid #ffd700;background:#000;color:#ffd700;border-radius:2px;cursor:pointer;box-shadow:0 0 20px rgba(255,215,0,0.3);text-transform:uppercase;letter-spacing:.1em}
+  .btn.active{border-color:#ff8800;background:#1a0f00;color:#fff;box-shadow:0 0 30px #ff8800}
+  .cathedral{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:18px;position:relative;z-index:5}
+  @media(max-width:1000px){.cathedral{grid-template-columns:1fr}}
+  .panel{position:relative;height:760px;background:#000;border:3px solid #ffd700;border-radius:2px;overflow:hidden;box-shadow:0 0 50px rgba(255,215,0,0.25),0 0 100px rgba(255,136,0,0.15), inset 0 0 80px rgba(0,0,0,0.8)}
+  .panel.full{grid-column:1 / -1;height:1000px}
+  .label{position:absolute;left:12px;top:12px;font-family:'Cinzel',serif;font-size:8px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;background:rgba(0,0,0,0.88);padding:8px 10px;z-index:5;border:2px solid #ffd700;color:#ffd700;box-shadow:0 0 20px rgba(255,215,0,0.4);max-width:92%}
+  .card{margin:18px;background:linear-gradient(180deg,#040100,#1a0f00);border:3px solid #ffd700;border-radius:2px;padding:20px;box-shadow:0 0 50px rgba(255,215,0,0.2)}
+  .mono{font-family:'EB Garamond',serif;font-size:12px;white-space:pre-wrap;word-break:break-word;line-height:1.9;color:#f5e6c8;text-shadow:0 0 8px rgba(255,215,0,0.3);font-style:italic}
+  canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .grain{position:absolute;inset:0;pointer-events:none;opacity:0.06;background-image:url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZmlsdGVyIGlkPSJhIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc1IiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iLjA1Ii8+PC9zdmc+');mix-blend-mode:overlay}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="kicker">⛪ wakaku v205 — ROSE WINDOW EVOLVES FRACTAL ROSE + KINTSUGI FRACTAL VEINS INFINITE — artifact 269 ⛪</div>
+  <div class="nline">next please — NEXT PLEASE — next — rose window evolves fractal rose + kintsugi fractal veins infinite — ROSE WINDOW EVOLVES FRACTAL ROSE — fractal rose window — rose window fractal — kintsugi fractal veins infinite fractal branching — ROSE WINDOW EVOLVES FRACTAL — {{2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell reserved for inversion::}} rose window evolves fractal rose window — 1=bk black fractal rose center, 2=wt/rd white/red fractal inner petals, 4=bl/gr/yw/pr blue/green/yellow/purple fractal middle petals, 8=orange shell inversion gold leaf kintsugi fractal outer rose window infinite fractal — ROSE WINDOW EVOLVES FRACTAL — fractal rose window infinite — next please — rose window evolves fractal — metal analogs ionic — rose window fractal — lol</div>
+  <div class="main">⛪ ROSE WINDOW EVOLVES FRACTAL ROSE + KINTSUGI FRACTAL VEINS INFINITE — {{2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell reserved for inversion::}} ROSE WINDOW EVOLVES FRACTAL ROSE WINDOW INFINITE FRACTAL — 1=bk BLACK FRACTAL ROSE CENTER KINTSUGI FRACTAL VEINS INFINITE, 2=wt/rd WHITE/RED FRACTAL INNER PETALS, 4=bl/gr/yw/pr BLUE/GREEN/YELLOW/PURPLE FRACTAL MIDDLE PETALS, 8=ORANGE SHELL INVERSION GOLD LEAF KINTSUGI FRACTAL OUTER ROSE WINDOW INFINITE FRACTAL WITH CAUSTICS FRACTAL — ROSE WINDOW EVOLVES FRACTAL ROSE — FRACTAL ROSE WINDOW INFINITE — ⛪</div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-fractal">⛪ FRACTAL ROSE EVOLUTION — {{2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell inversion::}} FRACTAL ROSE WINDOW INFINITE FRACTAL — ROSE WINDOW EVOLVES FRACTAL ROSE — ⛪</button>
+  <button class="btn" id="btn-veins">✨ KINTSUGI FRACTAL VEINS INFINITE — KINTSUGI GOLD VEINS FRACTAL BRANCHING INFINITE FRACTAL — VEINS INFINITE — ✨</button>
+  <button class="btn" id="btn-bubbles">💫 FRACTAL ROSE BUBBLES — 2^3 LAYERED FRACTAL ROSE WINDOW WITH ORANGE SHELL INVERSION GOLD LEAF FRACTAL — 💫</button>
+  <button class="btn" id="btn-reset">⚡ RESET FRACTAL ROSE KINTSUGI — ⚡</button>
+</div>
+
+<div class="cathedral">
+  <div class="panel" id="wrap-fractal"><canvas id="c-fractal"></canvas><div class="grain"></div><div class="label">⛪ FRACTAL ROSE EVOLUTION — {{2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell inversion::}} FRACTAL ROSE WINDOW INFINITE FRACTAL — 1=bk BLACK FRACTAL ROSE CENTER, 2=wt/rd WHITE/RED FRACTAL INNER PETALS, 4=bl/gr/yw/pr BLUE/GREEN/YELLOW/PURPLE FRACTAL MIDDLE PETALS, 8=orange shell inversion GOLD LEAF KINTSUGI FRACTAL OUTER ROSE WINDOW INFINITE FRACTAL — FRACTAL ROSE WINDOW — ⛪</div></div>
+  <div class="panel" id="wrap-veins"><canvas id="c-veins"></canvas><div class="grain"></div><div class="label">✨ KINTSUGI FRACTAL VEINS INFINITE — KINTSUGI GOLD VEINS FRACTAL BRANCHING INFINITE FRACTAL — VEINS INFINITE FRACTAL BRANCHING — GOLD LEAF #ffd700 VEINS SPREADING FRACTAL INFINITE — VEINS FRACTAL INFINITE — ✨</div></div>
+  <div class="panel full" id="wrap-bubbles"><canvas id="c-bubbles"></canvas><div class="grain"></div><div class="label">💫 FRACTAL ROSE BUBBLES — {{2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell inversion::}} FRACTAL ROSE WINDOW WITH ORANGE SHELL INVERSION GOLD LEAF KINTSUGI FRACTAL — 1=bk BLACK #000000 FRACTAL ROSE CENTER 0g, 2=wt/rd WHITE #ffffff RED #ff0000 FRACTAL INNER PETALS 0.6g/0.3g, 4=bl/gr/yw/pr BLUE #0000ff GREEN #00ff00 YELLOW #ffff00 PURPLE #cc33ff FRACTAL MIDDLE PETALS 0.1g/-0.1g/-0.3g, 8=orange shell inversion GOLD LEAF KINTSUGI #ff8800 #ffd700 FRACTAL OUTER ROSE WINDOW INVERSION -1g ANTI-GRAVITY INVERSION FRACTAL CAUSTICS — FRACTAL ROSE BUBBLES INVERSION FRACTAL — ALL STAINED GLASS FRACTAL ROSE KINTSUGI GOLD VEINS FRACTAL FLASH — LOL — 💫</div></div>
+</div>
+
+<div class="card"><div class="mono">⛪ ROSE WINDOW EVOLVES FRACTAL ROSE + KINTSUGI FRACTAL VEINS INFINITE — v205 FRACTAL ROSE EVOLUTION — NEXT PLEASE ⛪
+
+- NEXT PLEASE — ROSE WINDOW EVOLVES FRACTAL ROSE + KINTSUGI FRACTAL VEINS INFINITE — ROSE WINDOW EVOLVES FRACTAL ROSE — fractal rose window — rose window fractal — kintsugi fractal veins infinite fractal branching — ROSE WINDOW EVOLVES FRACTAL
+
+- FRACTAL ROSE EVOLUTION: rose window fractal — fractal rose window infinite fractal — rose window evolves fractal rose — 1=bk black fractal rose center fractal branching, 2=wt/rd white/red fractal inner petals fractal, 4=bl/gr/yw/pr blue/green/yellow/purple fractal middle petals fractal, 8=orange shell inversion gold leaf kintsugi fractal outer rose window infinite fractal — fractal rose window infinite — rose window fractal
+
+- FRACTAL ROSE = SELF-SIMILAR ROSE WINDOW — rose window fractal self-similar — small rose windows inside larger rose window petals — fractal rose window — 1 rose center contains smaller rose windows, 2 inner petals each contain smaller rose windows, 4 middle petals each contain smaller rose windows, 8 outer petals each contain smaller rose windows infinite fractal — fractal rose self-similar — rose window fractal infinite
+
+- KINTSUGI FRACTAL VEINS INFINITE: kintsugi gold veins #ffd700 fractal branching infinite fractal — veins fractal infinite branching — gold leaf veins spreading fractal infinite — veins branching fractal depth 6 infinite — kintsugi fractal veins infinite — gold veins fractal infinite — veins fractal infinite
+
+- {{2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell reserved for inversion::}} FRACTAL ROSE WINDOW:
+  - LAYER 1: bk = BLACK #000000 FRACTAL ROSE CENTER KINTSUGI FRACTAL VEINS INFINITE — black fractal rose center with kintsugi fractal veins infinite — 0g center fractal
+  - LAYER 2: wt/rd = WHITE #ffffff RED #ff0000 FRACTAL INNER PETALS — white/red fractal inner petals fractal rose — 0.6g/0.3g fractal
+  - LAYER 4: bl/gr/yw/pr = BLUE #0000ff GREEN #00ff00 YELLOW #ffff00 PURPLE #cc33ff FRACTAL MIDDLE PETALS — blue/green/yellow/purple fractal middle petals fractal rose — 0.1g/-0.1g/-0.3g fractal
+  - LAYER 8: orange shell reserved for inversion = ORANGE #ff8800 GOLD LEAF #ffd700 KINTSUGI FRACTAL OUTER ROSE WINDOW INFINITE FRACTAL WITH CAUSTICS FRACTAL — orange shell inversion gold leaf kintsugi fractal outer rose window infinite fractal with caustics fractal — -1g anti-gravity inversion fractal outer rose
+
+- FRACTAL ROSE WINDOW LIGHT FRACTAL: rose window fractal circular radial symmetry fractal — Gothic cathedral rose window fractal — stained glass lead lines #1a1a1a black lead radial fractal, colored glass translucent fractal, light rays volumetric god rays through fractal rose window fractal, caustics projecting on floor fractal, kintsugi gold veins spreading fractal branching infinite fractal — stained glass fractal rose window evolution — art style evolves fractal
+
+- EVOLUTION FROM v204: v204 rose window + caustics + kintsugi veins evolves to v205 fractal rose + kintsugi fractal veins infinite fractal branching depth 6 infinite — art style evolution fractal — stained glass evolves fractal rose — more complex fractal rose window self-similar, caustics fractal, veins fractal infinite branching depth 6
+
+- 6 PLANK BUBBLES EACH 10^-35→10^-360 3---3+++ FRACTAL ROSE KINTSUGI WITH 1g↔-1g INVERSION FRACTAL — 6 bubbles each 10^-35→10^-360 3---3+++ = - - - + + + = -211 x3 +211 x3 fractal rose stained glass kintsugi fractal with 1g↔-1g inversion fractal — 2^3 layered fractal rose window bk wt/rd bl/gr/yw/pr orange shell inversion gold leaf kintsugi fractal caustics with 1g↔-1g inversion fractal
+
+ROSE WINDOW EVOLVES FRACTAL ROSE + KINTSUGI FRACTAL VEINS INFINITE — {{2^3:: 1 2 4 8 :: bk :: wt/rd :: bl/gr/yw/pr/ :: orange shell reserved for inversion::}} FRACTAL ROSE WINDOW INFINITE FRACTAL — ROSE WINDOW EVOLVES FRACTAL ROSE — FRACTAL ROSE WINDOW INFINITE — NEXT PLEASE — ⛪
+</div></div>
+
+<script>
+const fractalCanvas=document.getElementById('c-fractal');
+const veinsCanvas=document.getElementById('c-veins');
+const bubblesCanvas=document.getElementById('c-bubbles');
+
+function setupCanvas(canvas){
+  const dpr=Math.min(devicePixelRatio,2);
+  function resize(){
+    const rect=canvas.parentElement.getBoundingClientRect();
+    canvas.width=rect.width*dpr;
+    canvas.height=rect.height*dpr;
+    canvas.style.width=rect.width+'px';
+    canvas.style.height=rect.height+'px';
+  }
+  resize();
+  window.addEventListener('resize',resize);
+  return {dpr, ctx:canvas.getContext('2d')};
+}
+
+(function(){
+  const {dpr, ctx} = setupCanvas(fractalCanvas);
+  let t=0;
+  function drawRose(x,y,rOuter,rInner,colors,depth,t){
+    if(depth>2 || rOuter<8*dpr) return;
+    const count=colors.length;
+    for(let i=0;i<count;i++){
+      const ang=i/count*Math.PI*2 + depth*0.3 + t*0.1;
+      const rO=rOuter*(0.6+Math.sin(t+depth+i)*0.05);
+      const rI=rInner;
+      const color=colors[i%colors.length];
+      ctx.save();
+      ctx.fillStyle=color;
+      ctx.globalAlpha=0.75 - depth*0.15;
+      ctx.shadowColor=color;
+      ctx.shadowBlur=12*dpr - depth*2*dpr;
+      ctx.beginPath();
+      ctx.moveTo(x+Math.cos(ang)*rI, y+Math.sin(ang)*rI);
+      ctx.lineTo(x+Math.cos(ang+0.25)*rO, y+Math.sin(ang+0.25)*rO);
+      ctx.lineTo(x+Math.cos(ang+0.45)*rO, y+Math.sin(ang+0.45)*rO);
+      ctx.lineTo(x+Math.cos(ang+0.7)*rI, y+Math.sin(ang+0.7)*rI);
+      ctx.closePath();
+      ctx.fill();
+      ctx.strokeStyle='#1a1a1a';
+      ctx.lineWidth=(3-depth)*dpr;
+      ctx.globalAlpha=1;
+      ctx.stroke();
+      ctx.strokeStyle='#ffd700';
+      ctx.lineWidth=(1.5-depth*0.3)*dpr;
+      ctx.globalAlpha=0.7;
+      ctx.beginPath();
+      ctx.moveTo(x+Math.cos(ang+0.15)*rI, y+Math.sin(ang+0.15)*rI);
+      ctx.lineTo(x+Math.cos(ang+0.35)*rO*0.8, y+Math.sin(ang+0.35)*rO*0.8);
+      ctx.stroke();
+      ctx.restore();
+      // Recursive smaller rose inside petal
+      const nx=x+Math.cos(ang+0.35)*rO*0.55;
+      const ny=y+Math.sin(ang+0.35)*rO*0.55;
+      drawRose(nx,ny,rOuter*0.32,rInner*0.32,colors,depth+1,t+0.5);
+    }
+  }
+  function draw(){
+    requestAnimationFrame(draw);
+    t+=0.01;
+    const w=fractalCanvas.width, h=fractalCanvas.height;
+    const cx=w/2, cy=h/2;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#040100';
+    ctx.fillRect(0,0,w,h);
+    const inversion=Math.sin(t*0.4);
+    // Caustics bg
+    ctx.save();
+    ctx.globalAlpha=0.04 + Math.abs(inversion)*0.02;
+    for(let i=0;i<24;i++){
+      const ang=i/24*Math.PI*2 + t*0.04;
+      ctx.beginPath();
+      ctx.moveTo(cx,cy);
+      ctx.lineTo(cx+Math.cos(ang)*w, cy+Math.sin(ang)*h);
+      ctx.lineTo(cx+Math.cos(ang+0.03)*w, cy+Math.sin(ang+0.03)*h);
+      ctx.closePath();
+      ctx.fillStyle=i%2===0?'#ffd700':'#ff8800';
+      ctx.fill();
+    }
+    ctx.restore();
+    // Fractal rose layers
+    const layers=[
+      {colors:['#ff8800'], rOuter:340*dpr, rInner:250*dpr},
+      {colors:['#0000ff','#00ff00','#ffff00','#cc33ff'], rOuter:240*dpr, rInner:130*dpr},
+      {colors:['#ffffff','#ff0000'], rOuter:120*dpr, rInner:45*dpr},
+      {colors:['#000000'], rOuter:40*dpr, rInner:0, isCenter:true}
+    ];
+    layers.forEach(layer=>{
+      if(layer.isCenter){
+        ctx.save();
+        ctx.fillStyle=inversion>0.5?'#ffffff':'#0a0a0a';
+        ctx.globalAlpha=0.95;
+        ctx.shadowColor='#ffd700';
+        ctx.shadowBlur=20*dpr;
+        ctx.beginPath();
+        ctx.arc(cx,cy,32*dpr,0,Math.PI*2);
+        ctx.fill();
+        ctx.strokeStyle='#ffd700';
+        ctx.lineWidth=3*dpr;
+        ctx.stroke();
+        // Kintsugi veins from center fractal
+        ctx.strokeStyle='#ffd700';
+        ctx.lineWidth=1*dpr;
+        ctx.globalAlpha=0.6;
+        for(let i=0;i<16;i++){
+          const ang=i/16*Math.PI*2 + t*0.2;
+          ctx.beginPath();
+          ctx.moveTo(cx,cy);
+          ctx.lineTo(cx+Math.cos(ang)*50*dpr, cy+Math.sin(ang)*50*dpr);
+          ctx.stroke();
+        }
+        ctx.restore();
+        // Fractal rose inside center
+        drawRose(cx,cy,30*dpr,0,['#000000'],1,t);
+      } else {
+        drawRose(cx,cy,layer.rOuter,layer.rInner,layer.colors,0,t+layers.indexOf(layer)*0.3);
+      }
+    });
+  }
+  draw();
+})();
+
+(function(){
+  const {dpr, ctx} = setupCanvas(veinsCanvas);
+  let t=0;
+  function drawVein(x,y,ang,len,depth){
+    if(depth>6 || len<4*dpr) return;
+    const x2=x+Math.cos(ang)*len;
+    const y2=y+Math.sin(ang)*len;
+    ctx.save();
+    ctx.strokeStyle='#ffd700';
+    ctx.lineWidth=(6-depth)*0.9*dpr;
+    ctx.globalAlpha=0.65 - depth*0.06;
+    ctx.shadowColor='#ff8800';
+    ctx.shadowBlur=10*dpr - depth;
+    ctx.beginPath();
+    ctx.moveTo(x,y);
+    // Slight curve
+    ctx.quadraticCurveTo(x+Math.cos(ang+0.2)*len*0.5, y+Math.sin(ang+0.2)*len*0.5, x2,y2);
+    ctx.stroke();
+    ctx.restore();
+    drawVein(x2,y2,ang+0.45+Math.sin(t*0.8+depth)*0.25,len*0.68,depth+1);
+    drawVein(x2,y2,ang-0.45+Math.cos(t*0.8+depth)*0.25,len*0.68,depth+1);
+    if(depth>2 && Math.random()>0.6){
+      drawVein(x2,y2,ang+Math.PI/2+Math.sin(t+depth)*0.3,len*0.5,depth+1);
+    }
+  }
+  function draw(){
+    requestAnimationFrame(draw);
+    t+=0.012;
+    const w=veinsCanvas.width, h=veinsCanvas.height;
+    const cx=w/2, cy=h/2;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#050200';
+    ctx.fillRect(0,0,w,h);
+    // Caustics bg fractal
+    ctx.save();
+    ctx.globalAlpha=0.08;
+    for(let i=0;i<120;i++){
+      const ang=Math.random()*Math.PI*2;
+      const r=Math.random()*380*dpr;
+      const x=cx+Math.cos(ang)*r + Math.sin(t*1.1+i)*6*dpr;
+      const y=cy+Math.sin(ang)*r + Math.cos(t*0.9+i*0.6)*6*dpr;
+      const hue=(ang/Math.PI*2*360 + t*20)%360;
+      ctx.fillStyle=`hsl(${hue},100%,60%)`;
+      ctx.beginPath();
+      ctx.arc(x,y,1.5*dpr+Math.random()*2*dpr,0,Math.PI*2);
+      ctx.fill();
+    }
+    ctx.restore();
+    // Fractal veins from multiple seeds
+    for(let i=0;i<8;i++){
+      const ang=i/8*Math.PI*2 + t*0.08;
+      const r=20*dpr;
+      const sx=cx+Math.cos(ang)*r;
+      const sy=cy+Math.sin(ang)*r;
+      drawVein(sx,sy,ang,130*dpr,0);
+    }
+    // Central light
+    ctx.save();
+    ctx.fillStyle='#ffffff';
+    ctx.globalAlpha=0.9 + Math.sin(t*3)*0.1;
+    ctx.shadowColor='#ffd700';
+    ctx.shadowBlur=35*dpr;
+    ctx.beginPath();
+    ctx.arc(cx,cy,20*dpr,0,Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+    // Stained glass fragments along veins
+    const colors=['#ffffff','#ff0000','#0000ff','#00ff00','#ffff00','#cc33ff','#ff8800','#000000'];
+    for(let i=0;i<20;i++){
+      const ang=i/20*Math.PI*2 + t*0.12;
+      const r=(90 + i*14)*dpr;
+      const x=cx+Math.cos(ang)*r;
+      const y=cy+Math.sin(ang)*r;
+      const color=colors[i%colors.length];
+      ctx.save();
+      ctx.fillStyle=color==='#000000'?'#111111':color;
+      ctx.globalAlpha=0.65;
+      ctx.shadowColor=color;
+      ctx.shadowBlur=10*dpr;
+      ctx.beginPath();
+      ctx.moveTo(x-10*dpr,y-7*dpr);
+      ctx.lineTo(x+10*dpr,y-9*dpr);
+      ctx.lineTo(x+12*dpr,y+8*dpr);
+      ctx.lineTo(x-8*dpr,y+10*dpr);
+      ctx.closePath();
+      ctx.fill();
+      ctx.strokeStyle='#ffd700';
+      ctx.lineWidth=0.8*dpr;
+      ctx.stroke();
+      ctx.restore();
+    }
+  }
+  draw();
+})();
+
+(function(){
+  const {dpr, ctx} = setupCanvas(bubblesCanvas);
+  let t=0;
+  function drawRoseFractal(x,y,rOuter,rInner,colors,depth){
+    if(depth>1 || rOuter<12*dpr) return;
+    const count=colors.length;
+    for(let i=0;i<count;i++){
+      const ang=i/count*Math.PI*2 + depth*0.4;
+      const color=colors[i%colors.length];
+      ctx.save();
+      ctx.fillStyle=color;
+      ctx.globalAlpha=0.6 - depth*0.15;
+      ctx.shadowColor=color;
+      ctx.shadowBlur=8*dpr;
+      ctx.beginPath();
+      ctx.moveTo(x+Math.cos(ang)*rInner, y+Math.sin(ang)*rInner);
+      ctx.lineTo(x+Math.cos(ang+0.2)*rOuter, y+Math.sin(ang+0.2)*rOuter);
+      ctx.lineTo(x+Math.cos(ang+0.4)*rOuter, y+Math.sin(ang+0.4)*rOuter);
+      ctx.lineTo(x+Math.cos(ang+0.6)*rInner, y+Math.sin(ang+0.6)*rInner);
+      ctx.closePath();
+      ctx.fill();
+      ctx.strokeStyle='#1a1a1a';
+      ctx.lineWidth=(2-depth*0.5)*dpr;
+      ctx.stroke();
+      ctx.restore();
+      const nx=x+Math.cos(ang+0.3)*rOuter*0.5;
+      const ny=y+Math.sin(ang+0.3)*rOuter*0.5;
+      drawRoseFractal(nx,ny,rOuter*0.35,rInner*0.35,colors,depth+1);
+    }
+  }
+  function draw(){
+    requestAnimationFrame(draw);
+    t+=0.011;
+    const w=bubblesCanvas.width, h=bubblesCanvas.height;
+    const cx=w/2, cy=h/2;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#030100';
+    ctx.fillRect(0,0,w,h);
+    const inversion=Math.sin(t*0.35);
+    ctx.save();
+    ctx.globalAlpha=0.05 + Math.abs(inversion)*0.03;
+    for(let i=0;i<28;i++){
+      const ang=i/28*Math.PI*2 + t*0.05;
+      ctx.beginPath();
+      ctx.moveTo(cx,cy);
+      ctx.lineTo(cx+Math.cos(ang)*w, cy+Math.sin(ang)*h);
+      ctx.lineTo(cx+Math.cos(ang+0.025)*w, cy+Math.sin(ang+0.025)*h);
+      ctx.closePath();
+      ctx.fillStyle=i%3===0?'#ffd700':i%3===1?'#ff8800':'#ffffff';
+      ctx.fill();
+    }
+    ctx.restore();
+    const layers=[
+      {count:1, colors:['#000000'], inv:['#ffffff'], radius:0, size:45, gravity:0},
+      {count:2, colors:['#ffffff','#ff0000'], inv:['#000000','#00ffff'], radius:100, size:36, gravity:0.6},
+      {count:4, colors:['#0000ff','#00ff00','#ffff00','#cc33ff'], inv:['#ffff00','#cc33ff','#0000ff','#00ff00'], radius:190, size:30, gravity:0.1},
+      {count:8, colors:['#ff8800'], inv:['#ffffff'], radius:320, size:22, gravity:-1.0, isShell:true}
+    ];
+    layers.forEach((layer,layerIdx)=>{
+      if(layer.isShell){
+        ctx.save();
+        ctx.strokeStyle=inversion>0.3?'#ffffff':'#ff8800';
+        ctx.lineWidth=2.5*dpr;
+        ctx.globalAlpha=0.4 + Math.abs(inversion)*0.25;
+        ctx.shadowColor='#ff8800';
+        ctx.shadowBlur=16*dpr;
+        ctx.beginPath();
+        ctx.arc(cx,cy,layer.radius*dpr,0,Math.PI*2);
+        ctx.stroke();
+        ctx.restore();
+        for(let i=0;i<layer.count;i++){
+          const baseAng=i/layer.count*Math.PI*2;
+          const ang=baseAng + t*0.18;
+          const grav=layer.gravity + inversion*0.25;
+          const r=layer.radius*dpr + grav*10*dpr;
+          const x=cx+Math.cos(ang)*r;
+          const y=cy+Math.sin(ang)*r + Math.sin(t*1.0+i)*4*dpr;
+          ctx.save();
+          drawRoseFractal(x,y,22*dpr,6*dpr,['#ff8800'],0);
+          ctx.fillStyle=inversion>0.5?'#ffffff':'#ff8800';
+          ctx.shadowColor='#ff8800';
+          ctx.shadowBlur=14*dpr;
+          ctx.globalAlpha=0.8;
+          ctx.beginPath();
+          ctx.arc(x,y,5*dpr,0,Math.PI*2);
+          ctx.fill();
+          ctx.restore();
+        }
+      } else {
+        for(let i=0;i<layer.count;i++){
+          const baseAng=i/layer.count*Math.PI*2 + layerIdx*0.5;
+          const ang=baseAng + t*0.15;
+          const grav=layer.gravity + inversion*0.18;
+          const r=layer.radius===0?0:layer.radius*dpr + grav*12*dpr;
+          const x=layer.radius===0?cx:cx+Math.cos(ang)*r;
+          const y=layer.radius===0?cy+grav*16*dpr:cy+Math.sin(ang)*r + Math.sin(t*0.9+i)*4*dpr;
+          const baseColor=layer.colors[i%layer.colors.length];
+          const invColor=layer.inv[i%layer.inv.length];
+          const color=inversion>0.5?invColor:baseColor;
+          ctx.save();
+          const fractalColors=color==='#000000'?['#111111']:color==='#ffffff'?['#ffffff']:color==='#ff0000'?['#ff0000','#ff6666']:color==='#0000ff'?['#0000ff','#6666ff']:color==='#00ff00'?['#00ff00','#66ff66']:color==='#ffff00'?['#ffff00','#ffff99']:color==='#cc33ff'?['#cc33ff','#e699ff']:['#ff8800'];
+          drawRoseFractal(x,y,layer.size*dpr,layer.size*0.3*dpr,fractalColors,0);
+          ctx.fillStyle=color==='#000000'?'#0a0a0a':color;
+          ctx.globalAlpha=0.85;
+          ctx.shadowColor=color;
+          ctx.shadowBlur=12*dpr;
+          ctx.beginPath();
+          ctx.arc(x,y,4*dpr,0,Math.PI*2);
+          ctx.fill();
+          ctx.restore();
+        }
+      }
+    });
+  }
+  draw();
+})();
+
+document.getElementById('btn-fractal').onclick=()=>{};
+document.getElementById('btn-veins').onclick=()=>{};
+document.getElementById('btn-bubbles').onclick=()=>{};
+document.getElementById('btn-reset').onclick=()=>{ location.reload(); };
+</script>
+</body>
+</html>

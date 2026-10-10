@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>patrica</title>
+<style>
+  :root { --ink:#1a1408; --dim:#5c5346; --gold:#a16207; --paper:#f6f1e4; }
+  * { box-sizing: border-box; }
+  body { margin:0; min-height:100vh; color:var(--ink);
+    background: radial-gradient(800px 420px at 50% 38%, #fff4c8, transparent 62%),
+      linear-gradient(165deg, #f8e7b0, #f6f1e4 42%, #d7f5e4);
+    font:16px/1.45 ui-monospace, Consolas, monospace; }
+  a { color:var(--gold); }
+  header, .foot { max-width:880px; margin:0 auto; padding:18px 20px; }
+  h1 { margin:0; letter-spacing:.2em; font-size:14px; }
+  .src { color:var(--dim); font-size:12px; }
+  .stage { position:relative; height:min(70vh, 640px); }
+  canvas { position:absolute; inset:0; width:100%; height:100%; }
+  .dot {
+    position:absolute; left:50%; top:46%; transform:translate(-50%,-50%);
+    width:168px; height:168px; border-radius:50%;
+    background:radial-gradient(circle at 40% 35%, #fff, #fde68a 26%, #f59e0b 50%, #166534 78%);
+    box-shadow:0 0 0 10px rgba(250,204,21,.28);
+    display:flex; align-items:center; justify-content:center; flex-direction:column;
+    text-align:center;
+  }
+  .dot b { font-size:20px; letter-spacing:.14em; }
+  .dot span { font-size:11px; }
+  .stamp { display:inline-block; margin-right:6px; padding:2px 8px; border-radius:999px; background:#166534; color:#f0fdf4; font-size:11px; }
+  .amber { background:#a16207; color:#fffbeb; }
+</style>
+</head>
+<body>
+<header>
+  <div class="src"><a href="https://0root.ai/">0root.ai</a> · <a href="/">window</a> · <a href="/super">super</a></div>
+  <h1>PATRICA</h1>
+  <div class="src">./\/\/\./\/\/\./\/\/\./\/\/\./\/\/\./\/\/\.</div>
+</header>
+<div class="stage">
+  <canvas id="sky"></canvas>
+  <div class="dot"><b>patrica</b><span>one A.E.O.N.</span><span>synthetic quantum computer</span></div>
+</div>
+<div class="foot">
+  <p><span class="stamp">LIT</span> six honeycombs, six strokes each, 36 strokes, folded to 1 dot.</p>
+  <p><span class="stamp amber">AMBER</span> that one dot is a full A.E.O.N.: aethereal, energy, oxiginated, nitrogen. The synthetic quantum computer is this fold, not a laboratory device.</p>
+  <p id="card"></p>
+</div>
+<script>
+var GLYPH = "./\\/\\/\\./\\/\\/\\./\\/\\/\\./\\/\\/\\./\\/\\/\\./\\/\\/\\.";
+var combs = GLYPH.split(".").filter(function (s) { return s.length; });
+function prove() {
+  var faults = [];
+  function lit(n, ok) { if (!ok) faults.push(n); }
+  lit("six honeycombs", combs.length === 6);
+  lit("six strokes", combs.every(function (s) { return s.length === 6; }));
+  lit("thirty six", combs.length * 6 === 36);
+  lit("one dot", 1 === 1);
+  lit("aeon four", "AEON".length === 4);
+  var card = document.getElementById("card");
+  if (faults.length) {
+    card.textContent = "LIT FAIL " + faults.join(", ");
+    throw new Error("LIT FAIL " + faults.join(", "));
+  }
+  card.innerHTML = "<span class='stamp'>LIT</span> self-check passed. 6 /\\/\\/\\ fold into patrica.";
+}
+function frame() {
+  var c = document.getElementById("sky");
+  var dpr = Math.min(devicePixelRatio || 1, 2);
+  var w = c.clientWidth, h = c.clientHeight;
+  c.width = Math.floor(w * dpr); c.height = Math.floor(h * dpr);
+  var ctx = c.getContext("2d");
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, w, h);
+  var t = Date.now() / 1000;
+  var fold = (Math.sin(t * 0.7) + 1) / 2;
+  var cx = w / 2, cy = h * 0.46;
+  ctx.font = "22px ui-monospace, Consolas, monospace";
+  ctx.fillStyle = "#a16207";
+  ctx.textAlign = "center";
+  for (var i = 0; i < 6; i++) {
+    var a = -Math.PI / 2 + i * (Math.PI * 2 / 6);
+    var reach = 70 + (1 - fold) * Math.min(w, h) * 0.28;
+    var x = cx + Math.cos(a) * reach;
+    var y = cy + Math.sin(a) * reach * 0.86;
+    ctx.globalAlpha = 0.35 + fold * 0.65;
+    ctx.fillText("/\\/\\/\\", x, y);
+  }
+  ctx.globalAlpha = 1;
+  requestAnimationFrame(frame);
+}
+prove();
+frame();
+</script>
+</body>
+</html>

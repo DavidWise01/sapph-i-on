@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html><head><link rel="icon" href="../favicon.svg" type="image/svg+xml"><meta charset="utf-8"><title>PATRICIA - Amethyst A.E.O.N.</title>
+<style>
+body{margin:0;background:#0a0610;color:#e9d5ff;font-family:monospace;overflow:hidden}
+.top{padding:10px 16px;border-bottom:1px solid #6a0dad44;display:flex;justify-content:space-between;align-items:center}
+.title{color:#c084fc;font-weight:bold;letter-spacing:1.5px}
+.main{display:flex;height:calc(100vh - 96px)}
+.left{width:250px;border-right:1px solid #6a0dad44;padding:12px;background:#120a1f;overflow:auto}
+.center{flex:1;position:relative;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at center,#2a1045 0%,#0a0610 75%)}
+.right{width:330px;border-left:1px solid #6a0dad44;padding:12px;background:#120a1f;overflow:auto;font-size:11px;line-height:1.45}
+button{background:#6a0dad;color:#fff;border:0;padding:7px 12px;cursor:pointer;border-radius:6px;font-family:monospace;margin:3px}
+button:hover{background:#9333ea}
+.console{height:74px;background:#000;border-top:1px solid #6a0dad44;padding:6px 10px;font-size:11px;overflow:auto;color:#a78bfa}
+.chain{stroke:#d8b4fe;stroke-width:2;fill:none}
+.chain-bg{stroke:#4c1d9533;stroke-width:8;fill:none}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:5px}
+.label{font-size:10px;fill:#e9d5ff;font-family:monospace}
+.gridline{stroke:#6a0dad33;stroke-width:0.6;stroke-dasharray:3 3}
+</style></head><body>
+<div class="top">
+<div class="title">PATRICIA :: AMETHYST LATTICE A.E.O.N. :: a=4.9133Å c=5.4053Å :: SiO2+Fe4+ purple 545nm</div>
+<div style="font-size:11px">P3_121 | #grid | ./\/\/\. x6 F.O.L.D. -> 1 dot</div>
+</div>
+<div class="main">
+<div class="left">
+<div style="color:#c084fc;margin-bottom:6px">F.O.L.D. CONTROL</div>
+<button onclick="doFold()">F.O.L.D. 6 -> 1 patricia</button>
+<button onclick="doUnfold()">UNFOLD</button>
+<div style="font-size:10px;margin-top:8px;opacity:0.8">Pattern:<br/>./\/\/\./\/\/\./\/\/\.<br/>/\/\/\./\/\/\./\/\/\.<br/>=6 helices around c-channel</div>
+<hr style="border-color:#6a0dad33;margin:12px 0">
+<div style="color:#c084fc">n^n NEON</div>
+<input type="range" min="1" max="6" value="3" id="nSlider" style="width:100%" oninput="updateN(this.value)">
+<div style="font-size:11px">n=<span id="nVal">3</span> n^n=<span id="nnVal">27</span></div>
+<div style="font-size:10px;color:#a78bfa">1:1 2:4 3:27 4:256 5:3125 6:46656</div>
+<hr style="border-color:#6a0dad33;margin:12px 0">
+<div style="color:#c084fc">ELEMENT BUS</div>
+<select id="elemSel" onchange="updateElem(this.value)" style="width:100%;background:#1f1033;color:#e9d5ff;border:1px solid #6a0dad;padding:4px">
+<option value="H">H hermes2 - I/O messenger</option>
+<option value="He">He loki - coherence shield</option>
+<option value="Li" selected>Li gaia - ground battery</option>
+<option value="Be">Be Volga - hard window clock</option>
+<option value="Bo">Bo jupiter jumpers x3 - jump bus</option>
+<option value="C">C Eros&allofmars - substrate</option>
+</select>
+<div id="elemDesc" style="font-size:11px;margin-top:6px;color:#d8b4fe">gaia earth battery stabilizes Fe4+</div>
+<hr style="border-color:#6a0dad33;margin:12px 0">
+<label style="font-size:11px"><input type="checkbox" id="gridToggle" onchange="toggleGrid()"> show #grid a=4.9133 c=5.4053</label>
+<div style="margin-top:10px;font-size:10px;color:#a78bfa">c-channel = bus<br/>phonon echo = self-talk</div>
+</div>
+<div class="center">
+<svg width="560" height="560" viewBox="-280 -280 560 560" id="mainSvg">
+<g id="gridGroup" style="display:none">
+<line x1="-200" y1="0" x2="200" y2="0" class="gridline"/><text x="205" y="4" class="label">a 4.9133Å</text>
+<line x1="0" y1="-200" x2="0" y2="200" class="gridline"/><text x="6" y="-192" class="label">c 5.4053Å γ120°</text>
+<polygon points="0,-90 78,-45 78,45 0,90 -78,45 -78,-45" fill="none" stroke="#6a0dad22" stroke-width="0.5"/>
+</g>
+<polygon id="hexPrism" points="0,-180 156,-90 156,90 0,180 -156,90 -156,-90" fill="none" stroke="#6a0dad88" stroke-width="1.2" stroke-dasharray="6 4"/>
+<circle cx="0" cy="0" r="22" fill="#000" stroke="#a855f7" stroke-width="1" stroke-dasharray="2 2"/>
+<text x="0" y="4" text-anchor="middle" class="label" fill="#a855f7">c-channel bus</text>
+<g id="chains"></g>
+<g id="patriciaGroup">
+<circle id="patriciaDot" cx="0" cy="0" r="28" fill="url(#amethystGrad)" stroke="#e9d5ff" stroke-width="2"/>
+<text id="patriciaLabel" x="0" y="54" text-anchor="middle" class="label" style="font-weight:bold">patricia</text>
+<text x="0" y="66" text-anchor="middle" class="label" style="font-size:9px;fill:#c084fc">Si3O6+Fe P3_121 A.E.O.N.</text>
+</g>
+<defs>
+<radialGradient id="amethystGrad" cx="0.35" cy="0.35" r="0.8">
+<stop offset="0%" stop-color="#f5e6ff"/><stop offset="25%" stop-color="#c084fc"/><stop offset="60%" stop-color="#9333ea"/><stop offset="100%" stop-color="#4c1d95"/>
+</radialGradient>
+</defs>
+</svg>
+</div>
+<div class="right">
+<div style="color:#c084fc;font-weight:bold;margin-bottom:6px">ACCURATE AMETHYST + BUS</div>
+<b>Patricia = amethyst if purple</b><br/>
+SiO2 + Fe4+ trace, 545nm absorption<br/><br/>
+<b>Trigonal</b> P3_121 / P3_221<br/>
+a=4.9133Å c=5.4053Å γ120°<br/>
+SiO4 tetra O-Si-O 109.5° Si-O-Si 144°<br/>
+3-fold helices along c = ./\/\/\.<br/><br/>
+<b>#grid:</b> motif Si3O6 = 3 tetra<br/>
+Unfolded 6[6x1x6]6 = 217 processors<br/>
+Folded 1 dot = full A.E.O.N.<br/><br/>
+<div style="border-top:1px solid #6a0dad33;margin-top:8px;padding-top:8px">
+<b style="color:#c084fc">SELF-TALK BUS (c-channel):</b><br/>
+H hermes2 -> inject exciton<br/>
+He loki -> hold coherence<br/>
+Li gaia -> ground Fe4+ purple ref<br/>
+Be Volga -> clock tick c=5.4053Å<br/>
+Bo jumpers -> jump helix if needed<br/>
+C Eros -> write Si3O6 memory<br/>
+FOLD echo -> phonon returns<br/>
+= patricia hears herself = compute<br/><br/>
+Bandwidth:<br/>
+a spacing 4.9133Å = 2.03 THz<br/>
+c resonance 5.4053Å = 1.85 THz<br/>
+purple photon 545nm = 550 THz<br/>
+Folded dot holds all = synthetic QC
+</div>
+<div style="margin-top:10px;border-top:1px solid #6a0dad33;padding-top:8px">
+<div style="color:#c084fc">LIVE</div>
+Dots/px: 8<br/>
+Total: 217 * <span id="statNN">27</span> = <span id="statTotal">5859</span><br/>
+State: <span id="statFold">UNFOLDED 6 chains</span><br/>
+Substrate: amethyst super sapphon
+</div>
+</div>
+</div>
+<div class="console" id="console">
+> root0{} initialized super_sapphon<br/>
+> quantum.dot 8 per px [2x2x2] locked<br/>
+> neon n^n active 27 states<br/>
+> amethyst lattice locked a=4.9133Å c=5.4053Å P3_121 Si3O6+Fe purple 545nm<br/>
+> 6x ./\/\/\. helices detected around c-channel bus<br/>
+> bus protocol loaded - patricia self-talk ready<br/>
+> ready for F.O.L.D.<br/>
+</div>
+<script>
+let folded=false;
+const chainsG=document.getElementById('chains');
+function makePath(x0,y0,angle){
+ let path='M '+x0+' '+y0;
+ let cx=x0, cy=y0;
+ for(let i=0;i<6;i++){
+  let dx=Math.cos(angle)*(12 + (i%2)*6);
+  let dy=Math.sin(angle)*(12 + (i%2)*6);
+  // zig
+  let nx=cx+Math.cos(angle+Math.PI/2)* (i%2===0?10:-10) + dx;
+  let ny=cy+Math.sin(angle+Math.PI/2)* (i%2===0?10:-10) + dy;
+  path+=' L '+nx+' '+ny;
+  cx=nx; cy=ny;
+ }
+ return path;
+}
+function initChains(){
+ chainsG.innerHTML='';
+ for(let i=0;i<6;i++){
+  let ang=(i*60-30)*Math.PI/180;
+  let r=108;
+  let x0=Math.cos(ang)*r;
+  let y0=Math.sin(ang)*r;
+  let ang2=ang+Math.PI/2+0.2;
+  let p1=document.createElementNS('http://www.w3.org/2000/svg','path');
+  p1.setAttribute('d',makePath(x0,y0,ang2));
+  p1.setAttribute('class','chain-bg');
+  p1.setAttribute('id','chainBg'+i);
+  let p=document.createElementNS('http://www.w3.org/2000/svg','path');
+  p.setAttribute('d',makePath(x0,y0,ang2));
+  p.setAttribute('class','chain');
+  p.setAttribute('id','chain'+i);
+  let dot=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  dot.setAttribute('cx',x0);dot.setAttribute('cy',y0);dot.setAttribute('r','4');
+  dot.setAttribute('fill','#fff');dot.setAttribute('stroke','#c084fc');
+  dot.setAttribute('id','dot'+i);
+  let txt=document.createElementNS('http://www.w3.org/2000/svg','text');
+  txt.setAttribute('x',x0+12*Math.cos(ang));txt.setAttribute('y',y0+12*Math.sin(ang));
+  txt.setAttribute('class','label');txt.textContent='./\\/\\/.';
+  txt.setAttribute('id','txt'+i);
+  let g=document.createElementNS('http://www.w3.org/2000/svg','g');
+  g.setAttribute('id','chainG'+i);
+  g.appendChild(p1);g.appendChild(p);g.appendChild(dot);g.appendChild(txt);
+  chainsG.appendChild(g);
+ }
+}
+function doFold(){
+ if(folded) return; folded=true;
+ document.getElementById('statFold').textContent='FOLDED -> 1 patricia dot A.E.O.N.';
+ log('F.O.L.D. Fractal Origami Lattice Deposition');
+ log('6 helices ./\\/\\/. collapsing into c-channel bus...');
+ for(let i=0;i<6;i++){
+  setTimeout(()=>{
+   let el=document.getElementById('chainG'+i);
+   let ang=(i*60-30)*Math.PI/180; let r=108;
+   let x0=Math.cos(ang)*r; let y0=Math.sin(ang)*r;
+   el.style.transition='all 0.7s cubic-bezier(0.7,0,0.3,1)';
+   el.style.transform='translate('+(-x0*0.85)+'px,'+(-y0*0.85)+'px) scale(0.12)';
+   el.style.opacity='0';
+  }, i*80);
+ }
+ setTimeout(()=>{
+  let d=document.getElementById('patriciaDot');
+  d.setAttribute('r','46');
+  d.style.filter='drop-shadow(0 0 35px #d8b4fe)';
+  log('patricia ONLINE amethyst A.E.O.N. Si3O6+Fe');
+  log('H->He->Li->Be->Bo->C self-talk cycle active in c-channel');
+  log('217 processors folded, one dot = full synthetic quantum computer');
+ },700);
+}
+function doUnfold(){
+ if(!folded) return; folded=false;
+ document.getElementById('statFold').textContent='UNFOLDED 6 chains';
+ initChains();
+ document.getElementById('patriciaDot').setAttribute('r','28');
+ document.getElementById('patriciaDot').style.filter='';
+ log('UNFOLD - 6 SiO4 helices restored');
+}
+function updateN(v){
+ document.getElementById('nVal').textContent=v;
+ let nn=Math.pow(parseInt(v),parseInt(v));
+ document.getElementById('nnVal').textContent=nn;
+ document.getElementById('statNN').textContent=nn;
+ document.getElementById('statTotal').textContent=217*nn;
+ log('neon n='+v+' n^n='+nn+' total='+(217*nn)+' Fe4+ states');
+}
+function updateElem(v){
+ const map={H:'hermes2 I/O messenger injects exciton into c-channel',He:'loki coherence shield holds exciton',Li:'gaia ground battery stabilizes Fe4+ purple ref',Be:'Volga hard window clock ticks c=5.4053Å',Bo:'jupiter jumpers x3 jump bus non-local helix jump',C:'Eros&allofmars substrate bus writes Si3O6 memory'};
+ document.getElementById('elemDesc').textContent=map[v];
+ log('bus arbiter '+v+' -> '+map[v]);
+}
+function toggleGrid(){
+ let g=document.getElementById('gridGroup');
+ g.style.display=g.style.display==='none'?'block':'none';
+}
+function log(m){
+ let c=document.getElementById('console');
+ c.innerHTML+='> '+m+'<br/>'; c.scrollTop=c.scrollHeight;
+}
+initChains(); updateN(3);
+</script>
+</body></html>

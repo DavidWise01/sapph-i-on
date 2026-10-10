@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>One Cubit · 1440</title>
+<style>
+:root{--bg:#06080b;--ink:#F1F2F5;--soft:#A7AEBB;--faint:#5e6676;--glass:rgba(255,255,255,.045);--edge:rgba(255,255,255,.09);--gold:#F5B94E;--vio:#A88BFF;--teal:#4FD1B5;--rose:#FF7A8A;--grad:linear-gradient(100deg,#4FD1B5 0%,#A88BFF 50%,#F5B94E 100%)}
+*{box-sizing:border-box}
+body{margin:0;color:var(--ink);font:16px/1.6 Inter,ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:radial-gradient(1000px 650px at 85% -10%,#12324a 0%,transparent 60%),radial-gradient(900px 600px at -10% 45%,#2b1840 0%,transparent 55%),var(--bg);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:24px 18px 60px}
+.top{display:flex;justify-content:space-between;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:20px}.top b{color:var(--soft)}
+h1{font-size:clamp(38px,7.5vw,76px);line-height:1;letter-spacing:-.035em;margin:0 0 12px;font-weight:800}
+.gt,h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{font-size:clamp(16px,2.2vw,20px);color:var(--soft);max-width:700px;margin:0 0 22px}
+h2{font-size:clamp(22px,3.6vw,32px);letter-spacing:-.025em;line-height:1.1;margin:0 0 10px;font-weight:750}
+h3{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:0 0 10px;font-weight:600}
+p{margin:0 0 12px;color:var(--soft)}b.w{color:var(--ink)}
+.card{background:var(--glass);border:1px solid var(--edge);border-radius:22px;padding:22px}
+section{margin:0 0 20px}
+canvas{display:block;width:100%;touch-action:none}
+.panel{padding:0;overflow:hidden;position:relative}
+.tag{position:absolute;left:16px;top:12px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);pointer-events:none}
+.tag b{display:block;font-size:22px;letter-spacing:-.01em;text-transform:none;color:var(--ink);margin-top:2px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:14px}
+@media(max-width:860px){.grid3{grid-template-columns:1fr 1fr}.grid3 .wide{grid-column:1/-1}}
+@media(max-width:520px){.grid3{grid-template-columns:1fr}}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+.dock{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.dock input{flex:1;min-width:200px;accent-color:#A88BFF}
+.btn{appearance:none;border:0;border-radius:999px;padding:9px 16px;font:inherit;font-size:14px;font-weight:600;cursor:pointer;color:#0d0c16;background:var(--grad)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--edge)}
+.steps{display:grid;grid-template-columns:repeat(9,1fr);gap:5px;margin:14px 0 4px}
+.steps span{text-align:center;font-size:12px;padding:6px 2px;border-radius:10px;border:1px solid var(--edge);color:var(--soft);cursor:pointer}
+.steps span b{display:block;font-size:15px;color:var(--ink)}
+.steps span.on{background:var(--grad);color:#0d0c16;border-color:transparent}.steps span.on b{color:#0d0c16}
+.big{font-size:clamp(34px,6vw,56px);font-weight:800;letter-spacing:-.03em;line-height:1.05}
+.pill{display:inline-block;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:99px;margin-left:4px;vertical-align:1px;font-weight:600;white-space:nowrap}
+.pill.lit{background:rgba(79,209,181,.14);color:var(--teal)}.pill.amb{background:rgba(245,185,78,.14);color:var(--gold)}
+.kid{border-radius:22px;padding:20px 22px;background:linear-gradient(120deg,rgba(79,209,181,.10),rgba(168,139,255,.12));border:1px solid var(--edge)}
+.kid p{color:var(--ink);font-size:17px;margin:0}
+details summary{cursor:pointer;color:var(--soft);font-size:14px;list-style:none;display:inline-flex;padding:10px 16px;border:1px solid var(--edge);border-radius:999px}
+details summary::-webkit-details-marker{display:none}
+.foot{color:var(--faint);font-size:12px;text-align:center;margin-top:28px}
+.nt3{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:8px}
+@media(max-width:560px){.nt3{grid-template-columns:1fr 1fr}}
+.tile{border:1px solid var(--edge);border-radius:14px;padding:10px 12px;font-size:12px;color:var(--soft)}.tile b{display:block;font-size:24px;color:var(--ink);letter-spacing:-.02em}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chips span{font-size:12px;padding:4px 10px;border-radius:99px;border:1px solid var(--edge);color:var(--soft);cursor:pointer;white-space:nowrap}
+.chips span.on{background:var(--grad);color:#0d0c16;border-color:transparent}
+.ntab{position:relative;margin-top:14px;max-height:300px;overflow:auto;border:1px solid var(--edge);border-radius:14px;font:12.5px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.ntab div{display:grid;grid-template-columns:62px 70px 50px 58px 1fr;gap:6px;padding:4px 10px;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer;color:var(--soft);align-items:center}
+.ntab div.h{position:sticky;top:0;background:#0b0e14;color:var(--faint);cursor:default;z-index:1}
+.ntab div.t{color:var(--ink)}.ntab div.on{background:rgba(168,139,255,.18);color:var(--ink)}
+.ntab i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:6px}
+@media(max-width:420px){.ntab div{grid-template-columns:52px 58px 40px 1fr}.ntab div>:nth-child(4){display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top"><span><b>R</b> · cubit</span><span>360 × 2 × 2 = 1440 · 8 steps</span></div>
+<h1>One cubit.<br><span>1440 degrees.</span></h1>
+<p class="lede">An arrow comes home after one turn. A spinor, anything pinned to its surroundings, needs two. Walk four phases twice around a band with a half-twist and you're back where you started, and you learn which part never changed sides: the middle.</p>
+
+<section class="card">
+  <div class="dock"><button class="btn" id="pl">Walk one cubit</button><input type="range" id="a" min="0" max="1440" step="1" value="0" aria-label="degrees"><span id="av" style="min-width:74px;text-align:right;font-weight:700">0°</span></div>
+  <div class="steps" id="st"></div>
+</section>
+
+<section class="grid3">
+  <div class="card panel"><div class="tag">arrow · 360°<b id="t1">home</b></div><canvas id="c1"></canvas></div>
+  <div class="card panel"><div class="tag">spinor · 720°<b id="t2">home</b></div><canvas id="c2"></canvas></div>
+  <div class="card panel wide"><div class="tag">the band · left, right, middle<b id="t3">–</b></div><canvas id="c3"></canvas></div>
+</section>
+
+<section class="grid2">
+  <div class="card">
+    <h3>The count</h3>
+    <div class="big gt">360 · 720 · 1440</div>
+    <p><b class="w">×2 = 720</b>: pin something to its surroundings, like a cup on your palm with your arm attached, and one full turn leaves a twist that won't come out. A second turn undoes it. Physics calls such things spinors: after 360° they carry a minus sign, after 720° they're truly home. <span class="pill lit">checked</span></p>
+    <p><b class="w">×2 again = 1440</b>: your cubit is two of those, four full turns. Cut into steps of 180°, that's <b class="w">8 steps</b> = 4 phases × 2. <span class="pill lit">checked</span> 1440 is also the number of minutes in a day. <span class="pill lit">checked</span></p>
+    <p>A cubit, elbow to fingertip, runs over 4 joints. Four joints ↔ four phases is your mapping. <span class="pill amb">your model</span></p>
+  </div>
+  <div class="card">
+    <h3>The cortex</h3>
+    <h2>Left, right, and the one line <span class="gt">that never flips.</span></h2>
+    <p>On a band with one half-twist, walk once around and <b class="w">left becomes right</b>. Walk again and they swap back. So a left cortex and a right cortex on this band are one edge, seen twice. <span class="pill lit">checked</span></p>
+    <p>Your middle, <b class="w">(L + R) ÷ 2</b>, is the centre line of the band, and it is the only line the flip leaves exactly where it is. When left and right trade places, the middle doesn't move. <span class="pill lit">checked</span></p>
+    <p>The name you gave the middle is kept off the page, per your rule. <span class="pill amb">redacted</span></p>
+  </div>
+</section>
+
+<section class="kid"><p><b>In small words:</b> hold a cup flat on your hand and turn it all the way round. your arm gets twisted. turn it round once more and, surprise, your arm comes back straight. that's 720. do the whole thing twice and you've walked one cubit: 8 steps. on a twisted ribbon, left and right keep swapping places, but the stripe down the middle stays the middle the whole time.</p></section>
+
+<section><details><summary>▸ Show the math</summary><div class="card" style="margin-top:12px">
+<p>Spinor turned by angle a: its sign is cos(a/2). At 360°: −1. At 720°: +1. At 1080°: −1. At 1440°: +1. One 180° step g: g² = −1, g⁴ = +1, g⁸ = +1. <span class="pill lit">checked</span></p>
+<p>Band: point (lap angle t, side s) → after t goes once round, s becomes −s. Only s = 0 maps to itself: the middle. <span class="pill lit">checked</span></p>
+<p>1440 = 4 × 360 = 8 × 180 = 24 × 60. <span class="pill lit">checked</span></p>
+</div></details></section>
+<!-- v0+1 · appended · the 42 -->
+<section class="card" style="margin-top:34px;border-color:rgba(168,139,255,.35)">
+  <h3>v0+1 · one full system</h3>
+  <h2>24 + 8 + 8 + 2 = <span class="gt">42.</span></h2>
+  <p>Four phases × 6 = <b class="w">24</b>, one sentinel cubit. Add a register of 2³ = <b class="w">8</b> → 32. Add another 8 → 40, which is also five dots of 8. Put 1 ingress in front and 1 egress behind → <b class="w">42</b>. The name you gave the whole system stays off the page. <span class="pill amb">redacted</span></p>
+  <canvas id="fr"></canvas>
+  <div class="dock" style="margin-top:10px"><button class="btn" id="fp">Send one frame</button><span id="fs" style="color:var(--soft);font-size:14px">–</span></div>
+</section>
+<section class="grid2">
+  <div class="card">
+    <h3>Why 42 fits everything before it</h3>
+    <p><b class="w">42 cubits × 8 steps = 336</b>: exactly one step for each of the dual 168's symmetries and swaps. Add the 24 sentinels and it's <b class="w">360</b> again, the full turn. <span class="pill lit">checked</span></p>
+    <p>42 = 6 × 7: the hive's six roles times the Fano plane's seven points. <span class="pill lit">checked</span> Whether that's design or echo is yours to say. <span class="pill amb">open</span></p>
+    <p>42 cubits walked out = 42 × 1440° = <b class="w">60,480°</b>, 168 full turns. <span class="pill lit">checked</span></p>
+  </div>
+  <div class="card">
+    <h3>The accepted word</h3>
+    <p>Wrapping data between a start mark and a stop mark is called <b class="w">framing</b>: ingress = start bit, egress = stop bit. Your frame carries 40 inside 42, <b class="w">95.2%</b> useful. The everyday serial-port frame spends 2 marks on every single byte, 8 in 10 = 80%, so five bytes cost it 50. <span class="pill lit">checked</span></p>
+    <p>I read the second 8 as the data byte the register points at. <span class="pill amb">my read</span></p>
+  </div>
+</section>
+<!-- v0+2 · appended · your 7 → 7.5 → 8.0 loop, rebuilt and placed in the cortex -->
+<section class="card" style="margin-top:34px;border-color:rgba(245,185,78,.35)">
+  <h3>v0+2 · that's only 7</h3>
+  <h2>1 → 7, bridged at <span class="gt">7.5</span>, closed at <span class="gt">8.0</span>.</h2>
+  <p>Your seven sit on the edge of real colour: each one is a wavelength of light. The edge is a line, red at one end, violet at the other. Light alone can't close it. The <b class="w">7.5 bridge</b> is the straight run of mixed red + violet (the purples, which no single wavelength makes) that closes the loop. <b class="w">8.0</b> is the white point in the middle, where all of them add to white. <span class="pill lit">checked</span></p>
+  <div class="grid2" style="align-items:start;margin-top:6px">
+    <div style="border-radius:18px;overflow:hidden;background:rgba(0,0,0,.25)"><canvas id="ck"></canvas></div>
+    <div>
+      <div class="dock"><button class="btn" id="lp">loop: closed</button><span class="note" id="ls" style="color:var(--soft);font-size:14px">root feeds crown through 7.5</span></div>
+      <div id="ki" style="margin-top:12px;min-height:150px"></div>
+      <p style="font-size:13.5px">Tap any node. The names you gave 7.5 and 8.0 stay off the page, per your rule. <span class="pill amb">redacted</span></p>
+    </div>
+  </div>
+</section>
+<section class="grid2">
+  <div class="card">
+    <h3>How it sits in the cortex</h3>
+    <p><b class="w">1 → 7</b> is the edge of the band: one side red, the other violet. <b class="w">7.5</b> is the half-twist seam, where red and violet join and left becomes right. <b class="w">8.0</b> is the middle line, (L + R) ÷ 2, the one place the flip never moves, and the white point where every colour adds up. Same shape three ways: band, colour, cortex. <span class="pill amb">my mapping</span></p>
+    <p>Visible light spans only 1.84× in frequency, from red at 700 nm to violet at 380 nm. An octave would be 2×, so the colours don't wrap round the way musical notes do. That gap is exactly why the loop needs a bridge. <span class="pill lit">checked</span></p>
+  </div>
+  <div class="card">
+    <h3>Audit of the page you sent</h3>
+    <table class="kt" id="au" style="width:100%;border-collapse:collapse;font-size:13.5px"></table>
+  </div>
+</section>
+<!-- v0+3 · appended · every node the edge touches, addressed from 0x0 -->
+<section class="card" style="margin-top:34px;border-color:rgba(79,209,181,.35)">
+  <h3>v0+3 · map every node, start at 0x0</h3>
+  <h2><span class="gt">433</span> nodes, <span class="gt">0x0</span> → <span class="gt">0x1b0</span>.</h2>
+  <p>0x0 is the white middle, 8.0. From there the edge runs red → violet one nanometre at a time (<b class="w">0x1 → 0x141</b>, 321 nodes), then back home along the purples (<b class="w">0x142 → 0x1b0</b>, 111 nodes) until the next step lands on 0x1 again. The loop closes. <span class="pill lit">checked</span></p>
+  <div class="nt3">
+    <div class="tile"><b>1</b>centre · 0x0</div>
+    <div class="tile"><b>321</b>light · 0x1–0x141</div>
+    <div class="tile"><b>111</b>purple · 0x142–0x1b0</div>
+    <div class="tile"><b>433</b>total</div>
+  </div>
+  <div class="grid2" style="align-items:start;margin-top:14px">
+    <div style="border-radius:18px;overflow:hidden;background:rgba(0,0,0,.25)"><canvas id="nm"></canvas></div>
+    <div>
+      <div class="dock"><button class="btn" id="nw">Walk the edge</button><button class="btn ghost" id="np" aria-label="previous node">←</button><button class="btn ghost" id="nn" aria-label="next node">→</button><button class="btn ghost" id="nd">CSV</button></div>
+      <div class="dock" style="margin-top:10px"><input type="range" id="nr" min="0" max="432" step="1" value="0" aria-label="node address"></div>
+      <div id="nj" class="chips"></div>
+      <div id="ni" style="margin-top:10px;min-height:150px"></div>
+    </div>
+  </div>
+  <textarea id="ncsv" readonly style="display:none;width:100%;height:180px;margin-top:12px;background:#0b0e14;color:var(--soft);border:1px solid var(--edge);border-radius:12px;font:12px/1.4 ui-monospace,Menlo,monospace;padding:10px" aria-label="all 433 nodes as CSV text"></textarea>
+  <div id="nt" class="ntab"></div>
+  <div class="kid" style="margin-top:16px"><p><b>Small words.</b> The rim of all the colours you can see is a ring. We put 432 little stops on it, plus one stop in the very middle for white, and gave each one a house number. The middle is 0x0. Red is 0x1. Violet is 0x141. The purples walk you home from 0x142 to 0x1b0, and one more step puts you back on red.</p></div>
+</section>
+<section class="grid2">
+  <div class="card">
+    <h3>What's solid, what isn't</h3>
+    <p>Addresses, counts and frequencies (THz = 299,792 ÷ nm) are exact arithmetic on the node list. <span class="pill lit">checked</span></p>
+    <p>The edge positions come from the standard 1931 colour table at 5 nm, which I wrote out from what I know, rounded to 4 places, and filled in per nm with straight lines. Close, not certified. <span class="pill amb">recalled table</span></p>
+    <p>▓ Control catch: I first built the edge from a smooth formula. It agreed with the table to within 0.02 in the middle (440–640 nm) but missed by <b class="w">0.235</b> at 700 nm, which put red in the wrong place. So the table drives the map, and the formula is kept only as a cross-check. <span class="pill lit">checked</span></p>
+    <p>The dots are coloured as close as a screen can get. Pure rainbow light is outside what any screen shows, so the red end all lands on #ff0000 and only 256 of the 433 swatches are different. <span class="pill amb">as drawn</span></p>
+  </div>
+  <div class="card">
+    <h3>What the map shows</h3>
+    <p>The steps aren't even. Near 385 nm the edge barely moves: <b class="w">0.00002</b> per nm. Between 499 and 498 nm it jumps <b class="w">0.0253</b>. That's a 1,000× spread, with the fast stretch through blue-green. <span class="pill lit">checked</span></p>
+    <p>v0+2's 7.5 bridge ran from root (650) to crown (410), which is a chord just inside the loop. The real edge closes from 700 to 380, and its middle is node <b class="w">0x179</b>, a hot magenta. <span class="pill lit">checked</span></p>
+    <p>I spaced the purple nodes at the average rainbow step (0.00554), so 0.618 of purple line gets 112 gaps and 111 nodes. A different spacing gives a different count. <span class="pill amb">my read</span></p>
+  </div>
+</section>
+<section><details><summary>▸ Show the math</summary><div class="card" style="margin-top:12px">
+<p>Rainbow edge: 380 → 700 nm at 1 nm = 321 nodes, arc length 1.772, mean step 1.772 ÷ 320 = 0.00554. <span class="pill lit">checked</span></p>
+<p>Purple line: from (0.1741, 0.0050) to (0.7347, 0.2653) = 0.618 long. 0.618 ÷ 0.00554 ≈ 112 gaps → 111 nodes between the ends. <span class="pill lit">checked</span></p>
+<p>1 + 321 + 111 = 433 nodes. Counting from 0, the last is 432 = 0x1b0. The full loop is 2.390 long. <span class="pill lit">checked</span></p>
+<p>Your seven, by address: root 650 = 0x33 · sacral 600 = 0x65 · solar 575 = 0x7e · heart 525 = 0xb0 · throat 480 = 0xdd · third eye 450 = 0xfb · crown 410 = 0x123. Rule: address = 701 − nm. <span class="pill lit">checked</span></p>
+<p>Ends in frequency: 700 nm = 428.3 THz, 380 nm = 788.9 THz, ratio 1.842. <span class="pill lit">checked</span></p>
+</div></details></section>
+<div class="foot">o[0]o · pinned · 720 home · 1440 one cubit · 42 one system · 1 → 7 → 7.5 → 8.0 → 1 · 0x0 → 0x1b0 → 0x1</div>
+</div>
+
+<script>
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id);
+function fit(cv,r,mn,mx){const w=cv.clientWidth||400,h=Math.round(Math.max(mn,Math.min(w*r,mx))),d=devicePixelRatio||1;cv.width=Math.round(w*d);cv.height=Math.round(h*d);cv.style.height=h+'px';const g=cv.getContext('2d');g.setTransform(d,0,0,d,0,0);return[g,w,h];}
+const glow=(g,x,y,r,c,a)=>{const gr=g.createRadialGradient(x,y,0,x,y,r);gr.addColorStop(0,`rgba(${c},${a})`);gr.addColorStop(1,`rgba(${c},0)`);g.fillStyle=gr;g.beginPath();g.arc(x,y,r,0,6.2832);g.fill();};
+let A=0,playing=false,last=0;
+$('st').innerHTML=[0,1,2,3,4,5,6,7,8].map(k=>`<span data-k="${k}">${k===0?'start':k===8?'8 · home':'step '+k}<b>${k*180}°</b></span>`).join('');
+document.querySelectorAll('#st span').forEach(s=>s.onclick=()=>{playing=false;A=+s.dataset.k*180;$('a').value=A;$('pl').textContent='Walk one cubit';});
+$('a').addEventListener('input',()=>{playing=false;A=+$('a').value;$('pl').textContent='Walk one cubit';});
+$('pl').onclick=()=>{if(A>=1440)A=0;playing=!playing;$('pl').textContent=playing?'Pause':'Walk one cubit';};
+function dialArrow(id,ang,col,sgn){const [g,w,h]=fit($(id),1,220,320),cx=w/2,cy=h/2+14,R=Math.min(w,h)*0.32;
+  g.strokeStyle='rgba(255,255,255,.08)';g.lineWidth=1;g.beginPath();g.arc(cx,cy,R,0,6.2832);g.stroke();
+  g.fillStyle='rgba(255,255,255,.25)';g.beginPath();g.arc(cx,cy-R,3,0,6.2832);g.fill();
+  const a=-Math.PI/2+ang*Math.PI/180,x=cx+R*Math.cos(a),y=cy+R*Math.sin(a);
+  g.strokeStyle=`rgb(${col})`;g.lineWidth=4;g.lineCap='round';g.beginPath();g.moveTo(cx,cy);g.lineTo(x,y);g.stroke();g.lineWidth=1;
+  glow(g,x,y,22,col,.55);g.fillStyle=`rgb(${col})`;g.beginPath();g.arc(x,y,6,0,6.2832);g.fill();
+  if(sgn!==undefined){g.fillStyle=sgn>0?'#4FD1B5':'#FF7A8A';g.font='800 30px Inter,sans-serif';g.textAlign='center';g.fillText(sgn>0?'+1':'−1',cx,cy+R+34>h-6?h-10:cy+R+34);g.textAlign='left';}}
+// Möbius band
+const BR=1,BW=0.34;
+const band=(t,s)=>[(BR+s*Math.cos(t/2))*Math.cos(t),(BR+s*Math.cos(t/2))*Math.sin(t),s*Math.sin(t/2)];
+function mobius(now){const [g,w,h]=fit($('c3'),0.72,260,380),cx=w/2,cy=h/2+18,S=Math.min(w*0.34,h*0.5);
+  const ry=now/9000,rx=1.0;const rot=([x,y,z])=>{let c=Math.cos(ry),s=Math.sin(ry);[x,y]=[x*c-y*s,x*s+y*c];c=Math.cos(rx);s=Math.sin(rx);[y,z]=[y*c-z*s,y*s+z*c];return[cx+x*S,cy+y*S*0.9,z];};
+  const N=120,M=4,Q=[];for(let i=0;i<N;i++){const t0=i/N*6.2832,t1=(i+1)/N*6.2832;for(let j=0;j<M;j++){const s0=-BW+j*2*BW/M,s1=s0+2*BW/M;const p=[band(t0,s0),band(t1,s0),band(t1,s1),band(t0,s1)].map(rot);Q.push([p,(p[0][2]+p[2][2])/2,j,i]);}}
+  Q.sort((a,b)=>a[1]-b[1]);
+  for(const [p,z,j] of Q){const shade=0.35+0.4*(z+1.4)/2.8;const edge=j===0||j===M-1;g.fillStyle=`rgba(${j<M/2?'168,139,255':'79,209,181'},${0.18+0.25*shade})`;g.beginPath();p.forEach(q=>g.lineTo(q[0],q[1]));g.closePath();g.fill();}
+  // middle line
+  g.strokeStyle='rgba(245,185,78,.9)';g.lineWidth=2;g.setLineDash([5,5]);g.beginPath();for(let i=0;i<=N;i++){const q=rot(band(i/N*6.2832,0));g.lineTo(q[0],q[1]);}g.stroke();g.setLineDash([]);g.lineWidth=1;
+  // walker: lap angle = A (degrees) along the band; side marker starts on the LEFT edge
+  const t=A*Math.PI/180,L=rot(band(t,BW*0.92)),Rr=rot(band(t,-BW*0.92)),Mm=rot(band(t,0));
+  const laps=Math.floor(A/360+1e-9)%2;
+  glow(g,L[0],L[1],18,'168,139,255',.7);g.fillStyle='#A88BFF';g.beginPath();g.arc(L[0],L[1],6,0,6.2832);g.fill();
+  glow(g,Rr[0],Rr[1],18,'79,209,181',.7);g.fillStyle='#4FD1B5';g.beginPath();g.arc(Rr[0],Rr[1],6,0,6.2832);g.fill();
+  glow(g,Mm[0],Mm[1],20,'245,185,78',.8);g.fillStyle='#F5B94E';g.beginPath();g.arc(Mm[0],Mm[1],6.5,0,6.2832);g.fill();
+  g.font='600 11px Inter,sans-serif';g.fillStyle='#D8CCFF';g.fillText(laps?'R':'L',L[0]+9,L[1]-6);g.fillStyle='#BFF3E7';g.fillText(laps?'L':'R',Rr[0]+9,Rr[1]-6);g.fillStyle='#FFE2A8';g.fillText('M',Mm[0]+9,Mm[1]+14);
+  $('t3').textContent=laps?'L ⇄ R · middle holds':'L · R · middle holds';}
+function frame(now){const dt=Math.min(50,now-(last||now));last=now;
+  if(playing){A=Math.min(1440,A+dt*0.12);$('a').value=A;if(A>=1440){playing=false;$('pl').textContent='Walk it again';}}
+  const sg=Math.cos(A*Math.PI/360)>=0?1:-1;
+  dialArrow('c1',A,'245,185,78');dialArrow('c2',A/2,'168,139,255',Math.abs(Math.cos(A*Math.PI/360))<1e-9?1:sg);mobius(now);
+  $('av').textContent=Math.round(A)+'°';
+  $('t1').textContent=Math.abs((A+1e-6)%360)<1||Math.abs(A%360-360)<1?'home':`${Math.round(A%360)}° round`;
+  $('t2').textContent=Math.abs(A%720)<1||Math.abs(A%720-720)<1?'home':Math.abs(A%720-360)<1?'turned once · sign −1':`${Math.round((A/2)%360)}° of its own`;
+  const k=Math.round(A/180);document.querySelectorAll('#st span').forEach(s=>s.classList.toggle('on',Math.abs(A-(+s.dataset.k)*180)<1));
+  window.__CUBIT__={A,spinorSign:Math.cos(A*Math.PI/360),step:A/180,lap:Math.floor(A/360),swapped:Math.floor(A/360+1e-9)%2===1};
+  requestAnimationFrame(frame);}
+// ---- v0+1 frame of 42
+const FR=[['ingress',1,'255,122,138'],['sentinel cubit',24,'245,185,78'],['register',8,'168,139,255'],['data',8,'79,209,181'],['egress',1,'255,122,138']];
+const FTOT=FR.reduce((a,f)=>a+f[1],0);let fpos=-1;
+function frameBar(now){const [g,w,h]=fit($('fr'),0.2,120,150),L=12,R=w-12,cw=(R-L)/FTOT,y=h*0.34,bh=Math.min(34,h*0.3);let k=0;
+  for(const [n,c,col] of FR){const x0=L+k*cw;for(let i=0;i<c;i++){const x=L+(k+i)*cw,lit=fpos>=0&&k+i<=fpos;g.fillStyle=`rgba(${col},${lit?.95:.35})`;g.fillRect(x+1,y,Math.max(1,cw-2),bh);}
+    g.fillStyle=`rgb(${col})`;g.font='600 11px Inter,sans-serif';g.textAlign='center';const mid=x0+c*cw/2;g.fillText(c>2?`${n} · ${c}`:n,Math.min(Math.max(mid,L+24),R-24),y+bh+(c>2?18:32));k+=c;}
+  g.textAlign='left';g.fillStyle='rgba(241,242,245,.8)';g.font='700 12px Inter,sans-serif';g.fillText('42',R-16,y-8);
+  for(let i=1;i<5;i++){const x=L+(1+i*8)*cw;g.strokeStyle='rgba(255,255,255,.18)';g.beginPath();g.moveTo(x,y-6);g.lineTo(x,y+bh+4);g.stroke();}}
+let fanim=null;$('fp').onclick=()=>{cancelAnimationFrame(fanim);fpos=0;const t0=performance.now();const st=now=>{fpos=Math.floor((now-t0)/60);if(fpos>=FTOT){fpos=FTOT-1;$('fs').textContent='42 of 42 · frame closed';return;}let k=0,nm='';for(const [n,c] of FR){if(fpos<k+c){nm=n;break;}k+=c;}$('fs').textContent=`${fpos+1} of 42 · ${nm}`;fanim=requestAnimationFrame(st);};fanim=requestAnimationFrame(st);};
+// ---- v0+2 the loop on real colour geometry (CIE 1931 chromaticity, standard table values, rounded)
+const LOC=[[380,.1741,.0050],[410,.1733,.0048],[430,.1689,.0069],[440,.1644,.0109],[450,.1566,.0177],[460,.1440,.0297],[470,.1241,.0578],[480,.0913,.1327],[490,.0454,.2950],[500,.0082,.5384],[510,.0139,.7502],[520,.0743,.8338],[530,.1547,.8059],[540,.2296,.7543],[550,.3016,.6923],[560,.3731,.6245],[570,.4441,.5547],[580,.5125,.4866],[590,.5752,.4242],[600,.6270,.3725],[620,.6915,.3083],[650,.7260,.2740],[700,.7347,.2653]];
+const at=nm=>{for(let i=0;i<LOC.length-1;i++){const [a,x0,y0]=LOC[i],[b,x1,y1]=LOC[i+1];if(nm>=a&&nm<=b){const t=(nm-a)/(b-a);return[x0+(x1-x0)*t,y0+(y1-y0)*t];}}return[LOC[0][1],LOC[0][2]];};
+const CK=[[1,'root','#ff1a1a',650],[2,'sacral','#ff7a00',600],[3,'solar','#ffd400',575],[4,'heart','#00ff88',525],[5,'throat','#00b7ff',480],[6,'third eye','#4b4bff',450],[7,'crown','#b44dff',410]].map(([id,n,c,nm])=>({id,n,c,nm,p:at(nm)}));
+const B75=[(CK[0].p[0]+CK[6].p[0])/2,(CK[0].p[1]+CK[6].p[1])/2],W80=[.3127,.3290];
+let closed=true,sel=8,CKG={};
+const TXT={
+ 7.5:'<h2 style="font-size:24px">7.5 · the bridge</h2><p>The straight run from red (1) to violet (7): mixes of the two ends that no single wavelength of light can make. It is what turns the colour line into a loop. As a number, 7.5 is halfway from 7 to 8. <span class="pill lit">checked</span> It is not halfway from 1 to 7; that is 4, the heart. <span class="pill lit">checked</span></p>',
+ 8:'<h2 style="font-size:24px">8.0 · the white point</h2><p>All the colours added together make white, and white sits in the middle of the loop. 1 + 7 = 8. <span class="pill lit">checked</span> In the cortex it is the middle line that never flips. <span class="pill amb">my mapping</span></p>'};
+function ckInfo(){const k=$('ki');if(sel===7.5||sel===8){k.innerHTML=TXT[sel];return;}const c=CK.find(q=>q.id===sel);const thz=Math.round(299792458/(c.nm*1e-9)/1e12);
+  k.innerHTML=`<h2 style="font-size:24px"><span style="color:${c.c}">●</span> ${c.id}.0 · ${c.n}</h2><p>About <b class="w">${c.nm} nm</b>, ${thz} THz. On its own it is one point on the edge; it only joins the loop through 7.5. <span class="pill amb">wavelength is my match to your colour</span></p>`;}
+function ckDraw(now){const [g,w,h]=fit($('ck'),0.95,300,440),m=26,sx=x=>m+(x/0.78)*(w-2*m),sy=y=>h-m-(y/0.86)*(h-2*m);
+  g.strokeStyle='rgba(255,255,255,.18)';g.lineWidth=1.5;g.beginPath();LOC.forEach(([nm,x,y])=>g.lineTo(sx(x),sy(y)));g.stroke();
+  const P=CK.map(c=>[sx(c.p[0]),sy(c.p[1])]);
+  g.strokeStyle='rgba(255,255,255,.55)';g.lineWidth=2;g.beginPath();CK.forEach((c,i)=>i?g.lineTo(...P[i]):g.moveTo(...P[i]));g.stroke();
+  const bx=sx(B75[0]),by=sy(B75[1]),wx=sx(W80[0]),wy=sy(W80[1]);
+  if(closed){const gr=g.createLinearGradient(P[0][0],P[0][1],P[6][0],P[6][1]);gr.addColorStop(0,'#ff1a1a');gr.addColorStop(1,'#b44dff');g.strokeStyle=gr;g.lineWidth=3;g.setLineDash([6,6]);g.lineDashOffset=-now/40;g.beginPath();g.moveTo(...P[6]);g.lineTo(...P[0]);g.stroke();g.setLineDash([]);}
+  else{g.strokeStyle='rgba(255,255,255,.12)';g.setLineDash([2,6]);g.beginPath();g.moveTo(...P[6]);g.lineTo(...P[0]);g.stroke();g.setLineDash([]);}
+  g.lineWidth=1;
+  CK.forEach((c,i)=>{const [x,y]=P[i],on=sel===c.id;const gg=g.createRadialGradient(x,y,0,x,y,on?26:16);gg.addColorStop(0,c.c+'cc');gg.addColorStop(1,c.c+'00');g.fillStyle=gg;g.beginPath();g.arc(x,y,on?26:16,0,6.2832);g.fill();g.fillStyle=c.c;g.beginPath();g.arc(x,y,on?8:6,0,6.2832);g.fill();g.fillStyle='rgba(241,242,245,.85)';g.font='600 11px Inter,sans-serif';g.fillText(c.id+'.0',x+10,y-6);});
+  const pul=.5+.5*Math.sin(now/300);g.fillStyle=`rgba(255,255,255,${closed?.4+.4*pul:.2})`;g.beginPath();g.arc(bx,by,sel===7.5?10:7,0,6.2832);g.fill();g.fillStyle='rgba(241,242,245,.9)';g.fillText('7.5',bx+10,by+14);
+  const wr=sel===8?16:12;const gw=g.createRadialGradient(wx,wy,0,wx,wy,wr*3);gw.addColorStop(0,'rgba(255,255,255,.9)');gw.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=gw;g.beginPath();g.arc(wx,wy,wr*3,0,6.2832);g.fill();g.fillStyle='#fff';g.beginPath();g.arc(wx,wy,wr*.6,0,6.2832);g.fill();g.fillStyle='rgba(241,242,245,.9)';g.fillText('8.0',wx+14,wy-10);
+  if(closed){const T=(now/5200)%1,path=[...P,[bx,by],P[0]],seg=path.length-1,f=T*seg,k=Math.floor(f),t=f-k,a=path[k],b=path[k+1],px=a[0]+(b[0]-a[0])*t,py=a[1]+(b[1]-a[1])*t;g.fillStyle='#fff';g.beginPath();g.arc(px,py,4,0,6.2832);g.fill();}
+  CKG={P,bx,by,wx,wy};}
+$('ck').addEventListener('pointerdown',e=>{const r=$('ck').getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;const cand=[...CKG.P.map((p,i)=>[p,i+1]),[[CKG.bx,CKG.by],7.5],[[CKG.wx,CKG.wy],8]];let best=null,bd=30;for(const [p,id] of cand){const d=Math.hypot(p[0]-x,p[1]-y);if(d<bd){bd=d;best=id;}}if(best!==null){sel=best;ckInfo();}});
+$('lp').onclick=()=>{closed=!closed;$('lp').textContent='loop: '+(closed?'closed':'open');$('ls').textContent=closed?'root feeds crown through 7.5':'open line · red and violet never meet';};
+const AU=[['1 + 7 = 8','LIT'],['7.5 is the "exact midpoint"','only of 7 and 8; the midpoint of 1 and 7 is 4 (heart)'],['13 × 1 × 13 × 1 × 360 + 6 = 366','DEAD: that product is 60,846; 360 + 6 = 366 is right on its own'],['366 ÷ 7.5 = 48.8 · 366 ÷ 8 = 45.75','LIT'],['root 228 Hz, crown 963 Hz','DEAD as drawn: the page’s own rule (194 + 94 × n) gives 288 and 852'],['colour of light','real frequencies: red 650 nm ≈ 461 THz, violet 410 nm ≈ 731 THz'],['tesseract 6×4×2×1×2×4×6','AMBER: that product is 2,304; a tesseract counts 16 corners, 32 edges, 24 squares, 8 cubes'],['all colours → white','LIT'],['1.6 ≈ φ','AMBER: φ = 1.618']];
+$('au').innerHTML=AU.map(([a,b])=>`<tr><td style="padding:7px 8px;border-bottom:1px solid var(--edge);color:var(--ink)">${a}</td><td style="padding:7px 8px;border-bottom:1px solid var(--edge)">${(()=>{const m=b.match(/^(LIT|DEAD|AMBER)( as drawn)?:?\s*/);if(!m)return b;const rest=(m[2]?'as drawn: ':'')+b.slice(m[0].length);const tag=m[1]==='LIT'?'<span class="pill lit">LIT</span>':m[1]==='DEAD'?'<span class="pill" style="background:rgba(255,122,138,.14);color:#FF7A8A">DEAD</span>':'<span class="pill amb">AMBER</span>';return tag+' '+rest;})()}</td></tr>`).join('');
+ckInfo();(function cl(now){ckDraw(now);requestAnimationFrame(cl);})(0);
+window.__LOOP__={mid17:(1+7)/2,mid78:(7+8)/2,prod:13*13*360+6,hzRule:[1,7].map(n=>194+94*n),ratio:700/380,bridge:B75,white:W80};
+window.__SYS__={total:FTOT,steps:42*8,withSentinels:42*8+24,eff:40/42};
+(function fl(now){frameBar(now);requestAnimationFrame(fl);})(0);
+// ---- v0+3 every node the edge touches, addressed from 0x0 · [nm (0 = none), x, y, screen colour]
+const ND=[[0,0.3127,0.329,"#ffffff"],[700,0.7347,0.2653,"#ff0000"],[699,0.73468,0.26532,"#ff0000"],[698,0.73466,0.26534,"#ff0000"],[697,0.73464,0.26536,"#ff0000"],[696,0.73462,0.26538,"#ff0000"],[695,0.7346,0.2654,"#ff0000"],[694,0.73456,0.26544,"#ff0000"],[693,0.73452,0.26548,"#ff0000"],[692,0.73448,0.26552,"#ff0000"],[691,0.73444,0.26556,"#ff0000"],[690,0.7344,0.2656,"#ff0000"],[689,0.73432,0.26568,"#ff0000"],[688,0.73424,0.26576,"#ff0000"],[687,0.73416,0.26584,"#ff0000"],[686,0.73408,0.26592,"#ff0000"],[685,0.734,0.266,"#ff0000"],[684,0.73388,0.26612,"#ff0000"],[683,0.73376,0.26624,"#ff0000"],[682,0.73364,0.26636,"#ff0000"],[681,0.73352,0.26648,"#ff0000"],[680,0.7334,0.2666,"#ff0000"],[679,0.73326,0.26674,"#ff0000"],[678,0.73312,0.26688,"#ff0000"],[677,0.73298,0.26702,"#ff0000"],[676,0.73284,0.26716,"#ff0000"],[675,0.7327,0.2673,"#ff0000"],[674,0.73256,0.26744,"#ff0000"],[673,0.73242,0.26758,"#ff0000"],[672,0.73228,0.26772,"#ff0000"],[671,0.73214,0.26786,"#ff0000"],[670,0.732,0.268,"#ff0000"],[669,0.73182,0.26818,"#ff0000"],[668,0.73164,0.26836,"#ff0000"],[667,0.73146,0.26854,"#ff0000"],[666,0.73128,0.26872,"#ff0000"],[665,0.7311,0.2689,"#ff0000"],[664,0.73088,0.26912,"#ff0000"],[663,0.73066,0.26934,"#ff0000"],[662,0.73044,0.26956,"#ff0000"],[661,0.73022,0.26978,"#ff0000"],[660,0.73,0.27,"#ff0000"],[659,0.72966,0.27034,"#ff0000"],[658,0.72932,0.27068,"#ff0000"],[657,0.72898,0.27102,"#ff0000"],[656,0.72864,0.27136,"#ff0000"],[655,0.7283,0.2717,"#ff0000"],[654,0.72784,0.27216,"#ff0000"],[653,0.72738,0.27262,"#ff0000"],[652,0.72692,0.27308,"#ff0000"],[651,0.72646,0.27354,"#ff0000"],[650,0.726,0.274,"#ff0000"],[649,0.7254,0.2746,"#ff0000"],[648,0.7248,0.2752,"#ff0000"],[647,0.7242,0.2758,"#ff0000"],[646,0.7236,0.2764,"#ff0000"],[645,0.723,0.277,"#ff0000"],[644,0.7222,0.27778,"#ff0000"],[643,0.7214,0.27856,"#ff0000"],[642,0.7206,0.27934,"#ff0000"],[641,0.7198,0.28012,"#ff0000"],[640,0.719,0.2809,"#ff0000"],[639,0.718,0.2819,"#ff0000"],[638,0.717,0.2829,"#ff0000"],[637,0.716,0.2839,"#ff0000"],[636,0.715,0.2849,"#ff0000"],[635,0.714,0.2859,"#ff0000"],[634,0.71278,0.28712,"#ff0000"],[633,0.71156,0.28834,"#ff0000"],[632,0.71034,0.28956,"#ff0000"],[631,0.70912,0.29078,"#ff0000"],[630,0.7079,0.292,"#ff0000"],[629,0.70644,0.29346,"#ff0000"],[628,0.70498,0.29492,"#ff0000"],[627,0.70352,0.29638,"#ff0000"],[626,0.70206,0.29784,"#ff0000"],[625,0.7006,0.2993,"#ff0000"],[624,0.69878,0.3011,"#ff0000"],[623,0.69696,0.3029,"#ff0000"],[622,0.69514,0.3047,"#ff0000"],[621,0.69332,0.3065,"#ff0000"],[620,0.6915,0.3083,"#ff0000"],[619,0.68922,0.31058,"#ff0000"],[618,0.68694,0.31286,"#ff0000"],[617,0.68466,0.31514,"#ff0000"],[616,0.68238,0.31742,"#ff0000"],[615,0.6801,0.3197,"#ff0000"],[614,0.67724,0.32256,"#ff0000"],[613,0.67438,0.32542,"#ff0000"],[612,0.67152,0.32828,"#ff0000"],[611,0.66866,0.33114,"#ff0000"],[610,0.6658,0.334,"#ff0000"],[609,0.66228,0.33748,"#ff0000"],[608,0.65876,0.34096,"#ff0300"],[607,0.65524,0.34444,"#ff1400"],[606,0.65172,0.34792,"#ff1f00"],[605,0.6482,0.3514,"#ff2700"],[604,0.64396,0.35562,"#ff2f00"],[603,0.63972,0.35984,"#ff3600"],[602,0.63548,0.36406,"#ff3c00"],[601,0.63124,0.36828,"#ff4100"],[600,0.627,0.3725,"#ff4700"],[599,0.62218,0.3773,"#ff4c00"],[598,0.61736,0.3821,"#ff5200"],[597,0.61254,0.3869,"#ff5700"],[596,0.60772,0.3917,"#ff5c00"],[595,0.6029,0.3965,"#ff6100"],[594,0.59736,0.40204,"#ff6600"],[593,0.59182,0.40758,"#ff6b00"],[592,0.58628,0.41312,"#ff7100"],[591,0.58074,0.41866,"#ff7600"],[590,0.5752,0.4242,"#ff7b00"],[589,0.56912,0.43024,"#ff8000"],[588,0.56304,0.43628,"#ff8600"],[587,0.55696,0.44232,"#ff8b00"],[586,0.55088,0.44836,"#ff9000"],[585,0.5448,0.4544,"#ff9600"],[584,0.53834,0.46084,"#ff9c00"],[583,0.53188,0.46728,"#ffa200"],[582,0.52542,0.47372,"#ffa800"],[581,0.51896,0.48016,"#ffae00"],[580,0.5125,0.4866,"#ffb400"],[579,0.50576,0.49332,"#ffbb00"],[578,0.49902,0.50004,"#ffc100"],[577,0.49228,0.50676,"#ffc800"],[576,0.48554,0.51348,"#ffd000"],[575,0.4788,0.5202,"#ffd700"],[574,0.47186,0.5271,"#ffdf00"],[573,0.46492,0.534,"#ffe800"],[572,0.45798,0.5409,"#fff100"],[571,0.45104,0.5478,"#fffa00"],[570,0.4441,0.5547,"#faff00"],[569,0.43702,0.56168,"#f1ff00"],[568,0.42994,0.56866,"#e7ff00"],[567,0.42286,0.57564,"#ddff00"],[566,0.41578,0.58262,"#d3ff00"],[565,0.4087,0.5896,"#caff00"],[564,0.40158,0.59658,"#c0ff00"],[563,0.39446,0.60356,"#b6ff00"],[562,0.38734,0.61054,"#acff00"],[561,0.38022,0.61752,"#a1ff00"],[560,0.3731,0.6245,"#96ff00"],[559,0.36594,0.63138,"#8bff00"],[558,0.35878,0.63826,"#7fff00"],[557,0.35162,0.64514,"#72ff00"],[556,0.34446,0.65202,"#64ff00"],[555,0.3373,0.6589,"#53ff00"],[554,0.33016,0.66558,"#3eff00"],[553,0.32302,0.67226,"#1cff00"],[552,0.31588,0.67894,"#00ff00"],[551,0.30874,0.68562,"#00ff00"],[550,0.3016,0.6923,"#00ff00"],[549,0.29444,0.6987,"#00ff00"],[548,0.28728,0.7051,"#00ff00"],[547,0.28012,0.7115,"#00ff00"],[546,0.27296,0.7179,"#00ff00"],[545,0.2658,0.7243,"#00ff00"],[544,0.25856,0.7303,"#00ff00"],[543,0.25132,0.7363,"#00ff00"],[542,0.24408,0.7423,"#00ff00"],[541,0.23684,0.7483,"#00ff00"],[540,0.2296,0.7543,"#00ff00"],[539,0.22226,0.75976,"#00ff00"],[538,0.21492,0.76522,"#00ff00"],[537,0.20758,0.77068,"#00ff00"],[536,0.20024,0.77614,"#00ff00"],[535,0.1929,0.7816,"#00ff00"],[534,0.18526,0.78646,"#00ff00"],[533,0.17762,0.79132,"#00ff00"],[532,0.16998,0.79618,"#00ff00"],[531,0.16234,0.80104,"#00ff00"],[530,0.1547,0.8059,"#00ff00"],[529,0.1466,0.80996,"#00ff00"],[528,0.1385,0.81402,"#00ff00"],[527,0.1304,0.81808,"#00ff00"],[526,0.1223,0.82214,"#00ff00"],[525,0.1142,0.8262,"#00ff00"],[524,0.10622,0.82772,"#00ff00"],[523,0.09824,0.82924,"#00ff00"],[522,0.09026,0.83076,"#00ff00"],[521,0.08228,0.83228,"#00ff00"],[520,0.0743,0.8338,"#00ff00"],[519,0.06722,0.82944,"#00ff00"],[518,0.06014,0.82508,"#00ff00"],[517,0.05306,0.82072,"#00ff00"],[516,0.04598,0.81636,"#00ff00"],[515,0.0389,0.812,"#00ff00"],[514,0.0339,0.79964,"#00ff19"],[513,0.0289,0.78728,"#00ff2b"],[512,0.0239,0.77492,"#00ff37"],[511,0.0189,0.76256,"#00ff42"],[510,0.0139,0.7502,"#00ff4a"],[509,0.0119,0.73112,"#00ff55"],[508,0.0099,0.71204,"#00ff5e"],[507,0.0079,0.69296,"#00ff67"],[506,0.0059,0.67388,"#00ff6f"],[505,0.0039,0.6548,"#00ff77"],[504,0.00476,0.63152,"#00ff80"],[503,0.00562,0.60824,"#00ff88"],[502,0.00648,0.58496,"#00ff91"],[501,0.00734,0.56168,"#00ff99"],[500,0.0082,0.5384,"#00ffa2"],[499,0.01126,0.51326,"#00ffac"],[498,0.01432,0.48812,"#00ffb5"],[497,0.01738,0.46298,"#00ffbf"],[496,0.02044,0.43784,"#00ffca"],[495,0.0235,0.4127,"#00ffd5"],[494,0.02788,0.38916,"#00ffdf"],[493,0.03226,0.36562,"#00ffeb"],[492,0.03664,0.34208,"#00fff7"],[491,0.04102,0.31854,"#00f9ff"],[490,0.0454,0.295,"#00ecff"],[489,0.05006,0.27614,"#00e1ff"],[488,0.05472,0.25728,"#00d6ff"],[487,0.05938,0.23842,"#00ccff"],[486,0.06404,0.21956,"#00c0ff"],[485,0.0687,0.2007,"#00b5ff"],[484,0.07322,0.1871,"#00adff"],[483,0.07774,0.1735,"#00a4ff"],[482,0.08226,0.1599,"#009bff"],[481,0.08678,0.1463,"#0091ff"],[480,0.0913,0.1327,"#0087ff"],[479,0.09496,0.12352,"#007fff"],[478,0.09862,0.11434,"#0078ff"],[477,0.10228,0.10516,"#006fff"],[476,0.10594,0.09598,"#0066ff"],[475,0.1096,0.0868,"#005cff"],[474,0.1125,0.081,"#0055ff"],[473,0.1154,0.0752,"#004dff"],[472,0.1183,0.0694,"#0044ff"],[471,0.1212,0.0636,"#003aff"],[470,0.1241,0.0578,"#002dff"],[469,0.12638,0.05422,"#0021ff"],[468,0.12866,0.05064,"#0010ff"],[467,0.13094,0.04706,"#0000ff"],[466,0.13322,0.04348,"#0000ff"],[465,0.1355,0.0399,"#0000ff"],[464,0.1372,0.03786,"#0000ff"],[463,0.1389,0.03582,"#0000ff"],[462,0.1406,0.03378,"#0000ff"],[461,0.1423,0.03174,"#0200ff"],[460,0.144,0.0297,"#1a00ff"],[459,0.1454,0.0283,"#2400ff"],[458,0.1468,0.0269,"#2c00ff"],[457,0.1482,0.0255,"#3300ff"],[456,0.1496,0.0241,"#3900ff"],[455,0.151,0.0227,"#3e00ff"],[454,0.15212,0.0217,"#4200ff"],[453,0.15324,0.0207,"#4500ff"],[452,0.15436,0.0197,"#4900ff"],[451,0.15548,0.0187,"#4c00ff"],[450,0.1566,0.0177,"#4f00ff"],[449,0.1575,0.01692,"#5100ff"],[448,0.1584,0.01614,"#5400ff"],[447,0.1593,0.01536,"#5600ff"],[446,0.1602,0.01458,"#5800ff"],[445,0.1611,0.0138,"#5a00ff"],[444,0.16176,0.01322,"#5b00ff"],[443,0.16242,0.01264,"#5d00ff"],[442,0.16308,0.01206,"#5e00ff"],[441,0.16374,0.01148,"#6000ff"],[440,0.1644,0.0109,"#6100ff"],[439,0.1649,0.01044,"#6200ff"],[438,0.1654,0.00998,"#6300ff"],[437,0.1659,0.00952,"#6400ff"],[436,0.1664,0.00906,"#6500ff"],[435,0.1669,0.0086,"#6600ff"],[434,0.1673,0.00826,"#6700ff"],[433,0.1677,0.00792,"#6700ff"],[432,0.1681,0.00758,"#6800ff"],[431,0.1685,0.00724,"#6900ff"],[430,0.1689,0.0069,"#6a00ff"],[429,0.16918,0.00668,"#6a00ff"],[428,0.16946,0.00646,"#6b00ff"],[427,0.16974,0.00624,"#6b00ff"],[426,0.17002,0.00602,"#6c00ff"],[425,0.1703,0.0058,"#6c00ff"],[424,0.17052,0.00566,"#6c00ff"],[423,0.17074,0.00552,"#6d00ff"],[422,0.17096,0.00538,"#6d00ff"],[421,0.17118,0.00524,"#6e00ff"],[420,0.1714,0.0051,"#6e00ff"],[419,0.17154,0.00504,"#6e00ff"],[418,0.17168,0.00498,"#6e00ff"],[417,0.17182,0.00492,"#6f00ff"],[416,0.17196,0.00486,"#6f00ff"],[415,0.1721,0.0048,"#6f00ff"],[414,0.1722,0.0048,"#6f00ff"],[413,0.1723,0.0048,"#6f00ff"],[412,0.1724,0.0048,"#7000ff"],[411,0.1725,0.0048,"#7000ff"],[410,0.1726,0.0048,"#7000ff"],[409,0.17268,0.0048,"#7000ff"],[408,0.17276,0.0048,"#7000ff"],[407,0.17284,0.0048,"#7000ff"],[406,0.17292,0.0048,"#7000ff"],[405,0.173,0.0048,"#7000ff"],[404,0.17306,0.0048,"#7000ff"],[403,0.17312,0.0048,"#7100ff"],[402,0.17318,0.0048,"#7100ff"],[401,0.17324,0.0048,"#7100ff"],[400,0.1733,0.0048,"#7100ff"],[399,0.17336,0.00482,"#7100ff"],[398,0.17342,0.00484,"#7100ff"],[397,0.17348,0.00486,"#7100ff"],[396,0.17354,0.00488,"#7100ff"],[395,0.1736,0.0049,"#7100ff"],[394,0.17364,0.0049,"#7100ff"],[393,0.17368,0.0049,"#7100ff"],[392,0.17372,0.0049,"#7100ff"],[391,0.17376,0.0049,"#7100ff"],[390,0.1738,0.0049,"#7200ff"],[389,0.17384,0.00492,"#7200ff"],[388,0.17388,0.00494,"#7200ff"],[387,0.17392,0.00496,"#7200ff"],[386,0.17396,0.00498,"#7200ff"],[385,0.174,0.005,"#7200ff"],[384,0.17402,0.005,"#7200ff"],[383,0.17404,0.005,"#7200ff"],[382,0.17406,0.005,"#7200ff"],[381,0.17408,0.005,"#7200ff"],[380,0.1741,0.005,"#7200ff"],[0,0.17911,0.00732,"#7800ff"],[0,0.18411,0.00965,"#7e00ff"],[0,0.18912,0.01197,"#8400ff"],[0,0.19412,0.0143,"#8900ff"],[0,0.19913,0.01662,"#8f00ff"],[0,0.20413,0.01894,"#9400ff"],[0,0.20914,0.02127,"#9900ff"],[0,0.21414,0.02359,"#9e00ff"],[0,0.21915,0.02592,"#a300ff"],[0,0.22415,0.02824,"#a800ff"],[0,0.22916,0.03057,"#ac00ff"],[0,0.23416,0.03289,"#b100ff"],[0,0.23917,0.03521,"#b500ff"],[0,0.24418,0.03754,"#ba00ff"],[0,0.24918,0.03986,"#be00ff"],[0,0.25419,0.04219,"#c300ff"],[0,0.25919,0.04451,"#c700ff"],[0,0.2642,0.04683,"#cc00ff"],[0,0.2692,0.04916,"#d000ff"],[0,0.27421,0.05148,"#d400ff"],[0,0.27921,0.05381,"#d800ff"],[0,0.28422,0.05613,"#dd00ff"],[0,0.28922,0.05845,"#e100ff"],[0,0.29423,0.06078,"#e500ff"],[0,0.29923,0.0631,"#e900ff"],[0,0.30424,0.06543,"#ee00ff"],[0,0.30924,0.06775,"#f200ff"],[0,0.31425,0.07007,"#f600ff"],[0,0.31926,0.0724,"#fa00ff"],[0,0.32426,0.07472,"#ff00ff"],[0,0.32927,0.07705,"#ff00fb"],[0,0.33427,0.07937,"#ff00f7"],[0,0.33928,0.0817,"#ff00f3"],[0,0.34428,0.08402,"#ff00ef"],[0,0.34929,0.08634,"#ff00eb"],[0,0.35429,0.08867,"#ff00e8"],[0,0.3593,0.09099,"#ff00e4"],[0,0.3643,0.09332,"#ff00e1"],[0,0.36931,0.09564,"#ff00dd"],[0,0.37431,0.09796,"#ff00da"],[0,0.37932,0.10029,"#ff00d6"],[0,0.38433,0.10261,"#ff00d3"],[0,0.38933,0.10494,"#ff00d0"],[0,0.39434,0.10726,"#ff00cd"],[0,0.39934,0.10958,"#ff00ca"],[0,0.40435,0.11191,"#ff00c7"],[0,0.40935,0.11423,"#ff00c4"],[0,0.41436,0.11656,"#ff00c1"],[0,0.41936,0.11888,"#ff00be"],[0,0.42437,0.12121,"#ff00bb"],[0,0.42937,0.12353,"#ff00b8"],[0,0.43438,0.12585,"#ff00b6"],[0,0.43938,0.12818,"#ff00b3"],[0,0.44439,0.1305,"#ff00b0"],[0,0.44939,0.13283,"#ff00ae"],[0,0.4544,0.13515,"#ff00ab"],[0,0.45941,0.13747,"#ff00a8"],[0,0.46441,0.1398,"#ff00a6"],[0,0.46942,0.14212,"#ff00a3"],[0,0.47442,0.14445,"#ff00a1"],[0,0.47943,0.14677,"#ff009e"],[0,0.48443,0.14909,"#ff009c"],[0,0.48944,0.15142,"#ff0099"],[0,0.49444,0.15374,"#ff0097"],[0,0.49945,0.15607,"#ff0095"],[0,0.50445,0.15839,"#ff0092"],[0,0.50946,0.16072,"#ff0090"],[0,0.51446,0.16304,"#ff008d"],[0,0.51947,0.16536,"#ff008b"],[0,0.52448,0.16769,"#ff0089"],[0,0.52948,0.17001,"#ff0086"],[0,0.53449,0.17234,"#ff0084"],[0,0.53949,0.17466,"#ff0082"],[0,0.5445,0.17698,"#ff007f"],[0,0.5495,0.17931,"#ff007d"],[0,0.55451,0.18163,"#ff007b"],[0,0.55951,0.18396,"#ff0078"],[0,0.56452,0.18628,"#ff0076"],[0,0.56952,0.1886,"#ff0074"],[0,0.57453,0.19093,"#ff0071"],[0,0.57953,0.19325,"#ff006f"],[0,0.58454,0.19558,"#ff006d"],[0,0.58954,0.1979,"#ff006a"],[0,0.59455,0.20022,"#ff0068"],[0,0.59956,0.20255,"#ff0065"],[0,0.60456,0.20487,"#ff0063"],[0,0.60957,0.2072,"#ff0061"],[0,0.61457,0.20952,"#ff005e"],[0,0.61958,0.21185,"#ff005c"],[0,0.62458,0.21417,"#ff0059"],[0,0.62959,0.21649,"#ff0057"],[0,0.63459,0.21882,"#ff0054"],[0,0.6396,0.22114,"#ff0051"],[0,0.6446,0.22347,"#ff004f"],[0,0.64961,0.22579,"#ff004c"],[0,0.65461,0.22811,"#ff0049"],[0,0.65962,0.23044,"#ff0046"],[0,0.66463,0.23276,"#ff0043"],[0,0.66963,0.23509,"#ff0040"],[0,0.67464,0.23741,"#ff003d"],[0,0.67964,0.23973,"#ff0039"],[0,0.68465,0.24206,"#ff0036"],[0,0.68965,0.24438,"#ff0032"],[0,0.69466,0.24671,"#ff002e"],[0,0.69966,0.24903,"#ff002a"],[0,0.70467,0.25136,"#ff0025"],[0,0.70967,0.25368,"#ff001f"],[0,0.71468,0.256,"#ff0019"],[0,0.71968,0.25833,"#ff0011"],[0,0.72469,0.26065,"#ff0005"],[0,0.72969,0.26298,"#ff0000"]];
+const TG={0:'8.0 · white · the 0',0x33:'1.0 root',0x65:'2.0 sacral',0x7e:'3.0 solar',0xb0:'4.0 heart',0xdd:'5.0 throat',0xfb:'6.0 third eye',0x123:'7.0 crown',0x179:'7.5 · middle of the true bridge'};
+const NK=a=>a===0?'centre':a<=321?'light':'purple',HX=a=>'0x'+a.toString(16),THZ=nm=>nm?(299792.458/nm).toFixed(1):'';
+let nsel=0,nwalk=false,nacc=0,nlastT=0,NG=null,trail=0;
+const LOFF={0x33:[12,-8],0x65:[12,-4],0x7e:[12,-4],0xb0:[12,-2],0xdd:[-12,-2],0xfb:[-12,-4],0x123:[8,16],0x179:[0,16],0:[14,-10]};
+function nmDraw(now){const [g,w,h]=fit($('nm'),0.95,300,460),m=24,sx=x=>m+(x/0.78)*(w-2*m),sy=y=>h-m-(y/0.86)*(h-2*m),small=w<420;
+  if(nwalk){nacc+=Math.min(50,now-(nlastT||now))/22;while(nacc>=1){nacc--;nset(nsel>=432?1:nsel+1,false);}}nlastT=now;
+  const P=ND.map(d=>[sx(d[1]),sy(d[2])]),[wx,wy]=P[0];
+  g.strokeStyle='rgba(255,255,255,.12)';g.lineWidth=1;g.beginPath();for(let a=1;a<ND.length;a++)g.lineTo(...P[a]);g.closePath();g.stroke();
+  if(nsel>0){g.strokeStyle=ND[nsel][3];g.globalAlpha=.55;g.lineWidth=1.5;g.beginPath();g.moveTo(wx,wy);g.lineTo(...P[nsel]);g.stroke();g.globalAlpha=1;g.lineWidth=1;}
+  const r=small?1.7:2.2;
+  for(let a=1;a<ND.length;a++){g.globalAlpha=(trail&&a<=nsel)||!trail?1:.35;g.fillStyle=ND[a][3];g.beginPath();g.arc(P[a][0],P[a][1],r,0,6.2832);g.fill();}
+  g.globalAlpha=1;
+  const gw=g.createRadialGradient(wx,wy,0,wx,wy,34);gw.addColorStop(0,'rgba(255,255,255,.85)');gw.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=gw;g.beginPath();g.arc(wx,wy,34,0,6.2832);g.fill();
+  g.fillStyle='#fff';g.beginPath();g.arc(wx,wy,nsel===0?7:5,0,6.2832);g.fill();
+  g.font=`600 ${small?10:11}px ui-monospace,Menlo,monospace`;
+  for(const k in TG){const a=+k,[x,y]=P[a],[dx,dy]=LOFF[a];if(a){g.strokeStyle='rgba(255,255,255,.8)';g.beginPath();g.arc(x,y,4.5,0,6.2832);g.stroke();}
+    g.fillStyle='rgba(241,242,245,.88)';g.textAlign=dx<0?'right':dx===0?'center':'left';g.fillText(HX(a),x+dx,y+dy);}
+  g.textAlign='left';
+  const [sx0,sy0]=P[nsel],pul=.5+.5*Math.sin(now/220);
+  const gs=g.createRadialGradient(sx0,sy0,0,sx0,sy0,20);gs.addColorStop(0,nsel?ND[nsel][3]+'ee':'#ffffffee');gs.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=gs;g.beginPath();g.arc(sx0,sy0,20,0,6.2832);g.fill();
+  g.strokeStyle='#fff';g.lineWidth=2;g.beginPath();g.arc(sx0,sy0,6+2*pul,0,6.2832);g.stroke();g.lineWidth=1;
+  if(!(nsel in TG)){const lab=HX(nsel),tw=g.measureText(lab).width,lx=Math.min(Math.max(sx0-tw/2,6),w-tw-6),ly=sy0-16<14?sy0+26:sy0-16;
+  g.fillStyle='rgba(6,8,11,.75)';g.fillRect(lx-4,ly-11,tw+8,15);g.fillStyle='#fff';g.fillText(lab,lx,ly);}
+  NG={P};}
+function ninfo(){const a=nsel,d=ND[a],k=NK(a),t=TG[a];
+  let body;
+  if(k==='centre')body=`All colours added together. Every node on the edge is one straight spoke from here. <span class="pill lit">checked</span>`;
+  else if(k==='light')body=`<b class="w">${d[0]} nm</b> · ${THZ(d[0])} THz. One pure wavelength of light. Address = 701 − nm. <span class="pill lit">checked</span>`;
+  else{const s=a-321;body=`No single wavelength makes this. It's a mix of the two ends: step <b class="w">${s} of 112</b> along the straight line from violet (0x141) back to red (0x1). <span class="pill lit">checked</span>`;}
+  $('ni').innerHTML=`<div class="big" style="font-family:ui-monospace,Menlo,monospace"><i style="display:inline-block;width:.6em;height:.6em;border-radius:.15em;background:${d[3]};margin-right:.25em;vertical-align:.08em"></i>${HX(a)}</div><p style="margin-top:6px">${t?`<b class="w">${t}</b> · `:''}${k} · node ${a} of 432</p><p>${body}</p><p style="font-size:13px">x ${d[1].toFixed(4)} · y ${d[2].toFixed(4)} · screen ${d[3]}</p>`;
+  document.querySelectorAll('#nj span').forEach(s=>s.classList.toggle('on',+s.dataset.a===a));}
+function nset(a,scroll=true){nsel=Math.max(0,Math.min(432,a));$('nr').value=nsel;ninfo();
+  const tb=$('nt'),old=tb.querySelector('.on');if(old)old.classList.remove('on');const row=tb.children[nsel+1];if(row){row.classList.add('on');if(scroll)tb.scrollTop=row.offsetTop-tb.clientHeight/2;}}
+$('nt').innerHTML='<div class="h"><span>addr</span><span>kind</span><span>nm</span><span>THz</span><span>colour · tag</span></div>'+ND.map((d,a)=>`<div data-a="${a}"${TG[a]?' class="t"':''}><span>${HX(a)}</span><span>${NK(a)}</span><span>${d[0]||'–'}</span><span>${THZ(d[0])||'–'}</span><span><i style="background:${d[3]}"></i>${TG[a]||d[3]}</span></div>`).join('');
+$('nt').addEventListener('click',e=>{const r=e.target.closest('[data-a]');if(r){nwalk=false;$('nw').textContent='Walk the edge';nset(+r.dataset.a,false);}});
+$('nj').innerHTML=Object.keys(TG).map(Number).sort((a,b)=>a-b).map(a=>`<span data-a="${a}">${HX(a)} · ${TG[a].split(' · ')[0].replace(/^\d\.\d /,'')}</span>`).join('');
+$('nj').addEventListener('click',e=>{const s=e.target.closest('[data-a]');if(s){nwalk=false;$('nw').textContent='Walk the edge';trail=0;nset(+s.dataset.a);}});
+$('nr').addEventListener('input',()=>{nwalk=false;$('nw').textContent='Walk the edge';trail=1;nset(+$('nr').value);});
+$('np').onclick=()=>{nwalk=false;$('nw').textContent='Walk the edge';nset(nsel<=1?432:nsel-1);};
+$('nn').onclick=()=>{nwalk=false;$('nw').textContent='Walk the edge';nset(nsel>=432?1:nsel+1);};
+$('nw').onclick=()=>{nwalk=!nwalk;trail=1;if(nwalk&&nsel===0)nset(1);$('nw').textContent=nwalk?'Pause':'Walk the edge';};
+$('nm').addEventListener('pointerdown',e=>{if(!NG)return;const r=$('nm').getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;let best=-1,bd=22;NG.P.forEach((p,a)=>{const d=Math.hypot(p[0]-x,p[1]-y)-(a===0||TG[a]?4:0);if(d<bd){bd=d;best=a;}});if(best>=0){nwalk=false;$('nw').textContent='Walk the edge';trail=0;nset(best);}});
+$('nd').onclick=()=>{const ta=$('ncsv');if(ta.style.display==='block'){ta.style.display='none';return;}ta.value=['address,kind,tag,wavelength_nm,frequency_THz,x,y,colour',...ND.map((d,a)=>[HX(a),NK(a),TG[a]||'',d[0]||'',THZ(d[0]),d[1],d[2],d[3]].join(','))].join('\n');ta.style.display='block';};
+nset(0);(function nl(now){nmDraw(now);requestAnimationFrame(nl);})(0);
+window.__EDGE__={n:ND.length,last:HX(ND.length-1),tags:Object.keys(TG).map(a=>HX(+a)),get sel(){return nsel;},set:a=>nset(a),walk:v=>{nwalk=v;trail=1;}};
+window.__CUBIT__={};window.__set=a=>{playing=false;A=a;$('a').value=a;};
+requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

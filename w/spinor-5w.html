@@ -1,0 +1,284 @@
+<!DOCTYPE html><html lang="en"><head><link rel="icon" href="../favicon.svg" type="image/svg+xml"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Spinor · 5-Window Build (W1–W5)</title>
+<style>
+:root{
+  --void:#06070d;--panel:#0b0d15;--rule:#181f2c;--card:#0f131c;
+  --ink:#e9edf5;--faint:#727e93;--fainter:#3f4858;
+  --arrow:#54d1ff;--phase-pos:#8affc8;--phase-neg:#ff6b8a;--belt:#c77dff;--w1:#ffb454;--sapphire:#4a7dff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--void);color:var(--ink);font:400 12px/1.5 "IBM Plex Mono",ui-monospace,Menlo,monospace}
+body{padding:20px 16px 40px}
+.wrap{max-width:1320px;margin:0 auto}
+.eyebrow{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}
+h1{font:600 26px/1.05 "IBM Plex Sans","Helvetica Neue",sans-serif;letter-spacing:-.02em}
+h1 em{font-style:normal;color:var(--belt)}
+.sub{color:var(--faint);font-size:12.5px;max-width:80ch;line-height:1.6;margin-top:10px}
+.master{display:flex;gap:14px;align-items:center;margin:18px 0 12px;padding:12px 14px;background:var(--panel);border:1px solid var(--rule);border-radius:10px;flex-wrap:wrap}
+.master .lbl{font-size:11px;color:var(--faint)}
+.master input[type=range]{flex:1;min-width:220px;height:4px;-webkit-appearance:none;appearance:none;background:var(--rule);border-radius:2px;outline:none}
+.master input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;border-radius:50%;background:var(--belt);cursor:pointer;border:2px solid var(--panel)}
+.master .v{font-variant-numeric:tabular-nums;color:var(--belt);font-weight:600;min-width:52px;text-align:right}
+.master button{font:inherit;font-size:11px;color:var(--ink);background:var(--card);border:1px solid var(--rule);border-radius:7px;padding:8px 12px;cursor:pointer}
+.master button:hover{border-color:var(--belt);color:var(--belt)}
+.windows{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:10px;overflow:hidden}
+@media(max-width:1040px){.windows{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.windows{grid-template-columns:1fr}}
+.win{background:var(--panel);display:flex;flex-direction:column;min-height:340px}
+.win .hd{padding:9px 11px;border-bottom:1px solid var(--rule);background:var(--card)}
+.win .hd .tag{font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--w1)}
+.win .hd .ttl{font:600 12.5px "IBM Plex Sans",sans-serif;color:var(--ink);margin-top:2px}
+.win .bd{padding:11px;flex:1;display:flex;flex-direction:column;gap:8px}
+.win canvas{width:100%;display:block;border-radius:6px;background:#05070c}
+.txt{font-size:10.5px;color:var(--faint);line-height:1.55}
+.txt b{color:var(--ink);font-weight:400}
+.stamp{display:inline-block;font-size:8.5px;padding:1px 6px;border-radius:10px;border:1px solid currentColor;margin-right:3px}
+.stamp.lit{color:var(--phase-pos)} .stamp.amber{color:var(--w1)}
+.ledger{font-size:10px;line-height:1.7}
+.ledger .who{color:var(--arrow);font-weight:600}
+.ledger .who.c{color:var(--belt)}
+.ledger .who.both{color:var(--phase-pos)}
+.report{margin-top:auto;font-size:10px;padding:7px 8px;border-radius:6px;background:var(--card);border:1px solid var(--rule)}
+.report .r{display:flex;justify-content:space-between;line-height:1.7}
+.report .r b{font-weight:400}
+.report .home{color:var(--phase-pos)} .report .away{color:var(--phase-neg)}
+.feedback{margin-top:auto;font-size:10px}
+.feedback .fb{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--rule)}
+.feedback .verdict{margin-top:8px;padding:8px;border-radius:6px;text-align:center;font-weight:600;font-size:11px}
+.feedback .verdict.agree{background:rgba(138,255,200,0.08);color:var(--phase-pos);border:1px solid rgba(138,255,200,0.3)}
+.feedback .verdict.dissent{background:rgba(255,107,138,0.08);color:var(--phase-neg);border:1px solid rgba(255,107,138,0.3)}
+.foot{color:var(--fainter);font-size:11px;line-height:1.7;margin-top:18px;max-width:92ch}
+.foot b{color:var(--faint);font-weight:400}.foot .n{color:var(--phase-neg)}.foot .p{color:var(--phase-pos)}.foot .b{color:var(--belt)}
+</style></head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">CC 5-window build · W1 source · W2 contributions · W3 1D · W4 2D+interactive · W5 3D + missing piece</div>
+  <h1>The Spinor — <em>five windows, one rotation</em></h1>
+  <p class="sub">One master angle drives all five windows. Turn it and each window reacts, then reports its verdict <b>up to W1</b>. Watch them agree everywhere except 360° — where the disagreement is the whole discovery.</p>
+
+  <div class="master">
+    <span class="lbl">master rotation θ</span>
+    <input type="range" id="ang" min="0" max="720" value="0">
+    <span class="v" id="vAng">0°</span>
+    <button id="t1">↻ 360°</button>
+    <button id="t2">↻↻ 720°</button>
+  </div>
+
+  <div class="windows">
+    <!-- W1 SOURCE -->
+    <div class="win">
+      <div class="hd"><div class="tag">W1 · source</div><div class="ttl">What it is · where found</div></div>
+      <div class="bd">
+        <div class="txt"><b>Spinor</b> — the true object under a spin-½ particle's "spin arrow." Defining trait: it takes <b>720°</b>, not 360°, to return to itself; one full turn multiplies it by −1.</div>
+        <div class="txt" style="color:var(--fainter)">Found: you asked for it after the positronium build ("add a spinor"). Grounding: Dirac / Pauli spin-½; rotation operator R(2π)=−I for any axis. Real: Rauch 1975 neutron interferometry measured the −1.</div>
+        <div class="txt"><span class="stamp lit">LIT</span>720° period, R(2π)=−I, cos(θ/2) phase — node-verified.<br><span class="stamp amber">AMBER</span>belt-trick as intuition (illustrative, not a proof).</div>
+        <div class="feedback" id="fb">
+          <div class="fb"><span>W3 · phase (1D)</span><b id="fb3">—</b></div>
+          <div class="fb"><span>W4 · arrow (2D)</span><b id="fb4">—</b></div>
+          <div class="fb"><span>W5 · Bloch (3D)</span><b id="fb5">—</b></div>
+          <div class="verdict agree" id="verdict">— feedback ↑ —</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- W2 CONTRIBUTIONS -->
+    <div class="win">
+      <div class="hd"><div class="tag">W2 · contributions</div><div class="ttl">Built together · who did what</div></div>
+      <div class="bd">
+        <div class="txt" style="color:var(--phase-pos)">Aggregate — one build, two hands.</div>
+        <div class="ledger">
+          <div><span class="who">ROOT0 →</span> the ask ("add a spinor to add"); the positron-is-it-real challenge; the corpus resonance — <i>"Top, the spinor (0 = balance)"</i> already sits at the centre of UD0.</div>
+          <div style="margin-top:6px"><span class="who c">Claude →</span> the rotation-operator verification (R(2π)=−I); the phase-at-half-speed (cos θ/2); belt-trick framing; Rauch-1975 grounding; the 5-window wiring.</div>
+          <div style="margin-top:6px"><span class="who both">together →</span> the house rule itself, and the choice to let W5 dissent.</div>
+        </div>
+        <div class="report">
+          <div class="r"><span>build</span><b>spinor.5w</b></div>
+          <div class="r"><span>rule</span><b>CC 5-window</b></div>
+          <div class="r"><span>W2 mode</span><b>aggregate</b></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- W3 1D -->
+    <div class="win">
+      <div class="hd"><div class="tag">W3 · 1D view</div><div class="ttl">The hidden phase, one line</div></div>
+      <div class="bd">
+        <canvas id="c3" width="240" height="150"></canvas>
+        <div class="txt">The spinor reduced to one number: <b>cos(θ/2)</b>, the real part of its hidden phase. +1 → −1 (at 360°) → +1 (at 720°). This scalar is the truth the arrow can't show.</div>
+        <div class="report">
+          <div class="r"><span>phase</span><b id="p3">+1.00</b></div>
+          <div class="r"><span>home?</span><b id="h3" class="home">yes</b></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- W4 2D interactive -->
+    <div class="win">
+      <div class="hd"><div class="tag">W4 · 2D + interactive</div><div class="ttl">Arrow + belt, flat & playable</div></div>
+      <div class="bd">
+        <canvas id="c4" width="240" height="180"></canvas>
+        <div class="txt">The <b>arrow</b> (what you see) and the <b>belt ribbon</b> to the world. Drag the master dial: the arrow returns at 360°, the ribbon's twist only clears at 720°.</div>
+        <div class="report">
+          <div class="r"><span>arrow</span><b id="p4">up</b></div>
+          <div class="r"><span>twists</span><b id="tw4">0.00</b></div>
+          <div class="r"><span>home?</span><b id="h4" class="home">yes</b></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- W5 3D + missing -->
+    <div class="win">
+      <div class="hd"><div class="tag">W5 · 3D + missing piece</div><div class="ttl">Bloch sphere · & its blind spot</div></div>
+      <div class="bd">
+        <canvas id="c5" width="240" height="180"></canvas>
+        <div class="txt"><b>Bloch sphere</b> — the standard 3D picture of a qubit. The vector returns at 360°. <b>The missing piece:</b> it's structurally <b>blind to the −1</b> — no 3D observable can show it. To see the sign you must <b>interfere two copies</b> (Rauch). W5 adds the second, ghost, copy.</div>
+        <div class="report">
+          <div class="r"><span>Bloch vec</span><b id="p5">home</b></div>
+          <div class="r"><span>interfere 2</span><b id="int5" class="home">bright</b></div>
+          <div class="r"><span>home?</span><b id="h5" class="home">yes</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot"><b>Reading the five windows.</b> W1 tells you what a spinor is and where it came from; W2 credits the build honestly as a joint one; W3 strips it to a single number, the hidden phase <b>cos(θ/2)</b>; W4 lets you play with the arrow and belt in the plane; W5 lifts it to the Bloch sphere and then admits the sphere's blind spot. The feedback panel in W1 is the point of the whole rule: W3, W4 and W5 each measure "am I home?" off the same live angle and report up, and at <b>360°</b> they split — W4's arrow and W5's Bloch vector say <p>home</p>, but W3's phase says <n>−1</n>. That dissent is true and structural: the arrow and the Bloch vector are <b>observables</b>, and a global phase cancels out of every observable, so they are physically incapable of seeing the sign flip that W3 reads directly. The resolution — the thing W5 contributes that none of W1–W4 hold — is that the −1 stops hiding the moment you have <b>two</b> spinors to compare: interfere the rotated copy with an untouched one and the sign becomes a shift you can measure, which is exactly Rauch's 1975 neutron experiment and exactly the para-vs-ortho combination that set positronium's 2-vs-3 gamma rule. Five windows, one rotation, and the disagreement between them is where the physics actually lives.</p>
+</div>
+
+<script>
+(function(){
+var $=function(id){return document.getElementById(id);};
+var angle=0, animTarget=null, animFrom=0, animT=0;
+
+// ---- W3: 1D phase trace ----
+var c3=$('c3'), g3=c3.getContext('2d');
+// ---- W4: 2D arrow+belt ----
+var c4=$('c4'), g4=c4.getContext('2d');
+// ---- W5: 3D bloch ----
+var c5=$('c5'), g5=c5.getContext('2d');
+var DPR=Math.min(devicePixelRatio||1,2);
+function fitAll(){
+  [[c3,g3,150,240],[c4,g4,180,240],[c5,g5,180,240]].forEach(function(o){
+    var w=o[0].clientWidth;o[0].width=w*DPR;o[0].height=w*o[2]/o[3]*DPR;o[1].setTransform(DPR,0,0,DPR,0,0);o[0]._w=w;o[0]._h=w*o[2]/o[3];});
+}
+
+function phaseRe(deg){return Math.cos(deg/2*Math.PI/180);}
+function phaseIm(deg){return -Math.sin(deg/2*Math.PI/180);}
+function homePhase(deg){return Math.abs(phaseRe(deg)-1)<1e-6&&Math.abs(phaseIm(deg))<1e-6;}
+function homeArrow(deg){return (((deg%360)+360)%360)<1e-6;}
+
+function drawW3(){
+  var W=c3._w,H=c3._h,g=g3;g.clearRect(0,0,W,H);g.fillStyle='#05070c';g.fillRect(0,0,W,H);
+  // axes
+  g.strokeStyle='rgba(120,130,150,0.15)';g.lineWidth=1;g.beginPath();g.moveTo(0,H/2);g.lineTo(W,H/2);g.stroke();
+  g.fillStyle='rgba(120,130,150,0.4)';g.font='8px monospace';g.textAlign='left';g.fillText('+1',3,12);g.fillText('−1',3,H-4);
+  // markers at 360, 720
+  [360,720].forEach(function(d){var x=d/720*W;g.strokeStyle='rgba(120,130,150,0.15)';g.beginPath();g.moveTo(x,0);g.lineTo(x,H);g.stroke();
+    g.fillStyle='rgba(120,130,150,0.4)';g.fillText(d+'°',x-14,H-4);});
+  // curve
+  g.strokeStyle='#8affc8';g.lineWidth=2;g.beginPath();
+  for(var d=0;d<=720;d+=4){var x=d/720*W;var y=H/2-phaseRe(d)*(H/2-8);if(d===0)g.moveTo(x,y);else g.lineTo(x,y);}
+  g.stroke();
+  // moving dot
+  var px=angle/720*W, py=H/2-phaseRe(angle)*(H/2-8);
+  var pos=phaseRe(angle)>=0;
+  g.fillStyle=pos?'#8affc8':'#ff6b8a';g.shadowColor=g.fillStyle;g.shadowBlur=8;g.beginPath();g.arc(px,py,4,0,6.28);g.fill();g.shadowBlur=0;
+}
+
+function drawW4(){
+  var W=c4._w,H=c4._h,g=g4;g.clearRect(0,0,W,H);g.fillStyle='#05070c';g.fillRect(0,0,W,H);
+  var cx=W/2,cy=H*0.44,R=Math.min(W,H)*0.3;
+  // belt ribbon (twist = angle/360)
+  var twists=angle/360, len=W*0.9;
+  for(var i=0;i<36;i++){var f=i/36;var x=cx-len/2+len*f;var w=6*Math.cos(twists*2*Math.PI*f);
+    g.strokeStyle='rgba(199,125,255,'+(0.2+Math.abs(Math.cos(twists*2*Math.PI*f))*0.4)+')';g.lineWidth=1;
+    g.beginPath();g.moveTo(x,H*0.86-Math.abs(w)*0.5);g.lineTo(x,H*0.86+Math.abs(w)*0.5);g.stroke();}
+  g.fillStyle='rgba(199,125,255,0.4)';g.font='8px monospace';g.textAlign='center';g.fillText('belt ribbon',cx,H*0.99);
+  // orbit + arrow
+  g.strokeStyle='rgba(120,130,150,0.12)';g.lineWidth=1;g.beginPath();g.arc(cx,cy,R,0,6.28);g.stroke();
+  var ar=angle*Math.PI/180;var ax=cx+Math.sin(ar)*R,ay=cy-Math.cos(ar)*R;
+  g.strokeStyle='#54d1ff';g.lineWidth=2.5;g.beginPath();g.moveTo(cx,cy);g.lineTo(ax,ay);g.stroke();
+  var a2=Math.atan2(ay-cy,ax-cx);g.fillStyle='#54d1ff';g.beginPath();g.moveTo(ax,ay);
+  g.lineTo(ax-8*Math.cos(a2-0.4),ay-8*Math.sin(a2-0.4));g.lineTo(ax-8*Math.cos(a2+0.4),ay-8*Math.sin(a2+0.4));g.closePath();g.fill();
+  var pos=phaseRe(angle)>=0;g.fillStyle=pos?'#8affc8':'#ff6b8a';g.beginPath();g.arc(cx,cy,5,0,6.28);g.fill();
+}
+
+function drawW5(){
+  var W=c5._w,H=c5._h,g=g5;g.clearRect(0,0,W,H);g.fillStyle='#05070c';g.fillRect(0,0,W,H);
+  var cx=W/2,cy=H*0.46,R=Math.min(W,H)*0.32;
+  // sphere wireframe (simple)
+  g.strokeStyle='rgba(120,130,150,0.15)';g.lineWidth=1;
+  g.beginPath();g.arc(cx,cy,R,0,6.28);g.stroke();
+  g.beginPath();g.ellipse(cx,cy,R,R*0.32,0,0,6.28);g.stroke();
+  g.beginPath();g.ellipse(cx,cy,R*0.32,R,0,0,6.28);g.stroke();
+  // bloch vector: spin direction rotates at FULL angle (period 360) about z; project
+  var ar=angle*Math.PI/180;
+  // state started at +x; rotating about z -> vector in xy-plane at angle ar
+  var vx=Math.cos(ar), vy=Math.sin(ar), vz=0;
+  // simple iso projection
+  var sx=cx+vx*R*0.9 - vy*R*0.3, sy=cy - vz*R*0.9 + vy*R*0.32;
+  g.strokeStyle='#54d1ff';g.lineWidth=2.5;g.beginPath();g.moveTo(cx,cy);g.lineTo(sx,sy);g.stroke();
+  g.fillStyle='#54d1ff';g.beginPath();g.arc(sx,sy,4,0,6.28);g.fill();
+  // GHOST second copy (untouched, the missing piece) at angle 0
+  var gx=cx+1*R*0.9-0*R*0.3, gy=cy+0;
+  g.strokeStyle='rgba(255,180,84,0.5)';g.setLineDash([3,3]);g.lineWidth=1.5;g.beginPath();g.moveTo(cx,cy);g.lineTo(gx,gy);g.stroke();g.setLineDash([]);
+  // interference of the two copies: bright if phases align (cos of half-angle diff)... visibility ~ cos(angle/2)
+  var vis=phaseRe(angle); // +1 bright, -1 dark(flipped)
+  g.fillStyle='rgba(120,130,150,0.4)';g.font='8px monospace';g.textAlign='center';
+  g.fillText('ghost = untouched copy',cx,H*0.98);
+  // interference bar
+  var bright=(vis+1)/2;
+  g.fillStyle=vis>=0?'rgba(138,255,200,'+(0.3+bright*0.6)+')':'rgba(255,107,138,'+(0.3+(1-bright)*0.6)+')';
+  g.fillRect(W*0.15,4,W*0.7*Math.abs(bright<0.5?1:bright),4);
+}
+
+function updateReports(){
+  $('vAng').textContent=Math.round(angle)+'°';
+  // W3
+  var pr=phaseRe(angle);var ph3=homePhase(angle);
+  $('p3').textContent=(pr>=0?'+':'')+pr.toFixed(2);
+  $('h3').textContent=ph3?'yes':(Math.abs(angle%720-360)<1?'−1 flipped':'not yet');
+  $('h3').className=ph3?'home':'away';
+  // W4
+  var ad=((angle%360)+360)%360;var ar4=homeArrow(angle);
+  $('p4').textContent=ad<45||ad>315?'up':ad<135?'right':ad<225?'down':'left';
+  $('tw4').textContent=(angle/360).toFixed(2);
+  $('h4').textContent=ar4?'yes':'not yet';$('h4').className=ar4?'home':'away';
+  // W5
+  var ar5=homeArrow(angle);
+  $('p5').textContent=ar5?'home':'moved';
+  var vis=phaseRe(angle);
+  $('int5').textContent=vis>=0.99?'bright':vis<=-0.99?'DARK (−1!)':'partial';
+  $('int5').className=vis>=0?'home':'away';
+  $('h5').textContent=ar5?'yes':'not yet';$('h5').className=ar5?'home':'away';
+  // feedback UP to W1
+  var f3=ph3, f4=ar4, f5=ar5;
+  $('fb3').textContent=f3?'HOME':(Math.abs(angle%720-360)<1?'−1':'…');
+  $('fb3').style.color=f3?'var(--phase-pos)':'var(--phase-neg)';
+  $('fb4').textContent=f4?'HOME':'…';$('fb4').style.color=f4?'var(--phase-pos)':'var(--faint)';
+  $('fb5').textContent=f5?'HOME':'…';$('fb5').style.color=f5?'var(--phase-pos)':'var(--faint)';
+  var dissent=!(f3===f4&&f4===f5);
+  var v=$('verdict');
+  if(dissent){v.className='verdict dissent';v.textContent='DISSENT ↑ W3 sees −1, W4/W5 blind';}
+  else if(f3&&f4&&f5){v.className='verdict agree';v.textContent='AGREE ↑ all home (0° / 720°)';}
+  else{v.className='verdict agree';v.textContent='in transit ↑ none home';}
+}
+
+function drawAll(){drawW3();drawW4();drawW5();updateReports();}
+
+function setAngle(a){angle=Math.max(0,Math.min(720,a));$('ang').value=angle;drawAll();}
+$('ang').addEventListener('input',function(){animTarget=null;setAngle(+this.value);});
+$('t1').onclick=function(){animateTo(Math.min(720,(Math.round(angle/360)*360)+360));};
+$('t2').onclick=function(){animateTo(720);};
+function animateTo(t){animFrom=angle;animTarget=t;animT=0;}
+function loop(){
+  if(animTarget!==null){animT+=0.02;var e=animT<1?animT:1;var s=e*e*(3-2*e);
+    angle=animFrom+(animTarget-animFrom)*s;$('ang').value=angle;drawAll();
+    if(animT>=1){angle=animTarget;animTarget=null;$('ang').value=angle;drawAll();}}
+  requestAnimationFrame(loop);
+}
+window.addEventListener('resize',function(){fitAll();drawAll();});
+fitAll();drawAll();loop();
+})();
+</script>
+</body></html>
