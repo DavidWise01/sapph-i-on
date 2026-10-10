@@ -1,0 +1,21 @@
+// WebGL2 post-process overlay (bloom, chromatic aberration, grain) over a 2D canvas. Visual only; falls back silently.
+(function(){var src=document.getElementById("stage");if(!src)return;var c=document.createElement("canvas"),gl=c.getContext("webgl2",{alpha:false,antialias:false});if(!gl)return;
+var RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
+c.setAttribute("aria-hidden","true");c.style.cssText="position:absolute;pointer-events:none;display:block";src.parentNode.style.position=src.parentNode.style.position||"relative";src.parentNode.insertBefore(c,src.nextSibling);
+function sh(t,s){var o=gl.createShader(t);gl.shaderSource(o,"#version 300 es\nprecision highp float;\n"+s);gl.compileShader(o);if(!gl.getShaderParameter(o,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(o));return o;}
+var V="out vec2 uv;void main(){vec2 p=vec2(gl_VertexID==1?2.:0.,gl_VertexID==2?2.:0.);uv=p;gl_Position=vec4(p*2.-1.,0,1);}";
+function prog(f){var p=gl.createProgram();gl.attachShader(p,sh(gl.VERTEX_SHADER,V));gl.attachShader(p,sh(gl.FRAGMENT_SHADER,f));gl.linkProgram(p);var u={};for(var i=0,n=gl.getProgramParameter(p,gl.ACTIVE_UNIFORMS);i<n;i++){var a=gl.getActiveUniform(p,i);u[a.name]=gl.getUniformLocation(p,a.name);}return {p:p,u:u};}
+var BR=prog("in vec2 uv;uniform sampler2D t;out vec4 o;void main(){vec3 c=texture(t,vec2(uv.x,1.-uv.y)).rgb;float l=max(c.r,max(c.g,c.b));o=vec4(c*smoothstep(.25,.9,l),1);}"),
+BL=prog("in vec2 uv;uniform sampler2D t;uniform vec2 d;out vec4 o;void main(){vec3 s=texture(t,uv).rgb*.227+(texture(t,uv+d*1.385).rgb+texture(t,uv-d*1.385).rgb)*.316+(texture(t,uv+d*3.231).rgb+texture(t,uv-d*3.231).rgb)*.07;o=vec4(s,1);}"),
+CO=prog("in vec2 uv;uniform sampler2D t,b;uniform float tm,ca;out vec4 o;float h(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}void main(){vec2 f=vec2(uv.x,1.-uv.y),c=uv-.5;float r=dot(c,c);vec2 off=c*ca*r*4.;vec3 s=vec3(texture(t,f+vec2(off.x,-off.y)).r,texture(t,f).g,texture(t,f-vec2(off.x,-off.y)).b);vec3 col=s+texture(b,uv).rgb*1.3;col=col/(1.+col*.25);col*=1.-.45*r;col+=(h(uv*1000.+tm)-.5)*.03;o=vec4(col,1);}");
+function T(w,h,fb){var t=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,t);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,w,h,0,gl.RGBA,gl.UNSIGNED_BYTE,null);[gl.TEXTURE_MIN_FILTER,gl.TEXTURE_MAG_FILTER].forEach(function(k){gl.texParameteri(gl.TEXTURE_2D,k,gl.LINEAR)});gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);var f=null;if(fb){f=gl.createFramebuffer();gl.bindFramebuffer(gl.FRAMEBUFFER,f);gl.framebufferTexture2D(gl.FRAMEBUFFER,gl.COLOR_ATTACHMENT0,gl.TEXTURE_2D,t,0);}return {t:t,f:f,w:w,h:h};}
+var S=T(2,2),A,B,w=0,h=0,vao=gl.createVertexArray(),ema=16,last=0,div=2,ok=true,t0=performance.now();
+function run(p,dst,tx,set){gl.bindFramebuffer(gl.FRAMEBUFFER,dst?dst.f:null);gl.viewport(0,0,dst?dst.w:c.width,dst?dst.h:c.height);gl.useProgram(p.p);tx.forEach(function(x,i){gl.activeTexture(gl.TEXTURE0+i);gl.bindTexture(gl.TEXTURE_2D,x[1].t);gl.uniform1i(p.u[x[0]],i);});if(set)set(p.u);gl.bindVertexArray(vao);gl.drawArrays(gl.TRIANGLES,0,3);}
+function frame(now){if(!ok)return;requestAnimationFrame(frame);try{var dt=now-(last||now);last=now;if(dt>0&&dt<200)ema=ema*.95+dt*.05;if(ema>24&&div<4&&now-t0>3000){div=4;w=0;}
+ if(!src.width||!src.height)return;c.style.left=src.offsetLeft+"px";c.style.top=src.offsetTop+"px";c.style.width=src.offsetWidth+"px";c.style.height=src.offsetHeight+"px";
+ if(c.width!==src.width||c.height!==src.height||!w){c.width=src.width;c.height=src.height;w=Math.max(2,c.width/div|0);h=Math.max(2,c.height/div|0);A=T(w,h,1);B=T(w,h,1);}
+ gl.bindTexture(gl.TEXTURE_2D,S.t);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,src);
+ run(BR,A,[["t",S]]);for(var i=0;i<2;i++){run(BL,B,[["t",A]],function(u){gl.uniform2f(u.d,1/w,0)});run(BL,A,[["t",B]],function(u){gl.uniform2f(u.d,0,1/h)});}
+ run(CO,null,[["t",S],["b",A]],function(u){gl.uniform1f(u.tm,RM?0:(now/1000)%10);gl.uniform1f(u.ca,RM?.001:.0018);});
+}catch(e){ok=false;c.remove();console.warn("post fx off",e);}}
+window.POST={info:function(){return {div:div,dt:ema};}};requestAnimationFrame(frame);})();
