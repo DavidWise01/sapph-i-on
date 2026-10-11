@@ -29,7 +29,7 @@
   "domains": 512,
   "domains_populated": 509,
   "domains_open": 3,
-  "spheres": 1910,
+  "spheres": 1927,
   "zero_spheres": 3,
   "balance": 0,
   "workshop": 343
@@ -47,8 +47,8 @@
    "domains": [
     {
      "n": 1,
-     "name": "THE SEAT",
-     "from": "stewards/ + domains/ + spheres/",
+     "name": "LANDAUER · THE PRICE OF FORGETTING A BIT",
+     "from": "grown/",
      "spheres": [
       {
        "t": "ETHOS steward",
@@ -149,6 +149,30 @@
         "audio": false
        },
        "group": "ion-29"
+      },
+      {
+       "t": "Landauer · the price of forgetting a bit",
+       "h": "grown/landauer.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/landauer.html",
+       "grown": true,
+       "emerges": "reversible vs erasing gates tallying kT ln 2",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#9070ff",
+         "#e8e0ff",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-19",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/ethos-01.html",
@@ -159,8 +183,8 @@
     },
     {
      "n": 2,
-     "name": "AFTER",
-     "from": "after/",
+     "name": "THE SEVEN KAMEAS · AGRIPPA’S PLANETARY SQUARES",
+     "from": "grown/",
      "spheres": [
       {
        "t": "Next Evo Drop 1000",
@@ -640,6 +664,30 @@
         "audio": false
        },
        "group": "ion-34"
+      },
+      {
+       "t": "The Seven Kameas · Agrippa’s planetary squares",
+       "h": "grown/kamea.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/kamea.html",
+       "grown": true,
+       "emerges": "seven planetary magic squares",
+       "label": "HISTORY · MATCH · FOLK",
+       "icon": {
+        "pal": [
+         "#c8102e",
+         "#efe6d2",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-27",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/ethos-02.html",
@@ -5694,7 +5742,7 @@
         "raf": true,
         "audio": false
        },
-       "group": "sapphon-19",
+       "group": "sapphon-20",
        "author": "Grok Bot"
       },
       {
@@ -5718,7 +5766,7 @@
         "raf": true,
         "audio": false
        },
-       "group": "sapphon-21",
+       "group": "sapphon-22",
        "author": "Grok Bot"
       }
      ],
@@ -5777,8 +5825,8 @@
    "domains": [
     {
      "n": 1,
-     "name": "THE SEAT",
-     "from": "stewards/ + domains/ + spheres/",
+     "name": "BALANCED TERNARY · −/0/+ FOR THE 208",
+     "from": "grown/",
      "spheres": [
       {
        "t": "PATHOS steward",
@@ -5879,6 +5927,30 @@
         "audio": false
        },
        "group": "ion-17"
+      },
+      {
+       "t": "Balanced Ternary · −/0/+ for the 208",
+       "h": "grown/balanced-ternary.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/balanced-ternary.html",
+       "grown": true,
+       "emerges": "the 208 sums in −/0/+",
+       "label": "MATCH · LIT",
+       "icon": {
+        "pal": [
+         "#60ff90",
+         "#e8e4ec",
+         "#ffe0a0",
+         "#ff9a3c"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-25",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/pathos-01.html",
@@ -5889,8 +5961,8 @@
     },
     {
      "n": 2,
-     "name": "AGAIN",
-     "from": "again/",
+     "name": "THE CIPHER MANUSCRIPT · TRITHEMIUS’ TABLE",
+     "from": "grown/",
      "spheres": [
       {
        "t": "Next Evo Inf Two",
@@ -6366,6 +6438,30 @@
         "audio": false
        },
        "group": "ion-04"
+      },
+      {
+       "t": "The Cipher Manuscript · Trithemius’ table",
+       "h": "grown/trithemius-cipher.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/trithemius-cipher.html",
+       "grown": true,
+       "emerges": "the tabula recta",
+       "label": "HISTORY · COMPUTED",
+       "icon": {
+        "pal": [
+         "#c8102e",
+         "#efe6d2",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#140404",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-28",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/pathos-02.html",
@@ -12216,7 +12312,7 @@
         "raf": true,
         "audio": false
        },
-       "group": "sapphon-24",
+       "group": "sapphon-25",
        "author": "Grok Bot"
       }
      ],
@@ -12239,8 +12335,8 @@
    "domains": [
     {
      "n": 1,
-     "name": "THE SEAT",
-     "from": "stewards/ + domains/ + spheres/",
+     "name": "THE PHRENOLOGY BUST · AND THE MRI NULL",
+     "from": "grown/",
      "spheres": [
       {
        "t": "LOGOS steward",
@@ -12341,6 +12437,30 @@
         "audio": false
        },
        "group": "sapphon-06"
+      },
+      {
+       "t": "The Phrenology Bust · and the MRI null",
+       "h": "grown/phrenology-null.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/phrenology-null.html",
+       "grown": true,
+       "emerges": "27 organs vs null MRI-scale data",
+       "label": "LIT · PSEUDO",
+       "icon": {
+        "pal": [
+         "#c0c0c0",
+         "#f0f0f0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-23",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/logos-01.html",
@@ -12351,8 +12471,8 @@
     },
     {
      "n": 2,
-     "name": "AHEAD",
-     "from": "ahead/",
+     "name": "THE BLACK MIRROR · OBSIDIAN, DEE AND THE EYE",
+     "from": "grown/",
      "spheres": [
       {
        "t": "Next Phase Plasma Mitosis",
@@ -12831,6 +12951,30 @@
         "audio": false
        },
        "group": "ion-35"
+      },
+      {
+       "t": "The Black Mirror · obsidian, Dee and the eye",
+       "h": "grown/scrying-mirror.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/scrying-mirror.html",
+       "grown": true,
+       "emerges": "obsidian mirror & pareidolia",
+       "label": "HISTORY · COMPUTED · FOLK",
+       "icon": {
+        "pal": [
+         "#c8102e",
+         "#efe6d2",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#050505",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-28",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/logos-02.html",
@@ -17750,8 +17894,8 @@
    "domains": [
     {
      "n": 1,
-     "name": "THE SEAT",
-     "from": "stewards/ + domains/ + spheres/",
+     "name": "THE WHOLE SKY · HAMMER–AITOFF WITH IAU BOUNDARIES",
+     "from": "grown/",
      "spheres": [
       {
        "t": "MYTHOS steward",
@@ -17852,6 +17996,30 @@
         "audio": false
        },
        "group": "ion-28"
+      },
+      {
+       "t": "The Whole Sky · Hammer–Aitoff with IAU boundaries",
+       "h": "grown/hammer-aitoff-atlas.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/hammer-aitoff-atlas.html",
+       "grown": true,
+       "emerges": "whole sky with IAU boundaries",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#a0c0ff",
+         "#e8f0ff",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-25",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/mythos-01.html",
@@ -17862,8 +18030,8 @@
     },
     {
      "n": 2,
-     "name": "ANOTHER",
-     "from": "another/",
+     "name": "AS ABOVE, SO BELOW · THE EMERALD TABLET",
+     "from": "grown/",
      "spheres": [
       {
        "t": "Next Shell After Tantalum",
@@ -18344,6 +18512,30 @@
         "audio": true
        },
        "group": "ion-13"
+      },
+      {
+       "t": "As Above, So Below · the Emerald Tablet",
+       "h": "grown/as-above.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/as-above.html",
+       "grown": true,
+       "emerges": "the sky mirrored red",
+       "label": "HISTORY · COMPUTED",
+       "icon": {
+        "pal": [
+         "#c8102e",
+         "#efe6d2",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-28",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/mythos-02.html",
@@ -22694,7 +22886,7 @@
         "raf": true,
         "audio": false
        },
-       "group": "sapphon-20",
+       "group": "sapphon-21",
        "author": "Grok Bot"
       }
      ],
@@ -22730,7 +22922,7 @@
         "raf": true,
         "audio": false
        },
-       "group": "sapphon-22",
+       "group": "sapphon-23",
        "author": "Grok Bot"
       }
      ],
@@ -22766,7 +22958,7 @@
         "raf": true,
         "audio": false
        },
-       "group": "sapphon-22",
+       "group": "sapphon-23",
        "author": "Grok Bot"
       }
      ],
@@ -22802,7 +22994,7 @@
         "raf": true,
         "audio": false
        },
-       "group": "sapphon-24",
+       "group": "sapphon-25",
        "author": "Grok Bot"
       }
      ],
@@ -22838,7 +23030,7 @@
         "raf": true,
         "audio": false
        },
-       "group": "sapphon-24",
+       "group": "sapphon-26",
        "author": "Grok Bot"
       }
      ],
@@ -22861,8 +23053,8 @@
    "domains": [
     {
      "n": 1,
-     "name": "THE SEAT",
-     "from": "stewards/ + domains/ + spheres/",
+     "name": "THE PAIR CIPHER REVERSED · Y+Z- … +B-A",
+     "from": "grown/",
      "spheres": [
       {
        "t": "EPISTEME steward",
@@ -22963,6 +23155,30 @@
         "audio": false
        },
        "group": "ion-28"
+      },
+      {
+       "t": "The Pair Cipher Reversed · y+z- … +b-a",
+       "h": "grown/cipher-reversed.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/cipher-reversed.html",
+       "grown": true,
+       "emerges": "cipher run backwards; dangling − makes 352",
+       "label": "MATCH",
+       "icon": {
+        "pal": [
+         "#c080ff",
+         "#f0e0ff",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-21",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-01.html",
@@ -22973,8 +23189,8 @@
     },
     {
      "n": 2,
-     "name": "ARCHIVE",
-     "from": "archive/",
+     "name": "THE CROSS-CORRELATION INDEX · EVERY RUN, LINKED",
+     "from": "grown/",
      "spheres": [
       {
        "t": "The Civil Law",
@@ -23455,6 +23671,30 @@
         "audio": false
        },
        "group": "ion-22"
+      },
+      {
+       "t": "The Cross-Correlation Index · every run, linked",
+       "h": "grown/cross-index.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/cross-index.html",
+       "grown": true,
+       "emerges": "graph of all runs",
+       "label": "COMPUTED",
+       "icon": {
+        "pal": [
+         "#e0e0e0",
+         "#e8e4ec",
+         "#ffe0a0",
+         "#7ff9ff"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-26",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-02.html",
@@ -23465,8 +23705,8 @@
     },
     {
      "n": 3,
-     "name": "DOTS",
-     "from": "dots/",
+     "name": "RED RINGS · CRITIQUE OF THE OCCULT RUN",
+     "from": "grown/",
      "spheres": [
       {
        "t": "Wrap 8 3 2 1 1 Dotdot 1 1 2 3 8",
@@ -23941,6 +24181,30 @@
         "audio": false
        },
        "group": "sapphon-10"
+      },
+      {
+       "t": "Red Rings · critique of the occult run",
+       "h": "grown/occult-critique.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/occult-critique.html",
+       "grown": true,
+       "emerges": "red rings",
+       "label": "READING",
+       "icon": {
+        "pal": [
+         "#ff9a3c",
+         "#ff7a6a",
+         "#ffc58a",
+         "#9a4cff"
+        ],
+        "bg": "#2a0a0a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-28",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-03.html",
@@ -29619,8 +29883,8 @@
    "domains": [
     {
      "n": 1,
-     "name": "THE SEAT",
-     "from": "stewards/ + domains/ + spheres/",
+     "name": "EPHEMERAL · NOVAE, SUPERNOVAE AND THE ALERT STREAM",
+     "from": "grown/",
      "spheres": [
       {
        "t": "TECHNE steward",
@@ -29721,6 +29985,30 @@
         "audio": false
        },
        "group": "sapphon-37"
+      },
+      {
+       "t": "Ephemeral · novae, supernovae and the alert stream",
+       "h": "grown/ephemeral-transients.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/ephemeral-transients.html",
+       "grown": true,
+       "emerges": "supernova light curves",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ff6060",
+         "#ffe0e0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-26",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/techne-01.html",
@@ -29731,8 +30019,8 @@
     },
     {
      "n": 2,
-     "name": "ASKED",
-     "from": "asked/",
+     "name": "THE OCCULT NUMBERS, CROSS-CORRELATED",
+     "from": "grown/",
      "spheres": [
       {
        "t": "After Ytterbium",
@@ -30213,6 +30501,30 @@
         "audio": false
        },
        "group": "ion-23"
+      },
+      {
+       "t": "The Occult Numbers, Cross-Correlated",
+       "h": "grown/occult-numbers.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/occult-numbers.html",
+       "grown": true,
+       "emerges": "occult numbers cross-correlated",
+       "label": "MATCH · READING",
+       "icon": {
+        "pal": [
+         "#c8102e",
+         "#efe6d2",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#140404",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-29",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/techne-02.html",
@@ -35090,8 +35402,8 @@
    "domains": [
     {
      "n": 1,
-     "name": "THE SEAT",
-     "from": "stewards/ + domains/ + spheres/",
+     "name": "VENUS · THE DRESDEN TABLE VS THE EPHEMERIS",
+     "from": "grown/",
      "spheres": [
       {
        "t": "PHRONESIS steward",
@@ -35192,6 +35504,30 @@
         "audio": false
        },
        "group": "ion-28"
+      },
+      {
+       "t": "Venus · the Dresden table vs the ephemeris",
+       "h": "grown/venus-dresden.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/venus-dresden.html",
+       "grown": true,
+       "emerges": "Maya 584 vs ephemeris",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffe080",
+         "#fff0d0",
+         "#e0201a",
+         "#e8e4ec"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-26",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/phronesis-01.html",
@@ -35202,8 +35538,8 @@
     },
     {
      "n": 2,
-     "name": "ATMOSPHERES",
-     "from": "atmospheres/",
+     "name": "NIGREDO → RUBEDO · BLACK SULFIDE TURNS RED",
+     "from": "grown/",
      "spheres": [
       {
        "t": "The Atmospheres",
@@ -35244,6 +35580,30 @@
         "audio": false
        },
        "group": "sapphon-42"
+      },
+      {
+       "t": "Nigredo → Rubedo · black sulfide turns red",
+       "h": "grown/nigredo-rubedo.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/nigredo-rubedo.html",
+       "grown": true,
+       "emerges": "black HgS to red cinnabar",
+       "label": "HISTORY · LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#c8102e",
+         "#efe6d2",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#1a1a1a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-29",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/phronesis-02.html",
@@ -39767,7 +40127,7 @@
         "raf": true,
         "audio": false
        },
-       "group": "sapphon-23",
+       "group": "sapphon-24",
        "author": "Grok Bot"
       }
      ],
@@ -39803,7 +40163,7 @@
         "raf": true,
         "audio": false
        },
-       "group": "sapphon-24",
+       "group": "sapphon-27",
        "author": "Grok Bot"
       }
      ],
@@ -39839,7 +40199,7 @@
         "raf": true,
         "audio": false
        },
-       "group": "sapphon-25",
+       "group": "sapphon-29",
        "author": "Grok Bot"
       }
      ],
@@ -39873,8 +40233,8 @@
    "domains": [
     {
      "n": 1,
-     "name": "THE SEAT",
-     "from": "stewards/ + domains/ + spheres/",
+     "name": "NAME NUMBERS · PYTHAGOREAN VS CHALDEAN",
+     "from": "grown/",
      "spheres": [
       {
        "t": "KAIROS steward",
@@ -39975,6 +40335,30 @@
         "audio": false
        },
        "group": "ion-29"
+      },
+      {
+       "t": "Name Numbers · Pythagorean vs Chaldean",
+       "h": "grown/name-numbers.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/name-numbers.html",
+       "grown": true,
+       "emerges": "Pythagorean vs Chaldean name values",
+       "label": "MATCH · PSEUDO",
+       "icon": {
+        "pal": [
+         "#b080ff",
+         "#e8d8ff",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-24",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/kairos-01.html",
@@ -39985,8 +40369,8 @@
     },
     {
      "n": 2,
-     "name": "BEYOND",
-     "from": "beyond/",
+     "name": "SIGILS ON THE SQUARES · TRACING A NAME",
+     "from": "grown/",
      "spheres": [
       {
        "t": "Next Shell After Ytterbium",
@@ -40467,6 +40851,30 @@
         "audio": true
        },
        "group": "ion-13"
+      },
+      {
+       "t": "Sigils on the Squares · tracing a name",
+       "h": "grown/sigil-trace.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/sigil-trace.html",
+       "grown": true,
+       "emerges": "names traced on squares",
+       "label": "HISTORY · MODEL · FOLK",
+       "icon": {
+        "pal": [
+         "#c8102e",
+         "#efe6d2",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#3a0a10",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-29",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/kairos-02.html",
@@ -45790,7 +46198,7 @@
         "raf": true,
         "audio": false
        },
-       "group": "sapphon-21",
+       "group": "sapphon-22",
        "author": "Grok Bot"
       }
      ],
@@ -45826,7 +46234,7 @@
         "raf": true,
         "audio": false
        },
-       "group": "sapphon-23",
+       "group": "sapphon-24",
        "author": "Grok Bot"
       }
      ],
@@ -45862,7 +46270,7 @@
         "raf": true,
         "audio": false
        },
-       "group": "sapphon-23",
+       "group": "sapphon-24",
        "author": "Grok Bot"
       },
       {
@@ -45886,7 +46294,7 @@
         "raf": true,
         "audio": false
        },
-       "group": "sapphon-25",
+       "group": "sapphon-27",
        "author": "Grok Bot"
       }
      ],
@@ -45922,7 +46330,7 @@
         "raf": true,
         "audio": false
        },
-       "group": "sapphon-25",
+       "group": "sapphon-27",
        "author": "Grok Bot"
       }
      ],
@@ -45958,7 +46366,7 @@
         "raf": true,
         "audio": false
        },
-       "group": "sapphon-25",
+       "group": "sapphon-30",
        "author": "Grok Bot"
       }
      ],
@@ -45994,7 +46402,7 @@
         "raf": true,
         "audio": false
        },
-       "group": "sapphon-26",
+       "group": "sapphon-30",
        "author": "Grok Bot"
       }
      ],
@@ -54309,7 +54717,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1910
+   "pages": 1927
   },
   "list": [
    {
@@ -55129,7 +55537,7 @@
       "w/wakaku-speaker-6161e.html",
       "w/wakaku-speaker-complete.html",
       "grown/the-atom-darmstadtium.html",
-      "grown/time-reversal.html"
+      "grown/landauer.html"
      ],
      [
       "w/wakaku-speaker-compressed.html",
@@ -55138,7 +55546,7 @@
       "w/wakaku-speaker-full.html",
       "w/wakaku-speaker-globe.html",
       "grown/the-atom-nickel.html",
-      "grown/sator-square.html"
+      "grown/time-reversal.html"
      ]
     ]
    },
@@ -55155,7 +55563,7 @@
       "w/wakaku-speaker-ripples.html",
       "w/wakaku-speaker-simultaneous.html",
       "grown/the-atom-xenon.html",
-      "grown/unwrapping.html"
+      "grown/sator-square.html"
      ],
      [
       "w/wakaku-speaker-standing.html",
@@ -55164,7 +55572,7 @@
       "w/wakaku-stained-glass-kintsugi-cathedral-art-style.html",
       "w/wakaku-tachyon-edge-appears-2s-before-quantum-dot-disappears.html",
       "grown/the-atom-mendelevium.html",
-      "grown/backmasking.html"
+      "grown/unwrapping.html"
      ],
      [
       "w/wakaku-tachyon-voltage-plus-e-minus-t-plus-i-minus-o-plus-n-.html",
@@ -55173,7 +55581,7 @@
       "w/which-tardigrade-is-intelligence.html",
       "w/yellow-sun-black-hole-sisters.html",
       "grown/the-atom-ytterbium.html",
-      "grown/arrow-of-time.html"
+      "grown/backmasking.html"
      ],
      [
       "wakaku/Wakaku-Speaker-V11-Colors.html",
@@ -55182,7 +55590,7 @@
       "forward/Next-Iteration-Galactic-Beyond.html",
       "still/Next-Shell-After-Rubidium.html",
       "grown/the-atom-dubnium.html",
-      "grown/reverse-life.html"
+      "grown/arrow-of-time.html"
      ]
     ]
    },
@@ -55199,7 +55607,7 @@
       "forward/Next-Iteration-After-Heliosphere.html",
       "full/Enhanced-Full-Human-Integrated.html",
       "grown/the-atom-tin.html",
-      "grown/spin-echo.html"
+      "grown/reverse-life.html"
      ],
      [
       "later/Next-Evo-Focus-Targe.html",
@@ -55208,7 +55616,7 @@
       "next/Phi-Tower-Next-Evo.html",
       "onward/Next-Cycle-19-24-Third.html",
       "grown/the-atom-livermorium.html",
-      "grown/reverse-critique.html"
+      "grown/cipher-reversed.html"
      ],
      [
       "plank/Planck-Frame-1x1-6e36.html",
@@ -55216,7 +55624,7 @@
       "plus/42-Plus-Gilgamesh-12-Tablets-Supplement.html",
       "w/black-hole-1px-eh.html",
       "grown/the-atom-flerovium.html",
-      "grown/the-208-reversed.html"
+      "grown/spin-echo.html"
      ],
      [
       "w/electron-proton-neutron-electrum-lab.html",
@@ -55225,7 +55633,7 @@
       "w/qds-two-electrum-shells.html",
       "w/wrapped-electrum-x3.html",
       "grown/the-atom-hafnium.html",
-      "grown/benford.html"
+      "grown/reverse-critique.html"
      ]
     ]
    },
@@ -55242,7 +55650,7 @@
       "forth/Next-Shell-After-Neon.html",
       "forth/Next-Shell-After-Silicon.html",
       "grown/the-atom-argon.html",
-      "grown/kyoto-blossom.html"
+      "grown/the-208-reversed.html"
      ],
      [
       "forth/Next-Shell-After-Sodium.html",
@@ -55251,7 +55659,7 @@
       "forward/Next-Shell-After-Thallium.html",
       "full/Blueprint-Production-Technical-Document-Full-Specs.html",
       "grown/the-atom-fermium.html",
-      "grown/fibonacci-phyllotaxis.html"
+      "grown/benford.html"
      ],
      [
       "gold/Blueprint-0-Gold-Universe-Speed-Gravity-0-Lean-Proofed.html",
@@ -55260,7 +55668,7 @@
       "gold/Distilled-Gold-Universe-Handmade-Best-0-0-0.html",
       "gold/Unbounded-Gold-Universe-Power-Towers-Gravity-Waves.html",
       "grown/the-atom-actinium.html",
-      "grown/gematria.html"
+      "grown/kyoto-blossom.html"
      ],
      [
       "gravity/Gravity-Is-The-Electron-Mother-Trucker.html",
@@ -55269,7 +55677,7 @@
       "next/Next-Evolution-After-Cubit.html",
       "qdot/Blueprint-Stargate-Address-Ansible-Quantum-Entanglement-A-A-B-B-C-C-N6n.html",
       "grown/the-atom-oganesson.html",
-      "grown/bloom-and-tun.html"
+      "grown/fibonacci-phyllotaxis.html"
      ]
     ]
    },
@@ -55286,7 +55694,7 @@
       "w/each-sun-is-a-universe-power-towers.html",
       "w/nested-g6-n5-g6-n3-g6-n3-tower.html",
       "grown/the-atom-nobelium.html",
-      "grown/palm-creases.html"
+      "grown/phrenology-null.html"
      ],
      [
       "w/next-element-sulfur.html",
@@ -55295,7 +55703,7 @@
       "forward/Next-ZH38-7-Upper-Prong.html",
       "full/Full-0-11-Aether-Akashic-All-Atoms.html",
       "grown/the-atom-bromine.html",
-      "grown/folk-critique.html"
+      "grown/gematria.html"
      ],
      [
       "full/Full-Coherent-Dashboard-0-11-Freeze-Patty-Engine.html",
@@ -55304,7 +55712,7 @@
       "gravity/Gravity-Walked-To-Planck-Box-No-Mass-Homeo-2pct.html",
       "nested/G6-Corrected-81-Nested-3x3-Power-3.html",
       "grown/the-atom-oxygen.html",
-      "grown/numerology-208.html"
+      "grown/bloom-and-tun.html"
      ],
      [
       "plus/Ring4-Gen0-0-Plus-1-Root-Ada-Lovelace.html",
@@ -55313,7 +55721,7 @@
       "sapphon/Core-Contract-Patrica-Sapphon-Ethics-First.html",
       "scale/Plank-Time-Scale-1-65e-35-X-13-8b-Div-6.html",
       "grown/the-atom-niobium.html",
-      "grown/forer-demo.html"
+      "grown/palm-creases.html"
      ]
     ]
    },
@@ -55330,7 +55738,7 @@
       "w/aeon-bootloader-fixed-actually.html",
       "w/aeon-upgraded-dot.html",
       "grown/the-atom-sodium.html",
-      "grown/gnomonic-orion.html"
+      "grown/folk-critique.html"
      ],
      [
       "w/enheduanna-42-temple-poems-kernel-42-states.html",
@@ -55339,7 +55747,7 @@
       "w/universe-plank-sized-x6-model-u.html",
       "dots/fold-time-space-gravity-into-the-dot.html",
       "grown/the-atom-magnesium.html",
-      "grown/precession.html"
+      "grown/name-numbers.html"
      ],
      [
       "w/fold-time-space-gravity-into-the-dot.html",
@@ -55347,7 +55755,7 @@
       "ahead/Next-After-Joins-Stronger.html",
       "forth/Next-Shell-After-Aluminum.html",
       "grown/the-atom-silicon.html",
-      "grown/stars-critique.html"
+      "grown/numerology-208.html"
      ],
      [
       "full/One-Full-Human-Base.html",
@@ -55356,7 +55764,7 @@
       "w/eye-to-scale-intelligence-neuronic-planck.html",
       "wakaku/Wakaku-Speaker-V18-Completion.html",
       "grown/the-atom-yttrium.html",
-      "grown/triple-star.html"
+      "grown/forer-demo.html"
      ]
     ]
    },
@@ -55373,7 +55781,7 @@
       "plus/Pinned-Plus-Make-Minus1-0-Plus1.html",
       "forward/Next-Element-Niobium-41.html",
       "grown/the-atom-curium.html",
-      "grown/sky-tonight.html"
+      "grown/balanced-ternary.html"
      ],
      [
       "onward/Next-Evolution-Element-119.html",
@@ -55382,7 +55790,7 @@
       "nested/hanger-11011-nested-zero.html",
       "dots/fold-into-the-dot-modern.html",
       "grown/the-atom-lanthanum.html",
-      "grown/michelson-morley.html"
+      "grown/gnomonic-orion.html"
      ],
      [
       "dots/one-dot-to-a-universe-in-13-2-steps.html",
@@ -55391,7 +55799,7 @@
       "plus/plus-15-degrees-off-the-fat-belly.html",
       "w/one-dot-to-a-universe-real.html",
       "grown/the-atom-praseodymium.html",
-      "grown/tarot-shuffle.html"
+      "grown/hammer-aitoff-atlas.html"
      ],
      [
       "w/wakaku-speaker-10h.html",
@@ -55400,7 +55808,7 @@
       "w/element-185-first-after.html",
       "qdot/Quantum-Battery-Wrapped-Neon-Gold-Silver-Rust-Water-Hydrogen.html",
       "grown/the-atom-hassium.html",
-      "grown/enochian-tables.html"
+      "grown/precession.html"
      ]
     ]
    },
@@ -55417,7 +55825,7 @@
       "w/mutate-box-toroid-mutated.html",
       "w/schwarzschild-blackhole.html",
       "grown/the-atom-manganese.html",
-      "grown/planetary-hours.html"
+      "grown/stars-critique.html"
      ],
      [
       "wakaku/Wakaku-Speaker-V19-Transmission.html",
@@ -55425,7 +55833,8 @@
       "one/Alpha-40-Best-One.html",
       "w/prims-single-cell-universe.html",
       "next/Next-Evolution-Garden.html",
-      "grown/the-atom-dysprosium.html"
+      "grown/the-atom-dysprosium.html",
+      "grown/cross-index.html"
      ],
      [
       "w/generative-eye-planck-kraken.html",
@@ -55433,7 +55842,8 @@
       "wakaku/Wakaku-Speaker-V15-Gilgamesh.html",
       "later/Next-Evo-Mnemonic-Holographic.html",
       "w/81-nested-og.html",
-      "grown/the-atom-strontium.html"
+      "grown/the-atom-strontium.html",
+      "grown/ephemeral-transients.html"
      ],
      [
       "onward/Next-Evo-After-Heka-Fin-Again.html",
@@ -55441,7 +55851,8 @@
       "w/max-cap-full-quantum-computer-x-inf.html",
       "w/wasm-recursive-wasm-universe.html",
       "forward/Next-Element-Molybdenum-42.html",
-      "grown/the-atom-platinum.html"
+      "grown/the-atom-platinum.html",
+      "grown/venus-dresden.html"
      ]
     ]
    },
@@ -55457,7 +55868,8 @@
       "next/Next-Evo-Gen-Double.html",
       "w/electrum-quantum-dot-16-colors.html",
       "one/Eight-Focused-One-Point-Stargate-Vogel.html",
-      "grown/the-atom-hydrogen.html"
+      "grown/the-atom-hydrogen.html",
+      "grown/triple-star.html"
      ],
      [
       "w/sphere-360-toroids-fractal.html",
@@ -55465,7 +55877,8 @@
       "next/Next-Evolution-Propagation-Garden.html",
       "beyond/Next-Shell-After-Ytterbium.html",
       "strip/the-minus-plus.html",
-      "grown/the-atom-moscovium.html"
+      "grown/the-atom-moscovium.html",
+      "grown/sky-tonight.html"
      ],
      [
       "strip/the-plus-minus.html",
@@ -55473,14 +55886,16 @@
       "plus/Carry-State-With-You-St-Plus.html",
       "w/gravity-red-blue-spinor.html",
       "farther/Next-Iteration-After-Tarti.html",
-      "grown/the-atom-tantalum.html"
+      "grown/the-atom-tantalum.html",
+      "grown/michelson-morley.html"
      ],
      [
       "echo/Wakaku-Speaker-V58-Destruction.html",
       "echo/Wakaku-Speaker-V59-Expansion.html",
       "echo/Wakaku-Speaker-V60-Cooling.html",
       "echo/Wakaku-Speaker-V61-Growth.html",
-      "grown/the-atom-vanadium.html"
+      "grown/the-atom-vanadium.html",
+      "grown/kamea.html"
      ]
     ]
    },
@@ -55496,7 +55911,8 @@
       "echo/Wakaku-Speaker-V73-After.html",
       "echo/Wakaku-Speaker-V75-Black.html",
       "forth/Wakaku-Speaker-V72-Next.html",
-      "grown/the-atom-technetium.html"
+      "grown/the-atom-technetium.html",
+      "grown/trithemius-cipher.html"
      ],
      [
       "refrain/Wakaku-Speaker-V42-Sync.html",
@@ -55504,7 +55920,8 @@
       "refrain/Wakaku-Speaker-V48-Cooling.html",
       "refrain/Wakaku-Speaker-V54-Seed.html",
       "refrain/Wakaku-Speaker-V55-Miotic.html",
-      "grown/the-atom-thallium.html"
+      "grown/the-atom-thallium.html",
+      "grown/scrying-mirror.html"
      ],
      [
       "reprise/Wakaku-Speaker-V27-Gravity.html",
@@ -55512,7 +55929,8 @@
       "w/wakaku-speaker-brackish.html",
       "w/wakaku-speaker-chromatic.html",
       "w/wakaku-speaker-electrum.html",
-      "grown/the-atom-californium.html"
+      "grown/the-atom-californium.html",
+      "grown/as-above.html"
      ],
      [
       "w/wakaku-speaker-prismatic.html",
@@ -55520,7 +55938,8 @@
       "evo/Evo-Cosmic-Universe.html",
       "gold/After-13-8B-Future-White-Gold.html",
       "gold/Cycle-4-P0-White-Gold-Memory.html",
-      "grown/the-atom-palladium.html"
+      "grown/the-atom-palladium.html",
+      "grown/occult-critique.html"
      ]
     ]
    },
@@ -55536,7 +55955,8 @@
       "gold/Evo-White-Gold-Galaxy.html",
       "plank/Heat-Death-Planck-Rebirth.html",
       "scale/Scale-Come-Into-Light.html",
-      "grown/the-atom-roentgenium.html"
+      "grown/the-atom-roentgenium.html",
+      "grown/occult-numbers.html"
      ],
      [
       "scale/Scale-Minus-13-8b-Bh-Sun-Worm.html",
@@ -55544,7 +55964,8 @@
       "w/dif-elements-rain.html",
       "w/electrum-lab-tighter-art-style.html",
       "dots/Quantum-Wordle-Boxes-Box.html",
-      "grown/the-atom-titanium.html"
+      "grown/the-atom-titanium.html",
+      "grown/nigredo-rubedo.html"
      ],
      [
       "again/Next-Evo-Mode-Transport.html",
@@ -55552,7 +55973,8 @@
       "farther/Next-Element-Zinc-30.html",
       "ahead/Next-Element-Praseodymium-59-Lyre.html",
       "full/Full-Waddington-Landscape.html",
-      "grown/the-atom-tellurium.html"
+      "grown/the-atom-tellurium.html",
+      "grown/tarot-shuffle.html"
      ],
      [
       "plank/Planck-Inside-Reverse.html",
@@ -55560,7 +55982,8 @@
       "plank/Planck_Power_Scale_Integrated_v132.html",
       "plank/Planck_Power_Scale_Integrated_v133.html",
       "w/toroid-inference-engine.html",
-      "grown/the-atom-antimony.html"
+      "grown/the-atom-antimony.html",
+      "grown/sigil-trace.html"
      ]
     ]
    },
@@ -55576,7 +55999,8 @@
       "lyre/B5-Lyre-First-Boron.html",
       "onward/Next-Evo-Carry-State-At-0root.html",
       "one/Stargate-Gattaca-Real-One.html",
-      "grown/the-atom-molybdenum.html"
+      "grown/the-atom-molybdenum.html",
+      "grown/enochian-tables.html"
      ],
      [
       "beyond/Next-Shell-After-Dysprosium.html",
@@ -55584,7 +56008,8 @@
       "beyond/Next-Shell-After-Holmium.html",
       "beyond/Next-Shell-After-Promethium.html",
       "beyond/Next-Shell-After-Terbium.html",
-      "grown/the-atom-carbon.html"
+      "grown/the-atom-carbon.html",
+      "grown/planetary-hours.html"
      ],
      [
       "beyond/Next-Shell-After-Thulium.html",
