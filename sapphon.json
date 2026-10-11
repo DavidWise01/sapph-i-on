@@ -27,10 +27,10 @@
  "counts": {
   "keepers": 8,
   "domains": 512,
-  "domains_populated": 484,
-  "domains_open": 28,
-  "spheres": 1883,
-  "zero_spheres": 28,
+  "domains_populated": 493,
+  "domains_open": 19,
+  "spheres": 1892,
+  "zero_spheres": 19,
   "balance": 0,
   "workshop": 343
  },
@@ -5634,24 +5634,74 @@
     },
     {
      "n": 62,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "T · RUN THE FILM BACKWARDS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "T · run the film backwards",
+       "h": "grown/time-reversal.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/time-reversal.html",
+       "grown": true,
+       "emerges": "reversible Verlet orbits sent home",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#60a0ff",
+         "#d0e8ff",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-19",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/ethos-62.html",
-     "zero_page": "z/ethos-62.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-62.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-62.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 63,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "SATOR · THE SQUARE THAT READS EVERY WAY",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "SATOR · the square that reads every way",
+       "h": "grown/sator-square.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/sator-square.html",
+       "grown": true,
+       "emerges": "the Sator square read four ways",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffe0b0",
+         "#d09040",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-19",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/ethos-63.html",
-     "zero_page": "z/ethos-63.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-63.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-63.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -11985,24 +12035,74 @@
     },
     {
      "n": 61,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "UNWRAPPING · THE NINE SHELLS RUN BACKWARDS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Unwrapping · the nine shells run backwards",
+       "h": "grown/unwrapping.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/unwrapping.html",
+       "grown": true,
+       "emerges": "nine shells coming off in reverse batch order",
+       "label": "COMPUTED",
+       "icon": {
+        "pal": [
+         "#ff80c0",
+         "#ffd0e8",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-20",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-61.html",
-     "zero_page": "z/pathos-61.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-61.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-61.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 62,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "BACKMASKING · HEARING THINGS IN REVERSE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Backmasking · hearing things in reverse",
+       "h": "grown/backmasking.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/backmasking.html",
+       "grown": true,
+       "emerges": "a phrase played forwards and backwards",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ff5050",
+         "#ffc8c8",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": true
+       },
+       "group": "sapphon-20",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-62.html",
-     "zero_page": "z/pathos-62.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-62.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-62.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -22435,24 +22535,74 @@
     },
     {
      "n": 59,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE ARROW · ENTROPY AND THE LOSCHMIDT REVERSAL",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Arrow · entropy and the Loschmidt reversal",
+       "h": "grown/arrow-of-time.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/arrow-of-time.html",
+       "grown": true,
+       "emerges": "lattice gas spreading and un-spreading",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffa040",
+         "#ffe8c0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-20",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-59.html",
-     "zero_page": "z/mythos-59.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-59.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-59.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 60,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "REVERSE LIFE · TUN REVIVAL AND REVERSE TRANSCRIPTASE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Reverse Life · tun revival and reverse transcriptase",
+       "h": "grown/reverse-life.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/reverse-life.html",
+       "grown": true,
+       "emerges": "tun revival and RNA→cDNA reverse transcription",
+       "label": "LIT · COMPUTED · MODEL",
+       "icon": {
+        "pal": [
+         "#80d050",
+         "#3fd06a",
+         "#4a7aff",
+         "#ffe33a"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-20",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-60.html",
-     "zero_page": "z/mythos-60.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-60.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-60.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -39286,24 +39436,74 @@
     },
     {
      "n": 58,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "SPIN ECHO · HAHN 1950, A REAL REVERSAL",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Spin Echo · Hahn 1950, a real reversal",
+       "h": "grown/spin-echo.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/spin-echo.html",
+       "grown": true,
+       "emerges": "dephasing spins refocused by a π pulse",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#30e090",
+         "#c0ffe0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-21",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-58.html",
-     "zero_page": "z/phronesis-58.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-58.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-58.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 59,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "RINGS REVERSED · CRITIQUE OF THE REVERSE RUN",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Rings Reversed · critique of the reverse run",
+       "h": "grown/reverse-critique.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/reverse-critique.html",
+       "grown": true,
+       "emerges": "severity rings of the reverse run",
+       "label": "READING",
+       "icon": {
+        "pal": [
+         "#ff9a3c",
+         "#ff7a6a",
+         "#ffc58a",
+         "#9a4cff"
+        ],
+        "bg": "#2a0a0a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-21",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-59.html",
-     "zero_page": "z/phronesis-59.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-59.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-59.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -45267,13 +45467,38 @@
     },
     {
      "n": 57,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE 208 REVERSED · READING 207 → 0",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The 208 Reversed · reading 207 → 0",
+       "h": "grown/the-208-reversed.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-208-reversed.html",
+       "grown": true,
+       "emerges": "the 208 read 207→0 under I/H/V/R",
+       "label": "MATCH · MODEL",
+       "icon": {
+        "pal": [
+         "#a070ff",
+         "#e0d0ff",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-21",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/kairos-57.html",
-     "zero_page": "z/kairos-57.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-57.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-57.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -45365,8 +45590,8 @@
   "world": 1,
   "keepers": 8,
   "domains": 512,
-  "zero_spheres": 28,
-  "generated_total": 637,
+  "zero_spheres": 19,
+  "generated_total": 628,
   "groups": 88
  },
  "workshop": [
@@ -53636,7 +53861,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1883
+   "pages": 1892
   },
   "list": [
    {
@@ -54455,7 +54680,8 @@
       "w/wakaku-small-network-test-minus211-bit-flip.html",
       "w/wakaku-speaker-6161e.html",
       "w/wakaku-speaker-complete.html",
-      "grown/the-atom-darmstadtium.html"
+      "grown/the-atom-darmstadtium.html",
+      "grown/time-reversal.html"
      ],
      [
       "w/wakaku-speaker-compressed.html",
@@ -54463,7 +54689,8 @@
       "w/wakaku-speaker-forest.html",
       "w/wakaku-speaker-full.html",
       "w/wakaku-speaker-globe.html",
-      "grown/the-atom-nickel.html"
+      "grown/the-atom-nickel.html",
+      "grown/sator-square.html"
      ]
     ]
    },
@@ -54479,7 +54706,8 @@
       "w/wakaku-speaker-inverted.html",
       "w/wakaku-speaker-ripples.html",
       "w/wakaku-speaker-simultaneous.html",
-      "grown/the-atom-xenon.html"
+      "grown/the-atom-xenon.html",
+      "grown/unwrapping.html"
      ],
      [
       "w/wakaku-speaker-standing.html",
@@ -54487,7 +54715,8 @@
       "w/wakaku-stained-glass-evolves-rose-window-caustics-kintsugi-v.html",
       "w/wakaku-stained-glass-kintsugi-cathedral-art-style.html",
       "w/wakaku-tachyon-edge-appears-2s-before-quantum-dot-disappears.html",
-      "grown/the-atom-mendelevium.html"
+      "grown/the-atom-mendelevium.html",
+      "grown/backmasking.html"
      ],
      [
       "w/wakaku-tachyon-voltage-plus-e-minus-t-plus-i-minus-o-plus-n-.html",
@@ -54495,7 +54724,8 @@
       "w/wakaku-x2-next-multiverse-omniverse-loop.html",
       "w/which-tardigrade-is-intelligence.html",
       "w/yellow-sun-black-hole-sisters.html",
-      "grown/the-atom-ytterbium.html"
+      "grown/the-atom-ytterbium.html",
+      "grown/arrow-of-time.html"
      ],
      [
       "wakaku/Wakaku-Speaker-V11-Colors.html",
@@ -54503,7 +54733,8 @@
       "yet/Next-Shell-After-Chromium.html",
       "forward/Next-Iteration-Galactic-Beyond.html",
       "still/Next-Shell-After-Rubidium.html",
-      "grown/the-atom-dubnium.html"
+      "grown/the-atom-dubnium.html",
+      "grown/reverse-life.html"
      ]
     ]
    },
@@ -54519,7 +54750,8 @@
       "forward/Next-After-Overlays-Silver.html",
       "forward/Next-Iteration-After-Heliosphere.html",
       "full/Enhanced-Full-Human-Integrated.html",
-      "grown/the-atom-tin.html"
+      "grown/the-atom-tin.html",
+      "grown/spin-echo.html"
      ],
      [
       "later/Next-Evo-Focus-Targe.html",
@@ -54527,14 +54759,16 @@
       "next/Next-Evo.html",
       "next/Phi-Tower-Next-Evo.html",
       "onward/Next-Cycle-19-24-Third.html",
-      "grown/the-atom-livermorium.html"
+      "grown/the-atom-livermorium.html",
+      "grown/reverse-critique.html"
      ],
      [
       "plank/Planck-Frame-1x1-6e36.html",
       "plank/Tetragarde-Size-1plank-X1.html",
       "plus/42-Plus-Gilgamesh-12-Tablets-Supplement.html",
       "w/black-hole-1px-eh.html",
-      "grown/the-atom-flerovium.html"
+      "grown/the-atom-flerovium.html",
+      "grown/the-208-reversed.html"
      ],
      [
       "w/electron-proton-neutron-electrum-lab.html",
@@ -56841,7 +57075,7 @@
  "built_by": {
   "author": "Grok Bot",
   "index": "built-by-grok-bot.html",
-  "pages": 1030,
+  "pages": 1032,
   "rule": "Pages generated by Grok Bot carry author \"Grok Bot\", a meta author tag and a badge. Dave's originals carry no author field and are unchanged.",
   "fortress": "grown/the-fortress-of-solitude.html"
  },
