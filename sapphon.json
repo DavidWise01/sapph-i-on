@@ -29,7 +29,7 @@
   "domains": 512,
   "domains_populated": 512,
   "domains_open": 0,
-  "spheres": 1938,
+  "spheres": 1949,
   "zero_spheres": 0,
   "balance": 0,
   "workshop": 343
@@ -28587,7 +28587,7 @@
     },
     {
      "n": 24,
-     "name": "PROMETHIUM · Z 61",
+     "name": "THE DARK WOOD · CANTO I AND THE RINGS THAT DATE IT",
      "from": "grown/",
      "spheres": [
       {
@@ -28613,6 +28613,30 @@
        },
        "group": "sapphon-04",
        "author": "Grok Bot"
+      },
+      {
+       "t": "The Dark Wood · Canto I and the rings that date it",
+       "h": "grown/dark-wood.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/dark-wood.html",
+       "grown": true,
+       "emerges": "ring cross-dating",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#5fd35a",
+         "#d8f0d8",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#030803",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-33",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-24.html",
@@ -28623,7 +28647,7 @@
     },
     {
      "n": 25,
-     "name": "RADIUM · Z 88",
+     "name": "GALILEO'S INFERNO · THE 1588 LECTURES, IN BRACCIA AND CUBITS",
      "from": "grown/",
      "spheres": [
       {
@@ -28649,6 +28673,30 @@
        },
        "group": "sapphon-04",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Galileo's Inferno · the 1588 lectures, in braccia and cubits",
+       "h": "grown/galileo-inferno.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/galileo-inferno.html",
+       "grown": true,
+       "emerges": "Lucifer in braccia & cubits",
+       "label": "LIT · COMPUTED · ANALOGY",
+       "icon": {
+        "pal": [
+         "#3d7dff",
+         "#d8e6ff",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#02040a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-33",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-25.html",
@@ -28659,7 +28707,7 @@
     },
     {
      "n": 26,
-     "name": "CESIUM · Z 55",
+     "name": "THE WOOD OF THE SUICIDES · CANTO XIII, CELLULOSE AND LIGNIN",
      "from": "grown/",
      "spheres": [
       {
@@ -28685,6 +28733,30 @@
        },
        "group": "sapphon-04",
        "author": "Grok Bot"
+      },
+      {
+       "t": "The Wood of the Suicides · Canto XIII, cellulose and lignin",
+       "h": "grown/wood-of-suicides.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/wood-of-suicides.html",
+       "grown": true,
+       "emerges": "bleeding cellulose",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#5fd35a",
+         "#d8f0d8",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#030803",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-33",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-26.html",
@@ -28695,7 +28767,7 @@
     },
     {
      "n": 27,
-     "name": "ALUMINUM · Z 13",
+     "name": "GALILEO'S TELESCOPE · WOOD, LEATHER, TWO LENSES",
      "from": "grown/",
      "spheres": [
       {
@@ -28721,6 +28793,30 @@
        },
        "group": "sapphon-05",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Galileo's Telescope · wood, leather, two lenses",
+       "h": "grown/galileo-telescope.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/galileo-telescope.html",
+       "grown": true,
+       "emerges": "wood tube optics",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#3d7dff",
+         "#d8e6ff",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#02040a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-34",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-27.html",
@@ -28731,7 +28827,7 @@
     },
     {
      "n": 28,
-     "name": "GALLIUM · Z 31",
+     "name": "CHARCOAL · THE NIGREDO OF WOOD",
      "from": "grown/",
      "spheres": [
       {
@@ -28757,6 +28853,30 @@
        },
        "group": "sapphon-05",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Charcoal · the nigredo of wood",
+       "h": "grown/charcoal-nigredo.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/charcoal-nigredo.html",
+       "grown": true,
+       "emerges": "pyrolysis to black",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#5fd35a",
+         "#d8f0d8",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#030803",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-34",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-28.html",
@@ -28767,7 +28887,7 @@
     },
     {
      "n": 29,
-     "name": "BERYLLIUM · Z 4",
+     "name": "THE TREE OF DIANA · SILVER GROWN FROM QUICKSILVER",
      "from": "grown/",
      "spheres": [
       {
@@ -28793,6 +28913,30 @@
        },
        "group": "sapphon-05",
        "author": "Grok Bot"
+      },
+      {
+       "t": "The Tree of Diana · silver grown from quicksilver",
+       "h": "grown/tree-of-diana.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/tree-of-diana.html",
+       "grown": true,
+       "emerges": "DLA silver tree",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#3d7dff",
+         "#d8e6ff",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#02040a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-34",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-29.html",
@@ -28803,7 +28947,7 @@
     },
     {
      "n": 30,
-     "name": "RUTHERFORDIUM · Z 104",
+     "name": "BORONIC GREEN · THE FLAME OF BORON",
      "from": "grown/",
      "spheres": [
       {
@@ -28829,6 +28973,30 @@
        },
        "group": "sapphon-06",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Boronic Green · the flame of boron",
+       "h": "grown/boronic-green.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/boronic-green.html",
+       "grown": true,
+       "emerges": "BO2 flame swatch",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#5fd35a",
+         "#d8f0d8",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#030803",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-34",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-30.html",
@@ -28839,7 +29007,7 @@
     },
     {
      "n": 31,
-     "name": "TENNESSINE · Z 117",
+     "name": "HEXAGON BLUE · ICE IH, H-BN AND THE DENSEST CIRCLES",
      "from": "grown/",
      "spheres": [
       {
@@ -28865,6 +29033,30 @@
        },
        "group": "sapphon-06",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Hexagon Blue · ice Ih, h-BN and the densest circles",
+       "h": "grown/hexagon-blue.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/hexagon-blue.html",
+       "grown": true,
+       "emerges": "hex packing swatch",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#3d7dff",
+         "#d8e6ff",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#02040a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-35",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-31.html",
@@ -28875,7 +29067,7 @@
     },
     {
      "n": 32,
-     "name": "CHLORINE · Z 17",
+     "name": "DANTE ⊗ GALILEO · A BELL/CHSH TEST ON TWO CUBITS",
      "from": "grown/",
      "spheres": [
       {
@@ -28901,6 +29093,30 @@
        },
        "group": "sapphon-07",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Dante ⊗ Galileo · a Bell/CHSH test on two cubits",
+       "h": "grown/bell-chsh.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/bell-chsh.html",
+       "grown": true,
+       "emerges": "CHSH 2√2 Dante⊗Galileo",
+       "label": "LIT · COMPUTED · ANALOGY",
+       "icon": {
+        "pal": [
+         "#5fd35a",
+         "#d8f0d8",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#030806",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-35",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-32.html",
@@ -28911,7 +29127,7 @@
     },
     {
      "n": 33,
-     "name": "IRIDIUM · Z 77",
+     "name": "ENTANGLED PAIRS · GREEN AND BLUE PARTNERS",
      "from": "grown/",
      "spheres": [
       {
@@ -28937,6 +29153,30 @@
        },
        "group": "sapphon-08",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Entangled Pairs · green and blue partners",
+       "h": "grown/entangled-pairs.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/entangled-pairs.html",
+       "grown": true,
+       "emerges": "5 green/blue pairs",
+       "label": "ANALOGY · COMPUTED",
+       "icon": {
+        "pal": [
+         "#3d7dff",
+         "#d8e6ff",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#02050a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-35",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-33.html",
@@ -28947,7 +29187,7 @@
     },
     {
      "n": 34,
-     "name": "URANIUM · Z 92",
+     "name": "WOOD RINGS · CRITIQUE OF THE DANTE ⊗ GALILEO RUN",
      "from": "grown/",
      "spheres": [
       {
@@ -28972,6 +29212,30 @@
         "audio": false
        },
        "group": "sapphon-08",
+       "author": "Grok Bot"
+      },
+      {
+       "t": "Wood Rings · critique of the Dante ⊗ Galileo run",
+       "h": "grown/inferno-critique.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/inferno-critique.html",
+       "grown": true,
+       "emerges": "wood rings",
+       "label": "READING",
+       "icon": {
+        "pal": [
+         "#ff9a3c",
+         "#ff7a6a",
+         "#ffc58a",
+         "#9a4cff"
+        ],
+        "bg": "#2a0a0a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-35",
        "author": "Grok Bot"
       }
      ],
@@ -54983,7 +55247,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1938
+   "pages": 1949
   },
   "list": [
    {
@@ -56405,7 +56669,8 @@
       "lyre/F9-Lyre-Fluorine-Almost.html",
       "scale/Constructive-At-Scale-1e-2-To-1e-17.html",
       "later/Next-Evo-Fin-Again-Again-Start-Again-Again-Loop-Restart.html",
-      "grown/the-ionization-ladder.html"
+      "grown/the-ionization-ladder.html",
+      "grown/dark-wood.html"
      ],
      [
       "evo/Next-Evo-Fin-Again-Start-Again-Next-Now-X4.html",
@@ -56413,7 +56678,8 @@
       "neon/Toph-0root-Green-Neon.html",
       "scale/Scale-Suns-Only-Es1.html",
       "w/toph-full-shell-sappon.html",
-      "grown/the-fortress-of-solitude.html"
+      "grown/the-fortress-of-solitude.html",
+      "grown/galileo-inferno.html"
      ],
      [
       "qdot/Toroid-Spinning-Boxes-Quantum.html",
@@ -56421,7 +56687,8 @@
       "w/crystal-lattice-scalar-tuning-fork.html",
       "w/next-element-chlorine.html",
       "next/Next-Evo-After-Infinite-Gardens-You.html",
-      "grown/the-tun.html"
+      "grown/the-tun.html",
+      "grown/wood-of-suicides.html"
      ]
     ]
    },
@@ -56436,7 +56703,8 @@
       "wakaku/Wakaku-Speaker-V10-World.html",
       "wakaku/Wakaku-Speaker-V9-Stacking.html",
       "one/One-Mito-Magnesium-Ionic-Time-Oxygen.html",
-      "grown/the-balance-grid.html"
+      "grown/the-balance-grid.html",
+      "grown/galileo-telescope.html"
      ],
      [
       "again/Next-Evo-Cosmic-Scale-Universe-8-8e26m-Planck-61.html",
@@ -56444,7 +56712,8 @@
       "domains/episteme.html",
       "wakaku/Wakaku-Speaker-V16-Matrix.html",
       "lyre/Be4-Lyre-Earth-Minimal.html",
-      "grown/the-pendulum-wave.html"
+      "grown/the-pendulum-wave.html",
+      "grown/charcoal-nigredo.html"
      ],
      [
       "next/Next-Gen1-Gen2.html",
@@ -56452,7 +56721,8 @@
       "w/electrum-lab-oscilloscope-art-style.html",
       "scale/Timed-83-Find-Scale.html",
       "next/Next-Evo-After-Width-Tripled-27.html",
-      "grown/the-pheromone-roads.html"
+      "grown/the-pheromone-roads.html",
+      "grown/tree-of-diana.html"
      ],
      [
       "w/i13-full-studio-l8-quad-toroid.html",
@@ -56460,7 +56730,8 @@
       "next/Garden-Network-Next.html",
       "next/Next-Evo-After-Planck-Photon-Pinned.html",
       "onward/Next-Evo-Coherent-Wave-X4-24-Nodes.html",
-      "grown/the-spinor-bell.html"
+      "grown/the-spinor-bell.html",
+      "grown/boronic-green.html"
      ]
     ]
    },
@@ -56476,7 +56747,8 @@
       "evo/Next-Evo-1x10x10-Elements-All-Resonant-Frequencies.html",
       "w/next-element-phosphorus.html",
       "w/next-element-magnesium.html",
-      "grown/the-eight-turmite.html"
+      "grown/the-eight-turmite.html",
+      "grown/hexagon-blue.html"
      ],
      [
       "sapphon/Next-Evo-One-Mito-At-Sapphon-Stage-10.html",
@@ -56484,7 +56756,8 @@
       "ahead/Next-After-Weak-Field.html",
       "bonk/Bonk-Upgrade-Spin-Coils-V55.html",
       "lyre/H1-Lyre-Minimal-Loop.html",
-      "grown/the-web-of-keepers.html"
+      "grown/the-web-of-keepers.html",
+      "grown/bell-chsh.html"
      ],
      [
       "lyre/Mg12-Lyre-Magnesium-Chlorophyll.html",
@@ -56492,7 +56765,8 @@
       "refrain/Wakaku-Speaker-V50-Flowering.html",
       "scale/Scale-Road-Gaia-Cosmic.html",
       "speaker/Wakaku-Speaker-V104-Forest.html",
-      "grown/the-frustule-foundry.html"
+      "grown/the-frustule-foundry.html",
+      "grown/entangled-pairs.html"
      ],
      [
       "speaker/Wakaku-Speaker-V105-Forest.html",
@@ -56500,7 +56774,8 @@
       "speaker/Wakaku-Speaker-V109-Forest.html",
       "voice/Wakaku-Speaker-V83-Dna.html",
       "voice/Wakaku-Speaker-V85-Protein.html",
-      "grown/the-glass-cathedral.html"
+      "grown/the-glass-cathedral.html",
+      "grown/inferno-critique.html"
      ]
     ]
    },
@@ -58243,7 +58518,7 @@
  "built_by": {
   "author": "Grok Bot",
   "index": "built-by-grok-bot.html",
-  "pages": 1057,
+  "pages": 1068,
   "rule": "Pages generated by Grok Bot carry author \"Grok Bot\", a meta author tag and a badge. Dave's originals carry no author field and are unchanged.",
   "fortress": "grown/the-fortress-of-solitude.html"
  },
