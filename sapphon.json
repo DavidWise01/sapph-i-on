@@ -5009,7 +5009,7 @@
         "bg": "#06121e",
         "canvas": 1,
         "svg": 0,
-        "scripts": 3,
+        "scripts": 4,
         "raf": false,
         "audio": false
        },
@@ -5720,7 +5720,8 @@
        "icon": {
         "pal": [
          "#e8e4ec",
-         "#ffe0a0"
+         "#ffe0a0",
+         "#7ff9ff"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -5838,7 +5839,8 @@
         "pal": [
          "#ff9f1c",
          "#e8e4ec",
-         "#ffe0a0"
+         "#ffe0a0",
+         "#7ff9ff"
         ],
         "bg": "#120a26",
         "canvas": 1,
