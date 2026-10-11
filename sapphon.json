@@ -27,10 +27,10 @@
  "counts": {
   "keepers": 8,
   "domains": 512,
-  "domains_populated": 473,
-  "domains_open": 39,
-  "spheres": 1872,
-  "zero_spheres": 39,
+  "domains_populated": 484,
+  "domains_open": 28,
+  "spheres": 1883,
+  "zero_spheres": 28,
   "balance": 0,
   "workshop": 343
  },
@@ -5562,24 +5562,74 @@
     },
     {
      "n": 60,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "STRATTON’S GOGGLES · THE WORLD INVERTED",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Stratton’s Goggles · the world inverted",
+       "h": "grown/stratton-goggles.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/stratton-goggles.html",
+       "grown": true,
+       "emerges": "reaching in an inverted world, adapting by day",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#40d090",
+         "#e8e4ec",
+         "#ffe0a0",
+         "#2a5a3a"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-16",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/ethos-60.html",
-     "zero_page": "z/ethos-60.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-60.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-60.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 61,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "FIELD REVERSAL · THE COMPASS UPSIDE DOWN",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Field Reversal · the compass upside down",
+       "h": "grown/magnetic-reversal.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/magnetic-reversal.html",
+       "grown": true,
+       "emerges": "seafloor stripes from a reversing toy dynamo",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#ff9a3c",
+         "#ffd8a0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-17",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/ethos-61.html",
-     "zero_page": "z/ethos-61.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-61.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-61.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -11863,24 +11913,74 @@
     },
     {
      "n": 59,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "FROM BELOW · NINE SHELLS ROTATED 180°",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "From Below · nine shells rotated 180°",
+       "h": "grown/shells-from-below.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/shells-from-below.html",
+       "grown": true,
+       "emerges": "nine shells turned over, shading and sag flipping",
+       "label": "COMPUTED",
+       "icon": {
+        "pal": [
+         "#ff80b0",
+         "#ffd0e0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-17",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-59.html",
-     "zero_page": "z/pathos-59.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-59.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-59.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 60,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "RAYLEIGH–TAYLOR · HEAVY ON TOP",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Rayleigh–Taylor · heavy on top",
+       "h": "grown/rayleigh-taylor.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/rayleigh-taylor.html",
+       "grown": true,
+       "emerges": "heavy-over-light fingers growing at σ = √(Agk)",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#5a80ff",
+         "#c8d8ff",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-17",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-60.html",
-     "zero_page": "z/pathos-60.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-60.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-60.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -17368,24 +17468,74 @@
     },
     {
      "n": 63,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "AMBIGRAM CIPHER · THE LETTERS THAT SURVIVE 180°",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Ambigram Cipher · the letters that survive 180°",
+       "h": "grown/ambigram-cipher.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/ambigram-cipher.html",
+       "grown": true,
+       "emerges": "the 13 rotatable letters spinning; cipher 235 → 191",
+       "label": "MATCH · MODEL",
+       "icon": {
+        "pal": [
+         "#ffb040",
+         "#fff0d0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-17",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/logos-63.html",
-     "zero_page": "z/logos-63.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-63.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-63.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 64,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "CASSIOPEA · THE UPSIDE-DOWN JELLYFISH",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Cassiopea · the upside-down jellyfish",
+       "h": "grown/cassiopea.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/cassiopea.html",
+       "grown": true,
+       "emerges": "upside-down jellyfish pulsing, sleeping at night",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#30e0b0",
+         "#c8fff0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#02101a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-18",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/logos-64.html",
-     "zero_page": "z/logos-64.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-64.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-64.html",
+     "zero_url": null,
      "author": "Grok Bot"
     }
    ],
@@ -22213,24 +22363,74 @@
     },
     {
      "n": 57,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "LIGHT FROM ABOVE · BUMPS, DENTS AND THATCHER",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Light From Above · bumps, dents and Thatcher",
+       "h": "grown/light-from-above.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/light-from-above.html",
+       "grown": true,
+       "emerges": "bumps become dents; a Thatcherised face flips",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#c0c0c0",
+         "#f0f0f0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-18",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-57.html",
-     "zero_page": "z/mythos-57.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-57.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-57.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 58,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "ANY WAY UP · SLOTHS, BATS AND THE TUN",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Any Way Up · sloths, bats and the tun",
+       "h": "grown/hanging-life.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/hanging-life.html",
+       "grown": true,
+       "emerges": "bat, sloth and tun under flipping gravity",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#90d040",
+         "#e8e4ec",
+         "#ffe0a0",
+         "#6a4a2a"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-18",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-58.html",
-     "zero_page": "z/mythos-58.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-58.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-58.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -39014,24 +39214,74 @@
     },
     {
      "n": 56,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "SOUTHERN SKY · ORION STANDS ON HIS HEAD",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Southern Sky · Orion stands on his head",
+       "h": "grown/southern-sky.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/southern-sky.html",
+       "grown": true,
+       "emerges": "Orion from real coordinates turning over across the equator",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#7090ff",
+         "#c8d8ff",
+         "#d8e0ff",
+         "#e8e4ec"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-18",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-56.html",
-     "zero_page": "z/phronesis-56.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-56.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-56.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 57,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "RINGS UPSIDE DOWN · CRITIQUE OF THE UPSIDE-DOWN RUN",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Rings Upside Down · critique of the upside-down run",
+       "h": "grown/upside-critique.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/upside-critique.html",
+       "grown": true,
+       "emerges": "severity rings of the upside-down run",
+       "label": "READING",
+       "icon": {
+        "pal": [
+         "#ff9a3c",
+         "#ff7a6a",
+         "#ffc58a",
+         "#9a4cff"
+        ],
+        "bg": "#2a0a0a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-19",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-57.html",
-     "zero_page": "z/phronesis-57.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-57.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-57.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -44981,13 +45231,38 @@
     },
     {
      "n": 56,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE 208 UPSIDE DOWN · A↔P",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The 208 Upside Down · A↔P",
+       "h": "grown/the-208-upside-down.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-208-upside-down.html",
+       "grown": true,
+       "emerges": "the 208 flipped A↔P and rotated 180°; two atoms fall off the disc",
+       "label": "MATCH · MODEL",
+       "icon": {
+        "pal": [
+         "#60c0ff",
+         "#d8f0ff",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-19",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/kairos-56.html",
-     "zero_page": "z/kairos-56.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-56.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-56.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -45090,8 +45365,8 @@
   "world": 1,
   "keepers": 8,
   "domains": 512,
-  "zero_spheres": 39,
-  "generated_total": 648,
+  "zero_spheres": 28,
+  "generated_total": 637,
   "groups": 88
  },
  "workshop": [
@@ -53361,7 +53636,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1872
+   "pages": 1883
   },
   "list": [
    {
@@ -54058,7 +54333,8 @@
       "voice/Wakaku-Speaker-V128-Wire.html",
       "voice/Wakaku-Speaker-V82-Pixelated.html",
       "voice/Wakaku-Speaker-V86-Cell.html",
-      "grown/the-atom-einsteinium.html"
+      "grown/the-atom-einsteinium.html",
+      "grown/stratton-goggles.html"
      ]
     ]
    },
@@ -54074,7 +54350,8 @@
       "voice/Wakaku-Speaker-V89-Beyond.html",
       "voice/Wakaku-Speaker-V90-Big.html",
       "voice/Wakaku-Speaker-V91-Wavelength.html",
-      "grown/the-atom-nitrogen.html"
+      "grown/the-atom-nitrogen.html",
+      "grown/magnetic-reversal.html"
      ],
      [
       "voice/Wakaku-Speaker-V92-Planck.html",
@@ -54082,7 +54359,8 @@
       "voice/Wakaku-Speaker-V93-Power.html",
       "voice/Wakaku-Speaker-V94-Apply.html",
       "voice/Wakaku-Speaker-V95-Cosmic.html",
-      "grown/the-atom-iron.html"
+      "grown/the-atom-iron.html",
+      "grown/shells-from-below.html"
      ],
      [
       "voice/Wakaku-Speaker-V96-Seeding.html",
@@ -54090,7 +54368,8 @@
       "w/all-12-uses-o3-interactive-max-cap-solid-plasma-lattice.html",
       "w/cern-black-hole.html",
       "w/dual-toroid-double-dt-cooper-x4-t1-ket-phase.html",
-      "grown/the-atom-bismuth.html"
+      "grown/the-atom-bismuth.html",
+      "grown/rayleigh-taylor.html"
      ],
      [
       "w/electrum-is-tardigrade-caught.html",
@@ -54098,7 +54377,8 @@
       "w/isomorphic-virus-scanner-jit-toroidal-axes.html",
       "w/junior-lab-012-neon-octet-toroid-chase.html",
       "w/patricia-shadow-sapphon-relinquish.html",
-      "grown/the-atom-ruthenium.html"
+      "grown/the-atom-ruthenium.html",
+      "grown/ambigram-cipher.html"
      ]
     ]
    },
@@ -54114,14 +54394,16 @@
       "w/transmon-fractal-gravity-vvv.html",
       "w/transmutate-power-towers-toph.html",
       "w/wakaku-1-gravity-outside-and-6-gravity-inside-white-gold-bla.html",
-      "grown/the-atom-selenium.html"
+      "grown/the-atom-selenium.html",
+      "grown/cassiopea.html"
      ],
      [
       "w/wakaku-all-moons-asteroid-belts.html",
       "w/wakaku-anti-matter-vs-matter-at-antiat-annihilation.html",
       "w/wakaku-bit-itself-minus211-1-plus211-ternary-qutrit.html",
       "w/wakaku-computer-makes-antimatter-naturally-pair-production.html",
-      "grown/the-atom-zirconium.html"
+      "grown/the-atom-zirconium.html",
+      "grown/light-from-above.html"
      ],
      [
       "w/wakaku-edge-x-2-y-3-x-3-y-2-tachyon-offset.html",
@@ -54129,7 +54411,8 @@
       "w/wakaku-its-real-if-you-want-it-to-be-tachyon-real.html",
       "w/wakaku-minus211mv-bit-flip-voltage.html",
       "w/wakaku-minus211mv-quantum-dot-2to3-big-bangers-banana.html",
-      "grown/the-atom-fluorine.html"
+      "grown/the-atom-fluorine.html",
+      "grown/hanging-life.html"
      ],
      [
       "w/wakaku-nested-minus1-0-1-n-n-3-n-n-tetration.html",
@@ -54137,7 +54420,8 @@
       "w/wakaku-next-edge-x-4-y-5-x-5-y-4-sequence.html",
       "w/wakaku-next-edge-x-8-y-9-x-9-y-8-infinite-ladder.html",
       "w/wakaku-next-network-of-minus211-1-plus211-computers-internet.html",
-      "grown/the-atom-chromium.html"
+      "grown/the-atom-chromium.html",
+      "grown/southern-sky.html"
      ]
     ]
    },
@@ -54153,7 +54437,8 @@
       "w/wakaku-next-please-infinite-oscillation.html",
       "w/wakaku-next-register-minus211-1-plus211-bits-memory.html",
       "w/wakaku-next-synthesis-photon-100g-smw-10-planets-16200.html",
-      "grown/the-atom-francium.html"
+      "grown/the-atom-francium.html",
+      "grown/upside-critique.html"
      ],
      [
       "w/wakaku-next-universe-of-minus211-1-plus211.html",
@@ -54161,7 +54446,8 @@
       "w/wakaku-photon-pinned-000-sun.html",
       "w/wakaku-photon-pinned-center-100-gravity-oscillating-10-plane.html",
       "w/wakaku-planets-moons-rotating.html",
-      "grown/the-atom-lutetium.html"
+      "grown/the-atom-lutetium.html",
+      "grown/the-208-upside-down.html"
      ],
      [
       "w/wakaku-rose-window-evolves-fractal-rose-kintsugi-fractal-vei.html",
