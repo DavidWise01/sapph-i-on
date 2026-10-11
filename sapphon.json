@@ -27,10 +27,10 @@
  "counts": {
   "keepers": 8,
   "domains": 512,
-  "domains_populated": 501,
-  "domains_open": 11,
-  "spheres": 1901,
-  "zero_spheres": 11,
+  "domains_populated": 506,
+  "domains_open": 6,
+  "spheres": 1907,
+  "zero_spheres": 6,
   "balance": 0,
   "workshop": 343
  },
@@ -12192,13 +12192,38 @@
     },
     {
      "n": 64,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "ORION, GNOMONIC · AN ATLAS PLATE BOTH WAYS UP",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Orion, Gnomonic · an atlas plate both ways up",
+       "h": "grown/gnomonic-orion.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/gnomonic-orion.html",
+       "grown": true,
+       "emerges": "Orion plate both ways up",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffb070",
+         "#fff0e0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-24",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-64.html",
-     "zero_page": "z/pathos-64.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-64.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-64.html",
+     "zero_url": null,
      "author": "Grok Bot"
     }
    ],
@@ -22753,24 +22778,74 @@
     },
     {
      "n": 63,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE WOBBLING POLE · PRECESSION ACROSS 26,000 YEARS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Wobbling Pole · precession across 26,000 years",
+       "h": "grown/precession.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/precession.html",
+       "grown": true,
+       "emerges": "the pole wandering 26,000 yr",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#d0b080",
+         "#f0e8d8",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-24",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-63.html",
-     "zero_page": "z/mythos-63.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-63.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-63.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 64,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "RINGS OF THE CHART · CRITIQUE OF THE STAR-CHART RUN",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Rings of the Chart · critique of the star-chart run",
+       "h": "grown/stars-critique.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/stars-critique.html",
+       "grown": true,
+       "emerges": "chart rings",
+       "label": "READING",
+       "icon": {
+        "pal": [
+         "#ff9a3c",
+         "#ff7a6a",
+         "#ffc58a",
+         "#9a4cff"
+        ],
+        "bg": "#2a0a0a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-24",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-64.html",
-     "zero_page": "z/mythos-64.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-64.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-64.html",
+     "zero_url": null,
      "author": "Grok Bot"
     }
    ],
@@ -39704,13 +39779,38 @@
     },
     {
      "n": 62,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "ALPHA CENTAURI · A TERNARY STAR",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Alpha Centauri · a ternary star",
+       "h": "grown/triple-star.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/triple-star.html",
+       "grown": true,
+       "emerges": "Alpha Centauri triple",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffd060",
+         "#e8e4ec",
+         "#ffe0a0",
+         "#fff3c0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-24",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-62.html",
-     "zero_page": "z/phronesis-62.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-62.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-62.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -45713,7 +45813,7 @@
     },
     {
      "n": 59,
-     "name": "THE FORER DEMO · EVERYONE GETS THE SAME READING",
+     "name": "SKY TONIGHT · CHICAGO, FROM BSC AND A JPL-DERIVED EPHEMERIS",
      "from": "grown/",
      "spheres": [
       {
@@ -45739,6 +45839,30 @@
        },
        "group": "sapphon-23",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Sky Tonight · Chicago, from BSC and a JPL-derived ephemeris",
+       "h": "grown/sky-tonight.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/sky-tonight.html",
+       "grown": true,
+       "emerges": "tonight's Chicago sky, BSC + JPL ephemeris",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#7aa0ff",
+         "#d8e4ff",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-25",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/kairos-59.html",
@@ -45749,13 +45873,38 @@
     },
     {
      "n": 60,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE AETHER THAT WASN’T · MICHELSON–MORLEY 1887",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Aether That Wasn’t · Michelson–Morley 1887",
+       "h": "grown/michelson-morley.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/michelson-morley.html",
+       "grown": true,
+       "emerges": "aether wind that never blew",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#9090ff",
+         "#e8e8ff",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-25",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/kairos-60.html",
-     "zero_page": "z/kairos-60.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-60.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-60.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -45814,8 +45963,8 @@
   "world": 1,
   "keepers": 8,
   "domains": 512,
-  "zero_spheres": 11,
-  "generated_total": 620,
+  "zero_spheres": 6,
+  "generated_total": 615,
   "groups": 88
  },
  "workshop": [
@@ -54085,7 +54234,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1901
+   "pages": 1907
   },
   "list": [
    {
@@ -55105,7 +55254,8 @@
       "toroid/Model-U-Toroid-Boxy-360-Scalar-0-Elliptical-30.html",
       "w/aeon-bootloader-fixed-actually.html",
       "w/aeon-upgraded-dot.html",
-      "grown/the-atom-sodium.html"
+      "grown/the-atom-sodium.html",
+      "grown/gnomonic-orion.html"
      ],
      [
       "w/enheduanna-42-temple-poems-kernel-42-states.html",
@@ -55113,14 +55263,16 @@
       "w/next-element-scandium.html",
       "w/universe-plank-sized-x6-model-u.html",
       "dots/fold-time-space-gravity-into-the-dot.html",
-      "grown/the-atom-magnesium.html"
+      "grown/the-atom-magnesium.html",
+      "grown/precession.html"
      ],
      [
       "w/fold-time-space-gravity-into-the-dot.html",
       "after/Next-Evo-11mx3xo2x6au79x6n2x6-Cell.html",
       "ahead/Next-After-Joins-Stronger.html",
       "forth/Next-Shell-After-Aluminum.html",
-      "grown/the-atom-silicon.html"
+      "grown/the-atom-silicon.html",
+      "grown/stars-critique.html"
      ],
      [
       "full/One-Full-Human-Base.html",
@@ -55128,7 +55280,8 @@
       "one/V122-Daughters-One-Sun.html",
       "w/eye-to-scale-intelligence-neuronic-planck.html",
       "wakaku/Wakaku-Speaker-V18-Completion.html",
-      "grown/the-atom-yttrium.html"
+      "grown/the-atom-yttrium.html",
+      "grown/triple-star.html"
      ]
     ]
    },
@@ -55144,7 +55297,8 @@
       "w/is-void-electrum.html",
       "plus/Pinned-Plus-Make-Minus1-0-Plus1.html",
       "forward/Next-Element-Niobium-41.html",
-      "grown/the-atom-curium.html"
+      "grown/the-atom-curium.html",
+      "grown/sky-tonight.html"
      ],
      [
       "onward/Next-Evolution-Element-119.html",
@@ -55152,7 +55306,8 @@
       "w/series1-outer-toroid.html",
       "nested/hanger-11011-nested-zero.html",
       "dots/fold-into-the-dot-modern.html",
-      "grown/the-atom-lanthanum.html"
+      "grown/the-atom-lanthanum.html",
+      "grown/michelson-morley.html"
      ],
      [
       "dots/one-dot-to-a-universe-in-13-2-steps.html",
@@ -57308,7 +57463,7 @@
  "built_by": {
   "author": "Grok Bot",
   "index": "built-by-grok-bot.html",
-  "pages": 1035,
+  "pages": 1041,
   "rule": "Pages generated by Grok Bot carry author \"Grok Bot\", a meta author tag and a badge. Dave's originals carry no author field and are unchanged.",
   "fortress": "grown/the-fortress-of-solitude.html"
  },
