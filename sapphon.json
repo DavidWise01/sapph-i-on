@@ -27,10 +27,10 @@
  "counts": {
   "keepers": 8,
   "domains": 512,
-  "domains_populated": 451,
-  "domains_open": 61,
-  "spheres": 1850,
-  "zero_spheres": 61,
+  "domains_populated": 462,
+  "domains_open": 50,
+  "spheres": 1861,
+  "zero_spheres": 50,
   "balance": 0,
   "workshop": 343
  },
@@ -5418,24 +5418,74 @@
     },
     {
      "n": 56,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "ROSE QUARTZ · PINK FROM INSIDE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Rose Quartz · pink from inside",
+       "h": "grown/rose-quartz.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/rose-quartz.html",
+       "grown": true,
+       "emerges": "fibre inclusions tinting a cut slab",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#e8a0b4",
+         "#ffd0dc",
+         "#f0dde4",
+         "#f4c0d0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-11",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/ethos-56.html",
-     "zero_page": "z/ethos-56.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-56.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-56.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 57,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "PINK DIAMOND · COLOUR FROM A BENT LATTICE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Pink Diamond · colour from a bent lattice",
+       "h": "grown/pink-diamond.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/pink-diamond.html",
+       "grown": true,
+       "emerges": "sheared lattice deepening the 550 nm band",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#ff90c0",
+         "#ffd0e4",
+         "#f0dde4",
+         "#ffc0dc"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-11",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/ethos-57.html",
-     "zero_page": "z/ethos-57.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-57.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-57.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -11619,24 +11669,74 @@
     },
     {
      "n": 55,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "FLAMINGO · PINK YOU EAT",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Flamingo · pink you eat",
+       "h": "grown/flamingo.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/flamingo.html",
+       "grown": true,
+       "emerges": "a wading flock tinted by carotenoid diet",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#ff7f9a",
+         "#ffc0cc",
+         "#f0dde4",
+         "#ff9fb2"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-11",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-55.html",
-     "zero_page": "z/pathos-55.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-55.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-55.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 56,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "H II PINK · WHY HUBBLE'S STAR NURSERIES LOOK PINK",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "H II Pink · why Hubble's star nurseries look pink",
+       "h": "grown/hii-pink.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/hii-pink.html",
+       "grown": true,
+       "emerges": "Balmer mix nebula drifting from pink to red with dust",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ff5a9a",
+         "#ffb8d0",
+         "#eedae2",
+         "#ff8ab8"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-12",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-56.html",
-     "zero_page": "z/pathos-56.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-56.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-56.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -17024,24 +17124,74 @@
     },
     {
      "n": 59,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE 208 · THE ALPHABET EIGHT TIMES OVER THE LAGADO ATOMS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The 208 · the alphabet eight times over the Lagado atoms",
+       "h": "grown/the-208.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/the-208.html",
+       "grown": true,
+       "emerges": "8 passes of a–z on the 208 Lagado atoms; pair cipher cancels 104 left, keeps 104 right",
+       "label": "MATCH · MODEL",
+       "icon": {
+        "pal": [
+         "#ff8ab0",
+         "#ffb0c8",
+         "#eadde2",
+         "#ffc0d4"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-12",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/logos-59.html",
-     "zero_page": "z/logos-59.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-59.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-59.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 60,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "ERBIUM · RARE-EARTH PINK",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Erbium · rare-earth pink",
+       "h": "grown/erbium-pink.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/erbium-pink.html",
+       "grown": true,
+       "emerges": "sharp Er3+ lines carving pink from white",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#e080b0",
+         "#ffc8e0",
+         "#f0dde4",
+         "#ffb0d0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-12",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/logos-60.html",
-     "zero_page": "z/logos-60.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/logos-60.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/logos-60.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -21769,24 +21919,74 @@
     },
     {
      "n": 53,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "BAKER–MILLER PINK · THE CLAIM THAT DIDN'T REPLICATE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Baker–Miller Pink · the claim that didn't replicate",
+       "h": "grown/baker-miller.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/baker-miller.html",
+       "grown": true,
+       "emerges": "null-effect trials showing how small studies fake effects",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#ff91af",
+         "#ffc0d0",
+         "#f0dde4",
+         "#ff9ab6"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-12",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-53.html",
-     "zero_page": "z/mythos-53.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-53.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-53.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 54,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "SAKURA · THE FAINTEST PINK",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Sakura · the faintest pink",
+       "h": "grown/cherry-blossom.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/cherry-blossom.html",
+       "grown": true,
+       "emerges": "falling sakura petals tinted by anthocyanin",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#f4b0c8",
+         "#ffe0ea",
+         "#f0dde4",
+         "#ffd0de"
+        ],
+        "bg": "#2a1810",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-13",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-54.html",
-     "zero_page": "z/mythos-54.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-54.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-54.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -38470,24 +38670,74 @@
     },
     {
      "n": 52,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "PINK NOISE · A COLOUR WORD FOR SOUND",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Pink Noise · a colour word for sound",
+       "h": "grown/pink-noise.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/pink-noise.html",
+       "grown": true,
+       "emerges": "live 1/f noise with measured spectral slope and audio",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffc8dc",
+         "#ff80b0",
+         "#eedde4",
+         "#ff9fc4"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": true
+       },
+       "group": "sapphon-13",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-52.html",
-     "zero_page": "z/phronesis-52.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-52.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-52.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 53,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "NINE RINGS · CRITIQUE OF THE PINK RUN",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Nine Rings · critique of the pink run",
+       "h": "grown/pink-critique.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/pink-critique.html",
+       "grown": true,
+       "emerges": "severity rings of the nine-layer run",
+       "label": "READING",
+       "icon": {
+        "pal": [
+         "#ff9a3c",
+         "#ff7a6a",
+         "#ffc58a",
+         "#9a4cff"
+        ],
+        "bg": "#2a0a0a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-13",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-53.html",
-     "zero_page": "z/phronesis-53.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-53.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-53.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -44409,13 +44659,38 @@
     },
     {
      "n": 54,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "NINE SHELLS · PINK, A NINTH BEYOND THE EIGHT",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Nine Shells · pink, a ninth beyond the eight",
+       "h": "grown/nine-shells.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/nine-shells.html",
+       "grown": true,
+       "emerges": "pink as white+red, a 9th colour beyond the 8",
+       "label": "COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffc0d8",
+         "#ff70a8",
+         "#f0dde4",
+         "#ffb6cf"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-13",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/kairos-54.html",
-     "zero_page": "z/kairos-54.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-54.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-54.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -44540,8 +44815,8 @@
   "world": 1,
   "keepers": 8,
   "domains": 512,
-  "zero_spheres": 61,
-  "generated_total": 670,
+  "zero_spheres": 50,
+  "generated_total": 659,
   "groups": 88
  },
  "workshop": [
@@ -52811,7 +53086,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1850
+   "pages": 1861
   },
   "list": [
    {
@@ -53272,7 +53547,8 @@
       "echo/Wakaku-Speaker-V80-Pixelated.html",
       "echo/Wakaku-Speaker-V81-Pixelated.html",
       "encore/Wakaku-Speaker-V30-Time.html",
-      "grown/the-atom-meitnerium.html"
+      "grown/the-atom-meitnerium.html",
+      "grown/rose-quartz.html"
      ],
      [
       "encore/Wakaku-Speaker-V33-Brackish.html",
@@ -53280,7 +53556,8 @@
       "encore/Wakaku-Speaker-V36-Rebound.html",
       "encore/Wakaku-V133-Forest-1225.html",
       "encore/Wakaku-V134-Clean-Tachyons.html",
-      "grown/the-atom-calcium.html"
+      "grown/the-atom-calcium.html",
+      "grown/pink-diamond.html"
      ],
      [
       "encore/Wakaku-V134-Tachyons-Positrons.html",
@@ -53288,7 +53565,8 @@
       "encore/Wakaku-V136-Clean-Metal-Analogs-3djs-201.html",
       "encore/Wakaku-V137-Clean-Metal-Analogs-3djs-202-Closes-P6.html",
       "encore/Wakaku-V138-Black-Halogen-At-Deep-Dive-Metal-Analogs-3djs-203.html",
-      "grown/the-atom-radon.html"
+      "grown/the-atom-radon.html",
+      "grown/flamingo.html"
      ]
     ]
    },
@@ -53303,7 +53581,8 @@
       "encore/Wakaku-V140-At211-Po211-Graph-211mN-211mV-205.html",
       "encore/Wakaku-V141-At211-In-Lattice-FCC-211mN-211mV-206.html",
       "encore/Wakaku-V142-0-07g-At-Vs-0-07g-BH-Black-Halogen-Vs-Black-Hole-207.html",
-      "grown/the-atom-krypton.html"
+      "grown/the-atom-krypton.html",
+      "grown/hii-pink.html"
      ],
      [
       "encore/Wakaku-V143-Ionic-AuPlus-AtMinus-Rocksalt-211mN-211mV-208.html",
@@ -53311,7 +53590,8 @@
       "farther/Next-Iteration-Silver-Female.html",
       "forward/Next-After-Aggregate-Metals.html",
       "forward/Next-Iteration-Interstellar-Beyond.html",
-      "grown/the-atom-rubidium.html"
+      "grown/the-atom-rubidium.html",
+      "grown/the-208.html"
      ],
      [
       "gold/After-White-Gold-Star-Collapse.html",
@@ -53319,7 +53599,8 @@
       "gold/It-Strobes-Timing-Gold.html",
       "gold/One-Atom-Gold-Swap.html",
       "gold/Prim-Palindromic-Gold-79060097.html",
-      "grown/the-atom-nihonium.html"
+      "grown/the-atom-nihonium.html",
+      "grown/erbium-pink.html"
      ],
      [
       "gold/Qds-Blinking-Gold-Silver.html",
@@ -53327,7 +53608,8 @@
       "gold/White-Gold-Star-Final.html",
       "gravity/Aeonic-Gravity-Two-Forces.html",
       "gravity/Germanium-Gravity-Gamma-Paired.html",
-      "grown/the-atom-rhenium.html"
+      "grown/the-atom-rhenium.html",
+      "grown/baker-miller.html"
      ]
     ]
    },
@@ -53343,7 +53625,8 @@
       "lyre/C6-Lyre-Carbon-Life.html",
       "lyre/Na11-Lyre-Sodium-Shell.html",
       "neon/Fuse-Ganglia-Better-Neon.html",
-      "grown/the-atom-cobalt.html"
+      "grown/the-atom-cobalt.html",
+      "grown/cherry-blossom.html"
      ],
      [
       "neon/Neon-20-Plus-10.html",
@@ -53351,7 +53634,8 @@
       "nested/81-Nested-Og.html",
       "nested/Add-More-Pin-Nested.html",
       "nested/Bone-Nest-Exponential-Tower.html",
-      "grown/the-atom-europium.html"
+      "grown/the-atom-europium.html",
+      "grown/pink-noise.html"
      ],
      [
       "nested/Mini-1px-Cube-1g.html",
@@ -53359,7 +53643,8 @@
       "nested/Nested-Relative-Scale-Me-You-Moon-Sun.html",
       "nests/Ne-Zero-Cubed-N6.html",
       "next/Next-Bifrostal-328.html",
-      "grown/the-atom-helium.html"
+      "grown/the-atom-helium.html",
+      "grown/pink-critique.html"
      ],
      [
       "next/Next-Gen-10-Qd.html",
@@ -53367,7 +53652,8 @@
       "one/One-Electron-Or-Pn.html",
       "plank/Blackhole-Plank-Out-Wind-In-13-8B.html",
       "plank/Sub5-Deep-Planck.html",
-      "grown/the-atom-osmium.html"
+      "grown/the-atom-osmium.html",
+      "grown/nine-shells.html"
      ]
     ]
    },
