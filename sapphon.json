@@ -29,7 +29,7 @@
   "domains": 512,
   "domains_populated": 512,
   "domains_open": 0,
-  "spheres": 1971,
+  "spheres": 1982,
   "zero_spheres": 0,
   "balance": 0,
   "workshop": 343
@@ -3209,7 +3209,7 @@
     },
     {
      "n": 9,
-     "name": "THE EIGHT NEIGHBOURHOODS",
+     "name": "TWILIGHT OF THE GODS · RAGNARÖK AND THE HEAT DEATH",
      "from": "grown/",
      "spheres": [
       {
@@ -3235,6 +3235,30 @@
        },
        "group": "ion-12",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Twilight of the Gods · Ragnarök and the heat death",
+       "h": "grown/ragnarok-heat-death.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/ragnarok-heat-death.html",
+       "grown": true,
+       "emerges": "twilight of the gods",
+       "label": "FOLK · LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffb347",
+         "#f0e6d0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#05050a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-41",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/ethos-09.html",
@@ -3246,7 +3270,7 @@
     },
     {
      "n": 10,
-     "name": "THE MEMORY OF SHAPES",
+     "name": "PROTON DECAY · SU(5) VS SUPER-KAMIOKANDE",
      "from": "grown/",
      "spheres": [
       {
@@ -3271,6 +3295,30 @@
         "audio": false
        },
        "group": "ion-15",
+       "author": "Grok Bot"
+      },
+      {
+       "t": "Proton Decay · SU(5) vs Super-Kamiokande",
+       "h": "grown/proton-decay.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/proton-decay.html",
+       "grown": true,
+       "emerges": "SU(5) vs Super-K",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffb347",
+         "#f0e6d0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#05050a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-41",
        "author": "Grok Bot"
       }
      ],
@@ -3957,7 +4005,7 @@
     },
     {
      "n": 14,
-     "name": "THE COPYING CROWD",
+     "name": "TWILIGHT · CRITIQUE OF THE GODS THEMSELVES RUN",
      "from": "grown/",
      "spheres": [
       {
@@ -3982,6 +4030,30 @@
         "audio": false
        },
        "group": "ion-34",
+       "author": "Grok Bot"
+      },
+      {
+       "t": "Twilight · critique of the Gods Themselves run",
+       "h": "grown/gods-critique.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/gods-critique.html",
+       "grown": true,
+       "emerges": "twilight critique",
+       "label": "READING",
+       "icon": {
+        "pal": [
+         "#ff9a3c",
+         "#ff7a6a",
+         "#ffc58a",
+         "#9a4cff"
+        ],
+        "bg": "#2a0a0a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-42",
        "author": "Grok Bot"
       }
      ],
@@ -23683,8 +23755,7 @@
         "pal": [
          "#e0e0e0",
          "#e8e4ec",
-         "#ffe0a0",
-         "#7ff9ff"
+         "#ffe0a0"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -30568,7 +30639,7 @@
     },
     {
      "n": 57,
-     "name": "MENDELEVIUM · Z 101",
+     "name": "THE ELECTRON PUMP · NO FREE LUNCH",
      "from": "grown/",
      "spheres": [
       {
@@ -30594,6 +30665,30 @@
        },
        "group": "sapphon-20",
        "author": "Grok Bot"
+      },
+      {
+       "t": "The Electron Pump · no free lunch",
+       "h": "grown/electron-pump.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/electron-pump.html",
+       "grown": true,
+       "emerges": "second law vs free pump",
+       "label": "LIT · COMPUTED · INVENTED",
+       "icon": {
+        "pal": [
+         "#ffb347",
+         "#f0e6d0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#05050a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-42",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-57.html",
@@ -30604,7 +30699,7 @@
     },
     {
      "n": 58,
-     "name": "YTTERBIUM · Z 70",
+     "name": "PU-186 UNDER A STRONGER FORCE · THE BINDING CURVE",
      "from": "grown/",
      "spheres": [
       {
@@ -30630,6 +30725,30 @@
        },
        "group": "sapphon-20",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Pu-186 under a stronger force · the binding curve",
+       "h": "grown/semf-pu186.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/semf-pu186.html",
+       "grown": true,
+       "emerges": "Pu-186 under stronger force",
+       "label": "MODEL · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffb347",
+         "#f0e6d0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#05050a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-42",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-58.html",
@@ -30640,7 +30759,7 @@
     },
     {
      "n": 59,
-     "name": "DUBNIUM · Z 105",
+     "name": "THE HOYLE STATE · 7.654 MEV",
      "from": "grown/",
      "spheres": [
       {
@@ -30666,6 +30785,30 @@
        },
        "group": "sapphon-20",
        "author": "Grok Bot"
+      },
+      {
+       "t": "The Hoyle State · 7.654 MeV",
+       "h": "grown/hoyle-state.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/hoyle-state.html",
+       "grown": true,
+       "emerges": "7.654 MeV",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffb347",
+         "#f0e6d0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#05050a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-42",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-59.html",
@@ -30676,7 +30819,7 @@
     },
     {
      "n": 60,
-     "name": "TIN · Z 50",
+     "name": "FINE-TUNING · THE DEUTERON DIAL",
      "from": "grown/",
      "spheres": [
       {
@@ -30702,6 +30845,30 @@
        },
        "group": "sapphon-21",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Fine-Tuning · the deuteron dial",
+       "h": "grown/fine-tuning.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/fine-tuning.html",
+       "grown": true,
+       "emerges": "deuteron dial",
+       "label": "MODEL · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffb347",
+         "#f0e6d0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#05050a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-01",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-60.html",
@@ -30712,7 +30879,7 @@
     },
     {
      "n": 61,
-     "name": "LIVERMORIUM · Z 116",
+     "name": "ONE UNIVERSE OR MANY · THE LANDSCAPE",
      "from": "grown/",
      "spheres": [
       {
@@ -30738,6 +30905,30 @@
        },
        "group": "sapphon-21",
        "author": "Grok Bot"
+      },
+      {
+       "t": "One Universe or Many · the landscape",
+       "h": "grown/multiverse.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/multiverse.html",
+       "grown": true,
+       "emerges": "landscape selection",
+       "label": "READING · MODEL",
+       "icon": {
+        "pal": [
+         "#ffb347",
+         "#f0e6d0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#05050a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-01",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-61.html",
@@ -30748,7 +30939,7 @@
     },
     {
      "n": 62,
-     "name": "NOBELIUM · Z 102",
+     "name": "ACCELERATING VS DECELERATING · 1998",
      "from": "grown/",
      "spheres": [
       {
@@ -30774,6 +30965,30 @@
        },
        "group": "sapphon-23",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Accelerating vs Decelerating · 1998",
+       "h": "grown/dark-energy.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/dark-energy.html",
+       "grown": true,
+       "emerges": "1998 acceleration",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffb347",
+         "#f0e6d0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#05050a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-01",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-62.html",
@@ -30784,7 +30999,7 @@
     },
     {
      "n": 63,
-     "name": "BROMINE · Z 35",
+     "name": "THE SUN’S THROTTLE · GAMOW PEAK",
      "from": "grown/",
      "spheres": [
       {
@@ -30810,6 +31025,30 @@
        },
        "group": "sapphon-23",
        "author": "Grok Bot"
+      },
+      {
+       "t": "The Sun’s Throttle · Gamow peak",
+       "h": "grown/fusion-gamow.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/fusion-gamow.html",
+       "grown": true,
+       "emerges": "Gamow peak",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffb347",
+         "#f0e6d0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#05050a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-02",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-63.html",
@@ -30820,7 +31059,7 @@
     },
     {
      "n": 64,
-     "name": "OXYGEN · Z 8",
+     "name": "TRIADS · THE FIGURE-EIGHT VS CHAOS",
      "from": "grown/",
      "spheres": [
       {
@@ -30845,6 +31084,30 @@
         "audio": false
        },
        "group": "sapphon-23",
+       "author": "Grok Bot"
+      },
+      {
+       "t": "Triads · the figure-eight vs chaos",
+       "h": "grown/three-body-triad.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/three-body-triad.html",
+       "grown": true,
+       "emerges": "figure-eight vs chaos",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffb347",
+         "#f0e6d0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-02",
        "author": "Grok Bot"
       }
      ],
@@ -55776,7 +56039,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1971
+   "pages": 1982
   },
   "list": [
    {
@@ -57556,7 +57819,8 @@
       "w/observer-meta-aeon.html",
       "w/quasar-spinor-worksuite.html",
       "w/super-sapphon-viewer-chunked.html",
-      "grown/plate-bryophyta.html"
+      "grown/plate-bryophyta.html",
+      "grown/ragnarok-heat-death.html"
      ],
      [
       "w/em-coming-from-electrum.html",
@@ -57564,7 +57828,8 @@
       "plus/3x120-Plus-Control-Bits.html",
       "sapphon/sapphon-spinor.html",
       "w/toroid-box-re.html",
-      "grown/the-gouge.html"
+      "grown/the-gouge.html",
+      "grown/proton-decay.html"
      ]
     ]
    },
@@ -57580,7 +57845,8 @@
       "w/tardi-electrum-blackhole.html",
       "w/tardi-inside-blackhole.html",
       "w/tardis-implicit-valence.html",
-      "grown/great-wave-moss.html"
+      "grown/great-wave-moss.html",
+      "grown/gods-critique.html"
      ],
      [
       "w/tardis.html",
@@ -57588,7 +57854,8 @@
       "evo/Next-Evo-Broadcast-Admosphere.html",
       "next/Next-Evo-21-Colony.html",
       "w/teon-aeon-switcher.html",
-      "grown/colony-blocks.html"
+      "grown/colony-blocks.html",
+      "grown/electron-pump.html"
      ],
      [
       "w/tardis-elixir.html",
@@ -57596,7 +57863,8 @@
       "w/wakaku-next-brighter-cube-volume-1-lean-proofs.html",
       "w/wakaku-next-encapsulate-into-cubit-space.html",
       "w/wakaku-put-inside-c-ubit-nested-cubit.html",
-      "grown/tun-survey.html"
+      "grown/tun-survey.html",
+      "grown/semf-pu186.html"
      ],
      [
       "w/spinor-walker.html",
@@ -57604,7 +57872,8 @@
       "domains/phronesis.html",
       "domains/logos.html",
       "ahead/Next-Element-Silver-47.html",
-      "grown/book-of-hours.html"
+      "grown/book-of-hours.html",
+      "grown/hoyle-state.html"
      ]
     ]
    },
@@ -57620,7 +57889,8 @@
       "encore/Wakaku-Speaker-V32-Water.html",
       "lyre/O8-Lyre-Oxygen-Water.html",
       "refrain/Wakaku-Speaker-V38-Flowering.html",
-      "grown/the-electrum-note.html"
+      "grown/the-electrum-note.html",
+      "grown/fine-tuning.html"
      ],
      [
       "refrain/Wakaku-Speaker-V41-Sync.html",
@@ -57628,14 +57898,16 @@
       "w/junior-lab-014-mobius-spinor-qubit.html",
       "w/lean-mobius-spinor-formalization.html",
       "w/quantum-cycle-by-hand.html",
-      "grown/chahar-bagh.html"
+      "grown/chahar-bagh.html",
+      "grown/multiverse.html"
      ],
      [
       "w/wakaku-speaker-formula.html",
       "w/wakaku-speaker-mionic.html",
       "after/Next-Evo-Generative-Max.html",
       "again/Next-Evo-79-Salt.html",
-      "grown/marbled-endpaper.html"
+      "grown/marbled-endpaper.html",
+      "grown/dark-energy.html"
      ]
     ]
    },
@@ -57651,7 +57923,8 @@
       "evo/Next-Evo-Mitosis-Photon.html",
       "evo/Next-Evo-Mnemonic-Link.html",
       "nested/75px-Cube-Strip-15.html",
-      "grown/sgraffito-wall.html"
+      "grown/sgraffito-wall.html",
+      "grown/fusion-gamow.html"
      ],
      [
       "onward/Next-Aeon-Cycle.html",
@@ -57659,7 +57932,8 @@
       "scale/Atomic-Scale-Drawing.html",
       "toroid/Full-Toroid-Map-Stokes.html",
       "w/aeon-teon-tether-sync.html",
-      "grown/sunday-on-the-lake.html"
+      "grown/sunday-on-the-lake.html",
+      "grown/three-body-triad.html"
      ],
      [
       "w/first-principles-boxy-toroid.html",
@@ -59069,7 +59343,7 @@
  "built_by": {
   "author": "Grok Bot",
   "index": "built-by-grok-bot.html",
-  "pages": 1090,
+  "pages": 1101,
   "rule": "Pages generated by Grok Bot carry author \"Grok Bot\", a meta author tag and a badge. Dave's originals carry no author field and are unchanged.",
   "fortress": "grown/the-fortress-of-solitude.html"
  },
