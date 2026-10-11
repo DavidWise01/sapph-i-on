@@ -543,6 +543,17 @@ New spheres built one at a time, each an emergent page with its own local rule, 
 - [PROJECT GOD EGG · the kernel v6 · 2 pairs and the resource in the middle](./grown/god-egg-v6.html): ETHOS domain 35. Emerges: 2 diatom/tardigrade pairs; reaching the middle resource makes one more. MODEL · LIT · COMPUTED.
 - [PROJECT GOD EGG · the kernel v7 · no imposed clock](./grown/god-egg-v7.html): ETHOS domain 36. Emerges: pair arrivals in any order make one more; simulator fingerprints labelled. MODEL · LIT · COMPUTED.
 - [RPS picks the roles · civilization war from 1832](./grown/rps-war-3.html): ETHOS domain 37. Emerges: 3 participants; RPS picks who assigns Judge/P1/P2; P1 moves first; winner picks next roles; one game per year from 1832. MODEL · LIT · COMPUTED.
+- [Bits per Symbol](./grown/shannon-bits.html): ETHOS domain 38. Emerges: Shannon H vs Hartley log N. LIT · MODEL · COMPUTED.
+- [Bits per Planck Area](./grown/bekenstein-area.html): ETHOS domain 39. Emerges: area law vs volume count; Dave’s bubble scales. LIT · MODEL · COMPUTED.
+- [The Price of Forgetting](./grown/landauer-erase.html): ETHOS domain 40. Emerges: k T ln2 erasure vs per-step cost. LIT · MODEL · COMPUTED.
+- [The Shortest Description](./grown/kolmogorov-lz.html): ETHOS domain 41. Emerges: LZ78 bound on K vs order-0. LIT · MODEL · COMPUTED.
+- [2^3 in the Mirror Box](./grown/dave-dot-density.html): ETHOS domain 42. Emerges: 2^3 = 8 dots, 256 patterns. LIT · MODEL · COMPUTED.
+- [Rock, Paper, 1/3](./grown/nash-rps.html): ETHOS domain 43. Emerges: Nash 1/3 vs replicator cycles. LIT · MODEL · COMPUTED.
+- [Who Moves First](./grown/zermelo-first-mover.html): ETHOS domain 44. Emerges: Zermelo determinacy vs first-mover myth. LIT · MODEL · COMPUTED.
+- [Hawk and Dove](./grown/hawk-dove.html): ETHOS domain 45. Emerges: ESS V/C vs group selection. LIT · MODEL · COMPUTED.
+- [Life’s Information](./grown/life-information.html): ETHOS domain 46. Emerges: Life universality vs von Neumann 29-state. LIT · MODEL · COMPUTED.
+- [What It Costs to Simulate](./grown/simulation-cost.html): ETHOS domain 47. Emerges: holographic budget vs voxels; log2 24!. LIT · MODEL · COMPUTED.
+- [Eleven: Overview & Critique](./grown/info-games-critique.html): ETHOS domain 48. Emerges: overview & critique of 1–10. LIT · MODEL · COMPUTED.
 
 ## The 88 groups
 - g/sapphon-NN.html (42 groups of 4 members), g/ion-NN.html (45 groups of 3 members) and g/center.html (1). 42×4 + 45×3 + 1 = 304 member slots; 42 + 45 + 1 = 88 groups.

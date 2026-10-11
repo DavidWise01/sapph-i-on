@@ -29,7 +29,7 @@
   "domains": 512,
   "domains_populated": 512,
   "domains_open": 0,
-  "spheres": 2005,
+  "spheres": 2016,
   "zero_spheres": 0,
   "balance": 0,
   "workshop": 343
@@ -5443,7 +5443,7 @@
     },
     {
      "n": 38,
-     "name": "QUICKSILVER BEADS",
+     "name": "BITS PER SYMBOL",
      "from": "grown/",
      "spheres": [
       {
@@ -5469,6 +5469,30 @@
        },
        "group": "ion-20",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Bits per Symbol",
+       "h": "grown/shannon-bits.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/shannon-bits.html",
+       "grown": true,
+       "emerges": "Shannon H vs Hartley log N",
+       "label": "LIT · MODEL · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffd166",
+         "#e8e4ec",
+         "#ffe0a0",
+         "#ef476f"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-10",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/ethos-38.html",
@@ -5479,7 +5503,7 @@
     },
     {
      "n": 39,
-     "name": "THE MINT IN THE TOWER",
+     "name": "BITS PER PLANCK AREA",
      "from": "grown/",
      "spheres": [
       {
@@ -5505,6 +5529,30 @@
        },
        "group": "ion-20",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Bits per Planck Area",
+       "h": "grown/bekenstein-area.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/bekenstein-area.html",
+       "grown": true,
+       "emerges": "area law vs volume count; Dave’s bubble scales",
+       "label": "LIT · MODEL · COMPUTED",
+       "icon": {
+        "pal": [
+         "#9fd3ff",
+         "#e8e4ec",
+         "#ffd166",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-10",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/ethos-39.html",
@@ -5515,7 +5563,7 @@
     },
     {
      "n": 40,
-     "name": "EU:YSO",
+     "name": "THE PRICE OF FORGETTING",
      "from": "grown/",
      "spheres": [
       {
@@ -5541,6 +5589,30 @@
        },
        "group": "ion-23",
        "author": "Grok Bot"
+      },
+      {
+       "t": "The Price of Forgetting",
+       "h": "grown/landauer-erase.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/landauer-erase.html",
+       "grown": true,
+       "emerges": "k T ln2 erasure vs per-step cost",
+       "label": "LIT · MODEL · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ef476f",
+         "#e8e4ec",
+         "#ffe0a0",
+         "#ffd166"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-11",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/ethos-40.html",
@@ -5551,7 +5623,7 @@
     },
     {
      "n": 41,
-     "name": "ION COULOMB CRYSTAL",
+     "name": "THE SHORTEST DESCRIPTION",
      "from": "grown/",
      "spheres": [
       {
@@ -5577,6 +5649,30 @@
        },
        "group": "ion-24",
        "author": "Grok Bot"
+      },
+      {
+       "t": "The Shortest Description",
+       "h": "grown/kolmogorov-lz.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/kolmogorov-lz.html",
+       "grown": true,
+       "emerges": "LZ78 bound on K vs order-0",
+       "label": "LIT · MODEL · COMPUTED",
+       "icon": {
+        "pal": [
+         "#b5e48c",
+         "#e8e4ec",
+         "#ffe0a0",
+         "#52b69a"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-11",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/ethos-41.html",
@@ -5587,7 +5683,7 @@
     },
     {
      "n": 42,
-     "name": "FALSE-COLOUR RING",
+     "name": "2^3 IN THE MIRROR BOX",
      "from": "grown/",
      "spheres": [
       {
@@ -5613,6 +5709,28 @@
        },
        "group": "ion-27",
        "author": "Grok Bot"
+      },
+      {
+       "t": "2^3 in the Mirror Box",
+       "h": "grown/dave-dot-density.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/dave-dot-density.html",
+       "grown": true,
+       "emerges": "2^3 = 8 dots, 256 patterns",
+       "label": "LIT · MODEL · COMPUTED",
+       "icon": {
+        "pal": [
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-11",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/ethos-42.html",
@@ -5623,7 +5741,7 @@
     },
     {
      "n": 43,
-     "name": "LAVA CRUST",
+     "name": "ROCK, PAPER, 1/3",
      "from": "grown/",
      "spheres": [
       {
@@ -5648,6 +5766,30 @@
        },
        "group": "ion-27",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Rock, Paper, 1/3",
+       "h": "grown/nash-rps.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/nash-rps.html",
+       "grown": true,
+       "emerges": "Nash 1/3 vs replicator cycles",
+       "label": "LIT · MODEL · COMPUTED",
+       "icon": {
+        "pal": [
+         "#c77dff",
+         "#e8e4ec",
+         "#ffe0a0",
+         "#ffd166"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-12",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/ethos-43.html",
@@ -5658,7 +5800,7 @@
     },
     {
      "n": 44,
-     "name": "LILAC & SODIUM",
+     "name": "WHO MOVES FIRST",
      "from": "grown/",
      "spheres": [
       {
@@ -5684,6 +5826,29 @@
        },
        "group": "ion-31",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Who Moves First",
+       "h": "grown/zermelo-first-mover.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/zermelo-first-mover.html",
+       "grown": true,
+       "emerges": "Zermelo determinacy vs first-mover myth",
+       "label": "LIT · MODEL · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ff9f1c",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-12",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/ethos-44.html",
@@ -5694,7 +5859,7 @@
     },
     {
      "n": 45,
-     "name": "THE GREAT RED SPOT",
+     "name": "HAWK AND DOVE",
      "from": "grown/",
      "spheres": [
       {
@@ -5720,6 +5885,30 @@
        },
        "group": "ion-31",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Hawk and Dove",
+       "h": "grown/hawk-dove.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/hawk-dove.html",
+       "grown": true,
+       "emerges": "ESS V/C vs group selection",
+       "label": "LIT · MODEL · COMPUTED",
+       "icon": {
+        "pal": [
+         "#80ed99",
+         "#e8e4ec",
+         "#ffe0a0",
+         "#ffd166"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-12",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/ethos-45.html",
@@ -5730,7 +5919,7 @@
     },
     {
      "n": 46,
-     "name": "THE GREEN FLASH",
+     "name": "LIFE’S INFORMATION",
      "from": "grown/",
      "spheres": [
       {
@@ -5756,6 +5945,30 @@
        },
        "group": "ion-41",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Life’s Information",
+       "h": "grown/life-information.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/life-information.html",
+       "grown": true,
+       "emerges": "Life universality vs von Neumann 29-state",
+       "label": "LIT · MODEL · COMPUTED",
+       "icon": {
+        "pal": [
+         "#4cc9f0",
+         "#e8e4ec",
+         "#ffe0a0",
+         "#ffd166"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-13",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/ethos-46.html",
@@ -5766,7 +5979,7 @@
     },
     {
      "n": 47,
-     "name": "COPPER GREENS",
+     "name": "WHAT IT COSTS TO SIMULATE",
      "from": "grown/",
      "spheres": [
       {
@@ -5792,6 +6005,30 @@
        },
        "group": "ion-41",
        "author": "Grok Bot"
+      },
+      {
+       "t": "What It Costs to Simulate",
+       "h": "grown/simulation-cost.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/simulation-cost.html",
+       "grown": true,
+       "emerges": "holographic budget vs voxels; log2 24!",
+       "label": "LIT · MODEL · COMPUTED",
+       "icon": {
+        "pal": [
+         "#f72585",
+         "#e8e4ec",
+         "#ffd166",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-13",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/ethos-47.html",
@@ -5802,7 +6039,7 @@
     },
     {
      "n": 48,
-     "name": "IO",
+     "name": "ELEVEN: OVERVIEW & CRITIQUE",
      "from": "grown/",
      "spheres": [
       {
@@ -5827,6 +6064,30 @@
         "audio": false
        },
        "group": "sapphon-02",
+       "author": "Grok Bot"
+      },
+      {
+       "t": "Eleven: Overview & Critique",
+       "h": "grown/info-games-critique.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/info-games-critique.html",
+       "grown": true,
+       "emerges": "overview & critique of 1–10",
+       "label": "LIT · MODEL · COMPUTED",
+       "icon": {
+        "pal": [
+         "#e0e0e0",
+         "#e8e4ec",
+         "#ffd166",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-13",
        "author": "Grok Bot"
       }
      ],
@@ -56592,7 +56853,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 2005
+   "pages": 2016
   },
   "list": [
    {
@@ -58763,7 +59024,8 @@
       "scale/Scale-Into-Light-Fixed.html",
       "gold/nail-sheet-gold-then-silver.html",
       "w/diamond-in-diamond-2-sapphires-2-black-diamonds.html",
-      "grown/the-dsup-codex.html"
+      "grown/the-dsup-codex.html",
+      "grown/shannon-bits.html"
      ],
      [
       "sapphon/hermes_sapphon.html",
@@ -58771,7 +59033,8 @@
       "encore/Wakaku-V135-Clean-Metal-Analogs-200.html",
       "w/gravity-budget.html",
       "w/paper-01-toroid.html",
-      "grown/the-zero-magnet.html"
+      "grown/the-zero-magnet.html",
+      "grown/bekenstein-area.html"
      ]
     ]
    },
@@ -58787,7 +59050,8 @@
       "w/gravity-lens.html",
       "neon/Triad-33-Equidistance-Neon.html",
       "nests/Nested-Black-Hole-81.html",
-      "grown/the-hunger-lattice.html"
+      "grown/the-hunger-lattice.html",
+      "grown/landauer-erase.html"
      ],
      [
       "w/real-physics-stack.html",
@@ -58795,7 +59059,8 @@
       "next/Next-Evo-512-Full.html",
       "forth/Next-Element-Erbium-68-Lyre.html",
       "forth/Next-Element-Gadolinium-64-Lyre.html",
-      "grown/the-signal.html"
+      "grown/the-signal.html",
+      "grown/kolmogorov-lz.html"
      ],
      [
       "w/lab-033-full-capacity-toroid-motherboard-kernel.html",
@@ -58803,7 +59068,8 @@
       "one/Integrated-One-Earth-Scalar-PINNED-0xISO.html",
       "one/Integrated-One-Earth-Scalar-ULTIMATE-SYMMETRY-ONLY.html",
       "sapphon/Integrated-One-Earth-Scalar-PATRICIA-SAPPHON-000-P-S-1.html",
-      "grown/the-red-queen-panel.html"
+      "grown/the-red-queen-panel.html",
+      "grown/dave-dot-density.html"
      ]
     ]
    },
@@ -58819,7 +59085,8 @@
       "bonk/Bonk-What-Dreams-May-Come-Colorful-Morphic-V44.html",
       "farther/Next-Shell-After-Astatine.html",
       "forth/Next-Shell-After-Chlorine.html",
-      "grown/the-ladder-thermostat.html"
+      "grown/the-ladder-thermostat.html",
+      "grown/nash-rps.html"
      ],
      [
       "qdot/Bonk-Black-Hole-Quantum-Dot-V50.html",
@@ -58827,7 +59094,8 @@
       "qdot/Bonk-Quantum-Dot-Q-Plus-D-Minus-Toroid-V40.html",
       "qdot/One-Qdot-8x8x8x8x1x8x8x8x8-FINAL.html",
       "w/next-element-argon.html",
-      "grown/the-avalanche-table.html"
+      "grown/the-avalanche-table.html",
+      "grown/zermelo-first-mover.html"
      ],
      [
       "w/next-element-potassium.html",
@@ -58835,7 +59103,8 @@
       "one/one-cubit-1440-spinor-mobius-cortex.html",
       "plus/Cut-Hologram-X4-Plus-100pct-Player.html",
       "yet/Next-Shell-After-Argon.html",
-      "grown/the-eight-neighbourhoods.html"
+      "grown/the-eight-neighbourhoods.html",
+      "grown/hawk-dove.html"
      ]
     ]
    },
@@ -58851,7 +59120,8 @@
       "w/6-universes-scalar-plane-0-deploy-now-stack-ten.html",
       "another/Next-Element-Curium-96-Lyre.html",
       "beyond/Next-Element-Dubnium-105-Lyre.html",
-      "grown/the-zero-flock.html"
+      "grown/the-zero-flock.html",
+      "grown/life-information.html"
      ],
      [
       "sapphon/V111-Sapphon-Patricia-Amethyst.html",
@@ -58859,7 +59129,8 @@
       "yet/Next-Element-Thallium-81-Lyre.html",
       "stewards/mythos.html",
       "ahead/Next-Phase-Plasma-Mitosis.html",
-      "grown/the-ark-raft.html"
+      "grown/the-ark-raft.html",
+      "grown/simulation-cost.html"
      ],
      [
       "beyond/Next-Element-Bohrium-107-Lyre.html",
@@ -58867,7 +59138,8 @@
       "still/Next-Element-Neptunium-93-Lyre.html",
       "still/Next-Element-Protactinium-91-Lyre.html",
       "farther/Next-Element-Manganese-25.html",
-      "grown/the-sky-over-the-rim.html"
+      "grown/the-sky-over-the-rim.html",
+      "grown/info-games-critique.html"
      ]
     ]
    },
@@ -59919,7 +60191,7 @@
  "built_by": {
   "author": "Grok Bot",
   "index": "built-by-grok-bot.html",
-  "pages": 1124,
+  "pages": 1135,
   "rule": "Pages generated by Grok Bot carry author \"Grok Bot\", a meta author tag and a badge. Dave's originals carry no author field and are unchanged.",
   "fortress": "grown/the-fortress-of-solitude.html"
  },
