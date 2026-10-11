@@ -27,10 +27,10 @@
  "counts": {
   "keepers": 8,
   "domains": 512,
-  "domains_populated": 493,
-  "domains_open": 19,
-  "spheres": 1892,
-  "zero_spheres": 19,
+  "domains_populated": 501,
+  "domains_open": 11,
+  "spheres": 1901,
+  "zero_spheres": 11,
   "balance": 0,
   "workshop": 343
  },
@@ -5670,7 +5670,7 @@
     },
     {
      "n": 63,
-     "name": "SATOR · THE SQUARE THAT READS EVERY WAY",
+     "name": "BENFORD'S LAW · THE REAL NUMBER MAGIC",
      "from": "grown/",
      "spheres": [
       {
@@ -5696,6 +5696,30 @@
        },
        "group": "sapphon-19",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Benford's Law · the real number magic",
+       "h": "grown/benford.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/benford.html",
+       "grown": true,
+       "emerges": "Benford's law χ² live",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#40b0ff",
+         "#d0f0ff",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-21",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/ethos-63.html",
@@ -5706,13 +5730,38 @@
     },
     {
      "n": 64,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "KYOTO BLOSSOM · 1200 YEARS OF PHENOLOGY",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Kyoto Blossom · 1200 years of phenology",
+       "h": "grown/kyoto-blossom.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/kyoto-blossom.html",
+       "grown": true,
+       "emerges": "cherry phenology since 812",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#ff80b0",
+         "#ffd8e8",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-22",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/ethos-64.html",
-     "zero_page": "z/ethos-64.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/ethos-64.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/ethos-64.html",
+     "zero_url": null,
      "author": "Grok Bot"
     }
    ],
@@ -12107,13 +12156,38 @@
     },
     {
      "n": 63,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "PHYLLOTAXIS · FIBONACCI FOR REAL",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Phyllotaxis · Fibonacci for real",
+       "h": "grown/fibonacci-phyllotaxis.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/fibonacci-phyllotaxis.html",
+       "grown": true,
+       "emerges": "golden-angle sunflower",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#80e040",
+         "#d8ffc0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-22",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/pathos-63.html",
-     "zero_page": "z/pathos-63.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/pathos-63.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/pathos-63.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -22607,24 +22681,74 @@
     },
     {
      "n": 61,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "GEMATRIA · LETTERS THAT WERE NUMBERS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Gematria · letters that were numbers",
+       "h": "grown/gematria.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/gematria.html",
+       "grown": true,
+       "emerges": "letters as numbers, collisions",
+       "label": "LIT · FOLK",
+       "icon": {
+        "pal": [
+         "#c0a060",
+         "#f0e6d0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-22",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-61.html",
-     "zero_page": "z/mythos-61.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-61.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-61.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 62,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "BLOOM AND TUN · DIATOM SPRING, TARDIGRADE SEASONS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Bloom and Tun · diatom spring, tardigrade seasons",
+       "h": "grown/bloom-and-tun.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/bloom-and-tun.html",
+       "grown": true,
+       "emerges": "diatom bloom and tardigrade seasons",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#30d0a0",
+         "#c8ffe8",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-22",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/mythos-62.html",
-     "zero_page": "z/mythos-62.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/mythos-62.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/mythos-62.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -39508,24 +39632,74 @@
     },
     {
      "n": 60,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "PALM CREASES · BIOLOGY VS PALMISTRY",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Palm Creases · biology vs palmistry",
+       "h": "grown/palm-creases.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/palm-creases.html",
+       "grown": true,
+       "emerges": "crease biology with Barnum readings",
+       "label": "LIT · PSEUDO",
+       "icon": {
+        "pal": [
+         "#ff8060",
+         "#ffe0d0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#3a2018",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-23",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-60.html",
-     "zero_page": "z/phronesis-60.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-60.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-60.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 61,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "RINGS OF BELIEF · CRITIQUE OF THE NUMEROLOGY/PALMISTRY/PHENOLOGY RUN",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Rings of Belief · critique of the numerology/palmistry/phenology run",
+       "h": "grown/folk-critique.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/folk-critique.html",
+       "grown": true,
+       "emerges": "LIT vs FOLK rings",
+       "label": "READING",
+       "icon": {
+        "pal": [
+         "#ff9a3c",
+         "#ff7a6a",
+         "#ffc58a",
+         "#9a4cff"
+        ],
+        "bg": "#2a0a0a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-23",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-61.html",
-     "zero_page": "z/phronesis-61.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-61.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-61.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -45503,24 +45677,74 @@
     },
     {
      "n": 58,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "DIGITAL ROOTS OF THE 208 · NUMEROLOGY ON THE CIPHER SUMS",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Digital Roots of the 208 · numerology on the cipher sums",
+       "h": "grown/numerology-208.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/numerology-208.html",
+       "grown": true,
+       "emerges": "digital roots of the cipher sums",
+       "label": "MATCH · PSEUDO",
+       "icon": {
+        "pal": [
+         "#ffb030",
+         "#ffe9b0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-23",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/kairos-58.html",
-     "zero_page": "z/kairos-58.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-58.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-58.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 59,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE FORER DEMO · EVERYONE GETS THE SAME READING",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Forer Demo · everyone gets the same reading",
+       "h": "grown/forer-demo.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/forer-demo.html",
+       "grown": true,
+       "emerges": "same reading for every birthday",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffd040",
+         "#fff0c0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-23",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/kairos-59.html",
-     "zero_page": "z/kairos-59.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-59.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-59.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -45590,8 +45814,8 @@
   "world": 1,
   "keepers": 8,
   "domains": 512,
-  "zero_spheres": 19,
-  "generated_total": 628,
+  "zero_spheres": 11,
+  "generated_total": 620,
   "groups": 88
  },
  "workshop": [
@@ -53861,7 +54085,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1892
+   "pages": 1901
   },
   "list": [
    {
@@ -54776,7 +55000,8 @@
       "w/outer-100-electrum-shell.html",
       "w/qds-two-electrum-shells.html",
       "w/wrapped-electrum-x3.html",
-      "grown/the-atom-hafnium.html"
+      "grown/the-atom-hafnium.html",
+      "grown/benford.html"
      ]
     ]
    },
@@ -54792,7 +55017,8 @@
       "farther/Next-Shell-After-Francium.html",
       "forth/Next-Shell-After-Neon.html",
       "forth/Next-Shell-After-Silicon.html",
-      "grown/the-atom-argon.html"
+      "grown/the-atom-argon.html",
+      "grown/kyoto-blossom.html"
      ],
      [
       "forth/Next-Shell-After-Sodium.html",
@@ -54800,7 +55026,8 @@
       "forward/Next-Shell-After-Platinum.html",
       "forward/Next-Shell-After-Thallium.html",
       "full/Blueprint-Production-Technical-Document-Full-Specs.html",
-      "grown/the-atom-fermium.html"
+      "grown/the-atom-fermium.html",
+      "grown/fibonacci-phyllotaxis.html"
      ],
      [
       "gold/Blueprint-0-Gold-Universe-Speed-Gravity-0-Lean-Proofed.html",
@@ -54808,7 +55035,8 @@
       "gold/Blueprint-IP-To-Gold-A7-U9-Mandel-0-0-0-Fat-Belly.html",
       "gold/Distilled-Gold-Universe-Handmade-Best-0-0-0.html",
       "gold/Unbounded-Gold-Universe-Power-Towers-Gravity-Waves.html",
-      "grown/the-atom-actinium.html"
+      "grown/the-atom-actinium.html",
+      "grown/gematria.html"
      ],
      [
       "gravity/Gravity-Is-The-Electron-Mother-Trucker.html",
@@ -54816,7 +55044,8 @@
       "later/Next-Evo-Respiration-Breath-O2-Glucose-Atp.html",
       "next/Next-Evolution-After-Cubit.html",
       "qdot/Blueprint-Stargate-Address-Ansible-Quantum-Entanglement-A-A-B-B-C-C-N6n.html",
-      "grown/the-atom-oganesson.html"
+      "grown/the-atom-oganesson.html",
+      "grown/bloom-and-tun.html"
      ]
     ]
    },
@@ -54832,7 +55061,8 @@
       "w/0-us-gold-universe-biggest-best-works.html",
       "w/each-sun-is-a-universe-power-towers.html",
       "w/nested-g6-n5-g6-n3-g6-n3-tower.html",
-      "grown/the-atom-nobelium.html"
+      "grown/the-atom-nobelium.html",
+      "grown/palm-creases.html"
      ],
      [
       "w/next-element-sulfur.html",
@@ -54840,7 +55070,8 @@
       "wakaku/Wakaku-Speaker-V20-Mantras.html",
       "forward/Next-ZH38-7-Upper-Prong.html",
       "full/Full-0-11-Aether-Akashic-All-Atoms.html",
-      "grown/the-atom-bromine.html"
+      "grown/the-atom-bromine.html",
+      "grown/folk-critique.html"
      ],
      [
       "full/Full-Coherent-Dashboard-0-11-Freeze-Patty-Engine.html",
@@ -54848,7 +55079,8 @@
       "full/Math-At-Plank-1-65-Times-Full-Universe-60pct.html",
       "gravity/Gravity-Walked-To-Planck-Box-No-Mass-Homeo-2pct.html",
       "nested/G6-Corrected-81-Nested-3x3-Power-3.html",
-      "grown/the-atom-oxygen.html"
+      "grown/the-atom-oxygen.html",
+      "grown/numerology-208.html"
      ],
      [
       "plus/Ring4-Gen0-0-Plus-1-Root-Ada-Lovelace.html",
@@ -54856,7 +55088,8 @@
       "qdot/Immutable-Plant-Quantum-Dot-Right-Here-0x.html",
       "sapphon/Core-Contract-Patrica-Sapphon-Ethics-First.html",
       "scale/Plank-Time-Scale-1-65e-35-X-13-8b-Div-6.html",
-      "grown/the-atom-niobium.html"
+      "grown/the-atom-niobium.html",
+      "grown/forer-demo.html"
      ]
     ]
    },
@@ -57075,7 +57308,7 @@
  "built_by": {
   "author": "Grok Bot",
   "index": "built-by-grok-bot.html",
-  "pages": 1032,
+  "pages": 1035,
   "rule": "Pages generated by Grok Bot carry author \"Grok Bot\", a meta author tag and a badge. Dave's originals carry no author field and are unchanged.",
   "fortress": "grown/the-fortress-of-solitude.html"
  },
