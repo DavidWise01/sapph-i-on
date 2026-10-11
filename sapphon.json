@@ -27,10 +27,10 @@
  "counts": {
   "keepers": 8,
   "domains": 512,
-  "domains_populated": 506,
-  "domains_open": 6,
-  "spheres": 1907,
-  "zero_spheres": 6,
+  "domains_populated": 509,
+  "domains_open": 3,
+  "spheres": 1910,
+  "zero_spheres": 3,
   "balance": 0,
   "workshop": 343
  },
@@ -39815,13 +39815,38 @@
     },
     {
      "n": 63,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "TAROT · A CARD GAME THAT BECAME AN ORACLE",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Tarot · a card game that became an oracle",
+       "h": "grown/tarot-shuffle.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/tarot-shuffle.html",
+       "grown": true,
+       "emerges": "78 cards & the out-shuffle",
+       "label": "HISTORY · COMPUTED · FOLK",
+       "icon": {
+        "pal": [
+         "#efe6d2",
+         "#c8102e",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#1a1a1a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-25",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-63.html",
-     "zero_page": "z/phronesis-63.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-63.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-63.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -45909,24 +45934,74 @@
     },
     {
      "n": 61,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "THE GREAT TABLE · 4 × 12 × 13",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "The Great Table · 4 × 12 × 13",
+       "h": "grown/enochian-tables.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/enochian-tables.html",
+       "grown": true,
+       "emerges": "the 624-cell Great Table",
+       "label": "HISTORY · MATCH · INVENTED",
+       "icon": {
+        "pal": [
+         "#c8102e",
+         "#efe6d2",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#1a0508",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-25",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/kairos-61.html",
-     "zero_page": "z/kairos-61.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-61.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-61.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 62,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "PICATRIX HOURS · WHY THE WEEK RUNS SAT-SUN-MON",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Picatrix Hours · why the week runs Sat-Sun-Mon",
+       "h": "grown/planetary-hours.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/planetary-hours.html",
+       "grown": true,
+       "emerges": "Chaldean hours make the week",
+       "label": "HISTORY · MATCH · FOLK",
+       "icon": {
+        "pal": [
+         "#c8102e",
+         "#efe6d2",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#1a1a1a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-26",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/kairos-62.html",
-     "zero_page": "z/kairos-62.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-62.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-62.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
@@ -45963,8 +46038,8 @@
   "world": 1,
   "keepers": 8,
   "domains": 512,
-  "zero_spheres": 6,
-  "generated_total": 615,
+  "zero_spheres": 3,
+  "generated_total": 612,
   "groups": 88
  },
  "workshop": [
@@ -54234,7 +54309,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1907
+   "pages": 1910
   },
   "list": [
    {
@@ -55315,7 +55390,8 @@
       "echo/Wakaku-Speaker-V70-Eyeball.html",
       "plus/plus-15-degrees-off-the-fat-belly.html",
       "w/one-dot-to-a-universe-real.html",
-      "grown/the-atom-praseodymium.html"
+      "grown/the-atom-praseodymium.html",
+      "grown/tarot-shuffle.html"
      ],
      [
       "w/wakaku-speaker-10h.html",
@@ -55323,7 +55399,8 @@
       "w/1760-teon-aeon.html",
       "w/element-185-first-after.html",
       "qdot/Quantum-Battery-Wrapped-Neon-Gold-Silver-Rust-Water-Hydrogen.html",
-      "grown/the-atom-hassium.html"
+      "grown/the-atom-hassium.html",
+      "grown/enochian-tables.html"
      ]
     ]
    },
@@ -55339,7 +55416,8 @@
       "w/music-rhythm-tempo-sappho.html",
       "w/mutate-box-toroid-mutated.html",
       "w/schwarzschild-blackhole.html",
-      "grown/the-atom-manganese.html"
+      "grown/the-atom-manganese.html",
+      "grown/planetary-hours.html"
      ],
      [
       "wakaku/Wakaku-Speaker-V19-Transmission.html",
@@ -57463,7 +57541,7 @@
  "built_by": {
   "author": "Grok Bot",
   "index": "built-by-grok-bot.html",
-  "pages": 1041,
+  "pages": 1049,
   "rule": "Pages generated by Grok Bot carry author \"Grok Bot\", a meta author tag and a badge. Dave's originals carry no author field and are unchanged.",
   "fortress": "grown/the-fortress-of-solitude.html"
  },
