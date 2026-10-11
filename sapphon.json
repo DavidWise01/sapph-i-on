@@ -29,7 +29,7 @@
   "domains": 512,
   "domains_populated": 512,
   "domains_open": 0,
-  "spheres": 1949,
+  "spheres": 1960,
   "zero_spheres": 0,
   "balance": 0,
   "workshop": 343
@@ -29247,7 +29247,7 @@
     },
     {
      "n": 35,
-     "name": "COPERNICIUM · Z 112",
+     "name": "RIVERWORLD · STATE · INFORMATION THAT SURVIVES",
      "from": "grown/",
      "spheres": [
       {
@@ -29273,6 +29273,30 @@
        },
        "group": "sapphon-08",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Riverworld · State · information that survives",
+       "h": "grown/riverworld-state.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/riverworld-state.html",
+       "grown": true,
+       "emerges": "Page curve vs info loss",
+       "label": "MODEL · LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffb347",
+         "#f0e6d0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#04070a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-36",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-35.html",
@@ -29283,7 +29307,7 @@
     },
     {
      "n": 36,
-     "name": "LITHIUM · Z 3",
+     "name": "DAYWORLD · SPACE · TIME-SHARING BEATS BATCH",
      "from": "grown/",
      "spheres": [
       {
@@ -29309,6 +29333,30 @@
        },
        "group": "sapphon-08",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Dayworld · Space · time-sharing beats batch",
+       "h": "grown/dayworld-space.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/dayworld-space.html",
+       "grown": true,
+       "emerges": "time-sharing vs batch",
+       "label": "MODEL · LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffb347",
+         "#f0e6d0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#04070a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-36",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-36.html",
@@ -29319,7 +29367,7 @@
     },
     {
      "n": 37,
-     "name": "THORIUM · Z 90",
+     "name": "RINGWORLD · TIME · EIGHTY-TWO DAYS TO DISASTER",
      "from": "grown/",
      "spheres": [
       {
@@ -29345,6 +29393,30 @@
        },
        "group": "sapphon-10",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Ringworld · Time · eighty-two days to disaster",
+       "h": "grown/ringworld-time.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/ringworld-time.html",
+       "grown": true,
+       "emerges": "Ringworld instability 82 d",
+       "label": "MODEL · LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffb347",
+         "#f0e6d0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#04070a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-36",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-37.html",
@@ -29355,7 +29427,7 @@
     },
     {
      "n": 38,
-     "name": "BERKELIUM · Z 97",
+     "name": "COPERNICUS & KEPLER VS TYCHO · SAME SKY, DIFFERENT CENTRE",
      "from": "grown/",
      "spheres": [
       {
@@ -29381,6 +29453,30 @@
        },
        "group": "sapphon-10",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Copernicus & Kepler vs Tycho · same sky, different centre",
+       "h": "grown/helio-vs-tycho.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/helio-vs-tycho.html",
+       "grown": true,
+       "emerges": "frame equivalence",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffb347",
+         "#f0e6d0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#04070a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-36",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-38.html",
@@ -29391,7 +29487,7 @@
     },
     {
      "n": 39,
-     "name": "SAMARIUM · Z 62",
+     "name": "WAVE VS CORPUSCLE · FOUCAULT’S WATER",
      "from": "grown/",
      "spheres": [
       {
@@ -29417,6 +29513,30 @@
        },
        "group": "sapphon-10",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Wave vs Corpuscle · Foucault’s water",
+       "h": "grown/wave-vs-corpuscle.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/wave-vs-corpuscle.html",
+       "grown": true,
+       "emerges": "Foucault’s water",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffb347",
+         "#f0e6d0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#04070a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-37",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-39.html",
@@ -29427,7 +29547,7 @@
     },
     {
      "n": 40,
-     "name": "INDIUM · Z 49",
+     "name": "BIG BANG VS STEADY STATE · THE 160 GHZ VERDICT",
      "from": "grown/",
      "spheres": [
       {
@@ -29453,6 +29573,30 @@
        },
        "group": "sapphon-11",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Big Bang vs Steady State · the 160 GHz verdict",
+       "h": "grown/steady-vs-bigbang.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/steady-vs-bigbang.html",
+       "grown": true,
+       "emerges": "160 GHz CMB",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffb347",
+         "#f0e6d0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#04070a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-37",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-40.html",
@@ -29463,7 +29607,7 @@
     },
     {
      "n": 41,
-     "name": "MEITNERIUM · Z 109",
+     "name": "WEGENER’S DRIFT · LOST IN LIFE, WON IN THE STRIPES",
      "from": "grown/",
      "spheres": [
       {
@@ -29489,6 +29633,30 @@
        },
        "group": "sapphon-11",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Wegener’s Drift · lost in life, won in the stripes",
+       "h": "grown/drift-wegener.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/drift-wegener.html",
+       "grown": true,
+       "emerges": "magnetic stripes",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#f0e6d0",
+         "#ffb347",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#04070a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-37",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-41.html",
@@ -29499,7 +29667,7 @@
     },
     {
      "n": 42,
-     "name": "RHENIUM · Z 75",
+     "name": "AC VS DC · THE TRANSFORMER WINS (THEN HVDC RETURNS)",
      "from": "grown/",
      "spheres": [
       {
@@ -29525,6 +29693,30 @@
        },
        "group": "sapphon-12",
        "author": "Grok Bot"
+      },
+      {
+       "t": "AC vs DC · the transformer wins (then HVDC returns)",
+       "h": "grown/ac-vs-dc.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/ac-vs-dc.html",
+       "grown": true,
+       "emerges": "1/V² loss",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffb347",
+         "#f0e6d0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#04070a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-37",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-42.html",
@@ -29535,7 +29727,7 @@
     },
     {
      "n": 43,
-     "name": "COBALT · Z 27",
+     "name": "VHS VS BETAMAX · LOCK-IN FROM LUCK",
      "from": "grown/",
      "spheres": [
       {
@@ -29561,6 +29753,30 @@
        },
        "group": "sapphon-13",
        "author": "Grok Bot"
+      },
+      {
+       "t": "VHS vs Betamax · lock-in from luck",
+       "h": "grown/vhs-vs-betamax.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/vhs-vs-betamax.html",
+       "grown": true,
+       "emerges": "Pólya lock-in",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#ffb347",
+         "#f0e6d0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#04070a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-38",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-43.html",
@@ -29571,7 +29787,7 @@
     },
     {
      "n": 44,
-     "name": "EUROPIUM · Z 63",
+     "name": "GREGORIAN VS JULIAN · 0.0078 DAYS A YEAR",
      "from": "grown/",
      "spheres": [
       {
@@ -29597,6 +29813,30 @@
        },
        "group": "sapphon-13",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Gregorian vs Julian · 0.0078 days a year",
+       "h": "grown/julian-vs-gregorian.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/julian-vs-gregorian.html",
+       "grown": true,
+       "emerges": "calendar drift",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffb347",
+         "#f0e6d0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#04070a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-38",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-44.html",
@@ -29607,7 +29847,7 @@
     },
     {
      "n": 45,
-     "name": "HELIUM · Z 2",
+     "name": "WINNER & GHOST · CRITIQUE OF THE RIVER/DAY/RING RUN",
      "from": "grown/",
      "spheres": [
       {
@@ -29632,6 +29872,30 @@
         "audio": false
        },
        "group": "sapphon-13",
+       "author": "Grok Bot"
+      },
+      {
+       "t": "Winner & Ghost · critique of the River/Day/Ring run",
+       "h": "grown/winners-critique.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/winners-critique.html",
+       "grown": true,
+       "emerges": "winner & ghost",
+       "label": "READING",
+       "icon": {
+        "pal": [
+         "#ff9a3c",
+         "#ff7a6a",
+         "#ffc58a",
+         "#9a4cff"
+        ],
+        "bg": "#2a0a0a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-38",
        "author": "Grok Bot"
       }
      ],
@@ -55247,7 +55511,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1949
+   "pages": 1960
   },
   "list": [
    {
@@ -56791,7 +57055,8 @@
       "w/5-octet-shadow-toroid.html",
       "w/overlay-5-0-nested-pattern.html",
       "w/wakaku-6-plank-bubbles-each-10-35-timed-to-10-360-3-3.html",
-      "grown/the-auxospore-garden.html"
+      "grown/the-auxospore-garden.html",
+      "grown/riverworld-state.html"
      ],
      [
       "w/wakaku-and-gravity-99-9-inf-inf.html",
@@ -56799,7 +57064,8 @@
       "w/wakaku-lol-i-call-a-qubit-a-cubit.html",
       "w/wakaku-next-brighter-with-lean-proofs-face-area-1.html",
       "w/wakaku-next-evo-1g-outside-0-6g-inside-evolves.html",
-      "grown/the-zero-orbit.html"
+      "grown/the-zero-orbit.html",
+      "grown/dayworld-space.html"
      ],
      [
       "w/wakaku-next-evo-anti-gravity.html",
@@ -56807,7 +57073,8 @@
       "w/wakaku-plank-bubble-electrum-oscillating-phase-10-1440-s-x6-.html",
       "sapphon/Next-Evo-I-Id-Sid-Lol-At-Sapphon-Stage-10-X4.html",
       "w/electron-lattice-3x3x.html",
-      "grown/the-spectroscope.html"
+      "grown/the-spectroscope.html",
+      "grown/ringworld-time.html"
      ],
      [
       "w/photon-lattice-3x3x.html",
@@ -56815,7 +57082,8 @@
       "w/toph-aeon-lattice-full.html",
       "one/Handbuilt-One-Window-Only.html",
       "bonk/Bonk-Toroid-Windmill-Steepled-Memsistor-Plank-V41.html",
-      "grown/patricias-drought.html"
+      "grown/patricias-drought.html",
+      "grown/helio-vs-tycho.html"
      ]
     ]
    },
@@ -56831,14 +57099,16 @@
       "toroid/Bonk-Recursive-Toroid-Trap-V22.html",
       "another/Next-Element-Rutherfordium-104-Lyre.html",
       "one/the-zero-one-principle.html",
-      "grown/zero-hand.html"
+      "grown/zero-hand.html",
+      "grown/wave-vs-corpuscle.html"
      ],
      [
       "one/Each-Box-Is-One.html",
       "scale/Next-Scale-Trans-Planckian-Googol.html",
       "w/quantum-eraser.html",
       "later/Next-Evo-Mito-Plus-Plus-Powers-1408-Gardens-X8.html",
-      "grown/the-qd-sequencer.html"
+      "grown/the-qd-sequencer.html",
+      "grown/steady-vs-bigbang.html"
      ],
      [
       "another/Next-Element-Einsteinium-99-Lyre.html",
@@ -56846,7 +57116,8 @@
       "kernel/the-carry.html",
       "skills/the-skills.html",
       "spheres/the-address.html",
-      "grown/the-720-typist.html"
+      "grown/the-720-typist.html",
+      "grown/drift-wegener.html"
      ],
      [
       "spheres/the-lines.html",
@@ -56854,7 +57125,8 @@
       "stewards/episteme.html",
       "another/Next-Element-Nobelium-102-Lyre.html",
       "still/Next-Element-Radium-88-Lyre.html",
-      "grown/zero-sphere-blueprint.html"
+      "grown/zero-sphere-blueprint.html",
+      "grown/ac-vs-dc.html"
      ]
     ]
    },
@@ -56870,7 +57142,8 @@
       "lyre/4o-Lyre-Quad-Water.html",
       "onward/V119-Next-Gem-Emerald.html",
       "yet/Next-Shell-After-Manganese.html",
-      "grown/the-qd-rose-window.html"
+      "grown/the-qd-rose-window.html",
+      "grown/vhs-vs-betamax.html"
      ],
      [
       "yet/Next-Shell-After-Titanium.html",
@@ -56878,7 +57151,8 @@
       "after/Wakaku-Speaker-V8-Next.html",
       "onward/Next-Assembly-Full-Manifold.html",
       "w/breathing-aeon.html",
-      "grown/heavy-metal-riso.html"
+      "grown/heavy-metal-riso.html",
+      "grown/julian-vs-gregorian.html"
      ],
      [
       "w/wakaku-16200-psi-photon-hydrogen-trap-lol.html",
@@ -56886,7 +57160,8 @@
       "w/wakaku-new-art-style-bioluminescent-deep-sea-cellular-membra.html",
       "w/wakaku-planets-emit-smw-wave-core-spectrograph.html",
       "after/Next-Evo-After-Light-Void-Source.html",
-      "grown/the-plankton-almanac.html"
+      "grown/the-plankton-almanac.html",
+      "grown/winners-critique.html"
      ],
      [
       "forth/Next-Gas-After-Nitrogen.html",
@@ -58518,7 +58793,7 @@
  "built_by": {
   "author": "Grok Bot",
   "index": "built-by-grok-bot.html",
-  "pages": 1068,
+  "pages": 1079,
   "rule": "Pages generated by Grok Bot carry author \"Grok Bot\", a meta author tag and a badge. Dave's originals carry no author field and are unchanged.",
   "fortress": "grown/the-fortress-of-solitude.html"
  },
