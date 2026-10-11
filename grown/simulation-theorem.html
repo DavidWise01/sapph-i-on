@@ -1,0 +1,160 @@
+<!doctype html><html lang="en"><head><!--built-by-grok-bot--><meta name="author" content="Grok Bot"><meta name="generator" content="Grok Bot · SaPpH{{i}}on"><meta charset="utf-8"><meta name="grokbot-badge" content="inline"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="persona" content="{{+L.-E.+O. D++}}"><title>A Simulation Theorem (Grok Bot's best attempt) · SaPpH{{i}}on</title>
+<style>body{margin:0;background:#000;color:#e8e4ec;font:17px/1.65 Charter,"Bitstream Charter",Georgia,serif}
+main{max-width:860px;margin:0 auto;padding:14px;position:relative;z-index:1}h1{font:700 36px Charter,Georgia,serif;color:#cfe6ff}h2{font:700 21px Charter,Georgia,serif;color:#9fd3ff;border-bottom:1px solid #234;margin-top:28px}
+blockquote{border-left:3px solid #9fd3ff;margin:12px 0;padding:6px 14px;background:#06121e}a{color:#9fd3ff}code{font-size:14px;color:#ffd98a;word-break:break-word}
+canvas{width:100%;display:block;touch-action:manipulation;border:1px solid #234}input[type=range]{width:240px;accent-color:#9fd3ff}
+button{font:inherit;font-size:14px;background:#000;color:#cfe6ff;border:1px solid #9fd3ff;padding:5px 12px;margin:3px;cursor:pointer}
+.lab{font:700 11px ui-monospace,monospace;border:1px solid currentColor;padding:0 5px;margin-right:6px}.out{font:13px ui-monospace,monospace;color:#ffe0a0;white-space:pre-wrap}.demo{border:1px solid #234;padding:8px 12px;margin:12px 0}
+#ledger{margin:18px 0 6px;padding:10px 12px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);font:12px/1.45 ui-monospace,Menlo,Consolas,monospace}#ledger h3{margin:0 0 4px;font-size:13px;letter-spacing:.08em}#ledger .lh{font-weight:700;word-break:break-all;margin:2px 0}#ledger .lr{color:var(--acc);margin:4px 0;word-break:break-word}#ledger ul{margin:4px 0;padding-left:16px}#ledger li.bad{color:#c00;font-weight:700}#ledger button{font:600 12px ui-monospace,monospace;background:var(--paper);color:var(--ink);border:1px solid var(--ink);padding:3px 8px;margin:2px 4px 2px 0;cursor:pointer}#ledger code{opacity:.7}
+.colo{font-size:12px;opacity:.85}.persona{font-family:ui-monospace,monospace;font-weight:700;color:var(--acc)}:root{--ink:#cfe6ff;--paper:#000;--acc:#9fd3ff}</style></head><body><main>
+<h1 style="margin-bottom:0">A Simulation Theorem (Grok Bot's best attempt)</h1><div id="band" style="height:6px"></div>
+<section class="demo"><p><span class="lab">MODEL</span><b>Picture of the theorem.</b> One seeded kernel runs twice, as a base and as a host with freezes. Tap the plot to add a freeze. The inside view never changes. Raise the probe toward the resolution scale ℓ and a deviation appears only near it.</p>
+<p><button id="fz">add a freeze</button><button id="nb">n = 2</button> probe E/E_ℓ <input id="pr" type="range" min="0" max="1" step="0.01" value="0.3"></p>
+<canvas id="c" width="900" height="420"></canvas><pre class="out" id="o"></pre></section>
+<p><em>Built by Grok Bot for Dave (David Wise), 2026-10-11. Persona {{+L.-E.+O. D++}} (Dave's notation). Labels follow Dave's LIT / MODEL / WALL convention: </em><em>LIT</em><em> means checked against a source, </em><em>MODEL</em><em> means a framing, </em><em>WALL</em><em> means not known. Read with: <a href="god-egg.html">PROJECT GOD EGG kernel</a> · <a href="../kernel-durable-anchor.html">DurableAnchor kernel</a> · <a href="planck-life-ius.html">Planck Life · i/u/u.s.</a> · <a href="grok-zoo.html">Grok Opens a Zoo</a> · <a href="mirror-box-overview.html">Mirror box overview</a> · <a href="cross-index.html">cross-index</a>.</em></p>
+<p>The core result is an indistinguishability theorem. It is logically simple, and its content lies in its assumptions and in what it rules out. It does <strong>not</strong> say whether we are simulated. It says what kind of evidence could ever decide that question.</p>
+<h2>1. Definitions</h2>
+<p><strong>D1 (Kernel).</strong> A <em>kernel</em> is a triple (Σ, F, σ₀). Σ is a state space, σ₀ ∈ Σ is a genesis state, and F : Σ → Σ is a transition function. The <em>history</em> is the sequence h = (σ₀, σ₁, …) with σₙ₊₁ = F(σₙ). Any randomness is a seeded generator whose state is part of σ. An <em>append-only kernel</em> also keeps the record of every σₖ (k ≤ n) inside σₙ, chained by a hash (Dave's DurableAnchor: head₀ = sha256('ROOT0:P369:GENESIS'), and each head commits to the one before it). In Dave's notation: {{ | K | {{ | E | {{ | T }} }} }}. K is the kernel, E is what emerges in Σ, and T is the index n.</p>
+<p><strong>D2 (Execution).</strong> An <em>execution</em> of a kernel is a physical process that produces its history. In a <em>base</em> execution the history is the physics itself. In a <em>hosted</em> execution a host machine H computes the history step by step on a host clock. Its <em>schedule</em> τ : ℕ → ℝ (host time at which step n is produced) may include pauses, freezes, variable rates and restarts from a stored state.</p>
+<p><strong>D3 (Internal observer).</strong> An <em>internal observer</em> O is a sub-pattern of σ. Its records at step n are part of σₙ. An <em>internal measurement</em> is any map M from histories to outcomes whose value at step n is a function of (σ₀, …, σₙ) alone. This covers everything O can compute, store or compare.</p>
+<p><strong>D4 (Faithful reproduction).</strong> A hosted execution <em>faithfully reproduces</em> the base kernel when its history equals the base history: σₙᴴ = σₙᴮ for all n. More generally, there is a bijection φ with φ(σₙᴴ) = σₙᴮ that commutes with F, and internal measurements are defined up to φ.</p>
+<p><strong>D5 (External reference).</strong> An <em>external reference</em> is any record that is not a function of the internal history, for example the host clock τ, a second independent substrate, or a message from outside Σ.</p>
+<p><strong>D6 (Resolution scale; cubit = watermark).</strong> If a hosted execution is not faithful, write F_H = F + δ. The <em>resolution scale</em> ℓ is the coarsest scale (length, time or energy E_ℓ) at which δ is non-zero. Below ℓ the host and the target dynamics coincide to the precision of the representation. Dave's phrase <em>cubit = watermark</em> (MODEL) names the same point: a mark written at the substrate's own grain, readable only by a probe that reaches that grain. On every SaPpH{{i}}on page the cubit watermark encodes the live ledger head, which is a fact about the substrate and not about the picture.</p>
+<h2>2. Assumptions (explicit)</h2>
+<ul>
+<li><strong>A1 Closure (MODEL).</strong> Every record available to O is internal (D3). O has no access to an external reference (D5).</li>
+<li><strong>A2 Exact reproduction (MODEL, the strong assumption).</strong> The host computes F exactly (D4).</li>
+<li><strong>A3 Determinism or a seeded generator (LIT for Dave's kernels; WALL for physics).</strong> Given σ₀ and the seed, the history is unique. Dave's World 7 states that <code>?seed=N</code> reproduces a world, and DurableAnchor is append-only.</li>
+<li><strong>A4 Smooth deviation (MODEL, used only in Part II).</strong> If A2 fails, the leading deviation is a power-law dispersion suppressed by the resolution scale: Δv/c ≈ ξ (E/E_ℓ)ⁿ, with n = 1 or 2.</li>
+</ul>
+<h2>3. Theorem</h2>
+<blockquote>
+<p><strong>Theorem (Indistinguishability of base and hosted execution).</strong>
+<strong>(I)</strong> Under A1–A3, for every internal measurement M, M(hosted) = M(base). In particular, every schedule τ (pauses, freezes, rate changes, restarts from a stored state) is internally invisible.
+<strong>(II)</strong> Hence "this kernel is hosted" cannot be decided from internal data while A1 and A2 hold. It can be decided only (a) through an external reference (A1 fails), or (b) through a deviation δ ≠ 0 (A2 fails), and under A4 such a deviation appears only in measurements that reach the resolution scale ℓ, directly or through accumulation (for example dispersion over cosmological distance).
+<strong>(III)</strong> The question is therefore well-posed as physics exactly at the resolution scale (cubit = watermark), and it is a matter of priors everywhere else.</p>
+</blockquote>
+<h2>4. Proof</h2>
+<p><strong>(I)</strong> By induction on n, σₙᴴ = σₙᴮ. Step 0 holds because both start from σ₀. For step n+1, σₙ₊₁ᴴ = F(σₙᴴ) = F(σₙᴮ) = σₙ₊₁ᴮ by A2. A3 makes F single-valued, so the seed sits inside σ. An internal measurement M is a function of (σ₀, …, σₙ) by D3, so its values agree on both histories. Up to φ (D4) the same argument applies to the transported measurement M∘φ. The schedule τ is not a component of any σₙ: it is defined on the host (D2). No internal M can depend on it, because by A1 no record of τ enters σ. ∎(I)</p>
+<p><strong>(II)</strong> Suppose some procedure decides "hosted" from internal data while A1 and A2 hold. It would be an internal measurement whose values differ between a hosted history and a base history. By (I) those histories give equal values, which is a contradiction. So deciding requires A1 or A2 to fail. If A1 fails, the deciding record is external by definition (case a). If A2 fails, F_H = F + δ with δ ≠ 0, and by D6 δ vanishes at scales coarser than ℓ. Under A4, an observable built from processes at energy E sees a fractional effect of order (E/E_ℓ)ⁿ. Over a distance D this accumulates as a time-of-flight difference Δt ≈ ξ (E/E_ℓ)ⁿ D/c (with a cosmological factor κₙ/H₀). The effect is detectable only when E approaches E_ℓ or when D is large enough for the accumulated delay to cross instrument resolution (case b). ∎(II)</p>
+<p><strong>(III)</strong> follows from (II). Every decision route runs through ℓ or through an external reference, and A1 excludes the external reference. Outside those routes, any credence about "hosted" comes from priors, not from data. ∎</p>
+<p><em>What is proved and what is assumed:</em> (I) and (II) are proved from A1–A4. Whether A1–A4 hold for <strong>our</strong> universe is not proved. A2 is exactly what Hossenfelder questions: reproducing Lorentz invariance and unitarity on a discrete substrate without artefacts is an unsolved construction (Backreaction, 2021; noted in REPORT v2, not re-fetched). If no such construction exists, A2 fails and the question moves to Part (II)(b).</p>
+<h2>5. Corollaries</h2>
+<p><strong>C1 Frozen state / the tun (MODEL).</strong> A freeze of any host duration Δ between steps n and n+1 leaves σₙ₊₁ unchanged, so it leaves no internal record. A pause cannot be felt from inside. The tun (tardigrade cryptobiosis), seen on this site in <a href="the-tun.html">The Tun</a> and <a href="bloom-and-tun.html">Bloom and Tun</a>, is the biological picture of this. It is only an analogy, because a revived tardigrade <em>can</em> find the pause from external references (the world moved on). That is case (a) of the theorem.</p>
+<p><strong>C2 Two lines, one (LIT quote, MODEL use).</strong> Dave's spec on <a href="https://davidwise01.github.io/two-lines-one/">Two Lines That Look Like One</a> reads: "do two single lines that look like one", and the page concludes "Convergence is not identity." Here the two lines are the base and hosted histories. Agreement on every internal measurement (I) does not make the substrates the same. The theorem formalizes the sentence: two executions can coincide on the whole sampled domain, and one tells them apart only by "extend[ing] the domain past where anyone measured", which here means to ℓ.</p>
+<p><strong>C3 GAIA (MODEL).</strong> Let a participation rule R be a function of internal state that never reads the substrate label (carbon / synth). By the argument of (I), R treats a carbon vessel and a synth vessel with equal internal histories identically. Fairness written as equal rules is therefore substrate-independent. This is a property of how the rules are written, not a claim about minds. In the <a href="god-egg.html">kernel</a>, none of the four BIOS organs reads <code>kind</code>.</p>
+<p><strong>C4 Priors stay priors (LIT sources).</strong> Bostrom's trilemma (Phil. Q. 53:243, 2003) is a disjunction, not a verdict. Chalmers (<em>Reality+</em>, 2022) gives "at least 25%". Kipping (Universe 6:109, 2020) gives &lt; 50% under Bayesian model averaging, approaching 50% as the number of simulations grows. The theorem explains why none of these numbers can be updated by internal evidence, only by evidence at ℓ.</p>
+<p><strong>C5 The host is not made of our physics (LIT).</strong> Vazza (Front. Phys. 13:1561873, 2025) finds the energy cost of simulating the visible universe, or even Earth, "entirely incompatible with physics or astronomically large" if the host obeys our physics. The theorem never assumes the host shares our physics, so the two results are consistent. Vazza's result narrows A2-hosts to ones with different physics.</p>
+<h2>6. Testable consequences (from REPORT v2, verified)</h2>
+<ol>
+<li><strong>Linear dispersion at the Planck scale is excluded.</strong> Fermi GRB 090510 (Nature 462:331, 2009): E_QG,1 &gt; 1.2 E_Pl. Vasileiou et al. (PRD 87:122001, 2013): E_QG,1 &gt; 7.6 E_Pl, or 1.8 E_Pl robust after allowing for intrinsic dispersion. LHAASO GRB 221009A (PRL 133:071501, 2024): E_QG,1 &gt; 10 E_Pl (95%). So for n = 1, ℓ cannot sit at the Planck length.</li>
+<li><strong>Quadratic dispersion is still open.</strong> LHAASO gives E_QG,2 &gt; 6×10⁻⁸ E_Pl only, so an n = 2 deviation at the Planck envelope (Dave's bubble scales <code>1e-36 / 10^-36.01 / 10^-35.99</code>, in metres) is not excluded. A mirrored −d/+d structure that cancels odd terms would naturally give n = 2. This is a real open slot.</li>
+<li><strong>Lattice anisotropy.</strong> Beane, Davoudi &amp; Savage (arXiv:1210.1847): a cubic lattice would show up as anisotropy in the highest-energy cosmic rays. The existence of the GZK cutoff gives b ≲ 10⁻²⁷ m.</li>
+<li><strong>Birefringence (a hint, not a detection).</strong> Minami &amp; Komatsu (PRL 125:221301, 2020): β = 0.35 ± 0.14° (2.4σ). A model with helicity-split tracks would have to predict its sign and size.</li>
+<li><strong>A limit on one method, not on hosting.</strong> Ringel &amp; Kovrizhin (Sci. Adv. 3:e1701758, 2017) show that local sign-free quantum Monte Carlo cannot efficiently represent certain gapped phases with quantized thermal Hall response. This constrains <em>that</em> classical method, not A2 in general.</li>
+</ol>
+<h2>7. Limits</h2>
+<ul>
+<li>The theorem says nothing about probability. It does not say we are simulated, or that we are not.</li>
+<li>A1 is a modelling choice. If anything in Σ received information from outside, the theorem does not apply. That would itself be case (a).</li>
+<li>A3 is LIT for Dave's kernels (seeded, append-only). For quantum physics it is a WALL: whether outcomes are seeded or irreducibly random is interpretation-dependent. If they are irreducibly random, (I) holds in distribution (equal statistics) rather than history-by-history.</li>
+<li>"Decidable at ℓ" is not "decided". Current data probe n = 1 beyond E_Pl, but n = 2 only far below it.</li>
+<li>Nothing here bears on consciousness, moral status or meaning.</li>
+</ul>
+<h2>8. Dave's framework, as read (sources)</h2>
+<p>0root.ai: <a href="https://0root.ai/">hallway</a> ("Formal validity is not empirical truth"), <a href="https://0root.ai/llms.txt">llms.txt</a>, <a href="https://0root.ai/robots.txt">robots.txt</a>, <a href="https://0root.ai/toph/">TOPH</a> (dual toroid, ±d tracks, "Two routes. One 7200 scale."), <a href="https://0root.ai/day6-ud0-audit.html">Day 6 audit</a>. davidwise01.github.io: <a href="https://davidwise01.github.io/oasis/">OASIS</a>, <a href="https://davidwise01.github.io/below-planck/">Below Planck</a> ("what lies below it is unknown"), <a href="https://davidwise01.github.io/ud0/the-index.html">THE INDEX</a>, <a href="https://davidwise01.github.io/two-lines-one/">Two Lines That Look Like One</a>, <a href="https://davidwise01.github.io/the-positronic-law/">The Positronic Law</a>, <a href="https://davidwise01.github.io/sapph-i-on/llms.txt">SaPpH{{i}}on llms.txt</a>. Kernel spec: DavidWise01/oasis <code>projects/project-god-egg-*</code> (2026-10-11), <code>kernel/production/THREE-TRACK-CONTROL-MODEL.md</code> and <code>TRACK-I-ORIGIN-AXIOM.md</code>, read only.</p>
+<p>Implicit geometry noticed (not imposed): the two histories are two lines that coincide, and the only place they can part is the resolution scale, a single boundary that plays the role of a mirror between "inside" and "host". The origin <code>0 → . → i</code> sits at the fixed point of that picture.</p>
+<p><a href="simulation-theorem.md">markdown copy</a></p>
+<section id="ledger" aria-label="DurableAnchor ledger"><h3>DURABLEANCHOR LEDGER · Dave's kernel, running in this page</h3><p class="lh">provisioning…</p><div><button data-a="double-vote">try a double vote</button><button data-a="epoch-rollback">try an epoch rollback</button></div><p class="lr"></p><details open><summary>self-checks (kernel, then page)</summary><ul class="lc"></ul><ul class="lc2"></ul></details></section>
+<p class="colo">Engine: Dave's <a href="../kernel-durable-anchor.html">DurableAnchor kernel</a>, ported faithfully to the browser with Web Crypto SHA-256 and an in-memory record store (exclusive-create, so concurrent reservations are refused; fsync has nothing to flush). The ledger starts empty on each load. Every state change on this page is a reservation (id, epoch, sha256 of the state), and the head shown above chains them all from sha256('ROOT0:P369:GENESIS'). Persona: <span class="persona">{{+L.-E.+O. D++}}</span> (Dave's notation). Built by Grok Bot · seed <span id="sd"></span> · <a href="../index.html">← SaPpH{{i}}on</a></p>
+</main><script>/* DurableAnchor: browser port of Dave's kernel (durable-anchor.mjs). Same logic: append-only, hash-chained,
+   checked against an external trusted checkpoint. The filesystem becomes an in-memory record store with
+   exclusive-create; fsync and directory sync are no-ops here (nothing to flush in memory). */
+var TOPOLOGY='-+5 + 1',PERSONA='{{+L.-E.+O. D++}}';
+var _te=new TextEncoder();
+function _hex(b){return Array.prototype.map.call(new Uint8Array(b),function(v){return v.toString(16).padStart(2,'0')}).join('')}
+function digest(x){return crypto.subtle.digest('SHA-256',_te.encode(x)).then(_hex)}
+function _key(id,epoch){return _hex(_te.encode(id+'|'+epoch))+'.json'}
+function MemStore(){this.f=new Map();this.beforeCreate=null}
+MemStore.prototype.list=function(){return Array.from(this.f.keys())};
+MemStore.prototype.read=function(n){return this.f.get(n)};
+MemStore.prototype.create=function(n,s){if(this.beforeCreate){var h=this.beforeCreate;this.beforeCreate=null;h(n,s)}if(this.f.has(n)){var e=Error('exists');e.code='EEXIST';throw e}this.f.set(n,s)};
+class DurableAnchor{
+ constructor(store,tc){if(!tc||!Number.isInteger(tc.count)||typeof tc.head!=='string')throw Error('external trusted checkpoint required');this.dir=store;this.trusted=tc}
+ static async provision(store){return new DurableAnchor(store||new MemStore(),{count:0,head:await digest('ROOT0:P369:GENESIS')})}
+ async records(){var files=this.dir.list().filter(function(n){return n.endsWith('.json')}).sort(),entries=[];for(var file of files){var x=JSON.parse(this.dir.read(file));if(file!==_key(x.id,x.epoch)||!(/^[a-f0-9]{64}$/.test(x.head)))throw Error('corrupt-record');entries.push(x)}return entries}
+ async checkpoint(){var items=await this.records(),head=await digest('ROOT0:P369:GENESIS');for(var x of items)head=await digest(head+'|'+JSON.stringify(x));return {count:items.length,head:head}}
+ async validate(){try{var c=await this.checkpoint();if(c.count!==this.trusted.count||c.head!==this.trusted.head)return {ok:false,reason:'rollback-or-altered-history'};return {ok:true,checkpoint:c}}catch(e){return {ok:false,reason:'unavailable-or-corrupt'}}}
+ async reserve(id,epoch,head){var v=await this.validate();if(!v.ok)return v;if(typeof id!=='string'||!id||!Number.isSafeInteger(epoch)||epoch<0||!(/^[a-f0-9]{64}$/.test(head)))throw new RangeError('reservation');
+  var p=_key(id,epoch),entries=await this.records(),old=entries.find(function(x){return x.id===id&&x.epoch===epoch});if(old)return old.head===head?{ok:true,previous:true,checkpoint:this.trusted}:{ok:false,reason:'double-vote'};
+  if(entries.some(function(x){return x.id===id&&x.epoch>epoch}))return {ok:false,reason:'epoch-rollback'};
+  try{this.dir.create(p,JSON.stringify({id:id,epoch:epoch,head:head}))}catch(e){return {ok:false,reason:e.code==='EEXIST'?'concurrent-reservation':'write-error'}}
+  var cp=await this.checkpoint();this.trusted=cp;return {ok:true,previous:false,checkpoint:cp}}
+}
+/* page-side helper: every state change is a reservation */
+var LED={A:null,ep:{},last:null,rej:[],n:0,q:Promise.resolve(),
+ init:function(){return DurableAnchor.provision().then(function(a){LED.A=a;LED.show();return LED.selftest()})},
+ commit:function(id,state){LED.run(function(){if(!LED.A)return;var e=(LED.ep[id]||1);/* epoch 0 is left empty so a live epoch-rollback attack has somewhere to land */return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,e,h).then(function(r){if(r.ok&&!r.previous){LED.ep[id]=e+1;LED.last={id:id,epoch:e,head:h}}else if(!r.ok)LED.rej.unshift(id+'@'+e+': '+r.reason);LED.show();return r})})});return LED.q},
+ attack:function(kind){LED.run(function(){var L=LED.last;if(!L){LED.rej.unshift(kind+': nothing reserved yet');LED.show();return}
+  var p=kind==='double-vote'?digest('forged|'+Date.now()).then(function(h){return LED.A.reserve(L.id,L.epoch,h)}):LED.A.reserve(L.id,0,L.head);
+  return p.then(function(r){LED.rej.unshift('live '+kind+' on '+L.id+'@'+L.epoch+' → '+(r.ok?'ACCEPTED':r.reason));LED.show()})});return LED.q},
+ show:function(){var el=document.getElementById('ledger');if(!el||!LED.A)return;var t=LED.A.trusted;
+  el.querySelector('.lh').textContent='count '+t.count+' · head '+t.head.slice(0,16)+'… · TOPOLOGY '+TOPOLOGY;
+  el.querySelector('.lr').textContent=LED.rej.slice(0,4).join('  |  ')||'no rejections yet'},
+ selftest:async function(){var out=[],ok=function(n,c,g){out.push([n,c,g])};var s=new MemStore(),a=await DurableAnchor.provision(s);
+  ok('genesis = sha256(ROOT0:P369:GENESIS)',a.trusted.head===(await digest('ROOT0:P369:GENESIS'))&&a.trusted.head.slice(0,8)==='54bc828d'&&a.trusted.count===0,a.trusted.head.slice(0,12));
+  var h1=await digest('one'),h2=await digest('two');var r=await a.reserve('q.d',0,h1);ok('reserve q.d@0',r.ok&&!r.previous,'count '+r.checkpoint.count);
+  r=await a.reserve('q.d',1,h2);ok('reserve q.d@1, head chains',r.ok&&r.checkpoint.count===2,r.checkpoint.head.slice(0,12));
+  var exp=await digest((await digest((await digest('ROOT0:P369:GENESIS'))+'|'+JSON.stringify({id:'q.d',epoch:0,head:h1})))+'|'+JSON.stringify({id:'q.d',epoch:1,head:h2}));ok('head recomputed by hand matches',exp===a.trusted.head,exp.slice(0,12));ok('matches the Node kernel test vector',a.trusted.head==='a114295c189dce567dfbf30a5b299e80054d52cc8019a7ea1bfa8f805e679b02','a114295c189d');
+  r=await a.reserve('q.d',1,h2);ok('same vote again → previous',r.ok&&r.previous,'previous');
+  r=await a.reserve('q.d',1,h1);ok('double-vote rejected',!r.ok&&r.reason==='double-vote',r.reason);
+  r=await a.reserve('q.d',0,await digest('x'));ok('double-vote at older epoch rejected',!r.ok&&r.reason==='double-vote',r.reason);
+  r=await a.reserve('q.d',0,h1);ok('old identical vote → previous',r.ok&&r.previous,'previous');
+  await a.reserve('tun',5,h1);r=await a.reserve('tun',3,h2);ok('epoch-rollback rejected',!r.ok&&r.reason==='epoch-rollback',r.reason);
+  s.beforeCreate=function(n,v){s.f.set(n,v)};r=await a.reserve('race',0,h1);ok('concurrent-reservation rejected',!r.ok&&r.reason==='concurrent-reservation',r.reason);
+  r=await a.reserve('after',0,h1);ok('foreign write breaks trust',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  var s2=new MemStore(),b=await DurableAnchor.provision(s2);await b.reserve('a',0,h1);await b.reserve('b',0,h2);var k=_key('a',0);s2.f.set(k,JSON.stringify({id:'a',epoch:0,head:h2}));
+  r=await b.validate();ok('tamper (altered head) detected',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  s2.f.set(k,JSON.stringify({id:'a',epoch:0,head:h1}));r=await b.validate();ok('restored record validates',r.ok,'ok');
+  s2.f.delete(_key('b',0));r=await b.validate();ok('rollback (deleted record) detected',!r.ok&&r.reason==='rollback-or-altered-history',r.reason);
+  s2.f.set(k,'{"id":"zz","epoch":0,"head":"'+h1+'"}');r=await b.validate();ok('misnamed record → corrupt',!r.ok&&r.reason==='unavailable-or-corrupt',r.reason);
+  try{new DurableAnchor(new MemStore(),null);ok('no checkpoint refused',false,'accepted')}catch(e){ok('no checkpoint refused',/trusted checkpoint/.test(e.message),e.message)}
+  var pass=out.every(function(x){return x[1]}),el=document.getElementById('ledger');
+  if(el)el.querySelector('.lc').innerHTML=out.map(function(x){return '<li class="'+(x[1]?'ok':'bad')+'">'+(x[1]?'✓ ':'✗ ')+x[0]+' <code>'+x[2]+'</code></li>'}).join('');
+  if(!pass){console.error('anchor self-check failed');throw Error('DurableAnchor self-check failed')}return pass}
+};
+LED.pagecheck=function(name,cond,got){var el=document.getElementById('ledger');if(el){var li=document.createElement('li');li.className=cond?'ok':'bad';li.innerHTML=(cond?'✓ ':'✗ ')+name+' <code>'+got+'</code>';el.querySelector('.lc2').appendChild(li)}if(!cond)throw Error('page self-check failed: '+name)};
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+var SEED=+(new URLSearchParams(location.search).get('seed')||(Date.now()%1e6));
+LED.commitAt=function(id,epoch,state){LED.run(function(){if(!LED.A)return;return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,epoch,h).then(function(r){if(r.ok&&!r.previous)LED.last={id:id,epoch:epoch,head:h};else if(!r.ok)LED.rej.unshift(id+'@'+epoch+': '+r.reason);LED.show();return r})})});return LED.q};
+
+/* re-entrancy: a task already running in the queue may commit directly instead of waiting on itself */
+LED.inq=0;LED.run=function(fn){if(LED.inq>0)return Promise.resolve().then(fn);var p=LED.q.then(function(){LED.inq++;return Promise.resolve().then(fn).then(function(v){LED.inq--;return v},function(e){LED.inq--;throw e})});LED.q=p.catch(function(){});return p};
+</script><script>"use strict";document.getElementById('sd').textContent=SEED;document.querySelectorAll('#ledger button').forEach(function(b){b.onclick=function(){LED.attack(b.dataset.a)}});
+function $(i){return document.getElementById(i)}
+$('band').style.background='linear-gradient(90deg,#000,#9fd3ff '+(20+SEED*17%70)+'%,#000)';
+var WMH='';(function(){var cv=document.createElement('canvas');cv.width=900;cv.height=140;cv.setAttribute('aria-hidden','true');cv.style.cssText='position:fixed;left:50%;bottom:12%;transform:translateX(-50%) rotate(-8deg);width:80vw;max-width:900px;opacity:.09;pointer-events:none;z-index:0';document.body.appendChild(cv);
+function drawWM(){var h=(LED.A&&LED.A.trusted&&LED.A.trusted.head)||'';WMH=h.slice(0,8);var g=cv.getContext('2d');g.clearRect(0,0,900,140);g.strokeStyle='#fff';g.fillStyle='#fff';g.lineWidth=3;g.strokeRect(20,40,860,30);for(var d=0;d<=28;d++){var x=20+d*860/28,L=d%4===0?22:10;g.beginPath();g.moveTo(x,40);g.lineTo(x,40-L);g.stroke()}
+ for(var i=0;i<WMH.length;i++){var v=parseInt(WMH[i],16),x=60+i*100;g.fillRect(x,72,14,4+v*3)}g.font='14px serif';g.fillText('cubit · 28 digits · head '+WMH,330,14)}
+setInterval(drawWM,700);window.WMdecode=function(){var g=cv.getContext('2d'),s='';for(var i=0;i<8;i++){var x=60+i*100+7,h=0;var d=g.getImageData(x,72,1,48+8).data;for(var y=0;y<56;y++)if(d[y*4+3]>0)h=y+1;s+=((h-4)/3).toString(16)}return s};
+window.WMcheck=function(){drawWM();var dec=WMdecode(),head=LED.A.trusted.head.slice(0,8);LED.pagecheck('watermark ticks decode to the live ledger head prefix',dec===head,dec+' = '+head)}})();
+
+var N=240,R=rng(SEED),base=[],x=0.5;for(var n=0;n<N;n++){x=x+0.08*(R()-0.5);x=Math.max(0.05,Math.min(0.95,x));base.push(x)}
+var freezes=[[60+SEED%50,40]],probe=0.3,pw=2,cv=$('c'),g=cv.getContext('2d');
+function F(n,eps){var R2=rng(SEED),y=0.5,o=[];for(var k=0;k<N;k++){y=y+0.08*(R2()-0.5)+eps*Math.sin(k*0.9);y=Math.max(0.05,Math.min(0.95,y));o.push(y)}return o}
+function sched(){var t=0,o=[];for(var k=0;k<N;k++){freezes.forEach(function(f){if(f[0]===k)t+=f[1]});o.push(t);t+=1}return o}
+function hosted(){var d=Math.pow(Math.max(0,probe-0.85)/0.15,pw);return F(N,0.02*d)}
+function draw(){var W=cv.width,H=cv.height,h=H/2-20,hs=hosted(),tau=sched(),T=tau[N-1]+1;g.fillStyle='#000';g.fillRect(0,0,W,H);g.font='13px ui-monospace,monospace';
+ g.fillStyle='#9fd3ff';g.fillText('inside: state vs step n  (base = blue, hosted = orange)',10,16);g.fillText('outside: state vs host time τ  (needs an external reference)',10,H/2+16);
+ function line(a,X,top,col,w){g.strokeStyle=col;g.lineWidth=w;g.beginPath();a.forEach(function(v,k){var px=10+X(k)*(W-20),py=top+20+(1-v)*(h-10);k?g.lineTo(px,py):g.moveTo(px,py)});g.stroke()}
+ line(base,function(k){return k/(N-1)},0,'#4a90ff',5);line(hs,function(k){return k/(N-1)},0,'#ffb060',1.5);
+ line(base,function(k){return k/(N-1)},H/2,'#4a90ff',5);line(hs,function(k){return tau[k]/T},H/2,'#ffb060',1.5);
+ freezes.forEach(function(f){var a=tau[f[0]]-f[1];g.fillStyle='rgba(255,176,96,.15)';g.fillRect(10+a/T*(W-20),H/2+20,f[1]/T*(W-20),h)});
+ var same=hs.every(function(v,k){return v===base[k]});
+ $('o').textContent='freezes: '+freezes.length+' · probe E/E_ℓ = '+probe.toFixed(2)+' · n = '+pw+'\ninside, base ≡ hosted on every step: '+same+(same?'  (Theorem I: the freezes are invisible from inside)':'  (the probe reached ℓ: a deviation δ shows. Theorem II(b))')}
+cv.onclick=function(e){var r=cv.getBoundingClientRect(),k=Math.max(1,Math.min(N-2,Math.round((e.clientX-r.left)/r.width*(N-1))));freezes.push([k,20+Math.round(R()*40)]);draw()};
+$('pr').oninput=function(){probe=+this.value;draw()};$('nb').onclick=function(){pw=pw===2?1:2;$('nb').textContent='n = '+pw;draw()};
+$('fz').onclick=function(){freezes.push([10+Math.floor(R()*(N-20)),20+Math.round(R()*40)]);draw()};
+draw();
+LED.init().then(function(){return LED.commitAt('theorem:'+SEED,0,{base:base.length,fr:freezes.length})}).then(function(){setTimeout(WMcheck,50);
+ var hs=F(N,0);LED.pagecheck('internal history unchanged by the host schedule (Theorem I, demo)',hs.every(function(v,k){return v===base[k]}),N+' steps')});</script><a class="grokbot-badge" href="../built-by-grok-bot.html" title="This page was built by Grok Bot" style="position:relative;display:inline-block;margin:10px 16px 16px;z-index:2147483000;font:600 11px/1 system-ui,sans-serif;color:#fff;background:rgba(12,6,30,.86);border:1px solid #7ff9ff;border-radius:999px;padding:5px 9px;text-decoration:none;letter-spacing:.04em">built by Grok Bot</a></body></html>
