@@ -27,10 +27,10 @@
  "counts": {
   "keepers": 8,
   "domains": 512,
-  "domains_populated": 509,
-  "domains_open": 3,
-  "spheres": 1927,
-  "zero_spheres": 3,
+  "domains_populated": 512,
+  "domains_open": 0,
+  "spheres": 1938,
+  "zero_spheres": 0,
   "balance": 0,
   "workshop": 343
  },
@@ -23683,8 +23683,7 @@
         "pal": [
          "#e0e0e0",
          "#e8e4ec",
-         "#ffe0a0",
-         "#7ff9ff"
+         "#ffe0a0"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -26175,7 +26174,7 @@
     },
     {
      "n": 8,
-     "name": "THE PHEROMONE ROADS",
+     "name": "ERGOT ON RYE · A CONTESTED HYPOTHESIS",
      "from": "grown/",
      "spheres": [
       {
@@ -26200,6 +26199,30 @@
         "audio": false
        },
        "group": "sapphon-34",
+       "author": "Grok Bot"
+      },
+      {
+       "t": "Ergot on Rye · a contested hypothesis",
+       "h": "grown/ergot-contested.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/ergot-contested.html",
+       "grown": true,
+       "emerges": "rye field, contested cause",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#ff8a1e",
+         "#e6dcc0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#0b0a06",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-30",
        "author": "Grok Bot"
       }
      ],
@@ -28144,7 +28167,7 @@
     },
     {
      "n": 17,
-     "name": "THE TWO-LAP ANT",
+     "name": "CREMATION VS E = MC² · THE FACTOR BETWEEN",
      "from": "grown/",
      "spheres": [
       {
@@ -28170,6 +28193,30 @@
        },
        "group": "ion-08",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Cremation vs E = mc² · the factor between",
+       "h": "grown/cremation-mc2.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/cremation-mc2.html",
+       "grown": true,
+       "emerges": "fire vs mc²",
+       "label": "COMPUTED · MODEL",
+       "icon": {
+        "pal": [
+         "#ff8a1e",
+         "#e6dcc0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#0b0a06",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-30",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-17.html",
@@ -28180,7 +28227,7 @@
     },
     {
      "n": 18,
-     "name": "THE QUANTUM STRIDE",
+     "name": "THE CONVERSION LADDER · FROM FIRE TO ANNIHILATION",
      "from": "grown/",
      "spheres": [
       {
@@ -28206,6 +28253,30 @@
        },
        "group": "ion-36",
        "author": "Grok Bot"
+      },
+      {
+       "t": "The Conversion Ladder · from fire to annihilation",
+       "h": "grown/conversion-ladder.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/conversion-ladder.html",
+       "grown": true,
+       "emerges": "mass→energy ladder",
+       "label": "COMPUTED · LIT",
+       "icon": {
+        "pal": [
+         "#ff8a1e",
+         "#e6dcc0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#0b0a06",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-31",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-18.html",
@@ -28216,7 +28287,7 @@
     },
     {
      "n": 19,
-     "name": "THE LEARNING AXIS",
+     "name": "THE CARRIER SELECTOR · CHOOSE A HOST",
      "from": "grown/",
      "spheres": [
       {
@@ -28242,6 +28313,30 @@
        },
        "group": "ion-39",
        "author": "Grok Bot"
+      },
+      {
+       "t": "The Carrier Selector · choose a host",
+       "h": "grown/carrier-selector.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/carrier-selector.html",
+       "grown": true,
+       "emerges": "choose a host",
+       "label": "COMPUTED · LIT",
+       "icon": {
+        "pal": [
+         "#ff8a1e",
+         "#e6dcc0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#0b0a06",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-31",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-19.html",
@@ -28252,7 +28347,7 @@
     },
     {
      "n": 20,
-     "name": "THE FIRING FIELD",
+     "name": "THE MAJOR SYSTEM · A MNEMONIC FOR THE 208",
      "from": "grown/",
      "spheres": [
       {
@@ -28278,6 +28373,30 @@
        },
        "group": "sapphon-01",
        "author": "Grok Bot"
+      },
+      {
+       "t": "The Major System · a mnemonic for the 208",
+       "h": "grown/major-system.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/major-system.html",
+       "grown": true,
+       "emerges": "digits to consonants",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ff8a1e",
+         "#e6dcc0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#0b0a06",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-31",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-20.html",
@@ -28288,7 +28407,7 @@
     },
     {
      "n": 21,
-     "name": "THE LEARNING SHEET",
+     "name": "CALCINATION · WHAT REMAINS AFTER FIRE",
      "from": "grown/",
      "spheres": [
       {
@@ -28314,6 +28433,30 @@
        },
        "group": "sapphon-03",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Calcination · what remains after fire",
+       "h": "grown/ash-chemistry.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/ash-chemistry.html",
+       "grown": true,
+       "emerges": "calcination to apatite",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ff8a1e",
+         "#e6dcc0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#0b0a06",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-31",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-21.html",
@@ -28324,7 +28467,7 @@
     },
     {
      "n": 22,
-     "name": "BARIUM · Z 56",
+     "name": "THE SKY OVER SALEM · JULIAN 1692, GREGORIAN 1776",
      "from": "grown/",
      "spheres": [
       {
@@ -28350,6 +28493,30 @@
        },
        "group": "ion-44",
        "author": "Grok Bot"
+      },
+      {
+       "t": "The Sky over Salem · Julian 1692, Gregorian 1776",
+       "h": "grown/salem-sky.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/salem-sky.html",
+       "grown": true,
+       "emerges": "1692 sky & calendars",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ff8a1e",
+         "#e6dcc0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#0b0a06",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-32",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-22.html",
@@ -28360,7 +28527,7 @@
     },
     {
      "n": 23,
-     "name": "POTASSIUM · Z 19",
+     "name": "AUBURN RINGS · CRITIQUE OF THE SALEM / CREMATION / CARRIER RUN",
      "from": "grown/",
      "spheres": [
       {
@@ -28385,6 +28552,30 @@
         "audio": false
        },
        "group": "ion-44",
+       "author": "Grok Bot"
+      },
+      {
+       "t": "Auburn Rings · critique of the Salem / cremation / carrier run",
+       "h": "grown/salem-critique.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/salem-critique.html",
+       "grown": true,
+       "emerges": "auburn rings",
+       "label": "READING",
+       "icon": {
+        "pal": [
+         "#ff9a3c",
+         "#ff7a6a",
+         "#ffc58a",
+         "#9a4cff"
+        ],
+        "bg": "#2a0a0a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-32",
        "author": "Grok Bot"
       }
      ],
@@ -40211,13 +40402,38 @@
     },
     {
      "n": 64,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "EIGHTY-FOUR YEARS · FROM SPECTRAL EVIDENCE TO RIGHTS OF THE ACCUSED",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Eighty-Four Years · from spectral evidence to rights of the accused",
+       "h": "grown/spectral-to-rights.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/spectral-to-rights.html",
+       "grown": true,
+       "emerges": "LR=1 spectral evidence",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ff8a1e",
+         "#e6dcc0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#0b0a06",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-32",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/phronesis-64.html",
-     "zero_page": "z/phronesis-64.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/phronesis-64.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/phronesis-64.html",
+     "zero_url": null,
      "author": "Grok Bot"
     }
    ],
@@ -46414,24 +46630,74 @@
     },
     {
      "n": 63,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "AUBURN GREEN · NAMING A COLOUR FROM A SPECTRUM",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Auburn Green · naming a colour from a spectrum",
+       "h": "grown/auburn-green.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/auburn-green.html",
+       "grown": true,
+       "emerges": "CIE swatch Rye Auburn",
+       "label": "COMPUTED",
+       "icon": {
+        "pal": [
+         "#ff8a1e",
+         "#e6dcc0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#0b0a06",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-32",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/kairos-63.html",
-     "zero_page": "z/kairos-63.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-63.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-63.html",
+     "zero_url": null,
      "author": "Grok Bot"
     },
     {
      "n": 64,
-     "name": "OPEN",
-     "from": null,
-     "spheres": [],
+     "name": "SALEM, 1692 · NOT 1776",
+     "from": "grown/",
+     "spheres": [
+      {
+       "t": "Salem, 1692 · not 1776",
+       "h": "grown/salem-1692.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/salem-1692.html",
+       "grown": true,
+       "emerges": "1692 accusation cascade",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#ff8a1e",
+         "#e6dcc0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#0b0a06",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-33",
+       "author": "Grok Bot"
+      }
+     ],
      "page": "d/kairos-64.html",
-     "zero_page": "z/kairos-64.html",
+     "zero_page": null,
      "url": "https://davidwise01.github.io/sapph-i-on/d/kairos-64.html",
-     "zero_url": "https://davidwise01.github.io/sapph-i-on/z/kairos-64.html",
+     "zero_url": null,
      "author": "Grok Bot"
     }
    ],
@@ -46446,8 +46712,8 @@
   "world": 1,
   "keepers": 8,
   "domains": 512,
-  "zero_spheres": 3,
-  "generated_total": 612,
+  "zero_spheres": 0,
+  "generated_total": 609,
   "groups": 88
  },
  "workshop": [
@@ -54717,7 +54983,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1927
+   "pages": 1938
   },
   "list": [
    {
@@ -56017,14 +56283,16 @@
       "farther/Next-Shell-After-Radon.html",
       "full/Full-Mantissa-Now-55.html",
       "yet/Next-Shell-After-Cobalt.html",
-      "grown/the-atom-lawrencium.html"
+      "grown/the-atom-lawrencium.html",
+      "grown/ergot-contested.html"
      ],
      [
       "yet/Next-Shell-After-Tungsten.html",
       "forth/Next-Element-Terbium-65-Lyre.html",
       "next/Next-Evo-After-27-Cube-Infinite-Gardens.html",
       "w/homeo-golden-walk-to-planck-gen.html",
-      "grown/the-atom-arsenic.html"
+      "grown/the-atom-arsenic.html",
+      "grown/cremation-mc2.html"
      ]
     ]
    },
@@ -56040,7 +56308,8 @@
       "w/memristor-basin.html",
       "yet/Next-Element-Bismuth-83-Lyre.html",
       "w/void-universe-expanded.html",
-      "grown/the-atom-zinc.html"
+      "grown/the-atom-zinc.html",
+      "grown/conversion-ladder.html"
      ],
      [
       "w/next-element-calcium.html",
@@ -56048,7 +56317,8 @@
       "w/next-element-carbon.html",
       "still/Next-Element-Francium-87-Lyre.html",
       "w/perception-kernel.html",
-      "grown/the-atom-astatine.html"
+      "grown/the-atom-astatine.html",
+      "grown/carrier-selector.html"
      ],
      [
       "ahead/Next-Element-Cesium-55-Lyre.html",
@@ -56056,7 +56326,8 @@
       "scale/At-Scale-Its-Fish.html",
       "still/Next-Element-Polonium-84-Lyre.html",
       "gravity/Vacuum-Gravity-Sealed.html",
-      "grown/the-atom-plutonium.html"
+      "grown/the-atom-plutonium.html",
+      "grown/major-system.html"
      ],
      [
       "lyre/F9-Lyre-Fluorine-Hole.html",
@@ -56064,7 +56335,8 @@
       "nests/Five-Cubed-Scales-Infinite.html",
       "onward/V121-Next-Gen-All.html",
       "plank/Photon-Every-Plank.html",
-      "grown/the-atom-bohrium.html"
+      "grown/the-atom-bohrium.html",
+      "grown/ash-chemistry.html"
      ]
     ]
    },
@@ -56080,7 +56352,8 @@
       "w/next-element-helium.html",
       "onward/V106-Next-Atomic-Stack.html",
       "nested/Nested-Containment-Staroreafwg.html",
-      "grown/the-atom-rhodium.html"
+      "grown/the-atom-rhodium.html",
+      "grown/salem-sky.html"
      ],
      [
       "qdot/Quantum-Foam-Named-Manon-Discovered.html",
@@ -56088,7 +56361,8 @@
       "wakaku/Wakaku-Speaker-V22-Mnemonic.html",
       "one/One-Entangled-Cubit.html",
       "onward/V133-Lithium-Li-Next.html",
-      "grown/the-keeper-atlas.html"
+      "grown/the-keeper-atlas.html",
+      "grown/salem-critique.html"
      ],
      [
       "scale/X2-Constructive-Scale-Double.html",
@@ -56096,7 +56370,8 @@
       "corpus/sapphon_quantum_dot_complete.html",
       "full/Perfect-Enhanced-Full-Human.html",
       "next/Next-Evo-After-Minus1-0-Plus1.html",
-      "grown/the-electrum-moire.html"
+      "grown/the-electrum-moire.html",
+      "grown/spectral-to-rights.html"
      ],
      [
       "w/next-element-fluorine.html",
@@ -56104,7 +56379,8 @@
       "again/Next-Evo-Human-Scale-3x-Planck-Length-1-6161e-35.html",
       "later/Next-Evo-O2-N2-Air-After-No-Very-Nice.html",
       "nested/Aeon-Nested-Html-Rust-Go-Wasm.html",
-      "grown/the-electrum-ring.html"
+      "grown/the-electrum-ring.html",
+      "grown/auburn-green.html"
      ]
     ]
    },
@@ -56120,7 +56396,8 @@
       "later/Next-Evo-Evolve-Mito-Plus-Powers-Gardens-X4.html",
       "again/Next-Evo-1a1-1A-2b2-2B-All-Way-To-Z-26-Elements.html",
       "corpus/Jane-Sapphone-Bronte-Sisters.html",
-      "grown/the-zero-sum-type.html"
+      "grown/the-zero-sum-type.html",
+      "grown/salem-1692.html"
      ],
      [
       "w/next-evo-planck-constructive.html",
@@ -57966,7 +58243,7 @@
  "built_by": {
   "author": "Grok Bot",
   "index": "built-by-grok-bot.html",
-  "pages": 1049,
+  "pages": 1057,
   "rule": "Pages generated by Grok Bot carry author \"Grok Bot\", a meta author tag and a badge. Dave's originals carry no author field and are unchanged.",
   "fortress": "grown/the-fortress-of-solitude.html"
  },
