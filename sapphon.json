@@ -29,7 +29,7 @@
   "domains": 512,
   "domains_populated": 512,
   "domains_open": 0,
-  "spheres": 1960,
+  "spheres": 1971,
   "zero_spheres": 0,
   "balance": 0,
   "workshop": 343
@@ -29907,7 +29907,7 @@
     },
     {
      "n": 46,
-     "name": "OSMIUM · Z 76",
+     "name": "NOTE G · LOVELACE’S BERNOULLI PROGRAM, BUGS AND ALL",
      "from": "grown/",
      "spheres": [
       {
@@ -29933,6 +29933,30 @@
        },
        "group": "sapphon-13",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Note G · Lovelace’s Bernoulli program, bugs and all",
+       "h": "grown/note-g.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/note-g.html",
+       "grown": true,
+       "emerges": "Lovelace Note G, bugs reconciled",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffb347",
+         "#f0e6d0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#07060a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-38",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-46.html",
@@ -29943,7 +29967,7 @@
     },
     {
      "n": 47,
-     "name": "NEODYMIUM · Z 60",
+     "name": "THE IMITATION GAME VS LADY LOVELACE’S OBJECTION",
      "from": "grown/",
      "spheres": [
       {
@@ -29969,6 +29993,30 @@
        },
        "group": "sapphon-15",
        "author": "Grok Bot"
+      },
+      {
+       "t": "The Imitation Game vs Lady Lovelace’s Objection",
+       "h": "grown/lovelace-objection.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/lovelace-objection.html",
+       "grown": true,
+       "emerges": "imitation game vs objection",
+       "label": "LIT · READING · COMPUTED",
+       "icon": {
+        "pal": [
+         "#f0e6d0",
+         "#ffb347",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#07060a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-39",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-47.html",
@@ -29979,7 +30027,7 @@
     },
     {
      "n": 48,
-     "name": "GERMANIUM · Z 32",
+     "name": "TURING MACHINE 1936 · TAPE, HEAD, TABLE",
      "from": "grown/",
      "spheres": [
       {
@@ -30005,6 +30053,30 @@
        },
        "group": "sapphon-15",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Turing Machine 1936 · tape, head, table",
+       "h": "grown/turing-machine.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/turing-machine.html",
+       "grown": true,
+       "emerges": "1936 machine, BB(2)",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffb347",
+         "#f0e6d0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#07060a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-39",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-48.html",
@@ -30015,7 +30087,7 @@
     },
     {
      "n": 49,
-     "name": "SCANDIUM · Z 21",
+     "name": "THE HALTING PROBLEM · THE DIAGONAL THAT ESCAPES",
      "from": "grown/",
      "spheres": [
       {
@@ -30041,6 +30113,30 @@
        },
        "group": "sapphon-15",
        "author": "Grok Bot"
+      },
+      {
+       "t": "The Halting Problem · the diagonal that escapes",
+       "h": "grown/halting-diagonal.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/halting-diagonal.html",
+       "grown": true,
+       "emerges": "diagonal escape",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffb347",
+         "#f0e6d0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#151520",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-39",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-49.html",
@@ -30051,7 +30147,7 @@
     },
     {
      "n": 50,
-     "name": "ERBIUM · Z 68",
+     "name": "ENIGMA VS THE BOMBE · THE LETTER THAT NEVER MAPS TO ITSELF",
      "from": "grown/",
      "spheres": [
       {
@@ -30077,6 +30173,30 @@
        },
        "group": "sapphon-16",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Enigma vs the Bombe · the letter that never maps to itself",
+       "h": "grown/enigma-bombe.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/enigma-bombe.html",
+       "grown": true,
+       "emerges": "Enigma I crib crack",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffb347",
+         "#f0e6d0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#07060a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-39",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-50.html",
@@ -30087,7 +30207,7 @@
     },
     {
      "n": 51,
-     "name": "CERIUM · Z 58",
+     "name": "BABBAGE BREAKS VIGENÈRE · TRITHEMIUS TO ENIGMA",
      "from": "grown/",
      "spheres": [
       {
@@ -30113,6 +30233,30 @@
        },
        "group": "sapphon-16",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Babbage breaks Vigenère · Trithemius to Enigma",
+       "h": "grown/babbage-vigenere.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/babbage-vigenere.html",
+       "grown": true,
+       "emerges": "Babbage/Kasiski IoC",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#f0e6d0",
+         "#ffb347",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#07060a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-40",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-51.html",
@@ -30123,7 +30267,7 @@
     },
     {
      "n": 52,
-     "name": "RUTHENIUM · Z 44",
+     "name": "TURING MORPHOGENESIS 1952 · SPOTS FROM SMOOTHNESS",
      "from": "grown/",
      "spheres": [
       {
@@ -30149,6 +30293,30 @@
        },
        "group": "sapphon-17",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Turing Morphogenesis 1952 · spots from smoothness",
+       "h": "grown/morphogenesis.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/morphogenesis.html",
+       "grown": true,
+       "emerges": "Turing 1952 reaction–diffusion",
+       "label": "LIT · MODEL",
+       "icon": {
+        "pal": [
+         "#ffb347",
+         "#f0e6d0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#07060a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-40",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-52.html",
@@ -30159,7 +30327,7 @@
     },
     {
      "n": 53,
-     "name": "SELENIUM · Z 34",
+     "name": "UNIVERSALITY · ANALYTICAL ENGINE VS DIFFERENCE ENGINE",
      "from": "grown/",
      "spheres": [
       {
@@ -30185,6 +30353,30 @@
        },
        "group": "sapphon-18",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Universality · Analytical Engine vs Difference Engine",
+       "h": "grown/universality.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/universality.html",
+       "grown": true,
+       "emerges": "Analytical vs Difference Engine",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#f0e6d0",
+         "#ffb347",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#07060a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-40",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-53.html",
@@ -30195,7 +30387,7 @@
     },
     {
      "n": 54,
-     "name": "ZIRCONIUM · Z 40",
+     "name": "TURING’S ACE VS THE MANCHESTER BABY",
      "from": "grown/",
      "spheres": [
       {
@@ -30221,6 +30413,30 @@
        },
        "group": "sapphon-18",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Turing’s ACE vs the Manchester Baby",
+       "h": "grown/ace-vs-baby.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/ace-vs-baby.html",
+       "grown": true,
+       "emerges": "Baby 1948 vs ACE",
+       "label": "LIT · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffb347",
+         "#f0e6d0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#07060a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-40",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-54.html",
@@ -30231,7 +30447,7 @@
     },
     {
      "n": 55,
-     "name": "FLUORINE · Z 9",
+     "name": "TERNARY & STATE MACHINES · SETUN, THE 208, DURABLEANCHOR",
      "from": "grown/",
      "spheres": [
       {
@@ -30257,6 +30473,30 @@
        },
        "group": "sapphon-18",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Ternary & State Machines · Setun, the 208, DurableAnchor",
+       "h": "grown/ternary-state.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/ternary-state.html",
+       "grown": true,
+       "emerges": "Setun & state machines",
+       "label": "LIT · MODEL · COMPUTED",
+       "icon": {
+        "pal": [
+         "#f0e6d0",
+         "#ffb347",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#07060a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-41",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/episteme-55.html",
@@ -30267,7 +30507,7 @@
     },
     {
      "n": 56,
-     "name": "CHROMIUM · Z 24",
+     "name": "+2+ · CRITIQUE OF THE LOVELACE/TURING RUN",
      "from": "grown/",
      "spheres": [
       {
@@ -30292,6 +30532,30 @@
         "audio": false
        },
        "group": "sapphon-18",
+       "author": "Grok Bot"
+      },
+      {
+       "t": "+2+ · critique of the Lovelace/Turing run",
+       "h": "grown/fulcrum-critique.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/fulcrum-critique.html",
+       "grown": true,
+       "emerges": "+2+ critique",
+       "label": "READING",
+       "icon": {
+        "pal": [
+         "#ff9a3c",
+         "#ff7a6a",
+         "#ffc58a",
+         "#9a4cff"
+        ],
+        "bg": "#2a0a0a",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "sapphon-41",
        "author": "Grok Bot"
       }
      ],
@@ -55511,7 +55775,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 1960
+   "pages": 1971
   },
   "list": [
    {
@@ -57169,7 +57433,8 @@
       "lyre/5o-Lyre-10-Quint.html",
       "plus/Continue-After-Mito-Plus.html",
       "toroid/First-Principles-Boxy-Toroid.html",
-      "grown/the-moss-diorama.html"
+      "grown/the-moss-diorama.html",
+      "grown/note-g.html"
      ]
     ]
    },
@@ -57185,7 +57450,8 @@
       "one/Emph-Garden-One-Hit.html",
       "w/deep-sea-black-hole-kraken-eye.html",
       "nests/entangled_nest.html",
-      "grown/clay-cast.html"
+      "grown/clay-cast.html",
+      "grown/lovelace-objection.html"
      ],
      [
       "nests/nested_decoherence.html",
@@ -57193,7 +57459,8 @@
       "w/planck-interferometer.html",
       "w/quantum-box-chain.html",
       "w/the-toroid.html",
-      "grown/assay-terminal.html"
+      "grown/assay-terminal.html",
+      "grown/turing-machine.html"
      ],
      [
       "w/ud0-spinor.html",
@@ -57201,7 +57468,8 @@
       "sapphon/hermes_sapphon_v2.html",
       "w/next-element-silicon.html",
       "later/Next-Evo-Headed-Towards-That-O-Sometime-Lol.html",
-      "grown/tardi-dmg.html"
+      "grown/tardi-dmg.html",
+      "grown/halting-diagonal.html"
      ],
      [
       "w/higgs-universal-gravity.html",
@@ -57209,7 +57477,8 @@
       "stewards/phronesis.html",
       "yet/Next-Element-Lead-82-Lyre.html",
       "again/Next-Evo-Crystalline-Gem.html",
-      "grown/the-phantom-jam.html"
+      "grown/the-phantom-jam.html",
+      "grown/enigma-bombe.html"
      ]
     ]
    },
@@ -57225,14 +57494,16 @@
       "bonk/Bonk-360-Colors-6-Torroids-01percent-V56.html",
       "bonk/Bonk-Neon-Self-Similar-Pulsar-V53.html",
       "bonk/Bonk-Transmon-Qubit-Build-V58.html",
-      "grown/the-twice-enso.html"
+      "grown/the-twice-enso.html",
+      "grown/babbage-vigenere.html"
      ],
      [
       "corpus/sapphon_event_horizon_six_vectors_walk.html",
       "corpus/sapphon_event_horizon_svg_layers.html",
       "full/Full-Phase-Map-Brain.html",
       "full/Outer-Shell-Full-10.html",
-      "grown/bauhaus-720-clock.html"
+      "grown/bauhaus-720-clock.html",
+      "grown/morphogenesis.html"
      ],
      [
       "gravity/Add-Gravity-Time-Mass.html",
@@ -57240,7 +57511,8 @@
       "gravity/Model-Planck-Scale-Gravity.html",
       "neon/Final-3d-Neon-Full-Code-Buried.html",
       "neon/Final-3d-Neon-Ganglia-Fuse.html",
-      "grown/the-sampler.html"
+      "grown/the-sampler.html",
+      "grown/universality.html"
      ],
      [
       "neon/Forces-Crisper-Neon-Svg.html",
@@ -57248,7 +57520,8 @@
       "neon/Neon-Shell-Exponential-Growth.html",
       "nested/Wrapped-Nested-Exponential-Tower.html",
       "plank/Planck-Scale-Ansible-Antenna.html",
-      "grown/sun-print.html"
+      "grown/sun-print.html",
+      "grown/ace-vs-baby.html"
      ]
     ]
    },
@@ -57264,7 +57537,8 @@
       "qdot/Photon-Quantum-Dot-16.html",
       "qdot/Quantum-Box-Tessy-Full.html",
       "toroid/11-Toroids-Superposition-Ring.html",
-      "grown/tesserae.html"
+      "grown/tesserae.html",
+      "grown/ternary-state.html"
      ],
      [
       "toroid/3x3x3-Toroid-O3-Stitch.html",
@@ -57272,7 +57546,8 @@
       "toroid/Toroid-Reactor-Clones-Lab.html",
       "w/aeon-boot-breakdown.html",
       "w/electrum-lab-brutalist-art-style.html",
-      "grown/lecture-79-21.html"
+      "grown/lecture-79-21.html",
+      "grown/fulcrum-critique.html"
      ],
      [
       "w/h-o-e-hydrogen-oxygen-electrum.html",
@@ -58793,7 +59068,7 @@
  "built_by": {
   "author": "Grok Bot",
   "index": "built-by-grok-bot.html",
-  "pages": 1079,
+  "pages": 1090,
   "rule": "Pages generated by Grok Bot carry author \"Grok Bot\", a meta author tag and a badge. Dave's originals carry no author field and are unchanged.",
   "fortress": "grown/the-fortress-of-solitude.html"
  },
