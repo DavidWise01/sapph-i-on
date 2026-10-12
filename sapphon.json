@@ -29,7 +29,7 @@
   "domains": 512,
   "domains_populated": 512,
   "domains_open": 0,
-  "spheres": 2016,
+  "spheres": 2027,
   "zero_spheres": 0,
   "balance": 0,
   "workshop": 343
@@ -6101,7 +6101,7 @@
     },
     {
      "n": 49,
-     "name": "MARS · SATURN",
+     "name": "ZERO PINNED AT SEL · COSMERE FROM THE PIN",
      "from": "grown/",
      "spheres": [
       {
@@ -6127,6 +6127,29 @@
        },
        "group": "sapphon-02",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Zero Pinned at Sel · Cosmere from the pin",
+       "h": "grown/cosmere-pin.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/cosmere-pin.html",
+       "grown": true,
+       "emerges": "0 pinned at Sel (alt: Yolen)",
+       "label": "FICTION · ATTRIBUTED · MODEL",
+       "icon": {
+        "pal": [
+         "#7fd6c2",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-14",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/ethos-49.html",
@@ -6137,7 +6160,7 @@
     },
     {
      "n": 50,
-     "name": "EGYPTIAN BLUE",
+     "name": "SIXTEEN SHARDS · COSMERE FROM THE PIN",
      "from": "grown/",
      "spheres": [
       {
@@ -6163,6 +6186,29 @@
        },
        "group": "ion-44",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Sixteen Shards · Cosmere from the pin",
+       "h": "grown/cosmere-shards.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/cosmere-shards.html",
+       "grown": true,
+       "emerges": "sixteen Shards, C(16,2)=120",
+       "label": "FICTION · ATTRIBUTED · COMPUTED",
+       "icon": {
+        "pal": [
+         "#ffd166",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-14",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/ethos-50.html",
@@ -6173,7 +6219,7 @@
     },
     {
      "n": 51,
-     "name": "THE BLUE-BLIND CENTRE",
+     "name": "SEL: THE DOR · COSMERE FROM THE PIN",
      "from": "grown/",
      "spheres": [
       {
@@ -6199,6 +6245,29 @@
        },
        "group": "sapphon-04",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Sel: the Dor · Cosmere from the pin",
+       "h": "grown/cosmere-sel.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/cosmere-sel.html",
+       "grown": true,
+       "emerges": "Devotion+Dominion → the Dor",
+       "label": "FICTION · ATTRIBUTED",
+       "icon": {
+        "pal": [
+         "#9fd3ff",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-14",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/ethos-51.html",
@@ -6209,7 +6278,7 @@
     },
     {
      "n": 52,
-     "name": "THREE IN FOUR · THE RED DWARFS NEXT DOOR",
+     "name": "SCADRIAL: HARMONY · COSMERE FROM THE PIN",
      "from": "grown/",
      "spheres": [
       {
@@ -6235,6 +6304,29 @@
        },
        "group": "sapphon-05",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Scadrial: Harmony · Cosmere from the pin",
+       "h": "grown/cosmere-scadrial.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/cosmere-scadrial.html",
+       "grown": true,
+       "emerges": "Ruin+Preservation → Harmony",
+       "label": "FICTION · ATTRIBUTED",
+       "icon": {
+        "pal": [
+         "#c0c0c0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-15",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/ethos-52.html",
@@ -6245,7 +6337,7 @@
     },
     {
      "n": 53,
-     "name": "THE OPTICAL WINDOW · WHY RED GOES THROUGH YOU",
+     "name": "ROSHAR: THREE SHARDS · COSMERE FROM THE PIN",
      "from": "grown/",
      "spheres": [
       {
@@ -6271,6 +6363,29 @@
        },
        "group": "sapphon-06",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Roshar: Three Shards · Cosmere from the pin",
+       "h": "grown/cosmere-roshar.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/cosmere-roshar.html",
+       "grown": true,
+       "emerges": "Honor, Cultivation, Odium → Retribution",
+       "label": "FICTION · ATTRIBUTED",
+       "icon": {
+        "pal": [
+         "#ff9f1c",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-15",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/ethos-53.html",
@@ -6281,7 +6396,7 @@
     },
     {
      "n": 54,
-     "name": "CLOUDS AND MILK · MIE WHITENESS",
+     "name": "NALTHIS: ENDOWMENT · COSMERE FROM THE PIN",
      "from": "grown/",
      "spheres": [
       {
@@ -6307,6 +6422,29 @@
        },
        "group": "sapphon-08",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Nalthis: Endowment · Cosmere from the pin",
+       "h": "grown/cosmere-nalthis.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/cosmere-nalthis.html",
+       "grown": true,
+       "emerges": "Endowment; Investiture states",
+       "label": "FICTION · ATTRIBUTED",
+       "icon": {
+        "pal": [
+         "#ef476f",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-15",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/ethos-54.html",
@@ -6317,7 +6455,7 @@
     },
     {
      "n": 55,
-     "name": "SNOW · WHITE ON TOP, BLUE IN THE HOLE",
+     "name": "TALDAIN AND THRENODY · COSMERE FROM THE PIN",
      "from": "grown/",
      "spheres": [
       {
@@ -6343,6 +6481,29 @@
        },
        "group": "sapphon-08",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Taldain and Threnody · Cosmere from the pin",
+       "h": "grown/cosmere-taldain-threnody.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/cosmere-taldain-threnody.html",
+       "grown": true,
+       "emerges": "Autonomy's avatars vs Ambition's Splintering",
+       "label": "FICTION · ATTRIBUTED · WALL",
+       "icon": {
+        "pal": [
+         "#e0c080",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-16",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/ethos-55.html",
@@ -6353,7 +6514,7 @@
     },
     {
      "n": 56,
-     "name": "ROSE QUARTZ · PINK FROM INSIDE",
+     "name": "KOMASHI, LUMAR, YOLEN · COSMERE FROM THE PIN",
      "from": "grown/",
      "spheres": [
       {
@@ -6379,6 +6540,29 @@
        },
        "group": "sapphon-11",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Komashi, Lumar, Yolen · Cosmere from the pin",
+       "h": "grown/cosmere-komashi-lumar.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/cosmere-komashi-lumar.html",
+       "grown": true,
+       "emerges": "Virtuosity at Komashi; Lumar WALL",
+       "label": "FICTION · ATTRIBUTED · WALL",
+       "icon": {
+        "pal": [
+         "#c77dff",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-16",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/ethos-56.html",
@@ -6389,7 +6573,7 @@
     },
     {
      "n": 57,
-     "name": "PINK DIAMOND · COLOUR FROM A BENT LATTICE",
+     "name": "TIME FROM THE PIN · COSMERE FROM THE PIN",
      "from": "grown/",
      "spheres": [
       {
@@ -6415,6 +6599,29 @@
        },
        "group": "sapphon-11",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Time from the Pin · Cosmere from the pin",
+       "h": "grown/cosmere-timeline.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/cosmere-timeline.html",
+       "grown": true,
+       "emerges": "years after the pin",
+       "label": "FICTION · ATTRIBUTED · COMPUTED",
+       "icon": {
+        "pal": [
+         "#06d6a0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-16",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/ethos-57.html",
@@ -6425,7 +6632,7 @@
     },
     {
      "n": 58,
-     "name": "THE 208 INVERTED · EVENS SURVIVE, THE LEFT LIVES",
+     "name": "STRETCHING SPACE · COSMERE FROM THE PIN",
      "from": "grown/",
      "spheres": [
       {
@@ -6451,6 +6658,29 @@
        },
        "group": "sapphon-14",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Stretching Space · Cosmere from the pin",
+       "h": "grown/cosmere-stretch.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/cosmere-stretch.html",
+       "grown": true,
+       "emerges": "space stretched from the pin",
+       "label": "MODEL · COMPUTED · WALL",
+       "icon": {
+        "pal": [
+         "#ffb3c6",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-17",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/ethos-58.html",
@@ -6461,7 +6691,7 @@
     },
     {
      "n": 59,
-     "name": "INVERSION LAYER · WARM AIR ON TOP",
+     "name": "ELEVEN: OVERVIEW & CRITIQUE · COSMERE FROM THE PIN",
      "from": "grown/",
      "spheres": [
       {
@@ -6486,6 +6716,29 @@
         "audio": false
        },
        "group": "sapphon-14",
+       "author": "Grok Bot"
+      },
+      {
+       "t": "Eleven: Overview & Critique · Cosmere from the pin",
+       "h": "grown/cosmere-critique.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/cosmere-critique.html",
+       "grown": true,
+       "emerges": "overview & critique of 1–10",
+       "label": "FICTION · MODEL · COMPUTED",
+       "icon": {
+        "pal": [
+         "#e0e0e0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-17",
        "author": "Grok Bot"
       }
      ],
@@ -56855,7 +57108,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 2016
+   "pages": 2027
   },
   "list": [
    {
@@ -59157,14 +59410,16 @@
       "ahead/Next-Element-Promethium-61-Lyre.html",
       "dots/Tail-Cypher-Mutated-Dot.html",
       "full/FULL-Purple30-Black5-Blue30-Black5-Red30-Power-Tower.html",
-      "grown/quarantine-findings.html"
+      "grown/quarantine-findings.html",
+      "grown/cosmere-pin.html"
      ],
      [
       "nests/Nested-Hamilton-Slexov.html",
       "sapphon/1-QD-Planck-1-25MB-Sapphon-0-25MB.html",
       "toroid/1-Toroid-Prim-Particles-X8-Phase-Shift-X4-Anisotropic-Div128.html",
       "toroid/1-Toroid-Prim-X8-X4-Div128-Scaled-13-8B.html",
-      "grown/the-capillary-line.html"
+      "grown/the-capillary-line.html",
+      "grown/cosmere-shards.html"
      ],
      [
       "sapphon/sapphon_computer_state_space.html",
@@ -59172,7 +59427,8 @@
       "sapphon/sapphon_computer_state_space_lhc_fork.html",
       "corpus/Heg0mon_Sapphon_Gravity_v00.html",
       "plank/Colors-Chase-Planck.html",
-      "grown/the-hungry-dark.html"
+      "grown/the-hungry-dark.html",
+      "grown/cosmere-sel.html"
      ]
     ]
    },
@@ -59188,7 +59444,8 @@
       "w/hepteract-lattice.html",
       "w/aeon-frozen.html",
       "w/aeon-x8-bk-wt-final.html",
-      "grown/the-memory-of-shapes.html"
+      "grown/the-memory-of-shapes.html",
+      "grown/cosmere-scadrial.html"
      ],
      [
       "w/patricia-amethyst-aeon.html",
@@ -59196,7 +59453,8 @@
       "corpus/sapphon_computer_jane_artistic_agentic_with_medium.html",
       "sapphon/sapphon_computer_jane_artistic_agentic.html",
       "gravity/hundred-under-gravity-to-zero.html",
-      "grown/the-turing-garden.html"
+      "grown/the-turing-garden.html",
+      "grown/cosmere-roshar.html"
      ],
      [
       "full/1-Full-Reality-X2-Shadowed-Inversed-Mirrored-Expanded-Kerneled-Seeded-Twice-Authored-Voltaged-Alive.html",
@@ -59204,7 +59462,8 @@
       "onward/V120-Next-Gen-Gen0.html",
       "plus/Pair-Entangled-1QD-Amethyst-Noble-Plus-1QD-Cobalt-PPMMMPP.html",
       "spheres/the-surface.html",
-      "grown/field-notes-outward.html"
+      "grown/field-notes-outward.html",
+      "grown/cosmere-nalthis.html"
      ]
     ]
    },
@@ -59220,7 +59479,8 @@
       "gravity/Gravity-Map-Below-Mile.html",
       "nested/One-Boxy-Nested-Boxy.html",
       "w/david-neutron-star-planck.html",
-      "grown/the-dresden-screenfold.html"
+      "grown/the-dresden-screenfold.html",
+      "grown/cosmere-taldain-threnody.html"
      ],
      [
       "plus/Bind-Boron-Oxygen-Nitrogen-Potassium-K-Plus-1.html",
@@ -59228,7 +59488,8 @@
       "plank/Combined-Planck-Felux-Flux.html",
       "sapphon/Super-Sapphon-Viewer-Chunked.html",
       "w/seam-chronicles-gravity-little.html",
-      "grown/the-speed-of-everyone.html"
+      "grown/the-speed-of-everyone.html",
+      "grown/cosmere-komashi-lumar.html"
      ],
      [
       "w/wakaku-all-colors-please.html",
@@ -59236,7 +59497,8 @@
       "w/wakaku-next.html",
       "one/one-electron.html",
       "w/box-toroid-juliet-sets.html",
-      "grown/the-crown-krater.html"
+      "grown/the-crown-krater.html",
+      "grown/cosmere-timeline.html"
      ]
     ]
    },
@@ -59252,7 +59514,8 @@
       "archive/the-occult-stack.html",
       "folio/the-base-seven.html",
       "folio/the-one-two-seven.html",
-      "grown/atomic-homophones.html"
+      "grown/atomic-homophones.html",
+      "grown/cosmere-stretch.html"
      ],
      [
       "folio/the-plant-hybrids.html",
@@ -59260,7 +59523,8 @@
       "libraries/the-church-shelf.html",
       "libraries/the-congregational-shelf.html",
       "libraries/the-mouride-shelf.html",
-      "grown/the-lacquer-emblems.html"
+      "grown/the-lacquer-emblems.html",
+      "grown/cosmere-critique.html"
      ],
      [
       "spheres/the-checker.html",
@@ -60193,7 +60457,7 @@
  "built_by": {
   "author": "Grok Bot",
   "index": "built-by-grok-bot.html",
-  "pages": 1135,
+  "pages": 1146,
   "rule": "Pages generated by Grok Bot carry author \"Grok Bot\", a meta author tag and a badge. Dave's originals carry no author field and are unchanged.",
   "fortress": "grown/the-fortress-of-solitude.html"
  },
