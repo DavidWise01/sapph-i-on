@@ -29,7 +29,7 @@
   "domains": 512,
   "domains_populated": 512,
   "domains_open": 0,
-  "spheres": 2027,
+  "spheres": 2029,
   "zero_spheres": 0,
   "balance": 0,
   "workshop": 343
@@ -6199,7 +6199,8 @@
         "pal": [
          "#ffd166",
          "#e8e4ec",
-         "#ffe0a0"
+         "#ffe0a0",
+         "#7ff9ff"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -6258,7 +6259,8 @@
         "pal": [
          "#9fd3ff",
          "#e8e4ec",
-         "#ffe0a0"
+         "#ffe0a0",
+         "#7ff9ff"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -6317,7 +6319,8 @@
         "pal": [
          "#c0c0c0",
          "#e8e4ec",
-         "#ffe0a0"
+         "#ffe0a0",
+         "#7ff9ff"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -6376,7 +6379,8 @@
         "pal": [
          "#ff9f1c",
          "#e8e4ec",
-         "#ffe0a0"
+         "#ffe0a0",
+         "#7ff9ff"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -6435,7 +6439,8 @@
         "pal": [
          "#ef476f",
          "#e8e4ec",
-         "#ffe0a0"
+         "#ffe0a0",
+         "#7ff9ff"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -6494,7 +6499,8 @@
         "pal": [
          "#e0c080",
          "#e8e4ec",
-         "#ffe0a0"
+         "#ffe0a0",
+         "#7ff9ff"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -6553,7 +6559,8 @@
         "pal": [
          "#c77dff",
          "#e8e4ec",
-         "#ffe0a0"
+         "#ffe0a0",
+         "#7ff9ff"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -6612,7 +6619,8 @@
         "pal": [
          "#06d6a0",
          "#e8e4ec",
-         "#ffe0a0"
+         "#ffe0a0",
+         "#7ff9ff"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -6671,7 +6679,8 @@
         "pal": [
          "#ffb3c6",
          "#e8e4ec",
-         "#ffe0a0"
+         "#ffe0a0",
+         "#7ff9ff"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -6730,7 +6739,8 @@
         "pal": [
          "#e0e0e0",
          "#e8e4ec",
-         "#ffe0a0"
+         "#ffe0a0",
+         "#7ff9ff"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -6751,7 +6761,7 @@
     },
     {
      "n": 60,
-     "name": "STRATTON’S GOGGLES · THE WORLD INVERTED",
+     "name": "PLANCK NANITES → NANOS · PLANCK NANITES",
      "from": "grown/",
      "spheres": [
       {
@@ -6777,6 +6787,29 @@
        },
        "group": "sapphon-16",
        "author": "Grok Bot"
+      },
+      {
+       "t": "Planck Nanites → Nanos · Planck nanites",
+       "h": "grown/planck-nanites.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/planck-nanites.html",
+       "grown": true,
+       "emerges": "Planck nanites build nanos up ladder v2",
+       "label": "LIT · MODEL · COMPUTED · WALL",
+       "icon": {
+        "pal": [
+         "#7fd6c2",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": true,
+        "audio": false
+       },
+       "group": "ion-17",
+       "author": "Grok Bot"
       }
      ],
      "page": "d/ethos-60.html",
@@ -6787,7 +6820,7 @@
     },
     {
      "n": 61,
-     "name": "FIELD REVERSAL · THE COMPASS UPSIDE DOWN",
+     "name": "TWO: OVERVIEW & CRITIQUE · PLANCK NANITES",
      "from": "grown/",
      "spheres": [
       {
@@ -6812,6 +6845,29 @@
         "audio": false
        },
        "group": "sapphon-17",
+       "author": "Grok Bot"
+      },
+      {
+       "t": "Two: Overview & Critique · Planck nanites",
+       "h": "grown/nanites-critique.html",
+       "url": "https://davidwise01.github.io/sapph-i-on/grown/nanites-critique.html",
+       "grown": true,
+       "emerges": "overview & critique",
+       "label": "MODEL · COMPUTED · WALL",
+       "icon": {
+        "pal": [
+         "#e0e0e0",
+         "#e8e4ec",
+         "#ffe0a0"
+        ],
+        "bg": "#120a26",
+        "canvas": 1,
+        "svg": 0,
+        "scripts": 2,
+        "raf": false,
+        "audio": false
+       },
+       "group": "ion-18",
        "author": "Grok Bot"
       }
      ],
@@ -24824,8 +24880,7 @@
         "pal": [
          "#e0e0e0",
          "#e8e4ec",
-         "#ffe0a0",
-         "#7ff9ff"
+         "#ffe0a0"
         ],
         "bg": "#120a26",
         "canvas": 1,
@@ -57109,7 +57164,7 @@
    "center": 1,
    "total": 88,
    "member_slots": 304,
-   "pages": 2027
+   "pages": 2029
   },
   "list": [
    {
@@ -59533,7 +59588,8 @@
       "spheres/the-taxicab.html",
       "stewards/kairos.html",
       "farther/Wakaku-Speaker-V17-Next.html",
-      "grown/the-voynich-vellum.html"
+      "grown/the-voynich-vellum.html",
+      "grown/planck-nanites.html"
      ]
     ]
    },
@@ -59549,7 +59605,8 @@
       "wakaku/Wakaku-Speaker-V21-Ro.html",
       "neon/Ellipticoid-Jane-Neon-Pink.html",
       "refrain/Wakaku-V132-Forest-1156.html",
-      "grown/the-periodic-printout.html"
+      "grown/the-periodic-printout.html",
+      "grown/nanites-critique.html"
      ],
      [
       "speaker/Wakaku-Speaker-V122-3js.html",
@@ -60458,7 +60515,7 @@
  "built_by": {
   "author": "Grok Bot",
   "index": "built-by-grok-bot.html",
-  "pages": 1146,
+  "pages": 1148,
   "rule": "Pages generated by Grok Bot carry author \"Grok Bot\", a meta author tag and a badge. Dave's originals carry no author field and are unchanged.",
   "fortress": "grown/the-fortress-of-solitude.html"
  },
