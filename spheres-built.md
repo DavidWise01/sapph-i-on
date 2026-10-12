@@ -12,3 +12,4 @@ Batch 62 ladder v2 (2026-10-11): Dave "fix what i missed"; v2 beside his verbati
 
 ## Batch 63 — Planck nanites → nanos (2 pages, 2026-10-11)
 Dave: "love it, now build me my plank nanites that will build my nano s" · "just nanos bigger nanites". 1 planck-nanites (random-walk nanites at 10^-35.99 m; equal sizes that touch join, doubling up ladder v2 rungs; each build a DurableAnchor reservation; COMPUTED log2(1 nm / 10^-35.99 m) = 89.66 → 90 doublings; Planck-scale building WALL; Drexler–Smalley winner/challenger) · 2 nanites-critique.
+Batch 64 (2026-10-11): Dave "now have the nanoites build the next" → grown/nanites-next.html: nanos chain tiers with the same rule toward 1 nm; rungs past 2^21 unnamed (MODEL); name of 'the next' asked of Dave.
