@@ -6139,10 +6139,11 @@
         "pal": [
          "#7fd6c2",
          "#e8e4ec",
-         "#ffe0a0"
+         "#ffe0a0",
+         "#ffd166"
         ],
         "bg": "#120a26",
-        "canvas": 1,
+        "canvas": 2,
         "svg": 0,
         "scripts": 2,
         "raf": false,
@@ -24823,8 +24824,7 @@
         "pal": [
          "#e0e0e0",
          "#e8e4ec",
-         "#ffe0a0",
-         "#7ff9ff"
+         "#ffe0a0"
         ],
         "bg": "#120a26",
         "canvas": 1,
