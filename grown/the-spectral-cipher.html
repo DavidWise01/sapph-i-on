@@ -75,7 +75,7 @@ var SEED=+(new URLSearchParams(location.search).get('seed')||(Date.now()%1e6));
 LED.commitAt=function(id,epoch,state){LED.run(function(){if(!LED.A)return;return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,epoch,h).then(function(r){if(r.ok&&!r.previous)LED.last={id:id,epoch:epoch,head:h};else if(!r.ok)LED.rej.unshift(id+'@'+epoch+': '+r.reason);LED.show();return r})})});return LED.q};
 
 /* re-entrancy: a task already running in the queue may commit directly instead of waiting on itself */
-LED.inq=0;LED.run=function(fn){if(LED.inq>0)return Promise.resolve().then(fn);var p=LED.q.then(function(){LED.inq++;return Promise.resolve().then(fn).then(function(v){LED.inq--;return v},function(e){LED.inq--;throw e})});LED.q=p.catch(function(){});return p};
+LED.inq=0;LED.run=function(fn){var p=LED.q.then(function(){LED.inq++;return Promise.resolve().then(fn).then(function(v){LED.inq--;return v},function(e){LED.inq--;throw e})});LED.q=p.catch(function(){});return p};
 </script><script>"use strict";document.getElementById('sd').textContent=SEED;document.querySelectorAll('#ledger button').forEach(function(b){b.onclick=function(){LED.attack(b.dataset.a)}});
 function $(i){return document.getElementById(i)}
 var LN={H:[656.28,486.13,434.05,410.17],He:[587.56,501.57,667.82,447.15,492.19],Na:[589.0,589.59],Li:[670.78,610.36],K:[766.49,769.9],Ca:[422.67],Sr:[460.73],Ba:[553.55,455.4],Hg:[404.66,435.83,546.07,576.96,579.07],Ne:[585.25,640.22,703.24,614.31],Cu:[510.55,515.32,521.82],Ar:[696.54,706.72,750.39,763.51],Mg:[518.36,517.27,516.73],Fe:[438.35,440.48,527.04],Tl:[535.05],In:[451.13,410.18],Cs:[455.53,459.32],Rb:[780.03,420.18],Kr:[587.09,557.03],O:[777.19,615.68],N:[746.83,744.23]};

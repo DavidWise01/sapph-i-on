@@ -80,7 +80,7 @@ var SEED=+(new URLSearchParams(location.search).get('seed')||(Date.now()%1e6));
 LED.commitAt=function(id,epoch,state){LED.run(function(){if(!LED.A)return;return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,epoch,h).then(function(r){if(r.ok&&!r.previous)LED.last={id:id,epoch:epoch,head:h};else if(!r.ok)LED.rej.unshift(id+'@'+epoch+': '+r.reason);LED.show();return r})})});return LED.q};
 
 /* re-entrancy: a task already running in the queue may commit directly instead of waiting on itself */
-LED.inq=0;LED.run=function(fn){if(LED.inq>0)return Promise.resolve().then(fn);var p=LED.q.then(function(){LED.inq++;return Promise.resolve().then(fn).then(function(v){LED.inq--;return v},function(e){LED.inq--;throw e})});LED.q=p.catch(function(){});return p};
+LED.inq=0;LED.run=function(fn){var p=LED.q.then(function(){LED.inq++;return Promise.resolve().then(fn).then(function(v){LED.inq--;return v},function(e){LED.inq--;throw e})});LED.q=p.catch(function(){});return p};
 </script><script>"use strict";document.getElementById('sd').textContent=SEED;document.querySelectorAll('#ledger button').forEach(function(b){b.onclick=function(){LED.attack(b.dataset.a)}});
 function $(i){return document.getElementById(i)}
 var P=[['inverted-nesting',0,'exact reversal'],['complement-shells',0,'CIE vs RGB angle measured'],['sign-flip',0,'exact swap, Σ=0'],['the-208-inverted',0,'sign flip vs parity shift exact'],['population-inversion',1,'Boltzmann exact; rates toy'],['orange-mask',2,'dyes invented; date unverified'],['parity-wu',1,'sourced; A not measured'],['inversion-layer',1,'ISA exact; smoke toy'],['inversion-symmetry',1,'counts LIT; 2D toy cell'],['interval-inversion',0,'exact ratios']];

@@ -80,7 +80,7 @@ var SEED=+(new URLSearchParams(location.search).get('seed')||(Date.now()%1e6));
 LED.commitAt=function(id,epoch,state){LED.run(function(){if(!LED.A)return;return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,epoch,h).then(function(r){if(r.ok&&!r.previous)LED.last={id:id,epoch:epoch,head:h};else if(!r.ok)LED.rej.unshift(id+'@'+epoch+': '+r.reason);LED.show();return r})})});return LED.q};
 
 /* re-entrancy: a task already running in the queue may commit directly instead of waiting on itself */
-LED.inq=0;LED.run=function(fn){if(LED.inq>0)return Promise.resolve().then(fn);var p=LED.q.then(function(){LED.inq++;return Promise.resolve().then(fn).then(function(v){LED.inq--;return v},function(e){LED.inq--;throw e})});LED.q=p.catch(function(){});return p};
+LED.inq=0;LED.run=function(fn){var p=LED.q.then(function(){LED.inq++;return Promise.resolve().then(fn).then(function(v){LED.inq--;return v},function(e){LED.inq--;throw e})});LED.q=p.catch(function(){});return p};
 </script><script>"use strict";document.getElementById('sd').textContent=SEED;document.querySelectorAll('#ledger button').forEach(function(b){b.onclick=function(){LED.attack(b.dataset.a)}});
 (function(){var b=document.createElement('canvas');b.width=1000;b.height=18;b.setAttribute('aria-hidden','true');b.style.cssText='width:100%;height:18px;display:block;margin:4px 0 8px';var h=document.querySelector('h1');h.parentNode.insertBefore(b,h.nextSibling);var g=b.getContext('2d'),r=rng(SEED*31+7),c=getComputedStyle(document.documentElement).getPropertyValue('--acc')||'#888';g.fillStyle=c;for(var x=0;x<1000;){var w=2+r()*14;if(r()<.55)g.fillRect(x,r()*6,w,6+r()*12);x+=w+r()*10}})();
 function $(i){return document.getElementById(i)}

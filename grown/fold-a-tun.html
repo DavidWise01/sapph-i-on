@@ -71,7 +71,7 @@ var SEED=+(new URLSearchParams(location.search).get('seed')||(Date.now()%1e6));
 LED.commitAt=function(id,epoch,state){LED.run(function(){if(!LED.A)return;return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,epoch,h).then(function(r){if(r.ok&&!r.previous)LED.last={id:id,epoch:epoch,head:h};else if(!r.ok)LED.rej.unshift(id+'@'+epoch+': '+r.reason);LED.show();return r})})});return LED.q};
 
 /* re-entrancy: a task already running in the queue may commit directly instead of waiting on itself */
-LED.inq=0;LED.run=function(fn){if(LED.inq>0)return Promise.resolve().then(fn);var p=LED.q.then(function(){LED.inq++;return Promise.resolve().then(fn).then(function(v){LED.inq--;return v},function(e){LED.inq--;throw e})});LED.q=p.catch(function(){});return p};
+LED.inq=0;LED.run=function(fn){var p=LED.q.then(function(){LED.inq++;return Promise.resolve().then(fn).then(function(v){LED.inq--;return v},function(e){LED.inq--;throw e})});LED.q=p.catch(function(){});return p};
 </script><script>"use strict";document.getElementById('sd').textContent=SEED;document.querySelectorAll('#ledger button').forEach(function(b){b.onclick=function(){LED.attack(b.dataset.a)}});
 var c=document.getElementById('c'),g=c.getContext('2d'),n=0,cr=[],R,col,anim=0,QD=['#d6282c','#ef7a22','#f2c12e','#3f9b48','#1f8f9a','#2b55c4','#6b3fb0','#c2338f'];
 function paper(){R=rng(SEED);col=QD[SEED%8];n=0;cr=[];anim=0}

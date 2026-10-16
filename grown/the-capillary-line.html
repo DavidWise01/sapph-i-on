@@ -73,7 +73,7 @@ var SEED=+(new URLSearchParams(location.search).get('seed')||(Date.now()%1e6));
 LED.commitAt=function(id,epoch,state){LED.run(function(){if(!LED.A)return;return digest(JSON.stringify(state)).then(function(h){return LED.A.reserve(id,epoch,h).then(function(r){if(r.ok&&!r.previous)LED.last={id:id,epoch:epoch,head:h};else if(!r.ok)LED.rej.unshift(id+'@'+epoch+': '+r.reason);LED.show();return r})})});return LED.q};
 
 /* re-entrancy: a task already running in the queue may commit directly instead of waiting on itself */
-LED.inq=0;LED.run=function(fn){if(LED.inq>0)return Promise.resolve().then(fn);var p=LED.q.then(function(){LED.inq++;return Promise.resolve().then(fn).then(function(v){LED.inq--;return v},function(e){LED.inq--;throw e})});LED.q=p.catch(function(){});return p};
+LED.inq=0;LED.run=function(fn){var p=LED.q.then(function(){LED.inq++;return Promise.resolve().then(fn).then(function(v){LED.inq--;return v},function(e){LED.inq--;throw e})});LED.q=p.catch(function(){});return p};
 </script><script>"use strict";document.getElementById('sd').textContent=SEED;document.querySelectorAll('#ledger button').forEach(function(b){b.onclick=function(){LED.attack(b.dataset.a)}});
 var c=document.getElementById('c'),g=c.getContext('2d'),R,S=[],L=[],dem,fr=0;var COL=['#e3242b','#0098d4','#00843d','#ffd300','#9b0058','#f3a9bb','#a0a5a9','#ee7c0e'];
 function survey(){R=rng(SEED);S=[];for(var i=0;i<16;i++)S.push({x:100+Math.round(R()*16)*50,y:80+Math.round(R()*10)*50,F:i<8,p:1+R()*3,n:(i<8?'F':'T')+(i+1)});dem=[];for(var i=0;i<16;i++){dem.push([]);for(var j=0;j<16;j++)dem[i].push(i===j?0:S[i].p*S[j].p/(1+Math.hypot(S[i].x-S[j].x,S[i].y-S[j].y)/200))}L=[]}
