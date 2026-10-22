@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Magic Constant — SaPpH{{i}}on</title>
+<style>
+  :root { --ink:#4a044e; --dim:#6b21a8; --accent:#be185d; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; color:var(--ink);
+    font:16px/1.5 "Segoe UI", ui-sans-serif, sans-serif;
+    background:
+      radial-gradient(820px 440px at 0% 0%, #fbcfe8, transparent 62%),
+      radial-gradient(680px 420px at 100% 0%, #fde68a, transparent 55%),
+      linear-gradient(165deg, #fdf4ff, #fff7ed 70%, #fdf4ff);
+    background-color:#fdf4ff; min-height:100vh;
+  }
+  a { color:var(--accent); }
+  header, main, footer { width:min(880px, calc(100% - 32px)); margin:0 auto; }
+  header { padding:22px 0 0; }
+  .src, .mono { font:13px/1.45 ui-monospace, Consolas, monospace; color:var(--dim); }
+  h1 { margin:8px 0 0; font-size:clamp(28px, 5vw, 46px); letter-spacing:.03em; }
+  .kicker { letter-spacing:.16em; font-size:12px; color:var(--accent); font-weight:700; }
+  .stage { background:#fff; border:1px solid rgba(74,4,78,.14); border-radius:18px; padding:12px; margin:14px 0; }
+  canvas { display:block; width:100%; height:auto; border-radius:12px; background:#fdf4ff; }
+  .row { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+  button.chip { font:inherit; color:var(--ink); background:#fff; border:1px solid rgba(74,4,78,.16); border-radius:12px; padding:8px 12px; cursor:pointer; }
+  button.chip.on { border-color:var(--accent); }
+  .stamp { display:inline-block; padding:2px 8px; border-radius:999px; font:11px ui-monospace, Consolas, monospace; color:#fff; }
+  .lit { background:#047857; } .amber { background:#b45309; } .wall { background:#be185d; }
+  footer { color:var(--dim); font-size:13px; padding-bottom:28px; overflow-wrap:anywhere; }
+  .src, .mono, p, a, h1, button { overflow-wrap:anywhere; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="src"><a href="../">SaPpH{{i}}on</a> · cited · <a href="https://oeis.org/A027441">OEIS A027441</a> · <a href="https://0root.ai/">0root.ai</a></div>
+  <div class="kicker">CITED · ORDER 7</div>
+  <h1>The Magic Constant</h1>
+  <p id="lead">A normal magic cube of order 7 has magic constant 1204.</p>
+</header>
+<main>
+  <div class="stage">
+    <canvas id="stage" width="880" height="520" aria-label="Seven layers of the cube of 7, with one line of seven cells through the keeper"></canvas>
+    <div class="row" id="chips"></div>
+  </div>
+  <p class="mono" id="card"></p>
+  <p class="mono" id="seq"></p>
+  <p class="mono" id="pick">No direction selected.</p>
+  <p><span class="stamp lit">LIT</span> The numbers 1 through 343 sum to 58996. Each direction cuts those cells into 49 lines of 7. Three directions make 147 lines. If those lines share one sum, the sum is 3 times 58996 divided by 147, which is 1204. The same value is (7 to the fourth plus 7) divided by 2. The eight terms from order 0 through order 7 are recomputed and compared with the cited list. A failed count throws.</p>
+  <p><span class="stamp amber">AMBER</span> OEIS A027441, read on 2026-10-22, defines a(n) = (n to the fourth plus n) divided by 2 and calls it the row sums of an n by n by n magic cube, when it exists. The listed term a(7) is 1204. Wikipedia's Magic cube article points at A027441 for that constant. No Downloads file was copied. This page is not one of those 696.</p>
+  <p><span class="stamp wall">WALL</span> The citation says the row sum applies when the cube exists. This page places no numbers, so it does not check a row, a pillar, or the four space diagonals. The walk was already full, so this page is not seated. A passing check is the count 1204.</p>
+</main>
+<footer>
+  David Lee Wise (ROOT0). Drafted by Grok (xAI) on 2026-10-22.
+  Birth seal 338bfba50530d2e77d34129059833891b33db7b70f612959cff2065f7f21ff01. One host, <a href="https://davidwise01.github.io/sapph-i-on/cited/the-magic-constant.html">https://davidwise01.github.io/sapph-i-on/cited/the-magic-constant.html</a>.
+</footer>
+<script>
+"use strict";
+var OEIS = [0, 1, 9, 42, 130, 315, 651, 1204];
+function magicConstant() {
+  var computed = [];
+  var faults = [];
+  var n, a, b, x, y, z;
+  var lines = [0, 0, 0];
+  for (n = 0; n <= 7; n++) {
+    a = (n * n * n * n + n) / 2;
+    b = n * (n * n * n + 1) / 2;
+    computed.push(a);
+    if (a !== b || a !== OEIS[n]) faults.push("term");
+  }
+  if (343 * 344 / 2 !== 58996) faults.push("sum");
+  if (3 * 58996 !== 147 * 1204) faults.push("share");
+  if (computed[7] !== 1204 || OEIS.length !== 8) faults.push("order");
+  for (z = 0; z < 7; z++) for (y = 0; y < 7; y++) lines[0]++;
+  for (z = 0; z < 7; z++) for (x = 0; x < 7; x++) lines[1]++;
+  for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) lines[2]++;
+  if (lines[0] !== 49 || lines[1] !== 49 || lines[2] !== 49) faults.push("lines");
+  return { faults: faults, computed: computed, lines: lines, constant: 1204 };
+}
+var report = magicConstant();
+function finish(model) {
+  var card = document.getElementById("card");
+  var seq = document.getElementById("seq");
+  if (!model || model.faults.length || model.constant !== 1204 || model.computed[7] !== 1204) {
+    var msg = (model && model.faults.join(", ")) || "no report";
+    card.innerHTML = "<span class='stamp wall'>WALL</span> LIT FAIL " + msg;
+    throw new Error("LIT FAIL " + msg);
+  }
+  seq.textContent = "A027441 through order 7: " + model.computed.join(", ");
+  if (seq.textContent.indexOf("1204") < 0) throw new Error("LIT FAIL cited show");
+  card.innerHTML = "<span class='stamp lit'>LIT</span> order 7 · constant 1204 · 49 lines each way";
+}
+finish(report);
+var chips = document.getElementById("chips");
+var pick = document.getElementById("pick");
+var chosen = 0;
+["along x", "along y", "along z"].forEach(function (label, i) {
+  var btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "chip" + (i === 0 ? " on" : "");
+  btn.textContent = label + " · 49";
+  btn.addEventListener("click", function () {
+    if (report.lines[i] !== 49) throw new Error("LIT FAIL cited pick");
+    chosen = i;
+    var all = chips.querySelectorAll("button");
+    var n;
+    for (n = 0; n < all.length; n++) all[n].classList.remove("on");
+    btn.classList.add("on");
+    pick.textContent = "direction " + i + " · " + label + " · 49 lines of 7";
+    frame(0);
+  });
+  chips.appendChild(btn);
+});
+var canvas = document.getElementById("stage");
+if (!canvas || !canvas.getContext) throw new Error("LIT FAIL cited stage");
+var ctx = canvas.getContext("2d");
+var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function onLine(x, y, z, dir) {
+  if (dir === 0) return y === 3 && z === 3;
+  if (dir === 1) return x === 3 && z === 3;
+  return x === 3 && y === 3;
+}
+function frame(now) {
+  var active = chosen;
+  var sky = ctx.createLinearGradient(0, 0, 0, canvas.height);
+  sky.addColorStop(0, "#fdf4ff");
+  sky.addColorStop(1, "#fff7ed");
+  ctx.fillStyle = sky;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  var painted = 0;
+  var marked = 0;
+  var z, y, x, px, py, hot;
+  for (z = 0; z < 7; z++) {
+    ctx.fillStyle = "#6b21a8";
+    ctx.font = "12px ui-monospace, Consolas, monospace";
+    ctx.fillText("z " + z, 28 + z * 118, 28);
+    for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+      hot = onLine(x, y, z, active);
+      px = 36 + z * 118 + x * 14;
+      py = 40 + y * 64;
+      ctx.fillStyle = hot ? (x === 3 && y === 3 && z === 3 ? "#4a044e" : "#be185d") : "#f3e8ff";
+      ctx.beginPath();
+      ctx.roundRect(px, py, hot ? 12 : 10, hot ? 12 : 10, 3);
+      ctx.fill();
+      painted++;
+      if (hot) marked++;
+    }
+  }
+  if (painted !== 343) throw new Error("LIT FAIL cited paint");
+  if (marked !== 7) throw new Error("LIT FAIL cited mark");
+  if (!reduce) requestAnimationFrame(frame);
+}
+frame(0);
+</script>
+</body>
+</html>
