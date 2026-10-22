@@ -93,7 +93,8 @@
   .grid { display:grid; grid-template-columns:repeat(7, 1fr); gap:7px; }
   button { font:inherit; color:inherit; }
   .cell {
-    position:relative; width:100%; aspect-ratio:1; padding:0; border:0; border-radius:14px;
+    position:relative; width:100%; aspect-ratio:1; padding:0; border:0; border-radius:50%;
+    display:grid; place-items:center;
     font:11px/1 var(--mono); letter-spacing:.06em; cursor:pointer; color:var(--ink);
     box-shadow:
       inset 0 1px 0 rgba(255,255,255,.92),
@@ -139,6 +140,13 @@
   }
   .cell.on { z-index:1; box-shadow:0 0 0 2px #fff, 0 0 0 4px var(--sapphire); }
   .cell.keeper.on { box-shadow:0 0 0 2px #fff, 0 0 0 4px var(--gold); }
+  .cell.shell0 { background:radial-gradient(circle at 32% 26%, rgba(255,255,255,.92), rgba(255,255,255,0) 36%), #e11d48; color:#fff; }
+  .cell.shell1 { background:radial-gradient(circle at 32% 26%, rgba(255,255,255,.92), rgba(255,255,255,0) 36%), #f97316; color:#fff; }
+  .cell.shell2 { background:radial-gradient(circle at 32% 26%, rgba(255,255,255,.92), rgba(255,255,255,0) 36%), #facc15; color:#1c1730; }
+  .cell.shell3 { background:radial-gradient(circle at 32% 26%, rgba(255,255,255,.92), rgba(255,255,255,0) 36%), #22c55e; color:#fff; }
+  .cell.shell4 { background:radial-gradient(circle at 32% 26%, rgba(255,255,255,.92), rgba(255,255,255,0) 36%), #2563eb; color:#fff; }
+  .cell.shell5 { background:radial-gradient(circle at 32% 26%, rgba(255,255,255,.92), rgba(255,255,255,0) 36%), #92400e; color:#fff; }
+  .cell.shell6 { background:radial-gradient(circle at 32% 26%, rgba(255,255,255,.92), rgba(255,255,255,0) 36%), #db2777; color:#fff; }
   @media (prefers-reduced-motion:reduce) {
     html { scroll-behavior:auto; }
     .cell, .cell:hover { transition:none; transform:none; }
@@ -180,7 +188,7 @@
   @media (max-width:860px) {
     .gui { height:62vh; }
     .gui-wait { min-height:220px; }
-    .cell { border-radius:10px; }
+    .cell { border-radius:50%; }
   }
   .mono { font:13px/1.5 var(--mono); }
   .legend { display:flex; flex-wrap:wrap; gap:10px 14px; margin-top:14px; font-size:12px; color:var(--dim); }
@@ -215,17 +223,17 @@
   .seat a { display:block; margin-top:6px; text-decoration:none; }
   .seat a:hover { text-decoration:underline; }
   .seat .addr { color:var(--dim); font:12px/1.4 var(--mono); margin:4px 0 6px; }
-  .corpus, .archive, .libraries, .folio, .strip, .nested, .nests, .qdot, .dots, .next, .plank, .bonk, .gold, .generative, .toroid, .onward, .gravity, .sapphon, .neon, .later, .universe, .atmospheres, .after, .again, .kernel, .wakaku, .evo, .full, .plus, .scale, .one, .beyond, .asked, .oasis, .speaker, .another, .still, .voice, .yet, .forth, .echo, .ahead, .refrain, .forward, .encore, .farther, .lyre, .reprise, .cat, .distance, .stewards, .domains, .skills, .lines, .cited {
+  .corpus, .archive, .libraries, .folio, .strip, .nested, .nests, .qdot, .dots, .next, .plank, .bonk, .gold, .generative, .toroid, .onward, .gravity, .sapphon, .neon, .later, .universe, .atmospheres, .after, .again, .kernel, .wakaku, .evo, .full, .plus, .scale, .one, .beyond, .asked, .oasis, .speaker, .another, .still, .voice, .yet, .forth, .echo, .ahead, .refrain, .forward, .encore, .farther, .lyre, .reprise, .cat, .distance, .stewards, .domains, .skills, .lines, .cited, .mms {
     display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
     gap:8px; margin:0 0 8px;
   }
-  .corpus a, .archive a, .libraries a, .folio a, .strip a, .nested a, .nests a, .qdot a, .dots a, .next a, .plank a, .bonk a, .gold a, .generative a, .toroid a, .onward a, .gravity a, .sapphon a, .neon a, .later a, .universe a, .atmospheres a, .after a, .again a, .kernel a, .wakaku a, .evo a, .full a, .plus a, .scale a, .one a, .beyond a, .asked a, .oasis a, .speaker a, .another a, .still a, .voice a, .yet a, .forth a, .echo a, .ahead a, .refrain a, .forward a, .encore a, .farther a, .lyre a, .reprise a, .cat a, .distance a, .stewards a, .domains a, .skills a, .lines a, .cited a {
+  .corpus a, .archive a, .libraries a, .folio a, .strip a, .nested a, .nests a, .qdot a, .dots a, .next a, .plank a, .bonk a, .gold a, .generative a, .toroid a, .onward a, .gravity a, .sapphon a, .neon a, .later a, .universe a, .atmospheres a, .after a, .again a, .kernel a, .wakaku a, .evo a, .full a, .plus a, .scale a, .one a, .beyond a, .asked a, .oasis a, .speaker a, .another a, .still a, .voice a, .yet a, .forth a, .echo a, .ahead a, .refrain a, .forward a, .encore a, .farther a, .lyre a, .reprise a, .cat a, .distance a, .stewards a, .domains a, .skills a, .lines a, .cited a, .mms a {
     display:block; padding:11px 12px; border-radius:14px;
     background:rgba(255,252,248,.8); border:1px solid var(--line);
     color:var(--ink); text-decoration:none; font-size:13.5px; line-height:1.35;
   }
   .corpus a:hover, .archive a:hover, .libraries a:hover, .folio a:hover, .strip a:hover,
-  .nested a:hover, .nests a:hover, .qdot a:hover, .dots a:hover, .next a:hover, .plank a:hover, .bonk a:hover, .gold a:hover, .generative a:hover, .toroid a:hover, .onward a:hover, .gravity a:hover, .sapphon a:hover, .neon a:hover, .later a:hover, .universe a:hover, .atmospheres a:hover, .after a:hover, .again a:hover, .kernel a:hover, .wakaku a:hover, .evo a:hover, .full a:hover, .plus a:hover, .scale a:hover, .one a:hover, .beyond a:hover, .asked a:hover, .oasis a:hover, .speaker a:hover, .another a:hover, .still a:hover, .voice a:hover, .yet a:hover, .forth a:hover, .echo a:hover, .ahead a:hover, .refrain a:hover, .forward a:hover, .encore a:hover, .farther a:hover, .lyre a:hover, .reprise a:hover, .cat a:hover, .distance a:hover, .stewards a:hover, .domains a:hover, .skills a:hover, .lines a:hover, .cited a:hover {
+  .nested a:hover, .nests a:hover, .qdot a:hover, .dots a:hover, .next a:hover, .plank a:hover, .bonk a:hover, .gold a:hover, .generative a:hover, .toroid a:hover, .onward a:hover, .gravity a:hover, .sapphon a:hover, .neon a:hover, .later a:hover, .universe a:hover, .atmospheres a:hover, .after a:hover, .again a:hover, .kernel a:hover, .wakaku a:hover, .evo a:hover, .full a:hover, .plus a:hover, .scale a:hover, .one a:hover, .beyond a:hover, .asked a:hover, .oasis a:hover, .speaker a:hover, .another a:hover, .still a:hover, .voice a:hover, .yet a:hover, .forth a:hover, .echo a:hover, .ahead a:hover, .refrain a:hover, .forward a:hover, .encore a:hover, .farther a:hover, .lyre a:hover, .reprise a:hover, .cat a:hover, .distance a:hover, .stewards a:hover, .domains a:hover, .skills a:hover, .lines a:hover, .cited a:hover, .mms a:hover {
     border-color:var(--sapphire); background:#fff;
   }
   .fold {
@@ -682,6 +690,13 @@
     <p class="mono" id="citedcard"></p>
   </details>
 
+  <details class="shelf">
+    <summary>Shells · 49</summary>
+    <p class="sub">One page colors the cube in seven shells. Each shell holds 49 cells. Each cell accepts an act from the shells of its color that reach it. The cells are full, so this page is not seated. It is not one of those 696.</p>
+    <div class="mms" id="mms"></div>
+    <p class="mono" id="shellcard"></p>
+  </details>
+
   <section class="read">
     <h2>WHAT THE PAGE PROVES</h2>
     <p><span class="stamp lit">LIT</span> Every cell of a 7×7×7 grid is visited once. Cells with 3 faces exposed are corners (8). Cells with 2 are edges (12×5 = 60). Cells with 1 are faces (6×25 = 150). Cells with 0 are interior (5³ = 125). Those four counts sum to 343, and 7×7×7 is 343. The odd side leaves exactly one center, at (3,3,3). 343 = (3+4)³, and 3, 4, 3 are the digits of 343. Complex multiplication gives i² = −1 and i³ = −i. A failed check throws and the grid is not drawn.</p>
@@ -745,8 +760,9 @@
     <p><span class="stamp amber">AMBER</span> One skill page lists 22 skills read from this builder's skill files on 2026-10-07, and two workflows beside them. A name on that page is a file that was read. No Downloads file was copied. This page is not seated. It is not one of those 696.</p>
     <p><span class="stamp amber">AMBER</span> The keeper lines are three addresses through (3,3,3). Each line holds seven cells and the three together hold nineteen. No Downloads file was copied. This page is not seated. It is not one of those 696.</p>
     <p><span class="stamp amber">AMBER</span> OEIS A027441, read on 2026-10-22, calls (n to the fourth plus n) divided by 2 the row sum of an n by n by n magic cube, when it exists. The term for order 7 is 1204. Wikipedia points at that sequence. No Downloads file was copied. This page is not seated. It is not one of those 696.</p>
-    <p><span class="stamp wall">WALL</span> The walk has no cell left. The further next, the gravity set, the sapphon set, the neon set, the later next, the evolution set, the after next, the again next, the wakaku set, the evo set, the full set, the plus set, the scale set, the one set, and the beyond next are published beside the cube. They are not seated. An asked set holds 24 answers and is not one of those 360. An oasis kernel holds 24 proofs and is not one of those 360. A speaker set holds 24 files whose names say wakaku, and sixteen unseated shelves are those 384. The asked pages and the oasis proofs are not part of those 384. Another next holds 24 files whose names say next, and seventeen unseated shelves are those 408. The asked pages and the oasis proofs are not part of those 408. A still next holds 24 files whose names say next, and eighteen unseated shelves are those 432. The asked pages and the oasis proofs are not part of those 432. A voice set holds 24 files whose names say wakaku, and nineteen unseated shelves are those 456. Speaker is the same 24 files, so speaker is not a second shelf. The asked pages and the oasis proofs are not part of those 456. A yet next holds 24 files whose names say next, and twenty unseated shelves are those 480. The asked pages and the oasis proofs are not part of those 480. A forth next holds 24 files whose names say next, and twenty-one unseated shelves are those 504. The asked pages and the oasis proofs are not part of those 504. An echo set holds 24 files whose names say wakaku, and twenty-two unseated shelves are those 528. Speaker is the same 24 files, so speaker is not a second shelf. The asked pages and the oasis proofs are not part of those 528. An ahead next holds 24 files whose names say next, and twenty-three unseated shelves are those 552. The asked pages and the oasis proofs are not part of those 552. A refrain set holds 24 files whose names say wakaku, and twenty-four unseated shelves are those 576. Speaker is not the same 24 files. The asked pages and the oasis proofs are not part of those 576. A forward next holds 24 files whose names say next, and twenty-five unseated shelves are those 600. The asked pages and the oasis proofs are not part of those 600. An encore set holds 24 files whose names say wakaku, and twenty-six unseated shelves are those 624. The asked pages and the oasis proofs are not part of those 624. Speaker is not the same 24 files. The folder is encore, because wakaku, speaker, voice, echo, and refrain were already used. A farther next holds 24 files whose names say next, and twenty-seven unseated shelves are those 648. The asked pages and the oasis proofs are not part of those 648. Wakaku is not the same 24 files. Speaker is not the same 24 files. The folder is farther, because next, onward, later, after, again, beyond, another, still, yet, forth, ahead, and forward were already used. A lyre set holds 24 files whose names say lyre, and twenty-eight unseated shelves are those 672. The asked pages and the oasis proofs are not part of those 672. A reprise set holds 24 files whose names say wakaku, and twenty-nine unseated shelves are those 696. Speaker is not the same 24 files. The asked pages and the oasis proofs are not part of those 696. A cat set holds 24 animated cats, one for each corner sphere, and these 24 are not one of those 696. A keeper distance page counts ten shells around (3,3,3), and this page is not one of those 696. Eight steward pages ledger the eight appeals, and those pages are not seated. Eight face domains count 127 cells at each corner, and those pages are not seated. One skill page lists 22 skills this builder can read, and that page is not seated. Three lines through the keeper hold 19 cells, and that page is not seated. A normal magic cube of order 7 has constant 1204, and that page is not seated. The evolution shelf is not the rest of the account. An atmosphere page counts from 1000 down to 0 by steps of 1 and overlays 250 elements, starting with +H, in the fib and reverse fib order. The fall continues from 750 down to 0. Both are published beside the cube and are not seated. The quantum kernel is published beside the cube and is not seated. No public repository on DavidWise01 was named quantum-kernel on 2026-10-02. The quantum-dot-vm index page uses a different tick and a black background, and that page was not copied. The carry continues from tick 27 through tick 107 and is not seated. Tick 108 is not drawn on the carry. At the end of tick 107 the kernel's history keeps ticks 81 through 107.</p>
-    <p><span class="stamp lit">LIT</span> 334 spheres sit on 334 cells. The walk is z, then y, then x. Corners and the keeper are skipped. One sphere, one cell. Selecting the cell opens that page. Each sphere has a world built into it. A corner builds one world for each of its three spheres. The keeper builds one world. That is 359 worlds. Each world is seven layers of seven by seven. It places 343 cells and one keeper. The base of a world is 58653. The world sum is that base plus 343 times the sphere's key. The door's own world, at (3,3,3), sums to 117306. A failed count throws. A corner sphere draws one animated cat. The 24 cats are proved as one batch. Each cat has 25 parts. A failed cat count throws. The keeper distance counts ten shells, 0 through 9, and they sum to 343. The distance sum is 1764. A failed shell count throws. Eight steward pages name the eight corners, three spheres on each. A failed steward count throws. Eight face domains count 127 cells on the three faces of each corner. A failed face count throws. One skill page lists 22 skills and 2 workflows. A failed skill count throws. Three lines through (3,3,3) hold 19 cells. A failed line count throws. OEIS A027441 gives 1204 for order 7. A failed constant throws.</p>
+    <p><span class="stamp amber">AMBER</span> Seven shells color the cube of 7. Each shell holds forty-nine cells. The act comes from the count of same-color shells that reach the cell. The picture is assigned: a colored shell, and a plain letter m. No Downloads file was copied. This page is not seated. It is not one of those 696.</p>
+    <p><span class="stamp wall">WALL</span> The walk has no cell left. The further next, the gravity set, the sapphon set, the neon set, the later next, the evolution set, the after next, the again next, the wakaku set, the evo set, the full set, the plus set, the scale set, the one set, and the beyond next are published beside the cube. They are not seated. An asked set holds 24 answers and is not one of those 360. An oasis kernel holds 24 proofs and is not one of those 360. A speaker set holds 24 files whose names say wakaku, and sixteen unseated shelves are those 384. The asked pages and the oasis proofs are not part of those 384. Another next holds 24 files whose names say next, and seventeen unseated shelves are those 408. The asked pages and the oasis proofs are not part of those 408. A still next holds 24 files whose names say next, and eighteen unseated shelves are those 432. The asked pages and the oasis proofs are not part of those 432. A voice set holds 24 files whose names say wakaku, and nineteen unseated shelves are those 456. Speaker is the same 24 files, so speaker is not a second shelf. The asked pages and the oasis proofs are not part of those 456. A yet next holds 24 files whose names say next, and twenty unseated shelves are those 480. The asked pages and the oasis proofs are not part of those 480. A forth next holds 24 files whose names say next, and twenty-one unseated shelves are those 504. The asked pages and the oasis proofs are not part of those 504. An echo set holds 24 files whose names say wakaku, and twenty-two unseated shelves are those 528. Speaker is the same 24 files, so speaker is not a second shelf. The asked pages and the oasis proofs are not part of those 528. An ahead next holds 24 files whose names say next, and twenty-three unseated shelves are those 552. The asked pages and the oasis proofs are not part of those 552. A refrain set holds 24 files whose names say wakaku, and twenty-four unseated shelves are those 576. Speaker is not the same 24 files. The asked pages and the oasis proofs are not part of those 576. A forward next holds 24 files whose names say next, and twenty-five unseated shelves are those 600. The asked pages and the oasis proofs are not part of those 600. An encore set holds 24 files whose names say wakaku, and twenty-six unseated shelves are those 624. The asked pages and the oasis proofs are not part of those 624. Speaker is not the same 24 files. The folder is encore, because wakaku, speaker, voice, echo, and refrain were already used. A farther next holds 24 files whose names say next, and twenty-seven unseated shelves are those 648. The asked pages and the oasis proofs are not part of those 648. Wakaku is not the same 24 files. Speaker is not the same 24 files. The folder is farther, because next, onward, later, after, again, beyond, another, still, yet, forth, ahead, and forward were already used. A lyre set holds 24 files whose names say lyre, and twenty-eight unseated shelves are those 672. The asked pages and the oasis proofs are not part of those 672. A reprise set holds 24 files whose names say wakaku, and twenty-nine unseated shelves are those 696. Speaker is not the same 24 files. The asked pages and the oasis proofs are not part of those 696. A cat set holds 24 animated cats, one for each corner sphere, and these 24 are not one of those 696. A keeper distance page counts ten shells around (3,3,3), and this page is not one of those 696. Eight steward pages ledger the eight appeals, and those pages are not seated. Eight face domains count 127 cells at each corner, and those pages are not seated. One skill page lists 22 skills this builder can read, and that page is not seated. Three lines through the keeper hold 19 cells, and that page is not seated. A normal magic cube of order 7 has constant 1204, and that page is not seated. Seven shells color the cube, forty-nine cells each, and that page is not seated. The evolution shelf is not the rest of the account. An atmosphere page counts from 1000 down to 0 by steps of 1 and overlays 250 elements, starting with +H, in the fib and reverse fib order. The fall continues from 750 down to 0. Both are published beside the cube and are not seated. The quantum kernel is published beside the cube and is not seated. No public repository on DavidWise01 was named quantum-kernel on 2026-10-02. The quantum-dot-vm index page uses a different tick and a black background, and that page was not copied. The carry continues from tick 27 through tick 107 and is not seated. Tick 108 is not drawn on the carry. At the end of tick 107 the kernel's history keeps ticks 81 through 107.</p>
+    <p><span class="stamp lit">LIT</span> 334 spheres sit on 334 cells. The walk is z, then y, then x. Corners and the keeper are skipped. One sphere, one cell. Selecting the cell opens that page. Each sphere has a world built into it. A corner builds one world for each of its three spheres. The keeper builds one world. That is 359 worlds. Each world is seven layers of seven by seven. It places 343 cells and one keeper. The base of a world is 58653. The world sum is that base plus 343 times the sphere's key. The door's own world, at (3,3,3), sums to 117306. A failed count throws. A corner sphere draws one animated cat. The 24 cats are proved as one batch. Each cat has 25 parts. A failed cat count throws. The keeper distance counts ten shells, 0 through 9, and they sum to 343. The distance sum is 1764. A failed shell count throws. Eight steward pages name the eight corners, three spheres on each. A failed steward count throws. Eight face domains count 127 cells on the three faces of each corner. A failed face count throws. One skill page lists 22 skills and 2 workflows. A failed skill count throws. Three lines through (3,3,3) hold 19 cells. A failed line count throws. OEIS A027441 gives 1204 for order 7. A failed constant throws. Seven shells color the cube, forty-nine cells each. A failed shell count throws.</p>
     <p><span class="stamp amber">AMBER</span> The walk order is assigned. The eight corners still hold three spheres each, and selecting a corner opens those three. The keeper at (3,3,3) is the door, not one of the files. The world in a sphere is built by this door from that cell. The copied sphere files were not rewritten. The birth seal was not rewritten. The beyond files, the asked pages, and the speaker files were not seated.</p>
     <p><span class="stamp wall">WALL</span> This galaxy does not extend the palindrome [ W1 | W2 ‖ W3 ‖ W4 | W5 ] and does not record a world 6. i³ = −i is arithmetic. It does not locate the cube on a physical imaginary axis, and it is not a claim about mind, physics, or authority. The strip's check is the number 420024. It does not measure glass, and it does not fold a piece of paper.</p>
     <p class="mono" id="card"></p>
@@ -764,6 +780,137 @@
 var SEAL = "b7350267c9df90491f3a2c45297e9a0f756c65d2c23a323f6f68abc3426d33fe";
 var APPEALS = ["ETHOS","PATHOS","LOGOS","MYTHOS","EPISTEME","TECHNE","PHRONESIS","KAIROS"];
 
+var SHELL_OFFSETS = [[-1,0,1],[-1,1,0],[0,-1,1],[0,1,-1],[1,-1,0],[1,0,-1]];
+var SHELL_COLORS = ["#e11d48","#f97316","#facc15","#22c55e","#2563eb","#92400e","#db2777"];
+var SHELL_INK = ["#ffffff","#ffffff","#1c1730","#ffffff","#ffffff","#ffffff","#ffffff"];
+function shellPack(model) {
+  return model.colors.join(",") + "|" + model.acts.sit + "," + model.acts.count + "," + model.acts.ring + "," + model.acts.circle;
+}
+function shellAt(x, y, z) {
+  var color = (x + y + z) % 7;
+  var n = 0;
+  var i, dx, dy, dz, xx, yy, zz;
+  for (i = 0; i < SHELL_OFFSETS.length; i++) {
+    dx = SHELL_OFFSETS[i][0];
+    dy = SHELL_OFFSETS[i][1];
+    dz = SHELL_OFFSETS[i][2];
+    xx = x + dx;
+    yy = y + dy;
+    zz = z + dz;
+    if (xx >= 0 && xx < 7 && yy >= 0 && yy < 7 && zz >= 0 && zz < 7) n++;
+  }
+  var act = "";
+  var line = "";
+  if (n === 0) {
+    act = "sit";
+    line = "I sit. No shell of my color reaches this corner.";
+  } else if (n === 2 || n === 3) {
+    act = "count";
+    line = "I act by the count. " + n + " shells of my color reach me.";
+  } else if (n === 4) {
+    act = "ring";
+    line = "I open a ring of four.";
+  } else if (n === 6) {
+    act = "circle";
+    line = "I keep the circle of six.";
+  }
+  if (!act) throw new Error("LIT FAIL shell act");
+  var text = "Shell " + x + "," + y + "," + z + " accepts the act. " + line;
+  if (text.indexOf("Shell " + x + "," + y + "," + z + " accepts the act.") !== 0) throw new Error("LIT FAIL shell open");
+  if (act === "sit" && (n !== 0 || line.indexOf("I sit.") !== 0)) throw new Error("LIT FAIL shell sit");
+  if (act === "count" && line.indexOf(String(n) + " shells") < 0) throw new Error("LIT FAIL shell count");
+  if (act === "ring" && (n !== 4 || line.indexOf("ring of four") < 0)) throw new Error("LIT FAIL shell ring");
+  if (act === "circle" && (n !== 6 || line.indexOf("circle of six") < 0)) throw new Error("LIT FAIL shell circle");
+  return { color: color, n: n, act: act, text: text };
+}
+function shellCensus() {
+  var colors = [0, 0, 0, 0, 0, 0, 0];
+  var acts = { sit: 0, count: 0, ring: 0, circle: 0 };
+  var ortho = 0;
+  var interior = 0;
+  var faults = [];
+  var found = 0;
+  var dx, dy, dz, i, ok, x, y, z, s, inside;
+  for (dx = -1; dx <= 1; dx++) for (dy = -1; dy <= 1; dy++) for (dz = -1; dz <= 1; dz++) {
+    if (!dx && !dy && !dz) continue;
+    if (dx + dy + dz !== 0) continue;
+    found++;
+    ok = false;
+    for (i = 0; i < SHELL_OFFSETS.length; i++) {
+      if (SHELL_OFFSETS[i][0] === dx && SHELL_OFFSETS[i][1] === dy && SHELL_OFFSETS[i][2] === dz) ok = true;
+    }
+    if (!ok) faults.push("offset");
+  }
+  if (found !== 6 || SHELL_OFFSETS.length !== 6) faults.push("offset");
+  for (z = 0; z < 7; z++) for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+    s = shellAt(x, y, z);
+    if (s.color !== (x + y + z) % 7) faults.push("color");
+    colors[s.color]++;
+    acts[s.act]++;
+    if (x > 0 && ((x - 1 + y + z) % 7) === s.color) ortho++;
+    if (y > 0 && ((x + (y - 1) + z) % 7) === s.color) ortho++;
+    if (z > 0 && ((x + y + (z - 1)) % 7) === s.color) ortho++;
+    inside = x >= 1 && x <= 5 && y >= 1 && y <= 5 && z >= 1 && z <= 5;
+    if (inside) {
+      interior++;
+      if (s.n !== 6 || s.act !== "circle") faults.push("interior");
+    } else if (s.n === 6) faults.push("rim");
+  }
+  if (colors.join(",") !== "49,49,49,49,49,49,49") faults.push("colors");
+  if (ortho !== 0) faults.push("ortho");
+  if (acts.sit !== 2 || acts.count !== 66 || acts.ring !== 150 || acts.circle !== 125) faults.push("acts");
+  if (interior !== 125 || 7 * 49 !== 343) faults.push("product");
+  return { faults: faults, colors: colors, acts: acts, ortho: ortho, interior: interior };
+}
+function shellGrow() {
+  var a = shellCensus();
+  var b = shellCensus();
+  var sa = shellPack(a);
+  var sb = shellPack(b);
+  if (a.faults.length || b.faults.length) throw new Error("LIT FAIL shells " + a.faults.concat(b.faults).join(","));
+  if (sa.length < 8 || sa !== sb) throw new Error("regenerative drift");
+  if (sa !== "49,49,49,49,49,49,49|2,66,150,125") throw new Error("regenerative drift");
+  return sa;
+}
+function shellKeep() {
+  var grown = shellGrow();
+  var census = shellCensus();
+  var again = shellPack(census);
+  if (census.faults.length) throw new Error("LIT FAIL shells " + census.faults.join(","));
+  if (again !== grown) throw new Error("regenerative drift");
+  var id = "seven-shells";
+  var key = "sapph-mm-kept";
+  var row = { colors: "49,49,49,49,49,49,49", sit: 2, count: 66, ring: 150, circle: 125, act: "census" };
+  var book = {};
+  var raw = null;
+  try { raw = localStorage.getItem(key); }
+  catch (e) { throw new Error("persistent book"); }
+  if (raw) {
+    try { book = JSON.parse(raw); }
+    catch (e) { throw new Error("persistent book"); }
+  }
+  if (!book || typeof book !== "object" || Array.isArray(book)) throw new Error("persistent book");
+  var has = Object.prototype.hasOwnProperty.call(book, id);
+  var kept = has ? book[id] : null;
+  var text;
+  if (kept == null) {
+    row.visits = 1;
+    text = "This browser had no row for seven-shells. I wrote 49,49,49,49,49,49,49. sit 2, count 66, ring 150, circle 125. The row is local. It is not the sealed list.";
+  } else {
+    if (typeof kept !== "object" || kept.colors !== row.colors || kept.sit !== 2 || kept.count !== 66 || kept.ring !== 150 || kept.circle !== 125 || kept.act !== "census") throw new Error("persistent drift");
+    var prev = typeof kept.visits === "number" && kept.visits >= 0 ? kept.visits : 0;
+    row.visits = prev + 1;
+    text = "This browser still holds seven-shells. Opened " + row.visits + " times here. The row is local. It is not the sealed list.";
+  }
+  book[id] = row;
+  try { localStorage.setItem(key, JSON.stringify(book)); }
+  catch (e) { throw new Error("persistent book"); }
+  var written;
+  try { written = JSON.parse(localStorage.getItem(key)); }
+  catch (e) { throw new Error("persistent drift"); }
+  if (!written || !written[id] || written[id].colors !== row.colors || written[id].visits !== row.visits || written[id].act !== "census") throw new Error("persistent drift");
+  return { census: census, visits: row.visits, grown: grown, text: text };
+}
 function census(N) {
   var counts = {corner:0, edge:0, face:0, interior:0};
   var center = 0;
@@ -821,6 +968,8 @@ if (report.faults.length) {
   throw new Error("LIT FAIL " + report.faults.join(", "));
 }
 card.innerHTML = "<span class='stamp lit'>LIT</span> self-check passed on load: 8 + 60 + 150 + 125 = 343, one center, (3+4)^3 = 343, i^2 = -1, i^3 = -i.";
+var shellReport = shellKeep();
+if (shellReport.grown !== "49,49,49,49,49,49,49|2,66,150,125" || shellReport.census.acts.circle !== 125) throw new Error("LIT FAIL shells");
 
 var zInput = document.getElementById("z");
 var zout = document.getElementById("zout");
@@ -835,14 +984,16 @@ function faceTitle(title) {
 function describe(x, y, z) {
   var k = kindAt(x, y, z);
   var ci = cornerIndex(x, y, z);
+  var shell = shellAt(x, y, z);
+  var act = " " + shell.text;
   if (k === "keeper") {
-    return {title:"SaPpH{{i}}on", body:"keeper · cell (3,3,3) · the one center of an odd cube. This page is the galaxy door, and a world is built into this sphere. The voice that says the keeper chose the cube is AMBER — assigned, not observed.", pages:[]};
+    return {title:"SaPpH{{i}}on", body:"keeper · cell (3,3,3) · the one center of an odd cube. This page is the galaxy door, and a world is built into this sphere. The voice that says the keeper chose the cube is AMBER — assigned, not observed." + act, pages:[]};
   }
   if (ci >= 0) {
     var mine = SPHERES.filter(function (s) { return s.steward === APPEALS[ci]; });
     return {
       title: APPEALS[ci],
-      body: "corner (" + x + "," + y + "," + z + ") · three spheres · this seat's GUI. A world is built into each sphere. Each of these spheres is an animated cat.",
+      body: "corner (" + x + "," + y + "," + z + ") · three spheres · this seat's GUI. A world is built into each sphere. Each of these spheres is an animated cat." + act,
       pages: mine.map(function (s) { return {title:s.title, href:"spheres/" + s.slug + ".html"}; })
     };
   }
@@ -850,11 +1001,11 @@ function describe(x, y, z) {
   if (held) {
     return {
       title: faceTitle(held.title),
-      body: held.cube + " · cell (" + x + "," + y + "," + z + ") · this sphere is the GUI of the cell, and a world is built into it.",
+      body: held.cube + " · cell (" + x + "," + y + "," + z + ") · this sphere is the GUI of the cell, and a world is built into it." + act,
       pages: [{title:held.title, href:held.href}]
     };
   }
-  return {title:k, body:"cell (" + x + "," + y + "," + z + ") · " + k + ". Counted in the census. No sphere on this cell.", pages:[]};
+  return {title:k, body:"cell (" + x + "," + y + "," + z + ") · " + k + ". Counted in the census. No sphere on this cell." + act, pages:[]};
 }
 
 function show(x, y, z) {
@@ -919,12 +1070,15 @@ function draw() {
     tally[k]++;
     btn = document.createElement("button");
     btn.type = "button";
-    btn.className = "cell " + k + (SEAT[x + "," + y + "," + z] || k === "corner" ? " held" : "") + (x === sel.x && y === sel.y ? " on" : "");
+    var shell = shellAt(x, y, z);
+    btn.className = "cell " + k + " shell" + shell.color + (SEAT[x + "," + y + "," + z] || k === "corner" ? " held" : "") + (x === sel.x && y === sel.y ? " on" : "");
     btn.setAttribute("role", "gridcell");
     btn.setAttribute("aria-label", describe(x, y, z).title + " " + x + " " + y + " " + z);
     btn.dataset.x = String(x);
     btn.dataset.y = String(y);
-    btn.textContent = k === "keeper" ? "i" : (cornerIndex(x, y, z) >= 0 ? APPEALS[cornerIndex(x, y, z)].slice(0, 2) : "");
+    btn.dataset.shell = String(shell.color);
+    btn.dataset.act = shell.act;
+    btn.textContent = k === "keeper" ? "i" : (cornerIndex(x, y, z) >= 0 ? APPEALS[cornerIndex(x, y, z)].slice(0, 2) : "m");
     btn.addEventListener("click", function (ev) {
       sel.x = Number(ev.currentTarget.dataset.x);
       sel.y = Number(ev.currentTarget.dataset.y);
@@ -3442,10 +3596,35 @@ fetch("cited/manifest.json").then(function (res) {
   var live = citedMagic();
   if (rows[0].order !== 7 || rows[0].constant !== live.constant || rows[0].oeis !== "A027441") throw new Error("LIT FAIL cited shape");
   if (rows[0].birth !== "338bfba50530d2e77d34129059833891b33db7b70f612959cff2065f7f21ff01") throw new Error("LIT FAIL cited birth");
-  if (rows[0].bytes !== 7947 || rows[0].sha256 !== "954e599dce3d304056ae516696c9f5ad1b9ffb55547d71c14895f905bd4dfba0") throw new Error("LIT FAIL cited file");
+  if (rows[0].bytes !== 14728 || rows[0].sha256 !== "1bf65795324c50f4347b02102ed1c926bada6a6add385c82950c56d94d872abf") throw new Error("LIT FAIL cited file");
   document.getElementById("citedcard").innerHTML = "<span class='stamp lit'>LIT</span> order 7 · constant 1204 · A027441";
 }).catch(function (err) {
   document.getElementById("citedcard").innerHTML = "<span class='stamp wall'>WALL</span> " + err.message;
+  throw err;
+});
+
+var MMS = ["the-seven-shells.html"];
+if (MMS.length !== 1) throw new Error("LIT FAIL shell count");
+var mmsEl = document.getElementById("mms");
+var mmsLink = document.createElement("a");
+mmsLink.href = "mms/" + MMS[0];
+mmsLink.textContent = "the seven shells";
+mmsEl.appendChild(mmsLink);
+fetch("mms/manifest.json").then(function (res) {
+  if (!res.ok) throw new Error("LIT FAIL shell manifest");
+  return res.json();
+}).then(function (rows) {
+  if (!rows || rows.length !== 1 || rows[0].file !== MMS[0]) throw new Error("LIT FAIL shell order");
+  if (!/^[0-9a-f]{64}$/.test(rows[0].sha256)) throw new Error("LIT FAIL shell hash");
+  var live = shellCensus();
+  if (live.faults.length) throw new Error("LIT FAIL shells");
+  if (rows[0].shells !== 7 || rows[0].each !== 49 || rows[0].agents !== 343) throw new Error("LIT FAIL shell shape");
+  if (rows[0].sit !== live.acts.sit || rows[0].count !== live.acts.count || rows[0].ring !== live.acts.ring || rows[0].circle !== live.acts.circle) throw new Error("LIT FAIL shell acts");
+  if (rows[0].birth !== "d5416ee450f00a53ff2945bd36e799c655312de7df40d6fe726ff249664b61ea") throw new Error("LIT FAIL shell birth");
+  if (rows[0].bytes !== 15524 || rows[0].sha256 !== "8900c6e11f462e886c9214ec53ec84e9847408d9210dea7e11cde71945652393") throw new Error("LIT FAIL shell file");
+  document.getElementById("shellcard").innerHTML = "<span class='stamp lit'>LIT</span> 7 shells \u00b7 49 each \u00b7 343 agents";
+}).catch(function (err) {
+  document.getElementById("shellcard").innerHTML = "<span class='stamp wall'>WALL</span> " + err.message;
   throw err;
 });
 
@@ -3820,6 +3999,7 @@ Object.keys(SEAT).forEach(function (key) {
   if (SEAT[key].href.indexOf("skills/") === 0) throw new Error("LIT FAIL skill seated");
   if (SEAT[key].href.indexOf("lines/") === 0) throw new Error("LIT FAIL line seated");
   if (SEAT[key].href.indexOf("cited/") === 0) throw new Error("LIT FAIL cited seated");
+  if (SEAT[key].href.indexOf("mms/") === 0) throw new Error("LIT FAIL shell seated");
 });
 if (SEAT["3,3,3"]) throw new Error("LIT FAIL world keeper");
 ["0,0,0","6,0,0","0,6,0","6,6,0","0,0,6","6,0,6","0,6,6","6,6,6"].forEach(function (corner) {

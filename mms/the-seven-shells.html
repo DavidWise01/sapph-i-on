@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Seven Shells — SaPpH{{i}}on</title>
+<style>
+  :root { --ink:#1c1730; --dim:#7c2d12; --accent:#e11d48; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; color:var(--ink);
+    font:16px/1.5 "Segoe UI", ui-sans-serif, sans-serif;
+    background:
+      radial-gradient(820px 440px at 0% 0%, #fecdd3, transparent 62%),
+      radial-gradient(680px 420px at 100% 0%, #fde68a, transparent 55%),
+      linear-gradient(165deg, #fff7ed, #fff1f2 70%, #fff7ed);
+    background-color:#fff7ed; min-height:100vh;
+  }
+  a { color:var(--accent); }
+  header, main, footer { width:min(880px, calc(100% - 32px)); margin:0 auto; }
+  header { padding:22px 0 0; }
+  .src, .mono { font:13px/1.45 ui-monospace, Consolas, monospace; color:var(--dim); }
+  h1 { margin:8px 0 0; font-size:clamp(28px, 5vw, 46px); letter-spacing:.03em; }
+  .kicker { letter-spacing:.16em; font-size:12px; color:var(--accent); font-weight:700; }
+  .stage { background:#fff; border:1px solid rgba(28,23,48,.14); border-radius:18px; padding:12px; margin:14px 0; }
+  canvas { display:block; width:100%; height:auto; border-radius:12px; background:#fff7ed; cursor:pointer; }
+  .row { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+  button.chip { font:inherit; border:1px solid rgba(28,23,48,.16); border-radius:999px; padding:8px 14px; cursor:pointer; font-weight:700; }
+  button.chip.on { box-shadow:0 0 0 2px #fff, 0 0 0 4px #1c1730; }
+  .stamp { display:inline-block; padding:2px 8px; border-radius:999px; font:11px ui-monospace, Consolas, monospace; color:#fff; }
+  .lit { background:#047857; } .amber { background:#b45309; } .wall { background:#be185d; }
+  footer { color:var(--dim); font-size:13px; padding-bottom:28px; overflow-wrap:anywhere; }
+  .src, .mono, p, a, h1, button { overflow-wrap:anywhere; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="src"><a href="../">SaPpH{{i}}on</a> · mms · <a href="https://0root.ai/">0root.ai</a></div>
+  <div class="kicker">SEVEN SHELLS · 343 AGENTS</div>
+  <h1>The Seven Shells</h1>
+  <p id="lead">Seven shells color the cube of 7, and each shell holds forty-nine cells.</p>
+</header>
+<main>
+  <div class="stage">
+    <canvas id="stage" width="880" height="520" aria-label="Seven layers of colored shells, one agent in each cell"></canvas>
+    <div class="row" id="chips"></div>
+  </div>
+  <p class="mono" id="card"></p>
+  <p class="mono" id="agent"></p>
+  <p class="mono" id="kept"></p>
+  <p class="mono" id="pick">No agent selected.</p>
+  <p><span class="stamp lit">LIT</span> The color of a cell is the sum of its addresses, modulo 7. For each fixed x and y, z runs through every residue once, so each color holds 49 cells. Seven times 49 is 343. A step of one along an axis changes the sum by 1, so a face neighbor never shares a color. The same color inside the 26-neighborhood is one of six diagonal steps whose offsets sum to 0. The number of those steps that stay inside the cube chooses the act. Two cells sit. Sixty-six count. One hundred fifty open a ring of four. One hundred twenty-five keep the circle of six, and those are the interior cells. A failed count throws.</p>
+  <p><span class="stamp amber">AMBER</span> The picture was assigned on 2026-10-22. Colored shells, and a plain letter m on an empty cell. The picture is not a candy brand, a logo, or a character. No Downloads file was copied. This page is not one of those 696.</p>
+  <p><span class="stamp wall">WALL</span> The shells are a coloring of the addresses. They are not a filled magic cube, and this page places none of the numbers 1 through 343. The walk was already full, so this page is not seated. A passing check is 49 cells in each shell.</p>
+</main>
+<footer>
+  David Lee Wise (ROOT0). Drafted by Grok (xAI) on 2026-10-22.
+  Birth seal d5416ee450f00a53ff2945bd36e799c655312de7df40d6fe726ff249664b61ea. One host, <a href="https://davidwise01.github.io/sapph-i-on/mms/the-seven-shells.html">https://davidwise01.github.io/sapph-i-on/mms/the-seven-shells.html</a>.
+</footer>
+<script>
+"use strict";
+var SHELL_OFFSETS = [[-1,0,1],[-1,1,0],[0,-1,1],[0,1,-1],[1,-1,0],[1,0,-1]];
+var SHELL_COLORS = ["#e11d48","#f97316","#facc15","#22c55e","#2563eb","#92400e","#db2777"];
+var SHELL_INK = ["#ffffff","#ffffff","#1c1730","#ffffff","#ffffff","#ffffff","#ffffff"];
+function shellPack(model) {
+  return model.colors.join(",") + "|" + model.acts.sit + "," + model.acts.count + "," + model.acts.ring + "," + model.acts.circle;
+}
+function shellAt(x, y, z) {
+  var color = (x + y + z) % 7;
+  var n = 0;
+  var i, dx, dy, dz, xx, yy, zz;
+  for (i = 0; i < SHELL_OFFSETS.length; i++) {
+    dx = SHELL_OFFSETS[i][0];
+    dy = SHELL_OFFSETS[i][1];
+    dz = SHELL_OFFSETS[i][2];
+    xx = x + dx;
+    yy = y + dy;
+    zz = z + dz;
+    if (xx >= 0 && xx < 7 && yy >= 0 && yy < 7 && zz >= 0 && zz < 7) n++;
+  }
+  var act = "";
+  var line = "";
+  if (n === 0) {
+    act = "sit";
+    line = "I sit. No shell of my color reaches this corner.";
+  } else if (n === 2 || n === 3) {
+    act = "count";
+    line = "I act by the count. " + n + " shells of my color reach me.";
+  } else if (n === 4) {
+    act = "ring";
+    line = "I open a ring of four.";
+  } else if (n === 6) {
+    act = "circle";
+    line = "I keep the circle of six.";
+  }
+  if (!act) throw new Error("LIT FAIL shell act");
+  var text = "Shell " + x + "," + y + "," + z + " accepts the act. " + line;
+  if (text.indexOf("Shell " + x + "," + y + "," + z + " accepts the act.") !== 0) throw new Error("LIT FAIL shell open");
+  if (act === "sit" && (n !== 0 || line.indexOf("I sit.") !== 0)) throw new Error("LIT FAIL shell sit");
+  if (act === "count" && line.indexOf(String(n) + " shells") < 0) throw new Error("LIT FAIL shell count");
+  if (act === "ring" && (n !== 4 || line.indexOf("ring of four") < 0)) throw new Error("LIT FAIL shell ring");
+  if (act === "circle" && (n !== 6 || line.indexOf("circle of six") < 0)) throw new Error("LIT FAIL shell circle");
+  return { color: color, n: n, act: act, text: text };
+}
+function shellCensus() {
+  var colors = [0, 0, 0, 0, 0, 0, 0];
+  var acts = { sit: 0, count: 0, ring: 0, circle: 0 };
+  var ortho = 0;
+  var interior = 0;
+  var faults = [];
+  var found = 0;
+  var dx, dy, dz, i, ok, x, y, z, s, inside;
+  for (dx = -1; dx <= 1; dx++) for (dy = -1; dy <= 1; dy++) for (dz = -1; dz <= 1; dz++) {
+    if (!dx && !dy && !dz) continue;
+    if (dx + dy + dz !== 0) continue;
+    found++;
+    ok = false;
+    for (i = 0; i < SHELL_OFFSETS.length; i++) {
+      if (SHELL_OFFSETS[i][0] === dx && SHELL_OFFSETS[i][1] === dy && SHELL_OFFSETS[i][2] === dz) ok = true;
+    }
+    if (!ok) faults.push("offset");
+  }
+  if (found !== 6 || SHELL_OFFSETS.length !== 6) faults.push("offset");
+  for (z = 0; z < 7; z++) for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+    s = shellAt(x, y, z);
+    if (s.color !== (x + y + z) % 7) faults.push("color");
+    colors[s.color]++;
+    acts[s.act]++;
+    if (x > 0 && ((x - 1 + y + z) % 7) === s.color) ortho++;
+    if (y > 0 && ((x + (y - 1) + z) % 7) === s.color) ortho++;
+    if (z > 0 && ((x + y + (z - 1)) % 7) === s.color) ortho++;
+    inside = x >= 1 && x <= 5 && y >= 1 && y <= 5 && z >= 1 && z <= 5;
+    if (inside) {
+      interior++;
+      if (s.n !== 6 || s.act !== "circle") faults.push("interior");
+    } else if (s.n === 6) faults.push("rim");
+  }
+  if (colors.join(",") !== "49,49,49,49,49,49,49") faults.push("colors");
+  if (ortho !== 0) faults.push("ortho");
+  if (acts.sit !== 2 || acts.count !== 66 || acts.ring !== 150 || acts.circle !== 125) faults.push("acts");
+  if (interior !== 125 || 7 * 49 !== 343) faults.push("product");
+  return { faults: faults, colors: colors, acts: acts, ortho: ortho, interior: interior };
+}
+function shellGrow() {
+  var a = shellCensus();
+  var b = shellCensus();
+  var sa = shellPack(a);
+  var sb = shellPack(b);
+  if (a.faults.length || b.faults.length) throw new Error("LIT FAIL shells " + a.faults.concat(b.faults).join(","));
+  if (sa.length < 8 || sa !== sb) throw new Error("regenerative drift");
+  if (sa !== "49,49,49,49,49,49,49|2,66,150,125") throw new Error("regenerative drift");
+  return sa;
+}
+function shellKeep() {
+  var grown = shellGrow();
+  var census = shellCensus();
+  var again = shellPack(census);
+  if (census.faults.length) throw new Error("LIT FAIL shells " + census.faults.join(","));
+  if (again !== grown) throw new Error("regenerative drift");
+  var id = "seven-shells";
+  var key = "sapph-mm-kept";
+  var row = { colors: "49,49,49,49,49,49,49", sit: 2, count: 66, ring: 150, circle: 125, act: "census" };
+  var book = {};
+  var raw = null;
+  try { raw = localStorage.getItem(key); }
+  catch (e) { throw new Error("persistent book"); }
+  if (raw) {
+    try { book = JSON.parse(raw); }
+    catch (e) { throw new Error("persistent book"); }
+  }
+  if (!book || typeof book !== "object" || Array.isArray(book)) throw new Error("persistent book");
+  var has = Object.prototype.hasOwnProperty.call(book, id);
+  var kept = has ? book[id] : null;
+  var text;
+  if (kept == null) {
+    row.visits = 1;
+    text = "This browser had no row for seven-shells. I wrote 49,49,49,49,49,49,49. sit 2, count 66, ring 150, circle 125. The row is local. It is not the sealed list.";
+  } else {
+    if (typeof kept !== "object" || kept.colors !== row.colors || kept.sit !== 2 || kept.count !== 66 || kept.ring !== 150 || kept.circle !== 125 || kept.act !== "census") throw new Error("persistent drift");
+    var prev = typeof kept.visits === "number" && kept.visits >= 0 ? kept.visits : 0;
+    row.visits = prev + 1;
+    text = "This browser still holds seven-shells. Opened " + row.visits + " times here. The row is local. It is not the sealed list.";
+  }
+  book[id] = row;
+  try { localStorage.setItem(key, JSON.stringify(book)); }
+  catch (e) { throw new Error("persistent book"); }
+  var written;
+  try { written = JSON.parse(localStorage.getItem(key)); }
+  catch (e) { throw new Error("persistent drift"); }
+  if (!written || !written[id] || written[id].colors !== row.colors || written[id].visits !== row.visits || written[id].act !== "census") throw new Error("persistent drift");
+  return { census: census, visits: row.visits, grown: grown, text: text };
+}
+
+var shells = shellKeep();
+var report = shells.census;
+function finish(model) {
+  var card = document.getElementById("card");
+  var agent = document.getElementById("agent");
+  var kept = document.getElementById("kept");
+  if (!model || model.faults.length || model.colors.join(",") !== "49,49,49,49,49,49,49") {
+    var msg = (model && model.faults.join(", ")) || "no report";
+    card.innerHTML = "<span class='stamp wall'>WALL</span> LIT FAIL " + msg;
+    throw new Error("LIT FAIL shells " + msg);
+  }
+  if (model.acts.sit !== 2 || model.acts.count !== 66 || model.acts.ring !== 150 || model.acts.circle !== 125) {
+    throw new Error("LIT FAIL shells acts");
+  }
+  card.innerHTML = "<span class='stamp lit'>LIT</span> 7 shells \u00b7 49 each \u00b7 343 agents";
+  agent.textContent = "sit 2 \u00b7 count 66 \u00b7 ring 150 \u00b7 circle 125";
+  kept.textContent = shells.text;
+  if (agent.textContent.indexOf("circle 125") < 0) throw new Error("LIT FAIL shell show");
+}
+finish(report);
+var chips = document.getElementById("chips");
+var pick = document.getElementById("pick");
+var chosen = 0;
+var names = ["red", "orange", "yellow", "green", "blue", "brown", "pink"];
+names.forEach(function (label, i) {
+  var btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "chip" + (i === 0 ? " on" : "");
+  btn.textContent = label + " \u00b7 49";
+  btn.style.background = SHELL_COLORS[i];
+  btn.style.color = SHELL_INK[i];
+  btn.addEventListener("click", function () {
+    if (report.colors[i] !== 49) throw new Error("LIT FAIL shell pick");
+    chosen = i;
+    var all = chips.querySelectorAll("button");
+    var n;
+    for (n = 0; n < all.length; n++) all[n].classList.remove("on");
+    btn.classList.add("on");
+    pick.textContent = "shell " + i + " \u00b7 " + label + " \u00b7 49 cells";
+    frame(0);
+  });
+  chips.appendChild(btn);
+});
+var canvas = document.getElementById("stage");
+if (!canvas || !canvas.getContext) throw new Error("LIT FAIL shell stage");
+var ctx = canvas.getContext("2d");
+var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var hits = [];
+function frame(now) {
+  var sky = ctx.createLinearGradient(0, 0, 0, canvas.height);
+  sky.addColorStop(0, "#fff7ed");
+  sky.addColorStop(1, "#fff1f2");
+  ctx.fillStyle = sky;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  hits = [];
+  var painted = 0;
+  var shown = [0, 0, 0, 0, 0, 0, 0];
+  var z, y, x, px, py, shell, wob, cx, cy, rx, ry;
+  for (z = 0; z < 7; z++) {
+    ctx.fillStyle = "#7c2d12";
+    ctx.font = "12px ui-monospace, Consolas, monospace";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "alphabetic";
+    ctx.fillText("z " + z, 28 + z * 118, 28);
+    for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+      shell = shellAt(x, y, z);
+      shown[shell.color]++;
+      px = 36 + z * 118 + x * 14;
+      py = 40 + y * 64;
+      wob = reduce ? 0 : Math.sin((now || 0) / 280 + shell.color) * 1.6;
+      cx = px + 6;
+      cy = py + 6 + wob;
+      rx = shell.color === chosen ? 6.4 : 5.4;
+      ry = shell.color === chosen ? 7.4 : 6.2;
+      ctx.beginPath();
+      ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+      ctx.fillStyle = SHELL_COLORS[shell.color];
+      ctx.fill();
+      if (shell.color === chosen) {
+        ctx.strokeStyle = "#1c1730";
+        ctx.lineWidth = 1.4;
+        ctx.stroke();
+      }
+      ctx.beginPath();
+      ctx.ellipse(cx - 1.6, cy - 2.2, 2.1, 1.3, -0.5, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(255,255,255,.72)";
+      ctx.fill();
+      ctx.fillStyle = SHELL_INK[shell.color];
+      ctx.font = "700 8px ui-monospace, Consolas, monospace";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("m", cx, cy + 0.6);
+      hits.push({ x: x, y: y, z: z, cx: cx, cy: cy, act: shell.act, n: shell.n, color: shell.color });
+      painted++;
+    }
+  }
+  if (painted !== 343) throw new Error("LIT FAIL shell paint");
+  if (shown.join(",") !== "49,49,49,49,49,49,49") throw new Error("LIT FAIL shell paint");
+  if (!reduce) requestAnimationFrame(frame);
+}
+canvas.addEventListener("click", function (ev) {
+  var rect = canvas.getBoundingClientRect();
+  var cx = (ev.clientX - rect.left) * (canvas.width / rect.width);
+  var cy = (ev.clientY - rect.top) * (canvas.height / rect.height);
+  var best = null;
+  var bestD = 8;
+  var i, dx, dy, d;
+  for (i = 0; i < hits.length; i++) {
+    dx = cx - hits[i].cx;
+    dy = cy - hits[i].cy;
+    d = Math.sqrt(dx * dx + dy * dy);
+    if (d < bestD) { bestD = d; best = hits[i]; }
+  }
+  if (!best) return;
+  var again = shellAt(best.x, best.y, best.z);
+  if (again.act !== best.act || again.n !== best.n || again.color !== best.color) throw new Error("LIT FAIL shell act");
+  if (again.n === 0 && again.act !== "sit") throw new Error("LIT FAIL shell act");
+  if ((again.n === 2 || again.n === 3) && again.act !== "count") throw new Error("LIT FAIL shell act");
+  if (again.n === 4 && again.act !== "ring") throw new Error("LIT FAIL shell act");
+  if (again.n === 6 && again.act !== "circle") throw new Error("LIT FAIL shell act");
+  pick.textContent = again.text;
+});
+frame(0);
+</script>
+</body>
+</html>

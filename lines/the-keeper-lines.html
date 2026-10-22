@@ -47,6 +47,7 @@
     <div class="row" id="chips"></div>
   </div>
   <p class="mono" id="card"></p>
+  <p class="mono" id="agent"></p>
   <p class="mono" id="pick">No line selected.</p>
   <p><span class="stamp lit">LIT</span> A line through the keeper holds the seven cells that keep two addresses at 3. The line of free x is y = 3 and z = 3. The line of free y is x = 3 and z = 3. The line of free z is x = 3 and y = 3. Each line holds 7 cells. Each pair meets only at (3,3,3). The three together hold 7 × 3 − 3 + 1 = 19 cells, and also 6 × 3 + 1 = 19. The eight corners stay off the lines. A failed count throws.</p>
   <p><span class="stamp amber">AMBER</span> The three lines are the assigned addresses of the cube of 7. No Downloads file was copied. The page does not read another sphere. This page is not one of those 696.</p>
@@ -58,6 +59,137 @@
 </footer>
 <script>
 "use strict";
+var SHELL_OFFSETS = [[-1,0,1],[-1,1,0],[0,-1,1],[0,1,-1],[1,-1,0],[1,0,-1]];
+var SHELL_COLORS = ["#e11d48","#f97316","#facc15","#22c55e","#2563eb","#92400e","#db2777"];
+var SHELL_INK = ["#ffffff","#ffffff","#1c1730","#ffffff","#ffffff","#ffffff","#ffffff"];
+function shellPack(model) {
+  return model.colors.join(",") + "|" + model.acts.sit + "," + model.acts.count + "," + model.acts.ring + "," + model.acts.circle;
+}
+function shellAt(x, y, z) {
+  var color = (x + y + z) % 7;
+  var n = 0;
+  var i, dx, dy, dz, xx, yy, zz;
+  for (i = 0; i < SHELL_OFFSETS.length; i++) {
+    dx = SHELL_OFFSETS[i][0];
+    dy = SHELL_OFFSETS[i][1];
+    dz = SHELL_OFFSETS[i][2];
+    xx = x + dx;
+    yy = y + dy;
+    zz = z + dz;
+    if (xx >= 0 && xx < 7 && yy >= 0 && yy < 7 && zz >= 0 && zz < 7) n++;
+  }
+  var act = "";
+  var line = "";
+  if (n === 0) {
+    act = "sit";
+    line = "I sit. No shell of my color reaches this corner.";
+  } else if (n === 2 || n === 3) {
+    act = "count";
+    line = "I act by the count. " + n + " shells of my color reach me.";
+  } else if (n === 4) {
+    act = "ring";
+    line = "I open a ring of four.";
+  } else if (n === 6) {
+    act = "circle";
+    line = "I keep the circle of six.";
+  }
+  if (!act) throw new Error("LIT FAIL shell act");
+  var text = "Shell " + x + "," + y + "," + z + " accepts the act. " + line;
+  if (text.indexOf("Shell " + x + "," + y + "," + z + " accepts the act.") !== 0) throw new Error("LIT FAIL shell open");
+  if (act === "sit" && (n !== 0 || line.indexOf("I sit.") !== 0)) throw new Error("LIT FAIL shell sit");
+  if (act === "count" && line.indexOf(String(n) + " shells") < 0) throw new Error("LIT FAIL shell count");
+  if (act === "ring" && (n !== 4 || line.indexOf("ring of four") < 0)) throw new Error("LIT FAIL shell ring");
+  if (act === "circle" && (n !== 6 || line.indexOf("circle of six") < 0)) throw new Error("LIT FAIL shell circle");
+  return { color: color, n: n, act: act, text: text };
+}
+function shellCensus() {
+  var colors = [0, 0, 0, 0, 0, 0, 0];
+  var acts = { sit: 0, count: 0, ring: 0, circle: 0 };
+  var ortho = 0;
+  var interior = 0;
+  var faults = [];
+  var found = 0;
+  var dx, dy, dz, i, ok, x, y, z, s, inside;
+  for (dx = -1; dx <= 1; dx++) for (dy = -1; dy <= 1; dy++) for (dz = -1; dz <= 1; dz++) {
+    if (!dx && !dy && !dz) continue;
+    if (dx + dy + dz !== 0) continue;
+    found++;
+    ok = false;
+    for (i = 0; i < SHELL_OFFSETS.length; i++) {
+      if (SHELL_OFFSETS[i][0] === dx && SHELL_OFFSETS[i][1] === dy && SHELL_OFFSETS[i][2] === dz) ok = true;
+    }
+    if (!ok) faults.push("offset");
+  }
+  if (found !== 6 || SHELL_OFFSETS.length !== 6) faults.push("offset");
+  for (z = 0; z < 7; z++) for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+    s = shellAt(x, y, z);
+    if (s.color !== (x + y + z) % 7) faults.push("color");
+    colors[s.color]++;
+    acts[s.act]++;
+    if (x > 0 && ((x - 1 + y + z) % 7) === s.color) ortho++;
+    if (y > 0 && ((x + (y - 1) + z) % 7) === s.color) ortho++;
+    if (z > 0 && ((x + y + (z - 1)) % 7) === s.color) ortho++;
+    inside = x >= 1 && x <= 5 && y >= 1 && y <= 5 && z >= 1 && z <= 5;
+    if (inside) {
+      interior++;
+      if (s.n !== 6 || s.act !== "circle") faults.push("interior");
+    } else if (s.n === 6) faults.push("rim");
+  }
+  if (colors.join(",") !== "49,49,49,49,49,49,49") faults.push("colors");
+  if (ortho !== 0) faults.push("ortho");
+  if (acts.sit !== 2 || acts.count !== 66 || acts.ring !== 150 || acts.circle !== 125) faults.push("acts");
+  if (interior !== 125 || 7 * 49 !== 343) faults.push("product");
+  return { faults: faults, colors: colors, acts: acts, ortho: ortho, interior: interior };
+}
+function shellGrow() {
+  var a = shellCensus();
+  var b = shellCensus();
+  var sa = shellPack(a);
+  var sb = shellPack(b);
+  if (a.faults.length || b.faults.length) throw new Error("LIT FAIL shells " + a.faults.concat(b.faults).join(","));
+  if (sa.length < 8 || sa !== sb) throw new Error("regenerative drift");
+  if (sa !== "49,49,49,49,49,49,49|2,66,150,125") throw new Error("regenerative drift");
+  return sa;
+}
+function shellKeep() {
+  var grown = shellGrow();
+  var census = shellCensus();
+  var again = shellPack(census);
+  if (census.faults.length) throw new Error("LIT FAIL shells " + census.faults.join(","));
+  if (again !== grown) throw new Error("regenerative drift");
+  var id = "seven-shells";
+  var key = "sapph-mm-kept";
+  var row = { colors: "49,49,49,49,49,49,49", sit: 2, count: 66, ring: 150, circle: 125, act: "census" };
+  var book = {};
+  var raw = null;
+  try { raw = localStorage.getItem(key); }
+  catch (e) { throw new Error("persistent book"); }
+  if (raw) {
+    try { book = JSON.parse(raw); }
+    catch (e) { throw new Error("persistent book"); }
+  }
+  if (!book || typeof book !== "object" || Array.isArray(book)) throw new Error("persistent book");
+  var has = Object.prototype.hasOwnProperty.call(book, id);
+  var kept = has ? book[id] : null;
+  var text;
+  if (kept == null) {
+    row.visits = 1;
+    text = "This browser had no row for seven-shells. I wrote 49,49,49,49,49,49,49. sit 2, count 66, ring 150, circle 125. The row is local. It is not the sealed list.";
+  } else {
+    if (typeof kept !== "object" || kept.colors !== row.colors || kept.sit !== 2 || kept.count !== 66 || kept.ring !== 150 || kept.circle !== 125 || kept.act !== "census") throw new Error("persistent drift");
+    var prev = typeof kept.visits === "number" && kept.visits >= 0 ? kept.visits : 0;
+    row.visits = prev + 1;
+    text = "This browser still holds seven-shells. Opened " + row.visits + " times here. The row is local. It is not the sealed list.";
+  }
+  book[id] = row;
+  try { localStorage.setItem(key, JSON.stringify(book)); }
+  catch (e) { throw new Error("persistent book"); }
+  var written;
+  try { written = JSON.parse(localStorage.getItem(key)); }
+  catch (e) { throw new Error("persistent drift"); }
+  if (!written || !written[id] || written[id].colors !== row.colors || written[id].visits !== row.visits || written[id].act !== "census") throw new Error("persistent drift");
+  return { census: census, visits: row.visits, grown: grown, text: text };
+}
 function keeperLines() {
   var lines = [[], [], []];
   var union = [];
@@ -95,6 +227,11 @@ function finish(model) {
   card.innerHTML = "<span class='stamp lit'>LIT</span> 3 lines · 7 cells each · union 19";
 }
 finish(report);
+var shells = shellKeep();
+var agent = document.getElementById("agent");
+if (!agent) throw new Error("LIT FAIL shell agent");
+agent.textContent = shells.grown + ". " + shells.text;
+if (shells.grown !== "49,49,49,49,49,49,49|2,66,150,125") throw new Error("LIT FAIL shells");
 var chips = document.getElementById("chips");
 var pick = document.getElementById("pick");
 var chosen = -1;
@@ -140,12 +277,20 @@ function frame(now) {
       if (x === 3 && y === 3) hit.push(2);
       px = 36 + z * 118 + x * 14;
       py = 40 + y * 64;
-      if (!hit.length) ctx.fillStyle = "#dbe4f0";
-      else if (hit.length === 3) ctx.fillStyle = "#172554";
-      else ctx.fillStyle = colors[hit[0]];
+      var shell = shellAt(x, y, z);
       var hot = active >= 0 && hit.indexOf(active) >= 0;
       ctx.beginPath();
-      ctx.roundRect(px, py, hot ? 12 : 10, hot ? 12 : 10, 3);
+      ctx.ellipse(px + 6, py + 6, hot ? 7 : 5.5, hot ? 8 : 6.5, 0, 0, Math.PI * 2);
+      ctx.fillStyle = SHELL_COLORS[shell.color];
+      ctx.fill();
+      if (hot) {
+        ctx.strokeStyle = hit.length === 3 ? "#172554" : colors[hit[0]];
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }
+      ctx.beginPath();
+      ctx.ellipse(px + 4.2, py + 3.6, 2.1, 1.3, -0.5, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(255,255,255,.72)";
       ctx.fill();
       painted++;
       if (hit.length) marked++;
