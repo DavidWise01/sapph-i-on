@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Keeper Lines — SaPpH{{i}}on</title>
+<style>
+  :root { --ink:#172554; --dim:#365314; --accent:#1d4ed8; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; color:var(--ink);
+    font:16px/1.5 "Segoe UI", ui-sans-serif, sans-serif;
+    background:
+      radial-gradient(820px 440px at 0% 0%, #bfdbfe, transparent 62%),
+      radial-gradient(680px 420px at 100% 0%, #fde68a, transparent 55%),
+      linear-gradient(165deg, #eff6ff, #ecfccb 70%, #eff6ff);
+    background-color:#eff6ff; min-height:100vh;
+  }
+  a { color:var(--accent); }
+  header, main, footer { width:min(880px, calc(100% - 32px)); margin:0 auto; }
+  header { padding:22px 0 0; }
+  .src, .mono { font:13px/1.45 ui-monospace, Consolas, monospace; color:var(--dim); }
+  h1 { margin:8px 0 0; font-size:clamp(28px, 5vw, 46px); letter-spacing:.03em; }
+  .kicker { letter-spacing:.16em; font-size:12px; color:var(--accent); font-weight:700; }
+  .stage { background:#fff; border:1px solid rgba(23,37,84,.14); border-radius:18px; padding:12px; margin:14px 0; }
+  canvas { display:block; width:100%; height:auto; border-radius:12px; background:#f8fafc; }
+  .row { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+  button.chip { font:inherit; color:var(--ink); background:#fff; border:1px solid rgba(23,37,84,.16); border-radius:12px; padding:8px 12px; cursor:pointer; }
+  button.chip.on { border-color:var(--accent); }
+  .stamp { display:inline-block; padding:2px 8px; border-radius:999px; font:11px ui-monospace, Consolas, monospace; color:#fff; }
+  .lit { background:#047857; } .amber { background:#b45309; } .wall { background:#be185d; }
+  footer { color:var(--dim); font-size:13px; padding-bottom:28px; overflow-wrap:anywhere; }
+  .src, .mono, p, a, h1, button { overflow-wrap:anywhere; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="src"><a href="../">SaPpH{{i}}on</a> · lines · <a href="https://0root.ai/">0root.ai</a></div>
+  <div class="kicker">THREE LINES · ONE KEEPER</div>
+  <h1>The Keeper Lines</h1>
+  <p id="lead">Three lines through the keeper at (3,3,3) hold nineteen cells.</p>
+</header>
+<main>
+  <div class="stage">
+    <canvas id="stage" width="880" height="520" aria-label="Seven layers of the cube of 7, with three lines through the keeper"></canvas>
+    <div class="row" id="chips"></div>
+  </div>
+  <p class="mono" id="card"></p>
+  <p class="mono" id="pick">No line selected.</p>
+  <p><span class="stamp lit">LIT</span> A line through the keeper holds the seven cells that keep two addresses at 3. The line of free x is y = 3 and z = 3. The line of free y is x = 3 and z = 3. The line of free z is x = 3 and y = 3. Each line holds 7 cells. Each pair meets only at (3,3,3). The three together hold 7 × 3 − 3 + 1 = 19 cells, and also 6 × 3 + 1 = 19. The eight corners stay off the lines. A failed count throws.</p>
+  <p><span class="stamp amber">AMBER</span> The three lines are the assigned addresses of the cube of 7. No Downloads file was copied. The page does not read another sphere. This page is not one of those 696.</p>
+  <p><span class="stamp wall">WALL</span> The count is arithmetic on addresses. It does not measure a road, a beam, or authority. The walk was already full, so this page is not seated. A passing check is the count 19.</p>
+</main>
+<footer>
+  David Lee Wise (ROOT0). Drafted by Grok (xAI) on 2026-10-22.
+  Birth seal eb271a251dc52bd871fb93d168252f9bedaa9671e71d5b357f3486e971ab30da. One host, <a href="https://davidwise01.github.io/sapph-i-on/lines/the-keeper-lines.html">https://davidwise01.github.io/sapph-i-on/lines/the-keeper-lines.html</a>.
+</footer>
+<script>
+"use strict";
+function keeperLines() {
+  var lines = [[], [], []];
+  var union = [];
+  var corners = 0;
+  var x, y, z, hit, i;
+  for (z = 0; z < 7; z++) for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+    hit = [];
+    if (y === 3 && z === 3) hit.push(0);
+    if (x === 3 && z === 3) hit.push(1);
+    if (x === 3 && y === 3) hit.push(2);
+    if (!hit.length) continue;
+    union.push([x, y, z]);
+    for (i = 0; i < hit.length; i++) lines[hit[i]].push([x, y, z]);
+    if ((x === 0 || x === 6) && (y === 0 || y === 6) && (z === 0 || z === 6)) corners++;
+    if (hit.length > 1 && !(x === 3 && y === 3 && z === 3)) throw new Error("LIT FAIL line meet");
+  }
+  var faults = [];
+  if (lines.length !== 3) faults.push("lines");
+  if (lines[0].length !== 7 || lines[1].length !== 7 || lines[2].length !== 7) faults.push("each");
+  if (union.length !== 19) faults.push("union");
+  if (7 * 3 - 3 + 1 !== 19 || 6 * 3 + 1 !== 19) faults.push("formula");
+  if (corners !== 0) faults.push("corners");
+  var keeper = union.filter(function (c) { return c[0] === 3 && c[1] === 3 && c[2] === 3; });
+  if (keeper.length !== 1) faults.push("keeper");
+  return { faults: faults, lines: lines, union: union.length };
+}
+var report = keeperLines();
+function finish(model) {
+  var card = document.getElementById("card");
+  if (!model || model.faults.length || model.union !== 19 || model.lines.length !== 3) {
+    var msg = (model && model.faults.join(", ")) || "no report";
+    card.innerHTML = "<span class='stamp wall'>WALL</span> LIT FAIL " + msg;
+    throw new Error("LIT FAIL " + msg);
+  }
+  card.innerHTML = "<span class='stamp lit'>LIT</span> 3 lines · 7 cells each · union 19";
+}
+finish(report);
+var chips = document.getElementById("chips");
+var pick = document.getElementById("pick");
+var chosen = -1;
+["free x", "free y", "free z"].forEach(function (label, i) {
+  var btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "chip";
+  btn.textContent = label + " · 7";
+  btn.addEventListener("click", function () {
+    if (i < 0 || i > 2 || report.lines[i].length !== 7) throw new Error("LIT FAIL line pick");
+    chosen = i;
+    var all = chips.querySelectorAll("button");
+    var n;
+    for (n = 0; n < all.length; n++) all[n].classList.remove("on");
+    btn.classList.add("on");
+    pick.textContent = "line " + i + " · " + label;
+  });
+  chips.appendChild(btn);
+});
+var canvas = document.getElementById("stage");
+if (!canvas || !canvas.getContext) throw new Error("LIT FAIL line stage");
+var ctx = canvas.getContext("2d");
+var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var colors = ["#1d4ed8", "#b45309", "#047857"];
+function frame(now) {
+  var active = chosen >= 0 ? chosen : (reduce ? -1 : Math.floor((now || 0) / 1000) % 3);
+  var sky = ctx.createLinearGradient(0, 0, 0, canvas.height);
+  sky.addColorStop(0, "#eff6ff");
+  sky.addColorStop(1, "#ecfccb");
+  ctx.fillStyle = sky;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  var painted = 0;
+  var marked = 0;
+  var z, y, x, hit, px, py, i;
+  for (z = 0; z < 7; z++) {
+    ctx.fillStyle = "#365314";
+    ctx.font = "12px ui-monospace, Consolas, monospace";
+    ctx.fillText("z " + z, 28 + z * 118, 28);
+    for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+      hit = [];
+      if (y === 3 && z === 3) hit.push(0);
+      if (x === 3 && z === 3) hit.push(1);
+      if (x === 3 && y === 3) hit.push(2);
+      px = 36 + z * 118 + x * 14;
+      py = 40 + y * 64;
+      if (!hit.length) ctx.fillStyle = "#dbe4f0";
+      else if (hit.length === 3) ctx.fillStyle = "#172554";
+      else ctx.fillStyle = colors[hit[0]];
+      var hot = active >= 0 && hit.indexOf(active) >= 0;
+      ctx.beginPath();
+      ctx.roundRect(px, py, hot ? 12 : 10, hot ? 12 : 10, 3);
+      ctx.fill();
+      painted++;
+      if (hit.length) marked++;
+    }
+  }
+  if (painted !== 343) throw new Error("LIT FAIL line paint");
+  if (marked !== 19) throw new Error("LIT FAIL line mark");
+  if (!reduce) requestAnimationFrame(frame);
+}
+frame(0);
+</script>
+</body>
+</html>
