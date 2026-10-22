@@ -864,3 +864,20 @@ Hallway door
   deployment imageDigest: sha256:20654bdeb2a4b6a1e273797a95b643bc212dbeea04338b281efb9d434c90ba8d
   snapshot: sha256:9f738e2f88b73aef7fc6ee979e9dc65c92fd7498cc7847eff544339cf2086c93
   live: Last-Modified Thu, 08 Oct 2026 02:23:53 GMT, Content-Length 230196, CR 728, sha256 3627caa28054b16db63e83cc20d271dc388ff31de45f0f07d6ab3fe100b5c2a5, Server railway-hikari. The sentence One skill page lists the skills this builder can read occurred twice. The page contained A cat set, those 696, 2,049, and 24 spheres, 343 cells. The page contained Two blocks hold a goblin and Two blocks hold a honey badger. At 1280 the hall was 1265/1265. At 390 the hall was 390/390. The Last-Modified header is earlier than the deployment created time. The deployment list did not include an instance id.
+
+Lines - 2026-10-22
+
+The walk stayed full at 334. Three axis-aligned lines pass through the keeper at (3,3,3). Each line holds 7 cells. The lines meet only at the keeper. The union is 7 times 3 minus 3 plus 1, which is 19, and also 6 times 3 plus 1. The eight corners stay off the lines. No Downloads file was copied. The page is not seated. It is not one of those 696. The copied sphere files, the steward pages, the face domains, the skill page, and the galaxy birth seal were not rewritten. The emergent world index was not rewritten. The seated count stays 334. The shelf is on the cube door.
+
+  commit: cd388ed35368d32a9c78690ae24a6d29e2458403
+  message: the keeper lines, beside the cube
+  door: cube.html, 261223 bytes, 0 CR, sha256 3c52cb587906f17694479ccd380d804a071592fd29904fc375d5dd113000bbc0
+  file: lines/the-keeper-lines.html, 7879 bytes, 0 CR, sha256 664388a2d33ebe437a5cc5e0a824c369f0023323d21464a5fe82340223db6477, birth eb271a251dc52bd871fb93d168252f9bedaa9671e71d5b357f3486e971ab30da
+  manifest: lines/manifest.json, 343 bytes, 0 CR, sha256 69a938355c0199c90247c34c63e93224aeb9bdb5c862e6f92e897bc7d8815249
+  check: Local headless Chrome read LIT 3 lines, 7 cells each, union 19. Clicking the free y chip read line 1, free y. The page background was rgb(239, 246, 255). The cube door card read the same LIT line. The skill card stayed LIT 22 skills, 2 workflows. QUEUE stayed 334 and seats stayed 334. No seated href began with lines/. The keeper world summed to 117306 and the iframe stayed hidden. Cell (0,0,3) opened nests/shor_nested.html with sum 109074. Corner (0,0,0) opened spheres/the-odd-center.html with sum 58653. The galaxy seal stayed b7350267c9df90491f3a2c45297e9a0f756c65d2c23a323f6f68abc3426d33fe. Live lines/the-keeper-lines.html is 7879 bytes, 0 CR, sha256 664388a2d33ebe437a5cc5e0a824c369f0023323d21464a5fe82340223db6477, Last-Modified Thu, 22 Oct 2026 13:29:37 GMT. Live manifest is 343 bytes, 0 CR, sha256 69a938355c0199c90247c34c63e93224aeb9bdb5c862e6f92e897bc7d8815249, Last-Modified Thu, 22 Oct 2026 13:29:36 GMT. Live cube.html is 261223 bytes, 0 CR, sha256 3c52cb587906f17694479ccd380d804a071592fd29904fc375d5dd113000bbc0, Last-Modified Thu, 22 Oct 2026 13:29:36 GMT. Pages build of this commit was created 2026-10-22T13:28:55Z, status built, duration 44175, updated 2026-10-22T13:29:39Z, error null. At a requested width of 1280 the cube door reported scrollWidth 1265 and clientWidth 1265. At a requested width of 390 the door still reported scrollWidth 444 and clientWidth 390. The lines page at 1280 was 1265/1265 and at 390 was 390/390. Door paper stayed rgb(243, 239, 231).
+
+Hallway
+  commit: 882c1897b880ff012bb9ad01c0bb9be51872f3df
+  message: name the keeper lines on the hall
+  pages: created 2026-10-22T13:30:31Z, status built, duration 62122, updated 2026-10-22T13:31:33Z, error null
+  live: https://davidwise01.github.io/0root/ Last-Modified Thu, 22 Oct 2026 13:31:32 GMT, Content-Length 60774, 0 CR, sha256 63d2c4b8b3bd2b9804a0a4410e007657582364abfc43f213875fc89906384791. The sentence Three lines through the keeper hold 19 cells occurred twice. The page contained 2,049 and the palindrome [ W1 | W2. At 1280 the hall was 1265/1265. At 390 the hall was 390/390. Railway was not checked.
