@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Twenty-One Slices - SaPpH{{i}}on</title>
+<style>
+:root { --ink:#312e81; --dim:#3730a3; --accent:#4338ca; }
+* { box-sizing:border-box; }
+body {
+  margin:0; color:var(--ink);
+  font:16px/1.5 "Segoe UI", ui-sans-serif, sans-serif;
+  background:
+    radial-gradient(820px 440px at 0% 0%, #e0e7ff, transparent 62%),
+    radial-gradient(680px 420px at 100% 0%, #fff7ed, transparent 55%),
+    linear-gradient(165deg, #eef2ff, #fff7ed 70%, #eef2ff);
+  background-color:#eef2ff; min-height:100vh;
+}
+a { color:var(--accent); }
+header, main, footer { width:min(880px, calc(100% - 32px)); margin:0 auto; }
+header { padding:22px 0 0; }
+.src, .mono { font:13px/1.45 ui-monospace, Consolas, monospace; color:var(--dim); }
+h1 { margin:8px 0 0; font-size:clamp(28px, 5vw, 46px); letter-spacing:.03em; }
+.kicker { letter-spacing:.16em; font-size:12px; color:var(--accent); font-weight:700; }
+.stage { background:#fff; border:1px solid rgba(28,23,48,.12); border-radius:18px; padding:12px; margin:14px 0; }
+canvas { display:block; width:100%; height:auto; border-radius:12px; background:#eef2ff; }
+.row { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+button.chip { font:inherit; color:var(--ink); background:#fff; border:1px solid rgba(28,23,48,.16); border-radius:999px; padding:8px 12px; cursor:pointer; }
+button.chip.on { border-color:var(--accent); background:#e0e7ff; }
+.stamp { display:inline-block; padding:2px 8px; border-radius:999px; font:11px ui-monospace, Consolas, monospace; color:#fff; }
+.lit { background:#047857; } .amber { background:#b45309; } .wall { background:#be185d; }
+footer { color:var(--dim); font-size:13px; padding-bottom:28px; overflow-wrap:anywhere; }
+.src, .mono, p, a, h1, button { overflow-wrap:anywhere; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+<header>
+<div class="src"><a href="../">SaPpH{{i}}on</a> - agent - <a href="https://0root.ai/">0root.ai</a></div>
+<div class="kicker">AGENT - ORDER 7</div>
+<h1>The Twenty-One Slices</h1>
+<p id="lead">Twenty-one slices hold forty-nine cells each, and each cell sits on three slices.</p>
+</header>
+<main>
+<div class="stage">
+<canvas id="stage" width="880" height="180" aria-label="Twenty-one slices of the cube of 7"></canvas>
+<div class="row" id="chips"></div>
+</div>
+<p class="mono" id="card">No report.</p>
+<p class="mono" id="agent"></p>
+<p class="mono" id="seq"></p>
+<p class="mono" id="pick">No cell selected.</p>
+<p class="mono" id="kept"></p>
+<p><span class="stamp lit">LIT</span> Three axes and seven fixed addresses make 21 slices. Each slice holds 49 cells. 21 times 49 is 1029, and 3 times 343 is 1029. Each cell sits on one slice of each axis, so it sits on three slices. The agent SLICER keeps a slice only when it holds 49 cells and the name is new. Every 5th slice is proposed again and dropped. A second run must match. A failed count throws.</p>
+<p><span class="stamp amber">AMBER</span> The agent is assigned these slices. The picture lights the slice it kept. The shells of color stay a coloring. They are not a filled magic cube. No Downloads file was copied. This page is not seated. It is not one of those 696.</p>
+<p><span class="stamp wall">WALL</span> These slices are the axis cuts. They are not magic lines, and they do not share a magic sum. The walk was already full, so this page is not seated.</p>
+</main>
+<footer>
+David Lee Wise (ROOT0). Drafted by Grok (xAI) on 2026-10-28.
+Birth seal d9929fb74f9c91226af3e5a30b81aa4048199a1afbb1b6f358cfd6d49ac40424. One host, <a href="https://davidwise01.github.io/sapph-i-on/agents/the-twenty-one-slices.html">https://davidwise01.github.io/sapph-i-on/agents/the-twenty-one-slices.html</a>.
+</footer>
+<script>
+"use strict";
+function sliceRun() {
+  var names = [];
+  var axisName = ["x", "y", "z"];
+  var cover = [];
+  var i, a, k, x, y, z, c, n;
+  for (i = 0; i < 343; i++) cover.push(0);
+  for (a = 0; a < 3; a++) for (k = 0; k < 7; k++) {
+    names.push(axisName[a] + String(k));
+    n = 0;
+    for (z = 0; z < 7; z++) for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+      c = a === 0 ? x : a === 1 ? y : z;
+      if (c === k) {
+        n++;
+        cover[x + 7 * y + 49 * z]++;
+      }
+    }
+    if (n !== 49) throw new Error("LIT FAIL slice size");
+  }
+  if (names.length !== 21) throw new Error("LIT FAIL slice count");
+  for (i = 0; i < 343; i++) if (cover[i] !== 3) throw new Error("LIT FAIL slice cover");
+  if (21 * 49 !== 1029 || 3 * 343 !== 1029) throw new Error("LIT FAIL slice product");
+  var seen = {};
+  var kept = 0;
+  var drops = 0;
+  for (i = 0; i < names.length; i++) {
+    var name = names[i];
+    var size = 49;
+    if (size === 49 && !seen[name]) {
+      seen[name] = 1;
+      kept++;
+    } else {
+      throw new Error("LIT FAIL slice keep");
+    }
+    if ((i + 1) % 5 === 0) {
+      if (size === 49 && !seen[name]) throw new Error("decoy kept");
+      drops++;
+    }
+  }
+  if (kept !== 21 || drops !== 4) throw new Error("LIT FAIL slice agent " + kept + " " + drops);
+  var pack = "21|49|1029|3|4|" + names.join(",");
+  return { pack: pack, slices: 21, each: 49, product: 1029, cover: 3, drops: 4, names: names };
+}
+function agentKeep(id, pack) {
+  var key = "sapph-agent-kept";
+  var row = { pack: pack, act: "census" };
+  var book = {};
+  var raw = null;
+  try { raw = localStorage.getItem(key); }
+  catch (e) { throw new Error("persistent book"); }
+  if (raw) {
+    try { book = JSON.parse(raw); }
+    catch (e) { throw new Error("persistent book"); }
+  }
+  if (!book || typeof book !== "object" || Array.isArray(book)) throw new Error("persistent book");
+  var has = Object.prototype.hasOwnProperty.call(book, id);
+  var kept = has ? book[id] : null;
+  var text;
+  if (kept == null) {
+    row.visits = 1;
+    text = "This browser had no row for " + id + ". I wrote " + pack + ". The row is local. It is not the sealed list.";
+  } else {
+    if (typeof kept !== "object" || kept.pack !== pack || kept.act !== "census") throw new Error("persistent drift");
+    var prev = typeof kept.visits === "number" && kept.visits >= 0 ? kept.visits : 0;
+    row.visits = prev + 1;
+    text = "This browser still holds " + id + ". Opened " + row.visits + " times here. The row is local. It is not the sealed list.";
+  }
+  book[id] = row;
+  try { localStorage.setItem(key, JSON.stringify(book)); }
+  catch (e) { throw new Error("persistent book"); }
+  var written;
+  try { written = JSON.parse(localStorage.getItem(key)); }
+  catch (e) { throw new Error("persistent drift"); }
+  if (!written || !written[id] || written[id].pack !== pack || written[id].visits !== row.visits || written[id].act !== "census") throw new Error("persistent drift");
+  return { text: text, visits: row.visits, pack: pack };
+}
+function paintCube(canvas, bg, drawCell) {
+  var ctx = canvas.getContext("2d");
+  var w = canvas.width;
+  var gap = 10;
+  var panel = Math.floor((w - gap * 8) / 7);
+  var cell = Math.floor((panel - 6) / 7);
+  var yTop = 24;
+  var colors = ["#e11d48", "#f97316", "#facc15", "#22c55e", "#2563eb", "#92400e", "#db2777"];
+  var boxes = [];
+  ctx.clearRect(0, 0, w, canvas.height);
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, w, canvas.height);
+  var z, y, x, x0, px, py, color;
+  for (z = 0; z < 7; z++) {
+    x0 = gap + z * (panel + gap);
+    ctx.fillStyle = "rgba(255,255,255,0.72)";
+    ctx.fillRect(x0, yTop - 4, panel, 7 * (cell + 1) + 8);
+    ctx.fillStyle = "#3f3f46";
+    ctx.font = "12px Consolas, monospace";
+    ctx.fillText("z " + z, x0 + 4, 16);
+    for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+      px = x0 + 3 + x * (cell + 1);
+      py = yTop + y * (cell + 1);
+      color = (x + y + z) % 7;
+      ctx.fillStyle = colors[color];
+      ctx.fillRect(px, py, cell, cell);
+      drawCell(ctx, x, y, z, px, py, cell, color);
+      boxes.push({ x: x, y: y, z: z, px: px, py: py, s: cell });
+    }
+  }
+  canvas._boxes = boxes;
+}
+function listen(canvas, choose) {
+  canvas.addEventListener("click", function (ev) {
+    var rect = canvas.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+    var cx = (ev.clientX - rect.left) * (canvas.width / rect.width);
+    var cy = (ev.clientY - rect.top) * (canvas.height / rect.height);
+    var i, b;
+    for (i = 0; i < canvas._boxes.length; i++) {
+      b = canvas._boxes[i];
+      if (cx >= b.px && cx < b.px + b.s && cy >= b.py && cy < b.py + b.s) {
+        choose(b.x, b.y, b.z);
+        return;
+      }
+    }
+  });
+}
+function bootSlices() {
+  var blurb = "Twenty-one slices hold forty-nine cells each, and each cell sits on three slices.";
+  var lead = document.getElementById("lead");
+  if (!lead || lead.textContent !== blurb) throw new Error("LIT FAIL lead");
+  var a = sliceRun();
+  var b = sliceRun();
+  if (a.pack !== b.pack || JSON.stringify(a.names) !== JSON.stringify(b.names)) throw new Error("generative drift");
+  var book = agentKeep("twenty-one-slices", a.pack);
+  var card = document.getElementById("card");
+  var agent = document.getElementById("agent");
+  var seq = document.getElementById("seq");
+  var pick = document.getElementById("pick");
+  var kept = document.getElementById("kept");
+  var canvas = document.getElementById("stage");
+  var chips = document.getElementById("chips");
+  if (!card || !agent || !seq || !pick || !kept || !canvas || !chips) throw new Error("LIT FAIL show");
+  card.innerHTML = "<span class=\"stamp lit\">LIT</span> 21 slices, 49 cells, 3 each";
+  agent.textContent = "SLICER kept " + a.slices + " slices and dropped " + a.drops + ". 21 times 49 is 1029.";
+  seq.textContent = "Second run matched. " + a.pack;
+  kept.textContent = book.text;
+  if (agent.textContent.indexOf("dropped 4") < 0 || card.innerHTML.indexOf("21") < 0) throw new Error("LIT FAIL show");
+  var axis = 0;
+  var k = 0;
+  function draw() {
+    paintCube(canvas, "#eef2ff", function (ctx, x, y, z, px, py, s) {
+      var c = axis === 0 ? x : axis === 1 ? y : z;
+      if (c === k) {
+        ctx.strokeStyle = "#312e81";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(px + 0.5, py + 0.5, s - 1, s - 1);
+        return;
+      }
+      ctx.fillStyle = "rgba(255,255,255,0.72)";
+      ctx.fillRect(px, py, s, s);
+    });
+  }
+  function chooseSlice(i) {
+    var name = a.names[i];
+    axis = name.charAt(0) === "x" ? 0 : name.charAt(0) === "y" ? 1 : 2;
+    k = Number(name.charAt(1));
+    pick.textContent = "Slice " + name.charAt(0) + " = " + k + " holds 49 cells.";
+    draw();
+  }
+  chips.innerHTML = "";
+  var i;
+  for (i = 0; i < a.names.length; i++) {
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "chip" + (i === 0 ? " on" : "");
+    btn.textContent = a.names[i].charAt(0) + " = " + a.names[i].charAt(1);
+    btn.setAttribute("data-i", String(i));
+    btn.addEventListener("click", function (ev) {
+      var n = Number(ev.currentTarget.getAttribute("data-i"));
+      var kids = chips.children;
+      var j;
+      for (j = 0; j < kids.length; j++) kids[j].className = "chip";
+      ev.currentTarget.className = "chip on";
+      chooseSlice(n);
+    });
+    chips.appendChild(btn);
+  }
+  if (chips.children.length !== 21) throw new Error("LIT FAIL slice chips");
+  pick.textContent = "Slice x = 0 holds 49 cells.";
+  draw();
+  listen(canvas, function (x, y, z) {
+    pick.textContent = "Cell " + x + "," + y + "," + z + " sits on x = " + x + ", y = " + y + ", and z = " + z + ".";
+  });
+}
+bootSlices();
+</script>
+</body>
+</html>

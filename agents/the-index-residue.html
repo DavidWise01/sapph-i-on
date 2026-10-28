@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Index Residue - SaPpH{{i}}on</title>
+<style>
+:root { --ink:#164e63; --dim:#155e75; --accent:#0e7490; }
+* { box-sizing:border-box; }
+body {
+  margin:0; color:var(--ink);
+  font:16px/1.5 "Segoe UI", ui-sans-serif, sans-serif;
+  background:
+    radial-gradient(820px 440px at 0% 0%, #cffafe, transparent 62%),
+    radial-gradient(680px 420px at 100% 0%, #fff7ed, transparent 55%),
+    linear-gradient(165deg, #ecfeff, #fff7ed 70%, #ecfeff);
+  background-color:#ecfeff; min-height:100vh;
+}
+a { color:var(--accent); }
+header, main, footer { width:min(880px, calc(100% - 32px)); margin:0 auto; }
+header { padding:22px 0 0; }
+.src, .mono { font:13px/1.45 ui-monospace, Consolas, monospace; color:var(--dim); }
+h1 { margin:8px 0 0; font-size:clamp(28px, 5vw, 46px); letter-spacing:.03em; }
+.kicker { letter-spacing:.16em; font-size:12px; color:var(--accent); font-weight:700; }
+.stage { background:#fff; border:1px solid rgba(28,23,48,.12); border-radius:18px; padding:12px; margin:14px 0; }
+canvas { display:block; width:100%; height:auto; border-radius:12px; background:#ecfeff; }
+.row { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+button.chip { font:inherit; color:var(--ink); background:#fff; border:1px solid rgba(28,23,48,.16); border-radius:999px; padding:8px 12px; cursor:pointer; }
+button.chip.on { border-color:var(--accent); background:#cffafe; }
+.stamp { display:inline-block; padding:2px 8px; border-radius:999px; font:11px ui-monospace, Consolas, monospace; color:#fff; }
+.lit { background:#047857; } .amber { background:#b45309; } .wall { background:#be185d; }
+footer { color:var(--dim); font-size:13px; padding-bottom:28px; overflow-wrap:anywhere; }
+.src, .mono, p, a, h1, button { overflow-wrap:anywhere; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+<header>
+<div class="src"><a href="../">SaPpH{{i}}on</a> - agent - <a href="https://0root.ai/">0root.ai</a></div>
+<div class="kicker">AGENT - ORDER 7</div>
+<h1>The Index Residue</h1>
+<p id="lead">The cell index leaves a remainder equal to its x address, and the indices sum to 58653.</p>
+</header>
+<main>
+<div class="stage">
+<canvas id="stage" width="880" height="180" aria-label="The remainder of each cell index"></canvas>
+<div class="row" id="chips"></div>
+</div>
+<p class="mono" id="card">No report.</p>
+<p class="mono" id="agent"></p>
+<p class="mono" id="seq"></p>
+<p class="mono" id="pick">No cell selected.</p>
+<p class="mono" id="kept"></p>
+<p><span class="stamp lit">LIT</span> The index of a cell is x plus 7 times y plus 49 times z. Dividing by 7 leaves x, because 7 times y and 49 times z are multiples of 7 and x is 0 through 6. The agent CLERK visits the cells in index order and keeps a cell only when the remainder equals x. Every 7th index also tries the remainder x plus 1, and that claim is dropped. The kept indices sum to 58653. The gap runs from 343 to 0. A second run must match. A failed count throws.</p>
+<p><span class="stamp amber">AMBER</span> The agent is assigned this reading. The picture writes the remainder, which is the x address. The shells of color stay a coloring. They are not a filled magic cube. No Downloads file was copied. This page is not seated. It is not one of those 696.</p>
+<p><span class="stamp wall">WALL</span> 58653 is the base this door already uses for a world. This page does not rebuild that world, and it does not seat a cell. The remainder is arithmetic. It is not a claim about mind, physics, or authority. The walk was already full, so this page is not seated.</p>
+</main>
+<footer>
+David Lee Wise (ROOT0). Drafted by Grok (xAI) on 2026-10-28.
+Birth seal 72b5ae88b74be8d84a8bc06c42cf88f0bea69a12630582cf82423d323d4a464d. One host, <a href="https://davidwise01.github.io/sapph-i-on/agents/the-index-residue.html">https://davidwise01.github.io/sapph-i-on/agents/the-index-residue.html</a>.
+</footer>
+<script>
+"use strict";
+function residueRun() {
+  var kept = 0;
+  var sum = 0;
+  var drops = 0;
+  var gap = 343;
+  var attempt = 0;
+  var counts = [0, 0, 0, 0, 0, 0, 0];
+  var z, y, x, id;
+  for (z = 0; z < 7; z++) for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+    id = x + 7 * y + 49 * z;
+    attempt++;
+    if (attempt % 7 === 0) {
+      if (id % 7 === (x + 1) % 7) throw new Error("decoy kept");
+      drops++;
+    }
+    if (id % 7 !== x) throw new Error("LIT FAIL residue");
+    kept++;
+    sum += id;
+    counts[x]++;
+    gap--;
+  }
+  if (kept !== 343 || sum !== 58653 || gap !== 0 || drops !== 49) throw new Error("LIT FAIL residue " + kept + " " + sum + " " + drops);
+  var i;
+  for (i = 0; i < 7; i++) if (counts[i] !== 49) throw new Error("LIT FAIL residue bin");
+  var pack = "343|58653|0|49";
+  return { pack: pack, kept: 343, sum: 58653, gap: 0, drops: 49, counts: counts };
+}
+function agentKeep(id, pack) {
+  var key = "sapph-agent-kept";
+  var row = { pack: pack, act: "census" };
+  var book = {};
+  var raw = null;
+  try { raw = localStorage.getItem(key); }
+  catch (e) { throw new Error("persistent book"); }
+  if (raw) {
+    try { book = JSON.parse(raw); }
+    catch (e) { throw new Error("persistent book"); }
+  }
+  if (!book || typeof book !== "object" || Array.isArray(book)) throw new Error("persistent book");
+  var has = Object.prototype.hasOwnProperty.call(book, id);
+  var kept = has ? book[id] : null;
+  var text;
+  if (kept == null) {
+    row.visits = 1;
+    text = "This browser had no row for " + id + ". I wrote " + pack + ". The row is local. It is not the sealed list.";
+  } else {
+    if (typeof kept !== "object" || kept.pack !== pack || kept.act !== "census") throw new Error("persistent drift");
+    var prev = typeof kept.visits === "number" && kept.visits >= 0 ? kept.visits : 0;
+    row.visits = prev + 1;
+    text = "This browser still holds " + id + ". Opened " + row.visits + " times here. The row is local. It is not the sealed list.";
+  }
+  book[id] = row;
+  try { localStorage.setItem(key, JSON.stringify(book)); }
+  catch (e) { throw new Error("persistent book"); }
+  var written;
+  try { written = JSON.parse(localStorage.getItem(key)); }
+  catch (e) { throw new Error("persistent drift"); }
+  if (!written || !written[id] || written[id].pack !== pack || written[id].visits !== row.visits || written[id].act !== "census") throw new Error("persistent drift");
+  return { text: text, visits: row.visits, pack: pack };
+}
+function paintCube(canvas, bg, drawCell) {
+  var ctx = canvas.getContext("2d");
+  var w = canvas.width;
+  var gap = 10;
+  var panel = Math.floor((w - gap * 8) / 7);
+  var cell = Math.floor((panel - 6) / 7);
+  var yTop = 24;
+  var colors = ["#e11d48", "#f97316", "#facc15", "#22c55e", "#2563eb", "#92400e", "#db2777"];
+  var boxes = [];
+  ctx.clearRect(0, 0, w, canvas.height);
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, w, canvas.height);
+  var z, y, x, x0, px, py, color;
+  for (z = 0; z < 7; z++) {
+    x0 = gap + z * (panel + gap);
+    ctx.fillStyle = "rgba(255,255,255,0.72)";
+    ctx.fillRect(x0, yTop - 4, panel, 7 * (cell + 1) + 8);
+    ctx.fillStyle = "#3f3f46";
+    ctx.font = "12px Consolas, monospace";
+    ctx.fillText("z " + z, x0 + 4, 16);
+    for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+      px = x0 + 3 + x * (cell + 1);
+      py = yTop + y * (cell + 1);
+      color = (x + y + z) % 7;
+      ctx.fillStyle = colors[color];
+      ctx.fillRect(px, py, cell, cell);
+      drawCell(ctx, x, y, z, px, py, cell, color);
+      boxes.push({ x: x, y: y, z: z, px: px, py: py, s: cell });
+    }
+  }
+  canvas._boxes = boxes;
+}
+function listen(canvas, choose) {
+  canvas.addEventListener("click", function (ev) {
+    var rect = canvas.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+    var cx = (ev.clientX - rect.left) * (canvas.width / rect.width);
+    var cy = (ev.clientY - rect.top) * (canvas.height / rect.height);
+    var i, b;
+    for (i = 0; i < canvas._boxes.length; i++) {
+      b = canvas._boxes[i];
+      if (cx >= b.px && cx < b.px + b.s && cy >= b.py && cy < b.py + b.s) {
+        choose(b.x, b.y, b.z);
+        return;
+      }
+    }
+  });
+}
+function bootResidue() {
+  var blurb = "The cell index leaves a remainder equal to its x address, and the indices sum to 58653.";
+  var lead = document.getElementById("lead");
+  if (!lead || lead.textContent !== blurb) throw new Error("LIT FAIL lead");
+  var a = residueRun();
+  var b = residueRun();
+  if (a.pack !== b.pack || JSON.stringify(a.counts) !== JSON.stringify(b.counts)) throw new Error("generative drift");
+  var book = agentKeep("index-residue", a.pack);
+  var card = document.getElementById("card");
+  var agent = document.getElementById("agent");
+  var seq = document.getElementById("seq");
+  var pick = document.getElementById("pick");
+  var kept = document.getElementById("kept");
+  var canvas = document.getElementById("stage");
+  var chips = document.getElementById("chips");
+  if (!card || !agent || !seq || !pick || !kept || !canvas || !chips) throw new Error("LIT FAIL show");
+  card.innerHTML = "<span class=\"stamp lit\">LIT</span> remainder x, sum 58653";
+  agent.textContent = "CLERK kept " + a.kept + " cells and dropped " + a.drops + ". Gap 343 to 0. Sum " + a.sum + ".";
+  seq.textContent = "Second run matched. " + a.pack;
+  kept.textContent = book.text;
+  if (agent.textContent.indexOf("dropped 49") < 0 || card.innerHTML.indexOf("58653") < 0) throw new Error("LIT FAIL show");
+  var inks = ["#ffffff", "#ffffff", "#1c1730", "#ffffff", "#ffffff", "#ffffff", "#ffffff"];
+  var only = -1;
+  function draw() {
+    paintCube(canvas, "#ecfeff", function (ctx, x, y, z, px, py, s, color) {
+      if (only >= 0 && x !== only) {
+        ctx.fillStyle = "rgba(255,255,255,0.78)";
+        ctx.fillRect(px, py, s, s);
+        return;
+      }
+      ctx.fillStyle = inks[color];
+      ctx.font = "bold 11px Consolas, monospace";
+      ctx.fillText(String(x), px + 3, py + s - 2);
+    });
+  }
+  function choose(x, y, z) {
+    var id = x + 7 * y + 49 * z;
+    pick.textContent = "Index " + id + " leaves " + (id % 7) + ", and x is " + x + ".";
+    if (id % 7 !== x) throw new Error("LIT FAIL residue");
+  }
+  chips.innerHTML = "";
+  var r;
+  for (r = 0; r < 7; r++) {
+    if (a.counts[r] !== 49) throw new Error("LIT FAIL residue bin");
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "chip";
+    btn.textContent = "x = " + r + " holds " + a.counts[r];
+    btn.setAttribute("data-r", String(r));
+    btn.addEventListener("click", function (ev) {
+      only = Number(ev.currentTarget.getAttribute("data-r"));
+      var kids = chips.children;
+      var j;
+      for (j = 0; j < kids.length; j++) kids[j].className = "chip";
+      ev.currentTarget.className = "chip on";
+      pick.textContent = "Remainder " + only + " is x address " + only + ", and " + a.counts[only] + " cells.";
+      draw();
+    });
+    chips.appendChild(btn);
+  }
+  pick.textContent = "Index 0 leaves 0, and x is 0. The indices sum to 58653.";
+  draw();
+  listen(canvas, choose);
+}
+bootResidue();
+</script>
+</body>
+</html>

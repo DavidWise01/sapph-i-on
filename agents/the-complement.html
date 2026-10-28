@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Complement - SaPpH{{i}}on</title>
+<style>
+:root { --ink:#14532d; --dim:#166534; --accent:#15803d; }
+* { box-sizing:border-box; }
+body {
+  margin:0; color:var(--ink);
+  font:16px/1.5 "Segoe UI", ui-sans-serif, sans-serif;
+  background:
+    radial-gradient(820px 440px at 0% 0%, #dcfce7, transparent 62%),
+    radial-gradient(680px 420px at 100% 0%, #fff7ed, transparent 55%),
+    linear-gradient(165deg, #f0fdf4, #fff7ed 70%, #f0fdf4);
+  background-color:#f0fdf4; min-height:100vh;
+}
+a { color:var(--accent); }
+header, main, footer { width:min(880px, calc(100% - 32px)); margin:0 auto; }
+header { padding:22px 0 0; }
+.src, .mono { font:13px/1.45 ui-monospace, Consolas, monospace; color:var(--dim); }
+h1 { margin:8px 0 0; font-size:clamp(28px, 5vw, 46px); letter-spacing:.03em; }
+.kicker { letter-spacing:.16em; font-size:12px; color:var(--accent); font-weight:700; }
+.stage { background:#fff; border:1px solid rgba(28,23,48,.12); border-radius:18px; padding:12px; margin:14px 0; }
+canvas { display:block; width:100%; height:auto; border-radius:12px; background:#f0fdf4; }
+.row { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+button.chip { font:inherit; color:var(--ink); background:#fff; border:1px solid rgba(28,23,48,.16); border-radius:999px; padding:8px 12px; cursor:pointer; }
+button.chip.on { border-color:var(--accent); background:#dcfce7; }
+.stamp { display:inline-block; padding:2px 8px; border-radius:999px; font:11px ui-monospace, Consolas, monospace; color:#fff; }
+.lit { background:#047857; } .amber { background:#b45309; } .wall { background:#be185d; }
+footer { color:var(--dim); font-size:13px; padding-bottom:28px; overflow-wrap:anywhere; }
+.src, .mono, p, a, h1, button { overflow-wrap:anywhere; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+<header>
+<div class="src"><a href="../">SaPpH{{i}}on</a> - agent - <a href="https://0root.ai/">0root.ai</a></div>
+<div class="kicker">AGENT - ORDER 7</div>
+<h1>The Complement</h1>
+<p id="lead">Each cell pairs with the opposite corner, and the keeper is the only cell that pairs with itself.</p>
+</header>
+<main>
+<div class="stage">
+<canvas id="stage" width="880" height="180" aria-label="A cell and the cell at the opposite corner"></canvas>
+<div class="row" id="chips"></div>
+</div>
+<p class="mono" id="card">No report.</p>
+<p class="mono" id="agent"></p>
+<p class="mono" id="seq"></p>
+<p class="mono" id="pick">No cell selected.</p>
+<p class="mono" id="kept"></p>
+<p><span class="stamp lit">LIT</span> Each cell (x, y, z) pairs with (6 - x, 6 - y, 6 - z). The three sums are 6. The keeper (3,3,3) is the only cell that pairs with itself. The other cells form 171 pairs, and 171 times 2 plus 1 is 343. The agent TWIN keeps a pair only when the three sums are 6 and the pair is new. Every 8th cell also proposes (5 - x, y, z), and that proposal is dropped. A second run must match. A failed count throws.</p>
+<p><span class="stamp amber">AMBER</span> The agent is assigned this pairing. The picture outlines the selected cell and its pair. The shells of color stay a coloring. They are not a filled magic cube. No Downloads file was copied. This page is not seated. It is not one of those 696.</p>
+<p><span class="stamp wall">WALL</span> This page checks the pairs. It does not place numbers on the cells, and it does not claim a magic line. The walk was already full, so this page is not seated.</p>
+</main>
+<footer>
+David Lee Wise (ROOT0). Drafted by Grok (xAI) on 2026-10-28.
+Birth seal 366caa6a0161a29dfc4882ac3a1690274077e4010bcc4975e3471f615bfc2823. One host, <a href="https://davidwise01.github.io/sapph-i-on/agents/the-complement.html">https://davidwise01.github.io/sapph-i-on/agents/the-complement.html</a>.
+</footer>
+<script>
+"use strict";
+function complementRun() {
+  var pairs = 0;
+  var self = 0;
+  var x, y, z, id, idt;
+  for (z = 0; z < 7; z++) for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+    id = x + 7 * y + 49 * z;
+    idt = (6 - x) + 7 * (6 - y) + 49 * (6 - z);
+    if (x + (6 - x) !== 6 || y + (6 - y) !== 6 || z + (6 - z) !== 6) throw new Error("LIT FAIL sums");
+    if (id === idt) self++;
+    else if (id < idt) pairs++;
+  }
+  if (pairs !== 171 || self !== 1 || pairs * 2 + self !== 343) throw new Error("LIT FAIL pairs");
+  var seen = {};
+  var kept = 0;
+  var dropped = 0;
+  var decoy = 0;
+  var keptSelf = 0;
+  var keptPairs = 0;
+  function consider(ax, ay, az, bx, by, bz, isDecoy) {
+    var sums = ax + bx === 6 && ay + by === 6 && az + bz === 6;
+    var inb = bx >= 0 && bx < 7 && by >= 0 && by < 7 && bz >= 0 && bz < 7;
+    var ida = ax + 7 * ay + 49 * az;
+    var idb = bx + 7 * by + 49 * bz;
+    var lo = ida < idb ? ida : idb;
+    var hi = ida < idb ? idb : ida;
+    var key = lo + ":" + hi;
+    var fresh = !seen[key];
+    if (sums && inb && fresh) {
+      if (isDecoy) throw new Error("decoy kept");
+      seen[key] = 1;
+      kept++;
+      if (ida === idb) keptSelf++;
+      else keptPairs++;
+    } else {
+      dropped++;
+      if (isDecoy) decoy++;
+    }
+  }
+  var n = 0;
+  for (z = 0; z < 7; z++) for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+    n++;
+    if (n % 8 === 0) consider(x, y, z, 5 - x, y, z, true);
+    consider(x, y, z, 6 - x, 6 - y, 6 - z, false);
+  }
+  if (n !== 343 || kept !== 172 || keptPairs !== 171 || keptSelf !== 1) throw new Error("LIT FAIL twin " + kept);
+  if (decoy !== 42 || dropped !== 213) throw new Error("LIT FAIL twin drop " + decoy + " " + dropped);
+  var pack = "171|1|172|213|3,3,3";
+  return { pack: pack, pairs: 171, self: 1, kept: 172, dropped: 213, decoy: 42 };
+}
+function agentKeep(id, pack) {
+  var key = "sapph-agent-kept";
+  var row = { pack: pack, act: "census" };
+  var book = {};
+  var raw = null;
+  try { raw = localStorage.getItem(key); }
+  catch (e) { throw new Error("persistent book"); }
+  if (raw) {
+    try { book = JSON.parse(raw); }
+    catch (e) { throw new Error("persistent book"); }
+  }
+  if (!book || typeof book !== "object" || Array.isArray(book)) throw new Error("persistent book");
+  var has = Object.prototype.hasOwnProperty.call(book, id);
+  var kept = has ? book[id] : null;
+  var text;
+  if (kept == null) {
+    row.visits = 1;
+    text = "This browser had no row for " + id + ". I wrote " + pack + ". The row is local. It is not the sealed list.";
+  } else {
+    if (typeof kept !== "object" || kept.pack !== pack || kept.act !== "census") throw new Error("persistent drift");
+    var prev = typeof kept.visits === "number" && kept.visits >= 0 ? kept.visits : 0;
+    row.visits = prev + 1;
+    text = "This browser still holds " + id + ". Opened " + row.visits + " times here. The row is local. It is not the sealed list.";
+  }
+  book[id] = row;
+  try { localStorage.setItem(key, JSON.stringify(book)); }
+  catch (e) { throw new Error("persistent book"); }
+  var written;
+  try { written = JSON.parse(localStorage.getItem(key)); }
+  catch (e) { throw new Error("persistent drift"); }
+  if (!written || !written[id] || written[id].pack !== pack || written[id].visits !== row.visits || written[id].act !== "census") throw new Error("persistent drift");
+  return { text: text, visits: row.visits, pack: pack };
+}
+function paintCube(canvas, bg, drawCell) {
+  var ctx = canvas.getContext("2d");
+  var w = canvas.width;
+  var gap = 10;
+  var panel = Math.floor((w - gap * 8) / 7);
+  var cell = Math.floor((panel - 6) / 7);
+  var yTop = 24;
+  var colors = ["#e11d48", "#f97316", "#facc15", "#22c55e", "#2563eb", "#92400e", "#db2777"];
+  var boxes = [];
+  ctx.clearRect(0, 0, w, canvas.height);
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, w, canvas.height);
+  var z, y, x, x0, px, py, color;
+  for (z = 0; z < 7; z++) {
+    x0 = gap + z * (panel + gap);
+    ctx.fillStyle = "rgba(255,255,255,0.72)";
+    ctx.fillRect(x0, yTop - 4, panel, 7 * (cell + 1) + 8);
+    ctx.fillStyle = "#3f3f46";
+    ctx.font = "12px Consolas, monospace";
+    ctx.fillText("z " + z, x0 + 4, 16);
+    for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+      px = x0 + 3 + x * (cell + 1);
+      py = yTop + y * (cell + 1);
+      color = (x + y + z) % 7;
+      ctx.fillStyle = colors[color];
+      ctx.fillRect(px, py, cell, cell);
+      drawCell(ctx, x, y, z, px, py, cell, color);
+      boxes.push({ x: x, y: y, z: z, px: px, py: py, s: cell });
+    }
+  }
+  canvas._boxes = boxes;
+}
+function listen(canvas, choose) {
+  canvas.addEventListener("click", function (ev) {
+    var rect = canvas.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+    var cx = (ev.clientX - rect.left) * (canvas.width / rect.width);
+    var cy = (ev.clientY - rect.top) * (canvas.height / rect.height);
+    var i, b;
+    for (i = 0; i < canvas._boxes.length; i++) {
+      b = canvas._boxes[i];
+      if (cx >= b.px && cx < b.px + b.s && cy >= b.py && cy < b.py + b.s) {
+        choose(b.x, b.y, b.z);
+        return;
+      }
+    }
+  });
+}
+function bootTwin() {
+  var blurb = "Each cell pairs with the opposite corner, and the keeper is the only cell that pairs with itself.";
+  var lead = document.getElementById("lead");
+  if (!lead || lead.textContent !== blurb) throw new Error("LIT FAIL lead");
+  var a = complementRun();
+  var b = complementRun();
+  if (a.pack !== b.pack) throw new Error("generative drift");
+  var book = agentKeep("complement", a.pack);
+  var card = document.getElementById("card");
+  var agent = document.getElementById("agent");
+  var seq = document.getElementById("seq");
+  var pick = document.getElementById("pick");
+  var kept = document.getElementById("kept");
+  var canvas = document.getElementById("stage");
+  var chips = document.getElementById("chips");
+  if (!card || !agent || !seq || !pick || !kept || !canvas || !chips) throw new Error("LIT FAIL show");
+  card.innerHTML = "<span class=\"stamp lit\">LIT</span> 171 pairs, 1 self-pair, 343 cells";
+  agent.textContent = "TWIN kept " + a.kept + " pairs and dropped " + a.dropped + ". Decoys " + a.decoy + ". The keeper is the only self-pair.";
+  seq.textContent = "Second run matched. " + a.pack;
+  kept.textContent = book.text;
+  if (agent.textContent.indexOf("dropped 213") < 0 || card.innerHTML.indexOf("171") < 0) throw new Error("LIT FAIL show");
+  var sel = [3, 3, 3];
+  function draw() {
+    paintCube(canvas, "#f0fdf4", function (ctx, x, y, z, px, py, s) {
+      var hit = (x === sel[0] && y === sel[1] && z === sel[2]) || (x === 6 - sel[0] && y === 6 - sel[1] && z === 6 - sel[2]);
+      if (!hit) return;
+      ctx.strokeStyle = "#14532d";
+      ctx.lineWidth = 2;
+      ctx.strokeRect(px + 0.5, py + 0.5, s - 1, s - 1);
+    });
+  }
+  function choose(x, y, z) {
+    sel = [x, y, z];
+    var tx = 6 - x;
+    var ty = 6 - y;
+    var tz = 6 - z;
+    var self = x === tx && y === ty && z === tz;
+    pick.textContent = self
+      ? "Cell " + x + "," + y + "," + z + " pairs with itself."
+      : "Cell " + x + "," + y + "," + z + " pairs with " + tx + "," + ty + "," + tz + ".";
+    draw();
+  }
+  chips.innerHTML = "";
+  var corners = [[0, 0, 0], [3, 3, 3], [6, 6, 6]];
+  var labels = ["0,0,0", "keeper", "6,6,6"];
+  var i;
+  for (i = 0; i < corners.length; i++) {
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "chip" + (i === 1 ? " on" : "");
+    btn.textContent = labels[i];
+    btn.setAttribute("data-i", String(i));
+    btn.addEventListener("click", function (ev) {
+      var n = Number(ev.currentTarget.getAttribute("data-i"));
+      var kids = chips.children;
+      var j;
+      for (j = 0; j < kids.length; j++) kids[j].className = "chip";
+      ev.currentTarget.className = "chip on";
+      choose(corners[n][0], corners[n][1], corners[n][2]);
+    });
+    chips.appendChild(btn);
+  }
+  pick.textContent = "Cell 3,3,3 pairs with itself.";
+  draw();
+  listen(canvas, choose);
+}
+bootTwin();
+</script>
+</body>
+</html>

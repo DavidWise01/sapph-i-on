@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Serpentine - SaPpH{{i}}on</title>
+<style>
+:root { --ink:#713f12; --dim:#854d0e; --accent:#a16207; }
+* { box-sizing:border-box; }
+body {
+  margin:0; color:var(--ink);
+  font:16px/1.5 "Segoe UI", ui-sans-serif, sans-serif;
+  background:
+    radial-gradient(820px 440px at 0% 0%, #fef9c3, transparent 62%),
+    radial-gradient(680px 420px at 100% 0%, #fff7ed, transparent 55%),
+    linear-gradient(165deg, #fefce8, #fff7ed 70%, #fefce8);
+  background-color:#fefce8; min-height:100vh;
+}
+a { color:var(--accent); }
+header, main, footer { width:min(880px, calc(100% - 32px)); margin:0 auto; }
+header { padding:22px 0 0; }
+.src, .mono { font:13px/1.45 ui-monospace, Consolas, monospace; color:var(--dim); }
+h1 { margin:8px 0 0; font-size:clamp(28px, 5vw, 46px); letter-spacing:.03em; }
+.kicker { letter-spacing:.16em; font-size:12px; color:var(--accent); font-weight:700; }
+.stage { background:#fff; border:1px solid rgba(28,23,48,.12); border-radius:18px; padding:12px; margin:14px 0; }
+canvas { display:block; width:100%; height:auto; border-radius:12px; background:#fefce8; }
+.row { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+button.chip { font:inherit; color:var(--ink); background:#fff; border:1px solid rgba(28,23,48,.16); border-radius:999px; padding:8px 12px; cursor:pointer; }
+button.chip.on { border-color:var(--accent); background:#fef9c3; }
+.stamp { display:inline-block; padding:2px 8px; border-radius:999px; font:11px ui-monospace, Consolas, monospace; color:#fff; }
+.lit { background:#047857; } .amber { background:#b45309; } .wall { background:#be185d; }
+footer { color:var(--dim); font-size:13px; padding-bottom:28px; overflow-wrap:anywhere; }
+.src, .mono, p, a, h1, button { overflow-wrap:anywhere; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+<header>
+<div class="src"><a href="../">SaPpH{{i}}on</a> - agent - <a href="https://0root.ai/">0root.ai</a></div>
+<div class="kicker">AGENT - ORDER 7</div>
+<h1>The Serpentine</h1>
+<p id="lead">One face-neighbor walk visits each of the 343 cells once.</p>
+</header>
+<main>
+<div class="stage">
+<canvas id="stage" width="880" height="180" aria-label="One face-neighbor walk through every cell"></canvas>
+<div class="row" id="chips"></div>
+</div>
+<p class="mono" id="card">No report.</p>
+<p class="mono" id="agent"></p>
+<p class="mono" id="seq"></p>
+<p class="mono" id="pick">No cell selected.</p>
+<p class="mono" id="kept"></p>
+<p><span class="stamp lit">LIT</span> One walk visits each of the 343 cells once. The row reverses at each step of y, and the layer reverses at each step of z, so consecutive cells differ by 1 in exactly one coordinate. That is 342 face steps. The agent SERPENT keeps a step only when the next cell is an unused face neighbor. Every 5th attempt proposes a jump of 2 and is dropped. The unvisited count runs from 343 to 0. A second run must match. A failed count throws.</p>
+<p><span class="stamp amber">AMBER</span> The agent is assigned this walk. The picture brightens along the visits it kept. The shells of color stay a coloring. They are not a filled magic cube. No Downloads file was copied. This page is not seated. It is not one of those 696.</p>
+<p><span class="stamp wall">WALL</span> The walk is a path. It is not a closed loop, and the last cell does not step back to the first. This page does not claim a cycle. The walk was already full, so this page is not seated.</p>
+</main>
+<footer>
+David Lee Wise (ROOT0). Drafted by Grok (xAI) on 2026-10-28.
+Birth seal 8c7c83bebffbed5d830465f9904778307cee280614487cebb6634879c7df89bf. One host, <a href="https://davidwise01.github.io/sapph-i-on/agents/the-serpentine.html">https://davidwise01.github.io/sapph-i-on/agents/the-serpentine.html</a>.
+</footer>
+<script>
+"use strict";
+function serpentRun() {
+  var cells = [];
+  var used = {};
+  var row = 0;
+  var z, yi, xi, y0, yDir, x0, xDir, yy, xx, cid;
+  for (z = 0; z < 7; z++) {
+    yDir = z % 2 === 0 ? 1 : -1;
+    y0 = z % 2 === 0 ? 0 : 6;
+    for (yi = 0; yi < 7; yi++) {
+      yy = y0 + yi * yDir;
+      xDir = row % 2 === 0 ? 1 : -1;
+      x0 = row % 2 === 0 ? 0 : 6;
+      for (xi = 0; xi < 7; xi++) {
+        xx = x0 + xi * xDir;
+        cid = xx + "," + yy + "," + z;
+        if (used[cid]) throw new Error("LIT FAIL serpent dup");
+        used[cid] = 1;
+        cells.push([xx, yy, z]);
+      }
+      row++;
+    }
+  }
+  if (cells.length !== 343) throw new Error("LIT FAIL serpent count");
+  var steps = 0;
+  var i;
+  for (i = 1; i < cells.length; i++) {
+    var dx = Math.abs(cells[i][0] - cells[i - 1][0]);
+    var dy = Math.abs(cells[i][1] - cells[i - 1][1]);
+    var dz = Math.abs(cells[i][2] - cells[i - 1][2]);
+    if (dx + dy + dz !== 1) throw new Error("LIT FAIL serpent step");
+    steps++;
+  }
+  if (steps !== 342) throw new Error("LIT FAIL serpent steps");
+  if (cells[0][0] !== 0 || cells[0][1] !== 0 || cells[0][2] !== 0) throw new Error("LIT FAIL serpent start");
+  var last = cells[342];
+  if (last[0] !== 6 || last[1] !== 6 || last[2] !== 6) throw new Error("LIT FAIL serpent end " + last.join(","));
+  var pos = cells[0];
+  var seen = {};
+  seen[pos.join(",")] = 1;
+  var kept = 1;
+  var dropped = 0;
+  var attempt = 0;
+  i = 1;
+  while (i < cells.length) {
+    attempt++;
+    var decoy = attempt % 5 === 0;
+    var proposal = decoy ? [pos[0] + 2, pos[1], pos[2]] : cells[i];
+    var inside = proposal[0] >= 0 && proposal[0] < 7 && proposal[1] >= 0 && proposal[1] < 7 && proposal[2] >= 0 && proposal[2] < 7;
+    var face = inside && Math.abs(proposal[0] - pos[0]) + Math.abs(proposal[1] - pos[1]) + Math.abs(proposal[2] - pos[2]) === 1;
+    var fresh = face && !seen[proposal.join(",")];
+    if (fresh) {
+      if (decoy) throw new Error("decoy kept");
+      pos = [proposal[0], proposal[1], proposal[2]];
+      seen[pos.join(",")] = 1;
+      kept++;
+      i++;
+    } else {
+      if (!decoy) throw new Error("LIT FAIL serpent true");
+      dropped++;
+    }
+    if (attempt > 500) throw new Error("LIT FAIL serpent loop");
+  }
+  if (kept !== 343 || dropped !== 85) throw new Error("LIT FAIL serpent agent " + kept + " " + dropped);
+  var pack = "343|342|0|85|0,0,0|6,6,6";
+  return { pack: pack, cells: 343, steps: 342, unvisited: 0, drops: 85, start: "0,0,0", end: "6,6,6", path: cells };
+}
+function agentKeep(id, pack) {
+  var key = "sapph-agent-kept";
+  var row = { pack: pack, act: "census" };
+  var book = {};
+  var raw = null;
+  try { raw = localStorage.getItem(key); }
+  catch (e) { throw new Error("persistent book"); }
+  if (raw) {
+    try { book = JSON.parse(raw); }
+    catch (e) { throw new Error("persistent book"); }
+  }
+  if (!book || typeof book !== "object" || Array.isArray(book)) throw new Error("persistent book");
+  var has = Object.prototype.hasOwnProperty.call(book, id);
+  var kept = has ? book[id] : null;
+  var text;
+  if (kept == null) {
+    row.visits = 1;
+    text = "This browser had no row for " + id + ". I wrote " + pack + ". The row is local. It is not the sealed list.";
+  } else {
+    if (typeof kept !== "object" || kept.pack !== pack || kept.act !== "census") throw new Error("persistent drift");
+    var prev = typeof kept.visits === "number" && kept.visits >= 0 ? kept.visits : 0;
+    row.visits = prev + 1;
+    text = "This browser still holds " + id + ". Opened " + row.visits + " times here. The row is local. It is not the sealed list.";
+  }
+  book[id] = row;
+  try { localStorage.setItem(key, JSON.stringify(book)); }
+  catch (e) { throw new Error("persistent book"); }
+  var written;
+  try { written = JSON.parse(localStorage.getItem(key)); }
+  catch (e) { throw new Error("persistent drift"); }
+  if (!written || !written[id] || written[id].pack !== pack || written[id].visits !== row.visits || written[id].act !== "census") throw new Error("persistent drift");
+  return { text: text, visits: row.visits, pack: pack };
+}
+function paintCube(canvas, bg, drawCell) {
+  var ctx = canvas.getContext("2d");
+  var w = canvas.width;
+  var gap = 10;
+  var panel = Math.floor((w - gap * 8) / 7);
+  var cell = Math.floor((panel - 6) / 7);
+  var yTop = 24;
+  var colors = ["#e11d48", "#f97316", "#facc15", "#22c55e", "#2563eb", "#92400e", "#db2777"];
+  var boxes = [];
+  ctx.clearRect(0, 0, w, canvas.height);
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, w, canvas.height);
+  var z, y, x, x0, px, py, color;
+  for (z = 0; z < 7; z++) {
+    x0 = gap + z * (panel + gap);
+    ctx.fillStyle = "rgba(255,255,255,0.72)";
+    ctx.fillRect(x0, yTop - 4, panel, 7 * (cell + 1) + 8);
+    ctx.fillStyle = "#3f3f46";
+    ctx.font = "12px Consolas, monospace";
+    ctx.fillText("z " + z, x0 + 4, 16);
+    for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+      px = x0 + 3 + x * (cell + 1);
+      py = yTop + y * (cell + 1);
+      color = (x + y + z) % 7;
+      ctx.fillStyle = colors[color];
+      ctx.fillRect(px, py, cell, cell);
+      drawCell(ctx, x, y, z, px, py, cell, color);
+      boxes.push({ x: x, y: y, z: z, px: px, py: py, s: cell });
+    }
+  }
+  canvas._boxes = boxes;
+}
+function strokeChain(canvas) {
+  var cells = canvas._chain;
+  if (!cells) return;
+  var ctx = canvas.getContext("2d");
+  var at = {};
+  var i, b, a;
+  for (i = 0; i < canvas._boxes.length; i++) {
+    b = canvas._boxes[i];
+    at[b.x + "," + b.y + "," + b.z] = b;
+  }
+  ctx.strokeStyle = "#1c1730";
+  ctx.lineWidth = 1.5;
+  for (i = 1; i < cells.length; i++) {
+    a = at[cells[i - 1].join(",")];
+    b = at[cells[i].join(",")];
+    if (!a || !b) throw new Error("LIT FAIL paint");
+    if (a.z !== b.z) continue;
+    ctx.beginPath();
+    ctx.moveTo(a.px + a.s / 2, a.py + a.s / 2);
+    ctx.lineTo(b.px + b.s / 2, b.py + b.s / 2);
+    ctx.stroke();
+  }
+}
+function listen(canvas, choose) {
+  canvas.addEventListener("click", function (ev) {
+    var rect = canvas.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+    var cx = (ev.clientX - rect.left) * (canvas.width / rect.width);
+    var cy = (ev.clientY - rect.top) * (canvas.height / rect.height);
+    var i, b;
+    for (i = 0; i < canvas._boxes.length; i++) {
+      b = canvas._boxes[i];
+      if (cx >= b.px && cx < b.px + b.s && cy >= b.py && cy < b.py + b.s) {
+        choose(b.x, b.y, b.z);
+        return;
+      }
+    }
+  });
+}
+function bootSerpent() {
+  var blurb = "One face-neighbor walk visits each of the 343 cells once.";
+  var lead = document.getElementById("lead");
+  if (!lead || lead.textContent !== blurb) throw new Error("LIT FAIL lead");
+  var a = serpentRun();
+  var b = serpentRun();
+  if (a.pack !== b.pack || JSON.stringify(a.path) !== JSON.stringify(b.path)) throw new Error("generative drift");
+  var book = agentKeep("serpentine", a.pack);
+  var card = document.getElementById("card");
+  var agent = document.getElementById("agent");
+  var seq = document.getElementById("seq");
+  var pick = document.getElementById("pick");
+  var kept = document.getElementById("kept");
+  var canvas = document.getElementById("stage");
+  var chips = document.getElementById("chips");
+  if (!card || !agent || !seq || !pick || !kept || !canvas || !chips) throw new Error("LIT FAIL show");
+  card.innerHTML = "<span class=\"stamp lit\">LIT</span> 343 cells, 342 face steps";
+  agent.textContent = "SERPENT kept 342 steps and dropped " + a.drops + ". Unvisited 343 to 0. End 6,6,6.";
+  seq.textContent = "Second run matched. " + a.pack;
+  kept.textContent = book.text;
+  if (agent.textContent.indexOf("dropped 85") < 0 || card.innerHTML.indexOf("342") < 0) throw new Error("LIT FAIL show");
+  var at = {};
+  var i;
+  for (i = 0; i < a.path.length; i++) at[a.path[i].join(",")] = i;
+  var selected = 0;
+  function draw() {
+    canvas._chain = a.path;
+    paintCube(canvas, "#fefce8", function (ctx, x, y, z, px, py, s) {
+      var n = at[x + "," + y + "," + z];
+      var alpha = 0.18 + 0.72 * (n / 342);
+      ctx.fillStyle = "rgba(255,255,255," + alpha + ")";
+      ctx.fillRect(px + 2, py + 2, s - 4, s - 4);
+      if (n === selected) {
+        ctx.strokeStyle = "#1c1730";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(px + 0.5, py + 0.5, s - 1, s - 1);
+      }
+    });
+    strokeChain(canvas);
+  }
+  function choose(x, y, z) {
+    selected = at[x + "," + y + "," + z];
+    pick.textContent = "Visit " + selected + " at " + x + "," + y + "," + z + ".";
+    draw();
+  }
+  chips.innerHTML = "";
+  var marks = [0, 171, 342];
+  var labels = ["start", "middle", "end"];
+  for (i = 0; i < marks.length; i++) {
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "chip" + (i === 0 ? " on" : "");
+    btn.textContent = labels[i] + " " + marks[i];
+    btn.setAttribute("data-i", String(marks[i]));
+    btn.addEventListener("click", function (ev) {
+      var n = Number(ev.currentTarget.getAttribute("data-i"));
+      var cell = a.path[n];
+      var kids = chips.children;
+      var j;
+      for (j = 0; j < kids.length; j++) kids[j].className = "chip";
+      ev.currentTarget.className = "chip on";
+      choose(cell[0], cell[1], cell[2]);
+    });
+    chips.appendChild(btn);
+  }
+  pick.textContent = "Visit 0 at 0,0,0.";
+  draw();
+  listen(canvas, choose);
+}
+bootSerpent();
+</script>
+</body>
+</html>

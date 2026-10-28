@@ -1,0 +1,57 @@
+[
+  {
+    "file": "the-keeper-path.html",
+    "title": "The Keeper Path",
+    "slug": "the-keeper-path",
+    "bytes": 14198,
+    "sha256": "0c128207d354d37b0de094ecd2086fff78f91f2430d7a201ecc4e4690cbc6c56",
+    "birth": "eab3fe330ecfee8f5bcd6de1b797d62fdb23fcf8db3a516c7c11d6e4aca420c2",
+    "ways": 1680,
+    "length": 9,
+    "drops": 2
+  },
+  {
+    "file": "the-complement.html",
+    "title": "The Complement",
+    "slug": "the-complement",
+    "bytes": 11910,
+    "sha256": "7b0fe371d22ffca1fe0fee3c54f8a17f3a8bf6c6df1d1c27856bc3e92370d28e",
+    "birth": "366caa6a0161a29dfc4882ac3a1690274077e4010bcc4975e3471f615bfc2823",
+    "pairs": 171,
+    "self": 1
+  },
+  {
+    "file": "the-serpentine.html",
+    "title": "The Serpentine",
+    "slug": "the-serpentine",
+    "bytes": 13249,
+    "sha256": "8355671854de91adbf84230a991af7123bcba9955e67ca4c3cd08b3012684200",
+    "birth": "8c7c83bebffbed5d830465f9904778307cee280614487cebb6634879c7df89bf",
+    "cells": 343,
+    "steps": 342,
+    "drops": 85
+  },
+  {
+    "file": "the-twenty-one-slices.html",
+    "title": "The Twenty-One Slices",
+    "slug": "the-twenty-one-slices",
+    "bytes": 11532,
+    "sha256": "3e68bd43cfce4dcfd246916f8cb9c504433f15d0192465c9efc316f93139fb16",
+    "birth": "d9929fb74f9c91226af3e5a30b81aa4048199a1afbb1b6f358cfd6d49ac40424",
+    "slices": 21,
+    "each": 49,
+    "product": 1029,
+    "cover": 3
+  },
+  {
+    "file": "the-index-residue.html",
+    "title": "The Index Residue",
+    "slug": "the-index-residue",
+    "bytes": 11145,
+    "sha256": "99a9c9d170029be8d6b67dd640790f5b133716c4e2f03c51d55657fbd18791b1",
+    "birth": "72b5ae88b74be8d84a8bc06c42cf88f0bea69a12630582cf82423d323d4a464d",
+    "sum": 58653,
+    "kept": 343,
+    "drops": 49
+  }
+]

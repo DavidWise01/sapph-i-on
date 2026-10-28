@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Keeper Path - SaPpH{{i}}on</title>
+<style>
+:root { --ink:#881337; --dim:#9f1239; --accent:#be123c; }
+* { box-sizing:border-box; }
+body {
+  margin:0; color:var(--ink);
+  font:16px/1.5 "Segoe UI", ui-sans-serif, sans-serif;
+  background:
+    radial-gradient(820px 440px at 0% 0%, #ffe4e6, transparent 62%),
+    radial-gradient(680px 420px at 100% 0%, #fff7ed, transparent 55%),
+    linear-gradient(165deg, #fff1f2, #fff7ed 70%, #fff1f2);
+  background-color:#fff1f2; min-height:100vh;
+}
+a { color:var(--accent); }
+header, main, footer { width:min(880px, calc(100% - 32px)); margin:0 auto; }
+header { padding:22px 0 0; }
+.src, .mono { font:13px/1.45 ui-monospace, Consolas, monospace; color:var(--dim); }
+h1 { margin:8px 0 0; font-size:clamp(28px, 5vw, 46px); letter-spacing:.03em; }
+.kicker { letter-spacing:.16em; font-size:12px; color:var(--accent); font-weight:700; }
+.stage { background:#fff; border:1px solid rgba(28,23,48,.12); border-radius:18px; padding:12px; margin:14px 0; }
+canvas { display:block; width:100%; height:auto; border-radius:12px; background:#fff1f2; }
+.row { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+button.chip { font:inherit; color:var(--ink); background:#fff; border:1px solid rgba(28,23,48,.16); border-radius:999px; padding:8px 12px; cursor:pointer; }
+button.chip.on { border-color:var(--accent); background:#ffe4e6; }
+.stamp { display:inline-block; padding:2px 8px; border-radius:999px; font:11px ui-monospace, Consolas, monospace; color:#fff; }
+.lit { background:#047857; } .amber { background:#b45309; } .wall { background:#be185d; }
+footer { color:var(--dim); font-size:13px; padding-bottom:28px; overflow-wrap:anywhere; }
+.src, .mono, p, a, h1, button { overflow-wrap:anywhere; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+<header>
+<div class="src"><a href="../">SaPpH{{i}}on</a> - agent - <a href="https://0root.ai/">0root.ai</a></div>
+<div class="kicker">AGENT - ORDER 7</div>
+<h1>The Keeper Path</h1>
+<p id="lead">One shortest walk from the corner to the keeper has length 9, and there are 1680 such walks.</p>
+</header>
+<main>
+<div class="stage">
+<canvas id="stage" width="880" height="180" aria-label="The kept walk from the corner to the keeper"></canvas>
+<div class="row" id="chips"></div>
+</div>
+<p class="mono" id="card">No report.</p>
+<p class="mono" id="agent"></p>
+<p class="mono" id="seq"></p>
+<p class="mono" id="pick">No cell selected.</p>
+<p class="mono" id="kept"></p>
+<p><span class="stamp lit">LIT</span> One shortest walk from (0,0,0) to (3,3,3) has length 9. The walks are the orders of three steps on x, three on y, and three on z. Their count is 9 factorial divided by 3 factorial three times, which is 1680. The agent PATH keeps a step only when the distance to the keeper falls by 1 and the cell stays inside 0 through 6. Every 4th attempt steps backward and is dropped. The gap runs from 9 to 0 and the walk ends at (3,3,3). A second run must match. A failed count throws.</p>
+<p><span class="stamp amber">AMBER</span> The agent is assigned this walk. The picture is the walk it kept, drawn on the seven shells of color. The shells are a coloring. They are not a filled magic cube. No Downloads file was copied. This page is not seated. It is not one of those 696.</p>
+<p><span class="stamp wall">WALL</span> This page counts the 1680 walks and keeps one. It does not draw the other 1679. It does not place a magic line. The walk was already full, so this page is not seated.</p>
+</main>
+<footer>
+David Lee Wise (ROOT0). Drafted by Grok (xAI) on 2026-10-28.
+Birth seal eab3fe330ecfee8f5bcd6de1b797d62fdb23fcf8db3a516c7c11d6e4aca420c2. One host, <a href="https://davidwise01.github.io/sapph-i-on/agents/the-keeper-path.html">https://davidwise01.github.io/sapph-i-on/agents/the-keeper-path.html</a>.
+</footer>
+<script>
+"use strict";
+function keeperRun() {
+  function fact(n) {
+    var f = 1;
+    var i;
+    for (i = 2; i <= n; i++) f *= i;
+    return f;
+  }
+  var formula = fact(9) / (fact(3) * fact(3) * fact(3));
+  var seen = {};
+  function walkPerm(prefix, rest) {
+    if (!rest) { seen[prefix] = 1; return; }
+    var used = {};
+    var i;
+    for (i = 0; i < rest.length; i++) {
+      var ch = rest.charAt(i);
+      if (used[ch]) continue;
+      used[ch] = 1;
+      walkPerm(prefix + ch, rest.slice(0, i) + rest.slice(i + 1));
+    }
+  }
+  walkPerm("", "xxxyyyzzz");
+  var ways = 0;
+  var key;
+  for (key in seen) {
+    if (!Object.prototype.hasOwnProperty.call(seen, key)) continue;
+    ways++;
+    var p = [0, 0, 0];
+    var t;
+    for (t = 0; t < 9; t++) {
+      var before = Math.abs(p[0] - 3) + Math.abs(p[1] - 3) + Math.abs(p[2] - 3);
+      var ai = key.charAt(t) === "x" ? 0 : key.charAt(t) === "y" ? 1 : 2;
+      p[ai]++;
+      var after = Math.abs(p[0] - 3) + Math.abs(p[1] - 3) + Math.abs(p[2] - 3);
+      if (after !== before - 1 || p[ai] > 6) throw new Error("LIT FAIL short");
+    }
+    if (p[0] !== 3 || p[1] !== 3 || p[2] !== 3) throw new Error("LIT FAIL end");
+  }
+  if (formula !== 1680 || ways !== 1680 || !seen.xxxyyyzzz) throw new Error("LIT FAIL ways");
+  var pos = [0, 0, 0];
+  var plan = "xxxyyyzzz";
+  var cells = [[0, 0, 0]];
+  var stepStr = "";
+  var pi = 0;
+  var attempt = 0;
+  var drops = 0;
+  function manhattan(q) {
+    return Math.abs(q[0] - 3) + Math.abs(q[1] - 3) + Math.abs(q[2] - 3);
+  }
+  if (manhattan(pos) !== 9) throw new Error("LIT FAIL gap");
+  while (pi < plan.length) {
+    attempt++;
+    var axis = plan.charAt(pi);
+    var aj = axis === "x" ? 0 : axis === "y" ? 1 : 2;
+    var bad = attempt % 4 === 0;
+    var next = [pos[0], pos[1], pos[2]];
+    next[aj] += bad ? -1 : 1;
+    var inside = next[0] >= 0 && next[0] <= 6 && next[1] >= 0 && next[1] <= 6 && next[2] >= 0 && next[2] <= 6;
+    var fall = inside && manhattan(pos) - manhattan(next) === 1;
+    if (fall) {
+      if (bad) throw new Error("decoy kept");
+      pos = next;
+      cells.push([pos[0], pos[1], pos[2]]);
+      stepStr += axis;
+      pi++;
+    } else {
+      if (!bad) throw new Error("LIT FAIL path drop");
+      drops++;
+    }
+    if (attempt > 40) throw new Error("LIT FAIL path loop");
+  }
+  var gap = manhattan(pos);
+  if (gap !== 0 || pos[0] !== 3 || pos[1] !== 3 || pos[2] !== 3) throw new Error("LIT FAIL path end");
+  if (stepStr !== "xxxyyyzzz" || cells.length !== 10 || drops !== 2) throw new Error("LIT FAIL path " + stepStr + " " + drops);
+  var pack = "1680|9|3,3,3|0|" + stepStr + "|" + drops;
+  return { pack: pack, ways: 1680, length: 9, end: "3,3,3", gap: 0, steps: stepStr, drops: drops, cells: cells };
+}
+function agentKeep(id, pack) {
+  var key = "sapph-agent-kept";
+  var row = { pack: pack, act: "census" };
+  var book = {};
+  var raw = null;
+  try { raw = localStorage.getItem(key); }
+  catch (e) { throw new Error("persistent book"); }
+  if (raw) {
+    try { book = JSON.parse(raw); }
+    catch (e) { throw new Error("persistent book"); }
+  }
+  if (!book || typeof book !== "object" || Array.isArray(book)) throw new Error("persistent book");
+  var has = Object.prototype.hasOwnProperty.call(book, id);
+  var kept = has ? book[id] : null;
+  var text;
+  if (kept == null) {
+    row.visits = 1;
+    text = "This browser had no row for " + id + ". I wrote " + pack + ". The row is local. It is not the sealed list.";
+  } else {
+    if (typeof kept !== "object" || kept.pack !== pack || kept.act !== "census") throw new Error("persistent drift");
+    var prev = typeof kept.visits === "number" && kept.visits >= 0 ? kept.visits : 0;
+    row.visits = prev + 1;
+    text = "This browser still holds " + id + ". Opened " + row.visits + " times here. The row is local. It is not the sealed list.";
+  }
+  book[id] = row;
+  try { localStorage.setItem(key, JSON.stringify(book)); }
+  catch (e) { throw new Error("persistent book"); }
+  var written;
+  try { written = JSON.parse(localStorage.getItem(key)); }
+  catch (e) { throw new Error("persistent drift"); }
+  if (!written || !written[id] || written[id].pack !== pack || written[id].visits !== row.visits || written[id].act !== "census") throw new Error("persistent drift");
+  return { text: text, visits: row.visits, pack: pack };
+}
+function paintCube(canvas, bg, drawCell) {
+  var ctx = canvas.getContext("2d");
+  var w = canvas.width;
+  var gap = 10;
+  var panel = Math.floor((w - gap * 8) / 7);
+  var cell = Math.floor((panel - 6) / 7);
+  var yTop = 24;
+  var colors = ["#e11d48", "#f97316", "#facc15", "#22c55e", "#2563eb", "#92400e", "#db2777"];
+  var boxes = [];
+  ctx.clearRect(0, 0, w, canvas.height);
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, w, canvas.height);
+  var z, y, x, x0, px, py, color;
+  for (z = 0; z < 7; z++) {
+    x0 = gap + z * (panel + gap);
+    ctx.fillStyle = "rgba(255,255,255,0.72)";
+    ctx.fillRect(x0, yTop - 4, panel, 7 * (cell + 1) + 8);
+    ctx.fillStyle = "#3f3f46";
+    ctx.font = "12px Consolas, monospace";
+    ctx.fillText("z " + z, x0 + 4, 16);
+    for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+      px = x0 + 3 + x * (cell + 1);
+      py = yTop + y * (cell + 1);
+      color = (x + y + z) % 7;
+      ctx.fillStyle = colors[color];
+      ctx.fillRect(px, py, cell, cell);
+      drawCell(ctx, x, y, z, px, py, cell, color);
+      boxes.push({ x: x, y: y, z: z, px: px, py: py, s: cell });
+    }
+  }
+  canvas._boxes = boxes;
+}
+function strokeChain(canvas) {
+  var cells = canvas._chain;
+  if (!cells) return;
+  var ctx = canvas.getContext("2d");
+  var at = {};
+  var i, b, a;
+  for (i = 0; i < canvas._boxes.length; i++) {
+    b = canvas._boxes[i];
+    at[b.x + "," + b.y + "," + b.z] = b;
+  }
+  ctx.strokeStyle = "#1c1730";
+  ctx.lineWidth = 1.5;
+  for (i = 1; i < cells.length; i++) {
+    a = at[cells[i - 1].join(",")];
+    b = at[cells[i].join(",")];
+    if (!a || !b) throw new Error("LIT FAIL paint");
+    if (a.z !== b.z) continue;
+    ctx.beginPath();
+    ctx.moveTo(a.px + a.s / 2, a.py + a.s / 2);
+    ctx.lineTo(b.px + b.s / 2, b.py + b.s / 2);
+    ctx.stroke();
+  }
+}
+function listen(canvas, choose) {
+  canvas.addEventListener("click", function (ev) {
+    var rect = canvas.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+    var cx = (ev.clientX - rect.left) * (canvas.width / rect.width);
+    var cy = (ev.clientY - rect.top) * (canvas.height / rect.height);
+    var i, b;
+    for (i = 0; i < canvas._boxes.length; i++) {
+      b = canvas._boxes[i];
+      if (cx >= b.px && cx < b.px + b.s && cy >= b.py && cy < b.py + b.s) {
+        choose(b.x, b.y, b.z);
+        return;
+      }
+    }
+  });
+}
+function bootKeeper() {
+  var blurb = "One shortest walk from the corner to the keeper has length 9, and there are 1680 such walks.";
+  var lead = document.getElementById("lead");
+  if (!lead || lead.textContent !== blurb) throw new Error("LIT FAIL lead");
+  var a = keeperRun();
+  var b = keeperRun();
+  if (a.pack !== b.pack || JSON.stringify(a.cells) !== JSON.stringify(b.cells)) throw new Error("generative drift");
+  var book = agentKeep("keeper-path", a.pack);
+  var card = document.getElementById("card");
+  var agent = document.getElementById("agent");
+  var seq = document.getElementById("seq");
+  var pick = document.getElementById("pick");
+  var kept = document.getElementById("kept");
+  var canvas = document.getElementById("stage");
+  var chips = document.getElementById("chips");
+  if (!card || !agent || !seq || !pick || !kept || !canvas || !chips) throw new Error("LIT FAIL show");
+  card.innerHTML = "<span class=\"stamp lit\">LIT</span> 1680 walks, length 9, end 3,3,3";
+  agent.textContent = "PATH kept 9 steps and dropped " + a.drops + ". Gap 9 to 0. End 3,3,3.";
+  seq.textContent = "Second run matched. " + a.pack;
+  kept.textContent = book.text;
+  if (card.innerHTML.indexOf("1680") < 0 || agent.textContent.indexOf("dropped 2") < 0) throw new Error("LIT FAIL show");
+  if (seq.textContent.indexOf(a.pack) < 0) throw new Error("LIT FAIL show");
+  if (book.visits === 1 && kept.textContent.indexOf(a.pack) < 0) throw new Error("LIT FAIL show");
+  if (book.visits > 1 && kept.textContent.indexOf("Opened " + book.visits) < 0) throw new Error("LIT FAIL show");
+  var selected = 0;
+  function draw() {
+    canvas._chain = a.cells;
+    paintCube(canvas, "#fff1f2", function (ctx, x, y, z, px, py, s) {
+      var n = -1;
+      var i;
+      for (i = 0; i < a.cells.length; i++) {
+        if (a.cells[i][0] === x && a.cells[i][1] === y && a.cells[i][2] === z) n = i;
+      }
+      if (n < 0) {
+        ctx.fillStyle = "rgba(255,255,255,0.62)";
+        ctx.fillRect(px, py, s, s);
+        return;
+      }
+      ctx.strokeStyle = n === selected ? "#1c1730" : "#fff7ed";
+      ctx.lineWidth = 2;
+      ctx.strokeRect(px + 0.5, py + 0.5, s - 1, s - 1);
+      ctx.fillStyle = "#1c1730";
+      ctx.font = "bold 10px Consolas, monospace";
+      ctx.fillText(String(n), px + 2, py + s - 2);
+    });
+    strokeChain(canvas);
+  }
+  function choose(x, y, z) {
+    var i;
+    for (i = 0; i < a.cells.length; i++) {
+      if (a.cells[i][0] === x && a.cells[i][1] === y && a.cells[i][2] === z) {
+        selected = i;
+        var dist = Math.abs(x - 3) + Math.abs(y - 3) + Math.abs(z - 3);
+        pick.textContent = "Step " + i + " at " + x + "," + y + "," + z + ". Distance " + dist + ".";
+        draw();
+        return;
+      }
+    }
+  }
+  chips.innerHTML = "";
+  var s;
+  for (s = 0; s < a.steps.length; s++) {
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "chip" + (s === 0 ? " on" : "");
+    btn.textContent = String(s + 1) + " +" + a.steps.charAt(s);
+    btn.setAttribute("data-i", String(s));
+    btn.addEventListener("click", function (ev) {
+      var i = Number(ev.currentTarget.getAttribute("data-i"));
+      var kids = chips.children;
+      var j;
+      for (j = 0; j < kids.length; j++) kids[j].className = "chip";
+      ev.currentTarget.className = "chip on";
+      choose(a.cells[i + 1][0], a.cells[i + 1][1], a.cells[i + 1][2]);
+    });
+    chips.appendChild(btn);
+  }
+  pick.textContent = "Step 0 at 0,0,0. Distance 9.";
+  draw();
+  listen(canvas, choose);
+}
+bootKeeper();
+</script>
+</body>
+</html>
