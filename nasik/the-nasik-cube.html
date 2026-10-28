@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Nasik Cube — SaPpH{{i}}on</title>
+<style>
+  :root { --ink:#134e4a; --dim:#0f766e; --accent:#0e7490; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; color:var(--ink);
+    font:16px/1.5 "Segoe UI", ui-sans-serif, sans-serif;
+    background:
+      radial-gradient(820px 440px at 0% 0%, #ccfbf1, transparent 62%),
+      radial-gradient(680px 420px at 100% 0%, #e0f2fe, transparent 55%),
+      linear-gradient(165deg, #f0fdfa, #fff7ed 70%, #f0fdfa);
+    background-color:#f0fdfa; min-height:100vh;
+  }
+  a { color:var(--accent); }
+  header, main, footer { width:min(880px, calc(100% - 32px)); margin:0 auto; }
+  header { padding:22px 0 0; }
+  .src, .mono { font:13px/1.45 ui-monospace, Consolas, monospace; color:var(--dim); }
+  h1 { margin:8px 0 0; font-size:clamp(28px, 5vw, 46px); letter-spacing:.03em; }
+  .kicker { letter-spacing:.16em; font-size:12px; color:var(--accent); font-weight:700; }
+  .stage { background:#fff; border:1px solid rgba(19,78,74,.14); border-radius:18px; padding:12px; margin:14px 0; }
+  canvas { display:block; width:100%; height:auto; border-radius:12px; background:#f0fdfa; }
+  .row { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+  button.chip { font:inherit; color:var(--ink); background:#fff; border:1px solid rgba(19,78,74,.16); border-radius:999px; padding:8px 12px; cursor:pointer; }
+  button.chip.on { border-color:var(--accent); background:#ecfeff; }
+  .stamp { display:inline-block; padding:2px 8px; border-radius:999px; font:11px ui-monospace, Consolas, monospace; color:#fff; }
+  .lit { background:#047857; } .amber { background:#b45309; } .wall { background:#be185d; }
+  footer { color:var(--dim); font-size:13px; padding-bottom:28px; overflow-wrap:anywhere; }
+  .src, .mono, p, a, h1, button { overflow-wrap:anywhere; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="src"><a href="../">SaPpH{{i}}on</a> · cited · <a href="https://en.wikipedia.org/wiki/Magic_cube_classes">Magic cube classes</a> · <a href="https://mathworld.wolfram.com/PerfectMagicCube.html">MathWorld</a> · <a href="https://0root.ai/">0root.ai</a></div>
+  <div class="kicker">CITED · ORDER 7</div>
+  <h1>The Nasik Cube</h1>
+  <p id="lead">A pandiagonal cube of order 7 asks 445 lines to share the sum 1204.</p>
+</header>
+<main>
+  <div class="stage">
+    <canvas id="stage" width="880" height="520" aria-label="Seven layers of the cube of 7, each cell a shell"></canvas>
+    <div class="row" id="chips"></div>
+  </div>
+  <p class="mono" id="card"></p>
+  <p class="mono" id="agent"></p>
+  <p class="mono" id="seq"></p>
+  <p class="mono" id="pick">No class selected.</p>
+  <p><span class="stamp lit">LIT</span> The classes table gives six line counts. At order 7 they are 3 times 49 plus 4, 3 times 49 plus 6 times 7 plus 4, 7 times 49, 7 times 49 plus 6 times 7, 9 times 49 plus 4, and 13 times 49. Those values are 151, 193, 343, 385, 445, and 637. The pandiagonal total is also 147 orthogonal lines, plus 294 diagonal lines, plus 4 space diagonals. The stricter total minus the pandiagonal total is 192, and 4 times 49 minus 4 is 192. The shared sum is 7 times 344 divided by 2, which is 1204. A failed count throws.</p>
+  <p><span class="stamp amber">AMBER</span> Wikipedia's Magic cube classes, read on 2026-10-22, lists the pandiagonal class at smallest order 7 and the line count 9m squared plus 4. The same table lists a stricter perfect class at smallest order 8 and the line count 13m squared. MathWorld's Perfect Magic Cube, read the same day, says the first published perfect magic cube was the order-7 cube of A. H. Frost in 1866, and that he called the type a Nasik cube because he had been a missionary in Nasik. The Perfect magic cube article on Wikipedia says the same year for Frost. No Downloads file was copied. This page is not one of those 696.</p>
+  <p><span class="stamp wall">WALL</span> The classes article warns that it may contain original research and that its sources are unclear. This page checks the arithmetic of the printed formulas. It does not check that a filling exists. Frost's numbers are not placed, so this page does not show that his 1866 cube meets the 445-line count or the 637-line count. The two articles use the word perfect for different line sets. The pantriagdiag row prints 8 with a question mark. This page checks the digit 8 and does not resolve the mark. The walk was already full, so this page is not seated.</p>
+</main>
+<footer>
+  David Lee Wise (ROOT0). Drafted by Grok (xAI) on 2026-10-22.
+  Birth seal 315d086e9e9bbd6929cfbed3dc1df04067754f596cfcce7b16659cecdd1b20e9. One host, <a href="https://davidwise01.github.io/sapph-i-on/nasik/the-nasik-cube.html">https://davidwise01.github.io/sapph-i-on/nasik/the-nasik-cube.html</a>.
+</footer>
+<script>
+"use strict";
+var SHELL_OFFSETS = [[-1,0,1],[-1,1,0],[0,-1,1],[0,1,-1],[1,-1,0],[1,0,-1]];
+var SHELL_COLORS = ["#e11d48","#f97316","#facc15","#22c55e","#2563eb","#92400e","#db2777"];
+var SHELL_INK = ["#ffffff","#ffffff","#1c1730","#ffffff","#ffffff","#ffffff","#ffffff"];
+function shellPack(model) {
+  return model.colors.join(",") + "|" + model.acts.sit + "," + model.acts.count + "," + model.acts.ring + "," + model.acts.circle;
+}
+function shellAt(x, y, z) {
+  var color = (x + y + z) % 7;
+  var n = 0;
+  var i, dx, dy, dz, xx, yy, zz;
+  for (i = 0; i < SHELL_OFFSETS.length; i++) {
+    dx = SHELL_OFFSETS[i][0];
+    dy = SHELL_OFFSETS[i][1];
+    dz = SHELL_OFFSETS[i][2];
+    xx = x + dx;
+    yy = y + dy;
+    zz = z + dz;
+    if (xx >= 0 && xx < 7 && yy >= 0 && yy < 7 && zz >= 0 && zz < 7) n++;
+  }
+  var act = "";
+  var line = "";
+  if (n === 0) {
+    act = "sit";
+    line = "I sit. No shell of my color reaches this corner.";
+  } else if (n === 2 || n === 3) {
+    act = "count";
+    line = "I act by the count. " + n + " shells of my color reach me.";
+  } else if (n === 4) {
+    act = "ring";
+    line = "I open a ring of four.";
+  } else if (n === 6) {
+    act = "circle";
+    line = "I keep the circle of six.";
+  }
+  if (!act) throw new Error("LIT FAIL shell act");
+  var text = "Shell " + x + "," + y + "," + z + " accepts the act. " + line;
+  if (text.indexOf("Shell " + x + "," + y + "," + z + " accepts the act.") !== 0) throw new Error("LIT FAIL shell open");
+  if (act === "sit" && (n !== 0 || line.indexOf("I sit.") !== 0)) throw new Error("LIT FAIL shell sit");
+  if (act === "count" && line.indexOf(String(n) + " shells") < 0) throw new Error("LIT FAIL shell count");
+  if (act === "ring" && (n !== 4 || line.indexOf("ring of four") < 0)) throw new Error("LIT FAIL shell ring");
+  if (act === "circle" && (n !== 6 || line.indexOf("circle of six") < 0)) throw new Error("LIT FAIL shell circle");
+  return { color: color, n: n, act: act, text: text };
+}
+function shellCensus() {
+  var colors = [0, 0, 0, 0, 0, 0, 0];
+  var acts = { sit: 0, count: 0, ring: 0, circle: 0 };
+  var ortho = 0;
+  var interior = 0;
+  var faults = [];
+  var found = 0;
+  var dx, dy, dz, i, ok, x, y, z, s, inside;
+  for (dx = -1; dx <= 1; dx++) for (dy = -1; dy <= 1; dy++) for (dz = -1; dz <= 1; dz++) {
+    if (!dx && !dy && !dz) continue;
+    if (dx + dy + dz !== 0) continue;
+    found++;
+    ok = false;
+    for (i = 0; i < SHELL_OFFSETS.length; i++) {
+      if (SHELL_OFFSETS[i][0] === dx && SHELL_OFFSETS[i][1] === dy && SHELL_OFFSETS[i][2] === dz) ok = true;
+    }
+    if (!ok) faults.push("offset");
+  }
+  if (found !== 6 || SHELL_OFFSETS.length !== 6) faults.push("offset");
+  for (z = 0; z < 7; z++) for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+    s = shellAt(x, y, z);
+    if (s.color !== (x + y + z) % 7) faults.push("color");
+    colors[s.color]++;
+    acts[s.act]++;
+    if (x > 0 && ((x - 1 + y + z) % 7) === s.color) ortho++;
+    if (y > 0 && ((x + (y - 1) + z) % 7) === s.color) ortho++;
+    if (z > 0 && ((x + y + (z - 1)) % 7) === s.color) ortho++;
+    inside = x >= 1 && x <= 5 && y >= 1 && y <= 5 && z >= 1 && z <= 5;
+    if (inside) {
+      interior++;
+      if (s.n !== 6 || s.act !== "circle") faults.push("interior");
+    } else if (s.n === 6) faults.push("rim");
+  }
+  if (colors.join(",") !== "49,49,49,49,49,49,49") faults.push("colors");
+  if (ortho !== 0) faults.push("ortho");
+  if (acts.sit !== 2 || acts.count !== 66 || acts.ring !== 150 || acts.circle !== 125) faults.push("acts");
+  if (interior !== 125 || 7 * 49 !== 343) faults.push("product");
+  return { faults: faults, colors: colors, acts: acts, ortho: ortho, interior: interior };
+}
+function shellGrow() {
+  var a = shellCensus();
+  var b = shellCensus();
+  var sa = shellPack(a);
+  var sb = shellPack(b);
+  if (a.faults.length || b.faults.length) throw new Error("LIT FAIL shells " + a.faults.concat(b.faults).join(","));
+  if (sa.length < 8 || sa !== sb) throw new Error("regenerative drift");
+  if (sa !== "49,49,49,49,49,49,49|2,66,150,125") throw new Error("regenerative drift");
+  return sa;
+}
+function shellKeep() {
+  var grown = shellGrow();
+  var census = shellCensus();
+  var again = shellPack(census);
+  if (census.faults.length) throw new Error("LIT FAIL shells " + census.faults.join(","));
+  if (again !== grown) throw new Error("regenerative drift");
+  var id = "seven-shells";
+  var key = "sapph-mm-kept";
+  var row = { colors: "49,49,49,49,49,49,49", sit: 2, count: 66, ring: 150, circle: 125, act: "census" };
+  var book = {};
+  var raw = null;
+  try { raw = localStorage.getItem(key); }
+  catch (e) { throw new Error("persistent book"); }
+  if (raw) {
+    try { book = JSON.parse(raw); }
+    catch (e) { throw new Error("persistent book"); }
+  }
+  if (!book || typeof book !== "object" || Array.isArray(book)) throw new Error("persistent book");
+  var has = Object.prototype.hasOwnProperty.call(book, id);
+  var kept = has ? book[id] : null;
+  var text;
+  if (kept == null) {
+    row.visits = 1;
+    text = "This browser had no row for seven-shells. I wrote 49,49,49,49,49,49,49. sit 2, count 66, ring 150, circle 125. The row is local. It is not the sealed list.";
+  } else {
+    if (typeof kept !== "object" || kept.colors !== row.colors || kept.sit !== 2 || kept.count !== 66 || kept.ring !== 150 || kept.circle !== 125 || kept.act !== "census") throw new Error("persistent drift");
+    var prev = typeof kept.visits === "number" && kept.visits >= 0 ? kept.visits : 0;
+    row.visits = prev + 1;
+    text = "This browser still holds seven-shells. Opened " + row.visits + " times here. The row is local. It is not the sealed list.";
+  }
+  book[id] = row;
+  try { localStorage.setItem(key, JSON.stringify(book)); }
+  catch (e) { throw new Error("persistent book"); }
+  var written;
+  try { written = JSON.parse(localStorage.getItem(key)); }
+  catch (e) { throw new Error("persistent drift"); }
+  if (!written || !written[id] || written[id].colors !== row.colors || written[id].visits !== row.visits || written[id].act !== "census") throw new Error("persistent drift");
+  return { census: census, visits: row.visits, grown: grown, text: text };
+}
+
+var NAMES = ["simple", "diagonal", "pantriagonal", "pantriagdiag", "pandiagonal", "perfect"];
+var SMALLEST = [3, 5, 4, 8, 7, 8];
+var CITED = [151, 193, 343, 385, 445, 637];
+function nasikCensus() {
+  var m = 7;
+  var faults = [];
+  var ortho = 3 * m * m;
+  var diag = 6 * m * m;
+  var space = 4;
+  var totals = [
+    3 * m * m + 4,
+    3 * m * m + 6 * m + 4,
+    7 * m * m,
+    7 * m * m + 6 * m,
+    9 * m * m + 4,
+    13 * m * m
+  ];
+  var i;
+  if (ortho !== 147 || diag !== 294) faults.push("split");
+  if (ortho + diag + space !== 445) faults.push("split");
+  if (9 * m * m + 4 !== 445) faults.push("pandiagonal");
+  if (13 * m * m !== 637) faults.push("perfect");
+  if ((13 * m * m) - (9 * m * m + 4) !== (4 * m * m - 4) || (4 * m * m - 4) !== 192) faults.push("gap");
+  if (m * (m * m * m + 1) / 2 !== 1204) faults.push("sum");
+  if (NAMES.length !== 6 || SMALLEST.length !== 6 || CITED.length !== 6 || totals.length !== 6) faults.push("count");
+  for (i = 0; i < 6; i++) if (totals[i] !== CITED[i]) faults.push("term");
+  if (NAMES[4] !== "pandiagonal" || SMALLEST[4] !== 7 || totals[4] !== 445) faults.push("row");
+  if (NAMES[5] !== "perfect" || SMALLEST[5] !== 8 || totals[5] !== 637) faults.push("strict");
+  return { faults: faults, totals: totals, smallest: SMALLEST, names: NAMES, constant: 1204, pandiagonal: 445, perfect: 637 };
+}
+function nasikGrow() {
+  var a = nasikCensus();
+  var b = nasikCensus();
+  var sa = a.totals.join(",");
+  var sb = b.totals.join(",");
+  if (a.faults.length || b.faults.length) throw new Error("LIT FAIL nasik " + a.faults.concat(b.faults).join(","));
+  if (sa.length < 8 || sa !== sb || sa !== "151,193,343,385,445,637") throw new Error("regenerative drift");
+  return a;
+}
+var report = nasikGrow();
+function finish(model) {
+  var card = document.getElementById("card");
+  var seq = document.getElementById("seq");
+  if (!model || model.faults.length || model.pandiagonal !== 445 || model.constant !== 1204 || model.perfect !== 637) {
+    var msg = (model && model.faults.join(", ")) || "no report";
+    card.innerHTML = "<span class='stamp wall'>WALL</span> LIT FAIL " + msg;
+    throw new Error("LIT FAIL " + msg);
+  }
+  seq.textContent = "classes at order 7: " + model.totals.join(", ");
+  if (seq.textContent.indexOf("445") < 0 || seq.textContent.indexOf("637") < 0) throw new Error("LIT FAIL nasik show");
+  card.innerHTML = "<span class='stamp lit'>LIT</span> order 7 \u00b7 pandiagonal 445 \u00b7 sum 1204";
+}
+finish(report);
+var shells = shellKeep();
+var agent = document.getElementById("agent");
+if (!agent) throw new Error("LIT FAIL shell agent");
+agent.textContent = shells.grown + ". " + shells.text;
+if (shells.grown !== "49,49,49,49,49,49,49|2,66,150,125") throw new Error("LIT FAIL shells");
+var chips = document.getElementById("chips");
+var pick = document.getElementById("pick");
+var chosen = 4;
+NAMES.forEach(function (label, i) {
+  var btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "chip" + (i === chosen ? " on" : "");
+  btn.textContent = label + " \u00b7 " + report.totals[i];
+  btn.addEventListener("click", function () {
+    if (report.totals[i] !== CITED[i] || report.smallest[i] !== SMALLEST[i]) throw new Error("LIT FAIL nasik pick");
+    if (label === "pandiagonal" && report.totals[i] !== 445) throw new Error("LIT FAIL nasik pick");
+    if (label === "perfect" && report.totals[i] !== 637) throw new Error("LIT FAIL nasik pick");
+    chosen = i;
+    var all = chips.querySelectorAll("button");
+    var n;
+    for (n = 0; n < all.length; n++) all[n].classList.remove("on");
+    btn.classList.add("on");
+    pick.textContent = "class " + i + " \u00b7 " + label + " \u00b7 " + report.totals[i] + " lines \u00b7 sum 1204";
+    frame(0);
+  });
+  chips.appendChild(btn);
+});
+pick.textContent = "class 4 \u00b7 pandiagonal \u00b7 445 lines \u00b7 sum 1204";
+var canvas = document.getElementById("stage");
+if (!canvas || !canvas.getContext) throw new Error("LIT FAIL nasik stage");
+var ctx = canvas.getContext("2d");
+var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var hits = [];
+function frame(now) {
+  var sky = ctx.createLinearGradient(0, 0, 0, canvas.height);
+  sky.addColorStop(0, "#f0fdfa");
+  sky.addColorStop(1, "#fff7ed");
+  ctx.fillStyle = sky;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  hits = [];
+  var painted = 0;
+  var marked = 0;
+  var shown = [0, 0, 0, 0, 0, 0, 0];
+  var z, y, x, px, py, shell, wob, cx, cy, hot;
+  for (z = 0; z < 7; z++) {
+    ctx.fillStyle = "#134e4a";
+    ctx.font = "12px ui-monospace, Consolas, monospace";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "alphabetic";
+    ctx.fillText("z " + z, 28 + z * 118, 28);
+    for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+      shell = shellAt(x, y, z);
+      shown[shell.color]++;
+      hot = shell.color === (chosen % 7);
+      px = 36 + z * 118 + x * 14;
+      py = 40 + y * 64;
+      wob = reduce ? 0 : Math.sin((now || 0) / 280 + shell.color) * 1.6;
+      cx = px + 6;
+      cy = py + 6 + wob;
+      ctx.beginPath();
+      ctx.ellipse(cx, cy, hot ? 6.4 : 5.4, hot ? 7.4 : 6.2, 0, 0, Math.PI * 2);
+      ctx.fillStyle = SHELL_COLORS[shell.color];
+      ctx.fill();
+      if (hot) {
+        ctx.strokeStyle = "#134e4a";
+        ctx.lineWidth = 1.6;
+        ctx.stroke();
+        marked++;
+      }
+      ctx.beginPath();
+      ctx.ellipse(cx - 1.6, cy - 2.2, 2.1, 1.3, -0.5, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(255,255,255,.72)";
+      ctx.fill();
+      ctx.fillStyle = SHELL_INK[shell.color];
+      ctx.font = "700 8px ui-monospace, Consolas, monospace";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("m", cx, cy + 0.6);
+      hits.push({ x: x, y: y, z: z, cx: cx, cy: cy, act: shell.act, n: shell.n, color: shell.color });
+      painted++;
+    }
+  }
+  if (painted !== 343) throw new Error("LIT FAIL nasik paint");
+  if (shown.join(",") !== "49,49,49,49,49,49,49") throw new Error("LIT FAIL nasik paint");
+  if (marked !== 49) throw new Error("LIT FAIL nasik mark");
+  if (!reduce) requestAnimationFrame(frame);
+}
+canvas.addEventListener("click", function (ev) {
+  var rect = canvas.getBoundingClientRect();
+  var cx = (ev.clientX - rect.left) * (canvas.width / rect.width);
+  var cy = (ev.clientY - rect.top) * (canvas.height / rect.height);
+  var best = null;
+  var bestD = 8;
+  var i, dx, dy, d;
+  for (i = 0; i < hits.length; i++) {
+    dx = cx - hits[i].cx;
+    dy = cy - hits[i].cy;
+    d = Math.sqrt(dx * dx + dy * dy);
+    if (d < bestD) { bestD = d; best = hits[i]; }
+  }
+  if (!best) return;
+  var again = shellAt(best.x, best.y, best.z);
+  if (again.act !== best.act || again.n !== best.n || again.color !== best.color) throw new Error("LIT FAIL shell act");
+  pick.textContent = again.text;
+});
+frame(0);
+</script>
+</body>
+</html>
