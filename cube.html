@@ -223,17 +223,17 @@
   .seat a { display:block; margin-top:6px; text-decoration:none; }
   .seat a:hover { text-decoration:underline; }
   .seat .addr { color:var(--dim); font:12px/1.4 var(--mono); margin:4px 0 6px; }
-  .corpus, .archive, .libraries, .folio, .strip, .nested, .nests, .qdot, .dots, .next, .plank, .bonk, .gold, .generative, .toroid, .onward, .gravity, .sapphon, .neon, .later, .universe, .atmospheres, .after, .again, .kernel, .wakaku, .evo, .full, .plus, .scale, .one, .beyond, .asked, .oasis, .speaker, .another, .still, .voice, .yet, .forth, .echo, .ahead, .refrain, .forward, .encore, .farther, .lyre, .reprise, .cat, .distance, .stewards, .domains, .skills, .lines, .cited, .mms, .nasik, .agents {
+  .corpus, .archive, .libraries, .folio, .strip, .nested, .nests, .qdot, .dots, .next, .plank, .bonk, .gold, .generative, .toroid, .onward, .gravity, .sapphon, .neon, .later, .universe, .atmospheres, .after, .again, .kernel, .wakaku, .evo, .full, .plus, .scale, .one, .beyond, .asked, .oasis, .speaker, .another, .still, .voice, .yet, .forth, .echo, .ahead, .refrain, .forward, .encore, .farther, .lyre, .reprise, .cat, .distance, .stewards, .domains, .skills, .lines, .cited, .mms, .nasik, .agents, .panes {
     display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
     gap:8px; margin:0 0 8px;
   }
-  .corpus a, .archive a, .libraries a, .folio a, .strip a, .nested a, .nests a, .qdot a, .dots a, .next a, .plank a, .bonk a, .gold a, .generative a, .toroid a, .onward a, .gravity a, .sapphon a, .neon a, .later a, .universe a, .atmospheres a, .after a, .again a, .kernel a, .wakaku a, .evo a, .full a, .plus a, .scale a, .one a, .beyond a, .asked a, .oasis a, .speaker a, .another a, .still a, .voice a, .yet a, .forth a, .echo a, .ahead a, .refrain a, .forward a, .encore a, .farther a, .lyre a, .reprise a, .cat a, .distance a, .stewards a, .domains a, .skills a, .lines a, .cited a, .mms a, .nasik a, .agents a {
+  .corpus a, .archive a, .libraries a, .folio a, .strip a, .nested a, .nests a, .qdot a, .dots a, .next a, .plank a, .bonk a, .gold a, .generative a, .toroid a, .onward a, .gravity a, .sapphon a, .neon a, .later a, .universe a, .atmospheres a, .after a, .again a, .kernel a, .wakaku a, .evo a, .full a, .plus a, .scale a, .one a, .beyond a, .asked a, .oasis a, .speaker a, .another a, .still a, .voice a, .yet a, .forth a, .echo a, .ahead a, .refrain a, .forward a, .encore a, .farther a, .lyre a, .reprise a, .cat a, .distance a, .stewards a, .domains a, .skills a, .lines a, .cited a, .mms a, .nasik a, .agents a, .panes a {
     display:block; padding:11px 12px; border-radius:14px;
     background:rgba(255,252,248,.8); border:1px solid var(--line);
     color:var(--ink); text-decoration:none; font-size:13.5px; line-height:1.35;
   }
   .corpus a:hover, .archive a:hover, .libraries a:hover, .folio a:hover, .strip a:hover,
-  .nested a:hover, .nests a:hover, .qdot a:hover, .dots a:hover, .next a:hover, .plank a:hover, .bonk a:hover, .gold a:hover, .generative a:hover, .toroid a:hover, .onward a:hover, .gravity a:hover, .sapphon a:hover, .neon a:hover, .later a:hover, .universe a:hover, .atmospheres a:hover, .after a:hover, .again a:hover, .kernel a:hover, .wakaku a:hover, .evo a:hover, .full a:hover, .plus a:hover, .scale a:hover, .one a:hover, .beyond a:hover, .asked a:hover, .oasis a:hover, .speaker a:hover, .another a:hover, .still a:hover, .voice a:hover, .yet a:hover, .forth a:hover, .echo a:hover, .ahead a:hover, .refrain a:hover, .forward a:hover, .encore a:hover, .farther a:hover, .lyre a:hover, .reprise a:hover, .cat a:hover, .distance a:hover, .stewards a:hover, .domains a:hover, .skills a:hover, .lines a:hover, .cited a:hover, .mms a:hover, .nasik a:hover, .agents a:hover {
+  .nested a:hover, .nests a:hover, .qdot a:hover, .dots a:hover, .next a:hover, .plank a:hover, .bonk a:hover, .gold a:hover, .generative a:hover, .toroid a:hover, .onward a:hover, .gravity a:hover, .sapphon a:hover, .neon a:hover, .later a:hover, .universe a:hover, .atmospheres a:hover, .after a:hover, .again a:hover, .kernel a:hover, .wakaku a:hover, .evo a:hover, .full a:hover, .plus a:hover, .scale a:hover, .one a:hover, .beyond a:hover, .asked a:hover, .oasis a:hover, .speaker a:hover, .another a:hover, .still a:hover, .voice a:hover, .yet a:hover, .forth a:hover, .echo a:hover, .ahead a:hover, .refrain a:hover, .forward a:hover, .encore a:hover, .farther a:hover, .lyre a:hover, .reprise a:hover, .cat a:hover, .distance a:hover, .stewards a:hover, .domains a:hover, .skills a:hover, .lines a:hover, .cited a:hover, .mms a:hover, .nasik a:hover, .agents a:hover, .panes a:hover {
     border-color:var(--sapphire); background:#fff;
   }
   .fold {
@@ -709,6 +709,13 @@
     <p class="sub">Five pages walk the cube of 7. Each agent acts from a count, writes its structure, and keeps a step only when the count improves. A second run must match. The cells are full, so these pages are not seated. They are not one of those 696.</p>
     <div class="agents" id="agents"></div>
     <p class="mono" id="agentscard"></p>
+  </details>
+
+  <details class="shelf">
+    <summary>Panes · 756</summary>
+    <p class="sub">One page cites the 2 by 2 windows of a cube. Order 7 holds 756. The cells are full, so this page is not seated. It is not one of those 696.</p>
+    <div class="panes" id="panes"></div>
+    <p class="mono" id="panescard"></p>
   </details>
 
   <section class="read">
@@ -3995,6 +4002,57 @@ fetch("agents/manifest.json").then(function (res) {
   document.getElementById("agentscard").innerHTML = "<span class='stamp wall'>WALL</span> " + err.message;
   throw err;
 });
+
+function paneCensus() {
+  var n = 7;
+  function term(k) { return 3 * k * k * k - 6 * k * k + 3 * k; }
+  var listed = [0, 0, 6, 36, 108, 240, 450, 756, 1176];
+  var k;
+  for (k = 0; k <= 8; k++) if (term(k) !== listed[k]) throw new Error("LIT FAIL panes list");
+  var each = n * (n - 1) * (n - 1);
+  if (each !== 252 || each * 3 !== 756 || term(7) !== 756) throw new Error("LIT FAIL panes term");
+  if (3 * 49 * 8 !== 1176 || term(8) !== 1176) throw new Error("LIT FAIL panes faces");
+  function cellsOf(ori, u, v) {
+    if (ori === 0) return [[u, v, 3], [u + 1, v, 3], [u, v + 1, 3], [u + 1, v + 1, 3]];
+    if (ori === 1) return [[u, 3, v], [u + 1, 3, v], [u, 3, v + 1], [u + 1, 3, v + 1]];
+    return [[3, u, v], [3, u + 1, v], [3, u, v + 1], [3, u + 1, v + 1]];
+  }
+  var keeper = 0;
+  var ori, u, v, cells, i;
+  for (ori = 0; ori < 3; ori++) {
+    for (u = 0; u <= 5; u++) for (v = 0; v <= 5; v++) {
+      cells = cellsOf(ori, u, v);
+      for (i = 0; i < 4; i++) {
+        if (cells[i][0] === 3 && cells[i][1] === 3 && cells[i][2] === 3) { keeper++; break; }
+      }
+    }
+  }
+  if (keeper !== 12) throw new Error("LIT FAIL panes keeper");
+  return { order: 7, windows: 756, each: 252, keeper: 12, faces: 1176, oeis: "A270205" };
+}
+var PANES = ["the-square-windows.html"];
+if (PANES.length !== 1) throw new Error("LIT FAIL panes count");
+var panesEl = document.getElementById("panes");
+var panesLink = document.createElement("a");
+panesLink.href = "panes/" + PANES[0];
+panesLink.textContent = "the square windows";
+panesEl.appendChild(panesLink);
+fetch("panes/manifest.json").then(function (res) {
+  if (!res.ok) throw new Error("LIT FAIL panes manifest");
+  return res.json();
+}).then(function (rows) {
+  if (!rows || rows.length !== 1 || rows[0].file !== PANES[0]) throw new Error("LIT FAIL panes order");
+  if (!/^[0-9a-f]{64}$/.test(rows[0].sha256)) throw new Error("LIT FAIL panes hash");
+  var live = paneCensus();
+  if (rows[0].order !== 7 || rows[0].windows !== live.windows || rows[0].each !== live.each) throw new Error("LIT FAIL panes shape");
+  if (rows[0].keeper !== live.keeper || rows[0].faces !== live.faces || rows[0].oeis !== "A270205") throw new Error("LIT FAIL panes shape");
+  if (rows[0].birth !== "63aaa0720109a1430bd57cd8f2d45dcead7fc960d5805874bb56c79f28304fc8") throw new Error("LIT FAIL panes birth");
+  if (rows[0].bytes !== 15332 || rows[0].sha256 !== "ae3861c7309f9239fc6390194c7255780391162b0bcf51468a290258f046cd6e") throw new Error("LIT FAIL panes file");
+  document.getElementById("panescard").innerHTML = "<span class='stamp lit'>LIT</span> order 7 \u00b7 756 windows \u00b7 A270205";
+}).catch(function (err) {
+  document.getElementById("panescard").innerHTML = "<span class='stamp wall'>WALL</span> " + err.message;
+  throw err;
+});
 var UNIVERSE = [
   "qd-prim-life-ledger.html",
   "homer.html",
@@ -4369,6 +4427,7 @@ Object.keys(SEAT).forEach(function (key) {
   if (SEAT[key].href.indexOf("mms/") === 0) throw new Error("LIT FAIL shell seated");
   if (SEAT[key].href.indexOf("nasik/") === 0) throw new Error("LIT FAIL nasik seated");
   if (SEAT[key].href.indexOf("agents/") === 0) throw new Error("LIT FAIL agents seated");
+  if (SEAT[key].href.indexOf("panes/") === 0) throw new Error("LIT FAIL panes seated");
 });
 if (SEAT["3,3,3"]) throw new Error("LIT FAIL world keeper");
 ["0,0,0","6,0,0","0,6,0","6,6,0","0,0,6","6,0,6","0,6,6","6,6,6"].forEach(function (corner) {

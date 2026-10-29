@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Square Windows — SaPpH{{i}}on</title>
+<style>
+  :root { --ink:#1e1b4b; --dim:#9a3412; --floor:#c2410c; --wall:#1d4ed8; --depth:#be185d; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; color:var(--ink);
+    font:17px/1.45 Georgia, "Iowan Old Style", Palatino, serif;
+    background:
+      linear-gradient(180deg, #dbeafe 0 92px, transparent 92px),
+      radial-gradient(900px 420px at 100% 0%, #fecdd3, transparent 60%),
+      radial-gradient(700px 380px at 0% 20%, #ffedd5, transparent 55%),
+      #fff6eb;
+    background-color:#fff6eb; min-height:100vh;
+  }
+  a { color:#9a3412; }
+  header, main, footer { width:min(920px, calc(100% - 28px)); margin:0 auto; }
+  header { padding:28px 0 0; }
+  .src { font:12px/1.4 ui-monospace, Consolas, monospace; color:#7c2d12; }
+  h1 { margin:6px 0 0; font-weight:500; font-size:clamp(32px, 6vw, 58px); letter-spacing:-.02em; }
+  .kicker { letter-spacing:.22em; font:12px ui-monospace, Consolas, monospace; color:var(--floor); }
+  .stage { margin:16px 0; }
+  .plates, .layers { display:flex; flex-wrap:wrap; gap:8px; }
+  button.plate, button.layer, button.win { font:inherit; color:var(--ink); cursor:pointer; }
+  button.plate { flex:1 1 140px; border:0; border-bottom:8px solid #1e1b4b; background:#fffef8; padding:12px 10px 14px; text-align:left; }
+  button.plate b { display:block; font:12px ui-monospace, Consolas, monospace; letter-spacing:.14em; }
+  button.plate.floor { border-color:var(--floor); }
+  button.plate.wall { border-color:var(--wall); }
+  button.plate.depth { border-color:var(--depth); }
+  button.plate.on { background:#fff; }
+  .layers { margin:12px 0; }
+  button.layer { width:42px; height:42px; border:1px solid #1e1b4b; background:#fffef8; }
+  button.layer.on { background:#1e1b4b; color:#fffef8; }
+  .sash {
+    display:grid; grid-template-columns:repeat(6, minmax(0, 1fr)); gap:6px;
+    padding:10px; background:#fffef8; border:1px solid rgba(30,27,75,.18);
+  }
+  button.win {
+    aspect-ratio:1; padding:0; border:4px solid #1e1b4b; background:
+      linear-gradient(#1e1b4b, #1e1b4b) center/2px 78% no-repeat,
+      linear-gradient(#1e1b4b, #1e1b4b) center/78% 2px no-repeat,
+      #fffaf3;
+  }
+  .sash.floor button.win { border-color:var(--floor); background:
+      linear-gradient(#c2410c, #c2410c) center/2px 78% no-repeat,
+      linear-gradient(#c2410c, #c2410c) center/78% 2px no-repeat, #fff7ed; }
+  .sash.wall button.win { border-color:var(--wall); background:
+      linear-gradient(#1d4ed8, #1d4ed8) center/2px 78% no-repeat,
+      linear-gradient(#1d4ed8, #1d4ed8) center/78% 2px no-repeat, #eff6ff; }
+  .sash.depth button.win { border-color:var(--depth); background:
+      linear-gradient(#be185d, #be185d) center/2px 78% no-repeat,
+      linear-gradient(#be185d, #be185d) center/78% 2px no-repeat, #fff1f2; }
+  button.win.keep { box-shadow:inset 0 0 0 5px #f59e0b; }
+  button.win.on { outline:3px solid #1e1b4b; outline-offset:2px; }
+  .tally { display:flex; align-items:baseline; gap:14px; margin:8px 0 0; }
+  .tally strong { font-size:clamp(64px, 12vw, 104px); font-weight:500; letter-spacing:-.04em; line-height:.9; color:var(--floor); }
+  .mono { font:13px/1.45 ui-monospace, Consolas, monospace; color:#7c2d12; }
+  .stamp { display:inline-block; padding:2px 8px; border-radius:999px; font:11px ui-monospace, Consolas, monospace; color:#fff; }
+  .lit { background:#047857; } .amber { background:#b45309; } .wall { background:#be185d; }
+  footer { color:#7c2d12; font-size:13px; padding-bottom:32px; overflow-wrap:anywhere; }
+  .src, .mono, p, a, h1, button { overflow-wrap:anywhere; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="src"><a href="../">SaPpH{{i}}on</a> · cited · <a href="https://oeis.org/A270205">OEIS A270205</a> · <a href="https://0root.ai/">0root.ai</a></div>
+  <div class="kicker">CITED · ORDER 7</div>
+  <h1>The Square Windows</h1>
+  <p id="lead">An order-7 cube holds 756 windows of two by two.</p>
+</header>
+<main>
+  <div class="stage">
+    <div class="tally"><strong id="count">756</strong><span id="cap">windows, three orientations</span></div>
+    <div class="plates" id="plates"></div>
+    <div class="layers" id="layers"></div>
+    <div class="sash floor" id="sash" role="group" aria-label="Six by six windows on the chosen layer"></div>
+  </div>
+  <p class="mono" id="card"></p>
+  <p class="mono" id="agent"></p>
+  <p class="mono" id="seq"></p>
+  <p class="mono" id="pick">No window selected.</p>
+  <p><span class="stamp lit">LIT</span> Three orientations each keep 7 layers of 6 by 6 windows, which is 252. Three times 252 is 756. The same total is 3 times 343, minus 6 times 49, plus 3 times 7. The terms from n = 0 through n = 8 match that formula, and the order-4 recurrence carries 0, 0, 6, 36 forward to 756 and then to 1176. Six times 126 is 756. A 7 by 7 by 7 lattice of unit cubes has 3 times 49 times 8 faces, which is 1176. Origins from −1 through 6 make 448 tries on one orientation, and 196 of them fall off the cube. Three times 196 is 588. The keeper at (3,3,3) sits in 12 windows. The corner (0,0,0) sits in 3. A second run matches the first. A failed count throws.</p>
+  <p><span class="stamp amber">AMBER</span> OEIS A270205, read on 2026-10-28, counts the 2 by 2 planar subsets of an n by n by n cube. Craig Knecht entered the sequence on 2016-03-13. The formula printed there is 3n cubed minus 6n squared plus 3n, and the listed term a(7) is 756. The same page says a(n) equals 6 times A002411(n−1), and the A002411 title there is the pentagonal pyramidal number n squared times (n+1) over 2. A comment by Mohammed Yaseen says a(n+1) is the number of unit faces required to make an n by n by n cubic lattice. Another comment says a most-perfect cube is one in which every such 2 by 2 subset shares one sum. No Downloads file was copied. This page is not one of those 696.</p>
+  <p><span class="stamp wall">WALL</span> The 756 count is geometric. It does not place the numbers 1 through 343, and it does not show that a most-perfect cube of order 7 exists. The note on that OEIS page about 64 subcubes summing to 260 belongs to an order-4 example, not to this cube. The unit-face count 1176 is the lattice of unit cubes, not a magic line. The walk was already full, so this page is not seated.</p>
+</main>
+<footer>
+  David Lee Wise (ROOT0). Drafted by Grok (xAI) on 2026-10-28.
+  Birth seal 63aaa0720109a1430bd57cd8f2d45dcead7fc960d5805874bb56c79f28304fc8. One host, <a href="https://davidwise01.github.io/sapph-i-on/panes/the-square-windows.html">https://davidwise01.github.io/sapph-i-on/panes/the-square-windows.html</a>.
+</footer>
+<script>
+"use strict";
+var ORDER = 7;
+var LISTED = [0, 0, 6, 36, 108, 240, 450, 756, 1176];
+var NAMES = ["floor", "wall", "depth"];
+var state = { ori: 0, layer: 3, u: 2, v: 2 };
+
+function term(n) {
+  return 3 * n * n * n - 6 * n * n + 3 * n;
+}
+function cellsOf(ori, u, v, layer) {
+  if (ori === 0) return [[u, v, layer], [u + 1, v, layer], [u, v + 1, layer], [u + 1, v + 1, layer]];
+  if (ori === 1) return [[u, layer, v], [u + 1, layer, v], [u, layer, v + 1], [u + 1, layer, v + 1]];
+  if (ori === 2) return [[layer, u, v], [layer, u + 1, v], [layer, u, v + 1], [layer, u + 1, v + 1]];
+  throw new Error("LIT FAIL panes ori");
+}
+function inside(p) {
+  return p[0] >= 0 && p[0] <= 6 && p[1] >= 0 && p[1] <= 6 && p[2] >= 0 && p[2] <= 6;
+}
+function hasCell(cells, x, y, z) {
+  var i;
+  for (i = 0; i < cells.length; i++) {
+    if (cells[i][0] === x && cells[i][1] === y && cells[i][2] === z) return true;
+  }
+  return false;
+}
+function windowCensus() {
+  var faults = [];
+  var kept = [0, 0, 0];
+  var drops = [0, 0, 0];
+  var keeperHits = [0, 0, 0];
+  var cornerHits = [0, 0, 0];
+  var ori, layer, u, v, cells, c, allIn, good;
+  for (ori = 0; ori < 3; ori++) {
+    for (layer = 0; layer < ORDER; layer++) {
+      for (u = -1; u <= ORDER - 1; u++) {
+        for (v = -1; v <= ORDER - 1; v++) {
+          good = u >= 0 && u <= ORDER - 2 && v >= 0 && v <= ORDER - 2;
+          cells = cellsOf(ori, u, v, layer);
+          allIn = true;
+          for (c = 0; c < 4; c++) if (!inside(cells[c])) allIn = false;
+          if (!good) {
+            drops[ori]++;
+            if (allIn) throw new Error("decoy kept");
+            continue;
+          }
+          if (!allIn) faults.push("outside");
+          kept[ori]++;
+          if (hasCell(cells, 3, 3, 3)) keeperHits[ori]++;
+          if (hasCell(cells, 0, 0, 0)) cornerHits[ori]++;
+          if (ori === 0 && u === 2 && v === 2 && layer === 3) {
+            if (cells.map(function (p) { return p.join(","); }).join("|") !== "2,2,3|3,2,3|2,3,3|3,3,3") faults.push("sample");
+          }
+        }
+      }
+    }
+  }
+  var total = kept[0] + kept[1] + kept[2];
+  var dropSum = drops[0] + drops[1] + drops[2];
+  if (kept[0] !== 252 || kept[1] !== 252 || kept[2] !== 252 || total !== 756) faults.push("kept");
+  if (drops[0] !== 196 || drops[1] !== 196 || drops[2] !== 196 || dropSum !== 588) faults.push("drops");
+  if (term(7) !== 756 || 3 * 343 - 6 * 49 + 21 !== 756) faults.push("formula");
+  var k;
+  for (k = 0; k <= 8; k++) if (term(k) !== LISTED[k]) faults.push("list");
+  var seq = [0, 0, 6, 36];
+  for (k = 4; k <= 8; k++) seq.push(4 * seq[k - 1] - 6 * seq[k - 2] + 4 * seq[k - 3] - seq[k - 4]);
+  if (seq[7] !== 756 || seq[8] !== 1176 || seq.join(",") !== LISTED.join(",")) faults.push("recur");
+  if (6 * (6 * 6 * 7 / 2) !== 756) faults.push("pyr");
+  if (3 * 49 * 8 !== 1176 || term(8) !== 1176) faults.push("faces");
+  var keeper = keeperHits[0] + keeperHits[1] + keeperHits[2];
+  var corner = cornerHits[0] + cornerHits[1] + cornerHits[2];
+  if (keeperHits[0] !== 4 || keeperHits[1] !== 4 || keeperHits[2] !== 4 || keeper !== 12) faults.push("keeper");
+  if (cornerHits[0] !== 1 || cornerHits[1] !== 1 || cornerHits[2] !== 1 || corner !== 3) faults.push("corner");
+  var mem = 0;
+  var x, y, z, nx, ny, nz;
+  for (z = 0; z < 7; z++) for (y = 0; y < 7; y++) for (x = 0; x < 7; x++) {
+    nx = (x === 0 || x === 6) ? 1 : 2;
+    ny = (y === 0 || y === 6) ? 1 : 2;
+    nz = (z === 0 || z === 6) ? 1 : 2;
+    mem += nx * ny + nx * nz + ny * nz;
+  }
+  if (mem !== 756 * 4) faults.push("touch");
+  var pack = "756|252|588|12|3";
+  return { faults: faults, pack: pack, total: total, each: kept[0], drops: dropSum, keeper: keeper, corner: corner, faces: 1176, listed: LISTED.slice() };
+}
+function actFor(cells) {
+  if (hasCell(cells, 3, 3, 3)) return "I keep the four cells around the keeper.";
+  if (hasCell(cells, 0, 0, 0)) return "I sit on the corner.";
+  return "I count four cells.";
+}
+function paneKeep(pack) {
+  var key = "sapph-pane-kept";
+  var id = "the-square-windows";
+  var book = {};
+  var raw = null;
+  try { raw = localStorage.getItem(key); }
+  catch (e) { throw new Error("persistent book"); }
+  if (raw) {
+    try { book = JSON.parse(raw); }
+    catch (e) { throw new Error("persistent book"); }
+  }
+  if (!book || typeof book !== "object" || Array.isArray(book)) throw new Error("persistent book");
+  var row = book[id];
+  if (!row) row = { pack: pack, act: "census", visits: 1 };
+  else {
+    if (row.pack !== pack || row.act !== "census") throw new Error("persistent drift");
+    row.visits += 1;
+  }
+  book[id] = row;
+  try { localStorage.setItem(key, JSON.stringify(book)); }
+  catch (e) { throw new Error("persistent book"); }
+  var again = null;
+  try { again = JSON.parse(localStorage.getItem(key)); }
+  catch (e) { throw new Error("persistent drift"); }
+  if (!again || !again[id] || again[id].pack !== pack || again[id].act !== "census" || again[id].visits !== row.visits) throw new Error("persistent drift");
+  return again[id];
+}
+function paint() {
+  var plates = document.getElementById("plates");
+  var layers = document.getElementById("layers");
+  var sash = document.getElementById("sash");
+  plates.innerHTML = "";
+  layers.innerHTML = "";
+  sash.innerHTML = "";
+  sash.className = "sash " + NAMES[state.ori];
+  var i, b, u, v, btn, cells, line;
+  for (i = 0; i < 3; i++) {
+    b = document.createElement("button");
+    b.type = "button";
+    b.className = "plate " + NAMES[i] + (i === state.ori ? " on" : "");
+    b.innerHTML = "<b>" + NAMES[i].toUpperCase() + "</b>252 windows";
+    b.dataset.ori = String(i);
+    b.addEventListener("click", function (ev) {
+      state.ori = Number(ev.currentTarget.dataset.ori);
+      paint();
+    });
+    plates.appendChild(b);
+  }
+  for (i = 0; i < 7; i++) {
+    b = document.createElement("button");
+    b.type = "button";
+    b.className = "layer" + (i === state.layer ? " on" : "");
+    b.textContent = String(i);
+    b.dataset.layer = String(i);
+    b.addEventListener("click", function (ev) {
+      state.layer = Number(ev.currentTarget.dataset.layer);
+      paint();
+    });
+    layers.appendChild(b);
+  }
+  for (v = 0; v < 6; v++) {
+    for (u = 0; u < 6; u++) {
+      btn = document.createElement("button");
+      btn.type = "button";
+      cells = cellsOf(state.ori, u, v, state.layer);
+      btn.className = "win" + (hasCell(cells, 3, 3, 3) ? " keep" : "") + (u === state.u && v === state.v ? " on" : "");
+      btn.dataset.u = String(u);
+      btn.dataset.v = String(v);
+      btn.setAttribute("aria-label", NAMES[state.ori] + " " + u + "," + v + "," + state.layer);
+      btn.addEventListener("click", function (ev) {
+        state.u = Number(ev.currentTarget.dataset.u);
+        state.v = Number(ev.currentTarget.dataset.v);
+        paint();
+      });
+      sash.appendChild(btn);
+    }
+  }
+  cells = cellsOf(state.ori, state.u, state.v, state.layer);
+  line = "Window " + NAMES[state.ori] + " " + state.u + "," + state.v + "," + state.layer + " accepts the act. " + actFor(cells);
+  if (line.indexOf("Window ") !== 0 || line.indexOf("accepts the act.") < 0) throw new Error("LIT FAIL panes open");
+  document.getElementById("agent").textContent = line;
+  document.getElementById("pick").textContent = NAMES[state.ori] + " · layer " + state.layer + " · window " + state.u + "," + state.v + " · cells " + cells.map(function (p) { return "(" + p.join(",") + ")"; }).join(" ");
+  document.getElementById("count").textContent = "756";
+  document.getElementById("cap").textContent = NAMES[state.ori] + " · layer " + state.layer + " · 252 on this orientation";
+}
+var first = windowCensus();
+var second = windowCensus();
+if (first.faults.length || second.faults.length || first.pack !== second.pack || first.pack !== "756|252|588|12|3") {
+  throw new Error("LIT FAIL panes " + first.faults.join(","));
+}
+if (first.total !== 756 || first.keeper !== 12 || first.corner !== 3 || first.faces !== 1176 || first.drops !== 588) {
+  throw new Error("LIT FAIL panes census");
+}
+var keptRow = paneKeep(first.pack);
+document.getElementById("card").innerHTML = "<span class='stamp lit'>LIT</span> order 7 · 756 windows · A270205";
+document.getElementById("seq").textContent = "A270205: " + LISTED.join(", ") + " · kept " + keptRow.visits + " · pack " + keptRow.pack;
+paint();
+if (document.getElementById("card").textContent.indexOf("756") < 0) throw new Error("LIT FAIL panes show");
+if (document.getElementById("sash").children.length !== 36) throw new Error("LIT FAIL panes sash");
+</script>
+</body>
+</html>

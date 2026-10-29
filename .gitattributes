@@ -57,3 +57,6 @@ mms/*.html -text
 nasik/*.html -text
 agents/*.html -text
 agents/*.dlw -text
+panes/*.html -text
+panes/*.dlw -text
+panes/*.json -text
