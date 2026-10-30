@@ -29,11 +29,11 @@
     "domains": 513,
     "domains_populated": 513,
     "domains_open": 0,
-    "spheres": 2390,
+    "spheres": 2414,
     "zero_spheres": 0,
     "balance": 0,
     "workshop": 343,
-    "new_spheres": 455
+    "new_spheres": 479
   },
   "seal": {
     "seal_sha256": "b7350267c9df90491f3a2c45297e9a0f756c65d2c23a323f6f68abc3426d33fe",
@@ -68239,6 +68239,390 @@
         "nui",
         "gods",
         "the-tahoti-spirit-of-death"
+      ]
+    },
+    {
+      "title": "God of the Gods \u00b7 The God of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-gods.html",
+      "offset": 0,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "gods",
+        "gods-of-the-gods",
+        "the-god-of-the-gods"
+      ]
+    },
+    {
+      "title": "King of the Gods \u00b7 The God of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-gods-king.html",
+      "offset": 1,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "gods",
+        "gods-of-the-gods",
+        "the-god-of-the-gods-king"
+      ]
+    },
+    {
+      "title": "Queen of the Gods \u00b7 The God of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-gods-queen.html",
+      "offset": 2,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "gods",
+        "gods-of-the-gods",
+        "the-god-of-the-gods-queen"
+      ]
+    },
+    {
+      "title": "God of the Gods Creator \u00b7 The God of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-gods-creator.html",
+      "offset": 3,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "gods",
+        "gods-of-the-gods",
+        "the-god-of-the-gods-creator"
+      ]
+    },
+    {
+      "title": "God of the Gods Sustainer \u00b7 The God of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-gods-sustainer.html",
+      "offset": 4,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "gods",
+        "gods-of-the-gods",
+        "the-god-of-the-gods-sustainer"
+      ]
+    },
+    {
+      "title": "God of the Gods Judge \u00b7 The God of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-gods-judge.html",
+      "offset": 5,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "gods",
+        "gods-of-the-gods",
+        "the-god-of-the-gods-judge"
+      ]
+    },
+    {
+      "title": "God of the Gods Danger \u00b7 The God of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-gods-danger.html",
+      "offset": 6,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "gods",
+        "gods-of-the-gods",
+        "the-god-of-the-gods-danger"
+      ]
+    },
+    {
+      "title": "God of the Gods Safe \u00b7 The God of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-gods-safe.html",
+      "offset": 7,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "gods",
+        "gods-of-the-gods",
+        "the-god-of-the-gods-safe"
+      ]
+    },
+    {
+      "title": "God of the Gods Death \u00b7 The God of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-gods-death.html",
+      "offset": 8,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "gods",
+        "gods-of-the-gods",
+        "the-god-of-the-gods-death"
+      ]
+    },
+    {
+      "title": "God of the Gods Life \u00b7 The God of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-gods-life.html",
+      "offset": 9,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "gods",
+        "gods-of-the-gods",
+        "the-god-of-the-gods-life"
+      ]
+    },
+    {
+      "title": "God of the Gods Truth \u00b7 The God of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-gods-truth.html",
+      "offset": 10,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "gods",
+        "gods-of-the-gods",
+        "the-god-of-the-gods-truth"
+      ]
+    },
+    {
+      "title": "God of the Gods Dream \u00b7 The God of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-gods-dream.html",
+      "offset": 11,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "gods",
+        "gods-of-the-gods",
+        "the-god-of-the-gods-dream"
+      ]
+    },
+    {
+      "title": "God of the Gods Tower \u00b7 The God of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-gods-tower.html",
+      "offset": 12,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "gods",
+        "gods-of-the-gods",
+        "the-god-of-the-gods-tower"
+      ]
+    },
+    {
+      "title": "God of the Gods Kingdom \u00b7 The God of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-gods-kingdom.html",
+      "offset": 13,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "gods",
+        "gods-of-the-gods",
+        "the-god-of-the-gods-kingdom"
+      ]
+    },
+    {
+      "title": "God of the Gods Wisdom \u00b7 The God of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-gods-wisdom.html",
+      "offset": 14,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "gods",
+        "gods-of-the-gods",
+        "the-god-of-the-gods-wisdom"
+      ]
+    },
+    {
+      "title": "God of the Gods Strength \u00b7 The God of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-gods-strength.html",
+      "offset": 15,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "gods",
+        "gods-of-the-gods",
+        "the-god-of-the-gods-strength"
+      ]
+    },
+    {
+      "title": "God of the Gods Fire \u00b7 The God of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-gods-fire.html",
+      "offset": 16,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "gods",
+        "gods-of-the-gods",
+        "the-god-of-the-gods-fire"
+      ]
+    },
+    {
+      "title": "God of the Gods Water \u00b7 The God of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-gods-water.html",
+      "offset": 17,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "gods",
+        "gods-of-the-gods",
+        "the-god-of-the-gods-water"
+      ]
+    },
+    {
+      "title": "God of the Gods Earth \u00b7 The God of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-gods-earth.html",
+      "offset": 18,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "gods",
+        "gods-of-the-gods",
+        "the-god-of-the-gods-earth"
+      ]
+    },
+    {
+      "title": "God of the Gods Sky \u00b7 The God of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-gods-sky.html",
+      "offset": 19,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "gods",
+        "gods-of-the-gods",
+        "the-god-of-the-gods-sky"
+      ]
+    },
+    {
+      "title": "God of the Gods Stars \u00b7 The God of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-gods-stars.html",
+      "offset": 20,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "gods",
+        "gods-of-the-gods",
+        "the-god-of-the-gods-stars"
+      ]
+    },
+    {
+      "title": "God of the Gods Moon \u00b7 The God of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-gods-moon.html",
+      "offset": 21,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "gods",
+        "gods-of-the-gods",
+        "the-god-of-the-gods-moon"
+      ]
+    },
+    {
+      "title": "God of the Gods Sun \u00b7 The God of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-gods-sun.html",
+      "offset": 22,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "gods",
+        "gods-of-the-gods",
+        "the-god-of-the-gods-sun"
+      ]
+    },
+    {
+      "title": "God of the Gods Sun \u00b7 The God of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-gods-the-sun.html",
+      "offset": 23,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "gods",
+        "gods-of-the-gods",
+        "the-god-of-the-gods-the-sun"
       ]
     }
   ]
