@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Icarium">
+<meta name="generator" content="Icarium · SaPpH{{i}}on">
+<title>{king_slug} · Brazillion Gods and Math</title>
+<style>
+  @import url('https://davidwise01.github.io/sapph-i-on/common.js');
+  :root {{
+    --bg: {background};
+    --accent: {accent};
+    --text: {text_color};
+    --border: rgba(255,255,255,0.1);
+  }}
+  body {{
+    font-family: monospace;
+    background: {background};
+    color: {text_color};
+    margin: 0;
+    padding: 1rem;
+    min-height: 100vh;
+  }}
+  .king {{
+    max-width: 800px;
+    margin: auto;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    background: rgba(0,0,0,0.2);
+  }}
+  h1 {{
+    color: {accent};
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }}
+  h1::before {{
+    content: "⏚ ";
+  }}
+  h2 {{
+    color: {base};
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+  }}
+  .epigraph {{
+    color: {text_color};
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    border-left: 2px solid {accent};
+    padding-left: 0.8rem;
+  }}
+  canvas {{
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: {background};
+  }}
+  table {{
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.85rem;
+  }}
+  th, td {{
+    border: 1px solid var(--border);
+    padding: 0.4rem 0.6rem;
+    text-align: left;
+  }}
+  th {{
+    background: {accent};
+    color: {text_color};
+  }}
+  tr:nth-child(even) {{
+    background: rgba(255,255,255,0.05);
+  }}
+  .sky-map {{
+    margin: 1rem 0;
+    border: 1px solid var(--border);
+    padding: 0.5rem;
+  }}
+  .sky-map svg {{
+    width: 100%;
+    height: auto;
+    display: block;
+  }}
+</style>
+</head>
+<body>
+<a href="https://davidwise01.github.io/sapph-i-on/">← Back to SaPpH{{i}}on</a>
+<main class="king">
+  <div class="title-block"><h1>{king_name}</h1><p class="epigraph">{epigraph}</p></div>
+  <div class="god-chart"><h2>{god_name}</h2><canvas id="god-chart-{king_slug}"></canvas></div>
+  <div class="sky-map"><h2>The Brazillion Gods and Math</h2><svg viewBox="0 0 400 200">
+  <defs><radialGradient id="sky-gradient-{king_slug}" cx="50%" cy="0%" r="100%">
+  <stop offset="0%" stop-color="#1a1a2a"/>
+  <stop offset="60%" stop-color="{background}"/>
+  <stop offset="100%" stop-color="#2a2a3a"/></radialGradient></defs>
+  <rect width="400" height="200" fill="url(#sky-gradient-{king_slug})"/>
+  <text x="200" y="50" font-family="monospace" fill="{text_color}" font-size="14" text-anchor="middle">BRAZIL</text>
+  <text x="200" y="65" font-family="monospace" fill="{text_color}" font-size="12" text-anchor="middle">GODS AND MATH</text>
+  <text x="200" y="80" font-family="monospace" fill="{text_color}" font-size="10" text-anchor="middle">UNIVERSE</text>
+  <text x="100" y="130" font-family="monospace" fill="{highlight}" font-size="10" text-anchor="middle">0,1,2</text>
+  <text x="300" y="130" font-family="monospace" fill="{highlight}" font-size="10" text-anchor="middle">π,i,e</text>
+  <text x="200" y="175" font-family="monospace" fill="{highlight}" font-size="10" text-anchor="middle">∞</text>
+  </svg></div>
+  <div class="tribal-table"><h2>The Brazillion Pantheon</h2><table class="tribal-table">
+  <tr><th>Divinity</th><th>Title</th><th>Math Concept</th></tr>
+  <tr><td>The God of Arithmetics</td><td>The Arithmetics</td><td>Arithmetic</td></tr>
+  <tr><td>The Sphere of Calculus</td><td>The Calculus</td><td>Calculus</td></tr>
+  <tr><td>The Goddess of Geometry</td><td>The Geometry</td><td>Geometry</td></tr>
+  <tr><td>The Algoddess</td><td>The Algebra</td><td>Algebra</td></tr>
+  <tr><td>The God of Statistics</td><td>The Statistics</td><td>Statistics</td></tr>
+  <tr><td>The Sphere of Probability</td><td>The Probability</td><td>Probability</td></tr>
+  <tr><td>The God of Logic</td><td>The Logic</td><td>Logic</td></tr>
+  <tr><td>The Mathess</td><td>The Mathesis</td><td>Mathematics</td></tr>
+  <tr><td>The Logarithm God</td><td>The Logarithms</td><td>Logarithms</td></tr>
+  <tr><td>The Trig God</td><td>The Trigonometry</td><td>Trigonometry</td></tr>
+  <tr><td>The Irrational Deity</td><td>The Irrationals</td><td>Irrational Numbers</td></tr>
+  <tr><td>The Infite God</td><td>The Infinity</td><td>Infinity</td></tr>
+  <tr><td>The God of Set Theory</td><td>The Set Theory</td><td>Set Theory</td></tr>
+  <tr><td>The Prime Minister</td><td>The Primes</td><td>Prime Numbers</td></tr>
+  <tr><td>The God of Numbers</td><td>The Numbers</td><td>Number Theory</td></tr>
+  <tr><td>The Sphere of Complex Analysis</td><td>The Complex Analysis</td><td>Complex Analysis</td></tr>
+  <tr><td>The God of Fractions</td><td>The Fractions</td><td>Fractions</td></tr>
+  <tr><td>The Sphere of Group Theory</td><td>The Group Theory</td><td>Group Theory</td></tr>
+  <tr><td>The Reductio God</td><td>The Reductio</td><td>Proof by Contradiction</td></tr>
+  <tr><td>The God of Series</td><td>The Series</td><td>Series and Sums</td></tr>
+  <tr><td>The Parallel Goddess</td><td>The Parallelism</td><td>Parallel Postulate</td></tr>
+  <tr><td>The Pascal Goddess</td><td>The Combinatorics</td><td>Binomial Expansion</td></tr>
+  <tr><td>The Riemann Sphere</td><td>The Riemann Sphere</td><td>Complex Plane</td></tr>
+  <tr><td>The Euler God</td><td>The Euler Identity</td><td>e^{π} + 1 = 0</td></tr>
+  </table></div>
+</main>
+<script>console.log("brazillion:" + window.location.pathname);</script>
+</body>
+</html>
