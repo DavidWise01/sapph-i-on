@@ -29,11 +29,11 @@
     "domains": 513,
     "domains_populated": 513,
     "domains_open": 0,
-    "spheres": 2438,
+    "spheres": 2462,
     "zero_spheres": 0,
     "balance": 0,
     "workshop": 343,
-    "new_spheres": 524
+    "new_spheres": 548
   },
   "seal": {
     "seal_sha256": "b7350267c9df90491f3a2c45297e9a0f756c65d2c23a323f6f68abc3426d33fe",
@@ -69343,6 +69343,414 @@
         "crippled",
         "gods",
         "the-god-who-lost-his-arms"
+      ]
+    },
+    {
+      "title": "King of the Underworld \u00b7 The Gods of the Underworld and the Afterlife",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-king-of-the-underworld.html",
+      "offset": 0,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "underworld",
+        "afterlife",
+        "gods",
+        "the-king-of-the-underworld"
+      ]
+    },
+    {
+      "title": "Queen of the Underworld \u00b7 The Gods of the Underworld and the Afterlife",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-queen-of-the-underworld.html",
+      "offset": 1,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "underworld",
+        "afterlife",
+        "gods",
+        "the-queen-of-the-underworld"
+      ]
+    },
+    {
+      "title": "God of the Underworld \u00b7 The Gods of the Underworld and the Afterlife",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-underworld.html",
+      "offset": 2,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "underworld",
+        "afterlife",
+        "gods",
+        "the-god-of-the-underworld"
+      ]
+    },
+    {
+      "title": "Goddess of the Underworld \u00b7 The Gods of the Underworld and the Afterlife",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-goddess-of-the-underworld.html",
+      "offset": 3,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "underworld",
+        "afterlife",
+        "gods",
+        "the-goddess-of-the-underworld"
+      ]
+    },
+    {
+      "title": "God of the Dead \u00b7 The Gods of the Underworld and the Afterlife",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-dead.html",
+      "offset": 4,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "underworld",
+        "afterlife",
+        "gods",
+        "the-god-of-the-dead"
+      ]
+    },
+    {
+      "title": "Goddess of the Dead \u00b7 The Gods of the Underworld and the Afterlife",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-goddess-of-the-dead.html",
+      "offset": 5,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "underworld",
+        "afterlife",
+        "gods",
+        "the-goddess-of-the-dead"
+      ]
+    },
+    {
+      "title": "God of the Afterlife \u00b7 The Gods of the Underworld and the Afterlife",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-afterlife.html",
+      "offset": 6,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "underworld",
+        "afterlife",
+        "gods",
+        "the-god-of-the-afterlife"
+      ]
+    },
+    {
+      "title": "Goddess of the Afterlife \u00b7 The Gods of the Underworld and the Afterlife",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-goddess-of-the-afterlife.html",
+      "offset": 7,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "underworld",
+        "afterlife",
+        "gods",
+        "the-goddess-of-the-afterlife"
+      ]
+    },
+    {
+      "title": "God of Purification \u00b7 The Gods of the Underworld and the Afterlife",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-purification.html",
+      "offset": 8,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "underworld",
+        "afterlife",
+        "gods",
+        "the-god-of-purification"
+      ]
+    },
+    {
+      "title": "Goddess of Purification \u00b7 The Gods of the Underworld and the Afterlife",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-goddess-of-purification.html",
+      "offset": 9,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "underworld",
+        "afterlife",
+        "gods",
+        "the-goddess-of-purification"
+      ]
+    },
+    {
+      "title": "God of Rebirth \u00b7 The Gods of the Underworld and the Afterlife",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-rebirth.html",
+      "offset": 10,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "underworld",
+        "afterlife",
+        "gods",
+        "the-god-of-rebirth"
+      ]
+    },
+    {
+      "title": "Goddess of Rebirth \u00b7 The Gods of the Underworld and the Afterlife",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-goddess-of-rebirth.html",
+      "offset": 11,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "underworld",
+        "afterlife",
+        "gods",
+        "the-goddess-of-rebirth"
+      ]
+    },
+    {
+      "title": "God of the Seeds \u00b7 The Gods of the Underworld and the Afterlife",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-seeds.html",
+      "offset": 12,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "underworld",
+        "afterlife",
+        "gods",
+        "the-god-of-the-seeds"
+      ]
+    },
+    {
+      "title": "Goddess of the Seeds \u00b7 The Gods of the Underworld and the Afterlife",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-goddess-of-the-seeds.html",
+      "offset": 13,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "underworld",
+        "afterlife",
+        "gods",
+        "the-goddess-of-the-seeds"
+      ]
+    },
+    {
+      "title": "God of the Stars \u00b7 The Gods of the Underworld and the Afterlife",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-stars.html",
+      "offset": 14,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "underworld",
+        "afterlife",
+        "gods",
+        "the-god-of-the-stars"
+      ]
+    },
+    {
+      "title": "Goddess of the Stars \u00b7 The Gods of the Underworld and the Afterlife",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-goddess-of-the-stars.html",
+      "offset": 15,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "underworld",
+        "afterlife",
+        "gods",
+        "the-goddess-of-the-stars"
+      ]
+    },
+    {
+      "title": "God of the Moon \u00b7 The Gods of the Underworld and the Afterlife",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-moon.html",
+      "offset": 16,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "underworld",
+        "afterlife",
+        "gods",
+        "the-god-of-the-moon"
+      ]
+    },
+    {
+      "title": "Goddess of the Moon \u00b7 The Gods of the Underworld and the Afterlife",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-goddess-of-the-moon.html",
+      "offset": 17,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "underworld",
+        "afterlife",
+        "gods",
+        "the-goddess-of-the-moon"
+      ]
+    },
+    {
+      "title": "God of the Sun \u00b7 The Gods of the Underworld and the Afterlife",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-sun.html",
+      "offset": 18,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "underworld",
+        "afterlife",
+        "gods",
+        "the-god-of-the-sun"
+      ]
+    },
+    {
+      "title": "Goddess of the Sun \u00b7 The Gods of the Underworld and the Afterlife",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-goddess-of-the-sun.html",
+      "offset": 19,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "underworld",
+        "afterlife",
+        "gods",
+        "the-goddess-of-the-sun"
+      ]
+    },
+    {
+      "title": "God of the Earth \u00b7 The Gods of the Underworld and the Afterlife",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-earth.html",
+      "offset": 20,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "underworld",
+        "afterlife",
+        "gods",
+        "the-god-of-the-earth"
+      ]
+    },
+    {
+      "title": "Goddess of the Earth \u00b7 The Gods of the Underworld and the Afterlife",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-goddess-of-the-earth.html",
+      "offset": 21,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "underworld",
+        "afterlife",
+        "gods",
+        "the-goddess-of-the-earth"
+      ]
+    },
+    {
+      "title": "God of the River \u00b7 The Gods of the Underworld and the Afterlife",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-of-the-river.html",
+      "offset": 22,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "underworld",
+        "afterlife",
+        "gods",
+        "the-god-of-the-river"
+      ]
+    },
+    {
+      "title": "Goddess of the River \u00b7 The Gods of the Underworld and the Afterlife",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-goddess-of-the-river.html",
+      "offset": 23,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "underworld",
+        "afterlife",
+        "gods",
+        "the-goddess-of-the-river"
       ]
     }
   ]
