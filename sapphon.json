@@ -29,11 +29,11 @@
     "domains": 513,
     "domains_populated": 513,
     "domains_open": 0,
-    "spheres": 2198,
+    "spheres": 2222,
     "zero_spheres": 0,
     "balance": 0,
     "workshop": 343,
-    "new_spheres": 235
+    "new_spheres": 259
   },
   "seal": {
     "seal_sha256": "b7350267c9df90491f3a2c45297e9a0f756c65d2c23a323f6f68abc3426d33fe",
@@ -64375,6 +64375,390 @@
         "atlantis",
         "god",
         "the-king-god"
+      ]
+    },
+    {
+      "title": "The Ancients \u00b7 God of the Stargate Universe",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-ancients.html",
+      "offset": 0,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "stargate",
+        "god",
+        "the-ancients"
+      ]
+    },
+    {
+      "title": "The Goa Uld \u00b7 God of the Stargate Universe",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-goa-uld.html",
+      "offset": 1,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "stargate",
+        "god",
+        "the-goa-uld"
+      ]
+    },
+    {
+      "title": "The Jaffa \u00b7 God of the Stargate Universe",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-jaffa.html",
+      "offset": 2,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "stargate",
+        "god",
+        "the-jaffa"
+      ]
+    },
+    {
+      "title": "The Ori \u00b7 God of the Stargate Universe",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-ori.html",
+      "offset": 3,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "stargate",
+        "god",
+        "the-ori"
+      ]
+    },
+    {
+      "title": "The Wraith \u00b7 God of the Stargate Universe",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-wraith.html",
+      "offset": 4,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "stargate",
+        "god",
+        "the-wraith"
+      ]
+    },
+    {
+      "title": "The Asgard \u00b7 God of the Stargate Universe",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-asgard.html",
+      "offset": 5,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "stargate",
+        "god",
+        "the-asgard"
+      ]
+    },
+    {
+      "title": "The Nox \u00b7 God of the Stargate Universe",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-nox.html",
+      "offset": 6,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "stargate",
+        "god",
+        "the-nox"
+      ]
+    },
+    {
+      "title": "The Tokra \u00b7 God of the Stargate Universe",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-tokra.html",
+      "offset": 7,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "stargate",
+        "god",
+        "the-tokra"
+      ]
+    },
+    {
+      "title": "The Priors \u00b7 God of the Stargate Universe",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-priors.html",
+      "offset": 8,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "stargate",
+        "god",
+        "the-priors"
+      ]
+    },
+    {
+      "title": "The Orionids \u00b7 God of the Stargate Universe",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-orionids.html",
+      "offset": 9,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "stargate",
+        "god",
+        "the-orionids"
+      ]
+    },
+    {
+      "title": "The Hatak \u00b7 God of the Stargate Universe",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-hatak.html",
+      "offset": 10,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "stargate",
+        "god",
+        "the-hatak"
+      ]
+    },
+    {
+      "title": "The Replicators \u00b7 God of the Stargate Universe",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-replicators.html",
+      "offset": 11,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "stargate",
+        "god",
+        "the-replicators"
+      ]
+    },
+    {
+      "title": "The Desert Nomads \u00b7 God of the Stargate Universe",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-desert-nomads.html",
+      "offset": 12,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "stargate",
+        "god",
+        "the-desert-nomads"
+      ]
+    },
+    {
+      "title": "The Warriors \u00b7 God of the Stargate Universe",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-warriors.html",
+      "offset": 13,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "stargate",
+        "god",
+        "the-warriors"
+      ]
+    },
+    {
+      "title": "The Peacemakers \u00b7 God of the Stargate Universe",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-peacemakers.html",
+      "offset": 14,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "stargate",
+        "god",
+        "the-peacemakers"
+      ]
+    },
+    {
+      "title": "The Light \u00b7 God of the Stargate Universe",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-light.html",
+      "offset": 15,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "stargate",
+        "god",
+        "the-light"
+      ]
+    },
+    {
+      "title": "The Engineers \u00b7 God of the Stargate Universe",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-engineers.html",
+      "offset": 16,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "stargate",
+        "god",
+        "the-engineers"
+      ]
+    },
+    {
+      "title": "The Watch \u00b7 God of the Stargate Universe",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-watch.html",
+      "offset": 17,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "stargate",
+        "god",
+        "the-watch"
+      ]
+    },
+    {
+      "title": "The Feeders \u00b7 God of the Stargate Universe",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-feeders.html",
+      "offset": 18,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "stargate",
+        "god",
+        "the-feeders"
+      ]
+    },
+    {
+      "title": "The Hosts \u00b7 God of the Stargate Universe",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-hosts.html",
+      "offset": 19,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "stargate",
+        "god",
+        "the-hosts"
+      ]
+    },
+    {
+      "title": "The Infinity \u00b7 God of the Stargate Universe",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-infinity.html",
+      "offset": 20,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "stargate",
+        "god",
+        "the-infinity"
+      ]
+    },
+    {
+      "title": "The Dawn \u00b7 God of the Stargate Universe",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-dawn.html",
+      "offset": 21,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "stargate",
+        "god",
+        "the-dawn"
+      ]
+    },
+    {
+      "title": "The Controllers \u00b7 God of the Stargate Universe",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-controllers.html",
+      "offset": 22,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "stargate",
+        "god",
+        "the-controllers"
+      ]
+    },
+    {
+      "title": "The Creators \u00b7 God of the Stargate Universe",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-creators.html",
+      "offset": 23,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "stargate",
+        "god",
+        "the-creators"
       ]
     }
   ]
