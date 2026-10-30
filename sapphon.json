@@ -29,11 +29,11 @@
     "domains": 513,
     "domains_populated": 513,
     "domains_open": 0,
-    "spheres": 2246,
+    "spheres": 2270,
     "zero_spheres": 0,
     "balance": 0,
     "workshop": 343,
-    "new_spheres": 283
+    "new_spheres": 307
   },
   "seal": {
     "seal_sha256": "b7350267c9df90491f3a2c45297e9a0f756c65d2c23a323f6f68abc3426d33fe",
@@ -65167,6 +65167,414 @@
         "gods",
         "math",
         "the-eulers-god"
+      ]
+    },
+    {
+      "title": "The Ahura Mazda \u00b7 God of the Persian Pantheon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-ahura-mazda.html",
+      "offset": 0,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "persian",
+        "gods",
+        "zoroastrian",
+        "the-ahura-mazda"
+      ]
+    },
+    {
+      "title": "The Angra Mainyu \u00b7 God of the Persian Pantheon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-angra-mainyu.html",
+      "offset": 1,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "persian",
+        "gods",
+        "zoroastrian",
+        "the-angra-mainyu"
+      ]
+    },
+    {
+      "title": "The Amesha Spentas \u00b7 God of the Persian Pantheon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-amesha-spentas.html",
+      "offset": 2,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "persian",
+        "gods",
+        "zoroastrian",
+        "the-amesha-spentas"
+      ]
+    },
+    {
+      "title": "The Asha Vahishta \u00b7 God of the Persian Pantheon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-asha-vahishta.html",
+      "offset": 3,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "persian",
+        "gods",
+        "zoroastrian",
+        "the-asha-vahishta"
+      ]
+    },
+    {
+      "title": "The Vohu Mana \u00b7 God of the Persian Pantheon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-vohu-mana.html",
+      "offset": 4,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "persian",
+        "gods",
+        "zoroastrian",
+        "the-vohu-mana"
+      ]
+    },
+    {
+      "title": "The Spenta Armaiti \u00b7 God of the Persian Pantheon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-spenta-armaiti.html",
+      "offset": 5,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "persian",
+        "gods",
+        "zoroastrian",
+        "the-spenta-armaiti"
+      ]
+    },
+    {
+      "title": "The Khvarenoh Kherad \u00b7 God of the Persian Pantheon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-khvarenoh-kherad.html",
+      "offset": 6,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "persian",
+        "gods",
+        "zoroastrian",
+        "the-khvarenoh-kherad"
+      ]
+    },
+    {
+      "title": "The Khshathra Vairya \u00b7 God of the Persian Pantheon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-khshathra-vairya.html",
+      "offset": 7,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "persian",
+        "gods",
+        "zoroastrian",
+        "the-khshathra-vairya"
+      ]
+    },
+    {
+      "title": "The Haurvatat \u00b7 God of the Persian Pantheon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-haurvatat.html",
+      "offset": 8,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "persian",
+        "gods",
+        "zoroastrian",
+        "the-haurvatat"
+      ]
+    },
+    {
+      "title": "The Ameretat \u00b7 God of the Persian Pantheon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-ameretat.html",
+      "offset": 9,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "persian",
+        "gods",
+        "zoroastrian",
+        "the-ameretat"
+      ]
+    },
+    {
+      "title": "The Frawardigh \u00b7 God of the Persian Pantheon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-frawardigh.html",
+      "offset": 10,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "persian",
+        "gods",
+        "zoroastrian",
+        "the-frawardigh"
+      ]
+    },
+    {
+      "title": "The Mithra \u00b7 God of the Persian Pantheon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-mithra.html",
+      "offset": 11,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "persian",
+        "gods",
+        "zoroastrian",
+        "the-mithra"
+      ]
+    },
+    {
+      "title": "The Sraosha \u00b7 God of the Persian Pantheon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-sraosha.html",
+      "offset": 12,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "persian",
+        "gods",
+        "zoroastrian",
+        "the-sraosha"
+      ]
+    },
+    {
+      "title": "The Tishtrya \u00b7 God of the Persian Pantheon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-tishtrya.html",
+      "offset": 13,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "persian",
+        "gods",
+        "zoroastrian",
+        "the-tishtrya"
+      ]
+    },
+    {
+      "title": "The Haoma \u00b7 God of the Persian Pantheon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-haoma.html",
+      "offset": 14,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "persian",
+        "gods",
+        "zoroastrian",
+        "the-haoma"
+      ]
+    },
+    {
+      "title": "The Rashnu \u00b7 God of the Persian Pantheon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-rashnu.html",
+      "offset": 15,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "persian",
+        "gods",
+        "zoroastrian",
+        "the-rashnu"
+      ]
+    },
+    {
+      "title": "The Verethragna \u00b7 God of the Persian Pantheon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-verethragna.html",
+      "offset": 16,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "persian",
+        "gods",
+        "zoroastrian",
+        "the-verethragna"
+      ]
+    },
+    {
+      "title": "The Anahita \u00b7 God of the Persian Pantheon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-anahita.html",
+      "offset": 17,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "persian",
+        "gods",
+        "zoroastrian",
+        "the-anahita"
+      ]
+    },
+    {
+      "title": "The Aramazd \u00b7 God of the Persian Pantheon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-aramazd.html",
+      "offset": 18,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "persian",
+        "gods",
+        "zoroastrian",
+        "the-aramazd"
+      ]
+    },
+    {
+      "title": "The Anaitis \u00b7 God of the Persian Pantheon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-anaitis.html",
+      "offset": 19,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "persian",
+        "gods",
+        "zoroastrian",
+        "the-anaitis"
+      ]
+    },
+    {
+      "title": "The Orion \u00b7 God of the Persian Pantheon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-orion.html",
+      "offset": 20,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "persian",
+        "gods",
+        "zoroastrian",
+        "the-orion"
+      ]
+    },
+    {
+      "title": "The Taurus \u00b7 God of the Persian Pantheon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-taurus.html",
+      "offset": 21,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "persian",
+        "gods",
+        "zoroastrian",
+        "the-taurus"
+      ]
+    },
+    {
+      "title": "The Gemini \u00b7 God of the Persian Pantheon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-gemini.html",
+      "offset": 22,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "persian",
+        "gods",
+        "zoroastrian",
+        "the-gemini"
+      ]
+    },
+    {
+      "title": "The Crab \u00b7 God of the Persian Pantheon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-crab.html",
+      "offset": 23,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "persian",
+        "gods",
+        "zoroastrian",
+        "the-crab"
       ]
     }
   ]
