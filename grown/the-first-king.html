@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Icarium">
+<meta name="generator" content="Icarium · SaPpH{i}on">
+<title>the-first-king · Sumerian Gods</title>
+<style>
+  @import url('https://davidwise01.github.io/sapph-i-on/common.js');
+  :root {
+    --bg: #0a1520;
+    --accent: #2a3a4a;
+    --text: #a82020;
+    --border: rgba(255,255,255,0.1);
+  }
+  body {
+    font-family: monospace;
+    background: #0a1520;
+    color: #a82020;
+    margin: 0;
+    padding: 1rem;
+    min-height: 100vh;
+  }
+  .king {
+    max-width: 800px;
+    margin: auto;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    background: rgba(0,0,0,0.2);
+  }
+  h1 {
+    color: #2a3a4a;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+  h1::before {
+    content: "☉ ";
+  }
+  h2 {
+    color: #0a1018;
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+  }
+  .epigraph {
+    color: #a82020;
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    border-left: 2px solid #2a3a4a;
+    padding-left: 0.8rem;
+  }
+  canvas {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: #0a1520;
+  }
+  table {
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.85rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.4rem 0.6rem;
+    text-align: left;
+  }
+  th {
+    background: #2a3a4a;
+    color: #a82020;
+  }
+  tr:nth-child(even) {
+    background: rgba(255,255,255,0.05);
+  }
+  .sky-map {
+    margin: 1rem 0;
+    border: 1px solid var(--border);
+    padding: 0.5rem;
+  }
+  .sky-map svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>
+</head>
+<body>
+<a href="https://davidwise01.github.io/sapph-i-on/">← Back to SaPpH{i}on</a>
+<main class="king">
+  <div class="title-block"><h1>The First King</h1><p class="epigraph">The first king, father of wisdom, bringer of culture, king of shuruppak</p></div>
+  <div class="god-chart"><h2>Alulim</h2><canvas id="god-chart-the-first-king"></canvas></div>
+  <div class="sky-map"><h2>The Sumerian Heavens</h2><svg viewBox="0 0 400 200">
+  <defs><radialGradient id="sky-gradient-the-first-king" cx="50%" cy="0%" r="100%">
+  <stop offset="0%" stop-color="#1a1a2a"/>
+  <stop offset="60%" stop-color="#0a1520"/>
+  <stop offset="100%" stop-color="#2a2a3a"/></radialGradient></defs>
+  <rect width="400" height="200" fill="url(#sky-gradient-the-first-king)"/>
+  <text x="200" y="50" font-family="monospace" fill="#a82020" font-size="14" text-anchor="middle">SUMER</text>
+  <text x="200" y="65" font-family="monospace" fill="#a82020" font-size="12" text-anchor="middle">NIPPUR</text>
+  <text x="200" y="80" font-family="monospace" fill="#a82020" font-size="10" text-anchor="middle">UR</text>
+  <text x="100" y="130" font-family="monospace" fill="#4a5a6a" font-size="10" text-anchor="middle">KISI</text>
+  <text x="300" y="130" font-family="monospace" fill="#4a5a6a" font-size="10" text-anchor="middle">ERL</text>
+  </svg></div>
+  <div class="tribal-table"><h2>Divine Progenitors</h2><table class="tribal-table">
+  <tr><th>Divinity</th><th>Title</th><th>City</th></tr>
+  <tr><td>An</td><td>King of the heavens</td><td>Uruk</td></tr>
+  <tr><td>Enlil</td><td>Lord of the air</td><td>Nippur</td></tr>
+  <tr><td>Enki</td><td>Wisdom and water</td><td>Eridu</td></tr>
+  <tr><td>Inanna</td><td>Love and war</td><td>Eanna</td></tr>
+  <tr><td>Utu</td><td>Sun and justice</td><td>Sippar</td></tr>
+  </table></div>
+</main>
+<script>console.log("sumerian:" + window.location.pathname);</script>
+</body>
+</html>
