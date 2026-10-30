@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Icarium">
+<meta name="generator" content="Icarium · SaPpH{i}on">
+<title>the-feeders · Gods of the Stargate Universe</title>
+<style>
+  @import url('https://davidwise01.github.io/sapph-i-on/common.js');
+  :root {
+    --bg: #1a1000;
+    --accent: #2a2000;
+    --text: #a0a030;
+    --border: rgba(255,255,255,0.1);
+  }
+  body {
+    font-family: monospace;
+    background: #1a1000;
+    color: #a0a030;
+    margin: 0;
+    padding: 1rem;
+    min-height: 100vh;
+  }
+  .king {
+    max-width: 800px;
+    margin: auto;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    background: rgba(0,0,0,0.2);
+  }
+  h1 {
+    color: #2a2000;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+  h1::before {
+    content: "⏚ ";
+  }
+  h2 {
+    color: #4a3000;
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+  }
+  .epigraph {
+    color: #a0a030;
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    border-left: 2px solid #2a2000;
+    padding-left: 0.8rem;
+  }
+  canvas {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: #1a1000;
+  }
+  table {
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.85rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.4rem 0.6rem;
+    text-align: left;
+  }
+  th {
+    background: #2a2000;
+    color: #a0a030;
+  }
+  tr:nth-child(even) {
+    background: rgba(255,255,255,0.05);
+  }
+  .sky-map {
+    margin: 1rem 0;
+    border: 1px solid var(--border);
+    padding: 0.5rem;
+  }
+  .sky-map svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>
+</head>
+<body>
+<a href="https://davidwise01.github.io/sapph-i-on/">← Back to SaPpH{i}on</a>
+<main class="king">
+  <div class="title-block"><h1>The Feeders</h1><p class="epigraph">The Wraith who hunt and feed on the weak</p></div>
+  <div class="god-chart"><h2>The Reapers</h2><canvas id="god-chart-the-feeders"></canvas></div>
+  <div class="sky-map"><h2>The Stargate Universe</h2><svg viewBox="0 0 400 200">
+  <defs><radialGradient id="sky-gradient-the-feeders" cx="50%" cy="0%" r="100%">
+  <stop offset="0%" stop-color="#1a1a2a"/>
+  <stop offset="60%" stop-color="#1a1000"/>
+  <stop offset="100%" stop-color="#2a2a3a"/></radialGradient></defs>
+  <rect width="400" height="200" fill="url(#sky-gradient-the-feeders)"/>
+  <text x="200" y="50" font-family="monospace" fill="#a0a030" font-size="14" text-anchor="middle">STargate</text>
+  <text x="200" y="65" font-family="monospace" fill="#a0a030" font-size="12" text-anchor="middle">UNIVERSE</text>
+  <text x="200" y="80" font-family="monospace" fill="#a0a030" font-size="10" text-anchor="middle">GODS</text>
+  <text x="100" y="130" font-family="monospace" fill="#707020" font-size="10" text-anchor="middle">SG1</text>
+  <text x="300" y="130" font-family="monospace" fill="#707020" font-size="10" text-anchor="middle">SG10</text>
+  <text x="200" y="175" font-family="monospace" fill="#707020" font-size="10" text-anchor="middle">GALAXY</text>
+  </svg></div>
+  <div class="tribal-table"><h2>The Stargate Pantheon</h2><table class="tribal-table">
+  <tr><th>Divinity</th><th>Title</th><th>Race</th></tr>
+  <tr><td>The Ancients</td><td>The Creators</td><td>Ancients</td></tr>
+  <tr><td>The Goa'uld</td><td>The Parasites</td><td>Goa'uld</td></tr>
+  <tr><td>The Jaffa</td><td>The Chosen Warriors</td><td>Jaffa</td></tr>
+  <tr><td>The Ori</td><td>The Dark Gods</td><td>Ori</td></tr>
+  <tr><td>The Wraith</td><td>The Pirates</td><td>Wraith</td></tr>
+  <tr><td>The Asgard</td><td>The Engineers</td><td>Asgard</td></tr>
+  <tr><td>The Nox</td><td>The Reclusive</td><td>Nox</td></tr>
+  <tr><td>The Tok'ra</td><td>The Peacemakers</td><td>Tok'ra</td></tr>
+  <tr><td>The Priors</td><td>The Infinity</td><td>Ancients</td></tr>
+  <tr><td>The Orionids</td><td>The Rulers</td><td>Orionids</td></tr>
+  <tr><td>The Ha'tak</td><td>The Ships</td><td>Goa'uld</td></tr>
+  <tr><td>The Replicators</td><td>The Hunters</td><td>Asgard</td></tr>
+  <tr><td>The Desert Nomads</td><td>The Wraith</td><td>Wraith</td></tr>
+  <tr><td>The Chosen Warriors</td><td>The Jaffa</td><td>Jaffa</td></tr>
+  <tr><td>The Peacemakers</td><td>The Tok'ra</td><td>Tok'ra</td></tr>
+  <tr><td>The Light</td><td>The Priors</td><td>Ori</td></tr>
+  <tr><td>The Engineers</td><td>The Asgard</td><td>Asgard</td></tr>
+  <tr><td>The Watch</td><td>The Nox</td><td>Nox</td></tr>
+  <tr><td>The Reapers</td><td>The Wraith</td><td>Wraith</td></tr>
+  <tr><td>The Symbiotes</td><td>The Hosts</td><td>Goa'uld</td></tr>
+  <tr><td>The Infinity</td><td>The Ancients</td><td>Ancients</td></tr>
+  <tr><td>The Dædoc</td><td>The Priors</td><td>Ori</td></tr>
+  <tr><td>The Ori</td><td>The Controllers</td><td>Ori</td></tr>
+  <tr><td>The Ancients</td><td>The Creators</td><td>Ancients</td></tr>
+  </table></div>
+</main>
+<script>console.log("stargate:" + window.location.pathname);</script>
+</body>
+</html>
