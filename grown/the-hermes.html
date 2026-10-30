@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Icarium">
+<meta name="generator" content="Icarium · SaPpH{i}on">
+<title>the-hermes · Spartan Gods and Customs</title>
+<style>
+  @import url('https://davidwise01.github.io/sapph-i-on/common.js');
+  :root {
+    --bg: #0a0a10;
+    --accent: #1a1a20;
+    --text: #505070;
+    --border: rgba(255,255,255,0.1);
+  }
+  body {
+    font-family: monospace;
+    background: #0a0a10;
+    color: #505070;
+    margin: 0;
+    padding: 1rem;
+    min-height: 100vh;
+  }
+  .king {
+    max-width: 800px;
+    margin: auto;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    background: rgba(0,0,0,0.2);
+  }
+  h1 {
+    color: #1a1a20;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+  h1::before {
+    content: "⏚ ";
+  }
+  h2 {
+    color: #2a2a30;
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+  }
+  .epigraph {
+    color: #505070;
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    border-left: 2px solid #1a1a20;
+    padding-left: 0.8rem;
+  }
+  canvas {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: #0a0a10;
+  }
+  table {
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.85rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.4rem 0.6rem;
+    text-align: left;
+  }
+  th {
+    background: #1a1a20;
+    color: #505070;
+  }
+  tr:nth-child(even) {
+    background: rgba(255,255,255,0.05);
+  }
+  .sky-map {
+    margin: 1rem 0;
+    border: 1px solid var(--border);
+    padding: 0.5rem;
+  }
+  .sky-map svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>
+</head>
+<body>
+<a href="https://davidwise01.github.io/sapph-i-on/">← Back to SaPpH{i}on</a>
+<main class="king">
+  <div class="title-block"><h1>The Hermes</h1><p class="epigraph">The messenger god, the guide of souls</p></div>
+  <div class="god-chart"><h2>The Hermes</h2><canvas id="god-chart-the-hermes"></canvas></div>
+  <div class="sky-map"><h2>The Spartan Pantheon</h2><svg viewBox="0 0 400 200">
+  <defs><radialGradient id="sky-gradient-the-hermes" cx="50%" cy="0%" r="100%">
+  <stop offset="0%" stop-color="#1a1a2a"/>
+  <stop offset="60%" stop-color="#0a0a10"/>
+  <stop offset="100%" stop-color="#2a2a3a"/></radialGradient></defs>
+  <rect width="400" height="200" fill="url(#sky-gradient-the-hermes)"/>
+  <text x="200" y="50" font-family="monospace" fill="#505070" font-size="14" text-anchor="middle">SPARTA</text>
+  <text x="200" y="65" font-family="monospace" fill="#505070" font-size="12" text-anchor="middle">GODS AND CUSTOMS</text>
+  <text x="200" y="80" font-family="monospace" fill="#505070" font-size="10" text-anchor="middle">LAKONIA</text>
+  <text x="100" y="130" font-family="monospace" fill="#808090" font-size="10" text-anchor="middle">Ares</text>
+  <text x="300" y="130" font-family="monospace" fill="#808090" font-size="10" text-anchor="middle">Athena</text>
+  <text x="200" y="175" font-family="monospace" fill="#808090" font-size="10" text-anchor="middle">∞</text>
+  </svg></div>
+  <div class="tribal-table"><h2>The Spartan Pantheon</h2><table class="tribal-table">
+  <tr><th>Divinity</th><th>Title</th><th>Domain</th></tr>
+  <tr><td>The Ares</td><td>The God of War</td><td>War, Battle</td></tr>
+  <tr><td>The Athena</td><td>The Goddess of Wisdom</td><td>Strategy, Wisdom</td></tr>
+  <tr><td>The Apollo</td><td>The God of Light</td><td>Prophecy, Music</td></tr>
+  <tr><td>The Artemis</td><td>The Goddess of the Hunt</td><td>Wild, Nature</td></tr>
+  <tr><td>The Zeus</td><td>The King of the Gods</td><td>Sky, Thunder</td></tr>
+  <tr><td>The Hera</td><td>The Queen of the Gods</td><td>Marriage, Family</td></tr>
+  <tr><td>The Poseidon</td><td>The God of the Sea</td><td>Ocean, Earthquakes</td></tr>
+  <tr><td>The Hermes</td><td>The Messenger God</td><td>Travel, Messages</td></tr>
+  <tr><td>The Hephaestus</td><td>The God of Smithcraft</td><td>Fire, Craft</td></tr>
+  <tr><td>The Aphrodite</td><td>The Goddess of Love</td><td>Beauty, Desire</td></tr>
+  <tr><td>The Demeter</td><td>The Goddess of Harvest</td><td>Agriculture, Grain</td></tr>
+  <tr><td>The Hestia</td><td>The Goddess of Hearth</td><td>Home, Family</td></tr>
+  <tr><td>The Nike</td><td>The Goddess of Victory</td><td>Triumph, Success</td></tr>
+  <tr><td>The Agoge</td><td>The Education System</td><td>Training, Discipline</td></tr>
+  <tr><td>The Syssitia</td><td>The Common Meals</td><td>Community, Sharing</td></tr>
+  <tr><td>The Cryptia</td><td>The Secret Police</td><td>Espionage, Vigilance</td></tr>
+  <tr><td>The Ephors</td><td>The Five Magistrates</td><td>Leadership, Oversight</td></tr>
+  <tr><td>The Gerousia</td><td>The Council of Elders</td><td>Politics, Judgment</td></tr>
+  <tr><td>The Apagoge</td><td>The Exposure of Newborns</td><td>Survival, Selection</td></tr>
+  <tr><td>The Krypteia</td><td>The Boar Hunt</td><td>Secret Operations</td></tr>
+  <tr><td>The Enkomas</td><td>The Warrior Brothers</td><td>Bond, Brotherhood</td></tr>
+  <tr><td>The Phiditia</td><td>The Secret Society</td><td>Mystery, Tradition</td></tr>
+  <tr><td>The Paides</td><td>The Spartan Boys</td><td>Youth, Training</td></tr>
+  <tr><td>The Men</td><td>The Adult Citizens</td><td>Warrior, Citizen</td></tr>
+  </table></div>
+</main>
+<script>console.log("spartan:" + window.location.pathname);</script>
+</body>
+</html>

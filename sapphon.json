@@ -29,11 +29,11 @@
     "domains": 513,
     "domains_populated": 513,
     "domains_open": 0,
-    "spheres": 2270,
+    "spheres": 2294,
     "zero_spheres": 0,
     "balance": 0,
     "workshop": 343,
-    "new_spheres": 307
+    "new_spheres": 331
   },
   "seal": {
     "seal_sha256": "b7350267c9df90491f3a2c45297e9a0f756c65d2c23a323f6f68abc3426d33fe",
@@ -65575,6 +65575,414 @@
         "gods",
         "zoroastrian",
         "the-crab"
+      ]
+    },
+    {
+      "title": "The Ares \u00b7 God or Custom of Sparta",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-ares.html",
+      "offset": 0,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "spartan",
+        "gods",
+        "customs",
+        "the-ares"
+      ]
+    },
+    {
+      "title": "The Athena \u00b7 God or Custom of Sparta",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-athena.html",
+      "offset": 1,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "spartan",
+        "gods",
+        "customs",
+        "the-athena"
+      ]
+    },
+    {
+      "title": "The Apollo \u00b7 God or Custom of Sparta",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-apollo.html",
+      "offset": 2,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "spartan",
+        "gods",
+        "customs",
+        "the-apollo"
+      ]
+    },
+    {
+      "title": "The Artemis \u00b7 God or Custom of Sparta",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-artemis.html",
+      "offset": 3,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "spartan",
+        "gods",
+        "customs",
+        "the-artemis"
+      ]
+    },
+    {
+      "title": "The Zeus \u00b7 God or Custom of Sparta",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-zeus.html",
+      "offset": 4,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "spartan",
+        "gods",
+        "customs",
+        "the-zeus"
+      ]
+    },
+    {
+      "title": "The Hera \u00b7 God or Custom of Sparta",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-hera.html",
+      "offset": 5,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "spartan",
+        "gods",
+        "customs",
+        "the-hera"
+      ]
+    },
+    {
+      "title": "The Poseidon \u00b7 God or Custom of Sparta",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-poseidon.html",
+      "offset": 6,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "spartan",
+        "gods",
+        "customs",
+        "the-poseidon"
+      ]
+    },
+    {
+      "title": "The Hermes \u00b7 God or Custom of Sparta",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-hermes.html",
+      "offset": 7,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "spartan",
+        "gods",
+        "customs",
+        "the-hermes"
+      ]
+    },
+    {
+      "title": "The Hephaestus \u00b7 God or Custom of Sparta",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-hephaestus.html",
+      "offset": 8,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "spartan",
+        "gods",
+        "customs",
+        "the-hephaestus"
+      ]
+    },
+    {
+      "title": "The Aphrodite \u00b7 God or Custom of Sparta",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-aphrodite.html",
+      "offset": 9,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "spartan",
+        "gods",
+        "customs",
+        "the-aphrodite"
+      ]
+    },
+    {
+      "title": "The Demeter \u00b7 God or Custom of Sparta",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-demeter.html",
+      "offset": 10,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "spartan",
+        "gods",
+        "customs",
+        "the-demeter"
+      ]
+    },
+    {
+      "title": "The Hestia \u00b7 God or Custom of Sparta",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-hestia.html",
+      "offset": 11,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "spartan",
+        "gods",
+        "customs",
+        "the-hestia"
+      ]
+    },
+    {
+      "title": "The Nike \u00b7 God or Custom of Sparta",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-nike.html",
+      "offset": 12,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "spartan",
+        "gods",
+        "customs",
+        "the-nike"
+      ]
+    },
+    {
+      "title": "The Agoe \u00b7 God or Custom of Sparta",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-agoe.html",
+      "offset": 13,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "spartan",
+        "gods",
+        "customs",
+        "the-agoe"
+      ]
+    },
+    {
+      "title": "The Syssitia \u00b7 God or Custom of Sparta",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-syssitia.html",
+      "offset": 14,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "spartan",
+        "gods",
+        "customs",
+        "the-syssitia"
+      ]
+    },
+    {
+      "title": "The Cryptia \u00b7 God or Custom of Sparta",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-cryptia.html",
+      "offset": 15,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "spartan",
+        "gods",
+        "customs",
+        "the-cryptia"
+      ]
+    },
+    {
+      "title": "The Ephors \u00b7 God or Custom of Sparta",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-ephors.html",
+      "offset": 16,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "spartan",
+        "gods",
+        "customs",
+        "the-ephors"
+      ]
+    },
+    {
+      "title": "The Gerousia \u00b7 God or Custom of Sparta",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-gerousia.html",
+      "offset": 17,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "spartan",
+        "gods",
+        "customs",
+        "the-gerousia"
+      ]
+    },
+    {
+      "title": "The Apagoge \u00b7 God or Custom of Sparta",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-apagoge.html",
+      "offset": 18,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "spartan",
+        "gods",
+        "customs",
+        "the-apagoge"
+      ]
+    },
+    {
+      "title": "The Krypteia \u00b7 God or Custom of Sparta",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-krypteia.html",
+      "offset": 19,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "spartan",
+        "gods",
+        "customs",
+        "the-krypteia"
+      ]
+    },
+    {
+      "title": "The Enchomas \u00b7 God or Custom of Sparta",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-enchomas.html",
+      "offset": 20,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "spartan",
+        "gods",
+        "customs",
+        "the-enchomas"
+      ]
+    },
+    {
+      "title": "The Phiditia \u00b7 God or Custom of Sparta",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-phiditia.html",
+      "offset": 21,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "spartan",
+        "gods",
+        "customs",
+        "the-phiditia"
+      ]
+    },
+    {
+      "title": "The Paides \u00b7 God or Custom of Sparta",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-paides.html",
+      "offset": 22,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "spartan",
+        "gods",
+        "customs",
+        "the-paides"
+      ]
+    },
+    {
+      "title": "The Men \u00b7 God or Custom of Sparta",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-men.html",
+      "offset": 23,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "spartan",
+        "gods",
+        "customs",
+        "the-men"
       ]
     }
   ]
