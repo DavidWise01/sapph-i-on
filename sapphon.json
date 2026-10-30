@@ -29,11 +29,11 @@
     "domains": 513,
     "domains_populated": 513,
     "domains_open": 0,
-    "spheres": 2414,
+    "spheres": 2438,
     "zero_spheres": 0,
     "balance": 0,
     "workshop": 343,
-    "new_spheres": 479
+    "new_spheres": 524
   },
   "seal": {
     "seal_sha256": "b7350267c9df90491f3a2c45297e9a0f756c65d2c23a323f6f68abc3426d33fe",
@@ -68623,6 +68623,726 @@
         "gods",
         "gods-of-the-gods",
         "the-god-of-the-gods-the-sun"
+      ]
+    },
+    {
+      "title": "Titan Who Lost a Leg \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-titan-who-lost-a-leg.html",
+      "offset": 0,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-titan-who-lost-a-leg"
+      ]
+    },
+    {
+      "title": "Olympian Who Lost an Eye \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-olympian-who-lost-an-eye.html",
+      "offset": 1,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-olympian-who-lost-an-eye"
+      ]
+    },
+    {
+      "title": "Sea God Who Lost a Hand \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-sea-god-who-lost-a-hand.html",
+      "offset": 2,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-sea-god-who-lost-a-hand"
+      ]
+    },
+    {
+      "title": "Sun God Who Lost His Chariot \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-sun-god-who-lost-his-chariot.html",
+      "offset": 3,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-sun-god-who-lost-his-chariot"
+      ]
+    },
+    {
+      "title": "Moon God Who Lost His Light \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-moon-god-who-lost-his-light.html",
+      "offset": 4,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-moon-god-who-lost-his-light"
+      ]
+    },
+    {
+      "title": "Wind God Who Lost His Breath \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-wind-god-who-lost-his-breath.html",
+      "offset": 5,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-wind-god-who-lost-his-breath"
+      ]
+    },
+    {
+      "title": "Storm God Who Lost His Voice \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-storm-god-who-lost-his-voice.html",
+      "offset": 6,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-storm-god-who-lost-his-voice"
+      ]
+    },
+    {
+      "title": "Fire God Who Lost His Flame \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-fire-god-who-lost-his-flame.html",
+      "offset": 7,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-fire-god-who-lost-his-flame"
+      ]
+    },
+    {
+      "title": "River God Who Lost His Water \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-river-god-who-lost-his-water.html",
+      "offset": 8,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-river-god-who-lost-his-water"
+      ]
+    },
+    {
+      "title": "Mountain God Who Lost His Peak \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-mountain-god-who-lost-his-peak.html",
+      "offset": 9,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-mountain-god-who-lost-his-peak"
+      ]
+    },
+    {
+      "title": "Sky God Who Lost His Heavens \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-sky-god-who-lost-his-heavens.html",
+      "offset": 10,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-sky-god-who-lost-his-heavens"
+      ]
+    },
+    {
+      "title": "Earth God Who Lost His Ground \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-earth-god-who-lost-his-ground.html",
+      "offset": 11,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-earth-god-who-lost-his-ground"
+      ]
+    },
+    {
+      "title": "Star God Who Lost His Constellations \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-star-god-who-lost-his-constellations.html",
+      "offset": 12,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-star-god-who-lost-his-constellations"
+      ]
+    },
+    {
+      "title": "Sun God Who Lost His Rays \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-sun-god-who-lost-his-rays.html",
+      "offset": 13,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-sun-god-who-lost-his-rays"
+      ]
+    },
+    {
+      "title": "Moon God Who Lost His Face \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-moon-god-who-lost-his-face.html",
+      "offset": 14,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-moon-god-who-lost-his-face"
+      ]
+    },
+    {
+      "title": "Sun God Who Lost His Heat \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-sun-god-who-lost-his-heat.html",
+      "offset": 15,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-sun-god-who-lost-his-heat"
+      ]
+    },
+    {
+      "title": "Moon God Who Lost His Glow \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-moon-god-who-lost-his-glow.html",
+      "offset": 16,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-moon-god-who-lost-his-glow"
+      ]
+    },
+    {
+      "title": "Sun God Who Lost His Warmth \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-sun-god-who-lost-his-warmth.html",
+      "offset": 17,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-sun-god-who-lost-his-warmth"
+      ]
+    },
+    {
+      "title": "Moon God Who Lost His Cool \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-moon-god-who-lost-his-cool.html",
+      "offset": 18,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-moon-god-who-lost-his-cool"
+      ]
+    },
+    {
+      "title": "Sun God Who Lost His Light \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-sun-god-who-lost-his-light.html",
+      "offset": 19,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-sun-god-who-lost-his-light"
+      ]
+    },
+    {
+      "title": "Moon God Who Lost His Night \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-moon-god-who-lost-his-night.html",
+      "offset": 20,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-moon-god-who-lost-his-night"
+      ]
+    },
+    {
+      "title": "Titan Who Lost a Leg \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-titan-who-lost-a-leg.html",
+      "offset": 0,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-titan-who-lost-a-leg"
+      ]
+    },
+    {
+      "title": "Olympian Who Lost an Eye \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-olympian-who-lost-an-eye.html",
+      "offset": 1,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-olympian-who-lost-an-eye"
+      ]
+    },
+    {
+      "title": "Sea God Who Lost a Hand \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-sea-god-who-lost-a-hand.html",
+      "offset": 2,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-sea-god-who-lost-a-hand"
+      ]
+    },
+    {
+      "title": "Sun God Who Lost His Chariot \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-sun-god-who-lost-his-chariot.html",
+      "offset": 3,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-sun-god-who-lost-his-chariot"
+      ]
+    },
+    {
+      "title": "Moon God Who Lost His Light \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-moon-god-who-lost-his-light.html",
+      "offset": 4,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-moon-god-who-lost-his-light"
+      ]
+    },
+    {
+      "title": "Wind God Who Lost His Breath \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-wind-god-who-lost-his-breath.html",
+      "offset": 5,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-wind-god-who-lost-his-breath"
+      ]
+    },
+    {
+      "title": "Storm God Who Lost His Voice \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-storm-god-who-lost-his-voice.html",
+      "offset": 6,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-storm-god-who-lost-his-voice"
+      ]
+    },
+    {
+      "title": "Fire God Who Lost His Flame \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-fire-god-who-lost-his-flame.html",
+      "offset": 7,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-fire-god-who-lost-his-flame"
+      ]
+    },
+    {
+      "title": "River God Who Lost His Water \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-river-god-who-lost-his-water.html",
+      "offset": 8,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-river-god-who-lost-his-water"
+      ]
+    },
+    {
+      "title": "Mountain God Who Lost His Peak \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-mountain-god-who-lost-his-peak.html",
+      "offset": 9,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-mountain-god-who-lost-his-peak"
+      ]
+    },
+    {
+      "title": "Sky God Who Lost His Heavens \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-sky-god-who-lost-his-heavens.html",
+      "offset": 10,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-sky-god-who-lost-his-heavens"
+      ]
+    },
+    {
+      "title": "Earth God Who Lost His Ground \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-earth-god-who-lost-his-ground.html",
+      "offset": 11,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-earth-god-who-lost-his-ground"
+      ]
+    },
+    {
+      "title": "Star God Who Lost His Constellations \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-star-god-who-lost-his-constellations.html",
+      "offset": 12,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-star-god-who-lost-his-constellations"
+      ]
+    },
+    {
+      "title": "Sun God Who Lost His Rays \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-sun-god-who-lost-his-rays.html",
+      "offset": 13,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-sun-god-who-lost-his-rays"
+      ]
+    },
+    {
+      "title": "Moon God Who Lost His Face \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-moon-god-who-lost-his-face.html",
+      "offset": 14,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-moon-god-who-lost-his-face"
+      ]
+    },
+    {
+      "title": "Sun God Who Lost His Heat \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-sun-god-who-lost-his-heat.html",
+      "offset": 15,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-sun-god-who-lost-his-heat"
+      ]
+    },
+    {
+      "title": "Moon God Who Lost His Glow \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-moon-god-who-lost-his-glow.html",
+      "offset": 16,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-moon-god-who-lost-his-glow"
+      ]
+    },
+    {
+      "title": "Sun God Who Lost His Warmth \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-sun-god-who-lost-his-warmth.html",
+      "offset": 17,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-sun-god-who-lost-his-warmth"
+      ]
+    },
+    {
+      "title": "Moon God Who Lost His Cool \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-moon-god-who-lost-his-cool.html",
+      "offset": 18,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-moon-god-who-lost-his-cool"
+      ]
+    },
+    {
+      "title": "Sun God Who Lost His Light \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-sun-god-who-lost-his-light.html",
+      "offset": 19,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-sun-god-who-lost-his-light"
+      ]
+    },
+    {
+      "title": "Moon God Who Lost His Night \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-moon-god-who-lost-his-night.html",
+      "offset": 20,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-moon-god-who-lost-his-night"
+      ]
+    },
+    {
+      "title": "God Who Lost His Heavens \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-who-lost-his-heavens.html",
+      "offset": 21,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-god-who-lost-his-heavens"
+      ]
+    },
+    {
+      "title": "God Who Lost His Eyes \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-who-lost-his-eyes.html",
+      "offset": 22,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-god-who-lost-his-eyes"
+      ]
+    },
+    {
+      "title": "God Who Lost His Arms \u00b7 The Crippled Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-god-who-lost-his-arms.html",
+      "offset": 23,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "crippled",
+        "gods",
+        "the-god-who-lost-his-arms"
       ]
     }
   ]
