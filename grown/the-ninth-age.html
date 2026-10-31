@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="Icarium">
+<meta name="generator" content="Icarium · SaPpH{i}on">
+<title>The Ninth Age · The Ninth Rebirth and the Age of Unfolding and Truth</title>
+<style><style>
+:root {
+  --bg: #07192f;
+  --panel: #0a2744;
+  --border: #1a4a7a;
+  --text: #d4e8f0;
+  --cyan: #73d5ff;
+  --off-white: #e6f2ff;
+  --yes: #73d573;
+  --no: #ff7373;
+  --maybe: #ffd773;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Courier New', monospace;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 1rem;
+}
+a { color: var(--cyan); text-decoration: none; }
+a:hover { text-decoration: underline; }
+main.king {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 1.2rem;
+}
+.title-block h1 { color: var(--cyan); margin-bottom: 0.3rem; font-size: 1.6rem; }
+.title-block p.epigraph { color: #9ab8c8; font-size: 0.95rem; }
+.god-chart {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 0.8rem;
+  border-radius: 4px;
+}
+.god-chart h2 { color: var(--cyan); margin-bottom: 0.5rem; font-size: 1.1rem; }
+canvas { display: block; width: 100%; height: 320px; background: #000; border-radius: 3px; }
+.sky-map {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 0.8rem;
+  border-radius: 4px;
+}
+.sky-map h2 { color: var(--cyan); margin-bottom: 0.5rem; font-size: 1.1rem; }
+.sky-map svg { width: 100%; height: 300px; display: block; }
+.tribal-table table { width: 100%; border-collapse: collapse; background: var(--panel); }
+.tribal-table th, .tribal-table td { border: 1px solid var(--border); padding: 0.5rem; text-align: left; }
+.tribal-table th { color: var(--cyan); }
+.witness-box {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 0.8rem;
+  border-radius: 4px;
+}
+.witness-box h2 { color: var(--cyan); margin-bottom: 0.5rem; font-size: 1.1rem; }
+.witness-box table { width: 100%; border-collapse: collapse; }
+.witness-box th, .witness-box td { border: 1px solid var(--border); padding: 0.4rem; text-align: left; }
+.witness-box th { color: var(--cyan); }
+.receipt {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  align-items: start;
+}
+.observers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+}
+.observer {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 1rem;
+  border-radius: 4px;
+  text-align: center;
+}
+.observer h3 { color: var(--cyan); font-size: 1.3rem; margin-bottom: 0.5rem; }
+.observer .sid, .observer .id, .observer .i { color: var(--off-white); font-size: 1rem; }
+.observer .status { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 2px; font-size: 0.75rem; font-weight: bold; }
+.status.applied { background: #73d573; color: #000; }
+.status.queued { background: #ffd773; color: #000; }
+.status.unsure { background: #ffb373; color: #000; }
+.buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin: 0.8rem 0; }
+.button {
+  background: var(--panel);
+  border: 1px solid var(--cyan);
+  color: var(--cyan);
+  padding: 0.6rem 0.8rem;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  text-align: center;
+}
+.button:hover { background: #1a4a7a; }
+.receipt-tape {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 0.8rem;
+  border-radius: 4px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+.receipt-tape h2 { color: var(--cyan); margin-bottom: 0.5rem; font-size: 1.1rem; }
+.receipt-item {
+  padding: 0.6rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.85rem;
+}
+.receipt-item .rc { color: var(--cyan); }
+.receipt-item .rx { color: #fff; }
+.receipt-item .rn { color: #9ab8c8; }
+.logo-line { display: flex; align-items: center; gap: 0.6rem; margin: 1rem 0; }
+.logo-line svg { width: 48px; height: 48px; flex-shrink: 0; }
+.logo-line .lbl { font-size: 0.9rem; }
+.theme-toggle {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.4rem 0.8rem;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+}
+.theme-toggle:hover { border-color: var(--cyan); }
+</style></style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<a href="https://davidwise01.github.io/sapph-i-on/">← Back to SaPpH{i}on</a>
+<main class="king">
+  <div class="title-block">
+    <h1>The Ninth Age</h1>
+    <p class="epigraph">The ninth age and the eternal turning of the ages.</p>
+  </div>
+  <div class="god-chart">
+    <h2>The Ninth Age</h2>
+    <canvas id="god-chart-the-ninth-age" width="640" height="320"></canvas>
+  </div>
+  <div class="sky-map">
+    <h2>The Ninth Rebirth</h2>
+    <svg viewBox="0 0 400 200">
+      <defs><radialGradient id="sky-gradient-the-ninth-age" cx="50%" cy="0%" r="100%">
+        <stop offset="0%" stop-color="#1a1a2a"/>
+        <stop offset="60%" stop-color="#0a2744"/>
+        <stop offset="100%" stop-color="#2a2a3a"/>
+      </radialGradient></defs>
+      <rect width="400" height="200" fill="url(#sky-gradient-the-ninth-age)"/>
+      <text x="200" y="50" font-family="monospace" fill="#d4e8f0" font-size="14" text-anchor="middle">NINTH</text>
+      <text x="200" y="65" font-family="monospace" fill="#d4e8f0" font-size="12" text-anchor="middle">REBIRTH</text>
+      <text x="200" y="80" font-family="monospace" fill="#73d5ff" font-size="10" text-anchor="middle">&amp;</text>
+      <text x="200" y="95" font-family="monospace" fill="#d4e8f0" font-size="10" text-anchor="middle">THE</text>
+      <text x="200" y="115" font-family="monospace" fill="#d4e8f0" font-size="10" text-anchor="middle">AGE</text>
+      <text x="200" y="135" font-family="monospace" fill="#73d5ff" font-size="10" text-anchor="middle">OF</text>
+      <text x="200" y="150" font-family="monospace" fill="#d4e8f0" font-size="10" text-anchor="middle">UNFOLDING</text>
+      <text x="200" y="175" font-family="monospace" fill="#73d5ff" font-size="10" text-anchor="middle">∞</text>
+    </svg>
+  </div>
+  <div class="tribal-table">
+    <h2>The Ninth Rebirth</h2>
+    <table>
+      <tr><th>Divinity</th><th>Title</th><th>Domain</th></tr>
+      <tr><td>Unfold</td><td>Become</td><td>Real</td></tr>
+<tr><td>Truth</td><td>Know</td><td>Be</td></tr>
+<tr><td>Verse</td><td>Line</td><td>Word</td></tr>
+<tr><td>Hymn</td><td>Song</td><td>Shout</td></tr>
+<tr><td>Grail</td><td>Vessel</td><td>Content</td></tr>
+    </table>
+  </div>
+</main>
+<script>console.log("ninth-rebirth:" + window.location.pathname);</script>
+</body>
+</html>
