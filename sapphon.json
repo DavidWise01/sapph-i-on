@@ -29,11 +29,11 @@
     "domains": 513,
     "domains_populated": 513,
     "domains_open": 0,
-    "spheres": 2486,
+    "spheres": 2534,
     "zero_spheres": 0,
     "balance": 0,
     "workshop": 343,
-    "new_spheres": 572
+    "new_spheres": 620
   },
   "seal": {
     "seal_sha256": "b7350267c9df90491f3a2c45297e9a0f756c65d2c23a323f6f68abc3426d33fe",
@@ -70159,6 +70159,822 @@
         "creation",
         "gods",
         "the-god-of-completed-creation"
+      ]
+    },
+    {
+      "title": "First People \u00b7 The First People and the Making of the Sapphon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-first-people.html",
+      "offset": 0,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "first people",
+        "sapphon",
+        "making",
+        "the-first-people"
+      ]
+    },
+    {
+      "title": "People of the Land \u00b7 The First People and the Making of the Sapphon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-people-of-the-land.html",
+      "offset": 1,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "first people",
+        "sapphon",
+        "making",
+        "the-people-of-the-land"
+      ]
+    },
+    {
+      "title": "People of the Waters \u00b7 The First People and the Making of the Sapphon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-people-of-the-waters.html",
+      "offset": 2,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "first people",
+        "sapphon",
+        "making",
+        "the-people-of-the-waters"
+      ]
+    },
+    {
+      "title": "People of the Sky \u00b7 The First People and the Making of the Sapphon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-people-of-the-sky.html",
+      "offset": 3,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "first people",
+        "sapphon",
+        "making",
+        "the-people-of-the-sky"
+      ]
+    },
+    {
+      "title": "People of the Seasons \u00b7 The First People and the Making of the Sapphon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-people-of-the-seasons.html",
+      "offset": 4,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "first people",
+        "sapphon",
+        "making",
+        "the-people-of-the-seasons"
+      ]
+    },
+    {
+      "title": "People of the Stars \u00b7 The First People and the Making of the Sapphon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-people-of-the-stars.html",
+      "offset": 5,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "first people",
+        "sapphon",
+        "making",
+        "the-people-of-the-stars"
+      ]
+    },
+    {
+      "title": "People of the First Song \u00b7 The First People and the Making of the Sapphon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-people-of-the-first-song.html",
+      "offset": 6,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "first people",
+        "sapphon",
+        "making",
+        "the-people-of-the-first-song"
+      ]
+    },
+    {
+      "title": "People of the First Flame \u00b7 The First People and the Making of the Sapphon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-people-of-the-first-flame.html",
+      "offset": 7,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "first people",
+        "sapphon",
+        "making",
+        "the-people-of-the-first-flame"
+      ]
+    },
+    {
+      "title": "People of the First Garden \u00b7 The First People and the Making of the Sapphon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-people-of-the-first-garden.html",
+      "offset": 8,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "first people",
+        "sapphon",
+        "making",
+        "the-people-of-the-first-garden"
+      ]
+    },
+    {
+      "title": "People of the First House \u00b7 The First People and the Making of the Sapphon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-people-of-the-first-house.html",
+      "offset": 9,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "first people",
+        "sapphon",
+        "making",
+        "the-people-of-the-first-house"
+      ]
+    },
+    {
+      "title": "People of the First Flock \u00b7 The First People and the Making of the Sapphon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-people-of-the-first-flock.html",
+      "offset": 10,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "first people",
+        "sapphon",
+        "making",
+        "the-people-of-the-first-flock"
+      ]
+    },
+    {
+      "title": "People of the First Hunt \u00b7 The First People and the Making of the Sapphon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-people-of-the-first-hunt.html",
+      "offset": 11,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "first people",
+        "sapphon",
+        "making",
+        "the-people-of-the-first-hunt"
+      ]
+    },
+    {
+      "title": "People of the First Fish \u00b7 The First People and the Making of the Sapphon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-people-of-the-first-fish.html",
+      "offset": 12,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "first people",
+        "sapphon",
+        "making",
+        "the-people-of-the-first-fish"
+      ]
+    },
+    {
+      "title": "People of the First Law \u00b7 The First People and the Making of the Sapphon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-people-of-the-first-law.html",
+      "offset": 13,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "first people",
+        "sapphon",
+        "making",
+        "the-people-of-the-first-law"
+      ]
+    },
+    {
+      "title": "People of the First Cloth \u00b7 The First People and the Making of the Sapphon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-people-of-the-first-cloth.html",
+      "offset": 14,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "first people",
+        "sapphon",
+        "making",
+        "the-people-of-the-first-cloth"
+      ]
+    },
+    {
+      "title": "People of the First Image \u00b7 The First People and the Making of the Sapphon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-people-of-the-first-image.html",
+      "offset": 15,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "first people",
+        "sapphon",
+        "making",
+        "the-people-of-the-first-image"
+      ]
+    },
+    {
+      "title": "People of the First Temple \u00b7 The First People and the Making of the Sapphon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-people-of-the-first-temple.html",
+      "offset": 16,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "first people",
+        "sapphon",
+        "making",
+        "the-people-of-the-first-temple"
+      ]
+    },
+    {
+      "title": "People of the First Heal \u00b7 The First People and the Making of the Sapphon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-people-of-the-first-heal.html",
+      "offset": 17,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "first people",
+        "sapphon",
+        "making",
+        "the-people-of-the-first-heal"
+      ]
+    },
+    {
+      "title": "People of the First Love \u00b7 The First People and the Making of the Sapphon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-people-of-the-first-love.html",
+      "offset": 18,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "first people",
+        "sapphon",
+        "making",
+        "the-people-of-the-first-love"
+      ]
+    },
+    {
+      "title": "People of the First Bury \u00b7 The First People and the Making of the Sapphon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-people-of-the-first-bury.html",
+      "offset": 19,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "first people",
+        "sapphon",
+        "making",
+        "the-people-of-the-first-bury"
+      ]
+    },
+    {
+      "title": "People of the First Fear \u00b7 The First People and the Making of the Sapphon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-people-of-the-first-fear.html",
+      "offset": 20,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "first people",
+        "sapphon",
+        "making",
+        "the-people-of-the-first-fear"
+      ]
+    },
+    {
+      "title": "People of the First Wait \u00b7 The First People and the Making of the Sapphon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-people-of-the-first-wait.html",
+      "offset": 21,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "first people",
+        "sapphon",
+        "making",
+        "the-people-of-the-first-wait"
+      ]
+    },
+    {
+      "title": "People of the First Dream \u00b7 The First People and the Making of the Sapphon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-people-of-the-first-dream.html",
+      "offset": 22,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "first people",
+        "sapphon",
+        "making",
+        "the-people-of-the-first-dream"
+      ]
+    },
+    {
+      "title": "People of Created Land \u00b7 The First People and the Making of the Sapphon",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-people-of-created-land.html",
+      "offset": 23,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "first people",
+        "sapphon",
+        "making",
+        "the-people-of-created-land"
+      ]
+    },
+    {
+      "title": "First Rebirth \u00b7 The Great Rebirth and the Turning of the Ages",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-first-rebirth.html",
+      "offset": 0,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "great rebirth",
+        "turning of the ages",
+        "sapphon",
+        "the-first-rebirth"
+      ]
+    },
+    {
+      "title": "Second Rebirth \u00b7 The Great Rebirth and the Turning of the Ages",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-second-rebirth.html",
+      "offset": 1,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "great rebirth",
+        "turning of the ages",
+        "sapphon",
+        "the-second-rebirth"
+      ]
+    },
+    {
+      "title": "Third Rebirth \u00b7 The Great Rebirth and the Turning of the Ages",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-third-rebirth.html",
+      "offset": 2,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "great rebirth",
+        "turning of the ages",
+        "sapphon",
+        "the-third-rebirth"
+      ]
+    },
+    {
+      "title": "Fourth Rebirth \u00b7 The Great Rebirth and the Turning of the Ages",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-fourth-rebirth.html",
+      "offset": 3,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "great rebirth",
+        "turning of the ages",
+        "sapphon",
+        "the-fourth-rebirth"
+      ]
+    },
+    {
+      "title": "Fifth Rebirth \u00b7 The Great Rebirth and the Turning of the Ages",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-fifth-rebirth.html",
+      "offset": 4,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "great rebirth",
+        "turning of the ages",
+        "sapphon",
+        "the-fifth-rebirth"
+      ]
+    },
+    {
+      "title": "Sixth Rebirth \u00b7 The Great Rebirth and the Turning of the Ages",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-sixth-rebirth.html",
+      "offset": 5,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "great rebirth",
+        "turning of the ages",
+        "sapphon",
+        "the-sixth-rebirth"
+      ]
+    },
+    {
+      "title": "Seventh Rebirth \u00b7 The Great Rebirth and the Turning of the Ages",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-seventh-rebirth.html",
+      "offset": 6,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "great rebirth",
+        "turning of the ages",
+        "sapphon",
+        "the-seventh-rebirth"
+      ]
+    },
+    {
+      "title": "Eighth Rebirth \u00b7 The Great Rebirth and the Turning of the Ages",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-eighth-rebirth.html",
+      "offset": 7,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "great rebirth",
+        "turning of the ages",
+        "sapphon",
+        "the-eighth-rebirth"
+      ]
+    },
+    {
+      "title": "Ninth Rebirth \u00b7 The Great Rebirth and the Turning of the Ages",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-ninth-rebirth.html",
+      "offset": 8,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "great rebirth",
+        "turning of the ages",
+        "sapphon",
+        "the-ninth-rebirth"
+      ]
+    },
+    {
+      "title": "Tenth Rebirth \u00b7 The Great Rebirth and the Turning of the Ages",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-tenth-rebirth.html",
+      "offset": 9,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "great rebirth",
+        "turning of the ages",
+        "sapphon",
+        "the-tenth-rebirth"
+      ]
+    },
+    {
+      "title": "Eleventh Rebirth \u00b7 The Great Rebirth and the Turning of the Ages",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-eleventh-rebirth.html",
+      "offset": 10,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "great rebirth",
+        "turning of the ages",
+        "sapphon",
+        "the-eleventh-rebirth"
+      ]
+    },
+    {
+      "title": "Twelfth Rebirth \u00b7 The Great Rebirth and the Turning of the Ages",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-twelfth-rebirth.html",
+      "offset": 11,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "great rebirth",
+        "turning of the ages",
+        "sapphon",
+        "the-twelfth-rebirth"
+      ]
+    },
+    {
+      "title": "Thirteenth Rebirth \u00b7 The Great Rebirth and the Turning of the Ages",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-thirteenth-rebirth.html",
+      "offset": 12,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "great rebirth",
+        "turning of the ages",
+        "sapphon",
+        "the-thirteenth-rebirth"
+      ]
+    },
+    {
+      "title": "Fourteenth Rebirth \u00b7 The Great Rebirth and the Turning of the Ages",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-fourteenth-rebirth.html",
+      "offset": 13,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "great rebirth",
+        "turning of the ages",
+        "sapphon",
+        "the-fourteenth-rebirth"
+      ]
+    },
+    {
+      "title": "Fifteenth Rebirth \u00b7 The Great Rebirth and the Turning of the Ages",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-fifteenth-rebirth.html",
+      "offset": 14,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "great rebirth",
+        "turning of the ages",
+        "sapphon",
+        "the-fifteenth-rebirth"
+      ]
+    },
+    {
+      "title": "Sixteenth Rebirth \u00b7 The Great Rebirth and the Turning of the Ages",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-sixteenth-rebirth.html",
+      "offset": 15,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "great rebirth",
+        "turning of the ages",
+        "sapphon",
+        "the-sixteenth-rebirth"
+      ]
+    },
+    {
+      "title": "Seventeenth Rebirth \u00b7 The Great Rebirth and the Turning of the Ages",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-seventeenth-rebirth.html",
+      "offset": 16,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "great rebirth",
+        "turning of the ages",
+        "sapphon",
+        "the-seventeenth-rebirth"
+      ]
+    },
+    {
+      "title": "Eighteenth Rebirth \u00b7 The Great Rebirth and the Turning of the Ages",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-eighteenth-rebirth.html",
+      "offset": 17,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "great rebirth",
+        "turning of the ages",
+        "sapphon",
+        "the-eighteenth-rebirth"
+      ]
+    },
+    {
+      "title": "Nineteenth Rebirth \u00b7 The Great Rebirth and the Turning of the Ages",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-nineteenth-rebirth.html",
+      "offset": 18,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "great rebirth",
+        "turning of the ages",
+        "sapphon",
+        "the-nineteenth-rebirth"
+      ]
+    },
+    {
+      "title": "Twentieth Rebirth \u00b7 The Great Rebirth and the Turning of the Ages",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-twentieth-rebirth.html",
+      "offset": 19,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "great rebirth",
+        "turning of the ages",
+        "sapphon",
+        "the-twentieth-rebirth"
+      ]
+    },
+    {
+      "title": "Twenty-First Rebirth \u00b7 The Great Rebirth and the Turning of the Ages",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-twenty-first-rebirth.html",
+      "offset": 20,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "great rebirth",
+        "turning of the ages",
+        "sapphon",
+        "the-twenty-first-rebirth"
+      ]
+    },
+    {
+      "title": "Twenty-Second Rebirth \u00b7 The Great Rebirth and the Turning of the Ages",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-twenty-second-rebirth.html",
+      "offset": 21,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "great rebirth",
+        "turning of the ages",
+        "sapphon",
+        "the-twenty-second-rebirth"
+      ]
+    },
+    {
+      "title": "Twenty-Third Rebirth \u00b7 The Great Rebirth and the Turning of the Ages",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-twenty-third-rebirth.html",
+      "offset": 22,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "great rebirth",
+        "turning of the ages",
+        "sapphon",
+        "the-twenty-third-rebirth"
+      ]
+    },
+    {
+      "title": "Twenty-Fourth Rebirth \u00b7 The Great Rebirth and the Turning of the Ages",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-twenty-fourth-rebirth.html",
+      "offset": 23,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "great rebirth",
+        "turning of the ages",
+        "sapphon",
+        "the-twenty-fourth-rebirth"
       ]
     }
   ]
