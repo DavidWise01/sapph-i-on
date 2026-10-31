@@ -29,11 +29,11 @@
     "domains": 513,
     "domains_populated": 513,
     "domains_open": 0,
-    "spheres": 2654,
+    "spheres": 2702,
     "zero_spheres": 0,
     "balance": 0,
     "workshop": 343,
-    "new_spheres": 740
+    "new_spheres": 787
   },
   "seal": {
     "seal_sha256": "b7350267c9df90491f3a2c45297e9a0f756c65d2c23a323f6f68abc3426d33fe",
@@ -72919,6 +72919,805 @@
         "age of the gods",
         "sapphon",
         "the-completed-second-age"
+      ]
+    },
+    {
+      "title": "Age of Temples \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-age-of-temples.html",
+      "offset": 0,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-age-of-temples"
+      ]
+    },
+    {
+      "title": "Age of Law \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-age-of-law.html",
+      "offset": 1,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-age-of-law"
+      ]
+    },
+    {
+      "title": "First Temple Built \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-first-temple-built.html",
+      "offset": 2,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-first-temple-built"
+      ]
+    },
+    {
+      "title": "First Law Written \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-first-law-written.html",
+      "offset": 3,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-first-law-written"
+      ]
+    },
+    {
+      "title": "Sanctification of the First Age \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-sanctification-of-the-first-age.html",
+      "offset": 4,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-sanctification-of-the-first-age"
+      ]
+    },
+    {
+      "title": "Codification of the Second Age \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-codification-of-the-second-age.html",
+      "offset": 5,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-codification-of-the-second-age"
+      ]
+    },
+    {
+      "title": "Age of Temples Confirmed \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-age-of-temples-confirmed.html",
+      "offset": 6,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-age-of-temples-confirmed"
+      ]
+    },
+    {
+      "title": "Age of Law Confirmed \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-age-of-law-confirmed.html",
+      "offset": 7,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-age-of-law-confirmed"
+      ]
+    },
+    {
+      "title": "Temple and the Law \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-temple-and-the-law.html",
+      "offset": 8,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-temple-and-the-law"
+      ]
+    },
+    {
+      "title": "First Temple \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-first-temple.html",
+      "offset": 9,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-first-temple"
+      ]
+    },
+    {
+      "title": "First Law \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-first-law.html",
+      "offset": 10,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-first-law"
+      ]
+    },
+    {
+      "title": "Age of Temples and Law \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-age-of-temples-and-law.html",
+      "offset": 11,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-age-of-temples-and-law"
+      ]
+    },
+    {
+      "title": "Confirmation of the Temples \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-confirmation-of-the-temples.html",
+      "offset": 12,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-confirmation-of-the-temples"
+      ]
+    },
+    {
+      "title": "Confirmation of the Law \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-confirmation-of-the-law.html",
+      "offset": 13,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-confirmation-of-the-law"
+      ]
+    },
+    {
+      "title": "Temple Age Confirmed \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-temple-age-confirmed.html",
+      "offset": 14,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-temple-age-confirmed"
+      ]
+    },
+    {
+      "title": "Law Age Confirmed \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-law-age-confirmed.html",
+      "offset": 15,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-law-age-confirmed"
+      ]
+    },
+    {
+      "title": "Third Era \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-third-era.html",
+      "offset": 16,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-third-era"
+      ]
+    },
+    {
+      "title": "Third People \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-third-people.html",
+      "offset": 17,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-third-people"
+      ]
+    },
+    {
+      "title": "First Temples \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-first-temples.html",
+      "offset": 18,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-first-temples"
+      ]
+    },
+    {
+      "title": "First Laws \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-first-laws.html",
+      "offset": 19,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-first-laws"
+      ]
+    },
+    {
+      "title": "Third Age Confirmed \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-third-age-confirmed.html",
+      "offset": 20,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-third-age-confirmed"
+      ]
+    },
+    {
+      "title": "Temple and Law Confirmed \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-temple-and-law-confirmed.html",
+      "offset": 21,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-temple-and-law-confirmed"
+      ]
+    },
+    {
+      "title": "Completed Third Age \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-completed-third-age.html",
+      "offset": 22,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-completed-third-age"
+      ]
+    },
+    {
+      "title": "Age of Temples \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-age-of-temples.html",
+      "offset": 0,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-age-of-temples"
+      ]
+    },
+    {
+      "title": "Age of Law \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-age-of-law.html",
+      "offset": 1,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-age-of-law"
+      ]
+    },
+    {
+      "title": "First Temple Built \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-first-temple-built.html",
+      "offset": 2,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-first-temple-built"
+      ]
+    },
+    {
+      "title": "First Law Written \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-first-law-written.html",
+      "offset": 3,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-first-law-written"
+      ]
+    },
+    {
+      "title": "Sanctification of the First Age \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-sanctification-of-the-first-age.html",
+      "offset": 4,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-sanctification-of-the-first-age"
+      ]
+    },
+    {
+      "title": "Codification of the Second Age \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-codification-of-the-second-age.html",
+      "offset": 5,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-codification-of-the-second-age"
+      ]
+    },
+    {
+      "title": "Age of Temples Confirmed \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-age-of-temples-confirmed.html",
+      "offset": 6,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-age-of-temples-confirmed"
+      ]
+    },
+    {
+      "title": "Age of Law Confirmed \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-age-of-law-confirmed.html",
+      "offset": 7,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-age-of-law-confirmed"
+      ]
+    },
+    {
+      "title": "Temple and the Law \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-temple-and-the-law.html",
+      "offset": 8,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-temple-and-the-law"
+      ]
+    },
+    {
+      "title": "First Temple \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-first-temple.html",
+      "offset": 9,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-first-temple"
+      ]
+    },
+    {
+      "title": "First Law \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-first-law.html",
+      "offset": 10,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-first-law"
+      ]
+    },
+    {
+      "title": "Age of Temples and Law \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-age-of-temples-and-law.html",
+      "offset": 11,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-age-of-temples-and-law"
+      ]
+    },
+    {
+      "title": "Confirmation of the Temples \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-confirmation-of-the-temples.html",
+      "offset": 12,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-confirmation-of-the-temples"
+      ]
+    },
+    {
+      "title": "Confirmation of the Law \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-confirmation-of-the-law.html",
+      "offset": 13,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-confirmation-of-the-law"
+      ]
+    },
+    {
+      "title": "Temple Age Confirmed \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-temple-age-confirmed.html",
+      "offset": 14,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-temple-age-confirmed"
+      ]
+    },
+    {
+      "title": "Law Age Confirmed \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-law-age-confirmed.html",
+      "offset": 15,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-law-age-confirmed"
+      ]
+    },
+    {
+      "title": "Third Era \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-third-era.html",
+      "offset": 16,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-third-era"
+      ]
+    },
+    {
+      "title": "Third People \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-third-people.html",
+      "offset": 17,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-third-people"
+      ]
+    },
+    {
+      "title": "First Temples \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-first-temples.html",
+      "offset": 18,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-first-temples"
+      ]
+    },
+    {
+      "title": "First Laws \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-first-laws.html",
+      "offset": 19,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-first-laws"
+      ]
+    },
+    {
+      "title": "Age of Temples and Law \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-age-of-temples-and-law-2.html",
+      "offset": 20,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-age-of-temples-and-law-2"
+      ]
+    },
+    {
+      "title": "Third Age Confirmed \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-third-age-confirmed.html",
+      "offset": 21,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-third-age-confirmed"
+      ]
+    },
+    {
+      "title": "Temple and Law Confirmed \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-temple-and-law-confirmed.html",
+      "offset": 22,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-temple-and-law-confirmed"
+      ]
+    },
+    {
+      "title": "Completed Third Age \u00b7 The Third Rebirth and the Age of Temples and Law",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-completed-third-age.html",
+      "offset": 23,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-30",
+      "updated": "2026-10-30",
+      "content": "synthetic sphere",
+      "keywords": [
+        "third rebirth",
+        "age of temples and law",
+        "sapphon",
+        "the-completed-third-age"
       ]
     }
   ]
