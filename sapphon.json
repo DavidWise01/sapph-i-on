@@ -29,11 +29,11 @@
     "domains": 513,
     "domains_populated": 513,
     "domains_open": 0,
-    "spheres": 2606,
+    "spheres": 2630,
     "zero_spheres": 0,
     "balance": 0,
     "workshop": 343,
-    "new_spheres": 692
+    "new_spheres": 716
   },
   "seal": {
     "seal_sha256": "b7350267c9df90491f3a2c45297e9a0f756c65d2c23a323f6f68abc3426d33fe",
@@ -72151,6 +72151,366 @@
         "first kings",
         "making of the law",
         "the-first-king-of-the-first-sky"
+      ]
+    },
+    {
+      "title": "Return of the Sky \u00b7 The Return of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-return-of-the-sky.html",
+      "offset": 0,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "return of the gods",
+        "the-return-of-the-sky"
+      ]
+    },
+    {
+      "title": "Return of the Sea \u00b7 The Return of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-return-of-the-sea.html",
+      "offset": 1,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "return of the gods",
+        "the-return-of-the-sea"
+      ]
+    },
+    {
+      "title": "Return of the Earth \u00b7 The Return of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-return-of-the-earth.html",
+      "offset": 2,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "return of the gods",
+        "the-return-of-the-earth"
+      ]
+    },
+    {
+      "title": "Return of the Moon \u00b7 The Return of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-return-of-the-moon.html",
+      "offset": 3,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "return of the gods",
+        "the-return-of-the-moon"
+      ]
+    },
+    {
+      "title": "Return of the Sun \u00b7 The Return of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-return-of-the-sun.html",
+      "offset": 4,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "return of the gods",
+        "the-return-of-the-sun"
+      ]
+    },
+    {
+      "title": "Return of the Stars \u00b7 The Return of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-return-of-the-stars.html",
+      "offset": 5,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "return of the gods",
+        "the-return-of-the-stars"
+      ]
+    },
+    {
+      "title": "Return of the Winds \u00b7 The Return of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-return-of-the-winds.html",
+      "offset": 6,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "return of the gods",
+        "the-return-of-the-winds"
+      ]
+    },
+    {
+      "title": "Return of the Fire \u00b7 The Return of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-return-of-the-fire.html",
+      "offset": 7,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "return of the gods",
+        "the-return-of-the-fire"
+      ]
+    },
+    {
+      "title": "Return of the River \u00b7 The Return of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-return-of-the-river.html",
+      "offset": 8,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "return of the gods",
+        "the-return-of-the-river"
+      ]
+    },
+    {
+      "title": "Return of the Mountain \u00b7 The Return of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-return-of-the-mountain.html",
+      "offset": 9,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "return of the gods",
+        "the-return-of-the-mountain"
+      ]
+    },
+    {
+      "title": "Return of the Lake \u00b7 The Return of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-return-of-the-lake.html",
+      "offset": 10,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "return of the gods",
+        "the-return-of-the-lake"
+      ]
+    },
+    {
+      "title": "Return of the Forest \u00b7 The Return of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-return-of-the-forest.html",
+      "offset": 11,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "return of the gods",
+        "the-return-of-the-forest"
+      ]
+    },
+    {
+      "title": "Return of the Cave \u00b7 The Return of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-return-of-the-cave.html",
+      "offset": 12,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "return of the gods",
+        "the-return-of-the-cave"
+      ]
+    },
+    {
+      "title": "Return of the Temple \u00b7 The Return of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-return-of-the-temple.html",
+      "offset": 13,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "return of the gods",
+        "the-return-of-the-temple"
+      ]
+    },
+    {
+      "title": "Return of the Garden \u00b7 The Return of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-return-of-the-garden.html",
+      "offset": 14,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "return of the gods",
+        "the-return-of-the-garden"
+      ]
+    },
+    {
+      "title": "Return of the Star \u00b7 The Return of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-return-of-the-star.html",
+      "offset": 15,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "return of the gods",
+        "the-return-of-the-star"
+      ]
+    },
+    {
+      "title": "Return of the Moon at Night \u00b7 The Return of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-return-of-the-moon-night.html",
+      "offset": 16,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "return of the gods",
+        "the-return-of-the-moon-night"
+      ]
+    },
+    {
+      "title": "Return of the Sun at Day \u00b7 The Return of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-return-of-the-sun-day.html",
+      "offset": 17,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "return of the gods",
+        "the-return-of-the-sun-day"
+      ]
+    },
+    {
+      "title": "Return of the First People \u00b7 The Return of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-return-of-the-first-people.html",
+      "offset": 18,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "return of the gods",
+        "the-return-of-the-first-people"
+      ]
+    },
+    {
+      "title": "Return of the First Fire \u00b7 The Return of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-return-of-the-first-fire.html",
+      "offset": 19,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "return of the gods",
+        "the-return-of-the-first-fire"
+      ]
+    },
+    {
+      "title": "Return of the First Tree \u00b7 The Return of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-return-of-the-first-tree.html",
+      "offset": 20,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "return of the gods",
+        "the-return-of-the-first-tree"
+      ]
+    },
+    {
+      "title": "Return of the First River \u00b7 The Return of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-return-of-the-first-river.html",
+      "offset": 21,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "return of the gods",
+        "the-return-of-the-first-river"
+      ]
+    },
+    {
+      "title": "Return of the First Mountain \u00b7 The Return of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-return-of-the-first-mountain.html",
+      "offset": 22,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "return of the gods",
+        "the-return-of-the-first-mountain"
+      ]
+    },
+    {
+      "title": "Return of the First Sky \u00b7 The Return of the Gods",
+      "url": "https://davidwise01.github.io/sapph-i-on/grown/the-return-of-the-first-sky.html",
+      "offset": 23,
+      "type": "sphere",
+      "status": "active",
+      "keeper": "Icarium",
+      "created": "2026-10-29",
+      "updated": "2026-10-29",
+      "content": "synthetic sphere",
+      "keywords": [
+        "return of the gods",
+        "the-return-of-the-first-sky"
       ]
     }
   ]
