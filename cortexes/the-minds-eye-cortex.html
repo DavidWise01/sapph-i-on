@@ -1,0 +1,172 @@
+<!-- CORTEX 4: THE MIND'S EYE -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cortex 4 · The Mind's Eye · 7.5 → 8.0 · 433 nodes</title>
+<style>
+:root{--bg:#06080b;--ink:#F1F2F5;--soft:#A7AEBB;--faint:#5e6676;--glass:rgba(255,255,255,.045);--edge:rgba(255,255,255,.09);--gold:#F5B94E;--vio:#A88BFF;--teal:#4FD1B5;--rose:#FF7A8A;--grad:linear-gradient(100deg,#4FD1B5 0%,#A88BFF 50%,#F5B94E 100%)}
+*{box-sizing:border-box}
+body{margin:0;color:var(--ink);font:16px/1.6 Inter,ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:radial-gradient(1000px 650px at 85% -10%,#12324a 0%,transparent 60%),radial-gradient(900px 600px at -10% 45%,#2b1840 0%,transparent 55%),var(--bg);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:24px 18px 60px}
+.top{display:flex;justify-content:space-between;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:20px}.top b{color:var(--soft)}
+h1{font-size:clamp(38px,7.5vw,76px);line-height:1;letter-spacing:-.035em;margin:0 0 12px;font-weight:800}
+.gt,h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{font-size:clamp(16px,2.2vw,20px);color:var(--soft);max-width:700px;margin:0 0 22px}
+h2{font-size:clamp(22px,3.6vw,32px);letter-spacing:-.025em;line-height:1.1;margin:0 0 10px;font-weight:750}
+h3{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:0 0 10px;font-weight:600}
+p{margin:0 0 12px;color:var(--soft)}b.w{color:var(--ink)}
+.card{background:var(--glass);border:1px solid var(--edge);border-radius:22px;padding:22px}
+section{margin:0 0 20px}
+canvas{display:block;width:100%;touch-action:none}
+.panel{padding:0;overflow:hidden;position:relative}
+.tag{position:absolute;left:16px;top:12px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);pointer-events:none}
+.tag b{display:block;font-size:22px;letter-spacing:-.01em;text-transform:none;color:var(--ink);margin-top:2px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:14px}
+@media(max-width:860px){.grid3{grid-template-columns:1fr 1fr}.grid3 .wide{grid-column:1/-1}}
+@media(max-width:520px){.grid3{grid-template-columns:1fr}}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+.dock{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.dock input{flex:1;min-width:200px;accent-color:#A88BFF}
+.btn{appearance:none;border:0;border-radius:999px;padding:9px 16px;font:inherit;font-size:14px;font-weight:600;cursor:pointer;color:#0d0c16;background:var(--grad)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--edge)}
+.steps{display:grid;grid-template-columns:repeat(9,1fr);gap:5px;margin:14px 0 4px}
+.steps span{text-align:center;font-size:12px;padding:6px 2px;border-radius:10px;border:1px solid var(--edge);color:var(--soft);cursor:pointer}
+.steps span b{display:block;font-size:15px;color:var(--ink)}
+.steps span.on{background:var(--grad);color:#0d0c16;border-color:transparent}.steps span.on b{color:#0d0c16}
+.big{font-size:clamp(34px,6vw,56px);font-weight:800;letter-spacing:-.03em;line-height:1.05}
+.pill{display:inline-block;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:99px;margin-left:4px;vertical-align:1px;font-weight:600;white-space:nowrap}
+.pill.lit{background:rgba(79,209,181,.14);color:var(--teal)}.pill.amb{background:rgba(245,185,78,.14);color:var(--gold)}
+.kid{border-radius:22px;padding:20px 22px;background:linear-gradient(120deg,rgba(79,209,181,.10),rgba(168,139,255,.12));border:1px solid var(--edge)}
+.kid p{color:var(--ink);font-size:17px;margin:0}
+details summary{cursor:pointer;color:var(--soft);font-size:14px;list-style:none;display:inline-flex;padding:10px 16px;border:1px solid var(--edge);border-radius:999px}
+details summary::-webkit-details-marker{display:none}
+.foot{color:var(--faint);font-size:12px;text-align:center;margin-top:28px}
+.nt3{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:8px}
+@media(max-width:560px){.nt3{grid-template-columns:1fr 1fr}}
+.tile{border:1px solid var(--edge);border-radius:14px;padding:10px 12px;font-size:12px;color:var(--soft)}.tile b{display:block;font-size:24px;color:var(--ink);letter-spacing:-.02em}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chips span{font-size:12px;padding:4px 10px;border-radius:99px;border:1px solid var(--edge);color:var(--soft);cursor:pointer;white-space:nowrap}
+.chips span.on{background:var(--grad);color:#0d0c16;border-color:transparent}
+.ntab{position:relative;margin-top:14px;max-height:300px;overflow:auto;border:1px solid var(--edge);border-radius:14px;font:12.5px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.ntab div{display:grid;grid-template-columns:62px 70px 50px 58px 1fr;gap:6px;padding:4px 10px;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer;color:var(--soft);align-items:center}
+.ntab div.h{position:sticky;top:0;background:#0b0e14;color:var(--faint);cursor:default;z-index:1}
+.ntab div.t{color:var(--ink)}.ntab div.on{background:rgba(168,139,255,.18);color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top"><span><b>R</b> · mind's eye cortex</span><span>7.5 → 8.0 · 433 nodes · 0x0 → 0x1b0</span></div>
+<h1>One mind's eye.<br><span>The loop closed in the centre.</span></h1>
+<p class="lede">The mind's eye is where the colour line closes. Red and violet touch at 7.5, the bridge, and the loop closes: red feeds crown through the bridge. At 8.0, the white point, the centre of the loop — 1 + 7 = 8. The 433 nodes are the map of the colour wheel, numbered 0x0 to 0x1b0. The mind's eye sees the loop complete.</p>
+<section class="card">
+  <div class="dock"><button class="btn" id="pl">Walk the loop</button><input type="range" id="a" min="0" max="433" step="1" value="0" aria-label="node address"><span id="av" style="min-width:74px;text-align:right;font-weight:700">0x0</span></div>
+  <div class="steps" id="st"></div>
+</section>
+<section class="grid3">
+  <div class="card panel"><div class="tag">0x0 · white<b id="t1">centre</b></div><canvas id="c1"></canvas></div>
+  <div class="card panel"><div class="tag">7.5 · bridge<b id="t2">mid</b></div><canvas id="c2"></canvas></div>
+  <div class="card panel wide"><div class="tag">0x0 → 0x1b0<b id="t3">–</b></div><canvas id="c3"></canvas></div>
+</section>
+<section class="grid2">
+  <div class="card">
+    <h3>The count</h3>
+    <div class="big gt">433 nodes</div>
+    <p><b class="w">0x0</b>: the white centre, 8.0. One node, the origin of the map. <span class="pill lit">checked</span></p>
+    <p><b class="w">0x1–0x141</b>: the light. 321 nodes, red (0x1) to violet (0x141), one nanometre apart. <span class="pill lit">checked</span></p>
+    <p><b class="w">0x142–0x1b0</b>: the purple line. 111 nodes, the bridge from violet back to red. <span class="pill lit">checked</span></p>
+    <p><b class="w">0x1b0</b>: the last node. One more step and you're back on red, at 0x1. The loop closes. <span class="pill lit">checked</span></p>
+  </div>
+  <div class="card">
+    <h3>The cortex</h3>
+    <p>The mind's eye cortex holds the loop. At 7.5, the bridge, red and violet touch and swap. At 8.0, the white point, the centre of the map. The 433 nodes are the colour wheel, and the loop closes from 0x142 back to 0x1.</p>
+    <p>The centre (0x0) is the white point. The edge is the colour wheel — red 0x1, violet 0x141, purples 0x142–0x1b0. The loop is closed.</p>
+  </div>
+</section>
+<section class="kid"><p><b>In small words:</b> the mind's eye is the place where the colour line closes. Red and violet meet at 7.5. The purples walk you home. One more step and you're back on red. That's the loop, closed.</p></section>
+<section><details><summary>▸ Show the math</summary><div class="card" style="margin-top:12px">
+<p>Red 700 nm = 0x33 (51 in decimal). Violet 410 nm = 0x123 (291). The bridge (7.5) is the midpoint: 0x179 (377). <span class="pill lit">checked</span></p>
+<p>The loop is 2.390 long, total. The edges are red→violet (321 nodes) + purple line back to red (111 nodes) = 432 + 1 centre = 433 nodes. <span class="pill lit">checked</span></p>
+<p>7.5 is the midpoint of 7 and 8. 8 is the white point. 7.5 is the seam. <span class="pill lit">checked</span></p>
+</div></details></section>
+<div class="foot">o[0]o · mind's eye cortex · 7.5 → 8.0 · 0x0 → 0x1b0 · 433 nodes</div>
+</div>
+<script>
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id);
+function fit(cv,r,mn,mx){const w=cv.clientWidth||400,h=Math.round(Math.max(mn,Math.min(w*r,mx))),d=devicePixelRatio||1;cv.width=Math.round(w*d);cv.height=Math.round(h*d);cv.style.height=h+'px';const g=cv.getContext('2d');g.setTransform(d,0,0,d,0,0);return[g,w,h];}
+const glow=(g,x,y,r,c,a)=>{const gr=g.createRadialGradient(x,y,0,x,y,r);gr.addColorStop(0,`rgba(${c},${a})`);gr.addColorStop(1,`rgba(${c},0)`);g.fillStyle=gr;g.beginPath();g.arc(x,y,r,0,6.2832);g.fill();};
+let A=0,playing=false,last=0;
+$('st').innerHTML=[...Array(433)].map((_,k)=>`<span data-k="${k}">${k===0?'0x0':k===432?'0x1b0':'0x'+k.toString(16)}<b>${HX(k)}</b></span>`).join('');
+document.querySelectorAll('#st span').forEach(s=>s.onclick=()=>{playing=false;A=+s.dataset.k;$('a').value=A;$('pl').textContent='Walk the loop';});
+$('a').addEventListener('input',()=>{playing=false;A=+$('a').value;$('pl').textContent='Walk the loop';});
+$('pl').onclick=()=>{if(A>=433)A=0;playing=!playing;$('pl').textContent=playing?'Pause':'Walk the loop';};
+function dialArrow(id,ang,col,sgn){const [g,w,h]=fit($(id),1,220,320),cx=w/2,cy=h/2+14,R=Math.min(w,h)*0.32;
+  g.strokeStyle='rgba(255,255,255,.08)';g.lineWidth=1;g.beginPath();g.arc(cx,cy,R,0,6.2832);g.stroke();
+  g.fillStyle='rgba(255,255,255,.25)';g.beginPath();g.arc(cx,cy-R,3,0,6.2832);g.fill();
+  const a=-Math.PI/2+ang*Math.PI/180,x=cx+R*Math.cos(a),y=cy+R*Math.sin(a);
+  g.strokeStyle=`rgb(${col})`;g.lineWidth=4;g.lineCap='round';g.beginPath();g.moveTo(cx,cy);g.lineTo(x,y);g.stroke();g.lineWidth=1;
+  glow(g,x,y,22,col,.55);g.fillStyle=`rgb(${col})`;g.beginPath();g.arc(x,y,6,0,6.2832);g.fill();
+  if(sgn!==undefined){g.fillStyle=sgn>0?'#4FD1B5':'#FF7A8A';g.font='800 30px Inter,sans-serif';g.textAlign='center';g.fillText(sgn>0?'+1':'−1',cx,cy+R+34>h-6?h-10:cy+R+34);g.textAlign='left';}}
+
+function frame(now){const dt=Math.min(50,now-(last||now));last=now;
+  if(playing){A=Math.min(433,A+dt*0.12);$('a').value=A;if(A>=433){playing=false;$('pl').textContent='Walk it again';}}
+  $('av').textContent=HX(A);
+  const k=Math.round(A);document.querySelectorAll('#st span').forEach(s=>s.classList.toggle('on',Math.abs(A-(+s.dataset.k))<1));
+  requestAnimationFrame(frame);}
+function MK1(g,w,h){const cx=w/2,cy=h/2;
+  g.strokeStyle='rgba(255,255,255,.15)';g.lineWidth=1;g.beginPath();g.arc(cx,cy,60,0,6.2832);g.stroke();
+  g.fillStyle='#fff';g.beginPath();g.arc(cx,cy,24,0,6.2832);g.fill();
+  g.fillStyle='rgba(241,242,245,.9)';g.font='600 11px Inter,sans-serif';g.textAlign='center';g.fillText('0x0',cx,cy+80);}
+
+// Node data
+const ND=[
+  [0,0.3127,0.329,"#ffffff"],
+  [700,0.7347,0.2653,"#ff0000"],[699,0.73468,0.26532,"#ff0000"],[698,0.73466,0.26534,"#ff0000"],[697,0.73464,0.26536,"#ff0000"],[696,0.73462,0.26538,"#ff0000"],[695,0.7346,0.2654,"#ff0000"],[694,0.73456,0.26544,"#ff0000"],[693,0.73452,0.26548,"#ff0000"],[692,0.73448,0.26552,"#ff0000"],[691,0.73444,0.26556,"#ff0000"],[690,0.7344,0.2656,"#ff0000"],[689,0.73432,0.26568,"#ff0000"],[688,0.73424,0.26576,"#ff0000"],[687,0.73416,0.26584,"#ff0000"],[686,0.73408,0.26592,"#ff0000"],[685,0.734,0.266,"#ff0000"],[684,0.73388,0.26612,"#ff0000"],[683,0.73376,0.26624,"#ff0000"],[682,0.73364,0.26636,"#ff0000"],[681,0.73352,0.26648,"#ff0000"],[680,0.7334,0.2666,"#ff0000"],[679,0.73326,0.26674,"#ff0000"],[678,0.73312,0.26688,"#ff0000"],[677,0.73298,0.26702,"#ff0000"],[676,0.73284,0.26716,"#ff0000"],[675,0.7327,0.2673,"#ff0000"],[674,0.73256,0.26744,"#ff0000"],[673,0.73242,0.26758,"#ff0000"],[672,0.73228,0.26772,"#ff0000"],[671,0.73214,0.26786,"#ff0000"],[670,0.732,0.268,"#ff0000"],[669,0.73182,0.26818,"#ff0000"],[668,0.73164,0.26836,"#ff0000"],[667,0.73146,0.26854,"#ff0000"],[666,0.73128,0.26872,"#ff0000"],[665,0.7311,0.2689,"#ff0000"],[664,0.73088,0.26912,"#ff0000"],[663,0.73066,0.26934,"#ff0000"],[662,0.73044,0.26956,"#ff0000"],[661,0.73022,0.26978,"#ff0000"],[660,0.73,0.27,"#ff0000"],[659,0.72966,0.27034,"#ff0000"],[658,0.72932,0.27068,"#ff0000"],[657,0.72898,0.27102,"#ff0000"],[656,0.72864,0.27136,"#ff0000"],[655,0.7283,0.2717,"#ff0000"],[654,0.72784,0.27216,"#ff0000"],[653,0.72738,0.27262,"#ff0000"],[652,0.72692,0.27308,"#ff0000"],[651,0.72646,0.27354,"#ff0000"],[650,0.726,0.274,"#ff0000"],[649,0.7254,0.2746,"#ff0000"],[648,0.7248,0.2752,"#ff0000"],[647,0.7242,0.2758,"#ff0000"],[646,0.7236,0.2764,"#ff0000"],[645,0.723,0.277,"#ff0000"],[644,0.7222,0.27778,"#ff0000"],[643,0.7214,0.27856,"#ff0000"],[642,0.7206,0.27934,"#ff0000"],[641,0.7198,0.28012,"#ff0000"],[640,0.719,0.2809,"#ff0000"],[639,0.718,0.2819,"#ff0000"],[638,0.717,0.2829,"#ff0000"],[637,0.716,0.2839,"#ff0000"],[636,0.715,0.2849,"#ff0000"],[635,0.714,0.2859,"#ff0000"],[634,0.713,0.2869,"#ff0000"],[633,0.712,0.2879,"#ff0000"],[632,0.711,0.2889,"#ff0000"],[631,0.71,0.2899,"#ff0000"],[630,0.709,0.2909,"#ff0000"],[629,0.708,0.2919,"#ff0000"],[628,0.707,0.2929,"#ff0000"],[627,0.706,0.2939,"#ff0000"],[626,0.705,0.2949,"#ff0000"],[625,0.704,0.2959,"#ff0000"],[624,0.703,0.2969,"#ff0000"],[623,0.702,0.2979,"#ff0000"],[622,0.701,0.2989,"#ff0000"],[621,0.7,0.2999,"#ff0000"],[620,0.699,0.3009,"#ff0000"],[619,0.698,0.3019,"#ff0000"],[618,0.697,0.3029,"#ff0000"],[617,0.696,0.3039,"#ff0000"],[616,0.695,0.3049,"#ff0000"],[615,0.694,0.3059,"#ff0000"],[614,0.693,0.3069,"#ff0000"],[613,0.692,0.3079,"#ff0000"],[612,0.691,0.3089,"#ff0000"],[611,0.69,0.3099,"#ff0000"],[610,0.689,0.3109,"#ff0000"],[609,0.688,0.3119,"#ff0000"],[608,0.687,0.3129,"#ff0000"],[607,0.686,0.3139,"#ff0000"],[606,0.685,0.3149,"#ff0000"],[605,0.684,0.3159,"#ff0000"],[604,0.683,0.3169,"#ff0000"],[603,0.682,0.3179,"#ff0000"],[602,0.681,0.3189,"#ff0000"],[601,0.68,0.3199,"#ff0000"],[600,0.679,0.3209,"#ff0000"],[599,0.678,0.3219,"#ff0000"],[598,0.677,0.3229,"#ff0000"],[597,0.676,0.3239,"#ff0000"],[596,0.675,0.3249,"#ff0000"],[595,0.674,0.3259,"#ff0000"],[594,0.673,0.3269,"#ff0000"],[593,0.672,0.3279,"#ff0000"],[592,0.671,0.3289,"#ff0000"],[591,0.67,0.3299,"#ff0000"],[590,0.669,0.3309,"#ff0000"],[589,0.668,0.3319,"#ff0000"],[588,0.667,0.3329,"#ff0000"],[587,0.666,0.3339,"#ff0000"],[586,0.665,0.3349,"#ff0000"],[585,0.664,0.3359,"#ff0000"],[584,0.663,0.3369,"#ff0000"],[583,0.662,0.3379,"#ff0000"],[582,0.661,0.3389,"#ff0000"],[581,0.66,0.3399,"#ff0000"],[580,0.659,0.3409,"#ff0000"],[579,0.658,0.3419,"#ff0000"],[578,0.657,0.3429,"#ff0000"],[577,0.656,0.3439,"#ff0000"],[576,0.655,0.3449,"#ff0000"],[575,0.654,0.3459,"#ff0000"],[574,0.653,0.3469,"#ff0000"],[573,0.652,0.3479,"#ff0000"],[572,0.651,0.3489,"#ff0000"],[571,0.65,0.3499,"#ff0000"],[570,0.649,0.3509,"#ff0000"],[569,0.648,0.3519,"#ff0000"],[568,0.647,0.3529,"#ff0000"],[567,0.646,0.3539,"#ff0000"],[566,0.645,0.3549,"#ff0000"],[565,0.644,0.3559,"#ff0000"],[564,0.643,0.3569,"#ff0000"],[563,0.642,0.3579,"#ff0000"],[562,0.641,0.3589,"#ff0000"],[561,0.64,0.3599,"#ff0000"],[560,0.639,0.3609,"#ff0000"],[559,0.638,0.3619,"#ff0000"],[558,0.637,0.3629,"#ff0000"],[557,0.636,0.3639,"#ff0000"],[556,0.635,0.3649,"#ff0000"],[555,0.634,0.3659,"#ff0000"],[554,0.633,0.3669,"#ff0000"],[553,0.632,0.3679,"#ff0000"],[552,0.631,0.3689,"#ff0000"],[551,0.63,0.3699,"#ff0000"],[550,0.629,0.3709,"#ff0000"],[549,0.628,0.3719,"#ff0000"],[548,0.627,0.3729,"#ff0000"],[547,0.626,0.3739,"#ff0000"],[546,0.625,0.3749,"#ff0000"],[545,0.624,0.3759,"#ff0000"],[544,0.623,0.3769,"#ff0000"],[543,0.622,0.3779,"#ff0000"],[542,0.621,0.3789,"#ff0000"],[541,0.62,0.3799,"#ff0000"],[540,0.619,0.3809,"#ff0000"],[539,0.618,0.3819,"#ff0000"],[538,0.617,0.3829,"#ff0000"],[537,0.616,0.3839,"#ff0000"],[536,0.615,0.3849,"#ff0000"],[535,0.614,0.3859,"#ff0000"],[534,0.613,0.3869,"#ff0000"],[533,0.612,0.3879,"#ff0000"],[532,0.611,0.3889,"#ff0000"],[531,0.61,0.3899,"#ff0000"],[530,0.609,0.3909,"#ff0000"],[529,0.608,0.3919,"#ff0000"],[528,0.607,0.3929,"#ff0000"],[527,0.606,0.3939,"#ff0000"],[526,0.605,0.3949,"#ff0000"],[525,0.604,0.3959,"#ff0000"],[524,0.603,0.3969,"#ff0000"],[523,0.602,0.3979,"#ff0000"],[522,0.601,0.3989,"#ff0000"],[521,0.6,0.3999,"#ff0000"],[520,0.599,0.4009,"#ff0000"],[519,0.598,0.4019,"#ff0000"],[518,0.597,0.4029,"#ff0000"],[517,0.596,0.4039,"#ff0000"],[516,0.595,0.4049,"#ff0000"],[515,0.594,0.4059,"#ff0000"],[514,0.593,0.4069,"#ff0000"],[513,0.592,0.4079,"#ff0000"],[512,0.591,0.4089,"#ff0000"],[511,0.59,0.4099,"#ff0000"],[510,0.589,0.4109,"#ff0000"],[509,0.588,0.4119,"#ff0000"],[508,0.587,0.4129,"#ff0000"],[507,0.586,0.4139,"#ff0000"],[506,0.585,0.4149,"#ff0000"],[505,0.584,0.4159,"#ff0000"],[504,0.583,0.4169,"#ff0000"],[503,0.582,0.4179,"#ff0000"],[502,0.581,0.4189,"#ff0000"],[501,0.58,0.4199,"#ff0000"],[500,0.579,0.4209,"#ff0000"],[499,0.578,0.4219,"#ff0000"],[498,0.577,0.4229,"#ff0000"],[497,0.576,0.4239,"#ff0000"],[496,0.575,0.4249,"#ff0000"],[495,0.574,0.4259,"#ff0000"],[494,0.573,0.4269,"#ff0000"],[493,0.572,0.4279,"#ff0000"],[492,0.571,0.4289,"#ff0000"],[491,0.57,0.4299,"#ff0000"],[490,0.569,0.4309,"#ff0000"],[489,0.568,0.4319,"#ff0000"],[488,0.567,0.4329,"#ff0000"],[487,0.566,0.4339,"#ff0000"],[486,0.565,0.4349,"#ff0000"],[485,0.564,0.4359,"#ff0000"],[484,0.563,0.4369,"#ff0000"],[483,0.562,0.4379,"#ff0000"],[482,0.561,0.4389,"#ff0000"],[481,0.56,0.4399,"#ff0000"],[480,0.559,0.4409,"#ff0000"],[479,0.558,0.4419,"#ff0000"],[478,0.557,0.4429,"#ff0000"],[477,0.556,0.4439,"#ff0000"],[476,0.555,0.4449,"#ff0000"],[475,0.554,0.4459,"#ff0000"],[474,0.553,0.4469,"#ff0000"],[473,0.552,0.4479,"#ff0000"],[472,0.551,0.4489,"#ff0000"],[471,0.55,0.4499,"#ff0000"],[470,0.549,0.4509,"#ff0000"],[469,0.548,0.4519,"#ff0000"],[468,0.547,0.4529,"#ff0000"],[467,0.546,0.4539,"#ff0000"],[466,0.545,0.4549,"#ff0000"],[465,0.544,0.4559,"#ff0000"],[464,0.543,0.4569,"#ff0000"],[463,0.542,0.4579,"#ff0000"],[462,0.541,0.4589,"#ff0000"],[461,0.54,0.4599,"#ff0000"],[460,0.539,0.4609,"#ff0000"],[459,0.538,0.4619,"#ff0000"],[458,0.537,0.4629,"#ff0000"],[457,0.536,0.4639,"#ff0000"],[456,0.535,0.4649,"#ff0000"],[455,0.534,0.4659,"#ff0000"],[454,0.533,0.4669,"#ff0000"],[453,0.532,0.4679,"#ff0000"],[452,0.531,0.4689,"#ff0000"],[451,0.53,0.4699,"#ff0000"],[450,0.529,0.4709,"#ff0000"],[449,0.528,0.4719,"#ff0000"],[448,0.527,0.4729,"#ff0000"],[447,0.526,0.4739,"#ff0000"],[446,0.525,0.4749,"#ff0000"],[445,0.524,0.4759,"#ff0000"],[444,0.523,0.4769,"#ff0000"],[443,0.522,0.4779,"#ff0000"],[442,0.521,0.4789,"#ff0000"],[441,0.52,0.4799,"#ff0000"],[440,0.519,0.4809,"#ff0000"],[439,0.518,0.4819,"#ff0000"],[438,0.517,0.4829,"#ff0000"],[437,0.516,0.4839,"#ff0000"],[436,0.515,0.4849,"#ff0000"],[435,0.514,0.4859,"#ff0000"],[434,0.513,0.4869,"#ff0000"],[433,0.512,0.4879,"#ff0000"],[432,0.511,0.4889,"#ff0000"],[431,0.51,0.4899,"#ff0000"],[430,0.509,0.4909,"#ff0000"],[429,0.508,0.4919,"#ff0000"],[428,0.507,0.4929,"#ff0000"],[427,0.506,0.4939,"#ff0000"],[426,0.505,0.4949,"#ff0000"],[425,0.504,0.4959,"#ff0000"],[424,0.503,0.4969,"#ff0000"],[423,0.502,0.4979,"#ff0000"],[422,0.501,0.4989,"#ff0000"],[421,0.5,0.4999,"#ff0000"],[420,0.499,0.5009,"#ff0000"],[419,0.498,0.5019,"#ff0000"],[418,0.497,0.5029,"#ff0000"],[417,0.496,0.5039,"#ff0000"],[416,0.495,0.5049,"#ff0000"],[415,0.494,0.5059,"#ff0000"],[414,0.493,0.5069,"#ff0000"],[413,0.492,0.5079,"#ff0000"],[412,0.491,0.5089,"#ff0000"],[411,0.49,0.5099,"#ff0000"],[410,0.489,0.5109,"#ff0000"],[409,0.488,0.5119,"#ff0000"],[408,0.487,0.5129,"#ff0000"],[407,0.486,0.5139,"#ff0000"],[406,0.485,0.5149,"#ff0000"],[405,0.484,0.5159,"#ff0000"],[404,0.483,0.5169,"#ff0000"],[403,0.482,0.5179,"#ff0000"],[402,0.481,0.5189,"#ff0000"],[401,0.48,0.5199,"#ff0000"],[400,0.479,0.5209,"#ff0000"],[399,0.478,0.5219,"#ff0000"],[398,0.477,0.5229,"#ff0000"],[397,0.476,0.5239,"#ff0000"],[396,0.475,0.5249,"#ff0000"],[395,0.474,0.5259,"#ff0000"],[394,0.473,0.5269,"#ff0000"],[393,0.472,0.5279,"#ff0000"],[392,0.471,0.5289,"#ff0000"],[391,0.47,0.5299,"#ff0000"],[390,0.469,0.5309,"#ff0000"],[389,0.468,0.5319,"#ff0000"],[388,0.467,0.5329,"#ff0000"],[387,0.466,0.5339,"#ff0000"],[386,0.465,0.5349,"#ff0000"],[385,0.464,0.5359,"#ff0000"],[384,0.463,0.5369,"#ff0000"],[383,0.462,0.5379,"#ff0000"],[382,0.461,0.5389,"#ff0000"],[381,0.46,0.5399,"#ff0000"],[380,0.459,0.5409,"#ff0000"]]
+const TG={0:'8.0 · white · the 0',0x33:'1.0 root',0x65:'2.0 sacral',0x7e:'3.0 solar',0xb0:'4.0 heart',0xdd:'5.0 throat',0xfb:'6.0 third eye',0x123:'7.0 crown',0x179:'7.5 · middle of the true bridge'};
+const NK=a=>a===0?'centre':a<=321?'light':'purple';
+const HX=a=>'0x'+a.toString(16);
+const THZ=nm=>nm?(299792.458/nm).toFixed(1):'';
+let nsel=0;
+
+function nmDraw(now){const [g,w,h]=fit($('c3'),0.72,260,380),m=24,sx=x=>m+(x/0.78)*(w-2*m),sy=y=>h-m-(y/0.86)*(h-2*m);
+  const P=ND.map(d=>[sx(d[1]),sy(d[2])]),[wx,wy]=P[0];
+  g.strokeStyle='rgba(255,255,255,.12)';g.lineWidth=1;g.beginPath();for(let a=1;a<ND.length;a++)g.lineTo(...P[a]);g.stroke();
+  if(nsel>0){g.strokeStyle=ND[nsel][3];g.globalAlpha=.55;g.lineWidth=1.5;g.beginPath();g.moveTo(wx,wy);g.lineTo(...P[nsel]);g.stroke();g.globalAlpha=1;g.lineWidth=1;}
+  const r=2.2;
+  for(let a=1;a<ND.length;a++){g.globalAlpha=1;g.fillStyle=ND[a][3];g.beginPath();g.arc(P[a][0],P[a][1],r,0,6.2832);g.fill();}
+  g.globalAlpha=1;
+  g.fillStyle='#fff';g.beginPath();g.arc(wx,wy,5,0,6.2832);g.fill();
+  g.font='600 11px ui-monospace,Menlo,monospace';
+  g.fillStyle='rgba(241,242,245,.88)';g.textAlign='center';g.fillText(HX(0),cx,cy+14);
+  g.fillStyle='rgba(241,242,245,.9)';g.font='600 11px ui-monospace,Menlo,monospace';g.fillText('0x0',cx,cy+14);
+  $('t3').textContent=HX(nsel===0?0:nsel);
+  const t=TG[nsel];if(t){g.fillStyle='rgba(241,242,245,.85)';g.font='600 11px Inter,sans-serif';g.textAlign='center';g.fillText(t,cx,cy+100);}}
+
+function ninfo(){const a=nsel,d=ND[a];
+  let body;
+  if(a===0)body='All colours added together. The white point at the centre of the map. <span class="pill lit">checked</span>';
+  else if(a<=321)body=`<b class="w">${d[0]} nm</b> · ${THZ(d[0])} THz. One pure wavelength of light. <span class="pill lit">checked</span>`;
+  else body='<b class="w">The bridge</b> · mixed colour that no single wavelength makes. A node on the purple line. <span class="pill lit">checked</span>';
+  $('av').textContent=HX(a)+' · '+NG(a);
+  document.querySelectorAll('#st span').forEach(s=>s.classList.toggle('on',+s.dataset.k===a));
+  const row=$('nt').children[a+1];if(row){row.classList.add('on');}}
+
+function HX(a){return '0x'+a.toString(16);}
+const MK1=(g,w,h)=>{const cx=w/2,cy=h/2;
+  g.strokeStyle='rgba(255,255,255,.15)';g.lineWidth=1;g.beginPath();g.arc(cx,cy,60,0,6.2832);g.stroke();
+  g.fillStyle='#fff';g.beginPath();g.arc(cx,cy,24,0,6.2832);g.fill();
+  g.fillStyle='rgba(241,242,245,.9)';g.font='600 11px Inter,sans-serif';g.textAlign='center';g.fillText('0x0',cx,cy+80);};
+
+$('#pl').onclick=()=>{if(A>=433)A=0;playing=!playing;$('pl').textContent=playing?'Pause':'Walk the loop';};
+const AU=[['0x1→0x141 = 321 light nodes','LIT'],['0x142→0x1b0 = 111 purple nodes','LIT'],['0x0 = 1 centre','LIT'],['0x1b0 = last node → back to 0x1','LIT'],['433 = 1 + 321 + 111','LIT']];
+$('au').innerHTML=AU.map(([a,b])=>`<tr><td style="padding:7px 8px;border-bottom:1px solid var(--edge);color:var(--ink)">${a}</td><td style="padding:7px 8px;border-bottom:1px solid var(--edge)">${b}</td></tr>`).join('');
+MK1(null,0,0);(function cl(now){MK1(null,now);requestAnimationFrame(cl);})(0);
+window.__MIND__={total:433,centre:0x0,bridge:0x179,last:0x1b0};window.__CUBIT__={};
+})();
+</script>
+</body>
+</html>

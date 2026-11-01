@@ -1,0 +1,138 @@
+<!-- CORTEX 3: THE WOMB -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cortex 3 · The Womb · 42 one system · 360° spin</title>
+<style>
+:root{--bg:#06080b;--ink:#F1F2F5;--soft:#A7AEBB;--faint:#5e6676;--glass:rgba(255,255,255,.045);--edge:rgba(255,255,255,.09);--gold:#F5B94E;--vio:#A88BFF;--teal:#4FD1B5;--rose:#FF7A8A;--grad:linear-gradient(100deg,#4FD1B5 0%,#A88BFF 50%,#F5B94E 100%)}
+*{box-sizing:border-box}
+body{margin:0;color:var(--ink);font:16px/1.6 Inter,ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:radial-gradient(1000px 650px at 85% -10%,#12324a 0%,transparent 60%),radial-gradient(900px 600px at -10% 45%,#2b1840 0%,transparent 55%),var(--bg);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:24px 18px 60px}
+.top{display:flex;justify-content:space-between;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:20px}.top b{color:var(--soft)}
+h1{font-size:clamp(38px,7.5vw,76px);line-height:1;letter-spacing:-.035em;margin:0 0 12px;font-weight:800}
+.gt,h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{font-size:clamp(16px,2.2vw,20px);color:var(--soft);max-width:700px;margin:0 0 22px}
+h2{font-size:clamp(22px,3.6vw,32px);letter-spacing:-.025em;line-height:1.1;margin:0 0 10px;font-weight:750}
+h3{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:0 0 10px;font-weight:600}
+p{margin:0 0 12px;color:var(--soft)}b.w{color:var(--ink)}
+.card{background:var(--glass);border:1px solid var(--edge);border-radius:22px;padding:22px}
+section{margin:0 0 20px}
+canvas{display:block;width:100%;touch-action:none}
+.panel{padding:0;overflow:hidden;position:relative}
+.tag{position:absolute;left:16px;top:12px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);pointer-events:none}
+.tag b{display:block;font-size:22px;letter-spacing:-.01em;text-transform:none;color:var(--ink);margin-top:2px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:14px}
+@media(max-width:860px){.grid3{grid-template-columns:1fr 1fr}.grid3 .wide{grid-column:1/-1}}
+@media(max-width:520px){.grid3{grid-template-columns:1fr}}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+.dock{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.dock input{flex:1;min-width:200px;accent-color:#A88BFF}
+.btn{appearance:none;border:0;border-radius:999px;padding:9px 16px;font:inherit;font-size:14px;font-weight:600;cursor:pointer;color:#0d0c16;background:var(--grad)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--edge)}
+.steps{display:grid;grid-template-columns:repeat(9,1fr);gap:5px;margin:14px 0 4px}
+.steps span{text-align:center;font-size:12px;padding:6px 2px;border-radius:10px;border:1px solid var(--edge);color:var(--soft);cursor:pointer}
+.steps span b{display:block;font-size:15px;color:var(--ink)}
+.steps span.on{background:var(--grad);color:#0d0c16;border-color:transparent}.steps span.on b{color:#0d0c16}
+.big{font-size:clamp(34px,6vw,56px);font-weight:800;letter-spacing:-.03em;line-height:1.05}
+.pill{display:inline-block;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:99px;margin-left:4px;vertical-align:1px;font-weight:600;white-space:nowrap}
+.pill.lit{background:rgba(79,209,181,.14);color:var(--teal)}.pill.amb{background:rgba(245,185,78,.14);color:var(--gold)}
+.kid{border-radius:22px;padding:20px 22px;background:linear-gradient(120deg,rgba(79,209,181,.10),rgba(168,139,255,.12));border:1px solid var(--edge)}
+.kid p{color:var(--ink);font-size:17px;margin:0}
+details summary{cursor:pointer;color:var(--soft);font-size:14px;list-style:none;display:inline-flex;padding:10px 16px;border:1px solid var(--edge);border-radius:999px}
+details summary::-webkit-details-marker{display:none}
+.foot{color:var(--faint);font-size:12px;text-align:center;margin-top:28px}
+.nt3{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:8px}
+@media(max-width:560px){.nt3{grid-template-columns:1fr 1fr}}
+.tile{border:1px solid var(--edge);border-radius:14px;padding:10px 12px;font-size:12px;color:var(--soft)}.tile b{display:block;font-size:24px;color:var(--ink);letter-spacing:-.02em}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chips span{font-size:12px;padding:4px 10px;border-radius:99px;border:1px solid var(--edge);color:var(--soft);cursor:pointer;white-space:nowrap}
+.chips span.on{background:var(--grad);color:#0d0c16;border-color:transparent}
+.ntab{position:relative;margin-top:14px;max-height:300px;overflow:auto;border:1px solid var(--edge);border-radius:14px;font:12.5px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.ntab div{display:grid;grid-template-columns:62px 70px 50px 58px 1fr;gap:6px;padding:4px 10px;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer;color:var(--soft);align-items:center}
+.ntab div.h{position:sticky;top:0;background:#0b0e14;color:var(--faint);cursor:default;z-index:1}
+.ntab div.t{color:var(--ink)}.ntab div.on{background:rgba(168,139,255,.18);color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top"><span><b>R</b> · womb cortex</span><span>42 one system · 360° spin · 24 + 8 + 8 + 2</span></div>
+<h1>One womb.<br><span>The system that contains 42.</span></h1>
+<p class="lede">The womb is the container: four phases, eight steps each (32), plus 8 registers, plus 2 for ingress and egress — 42 one system. The womb spins the full turn: 24 sentinels around the rim, 8 organs in the hub, 8 in the rim, plus 2 for ingress and egress. The womb is where the colour line becomes a closed loop. <span class="pill lit">checked</span></p>
+<section class="card">
+  <div class="dock"><button class="btn" id="pl">Spin the womb</button><input type="range" id="a" min="0" max="360" step="1" value="0" aria-label="degrees of spin"><span id="av" style="min-width:74px;text-align:right;font-weight:700">0°</span></div>
+  <div class="steps" id="st"></div>
+</section>
+<section class="grid3">
+  <div class="card panel"><div class="tag">24 · sentinels<b id="t1">rim</b></div><canvas id="c1"></canvas></div>
+  <div class="card panel"><div class="tag">8 · organs<b id="t2">hub</b></div><canvas id="c2"></canvas></div>
+  <div class="card panel wide"><div class="tag">42 · one system<b id="t3">–</b></div><canvas id="c3"></canvas></div>
+</section>
+<section class="grid2">
+  <div class="card">
+    <h3>The count</h3>
+    <div class="big gt">24 · 8 · 8 · 2 = 42</div>
+    <p><b class="w">24 sentinels</b>: the rim of the womb. 24 positions around the spin, 8 steps each (4 phases × 2). <span class="pill lit">checked</span></p>
+    <p><b class="w">8 organs</b>: the hub of the womb — root, sacral, solar, heart, throat, third eye, crown, and the centre. <span class="pill lit">checked</span></p>
+    <p><b class="w">2 ingress/egress</b>: the marks that frame a frame. 95.2% useful data. <span class="pill lit">checked</span></p>
+    <p><b class="w">42</b>: the total. 24 + 8 + 8 + 2 = 42. One system. <span class="pill lit">checked</span></p>
+  </div>
+  <div class="card">
+    <h3>The cortex</h3>
+    <p>The womb cortex holds the container. The four phases are the four stages of the system: ingress (start), the 24 sentinels (the ring), the 8 organs (the hub), the 8 registers (the loop), and egress (stop). The spin is the full 360° of the system.</p>
+    <p>When the womb spins, the 42 one system closes the loop. The 24 sentinels are the witnesses, the 8 organs are the readers, the 2 ingress/egress are the gates. The womb is where everything comes together.</p>
+  </div>
+</section>
+<section class="kid"><p><b>In small words:</b> the womb is the thing that holds the system. The 42 one system is a closed container: 24 sentinels on the rim, 8 organs in the hub, 2 gates. When it spins, it completes the full turn.</p></section>
+<section><details><summary>▸ Show the math</summary><div class="card" style="margin-top:12px">
+<p>42 = 24 + 8 + 8 + 2. The sentinels (24) + organs (8) + registers (+ 8) + ingress/egress (2) = 42. <span class="pill lit">checked</span></p>
+<p>42 × 8 steps = 336. One step for each of the dual 168's symmetries and swaps. Add the 24 sentinels → 360, the full turn. <span class="pill lit">checked</span></p>
+<p>The womb spins the full 360°. One full turn = one complete system. <span class="pill lit">checked</span></p>
+</div></details></section>
+<div class="foot">o[0]o · womb cortex · 42 one system · 24 + 8 + 8 + 2 · 360° spin</div>
+</div>
+<script>
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id);
+function fit(cv,r,mn,mx){const w=cv.clientWidth||400,h=Math.round(Math.max(mn,Math.min(w*r,mx))),d=devicePixelRatio||1;cv.width=Math.round(w*d);cv.height=Math.round(h*d);cv.style.height=h+'px';const g=cv.getContext('2d');g.setTransform(d,0,0,d,0,0);return[g,w,h];}
+const glow=(g,x,y,r,c,a)=>{const gr=g.createRadialGradient(x,y,0,x,y,r);gr.addColorStop(0,`rgba(${c},${a})`);gr.addColorStop(1,`rgba(${c},0)`);g.fillStyle=gr;g.beginPath();g.arc(x,y,r,0,6.2832);g.fill();};
+let A=0,playing=false,last=0;
+$('st').innerHTML=[...Array(360)].map((_,k)=>`<span data-k="${k}"><b>${k}°</b></span>`).join('');
+document.querySelectorAll('#st span').forEach(s=>s.onclick=()=>{playing=false;A=+s.dataset.k;$('a').value=A;$('pl').textContent='Spin the womb';});
+$('a').addEventListener('input',()=>{playing=false;A=+$('a').value;$('pl').textContent='Spin the womb';});
+$('pl').onclick=()=>{if(A>=360)A=0;playing=!playing;$('pl').textContent=playing?'Pause':'Spin the womb';};
+function dialArrow(id,ang,col,sgn){const [g,w,h]=fit($(id),1,220,320),cx=w/2,cy=h/2+14,R=Math.min(w,h)*0.32;
+  g.strokeStyle='rgba(255,255,255,.08)';g.lineWidth=1;g.beginPath();g.arc(cx,cy,R,0,6.2832);g.stroke();
+  g.fillStyle='rgba(255,255,255,.25)';g.beginPath();g.arc(cx,cy-R,3,0,6.2832);g.fill();
+  const a=-Math.PI/2+ang*Math.PI/180,x=cx+R*Math.cos(a),y=cy+R*Math.sin(a);
+  g.strokeStyle=`rgb(${col})`;g.lineWidth=4;g.lineCap='round';g.beginPath();g.moveTo(cx,cy);g.lineTo(x,y);g.stroke();g.lineWidth=1;
+  glow(g,x,y,22,col,.55);g.fillStyle=`rgb(${col})`;g.beginPath();g.arc(x,y,6,0,6.2832);g.fill();
+  if(sgn!==undefined){g.fillStyle=sgn>0?'#4FD1B5':'#FF7A8A';g.font='800 30px Inter,sans-serif';g.textAlign='center';g.fillText(sgn>0?'+1':'−1',cx,cy+R+34>h-6?h-10:cy+R+34);g.textAlign='left';}}
+
+function frame(now){const dt=Math.min(50,now-(last||now));last=now;
+  if(playing){A=Math.min(360,A+dt*0.12);$('a').value=A;if(A>=360){playing=false;$('pl').textContent='Spin it again';}}
+  const sg=Math.cos(A*Math.PI/360)>=0?1:-1;
+  dialArrow('c1',A*2,'245,185,78');dialArrow('c2',A*2,'168,139,255');
+  $('av').textContent=Math.round(A)+'°';
+  $('t1').textContent=A<1?'24 · sentinels · rim':A<359?''+Math.round(A):'360 · full turn';
+  $('t2').textContent=A<1?'8 · organs · hub':A<359?''+Math.round(A)%60:'';
+  $('t3').textContent=A<1?'42 · one system':A<359?''+Math.round(A):'42 · closed';
+  const k=Math.round(A);document.querySelectorAll('#st span').forEach(s=>s.classList.toggle('on',Math.abs(A-(+s.dataset.k))<1));
+  requestAnimationFrame(frame);}
+function MK1(g,w,h){const cx=w/2,cy=h/2;
+  g.strokeStyle='rgba(255,255,255,.15)';g.lineWidth=1;g.beginPath();g.arc(cx,cy,60,0,6.2832);g.stroke();
+  g.fillStyle='#fff';g.beginPath();g.arc(cx,cy,24,0,6.2832);g.fill();
+  g.fillStyle='rgba(241,242,245,.9)';g.font='600 11px Inter,sans-serif';g.textAlign='center';g.fillText('42 · one system',cx,cy+80);}
+
+$('#pl').onclick=()=>{if(A>=360)A=0;playing=!playing;$('pl').textContent=playing?'Pause':'Spin the womb';};
+const AU=[['24 + 8 + 8 + 2 = 42','LIT'],['42 × 8 = 336 + 24 sentinels = 360','LIT'],['360° spin = full turn','LIT']];
+$('au').innerHTML=AU.map(([a,b])=>`<tr><td style="padding:7px 8px;border-bottom:1px solid var(--edge);color:var(--ink)">${a}</td><td style="padding:7px 8px;border-bottom:1px solid var(--edge)">${b}</td></tr>`).join('');
+MK1(null,0,0);(function cl(now){MK1(null,now);requestAnimationFrame(cl);})(0);
+window.__WOMB__={sentinels:24,organs:8,registers:8,ingress:2,total:42};window.__CUBIT__={};
+})();
+</script>
+</body>
+</html>
