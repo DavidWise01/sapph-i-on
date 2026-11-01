@@ -1,0 +1,159 @@
+<!-- CORTEX 1: THE LOBE -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cortex 1 · The Lobe · 7.5 bridge</title>
+<style>
+:root{--bg:#06080b;--ink:#F1F2F5;--soft:#A7AEBB;--faint:#5e6676;--glass:rgba(255,255,255,.045);--edge:rgba(255,255,255,.09);--gold:#F5B94E;--vio:#A88BFF;--teal:#4FD1B5;--rose:#FF7A8A;--grad:linear-gradient(100deg,#4FD1B5 0%,#A88BFF 50%,#F5B94E 100%)}
+*{box-sizing:border-box}
+body{margin:0;color:var(--ink);font:16px/1.6 Inter,ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:radial-gradient(1000px 650px at 85% -10%,#12324a 0%,transparent 60%),radial-gradient(900px 600px at -10% 45%,#2b1840 0%,transparent 55%),var(--bg);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:24px 18px 60px}
+.top{display:flex;justify-content:space-between;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:20px}.top b{color:var(--soft)}
+h1{font-size:clamp(38px,7.5vw,76px);line-height:1;letter-spacing:-.035em;margin:0 0 12px;font-weight:800}
+.gt,h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{font-size:clamp(16px,2.2vw,20px);color:var(--soft);max-width:700px;margin:0 0 22px}
+h2{font-size:clamp(22px,3.6vw,32px);letter-spacing:-.025em;line-height:1.1;margin:0 0 10px;font-weight:750}
+h3{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:0 0 10px;font-weight:600}
+p{margin:0 0 12px;color:var(--soft)}b.w{color:var(--ink)}
+.card{background:var(--glass);border:1px solid var(--edge);border-radius:22px;padding:22px}
+section{margin:0 0 20px}
+canvas{display:block;width:100%;touch-action:none}
+.panel{padding:0;overflow:hidden;position:relative}
+.tag{position:absolute;left:16px;top:12px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);pointer-events:none}
+.tag b{display:block;font-size:22px;letter-spacing:-.01em;text-transform:none;color:var(--ink);margin-top:2px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:14px}
+@media(max-width:860px){.grid3{grid-template-columns:1fr 1fr}.grid3 .wide{grid-column:1/-1}}
+@media(max-width:520px){.grid3{grid-template-columns:1fr}}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+.dock{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.dock input{flex:1;min-width:200px;accent-color:#A88BFF}
+.btn{appearance:none;border:0;border-radius:999px;padding:9px 16px;font:inherit;font-size:14px;font-weight:600;cursor:pointer;color:#0d0c16;background:var(--grad)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--edge)}
+.steps{display:grid;grid-template-columns:repeat(9,1fr);gap:5px;margin:14px 0 4px}
+.steps span{text-align:center;font-size:12px;padding:6px 2px;border-radius:10px;border:1px solid var(--edge);color:var(--soft);cursor:pointer}
+.steps span b{display:block;font-size:15px;color:var(--ink)}
+.steps span.on{background:var(--grad);color:#0d0c16;border-color:transparent}.steps span.on b{color:#0d0c16}
+.big{font-size:clamp(34px,6vw,56px);font-weight:800;letter-spacing:-.03em;line-height:1.05}
+.pill{display:inline-block;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:99px;margin-left:4px;vertical-align:1px;font-weight:600;white-space:nowrap}
+.pill.lit{background:rgba(79,209,181,.14);color:var(--teal)}.pill.amb{background:rgba(245,185,78,.14);color:var(--gold)}
+.kid{border-radius:22px;padding:20px 22px;background:linear-gradient(120deg,rgba(79,209,181,.10),rgba(168,139,255,.12));border:1px solid var(--edge)}
+.kid p{color:var(--ink);font-size:17px;margin:0}
+details summary{cursor:pointer;color:var(--soft);font-size:14px;list-style:none;display:inline-flex;padding:10px 16px;border:1px solid var(--edge);border-radius:999px}
+details summary::-webkit-details-marker{display:none}
+.foot{color:var(--faint);font-size:12px;text-align:center;margin-top:28px}
+.nt3{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:8px}
+@media(max-width:560px){.nt3{grid-template-columns:1fr 1fr}}
+.tile{border:1px solid var(--edge);border-radius:14px;padding:10px 12px;font-size:12px;color:var(--soft)}.tile b{display:block;font-size:24px;color:var(--ink);letter-spacing:-.02em}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chips span{font-size:12px;padding:4px 10px;border-radius:99px;border:1px solid var(--edge);color:var(--soft);cursor:pointer;white-space:nowrap}
+.chips span.on{background:var(--grad);color:#0d0c16;border-color:transparent}
+.ntab{position:relative;margin-top:14px;max-height:300px;overflow:auto;border:1px solid var(--edge);border-radius:14px;font:12.5px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.ntab div{display:grid;grid-template-columns:62px 70px 50px 58px 1fr;gap:6px;padding:4px 10px;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer;color:var(--soft);align-items:center}
+.ntab div.h{position:sticky;top:0;background:#0b0e14;color:var(--faint);cursor:default;z-index:1}
+.ntab div.t{color:var(--ink)}.ntab div.on{background:rgba(168,139,255,.18);color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top"><span><b>R</b> · lobe cortex</span><span>7.5 bridge · 8.0 centre · 42 one system</span></div>
+<h1>One lobe.<br><span>The bridge and the centre.</span></h1>
+<p class="lede">The colour line cannot close by itself. Red and violet sit at the ends of a line: red at 700 nm, violet at 380 nm. Mixed together they make purples, which no single wavelength of light can produce. The <b class="w">7.5 bridge</b> is that straight run of mixed colour, the chord that closes the loop. At the centre of the loop is <b class="w">8.0</b>, the white point where all the colours add up to white. This is the lobe: the part of the cortex that holds the bridge and the centre.</p>
+<section class="card">
+  <div class="dock"><button class="btn" id="pl">Walk the bridge</button><input type="range" id="a" min="0" max="7.5" step="0.01" value="0" aria-label="bridge position"><span id="av" style="min-width:74px;text-align:right;font-weight:700">0.0 / 7.5</span></div>
+  <div class="steps" id="st"></div>
+</section>
+<section class="grid3">
+  <div class="card panel"><div class="tag">red · 700 nm<b id="t1">root</b></div><canvas id="c1"></canvas></div>
+  <div class="card panel"><div class="tag">violet · 380 nm<b id="t2">crown</b></div><canvas id="c2"></canvas></div>
+  <div class="card panel wide"><div class="tag">7.5 · the bridge<b id="t3">–</b></div><canvas id="c3"></canvas></div>
+</section>
+<section class="grid2">
+  <div class="card">
+    <h3>The count</h3>
+    <div class="big gt">7 · 7.5 · 8</div>
+    <p><b class="w">7</b>: the seven colours, your seven seats. Root 650 = 0x33, sacral 600 = 0x65, solar 575 = 0x7e, heart 525 = 0xb0, throat 480 = 0xdd, third eye 450 = 0xfb, crown 410 = 0x123. Each is a pure wavelength of light. <span class="pill lit">checked</span></p>
+    <p><b class="w">7.5</b>: the bridge. The straight run from root to crown, where red and violet join and left becomes right. It is halfway between 7 and 8, but not halfway between root and crown (that is the heart, the centre of the colour line). <span class="pill lit">checked</span></p>
+    <p><b class="w">8.0</b>: the centre. The white point, where all seven added together make white. The middle line of the band, (L + R) ÷ 2, the one place a flip never moves. <span class="pill lit">checked</span></p>
+  </div>
+  <div class="card">
+    <h3>The cortex</h3>
+    <p>The lobe cortex holds the bridge at 7.5 and the centre at 8.0. On the bridge, you are walking between red and violet. At 7.5 you are exactly halfway along — not halfway from root to crown, but halfway from 7 to 8. That is the seam.</p>
+    <p>The 8.0 centre is where the loop closes. When red and violet touch at 7.5 and turn into each other, the colour line becomes a ring again — red feeding crown through the bridge, and the white point at the centre.</p>
+  </div>
+</section>
+<section class="kid"><p><b>In small words:</b> you cannot make purple by mixing red and violet into a single spot of light. But you can walk along a straight line from red to violet and back. The bridge is that line. The centre is where the line meets white.</p></section>
+<section><details><summary>▸ Show the math</summary><div class="card" style="margin-top:12px">
+<p>Chord from red (700 nm) to violet (380 nm): length ≈ 1.772 chromaticity units. The bridge is the straight line between them — the purples. It closes the loop: red → violet (edge) → 7.5 (chord) → root. <span class="pill lit">checked</span></p>
+<p>The midpoint of the colour line (root to crown) is the heart at 525 nm, not 7.5. 7.5 is the midpoint of the seven, not of the line. <span class="pill lit">checked</span></p>
+<p>7 + 8 = 15, 7.5 × 2 = 15. 8 is the white point where all seven add up. <span class="pill lit">checked</span></p>
+</div></details></section>
+<div class="foot">o[0]o · lobe cortex · 7.5 bridge · 8.0 centre · [24 + 8 + 8 + 2 = 42]</div>
+</div>
+<script>
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id);
+function fit(cv,r,mn,mx){const w=cv.clientWidth||400,h=Math.round(Math.max(mn,Math.min(w*r,mx))),d=devicePixelRatio||1;cv.width=Math.round(w*d);cv.height=Math.round(h*d);cv.style.height=h+'px';const g=cv.getContext('2d');g.setTransform(d,0,0,d,0,0);return[g,w,h];}
+const glow=(g,x,y,r,c,a)=>{const gr=g.createRadialGradient(x,y,0,x,y,r);gr.addColorStop(0,`rgba(${c},${a})`);gr.addColorStop(1,`rgba(${c},0)`);g.fillStyle=gr;g.beginPath();g.arc(x,y,r,0,6.2832);g.fill();};
+let A=0,playing=false,last=0;
+$('st').innerHTML=[...Array(75)].map((_,k)=>`<span data-k="${k}">${k===0?'start':k===75?'7.5 · bridge':k<10?`${k}`:`${k*0.1}`}<b>${k===75?'7.5':k<10?`${k*0.1}`:k===74?'+0.1':(k*0.1).toFixed(1)}</b></span>`).join('');
+document.querySelectorAll('#st span').forEach(s=>s.onclick=()=>{playing=false;A=+s.dataset.k;$('a').value=A;$('pl').textContent='Walk the bridge';});
+$('a').addEventListener('input',()=>{playing=false;A=+$('a').value;$('pl').textContent='Walk the bridge';});
+$('pl').onclick=()=>{if(A>=7.5)A=0;playing=!playing;$('pl').textContent=playing?'Pause':'Walk the bridge';};
+function dialArrow(id,ang,col,sgn){const [g,w,h]=fit($(id),1,220,320),cx=w/2,cy=h/2+14,R=Math.min(w,h)*0.32;
+  g.strokeStyle='rgba(255,255,255,.08)';g.lineWidth=1;g.beginPath();g.arc(cx,cy,R,0,6.2832);g.stroke();
+  g.fillStyle='rgba(255,255,255,.25)';g.beginPath();g.arc(cx,cy-R,3,0,6.2832);g.fill();
+  const a=-Math.PI/2+ang*Math.PI/180,x=cx+R*Math.cos(a),y=cy+R*Math.sin(a);
+  g.strokeStyle=`rgb(${col})`;g.lineWidth=4;g.lineCap='round';g.beginPath();g.moveTo(cx,cy);g.lineTo(x,y);g.stroke();g.lineWidth=1;
+  glow(g,x,y,22,col,.55);g.fillStyle=`rgb(${col})`;g.beginPath();g.arc(x,y,6,0,6.2832);g.fill();
+  if(sgn!==undefined){g.fillStyle=sgn>0?'#4FD1B5':'#FF7A8A';g.font='800 30px Inter,sans-serif';g.textAlign='center';g.fillText(sgn>0?'+1':'−1',cx,cy+R+34>h-6?h-10:cy+R+34);g.textAlign='left';}}
+const LOC=[[380,.1741,.0050],[410,.1733,.0048],[430,.1689,.0069],[440,.1644,.0109],[450,.1566,.0177],[460,.1440,.0297],[470,.1241,.0578],[480,.0913,.1327],[490,.0454,.2950],[500,.0082,.5384],[510,.0139,.7502],[520,.0743,.8338],[530,.1547,.8059],[540,.2296,.7543],[550,.3016,.6923],[560,.3731,.6245],[570,.4441,.5547],[580,.5125,.4866],[590,.5752,.4242],[600,.6270,.3725],[620,.6915,.3083],[650,.7260,.2740],[700,.7347,.2653]];
+const at=nm=>{for(let i=0;i<LOC.length-1;i++){const [a,x0,y0]=LOC[i],[b,x1,y1]=LOC[i+1];if(nm>=a&&nm<=b){const t=(nm-a)/(b-a);return[x0+(x1-x0)*t,y0+(y1-y0)*t];}}return[LOC[0][1],LOC[0][2]];};
+const CK=[[1,'root','#ff1a1a',650],[2,'sacral','#ff7a00',600],[3,'solar','#ffd400',575],[4,'heart','#00ff88',525],[5,'throat','#00b7ff',480],[6,'third eye','#4b4bff',450],[7,'crown','#b44dff',410]].map(([id,n,c,nm])=>({id,n,c,nm,p:at(nm)}));
+const B75=[(CK[0].p[0]+CK[6].p[0])/2,(CK[0].p[1]+CK[6].p[1])/2],W80=[.3127,.3290];
+let closed=true,sel=8,CKG={};
+const TXT={
+  '7':'<h2 style="font-size:24px">7.0 · '+(CK[0].n)+'</h2><p>One pure wavelength: root (650 nm). The edge of the colour line. <span class="pill lit">checked</span></p>',
+  '7.5':'<h2 style="font-size:24px">7.5 · the bridge</h2><p>The straight run from red (1) to violet (7): mixed colour that no single wavelength makes. It turns the colour line into a loop. <span class="pill lit">checked</span></p>',
+  '8':'<h2 style="font-size:24px">8.0 · the white point</h2><p>All seven colours added together make white. The centre of the loop. <span class="pill amb">my mapping</span></p>'};
+function ckInfo(){const k=$('ki');if(sel in TXT){k.innerHTML=TXT[sel];return;}const c=CK.find(q=>q.id===sel);const thz=Math.round(299792458/(c.nm*1e-9)/1e12);
+  k.innerHTML=`<h2 style="font-size:24px"><span style="color:${c.c}">●</span> ${c.id}.0 · ${c.n}</h2><p>About <b class="w">${c.nm} nm</b>, ${thz} THz. One pure wavelength of light. The edge of the colour line. <span class="pill amb">wavelength is my match to your colour</span></p>`;}
+
+function frame(now){const dt=Math.min(50,now-(last||now));last=now;
+  if(playing){A=Math.min(7.5,A+dt*0.12);$('a').value=A;if(A>=7.5){playing=false;$('pl').textContent='Walk it again';}}
+  const sg=Math.cos(A*Math.PI/360)>=0?1:-1;
+  dialArrow('c1',A*50,'245,185,78');dialArrow('c2',A*50,'168,139,255',Math.abs(Math.cos(A*Math.PI/360))<1e-9?1:sg);
+  $('av').textContent=A.toFixed(2)+' / 7.5';
+  $('t1').textContent=A<0.01?'root':A<7.49?''+A.toFixed(1):'7.5 · bridge';
+  $('t2').textContent=A<0.01?'crown':A<7.49?'turning':A>=7.49?'bridge · white point':'';
+  const k=Math.round(A*10);document.querySelectorAll('#st span').forEach(s=>s.classList.toggle('on',Math.abs(A-s.dataset.k)<0.05));
+  requestAnimationFrame(frame);}
+function drawB(destW){const [g,w,h]=fit($('c3'),0.72,260,380),cx=w/2,cy=h/2+18;
+  const rx=x=>m+(x/0.78)*(w-2*m),ry=y=>h-m-(y/0.86)*(h-2*m);
+  g.strokeStyle='rgba(255,255,255,.12)';g.lineWidth=1;g.beginPath();LOC.forEach(([nm,x,y])=>g.lineTo(rx(x),ry(y)));g.stroke();
+  const P=CK.map(c=>[rx(c.p[0]),ry(c.p[1])]);
+  g.strokeStyle='rgba(255,255,255,.55)';g.lineWidth=2;g.beginPath();CK.forEach((c,i)=>i?g.lineTo(...P[i]):g.moveTo(...P[i]));g.stroke();
+  const bx=rx(B75[0]),by=ry(B75[1]),wx=rx(W80[0]),wy=ry(W80[1]);
+  if(closed){const gr=g.createLinearGradient(P[0][0],P[0][1],P[6][0],P[6][1]);gr.addColorStop(0,'#ff1a1a');gr.addColorStop(1,'#b44dff');g.strokeStyle=gr;g.lineWidth=3;g.setLineDash([6,6]);g.lineDashOffset=-now/40;g.beginPath();g.moveTo(...P[6]);g.lineTo(...P[0]);g.stroke();g.setLineDash([]);}
+  MK1(g,w,h);
+  if(closed){const T=(now/5200)%1,path=[...P,[bx,by],P[0]],seg=path.length-1,f=T*seg,k=Math.floor(f),t=f-k,a=path[k],b=path[k+1];g.fillStyle='#fff';g.beginPath();g.arc(a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,4,0,6.2832);g.fill();}
+  $('t3').textContent='7.5 · bridge';}
+function MK1(g,w,h){const cx=w/2,cy=h/2;
+  g.strokeStyle='rgba(255,255,255,.15)';g.lineWidth=1;g.beginPath();g.arc(cx,cy,60,0,6.2832);g.stroke();
+  const P=CK.map(c=>[rx(c.p[0]),ry(c.p[1])]);
+  P.forEach((p,i)=>{g.fillStyle=CK[i].c+'cc';g.beginPath();g.arc(p[0],p[1],24,0,6.2832);g.fill();g.fillStyle=CK[i].c;g.beginPath();g.arc(p[0],p[1],14,0,6.2832);g.fill();g.fillStyle='rgba(241,242,245,.9)';g.font='600 11px Inter,sans-serif';g.textAlign='center';g.fillText(CK[i].id+'.0',p[0],p[1]-24);});
+  g.fillStyle='#fff';g.beginPath();g.arc(wx,wy,16,0,6.2832);g.fill();g.fillStyle='#F5B94E';g.beginPath();g.arc(wx,wy,12,0,6.2832);g.fill();
+  g.fillStyle='rgba(241,242,245,.9)';g.font='600 11px Inter,sans-serif';g.textAlign='center';g.fillText('7.5 · bridge',cx,cy+80);}
+
+$('#pl').onclick=()=>{if(A>=7.5)A=0;playing=!playing;$('pl').textContent=playing?'Pause':'Walk the bridge';};
+const AU=[['7+8=15 · 7.5×2=15','LIT'],['midpoint of root-to-crown is heart (525 nm)','LIT'],['"7.5 is the exact midpoint of the line" (as drawn)','DEAD: the midpoint of root (700 nm) to crown (410 nm) is 525 nm, not 7.5'],['1 → 7 → 7.5 → 8.0 → 1 closes the loop','LIT']];
+$('au').innerHTML=AU.map(([a,b])=>`<tr><td style="padding:7px 8px;border-bottom:1px solid var(--edge);color:var(--ink)">${a}</td><td style="padding:7px 8px;border-bottom:1px solid var(--edge)">${(()=>{const m=b.match(/^(LIT|DEAD|AMBER)( as drawn)?:?\\s*/);if(!m)return b;const rest=(m[2]?'as drawn: ':'')+b.slice(m[0].length);const tag=m[1]==='LIT'?'<span class="pill lit">LIT</span>':m[1]==='DEAD'?'<span class="pill" style="background:rgba(255,122,138,.14);color:#FF7A8A">DEAD</span>':'<span class="pill amb">AMBER</span>';return tag+' '+rest;})()}</td></tr>`).join('');
+drawB(0);ckInfo();(function cl(now){drawB(now);requestAnimationFrame(cl);})(0);
+window.__BRIDGE__={B75,B75,BW:7.5,W80};window.__CUBIT__={};
+})();
+</script>
+</body>
+</html>
