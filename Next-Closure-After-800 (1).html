@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>React Artifact</title>
+  <style>@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Syne:wght@600;800&display=swap');
+
+*, ::before, ::after{
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
+}
+
+::backdrop{
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
+}
+
+/*
+! tailwindcss v3.4.18 | MIT License | https://tailwindcss.com
+*/
+
+/*
+1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
+2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
+*/
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  /* 1 */
+  border-width: 0;
+  /* 2 */
+  border-style: solid;
+  /* 2 */
+  border-color: #e5e7eb;
+  /* 2 */
+}
+
+::before,
+::after {
+  --tw-content: '';
+}
+
+/*
+1. Use a consistent sensible line-height in all browsers.
+2. Prevent adjustments of font size after orientation changes in iOS.
+3. Use a more readable tab size.
+4. Use the user's configured `sans` font-family by default.
+5. Use the user's configured `sans` font-feature-settings by default.
+6. Use the user's configured `sans` font-variation-settings by default.
+7. Disable tap highlights on iOS
+*/
+
+html,
+:host {
+  line-height: 1.5;
+  /* 1 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */
+  -moz-tab-size: 4;
+  /* 3 */
+  -o-tab-size: 4;
+     tab-size: 4;
+  /* 3 */
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  /* 4 */
+  font-feature-settings: normal;
+  /* 5 */
+  font-variation-settings: normal;
+  /* 6 */
+  -webkit-tap-highlight-color: transparent;
+  /* 7 */
+}
+
+/*
+1. Remove the margin in all browsers.
+2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
+*/
+
+body {
+  margin: 0;
+  /* 1 */
+  line-height: inherit;
+  /* 2 */
+}
+
+/*
+1. Add the correct height in Firefox.
+2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
+3. Ensure horizontal rules are visible by default.
+*/
+
+hr {
+  height: 0;
+  /* 1 */
+  color: inherit;
+  /* 2 */
+  border-top-width: 1px;
+  /* 3 */
+}
+
+/*
+Add the correct text decoration in Chrome, Edge, and Safari.
+*/
+
+abbr:where([title]) {
+  -webkit-text-decoration: underline dotted;
+          text-decoration: underline dotted;
+}
+
+/*
+Remove the default font size and weight for headings.
+*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/*
+Reset links to optimize for opt-in styling instead of opt-out.
+*/
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+/*
+Add the correct font weight in Edge and Safari.
+*/
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+/*
+1. Use the user's configured `mono` font-family by default.
+2. Use the user's configured `mono` font-feature-settings by default.
+3. Use the user's configured `mono` font-variation-settings by default.
+4. Correct the odd `em` font sizing in all browsers.
+*/
+
+code,
+kbd,
+samp,
+pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  /* 1 */
+  font-feature-settings: normal;
+  /* 2 */
+  font-variation-settings: normal;
+  /* 3 */
+  font-size: 1em;
+  /* 4 */
+}
+
+/*
+Add the correct font size in all browsers.
+*/
+
+small {
+  font-size: 80%;
+}
+
+/*
+Prevent `sub` and `sup` elements from affecting the line height in all browsers.
+*/
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/*
+1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
+2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
+3. Remove gaps between table borders by default.
+*/
+
+table {
+  text-indent: 0;
+  /* 1 */
+  border-color: inherit;
+  /* 2 */
+  border-collapse: collapse;
+  /* 3 */
+}
+
+/*
+1. Change the font styles in all browsers.
+2. Remove the margin in Firefox and Safari.
+3. Remove default padding in all browsers.
+*/
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  /* 1 */
+  font-feature-settings: inherit;
+  /* 1 */
+  font-variation-settings: inherit;
+  /* 1 */
+  font-size: 100%;
+  /* 1 */
+  font-weight: inherit;
+  /* 1 */
+  line-height: inherit;
+  /* 1 */
+  letter-spacing: inherit;
+  /* 1 */
+  color: inherit;
+  /* 1 */
+  margin: 0;
+  /* 2 */
+  padding: 0;
+  /* 3 */
+}
+
+/*
+Remove the inheritance of text transform in Edge and Firefox.
+*/
+
+button,
+select {
+  text-transform: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Remove default button styles.
+*/
+
+button,
+input:where([type='button']),
+input:where([type='reset']),
+input:where([type='submit']) {
+  -webkit-appearance: button;
+  /* 1 */
+  background-color: transparent;
+  /* 2 */
+  background-image: none;
+  /* 2 */
+}
+
+/*
+Use the modern Firefox focus style for all focusable elements.
+*/
+
+:-moz-focusring {
+  outline: auto;
+}
+
+/*
+Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
+*/
+
+:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+/*
+Add the correct vertical alignment in Chrome and Firefox.
+*/
+
+progress {
+  vertical-align: baseline;
+}
+
+/*
+Correct the cursor style of increment and decrement buttons in Safari.
+*/
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/*
+1. Correct the odd appearance in Chrome and Safari.
+2. Correct the outline style in Safari.
+*/
+
+[type='search'] {
+  -webkit-appearance: textfield;
+  /* 1 */
+  outline-offset: -2px;
+  /* 2 */
+}
+
+/*
+Remove the inner padding in Chrome and Safari on macOS.
+*/
+
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Change font properties to `inherit` in Safari.
+*/
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  /* 1 */
+  font: inherit;
+  /* 2 */
+}
+
+/*
+Add the correct display in Chrome and Safari.
+*/
+
+summary {
+  display: list-item;
+}
+
+/*
+Removes the default spacing and border for appropriate elements.
+*/
+
+blockquote,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+figure,
+p,
+pre {
+  margin: 0;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+legend {
+  padding: 0;
+}
+
+ol,
+ul,
+menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+Reset default styling for dialogs.
+*/
+
+dialog {
+  padding: 0;
+}
+
+/*
+Prevent resizing textareas horizontally by default.
+*/
+
+textarea {
+  resize: vertical;
+}
+
+/*
+1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
+2. Set the default placeholder color to the user's configured gray 400 color.
+*/
+
+input::-moz-placeholder, textarea::-moz-placeholder {
+  opacity: 1;
+  /* 1 */
+  color: #9ca3af;
+  /* 2 */
+}
+
+input::placeholder,
+textarea::placeholder {
+  opacity: 1;
+  /* 1 */
+  color: #9ca3af;
+  /* 2 */
+}
+
+/*
+Set the default cursor for buttons.
+*/
+
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
+/*
+Make sure disabled buttons don't get the pointer cursor.
+*/
+
+:disabled {
+  cursor: default;
+}
+
+/*
+1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)
+2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
+   This can trigger a poorly considered lint error in some tools but is included by design.
+*/
+
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block;
+  /* 1 */
+  vertical-align: middle;
+  /* 2 */
+}
+
+/*
+Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
+*/
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Make elements with the HTML hidden attribute stay hidden by default */
+
+[hidden]:where(:not([hidden="until-found"])) {
+  display: none;
+}
+
+.container{
+  width: 100%;
+}
+
+@media (min-width: 640px){
+  .container{
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px){
+  .container{
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px){
+  .container{
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px){
+  .container{
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px){
+  .container{
+    max-width: 1536px;
+  }
+}
+
+.pointer-events-none{
+  pointer-events: none;
+}
+
+.pointer-events-auto{
+  pointer-events: auto;
+}
+
+.absolute{
+  position: absolute;
+}
+
+.relative{
+  position: relative;
+}
+
+.sticky{
+  position: sticky;
+}
+
+.left-0{
+  left: 0px;
+}
+
+.right-0{
+  right: 0px;
+}
+
+.top-0{
+  top: 0px;
+}
+
+.z-10{
+  z-index: 10;
+}
+
+.z-30{
+  z-index: 30;
+}
+
+.mx-auto{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mb-2{
+  margin-bottom: 0.5rem;
+}
+
+.mb-3{
+  margin-bottom: 0.75rem;
+}
+
+.ml-2{
+  margin-left: 0.5rem;
+}
+
+.ml-auto{
+  margin-left: auto;
+}
+
+.mt-1{
+  margin-top: 0.25rem;
+}
+
+.mt-2{
+  margin-top: 0.5rem;
+}
+
+.mt-3{
+  margin-top: 0.75rem;
+}
+
+.block{
+  display: block;
+}
+
+.inline-block{
+  display: inline-block;
+}
+
+.flex{
+  display: flex;
+}
+
+.grid{
+  display: grid;
+}
+
+.hidden{
+  display: none;
+}
+
+.aspect-square{
+  aspect-ratio: 1 / 1;
+}
+
+.h-2{
+  height: 0.5rem;
+}
+
+.h-6{
+  height: 1.5rem;
+}
+
+.h-7{
+  height: 1.75rem;
+}
+
+.h-8{
+  height: 2rem;
+}
+
+.h-\[2px\]{
+  height: 2px;
+}
+
+.h-\[32px\]{
+  height: 32px;
+}
+
+.h-\[8px\]{
+  height: 8px;
+}
+
+.w-2{
+  width: 0.5rem;
+}
+
+.w-4{
+  width: 1rem;
+}
+
+.w-6{
+  width: 1.5rem;
+}
+
+.w-\[28px\]{
+  width: 28px;
+}
+
+.w-\[90px\]{
+  width: 90px;
+}
+
+.w-full{
+  width: 100%;
+}
+
+.min-w-\[280px\]{
+  min-width: 280px;
+}
+
+.min-w-\[36px\]{
+  min-width: 36px;
+}
+
+.min-w-\[720px\]{
+  min-width: 720px;
+}
+
+.max-w-\[1600px\]{
+  max-width: 1600px;
+}
+
+.scale-110{
+  --tw-scale-x: 1.1;
+  --tw-scale-y: 1.1;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.transform{
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.grid-cols-1{
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.flex-col{
+  flex-direction: column;
+}
+
+.flex-wrap{
+  flex-wrap: wrap;
+}
+
+.place-items-center{
+  place-items: center;
+}
+
+.items-start{
+  align-items: flex-start;
+}
+
+.items-end{
+  align-items: flex-end;
+}
+
+.items-center{
+  align-items: center;
+}
+
+.justify-center{
+  justify-content: center;
+}
+
+.justify-between{
+  justify-content: space-between;
+}
+
+.gap-1{
+  gap: 0.25rem;
+}
+
+.gap-2{
+  gap: 0.5rem;
+}
+
+.gap-3{
+  gap: 0.75rem;
+}
+
+.gap-4{
+  gap: 1rem;
+}
+
+.gap-\[2px\]{
+  gap: 2px;
+}
+
+.overflow-hidden{
+  overflow: hidden;
+}
+
+.overflow-x-auto{
+  overflow-x: auto;
+}
+
+.overflow-x-clip{
+  overflow-x: clip;
+}
+
+.rounded{
+  border-radius: 0.25rem;
+}
+
+.rounded-\[10px\]{
+  border-radius: 10px;
+}
+
+.rounded-\[18px\]{
+  border-radius: 18px;
+}
+
+.rounded-\[24px\]{
+  border-radius: 24px;
+}
+
+.rounded-full{
+  border-radius: 9999px;
+}
+
+.border{
+  border-width: 1px;
+}
+
+.border-2{
+  border-width: 2px;
+}
+
+.border-b{
+  border-bottom-width: 1px;
+}
+
+.border-t{
+  border-top-width: 1px;
+}
+
+.bg-\[\#d4af37\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(212 175 55 / var(--tw-bg-opacity, 1));
+}
+
+.bg-black{
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1));
+}
+
+.bg-purple-500{
+  --tw-bg-opacity: 1;
+  background-color: rgb(168 85 247 / var(--tw-bg-opacity, 1));
+}
+
+.bg-white{
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+}
+
+.p-1{
+  padding: 0.25rem;
+}
+
+.p-3{
+  padding: 0.75rem;
+}
+
+.p-4{
+  padding: 1rem;
+}
+
+.px-1{
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
+.px-2{
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.px-3{
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.px-4{
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.py-0\.5{
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem;
+}
+
+.py-1{
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.py-1\.5{
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+}
+
+.py-3{
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.py-4{
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.pb-12{
+  padding-bottom: 3rem;
+}
+
+.pb-6{
+  padding-bottom: 1.5rem;
+}
+
+.pb-8{
+  padding-bottom: 2rem;
+}
+
+.pb-\[14px\]{
+  padding-bottom: 14px;
+}
+
+.pt-3{
+  padding-top: 0.75rem;
+}
+
+.text-center{
+  text-align: center;
+}
+
+.font-mono{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.text-\[10px\]{
+  font-size: 10px;
+}
+
+.text-\[11px\]{
+  font-size: 11px;
+}
+
+.text-\[12px\]{
+  font-size: 12px;
+}
+
+.text-\[14px\]{
+  font-size: 14px;
+}
+
+.text-\[8px\]{
+  font-size: 8px;
+}
+
+.text-\[9px\]{
+  font-size: 9px;
+}
+
+.font-\[600\]{
+  font-weight: 600;
+}
+
+.font-\[700\]{
+  font-weight: 700;
+}
+
+.font-\[800\]{
+  font-weight: 800;
+}
+
+.uppercase{
+  text-transform: uppercase;
+}
+
+.leading-\[0\.95\]{
+  line-height: 0.95;
+}
+
+.leading-\[1\.2\]{
+  line-height: 1.2;
+}
+
+.leading-\[1\.6\]{
+  line-height: 1.6;
+}
+
+.leading-\[1\.7\]{
+  line-height: 1.7;
+}
+
+.tracking-\[-0\.02em\]{
+  letter-spacing: -0.02em;
+}
+
+.tracking-\[0\.08em\]{
+  letter-spacing: 0.08em;
+}
+
+.tracking-\[0\.12em\]{
+  letter-spacing: 0.12em;
+}
+
+.tracking-\[0\.14em\]{
+  letter-spacing: 0.14em;
+}
+
+.tracking-\[0\.16em\]{
+  letter-spacing: 0.16em;
+}
+
+.tracking-\[0\.18em\]{
+  letter-spacing: 0.18em;
+}
+
+.tracking-\[0\.2em\]{
+  letter-spacing: 0.2em;
+}
+
+.text-black{
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity, 1));
+}
+
+.text-white{
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+
+.accent-black{
+  accent-color: #000;
+}
+
+.opacity-40{
+  opacity: 0.4;
+}
+
+.opacity-50{
+  opacity: 0.5;
+}
+
+.opacity-60{
+  opacity: 0.6;
+}
+
+.opacity-70{
+  opacity: 0.7;
+}
+
+.opacity-80{
+  opacity: 0.8;
+}
+
+.ring{
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
+.blur{
+  --tw-blur: blur(8px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.filter{
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.backdrop-blur-xl{
+  --tw-backdrop-blur: blur(24px);
+  backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+}
+
+.transition{
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+:root{
+  --bg:#fbfbf8;
+  --bg-2:#ffffff;
+  --fg:#0a0a0a;
+  --fg-soft:#3a3a3a;
+  --surface:#ffffff;
+  --surface-2:#f3f1eb;
+  --line:#111111;
+  --purple:#7c3aed;
+  --cyan:#06b6d4;
+  --gold:#c6a43a;
+  --gold-bright:#e8c24a;
+  --halo:#ffffff;
+  --halo-gold:#d4af37;
+  --void:#08080a;
+}
+
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0a0a0a;
+    --bg-2:#121212;
+    --fg:#f5f3ef;
+    --fg-soft:#a8a29a;
+    --surface:#161616;
+    --surface-2:#1e1e1e;
+    --line:#f5f3ef;
+    --halo:#1a1a1a;
+  }
+}
+
+html,body{
+  margin:0;
+  padding:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:"JetBrains Mono", ui-monospace, monospace;
+  overflow-x-clip: hidden;
+}
+
+.syne{
+  font-family:"Syne", system-ui, sans-serif;
+}
+
+.hover\:scale-\[1\.02\]:hover{
+  --tw-scale-x: 1.02;
+  --tw-scale-y: 1.02;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.active\:scale-\[0\.98\]:active{
+  --tw-scale-x: 0.98;
+  --tw-scale-y: 0.98;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+@media (min-width: 768px){
+  .md\:flex{
+    display: flex;
+  }
+
+  .md\:aspect-\[1\/1\]{
+    aspect-ratio: 1/1;
+  }
+
+  .md\:h-\[42px\]{
+    height: 42px;
+  }
+
+  .md\:w-\[140px\]{
+    width: 140px;
+  }
+
+  .md\:w-\[48px\]{
+    width: 48px;
+  }
+
+  .md\:min-w-\[48px\]{
+    min-width: 48px;
+  }
+
+  .md\:grid-cols-3{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .md\:gap-6{
+    gap: 1.5rem;
+  }
+
+  .md\:rounded-\[32px\]{
+    border-radius: 32px;
+  }
+
+  .md\:p-4{
+    padding: 1rem;
+  }
+
+  .md\:px-6{
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .md\:px-8{
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .md\:py-4{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .md\:text-\[11px\]{
+    font-size: 11px;
+  }
+
+  .md\:text-\[13px\]{
+    font-size: 13px;
+  }
+
+  .md\:text-\[18px\]{
+    font-size: 18px;
+  }
+}
+</style>
+</head>
+<body>
+  <div id="root"></div>
+  
+  <script type="module">var Kc=Object.create;var{getPrototypeOf:Yc,defineProperty:xl,getOwnPropertyNames:Xc}=Object;var Vc=Object.prototype.hasOwnProperty;var yn=(e,n,t)=>{t=e!=null?Kc(Yc(e)):{};let r=n||!e||!e.__esModule?xl(t,"default",{value:e,enumerable:!0}):t;for(let l of Xc(e))if(!Vc.call(r,l))xl(r,l,{get:()=>e[l],enumerable:!0});return r};var ar=(e,n)=>()=>(n||e((n={exports:{}}).exports,n),n.exports);var Gc=(e,n)=>{for(var t in n)xl(e,t,{get:n[t],enumerable:!0,configurable:!0,set:(r)=>n[t]=()=>r})};var Zc=(e,n)=>()=>(e&&(n=e(e=0)),n);var dt=ar((df)=>{var ft=Symbol.for("react.element"),Jc=Symbol.for("react.portal"),qc=Symbol.for("react.fragment"),jc=Symbol.for("react.strict_mode"),bc=Symbol.for("react.profiler"),ef=Symbol.for("react.provider"),nf=Symbol.for("react.context"),tf=Symbol.for("react.forward_ref"),rf=Symbol.for("react.suspense"),lf=Symbol.for("react.memo"),uf=Symbol.for("react.lazy"),ri=Symbol.iterator;function of(e){if(e===null||typeof e!=="object")return null;return e=ri&&e[ri]||e["@@iterator"],typeof e==="function"?e:null}var oi={isMounted:function(){return!1},enqueueForceUpdate:function(){},enqueueReplaceState:function(){},enqueueSetState:function(){}},ii=Object.assign,si={};function On(e,n,t){this.props=e,this.context=n,this.refs=si,this.updater=t||oi}On.prototype.isReactComponent={};On.prototype.setState=function(e,n){if(typeof e!=="object"&&typeof e!=="function"&&e!=null)throw Error("setState(...): takes an object of state variables to update or a function which returns an object of state variables.");this.updater.enqueueSetState(this,e,n,"setState")};On.prototype.forceUpdate=function(e){this.updater.enqueueForceUpdate(this,e,"forceUpdate")};function ai(){}ai.prototype=On.prototype;function Ml(e,n,t){this.props=e,this.context=n,this.refs=si,this.updater=t||oi}var Ol=Ml.prototype=new ai;Ol.constructor=Ml;ii(Ol,On.prototype);Ol.isPureReactComponent=!0;var li=Array.isArray,ci=Object.prototype.hasOwnProperty,Dl={current:null},fi={key:!0,ref:!0,__self:!0,__source:!0};function di(e,n,t){var r,l={},u=null,o=null;if(n!=null)for(r in n.ref!==void 0&&(o=n.ref),n.key!==void 0&&(u=""+n.key),n)ci.call(n,r)&&!fi.hasOwnProperty(r)&&(l[r]=n[r]);var i=arguments.length-2;if(i===1)l.children=t;else if(1<i){for(var s=Array(i),p=0;p<i;p++)s[p]=arguments[p+2];l.children=s}if(e&&e.defaultProps)for(r in i=e.defaultProps,i)l[r]===void 0&&(l[r]=i[r]);return{$$typeof:ft,type:e,key:u,ref:o,props:l,_owner:Dl.current}}function sf(e,n){return{$$typeof:ft,type:e.type,key:n,ref:e.ref,props:e.props,_owner:e._owner}}function Fl(e){return typeof e==="object"&&e!==null&&e.$$typeof===ft}function af(e){var n={"=":"=0",":":"=2"};return"$"+e.replace(/[=:]/g,function(t){return n[t]});}var ui=/\/+/g;function Il(e,n){return typeof e==="object"&&e!==null&&e.key!=null?af(""+e.key):n.toString(36)}function fr(e,n,t,r,l){var u=typeof e;if(u==="undefined"||u==="boolean")e=null;var o=!1;if(e===null)o=!0;else switch(u){case"string":case"number":o=!0;break;case"object":switch(e.$$typeof){case ft:case Jc:o=!0}}if(o)return o=e,l=l(o),e=r===""?"."+Il(o,0):r,li(l)?(t="",e!=null&&(t=e.replace(ui,"$&/")+"/"),fr(l,n,t,"",function(p){return p})):l!=null&&(Fl(l)&&(l=sf(l,t+(!l.key||o&&o.key===l.key?"":(""+l.key).replace(ui,"$&/")+"/")+e)),n.push(l)),1;if(o=0,r=r===""?".":r+":",li(e))for(var i=0;i<e.length;i++){u=e[i];var s=r+Il(u,i);o+=fr(u,n,t,s,l)}else if(s=of(e),typeof s==="function")for(e=s.call(e),i=0;!(u=e.next()).done;)u=u.value,s=r+Il(u,i++),o+=fr(u,n,t,s,l);else if(u==="object")throw n=String(e),Error("Objects are not valid as a React child (found: "+(n==="[object Object]"?"object with keys {"+Object.keys(e).join(", ")+"}":n)+"). If you meant to render a collection of children, use an array instead.");return o}function cr(e,n,t){if(e==null)return e;var r=[],l=0;return fr(e,r,"","",function(u){return n.call(t,u,l++)}),r}function cf(e){if(e._status===-1){var n=e._result;n=n(),n.then(function(t){if(e._status===0||e._status===-1)e._status=1,e._result=t},function(t){if(e._status===0||e._status===-1)e._status=2,e._result=t}),e._status===-1&&(e._status=0,e._result=n)}if(e._status===1)return e._result.default;throw e._result}var re={current:null},dr={transition:null},ff={ReactCurrentDispatcher:re,ReactCurrentBatchConfig:dr,ReactCurrentOwner:Dl};function pi(){throw Error("act(...) is not supported in production builds of React.")}df.Children={map:cr,forEach:function(e,n,t){cr(e,function(){n.apply(this,arguments)},t)},count:function(e){var n=0;return cr(e,function(){n++}),n},toArray:function(e){return cr(e,function(n){return n})||[]},only:function(e){if(!Fl(e))throw Error("React.Children.only expected to receive a single React element child.");return e}};df.Component=On;df.Fragment=qc;df.Profiler=bc;df.PureComponent=Ml;df.StrictMode=jc;df.Suspense=rf;df.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED=ff;df.act=pi;df.cloneElement=function(e,n,t){if(e===null||e===void 0)throw Error("React.cloneElement(...): The argument must be a React element, but you passed "+e+".");var r=ii({},e.props),l=e.key,u=e.ref,o=e._owner;if(n!=null){if(n.ref!==void 0&&(u=n.ref,o=Dl.current),n.key!==void 0&&(l=""+n.key),e.type&&e.type.defaultProps)var i=e.type.defaultProps;for(s in n)ci.call(n,s)&&!fi.hasOwnProperty(s)&&(r[s]=n[s]===void 0&&i!==void 0?i[s]:n[s])}var s=arguments.length-2;if(s===1)r.children=t;else if(1<s){i=Array(s);for(var p=0;p<s;p++)i[p]=arguments[p+2];r.children=i}return{$$typeof:ft,type:e.type,key:l,ref:u,props:r,_owner:o}};df.createContext=function(e){return e={$$typeof:nf,_currentValue:e,_currentValue2:e,_threadCount:0,Provider:null,Consumer:null,_defaultValue:null,_globalName:null},e.Provider={$$typeof:ef,_context:e},e.Consumer=e};df.createElement=di;df.createFactory=function(e){var n=di.bind(null,e);return n.type=e,n};df.createRef=function(){return{current:null}};df.forwardRef=function(e){return{$$typeof:tf,render:e}};df.isValidElement=Fl;df.lazy=function(e){return{$$typeof:uf,_payload:{_status:-1,_result:e},_init:cf}};df.memo=function(e,n){return{$$typeof:lf,type:e,compare:n===void 0?null:n}};df.startTransition=function(e){var n=dr.transition;dr.transition={};try{e()}finally{dr.transition=n}};df.unstable_act=pi;df.useCallback=function(e,n){return re.current.useCallback(e,n)};df.useContext=function(e){return re.current.useContext(e)};df.useDebugValue=function(){};df.useDeferredValue=function(e){return re.current.useDeferredValue(e)};df.useEffect=function(e,n){return re.current.useEffect(e,n)};df.useId=function(){return re.current.useId()};df.useImperativeHandle=function(e,n,t){return re.current.useImperativeHandle(e,n,t)};df.useInsertionEffect=function(e,n){return re.current.useInsertionEffect(e,n)};df.useLayoutEffect=function(e,n){return re.current.useLayoutEffect(e,n)};df.useMemo=function(e,n){return re.current.useMemo(e,n)};df.useReducer=function(e,n,t){return re.current.useReducer(e,n,t)};df.useRef=function(e){return re.current.useRef(e)};df.useState=function(e){return re.current.useState(e)};df.useSyncExternalStore=function(e,n,t){return re.current.useSyncExternalStore(e,n,t)};df.useTransition=function(){return re.current.useTransition()};df.version="18.3.1"});var ki=ar((Jf)=>{function Bl(e,n){var t=e.length;e.push(n);e:for(;0<t;){var r=t-1>>>1,l=e[r];if(0<pr(l,n))e[r]=n,e[t]=l,t=r;else break e}}function Ne(e){return e.length===0?null:e[0]}function yr(e){if(e.length===0)return null;var n=e[0],t=e.pop();if(t!==n){e[0]=t;e:for(var r=0,l=e.length,u=l>>>1;r<u;){var o=2*(r+1)-1,i=e[o],s=o+1,p=e[s];if(0>pr(i,t))s<l&&0>pr(p,i)?(e[r]=p,e[s]=t,r=s):(e[r]=i,e[o]=t,r=o);else if(s<l&&0>pr(p,t))e[r]=p,e[s]=t,r=s;else break e}}return n}function pr(e,n){var t=e.sortIndex-n.sortIndex;return t!==0?t:e.id-n.id}if(typeof performance==="object"&&typeof performance.now==="function")Wl=performance,Jf.unstable_now=function(){return Wl.now()};else mr=Date,$l=mr.now(),Jf.unstable_now=function(){return mr.now()-$l};var Wl,mr,$l,Me=[],Ze=[],Zf=1,ye=null,j=3,gr=!1,gn=!1,mt=!1,hi=typeof setTimeout==="function"?setTimeout:null,vi=typeof clearTimeout==="function"?clearTimeout:null,mi=typeof setImmediate<"u"?setImmediate:null;typeof navigator<"u"&&navigator.scheduling!==void 0&&navigator.scheduling.isInputPending!==void 0&&navigator.scheduling.isInputPending.bind(navigator.scheduling);function Al(e){for(var n=Ne(Ze);n!==null;){if(n.callback===null)yr(Ze);else if(n.startTime<=e)yr(Ze),n.sortIndex=n.expirationTime,Bl(Me,n);else break;n=Ne(Ze)}}function Ql(e){if(mt=!1,Al(e),!gn)if(Ne(Me)!==null)gn=!0,Yl(Kl);else{var n=Ne(Ze);n!==null&&Xl(Ql,n.startTime-e)}}function Kl(e,n){gn=!1,mt&&(mt=!1,vi(ht),ht=-1),gr=!0;var t=j;try{Al(n);for(ye=Ne(Me);ye!==null&&(!(ye.expirationTime>n)||e&&!wi());){var r=ye.callback;if(typeof r==="function"){ye.callback=null,j=ye.priorityLevel;var l=r(ye.expirationTime<=n);n=Jf.unstable_now(),typeof l==="function"?ye.callback=l:ye===Ne(Me)&&yr(Me),Al(n)}else yr(Me);ye=Ne(Ze)}if(ye!==null)var u=!0;else{var o=Ne(Ze);o!==null&&Xl(Ql,o.startTime-n),u=!1}return u}finally{ye=null,j=t,gr=!1}}var wr=!1,hr=null,ht=-1,yi=5,gi=-1;function wi(){return Jf.unstable_now()-gi<yi?!1:!1}function Ul(){if(hr!==null){var e=Jf.unstable_now();gi=e;var n=!0;try{n=hr(!0,e)}finally{n?pt():(wr=!1,hr=null)}}else wr=!1}var pt;if(typeof mi==="function")pt=function(){mi(Ul)};else if(typeof MessageChannel<"u")vr=new MessageChannel,Hl=vr.port2,vr.port1.onmessage=Ul,pt=function(){Hl.postMessage(null)};else pt=function(){hi(Ul,0)};var vr,Hl;function Yl(e){hr=e,wr||(wr=!0,pt())}function Xl(e,n){ht=hi(function(){e(Jf.unstable_now())},n)}Jf.unstable_IdlePriority=5;Jf.unstable_ImmediatePriority=1;Jf.unstable_LowPriority=4;Jf.unstable_NormalPriority=3;Jf.unstable_Profiling=null;Jf.unstable_UserBlockingPriority=2;Jf.unstable_cancelCallback=function(e){e.callback=null};Jf.unstable_continueExecution=function(){gn||gr||(gn=!0,Yl(Kl))};Jf.unstable_forceFrameRate=function(e){0>e||125<e?console.error("forceFrameRate takes a positive int between 0 and 125, forcing frame rates higher than 125 fps is not supported"):yi=0<e?Math.floor(1000/e):5};Jf.unstable_getCurrentPriorityLevel=function(){return j};Jf.unstable_getFirstCallbackNode=function(){return Ne(Me)};Jf.unstable_next=function(e){switch(j){case 1:case 2:case 3:var n=3;break;default:n=j}var t=j;j=n;try{return e()}finally{j=t}};Jf.unstable_pauseExecution=function(){};Jf.unstable_requestPaint=function(){};Jf.unstable_runWithPriority=function(e,n){switch(e){case 1:case 2:case 3:case 4:case 5:break;default:e=3}var t=j;j=e;try{return n()}finally{j=t}};Jf.unstable_scheduleCallback=function(e,n,t){var r=Jf.unstable_now();switch(typeof t==="object"&&t!==null?(t=t.delay,t=typeof t==="number"&&0<t?r+t:r):t=r,e){case 1:var l=-1;break;case 2:l=250;break;case 5:l=1073741823;break;case 4:l=1e4;break;default:l=5000}return l=t+l,e={id:Zf++,callback:n,priorityLevel:e,startTime:t,expirationTime:l,sortIndex:-1},t>r?(e.sortIndex=t,Bl(Ze,e),Ne(Me)===null&&e===Ne(Ze)&&(mt?(vi(ht),ht=-1):mt=!0,Xl(Ql,t-r))):(e.sortIndex=l,Bl(Me,e),gn||gr||(gn=!0,Yl(Kl))),e};Jf.unstable_shouldYield=wi;Jf.unstable_wrapCallback=function(e){var n=j;return function(){var t=j;j=n;try{return e.apply(this,arguments)}finally{j=t}}}));
+var bo={};Gc(bo,{version:()=>Oc,unstable_renderSubtreeIntoContainer:()=>Mc,unstable_batchedUpdates:()=>Ic,unmountComponentAtNode:()=>xc,render:()=>Rc,hydrateRoot:()=>Lc,hydrate:()=>Tc,flushSync:()=>zc,findDOMNode:()=>Pc,createRoot:()=>Nc,createPortal:()=>_c,__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED:()=>Cc});function g(e){for(var n="https://reactjs.org/docs/error-decoder.html?invariant="+e,t=1;t<arguments.length;t++)n+="&args[]="+encodeURIComponent(arguments[t]);return"Minified React error #"+e+"; visit "+n+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings."}function In(e,n){tt(e,n),tt(e+"Capture",n)}function tt(e,n){$t[e]=n;for(e=0;e<n.length;e++)Ps.add(n[e])}function vd(e){if(mu.call(Ei,e))return!0;if(mu.call(Si,e))return!1;if(hd.test(e))return Ei[e]=!0;return Si[e]=!0,!1}function yd(e,n,t,r){if(t!==null&&t.type===0)return!1;switch(typeof n){case"function":case"symbol":return!0;case"boolean":if(r)return!1;if(t!==null)return!t.acceptsBooleans;return e=e.toLowerCase().slice(0,5),e!=="data-"&&e!=="aria-";default:return!1}}function gd(e,n,t,r){if(n===null||typeof n>"u"||yd(e,n,t,r))return!0;if(r)return!1;if(t!==null)switch(t.type){case 3:return!n;case 4:return n===!1;case 5:return isNaN(n);case 6:return isNaN(n)||1>n}return!1}function oe(e,n,t,r,l,u,o){this.acceptsBooleans=n===2||n===3||n===4,this.attributeName=r,this.attributeNamespace=l,this.mustUseProperty=t,this.propertyName=e,this.type=n,this.sanitizeURL=u,this.removeEmptyString=o}function ao(e){return e[1].toUpperCase()}function co(e,n,t,r){var l=J.hasOwnProperty(n)?J[n]:null;if(l!==null?l.type!==0:r||!(2<n.length)||n[0]!=="o"&&n[0]!=="O"||n[1]!=="n"&&n[1]!=="N")gd(n,t,l,r)&&(t===null?e.removeAttribute(n):e.setAttribute(n,""+t)),r||l===null?vd(n)&&(t===null?e.removeAttribute(n):e.setAttribute(n,""+t)):l.mustUseProperty?e[l.propertyName]=t===null?l.type===3?!1:"":t:(n=l.attributeName,r=l.attributeNamespace,t===null?e.removeAttribute(n):(l=l.type,t=l===3||l===4&&t===!0?"":""+t,r?e.setAttributeNS(r,n,t):e.setAttribute(n,t)))}function vt(e){if(e===null||typeof e!=="object")return null;return e=Ci&&e[Ci]||e["@@iterator"],typeof e==="function"?e:null}function Ct(e){if(Vl===void 0)try{throw Error()}catch(t){var n=t.stack.trim().match(/\n( *(at )?)/);Vl=n&&n[1]||""}return`
+`+Vl+e}function Zl(e,n){if(!e||Gl)return"";Gl=!0;var t=Error.prepareStackTrace;Error.prepareStackTrace=void 0;try{if(n)if(n=function(){throw Error()},Object.defineProperty(n.prototype,"props",{set:function(){throw Error()}}),typeof Reflect==="object"&&Reflect.construct){try{Reflect.construct(n,[])}catch(p){var r=p}Reflect.construct(e,[],n)}else{try{n.call()}catch(p){r=p}e.call(n.prototype)}else{try{throw Error()}catch(p){r=p}e()}}catch(p){if(p&&r&&typeof p.stack==="string"){for(var l=p.stack.split(`
+`),u=r.stack.split(`
+`),o=l.length-1,i=u.length-1;1<=o&&0<=i&&l[o]!==u[i];)i--;for(;1<=o&&0<=i;o--,i--){if(l[o]!==u[i]){if(o!==1||i!==1)do if(o--,i--,0>i||l[o]!==u[i]){var s=`
+`+l[o].replace(" at new "," at ");return e.displayName&&s.includes("<anonymous>")&&(s=s.replace("<anonymous>",e.displayName)),s}while(1<=o&&0<=i);break}}}finally{Gl=!1,Error.prepareStackTrace=t}return(e=e?e.displayName||e.name:"")?Ct(e):""}function wd(e){switch(e.tag){case 5:return Ct(e.type);case 16:return Ct("Lazy");case 13:return Ct("Suspense");case 19:return Ct("SuspenseList");case 0:case 2:case 15:return e=Zl(e.type,!1),e;case 11:return e=Zl(e.type.render,!1),e;case 1:return e=Zl(e.type,!0),e;default:return""}}function gu(e){if(e==null)return null;if(typeof e==="function")return e.displayName||e.name||null;if(typeof e==="string")return e;switch(e){case Wn:return"Fragment";case Bn:return"Portal";case hu:return"Profiler";case fo:return"StrictMode";case vu:return"Suspense";case yu:return"SuspenseList"}if(typeof e==="object")switch(e.$$typeof){case Ts:return(e.displayName||"Context")+".Consumer";case zs:return(e._context.displayName||"Context")+".Provider";case po:var n=e.render;return e=e.displayName,e||(e=n.displayName||n.name||"",e=e!==""?"ForwardRef("+e+")":"ForwardRef"),e;case mo:n=e.displayName||null,n!==null?n:gu(e.type)||"Memo";case qe:n=e._payload,e=e._init;try{return gu(e(n))}catch(t){}}return null}function kd(e){var n=e.type;switch(e.tag){case 24:return"Cache";case 9:ret
