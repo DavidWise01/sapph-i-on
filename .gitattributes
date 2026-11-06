@@ -60,3 +60,6 @@ agents/*.dlw -text
 panes/*.html -text
 panes/*.dlw -text
 panes/*.json -text
+spans/*.html -text
+spans/*.dlw -text
+spans/*.json -text
